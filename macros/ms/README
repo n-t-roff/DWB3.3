@@ -1,0 +1,9 @@
+
+Latest ms macro package - from Lorinda Cherry and Brian Kernighan.
+Following the research model and installing macros in /usr/lib/tmac.
+
+The coversheet macros (tmac.cs and tmac.rscover) are included but
+not installed. Nicely done, but may conflict with the version that
+handles the mm macros. Install them only if you know exactly what
+you're doing!
+

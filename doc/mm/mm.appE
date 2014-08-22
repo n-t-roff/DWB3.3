@@ -1,0 +1,129 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr L 12.5i
+.so ../defs.doc
+.ds pT MM
+.aP E "Sample Footnotes"
+.P
+This example illustrates several footnote styles, using both
+labeled and automatically-numbered footnotes.
+The input on this page yields the output on the next page.
+.iS
+.S -1
+\&.FD 0
+\&The first three footnotes are processed in the default footnote style (.FD 0).
+\&This is an automatically-numbered footnote\e*F
+\&.FS
+\&This is the first footnote example.
+\&In this style (.FD\ 0), hyphenation is not permitted,
+the right margin is justified, the footnote text is indented,
+\&and the label is left-justified in the text-indent space.
+\&.FE
+\&followed by another one\e*F
+\&.FS
+\&This is the second footnote example.
+\&.FE
+\&and a third one with a user-supplied label.***
+\&.FS ***
+\&This is the third footnote example.
+\&The label (three asterisks) is supplied manually by the user.
+\&.FE
+\&.FD 11
+\&The next two footnotes are processed in a different
+\&footnote style (.FD 11).  Here is a labeled footnote\e(dg\e(dg
+\&.FS \e(dg\e(dg
+\&This is the fourth footnote example.
+\&This footnote is labeled manually with two daggers.
+\&In this style (.FD 11), hyphenation is permitted,
+the right margin is not justified, the footnote text is indented,
+and the footnote label is right-justified.
+\&.FE
+\&followed by an automatically-numbered footnote.\e*F
+\&.FS
+\&This is the fifth footnote example.
+\&This footnote is automatically-numbered.
+\&Notice how the footnote label is right-justified with
+\&the label of the previous footnote.
+\&.FE
+\&.FD 6
+\&The last two footnotes are processed in another footnote style (.FD 6)
+\&which generates a simple blocked format.
+\&Here's an automatically-numbered footnote\e*F
+\&.FS
+\&This is the sixth footnote example.
+\&In this footnote style (.FD 6), hyphenation is not permitted,
+\&the right margin is not jusitified, the text is not indented,
+\&and the footnote label is left-justified.
+\&.FE
+\&and the last one is a labeled footnote.*****
+\&.FS *****
+\&This is the seventh and last footnote example.
+\&This footnote has a very long label (five asterisks).
+\&Of the seven footnotes on this page, four were numbered automatically
+\&and three were labeled manually.
+\&.FE
+\&This concludes our footnote example.
+.S +1
+.iE
+.SK
+.HU "Output:"
+.P
+.FD 0
+The first three footnotes are processed in the default footnote style (.FD\ 0).
+This is an automatically-numbered footnote\*F
+.FS
+This is the first footnote example.
+In this style (.FD 0), hyphenation is not permitted,
+the right margin is justified, the footnote text is indented,
+and the label is left-justified in the text-indent space.
+.FE
+followed by another one\*F
+.FS
+This is the second footnote example.
+.FE
+and a third one with a user-supplied label.***
+.FS ***
+This is the third footnote example.
+The label (three asterisks) is supplied manually by the user.
+.FE
+.FD 11
+The next two footnotes are processed in a different
+footnote style (.FD\ 11).  Here is a labeled footnote\(dg\(dg
+.FS \(dg\(dg
+This is the fourth footnote example.
+This footnote is labeled manually with two daggers.
+In this style (.FD 11), hyphenation is permitted,
+the right margin is not justified, the footnote text is indented,
+and the footnote label is right-justified.
+.FE
+followed by an automatically-numbered footnote.\*F
+.FS
+This is the fifth footnote example.
+This footnote is automatically-numbered.
+Notice how the footnote label is right-justified with
+the label of the previous footnote.
+.FE
+.FD 6
+The last two footnotes are processed in another footnote style (.FD\ 6)
+which generates a simple blocked format.
+Here's an automatically-numbered footnote\*F
+.FS
+This is the sixth footnote example.
+In this footnote style (.FD\ 6), hyphenation is not permitted,
+the right margin is not jusitified, the text is not indented,
+and the footnote label is left-justified.
+.FE
+and the last one is a labeled footnote.*****
+.FS *****
+This is the seventh and last footnote example.
+This footnote has a very long label (five asterisks).
+Of the seven footnotes on this page, four were numbered automatically
+and three were labeled manually.
+.FE
+This concludes our footnote example.
+.br
+.nr L 11i

@@ -1,0 +1,560 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+17 HB f
+(MM)720 1040 w
+18 HB f
+(\320 A Macro Package)3 1727 1 1052 1040 t
+(for Generating Documents)2 2273 1 720 1240 t
+36 S1 f
+(________________________)720 1440 w
+14 HB f
+(Addendum)720 1640 w
+13 HB f
+(DWB 3.3)1 528 1 4512 1640 t
+10 R f
+( heading marked)2 681( A)1 130( of this software.)3 695(This addendum re\257ects changes in the DWB 3.3 version)8 2311 4 720 2060 t
+10 S1 f
+()4570 2060 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_rh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+15 66 moveto
+15 86 lineto
+16 131 lineto
+17 146 lineto
+18 158 lineto
+19 167 lineto
+21 181 lineto
+24 190 lineto
+34 193 lineto
+49 189 lineto
+58 182 lineto
+60 177 lineto
+60 166 lineto
+59 156 lineto
+58 143 lineto
+57 130 lineto
+56 117 lineto
+55 102 lineto
+54 42 lineto
+53 39 lineto
+49 35 lineto
+34 34 lineto
+19 39 lineto
+16 47 lineto
+15 66 lineto
+stroke
+
+65 60 moveto
+65 111 lineto
+66 127 lineto
+67 139 lineto
+69 153 lineto
+72 163 lineto
+83 171 lineto
+98 177 lineto
+113 182 lineto
+128 187 lineto
+143 190 lineto
+158 194 lineto
+173 196 lineto
+188 199 lineto
+203 201 lineto
+218 203 lineto
+233 205 lineto
+248 205 lineto
+263 206 lineto
+278 206 lineto
+293 206 lineto
+308 206 lineto
+323 206 lineto
+338 205 lineto
+353 203 lineto
+368 202 lineto
+383 200 lineto
+394 197 lineto
+389 190 lineto
+389 180 lineto
+391 176 lineto
+391 173 lineto
+380 173 lineto
+365 173 lineto
+350 174 lineto
+335 175 lineto
+320 176 lineto
+305 176 lineto
+290 176 lineto
+275 177 lineto
+260 177 lineto
+245 177 lineto
+240 173 lineto
+240 170 lineto
+245 165 lineto
+260 164 lineto
+275 164 lineto
+290 164 lineto
+305 163 lineto
+320 160 lineto
+327 155 lineto
+330 149 lineto
+330 134 lineto
+328 129 lineto
+323 124 lineto
+309 121 lineto
+294 121 lineto
+279 121 lineto
+264 121 lineto
+249 121 lineto
+234 121 lineto
+228 118 lineto
+228 112 lineto
+234 109 lineto
+249 109 lineto
+264 109 lineto
+279 108 lineto
+294 108 lineto
+306 104 lineto
+311 97 lineto
+312 91 lineto
+312 88 lineto
+311 82 lineto
+305 74 lineto
+290 72 lineto
+275 72 lineto
+260 72 lineto
+245 73 lineto
+230 73 lineto
+215 73 lineto
+205 70 lineto
+205 63 lineto
+217 60 lineto
+232 60 lineto
+247 60 lineto
+262 60 lineto
+277 57 lineto
+283 52 lineto
+285 44 lineto
+285 41 lineto
+284 35 lineto
+280 30 lineto
+268 26 lineto
+253 25 lineto
+238 26 lineto
+223 28 lineto
+208 31 lineto
+193 33 lineto
+178 34 lineto
+163 33 lineto
+148 31 lineto
+133 28 lineto
+118 27 lineto
+103 28 lineto
+88 34 lineto
+73 43 lineto
+67 52 lineto
+65 60 lineto
+stroke
+
+396 180 moveto
+396 188 lineto
+399 194 lineto
+410 196 lineto
+416 190 lineto
+416 180 lineto
+415 177 lineto
+411 173 lineto
+400 173 lineto
+396 180 lineto
+stroke
+
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+4570 2060 m
+100 build_rh
+4670 2060 m
+10 R f
+(refers to)1 337 1 4703 2060 t
+( heading marked)2 671( A)1 128(the section in the user documentation where this topic is discussed.)10 2708 3 720 2180 t
+10 ZD f
+(v)4255 2180 w
+10 R f
+(introduces a new)2 680 1 4360 2180 t
+(section.)720 2300 w
+10 S1 f
+()720 2540 w
+720 2540 m
+100 build_rh
+820 2540 m
+10 B f
+( Table, Equation, and Exhibit Captions)5 1680(7.7 Figure,)1 483 2 895 2540 t
+10 R f
+(The)720 2720 w
+10 CW f
+(.TB)904 2720 w
+10 R f
+( of ``)2 209(macro generates the table caption label ``Table'' \(instead)7 2307 2 1113 2720 t
+9 R f
+(TABLE)3629 2720 w
+10 R f
+(''\) to be consistent with the)5 1121 1 3919 2720 t
+(initial-capital format used in the labels for \256gures, equations, and exhibits.)10 2972 1 720 2840 t
+10 S1 f
+()720 3080 w
+720 3080 m
+100 build_rh
+820 3080 m
+10 B f
+( Output)1 337(12.3 Two-Column)1 792 2 895 3080 t
+10 CW f
+(.2C [)1 300 1 870 3260 t
+10 I f
+(gutter)1170 3260 w
+10 CW f
+(])1409 3260 w
+10 R f
+( optional argument)2 785( The)1 220( gutter and column widths are set relative to the overall line length.)12 2857(By default,)1 458 4 720 3440 t
+10 I f
+(gutter)720 3560 w
+10 R f
+( explicitly; the line length for each)6 1490(overrides the default computations and sets the gutter width)8 2546 2 1004 3560 t
+( given,)1 282( If)1 126( half of the remaining page width \(overall line length less gutter width\).)12 2980(column is set to)3 658 4 720 3680 t
+10 I f
+(gutter)4801 3680 w
+10 R f
+(must not exceed 1/3 of the overall line length, otherwise the gutter is set to)14 2983 1 720 3800 t
+10 CW f
+(0.5i)3728 3800 w
+10 R f
+(.)3968 3800 w
+10 ZD f
+(v)720 4040 w
+10 B f
+(Information Markers)1 918 1 873 4040 t
+10 R f
+(The)720 4220 w
+9 R f
+(MM)913 4220 w
+10 R f
+( information markers to keep track of key document information \(e.g., title,)11 3185(package generates)1 742 2 1113 4220 t
+( information markers appear in the)5 1498( The)1 228(author data, abstract, document style\).)4 1614 3 720 4340 t
+10 I f
+(troff)4108 4340 w
+10 R f
+(and)4329 4340 w
+10 I f
+(dpost)4520 4340 w
+10 R f
+(output)4784 4340 w
+(streams, but have no effect on printed output.)7 1811 1 720 4460 t
+(The markers appear as special device control commands of the form)10 2726 1 720 4640 t
+10 CW f
+(x X INFO:[)2 600 1 870 4820 t
+10 I f
+(information)1470 4820 w
+10 CW f
+(])1943 4820 w
+10 R f
+(in the)1 243 1 720 5000 t
+10 I f
+(troff)1006 5000 w
+10 R f
+(output. The)1 505 1 1222 5000 t
+10 I f
+(dpost)1771 5000 w
+10 R f
+(postprocessor recognizes these control commands and converts them to)8 3008 1 2032 5000 t
+(PostScript comments of the form)4 1322 1 720 5120 t
+10 CW f
+(%INFO[)870 5300 w
+10 I f
+(information)1230 5300 w
+10 CW f
+(])1703 5300 w
+10 R f
+(These device control commands are ignored by the other postprocessors.)9 2905 1 720 5480 t
+( electronic)1 436(The information markers are intended for use in future hypertext applications geared toward)12 3884 2 720 5660 t
+( details, contact the)3 783( For)1 193(storage and retrieval of PostScript-based documents.)5 2122 3 720 5780 t
+9 R f
+(DWB)3845 5780 w
+10 R f
+( electronic)1 421(group via the)2 535 2 4084 5780 t
+(mail address on the)3 774 1 720 5900 t
+9 H f
+(Feedback)1519 5900 w
+10 R f
+(page in the front of this manual.)6 1279 1 1939 5900 t
+10 S1 f
+()720 6140 w
+720 6140 m
+100 build_rh
+820 6140 m
+10 B f
+( that Can Be Set from the Command Line)8 1782(2.3 Parameters)1 667 2 895 6140 t
+10 R f
+(The register)1 493 1 720 6320 t
+10 CW f
+(I)1252 6320 w
+10 R f
+(determines whether or not)3 1087 1 1351 6320 t
+9 R f
+(MM)2476 6320 w
+10 R f
+( default,)1 342( By)1 182(generates information markers.)2 1274 3 2676 6320 t
+10 CW f
+(I)4514 6320 w
+10 R f
+(is set to 0)3 426 1 4614 6320 t
+(resulting in information markers; if)4 1410 1 720 6440 t
+10 CW f
+(I)2155 6440 w
+10 R f
+(is set to any non-zero value, this feature is turned off.)10 2129 1 2240 6440 t
+(To suppress information markers, use the command line option)8 2592 1 720 6620 t
+10 CW f
+(-rI1)3345 6620 w
+10 R f
+(\(e.g., ``)1 301 1 3618 6620 t
+10 CW f
+(troff -mm -rI1)2 840 1 3919 6620 t
+10 I f
+(\256le)4819 6620 w
+10 R f
+(''\))4941 6620 w
+(or insert the request)3 790 1 720 6740 t
+10 CW f
+(.nr I 1)2 420 1 870 6920 t
+10 R f
+(in the beginning of the document \256le before the \256rst)9 2084 1 720 7100 t
+9 R f
+(MM)2827 7100 w
+10 R f
+(macro call.)1 443 1 3012 7100 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Courier ZapfDingbats Times-Roman Helvetica-Bold Times-Bold Helvetica Times-Italic Times-Roman

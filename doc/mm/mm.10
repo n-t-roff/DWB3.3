@@ -1,0 +1,215 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "TABLE OF CONTENTS AND COVER SHEET"
+The table of contents and the cover sheet for a document
+are produced by invoking the
+.cR .TC
+and
+.cR .CS
+macros, respectively.
+.P
+These macros should normally appear only once at the end of the 
+document, after the signature block
+.cR .SG ) (
+and notations (\*(iR.NS\fP/\*(iR.NE\fP) macros.
+They may occur in either order.
+.P
+The table of contents is produced at the end of the document because the
+entire document must be processed before the table of contents can be
+generated.
+Similarly, the cover sheet is often not needed, and is
+therefore produced at the end.
+.H 2 "Table of Contents"
+.iS
+\&.TC \f1[\*(iAslevel\|\f1] [\*(iAspacing\f1] [\*(iAtlevel\|\f1] [\*(iAtab\f1] [\*(iAhead1\f1] [\*(iAhead2\f1] [\*(iAhead3\f1] [\*(iAhead4\f1] [\*(iAhead5\f1]
+.iE
+The
+.cR .TC
+macro generates a table of contents containing the
+headings that were saved for the table of contents
+as determined by the value of the
+.cR Cl
+register.
+The arguments to
+.cR .TC
+control the spacing before each entry, the placement of the associated page 
+number, and additional text on the first page of the table of contents 
+before the word
+.sM CONTENTS '' ``
+is printed.
+.P
+Spacing before each entry is controlled by the first two arguments; 
+headings whose level is less than or equal to
+.cA slevel
+will have 
+.cA spacing
+blank vertical spaces before them.
+Both
+.cA slevel
+and
+.cA spacing
+default to 1.
+This means that first-level headings are preceded by one blank vertical space.
+Note that
+.cA slevel
+does not control what levels of
+heading have been saved; the saving of headings is the function of the
+.cR Cl
+register.
+.P
+The third and fourth arguments control the placement of the page
+number of each heading.
+The page numbers can be justified at the 
+right margin with either blanks or dots separating the
+heading text from the page number, or the page numbers can follow the
+heading text.
+For headings whose level is less than or equal to 
+.cA tlevel
+(default is 2),
+the page numbers are justified at the right margin.
+In this case, the value of
+.cA tab
+determines the character used to separate
+the heading text from the page number.
+If
+.cA tab
+is 0 (the default value), dots (i.e., leaders) are used; if
+.cA tab
+is greater than 0, spaces are used.
+For headings whose level is greater than
+.cA tlevel ,
+the page numbers are separated from
+the heading text by two spaces (i.e., they are ``ragged right'').
+.P
+All additional arguments (e.g.,
+.cA head1 ,
+.cA head2 ),
+if any, are horizontally centered on the page,
+and precede the actual table of contents itself.
+.P
+If the
+.cR .TC
+macro is invoked with at most four arguments, then
+the user-exit macro
+.cR .TX
+is invoked (without arguments) before the word
+.sM CONTENTS '' ``
+is printed, or the user-exit macro
+.cR .TY
+is invoked and the word
+.sM CONTENTS '' ``
+is not printed.
+By defining
+.cR .TX
+or
+.cR .TY
+and invoking
+.cR .TC
+with at most four arguments,
+the user can specify what needs to be done at the top of
+the first page of the table of contents.
+For example:
+.iS
+\&.de TX
+\&.ce 2
+Special Application
+Message Transmission
+\&.sp 2
+\&.in +10n
+Approved:  \el'3i'
+\&.in
+\&.sp
+\&..
+\&.TC
+.iE
+yields:
+.DS I
+.ce 2
+Special Application
+Message Transmission
+.sp 2
+.in +10n
+Approved:  \l'3i'
+.in
+.sp
+.ce
+CONTENTS
+.sp
+.DE
+.P
+If this macro were defined as
+.cR .TY
+rather than
+.cR .TX ,
+the word
+.sM CONTENTS '' ``
+would not appear.
+Defining
+.cR .TY
+as an empty macro will suppress
+.sM CONTENTS '' ``
+with no replacement:
+.iS
+\&.de TY
+\&..
+.iE
+By default, the first level headings will appear in the table of contents
+at the left margin.
+Subsequent levels will be aligned with the text of 
+headings at the preceding level.
+These indentations may be changed by defining the
+.cR Ci
+string which takes a maximum of seven arguments
+corresponding to the heading levels.
+It must be given at least as many
+arguments as are set by the
+.cR Cl
+register.
+The arguments must be scaled.
+For example, if
+.cR Cl
+is 5,
+.cR Ci
+would be defined as:
+.iS
+\&.ds Ci .25i .5i .75i 1i 1i
+.iE
+or
+.iS
+\&.ds Ci 0 2n 4n 6n 8n
+.iE
+Two other registers are available to modify the format of the table
+of contents,
+.cR Oc
+and
+.cR Cp .
+By default, table of contents pages will
+have lower-case Roman numeral page numbering.
+If the
+.cR Oc
+register is set to 1, the
+.cR .TC
+macro will not print any page number but
+will instead reset the
+.cR P
+register to 1.
+It is the user's responsibility
+to give an appropriate page footer to place the page number.
+Ordinarily, the same
+.cR .PF
+used in the body of the document will be adequate.
+.P
+The List of Figures, List of Tables, List of Exhibits, and
+List of Equations pages will be produced separately unless
+.cR Cp
+is set to 1 which causes these lists to appear on the same
+page as the table of contents.
+.H 2 "Cover Sheet"
+For document styles that allow a cover sheet
+(e.g., released-paper and memoranda), the format of the cover sheet
+resembles the first-page format of the document and includes the abstract.
+Cover sheets are not generated for external letters and business letters.

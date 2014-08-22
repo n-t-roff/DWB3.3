@@ -1,0 +1,98 @@
+.ds dL /usr/lib/dwb
+.TH XPAND 5
+.SH NAME
+.B xpand
+\- expand
+.MW .so
+calls in
+.B troff
+and
+.B nroff
+files
+.SH SYNOPSIS
+\*(mBxpand\f1
+.OP "" files []
+.SH DESCRIPTION
+The
+.B xpand
+utility searches
+.I files
+for
+.MW .so
+requests and inserts the named file at that point.
+The output of
+.B xpand
+is a composite of
+.I files
+where each
+.MW .so
+call is replaced by the contents of the called file.
+.PP
+The
+.B xpand
+utility is especially useful when preprocessor input (for
+.BR tbl ,
+.BR eqn ,
+.BR pic ,
+or
+.BR grap )
+is contained in a external file.
+Since
+.MW .so
+is a 
+.B troff
+request, the preprocessors will not see the
+contents of the external source files, so
+.B xpand
+can be used to retrieve them before the preprocessors
+do their work.
+.SH EXAMPLE
+Given the file
+.MW doc
+as the entire document file in which each section is inserted with a
+.MW .so
+request, then
+.EX
+\*(dL/xpand doc | tbl | eqn | troff -mm \(el
+.EE
+eliminates all
+.MW .so
+calls in
+.MW doc
+and creates a complete document input stream,
+which is then processed by
+.BR tbl ,
+.BR eqn ,
+and
+.B troff
+with the
+.SM MM
+macro package.
+.SH WARNINGS
+.B xpand
+does not recognize
+.MW .nx
+requests to switch source files.
+.PP
+.B xpand
+does not interpret number register or string calls
+as part of the
+.MW .so
+filename.
+Any
+.MW \en
+or
+.MW \e*
+sequences in the
+.MW .so
+filename argument is assumed to be part of the name;
+most likely, such a file will not be found.
+.SH FILES
+.MW \*(dL/xpand
+.SH SEE ALSO
+.BR eqn (1),
+.BR grap (1),
+.BR nroff (1),
+.BR pic (1),
+.BR tbl (1)
+.BR troff (1),

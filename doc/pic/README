@@ -1,0 +1,35 @@
+PIC
+============================================================================
+TITLE      PIC - A Graphics Language for Typesetting
+           (User Manual)
+
+AUTHOR(s)  Brian W. Kernighan
+           AT&T Bell Laboratories
+
+REVISED    1990 by B.W.Kernighan
+REPRINTED  May 1990, AT&T Bell Laboratories
+============================================================================
+FILE             PURPOSE
+--------------   --------------------------------------------------------
+pic.doc          PIC document body
+pic.app          Appendix:  PIC Reference Manual
+pic.defs         Additional macro defintions for PIC document
+Run              Shell script to format and print entire PIC document
+============================================================================
+To produce the entire PIC document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the PIC document (body only), use the command:
+
+   pic pic.doc | tbl | eqn | troff -Tpost | dpost
+
+To produce the appendix, use the command:
+
+   eqn pic.app | troff -Tpost | dpost
+============================================================================

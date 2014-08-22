@@ -1,0 +1,44 @@
+'''	\" redefine iS for smaller size and tab settings
+.de iS
+.DS I
+.ft 5
+.S -1
+.nr d 8     	\" tab stops this far apart in .P1/.P2
+.nr t \\nd*\\w'x'u
+.ta 1u*\\ntu 2u*\\ntu 3u*\\ntu 4u*\\ntu 5u*\\ntu 6u*\\ntu 7u*\\ntu 8u*\\ntu 9u*\\ntu 10u*\\ntu 11u*\\ntu 12u*\\ntu 13u*\\ntu 14u*\\ntu
+..
+'''	\" redefine iE to return to previous size
+.de iE
+.S +1
+.ft 1
+.DE
+..
+'''	\" .gE  (called as .gET) include copy of source file here
+'''	\"      normally used inside input display (.iS/.iE)
+'''	\" USAGE:  .gET file
+.de gE
+.sy ./trget \\n(.$ \\$2 '\\$3' '\\$4' '\\$5' | sed '/^.&.G[12]/d' >junk.\\n($$
+.so junk.\\n($$
+.sy rm junk.\\n($$
+..
+'''	\" .gR  (called as .gRAP) run grap|pic and insert output here
+'''	\"      input file assumed to include .G1/.G2
+'''	\" USAGE:  .gRAP file
+.ds gP grap	\" what grap to run
+.de gR
+.sy \\*(gP \\$2 | pic | eqn '-d$$' >junk.\\n($$
+.DS CB
+.so junk.\\n($$
+.DE
+.sy rm junk.\\n($$
+..
+'''	\" .dD  prints first 5 lines and last line of source file
+'''	\"      and includes lines here
+'''	\"      normally used inside input display (.iS/.iE)
+'''	\" USAGE:  .dD file
+.de dD
+....sy sed -n -e 1,5p -e '6s/.*/  .../p' -e '$p' \\$1 >junk.\\n($$
+.sy awk '{if(NR<=5)print;else x=$0}; END {if(NR>5){print "\\(el";print x}}' \\$1 >junk.\\n($$
+.so junk.\\n($$
+...sy rm junk.\\n($$
+..

@@ -1,0 +1,33 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.VG
+.TU CHANGING SIZES
+Changing the point size (smaller or larger) by a single
+point may not be noticeable.  A change of several points
+may be necessary to see the difference.
+.sp
+.ce 99
+Some normal-sized text
+.S
+.S
+A Bit Smaller
+.S
+.S
+.S
+.S
+Much Smaller
+.L
+.L
+A Bit Larger
+.L
+.L
+.L
+.L
+Return to the normal point size
+.VE
+SIZES
+Example 5

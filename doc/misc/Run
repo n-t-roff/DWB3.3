@@ -1,0 +1,18 @@
+# set print spooler command
+PRINT=""
+
+# set list of PostScript output files to print
+PSFILES="PS.cover PS.divtags PS.feedback PS.refs PS.spine PS.toc.master"
+
+# run document parts and create PostScript output files
+troff -Tpost cover | dpost >PS.cover
+troff -Tpost -mm divtags | dpost >PS.divtags
+troff -Tpost feedback | dpost >PS.feedback
+troff -Tpost refs | dpost >PS.refs
+troff -Tpost spine | dpost >PS.spine
+tbl toc.master | troff -Tpost - | dpost >PS.toc.master
+
+# print document parts if PRINT is set
+if [ x"$PRINT" != "x" ]; then
+   $PRINT $PSFILES
+fi

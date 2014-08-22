@@ -1,0 +1,579 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "MISCELLANEOUS FEATURES"
+.H 2 "Using Fonts for Emphasis"
+.iS
+\&.B \f1[\*(iAbold\|\f1] [\*(iAprevious\f1] [\(el]\*(iR
+.sp 0.3v
+\&.I \f1[\*(iAbold\|\f1] [\*(iAprevious\f1] [\(el]\*(iR
+.sp 0.3v
+\&.R
+.iE
+.P
+The
+.sM MM
+package recognizes three standard fonts or typefaces:  roman, italic, and bold.
+The roman font is the typeface used for regular text.
+When called without arguments, the
+.cR .B
+and
+.cR .I
+macros change to the bold and italic fonts,
+respectively.
+The font change remains in effect until another call to
+.cR .B
+or
+.cR .I ,
+or until the roman (regular text) font is restored
+with the
+.cR .R
+macro.
+For example:
+.iS
+\&This is the roman font.
+\&.B
+Here is some text in the bold font,
+\&.I
+and here is some text in the italic font.
+\&.R
+Now back to the regular font.
+.iE
+yields:
+.DS I F
+This is the roman font.
+.B
+Here is some text in the bold font,
+.I
+and here is some text in the italic font.
+.br
+.R
+Now back to the regular font.
+.DE
+.P
+If
+.cR .B
+is called with one argument, that argument is printed in the
+bold font; likewise, if
+.cR .I
+is called with one argument, that argument is printed in the
+italic font.
+Then the 
+previous font is restored.
+If two or more arguments (maximum 6) are given to a
+.cR .B
+or a
+.cR .I 
+macro, the second argument is then concatenated to the first with no
+intervening space (a narrow space is inserted after italics),
+but is printed in the previous font;
+the remaining pairs of arguments are
+similarly alternated.
+For example:
+.br
+.ne 4v
+.iS
+\&.I abc def ghi jkl
+.iE
+produces:
+.DS I
+.I abc def ghi jkl
+.DE
+.P
+Use the following macros to alternate between specific pairs of fonts:
+.iS
+\&.IB \f1[\*(iAitalic\f1] [\*(iAbold\|\f1] [\(el]\*(iR
+.sp 0.3v
+\&.BI \f1[\*(iAbold\|\f1] [\*(iAitalic\f1] [\(el]\*(iR
+.sp 0.3v
+\&.IR \f1[\*(iAitalic\f1] [\*(iAroman\f1] [\(el]\*(iR
+.sp 0.3v
+\&.RI \f1[\*(iAroman\f1] [\*(iAitalic\f1] [\(el]\*(iR
+.sp 0.3v
+\&.RB \f1[\*(iAroman\f1] [\*(iAbold\|\f1] [\(el]\*(iR
+.sp 0.3v
+\&.BR \f1[\*(iAbold\|\f1] [\*(iAroman\f1] [\(el]\*(iR
+.iE
+Each takes a maximum of 6 arguments and alternates the arguments between
+the specified fonts.
+Note the font changes in headings are handled separately.
+.P
+.H 2 "Right Margin Justification"
+.iS
+\&.SA \f1[\*(iAmode\f1]
+.iE
+The
+.cR .SA
+macro is used to set right-margin justification for the main body of text.
+Two justification flags are used:  ``current'' and ``default.''
+.cR ".SA\ 0"
+sets both flags to no justification, i.e., it acts like the
+.cR .na
+request and produces a ragged right margin.
+.cR ".SA\ 1"
+is the inverse:  it sets both flags to cause
+justification, just like the
+.cR .ad
+request.
+However, calling
+.cR .SA 
+without an argument causes the ``current'' flag to be copied
+from the ``default'' flag, thus performing either
+.cR .na
+or
+.cR .ad ,
+depending on what the default is.
+Initially, both flags are set for justification.
+.P
+In general, the
+.cR .na
+request can be used to ensure that justification is turned off, but
+.cR .SA
+should be used to restore justification, rather than the
+.cR .ad
+request.
+In this way, justification or lack thereof for the 
+remainder of the text is specified by inserting
+.cR ".SA 0"
+or
+.cR ".SA 1"
+once at the beginning of the document.
+.H 2 "Two-Column Output"
+.sM MM
+can print two columns of text on a page:
+.iS
+\&.2C
+.cA "text and formatting requests"
+\*(iA(except another \*(iR.2C\*(iA macro)\*(iR
+\&.1C
+.iE
+The
+.cR .2C
+macro begins two-column processing which continues until a
+.cR .1C
+macro is encountered.
+In two-column processing, each physical page is
+thought of as containing two columnar ``pages'' of equal
+(but smaller) page width.
+Page headers and footers are not affected by two-column processing.
+The
+.cR .2C
+macro does not ``balance'' two-column output.
+.H 3 "Width Control for Footnotes and Displays"
+.iS
+\&.WC \f1[\*(iAcode\f1]
+.iE
+It is possible to have full-page width footnotes and displays when in
+two-column mode, although the default action is for footnotes and 
+displays to be narrow in two-column mode and wide in one-column mode.
+The width of footnotes and displays are controlled by the
+.cR .WC
+(width control) macro
+which takes the following arguments:
+.DS "" F
+.TS
+center box tab(;);
+c cf1
+lf5 lw(4.5i).
+\*(iAcode\fP;Meaning
+_
+N;T{
+.na
+Use normal default mode (\*(iR-WF\fP, \*(iR-FF\fP, \*(iR-WD\fP, \*(iRFB\fP).
+T}
+WF;T{
+.na
+Always use wide footnotes, even in two-column mode.
+T}
+-WF;T{
+.na
+Default:  Turn off \*(iRWF\fP.  Footnotes follow the
+column mode in effect (wide in one-column mode and narrow in
+two-column mode) unless \*(iRFF\fP is set.
+T}
+FF;T{
+.na
+All footnotes have the same
+width as the first footnote for that page.
+T}
+-FF;T{
+.na
+Default:  Turn off \*(iRFF\fP.  The footnote style
+follows the settings of \*(iRWF\fP or \*(iR-WF\fP.
+T}
+WD;T{
+.na
+Always use wide displays, even in two-column mode.
+T}
+-WD;T{
+.na
+Default:  Turn off \*(iRWD\fP.  Displays follow
+the column mode in effect when the display is encountered.
+T}
+FB;T{
+.na
+Default:  Floating displays cause a break
+when output on the current page.
+T}
+-FB;T{
+.na
+Floating displays on current page do not cause a break.
+T}
+.TE
+.DE
+.P
+For example:
+.iS
+\&.WC WD FF
+.iE
+will cause all displays to be wide, and all
+footnotes on a page to be the same width, while:
+.iS
+\&.WC N
+.iE
+will reinstate the default actions.
+If conflicting settings are given to
+.cR .WC ,
+the last one is used.
+That is,
+.cR ".WC WF -WF" '' ``
+has the effect of
+.cR ".WC -WF" ''. ``
+.H 3 "Column Headings for Two-Column Output \*(BU"
+.br
+.P
+In two-column output, it is sometimes necessary to have headers over 
+each column, as well as headers over the entire page.
+This is accomplished by redefining the
+.cR .TP
+macro to provide header lines
+both for the entire page and for each of the columns.
+For example:
+.iS
+\&.de TP
+\&.sp 2
+\&.tl 'Page \e\enP'OVERALL''
+\&.tl ''TITLE''
+\&.sp
+\&.nf
+\&.ta 1.5iC 3iR 3.5i 5iC 6.5iR
+\*(iAleft-part\|\*(tB\|center-part\|\*(tB\|right-part\|\*(tB\|left-part\|\*(tB\|center-part\|\*(tB\|right-part\*(iR
+\*(iAleft-part\|\*(tB\|center-part\|\*(tB\|right-part\|\*(tB\|left-part\|\*(tB\|center-part\|\*(tB\|right-part\*(iR
+\&.fi
+\&.sp2
+\&..
+.iE
+(where \*(tB represents the tab character).
+The above example will produce two lines of page header text plus two
+lines of headers over each column.
+The tab stops are for a 6.5-inch overall line length.
+.H 2 "Blank Vertical Spaces"
+.iS
+\&.SP \f1[\*(iAlines\f1]
+.iE
+There exist several ways of obtaining blank vertical spaces, all with
+different effects.
+The
+.cR .sp
+request spaces the number of lines specified,
+unless ``no space''
+.cR .ns ) (
+mode is on, in which case the request is ignored.
+This mode is set at the end of a page header to eliminate spacing by a
+.cR .sp
+or a
+.cR .bp
+request that happens to occur at the top of a page.
+This mode can be turned off by the
+.cR .rs
+(restore spacing)
+request.
+.br
+.ne 7v
+.P
+The
+.cR .SP
+macro is used to avoid the accumulation of blank vertical space by
+successive macro calls.
+Several
+.cR .SP
+calls in a row produce not
+the sum of their arguments, but their maximum.
+For example:
+.iS
+\&.SP 2
+\&.SP 3
+\&.SP
+.iE
+produces only 3 blank lines.
+Many
+.sM MM
+macros utilize
+.cR .SP
+for spacing.
+For example,
+.cR ".LE\ 1"
+immediately followed by
+.cR .P
+produces only a single blank vertical space
+between the end of the list and the following paragraph.
+.P
+An omitted argument defaults to one blank vertical space.
+Negative arguments are not permitted.
+The argument must be unscaled but fractional amounts are permitted.
+Like
+.cR .sp ,
+.cR .SP
+is also inhibited by the
+.cR .ns
+request.
+.H 2 "Skipping Pages"
+.iS
+\&.SK \f1[\*(iA\|pages\f1]
+.iE
+The
+.cR .SK
+macro skips pages, but retains the usual header and footer processing.
+If the argument
+.cA pages
+is omitted, null, or 0,
+.cR .SK
+skips to the top of the next page unless it is currently
+at the top of a page, in which case it does nothing.
+If the argument
+.cA pages
+is given,
+.cR .SK
+.cA n
+skips
+.cA n
+pages, that is,
+.cR .SK
+always positions the text that follows it at the top of a page, while
+.cR ".SK\ 1"
+always leaves one page that is blank except for the header and footer.
+.H 2 "Forcing an Odd Page"
+.iS
+\&.OP
+.iE
+This macro is used to ensure that the text following it begins at the
+top of an odd-numbered page.
+If currently at the top of an odd page,
+no action takes place.
+If currently on an even page, text resumes
+printing at the top of the next page.
+If currently on an odd page (but
+not at the top of the page) one blank page is produced, and printing
+resumes on the next odd-numbered page.
+.H 2 "Setting the Point Size and Vertical Spacing"
+The default point size (obtained from the
+.sM MM
+register
+.cR S )
+is 10 points, and the vertical spacing is 12 points.
+The prevailing point size and vertical spacing may be
+changed by invoking the
+.cR .S
+macro:
+.iS
+\&.S \f1[\*(iA\|point-size\f1] [\*(iAvertical-spacing\f1]
+.iE
+The mnemonics
+.cR D
+(default value),
+.cR C
+(current value),
+and
+.cR P
+(previous value)
+may be used for both arguments.
+If an argument is negative, the
+current value is decremented by the specified amount; if an argument is
+positive, the current value is incremented by the specified amount; if 
+an argument is unsigned, it is used as the new value;
+.cR .S
+without
+arguments defaults to 
+.cR P .
+If the first argument is specified but the
+second is not, then
+.cR D
+is used for the vertical spacing; the default 
+value for vertical spacing is always 2 points greater than the 
+current point size.
+A null (\*(iR""\fP) value for either argument defaults to
+.cR C .
+Thus, if
+.cA n
+is a numeric value:
+.DS I
+.TS
+tab(;);
+lw(1i)f5 lf1 lw(1i)f5.
+\&.S;is equivalent to;\&.S P P
+\&.S "" \*(iAn\fP;is equivalent to;\&.S C \*(iAn\fP
+\&.S \*(iAn\fP "";is equivalent to;\&.S \*(iAn\fP C
+\&.S \*(iAn\fP;is equivalent to;\&.S \*(iAn\fP D
+\&.S "";is equivalent to;\&.S C D
+\&.S "" "";is equivalent to;\&.S C C
+\&.S \*(iAn\0n\fP;is equivalent to;\&.S \*(iAn\0n\fP
+.TE
+.DE
+If the first argument is greater than 99, the default point size
+(10 points) is restored.
+If the second argument is greater than 99, the
+default vertical spacing (current point size plus 2 points) is used.
+For example:
+.DS I
+.TS
+tab(;);
+lw(1i)f5 lf1 lw(1i)f5.
+\&.S 100;is equivalent to;\&.S 10 12
+\&.S 14 111;is equivalent to;\&.S 14 16
+.TE
+.DE
+.H 2 "Size Reduction"
+.iS
+\&.SM \*(iAstring1 \f1[\*(iAstring2\f1] [\*(iAstring3\f1]
+.iE
+The
+.cR .SM
+macro reduces the size of a string by a single point size.
+If the third argument
+.cA string3 ) (
+is omitted, then the first argument
+.cA string1 ) (
+is made smaller
+and is concatenated with the second argument
+.cA string2 ), (
+if the latter is specified.
+If all three arguments are present (even if any are null), 
+then the second argument is made smaller and all three arguments are
+concatenated.
+For example:
+.DS I
+.TS
+tab(;);
+lf5 lf1 lf1.
+\&.SM X;gives;T{
+.SM X
+T}
+\&.SM X Y;gives;T{
+.SM X Y
+T}
+\&.SM Y X Y;gives;T{
+.SM Y X Y
+T}
+\&.SM UNIX;gives;T{
+.SM UNIX
+T}
+\&.SM UNIX );gives;T{
+.SM UNIX )
+T}
+\&.SM ( UNIX );gives;T{
+.SM ( UNIX )
+T}
+\&.SM U NIX "";gives;T{
+.SM U NIX ""
+T}
+.TE
+.DE
+.H 2 "Producing Accents"
+Seven strings are defined to place accent marks with letters.
+The accent string immediately follows the letter that it is used with:
+.tr ~~
+.DS
+.ta 1.5i 3.25i 4i
+		Input	Output
+.sp 0.3v
+	Grave accent	e\*(iR\e*`\fP	    e\*`
+.sp 0.2v
+	Acute accent	e\*(iR\e*'\fP	    e\*'
+.sp 0.2v
+	Circumflex	o\*(iR\e*^\fP	    o\*^
+.sp 0.2v
+	Tilde	n\*(iR\e*~\fP	    n\*~
+.sp 0.2v
+	Cedilla	c\*(iR\e*,\fP	    c\*,
+.sp 0.2v
+	Lower-case umlaut	u\*(iR\e*:\fP	    u\*:
+.sp 0.2v
+	Upper-case umlaut	U\*(iR\e*;\fP	    U\*;
+.ta
+.DE
+.H 2 "Inserting Text Interactively \*(BU"
+.iS
+\&.RD\0\f1[\*(iA\|prompt\f1]\0[\*(iAdiversion-name\f1]\0[\*(iAstring-name\f1]
+.iE
+The
+.cR .RD
+(read insertion) macro allows a user to stop the standard output of a
+document and to read text from the standard input until two consecutive
+newlines are found.
+When the newlines are encountered, normal output is resumed.
+The
+.cR .RD
+macro follows the formatting conventions in effect.
+Thus, the examples below assume that
+.cR .RD
+is invoked in no-fill mode.
+.P
+The first argument is a prompt which will be printed at the terminal.
+If
+.cA prompt
+is not given,
+.cR .RD
+signals the user with a
+.sM BEL
+(bell sound).
+The second argument, the name of a diversion,
+allows the user to save all the text typed in after the prompt
+in a macro named
+.cA diversion-name .
+The third argument, the name of a string,
+allows the user to save the first line following
+the prompt in the string named
+.cA string-name
+for later reference.
+For example:
+.iS
+\&.RD NAME aA bB
+.iE
+produces the prompt
+.sM NAME '' ``
+after which the user types in the
+information to be read and ends with an extra line return:
+.iS
+NAME  \f(CBJ. Jones
+16 Elm Road
+Piscataway, N.J.
+.cA "newline"
+.iE
+.br
+.ne 5v
+.P
+The diverted macro
+.cR aA
+will contain:
+.DS I
+J. Jones
+16 Elm Road
+Piscataway, N.J.
+.DE
+.P
+The string
+.cR bB
+contains ``J.\ Jones''.
+The collected information can then be used by invoking
+.cR .aA
+for the diverted macro and
+.cR \e*(bB
+for the defined string.
+.P
+A newline followed by a control-d
+.SM ( EOF )
+also allows the user to resume
+normal output.

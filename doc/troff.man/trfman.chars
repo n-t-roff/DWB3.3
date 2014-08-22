@@ -1,0 +1,159 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.nr L 11.5i
+.so ../defs.doc
+.so defs.trfman
+.TL "Special Character Names"
+The following table lists names for a set of characters,
+most of which have typically been available with \f2troff\fP.
+.br
+Not all print on any particular device.
+.sp 0.3v
+.mk
+.po +0.9i
+.TS
+l lf5.
+\'	\e'
+\`	\e`
+\(em	\e(em
+\(hy	\e(hy
+\-	\e-
+\(bu	\e(bu
+\(sq	\e(sq
+\(ru	\e(ru
+\(14	\e(14
+\(12	\e(12
+\(34	\e(34
+\(fi	\e(fi
+\(fl	\e(fl
+\(ff	\e(ff
+\(Fi	\e(Fi
+\(Fl	\e(Fl
+\(de	\e(de
+\(dg	\e(dg
+\(fm	\e(fm
+\(ct	\e(ct
+\(rg	\e(rg
+\(co	\e(co
+\(pl	\e(pl
+\(mi	\e(mi
+\(eq	\e(eq
+\(**	\e(**
+\(sc	\e(sc
+\(aa	\e(aa
+\(ga	\e(ga
+\(ul	\e(ul
+\(sl	\e(sl
+\(*a	\e(*a
+\(*b	\e(*b
+\(*g	\e(*g
+\(*d	\e(*d
+\(*e	\e(*e
+\(*z	\e(*z
+\(*y	\e(*y
+\(*h	\e(*h
+\(*i	\e(*i
+\(*k	\e(*k
+\(*l	\e(*l
+.TE
+.rt
+.po +2i
+.TS
+l lf5.
+\(*m	\e(*m
+\(*n	\e(*n
+\(*c	\e(*c
+\(*o	\e(*o
+\(*p	\e(*p
+\(*r	\e(*r
+\(*s	\e(*s
+\(ts	\e(ts
+\(*t	\e(*t
+\(*u	\e(*u
+\(*f	\e(*f
+\(*x	\e(*x
+\(*q	\e(*q
+\(*w	\e(*w
+\(*A	\e(*A
+\(*B	\e(*B
+\(*G	\e(*G
+\(*D	\e(*D
+\(*E	\e(*E
+\(*Z	\e(*Z
+\(*Y	\e(*Y
+\(*H	\e(*H
+\(*I	\e(*I
+\(*K	\e(*K
+\(*L	\e(*L
+\(*M	\e(*M
+\(*N	\e(*N
+\(*C	\e(*C
+\(*O	\e(*O
+\(*P	\e(*P
+\(*R	\e(*R
+\(*S	\e(*S
+\(*T	\e(*T
+\(*U	\e(*U
+\(*F	\e(*F
+\(*X	\e(*X
+\(*Q	\e(*Q
+\(*W	\e(*W
+\(sr	\e(sr
+\(rn	\e(rn
+\(>=	\e(>=
+\(<=	\e(<=
+.TE
+.rt
+.po +2i
+.TS
+l lf5.
+\(==	\e(==
+\(~=	\e(~=
+\(ap	\e(ap
+\(!=	\e(!=
+\(->	\e(->
+\(<-	\e(<-
+\(ua	\e(ua
+\(da	\e(da
+\(mu	\e(mu
+\(di	\e(di
+\(+-	\e(+-
+\(cu	\e(cu
+\(ca	\e(ca
+\(sb	\e(sb
+\(sp	\e(sp
+\(ib	\e(ib
+\(ip	\e(ip
+\(if	\e(if
+\(pd	\e(pd
+\(gr	\e(gr
+\(no	\e(no
+\(is	\e(is
+\(pt	\e(pt
+\(es	\e(es
+\(mo	\e(mo
+\(br	\e(br
+\(dd	\e(dd
+\(rh	\e(rh
+\(lh	\e(lh
+\(or	\e(or
+\(ci	\e(ci
+\(lt	\e(lt
+\(lb	\e(lb
+\(rt	\e(rt
+\(rb	\e(rb
+\(lk	\e(lk
+\(rk	\e(rk
+\(bv	\e(bv
+\(lf	\e(lf
+\(rf	\e(rf
+\(lc	\e(lc
+\(rc	\e(rc
+.TE
+.po \\nOu

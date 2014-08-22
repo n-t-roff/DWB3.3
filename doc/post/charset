@@ -1,0 +1,189 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so ../defs.doc
+.so defs.post
+.AT "PostScript" "Character Set"
+.TL "PostScript Character Set and Symbols" "Standard Text Font Character Set"
+The standard text font character set consists of alphanumerics,
+punctuation and accent marks, brackets, and
+other symbols to complement each type style.
+Each standard text font offers a full set of
+.sM ASCII
+characters
+and a variety of
+.sM ASCII "" non-
+special characters.
+The more useful
+.sM ASCII  "" non-
+symbols have assigned
+input names;
+the remaining unnamed symbols are represented by character access codes.
+.P
+The
+.sM ASCII
+characters |, _, < and >, and the bullet (\(bu) symbol
+are taken from the special Symbol font;
+the standard text font versions are available by character access code.
+In the case of the constant-width fonts
+.cR CO , (
+.cR CW ,
+.cR CI ,
+.cR CB ,
+and
+.cR CX ),
+the
+.sM ASCII
+characters
+.cR | ,
+.cR _ ,
+.cR <
+and
+.cR >
+are taken from the respective font.
+.MT "\s-1ASCII\s+1 (Keyboard) Characters"
+.iS
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
+0123456789.,;:!?`'^~"\e
+@#$%&*+=-/()[]{}
+.iE
+.MT "Non-\s-1ASCII\s+1 Special Characters"
+The following characters have assigned
+input names.
+.br
+.mk
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 2p
+\(hy	\e(hy	hyphen (same as \f5-\fP)
+\(en	\e(en	en dash (same as \f5\e-\fP)
+\(em	\e(em	em dash
+\(fr	\e(fr	fraction bar
+\(``	\e(``	left double quote
+\(''	\e(''	right double quote
+\(dg	\e(dg	dagger
+\(dd	\e(dd	double dagger
+\(sc	\e(sc	section
+\(pg	\e(pg	paragraph
+\(ct	\e(ct	cent
+\(ps	\e(ps	pound sterling
+\(yn	\e(yn	yen
+\(cr	\e(cr	currency
+\(fn	\e(fn	florin
+.TE
+.rt
+.po +3.5i
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 2p
+\(ga	\e(ga	Accent:  grave (same as \f5\e`\fP)
+\(aa	\e(aa	Accent:  acute (same as \f5\e'\fP)
+\(^a	\e(^a	Accent:  circumflex (same as \f5^\fP)
+\(~a	\e(~a	Accent:  tilde (same as \f5~\fP)
+\(-a	\e(-a	Accent:  macron
+\(Ua	\e(Ua	Accent:  breve
+\(.a	\e(.a	Accent:  dot
+\(:a	\e(:a	Accent:  dieresis (umlaut)
+\(oa	\e(oa	Accent:  ring
+\(,a	\e(,a	Accent:  cedilla
+\("a	\e("a	Accent:  hungarumlaut
+\(Ca	\e(Ca	Accent:  ogonek
+\(va	\e(va	Accent:  caron
+\(fi	\e(fi	f\^i ligature*
+\(fl	\e(fl	f\^l ligature*
+.TE
+.po \nOu
+.br
+.FS *
+In ligature mode,
+.I troff
+replaces the character pairs
+.cR fi
+and
+.cR fl
+with the appropriate ligature symbol.
+Ligatures are not available for the character combinations
+.cR ff ,
+.cR ffi
+and
+.cR ffl .
+No ligatures are available for mono-spaced fonts (like Courier).
+.FE
+.SK
+.MT "Other (Unnamed) Characters"
+The following characters are represented by character access codes
+(the input format is
+.cI \eN' code \f5'\f1\|).
+To select one of these unnamed symbols, input the access code format
+with the appropriate number.
+.br
+.mk
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 nf5 lf1w(1.75i).
+	Access
+Symbol	Code	Description
+_
+.sp 2p
+\N'60'	60	less than
+\N'62'	62	greater than
+\N'94'	94	\s-1ASCII\s+1 circumflex
+\N'95'	95	underscore
+\N'124'	124	vertical bar
+\N'126'	126	\s-1ASCII\s+1 tilde
+\N'161'	161	inverted exclamation mark
+\N'169'	169	single quote
+\N'171'	171	left double angle
+\N'172'	172	left single angle
+\N'173'	173	right single angle
+\N'180'	180	centered dot
+\N'183'	183	bullet
+\N'184'	184	base single quote
+\N'185'	185	base double quote
+\N'187'	187	right double angle
+.TE
+.rt
+.po +3.5i
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 nf5 lf1w(1.75i).
+	Access
+Symbol	Code	Description
+_
+.sp 2p
+\N'188'	188	ellipsis
+\N'189'	189	per thousand
+\N'191'	191	inverted question mark
+\N'225'	225	A\&E ligature
+\N'227'	227	raised underscored ``a''
+\N'232'	232	L slash
+\N'233'	233	O slash
+\N'234'	234	O\&E ligature
+\N'235'	235	raised underscored ``o''
+\N'241'	241	a\&e ligature
+\N'245'	245	dotless i
+\N'248'	248	l slash
+\N'249'	249	o slash
+\N'250'	250	o\&e ligature
+\N'251'	251	german double s
+.TE
+.po \nOu
+.br

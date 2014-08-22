@@ -1,0 +1,42 @@
+.ND "April 1, 1990"
+.TL
+Document Headings and Paragraphs
+.AF "DocuCenter Services, Inc."
+.AU "S. P. Lename" SPL MH 98765 "(201) 582-1234" 4W-567 systemx!spl
+.MT 5
+.H 1 "PARAGRAPHS AND HEADINGS"
+This section describes the types of paragraphs and the
+kinds of headings that are available.
+.H 2 Paragraphs
+Paragraphs are specified by the .P macro.
+Usually, they are flush left.
+The number register Pt is used to change the paragraph style.
+.H 2 Headings
+.H 3 "Numbered Headings."
+There are seven levels of numbered headings.
+Level 1 is the most major or highest;
+level 7, the lowest.
+.P
+Headings are specified with the .H macro,
+whose first argument is the level of heading
+(1 through 7).
+.P
+On output, level-1 headings are preceded by two blank lines;
+all others, by one blank line.
+Level-1 and level-2 headings are normally emboldened and
+stand apart from the text that follows;
+levels 3 through 7 are normally italicized and run in with the
+text that follows.
+.H 3 "Unnumbered Headings."
+The macro .HU is a special case of .H, in that no heading
+number is printed.
+Each .HU heading has the level given by the register Hu,
+whose initial value is 2.
+Usually, the value of that register is set to make
+unnumbered headings occur at the lower heading level
+in a document.
+.SG mc
+.NS
+J. J. Jones
+F. G. Swatter
+.NE

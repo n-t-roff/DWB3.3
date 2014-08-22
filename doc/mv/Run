@@ -1,0 +1,14 @@
+# set print spooler command
+PRINT=""
+
+# set list of PostScript output files to print
+PSFILES="PS.doc PS.app"
+
+# run document parts and create PostScript output files
+tbl mv.doc | eqn | troff -Tpost - | dpost >PS.doc
+troff -Tpost -mpictures mv.app | dpost >PS.app
+
+# print document parts if PRINT is set
+if [ x"$PRINT" != "x" ]; then
+   $PRINT $PSFILES
+fi

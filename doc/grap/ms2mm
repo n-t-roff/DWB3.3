@@ -1,0 +1,8 @@
+s/^\.PP/.P/
+s/^\.UL/.cR/
+s/^\.UC/.sM/
+s/^\.P1/.iS/
+s/^\.P2/.iE/
+s/^\.get/.gET/
+s/^\.grap/.gRAP/
+s/^\.d /s//.dD /

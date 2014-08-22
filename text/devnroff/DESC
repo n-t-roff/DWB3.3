@@ -1,0 +1,10 @@
+# nroff simulator font for 10-pitch terminals (e.g., dumb printers, m37 ttys)
+
+fonts 4 R I B S
+sizes 10  0
+res 240
+hor 24
+vert 10
+unitwidth 10
+
+charset

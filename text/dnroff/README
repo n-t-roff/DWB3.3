@@ -1,0 +1,7 @@
+
+Preliminary version of a troff postprocessor that we expect will
+eventually replace nroff. Close but not quite ready. Command line
+should look something like,
+
+	troff -Tnroff file | dnroff
+

@@ -1,0 +1,85 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.ds pT TBL
+.aP B "List of Input Commands"
+.TS H
+center;
+lfI    cfI lfI lfI
+lfCW   l   l   l.
+Input Command	Description	Section(s)	Example(s)
+=
+.sp 0.3v
+.TH
+\f3Macros\fP
+.sp 0.2v
+\&.TS	Table start macro	1	all
+\&.TE	Table end macro	1	all
+\&.T&	Table change macro	2.4	3, 11, 12
+\&.TS H	Table start macro with repeated heading	3.4	Appendix B
+\&.TH	Table repeat-heading macro	3.4	Appendix B
+.sp 0.1v
+_
+.sp 0.3v
+\f3Options\fP
+.sp 0.2v
+allbox	Draw box around all items	2.1	2, 8
+box	Draw box around table	2.1	1, 3, 5-6, 10, 14
+center	Center table in page	2.1	6-8, 12
+delim(\*(iAxy\*(iR)	Define \f2eqn\fP delimiters	2.1, 3.2	12
+doublebox	Draw double box around table	2.1	9
+expand	Make table full line width	2.1	13
+linesize(\*(iAn\*(iR)	Set size for rules	2.1	1
+tab(\f2x\*(iR)	Change data separator character	2.1	7, 10
+.sp 0.1v
+_
+.sp 0.3v
+\f3Key Letters\fP
+.sp 0.2v
+a  \&\f1\s-1or\s+1\*(iR  A	Alphabetic subcolumn	2.2.1	11
+c  \&\f1\s-1or\s+1\*(iR  C	Centered column	2.2.1	2-4, 6-14
+l  \&\f1\s-1or\s+1\*(iR  L	Left adjusted column	2.2.1	1, 3, 5, 6, 8, 9, 11-14
+n  \&\f1\s-1or\s+1\*(iR  N	Numerical column	2.2.1	2-4, 6, 7, 10-13
+r  \&\f1\s-1or\s+1\*(iR  R	Right adjusted column	2.2.1	10, 11, 14
+s  \&\f1\s-1or\s+1\*(iR  S	Spanned item	2.2.1	2, 3, 6-8, 10-14
+\*(iR^\f1	Vertical span	2.2.1	6, 7
+.sp 0.1v
+_
+.sp 0.3v
+\f3Modifiers\fP
+.sp 0.2v
+b  \&\f1\s-1or\s+1\*(iR  B	Boldface item	2.2.6	5, 9-12, 14
+e  \&\f1\s-1or\s+1\*(iR  E	Equal-width columns	2.2.10	2, 6, 10, 12
+f  \&\f1\s-1or\s+1\*(iR  F	Font change	2.2.6	2, 6, 8, 13
+i  \&\f1\s-1or\s+1\*(iR  I	Italic item	2.2.6	2, 12, 14
+p  \&\f1\s-1or\s+1\*(iR  P	Point size change	2.2.7	1, 2, 4, 7, 8, 10-14
+t  \&\f1\s-1or\s+1\*(iR  T	Vertical spanning at top	2.2.5	14
+u  \&\f1\s-1or\s+1\*(iR  U	Staggered columns	2.2.11	12
+v  \&\f1\s-1or\s+1\*(iR  V	Vertical spacing change	2.2.8	8, 12
+w  \&\f1\s-1or\s+1\*(iR  W	Minimum width value	2.2.9	8, 14
+z  \&\f1\s-1or\s+1\*(iR  Z	Zero-width item	2.2.12	11
+\*(iAn\f1	Column separation	2.2.4	10, 12, 14
+\&|	Single vertical line	2.2.3	3-6, 10, 14
+\&||	Double vertical line	2.2.3	7, 10
+\&=	Double horizontal line	2.2.2	7
+\&_  \f1\s-2(underline)\s+2	Single horizontal line	2.2.2	3, 5
+\&-  \f1\s-2(dash)\s+2	\^	\^	\^
+.sp 0.1v
+_
+.bp
+\f3Data Entry\f1
+.sp 0.2v
+\&_	Single horizontal line	2.3.2, 2.3.3	3, 4, 6, 10, 12, 14
+\&=	Double horizontal line	2.3.2, 2.3.3	3, 10, 12
+\e_	Short single horizontal line	2.3.4	12
+\e=	Short double horizontal line	2.3.4	12
+\e^	Vertical span	2.3.6	3, 14
+\eR\*(iAx\f1	Repeat character	2.3.5	6
+T{\f1\|\(el\|\*(iRT}	Text block	2.3.7	8, 12, 14
+\&.\*(iAxx\f1	Included \f2troff\f1 request	2.3.1	7-9, 11-14
+\e\*(iAE\*(iR  \&\f1\s-1or\s+1\*(iR  \e(\*(iAxx\f1	Included \f2troff\f1 escape sequence	2.3.1	10, 11, 14
+.TE

@@ -1,0 +1,31 @@
+.TH ATOL1 1 "DWB 3.2"
+.SH NAME
+.B atoL1
+\- convert
+.SM ASCII
+to Latin-1
+.SH SYNOPSIS
+\*(mBatoL1\f1
+.SH DESCRIPTION
+.B AtoL1
+reads standard input and copies to standard output.
+Escape strings of the form
+.MI \e( xy
+are replaced by the equivalent 8 bit Latin-1 (\s-1ISO 8859-1\s+1) character
+as defined in the table ``PostScript Character Set and Symbols/Latin-1 (\s-1ISO 8859-1\s+1)
+Character Set'' in the DWB\ 3.2 PostScript documentation.
+Undefined strings are passed through as is.
+.P
+For example, the British Pound sign may be expressed in
+.SM ASCII
+by either of
+.MW \e(L-
+or
+.MR \e(ps .
+The first of these would be converted to hexadecimal
+.MR A3 ,
+the second would pass through unchanged.
+.SH SEE ALSO
+.BR L1toa (1),
+.BR atoL1sim (1),
+.BR troff(1)

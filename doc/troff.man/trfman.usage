@@ -1,0 +1,182 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so ../defs.doc
+.so defs.trfman
+.EQ
+delim @@
+define cw % "\&" font CW %
+.EN
+.TL "Usage and Options"
+.P
+\f2Troff\fP or \f2nroff\fP is invoked as
+.iS
+troff \*(iAoptions  files\fP
+nroff \*(iAoptions  files\fP
+.iE
+where
+.cA options
+represents any of a number of option arguments
+and
+.cA files
+represents the list of files containing the document
+to be formatted.
+An argument consisting of a single minus
+.cR - ' `
+is taken to be
+a filename corresponding to the standard input.
+If no filenames are given input is taken from the standard input.
+The options, which may appear in any order so long as they appear
+before the files, are:
+.TS
+center;
+af5 lf1w(5i).
+-m\^@name@	T{
+Read the macro file
+@cw /usr/lib/tmac. name@
+before the input @files@.
+T}
+-T@name@	T{
+Specifies
+the type of the output device.
+Specific devices are site-dependent.
+.sp 3p
+For
+\f2troff\fP,
+useful names include
+.cR post
+(for PostScript\*(Rg, the default),
+.cR i300
+(for Imagen 8/300),
+and
+.cR pcl
+(for
+.sM HP
+LaserJet).
+.sp 3p
+For
+\f2nroff\fP,
+useful names include
+@cw "37"@ for the (default) Model 37 Teletype\*(Rg,
+@cw "450"@ for the \s-1DASI\s+1-450 (Diablo Hyterm),
+@cw lp@ for ``dumb'' line printer terminals
+(no half-line motions, no reverse motions),
+and @cw think@ for the
+.sM HP
+ThinkJet printer.
+T}
+-i	T{
+Read standard input after the input files are exhausted.
+T}
+-o@list@	T{
+Print only pages whose page numbers appear in @list@,
+which consists of comma-separated numbers and number ranges.
+A number range has the form @N-M@
+and means pages @N@ through @M@;
+an initial @-N@ means
+from the beginning to page @N@; and a final @N-@ means
+from @N@ to the end.
+T}
+-n\^@N@	T{
+Number first generated page @N@.
+T}
+-r@aN@	T{
+Set number register @a@ (one-character) to @N@.
+T}
+-s@N@	T{
+Stop every @N@ pages.
+\f2Nroff\fP will halt prior to every @N@ pages (default @N=1@)
+to allow paper loading or
+changing, and will resume upon receipt of a newline.
+\f2Troff\fP will include a ``pause'' code every @N@ pages;
+its meaning, if any, depends on the output device.
+T}
+-u\^@N@	T{
+Set amount of emboldening for the
+.cR bd
+request to @N@.
+T}
+-F@path@	T{
+Look in directory @path@ for font information;
+default is
+.cR /usr/lib/font
+for \f2troff\fP
+and
+.cR /usr/lib/term
+for \f2nroff\fP.
+T}
+.sp .5
+.T&
+lf1 lf1w(5i)
+af5 lf1w(5i).
+\f2troff\fP only:
+.sp 3p
+-a	T{
+Send a printable
+.sM ASCII ) (
+approximation
+of the results to the standard output.
+T}
+.sp .5
+.T&
+lf1 lf1w(5i)
+af5 lf1w(5i).
+\f2nroff\fP only:
+.sp 3p
+-e	T{
+Produce equally-spaced words in adjusted
+lines, using full terminal resolution.
+T}
+-h	T{
+Use tabs instead of spaces
+to speed up printing.
+T}
+-q	T{
+Invoke the simultaneous input-output mode of the @cw rd@ request.
+T}
+.TE
+.P
+Each option is a separate argument;
+for example,
+.iS
+troff -Tpost -ms -o4,6,8-10 \*(iAfile1  file2
+.iE
+requests formatting of pages 4, 6, and 8 through 10 of a document
+contained in the files
+named
+.cA file1
+and
+.cA file2 ,
+specifies the output device as a PostScript printer,
+and invokes the
+.sM MS
+macro package.
+.P
+Various pre- and post-processors are available for use with \f2nroff\fP and \f2troff\fP.
+These include the equation preprocessor
+.I eqn
+(for \f2troff\fP;
+.I neqn
+for
+.IR nroff ),
+the table-construction preprocessor
+.I tbl ,
+and
+.I pic
+and
+.I grap
+(for
+.I troff
+only)
+for various forms of graphics.
+A reverse-line postprocessor
+.I col
+is available for multiple-column \f2nroff\fP output on terminals without reverse-line ability;
+.I col
+expects the Model 37 Teletype
+escape sequences that \f2nroff\fP produces by default.

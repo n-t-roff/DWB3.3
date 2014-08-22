@@ -1,0 +1,68 @@
+GRAP
+============================================================================
+TITLE      GRAP - A Language for Typesetting Graphs
+           (Tutorial and User Manual)
+
+AUTHOR(s)  Jon L. Bentley, Brian W. Kernighan
+           AT&T Bell Laboratories
+
+REPRINTED  May 1990, AT&T Bell Laboratories
+============================================================================
+FILE             PURPOSE
+--------------   --------------------------------------------------------
+defs.grap        Additional macro definitions for GRAP document
+grap.doc         GRAP document body
+grap.appA        Appendix A:  GRAP Reference Manual
+grap.appB        Appendix B:  Summary of GRAP Commands
+trget            Shell script to include GRAP source
+Run              Shell script to format and print entire GRAP document
+
+Grap source files for sample graphs:
+   4001.g       4002.g       4003.g       4004.g       4005.g
+   4006.g       4007.g       agepop1.g    army1.g      army2.g
+   box1.g       boyhts1.g    boyhts2.g    cars1.g      cars2.g
+   geom.g       macarith.g   ode1.g       phone1.g     phone2.g
+   prof1.g      sin1.g       slide1.g     speedcar1.g  speedhorse1.g
+   speedman1.g  states1.g    states2.g    states3.g    states4.g
+   states5.g    states6.g    states7.g    states8.g    usapop1.g
+   usapop2.g
+
+Data for sample graphs:
+   400m.d       400mtimes.d  400mpairs.d  400w.d       400wpairs.d
+   agepop.d     army.d       boyhts.d     cars.d       phone.d
+   prof1.d      prof2.d      speedcar.d   speedhorse.d speedman.d
+   states.d     states2.d    states3.d    usapop.d
+
+Source for awk programs:
+   prof1.awk    regress.awk
+   scatmat      scatvec.awk
+   states5.awk  states7.awk
+============================================================================
+To print the GRAP document, you need to make the "trget" and the
+awk scripts executable:  
+
+   chmod +x trget *.awk
+
+To produce the entire GRAP document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the GRAP document (body only), use the command:
+
+   eqn grap.doc | troff -Tpost | dpost
+
+NOTE:  GRAP is called only indirectly, via suitably clever and
+obscure macros defined in the file "grap.defs".  The cleverness
+is necessary to successfully include source files containing \'s.
+If things do not work, this is the place to start looking.
+
+To produce each of the appendices, use the commands:
+
+   eqn grap.appA | troff -Tpost | dpost
+   eqn grap.appB | troff -Tpost | dpost
+============================================================================

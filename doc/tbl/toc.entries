@@ -1,0 +1,32 @@
+.H1 1 "INTRODUCTION" 1
+.H1 2 "INPUT COMMANDS" 2
+.H2 2.1 "Global Options" 2
+.H2 2.2 "Format Specifications" 3
+.H3 2.2.1 "Column Description Key Letters" 3
+.H3 2.2.2 "Horizontal Lines" 4
+.H3 2.2.3 "Vertical Lines" 4
+.H3 2.2.4 "Space Between Columns" 4
+.H3 2.2.5 "Vertical Spanning" 4
+.H3 2.2.6 "Font Changes" 4
+.H3 2.2.7 "Point Size Changes" 5
+.H3 2.2.8 "Vertical Spacing Changes" 5
+.H3 2.2.9 "Column Width Indication" 5
+.H3 2.2.10 "Equal-width Columns" 5
+.H3 2.2.11 "Staggered Columns" 5
+.H3 2.2.12 "Zero-width Item" 5
+.H2 2.3 "Data Entries" 5
+.H3 2.3.1 "Using \f2troff\fP Within Tables" 5
+.H3 2.3.2 "Full-width Horizontal Lines" 6
+.H3 2.3.3 "Single-column Horizontal Lines" 6
+.H3 2.3.4 "Short Horizontal Lines" 6
+.H3 2.3.5 "Repeated Characters" 6
+.H3 2.3.6 "Vertically Spanned Items" 6
+.H3 2.3.7 "Text Blocks" 6
+.H2 2.4 "Additional Command Lines" 7
+.H1 3 "USAGE" 7
+.H2 3.1 "Command Line" 7
+.H2 3.2 "Interactions with \f2eqn\fP" 7
+.H2 3.3 "Internal \f2troff\fP Names and Registers" 8
+.H2 3.4 "Macro Package Extensions" 8
+.HA A "Examples"
+.HA B "List of Input Commands"

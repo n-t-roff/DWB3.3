@@ -1,0 +1,45 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.ds rG \v'-0.4m'\s-5\(RG\s0\v'0.4m'
+.de fo
+.ps 11
+.vs 13
+.ce 3
+Copyright \(co 1990 AT&T
+All Rights Reserved.
+Printed in U.S.A.
+..
+.wh -1.25i fo
+.po 0.75i
+.rs
+.sp|1i
+.nf
+.ps 36
+.vs 36
+.ti 5i
+\(LH
+\l'6.5i'
+.sp 0.5i
+.in +0.5i
+.ft HB
+.ps 40
+.vs 44
+AT&T
+.ps 30
+.ft H
+UNIX\*(rG System
+.ps 36
+.vs 40
+.ft HB
+DOCUMENTER'S
+WORKBENCH\s-4\*(rG
+.ft H
+.ps 32
+Software
+.ps 20
+(Release 3.1)
+.in -0.5i

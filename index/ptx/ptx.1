@@ -1,0 +1,158 @@
+.ds dL /usr/lib/dwb
+.ds dT /usr/lib/tmac
+.TH PTX 1
+.SH NAME
+.B ptx
+\- make permuted index
+.SH SYNOPSIS
+\*(mBptx\f1
+.OP "" options []
+[
+.I input_file
+.OP "" output_file []
+]
+.SH DESCRTPTION
+.B ptx
+generates the file
+.I output_file
+that can be processed with a text formatter
+.RB ( nroff
+or
+.BR troff )
+to produce a permuted
+index of file
+.IR input_file .
+Standard input (\*(mB\-\fP) and standard output are default.
+It has three phases:  the first does the permutation, generating one line
+for each keyword in an input line.
+The keyword is rotated to the front.
+The permuted file is then sorted.
+Finally, the sorted lines are rotated, so the keyword comes
+at the middle of each line.
+.B ptx
+output is in the following form:
+.EX
+\&.xx "" "\f2before keyword\fP" "\f2keyword\fP" "\f2after keyword\fP"
+.EE
+where
+.MW .xx
+is assumed to be an
+.BR nroff (1)
+or
+.BR troff (1)
+macro
+provided by the user, or provided
+by
+.BR mptx (5).
+The
+.SM MPTX
+macro package provides the
+.MW .xx
+macro definition.
+The
+.IR "before keyword" ,
+.IR keyword ,
+and
+.I "after keyword"
+fields incorporate as much
+of the line as will fit around the keyword
+when it is printed.
+.I tail
+and
+.IR head ,
+at least one of which is always the
+empty string, are wrapped-around
+pieces small enough to fit in the unused
+space at the opposite end of the line.
+.PP
+The following
+.I options
+can be
+applied:
+.PP
+.PD 0
+.TP 0.75i
+.OP \-f
+Fold upper- and lower-case letters for sorting.
+.TP
+.OP \-t
+Prepare the output for the phototypesetter.
+.TP
+.OP \-w n
+Use the next argument,
+.IR n ,
+as the length of the output line.
+The default line length is 72 characters
+for
+.B nroff
+and 100 for
+.BR troff .
+.TP
+.OP \-g n
+Use the next argument,
+.IR n ,
+as the number
+of characters that
+.B ptx
+will reserve
+in its calculations for each gap among the four
+parts of the line as finally printed.
+The default gap is 3.
+.TP
+.OP \-o only
+Use as keywords any words given in the
+.I only
+file.
+.TP
+.OP \-i ignore
+Do not use as keywords any words given the
+.I ignore
+file.
+If the
+.OP \-i
+and
+.OP \-o
+options are
+missing, use
+.MW \*(dL/eign
+as the
+.I ignore
+file.
+.TP
+.OP \-b break
+Use the characters in the
+.I break
+file to separate words.
+Tab, newline, and space characters are
+.I always
+used as break characters.
+.TP
+.OP \-r
+Take any leading non-blank characters of each input
+line to be a reference identifier (as to a page or
+chapter), separate from the text of the line.
+Attach that identifier as a 5th field on each output line.
+.PD
+.SH "BUGS"
+Line length counts do not account
+for overstriking or proportional spacing.
+Lines that contain tildes
+.RM ( ~ )
+are botched because
+.B ptx
+uses that character
+internally.
+.B ptx
+does not discard non-alphanumeric
+characters.
+.SH FILES
+.MW /bin/sort
+.br
+.MW \*(dL/eign
+.br
+.MW \*(dT/tmac.ptx
+.ft 1
+.SH "SEE ALSO"
+.BR nroff (1),
+.BR troff (1),
+.BR mptx (5)

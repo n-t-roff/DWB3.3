@@ -1,0 +1,151 @@
+.ds dF /usr/lib/font
+.TH TROFF 5
+.SH NAME
+.B troff
+\- description of output language
+.SH DESCRIPTION
+Output from
+.B troff
+is pure
+.SM ASCII
+written in the following language:
+.TP 1.5i
+.OP s n
+Use point size
+.IR n .
+.TP
+.OP f n
+Use the font mounted at position
+.IR n .
+.TP
+.OP c x
+Print
+.SM ASCII
+character
+.I x
+at the current position.
+.TP
+.OP C xy
+Print special character
+.IR xy
+at the current position.
+.TP
+.OP H n
+Absolute horizontal move to position
+.IR n .
+.TP
+.OP h n
+Relative horizontal move of
+.I n
+units.
+.TP
+.OP V n
+Absolute vertical move to position
+.I n
+(down is positive).
+.TP
+.OP v n
+Relative vertical move of
+.I n
+units.
+.TP
+.OP "" nnx
+Move
+.I nn
+units horizontally then print
+.SM ASCII
+character
+.IR x .
+.TP
+.OP n \0b\0a
+End of a line.
+.TP
+.OP p n
+Begin page
+.IR n .
+.TP
+.OP # \(el
+Comment to the end of the line.
+.TP
+.OP Dl \0dx\0dy
+Line from current point
+.RI ( x ,
+.IR y )
+to point
+.RI ( x+dx ,
+.IR y+dy ).
+.TP
+.OP Dc \0d
+Circle od diameter
+.I d
+with left side at the current point.
+.TP
+.OP De \0dx\0dy
+Ellipse with axes
+.I dx 
+and
+.I dy 
+and left side at the current point.
+.TP
+.OP Da \0dx1\0dy1\0dx2\0dy2
+Counterclockwise arc from current point
+.RI ( x ,
+.IR y )
+to
+.RI ( x+dx1+dx2 ,
+.IR y+dy1+dy2 ).
+.br
+Center of the circle is
+.RI ( x+dx1 ,
+.IR y+dy1 ).
+.TP
+.OP D~ \0dx1\0dy1\0dx2\0dy2\0\(el
+B-spline from current point
+.RI ( x ,
+.IR y )
+to
+.RI ( x+dx1 ,
+.IR y+dy1 ),
+.br
+then to
+.RI ( x+dx1+dx2 ,
+.IR y+dy1+dy2 ).
+.TP
+.OP "x\ init"
+Initialize the typesetter.
+.TP
+.OP "x\ T" \0device
+The name of the typesetter is
+.IR device .
+.TP
+.OP "x res" \0n\0h\0v
+Typesetter resolution is
+.IR n .
+.TP
+.OP "x\ stop"
+Stop; done forever.
+.TP
+.OP "x\ trailer"
+Generate a trailer.
+.TP
+.OP "x\ font" \0n\0name
+Mount font
+.I name
+at position
+.IR n .
+.TP
+.OP "x\ Height" \0n
+Set character height to
+.I n
+points.
+.TP
+.OP "x\ Slant" \0n
+Set character slant to
+.I n
+degrees.
+.SH SEE ALSO
+.BR troff (1)
+.SH REFERENCE
+B. W. Kernighan and J. F. Ossanna,
+.ul
+Troff User's Manual

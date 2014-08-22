@@ -1,0 +1,63 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr W 7.5i
+.de SP
+.rs
+.sp 0.75i
+.ll \\nWu
+.ps 10
+.vs 12
+\l'\\nWu\(eq'
+.br
+.ul
+\(rh   SPINE:  \\$1, \\$2 orientation
+.br
+\l'\\nWu\(hy'
+.br
+..
+.de RL
+.br
+.ft 1
+.ps 36
+\l'2i'\h'-2i'\v'6p'\l'2i'
+.sp 6p
+..
+.ds rG \v'-0.4m+1p'\s16\(RG\s0\v'0.4m+1p'
+.fp 1 H
+.fp 2 HI
+.fp 3 HB
+.fp 4 HX
+.po 0.5i
+.nf
+.SP top vertical
+.sp 0.25i
+.ll 2i
+.ps 24
+.vs 28
+.ft 1
+.ce
+DWB 3.1
+.RL
+.SP centered horizontal
+.sp 0.6i
+.ll \\nWu
+.ps 30
+.vs 31
+'''	\"\s26\f1AT&T UNIX\v'1p'\*(rG\v'-1p' System
+\s24\H'26'\f1AT&T UNIX\H'0'\s26\v'1p'\*(rG\v'-1p' System
+\s30\f3Documenter's Workbench\*(rG \s26\f1Software
+.sp 0.2i
+.SP bottom vertical
+.sp 0.25i
+.ll 2i
+.vs 50
+.RL
+.sp 0.35i
+.ce
+.ps 48
+\(LH
+.br

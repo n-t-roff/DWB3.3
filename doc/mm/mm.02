@@ -1,0 +1,275 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "INVOKING THE MACROS"
+This section tells how to access
+.sM MM
+and shows the typical
+.sM UNIX
+command lines to format an
+.sM MM
+document.
+.H 2 "The \f(CB\-mm\fP Flag"
+The
+.sM MM
+package can be invoked by including the
+.cR \-mm
+flag as an argument to the formatter.  
+The
+.cR \-mm
+flag causes the file
+.cR /usr/lib/tmac/tmac.m
+to be read and processed before any
+other files.
+This action defines the
+.sM MM
+macros, sets default values for various parameters, and initializes
+the formatter to be ready to process the files of input text.
+.H 2 "Typical Command Lines"
+The prototype command lines are as follows (with the various
+options explained in \(sc2.3 and in the 
+.IR "Troff User's Manual" ).
+.BL
+.LI
+Plain text (no tables, equations, pictures or graphs):
+.iS
+troff -mm \f1[\*(iAoptions\f1]\0\*(iAfilename\*(iR | \(el
+.iE
+.LI
+Text with tables:
+.iS
+tbl \*(iAfilename\f1 ... \*(iR| troff -mm \f1[\*(iAoptions\f1]\*(iR | \(el
+.iE
+.LI
+Text with equations:
+.iS
+eqn usr/pub/eqnchar \*(iAfilename \*(iR| troff -mm \f1[\*(iAoptions\f1]\*(iR | \(el
+.iE
+.LI
+Text with both tables and equations:
+.iS
+tbl \*(iAfilename\f1 \*(iR| eqn /usr/pub/eqnchar - | troff -mm \f1[\*(iAoptions\f1]\*(iR | \(el
+.iE
+.LI
+Text with pictures:
+.iS
+pic \*(iAfilename\f1 \*(iR | troff -mm \f1[\*(iAoptions\f1]\*(iR | \(el
+.iE
+.LI
+Text with graphs:
+.iS
+grap \*(iAfilename\f1 \*(iR| pic | troff -mm \f1[\*(iAoptions\f1]\*(iR | \(el
+.iE
+.LI
+Text with the works (tables, equations, graphs and pictures):
+.iS
+grap \*(iAfilename\f1 \*(iR| pic | tbl | eqn | troff -mm \f1[\*(iAoptions\f1]\*(iR | \(el
+.iE
+.LE
+.P
+Preprocessing by
+.I tbl
+and
+.IR eqn ,
+if needed, must be invoked as shown in the command line prototypes.
+If used,
+.I eqn
+immediately precedes
+.IR troff .
+Other preprocessors
+.RI ( tbl ,
+.IR pic ,
+.IR grap )
+are used before
+.I eqn
+and
+.IR troff ,
+but need not be in any particular order.
+Since
+.I grap
+is a preprocessor to
+.IR pic ,
+you must use
+.I grap
+before
+.IR pic .
+.H 2 "Parameters that Can Be Set from the Command Line"
+.I "Number registers"
+are commonly used
+to hold parameter values that control various aspects
+of output style.
+Many registers can be changed in
+the text file with
+.cR .nr
+requests.
+In addition,
+some registers can be set from the
+command line itself, a useful feature for those
+parameters that should not be permanently
+embedded within the input text itself.
+If used, these registers (with the possible
+exception of the register
+.cR P )
+.I must
+be set on the command line before the
+.sM MM
+macro definitions are processed.
+Their meanings are:
+.in +0.25i
+.VL 8
+.LI \*(iR\-rA\*(iA\^n\f1
+modifies the first-page format for memoranda and letters.
+If
+.cA n
+is 1 (or any non-zero value),
+the letterhead block is suppressed to accommodate preprinted stationary.
+The letterhead block includes the company name and logo as well as any
+other signature element that appears above the ``subject/date/from'' block.
+.LI \*(iR\-rC\*(iAn\f1
+sets the type of copy (e.g., 
+.sM DRAFT )
+to be printed at the bottom of each page:
+.DS I
+.TS
+box;
+c cf1
+nf5 lf1.
+\*(iAn\fP	Type of Copy
+_
+0	none (default)
+1	OFFICIAL FILE COPY
+2	DATE FILE COPY
+3	DRAFT with single-spacing and default paragraph style
+4	DRAFT with double-spacing and 10-en paragraph indent
+5	double-spacing with 10-en paragraph indent
+.TE
+.DE
+.LI \*(iR\-rD1\f1
+sets \f2debug mode\f1.
+This flag requests the formatter
+to attempt to continue processing even if
+.sM MM
+detects errors that would otherwise cause termination.
+It also includes some debugging information in the default page header. 
+.LI \*(iR\-rE\*(iAn\f1
+controls the font of the subject\^/\^date\^/\^from fields on
+memoranda and letters.
+If
+.cA n
+is 1, then these fields are emboldened.
+If
+.cA n
+is 0, then these fields appear in the normal text font.
+.LI \*(iR\-rL\*(iAk\f1
+sets the length of the physical page to
+.cA k
+where
+.cA k
+is a scaled value.
+The default page length is 11 inches (e.g.,
+.cR 11i ).
+.LI \*(iR\-rN\*(iAn\f1
+specifies the page numbering style.
+.DS I
+.TS
+box tab(;);
+c cf1 cf1
+nf5 lf1 lf1.
+\*(iAn\fP;Page 1;Pages 2ff
+_
+0;header;header
+1;header replaces footer;header
+2;no header;header
+3;``\*(iAsection\fP-\*(iApage\fP'' as footer;same as page 1
+4;no header;no header unless \*(iR.PH\f1 defined
+5;same as 3, with ``\*(iAsection\fP-\*(iAfigure\fP'';same as page 1
+.TE
+.DE
+The contents of the prevailing header and footer do not
+depend on the value of the number register
+.cR N ;
+.cR N
+only controls whether and where the header
+(and the footer if
+.cR N
+is 3 or 5)
+is printed, as well as the page numbering style.
+In particular, if the header and footer are
+null, the value of
+.cR N
+is irrelevant.
+.LI \*(iR\-rO\*(iAk\f1
+sets the page offset (e.g., left margin) to
+.cA k
+where
+.cA k
+is a scaled value.
+The default page offset is 1 inch
+(e.g.,
+.cR 1i ).
+(The register
+name is the capital letter O, not the digit zero 0.)
+.LI \*(iR\-rP\*(iAn\f1
+specifies that the pages of the document
+are to be numbered starting with
+.cA n .
+This register may also be set via a
+.cR .nr
+request in the input text.
+.LI \*(iR\-rS\*(iAn\f1
+sets the point size and vertical spacing for the document.
+By default,
+.cA n
+is 10, i.e., 10-point
+type on 12-point vertical spacing.
+.LI \*(iR\-rW\*(iAk\f1
+sets the page width (i.e., line length and title length) to
+.cA k
+where
+.cA k
+is a scaled value.
+The default page width is 6 inches
+(e.g.,
+.cR 6i ).
+.LE
+.in -0.25i
+.H 2 "Omission of \f(CB\-mm\fP"
+If a large number of arguments is required on the command
+line, it may be convenient to set up the first (or only)
+input file of a document as follows:
+.iS
+.cA "any initializations of registers in \(sc2.3"
+\&.so /usr/lib/tmac/tmac.m
+.cA "remainder of text"
+.iE
+.P
+In this case, one must not use the
+.cR \-mm
+flag; the
+.cR .so
+request has the equivalent effect, but the registers in
+\(sc2.3 must be initialized
+before the
+.cR .so
+request, because their values are meaningful only if
+set before the macro definitions are processed.
+When using this method, it is best to ``lock'' into
+the input file only those parameters that are seldom changed.
+For example:
+.iS
+\&.nr L 9i
+\&.nr W 5i
+\&.nr O 0.5i
+\&.nr N 3
+\&.so /usr/lib/tmac/tmac.m
+\&.H 1 "INTRODUCTION"
+\0\(el
+.iE
+.P
+specifies a page length of 9 inches,
+a page width (i.e., line length) of 5 inches,
+a page offset of one-half inch,
+and ``section-page'' numbering.

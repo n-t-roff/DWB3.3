@@ -1,0 +1,54 @@
+'''	\"  tbl file | troff -mv [-Tdevname] | ...
+.DF 1 R
+.VS 3 mv.test3
+.T "Of Bits & Bytes & Words"
+.S -4
+.I 3 A x
+.ft I
+But let your communication be, Yea, yea;
+Nay, nay: for whatsoever is more than these
+cometh of evil.*
+.ft
+.I +1 a nospace
+Matthew 5:37
+.BR
+.S
+.I 0 .A
+Binary notation has been around for a
+.S +6
+long
+.S
+time.
+.B
+The above verse tells us to use:
+.C 1)
+binary notation,
+.ft I
+and
+.ft
+.C 2)
+redundancy (in communicating)
+.B
+Binary notation is
+.U not
+suited for human use, above verse to
+the contrary notwithstanding.
+.SP
+.S -2
+.TS
+box ;
+c | c | c | c
+l | c | c | c .
+System	Bits/Type	Bytes/Word	Bits/Word
+_
+IBM-7090/94	6	6	36
+IBM-360/370	8	4	32
+PDP-11/70	8	2	16
+.TE
+.S
+.S -4
+.U ~~~~~~~~~~~~
+.BR
+* The use of this verse in this context
+is plagiarized from C. Shannon.
+.S

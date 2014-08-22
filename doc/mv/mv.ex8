@@ -1,0 +1,16 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.Vw 8 "Age Graph"
+.T "1984 Age Distribution in U.S."
+.SP
+.G1
+coord x 0,89 y 0,5
+label left "\s-3Population\s+3" "\s-3(in millions)\s+3" left 0.2
+label bottom "\s-31984 Age\s+3" down 0.2
+draw solid
+copy "agepop.d"
+.G2

@@ -1,0 +1,520 @@
+              DOCUMENTER'S WORKBENCH - Release 3.3
+
+If your a new customer we recommend you read everything in this file
+before installing the package. There's an overview at the start and a
+brief summary at the end. The summary should be all you need once you
+understand the package.
+
+If you're familiar with DWB 3.2 you can probably skip most of what's
+here. There are no significant changes to the structure of the source
+package or the mechanism used to build and install programs.
+
+DWB 3.3 is being distributed internally and externally. There's a bit
+more in the internal release, simply because we're forced to support
+the many mistakes we've made over years. If you have the external
+release and think you're missing something don't worry. What's been
+omitted is (for the most part) obsolete.
+
+Device support varies. PostScript printers have been given a thorough
+treatment. LaserJet and Imagen printers include troff support (using
+host resident raster files) and little else. We expect customers will
+be satisfied with the level of PostScript support. We also anticipate
+some disappointment with our LaserJet and Imagen software, particularly
+when compared to what's been supplied for PostScript printers. The
+message is simple and not likely to change. You get much more from
+the package when you choose to drive a PostScript printer.
+
+DWB 3.3 represents the combined work of many people, too many to name
+here, although most of what's good can be traced directly to research.
+Credit for keeping the important programs alive and well in a rapidly
+changing environment belongs almost entirely to Brian Kernighan.
+
+----------
+Builing pm
+----------
+
+The source package includes the latest version of pm, a page makeup
+program by Brian Kernighan and Chris Van Wyk. The pm macros are based
+on and similar to ms, but provide automatic figure placement and widow
+suppression. Source and documentation are in directory text/pm.
+
+The pm package requires a C++ compiler. As a result it's not one of
+the components built and installed by the default makefile (dwb.mk).
+If you have a C++ compiler add pm to the TARGETS list in file dwb.mk
+and pm should build along with everything else.
+
+--------
+Overview
+--------
+
+The full package includes the following source directories:
+
+    doc		documentation - over and above what's in man pages
+    imagen	limited troff support for Impress based printers
+    index	permuted index programs - terribly complicated!
+    laserjet	limited troff support for LaserJet printers
+    macros	macro packages for nroff and troff
+    misc	miscellaneous collection of programs
+    postscript	support for PostScript printers
+    tests	test files for troff and most preprocessors
+    text	the important stuff - nroff, troff, preprocessors
+    xerox	troff support for some Xerox printers
+
+Each source directory is complete and can stand on its own. That means
+top level source directories (e.g. everything under postscript) can be
+distributed as stand-alone packages.
+
+The package is built around a top level makefile (dwb.mk), intermediate
+makefiles (e.g. postscript/postscript.mk), and low level makefiles. Low
+level makefiles build and install things. The others simply pass control
+and appropriate parameters to the low level makefiles. What you usually
+do is edit dwb.mk, update the source files (using dwb.mk), and build and
+install the package (again using dwb.mk). The top and intermediate level
+makefiles silently ignore requests to build missing pieces.
+
+-------------
+Major Changes
+-------------
+
+See the CHANGES file.
+
+-------------------
+Tuning The Makefile
+-------------------
+
+As in previous releases the most common tunable parameters can be set
+in the top level makefile (file dwb.mk). Source files, macro packages,
+man pages, and low level makefiles can be updated to reflect settings
+in dwb.mk in one step (described in the section titled "Updating The
+Source").
+
+Not much in dwb.mk has changed. Parameters that typically need tuning
+are are ROOT, SYSTEM, OWNER, GROUP, MACRODIR, MAN1DIR, MAN5DIR, and
+POSTBIN.
+
+Set DKHOST to TRUE to compile DKHOST support in postio - generally only
+on internal System V machines. DKSTREAMS should be TRUE, FALSE, or the
+name of the streams module (e.g dkty or dknetty) that postio pushes to
+communicate with your printers. DKSTREAMS is ignored if DKHOST is FALSE.
+DKSTREAMS=TRUE is equivalent to DKSTREAMS=dknetty. Newer DKHOST versions
+may require DKSTREAMS=dkty.
+
+The first step is save a copy of dwb.mk. Then adjust the following
+definitions in file dwb.mk:
+
+  SYSTEM    best match for your version of Unix. Current choices for
+	    SYSTEM are:
+
+			SYSV	- System V
+			V9	- Ninth Edition
+			BSD4_2	- Berkeley (eg. Sun 3)
+
+	    Controls conditional compilation in a few places. Try SYSV
+	    and /usr/5bin/cc on a Sun 4.
+
+  GROUP	    group assigned to all installed files
+
+  OWNER	    owner of everything that's installed
+
+  HYPHALG   default troff hyphenation algorithm. Choose 0 for troff's
+	    original version and 1 for the TeX algorithm. The algorithm
+	    can also be set with the .ha request.
+
+  NDEVNAME  default nroff device
+
+  TDEVNAME  default troff device
+
+  ROOT	    prepended to most directory pathnames.
+
+  BINDIR    most commands go here. Main exceptions are the PostScript
+	    support programs that are installed in POSTBIN. BINDIR must
+	    already exist - it will not be created during an install.
+
+  HOSTDIR   hostresident font directory for PostScript printers. Only
+	    used in the font download program.
+
+  FONTDIR   width table directory - for troff and most postprocessors
+
+  LIBDIR    special library directory
+
+  MACRODIR  nroff/troff macro packages. Both nroff and troff look for
+	    macro packages in TMACDIR (below). If MACRODIR and TMACDIR
+	    are different, files in TMACDIR usually point to the real
+	    macro packages in MACRODIR using a .so request.
+
+	    If you have an older version of DWB that uses separate
+	    directories for MACRODIR and TMACDIR, you probably should
+	    leave things be. Otherwise think about defining MACRODIR
+	    and TMACDIR to be the same directory (ideally /usr/lib/tmac).
+	    If you're not already doing so, there's no good reason to
+	    manage macro packages in two different directories.
+
+  MAN1DIR   command manpages. A command and its manpage are installed
+	    together - there's no easy way to avoid it. Setting MAN1DIR
+	    (and MAN5DIR) to an existing temporary directory (e.g. /tmp)
+	    means an install will work but manpages won't go anywhere
+	    permanent. MAN1DIR must already exist - it will not be
+	    created during an install.
+
+  MAN5DIR   miscellaneous manpages - e.g. macro packages. Manpages are
+	    always installed - there's no easy way to avoid it. Setting
+	    MAN5DIR (and MAN1DIR) to some existing temporary directory
+	    (e.g. /tmp) means an install will work but manpages won't
+	    go anywhere permanent. MAN5DIR must already exist - it will
+	    not be created during an install.
+
+  NTERMDIR  terminal table directory - for nroff
+
+  POSTBIN   where most PostScript support programs go. One reasonable
+	    choice, if the PostScript support package is not already
+	    installed, is to set POSTBIN to BINDIR.
+
+  POSTLIB   prologues and miscellaneous PostScript files. Primarily for
+	    the programs that live in POSTBIN.
+
+  PUBDIR    eqnchar files and a few others go here
+
+  RASTDIR   top level raster file directory - only for laserjet and
+	    imagen postprocessors. Be careful if you're installing the
+	    laserjet or imagen drivers. You will need at least 4.5 meg
+	    in RASTDIR for each device - 9 meg if both drivers are
+	    installed.
+
+  TMACDIR   where nroff and troff look for macro packages
+
+  CFLGS	    common compiler options - used to build CFLAGS in the low
+	    level makefiles. CLFGS and LDFLGS are best set on the make
+	    command line.
+
+  LDFLGS    common link editor options - used to build LDFLAGS in the
+	    low level makefiles. LDFLGS and CFLGS are best set on the
+	    make command line.
+
+  DKHOST    set it to TRUE to compile the DKHOST Datakit support code
+	    in postio. Temporarily resets SYSTEM to SYSV if DKHOST is
+	    TRUE and SYSTEM is BSD4_2. Ignored if SYSTEM is not SYSV
+	    or BSD4_2.
+
+  DKSTREAMS enables streams based DKHOST support in postio when DKHOST
+	    is TRUE and SYSTEM is SYSV or BSD4_2. Choices are TRUE,
+	    FALSE, or a stream module name (e.g. dknetty or dkty). TRUE
+	    selects dknetty. Newer systems may expect dkty.
+
+  ROUNDPAGE must only be set to TRUE or FALSE. TRUE means PostScript
+	    translators include code that maps clipping path dimensions
+	    into known paper sizes.
+
+  TARGETS   the default list of what's built by make. Each target must
+	    be the name of a source directory, either at the top level
+	    (this directory) or one level down. Pathnames relative to
+	    the top level directory are allowed (and often preferred),
+	    so either,
+
+			TARGETS=pm
+
+	    or,
+
+			TARGETS=text/pm
+
+	    refer to the same source directory. A target that names a
+	    non-existent source directory is ignored. Setting TARGETS
+	    on the make command line overrides the default list.
+
+-------------------
+Testing The Package
+-------------------
+
+We recommend you first install and test the package in a temporary
+directory, particularly if you're running an older version of DWB.
+The steps to follow are:
+
+ 1: Pick a directory, say /tmp/dwb. The only requirement is disk space.
+    We can't give exact space requirements, but 4 meg should be more
+    than enough for the core package. Add another 4.5 meg if you're
+    installing LaserJet or Imagen software. Double that (9 meg) if you
+    install both drivers. In other words 13 meg should be enough for
+    everything.
+
+ 2: The temporary directory you picked in step 1 must be assigned to
+    ROOT in file dwb.mk. In our case that means changing the definition
+    of ROOT to,
+
+		ROOT=/tmp/dwb
+
+    in file dwb.mk.
+
+ 3: Change the definitions of OWNER and GROUP in dwb.mk if someone other
+    than superuser will be running the install. OWNER should probably be
+    set to your login name and GROUP to your group id.
+
+ 4: Create the top level temporary directory. In our example that means
+    typing,
+
+		mkdir /tmp/dwb
+
+ 5: Check the definitions of BINDIR, MAN1DIR, and MAN5DIR directories
+    in file dwb.mk. All three directories must exist when the package
+    is installed - they will not be created during the install. Suppose
+    the definitions (in dwb.mk) are:
+
+		ROOT=/tmp/dwb
+		BINDIR=$(ROOT)/bin
+		MAN1DIR=$(ROOT)/man/man1
+		MAN5DIR=$(ROOT)/man/man5
+
+    Create the BINDIR, MAN1DIR, and MAN5DIR directories (in /tmp/dwb)
+    by typing,
+
+		mkdir /tmp/dwb
+		mkdir /tmp/dwb/bin /tmp/dwb/man
+		mkdir /tmp/dwb/man/man1 /tmp/dwb/man/man5
+
+ 6: Basename components of all other directories named in dwb.mk will be
+    created during an install. For example if FONTDIR is /usr/lib/font
+    then during an install the makefiles create directory /usr/lib/font
+    assuming directory /usr/lib already exists.
+
+    Check the directories named in dwb.mk that begin with prefix $(ROOT).
+    The list should include FONTDIR, LIBDIR, MACRODIR, NTERMDIR, POSTBIN,
+    POSTLIB, PUBDIR, RASTDIR, and TMACDIR. Make certain these directories
+    exist (in your temporary directory) up to their basename component.
+    Unless you've made extensive changes to dwb.mk all you should have to
+    do is type,
+
+		mkdir /tmp/dwb/lib
+		mkdir /tmp/dwb/lbin
+
+ 7: Continue following the installation instructions in the next three
+    sections. Remember - you MUST update the source files (as described
+    in the section titled "Updating The Source") whenever dwb.mk or the
+    intermediate makefiles change.
+
+Once the package is installed prepend the BINDIR and POSTBIN pathnames
+to your PATH variable and export PATH. For example if ROOT, BINDIR and
+POSTBIN and defined (in dwb.mk) as,
+
+	ROOT=/tmp/dwb
+	BINDIR=$(ROOT)/bin
+	POSTBIN=$(ROOT)/lbin/postscript
+
+then typing,
+
+	PATH=/tmp/dwb/bin:/tmp/dwb/lbin/postscript:$PATH
+	export PATH
+
+will have the shell run the new programs instead of versions that may be
+officially installed on your system. As a check you can use "ls -lu" to
+verify access times of the files installed in the temporary directory.
+
+You can run the test files in directory tests by typing,
+
+	cd tests
+	make -f tests.mk install
+
+Results are saved in directory tests/$(SYSTEM), where SYSTEM is taken
+from the definition in file tests/tests.mk. For example if SYSTEM is SYSV
+then troff output files go in tests/SYSV. To print the test files run
+dpost on the troff output files in directory tests/SYSV and send the
+output from dpost to a PostScript printer. Other potentially useful test
+files include man pages and the papers in the doc directory.
+
+When you're finished testing the package remove the temporary directory,
+restore the original definitions of ROOT, OWNER and GROUP in dwb.mk, and
+update the source files (as described in the next section).
+
+-------------------
+Updating The Source
+-------------------
+
+Source files, macro packages, man pages and makefiles MUST be updated
+whenever dwb.mk or the intermediate makefiles change. Typing,
+
+	make -f dwb.mk changes
+
+will update everything. It's a quick procedure, but it is not handled
+automatically. It's your responsibility to update the source files. If
+you forget something will likely break when you install the package.
+
+------------------------
+More System Dependencies
+------------------------
+
+The package has been compiled and tested on System V and Ninth Edition
+Unix Systems and on Sun workstations. Most differences are handled via
+the SYSTEM definition in dwb.mk. Problems that remain are:
+
+  SYSV - System V
+    Use the native compiler if you're on an internal System V UTS
+    machine.
+
+  V9 - Ninth or Tenth Edition
+    chown is in /etc and chgrp no longer exists - it's been folded into
+    the chown command. You may be forced to build a simple chgrp shell
+    script (put it in your bin) that calls chown. If you're not superuser
+    set OWNER to your login name and GROUP to your group id.
+
+  SunOS
+    We've had success with /usr/5bin and SYSTEM=SYSV. If you're not root
+    you may need dummy chown and chgrp commands in your bin before for an
+    install works.
+
+  BSD4_2 - Sun Workstations
+    Use the Bourne shell. chown should be in /usr/etc. Add /usr/etc to
+    your PATH and export PATH. If you're not superuser set OWNER to your
+    login name and GROUP to your group id.
+
+----------------------
+Installing The Package
+----------------------
+
+To build (but not install) the default package (i.e. everything named by
+TARGETS in dwb.mk) type,
+
+	make -f dwb.mk all
+
+One way to build and install the package is,
+
+	make -f dwb.mk install
+
+but it's not the recommended approach. Better and safer is,
+
+	make -f dwb.mk all install
+
+which first compiles all the programs and then installs the package.
+It's preferred only because a compile time problem won't leave you with
+a partially installed package.
+
+A simple command line guaranteed to properly build and install the
+entire package is,
+
+	make -f dwb.mk clobber changes all install
+
+Although it can be overkill, we recommend it if you have any doubts about
+what needs to be done.
+
+After the package is installed use,
+
+	make -f dwb.mk clobber
+
+to delete binary files and compiled programs from the source directories.
+
+To select part of the package define TARGETS on the command line. For
+example,
+
+	make -f dwb.mk TARGETS="troff devpost" all install
+
+builds and installs troff and the PostScript font tables. Quotes hide
+white space from the shell. Setting TARGETS to a top level source
+directory builds everything under that directory. For example,
+
+	make -f dwb.mk TARGETS=postscript all install
+
+installs the postscript support programs (everything named by TARGETS
+in file postscript/postscript.mk).
+
+TARGETS (in dwb.mk) can name directories at the top level or one level
+down in the source package. You can also point at a source directory
+that's one level down by giving the pathname of that directory relative
+to the top level source directory. For example,
+
+	make -f dwb.mk TARGETS=postscript/dpost all
+
+and
+
+	make -f dwb.mk TARGETS=dpost all
+
+are equivalent.
+
+-------------------------
+Building A Binary Package
+-------------------------
+
+ 1: Edit dwb.mk so pathnames reflect where the package will eventually
+    be installed. For example you might choose,
+
+	ROOT=/usr/add-on/dwb
+
+ 2: Build (but don't install) a package that will run under directory
+    /usr/add-on/dwb using,
+
+	make -f dwb.mk clobber changes all
+
+    NOTE: install has been intentionally omitted from this command line!
+
+ 3: Choose an empty temporary directory (say /tmp/dwb) and make a few
+    subdirectories (exactly as you did when you tested the package),
+
+	mkdir /tmp/dwb
+	cd /tmp/dwb
+	mkdir bin lib man man/man1 man/man5
+
+ 4: Install the package under /tmp/dwb,
+
+	make -f dwb.mk ROOT=/tmp/dwb install
+
+ 5: Collect a complete binary package that will run properly when unpacked
+    under directory /usr/add-on/dwb,
+
+	cd /tmp/dwb
+	find . -print | cpio -oc >$HOME/dwb.cpio
+
+ 6: To install the package do,
+
+	cd /usr/add-on/dwb
+	cpio -icd <$HOME/dwb.cpio
+
+-------
+Summary
+-------
+
+Everything you'll need (without much explanation) once you understand
+the package. Pathnames in 2 depend on directory definitions in dwb.mk.
+
+ 1: Edit dwb.mk. Pay close attention to SYSTEM, GROUP, OWNER, MACRODIR,
+    MAN1DIR, MAN5DIR, and POSTBIN. Set DKHOST to TRUE to get DKHOST
+    support in postio on internal System V machines.
+
+ 2: To test the package in a temporary directory set ROOT, OWNER, and
+    GROUP in dwb.mk. Create missing directories (assume ROOT=/tmp/dwb),
+
+	mkdir /tmp/dwb
+	mkdir /tmp/dwb
+	cd /tmp/dwb
+	mkdir bin lbin lib man
+	mkdir man/man1 man/man5
+
+    Check the definitions in dwb.mk to find out exactly what directories
+    must be created.
+
+ 3: Update source files by typing,
+
+	make -f dwb.mk changes
+
+    Remember to update the source files whenever dwb.mk changes.
+
+ 4: Build and install the package using,
+
+	make -f dwb.mk all install
+
+ 5: Delete binaries and compiled programs from source directories with,
+
+	make -f dwb.mk clobber
+
+ 6: A simple command line guaranteed to properly build and install the
+    entire package is,
+
+	make -f dwb.mk clobber changes all install
+
+    Often overkill, but recommended if you have any doubts about what
+    must be done.
+
+ 7: Set TARGETS on the command line to select part of the package as in,
+
+	make -f dwb.mk TARGETS="dpost troff" all install
+
+    Pointing at a source directory with relative pathnames is allowed and
+    often preferred (avoids ambiguity). Last example can also be written
+    as,
+
+	make -f dwb.mk TARGETS="postscript/dpost text/troff" all install
+

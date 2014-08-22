@@ -1,0 +1,7 @@
+# Two runs are required, because the -mm macros interfere with -man
+# The first does everything except the man page.
+# File picasso.1 is intended to also be installed in /usr/.../man...
+# Replace "prt" with whatever print spooler you use locally
+# Make sure DWB 3.1 has been installed first (type "dwbv")
+troff -mm -mpictures guide.all | dpost | prt -lpost
+troff -man picasso.1 | dpost | prt -lpost

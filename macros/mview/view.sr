@@ -1,0 +1,614 @@
+.de
+.if \\nd .tm \\n(nl \\n(.t  \\$1
+.de>X
+.if \\nd .tm \\n(nl \\n(.t >X \\$1
+.if(\\\\$3-77*360+(\\\\$1*30)+\\\\$2+30>\n(yr-77*360+(\n(mo*30)+\n(dy) .if \\nd=0 .tm\\\\$1/\\\\$2/\\\\$3 \\\\$4
+\\..
+.di>W
+.tr/
+\!.>X\\$1 "\\$2"
+.di
+.>W
+.tr//
+.rm>W
+.rm>X
+..
+.nr ;a 0 1\" counter for lists
+.nr ;b 0\" text indent for lists
+.nr ;c 0\" mark indent for lists
+.nr ;d 0\" pad distance/justification for lists
+.nr ;e 0\" type for lists:  0 = simple mark, 1 = automatic number/letter
+.nr ;g 0 1\" list level [0:9]
+.nr ;h 0\" viewgraph number
+.nr ;t 0\" .d position of last title
+.ig
+The following number registers are available:
+  : BCDEFGIJKMNOPQRSUVXYZabcdefghijklmnqstuwyz0123456789
+  ; ABCDEFGHIJKLMNOPQRSTUVWYZfjklmnopqrstuvwxyz23456789
+  :A 1 automatic Mode, 0 Manual mode
+  :H 7i view graph height
+  :W 7i view graph width
+  :r 110 min vs to ps ratio (110%)
+  :p 18 default point size
+  :v 20 vs
+  :L    allowable line length
+  :o    page offset
+  :T    space between cutmarks and top of view graph
+  M:    user's text terminated by .VE
+  ::    is the tested scratch diversion
+..
+.ds BU \s-2\(bu\s0
+.ds DA \(em
+.ds CI \s-2\(ci\s0
+.ds SQ \s-2\f1\(sq\fP\s0
+.ds FS \s-2\(bx\s0
+.ds RH \s-2\(rh\s0
+.ds NU \ \ 
+.ds Rg \v'-0.35m'\s-4\(rg\s+4\v'0.35m'
+.ds Tm \v'-0.4m'\s-6TM\s+6\v'0.4m'
+.ds Sm \v'-0.4m'\s-6SM\s+6\v'0.4m'
+.ig
+	Vu-Graph start.
+..
+.de VG
+.I:\" initialize
+.nr ;h \\n(;h+1\" inc vg number
+.if \\nd .tm VG #\\n(;h 
+.if \\n(.$ .if 12>\\$1 .nr :W \\$1i\" set width
+.if \\n(:W-8i .nr :W 8i\"limit to 8 inches
+.if \\n(.$>1 .if 16>\\$2 .nr :H \\$2i\" set height
+.if \\n(.$>2 .if 5<\\$3 .if 37>\\$3  \{.nr :A 0\" set manual mode
+.nr :p \\$3
+.nr :v \\n(:p*110/100
+.if \\n(.$>3 .nr :v \\$4\}
+.nr :L \\n(:W-0.5i\" line length = vg width - .5i to start
+.nr :o 7.54i-\\n(:L/2\" page offset to center frame
+.ec @
+.de M: VE\" define user's text as macro M:
+.ps \\n(:p\" handle on the point size,
+.vs \\n(:v\" vertical spacing,
+.ll \\n(:Lu\" and line length
+.nr ;g 0 1\"reset list level
+.nf\" default is nofill
+..
+.ig
+	Vu-graph End.
+	does all the fancy stuff.
+..
+.de VE
+.ec \\
+.if \\nd .tm VE(a) #\\n(;h  nl=\\n(nl %=\\n%
+.am M:\" add a little bit to the macro
+.br
+.U:\" reset some parameters
+\\..
+.if \\n(.$ \{\
+.ie     \\n(.$=1 .ds :N \\$1
+.el .ie \\n(.$=2 .ds :N \\$1 \\$2
+.el .ie \\n(.$=3 .ds :N \\$1 \\$2 \\$3
+.el .ie \\n(.$=4 .ds :N \\$1 \\$2 \\$3 \\$4
+.el .ie \\n(.$=5 .ds :N \\$1 \\$2 \\$3 \\$4 \\$5
+.el .ie \\n(.$=6 .ds :N \\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+.el .ie \\n(.$=7 .ds :N \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7
+.el .ie \\n(.$=8 .ds :N \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8
+.el .if \\n(.$>8 .ds :N \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9 \}
+.di ::
+.M:
+.di
+.if \\n(;g \{\
+.tm WARNING - Lists not properly terminated in view graph number \\n(;h \\*(:N: \\n(;g .LEs are missing
+.am M:
+.Q:
+\\..
+.@@\}
+.if \\n(:A .P:\" do the automatic stuff
+.di ::\" divert to get height and width
+.M:
+.di
+.if \\nd .tm . VE(b) final height \\n(dn, final width \\n(dl .z=\\n(.z nl=\\n(nl %=\\n%
+.H:\" do the header
+.sp \\n(:Hu-\\n(dnu-\\n(:vp/2u-6p\" center vertically
+.nr :o +\\n(:Lu-\\n(dlu/2u\" center horizontally
+.nr :L \\n(dl
+.nr ;X \\n(:Hu-\\n(dnu-\\n(:vp/2u-6p
+.if \\nd .tm . VE(c) vertical space=\\n(;X, .o=\\n(.o, :L=\\n(:L, dl=\\n(dl .z=\\n(.z nl=\\n(nl %=\\n%
+.po \\n(:ou
+.if \\nd .tm . VE(d)  .o=\\n(.o .z=\\n(.z nl=\\n(nl nl=\\n(nl %=\\n%
+.M:\" execute the text for real
+.if \\nd .tm .   VE(e)  nl=\\n(nl
+.F: "\\*(:N"\" do the footer
+..
+.ig
+	header macro.
+	sets up top part of view graph frame.
+..
+.de H:
+.if \\nd .tm H:(a)
+.br
+.ll 7.54i
+.ft 1
+.ps 10
+.vs 10
+.if \\n(nl .bp
+.pl 8.5i
+.if \\n(:H>7i .pl \\n(:Hu+1.5i
+.lt 7.54i
+.tl ''''\" no cut marks
+.ie !7i-\\n(:Hu .nr :T .75i\" at least .75i at top
+.el .nr :T 8.5i-\\n(:Hu/2u\" otherwise center in 8.5i page
+.sp \\n(:Tu
+.if !\\n(:W-7i \{\
+.ps 8
+.vs 8
+.po 7.54i-\\n(:Wu/2u
+.lt \\n(:Wu
+.tl '\(br\(rn\(rn'\(rn\(rn'\(rn\(rn\(br' \}
+.if \\nd .tm . H:(b) nl=\\n(nl, :W=\\n(:W, :H=\\n(:H, :T=\\n(:T, .o=\\n(.o
+..
+.ig
+	footer macro.
+	does bottom of frame.
+..
+.de F:
+.if \\nd .tm F:(a) .z=\\n(.z nl=\\n(nl
+.br
+.ie !\\n(:W-7i \{\
+.po 7.54i-\\n(:Wu/2u
+.lt \\n(:Wu
+.nr :x (\\n(:Hu+\\n(:Tu-10p)
+.sp |\\n(:xu
+.if \\nd .tm F:(b) .z=\\n(.z nl=\\n(nl :x=\\n(:x
+.ps \\n(:p-2
+.if \\n(.s>10 .ps 10
+.vs 10
+.ft 1
+.tl '''\\$1\0\0'
+.if \\nd .tm F:(c) .z=\\n(.z nl=\\n(nl
+.ft 1
+.ps 8
+.vs 3u
+.nr :x (\\n(:Hu+\\n(:Tu+10p)\" 10p is for the cutmark
+.sp |\\n(:xu
+.if \\nd .tm F:(d) .z=\\n(.z nl=\\n(nl :x=\\n(:x
+.tl '\(br\(ul\(ul'\(ul\(ul'\(ul\(ul\(br'
+.if \\nd .tm F:(e) .z=\\n(.z nl=\\n(nl
+.ps 10
+.vs 12 
+.br
+\}
+.el \{\
+.nr :x (\\n(:Hu+\\n(:Tu+10p)
+.sp |\\n(:xu
+.po 0
+.lt 7.5i
+.ps \\n(:p-2
+.if \\n(.s>10 .ps 10
+.vs 10
+.ft 1
+.tl '\\$1'''
+.sp
+.ps 10 \}
+..
+.ig
+  G: sets nr G: to the value of the
+  Nth argument of the invoking call.
+  example:
+  .nr G: 3
+  .G: 13 5 7 9 11
+..
+.de G:
+.nr G: \\$\\n(G:
+..
+.nr G: 4
+.G: 2 4 6 8 10 12
+.ig
+	rounding macro.
+	rounds number register :p
+	down to next legal point size.
+..
+.de R:
+.ie \\n(:p-35 .nr :p 36
+.el .ie \\n(:p-34 .nr :p 35
+.el .ie \\n(:p-33 .nr :p 34
+.el .ie \\n(:p-32 .nr :p 33
+.el .ie \\n(:p-31 .nr :p 32
+.el .ie \\n(:p-30 .nr :p 31
+.el .ie \\n(:p-29 .nr :p 30
+.el .ie \\n(:p-28 .nr :p 29
+.el .ie \\n(:p-27 .nr :p 28
+.el .ie \\n(:p-26 .nr :p 27
+.el .ie \\n(:p-25 .nr :p 26
+.el .ie \\n(:p-24 .nr :p 25
+.el .ie \\n(:p-23 .nr :p 24
+.el .ie \\n(:p-22 .nr :p 23
+.el .ie \\n(:p-21 .nr :p 22
+.el .ie \\n(:p-20 .nr :p 21
+.el .ie \\n(:p-19 .nr :p 20
+.el .ie \\n(:p-18 .nr :p 19
+.el .ie \\n(:p-17 .nr :p 18
+.el .ie \\n(:p-16 .nr :p 17
+.el .ie \\n(:p-15 .nr :p 16
+.el .ie \\n(:p-14 .nr :p 15
+.el .ie \\n(:p-13 .nr :p 14
+.el .ie \\n(:p-12 .nr :p 13
+.el .ie \\n(:p-11 .nr :p 12
+.el .ie \\n(:p-10 .nr :p 11
+.el .ie \\n(:p-9 .nr :p 10
+.el .ie \\n(:p-8 .nr :p 9
+.el .ie \\n(:p-7 .nr :p 8
+.el .ie \\n(:p-6 .nr :p 7
+.el .ie \\n(:p-5 .nr :p 6
+.el .D: "view graph too large."
+..
+.ig
+	macro to fit proper point size
+	and vertical spacing.
+..
+.de P:
+.if \\nd .tm P:(a)  .z=\\n(.z
+.nr :p 36
+.1:\" fit it horizontally
+.if \\nd .tm . P:(b)  .z=\\n(.z
+.2:\" fit it vertically
+.if \\nd .tm . P:(c) dn=\\n(dn, :H=\\n(:H, :v=\\n(:v, :p=\\n(:p .z=\\n(.z
+.nr :v \\n(:H*\\n(:v/(\\n(dn+(3*\\n(:vp))\" increase vs to fill frame
+.nr :x 3*\\n(:p*\\n(:r/100 \"within limits
+.if (\\n(:v-\\n(:x) .nr :v \\n(:x
+.if \\n(:A .tm View graph number \\n(;h   Final ps=\\n(:p, vs=\\n(:v 
+..
+.ig
+	macro 1: expands diversion M:
+	and continues to rescale :p (point-size)
+	until view graph width fits.
+..
+.de 1:
+.nr :v \\n(:p*\\n(:r/100\" keep vs in proportion to ps
+.if \\nd .tm 1:(a) :v=\\n(:v :p=\\n(:p
+.di ::
+.M:
+.di
+.if \\nd .tm . 1:(b) width of diversion is \\n(dl
+.if \\n(dlu-\\n(:Lu \{\
+.nr :p \\n(:L*\\n(:p/\\n(dl\" scale down if too big
+.R:
+.if \\nd .tm . 1:(c) too wide. trying ps \\n(:p
+.1:\}
+..
+.de 2:
+.nr :v \\n(:p*\\n(:r/100
+.if \\nd .tm 2:(a) :v=\\n(:v :p=\\n(:p
+.di ::
+.M:
+.di
+.if \\nd .tm . 2:(b) height of diversion is \\n(dn
+.if \\n(dn-\\n(:H \{\
+.nr :p \\n(:H*\\n(:p/\\n(dn
+.R:
+.if \\nd .tm . 2:(c) too high. trying ps \\n(:p
+.2:\}
+..
+.ig
+	diagnostic macro.
+	screams, then ignores rest of view graph.
+..
+.de D:
+.tm error in view graph number \\n(;h \\*(:N, file \\*(f..
+.tm \\$1
+\\.ig VG
+..
+.ig
+	end macro.
+	does last cut mark.
+..
+.de E:
+.if \\nd .tm E: nl=\\n(nl
+.if \\n(;h \{\
+.nr :x \\n(:Tu+\\n(:Hu+\\n(:Tu
+.sp |\\n(:xu
+.if \\nd .tm E:(a) nl=\\n(nl :x=\\n(:x
+.po 0
+.ft 1
+.ps 10
+.vs 10
+.lt 7.54i
+.tl ''''
+\}
+..
+.ig
+	initialization.
+..
+.de I:
+.nr :A 1\" automatic mode
+.if !\\n(:H .nr :H 7i
+.if !\\n(:W .nr :W 7i
+.nr :r 110\" min vs to ps ratio 110%
+.nr :p 18
+.nr :v 20
+..
+.ig
+	reset parameters.
+	(so things like .in +n don't keep
+	happening when we divert)
+..
+.de U:
+.in 0
+.po 0
+.ce 0
+.ne 0
+.hy 0
+..
+.ig
+---------------------------
+| Extra macros start here |
+---------------------------
+..
+.de S\" Smaller (decrease point size)
+.if \\nd .tm S
+.nr :x \\n(:p\" save :p
+.nr :p \\n(.s-1
+.R:
+.ps \\n(:p
+.nr :p \\n(:x\" restore :p
+..
+.de L\" Large
+.if \\nd .tm L
+.ps \\n(.s+1
+..
+.de TU\" large, centered, bold underlined, title
+.if \\nd .tm TU .z=\\n(.z .l=\\n(.l .i=\\n(.i
+.if \\n(.d=\\n(;t .sp -0.5
+.L
+.ft 3
+.ce 1
+.if \\n(.$=1 \\$1\l'|0\(ul'
+.if \\n(.$=2 \\$1 \\$2\l'|0\(ul'
+.if \\n(.$=3 \\$1 \\$2 \\$3\l'|0\(ul'
+.if \\n(.$=4 \\$1 \\$2 \\$3 \\$4\l'|0\(ul'
+.if \\n(.$=5 \\$1 \\$2 \\$3 \\$4 \\$5\l'|0\(ul'
+.if \\n(.$=6 \\$1 \\$2 \\$3 \\$4 \\$5 \\$6\l'|0\(ul'
+.if \\n(.$=7 \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7\l'|0\(ul'
+.if \\n(.$=8 \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8\l'|0\(ul'
+.if \\n(.$=9 \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9\l'|0\(ul'
+.ft
+.S
+.sp 0.5
+.nr ;t \\n(.d
+..
+.de T\" large, centered, bold Title
+.if \\nd .tm T .z=\\n(.z .l=\\n(.l .i=\\n(.i
+.if \\n(.d=\\n(;t .sp -0.5
+.L
+.ft 3
+.ce 1
+.if \\n(.$=1 \\$1
+.if \\n(.$=2 \\$1 \\$2
+.if \\n(.$=3 \\$1 \\$2 \\$3
+.if \\n(.$=4 \\$1 \\$2 \\$3 \\$4
+.if \\n(.$=5 \\$1 \\$2 \\$3 \\$4 \\$5
+.if \\n(.$=6 \\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+.if \\n(.$=7 \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7
+.if \\n(.$=8 \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8
+.if \\n(.$=9 \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.ft
+.S
+.sp 0.5
+.nr ;t \\n(.d
+..
+.de R\" Roman
+.if \\nd .tm R
+.ft 1
+..
+.de I\" Italic
+.if \\nd .tm I
+.ft 2
+..
+.de B\" Bold
+.if \\nd .tm B
+.ft 3
+..
+.de BI\" Bold Italic
+.if \\nd .tm BI
+.ft 4
+..
+.de CW\" Constant Width
+.if \\nd .tm CW
+.ft 5
+..
+.de MN\" Minimum vs to ps ratio
+.nr :r \\\\$2
+..
+.de TS
+.sp 0.5
+.rn tm t:
+..
+.de TE
+.sp 0.5
+.rn t: tm
+..
+.de EQ
+.sp 0.5
+..
+.de EN
+.sp 0.5
+..
+.de PS
+.sp 0.5
+..
+.de PE
+.sp 0.5
+..
+.de G1
+.sp 0.5
+..
+.de G2
+.sp 0.5
+..
+.de Z0
+.fp 1 H
+.fp 2 HI
+.fp 3 HB
+.fp 4 HX
+.fp 5 CW
+..
+.de Z1
+.fp 1 R
+.fp 2 I
+.fp 3 B
+.fp 4 BI
+.fp 5 CW
+..
+.de Z2
+.fp 1 PA
+.fp 2 PI
+.fp 3 PB
+.fp 4 PX
+.fp 5 CW
+..
+.ig
+  L: List initialization called as follows:
+
+  L: text-indent mark-indent  pad    type    marker-or-;a-type-format
+                                             0 - marker
+                                             1 - #
+                                             2 - #)
+                                             3 - (#)
+                                             4 - [#]
+                                             5 - <#>
+                                             6 - {#}
+         ;b           ;c      ;d              ;e     string ]g
+  ;a is the outline incremented number register
+  ;g is the lesting level for the list
+..
+.de L:
+.if \\nd .tm L:(a) \\$1, \\$2, \\$3, \\$4, \\$5, ;g=\\n(;g .z=\\n(.z dn=\\n(dn
+.if \\nd .tm .  L:(b) .i=\\n(.i .o=\\n(.o .l=\\n(.l .z=\\n(.z
+.if \\n(;g=10 .D: "(L:): too many nested lists"
+.if \\n(;g .A: \" push status
+.if \\n+(;g=1 .ds ]b \\n(.i\" save current indent at outer level
+.nr ;b \\n(.iu+0\\$1u \" text indent
+.nr ;c \\n(.iu+0\\$2u \" mark indent
+.nr ;d 0\\$3 \" pad
+.nr ;e 0\\$4 \" type
+.ds ]g \\$5
+.if !\w@\\$5@ .ds ]g \&
+.if !\w@\\$5@ .if \\n(;e .ds ]g 1
+.nr ;a 0 1
+.if 0\\$4 .af ;a \\$5 1\" in case $5 is null
+.in \\n(;bu
+.ti \\n(;bu
+..
+.de LE
+.if \\nd .tm LE
+.if !\\n(;g .D: "LE: mismatched"
+.if \\n(;g .B:
+.if \\n(;g=0 .sp .5
+..
+.de LI
+.if \\nd .tm LI(a) \\$1 ;a=\\n(;a ;b=\\n(;b ;c=\\n(;c ;d=\\n(;d ;e=\\n(;e ;g=\\n(;g dn=\\n(dn .d=\\n(.d
+.if !\\n(;g .D: "LI: no lists active" 
+.sp .5
+.in \\n(;bu
+.ds ]0 \\*(]g
+.if \\n(;e .ds ]0 \\n+(;a.
+.if \\n(;e-1 .ds ]0 \\n(;a)
+.if \\n(;e-2 .ds ]0 (\\n(;a)
+.if \\n(;e-3 .ds ]0 [\\n(;a]
+.if \\n(;e-4 .ds ]0 <\\n(;a>
+.if \\n(;e-5 .ds ]0 {\\n(;a}
+.if \\n(.$-1 .ds ]0 \\$1\ \\*(]0
+.if \\n(.$ .if !\\n(.$-1 .ds ]0 \\$1
+.nr ;0 \w@\\*(]0@
+.nr ;1 \\n(;c
+.if \\n(;d .nr ;1 \\n(;bu-\\n(;du-\\n(;0u
+.if !\\n(;1 .nr ;1 0
+.nr ;0 \\n(;bu-\\n(;1u-\\n(;0u
+.ti \\n(;1u
+.if !\\n(;0 .nr ;0 \w@ @u\" want at least one blank
+.if \\nd .tm .  LI(b) marker=\\*(]0 ;0=\\n(;0 ;b=\\n(;b .d=\\n(.d
+.nr ;j \\n(.d\"save position of LI line
+.if \w@\\*(]0@ \&\\*(]0\h@\\n(;0u@\&\c
+..
+.de BL
+.if \\nd .tm BL .z=\\n(.z
+.L: 3n 0 3n-\w'\\*(BU'u 0 \\*(BU
+..
+.de DL
+.if \\nd .tm DL
+.L: 3n 0 3n-\w'\\*(DA'u 0 \\*(DA
+..
+.de ML
+.if \\nd .tm ML
+.if \\n(.$=0 .D: "ML: missing arg"
+.L: \w@\\$1@u+1n 0 1n 0 "\\$1"
+..
+.de VL
+.if \\nd .tm VL
+.if !\\n(.$ .D: "VL: missing arg"
+.L: 0\\$1n 0 0 0
+..
+.de OL
+.if \\nd .tm OL
+.ie !\\n(.$ \{\
+.nr G: \\n(;g+1  
+.G: 1 1 1 2 3 3 2 \}
+.el .nr G: \\$1
+.ie \\n(;g=0 .L: 5n 0 2n \\n(G: I
+.el .ie \\n(;g=1 .L: 5n 0 2n \\n(G: A
+.el .ie \\n(;g=2 .L: 5n 0 2n \\n(G: 1
+.el .ie \\n(;g=3 .L: 5n 0 2n \\n(G: a
+.el .ie \\n(;g=4 .L: 5n 0 2n \\n(G: 1
+.el .ie \\n(;g=5 .L: 5n 0 2n \\n(G: a
+.el .ie \\n(;g=6 .L: 5n 0 2n \\n(G: i
+.el .L: 5n 0 2n \\n(G:
+..
+.de A:
+.if \\nd .tm A:
+.af ;a 1
+.ds ]a \\n(;a \\*(]a
+.ds ]b \\n(;b \\*(]b
+.ds ]c \\n(;c \\*(]c
+.ds ]d \\n(;d \\*(]d
+.ds ]e \\n(;e \\*(]e
+.ds ]h \\*(]g \\*(]h
+.if \\nd-1 .tm .  A: ]a \\*(]a
+.if \\nd-1 .tm .  A: ]b \\*(]b
+.if \\nd-1 .tm .  A: ]c \\*(]c
+.if \\nd-1 .tm .  A: ]d \\*(]d
+.if \\nd-1 .tm .  A: ]e \\*(]e
+.if \\nd-1 .tm .  A: ]h \\*(]h
+..
+.de B:
+.br
+.nr ;g -1
+.C: nr ;a ]a \\*(]a
+.C: nr ;b ]b \\*(]b
+'in \\n(;bu
+'ti \\n(;bu
+.C: nr ;c ]c \\*(]c
+.C: nr ;d ]d \\*(]d
+.C: nr ;e ]e \\*(]e
+.C: ds ]g ]h \\*(]h
+.af ;a 1
+.if \\n(;e .af ;a \\*(]g
+..
+.ig
+    C: pulls the first argument off a string and
+       performs the operation dictated by the first
+       argument of the macrocommand. Syntax:
+
+   .C: operation argument string-name string
+..
+.de C:
+.\\$1 \\$2 \\$4
+.ds \\$3 \\$5 \\$6 \\$7 \\$8 \\$9
+..
+.ig
+recursive .Q: terminates outstanding lists
+..
+.de Q:
+.if \\nd .tm Q:
+.LE 
+.if \\n(;g .Q:
+..
+.Z\nf
+.em E:

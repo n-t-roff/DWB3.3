@@ -1,0 +1,31 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.VG
+.EQ
+gsize 24
+delim $$
+.EN
+.T Equations Are Easy
+You do not need to be a mathematician to
+format equations on the UNIX\*(Rg system.
+For example, the input
+.sp 0.5v
+.S
+.S
+.CW
+.ce
+sum from i=1 to n x sub i
+.R
+.L
+.L
+.sp 0.5v
+produces $sum from i=1 to n x sub i$ on paper.
+.sp
+The eqn language makes it easy!
+.VE Example 11
+Equations Are Easy
+(eqn sample)

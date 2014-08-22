@@ -1,0 +1,468 @@
+'''	\"  tbl file | troff -mm [-Tdevname] | ...
+.PF "'Memorandum Macros''TEST: \\n(.F'"
+.ds HP 10 10 10 10 10 10 10
+.ds HF 3 3 2 2 2 2 2
+.H 1 "PARAGRAPHS AND HEADINGS"
+This section describes simple paragraphs and section headings.
+.H 2 "Paragraphs"
+.DS I
+\&.P [type]
+.ul
+one or more lines of text
+.DE
+This macro is used to begin two kinds of paragraphs.
+In a
+.I left-justified
+paragraph, the first line
+begins at the left margin, while in an
+.I indented
+paragraph, it is indented five spaces.
+.P
+A document possesses a
+.I
+default paragraph style
+.R
+obtained by specifying .P before each paragraph
+that does \f2not\f1 follow a heading.
+The default style is controlled by the register Pt.
+The initial value of Pt is 0,
+which always provides
+left-justified paragraphs.
+All paragraphs can be forced
+to be indented by inserting the following at the beginning of 
+the document:
+.DS I
+\&.nr Pt 1
+.DE
+All paragraphs will be indented except after headings,
+lists, and displays if the following:
+.DS I
+\&.nr Pt 2
+.DE
+is inserted at the beginning of the document.
+.P
+The amount a paragraph is indented is contained in the register Pi,
+whose default value is 5.
+To indent paragraphs by,
+say, 10 spaces, insert:
+.DS I
+\&.nr Pi 10
+.DE
+at the beginning of the document.
+Of course, both the Pi and Pt
+register values must be greater than zero for
+any paragraphs to be indented.
+.P
+The number register Ps
+controls the amount of spacing
+between paragraphs.
+By default, Ps is set to 1,
+yielding one blank space (1/2 a vertical space).
+.P
+Regardless of Pt, an
+.I individual
+paragraph can be forced to be left-justified or
+indented.  ``.P\ 0'' always forces left
+justification; ``.P\ 1'' always causes
+indentation by the amount specified
+by the register Pi.
+.P
+If .P occurs inside a
+.IR list ,
+the indent (if any) 
+of the paragraph is added to the current list indent.
+.P
+Numbered paragraphs may be produced by setting the
+register Np to 1.
+This produces paragraphs numbered
+within first level headings, e.g., 1.01, 1.02, 1.03, 2.01, etc.
+.P
+A different style of numbered paragraphs is obtained by 
+using the
+.DS I
+\&.nP
+.DE
+macro rather than the .P
+macro for paragraphs.
+This produces
+paragraphs that are numbered within second level headings
+and contain a ``double-line indent'' in which the text of the
+second line is indented to be aligned with the text of the
+first line so that the number stands out.
+.DS I
+\&.H 1 "FIRST HEADING"
+\&.H 2 "Second Heading"
+\&.nP
+.ul
+one or more lines of text
+.DE
+.H 2 "Numbered Headings"
+.DS I
+\&.H level [heading-text] [heading-suffix]
+.ul
+zero or more lines of text
+.DE
+The .H macro provides seven levels of numbered headings,
+as illustrated by this document. 
+Level 1 is the most
+major or highest; level 7 the lowest.
+.P
+The
+.I heading-suffix
+is appended to the
+.I heading-text
+and may be used for footnote marks which should not appear
+with the heading text in the Table of Contents.
+.H 3 "Normal Appearance."
+The normal appearance of headings is as shown in this
+document.
+The effect of .H varies according to the
+.I level
+argument.
+First-level headings are
+.I preceded
+by two blank lines (one vertical space);
+all others are
+.I preceded
+by one blank line
+(1/2 vertical space).
+.DS I F
+.TS
+tab (;);
+l 1 l lw(4.25i).
+\&.H 1;heading-text;T{
+gives a bold heading \f2followed\f1 by a single blank line
+(1/2 vertical space).
+The following text begins on a new line and is indented
+according to the current paragraph type.
+Full capital letters should normally be used to make the
+heading stand out.
+T}
+.sp 0.3v
+\&.H 2;heading-text;T{
+yields a bold heading followed by a single blank line
+(1/2 vertical space).
+The following text begins on a new line and
+is indented according to the current paragraph type.
+Normally, initial capitals are used.
+T}
+.sp 0.3v
+\&.H n;heading-text;T{
+for 3\ \(<=\ n\ \(<=\ 7, produces an underlined (italic) heading
+followed by two spaces.
+The following text appears on the
+same line, i.e., these are \f2run-in\f1 headings.
+T}
+.TE
+.DE
+.P
+Appropriate numbering and spacing (horizontal and vertical)
+occur even if the heading text is omitted from a .H macro call.
+.P
+Here are the first few .H calls in this document:
+.DS I
+\&.H 1 "PARAGRAPHS AND HEADINGS"
+\&.H 2 "Paragraphs"
+\&.H 3 "Numbered Headings"
+\&.H 3 "Normal Appearance."
+\&.H 3 "Altering Appearance of Headings."
+\&.H 4 "Pre-Spacing and Page Ejection."
+\&.H 4 "Spacing After Headings."
+\&.H 4 "Centered Headings."
+\&.H 4 "Bold, Italic, and Underlined Headings"
+\&.H 5 "Control by Level."
+.DE
+.H 3 "Altering Appearance of Headings."
+Users satisfied with the default appearance of headings
+may skip to the section titled ``Unnumbered Headings''.
+One can modify the appearance of
+headings quite easily by setting certain registers and
+strings at the beginning of the document.
+This permits
+quick alteration of a document's style, because this
+style-control information is concentrated in a few
+lines, rather than being distributed throughout the document.
+.H 4 "Pre-Spacing and Page Ejection."
+A first-level heading normally has two blank lines
+(one vertical space) preceding it, and all others have one
+blank line (1/2 vertical space).
+If a multi-line
+heading were to be split across pages, it is automatically
+moved to the top of the next page.
+Every first-level
+heading may be forced to the top of a new page by inserting:
+.DS I
+\&.nr Ej 1
+.DE
+at the beginning of the document.
+Long documents may be
+made more manageable if each section starts on a new
+page.
+Setting Ej to a higher value causes the same
+effect for headings up to that level, i.e., a page
+eject occurs if the heading level is less than or equal to Ej.
+.H 4 "Spacing After Headings."
+Three registers control the appearance of text immediately
+following a .H call.
+They are Hb (heading break level), Hs (heading space level),
+and Hi (post-heading indent).
+.P
+If the heading level is less than or equal to Hb, a break
+occurs after the heading.
+If the heading level
+is less than or equal to Hs, a blank line (1/2
+vertical space) is inserted after the heading.
+Defaults for Hb and Hs are 2.
+If a heading level is greater than Hb and also greater
+than Hs, then the heading (if any) is run into the following text.
+These registers permit headings to be separated
+from the text in a consistent way throughout a document,
+while allowing easy alteration of white space and heading emphasis.
+.P
+For any
+.I stand-alone
+heading, i.e., a heading not run
+into the following text, the alignment of the next line
+of output is controlled by the register Hi.
+If Hi is 0, text is left-justified.
+If Hi is 1
+(the \f2default\f1 value), the text is indented according to
+the paragraph type as specified by the register Pt.
+Finally, if Hi is 2, text is indented
+to line up with the first word of the heading itself,
+so that the heading number stands out more clearly.
+.P
+For example, to cause a blank line (1/2 vertical space)
+to appear after the first three heading levels, to
+have no run-in headings, and to force the text
+following all headings to be left-justified (regardless
+of the value of Pt), the following should appear
+at the top of the document:
+.DS I
+\&.nr Hs 3
+\&.nr Hb 7
+\&.nr Hi 0
+.DE
+.H 4 "Centered Headings."
+The register Hc can be used to obtain centered headings.
+A heading is centered if its level is less than or equal to Hc,
+and if it is also stand-alone.
+Hc is 0 initially (no centered headings).
+.H 4 "Bold, Italic, and Underlined Headings"
+.H 5 "Control by Level."
+Any heading that is underlined by
+.I nroff
+is made italic by
+.IR troff .
+The string HF (heading font)
+contains seven codes that specify the fonts for heading
+levels 1-7.
+The legal codes, their interpretations, and
+the defaults for HF are:
+.TS
+center box tab(;);
+c | c s s | c
+c | l l l | c
+l | l l l | n.
+.ul
+Formatter;HF Code;Default HF
+.ul
+\^;1;2;3;\^
+_
+nroff;no underline;underline;bold;2 2 2 2 2 2 2
+troff;roman;italic;bold;2 2 2 2 2 2 2
+.TE
+.P
+Thus, all levels are underlined in
+.I nroff
+and italic
+in
+.IR troff .
+The user may reset HF as desired.
+Any value omitted from the right end of the list is taken to be 1.
+For example, the following would result in two bold
+levels, three underlined (italic) levels, and two normal (roman)
+levels:
+.DS I
+\&.ds HF 3 3 2 2 2
+.DE
+.H 5 "Nroff Underlining Style."
+.I Nroff
+can underline in two ways.
+The normal style (.ul request)
+is to underline only letters and digits.
+The continuous style (.cu request) underlines all
+characters, including spaces.
+By default, MM attempts
+to use the continuous style on any heading that is to be
+underlined and is short enough to fit on a single line.
+If a heading is to be underlined, but is too long, it is
+underlined the normal way (i.e., only letters and digits are
+underlined).
+.P
+All underlining of headings can be forced to the normal way
+by using the -rU1 flag when invoking
+.IR nroff .
+.H 5 "Heading Point Sizes."
+The user may also specify the desired point size for each
+heading level with the HP string (for use with
+.I troff
+only).
+.DS I
+\&.ds HP [ps1] [ps2] [ps3] [ps4] [ps5] [ps6] [ps7]
+.DE
+By default, the text of headings (.H  and .HU) is printed
+in the same point size as the body \f2except\f1 that
+bold stand-alone headings are printed in a size one point
+smaller than the body.
+The string HP, similar to
+the string HF, can be specified to contain up to
+seven values, corresponding to the seven levels of
+headings.
+For example:
+.DS I
+\&.ds HP 12 12 10 10 10 10 10
+.DE
+specifies that the first and second level headings are to be
+printed in 12-point type, with the remainder printed in 10-point.
+Note that the specified values may also
+be \f2relative\f1 point-size changes, e.g.:
+.DS I
+\&.ds HP +2 +2 -1 -1 
+.DE
+If absolute point sizes are specified, then those sizes
+will be used regardless of the point size of the body
+of the document.
+If relative point sizes are specified,
+then the point sizes for the headings will be relative to the
+point size of the body, even if the latter is changed.
+.P
+Null or zero values imply that the \f2default\f1 size
+will be used for the corresponding heading level.
+.H 4 "Marking Styles \- Numerals and Concatenation"
+.DS I
+\&.HM [arg1] ... [arg7]
+.DE
+The registers names H1 through H7 are used
+as counters for the seven levels of headings.
+Their values are normally printed using Arabic
+numerals.
+The .HM macro (heading mark style)
+allows this choice to be overridden, thus providing
+``outline'' and other document styles.
+This macro can
+have up to seven arguments; each argument is a string
+indicating the type of marking to be used.
+Legal values and their meanings are shown below; omitted
+values are interpreted as 1,
+while illegal values have no effect.
+.TS
+center box tab(;);
+lf2 lf2
+c l.
+Value;Interpretation
+_
+1;Arabic (default for all levels)
+0001;Arabic with enough leading zeroes
+;\0to get the specified number of digits
+A;Upper-case alphabetic
+a;Lower-case alphabetic
+I;Upper-case Roman
+i;Lower-case Roman
+.TE
+.P
+By default, the complete heading mark for a given level is
+built by concatenating the mark for that level to the right
+of all marks for all levels of higher value.
+To inhibit the concatenation of heading level marks,
+i.e., to obtain just the current level mark followed
+by a period, set the register Ht (heading-mark type) to 1.
+.P
+For example, a commonly-used ``outline'' style is obtained by:
+.DS I
+\&.HM I A 1 a i
+\&.nr Ht 1
+.DE
+.H 2 "Unnumbered Headings"
+.DS I
+\&.HU heading-text
+.DE
+\&.HU is a special case of .H;
+it is handled in the same
+way as .H, except that no heading mark is printed.
+In order to preserve the hierarchical structure of
+headings when .H and .HU
+calls are intermixed, each .HU
+heading is considered to exist at the level given by
+register Hu, whose initial value is 2.
+Thus, in the normal case, the only difference between:
+.DS I
+\&.HU heading-text
+.DE
+and:
+.DS I
+\&.H 2 heading-text
+.DE
+is the printing of the heading mark for the latter.
+Both have the effect of incrementing the numbering
+counter for level 2, and resetting to zero the
+counters for levels 3 through 7.
+Typically, the value
+of Hu should be set to make unnumbered headings
+(if any) be the lowest-level headings in a document.
+.P
+\&.HU can be especially helpful in setting up appendices
+and other sections that may not fit well into the
+numbering scheme of the main body of a document.
+.H 2 "Headings and the Table of Contents"
+The text of headings and their corresponding page
+numbers can be automatically collected for a table
+of contents.
+This is accomplished by doing the following
+two things:
+.BL
+.LI
+specifying in the register Cl what level headings are
+to be saved
+.LI
+invoking the .TC
+macro at the end of the document
+.LE
+.P
+Any heading whose level is less than or equal to the value
+of the register Cl (contents level) is saved and
+later displayed in the table of contents.
+The default
+value for Cl is 2,
+i.e., the first two levels of
+headings are saved.
+.P
+Due to the way the headings are saved, it is possible to
+exceed the formatter's storage capacity, particularly
+when saving many levels of many headings, while also
+processing displays and footnotes.
+If this happens, the ``Out of temp file space'' diagnostic
+will be issued; the only remedy is to save
+fewer levels and/or to have fewer words in the heading
+text.
+.H 2 "First-Level Headings and Page Numbering Style"
+By default, pages are numbered sequentially at the top
+of the page.
+For large documents, it may be desirable
+to use page numbering of the form ``section-page,'' where
+.I section
+is the number of the current first-level
+heading.
+This page numbering style can be achieved
+by specifying the \-rN3 or \-rN5
+flag on the command line.
+As a side effect, this also has the
+effect of setting Ej to 1,
+i.e., each section
+begins on a new page.
+In this style, the page number
+is printed at the
+.I bottom
+of the page, so that the
+correct section number is printed.
+.TC

@@ -1,0 +1,51 @@
+.ds dT /usr/lib/tmac
+.TH MSAFE 5
+.SH NAME
+.B msafe
+\- a macro package for a safer
+.B troff
+.SH SYNOPSIS
+\*(mBtroff \-msafe\f1
+.OP \-m name []
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+The
+.SM MSAFE
+macro package removes the definitions of the
+.B troff
+requests
+.MW .sy
+and
+.MW .pi
+from memory.
+The
+.OP \-msafe
+option should be used as the first macro option on the
+.B troff
+command line, before any other macro package and
+before any files are processed.
+.PP
+Any document file obtained from a questionable or unreliable source
+may contain
+.B troff
+requests that make use of the
+.SM UNIX
+.BR system (3)
+call, thereby posing a security risk on that system.
+If a document formatted with
+.OP \-msafe
+contains any calls to the
+.MW .sy
+and
+.MW .pi
+requests, those requests will be treated
+as an unrecognized macro calls and will be ignored.
+.PP
+The
+.SM MSAFE
+package does not interpret any macros, requests, or escapes.
+.SH FILES
+.MW \*(dT/tmac.safe
+.SH SEE ALSO
+.BR troff (1)

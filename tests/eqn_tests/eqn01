@@ -1,0 +1,57 @@
+'''	\"  eqn file | troff -mm [-Tdevname] | ...
+.PH "'EQN:  File(\n(.F)''Device(\*(.T)'"
+.P
+.DS I
+.EQ
+(N sub roman Sh ) sub a sup * mark = 1 over 2 left ( d sub t over L right )
+  N sub roman Re N sub roman Sc
+.EN
+.sp
+.EQ (3a)
+lineup times
+left [
+{ 1 - sum from j=1 to {j= inf} {-4 beta sub j} over {beta sub j sup 2}
+  left ( {d phi sub j} over dr sub + right ) sub {r sub + =1}
+  exp left ( {- beta sub j sup 2 (x/r sub t ) } over { N sub Re N sub roman Sc} right ) 
+}
+over
+{ 1 + sum from j=1 to {j= inf} {-4 beta sub j} over {beta sub j sup 2}
+  left ( {d phi sub j} over dr sub + right ) sub {r sub + =1}
+  exp left ( {- beta sub j sup 2 (x/r sub t ) } over { N sub Re N sub roman Sc} right ) 
+}
+right ]
+.EN
+.DE
+.sp 1i
+.P
+.B Knuth
+(Vol. 1, p. 92):
+.DS CB
+.EQ
+G(z)~mark =~ e sup { ln ~ G(z) }
+~=~ exp left ( 
+sum from k>=1 {S sub k z sup k} over k right )
+~=~  prod from k>=1 e sup {S sub k z sup k /k}
+.EN
+.sp .5
+.EQ
+lineup =~ left ( 1 + S sub 1 z + 
+{ S sub 2 sup 1 z sup 2 } over 2! + ... right )
+left ( 1+ { S sub 2 z sup 2 } over 2
++ { S sub 2 sup 2 z sup 4 } over { 2 sup 2 . 2! }
++ ... right ) ...
+.EN
+.sp .5
+.EQ
+lineup =~  sum from m>=0 left ( I
+sum from
+pile { k sub 1 ,k sub 2 , ... ,k sub m  >=0
+  above
+k sub 1 +2k sub 2 + ... +mk sub m =m}
+{ S sub 1 sup {k sub 1} } over {1 sup k sub 1 k sub 1 ! } ~
+{ S sub 2 sup {k sub 2} } over {2 sup k sub 2 k sub 2 ! } ~
+...
+{ S sub m sup {k sub m} } over {m sup k sub m k sub m ! } 
+right ) z sup m
+.EN
+.DE

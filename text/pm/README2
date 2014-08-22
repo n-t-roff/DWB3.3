@@ -1,0 +1,2 @@
+Will not compile without a good C++ compiler. If you have one check
+the definition of CC in pm.mk.

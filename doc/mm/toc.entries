@@ -1,0 +1,169 @@
+.de H2
+.if \\nh .sp 3p
+.in \w'00.0'u
+.ta +\w'00.000'u
+\\$1\t\\$2\0\0\0\fH\s-2\\$3\s+2\f1
+.nr h 0
+..
+.de H3
+.in \w'00.000.000'u
+.ta \w'00000'u
+\t\f2\\$2\f1
+.nr h 1
+..
+.H1 1 "INTRODUCTION" 1
+.H2 1.1 "Purpose" 1
+.H2 1.2 "Conventions" 1
+.H2 1.3 "Overall Structure of a Document" 2
+.H2 1.4 "Definitions" 2
+.H1 2 "INVOKING THE MACROS" 3
+.H2 2.1 "The \f5\-mm\fP Flag" 3
+.H2 2.2 "Typical Command Lines" 3
+.H2 2.3 "Parameters that Can Be Set from the Command Line" 4
+.H2 2.4 "Omission of \f5\-mm\fP" 5
+.H1 3 "FORMATTING CONCEPTS" 5
+.H2 3.1 "Basic Terms" 5
+.H2 3.2 "Arguments and Double Quotes" 5
+.H2 3.3 "Unpaddable Spaces" 6
+.H2 3.4 "Hyphenation" 6
+.H2 3.5 "Tabs" 7
+.H2 3.6 "Special Use of the \s-1BEL\s+1 Character" 7
+.H2 3.7 "Strings for Special Symbols" 7
+.H3 3.7.1 "Bullets" 7
+.H3 3.7.2 "Dashes, Minus Signs, and Hyphens" 7
+.H3 3.7.3 "Registered and Unregistered Marks" 7
+.H2 3.8 "Use of Formatter Requests" 7
+.H1 4 "PARAGRAPHS AND HEADINGS" 7
+.H2 4.1 "Paragraphs" 7
+.H2 4.2 "Numbered Headings" 8
+.H3 4.2.1 "Normal Appearance" 8
+.H3 4.2.2 "Altering Appearance of Headings" 9
+.H4 4.2.2.1 "Pre-Spacing and Page Ejection" 9
+.H4 4.2.2.2 "Spacing After Headings" 9
+.H4 4.2.2.3 "Centered Headings" 10
+.H4 4.2.2.4 "Heading Fonts" 10
+.H4 4.2.2.5 "Heading Point Sizes" 10
+.H4 4.2.2.6 "Marking Styles \(em Numerals and Concatenation" 11
+.H2 4.3 "Unnumbered Headings" 11
+.H2 4.4 "Headings and the Table of Contents" 11
+.H2 4.5 "First-Level Headings and Page Numbering Style" 12
+.H2 4.6 "User Exit Macros" 12
+.H2 4.7 "Hints for Large Documents" 13
+.ne 3v+11p
+.H1 5 "LISTS" 13
+.H2 5.1 "Basic Approach" 13
+.H2 5.2 "Sample Nested Lists" 14
+.H2 5.3 "Basic List Macros" 15
+.H3 5.3.1 "List Item" 15
+.H3 5.3.2 "List End" 16
+.H3 5.3.3 "List Initialization Macros" 16
+.H4 5.3.3.1 "Automatically-Numbered or Alphabetized Lists" 16
+.H4 5.3.3.2 "Bullet List" 16
+.H4 5.3.3.3 "Dash List" 16
+.H4 5.3.3.4 "Marked List" 16
+.H4 5.3.3.5 "Reference List" 17
+.H4 5.3.3.6 "Variable-Item List" 17
+.H2 5.4 "List-Begin Macro and Customized Lists" 18
+.H1 6 "DOCUMENT STYLES" 19
+.H2 6.1 "Memoranda, Released Papers, and External Letters" 19
+.H3 6.1.1 "Title" 19
+.H3 6.1.2 "Author(s)" 20
+.H3 6.1.3 "Document Number(s)" 20
+.H3 6.1.4 "Abstract" 20
+.H3 6.1.5 "Other Keywords" 21
+.H3 6.1.6 "Memorandum Types" 21
+.H3 6.1.7 "Date and Format Changes" 22
+.H4 6.1.7.1 "Changing the Date" 22
+.H4 6.1.7.2 "Alternate First-Page Format" 22
+.H3 6.1.8 "Released-Paper Style" 22
+.H3 6.1.9 "Sequence of ``Beginning'' Memorandum/Paper/Letter Macros" 23
+.H2 6.2 "Business Letters" 23
+.H3 6.2.1 "Letter Types" 24
+.H3 6.2.2 "Writer's Address" 24
+.H3 6.2.3 "Recipient's Address" 24
+.H3 6.2.4 "Letter Options" 24
+.H4 6.2.4.1 "Salutation" 25
+.H4 6.2.4.2 "Attention Line" 25
+.H4 6.2.4.3 "Subject Line" 25
+.H4 6.2.4.4 "Reference Line" 25
+.H4 6.2.4.5 "Confidential Notation" 25
+.H3 6.2.5 "Sequence of Business Letter Macros" 25
+.H2 6.3 "Macros for the End of a Memorandum or Letter" 26
+.H3 6.3.1 "Signature Block" 26
+.H4 6.3.1.1 "Formal Closing" 26
+.H4 6.3.1.2 "Signature and Reference Line" 26
+.H3 6.3.2 "``Copy to'' and Other Notations" 26
+.H3 6.3.3 "Approval Signature Line" 28
+.H2 6.4 "Forcing a One-Page Letter" 28
+.ne 9v+11p
+.H1 7 "DISPLAYS AND CAPTIONS" 28
+.H2 7.1 "Static Displays" 29
+.H2 7.2 "Floating Displays" 30
+.ne 6v
+.H2 7.3 "Tables with \s-1TBL\s+1" 31
+.H2 7.4 "Equations with \s-1EQN\s+1" 32
+.H2 7.5 "Pictures with \s-1PIC\s+1" 32
+.H2 7.6 "Graphs with \s-1GRAP\s+1" 32
+.H2 7.7 "Figure, Table, Equation, and Exhibit Captions" 32
+.H2 7.8 "List of Figures, Tables, Equations, and Exhibits" 33
+.H1 8 "FOOTNOTES" 33
+.H2 8.1 "Automatically-Numbered Footnotes" 34
+.H2 8.2 "Labeled Footnotes" 34
+.H2 8.3 "Spacing Between Footnote Entries" 34
+.H2 8.4 "Format of Footnote Text" 34
+.H1 9 "PAGE HEADERS AND FOOTERS" 35
+.H2 9.1 "Default Headers and Footers" 35
+.H2 9.2 "Page Header" 36
+.H3 9.2.1 "Even-Page Header" 36
+.H3 9.2.2 "Odd-Page Header" 36
+.H2 9.3 "Page Footer" 36
+.H3 9.3.1 "Even-Page Footer" 36
+.H3 9.3.2 "Odd-Page Footer" 36
+.H3 9.3.3 "Footer on the First Page" 37
+.H2 9.4 "Use of Strings and Registers in Header and Footer Macros" 37
+.H2 9.5 "Generalized Top-of-Page Processing" 37
+.H2 9.6 "Generalized Bottom-of-Page Processing" 38
+.H2 9.7 "Proprietary Markings and Copyright Notice" 38
+.H2 9.8 "Private Documents" 39
+.H1 10 "TABLE OF CONTENTS AND COVER SHEET" 39
+.H2 10.1 "Table of Contents" 39
+.H2 10.2 "Cover Sheet" 40
+.H1 11 "REFERENCES" 41
+.H2 11.1 "Automatic Numbering of References" 41
+.H2 11.2 "Subsequent References" 41
+.H2 11.3 "Reference Page" 41
+.H1 12 "MISCELLANEOUS FEATURES" 42
+.H2 12.1 "Using Fonts for Emphasis" 42
+.H2 12.2 "Right Margin Justification" 43
+.H2 12.3 "Two-Column Output" 43
+.H3 12.3.1 "Width Control for Footnotes and Displays" 43
+.H3 12.3.2 "Column Headings for Two-Column Output" 44
+.H2 12.4 "Blank Vertical Spaces" 44
+.H2 12.5 "Skipping Pages" 45
+.H2 12.6 "Forcing an Odd Page" 45
+.H2 12.7 "Setting the Point Size and Vertical Spacing" 45
+.H2 12.8 "Size Reduction" 46
+.H2 12.9 "Producing Accents" 46
+.H2 12.10 "Inserting Text Interactively" 46
+.ne 4v+11p
+.H1 13 "ERRORS AND DEBUGGING" 47
+.H2 13.1 "Error Terminations" 47
+.H2 13.2 "Disappearance of Output" 47
+.H2 13.3 "The \s-1CHECKDOC\s+1 Command" 47
+.H1 14 "EXTENDING AND MODIFYING THE MACROS" 48
+.H2 14.1 "Naming Conventions" 48
+.H3 14.1.1 "Names Used by Formatters" 48
+.H3 14.1.2 "Names Used by \s-1MM\s+1" 48
+.H3 14.1.3 "Names Used by \s-1EQN\s+1 and \s-1TBL\s+1" 48
+.H3 14.1.4 "User-Definable Names" 48
+.H2 14.2 "Sample Extensions" 49
+.H3 14.2.1 "Appendix Headings" 49
+.H3 14.2.2 "Hanging Indent with Tabs" 49
+.HA A "Summary of Differences for \s-1MM\s+1 with \s-1NROFF\s+1"
+.HA B "User-Defined List Structures"
+.HA C "Sample Memorandum, Released Paper, and External Letter"
+.HA D "Sample Business Letters"
+.HA E "Sample Footnotes"
+.HA F "Error Messages"
+.HA G "Company-Related Information"
+.HA H "Summary of Macros, Strings, and Number Registers"

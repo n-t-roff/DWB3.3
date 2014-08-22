@@ -1,0 +1,209 @@
+%!PS-Adobe-2.0
+%%Creator: picasso
+%%BoundingBox: (atend)
+%%Pages: (atend)
+%%EndComments
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+%!
+%	@(#)newpic newpic.ps 1.0b@(#)	10/27/89
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+%%EndProlog
+%%BeginSetup
+%%EndSetup
+%%Page: ? 1
+%%PageBoundingBox: 3 213 607 577
+%%BeginPageSetup
+-0.1725 -2.5 72 72 PIC
+%%EndPageSetup
+ 0.01 w
+ 0 g
+ [] 0 d
+-4 0 4 5 Q s
+-3.805 5.005 -3.805 4.905 -3.905 4.905 -3.905 4.805 4 -4.005 4.805 L s
+3.805 5.005 3.805 4.905 3.905 4.905 3.905 4.805 4 4.005 4.805 L s
+-3.805 -0.0050001 -3.805 0.095 -3.905 0.095 -3.905 0.195 4 -4.005 0.195 L s
+3.805 -0.0050001 3.805 0.095 3.905 0.095 3.905 0.195 4 4.005 0.195 L s
+-3.9 0.1 3.9 0.3 Q c gs 1 g f gr s
+-3.9 4.605 3.9 4.905 Q c gs 0.8 g f gr s
+H findfont 0.16667 scalefont setfont
+(Picasso 1.0) 1 0.865 -0.4325 4.7133 T
+-3.685 4.635 -3.485 4.835 Q c gs 0 g f gr s
+-3.705 4.655 -3.505 4.855 Q c gs 0.8 g f gr s
+-3.605 4.705 -3.665 4.805 -3.545 4.805 3 -3.605 4.705 L s
+-3.9 0.6 3.7 4.2 Q s
+-3.885 4.26 -2.985 4.51 0.12 rQ c gs 0 g f gr s
+-3.905 4.28 -3.005 4.53 0.12 rQ c gs 1 g f gr s
+(File   ) 3 0.40833 -3.6592 4.3633 T
+-3.2 4.355 -3.26 4.455 -3.14 4.455 3 -3.2 4.355 L s
+-2.885 4.26 -1.985 4.51 0.12 rQ c gs 0 g f gr s
+-2.905 4.28 -2.005 4.53 0.12 rQ c gs 1 g f gr s
+(View   ) 3 0.50167 -2.7058 4.3633 T
+-2.2 4.355 -2.26 4.455 -2.14 4.455 3 -2.2 4.355 L s
+-1.885 4.26 -0.985 4.51 0.12 rQ c gs 0 g f gr s
+-1.905 4.28 -1.005 4.53 0.12 rQ c gs 1 g f gr s
+(Edit   ) 3 0.42833 -1.6692 4.3633 T
+-1.2 4.355 -1.26 4.455 -1.14 4.455 3 -1.2 4.355 L s
+-0.885 4.26 0.415 4.51 0.12 rQ c gs 0 g f gr s
+-0.905 4.28 0.395 4.53 0.12 rQ c gs 1 g f gr s
+(Properties   ) 3 0.90167 -0.70583 4.3633 T
+0.2 4.355 0.14 4.455 0.26 4.455 3 0.2 4.355 L s
+0.515 4.26 1.415 4.51 0.12 rQ c gs 0 g f gr s
+0.495 4.28 1.395 4.53 0.12 rQ c gs 1 g f gr s
+(Draw   ) 3 0.52833 0.68084 4.3633 T
+1.2 4.355 1.14 4.455 1.26 4.455 3 1.2 4.355 L s
+1.515 4.26 2.815 4.51 0.12 rQ c gs 0 g f gr s
+1.495 4.28 2.795 4.53 0.12 rQ c gs 1 g f gr s
+(Transform   ) 3 0.9 1.695 4.3633 T
+2.6 4.355 2.54 4.455 2.66 4.455 3 2.6 4.355 L s
+3.765 4.105 3.945 4.205 Q s
+3.855 3.105 1 3.855 4.105 L 0.5 g
+ 0.03 w
+ s
+3.855 1.705 1 3.855 3.105 L 0 g
+ s
+3.855 0.705 1 3.855 1.705 L 0.5 g
+ s
+3.765 0.605 3.945 0.705 Q 0 g
+ 0.01 w
+ s
+3.765 2.105 3.945 2.705 Q c gs 1 g f gr s
+3.94 2.305 1 3.76 2.305 L s
+3.855 2.66 3.795 2.56 3.915 2.56 3 3.855 2.66 L c gs 0 g f gr s
+3.94 2.505 1 3.76 2.505 L s
+3.855 2.15 3.795 2.25 3.915 2.25 3 3.855 2.15 L c gs 0 g f gr s
+showpage
+%%Trailer
+%%BoundingBox: 3 213 607 577
+%%Pages: 1

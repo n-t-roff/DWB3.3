@@ -1,0 +1,28 @@
+'''	\"  pic file | troff -mm [-Tdevname] | ...
+.PH "'PIC:  File(\n(.F)''Device(\*(.T)'"
+.P
+.DS I
+.PS 5
+.ps 8
+     arrow "source" "code"
+LA:  box "lexical" "analyzer"
+     arrow "tokens" above
+P:   box "parser"
+     arrow "inter-" "mediate" "code" ""
+Sem: box "semantic" "checker"
+     arrow
+
+     arrow <-> up from top of LA
+LC:  box "lexical" "corrector"
+     arrow <-> up from top of P
+Syn: box "syntactic" "corrector"
+     arrow up
+DMP: box "diagnostic" "message" "printer"
+     arrow <-> right  from right of DMP
+ST:  box "symbol" "table"
+     arrow from LC.ne to DMP.sw
+     arrow from Sem.nw to DMP.se
+     arrow <-> from Sem.top to ST.bot
+.ps
+.PE
+.DE

@@ -1,0 +1,38 @@
+.de TP
+'sp 3
+.if e \{\
+'	tl !!!\s+1\f(HB\\*(pT\fP\s0!
+'	tl !\s-1\f(HB\\nP!!\\*(sT\fP\s0!   \}
+.if o \{\
+.ie \\nP=1 'sp 2v
+.el \{\
+'	tl !\s+1\f(HB\\*(pT\fP\s0!!!
+'	tl !\s-1\f(HB\\*(sT!!\\nP\fP\s0!   \} \}
+'sp 2
+..
+'''	\" define alternate titles for page header
+'''	\" USAGE:  .AT [main] [sub]
+.de AT
+.ds pT "\s+1\\$1\s0
+.ds sT "\s-1\\$2\s0
+..
+'''	\" define main document title
+.PH ""
+.EH ""
+.OH ""
+'''	\" collect titles for titlebox
+'''	\" USAGE:  .TL "major_title" "subtitle"
+.de TL
+.DS
+.ft HB
+.ps 18
+.vs 20
+\\$1
+.br
+\s36\l'\\nWu'\s0
+\f(HB\s14\\$2\s0\fP
+.ps 10
+.ft 1
+.DE
+.sp 2
+..

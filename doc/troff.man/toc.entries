@@ -1,0 +1,102 @@
+.de H1
+.sp 8p
+.in 0
+.ta \w'00.0'u 6iR
+.ie '\\$4'' \{\
+.ie '\\$1'' \\$2    \fH\s-1\\$3\s+1\f1
+.el \\$1.\t\\$2    \fH\s-1\\$3\s+1\f1   \}
+.el \{\
+\\$1.\t\\$2
+\t\\$4    \fH\s-1\\$3\s+1\f1   \}
+.nr h 1
+..
+.ft 3
+INTRODUCTION
+.sp 12p
+USAGE AND OPTIONS
+.sp 12p
+SUMMARY OF REQUESTS, ESCAPE SEQUENCES, AND NUMBER REGISTERS
+.ft 1
+.sp 3p
+.in +0.4i
+.ft 2
+Requests
+Alphabetical Request and Section Number Cross Reference
+Escape Sequences for Characters, Indicators, and Functions
+Predefined Number Registers
+Predefined Read-Only Number Registers
+.ft 1
+.in -0.4i
+.sp 12p
+.ft 3
+REFERENCE MANUAL
+.ft 1
+.H1 1 "GENERAL INFORMATION" 1
+.H2 1.1 "Form of Input" 1
+.H2 1.2 "Formatter and Device Resolution" 1
+.H2 1.3 "Numerical Parameter Input" 1
+.H2 1.4 "Numerical Expressions" 2
+.H2 1.5 "Notation" 2
+.H1 2 "FONT AND CHARACTER SIZE CONTROL" 2
+.H2 2.1 "Character Set" 2
+.H2 2.2 "Fonts" 3
+.H2 2.3 "Character Size" 3
+.H1 3 "PAGE CONTROL" 4
+.H1 4 "TEXT FILLING, ADJUSTING, AND CENTERING" 5
+.H2 4.1 "Filling and Adjusting" 5
+.H2 4.2 "Interrupted Text" 6
+.H1 5 "VERTICAL SPACING" 6
+.H2 5.1 "Baseline Spacing" 6
+.H2 5.2 "Extra Line-Space" 7
+.H2 5.3 "Blocks of Vertical Space" 7
+.H1 6 "LINE LENGTH AND INDENTING" 7
+.H1 7 "MACROS, STRINGS, DIVERSIONS, AND POSITION TRAPS" 8
+.H2 7.1 "Macros and Strings" 8
+.H2 7.2 "Copy Mode Input Interpretation" 8
+.H2 7.3 "Arguments" 8
+.H2 7.4 "Diversions" 9
+.H2 7.5 "Traps" 9
+.H1 8 "NUMBER REGISTERS" 11
+.SK
+.H1 \09 "TABS, LEADERS, AND FIELDS" 12
+.H2 \09.1 "\0Tabs and Leaders" 12
+.H2 \09.2 "\0Fields" 12
+.H1 10 "INPUT AND OUTPUT CONVENTIONS AND CHARACTER TRANSLATIONS" 13
+.H2 10.1 "\0Input Character Translations" 13
+.H2 10.2 "\0Ligatures" 13
+.H2 10.3 "\0Backspacing, Underlining, Overstriking, Etc." 13
+.H2 10.4 "\0Control Characters" 14
+.H2 10.5 "\0Output Translation" 14
+.H2 10.6 "\0Transparent Throughput" 14
+.H2 10.7 "\0Transparent Output" 14
+.H2 10.8 "\0Comments and Concealed Newlines" 14
+.H1 11 "LOCAL HORIZONTAL AND VERTICAL MOTIONS, AND THE WIDTH FUNCTION" 14
+.H2 11.1 "\0Local Motions" 14
+.H2 11.2 "\0Width Function" 15
+.H2 11.3 "\0Mark Horizontal Place" 15
+.H1 12 "OVERSTRIKE, BRACKET, LINE-DRAWING, GRAPHICS, AND" 15 "ZERO-WIDTH FUNCTIONS"
+.H2 12.1 "\0Overstriking" 15
+.H2 12.2 "\0Zero-Width Characters" 15
+.H2 12.3 "\0Large Brackets" 15
+.H2 12.4 "\0Line Drawing" 16
+.H2 12.5 "\0Graphics" 17
+.H1 13 "HYPHENATION" 17
+.H1 14 "THREE-PART TITLES" 17
+.H1 15 "OUTPUT LINE NUMBERING" 18
+.H1 16 "CONDITIONAL ACCEPTANCE OF INPUT" 18
+.H1 17 "ENVIRONMENT SWITCHING" 20
+.H1 18 "INSERTIONS FROM THE STANDARD INPUT" 20
+.H1 19 "INPUT/OUTPUT FILE SWITCHING" 20
+.H1 20 "MISCELLANEOUS" 21
+.H1 21 "OUTPUT AND ERROR MESSAGES" 21
+.H1 22 "OUTPUT LANGUAGE" 22
+.H1 23 "DEVICE AND FONT DESCRIPTION FILES" 23
+.H2 23.1 "\0Device Description File" 23
+.H2 23.2 "\0Font Description Files" 24
+.in 0
+.sp 12p
+.ft 3
+TUTORIAL EXAMPLES
+.sp 12p
+SPECIAL CHARACTER NAMES
+.ft 1

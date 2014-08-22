@@ -1,0 +1,1074 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(PostScript Character Set and Symbols)4 3300 1 720 1040 t
+36 S1 f
+(________________________)720 1240 w
+14 HB f
+(Addendum)720 1440 w
+13 HB f
+(DWB 3.3)1 528 1 4512 1440 t
+10 R f
+( heading marked)2 681( A)1 130( of this software.)3 695(This addendum re\257ects changes in the DWB 3.3 version)8 2311 4 720 1860 t
+10 S1 f
+()4570 1860 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_rh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+15 66 moveto
+15 86 lineto
+16 131 lineto
+17 146 lineto
+18 158 lineto
+19 167 lineto
+21 181 lineto
+24 190 lineto
+34 193 lineto
+49 189 lineto
+58 182 lineto
+60 177 lineto
+60 166 lineto
+59 156 lineto
+58 143 lineto
+57 130 lineto
+56 117 lineto
+55 102 lineto
+54 42 lineto
+53 39 lineto
+49 35 lineto
+34 34 lineto
+19 39 lineto
+16 47 lineto
+15 66 lineto
+stroke
+
+65 60 moveto
+65 111 lineto
+66 127 lineto
+67 139 lineto
+69 153 lineto
+72 163 lineto
+83 171 lineto
+98 177 lineto
+113 182 lineto
+128 187 lineto
+143 190 lineto
+158 194 lineto
+173 196 lineto
+188 199 lineto
+203 201 lineto
+218 203 lineto
+233 205 lineto
+248 205 lineto
+263 206 lineto
+278 206 lineto
+293 206 lineto
+308 206 lineto
+323 206 lineto
+338 205 lineto
+353 203 lineto
+368 202 lineto
+383 200 lineto
+394 197 lineto
+389 190 lineto
+389 180 lineto
+391 176 lineto
+391 173 lineto
+380 173 lineto
+365 173 lineto
+350 174 lineto
+335 175 lineto
+320 176 lineto
+305 176 lineto
+290 176 lineto
+275 177 lineto
+260 177 lineto
+245 177 lineto
+240 173 lineto
+240 170 lineto
+245 165 lineto
+260 164 lineto
+275 164 lineto
+290 164 lineto
+305 163 lineto
+320 160 lineto
+327 155 lineto
+330 149 lineto
+330 134 lineto
+328 129 lineto
+323 124 lineto
+309 121 lineto
+294 121 lineto
+279 121 lineto
+264 121 lineto
+249 121 lineto
+234 121 lineto
+228 118 lineto
+228 112 lineto
+234 109 lineto
+249 109 lineto
+264 109 lineto
+279 108 lineto
+294 108 lineto
+306 104 lineto
+311 97 lineto
+312 91 lineto
+312 88 lineto
+311 82 lineto
+305 74 lineto
+290 72 lineto
+275 72 lineto
+260 72 lineto
+245 73 lineto
+230 73 lineto
+215 73 lineto
+205 70 lineto
+205 63 lineto
+217 60 lineto
+232 60 lineto
+247 60 lineto
+262 60 lineto
+277 57 lineto
+283 52 lineto
+285 44 lineto
+285 41 lineto
+284 35 lineto
+280 30 lineto
+268 26 lineto
+253 25 lineto
+238 26 lineto
+223 28 lineto
+208 31 lineto
+193 33 lineto
+178 34 lineto
+163 33 lineto
+148 31 lineto
+133 28 lineto
+118 27 lineto
+103 28 lineto
+88 34 lineto
+73 43 lineto
+67 52 lineto
+65 60 lineto
+stroke
+
+396 180 moveto
+396 188 lineto
+399 194 lineto
+410 196 lineto
+416 190 lineto
+416 180 lineto
+415 177 lineto
+411 173 lineto
+400 173 lineto
+396 180 lineto
+stroke
+
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+4570 1860 m
+100 build_rh
+4670 1860 m
+10 R f
+(refers to)1 337 1 4703 1860 t
+( heading marked)2 671( A)1 128(the section in the user documentation where this topic is discussed.)10 2708 3 720 1980 t
+10 ZD f
+(v)4255 1980 w
+10 R f
+(introduces a new)2 680 1 4360 1980 t
+(section.)720 2100 w
+10 S1 f
+()720 2340 w
+720 2340 m
+100 build_rh
+820 2340 m
+10 B f
+(Standard Text Font Character Set)4 1465 1 895 2340 t
+10 R f
+( synonym names)2 674( The)1 206( backslash characters have been assigned synonym input names.)8 2572(The double quote and)3 868 4 720 2520 t
+(are intended to eliminate ambiguities in cases where one desires the printed character but the)14 4039 1 720 2640 t
+9 R f
+(ASCII)4805 2640 w
+10 R f
+(representation may infer some special meaning \(e.g., in a macro argument the)11 3346 1 720 2760 t
+10 CW f
+(")4113 2760 w
+10 R f
+(is interpreted as an)3 820 1 4220 2760 t
+( input names have been assigned to the inverted exclamation and question)11 2998(argument delimiter\). In addition,)3 1322 2 720 2880 t
+(marks commonly used in foreign language composition.)6 2251 1 720 3000 t
+(Input)1556 3240 w
+(Symbol Name Description)2 1318 1 1080 3360 t
+10 S f
+(_ __________________________________________)1 2112 1 1080 3380 t
+10 R f
+(")1215 3520 w
+10 CW f
+(\\\(dq)1542 3520 w
+10 R f
+(double quote \(same as)3 890 1 1932 3520 t
+10 CW f
+(")2847 3520 w
+10 R f
+(\))2907 3520 w
+(\\)1222 3640 w
+10 CW f
+(\\\(bs)1542 3640 w
+10 R f
+(backslash \(same as)2 759 1 1932 3640 t
+10 CW f
+(\\)2716 3640 w
+10 R f
+(\))2776 3640 w
+(\241)1219 3760 w
+10 CW f
+(\\\(!!)1542 3760 w
+10 R f
+(inverted exclamation mark)2 1070 1 1932 3760 t
+(\277)1214 3880 w
+10 CW f
+(\\\(??)1542 3880 w
+10 R f
+(inverted question mark)2 921 1 1932 3880 t
+10 ZD f
+(v)720 4240 w
+10 B f
+(AT&T Corporate Signature)2 1199 1 873 4240 t
+10 R f
+(The)720 4420 w
+9 R f
+(AT&T)906 4420 w
+10 R f
+( globe symbol and the letters of the)7 1463( \320 the)2 254(corporate signature)1 775 3 1184 4420 t
+9 R f
+(AT&T)3707 4420 w
+10 R f
+( available in)2 506(logotype \320 is)2 549 2 3985 4420 t
+(both a horizontal and a vertical con\256guration for use in printed media on a light background.)15 3700 1 720 4540 t
+(The input name)2 627 1 720 4936 t
+10 CW f
+(\\\(LH)1372 4936 w
+10 R f
+(generates the logo in the horizontal con\256guration:)6 1992 1 1637 4936 t
+32 S1 f
+()3679 4936 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% PostScript 12 and 8 line logos - horizontal configuration. Switch occurs
+% automatically below point size 29. Code from Matthijs Melchior.
+%
+
+/LOGO-dict-mm where not {
+	64 dict /LOGO-dict-mm exch def
+}{pop} ifelse
+LOGO-dict-mm begin		% initialize dictionary
+
+
+/globesetup {
+/r exch def
+/N exch def
+/d 2 N r mul N 1 sub add div def
+/h d r mul def
+} def
+/mkabs {
+/yp exch def
+/xl exch def
+dup dup 0 get xl mul 0 exch put
+dup dup 1 get h mul yp add 1 exch put
+dup dup 2 get xl mul 2 exch put
+dup dup 3 get h mul yp add 3 exch put
+dup dup 4 get xl mul 4 exch put
+dup dup 5 get h mul yp add 5 exch put
+} def
+/topsegment {
+/n exch def
+/y n r mul n .5 add add d mul def
+/a y 1 y dup mul sub sqrt atan def
+/x a cos def
+/c2 exch x y mkabs def
+/ly1 exch h mul y add def
+/lx1 exch x abs mul def
+/c1 exch x y mkabs def
+x y /moveto load
+0 0 1 a 180 a sub /arc load
+c1 aload pop /curveto load
+lx1 ly1 /lineto load
+c2 aload pop /curveto load
+/closepath load
+} def
+/botsegment {
+/n exch 1 add def
+/y n r mul n .5 sub add d mul def
+/a y 1 y dup mul sub sqrt atan def
+/x a cos def
+/c2 exch x y mkabs def
+/ly1 exch h mul y add def
+/lx1 exch x abs mul def
+/c1 exch x y mkabs def
+x y /moveto load
+0 0 1 a 540 a sub /arcn load
+c1 aload pop /curveto load
+lx1 ly1 /lineto load
+c2 aload pop /curveto load
+/closepath load
+} def
+/segment {
+/n exch def
+/dh exch 1 exch sub 2 div def
+/ylb n r mul n 0.5 add add d mul def
+/ylt ylb h add def
+/yrb ylb h dh mul add def
+/yrt ylt h dh mul sub def
+/alb ylb 1 ylb dup mul sub sqrt atan def
+/alt ylt 1 ylt dup mul sub sqrt atan def
+/arb yrb 1 yrb dup mul sub sqrt atan 180 exch sub def
+/art yrt 1 yrt dup mul sub sqrt atan 180 exch sub def
+/xlb alb cos def
+/xlt alt cos def
+/xrb arb cos def
+/xrt art cos def
+/c4 exch xrb abs ylb mkabs def
+/ly2 exch h mul ylb add def
+/lx2 exch xrb abs mul def
+/c3 exch xrb abs ylb mkabs def
+/c2 exch xrt abs ylt mkabs def
+/ly1 exch h mul ylt add def
+/lx1 exch xrt abs mul def
+/c1 exch xrt abs ylt mkabs def
+xlb ylb /moveto load
+0 0 1 alb alt /arc load
+c2 4 get c2 5 get /lineto load
+c2 2 get c2 3 get
+c2 0 get c2 1 get
+lx1 ly1	/curveto load
+c1 4 get c1 5 get /lineto load
+c1 2 get c1 3 get
+c1 0 get c1 1 get
+xrt yrt /curveto load
+0 0 1 art arb /arc load
+c3 aload pop /curveto load
+lx2 ly2 /lineto load
+c4 aload pop /curveto load
+/closepath load
+} def
+8 2.5 globesetup
+/globe8 [
+/newpath load
+[ -.9   .1  -.6   .2  -.5   .2  ] -.5   .2  [ -.4   .2   .0  .0  .4  .0 ] 3 topsegment
+[ -.9  -.35 -.85 -.35 -.8  -.35 ] -.1  -.35 [  .1  -.35  .3  .0  .5  .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ] -.1   .35 [  .1   .35  .4  .0  .55 .0 ] .55 2 segment
+[ -.8  -.35 -.75 -.35 -.7  -.35 ]  .05 -.35 [  .2  -.35  .4  .0  .55 .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ]  .05  .35 [  .2   .35  .45 .0  .6  .0 ] .7  1 segment
+[ -.8  -.35 -.75 -.35 -.7  -.35 ]  .0  -.35 [  .15 -.35  .4  .0  .6  .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ]  .0   .35 [  .15  .35  .4  .0  .6  .0 ] .7  0 segment
+[ -.7  -.35 -.65 -.35 -.6  -.35 ] -.1  -.35 [  .05 -.35  .35 .0  .55 .0 ]
+[ -.7   .35 -.65  .35 -.6   .35 ] -.1   .35 [  .05  .35  .25 .0  .4  .0 ] .8 -1 segment
+[ -.65 -.2  -.55 -.2 -.45  -.2  ] -.3   -.2 [ -.2  -.2   .2  .0  .3  .0 ]
+[ -.65  .1  -.55  .1 -.45   .1  ] -.45  .1  [ -.3   .1  -.1  .0  .0  .0 ] .96 -2 segment
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]  1 -3 segment
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] -4 botsegment
+] cvx def
+12 3 globesetup
+/globe12 [
+/newpath load
+[ -.8   .2  -.7  .25 -.5   .25 ] -.4  .25 [ -.2   .25  .0  .0  .2  .0 ] 5 topsegment
+[ -.7  -.35 -.7 -.35 -.6  -.35 ] -.3 -.35 [ -.1  -.35  .3  .0  .55 .0 ]
+[ -.7   .35 -.7  .35 -.6   .35 ] -.25 .35 [ -.05  .35  .4  .0  .55 .0 ] .6  4 segment
+[ -.8  -.35 -.7 -.35 -.6  -.35 ] -.1 -.35 [  .1  -.35  .4  .0  .5  .0 ]
+[ -.8   .35 -.7  .35 -.6   .35 ] -.1  .35 [  .1   .35  .4  .0  .5  .0 ] .7  3 segment
+[ -.8  -.35 -.7 -.35 -.6  -.35 ]  .0 -.35 [  .1  -.35  .45 .0  .55 .0 ]
+[ -.8   .35 -.7  .35 -.6   .35 ]  .0  .35 [  .15  .35  .4  .0  .5  .0 ] .8  2 segment
+[ -.75 -.35 -.7 -.35 -.6  -.35 ]  .0 -.35 [  .2  -.35  .4  .0  .5  .0 ]
+[ -.75  .35 -.7  .35 -.6   .35 ]  .0  .35 [  .2   .35  .45 .0  .55 .0 ] .9  1 segment
+[ -.7  -.35 -.6 -.35 -.55 -.35 ]  .0 -.35 [  .1  -.35  .45 .0  .55 .0 ]
+[ -.7   .35 -.6  .35 -.55  .35 ]  .0  .35 [  .1   .35  .5  .0  .6  .0 ] .9  0 segment
+] cvx
+[
+[ -.7 -.35 -.6 -.35 -.5  -.35 ] -.15 -.35 [  .0  -.35  .4  .0  .5  .0 ]
+[ -.65 .35 -.55 .35 -.45  .35 ] -.15  .35 [  .0   .35  .35 .0  .45 .0 ] .9 -1 segment
+[ -.8 -.1  -.5 -.3  -.4  -.3  ] -.2  -.3  [  .0  -.3   .3  .0  .4  .0 ]
+[ -.8  .1  -.5  .3  -.4   .3  ] -.2   .3  [  .0   .3   .2  .0  .3  .0 ] 1 -2 segment
+[ -.7 -.1  -.5 -.15 -.4  -.15 ] -.3  -.15 [ -.2  -.15  .0  .0  .2  .0 ]
+[ -.7  .05 -.5  .1  -.4   .1  ] -.4   .1  [ -.3   .1   .0  .0  .2  .0 ] 1 -3 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] 1 -4 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] 1 -5 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] -6 botsegment
+] cvx
+4 array cvx
+dup 0 5 -1 roll put
+dup 1 /exec load put
+dup 2 4 -1 roll put
+dup 3 /exec load put
+def
+
+/l {  lineto } def
+/rl {  rlineto } def
+/m {  moveto } def
+/rm {  rmoveto } def
+/C { closepath } def
+/c {  curveto } def
+/rc {  rcurveto } def
+/T { m 0 29 rl -9.5 0 rl 0 7 rl 29 0 rl 0 -7 rl -9.5 0 rl 0 -29 rl C } def
+/ATT {
+newpath
+1 36 div dup scale
+0  0 m  12 36 rl  8 0 rl -11 -36 rl C
+25  0 m -11 36 rl  8 0 rl  12 -36 rl C
+10  7 m   0  7 rl 14 0 rl   0  -7 rl C
+36  0 T
+80  6 m -3 0 -5 1.2 -6 2 rc -12 10 rl -2.4 2 -2.7 6 0 6 rc
+1 0 2 -1 2 -2 rc 0 -4 rl 7 0 rl 0 4 rl
+0 5 -3 7 -9 7 rc -6 0 -9 -3 -9 -7 rc
+0 -2 0 -3.6 2 -6 rc 12 -10 rl 6 -5 10 -6 13 -6 rc C
+71 18 m 0 -6 rl 0 -5 -3 -7 -7 -7 rc -3 0 -5 2 -5 4 rc 0 1 0 3 2 4 rc
+-4 5 rl -4 -2 -6 -6 -6 -9 rc 0 -7 6 -10 13 -10 rc
+9 0 14 6 14 11 rc 0 8 rl C
+82  0 T
+36 dup scale
+} def
+
+end
+
+/build_LH { % standard ATT logo
+    LOGO-dict-mm begin
+	/w exch def
+	ptsize 29 lt	% select globe, # lines depends on point size
+		{ /globe /globe8 load def }
+		{ /globe /globe12 load def } ifelse
+	gsave
+	 currentpoint translate
+	 size 2 div dup scale
+	 gsave
+	  1.02 1 transform round exch round exch itransform
+	  translate
+	  globe fill
+	 grestore
+	 gsave
+	  2.15 .62 translate
+	  .78 dup scale
+	  ATT fill
+	 grestore
+	grestore
+    end
+} def
+%%EndGlobal
+/saveobj save def
+mark
+32 S1 f
+3679 4936 m
+672 build_LH
+4351 4936 m
+10 R f
+(The input name)2 627 1 720 5404 t
+10 CW f
+(\\\(LV)1372 5404 w
+10 R f
+(generates the logo in the vertical con\256guration:)6 1886 1 1637 5404 t
+32 S1 f
+()3573 5404 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% PostScript 12 and 8 line logos - vertical configuration. Switch occurs
+% automatically below point size 29. Code from Matthijs Melchior.
+%
+
+/LOGO-dict-mm where not {
+	64 dict /LOGO-dict-mm exch def
+}{pop} ifelse
+LOGO-dict-mm begin      	% initialize dictionary
+
+
+/globesetup {
+/r exch def
+/N exch def
+/d 2 N r mul N 1 sub add div def
+/h d r mul def
+} def
+/mkabs {
+/yp exch def
+/xl exch def
+dup dup 0 get xl mul 0 exch put
+dup dup 1 get h mul yp add 1 exch put
+dup dup 2 get xl mul 2 exch put
+dup dup 3 get h mul yp add 3 exch put
+dup dup 4 get xl mul 4 exch put
+dup dup 5 get h mul yp add 5 exch put
+} def
+/topsegment {
+/n exch def
+/y n r mul n .5 add add d mul def
+/a y 1 y dup mul sub sqrt atan def
+/x a cos def
+/c2 exch x y mkabs def
+/ly1 exch h mul y add def
+/lx1 exch x abs mul def
+/c1 exch x y mkabs def
+x y /moveto load
+0 0 1 a 180 a sub /arc load
+c1 aload pop /curveto load
+lx1 ly1 /lineto load
+c2 aload pop /curveto load
+/closepath load
+} def
+/botsegment {
+/n exch 1 add def
+/y n r mul n .5 sub add d mul def
+/a y 1 y dup mul sub sqrt atan def
+/x a cos def
+/c2 exch x y mkabs def
+/ly1 exch h mul y add def
+/lx1 exch x abs mul def
+/c1 exch x y mkabs def
+x y /moveto load
+0 0 1 a 540 a sub /arcn load
+c1 aload pop /curveto load
+lx1 ly1 /lineto load
+c2 aload pop /curveto load
+/closepath load
+} def
+/segment {
+/n exch def
+/dh exch 1 exch sub 2 div def
+/ylb n r mul n 0.5 add add d mul def
+/ylt ylb h add def
+/yrb ylb h dh mul add def
+/yrt ylt h dh mul sub def
+/alb ylb 1 ylb dup mul sub sqrt atan def
+/alt ylt 1 ylt dup mul sub sqrt atan def
+/arb yrb 1 yrb dup mul sub sqrt atan 180 exch sub def
+/art yrt 1 yrt dup mul sub sqrt atan 180 exch sub def
+/xlb alb cos def
+/xlt alt cos def
+/xrb arb cos def
+/xrt art cos def
+/c4 exch xrb abs ylb mkabs def
+/ly2 exch h mul ylb add def
+/lx2 exch xrb abs mul def
+/c3 exch xrb abs ylb mkabs def
+/c2 exch xrt abs ylt mkabs def
+/ly1 exch h mul ylt add def
+/lx1 exch xrt abs mul def
+/c1 exch xrt abs ylt mkabs def
+xlb ylb /moveto load
+0 0 1 alb alt /arc load
+c2 4 get c2 5 get /lineto load
+c2 2 get c2 3 get
+c2 0 get c2 1 get
+lx1 ly1	/curveto load
+c1 4 get c1 5 get /lineto load
+c1 2 get c1 3 get
+c1 0 get c1 1 get
+xrt yrt /curveto load
+0 0 1 art arb /arc load
+c3 aload pop /curveto load
+lx2 ly2 /lineto load
+c4 aload pop /curveto load
+/closepath load
+} def
+8 2.5 globesetup
+/globe8 [
+/newpath load
+[ -.9   .1  -.6   .2  -.5   .2  ] -.5   .2  [ -.4   .2   .0  .0  .4  .0 ] 3 topsegment
+[ -.9  -.35 -.85 -.35 -.8  -.35 ] -.1  -.35 [  .1  -.35  .3  .0  .5  .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ] -.1   .35 [  .1   .35  .4  .0  .55 .0 ] .55 2 segment
+[ -.8  -.35 -.75 -.35 -.7  -.35 ]  .05 -.35 [  .2  -.35  .4  .0  .55 .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ]  .05  .35 [  .2   .35  .45 .0  .6  .0 ] .7  1 segment
+[ -.8  -.35 -.75 -.35 -.7  -.35 ]  .0  -.35 [  .15 -.35  .4  .0  .6  .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ]  .0   .35 [  .15  .35  .4  .0  .6  .0 ] .7  0 segment
+[ -.7  -.35 -.65 -.35 -.6  -.35 ] -.1  -.35 [  .05 -.35  .35 .0  .55 .0 ]
+[ -.7   .35 -.65  .35 -.6   .35 ] -.1   .35 [  .05  .35  .25 .0  .4  .0 ] .8 -1 segment
+[ -.65 -.2  -.55 -.2 -.45  -.2  ] -.3   -.2 [ -.2  -.2   .2  .0  .3  .0 ]
+[ -.65  .1  -.55  .1 -.45   .1  ] -.45  .1  [ -.3   .1  -.1  .0  .0  .0 ] .96 -2 segment
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]  1 -3 segment
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] -4 botsegment
+] cvx def
+12 3 globesetup
+/globe12 [
+/newpath load
+[ -.8   .2  -.7  .25 -.5   .25 ] -.4  .25 [ -.2   .25  .0  .0  .2  .0 ] 5 topsegment
+[ -.7  -.35 -.7 -.35 -.6  -.35 ] -.3 -.35 [ -.1  -.35  .3  .0  .55 .0 ]
+[ -.7   .35 -.7  .35 -.6   .35 ] -.25 .35 [ -.05  .35  .4  .0  .55 .0 ] .6  4 segment
+[ -.8  -.35 -.7 -.35 -.6  -.35 ] -.1 -.35 [  .1  -.35  .4  .0  .5  .0 ]
+[ -.8   .35 -.7  .35 -.6   .35 ] -.1  .35 [  .1   .35  .4  .0  .5  .0 ] .7  3 segment
+[ -.8  -.35 -.7 -.35 -.6  -.35 ]  .0 -.35 [  .1  -.35  .45 .0  .55 .0 ]
+[ -.8   .35 -.7  .35 -.6   .35 ]  .0  .35 [  .15  .35  .4  .0  .5  .0 ] .8  2 segment
+[ -.75 -.35 -.7 -.35 -.6  -.35 ]  .0 -.35 [  .2  -.35  .4  .0  .5  .0 ]
+[ -.75  .35 -.7  .35 -.6   .35 ]  .0  .35 [  .2   .35  .45 .0  .55 .0 ] .9  1 segment
+[ -.7  -.35 -.6 -.35 -.55 -.35 ]  .0 -.35 [  .1  -.35  .45 .0  .55 .0 ]
+[ -.7   .35 -.6  .35 -.55  .35 ]  .0  .35 [  .1   .35  .5  .0  .6  .0 ] .9  0 segment
+] cvx
+[
+[ -.7 -.35 -.6 -.35 -.5  -.35 ] -.15 -.35 [  .0  -.35  .4  .0  .5  .0 ]
+[ -.65 .35 -.55 .35 -.45  .35 ] -.15  .35 [  .0   .35  .35 .0  .45 .0 ] .9 -1 segment
+[ -.8 -.1  -.5 -.3  -.4  -.3  ] -.2  -.3  [  .0  -.3   .3  .0  .4  .0 ]
+[ -.8  .1  -.5  .3  -.4   .3  ] -.2   .3  [  .0   .3   .2  .0  .3  .0 ] 1 -2 segment
+[ -.7 -.1  -.5 -.15 -.4  -.15 ] -.3  -.15 [ -.2  -.15  .0  .0  .2  .0 ]
+[ -.7  .05 -.5  .1  -.4   .1  ] -.4   .1  [ -.3   .1   .0  .0  .2  .0 ] 1 -3 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] 1 -4 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] 1 -5 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] -6 botsegment
+] cvx
+4 array cvx
+dup 0 5 -1 roll put
+dup 1 /exec load put
+dup 2 4 -1 roll put
+dup 3 /exec load put
+def
+
+/l {  lineto } def
+/rl {  rlineto } def
+/m {  moveto } def
+/rm {  rmoveto } def
+/C { closepath } def
+/c {  curveto } def
+/rc {  rcurveto } def
+/T { m 0 29 rl -9.5 0 rl 0 7 rl 29 0 rl 0 -7 rl -9.5 0 rl 0 -29 rl C } def
+/ATT {
+newpath
+1 36 div dup scale
+0  0 m  12 36 rl  8 0 rl -11 -36 rl C
+25  0 m -11 36 rl  8 0 rl  12 -36 rl C
+10  7 m   0  7 rl 14 0 rl   0  -7 rl C
+36  0 T
+80  6 m -3 0 -5 1.2 -6 2 rc -12 10 rl -2.4 2 -2.7 6 0 6 rc
+1 0 2 -1 2 -2 rc 0 -4 rl 7 0 rl 0 4 rl
+0 5 -3 7 -9 7 rc -6 0 -9 -3 -9 -7 rc
+0 -2 0 -3.6 2 -6 rc 12 -10 rl 6 -5 10 -6 13 -6 rc C
+71 18 m 0 -6 rl 0 -5 -3 -7 -7 -7 rc -3 0 -5 2 -5 4 rc 0 1 0 3 2 4 rc
+-4 5 rl -4 -2 -6 -6 -6 -9 rc 0 -7 6 -10 13 -10 rc
+9 0 14 6 14 11 rc 0 8 rl C
+82  0 T
+36 dup scale
+} def
+
+end
+
+/build_LV { % standard ATT logo
+    LOGO-dict-mm begin
+	/w exch def
+	ptsize 29 lt	% select globe, # lines depends on point size
+		{ /globe /globe8 load def }
+		{ /globe /globe12 load def } ifelse
+	gsave
+	 currentpoint translate
+	 size 2 div dup scale
+	 gsave
+	  1.02 1 transform round exch round exch itransform
+	  translate
+	  globe fill
+	 grestore
+	 gsave
+	  %2.15 .62 translate
+	  -0.1 -1.0 translate
+	  .78 dup scale
+	  ATT fill
+	 grestore
+	grestore
+    end
+} def
+%%EndGlobal
+/saveobj save def
+mark
+32 S1 f
+3573 5404 m
+352 build_LV
+3925 5404 m
+10 R f
+(Note that in each con\256guration, the logo is positioned so the globe sits on the baseline.)15 3462 1 720 5704 t
+( globe or an 8-line globe depending on its diameter)9 2165(Corporate graphic standards call for either a 12-line)7 2155 2 720 5884 t
+( preparation, the logo is large)5 1255( most printed applications for document)5 1686( In)1 151(when the logo is reproduced.)4 1228 4 720 6004 t
+( alternate 8-line version of the globe is used to assure)10 2164( The)1 209(enough so that it appears with the 12-line globe.)8 1947 3 720 6124 t
+( PostScript de\256nition of the globe)5 1448( The)1 225( diameter\).)1 452(visual similarity for small sizes \(3/8-inch or less in)8 2195 4 720 6244 t
+( to ensure correct representation regardless)5 1748(symbol automatically makes the necessary graphic adjustments)6 2572 2 720 6364 t
+( the logo symbol is set at point size 29 or larger, it is drawn with the 12-line globe; for smaller)20 3901( If)1 123(of size.)1 296 3 720 6484 t
+(point sizes, the logo is drawn with the 8-line globe.)9 2046 1 720 6604 t
+( the globe symbol for use on light and dark backgrounds.)10 2318(The graphic standards de\256ne different versions of)6 2002 2 720 6784 t
+( ``positive'' version designed for applications on a light)8 2497(The logo symbols described here are the)6 1823 2 720 6904 t
+( ``reverse'' version suitable for use)5 1408( The)1 207(background \(e.g., the logo printed in black on a white background\).)10 2705 3 720 7024 t
+( addition, the standards impose restrictions on staging, color)8 2540( In)1 150(on a dark background is not available.)6 1630 3 720 7144 t
+( further details, see)3 831( For)1 213( background constrasts.)2 988(speci\256cations, and)1 761 4 720 7264 t
+9 I f
+(AT&T)3560 7264 w
+10 I f
+(Corporate Identity Program,)2 1206 1 3834 7264 t
+(Graphic Standards)1 764 1 720 7384 t
+10 R f
+(or contact the Corporate Identity Manager, Corporate Headquarters, \(212\) 605-6780.)9 3386 1 1509 7384 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+9 HB f
+(Addendum \()1 525 1 720 600 t
+8 HB f
+(DWB 3.3)1 325 1 1245 600 t
+9 HB f
+(\))1570 600 w
+10 HB f
+(PostScript)4539 600 w
+10 R f
+(The)720 960 w
+9 R f
+(AT&T)922 960 w
+10 R f
+( of these symbols for unauthorized)5 1509( Use)1 230(logo symbols are intended for internal use only.)7 2084 3 1217 960 t
+( PostScript language, other logos can be)6 1625( a working knowledge of the)5 1170( Given)1 299(purposes is strictly prohibited.)3 1226 4 720 1080 t
+(de\256ned and implemented in the same manner as the)8 2253 1 720 1200 t
+10 CW f
+(\\\(LH)3021 1200 w
+10 R f
+(and)3309 1200 w
+10 CW f
+(\\\(LV)3501 1200 w
+10 R f
+( the)1 171( details, see)2 509(symbols. For)1 571 3 3789 1200 t
+(information provided in the \256le)4 1255 1 720 1320 t
+10 CW f
+(LH.example)2000 1320 w
+10 R f
+(in the)1 225 1 2625 1320 t
+10 CW f
+(devpost/charlib)2875 1320 w
+10 R f
+(directory.)3800 1320 w
+10 I f
+(Examples)720 1500 w
+10 S1 f
+()720 1680 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_bx {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    fill
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+720 1680 m
+50 build_bx
+770 1680 m
+10 R f
+(In point size 36, the logo appears with the 12-line globe measuring)11 2680 1 820 1680 t
+10 S1 f
+()3526 1680 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_12 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (2) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+3526 1680 m
+75 build_12
+3601 1680 m
+10 R f
+( the logo)2 354( Printing)1 375( diameter.)1 401(-inch in)1 309 4 3601 1680 t
+( the signature used on memorandum)5 1601(symbol in the horizontal con\256guration in this size produces)8 2619 2 820 1800 t
+(letterhead.)820 1920 w
+36 S1 f
+()1422 2400 w
+1422 2400 m
+756 build_LH
+2178 2400 m
+10 S1 f
+()720 2580 w
+720 2580 m
+50 build_bx
+770 2580 m
+10 R f
+( the logo)2 366( Using)1 297( with the 12-line globe measuring 1-inch in diameter.)8 2192(In point size 72, the logo appears)6 1365 4 820 2580 t
+( vertical con\256guration in this size produces the signature commonly used on document)12 3643(symbol in the)2 577 2 820 2700 t
+(covers.)820 2820 w
+72 S1 f
+()1404 3660 w
+1404 3660 m
+792 build_LV
+2196 3660 m
+10 S1 f
+()720 4200 w
+720 4200 m
+50 build_bx
+770 4200 m
+10 R f
+( logo symbol in either con\256guration in)6 1557( the)1 149( Using)1 291(In point size 24, the logo appears with the 8-line globe.)10 2223 4 820 4200 t
+(this smaller size produces the signatures often preferred for business cards and memo note paper.)14 3877 1 820 4320 t
+24 S1 f
+()1008 4680 w
+1008 4680 m
+504 build_LH
+1512 4680 m
+()2028 4680 w
+2028 4680 m
+264 build_LV
+2292 4680 m
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Trailer
+done
+%%Pages: 2
+%%DocumentFonts: Courier ZapfDingbats Times-Roman Helvetica-Bold Times-Bold Times-Italic Times-Roman Symbol

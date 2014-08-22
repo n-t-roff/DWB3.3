@@ -1,0 +1,392 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so defs.ov
+.TL "Picasso\*(EMAn \s-1OPEN LOOK\s+1 Drawing Program" "Product Overview"
+.AT "Picasso" "Overview"
+.IR Picasso \*(Tm
+is a general purpose interactive drawing tool that runs 
+in the X Window System environment;
+its mouse/menu interface conforms to the
+.sM "OPEN LOOK" \*(Rg
+User Interface style.
+It is intended for writers, artists
+or programmers to create diagrams, flowcharts, icons, etc.
+For example, a technical writer might use
+.I Picasso
+to draw 
+illustrations of terminals, keyboards, and screen layouts for inclusion in 
+user manuals.
+.P
+The
+.I Picasso
+user can create 
+the following basic objects: line, box, circle, ellipse, arc, 
+sector, spline, polygon, and text.
+Boxes, polygons, and lines may have 
+rounded corners;
+arrow heads may be added to 
+lines and arcs.
+Line thickness and style (solid, dashed, dotted) is controllable.
+Color and shades of gray are supported both for line 
+drawings and as fill for objects.
+Objects may be scaled, 
+rotated, reflected, moved and copied.
+An ``undo'' 
+operation is also supported to allow for correcting mistakes.
+Files can be saved as PostScript\*(Rg
+.FS ""
+PostScript is a registered trademark of
+Adobe Systems, Inc.
+.FE
+or in a
+language based on
+.IR pic .
+.P
+.I Picasso
+is highly portable, and has been run successfully
+on the
+.sM AT&T
+6386 under
+.sM UNIX \*(Rg
+.sM SVR3.2 ,
+the
+.sM AT&T
+3B2/1000
+under
+.sM SVR3.2.3
+and the Sun 4 under SunOS 4.0.3, with no change to the source code.
+It is compatible
+with the
+.sM "DOCUMENTER'S WORKBENCH" \*(Rg
+.sM DWB ) (
+3.1 package.
+The required interactive operating environment is
+.sM "OPEN LOOK"
+2.0 or higher.
+.P
+This document was itself created entirely with
+.I Picasso
+and
+.sM DWB
+3.1.
+.rs
+.sp 1v
+.br
+.MT "Product Features"
+.HU "\s-1OPEN LOOK\s+1 Design Specifications"
+.sp -3
+.BP mouse.ps 1.5 1.5 r -.5
+.sp 3
+.sM "OPEN LOOK"
+defines three basic mouse 
+functions as shown on the right: 
+.BL
+.LI
+.sM SELECT
+to select objects and/or manipulate controls,
+.LI
+.sM ADJUST
+to add to or take away from a group of selected objects,
+.LI
+.sM MENU
+to display and choose from menus.
+.LE
+.sp
+.EP
+.I Picasso
+uses these conventions throughout.
+Likewise,
+.sM "OPEN LOOK"
+specifications have been respected
+for use of resize corners, vertical and horizontal scroll bars,
+pop-up windows, titles, headers and footers.
+.br
+.ne 5i
+.HU "The Base Window"
+When you first invoke
+.IR Picasso ,
+a base window like the one shown below 
+is displayed.
+The top level menu button have submenus under them, as indicated by 
+the triangles.
+These submenus are revealed by clicking
+.sM SELECT
+or
+.sM MENU
+on the top level menu button.
+The following sections describe each of these menus.
+.sp -1.0
+.BP main.menu.ps 4.0
+The \f3Draw\fP menu has two buttons: \f3Objects\fP and \f3Default Size\fP.
+.P
+.sp -1.5
+.BP obj.menu.ps 2.5 1.2 r 0
+.sp 1.5
+\f3Objects\fP creates a table of \f2icons\fP, as shown to the right.
+.P
+To draw an object,
+.sM SELECT
+the box with the appropriate icon.
+(The mouse pointer will now look like a pencil.)
+Move the mouse so that the pointer is at the place you want the object.
+For any of the top six objects, which represent rectangular and square boxes,
+rectangular and square rounded boxes, ellipses and circles,
+click
+.sM SELECT
+again to create a new object with the default size.
+If instead you press
+.sM SELECT
+and drag the mouse, you can
+sweep out a new object of any size within the limits of the drawing area.
+You can freeze the size and readjust the position by pressing
+.sM ADJUST .
+To change the default size, create an object with the desired dimensions,
+then select
+\f3Default Size\fP.
+.P
+The next six icons, which represent arcs, sectors, segmented lines and arrows,
+splines and polygons,
+use
+.sM SELECT
+to specify
+corners or critical points.
+Segmented lines and arrows, splines and polygons require
+.sM ADJUST
+to ``finish off''
+the object.
+.sM \fHTEXT\fP
+simply accepts keyboard text, terminated by
+the
+.cR \s-1ENTER\s+1
+or
+.cR \s-1RETURN\s+1
+key.
+The last icon, ``doodle,'' let you draw freehand; as long as
+.sM SELECT
+is depressed you will get a line which follows the mouse movement.
+.P
+Leave \f3Draw\fP mode by pressing
+.sM MENU
+or by reselecting
+the icon that put you into \f3Draw\fP mode.
+.br
+.ne 6
+.P
+.sp -1.5
+.BP edit.ps 1.7 1.3 l 0
+.sp 1.5
+The commands under \f3Edit\fP reposition objects,
+but do not change their shape.
+In each case, you need to select an object or a group of objects and
+then apply an operation to the selection.
+This is done by clicking
+.sM SELECT
+inside (or very near, in
+the case of lines) the first object, and clicking
+.sM ADJUST
+inside additional objects; or, by sweeping a rectangle with
+.sM SELECT
+depressed around the desired objects.
+Objects selected in this way will be highlighted with \f2handles\fP.
+.P
+\f3Move\fP can be shortcut by simply pressing
+.sM SELECT
+in a highlighted object
+and dragging the mouse.
+\f3Duplicate\fP can be shortcut by holding the
+.cR \s-1CTL\s+1
+key while doing a \f2move\fP;
+when initiated from the menu, click
+.sM SELECT
+for
+each copy you want,
+.sM ADJUST
+to terminate.
+\f3Delete\fP erases the object completely.
+.P
+\f3Front\fP and \f33ack\fP change the apparent plane of the object.
+This is important when dealing with filled areas.
+.P
+\f3Undo\fP will retract the last transformation or edit command.  
+\f3Redo\fP will cancel the last ``undo''.
+.P
+.sp -1.5
+.BP transform.ps 1.0 1.3 l 0
+.sp 1.5
+Transformations can be applied to individually selected or grouped objects,
+as described under \f3Edit\fP.
+The triangles on this menu indicate sub-menus, as described below.
+.P
+There are three buttons on the \f3Scale\fP submenu:
+the first two permit \f3Proportional\fP and \f3Nonproportional\fP
+stretching by moving the mouse;
+the \f3Factor\fP button creates a pop-up that allows you
+to type in an exact factor for scaling in both directions.
+.br
+.EP
+.P
+\f3Rotate\fP offers choices of \f3Freehand\fP
+and \f3Degrees\fP.
+The first allows you to rotate an object by 
+dragging the mouse; the second brings up a pop-up
+that allows you to type in an exact number of degrees.
+.P
+\f3Reflect\fP produces the mirror image of
+an object about a line.
+You can choose to reflect
+about the \f3X-Axis\fP, \f3Y-Axis\fP, \f3Any Axis\fP, or \f3Center\fP.
+.P
+.sp -1.5
+.BP properties.ps 1.45 1.3 l 0
+.sp 1.5
+Each property button brings
+up a pop-up (as indicated by the three dots) with choices 
+\f3Apply\fP and \f3Set Default\fP.
+The first affects only selected objects,
+the second only newly-created objects.
+.P
+The \f3Line Style\fP menu lets you set solid, dotted, or dash patterns, and line 
+thickness (via a slider bar).
+.P
+The \f3Line Color\fP and \f3Fill Color\fP menus appear both in
+their natural colors and with the name of the color, so that
+color pictures can be prepared from black-and-white terminals.
+.P
+\f3Arrow Head\fP allows you to change the width, height and fill
+of arrowheads, and apply them to lines, arcs and splines; 
+\f3Corner Arc\fP permits changing the curvature applied to
+rounded boxes and segmented lines.
+.P
+The \f3Text\fP submenu permits you to change \f3Font\fP (via pop-up),
+\f3Size\fP and \f3Vertical spacing\fP (via slider bars), \f3Color\fP,
+and \f3Justification\fP (left, center or right).
+The font pop-up lets you choose from a wide variety, including
+Times Roman, Palatino, Courier, Helvetica and Zapf Chancery.
+.P
+.sp -1.5
+.BP file.ps 1.2 1.5 l 0
+.sp 1.5
+The \f3File\fP menu is mostly for getting and saving files.
+The \f3Quit\fP button has been placed here as a protection against
+inadvertantly losing your picture.
+When you quit via this button, you'll be asked
+if you really mean it.
+You can also quit from the Window Manager, without such protection.
+.P
+In all pop-ups under the \f3File\fP menu you will see a
+\f3pwd\fP button; this prints your current working directory
+(the one in effect at the time you entered
+.IR Picasso ).
+.br
+.ne 3i
+.P
+.sp -1.5
+.BP picture.ps 2.1 2.8 r 0
+.sp 1.5
+The \f3Picture\fP button creates a pop-up with fields for
+entering and displaying the \f2file\fP and \f2directory\fP
+as shown to the right.
+.P
+\f3Clear Screen\fP will erase your drawing area.
+.P
+\f3Get\fP allows you to read in a new file.
+The picture will be added to what is already on the screen.
+You can either type in 
+the name of the file or choose a file from a list of
+all
+.cR .pic
+files in the current directory.
+The file must be in the batch
+.I Picasso
+program format
+.cR "box; arrow; circle" ''). (``
+.P
+\f3Save\fP lets you type a name, or use the name already in the command window.
+The drawing will be saved as a batch
+.I Picasso
+program.
+.P
+\f3Configuration\fP allows you to \f3Save\fP
+current settings and options
+(color, line style, line weight, etc.)
+in a ``configuration'' file.
+In a later session you can \f3Get\fP a
+saved configuration file to restore those settings.
+This feature permits an organization to 
+encourage a standard design, by distributing a standard configuration file.
+\f3Factory\fP resets your settings and options
+as they were when you started your session.
+.P
+\f3PostScript\fP will let you \f3Save\fP your picture as a PostScript file.
+Such files cannot be read back into
+.IR Picasso ;
+they are intended
+for printers or other output devices.
+.P
+.sp -1.5
+.BP view.ps 1.0 1.3 l 0
+.sp 1.5
+The \f3View\fP menu is used to specify 
+actions that affect the entire drawing, rather than individual objects.
+.P
+\f3Grid\fP
+will bring up a command window which allows you to set
+the grid \f3On\fP or \f3Off\fP, and define its fineness.  
+The grid will appear as rows of equally spaced dots, which will 
+aid alignment of text or objects;
+it is a visual aid and is not saved with the picture.
+\f3Snap to Grid\fP will force new objects to align so that
+their edges coincide with the grid lines.
+.P
+\f3Refresh\fP is a cure for little blips or extraneous lines
+which are occasionally left behind when pop-ups interfere
+with drawn objects.
+Use it if you see something on the screen you think shouldn't be there.
+.P
+\f3Clear Screen\fP does the obvious; you can \f3Undo\fP
+if you change your mind.
+'''	\" FORCE PAGE
+.SK
+.MT "System Requirements"
+.I Picasso
+requires an
+.sM "AT&T 6386"
+running
+.SM "OPEN LOOK"
+End User System Release 2.0 with the following configuration:
+.BL
+.LI
+80387 math coprocessor chip
+.LI
+three-button mouse (compatible with
+.sM "OPEN LOOK" )
+.LI
+.sM EGA
+or
+.sM VGA
+monitor and display controller board
+.LI
+8 megs of 
+.sM RAM
+.LI
+about 1.2 Mbytes of storage
+.LE
+.P
+.I Picasso
+also runs on a Sun-4 Sparc workstation running Sun's Open Windows 2.0.
+.MT Ordering
+.I Picasso
+can be ordered through
+.SM USTOP
+(Unix Software Tools OPerations),
+a repository of software tools and related information
+available to all AT&T development organizations.
+The
+.sM USTOP
+Hotline can be reached by electronic mail via \&\f5whsds!uadm\fP or
+by phone at 201\(hy564\(hy3330.

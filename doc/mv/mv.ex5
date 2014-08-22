@@ -1,0 +1,30 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.tr ~~
+.DF 1 R 2 I 3 B
+.Vw 5 "Equations"
+.T Equations
+.EQ
+gsize 18
+delim $$
+.EN
+.S 100 5.5
+Equations can be displayed or
+set in-line with the text.
+.SP
+A displayed equation is set apart
+from the text:
+.I 2 a
+.EQ
+sum from k=1 to inf m sup k-1
+~=~ 1 over 1-m
+.EN
+.I 0 a
+An in-line equation
+$f(t)~=~2 pi int sin ( omega t)dt$
+is used in the running text,
+rather than being displayed.

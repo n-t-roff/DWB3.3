@@ -1,0 +1,31 @@
+.H1 1 "INTRODUCTION" 1
+.H1 2 "SIMPLE EXAMPLES" 1
+.H2 2.1 "Less Trivial Example" 2
+.H1 3 "THE FOIL-START MACROS" 2
+.H1 4 "THE LEVEL MACROS" 3
+.H2 4.1 "The \f5.A\fP Level" 3
+.H2 4.2 "The \f5.B\fP Level" 3
+.H2 4.3 "The \f5.C\fP Level" 4
+.H2 4.4 "The \f5.D\fP Level" 4
+.H2 4.5 "More About Levels" 4
+.H1 5 "THE TITLE AND INDENT MACROS" 4
+.H2 5.1 "Titles" 4
+.H2 5.2 "Global Indents" 4
+.H1 6 "SIZE AND FONT CONTROL" 5
+.H2 6.1 "Point Sizes and Line Lengths" 5
+.H2 6.2 "Default Vertical Space" 5
+.H2 6.3 "Default Fonts" 6
+.H2 6.4 "Underlining" 6
+.H1 7 "USING \s+1\f2troff\fP\s-1 COMMANDS AND SYMBOLS" 6
+.H2 7.1 "Use of \f2troff\fP Requests" 6
+.H2 7.2 "Breaks" 6
+.H2 7.3 "Text Filling, Adjusting, and Hyphenation" 7
+.H2 7.4 "Defined Strings" 7
+.H2 7.5 "Unpaddable Space" 7
+.H1 8 "THE \s+1\f2troff\fP\s-1  PREPROCESSORS" 7
+.H1 9 "THE FINISHED PRODUCT" 8
+.H2 9.1 "Laser Printer and Phototypesetter Output" 8
+.H2 9.2 "Output Approximation on a Terminal" 8
+.H2 9.3 "Making Actual View Graphs and Slides" 8
+.H1 10 "OPINIONS AND SUGGESTIONS" 9
+.HA "" Examples

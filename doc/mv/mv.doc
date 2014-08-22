@@ -1,0 +1,1212 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.de us
+\\$1\l'|0\(ul'
+..
+.nr Hs 3
+.nr Hb 7
+.nr Hi 0
+.nr Ls 2
+.EQ
+delim $$
+.EN
+.tS MV
+\s-1MV\s+1 \(em A Macro Package
+for View Graphs and Slides
+.tE
+.H 1 "INTRODUCTION"
+This manual describes
+a package of
+.sM UNIX \*(Rg
+system
+.IR troff
+macros called
+.sM MV ,
+designed for typesetting view graphs and slides.
+This manual assumes that the reader has a basic knowledge of the
+.sM UNIX
+system, an editor,
+and the text formatter
+.IR troff .
+.P
+With these macros, one can easily prepare view graphs in a variety of
+dimensions (see Table I),
+as well as 35-mm slides and 2\^\(mu\^2-inch``super-slides.''
+These transparencies can be made in a variety of styles, in different fonts,
+with oversize titles, and with highlighted subordination levels.
+.P
+Since the text from which the foils are typeset is stored in a file,
+the contents of a foil can be readily changed to include new data
+or can be incorporated into a new presentation.
+The text of the foils can be passed through
+.IR spell
+to check for typos or spelling errors, and can
+be preprocessed by
+.IR eqn ,
+.IR tbl ,
+.IR pic ,
+or
+.I grap
+to produce tables, equations, pictures, or graphs,
+respectively.
+.P
+In the remainder of this document, the features of
+.sM MV
+and how to use it with
+.I troff
+as well as its preprocessors are shown by example.
+Two examples of
+.sM MV
+input are included in the document;
+the remaining input examples are given in the Appendix.
+The resulting view graphs are included in the Appendix at the
+end of the document.
+.H 1 "SIMPLE EXAMPLES"
+Before explaining the macros in detail,
+the formatting process is illustrated with two examples.
+If you are familiar enough with a
+.sM UNIX
+system editor to create the following
+text file, naming it ``trivial'':
+.iS
+\&.Sw
+\&Six stages of a project:
+\&.B
+\&wild enthusiasm
+\&.B
+\&disillusionment
+\&.B
+\&total confusion
+\&.B
+\&search for the guilty
+\&.B
+\&punishment of the innocent
+\&.B
+\&promotion of the non-participants
+.iE
+and if you then format the file with
+.I troff
+and the
+.sM MV
+macros:
+.iS
+troff -mv trivial | \(el
+.iE
+you will be rewarded with the view graph
+shown in Example 1 in the Appendix.
+The
+.cR .Sw
+is a
+.IR "foil-start macro" ;
+by looking at that view
+graph, you should be able to figure out what the
+.cR .B
+macro does.
+'''	\" FORCE PAGE
+.SK
+.H 2 "Less Trivial Example"
+The following input was used to produce the view graph shown in Example 2 of the Appendix:
+.iS
+\&.Vw 2 "Less Trivial" "April 1, 1990"
+\&.T "What the Walrus Said"
+\&`\&`The time has come,'\&' the Walrus said,
+\&.BR
+\&`\&`To talk of many things:
+\&.I .5
+\&.B
+\&Of shoes\e(emand ships\e(emand sealing wax\e(em
+\&.B
+\&Of cabbages\e(emand kings\e(em
+\&.B
+\&And why the sea is boiling hot\e(em
+\&.B
+\&And whether pigs have wings.'\&'
+.iE
+The
+.cR .Vw
+is another foil-start macro and will be discussed in the next section.
+A bit later on, you will also find out what the other macros in this example
+.cR .T , (
+.cR .BR ,
+and
+.cR .I )
+are all about.
+(The input string
+.cR \e(em
+is the
+.I troff
+name for the long
+em-dash.)
+.H 1 "THE FOIL-START MACROS"
+Each foil
+.I must
+start with a foil-start macro.
+There are nine foil-start macros for generating nine different-sized foils;
+the names (and the corresponding mounting-frame sizes)
+of these macros are shown in Table\ I.
+.DS
+.ce 2
+.ft 3
+TABLE I
+.sp 0.5v
+Foil-Start Macros
+.sp 0.5v
+.ft 1
+.TS
+box center;
+cf2|cf2
+cf5 |l.
+Macro Name	Size* and Type
+=
+\&.VS	7\^\(mu\^7-inch view graph \f2or\f1
+\^	2\^\(mu\^2-inch super-slide
+\&.Vw	7\^\(mu\^5-inch view graph
+\&.Vh	5\^\(mu\^7-inch view graph
+\&.VW	9\^\(mu\^7-inch view graph
+\&.VH	7\^\(mu\^9-inch view graph
+\&.Sw	7\^\(mu\^5-inch 35-mm slide
+\&.Sh	5\^\(mu\^7-inch 35-mm slide
+\&.SW	9\^\(mu\^7-inch 35-mm slide
+\&.SH	7\^\(mu\^9-inch 35-mm slide
+.TE
+.DE
+.FS *
+Size of the mounting frame opening (width times height) in inches.
+.FE
+.P
+The naming convention for these nine macros is that the first character of the name
+.cR V "" (
+or
+.cR S )
+distinguishes between view graphs and slides,
+while the second character indicates whether the foil is
+square
+.cR S ), (
+small wide
+.cR w ), (
+small high
+.cR h ), (
+big wide
+.cR W ), (
+or
+big high
+.cR H ). (
+Slides are
+``skinnier'' than the corresponding view graphs:
+the ratio of the longer dimension to the shorter one is larger
+for slides than for view graphs.
+As a result, slide foils can be used for view graphs,
+but not vice versa;
+on the other hand, view graphs can accommodate a bit more text.
+.P
+Note that
+.cR .VW
+and
+.cR .SW
+produce foils that are 7\^\(mu\^5.4 inches because
+commonly available paper for laser printers and some typesetters
+is less than 9 inches wide;
+these foils must be enlarged by a factor of 9/\^7
+before they can be used as 9-inch-wide by 7-inch-high view graphs.
+'''	\" FORCE PAGE
+.SK
+.P
+Each foil-start macro causes the previous foil (if any) to be terminated,
+foil separators to be produced,
+and certain heading information to be generated.
+The
+.I default
+heading information consists of three lines of
+.IR right -justified
+data:
+.nr Ls 0
+.P
+.BL
+.LI
+the current date in the form
+.I mo/dy/yr
+.LI
+the company name
+.LI
+Foil
+.I n
+.LE
+.nr Ls 2
+.P
+where
+.I n
+is the sequence number in the current ``run'';
+as explained below, this heading information is replaced by
+the three arguments of the foil-start macro,
+if those arguments are given.
+.P
+The actual projection area is marked by ``cross-hairs''
+(plus signs) that fit into the corners of the view graph mount,
+helping one to position the foil for mounting.
+All foils other than the square
+.cR .VS ) (
+foil also have a set of (horizontal or vertical) ``crop marks'';
+these indicate how much of the foil will be seen if it is made into a slide,
+rather than into a view graph.
+.P
+The default heading information can be changed by specifying three
+optional arguments to the foil-start macro
+(square brackets [\ ] are used to indicate that the
+argument they enclose is optional):
+.DS I
+\*(iR.\f(CIXX \|\f1[\|\*(iAn\|\f1] [\|\*(iAid\|\f1] [\|\*(iAdate\|\f1]
+.DE
+where \f(CIXX\fP stands for one of the line foil-start macros,
+.cA n
+is the foil
+identifier (typically a number),
+.cA id
+is other identifying information
+(typically the initials of the person creating the foil),
+and
+.cA date
+is usually the date.
+The resulting heading information consists of
+three lines of right-justified text:
+.cA id ,
+.cA date ,
+and
+.cR FOIL
+.cA n .
+If
+.cA date
+and
+.cA id
+are omitted on a foil-start macro,
+then the corresponding values (if any)
+from the previous foil-start macro are used.
+.P
+See the Appendix for examples of all this.
+.H 1 "THE LEVEL MACROS"
+The
+.sM MV
+macros provide four levels of indentation, called
+.cR .A ,
+.cR .B ,
+.cR .C ,
+and
+.cR .D .
+Each of these
+.I "level macros"
+causes the text that follows it to be placed at the corresponding
+level of indentation.
+.H 2 "The \*(iR.A\fP Level"
+The leftmost (left margin) level is obtained by:
+.iS
+\&.A \f1[\|\*(iAx\|\f1]
+.iE
+The
+.cR .A
+level is automatically invoked by each of the foil-start macros.
+Each
+.cR .A
+macro spaces a half-line from the preceding text,
+unless the
+.cA x
+argument
+is specified
+.cA x "" (
+can be any character or string of characters);
+.cA x
+suppresses the spacing.
+The
+.cR .A
+macro can also be invoked through the
+.cR .I
+macro (see \(sc5.2).
+.H 2 "The \*(iR.B\fP Level"
+.iS
+\&.B \f1[\|\*(iAmark\|\f1 [\|\*(iAsize\|\f1]\|]
+.iE
+The
+.cR .B
+level items are marked by a bullet (in a slightly
+reduced point size).
+The text that follows the
+.cR .B
+macro is spaced
+one-half line from the preceding text.
+The
+.cR .B
+level mark may be changed by specifying the desired mark
+(which may be any character string)
+as the first argument
+.cA mark ). (
+Without the second argument, the point size of the mark is not
+reduced.
+Thus, one can produce a numbered list as follows:
+.iS
+\&.VS
+\&This is a list of things:
+\&.B 1.
+\&This is thing number 1.
+\&.B 2.
+\&This is thing number 2.
+\&.B 3.
+\&This is the third and last thing on this foil.
+.iE
+.br
+.ne 5v
+It is possible to change the point size of the mark:
+the second argument
+.cA size ), (
+if given, specifies the desired point-size change.
+An unsigned or positive (+) argument is taken as an increment;
+a negative (\-) argument is a decrement;
+an argument greater than 99 causes the mark to be reduced in size
+just as if it were the default mark, namely the bullet.
+After the mark is printed, the previous point size is restored.
+All these point-size changes are
+.I completely
+invisible to the user.
+.H 2 "The \*(iR.C\fP Level"
+.iS
+\&.C \f1[\|\*(iAmark\|\f1 [\|\*(iAsize\f1\|]\|]
+.iE
+The
+.cR .C
+level is just like the
+.cR .B
+level
+.I except
+that is is
+indented farther to the right than the
+.cR .B
+level and the default mark is a long
+em-dash (\(em), also in a slightly reduced point size.
+.H 2 "The \*(iR.D\fP Level"
+.iS
+\&.D \f1[\|\*(iAmark\|\f1 [\|\*(iAsize\|\f1]\|]
+.iE
+The
+.cR .D
+level's default mark is a bullet (smaller than that used for the
+.cR .B
+level);
+the
+.cR .D
+level is indented farther to the right than the
+.cR .C
+level and is does
+.I not
+space from the previous text;
+it just causes the following text to start
+on a new line (in other words, it causes a
+.IR break ).
+Otherwise, it behaves just like the
+.cR .B
+and
+.cR .C
+levels.
+.H 2 "More about Levels"
+.BL
+.LI
+The
+.cR .A
+macro never generates a mark of any sort; it is the ``left-margin'' macro.
+.LI
+Repeated
+.cR .A
+calls are ignored, but each successive call of any of the other
+three level macros generates the corresponding mark.
+.LI
+The amount of vertical pre-spacing generated by each level macro
+can be changed with the
+.cR .DV
+macro
+(see \(sc6.2).
+.LI
+Example 3 in the Appendix is devoted to the level macros.
+.LE
+.H 1 "THE TITLE AND INDENT MACROS"
+.H 2 "Titles"
+The title macro
+.cR .T
+creates a centered title from its argument:
+.iS
+\&.T \*(iAstring
+.iE
+The size of the title is four points larger than the prevailing point size.
+Remember that the argument must be enclosed within double quotes
+(\f5"\f1\(el\f5"\f1)
+if it contains blanks.
+Any indentation established by the
+.cR .I
+macro has no effect on titles;
+they are always centered within the foil's horizontal dimension.
+.P
+See Examples 2, 3, and 4 in the Appendix.
+.H 2 "Global Indents"
+The entire text (except titles) of the foil may be shifted right or left
+by the
+.cR .I
+macro:
+.iS
+\&.I \f1[\|\*(iAindent\|\f1] [\|\*(iAa\f1\| [\|\*(iAx\|\f1]\|]
+.iE
+The first argument is the amount of indentation that is to be
+used to establish a new left margin.
+This argument may be signed positive or negative,
+indicating right or left movement from the current margin.
+If unsigned,
+'''	\" FORCE PAGE
+'ne 1i
+the argument specifies the new margin,
+relative to the
+.I initial
+default margin.
+If the argument is not dimensioned,
+it is assumed to be in inches.
+If the argument is null or omitted,
+.cR 0i
+is assumed, causing the
+margin to revert to the initial default margin.
+.P
+If a second argument is specified, the
+.cR .I
+macro calls the
+.cR .A
+macro before exiting.
+The third argument, if present, is passed to the
+.cR .A
+macro.
+.P
+See Examples 1, 2 and 4 in the Appendix.
+.H 1 "SIZE AND FONT CONTROL"
+.H 2 "Point Sizes and Line Lengths"
+Each foil-start macro begins the foil
+with an appropriate default point size
+and line length.
+Table\ II shows, for each style of view graph, the default point size,
+the maximum number of lines of text (at the default point size),
+and the height, width, and ``aspect ratio,'' both nominal and
+actual.
+.EQ
+delim $$
+.EN
+.DS
+.ce 2
+.ft 3
+TABLE II
+.sp 0.5v
+Default Point Size, Dimensions, and Aspect Ratios
+.sp 0.5v
+.ft 1
+.TS
+box center;
+cf2 s   s  |cf2 s   s   s  |cf2 s   s   s  
+cf2 s   s  |-   -   -   -  |-   -   -   -
+cf2 cf2 cf2|cf2 cf2 cf2 cf2|cf2 cf2 cf2 cf2
+lf5 n2  n2 |n2  n2  n2  n2 |n2  n2  n2  n.
+	Nominal	Actual (Text)
+
+.sp 0.1v
+T{
+Macro
+.br
+Name
+T}	T{
+Point
+.br
+Size
+T}	T{
+Max.
+.br
+Lines
+T}	T{
+Width
+.br
+(inches)
+T}	T{
+Height
+.br
+(inches)
+T}	T{
+Aspect
+.br
+Ratio
+T}	T{
+$1 over AR$
+T}	T{
+Width
+.br
+(inches)
+T}	T{
+Height
+.br
+(inches)
+T}	T{
+Aspect
+.br
+Ratio
+T}	T{
+$1 over AR$
+T}
+=
+\&.VS	18	21	7	7	1	1	6	6.8	1.13	.88
+_
+\&.Vw	14	19	7	5	0.71	1.4	6	4.8	0.8	1.25
+\&.Vh	14	27	5	7	1.4	0.71	4.2	6.8	1.6	0.62
+\&.VW	14	21	7	5.4	0.77	1.3	6	5.2	0.87	1.15
+\&.VH	18	28	7	9	1.3	0.77	6	8.8	1.5	0.68
+_
+\&.Sw	14	18	7	4.6	0.67	1.5	6	4.4	0.73	1.4
+\&.Sh	14	27	4.6	7	1.5	0.67	3.8	6.8	1.8	0.56
+\&.SW	14	18	7	4.6	0.67	1.5	6	4.4	0.73	1.4
+\&.SH	18	28	6	9	1.5	0.67	5	8.8	1.76	0.57
+.TE
+.DE
+.DS L F
+.in +4n
+Notes:
+.br
+\(em  ``Max. Lines'' is the maximum number of lines of text at the \f2default\f1 point size.
+.br
+\(em  ``Aspect Ratio'' ($AR$) is the ratio of height over width.
+.br
+\(em  Remember that, normally each 
+.cR .A ,
+.cR .B ,
+and
+.cR .C
+macro generates a one-half line space.
+.br
+\(em  The
+.cR .SW
+(if used as a view graph) and
+.cR .VW
+foils must be enlarged
+by a factor of 9/\^7.
+.in -4n
+.DE
+.P
+The prevailing point size and the line length may be changed
+by invoking the
+.cR .S
+macro:
+.iS
+\&.S \f1[\|\*(iAps\|\f1] [\|\*(iAll\|\f1]
+.iE
+If
+.cA ps
+is null, the
+.I previous
+point size is restored.
+If
+.cA ps
+is signed negative,
+the point size is decremented by the specified amount.
+If
+.cA ps
+is signed positive, it is used as an
+increment, and if
+.cA ps
+is unsigned, it is used as the new
+point size.
+If
+.cA ps
+is greater than 99,
+the
+.I "initial default"
+point size is restored (see Table\ II).
+Vertical spacing is
+always 1.25 times the current point size.
+.P
+The second argument, if given, specifies the line length.
+It may be dimensioned.
+If it is
+.I not
+dimensioned and less than 10, it is taken as inches;
+if it is
+.I not
+dimensioned and greater than or equal to 10,
+it is taken as
+.I troff
+units.
+The
+.cR .S
+macro changes the point size and vertical spacing
+immediately, but a line-length change
+requested with that macro does not take effect until the next
+level-macro call.
+.P
+See Examples 3, 4, and 6 in the Appendix.
+.H 2 "Default Vertical Space"
+The vertical space macro allows one to change
+the vertical pre-spacing done by each of the four
+level macros:
+.iS
+\&.DV \f1[\|\*(iAa\|\f1]\0[\|\*(iAb\|\f1]\0[\|\*(iAc\|\f1]\0[\|\*(iAd\|\f1]
+.iE
+The first argument
+.cA a
+is the spacing for
+.cR .A ,
+.cA b
+is for 
+.cR .B ,
+.cA c
+is for
+.cR .C ,
+and
+.cA d
+is for
+.cR .D .
+All non-null arguments must be dimensioned; null arguments leave the
+corresponding spacing unaffected.
+.P
+By default,
+the
+.cR .A ,
+.cR .B ,
+and
+.cR .C
+level macros generate one-half vertical pre-space, and the
+.cR .D
+level macro generates no vertical pre-space.
+The initial setting is equivalent to:
+.iS
+\&.DV .5v .5v .5v 0v
+.iE
+.H 2 "Default Fonts"
+The macros assume that the Helvetica font, mounted in
+position 1, is the default font.
+Additional fonts can be mounted and the default font
+can be changed:
+.iS
+\&.DF \*(iAn\0font\| \f1[\|\*(iAn\0font\| \f1[\|\(el\|]\|]
+.iE
+The
+.cR .DF
+macro informs
+.I troff
+that
+.cA font
+is mounted on position
+.cA n .
+The first-named font is the default font.
+Up to four pairs of arguments may be specified.
+The
+.cR .DF
+macro must immediately precede a foil-start macro; the initial
+setting is equivalent to:
+.iS
+\&.DF 1 H 2 I 3 B 4 BI
+.iE
+By default, the constant-width font
+.cR CW ) (
+is mounted on position 5.
+See Examples 4 and 5 in the Appendix.
+.H 2 "Underlining"
+The underline macro
+.cR .U
+takes one or two arguments:
+.iS
+\&.U \*(iAstring1\|\f1 [\|\*(iAstring2\|\f1]
+.iE
+The first argument is the string of characters to be
+underlined.
+The second argument, if present, is not underlined,
+but concatenated to the first argument.
+For example,
+.iS
+\&.U phototypesetter
+.iE
+produces
+.DS I
+.us "phototypesetter"
+.DE
+.br
+.ne 7v
+while
+.iS
+\&.U under line
+.iE
+produces
+.DS I
+\&under\l'|0\(ul'line
+.DE
+See Example 4 in the Appendix.
+.H 1 "USING \f4troff\fP COMMANDS AND SYMBOLS"
+.H 2 "Use of \f4troff\fP Requests"
+In general, it is not advisable to intermix arbitrary
+.I troff
+requests with the
+.sM MV
+macros, because this often leads to undesirable
+(and sometimes downright astonishing) results.
+The ``safe'' requests are the ones for which upper-case
+synonyms have been defined in the
+.sM MV
+package:
+.iS
+\&.AD  .BR  .CE  .FI  .HY  .NA  .NF  .NH  .NX  .SO  .SP  .TA  .TI
+.iE
+Other
+.I troff
+requests should be used sparingly (if at all),
+and with care and discipline.
+Particularly dangerous are the requests that affect point size,
+indentation, page offset, line and title lengths,
+and vertical spacing between lines;
+use the
+.cR .S
+and
+.cR .I
+macros instead.
+.P
+.ul
+Reserved Names.
+Certain names are used internally by this macro package.
+In particular, all two-character names
+starting with either ) and ] are reserved.
+Names that are the same as names of the
+.sM MV
+macros
+and strings described in this manual, or the same as any
+.I troff
+names, cannot be used either.
+Furthermore, if any of the preprocessors (see \(sc8) are used,
+their reserved names must also be avoided.
+.H 2 "Breaks"
+The
+.cR .S ,
+.cR .DF ,
+.cR .DV ,
+and
+.cR .U
+macros do
+.I not
+cause a break;
+the
+.cR .I
+macro causes a break
+.I only
+if it is invoked with more than one argument;
+all the other
+.sM MV
+macros
+.I always
+cause a break.
+The
+.I troff
+synonyms
+.cR .AD ,
+.cR .BR ,
+.cR .CE ,
+.cR .FI ,
+.cR .NA ,
+.cR .NF ,
+.cR .SP ,
+and
+.cR .TI
+also cause a break.
+.H 2 "Text Filling, Adjusting, and Hyphenation"
+By default, the
+.sM MV
+macros fill, but neither adjust nor hyphenate text.
+This is an aesthetic judgement that seems correct for foils.
+These defaults can, of course, be changed by using the
+.cR .AD ,
+.cR .FI ,
+.cR .HY ,
+.cR .NA ,
+.cR .NF ,
+and
+.cR .NH
+macros.
+.H 2 "Defined Strings"
+The registered mark, service mark, and trademark symbols
+are defined as strings in the
+.sM MV
+package.
+Use the following string to generate the corresponding symbol:
+.DS
+.TS
+center box;
+cf1 cf1 cf1
+lf5 cf1 lf1.
+String	Symbol	Description
+_
+\e*(Rg	\*(Rg	registered mark
+\e*(Tm	\*(Tm	trademark
+\e*(Sm	\*(Sm	service mark
+.TE
+.DE
+Use the registration symbol for registered marks;
+for unregistered marks, use the service mark symbol or the
+trademark symbol, as appropriate.
+Marks should always be used as adjectives when they appear
+in printed text (e.g., \s-1UNIX\s+1\*(Rg system, Tuxedo\*(Tm software,
+\s-1ACCUNET\s+1\^\*(Sm digital services).
+.H 2 "Unpaddable Space"
+Normally,
+.I troff
+treats a space as an appropriate place to
+break the line or to insert extra space to
+fill out the line.
+An ``unpaddable'' space is a fixed-size non-adjustable space;
+.I troff
+will neither pad nor break the line at this space.
+To produce an unpaddable space, use the built-in
+.I troff
+escape sequence
+.cR \e\(sq
+where
+.cR \(sq
+is a single space from the keyboard.
+.br
+.ne 3v
+.P
+A popular convention is to use a visible character
+to represent an unpaddable space.
+The
+.sM MV
+package does not
+provide a visible unpaddable space character by default.
+To define one, you must use the
+.I troff
+.cR .tr
+request in the beginning of the file
+to translate the desired character to space.
+For example, the request
+.iS
+\&.tr ~
+.iE
+translates a tilde into white space.
+You can then use
+.cR ~
+in the text to represent an unpaddable space.
+To print a tilde, the request
+.iS
+\&.tr ~~
+.iE
+will translate
+.cR ~
+back into itself.
+.H 1 "THE \f4troff\fP \^PREPROCESSORS"
+It is possible to use the various
+.I troff
+preprocessors to typeset
+foils that require more powerful formatting capabilities.
+.BL
+.LI
+The
+.IR tbl
+program can be used to set up columns of data within
+a view graph or slide.
+The
+.cR .TS
+and
+.cR .TE
+macros mark the start and end of
+.I tbl
+input.
+See Examples 4 and 6 in the Appendix.
+.LI
+The
+.IR eqn
+program can be used to typeset
+mathematical expressions and formulas on foils,
+provided one is
+careful to specify the proper fonts and point sizes.
+The
+.cR .EQ
+and
+.cR .EN
+macros mark the start and end of
+.I eqn
+input for displayed equations, and to set delimiters for in-line equations.
+See Examples 5 and 6 in the Appendix.
+.LI
+The
+.IR pic
+program can be used to draw simple pictures.
+One may need to adjust the size of objects to accommodate the
+text within.
+The
+.cR .PS
+and
+.cR .PE
+macros mark the start and end of
+.I pic
+input.
+See Example 7 in the Appendix.
+.LI
+The
+.IR grap
+program is a preprocessor to
+.I pic
+and can be used to plot graphs and display statistical data.
+One may need to adjust the size and placement of labels due to
+the larger text size.
+The
+.cR .G1
+and
+.cR .G2
+macros mark the start and end of
+.I grap
+input.
+See Example 8 in the Appendix.
+.LE
+.P
+The preprocessor macros
+.cR .TS "" (
+and
+.cR .TE ,
+.cR .EQ
+and
+.cR .EN ,
+.cR .PS
+and
+.cR .PE ,
+.cR .G1
+and
+.cR .G2 )
+are not
+defined in the
+.sM MV
+macro package, but are merely flags to the particular preprocessor.
+.H 1 "THE FINISHED PRODUCT"
+.H 2 "Laser Printer and Phototypesetter Output"
+Laser printer output is more than adequate for most view graphs
+and slides; in some cases, actual phototypesetter output may be
+desired.
+Output is obtained via the formatting command:
+.iS
+troff -mv \f1[\*(iAoptions\|\f1]\0\*(iAfilename\*(iR | \(el
+.iE
+where
+.cA filename
+contains the text and the macro invocations for the foils, and
+.cA options
+can be one or more
+.I troff
+command line options.
+.P
+If any of the
+.I troff
+preprocessors are used,
+they must appear before
+.I troff
+on the command line and the filename is given to the first preprocessor:
+.iS
+tbl \*(iAfilename\*(iR | eqn | troff -mv \f1[\*(iAoptions\|\f1] \*(iR | \(el
+.iE
+When
+.I eqn
+and
+.I tbl
+are used together on the same file,
+.I tbl
+should be used first;
+if there are no equations within tables,
+either order works.
+Since
+.I grap
+is a preprocessor to
+.IR pic ,
+.I grap
+must precede
+.I pic
+on the command line.
+For example, given a file which contains
+the input for several view graphs with tables, equations,
+pictures, and a graph, the command line:
+.iS
+grap \*(iAfile\fP | pic | tbl | eqn | troff -mv \f1[\*(iAoptions\|\f1]\*(iR | \(el
+.iE
+produces the set of view graphs using the preprocessors
+discussed in \(sc8.
+.H 2 "Output Approximation on a Terminal"
+One can obtain an approximation of the typeset output
+by entering the command:
+.iS
+troff -a -mv \*(iAfilename\*(iR | \(el
+.iE
+.nr Ls 0
+The resulting output shows the formatted foils except that:
+.P
+.BL
+.LI
+Point-size changes are not visible.
+.LI
+Font changes cannot be seen.
+.LI
+Titles that are too long appear proper.
+.LI
+All horizontal motions are reduced to one horizontal space to
+the right.
+.LI
+All vertical motions are reduced to one vertical space down.
+.LE
+.nr Ls 6
+.P
+Thus, for example, it appears that the lines of text following a
+.cR .B ,
+.cR .C ,
+or
+.cR .D
+macro do not
+align properly (even though, in fact, they do).
+.P
+Although alignment cannot be determined from this approximation,
+one can observe line breaks and the amount of vertical space used by the
+text.
+If the foil is not full, the macro package prints the number of
+blank lines (in the then current point size)
+that remain on the foil;
+if the foil is full, a warning is printed.
+If the text
+.I did
+overflow the foil, text will be printed after the
+``cross-hairs.''
+.H 2 "Making Actual View Graphs and Slides"
+The output of the typesetter is so-called ``mechanical
+paper,'' which is white, opaque photographic paper with black letters.
+There are several very simple processes
+for making transparent foils from opaque paper.
+Because some of these processes involve heat,
+and because mechanical paper is heat
+sensitive, one should first make copies of the typesetter output
+(as well as laser printer output)
+on a good-quality office copier,
+and then use these copies for making
+the transparencies.
+.P
+Getting slides made is a much more
+complicated photographic process that is best left to professionals.
+It is possible to make both positive (opaque letters on transparent
+background) and negative (transparent letters on opaque background)
+slides, as well as colored-background slides.
+'''	\" FORCE PAGE
+.SK
+.H 1 "OPINIONS AND SUGGESTIONS"
+The following suggestions and opinions have
+been derived from experience,
+from the examination of several other macro
+packages for making foils,
+and from some publications that discuss good and bad foil-making
+practices:
+.P
+\(rh \f2Foils 3 and 4 in the Appendix violate some or most of the ``rules''
+given below.\f1
+.BL
+.LI
+The most useful foil sizes are
+.cR .VS
+and
+.cR .Vw
+(or
+.cR .Sw ).
+This is because most projection screens are either square, or ``wide''
+(i.e., are wider than they are tall), and also
+because the resulting foils are smaller, easier
+to carry, and require no enlargement before using.
+.LI
+The
+.I default
+point size for each type of foil (see Table\ II) is the
+.I smallest
+point size that will result in a foil that is legible by an
+audience of more than a dozen people.
+Reducing the point size
+below the default should be avoided.
+If you have more text than fits onto a foil, do not
+reduce the point size; use two or more foils instead.
+.LI
+Do not abuse font changes.
+Most novice foil-makers tend to use too many typefaces,
+resulting in foils that look cluttered and distract the viewer.
+Be sure you need to use a different typeface
+(e.g., for spatial emphasis);
+when in doubt, stick to a single typeface.
+You should almost never use more than two different typefaces
+on a single foil.
+.LI
+Even though this package contains a macro for underlining,
+do not use it:
+underlined typeset text almost always looks awful;
+instead, if necessary, use a different typeface.
+.LI
+The Helvetica sans-serif font (which is the default font used by
+this package) is ``fatter'' and is,
+in foils,
+considered easier to read than, for instance,
+the Times Roman or Palatino serif fonts used
+for typesetting normal, ``running''
+text (such as the text in this paragraph).
+On the other hand, the Times Roman font will allow you to
+``squeeze'' a bit more
+text onto a foil.
+On the whole, the choice of fonts is primarily a matter of personal
+aesthetics.
+.LI
+If possible, use the
+.cR .SP
+macro to insert a bit of additional
+white space (say,
+.cR .5v
+or
+.cR 1v ,
+where
+.cR v
+means ``vertical space'')
+at the top of each foil (i.e., increase the top margin).
+.LI
+Some people believe that foils should not contain any lower-case
+alphabetic characters to maximize legibility; this is not necessarily true:
+``normal'' upper-and-lower-case
+text is far more legible
+than upper-case-only text.
+Upper-and-lower-case alphabets have evolved and been refined
+over millenia precisely because they
+result in more legible text.
+Furthermore, such text is less ``bulky'' than upper-case-only
+text, so one can get more information onto a foil without crowding it.
+.LI
+Make all the foils for a presentation as consistent as possible;
+changing fonts, typefaces, point sizes, etc.,
+from foil to foil tends to jar and distract the viewer.
+While it is possible to introduce emphasis and draw
+the viewer's attention to particular
+items with such changes, this only works if you do it very purposefully and
+very sparingly; overuse of these techniques
+is almost always counter-productive.
+.LE
+.nr Ls 0
+.P
+In summary, the dictum that ``the medium is the message''
+does not apply to foil making.
+When in doubt:
+.P
+.BL
+.LI
+Do not change point sizes.
+.LI
+Do not change fonts or typefaces.
+.LI
+Do not underline!
+.LI
+Use many ``sparse'' foils, rather than few ``dense'' ones.
+.LI
+Use fewer words, rather than more.
+.LI
+Use larger point sizes, rather than smaller.
+.LI
+Use larger top and bottom margins, rather than smaller.
+.LI
+Use normal upper-and-lower-case text, rather than
+upper-case only.
+.LE
+.nr Ls 6

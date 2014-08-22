@@ -1,0 +1,58 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.DF 1 R 2 I 3 B
+.VS 4 Complex
+.T "Of Bits & Bytes & Words"
+.S -4
+.I 3 A x
+.ul 3
+But let your communication be, Yea, yea;
+Nay, nay: for whatsoever is more than these
+cometh of evil.*
+.I +1 a nospace
+Matthew 5:37
+.BR
+.S
+.I 0 .A
+Binary notation has been around for a
+.S +6
+long
+.S
+time.
+.B
+The above verse tells us to use:
+.C 1)
+binary notation,
+.ul
+and
+.C 2)
+redundancy
+.D \(rh
+(in communicating)
+.B
+Binary notation is
+.U not
+suited for human use, above
+verse to the contrary notwithstanding.
+.S -2
+.TS
+center box;
+cb | cb | cb | cb
+l  | n  | n  | n.
+System	Bits/Byte	Bytes/Word	Bits/Word
+_
+IBM-7090/94	6	6	36
+IBM-360/370	8	4	32
+PDP-11/70	8	2	16
+.TE
+.S
+.S -4
+.U "            "
+.BR
+* The use of this verse in this context
+is plagiarized from C. Shannon.
+.S

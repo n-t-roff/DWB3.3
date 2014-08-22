@@ -1,0 +1,473 @@
+%!PS
+%%Version: 3.3
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+%
+% Version 3.3 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	/Symbol /S Sdefs cf
+	/Times-Roman /S1 S1defs cf
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/rotation 1 def
+/gotpagebbox true def
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+%%PageBoundingBox: (atend)
+/saveobj save def
+mark
+1 pagesetup
+8 S f
+(\257)0 100 w
+8 H f
+(cut)78 100 w
+8 S f
+(\257 \257)1 5099 1 215 100 t
+8 H f
+(cut)5344 100 w
+8 S f
+(\257)5481 100 w
+8 S1 f
+( ______)1 233( _)1 5023(_ ______)1 273 3 0 200 t
+8 H f
+(5/7/91)5024 350 w
+(Levels & Marks)2 564 1 4684 450 t
+(FOIL 3)1 253 1 4995 550 t
+8 S f
+(\357 \357)1 3333 1 1051 689 t
+8 H f
+(+ +)1 3643 1 885 920 t
+18 H f
+(Foil Levels & Level Marks)4 2125 1 1673 1152 t
+14 H f
+(This is the .A \(left margin\) level;)6 2038 1 1224 1414 t
+11 S f
+(\267)1224 1676 w
+14 H f
+(this is the .B level,)4 1182 1 1375 1676 t
+11 S f
+(\267)1224 1938 w
+14 H f
+(as is this;)2 610 1 1375 1938 t
+11 H f
+(\320)1375 2200 w
+14 H f
+(this is the .C level,)4 1189 1 1585 2200 t
+11 H f
+(\320)1375 2462 w
+14 H f
+(as is this;)2 610 1 1585 2462 t
+7 S f
+(\267)1585 2637 w
+14 H f
+(and this is the .D level,)5 1475 1 1680 2637 t
+7 S f
+(\267)1585 2812 w
+14 H f
+(as is this.)2 610 1 1680 2812 t
+(The large bullet, the dash, and the small bullet)8 2970 1 1224 3074 t
+(are the default ``marks'' for levels .B, .C, and)8 2844 1 1224 3249 t
+( these three levels)3 1176( However,)1 695(.D, respectively.)1 1009 3 1224 3424 t
+(can also be marked arbitrarily:)4 1926 1 1224 3599 t
+(B. Like this \(this is the .B level\);)7 2038 1 1224 3861 t
+(3. like this \(this is the .C level\);)7 1982 1 1416 4123 t
+(d. like this \(this is the .D level\), or)8 2158 1 1511 4298 t
+(iv. like this, or even)4 1243 1 1488 4473 t
+18 S1 f
+()1350 4648 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_rh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+15 66 moveto
+15 86 lineto
+16 131 lineto
+17 146 lineto
+18 158 lineto
+19 167 lineto
+21 181 lineto
+24 190 lineto
+34 193 lineto
+49 189 lineto
+58 182 lineto
+60 177 lineto
+60 166 lineto
+59 156 lineto
+58 143 lineto
+57 130 lineto
+56 117 lineto
+55 102 lineto
+54 42 lineto
+53 39 lineto
+49 35 lineto
+34 34 lineto
+19 39 lineto
+16 47 lineto
+15 66 lineto
+stroke
+
+65 60 moveto
+65 111 lineto
+66 127 lineto
+67 139 lineto
+69 153 lineto
+72 163 lineto
+83 171 lineto
+98 177 lineto
+113 182 lineto
+128 187 lineto
+143 190 lineto
+158 194 lineto
+173 196 lineto
+188 199 lineto
+203 201 lineto
+218 203 lineto
+233 205 lineto
+248 205 lineto
+263 206 lineto
+278 206 lineto
+293 206 lineto
+308 206 lineto
+323 206 lineto
+338 205 lineto
+353 203 lineto
+368 202 lineto
+383 200 lineto
+394 197 lineto
+389 190 lineto
+389 180 lineto
+391 176 lineto
+391 173 lineto
+380 173 lineto
+365 173 lineto
+350 174 lineto
+335 175 lineto
+320 176 lineto
+305 176 lineto
+290 176 lineto
+275 177 lineto
+260 177 lineto
+245 177 lineto
+240 173 lineto
+240 170 lineto
+245 165 lineto
+260 164 lineto
+275 164 lineto
+290 164 lineto
+305 163 lineto
+320 160 lineto
+327 155 lineto
+330 149 lineto
+330 134 lineto
+328 129 lineto
+323 124 lineto
+309 121 lineto
+294 121 lineto
+279 121 lineto
+264 121 lineto
+249 121 lineto
+234 121 lineto
+228 118 lineto
+228 112 lineto
+234 109 lineto
+249 109 lineto
+264 109 lineto
+279 108 lineto
+294 108 lineto
+306 104 lineto
+311 97 lineto
+312 91 lineto
+312 88 lineto
+311 82 lineto
+305 74 lineto
+290 72 lineto
+275 72 lineto
+260 72 lineto
+245 73 lineto
+230 73 lineto
+215 73 lineto
+205 70 lineto
+205 63 lineto
+217 60 lineto
+232 60 lineto
+247 60 lineto
+262 60 lineto
+277 57 lineto
+283 52 lineto
+285 44 lineto
+285 41 lineto
+284 35 lineto
+280 30 lineto
+268 26 lineto
+253 25 lineto
+238 26 lineto
+223 28 lineto
+208 31 lineto
+193 33 lineto
+178 34 lineto
+163 33 lineto
+148 31 lineto
+133 28 lineto
+118 27 lineto
+103 28 lineto
+88 34 lineto
+73 43 lineto
+67 52 lineto
+65 60 lineto
+stroke
+
+396 180 moveto
+396 188 lineto
+399 194 lineto
+410 196 lineto
+416 190 lineto
+416 180 lineto
+415 177 lineto
+411 173 lineto
+400 173 lineto
+396 180 lineto
+stroke
+
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+18 S1 f
+1350 4648 m
+180 build_rh
+1530 4648 m
+18 S f
+(\267)1530 4648 w
+14 H f
+(like this.)1 519 1 1680 4648 t
+(The .A level cannot be marked.)5 2004 1 1224 4910 t
+11 S f
+(\267)1224 5172 w
+14 H f
+(An arbitrary number of lines of text can be)8 2704 1 1375 5172 t
+(included in any item at any level; the text)8 2628 1 1375 5347 t
+(will be filled, but neither adjusted nor)6 2344 1 1375 5522 t
+(hyphenated, just like this .B level item.)6 2454 1 1375 5697 t
+8 H f
+(+ +)1 3643 1 885 5960 t
+8 S f
+(\357 \357)1 3333 1 1051 6190 t
+8 S1 f
+( ______)1 233( _)1 5023(_ ______)1 273 3 0 7040 t
+8 S f
+(\255)0 7140 w
+8 H f
+(cut)78 7140 w
+8 S f
+(\255 \255)1 5099 1 215 7140 t
+8 H f
+(cut)5344 7140 w
+8 S f
+(\255)5481 7140 w
+cleartomark
+showpage
+saveobj restore
+%%PageBoundingBox: -10 63 563 800
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Helvetica Times-Roman Symbol
+%%BoundingBox: -10 63 563 800

@@ -1,0 +1,36 @@
+.PH ""
+'''	\" titlebox start; argument is title for page header
+'''	\" USAGE:  .tS "page header title"
+'''	\"         one or more lines
+'''	\"         of title text
+'''	\"         .tE
+.de tS
+.PH ""
+.ds pT "\\$1
+.DS
+.ft HB
+.ps 18
+.vs 20
+..
+'''	\" titlebox end
+.de tE
+.br
+\s36\l'\\nWu'\s0
+.br
+.ft HB
+.ps 14
+.tl 'Addendum''\s-1DWB 3.2\s+1'
+.ps 10
+.ft 1
+.DE
+.EH "@\f(HB\s-1Addendum (\s-1DWB 3.2\s+1)\s+1@@\\*(pT\fP@"
+.OH "@\f(HB\\*(pT@@\s-1Addendum (\s-1DWB 3.2\s+1)\s+1\fP@"
+.sp 2
+..
+.de sC
+.sp
+.ft 3
+\(rh   \\$1  \\$2
+.ft 1
+.P
+..

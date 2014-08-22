@@ -1,0 +1,47 @@
+'''	\"  troff -mm [-Tdevname] file | ...
+.PF "'Memorandum Macros''TEST: \\n(.F'"
+.ND "May 31, 1979"
+.TL 123456 334455
+Out-of-Hours Course Description
+.AU "D. W. Stevenson" DWS PY 9876 5432 1X-123
+.MT 0
+.DS
+J. M. Jones:
+.DE
+.P
+Please use the following description for the Out-of Hours course
+.ul
+Document Preparation on the UNIX\(rg
+.ul
+Time-Sharing System.
+.P
+The course is intended for clerks, typists and secretaries
+as well as members of administrative and technical staff
+who intend to use the UNIX system for preparing documentation.
+The course will cover such topics as:
+.VL 18
+.LI Environment:
+utilizing a time-sharing computer system; accessing the system;
+using appropriate output terminals.
+.LI Files:
+how text is stored on the system; directories; manipulating files.
+.LI "Text editing:"
+how to enter text so that subsequent revisions are easier to make;
+how to use the editing system to add, delete, and move lines of text;
+how to make corrections.
+.LI "Text processing:"
+basic concepts; use of general-purpose formatting packages.
+.LI "Other facilities:"
+additional capabilities useful to the typist such as the
+.IR spell ,
+.IR diff ,
+and
+.I grep
+commands, and a desk-calculator package.
+.LE
+.SG jrm
+.NS
+S. P. LeName
+H. O. Del
+M. Hill
+.NE

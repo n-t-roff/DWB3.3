@@ -1,0 +1,4 @@
+
+No idea why the indexing stuff needs its own version of deroff.
+Leave things be for now - it's installed in LIBDIR not BINDIR.
+

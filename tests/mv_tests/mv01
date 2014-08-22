@@ -1,0 +1,15 @@
+'''	\"  troff -mv [-Tdevname] file | ...
+.Sw 1 \\n(.F
+Six stages of a project:
+.B
+wild enthusiasm
+.B
+disillusionment
+.B
+total confusion
+.B
+search for the guilty
+.B
+punishment of the innocent
+.B
+promotion of the non-participants

@@ -1,0 +1,107 @@
+'''	\"               Copyright c 1991 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so ../defs.add
+.tS TBL
+\s-1TBL\s+1 \(em A Program to Format Tables
+.tE
+This addendum reflects changes in the
+DWB 3.2 version of this software.
+.P
+A heading marked \(rh refers to the section in the
+user documentation where this topic is discussed.
+.sC 2.1 "Global Options"
+.DL
+.LI
+The global variable
+.cR maxline
+allows you to override the default maximum for the number
+of data lines that are effective in determining the shape
+of the table.
+For example,
+.iS
+maxline(2000);
+.iE
+in the global options section allows up to 2,000 lines of input
+data to be used in determining column widths;
+it also allows changes to the table format (using
+.cR \&.T& )
+anywhere in the first 2,000 lines.
+The maximum value permitted is 16,000; the default is 250.
+.LI
+As a small gesture to internalization, the alternative
+spellings
+.cR centre
+and
+.cR CENTRE
+are allowed for the
+.cR center
+global option.
+.LE
+.sC 2.5 "File Inclusion"
+Anywhere between
+.cR \&.TS
+and the next
+.cR \&.TE ,
+an input line of the form
+.iS
+\&.T& <\f2filename
+.iE
+inserts the contents of the named file at that point in the input.
+The included file may contain format specifications, global options,
+or data in any valid combination.
+Any
+.cR \&.T&
+requests in an included file are allowed,
+so nested file inclusion is possible.
+.sC 3.2 "Error Recovery"
+The normal operation of
+.B tbl
+is to terminate processing when the first input error is encountered.
+The
+.B tbl
+option
+.cR -c
+causes processing to continue even if there are errors in the input.
+If there is an error in the global options section for a given table,
+the remaining global options for that table are not processed.
+If there is an error in the format specifications,
+the data section of the table is skipped.
+.sp 0.5v
+.HU "INCOMPATIBLE CHANGES"
+.DL
+.LI
+The undocumented use of
+.cR \&.TC
+to introduce a new format section is no longer supported
+\(em use
+.cR \&.T&
+instead.
+.LI
+The
+.cR -mm
+and
+.cR -ms
+command-line options available in some previous versions of
+.B tbl
+are not accepted.
+Macro packages, if any, should be specified on the
+.B troff
+or
+.B nroff
+command line, e.g.,
+.iS
+tbl \f2file\fP | troff -mm | \(el
+.iE
+.LI
+The maximum number of columns in a table is determined by the
+format for the first row.
+Previous versions of
+.B tbl
+erroneously allowed the maximum to be one greater than the
+number of columns specified by the format for the first row.
+.LE

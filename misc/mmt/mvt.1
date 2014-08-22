@@ -1,0 +1,182 @@
+.ds dP /usr/pub
+.TH MVT 1
+.SH NAME
+.B mvt
+\- typeset document with
+.SM MV
+macros
+.SH SYNOPSIS
+\*(mBmvt\f1
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+The
+.B mvt
+command formats input using the
+.BR troff (1)
+text formatter
+and the
+.SM MV
+macro package.
+There are options to specify
+preprocessing by
+.BR eqn (1),
+.BR tbl (1),
+.BR pic (1),
+and/or
+.BR grap (1).
+The proper pipelines and the
+required arguments and flags for
+.B troff
+and for the macro package
+are generated, depending on the options selected.
+.PP
+.I Options\^
+specific to 
+.B mvt
+are given below.
+Any other arguments or flags (e.g.,
+.OP -o list )
+are passed to
+.BR troff .
+You can put options in any order,
+but they must appear before any
+.IR files .
+If you give no arguments or 
+.IR files ,
+.B mvt
+will print a list of its options.
+.PP
+.PD 0
+.TP 9
+.OP \-e
+invokes
+.BR eqn ;
+also causes
+.B eqn
+to read the
+.MW \*(dP/eqnchar
+file (see
+.BR eqnchar (5)).
+.TP
+.OP \-t
+invokes
+.BR tbl .
+.TP
+.OP \-p
+invokes
+.BR pic .
+.TP
+.OP \-g
+invokes
+.BR grap ,
+which in turn calls
+.BR pic .
+.TP
+.OP \-T type
+creates output for
+.BR troff
+device \f2type\f1 (see
+.BR troff (1)).
+Output for a recognized device (\*(mBpost\fP, \*(mBX97.ti10p\fP,
+\*(mBX97.ti12p\fP, \*(mBi300\fP, \*(mBpcl\fP)
+is sent through the appropriate postprocessor for printing.
+The default device type is \*(mBpost\fP.
+.TP
+.OP \-D dev
+directs the output to 
+device type \f2dev\f1.
+Supported values for \f2dev\f1 are:
+.sp 4p
+.in +0.75i
+.de XX
+.sp 2p
+.ti -0.75i
+\*(mB\\$1\f1
+.sp -1v
+..
+.XX post
+PostScript laser printer
+.XX lino
+Linotronic L200P PostScript-based phototypesetter
+.XX i300
+Imagen 8/300 laser printer
+.XX xrx
+Xerox 4050/9700/8700 line printer
+.XX hp
+Hewlett-Packard LaserJet printer
+.in -0.75i
+.sp 4p
+.TP
+.OP \-z
+invokes no output filter
+to process or redirect the output of
+.BR troff .
+.PD
+.PP
+When you specify
+.OP \-
+instead of any
+.IR files ,
+.B mvt 
+will read the standard input.
+.SH EXAMPLES
+To process input with
+.B troff
+and the
+.SM MV
+macros, and generate view graph copies on a local PostScript printer:
+.EX
+mvt \-Tpost \-Dpost  \f2files
+.EE
+To process input with
+.BR tbl ,
+.BR eqn ,
+and
+.B troff
+with the
+.SM MV
+macros and print the view graphs on an Imagen 8/300 printer
+via a local spooling command:
+.EX
+mvt \-t \-e \-Ti300 \-z  \f2files\fP | \f2spool
+.EE
+Note:  The
+.OP \-z
+option is needed to allow special postprocessing functions or commands.
+.SH HINTS
+Use the
+.OP \-o list
+option of
+.B troff
+to specify a subset or range of pages to be output.
+Note, however, that if you call
+.B mvt
+with one or more of the
+.OP \-e ,
+.OP \-t ,
+.OP \-p ,
+.OP \-g ,
+and
+.OP \-
+options together with the
+.OP \-o list
+option of
+.BR troff ,
+you may cause a harmless ``broken pipe'' diagnostic
+if the last page of the document is not specified in
+.IR list .
+.SH DIAGNOSTICS
+.MW "mvt: no input file"
+.ti +3n
+If none of the arguments is a readable file and
+the command is not used as a filter.
+.SH SEE ALSO
+.BR mmt (1),
+.BR troff (1),
+.BR tbl (1),
+.BR eqn (1),
+.BR pic (1),
+.BR grap (1),
+.BR eqnchar (5),
+.BR mv (5)

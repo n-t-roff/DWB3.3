@@ -1,0 +1,34 @@
+.\"
+.\" Macros for PostScript printers. Includes color and pictures macros
+.\" along with two macros (lM and pM) for selecting landscape or portrait
+.\" mode printing. lM and pM only work with relatively recent versions
+.\" of dpost.
+.\"
+.so MACRODIR/color
+.so MACRODIR/pictures
+.de lM	\" Landscape mode - on the next page
+.if \\n(.p>\\n(.l \{\
+\\X'ExportPS:/pagesetup{cleartomark saveobj restore initgraphics mark /orientation 0 /landscape true setup /saveobj save def mark}def'
+.	bp
+.	nr :M \\n(.l \" Exchange page length and width
+.	ll \\n(.pu
+.	ll -2i
+.	nr W \\(.l
+.	pl \\n(:Mu
+.	pl +2i
+.	nr L \\(.p
+.	lt \\n(.lu \}
+..
+.de pM	\" Portrait mode - on the next page
+.if \\n(.l>\\n(.p \{\
+\\X'ExportPS:/pagesetup{cleartomark saveobj restore initgraphics mark /orientation 0 /landscape false setup /saveobj save def mark}def'
+.	bp
+.	nr :M \\n(.l
+.	ll \\n(.pu
+.	ll -2i
+.	nr W \\(.l
+.	pl \\n(:Mu
+.	pl +2i
+.	nr L \\(.p
+.	lt \}
+..

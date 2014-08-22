@@ -1,0 +1,27 @@
+#
+# Creates missing width tables from existing ones.
+#
+
+rm -f G
+cp H G
+
+rm -f GI
+cp HI GI
+
+rm -f HB
+cp H HB
+
+rm -f HM
+cp H HM
+
+rm -f HK
+cp H HK
+
+rm -f HL
+cp H HL
+
+rm -f HX
+cp HI HX
+
+rm -f CB
+cp CW CB

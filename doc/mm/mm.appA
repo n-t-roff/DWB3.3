@@ -1,0 +1,278 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.ds pT MM
+.aP A "Summary of Differences for \s-1MM\s+1 with \s-1NROFF\s+1"
+Some
+.sM MM
+features behave differently with the
+.I nroff
+text formatter than with
+.IR troff .
+The
+.I nroff
+behavior is noted below along with the
+section number in the manual where the feature is discussed.
+.sp
+.HU General
+.BL
+.LI
+All values are unscaled and are treated as the number of
+character positions (e.g., spaces) or vertical lines,
+as appropriate.
+.LI
+Each reference to ``blank vertical space'' means a full vertical line.
+[\(sc1.2]
+.LI
+By default, tabs are set every 8 character spaces.
+[\(sc3.5]
+.LI
+Not all formatter requests are available with
+.IR nroff .
+For example, the
+.cR .fp ,
+.cR .lg ,
+and
+.cR .ss
+requests are for use with
+.I troff
+only.
+[\(sc3.8]
+.LI
+Text in the italic font is underlined;
+text in the bold font is emboldened by overstriking.
+[\(sc4.2.2.4, \(sc12.1]
+.LI
+Point size and vertical spacing are for use with
+.I troff
+only and are ignored by
+.IR nroff .
+[\(sc4.2.2.5, \(sc12.4, \(sc12.7]
+.LI
+Right-margin justification is turned off.
+By default, the ``current'' and ``default'' justification flags
+are set to no justification;
+initially, justification is set with
+.cR ".SA\ 0" .
+[\(sc12.2]
+.LE
+.sp 0.5v
+.HU "Typical Command Lines" "\0\f1[\(sc2.2]\fP"
+.BL
+.LI
+Plain text (no tables or equations):
+.iS
+nroff -mm \f1[\*(iAoptions\f1]\0\*(iAfilename\*(iR | \(el
+.iE
+.LI
+Text with tables:
+.iS
+tbl \*(iAfilename\f1\*(iR | nroff -mm \f1[\*(iAoptions\f1]\*(iR | \(el
+.iE
+.LI
+Text with equations:
+.iS
+neqn /usr/pub/eqnchar \*(iAfilename \*(iR| nroff -mm \f1[\*(iAoptions\f1]\*(iR | \(el
+.iE
+.LI
+Text with both tables and equations:
+.iS
+tbl \*(iAfilename\f1 \*(iR| neqn /usr/pub/eqnchar - | nroff -mm \f1[\*(iAoptions\f1]\*(iR | \(el
+.iE
+.LE
+.P
+Preprocessing by
+.I tbl
+and
+.IR neqn ,
+if needed, must be invoked as shown in the command line prototypes.
+If used,
+.I neqn
+immediately precedes
+.IR nroff .
+(The
+.I grap
+and
+.I pic
+preprocessors are for use with
+.I troff
+only.)
+.P
+When formatting a document with
+.IR nroff ,
+the output should normally be processed for a specific type of terminal,
+because the output may require some features that are
+specific to a given terminal, e.g., reverse paper motion
+or half-line paper motion in both directions.
+Output for any terminal incapable of reverse paper motion and also lacking
+hardware tab stops should be processed as follows:
+.iS
+nroff -mm -T745 \*(iAfilename\*(iR | col -x
+.iE
+.P
+If two-column processing is used with
+.IR nroff ,
+the
+.I nroff
+output must be postprocessed by
+.IR col .
+In the latter case, the
+.cR \-T37
+terminal type must be specified to
+.I nroff
+and the output of
+.I col
+must be processed by the
+appropriate terminal filter (e.g.,
+.IR 450 ).
+For example, two-column output for a
+.sM "DIABLO 450S"
+terminal should be processed as follows:
+.iS
+nroff -mm \-T37 \*(iAfilename\*(iR | col -x | 450
+.iE
+To produce boxed tables on printers without fractional line capabilities,
+use
+.I tbl
+with the
+.cR -TX
+option.
+.sp 0.5v
+.HU "Parameters that Can Be Set from the Command Line" "\0\f1[\(sc2.3]\fP"
+.VL 6
+.LI \*(iR-rA2\fP
+suppresses the letterhead block
+to accommodate preprinted stationary.
+.LI \*(iR-rT\*(iAn\f1
+provides register settings for certain devices.
+If
+.cA n
+is 1, the page width (e.g., line length) and page offset are set to
+80 and 3 character spaces, respectively.
+If
+.cA n
+is 2, the page length is set to 84 lines
+and underlining is turned off.
+By default,
+.cA n
+is 0 for standard page length, page width and page offset.
+.LI \*(iR-rU1\f1
+controls underlining of section headings.
+This flag causes only letters and digits to be underlined;
+otherwise all characters (including spaces) are underlined.
+.LE
+.P
+By default, the page length is set to 66 lines (e.g.,
+.cR -rL66 ),
+the page offset is set to 10 character spaces (e.g.,
+.cR -rO10 ),
+and the page width is set to 60 character spaces (e.g.,
+.cR -rW60 ).
+The page width for 12-pitch type would be 72 character spaces (e.g.,
+.cR -rW72 ).
+.sp 0.5v
+.HU "Strings for Special Symbols"
+.BL
+.LI
+The string
+.cR \e*(BU
+produces a real bullet (\*(BU) on printers that have one.
+Otherwise, a bullet is represented as \(O+
+(by overstriking ``o'' and ``+'').
+[\(sc3.7.1]
+.LI
+Most
+.I nroff
+printers do not offer distinct graphics
+for a dash, a minus sign, and a hyphen.
+The string
+.cR \e*(EM
+represents an em dash as two hyphens (--).
+A hyphen is just the terminal dash (-) character.
+The sequence
+.cR \e-
+produces a real minus sign (\-) on printers that have one;
+otherwise a hyphen is used.
+[\(sc3.7.2]
+.LI
+The strings
+.cR \e*(Rg ,
+.cR \e*(Tm ,
+and
+.cR \e*(Sm
+produce the registered mark,
+trademark, and service mark symbols,
+respectively, on printers that have them.
+Otherwise, the registered mark, trademark, and service mark
+symbols are represented as (\^R), (\^TM\^), and (SM\^), respectively;
+in this case, the mark is raised one-half line for printers
+that have half-line capabilities.
+[\(sc3.7.3]
+.LE
+.sp 0.5v
+.HU "Paragraphs and Headings"
+.BL
+.LI
+By default, paragraph indentation is 5 character spaces;
+initially, register
+.cR Pi
+is set to 5.
+[\(sc4.1]
+.LI
+By default, all heading levels are underlined;
+string
+.cR HF
+is set to all 2's.
+[\(sc4.2.2.4]
+.LE
+.sp 0.5v
+.HU Lists
+.BL
+.LI
+By default, list item indentation for an automatically-numbered list
+is 6 character spaces;
+initially, register
+.cR Li
+is set to 6.
+[\(sc5.3.3.1]
+.LI
+By default, list item indentation for a reference list is 6 character spaces.
+[\(sc5.3.3.5]
+.LE
+.sp 0.5v
+.HU Displays "\0\f1[\(sc7.1, \(sc7.2]\fP"
+.BL
+.LI
+By default, display indentation
+(for display
+.cA format
+.cR 2
+or
+.cR I )
+is 5 character spaces;
+initially, register
+.cR Si
+is set to 5.
+.LI
+The
+.cA rindent
+argument must be an unscaled number and is treated as character spaces.
+.LE
+.sp 0.5v
+.HU Footnotes
+By default, footnote text is formatted with no hyphenation and
+no justification;
+initially, the footnote style is set to
+.cR ".FD\ 10" .
+[\(sc8.3]
+.sp 0.5v
+.HU References
+The reference mark appears full-sized on the main line and is
+separated from the preceding text by one space
+(e.g., segment of text to be referenced [1] continue).
+[\(sc11.1]
+.P

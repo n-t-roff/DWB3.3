@@ -1,0 +1,39 @@
+TROFF (User's Manual)
+=============================================================================
+TITLE      Troff User's Manual
+
+AUTHOR(s)  Brian W. Kernighan, Joseph F. Ossanna
+           AT&T Bell Laboratories
+
+REVISED    1989 by B.W.Kernighan, AT&T Bell Laboratories
+REPRINTED  May 1990, AT&T Bell Laboratories
+=============================================================================
+FILE            PURPOSE
+------------    ----------------------------------------------------------
+trfman.intro    Introduction
+trfman.usage    Usage and Options
+trfman.sum      Summary of Requests, Escape Sequences, and Number Registers
+trfman.ref      Reference Manual
+trfman.tutex    Tutorial Examples
+trfman.chars    Special Character Names
+trfman.defs     Additional macro definitions for TROFF User's Manual document
+Run             Shell script to format and print entire Troff User's Manual document
+=============================================================================
+To produce the entire Troff User's Manual document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the Troff User's Manual, use the commands:
+
+   troff -Tpost trfman.intro | dpost
+   tbl trfman.usage | eqn | troff -Tpost - | dpost
+   tbl trfman.sum | eqn | troff -Tpost - | dpost
+   tbl trfman.ref | eqn | troff -Tpost - | dpost
+   troff -Tpost trfman.tutex | dpost
+   tbl trfman.chars | troff -Tpost - | dpost
+=============================================================================

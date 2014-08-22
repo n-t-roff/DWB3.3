@@ -1,0 +1,1852 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so ../defs.doc
+.EQ
+delim $$
+.EN
+.tr ~~
+.tS EQN
+\s-1EQN\s+1 \(em A Language for Typesetting Mathematics
+.tE
+.aS
+This is the user's guide for
+.IR eqn ,
+a language for typesetting mathematics on the
+.sM UNIX \*(Rg
+system.
+Mathematical expressions are described in a language
+designed to be easy to use
+by people who know neither mathematics nor typesetting.
+Enough of the language to set in-line expressions like
+$lim from {x-> pi /2} ( tan~x) sup{sin~2x}~=~1$
+or display equations like
+.DS I
+.EQ
+G(z)~mark =~ e sup {ln ~ G(z)} ~=~ exp left (
+sum from k>=1 {S sub k z sup k} over k right )
+~=~ prod from k>=1 e sup {S sub k z sup k /k}
+.EN
+.sp 0.5v
+.EQ
+lineup = left ( 1 + S sub 1 z +
+{S sub 1 sup 2 z sup 2} over 2! + ... right )
+left ( 1+ {S sub 2 z sup 2} over 2
++ {S sub 2 sup 2 z sup 4} over
+  { 2 sup 2 cdot 2! } + ... right ) ...
+.EN
+.sp 0.5v
+.EQ
+lineup =  sum from m>=0 left ( sum from
+pile { k sub 1 ,k sub 2 ,..., k sub m >=0
+above k sub 1 +2k sub 2 + ... +mk sub m =m}
+{ S sub 1 sup {k sub 1} } over
+{1 sup k sub 1 k sub 1 ! } ~ ...
+{ S sub 2 sup {k sub 2} } over
+{2 sup k sub 2 k sub 2 ! } ~
+{ S sub m sup {k sub m} } over
+{m sup k sub m k sub m ! } right ) z sup m
+.EN
+.DE
+can be learned in an hour or so.
+.P
+The language interfaces directly with
+the formatting language
+.IR troff ,
+so mathematical expressions can be embedded in the running
+text of a manuscript,
+and the entire document produced in one process.
+This user's guide is an example of its output.
+.aE
+.2C
+.H 1 Introduction
+.I Eqn
+is a program and a language for typesetting mathematics.
+The
+.I eqn
+language was designed to be easy to use
+by people who know neither mathematics
+nor typesetting.
+Thus
+.I eqn
+knows relatively little about mathematics.
+In particular, mathematical symbols like
++, \(mi, \(mu, parentheses, and so on have no special meanings.
+.I Eqn
+is quite happy to set garbage (but it will look good).
+.P
+.I Eqn
+is a preprocessor for the typesetter formatter,
+.IR troff ,
+so the normal mode of operation is to prepare
+a document with both mathematics and ordinary text
+interspersed, and let
+.I eqn
+set the mathematics while
+.I troff
+does the body of the text.
+.P
+To use
+.I eqn
+on the
+.sM UNIX
+system,
+.iS
+eqn \*(iAfiles\fP | troff \f1[\*(iAoptions\|\f1]\*(iR | \(el
+.iE
+.H 1 "Displayed Equations"
+To tell
+.I eqn
+where a mathematical expression begins and ends,
+one marks it with lines beginning
+.cR .EQ
+and
+.cR .EN .
+Thus
+if you type the lines
+.iS
+\&.EQ
+x=y+z
+\&.EN
+.iE
+your output will look like
+.DS CB
+.EQ
+x=y+z
+.EN
+.DE
+The
+.cR .EQ
+and
+.cR .EN
+are copied through untouched;
+they are not otherwise processed by
+.IR eqn .
+This means that you have to take care
+of things like centering, numbering, and so on
+yourself.
+The most common way is to use a
+.I troff
+macro package like
+.cR \-ms
+or
+.cR \-mm ,
+which allow you to center, indent, left-justify and number equations.
+.P
+With the
+.cR \-ms
+package,
+equations are centered by default.
+To left-justify an equation, use
+.cR ".EQ\ L"
+instead of
+.cR .EQ .
+To indent it, use
+.cR ".EQ\ I" .
+Any of these can be followed by an arbitrary ``equation number''
+which will be placed at the right margin.
+For example, the input
+.iS
+\&.EQ I (3.1a)
+x = f(y/2) + y/2
+\&.EN
+.iE
+.br
+.ne 3v
+produces the output
+.DS I
+.EQ (3.1a)
+x = f(y/2) + y/2
+.EN
+.DE
+.hy
+.P
+With the
+.cR \-mm
+package,
+equations must be sur\%rounded by the
+.cR .DS
+and
+.cR .DE
+display macros.
+.cR .DS
+allows you to left-justify, indent, and center equations;
+.cR .EQ
+provides the equation number, if any.
+To indent an equation, use
+.cR ".DS I"
+instead of
+.cR .DS ;
+to center it, use
+.cR ".DS CB".
+.nh
+Thus, the input
+.iS
+\&.DS I
+\&.EQ (3.1a)
+x = f(y/2) + y/2
+\&.EN
+\&.DE
+.iE
+produces the same output as above.
+.P
+.hy
+There is also a shorthand notation so
+in-line expres\%sions like
+$pi sub i sup 2$
+can be entered without
+.cR .EQ
+and
+.cR .EN .
+We will talk about it in \(sc9.
+.H 1 "Input Spaces"
+Spaces, tabs, and newlines within an expression are thrown away by
+.IR eqn .
+(Normal text is left absolutely alone.)
+Thus between
+.cR .EQ
+and
+.cR .EN ,
+.iS
+x=y+z
+.iE
+and
+.iS
+x = y + z
+.iE
+and
+.iS
+x   =   y
+   + z
+.iE
+and so on
+all produce the same output:
+.DS CB
+.EQ
+x=y+z
+.EN
+.DE
+You should use spaces and newlines freely to make your input equations
+readable and easy to edit.
+In particular, very long lines are a bad idea,
+since they are often hard to fix if you make a mistake.
+.H 1 "Output Spaces"
+To force extra spaces into the
+.IR output ,
+use a tilde
+.cR ~ '' ``
+for each space you want:
+.iS
+x~=~y~+~z
+.iE
+gives
+.DS CB
+.EQ
+x~=~y~+~z
+.EN
+.DE
+You can also use a circumflex
+.cR ^ '', ``
+which gives a space half the width of a tilde.
+It is mainly useful for fine-tuning.
+.H 1 "Symbols, Special Names, Greek"
+.I Eqn
+knows some mathematical symbols,
+some mathematical names, and the Greek alphabet.
+For example,
+.iS
+x=2 pi int sin ( omega t)dt
+.iE
+produces
+.DS CB
+.EQ
+x = 2 pi int sin ( omega t)dt
+.EN
+.DE
+Here the spaces in the input are
+necessary to tell
+.I eqn
+that
+.cR int ,
+.cR pi ,
+.cR sin ,
+and
+.cR omega
+are separate entities that should get special treatment.
+The
+.cR sin ,
+digit 2, and parentheses are set in roman type instead of italic;
+.cR pi
+and
+.cR omega
+are made Greek;
+and
+.cR int
+becomes the integral sign.
+.P
+When in doubt, leave spaces around separate parts of the input.
+A common error is to type
+.cR f(pi)
+without leaving spaces on both sides of the
+.cR pi .
+As a result,
+.I eqn
+does not recognize
+.cR pi
+as a special word, and you get
+$f(pi)$
+instead of
+$f( pi )$.
+.hy
+.P
+A list of
+.I eqn
+names appears in \(sc24.
+Knowl\%edge\%able users can also use
+.I troff
+four-character names
+for anything
+.I eqn
+doesn't know about, like
+.cR \e(rh
+for the right-hand index symbol (\(rh).
+.nh
+.H 1 "Spaces, Again"
+The only way
+.I eqn
+can deduce that some sequence
+of letters might be special
+is if that sequence is separated from the letters
+on either side of it.
+This can be done by surrounding a special word by spaces,
+tabs, or newlines,
+as we did in the previous section.
+.P
+You can also make special words stand out by surrounding them
+with tildes or circumflexes:
+.iS
+x~=~2~pi~int~sin~(~omega~t~)~dt
+.iE
+is much the same as the last example,
+except that the tildes
+not only separate the magic words like
+.cR sin ,
+.cR omega ,
+and so on,
+but also add extra spaces,
+one space per tilde:
+.DS CB
+.EQ
+x~=~2~pi~int~sin~(~omega~t~)~dt
+.EN
+.DE
+.P
+Special words can also be separated by braces
+.cR {}
+and double quotes \*(iR""\fP,
+which have special meanings that we will
+see soon.
+.H 1 "Subscripts and Superscripts"
+Subscripts and superscripts are
+obtained with the words
+.cR sub
+and
+.cR sup .
+.iS
+x sup 2 + y sub k
+.iE
+.br
+.ne 3v
+gives
+.DS CB
+.EQ
+x sup 2 + y sub k
+.EN
+.DE
+.I Eqn
+takes care of all the size changes and vertical motions
+needed to make the output look right.
+The words
+.cR sub
+and
+.cR sup
+must be surrounded by spaces;
+.hy
+.cR "x\ sub2"
+will give you
+$x sub2$ instead of $x sub 2$.
+Fur\%ther\%more, don't forget to leave a space
+(or a tilde, etc.)
+to mark the end of a subscript or superscript.
+.nh
+A common error is to say
+something like
+.iS
+y = (x sup 2)+1
+.iE
+which causes
+.DS CB
+.EQ
+y = (x sup 2)+1
+.EN
+.DE
+instead of the intended
+.DS CB
+.EQ
+y = (x sup 2 )+1
+.EN
+.DE
+.P
+Subscripted subscripts and superscripted superscripts
+also work:
+.iS
+x sub i sub 1
+.iE
+is
+.DS CB
+.EQ
+x sub i sub 1
+.EN
+.DE
+A subscript and superscript on the same thing
+are printed one above the other
+if the subscript comes
+.IR first :
+.iS
+x sub i sup 2
+.iE
+is
+.DS CB
+.EQ
+x sub i sup 2
+.EN
+.DE
+.P
+Other than this special case,
+.cR sub
+and
+.cR sup
+group to the right, so
+.cR "x\ sup\ y\ sub\ z"
+means
+$x sup {y sub size +1 z}$, not ${x sup y} sub z$.
+.H 1 "Braces for Grouping"
+Normally, the end of a subscript or superscript is marked
+simply by a blank (or tab or tilde, etc.).
+What if the subscript or superscript is something that has to be typed
+with blanks in it?
+In that case, you can use the braces
+.cR {
+and
+.cR }
+to mark the
+beginning and end of the subscript or superscript:
+.iS
+e sup {i omega t}
+.iE
+is
+.DS CB
+.EQ
+e sup {i omega t}
+.EN
+.DE
+.hy
+Rule:  Braces can always be used to force
+.I eqn
+to treat something as a unit,
+or just to make your intent per\%fectly clear.
+Thus:
+.nh
+.iS
+x sub {i sub 1} sup 2
+.iE
+.br
+.ne 3v
+is
+.DS CB
+.EQ
+x sub {i sub 1} sup 2
+.EN
+.DE
+with braces, but
+.iS
+x sub i sub 1 sup 2
+.iE
+is
+.fS -3p
+.DS CB
+.EQ
+x sub i sub 1 sup 2
+.EN
+.DE
+which is rather different.
+.P
+Braces can occur within braces:
+.iS
+e sup {i pi sup {rho +1}}
+.iE
+is
+.DS CB
+.EQ
+e sup {i pi sup size +1 {rho +1}}
+.EN
+.DE
+The general rule is that anywhere you could use some single
+thing like
+.IR x ,
+you can use an arbitrarily com\%pli\%cated thing if you enclose
+it in braces.
+.I Eqn
+will look after all the details of positioning it and making
+it the right size.
+.P
+In all cases, make sure you have the
+right number of braces.
+Leaving one out or adding an extra will cause
+.I eqn
+to complain bitterly.
+.P
+Occasionally you will have to
+print braces.
+To do this,
+enclose them in double quotes, like
+.cR \&"{" .
+Quoting is discussed in more detail in \(sc15.
+.H 1 "Shorthand for In-line Equations"
+With the
+.cR \-ms
+and
+.cR \-mm
+macro packages,
+.cR .EQ
+and
+.cR .EN
+imply a displayed equation.
+But in most documents,
+it is necessary to follow mathematical conventions
+not just in display equations,
+but also in the body of the text,
+for example by making variable names like
+.cR x
+italic.
+.P
+.I Eqn
+provides a shorthand for short in-line expressions.
+You can define two characters to mark the left and right ends
+of an in-line equation,
+and then type expressions right in the middle of text lines.
+To set both the left and right characters to dollar signs, for example,
+add to the beginning of your document the three lines
+.br
+.EQ
+delim off
+.EN
+.iS
+\&.EQ
+delim $$
+\&.EN
+.iE
+Having done this, you can then say things like
+.iS
+Let $alpha sub i$ be positive,
+and let $beta$ be zero.
+Then we can show that
+$alpha sub 1$ is $>=0$.
+.iE
+.EQ
+delim $$
+.EN
+.hy
+This works as
+you might expect\|\(em\|spaces, new\%lines, and so on are significant
+in the text, but not in the equation part itself.
+Multiple equations can occur in a single input line.
+.nh
+.P
+Enough room is left before and after a line that contains
+in-line expressions
+so that something tall like
+$sum from i=1 to n x sub i$
+does not interfere with the lines surrounding it.
+.P
+To turn off the delimiters,
+.iS
+\&.EQ
+delim off
+\&.EN
+.iE
+Warning:  Don't use braces, tildes, circumflexes,
+or double quotes as delimiters\|\(em\|chaos will result.
+.H 1 Fractions
+.P
+To make a fraction,
+use the word
+.cR over \^:
+.iS
+a+b over 2c =1
+.iE
+gives
+.DS CB
+.EQ
+a+b over 2c =1
+.EN
+.DE
+.hy
+The line is made the right length and positioned auto\%matically.
+Braces can be used to make clear what goes over what:
+.nh
+.iS
+{alpha + beta} over {sin (x)}
+.iE
+is
+.DS CB
+.EQ
+{alpha + beta} over {sin (x)}
+.EN
+.DE
+.hy
+What happens when there is both an
+.cR over
+and a
+.cR sup
+in the same expression?
+In such an apparently ambig\%u\%ous case,
+.I eqn
+does the
+.cR sup
+before the
+.cR over ,
+so
+.iS
+-b sup 2 over pi
+.iE
+.rs
+.sp 0.5v
+is
+$-b sup 2 over pi$
+instead of
+$-b sup {2 over pi}$.
+The rules
+that decide which operation is done first in cases like this
+are sum\%ma\%rized in \(sc24.
+When in doubt, however,
+use braces
+to make clear what goes with what.
+.nh
+.H 1 "Square Roots"
+To draw a square root, use
+.cR sqrt :
+.iS
+sqrt a+b + 1 over
+sqrt {ax sup 2 +bx+c}
+.iE
+is
+.DS CB
+.EQ
+sqrt a+b + 1 over
+sqrt {ax sup 2 +bx+c}
+.EN
+.DE
+Warning:  Square roots of tall quantities look bad,
+because a root-sign
+big enough to cover the quantity is
+too dark and heavy:
+.iS
+sqrt {a sup 2 over b sub 2}
+.iE
+is
+.DS CB
+.EQ
+sqrt { a sup 2 over b sub 2 }
+.EN
+.DE
+.hy
+Big square roots are generally better written as something
+to the power \(12:
+.nh
+.DS CB
+.EQ
+(a sup 2 /b sub 2 ) sup half
+.EN
+.DE
+which is
+.iS
+(a sup 2 /b sub 2 ) sup half
+.iE
+.H 1 "Summation, Integral, Etc."
+Summations, integrals, and similar constructions
+are easy:
+.iS
+sum from i=0 to {i= inf} x sup i
+.iE
+produces
+.DS CB
+.EQ
+sum from i=0 to {i= inf} x sup i
+.EN
+.DE
+Notice that we used
+braces to indicate where the upper
+part
+$i= inf$
+begins and ends.
+No braces were necessary for the lower part $i=0$,
+because it contained no blanks.
+The braces will never hurt,
+and if the
+.cR from
+and
+.cR to
+parts contain any blanks, you must use braces around them.
+.P
+The
+.cR from
+and
+.cR to
+parts are both optional,
+but if both are used,
+they have to occur in that order.
+.P
+Other useful characters can replace the
+.cR sum
+in our example:
+.iS
+int   prod   union   inter
+.iE
+become, respectively,
+.DS I
+.EQ
+~~int ~~~~~~~~ prod ~~~~~~~~~ union ~~~~~~~~~~ inter
+.EN
+.DE
+Since the thing before the
+.cR from
+can be anything,
+even something in braces,
+.cR from\f1-\fPto
+can often be used in unexpected ways:
+.iS
+lim from {n -> inf} x sub n =0
+.iE
+is
+.DS CB
+.EQ
+lim from {n -> inf} x sub n =0
+.EN
+.DE
+.P
+Notice the difference between
+.cR from\f1-\fPto
+and
+.cR sub\f1-\fPsup :
+.iS
+int from a to b ~~~
+int sub a sup b
+.iE
+is
+.fS -3p
+.DS CB
+.EQ
+int from a to b ~~~ int sub a sup b
+.EN
+.DE
+.H 1 "Size and Font Changes"
+.P
+By default, equations are set in
+the current point size (this text is 10-point type),
+with standard mathematical conventions
+to determine what characters are in roman and what in italic.
+Although
+.I eqn
+makes a valiant attempt to use
+esthetically pleasing sizes and fonts,
+it is not perfect.
+To change sizes and fonts, use
+.cR size
+.cA n
+and
+.cR roman ,
+.cR italic ,
+.cR bold
+and
+.cR fat .
+Like
+.cR sub
+and
+.cR sup ,
+size and font changes affect only the thing that follows
+them, and revert to the normal situation
+at the end of it.
+Thus
+.iS
+bold x y
+.iE
+is
+.fS -4p
+.DS CB
+.EQ
+bold x y
+.EN
+.DE
+and
+.iS
+size 12 bold x = y +
+size 12 {alpha + beta}
+.iE
+gives
+.fS -2p
+.DS CB
+.EQ
+size 12 bold x = y +
+size 12 {alpha + beta}
+.EN
+.DE
+As always, you can use braces if you want to affect something
+more complicated than a single letter.
+For example, you can change the size of an entire equation by
+.iS
+size 8 { \(el }
+.iE
+.P
+You can also change the size by
+a given amount;
+for example, you can say
+.cR "size\ +2"
+to make the size two points bigger,
+or
+.cR "size\ -3"
+to make it three points smaller.
+This has the advantage that you don't have
+to know what the current size is.
+.P
+If you are using fonts other than roman, italic and bold,
+you can say
+.cR font
+.cA X
+where
+.cA X
+is a
+.I troff
+name or number for the font,
+one or two characters long.
+Since
+.I eqn
+is tuned for roman, italic and bold,
+other fonts may not give quite as good an appearance.
+.P
+The
+.cR fat
+operation takes the current font and widens it
+by overstriking: \*(iRfat\fP\ \*(iRgrad\fP is $fat grad$ and
+\*(iRfat\fP\ \*(iR{x\fP\ \*(iRsub\fP\ \*(iRi}\fP is $fat {x sub i}$.
+'''	\FORCE COLUMN
+.nC
+.P
+If an entire document is to be in a non-standard size
+or font, it is a severe nuisance
+to have to write out a size and font change for each
+equation.
+Accordingly, you can set a ``global'' size or font
+which thereafter affects all equations.
+At the beginning of any equation, you might say, for instance,
+.iS
+\&.EQ
+gsize 16
+gfont R
+ \(el
+\&.EN
+.iE
+to set the size to 16 and the font to roman thereafter.
+In place of
+.cR R ,
+you can use any of the
+.I troff
+font names.
+The size after
+.cR gsize
+can be a relative change with
+.cR +
+or
+.cR - .
+.P
+Generally,
+.cR gsize
+and
+.cR gfont
+will appear at the beginning of a document
+but they can also appear
+throughout a document:  the global font and size
+can be changed as often as needed.\(dd
+.FS \(dd
+In a footnote like this one,
+in which we have a few random expressions
+like $x sub i$ and $pi sup 2$,
+.I eqn
+handles the size change automatically.
+.FE
+.hy
+.P
+Since
+.I eqn
+manages most size changes auto\%matically,
+.cR gsize
+is rarely necessary.
+.nh
+.H 1 "Diacritical Marks"
+.P
+To get diacritical marks on top of letters,
+there are several words:
+.fS -3p
+.DS
+.TS
+center;
+lf5 10 c.
+x dot	$x dot$
+x dotdot	$x dotdot$
+x hat	$x hat$
+x tilde	$x tilde$
+x vec	$x vec$
+x dyad	$x dyad$
+x bar	$x bar$
+x under	$x under$
+x utilde	$x utilde$
+.TE
+.DE
+The diacritical mark is placed at the right height.
+The
+.cR bar
+and
+.cR under
+are made the right length for the entire construct,
+as in $x+y+z bar$;
+other marks are centered.
+.P
+Sometimes
+.I eqn
+guesses wrong on the height for bars.
+As an interim fix, the words
+.cR highbar
+and
+.cR lowbar
+are synonymous with
+.cR bar ,
+but force the bar to be either
+high (as with $X bar$\^)
+or low (as with $x bar$\^)
+regardless of the apparent height of the object.
+This is useful for constructions like
+${x sub 1} lowbar$, which is \*(iR{x\fP\ \*(iRsub\fP\ \*(iR1}\fP\ \*(iRlowbar\fP.
+.H 1 "Quoted Text"
+.hy
+Any input entirely within quotes
+.cR \&"\(el"
+is not subject to any of the normal font changes and spacing
+adjust\%ments.
+This provides a way to do your own spacing and adjusting if needed:
+.iS
+italic "sin(x)" + sin (x)
+.iE
+is
+.DS CB
+.EQ
+italic "sin(x)" + sin (x)
+.EN
+.DE
+.P
+Quotes are also used to get braces and other
+.I eqn
+key\%words printed:
+.iS
+"{ size alpha }"
+.iE
+is
+.DS CB
+.EQ
+"{ size alpha }"
+.EN
+.DE
+and
+.iS
+roman "{ size alpha }"
+.iE
+is
+.DS CB
+.EQ
+roman "{ size alpha }"
+.EN
+.DE
+.nh
+.P
+The construction
+.cR \&""
+is often used as a place-holder
+when grammatically
+.I eqn
+needs something, but you don't actually want anything in your output.
+For example, to make
+$"" sup 2 roman He$,
+you can't just type
+.cR "sup\ 2\ roman\ He"
+because a
+.cR sup
+has to be a superscript
+.I on
+something.
+Thus you must say
+.iS
+"" sup 2 roman He
+.iE
+.P
+To get a literal quote use
+.cR \&"\e"" .
+If delimiters are set with
+.cR delim ,
+you can include them in a quoted string too.
+.I Troff
+special-character names like
+.cR \e(rh
+can appear unquoted, but all other
+.I troff
+constructions should always be quoted.
+.H 1 "Lining Up Equations"
+Sometimes it's necessary to line up a series of equations
+at some horizontal position, often at an equals sign.
+This is done with two operations called
+.cR mark
+and
+.cR lineup .
+.P
+The word
+.cR mark
+may appear once at any place in an equation.
+It remembers the horizontal position where it appeared.
+Successive equations can contain one occurrence of the word
+.cR lineup .
+The place where
+.cR lineup
+appears is made to line up
+with the place marked by the previous
+.cR mark
+if possible.
+Thus, for example,
+you can say
+.iS
+\&.EQ I
+x+y mark = z
+\&.EN
+\&.EQ I
+x lineup = 1
+\&.EN
+.iE
+to produce
+.DS I
+.EQ
+x+y mark = z
+.EN
+.EQ
+x lineup = 1
+.EN
+.DE
+For reasons too complicated to talk about,
+when you use
+.I eqn
+and
+.cR \-ms ,
+use either
+.cR ".EQ\ I"
+or
+.cR ".EQ\ L" ;
+.cR mark
+and
+.cR lineup
+don't work with centered equations.
+When you use
+.I eqn
+and
+.cR \-mm ,
+use either
+.cR ".DS\ L" ,
+.cR ".DS\ I" ,
+or
+.cR ".DS\ CB" .
+Also bear in mind that
+.cR mark
+doesn't look ahead;
+.iS
+x mark =1
+ \(el
+x+y lineup =z
+.iE
+will not work if there isn't room
+for the
+.cR x+y
+part after the
+.cR mark
+remembers where the
+.cR x
+is.
+If you indent the equation,
+that may suffice;
+if not, use tildes to move the first equation to the right.
+.H 1 "Big Brackets, Etc."
+To get big brackets,
+braces, parentheses, and bars
+around things, use the
+.cR left
+and
+.cR right
+commands:
+.iS
+left { a over b + 1 right }
+~=~ left ( c over d right )
++ left [ e right ]
+.iE
+is
+.DS CB
+.EQ
+left { a over b + 1 right }
+~=~ left ( c over d right )
++ left [ e right ]
+.EN
+.DE
+The resulting brackets are made big enough
+to cover whatever they enclose.
+Other characters can be used besides these,
+but are not likely to look very good.
+The
+.cR floor
+and
+.cR ceiling
+characters are exceptions:
+.iS
+left floor x over y right floor
+<= left ceiling a over b
+   right ceiling
+.iE
+produces
+.DS CB
+.EQ
+left floor x over y right floor
+<= left ceiling a over b right ceiling
+.EN
+.DE
+'''	\" FORCE PAGE
+.SK
+.hy
+.P
+Several warnings about brackets are in order.
+First, braces are typically bigger than brackets and paren\%theses,
+because they are made up of three, five, seven, etc., pieces,
+while brackets can be made up of two, three, etc.
+Second, big left and right parentheses often look poor,
+because the character set is poorly designed.
+.nh
+.P
+The
+.cR right
+part may be omitted:
+a ``left something'' need not have a
+corresponding ``right something''.
+If the
+.cR right
+part is omitted,
+put braces around the thing you want the left bracket
+to encompass.
+Otherwise, the resulting brackets may be too large.
+.P
+If you want to omit the
+.cR left
+part, things are more complicated,
+because technically you can't have a
+.cR right
+without a corresponding
+.cR left .
+Instead you have to say
+.iS
+left "" \(el right )
+.iE
+for example.
+The
+.cR \&left\ ""
+means a ``left nothing''.
+This satisfies the rules without hurting your output.
+.H 1 Piles
+There is a general facility for making vertical piles
+of things; it comes in several flavors.
+For example:
+.iS
+A ~=~ left [
+  pile { a above b above c } ~~
+  pile { x above y above z }
+right ]
+.iE
+will make
+.DS CB
+.EQ
+A ~=~ left [
+  pile { a above b above c } ~~
+  pile { x above y above z }
+right ]
+.EN
+.DE
+The elements of the pile (there can be as many as you want)
+are centered one above another, at the right height for
+most purposes.
+.hy
+The keyword
+.cR above
+is used to separate the pieces;
+braces are used around the entire list.
+The elements of a pile can be as complicated as needed,
+even containing more piles.
+.br
+.nh
+.P
+Three other forms of pile exist:
+.cR lpile
+makes a pile with the elements left-justified;
+.cR rpile
+makes a right-justified pile;
+and
+.cR cpile
+makes a centered pile, just like
+.cR pile .
+The vertical spacing between the pieces
+is somewhat larger for
+.cR l ,
+.cR r ,
+and
+.cR cpile s
+than it is for ordinary piles.
+.iS
+roman sign (x)~=~
+left {
+  lpile {1 above 0 above -1} ~~
+  lpile {if~x>0 above if~x=0
+         above if~x<0}
+.iE
+makes
+.DS CB
+.EQ
+roman sign (x)~=~
+left {
+  lpile {1 above 0 above -1} ~~
+  lpile {if~x>0 above if~x=0
+         above if~x<0}
+.EN
+.DE
+.rs
+.sp -4p
+Notice the left brace
+without a matching right one.
+.P
+It is possible to change the default vertical separation
+between elements of a pile,
+by adding a number immediately after the word
+.cR lpile ,
+etc.
+The number is in units of 1/100's of an em
+(an em is about the width of the letter `m');
+.cR lpile\ 33
+makes the spacing 1/\^3 of an em.
+.H 1 Matrices
+It is also possible to make matrices.
+For example, to make
+a neat array like
+.rs
+.sp -2p
+.DS CB
+.EQ
+matrix {
+  ccol { x sub i above y sub i }
+  ccol { x sup 2 above y sup 2 }
+}
+.EN
+.DE
+.rs
+.sp -4p
+you have to type
+.rs
+.sp -2p
+.iS
+matrix {
+  ccol { x sub i above y sub i }
+  ccol { x sup 2 above y sup 2 }
+.fS -1p
+\!.fS -1p
+}
+.iE
+.rs
+.sp -3p
+This produces a matrix with
+two centered columns.
+The elements of the columns are then listed just as for a pile,
+each element separated by the word
+.cR above .
+You can also use
+.cR lcol
+or
+.cR rcol
+to left or right adjust columns.
+Each column can be separately adjusted,
+and there can be as many columns as you like.
+.P
+The words
+.cR pile
+and
+.cR col ,
+.cR lpile
+and
+.cR lcol ,
+etc., are synonyms.
+.P
+The reason for using a matrix instead of two adjacent piles, by the way,
+is that if the elements of the piles don't all have the same height,
+they won't line up properly.
+A matrix forces them to line up,
+because it looks at the entire structure before deciding what
+spacing to use.
+.P
+A word of warning about matrices\|\(em\|each
+column must have the same number of elements in it.
+The world will end if you get this wrong.
+.nr L +1v
+.pl +1v
+.H 1 "Local Motions"
+Although
+.I eqn
+tries to get most things at the right place,
+it isn't perfect, and occasionally you will need to tune
+the output to make it just right.
+Small extra horizontal spaces can be obtained with
+tilde and circumflex.
+You can also say
+.cR back
+.cA n
+and
+.cR fwd
+.cA n
+to move small amounts horizontally.
+.cA n
+is how far to move in 1/100's of an em.
+Thus
+.cR "back\ 50"
+moves back about half the width of an `m'.
+For example,
+.cR <<
+produces
+$<<$, while
+.cR "\|<\ back\ 50\ <\|"
+produces $< back 50 <$.
+.P
+Similarly you can move things up or down with
+.cR up
+.cA n
+and
+.cR down
+.cA n .
+.iS
+x sub down 20 i sup up 20 j
+.iE
+produces $x sub down 20 i sup up 20 j$ instead
+of the usual $x sub i sup j$.
+.P
+As with
+.cR sub
+or
+.cR sup ,
+the local motions affect the next thing in the input,
+and this can be something arbitrarily complicated if it is enclosed
+in braces.
+.H 1 Definitions
+.P
+.I Eqn
+provides a facility so you can give
+a frequently-used string of characters a name,
+and thereafter just type the name instead of the
+whole string.
+For example, if the sequence
+.iS
+x sub i + y sub i
+.iE
+appears repeatedly throughout a paper,
+you can save re-typing it each time by defining it like this:
+.iS
+define xy 'x sub i + y sub i'
+.iE
+This makes
+.cR xy
+a shorthand for whatever characters occur between the single quotes
+in the definition.
+You can use any character instead of quote to mark the ends of the definition,
+so long as it doesn't appear inside the definition.
+.P
+Now you can use
+.cR xy
+like this:
+.fS -1p
+.iS
+\&.EQ
+f(x) = xy \(el
+\&.EN
+.iE
+.fS -1p
+and so on.
+Each occurrence of
+.cR xy
+will expand into what it was defined as.
+Be careful to leave spaces or their equivalent
+around the name
+when you actually use it, so
+.I eqn
+will be able to identify it as special.
+.P
+There are several things to watch out for.
+First, although definitions can use previous definitions,
+as in
+.fS -1p
+.iS
+\&.EQ
+define xi ' x sub i '
+define xi1 ' xi sub 1 '
+\&.EN
+.iE
+.fS -1p
+.ul
+Don't define something in terms of itself!
+A favorite error is to say
+.iS
+define X ' roman X '
+.iE
+This is a guaranteed disaster,
+since
+.cR X
+is now defined in terms of itself.
+If you say
+.iS
+define X ' roman "X" '
+.iE
+.hy
+however, the quotes
+protect the second
+.cR X ,
+and every\%thing works fine.
+.P
+.nh
+.I Eqn
+keywords can be redefined.
+You can make
+.cR /
+mean
+.cR over
+by saying
+.iS
+define / ' over '
+.iE
+or redefine
+.cR over
+as
+.cR /
+with
+.iS
+define over ' / '
+.iE
+.br
+.EQ
+delim off
+.EN
+.P
+.hy
+It is possible to create a parameterized definition, which will
+expand into something different each time it is used.
+If a definition contains occur\%rences of
+.cR $1 ,
+.cR $2 ,
+etc., as in
+.iS
+define f 'font $1 {"$2"}'
+.iE
+then subsequent uses of that name that are followed by a parenthesized
+list of values will have the values substituted for the
+.cR $\*(iAn \f1's:
+.iS
+f(CW, a phrase)
+.iE
+will print
+.cR "a\ phrase"
+in the constant-width font
+.cR CW .
+.P
+You can test whether something is defined with
+.cR ifdef :
+.iS
+ifdef f / \*(iAanything at all\fP /
+.iE
+is replaced by
+.cA "anything at all"
+if
+.cR f
+is defined.
+.H 1 "File Inclusion"
+You can include a file of
+.I eqn
+input as part of an equation by the construction
+.iS
+include "\*(iAfilename\fP"
+.iE
+For historical reasons, 
+.cR copy
+is a synonym for
+.cR include .
+.H 1 "A Large Example"
+.P
+Here is the complete source for the three display equations
+in the abstract of this guide.
+.DS 
+.ft 5
+.S -2
+\&.EQ I
+\&G(z)~mark =~ e sup {ln ~ G(z)} ~=~ exp left (
+\&sum from k>=1 {S sub k z sup k} over k right )
+\&~=~ prod from k>=1 e sup {S sub k z sup k /k}
+\&.EN
+\&.EQ I
+\&lineup = left ( 1 + S sub 1 z +
+\&{S sub 1 sup 2 z sup 2} over 2! + ... right )
+\&left ( 1+ {S sub 2 z sup 2} over 2
+\&+ {S sub 2 sup 2 z sup 4} over
+\&  {2 sup 2 cdot 2!} + ... right ) ...
+\&.EN
+\&.EQ I
+\&lineup = sum from m>=0 left ( sum from
+\&pile {k sub 1 ,k sub 2 ,..., k sub m >=0
+\&above k sub 1 +2k sub 2 + ... +mk sub m =m}
+\&{ S sub 1 sup {k sub 1} } over
+\&{ 1 sup k sub 1 k sub 1 ! } ~ ...
+\&{ S sub 2 sup {k sub 2} } over
+\&{2 sup k sub 2 k sub 2 ! } ~
+\&{ S sub m sup {k sub m} } over
+\&{ m sup k sub m k sub m ! } right ) z sup m
+\&.EN
+.ft 1
+.S +2
+.DE
+.H 1 "Keywords, Precedences, Etc."
+.nr L -1v
+.pl -1v
+Here are the keywords of
+.I eqn
+in order of decreasing precedence:
+.iS
+dyad  vec  under  utilde  bar 
+      tilde  hat  dot  dotdot
+left  right
+fwd   back   down    up
+fat   roman  italic  bold  size
+sub   sup
+sqrt  over
+from  to
+.iE
+These operations group to the left:
+.iS
+over  sqrt  left  right
+.iE
+All others group to the right.
+.P
+Digits, parentheses, brackets, punctuation marks,
+and these mathematical words
+are converted to Roman font when encountered:
+.iS
+sin   sinh   max   log   and
+cos   cosh   min   ln    if
+tan   tanh   lim   exp   for
+arc   det    Re    Im
+.iE
+.br
+.EQ
+delim $$
+.EN
+.hy
+These character sequences are recognized and trans\%lated as shown.
+.DS
+.TS
+center;
+lf5 c 8 lf5 c.
+>=	$>=$	nothing	$nothing$
+.sp 1p
+<=	$<=$	partial	$partial$
+.sp 1p
+==	$==$	half	$half$
+.sp 1p
+!=	$!=$	prime	$prime$
+.sp 1p
++-	$+-$	cdot	$cdot$
+.sp 1p
+->	$->$	times	$times$
+.sp 1p
+<-	$<-$	del	$del$
+.sp 1p
+<<	$<<$	grad	$grad$
+.sp 1p
+>>	$>>$	\&...	$"..."$
+.sp 1p
+approx	$approx$	,...,	$",...,"$
+.sp 1p
+inf	$inf$	dollar	$dollar$
+.sp 2p
+sum	$sum$
+.sp 2p
+prod	$prod$
+.sp 3p
+int	$int$
+.sp 3p
+union	$union$
+.sp 2p
+inter	$inter$
+.TE
+.DE
+'''	\" FORCE COLUMN
+.br
+.ne 3i
+.P
+To obtain Greek letters,
+simply spell them out in whatever case you want:
+.DS
+.TS
+center;
+lf5 c8 lf5 c.
+DELTA	$DELTA$	iota	$iota$
+GAMMA	$GAMMA$	kappa	$kappa$
+LAMBDA	$LAMBDA$	lambda	$lambda$
+OMEGA	$OMEGA$	mu	$mu$
+PHI	$PHI$	nu	$nu$
+PI	$PI$	omega	$omega$
+PSI	$PSI$	omicron	$omicron$
+SIGMA	$SIGMA$	phi	$phi$
+THETA	$THETA$	pi	$pi$
+UPSILON	$UPSILON$	psi	$psi$
+XI	$XI$	rho	$rho$
+alpha	$alpha$	sigma	$sigma$
+beta	$beta$	tau	$tau$
+chi	$chi$	theta	$theta$
+delta	$delta$	upsilon	$upsilon$
+epsilon	$epsilon$	xi	$xi$
+eta	$eta$	zeta	$zeta$
+gamma	$gamma$
+.TE
+.DE
+.nh
+.P
+.I Eqn
+really ought to know the whole Greek alphabet,
+but the missing upper-case characters are identical to Roman ones.
+.P
+These are all the words known to
+.I eqn ,
+except for characters with names.
+.iS
+.mk
+above
+back
+bar
+bold
+ccol
+col
+copy
+cpile
+define
+delim
+dot
+dotdot
+down
+dyad
+fat
+font
+from
+fwd
+gfont
+.rt
+.in +14n
+gsize
+hat
+highbar
+ifdef
+include
+int
+integral
+inter
+italic
+lcol
+left
+lineup
+lowbar
+lpile
+mark
+matrix
+over
+pile
+prod
+.rt
+.in +14n
+rcol
+right
+roman
+rpile
+size
+space
+sqrt
+sub
+sum
+sup
+tilde
+to
+under
+union
+up
+utilde
+vec
+
+
+.in -28n
+.iE
+'''	\" FORCE PAGE
+.SK
+.H 1 Troubleshooting
+If you make a mistake in an equation,
+like leaving out a brace (very common)
+or having one too many (very common)
+or having a
+.cR sup
+with nothing before it (common),
+.I eqn
+will tell you with the message
+.iS
+syntax error near line \*(iAn\fP, file \*(iAf\fP,
+  context is >>> \*(iAsomething\fP <<<
+.iE
+where
+.cA n
+is approximately the line
+where the trouble occurred,
+.cA f
+is the name of the input file, and
+.cA something
+is a guess about what input was in error.
+The line number and context is approximate\|\(em\|look nearby as well.
+There are also self-explanatory messages that arise if you leave out a quote
+or try to run
+.I eqn
+on a non-existent file.
+.P
+If you want to check a document before actually printing it,
+.iS
+eqn \*(iAfiles\fP >/dev/null
+.iE
+will throw away the output but print the messages.
+.P
+If you use something like dollar signs as delimiters,
+it is easy to leave one out.
+This causes very strange troubles.
+The program
+.I checkdoc
+checks for misplaced or missing delimiters
+and similar troubles.
+.P
+In-line equations can only be so big
+because of an internal limit in
+.IR troff .
+If you get the message
+``word overflow,''
+you have exceeded this limit.
+If you print the equation as a displayed equation
+.hy
+this message will usually go away.
+The message
+``line overflow''
+indi\%cates you have exceeded a different, bigger internal limit.
+The only cure for this is to break the equation into two separate ones.
+.nh
+'''	\" FORCE COLUMN
+.br
+.ne 6i
+.P
+On a related topic,
+.I eqn
+does not break equations by itself\|\(em\|you must
+split long equations up across multiple lines
+by yourself,
+marking each by a separate
+\*(iR.EQ\fP\ \v'-0.2m'\(el\v'0.2m'\^\*(iR.EN\fP
+sequence.
+.H 1 "Use on the \s-1UNIX\s+1 System"
+.P
+To print a document that contains mathematics,
+.iS 
+eqn \*(iAfiles\fP | troff
+.iE
+If there are any
+.I troff
+options, they go after the
+.I troff
+part of the command.  For example,
+.iS
+eqn \*(iAfiles\fP | troff -ms       \f1(or \fP-mm\f1)
+.iE
+.P
+.I Eqn
+assumes the output is aimed at a PostScript device.
+If you are using some other typesetter or printer,
+you have to tell
+.I eqn
+with the same
+.cR -T
+argument that you use with
+.IR troff :
+.iS
+eqn -Taps \*(iAfiles\fP | troff -Taps \f1\(el
+.iE
+.I Eqn
+also uses the environment variable
+.cR \s-1TYPESETTER\s+1 ;
+the default is
+.cR post ,
+as it is for
+.IR troff .
+.P
+.I Eqn
+can be used with the
+.I tbl
+program
+for setting tables that contain mathematics.
+Use
+.I tbl
+before
+.I eqn ,
+like this:
+.iS
+tbl \*(iAfiles\fP | eqn | troff
+.iE
+.P
+When
+.I eqn
+is used with
+.I pic
+or
+.IR grap ,
+the additional vertical space
+that
+.I eqn
+adds to a line to keep it from colliding
+with adjacent lines will conflict with
+.I pic
+and
+.I grap
+spacing.
+The phrase
+.cR "space\ 0"
+at the beginning of an equation will turn off the extra space.

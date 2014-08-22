@@ -1,0 +1,210 @@
+%!PS-Adobe-2.0
+%%Creator: picasso
+%%BoundingBox: (atend)
+%%Pages: (atend)
+%%EndComments
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+%!
+%	@(#)newpic newpic.ps 1.0b@(#)	10/27/89
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+%%EndProlog
+%%BeginSetup
+%%EndSetup
+%%Page: ? 1
+%%PageBoundingBox: 161 332 450 458
+%%BeginPageSetup
+-1.9966 0.4525 72 72 PIC
+%%EndPageSetup
+ 0.01 w
+ 0 g
+ [] 0 d
+R findfont 0.13889 scalefont setfont
+(hashtab: ) 1 0.49722 2.9802e-08 -0.048611 T
+0.49722 -0.1 0.79722 0.1 Q s
+0.49722 -0.305 0.79722 -0.105 Q s
+0.49722 -0.905 0.79722 -0.305 Q s
+(.) 0 0.034722 0.62986 -0.47306 T
+(.) 0 0.034722 0.62986 -0.63972 T
+(.) 0 0.034722 0.62986 -0.80639 T
+0.49722 -1.105 0.79722 -0.905 Q s
+0.49722 -1.305 0.79722 -1.105 Q s
+(ndtable: ) 1 0.48194 0.70625 0.25139 T
+1.1882 0.2 1.6882 0.4 Q s
+(...) 0 0.10417 1.3861 0.26528 T
+1.6882 0.2 1.8882 0.4 Q s
+(n1) 0 0.13889 1.7188 0.26528 T
+1.8882 0.2 2.1882 0.4 Q s
+(d1) 0 0.13889 1.9688 0.26528 T
+2.1882 0.2 2.5882 0.4 Q s
+(n3) 0 0.13889 2.3187 0.26528 T
+2.5882 0.2 2.8882 0.4 Q s
+(d3) 0 0.13889 2.6687 0.26528 T
+2.8882 0.2 3.2882 0.4 Q s
+(...) 0 0.10417 3.0361 0.26528 T
+3.2882 0.2 3.7882 0.4 Q s
+(n2) 0 0.13889 3.4687 0.26528 T
+3.7882 0.2 3.9882 0.4 Q s
+(d2) 0 0.13889 3.8187 0.26528 T
+1.1472 -0.205 1 0.64722 -0.205 L s
+1.0472 -0.23 1.1472 -0.205 2 1.0472 -0.18 L c f
+1.1472 -0.255 1.2972 -0.155 Q s
+1.1472 -0.36 1.2972 -0.26 Q s
+1.1472 -0.46 1.2972 -0.36 Q s
+1.7332 0.195 1.6332 -0.005 2   1.4222 -0.205 1.2222 -0.205 Sp   s
+1.7108 0.094377 1.7332 0.195 2 1.6661 0.11674 L c f
+1.9332 0.195 1.8332 -0.005 2   1.5222 -0.31 1.2222 -0.31 Sp   s
+1.9108 0.094377 1.9332 0.195 2 1.8661 0.11674 L c f
+1.7222 -0.41 1 1.2222 -0.41 L s
+1.6222 -0.435 1.7222 -0.41 2 1.6222 -0.385 L c f
+1.7222 -0.46 1.8722 -0.36 Q s
+1.7222 -0.565 1.8722 -0.465 Q s
+1.7222 -0.665 1.8722 -0.565 Q s
+3.3332 0.195 3.2332 -0.005 2   1.9972 -0.41 1.7972 -0.41 Sp   s
+3.3108 0.094377 3.3332 0.195 2 3.2661 0.11674 L c f
+3.8332 0.195 3.7332 -0.005 2   2.0972 -0.515 1.7972 -0.515 Sp   s
+3.8108 0.094377 3.8332 0.195 2 3.7661 0.11674 L c f
+1.6472 -1.005 1 0.64722 -1.005 L s
+1.5472 -1.03 1.6472 -1.005 2 1.5472 -0.98 L c f
+1.6472 -1.055 1.7972 -0.955 Q s
+1.6472 -1.16 1.7972 -1.06 Q s
+1.6472 -1.26 1.7972 -1.16 Q s
+2.2332 0.195 2.1332 -0.205 2   1.9222 -1.005 1.7222 -1.005 Sp   s
+2.2332 0.091922 2.2332 0.195 2 2.1847 0.10405 L c f
+2.6332 0.195 2.5332 -0.205 2   2.0222 -1.11 1.7222 -1.11 Sp   s
+2.6332 0.091922 2.6332 0.195 2 2.5847 0.10405 L c f
+showpage
+%%Trailer
+%%BoundingBox: 161 332 450 458
+%%Pages: 1

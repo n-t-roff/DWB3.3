@@ -1,0 +1,20 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.VG
+.T FONTS FOR EMPHASIS
+Fonts are sometimes used for emphasis.
+.I
+This is the italic font.
+.B
+This is the bold font.
+.BI
+This is the bold-italic font.
+.CW
+This is constant width.
+.R
+Now back to the regular font.
+.VE jns

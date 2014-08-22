@@ -1,0 +1,122 @@
+'\" te
+.EQ
+delim @@
+.EN
+.ds dP /usr/pub
+.TH EQNCHAR 5
+.SH NAME
+.B eqnchar
+\- special character definitions for
+.B eqn
+and
+.B neqn
+.SH SYNOPSIS
+\*(mBeqn\f1
+.OP "" options []
+.OP \*(dP/eqnchar
+.OP \- "" []
+.OP "" files []
+\*(mB| troff\f1
+.OP "" options []
+.sp 0.5v
+\*(mBneqn\f1
+.OP "" options []
+.OP \*(dP/eqnchar
+.OP \- "" []
+.OP "" files []
+\*(mB| nroff\f1
+.OP "" options []
+.SH DESCRIPTION
+The file
+.MW \*(dP/eqnchar
+contains the following
+.BR troff (1)
+and
+.BR nroff (1)
+character definitions that are not
+ordinarily available on a phototypesetter or printer.
+These definitions are primarily intended for use with
+.BR eqn (1)
+and
+.BR neqn (1).
+.B eqnchar
+contains definitions for the following characters:
+.PP
+.TS
+center;
+lf(CW) l8 lf(CW) l8 lf(CW) l.
+ciplus	@ciplus@	||	@||@	square	@square@
+.sp 2p
+citimes	@citimes@	langle	@langle@	circle	@circle@
+.sp 2p
+wig	@wig@	rangle	@rangle@	blot	@blot@
+.sp 2p
+\-wig	@-wig@	hbar	@hbar@	bullet	@bullet@
+.sp 2p
+>wig	@>wig@	ppd	@ppd@	prop	@prop@
+.sp 2p
+<wig	@<wig@	<\->	@<->@	empty	@empty@
+.sp 2p
+=wig	@=wig@	<=>	@<=>@	member	@member@
+.sp 2p
+star	@star@	|<	@|<@	nomem	@nomem@
+.sp 2p
+bigstar	@bigstar@	|>	@|>@	cup	@cup@
+.sp 2p
+=dot	@=dot@	ang	@ang@	cap	@cap@
+.sp 2p
+orsign	@orsign@	rang	@rang@	incl	@incl@
+.sp 2p
+andsign	@andsign@	3dot	@3dot@	subset	@subset@
+.sp 2p
+=del	@=del@	thf	@thf@	supset	@supset@
+.sp 2p
+oppA	@oppA@	quarter	@quarter@	!subset	@subset@
+.sp 2p
+oppE	@oppE@	3quarter	@3quarter@	!supset	@supset@
+.sp 2p
+angstrom	@angstrom@	degree	@degree@	scrL	@scrL@
+.sp 2p
+==<	@==<@	==>	@==>@	
+.TE
+.PP
+.B posteqnchar
+and
+.B i300eqnchar
+are special versions of
+.B eqnchar
+tailored for PostScript and Imagen 8/300 output devices,
+respectively;
+output will not look optimal on other devices.
+.B cateqnchar
+is more ``device-independent,''
+and should produce output that looks reasonable
+on any device supported by 
+.BR troff (1).
+PostScript is the default device, so
+.B eqnchar
+is linked to
+.B posteqnchar
+by default.
+.SH FILES
+.MW \*(dP/eqnchar
+.br
+.MW \*(dP/posteqnchar
+.br
+.MW \*(dP/i300eqnchar
+.br
+.MW \*(dP/cateqnchar
+.fi
+.SH SEE ALSO
+.BR eqn (1),
+.BR neqn (1),
+.BR nroff (1),
+.BR troff (1)
+.SH REFERENCES
+C. Scrocca,
+.ul
+New Graphic Symbols for EQN and NEQN
+.sp .5
+B. W. Kernighan, L. L. Cherry,
+.ul
+Typesetting Mathematics \(em User's Guide (Second Edition)

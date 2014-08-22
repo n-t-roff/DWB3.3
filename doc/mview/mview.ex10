@@ -1,0 +1,29 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+.VG
+.T READABILITY OF TEXT
+.S
+.S
+.T Line Width and Leading for 10-Point Type
+.L
+.L
+.TS
+box;
+c  || c   | c   | c   | c 
+c  || c   | c   | c   | c 
+r2 || ne2 | ne2 | ne2 | ne.
+Line	Set	1-Point	2-Point	4-Point
+Width	Solid	Leading	Leading	Leading
+=
+9 Pica	\-9.3	\-6.0	\-5.3	\-7.1
+14 Pica	\-4.5	\-0.6	\-0.3	\-1.7
+19 Pica	\-5.0	\-5.1	0.0	\-2.0
+31 Pica	\-3.7	\-3.8	\-2.4	\-3.6
+43 Pica	\-9.1	\-9.0	\-5.9	\-8.8
+.TE
+.VE Example 10
+Readability of Text
+(tbl sample)

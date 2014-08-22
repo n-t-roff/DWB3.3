@@ -1,0 +1,437 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "PAGE HEADERS AND FOOTERS"
+Text that occurs at the top of each page is known as the page header. 
+Text printed at the bottom of each page is called the page footer.
+There can be up to three lines of text associated with
+the page header and the page footer:
+every page, even page only, and odd page only.
+Thus, the page header may have up to two lines of text:  the
+line that occurs at the top of every page and
+the line for the even- or odd-numbered page.
+Likewise, the page footer may have up to two lines of text:  the
+line that occurs at the bottom of every page and
+the line for the even- or odd-numbered page.
+.P
+This section describes the default appearance of page headers and
+page footers and ways to change them.
+The term ``header'' (not qualified by ``even'' or ``odd'')
+refers to the line of the page header that occurs on every page,
+and similarly for the term ``footer''.
+.br
+.ne 1i
+.H 2 "Default Headers and Footers"
+By default, each page has a centered page number as the header.  
+There is no default footer and no even\^/odd default headers or footers,
+except when pages are numbered sequentially within sections.
+In a document whose style is controlled by the
+.cR .MT
+or the
+.cR .LT
+macro, the page header on the first page
+is automatically suppressed provided a break does not occur before the
+.cR .MT
+or the
+.cR .LT
+macro is called.
+The macros and text of \(sc6.1-\(sc6.2. and \(sc9 as well as
+.cR .nr
+and
+.cR .ds
+requests do not cause a break and are permitted before the
+.cR .MT
+or the
+.cR .LT
+macro call.
+.P
+Pages can be numbered sequentially within sections.
+To obtain this numbering style, specify 
+.cR \-rN3
+or
+.cR \-rN5
+on the command line.
+In this case, the default footer is a centered \*(iAsection\fP-\*(iApage\fP
+number (e.g., ``9\(hy1''), and the default page header is blank.
+.P
+The current page number is often used in the page header or the
+page footer (see \(sc9.4).
+By default, the page number contained in the
+.cR P
+register is an Arabic number.
+The format of the page number may be changed with the
+.cR .af
+request
+(e.g., use format
+.cR i
+for lower-case Roman numerals.)
+.P
+If ``debug mode'' is set using the flag
+.cR \-rD1 
+on the command line, additional information
+is included in the default header at the top left of each page.
+.H 2 "Page Header"
+.iS
+\&.PH \f1[\*(iAheader\f1]
+.iE
+The argument
+.cA header
+is of the form
+.iS
+"'\*(iAleft\*(iR'\*(iAcenter\*(iR'\*(iAright\*(iR'"
+.iE
+This form applies to the argument
+.cA header
+for the
+.cR .EH
+and
+.cR .OH
+macros as well.
+If it is inconvenient to use the apostrophe
+.cR ' ) (
+as the delimiter
+(i.e., because it occurs within one of the parts), it may be replaced
+uniformly by any other character.
+On output, the parts are left-justified, centered, and right-justified,
+respectively.
+.P
+The
+.cR .PH
+macro specifies the header that is to appear at the top of every page.
+By default, the page header is defined as a centered page number surrounded by hyphens.
+.H 3 "Even-Page Header"
+.iS
+\&.EH \f1[\*(iAheader\f1]
+.iE
+The
+.cR .EH
+macro supplies a line to be printed at the top of each
+even-numbered page, immediately following the header.
+The even-page header is not defined by default
+so the initial value is a blank line.
+.H 3 "Odd-Page Header"
+.iS
+\&.OH \f1[\*(iAheader\f1]
+.iE
+The
+.cR .OH
+macro supplies a line to be printed at the top of each
+odd-numbered page, immediately following the header.
+The odd-page header is not defined by default
+so the initial value is a blank line.
+.H 2 "Page Footer"
+.iS
+\&.PF \f1[\|\*(iAfooter\f1]
+.iE
+The argument
+.cA footer
+is of the form
+.iS
+"'\*(iAleft\*(iR'\*(iAcenter\*(iR'\*(iAright\*(iR'"
+.iE
+(same as for page headers).
+This form applies to the argument
+.cA footer
+for the
+.cR .EF
+and
+.cR .OF
+macros as well.
+If it is inconvenient to use the apostrophe
+.cR ' ) (
+as the delimiter
+(i.e., because it occurs within one of the parts), it may be replaced
+uniformly by any other character.
+On output, the parts
+are left-justified, centered, and right-justified, respectively.
+.P
+The
+.cR .PF
+macro specifies the line that is to appear at the bottom of each page.
+The page footer is not defined by default so
+the initial value is a blank line.
+If the \*(iR\-rC\*(iAn\f1
+flag is specified on the command line, the type of copy 
+follows the footer on a separate line.
+In particular, if 
+.cR \-rC3
+or
+.cR \-rC4
+.sM DRAFT ) (
+is specified, then, in addition, the
+footer is initialized to contain the date instead of being
+a blank line.
+.H 3 "Even-Page Footer"
+.iS
+\&.EF \f1[\|\*(iAfooter\f1]
+.iE
+The
+.cR .EF
+macro supplies a line to be printed at the bottom of
+each even-numbered page, immediately preceding the footer.
+The even-page footer is not defined by default so
+the initial value is a blank line.
+.H 3 "Odd-Page Footer"
+.iS
+\&.OF \f1[\|\*(iAfooter\f1]
+.iE
+The
+.cR .OF
+macro supplies a line to be printed at the bottom of
+each odd-numbered page, immediately preceding the footer.
+The odd-page footer is not defined by default
+so the initial value is a blank line.
+.H 3 "Footer on the First Page."
+By default, page footers are not defined so the resulting lines are blank.
+If one specifies
+.cR .PF
+and\^/or
+.cR .OF
+before the end of the first page of the document,
+then these lines will appear at the bottom of the first page.
+.P
+The header (whatever its contents) replaces the footer on the 
+first page only if the
+.cR \-rN1 
+option is specified on the command line
+(see \(sc2.3).
+.H 2 "Use of Strings and Registers in Header and Footer Macros"
+String and register names may be placed in the arguments to the header
+and footer macros.
+If the value of the string or register is to be
+computed when the respective header or footer is printed, the
+invocation must be escaped by four (4) backlashes.
+This is because the
+string or register invocation will be processed three times:
+.BL "" 1
+.LI
+as the argument to the header or footer macro;
+.LI
+in a formatting request within the header or footer macro;
+.LI
+in a
+.cR .tl
+request during header or footer processing.
+.LE 1
+For example, the page number register
+.cR P
+must be escaped with four
+backslashes in order to specify a header in which the page number is to
+be printed at the right margin, e.g.:
+.iS
+\&.PH "'''Page \e\e\e\enP'"
+.iE
+creates a right-justified header containing the word ``Page'' followed by
+the page number.
+Similarly, to specify a centered footer with the ``section-page'' 
+style, use:
+.iS
+\&.PF "''- \e\e\e\en(H1-\e\e\e\enP -''"
+.iE
+As another example, suppose that the user arranges for the string
+.cR a]
+to contain the current section heading which is to be printed at the 
+bottom of each page.
+The
+.cR .PF
+macro call would then be:
+.iS
+\&.PF "''\e\e\e\e*(a]''"
+.iE
+If only one or two backslashes were used, the footer would print a
+constant value for
+.cR a] ,
+namely, its value when the
+.cR .PF
+appeared in the input text.
+.P
+The following sequence specifies blank lines for the header and footer
+lines, page numbers on the outside edge of each page (i.e., top left 
+margin of even pages and top right margin of odd pages), and ``Revision\ 3''
+on the top inside margin of each page:
+.iS
+\&.PH ""
+\&.PF ""
+\&.EH "'\e\e\e\enP''Revision 3'"
+\&.OH "'Revision 3''\e\e\e\enP'"
+.iE
+.H 2 "Generalized Top-of-Page Processing \*(BU"
+.P
+During header processing,
+.sM MM
+invokes two user-definable macros:  the
+.cR .TP
+macro and the
+.cR .PX
+macro.
+The
+.cR .TP 
+macro is invoked in the environment (see
+.cR .ev
+request) 
+of the header; the
+.cR .PX
+macro is a user-exit macro that is
+invoked (without arguments) when the normal environment has been
+restored, and with ``no-space'' mode already in effect.
+.P
+The effective initial definition of
+.cR .TP
+(after the first page of a document) is:
+.iS
+\&.de TP
+\&'sp 3
+\&.tl \e\e*(}t
+\&.if e 'tl \e\e*(}e
+\&.if o 'tl \e\e*(}o
+\&'sp 2
+\&..
+.iE
+.br
+.ne 5v
+The string
+.cR }t
+contains the header (for every page), the string
+.cR }e
+contains the even-page header, and the string
+.cR }o
+contains the odd-page header, as defined by
+.cR .PH ,
+.cR .EH 
+and
+.cR .OH ,
+respectively.
+To obtain more specialized page titles, the user may redefine
+.cR .TP
+to cause any desired header processing (see \(sc12.3.2).
+For example, to obtain a page header that includes three centered lines 
+of data (a document's number, issue date, and revision date),
+one could define
+.cR .TP
+as follows:
+.iS
+\&.de TP
+\&.sp
+\&.ce 3
+777\-888\-999
+Iss. 2, AUG 1977
+Rev. SEP 1977
+\&.sp
+\&..
+.iE
+The
+.cR .PX
+macro may be used to supply text that is to appear at
+the top of each page after the normal header and that may have tab
+stops to align it with columns of text in the body of the document.
+.H 2 "Generalized Bottom-of-Page Processing"
+.iS
+\&.BS
+.cA "zero or more lines"
+.cA "of bottom-block text"
+\&.BE
+.iE
+Lines of text that are specified between the
+.cR .BS
+(bottom-block start)
+and
+.cR .BE
+(bottom-block end) macros will be printed at the bottom of 
+each page,
+after the footnotes (if any), but before the page footer.
+The bottom block will not appear on the cover sheet, if any.
+This block of text is removed by specifying an empty block:
+.iS
+\&.BS
+\&.BE
+.iE
+.H 2 "Proprietary Markings and Copyright Notice"
+.iS
+\&.PM \f1[\*(iAtype\f1] [\*(iA\|year\f1]
+.iE
+The
+.cR .PM
+macro generates a proprietary marking or copyright notice.
+The marking appears at the bottom of the page following
+the page footer (if any).
+.P
+By default,
+a document does not carry a proprietary marking or copyright notice.
+Use the
+.cR .PM
+macro with the following value for
+.cA type
+to generate the corresponding type of marking or notice:
+.DS
+.TS
+center box tab(;);
+c s s cf1
+c1f5 c1p-2f1 cf5 lf1.
+\*(iAtype\fP;Marking Type
+_
+\f2none\fP;or;0;turn off previous marking, if any
+P;or;1;PROPRIETARY
+RS;or;2;PROPRIETARY (RESTRICTED)
+RG;or;3;PROPRIETARY (REGISTERED)
+CP;or;4;``SEE COVER PAGE'' message
+CR;or;5;Copyright notice
+UW;or;6;Unpublished Work
+.TE
+.DE
+An unrecognized
+.cA type
+will default to the PROPRIETARY marking.
+.P
+By default, the copyright notice
+.cR CR ) (
+and the ``Unpublished Work'' notice
+.cR UW ) (
+use the current year as the copyright date.
+A year may be supplied as the second argument to
+.cR .PM
+to override the copyright date.
+.P
+See Appendix\ G for a sample of each type of marking.
+.br
+.ne 5v
+.H 2 "Private Documents"
+.iS
+\&.nr Pv \*(iAvalue
+.iE
+The word
+.sM PRIVATE '' ``
+may be centered and underlined on the second
+line of a document (preceding the page header).
+This is done by setting the
+.cR Pv
+register:
+.DS
+.TS
+center box tab(;);
+c cf1
+nf5 lf1.
+\*(iAvalue\fP;Meaning
+_
+0;do not print PRIVATE (default)
+1;PRIVATE on First page only
+2;PRIVATE on all pages
+.TE
+.DE
+.P
+If
+.cR Pv
+is 2, the user-definable
+.cR .TP
+macro may not be used because
+.cR .TP
+is used by
+.sM MM
+to print
+.sM PRIVATE '' ``
+on all pages except the first page of a
+memorandum on which
+.cR .TP
+is not invoked.

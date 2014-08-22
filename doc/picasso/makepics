@@ -1,0 +1,10 @@
+ # After installing Picasso, run this shell script to recreate
+ # all the pictures in the Overview and User Guide.
+ # Then you can troff the guide and overview.  This script
+ # need only be run once. The Guide itself is a good test
+ # of Picasso, BP, mm and troff.
+for f in *.pic
+do
+o=`basename $f .pic`
+picasso $f >$o.ps
+done

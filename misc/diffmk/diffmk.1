@@ -1,0 +1,83 @@
+.TH DIFFMK 1
+.SH NAME
+.B diffmk
+\- mark differences between files
+.SH SYNOPSIS
+\*(mBdiffmk\fP
+.OP \- "" []
+.OP "" \ filename1
+.OP "" \ filename2
+.OP "" \ filename3
+.SH DESCRIPTION
+.B diffmk
+compares two versions of a file and creates a
+third file that includes ``change mark''
+.MW .mc
+requests for
+.B nroff
+or
+.BR troff .
+.I filename1
+and
+.I filename2
+are the old and new versions of the file,
+respectively.
+.B diffmk
+generates
+.IR filename3 ,
+which contains the lines of
+.I filename2\^
+plus inserted formatter ``change mark''
+requests.
+When
+.I filename3\^
+is formatted,
+changed or inserted text is shown by \(bv at the right
+margin of each line.
+The position of deleted text is shown by a single asterisk (\(**).
+.PP
+In addition,
+.B diffmk
+can be used to produce listings of C (or other)
+programs with changes marked.
+A typical command line for such use is
+.EX
+diffmk old.c new.c tmp; nroff macs tmp
+.EE
+where the file
+.MW macs
+contains
+.EX
+\&.pl 1
+\&.ll 77
+\&.nf
+\&.eo
+\&.c2 `
+.EE
+The
+.MW .ll
+request might specify a different line length, depending on the
+nature of the program being printed.
+The
+.MW .eo
+and
+.MW .c2
+requests are probably needed only for C programs.
+.PP
+Where
+.B diffmk
+encounters
+.OP \-
+it uses the standard input.
+.SH BUGS
+Aesthetic considerations may dictate manual adjustment of some output.
+File differences involving only formatting requests may produce undesirable
+output,
+i.e., replacing
+.MW .sp
+by
+.MW ".sp\ 2"
+will produce a ``change mark'' on the preceding or following line of output.
+.SH SEE ALSO
+.BR nroff (1),
+.BR troff (1)

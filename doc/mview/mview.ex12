@@ -1,0 +1,18 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.VG 7 5 20 24
+.T A Working Model
+.PS
+boxwid = 1.25i ; boxht = 0.75i
+arrow
+box "input" ; arrow
+box "process" ; arrow
+box "output" ; arrow
+.PE
+.VE Example 12
+A Working Model
+(pic sample)

@@ -1,0 +1,26 @@
+.TL
+bug
+.AF
+.AU    "Wendy S. Grohol"
+.AS
+The problem was: print this. The inner expression
+comes out too low. Removing either superscript or
+subscript puts it in the right place.
+.AE
+.MT
+.P
+.S 12
+.EQ
+delim $$
+gsize 12
+.EN
+.DS C
+.EQ (4.1.2)
+E(L ~|~ y) ~=~ sum from j=0 to inf
+(j ~+~ 1)
+sum from k=1 to inf k left ( left ( 1 ~-~ kM over y right ) sub + sup j ~-~
+left ( 1 ~-~ { (k ~+~ 1)M } over y right ) sub + sup j right )
+{ e sup {- nu y  } (
+nu y ) sup j } over {j !} .
+.EN
+.DE

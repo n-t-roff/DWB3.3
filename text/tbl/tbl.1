@@ -1,0 +1,471 @@
+'\" t
+.ds T \(->
+.if t .ds ^\s+2\v@.2m@^\v@-.2m@\s-2
+.if n .ds ^ ^
+.TH TBL 1 "DWB 3.3"
+.SH NAME
+.B tbl
+\- prepare tables for
+.B nroff
+or
+.B troff
+.SH SYNOPSIS
+\*(mBtbl\f1
+.OP \-c "" []
+.OP \-TX "" []
+.OP \- "" []
+.OP "" files []
+.SH DESCRIPTION
+.B tbl
+is a table preprocessor for
+.BR nroff (1)
+or
+.BR troff (1).
+.B tbl 
+assumes that lines between a
+.MW .TS
+and a subsequent
+.MW .TE
+describe a table; these lines are replaced by
+.B troff
+requests and data to produce the table.
+Lines outside these areas are copied to the standard output unaltered.
+The
+.MW .TS
+and
+.MW .TE
+command lines are also copied through without change
+so they can be interpreted later by
+.B troff
+macro packages.
+.PP
+The
+.MW .TS
+command line
+may be followed by a line containing global options:
+.sp 3p
+.RS
+.PD 0
+.TP 1i
+.MW center
+Centers the table (the default action is to left-adjust the table).
+.TP
+.MW expand
+Makes the table as wide as the current line length.
+.TP
+.MW box
+Encloses the table in a box.
+.TP
+.MW doublebox
+Encloses the table in a double box.
+.TP
+.MW allbox
+Encloses each table entry in a box.
+.TP
+.MI tab( x )
+Uses the character
+.I x
+instead of a tab to separate entries in a line of input data.
+.TP
+.MI linesize( n )
+Sets lines or rules (e.g., from
+.MR box )
+in
+.IR n -point
+type.
+.TP
+.MI maxline( n )
+Uses
+.I n
+instead of the default maximum (250)
+for the number of data lines that are used in calculating column widths, etc.
+.TP
+.MI delim( x\|y )
+Recognizes
+.I x
+and
+.I y
+as
+.BR eqn (1)
+delimiters.
+.RE
+.PD
+.PP
+End the global options, if any, with a semi-colon
+.RM ( ; ).
+Use white space and/or commas to separate multiple global options.
+All of the global options must appear on a single line.
+.PP
+The line of global options is followed by one or more
+lines describing the format of the table.
+Each format line describes one row of the table, 
+except that the last format line (which must end with a period) describes
+the remaining rows of the table.
+Each format line contains a key letter to describe each column of the table. 
+A key letter may be followed by modifiers to specify the font and point size
+of the corresponding table entries,
+to indicate where vertical bars are to appear between columns,
+and to override the default calculations for column width,
+spacing between columns, etc.
+.PP
+The available key-letters (lower- and upper-case) are:
+.sp 3p
+.RS
+.PD 0
+.TP
+.MW c
+Centers each entry within the column.
+.TP
+.MW r
+Right-adjusts each entry within the column.
+.TP
+.MW l
+Left-adjusts each entry within the column.
+.TP
+.MW n
+Numerically adjusts each entry in the column:
+the units positions of numeric entries will be aligned vertically.
+.TP
+.MW a
+Centers the widest entry in this column
+and then causes all other entries in this column
+to be left-adjusted with respect to the widest entry.
+.TP
+.MW s
+Causes the previous entry on the left to span horizontally into this column.
+.TP
+.MW \*^
+Causes the previous entry in this column
+to span vertically into this entry.
+.TP
+.MW _
+Replaces this entry with a horizontal line
+.RM ( \-
+is a synonym).
+.TP
+.MW =
+Replaces this entry with a double horizontal line.
+.RE
+.PD
+.PP
+Each key letter may be followed by one or more modifiers (lower- or upper-case):
+.sp 3p
+.RS
+.PD 0
+.TP
+.I n
+Sets the gap between the current and next column to be
+.I n
+ens wide.
+Default is 3.
+.TP
+.MI F \|f
+Uses font
+.IR f .
+.MW B
+and
+.MW I
+are synonyms for
+.MW FB
+and
+.MR FI ,
+respectively.
+.TP
+.MW T
+Begin a vertically-spanned item at the top of its range.
+Default is vertical centering.
+.TP
+.MI P n
+Uses point size
+.IR n ;
+signed
+.I n
+means a relative size change.
+.TP
+.MI V n
+Uses
+.IR n -point
+vertical spacing in text blocks; signed
+.I n
+means a relative size change.
+.TP
+.MI W( n )
+Sets the column width to a
+.B troff
+width specification
+.IR n ;
+parens are optional if
+.I n
+is a simple integer.
+.TP
+.MW E
+Equalizes the widths of all columns marked with the
+.MW E
+modifier.
+.TP
+.MW X
+Increase the normal width of this column
+to use the remainder of the page width
+(between margins)
+after the widths of the other columns have been subtracted.
+This modifier is useful for a column containing text blocks,
+where it is desired to make the column as wide as possible
+without exceeding the page width.
+At most one column can have this modifier.
+.RE
+.PD
+.PP
+A vertical bar
+.RM ( | )
+may be placed between key letters to produce a vertical line
+between the corresponding columns of the table.
+A vertical bar to the left of the first key letter
+or to the right of the last one produces a line at the edge
+of the table.
+If two vertical bars
+.RM ( || )
+appear between key letters, a double vertical line is drawn
+between the corresponding columns of the table.
+.PP
+The maximum number of columns for a given table is set by the
+first format line for that table.
+Subsequent format lines may specify fewer columns, if desired.
+.PP
+The last format line is followed by one or more lines
+containing the data for the table entries, followed finally by the
+.MW .TE
+command line.
+Within each data line, the data items for the table entries
+are separated from each other by the specified separator character
+(default tab).
+.PP
+Except as specified below,
+each line of data corresponds to one row of the table.
+Lines beginning with
+.MW .
+are taken to be
+.B troff
+requests and are copied through unchanged.
+Certain special data items are recognized:
+.PP
+.RS
+.PD 0
+.TP
+.MW _
+Draws a horizontal line in this column
+.RM ( -
+is a synonym).
+A data line consisting of a single
+.MW _
+or
+.MW -
+draws a line across the whole table.
+.TP
+.MW =
+Draws a double horizontal line in this column.
+A data line consisting of a single
+.MW =
+draws the line across the whole table.
+.TP
+.MW \e_
+Draws a horizontal line only as wide as the contents of the column
+(does not extend into the column gutter to join with other lines).
+.TP
+.MI \eR x
+Repeats character
+.I x
+across the column.
+.TP
+.MW \e^
+Spans the previous item in this column down into this row.
+.TP
+.MW T{
+The following data is a text block to be formatted separately by
+.B troff
+and then placed in the table entry.
+The block continues to the next line beginning with
+.MW T}
+alone in a data field.
+The remainder of the data line follows at that point.
+.RE
+.PD
+.PP
+Long data lines can be broken: any data line ending with a backslash
+.RM ( \e )
+is combined with the following line (and the
+.MW \e
+vanishes).
+.PP
+There is a limit of 62 on the number of text blocks in the first
+.MI maxline
+lines of input data;
+this reflects a limit in the size of the
+.B troff
+name space.
+There is no limit on the number of text blocks after the first
+.MI maxline
+lines of input data.
+The global parameter
+.MI maxline
+determines the number of lines of input data
+that are used to calculate column widths, etc.
+A
+.I line
+in this context is one of the following:
+(1) the input data for one row of the table, including text blocks, if any,
+(2) a
+.B troff
+request or macro call, or
+(3) an explicit request for a full-width horizontal line.
+If you get a message indicating that
+the limit on the number of text blocks has been exceeded,
+try using the
+global parameter
+.MI maxline
+to
+.I reduce
+the number of input lines that are considered in calculating column widths,
+etc.
+.PP
+Format specifications can be interspersed with data lines by using the
+table-change request
+.RM ( .T& ).
+Lines following
+.MW .T&
+are taken to be new format specifications;
+the last such line must end with a period.
+Subsequent lines are treated as input data to be
+processed in accordance with the new format specifications.
+It is not possible to change the maximum number of columns,
+the space between columns, the global options, or the selections
+of equal-width columns.
+Changes to the table format using
+.MW .T&
+are allowed only within the first 250 lines of table data;
+this limit can be overridden by the
+.MW maxline
+global option.
+.PP
+Anywhere between a
+.MW .TS
+and the next
+.MR .TE ,
+an input line of the form
+.EX
+\&.T& <\f2filename
+.EE
+inserts the contents of
+.I filename
+at that point in the input.
+The included file may contain format specifications,
+global options, or data in any valid combination.
+.MW .T&
+requests in an included file are allowed, so nested file includes are possible.
+.MW .TS
+and
+.MW .TE
+requests in an included file are ignored.
+.PP
+The normal operation of
+.B tbl
+is to terminate processing when the first input error is encountered.
+If the
+.OP \-c
+command-line option is used,
+.B tbl
+will continue processing
+even if there are errors in the input.
+If this option is used
+and there is an error in the global options section for a given table,
+the remaining global options for that table are not processed.
+If there is an error in the format specifications,
+the data section of the table is skipped.
+If the
+.OP \-c
+option is not used, processing terminates with the first error.
+.PP
+The
+.OP \-TX
+option forces
+.B tbl
+to use only full vertical line motions, making the output
+more suitable for devices that cannot generate partial vertical
+line motions (for example, line printers).
+.PP
+If you do not give any file names as arguments,
+or if you specify
+.OP \-
+as a file name argument,
+.B tbl
+reads the standard input,
+so it may be used as a filter.
+When you use
+.B tbl
+with
+.BR eqn (1)
+or
+.BR neqn (1),
+put
+.B tbl
+first to minimize the volume of data passed through pipes.
+.br
+.ne 20v
+.SH EXAMPLE
+If we let \*T represent the tab character
+(which should be typed as a genuine tab),
+then the following input:
+.EX -1
+\&.TS
+center box ;
+cB   s  s
+cI | cI s
+^  | c  c
+l  | n  n .
+Household Population
+_
+Town\*THouseholds
+\*TNumber\*TSize
+=
+Bedminster\*T789\*T3.26
+Bernards Twp.\*T3087\*T3.74
+Bernardsville\*T2018\*T3.30
+Bound Brook\*T3425\*T3.04
+Bridgewater\*T7897\*T3.81
+Far Hills\*T240\*T3.19
+\&.TE
+.EE
+.br
+.ne 10v
+yields a table which looks as follows:
+.TS
+center box ;
+cB s s
+cI | cI s
+^ | c c
+l | n n .
+Household Population
+_
+Town	Households
+	Number	Size
+=
+Bedminster	789	3.26
+Bernards Twp.	3087	3.74
+Bernardsville	2018	3.30
+Bound Brook	3425	3.04
+Bridgewater	7897	3.81
+Far Hills	240	3.19
+.TE
+.SH BUGS
+This release of
+.B tbl
+attempts to fix all of the serious problems with multiple-page boxed tables.
+There are still a few unresolved appearance problems
+that do not seriously affect readability.
+.SH SEE ALSO
+.BR nroff (1), 
+.BR troff (1),
+.BR mm (5)
+.SH REFERENCE
+M. E. Lesk,
+.ul
+TBL \(em A Program To Format Tables

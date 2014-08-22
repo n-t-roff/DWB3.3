@@ -1,0 +1,154 @@
+.TH NDX 1
+.SH NAME
+.B ndx
+\- create a subject-page index for a document
+.SH SYNOPSIS
+\*(mBndx\f1
+.OP "" \ subjfile
+\*(mW"\f2formatter\ command\ line\*(mW"\f1
+.SH DESCRIPTION
+.BR ndx ,
+given a list of subjects in
+.IR subjfile ,
+searches a specified document
+and writes a subject-page index to the standard output.
+.PP
+The file
+.I subjfile
+contains the list of subjects to be included in the index.
+Each subject must begin
+on a new line and have the following format:
+.EX
+\f2word1\f1  [\f2word2\f1  \(el ]  [,  \f2wordk\f1  \(el ]
+.EE
+For example,
+.EX
+printed circuit boards
+arrays
+arrays, dynamic storage
+Smith, W. P.
+printed circuit boards, channel-oriented multi-layer
+Aranoff
+University of Illinois
+PL/1
+.EE
+.PP
+The subject must start in column 1.
+.PP
+The syntax for the
+formatter command line
+is
+.EX
+\f2formatter\f1  [\|\f2options\f1\|]  \f2files\f1
+.EE
+It is the command that will be used to create the final form
+of the document.
+The following are examples of valid formatter command lines:
+.EX
+mm \-Tlp  \f2files
+.EE
+.EX
+nroff \-mm \-Tlp \-rW60  \f2files
+.EE
+.EX
+troff \-rB2 \-Tpost \-rO1.5i  \f2files
+.EE
+For more information on the
+formatter command line,
+see,
+.BR mm (1),
+.BR mmt (1),
+.BR nroff (1)
+and
+.BR troff (1).
+.PP
+The document
+must include formatting commands for
+.SM MM ,
+.B nroff
+or
+.BR troff .
+The formatter command line
+tells
+.B ndx
+whether 
+.BR troff ,
+.BR nroff ,
+.B mm
+or 
+.B mmt
+would be used to produce the final version of the document.
+.B troff
+or
+.B mmt
+specifies
+.B troff
+as the formatting program;
+.B nroff
+or
+.B mm
+specifies
+.B nroff
+as the formatting program.
+The
+.I options
+are those that would be given to the
+.BR troff ,
+.BR nroff ,
+.B mm
+or
+.B mmt
+command
+in printing the final form of the document, and are necessary to determine
+the correct page numbers for subjects as they are located in the document.
+.PP
+.B ndx
+does not actually cause the final version of the document to be printed.
+The author must create the document separately.
+The indexer, of course, should not be
+used until the document is complete and no further changes are expected.
+.SH EXAMPLES
+The command
+.EX
+ndx  \f2subjfile\fP "nroff \-mm \-rW70  \f2files\fP" > \f2indexfile
+.EE
+would produce a subject-page index for the document 
+.I files
+and take its subjects from the list,
+.IR subjfile .
+The page numbers would correspond to the document produced by
+.EX
+nroff \-mm \-rW70  \f2files
+.EE
+The command
+.EX
+ndx  \f2subjfile\fP "mm \-rW60 \-rN2 \-rO0 ch1 ch2 ch3" > \f2indexfile
+.EE
+would produce a subject-page index for the document files
+.MR ch1 ,
+.MR ch2 ,
+and
+.MR ch3 .
+The page numbers would correspond to the documents produced by
+.EX
+mm \-rW60 \-rN2 \-rO0 ch1 ch2 ch3
+.EE
+The command
+.EX
+ndx  \f2subjfile\fP "troff \-rB2 \-rW5i \-rO1.5i \-mm  \f2files\fP" > \f2indexfile
+.EE
+would produce a subject-page index
+for the document
+.IR files ,
+and the page numbers
+would correspond
+to the document produced by
+.EX
+troff \-rB2 \-rW5i \-rO1.5i \-mm  \f2files
+.EE
+.SH SEE ALSO
+.BR subj (1),
+.BR mm (1),
+.BR mmt (1),
+.BR nroff (1),
+.BR troff (1)

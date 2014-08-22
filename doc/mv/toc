@@ -1,0 +1,13 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so ../defs.toc
+.tS MV
+\s-1MV\s+1 \(em A Macro Package
+for View Graphs and Slides
+.tE
+.so toc.entries

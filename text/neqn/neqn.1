@@ -1,0 +1,45 @@
+.TH NEQN 1
+.SH NAME
+.B neqn
+\- format mathematical text for
+.B nroff
+.SH SYNOPSIS
+\*(mBneqn\f1
+.OP \-d xy []
+.OP \-p n []
+.OP \-s n []
+.OP \-f n []
+.OP \- "" []
+.OP "" files []
+.SH DESCRIPTION
+.B neqn
+is a preprocessor
+for formatting mathematical text
+with
+.B nroff
+on typewriter-like terminals.
+Normal usage is:
+.EX
+neqn  \f1[\|\f2options\f1\|]  \f2files\*(mW | nroff  \f1[\|\f2options\f1\|]\*(mW | \(el\f1
+.EE
+If you do not specify files 
+(or if you specify
+.OP \-
+as the last
+argument),
+.B neqn
+reads the standard input.
+.PP
+Full details of use are given in
+.BR eqn (1)
+and in the
+.SM REFERENCE
+cited below.
+.SH SEE ALSO
+.BR eqn (1),
+.BR nroff (1),
+.BR eqnchar (5)
+.SH REFERENCE
+B. W. Kernighan, L. L. Cherry,
+.ul
+Typesetting Mathematics \(em User's Guide (Second Edition)

@@ -1,0 +1,192 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.ds pT MM
+.aP B "User-Defined List Structures \*(BU"
+.P
+If a large document requires complex list structures, it is useful
+to be able to define the appearance for each list level only once,
+instead of having to define it at the beginning of each list.
+This permits consistency of style in a large document.
+For example, a generalized list-initialization macro might be defined
+in such a way that what it does depends on the list-nesting level in effect
+at the time the macro is called.
+Suppose that levels 1 through 5 of 
+lists are to have the following appearance:
+.DS I
+A.
+.ti +\w'A.\ 'u
+[1]
+.ti +\w'A.\ [1]\ 'u
+\*(BU
+.ti +\w'A.\ [1]\ \*(BU\ 'u
+a)
+.ti +\w'A.\ [1]\ \*(BU\ a)\ 'u
++
+.DE
+.P
+The following code defines a macro
+.cR .aL ) (
+that always begins a new list and determines the type of list
+according to the current list level.
+To understand it, you should know that the number register
+.cR :g
+is used by the
+.sM MM
+list macros to determine the current list
+level, and it is 0 if there is no currently active list.
+Each call to a list-initialization macro increments
+.cR :g
+and each
+.cR .LE
+call decrements it.
+.iS
+\&.de aL
+\&'        \e" register g is used as a local temporary
+\&'        \e" to save :g before it is changed below
+\&.nr g \e\en(:g
+\&'        \e" give me an A.
+\&.if \e\eng=0 .AL A
+\&'        \e" give me a [1]
+\&.if \e\eng=1 .LB \e\en(Li 0 1 4
+\&'        \e" give me a bullet
+\&.if \e\eng=2 .BL
+\&'        \e" give me an a)
+\&.if \e\eng=3 .LB \e\en(Li 0 2 2 a
+\&'        \e" give me a +
+\&.if \e\eng=4 .ML +
+\&..
+.iE
+This macro can be used (in conjunction with
+.cR .LI
+and
+.cR .LE )
+instead of
+.cR .AL ,
+.cR .RL ,
+.cR .BL ,
+.cR .LB
+and
+.cR .ML .
+For example, the following input:
+.iS
+\&.aL
+\&.LI
+first line.
+\&.aL
+\&.LI
+second line.
+\&.LE
+\&.LI
+third line.
+\&.LE
+.iE
+.ne 1i
+will yield:
+.DS I F
+.AL A
+.LI
+first line.
+.RL
+.LI
+second line.
+.LE
+.LI
+third line.
+.LE
+.DE
+.P
+There is another approach to lists that is similar to the
+.cR .H
+mechanism.
+The list-initialization, as well as the
+.cR .LI
+and
+.cR .LE
+macros, are all included in a single macro.
+That macro (called
+.cR .bL
+below) requires an argument to tell it what level of item is required;
+it adjusts the list level by either beginning a new list or setting the list 
+level back to a previous value, and then issues a
+.cR .LI
+macro call to produce the item:
+.iS
+\&.de bL
+\&'        \e" if there is an argument, that is the level
+\&.ie \e\en(.$ .nr g \e\e$1
+\&'        \e" if no argument, use current level
+\&.el .nr g \e\en(:g
+\&'        \e" increasing level by more than 1 is an error
+\&.if \e\eng-\e\en(:g>1 .)D "*** ILLEGAL SKIPPING OF LEVEL"
+\&'        \e" if g is greater than :g, begin new list
+\&'        \e" and reset g to current level (.aL changes g)
+\&.if \e\eng>\e\en(:g \e{.AL \e\eng-1
+\&.nr g \e\en(:g \e}
+\&'        \e" if :g is greater than g, prune back to correct level
+\&.if \e\en(:g>\e\eng .LC \e\eng
+\&'        \e" if :g equals g, stay within current list
+\&'        \e" in all cases, get out an item
+\&.LI
+\&..
+.iE
+For
+.cR .bL
+to work, the previous definition of the
+.cR .aL
+macro must be changed to obtain the value of
+.cR g
+from its argument, rather than for
+.cR :g .
+Invoking
+.cR .bL
+without arguments causes it to stay at the current list level.
+The
+.sM MM
+.cR .LC
+macro (list clear) removes list descriptions until the level is less
+than or equal to that of its argument.
+For example, the
+.cR .H
+macro includes the call
+.cR .LC . 
+If text is to be resumed at the end of a list, insert the call
+.cR ".LC 0"
+to clear out the lists completely.
+The example below illustrates the
+relatively small amount of input needed by this approach.
+.iS
+The quick brown fox jumped over the lazy dog's back.
+\&.bL 1
+first line.
+\&.bL 2
+second line.
+\&.bL 1
+third line.
+\&.bL 
+fourth line.
+\&.LC 0
+fifth line.
+.iE
+.ne 1i
+yields:
+.DS I F
+The quick brown fox jumped over the lazy dog's back.
+.AL A
+.LI
+first line.
+.RL
+.LI
+second line.
+.LE
+.LI
+third line.
+.LI
+fourth line.
+.LE 1
+fifth line.
+.DE

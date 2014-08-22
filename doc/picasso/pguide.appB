@@ -1,0 +1,515 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so defs.pguide
+.ds pT Picasso
+'''	\" append tab settings to input start macro
+.am iS
+.ta +0.5i +1.75i
+..
+.aP B "Formal Language"
+.HU Pictures
+.P
+The top-level object in
+.I Picasso
+is the ``picture'':
+.iS
+.IR picture :
+	\f5.PS \f2optional-height  optional-width  other-args
+	\f2element-list
+	\f5.PE
+.iE
+If \f2optional-height\f1 is present, the picture is shrunk to that many inches
+high; if \f2optional-width\f1 is also present, the more constraining of the
+two sizes sets the overall picture scale.
+If the picture is smaller in its internal measure than these optional sizes,
+it is \f2not\f1 expanded to suit.
+All the arguments after
+.cR .PS
+are passed to a
+.sM "DWB 3.1"
+.cR .BP
+picture
+inclusion macro when a picture is processed by
+.cR "picasso \-t" .
+In this same context, if
+.cR .PF
+is used instead of
+.cR .PE ,
+text
+following the picture will be placed alongside the picture (if there is room).
+If the picture concludes with
+.cR .PN
+instead of
+.cR .PE ,
+no PostScript output is produced.
+.HU Elements
+An \f2element-list\f1 is a list of
+\f2elements\f1 separated by newlines or semicolons;
+a long element may be continued by ending the line with a backslash.
+Comments are introduced by a
+.cR #
+and terminated by a newline.
+.iS
+.IR element :
+	\f2primitive attribute-list
+	\f5[ \f2element-list\f5 ] \f2attribute-list
+	\f2placename\f5 : \f2element
+	\f2placename\f5 : \f2position
+	\f2var\f5 = \f2expr
+	\f2var\f5 = \f2expr-list
+	\f2direction
+	\f5{ \f2element-list\f5 }
+	\f5delete \f2object
+	\f5duplicate \f2object
+	\f5duplicate \f2object\f5 at \f2position
+	\f2transformation
+	\f5for \f2var\f5 from \f2expr\f5 to \f2expr\f5 by \f2expr\f5 do X \f2anything\f5 X
+	\f5if \f2expr\f5 then X \f2anything\f5 X else X \f2anything\f5 X
+	\f5define \f2macro\f5 X \f2replacement text\f5 X
+	\f5undef \f2macro
+	\f5copy \f2file
+	\f5copy thru \f2macro
+	\f5copy \f2file\f5 thru \f5macro
+	\f5sh X \f2commandline\f5 X
+	\f5print \f2expr
+	\f5show \f2picture-part
+	\f5reset \f2optional-var-list
+	\f2troff-command\f5
+.iE
+.iS
+.IR primitive :
+	arc
+	arrow
+	box
+	circle
+	ellipse
+	line
+	move
+	sector
+	spline
+	\f2text-list
+.iE
+.br
+.ne 2v
+.P
+Variable names begin with a lower case letter;
+place names begin with upper case.
+Place and variable names retain their values from one picture to the next.
+.P
+The current position and direction of motion are saved upon entry to a list
+of elements enclosed by
+.cR {\(el}
+and restored upon exit.
+.P
+Elements within a block (\f5[\ \f2element-list\f5\ ]\f1) are
+treated as a unit; the dimensions are determined by the extreme points
+of the contained objects.
+Names, variables, and direction of motion within a block are
+local to that block, but the names may be referred to one level outside
+the block.
+.P
+The
+.cR else
+clause is optional in the
+.cR if
+statement;
+the
+.cR by
+clause is optional in
+.cR for .
+The \f2expr\f1 in an
+.cR if
+may use the usual relational operators
+or the tests
+.cA str1
+.cR ==
+(or
+.cR != )
+.cA str2
+for two quoted strings.
+.P
+.cA troff-command
+is any line that begins with a period or any group of lines
+enclosed between line-initial
+.cR .EQ
+and
+.cR .EN .
+Such lines are assumed to make sense in the context in which they appear;
+input to
+.I eqn
+is taken to imply a certain amount of text at the current
+position.
+.HU Attributes
+An \f2attribute-list\fP is a sequence of zero or more attributes;
+each attribute consists of a keyword, perhaps followed by a value.
+.iS
+.IR attribute :
+	\f5h\f1(\f5eigh\f1)\f5t \f2expr	\f5wid\f1(\f5th\f1)\f5 \f2expr
+	\f5rad\f1(\f5ius\f1)\f5 \f2expr	\f5diam\f1(\f5eter\f1)\f5 \f2expr
+	\f5up \f2opt-expr	\f5down \f2opt-expr
+	\f5left \f2opt-expr	\f5right \f2opt-expr
+	\f5from \f2position	\f5to \f2position
+	\f5at \f2position	\f5with \f2corner
+	\f5touch\f1(\f5ing\f1)\f5 \f2var\f5,\f2var	\f5by \f2expr\f5,\f2expr
+	\f5chop \f2opt-expr	\f5then
+	\f5clockwise	\f5ccw
+	\f5dashpat (\f2expr-list\f5)	\f5dash\f1(\f5ed\f1)\f5 \f2opt-expr\f5
+	\f5dot\f1(\f5ted\f1)\f5 \f2opt-expr	\f5same
+	\f5weight \f2expr	\f5layer \f2expr
+	\f5->  <-  <->	\f5noedge
+	\f5edge\f1(\f5d\f1)\f5 \f2color	\f5fill\f1(\f5ed\f1)\f5 \f2color
+	\f5label\f1(\f5ed\f1)\f5 \f2color	\f5font \f2fontexpr
+	\f5size \f2expr	\f5space \f2expr
+	\f2text-list	\f2expr
+.iE
+Missing attributes and values are filled in from defaults.
+Not all attributes make sense for all primitives;
+irrelevant ones are silently ignored.
+For lines, splines and arcs,
+.cR height
+and
+.cR width
+refer to
+arrowhead size.
+A bare \f2expr\f1 implies motion in the current direction.
+.br
+.ne 10.5v
+.HU Text
+Text attributed to an object (\f2object-text\fP) is part of the object,
+otherwise it is an independent entity (\f2free-text\fP).
+Strings are placed by default at the geometrical center of the object,
+but may be justified right or left, or moved vertically
+one half line up or down.
+.iS
+.IR text-item :
+	\f5"\(el" \(el \f2positioning
+	\f5sprintf("\f2format\f5",\f2expr\f5,\(el) \f2positioning \(el
+.sp 4p
+.IR positioning :
+	\f5center ljust rjust above below
+.iE
+Multiple text items in an object are output on
+separate lines centered vertically except as qualified by \f2positioning\f1.
+Text items can contain
+.I troff
+commands for size and font changes.
+An \f2sprintf\f1 item is equivalent to a quoted string in any context.
+Variants of
+.cR %f
+or
+.cR %g
+are the only sensible format conversions.
+.br
+.ne 3v
+.P
+Free-text behaves differently under transformation than object-text.
+All transformations apply exactly as specified to free-text,
+but object-text is subject only to the translational component of transformations
+(i.e., object-text doesn't rotate, reflect or scale with the object,
+but it does move with it).
+.HU "Positions, Places and Objects"
+A position is ultimately an \f2x,y\f1 coordinate pair, but it may be
+specified in other ways:
+.iS
+.IR position :
+	\f2expr\f5,\f2expr
+	\f2place \(+- expr\f5,\f2expr
+	\f2place \(+- \f5(\f2 expr\f5,\f2expr \f5)
+	\f5( \f2position\f5,\f2position \f5)
+	\f2expr [\f5 of the way \f2]\f5 between \f2position\f5 and \f2position
+	\f2expr\f5 < \f2position\f5 , \f2position\f5 >
+	\f5( \f2position\f5 )
+.sp 4p
+.IR place :
+	\f2placename optional-corner
+	\f2corner\f5 of \f2placename
+	\f2n\|\f5th\f2 [\f5 last \f2]  object  optional-corner
+	\f2corner\f5 of \f2n\|\f5th \f2[\f5 last \f2]  object
+	\f5Here
+.iE
+An \f2object\f1 is a \f2place\f1 that actually refers to a primitive or a
+block, not to a corner position on one of these or to an arbitrary point in
+coordinate space.
+An \f2optional-corner\f1 is one of the eight compass points or the center or
+the start or end of an object:
+.iS
+.IR optional-corner :
+	\f5.e .ne .n .nw .w .sw .s .se .c .start .end .\f2n\|\f5th
+.sp 4p
+.IR corner :
+	\f5top  bottom  left  center  right  start  end
+	northeast  northwest  southeast  southwest
+.iE
+The compass points label the appropriate points on the
+bounding box of the object.
+To refer to actual points on circles or ellipses (or on rotated or
+otherwise transformed objects) corresponding to these compass directions,
+the
+.cI . n \f5th\f1
+syntax assigns points to boxes, circles and ellipses
+starting with
+.cR .1st
+equivalent to
+.cR .e
+and with
+.cR .8th
+in the direction (before any transformations) of
+.cR .se ;
+higher numbers are acceptable and are recycled modulo 8.
+For other objects such as lines, the
+.cI . n \f5th\f1
+notation may also be used,
+with results that are intended to be intuitive in each case.
+.P
+Each object in a picture has an ordinal number, both with respect to its
+particular type and globally among all objects.
+In specifiying a \f2place\f1,
+one counts an
+.cA n \f5th\f1
+object forward from the
+.cR 1st
+or backwards from the
+.cR last .
+A block is opaque from the outside for this counting operation,
+but not from the inside;
+a count started inside a block continues at higher levels
+until its total is met.
+References to
+.cA n \f5th\f1
+object\f1 count all the types alike;
+.cA n "\f5th\ text\f1"
+refers only to \f2text-list\f1 primitives;
+.cA n "\f5th\ []\f1"
+or
+.cA n "\f5th\ block\f1"
+to blocks.
+.br
+.ne 4.5v
+.HU Expressions
+.I Picasso
+evaluates expressions in floating point.
+All numbers representing dimensions, with the exception of
+.cR textsize
+and
+.cR textspace ,
+are in inches;
+the text variables (and expressions given for
+.cR size
+and
+.cR space
+attributes) are in points.
+.iS
+.ta +0.5i +1.25i
+.IR expr-list :
+	\f2expr [\f5 ,\f2expr \(el ]
+.sp 4p
+.IR expr :
+	\f2number
+	\f2variable
+	\f2variable.nth
+	\f2expr op expr
+	\f5-\f2 expr
+	\f5!\f2 expr
+	\f5(\f2 expr \f5)
+	\f2place \f5.x
+	\f2place \f5.y
+	\f2place \f5.ht
+	\f2place \f5.wid
+	\f2place \f5.rad
+	\f5setrgb(\f2expr-list\f5)
+	\f5setfont("\f2name\f5")
+	\f5max(\f2expr-list\f5)	\f5min(\f2expr-list\f5)
+	\f5atan2(\f2expr\f5,\f2expr\f5)	\f5pow(\f2expr\f5,\f2expr\f5)
+	\f5abs(\f2expr\f5)  cos(\f2expr\f5)  exp(\f2expr\f5) int(\f2expr\f5)  ln(\f2expr\f5)
+	\f5log(\f2expr\f5)  rand(\f2expr\f5) sin(\f2expr\f5) sqrt(\f2expr\f5)
+.sp 4p
+.IR op :
+	\f5+  -   *  /   %
+	<  <=  >  >=  ==  !=  &&  ||
+.iE
+A \f2color\f1 is either a grayscale value between 0 (black) and 1 (white)
+or an integer index returned from the
+.cR setrgb
+function.
+A \f2font-expr\f1 is either a quoted string naming the font (e.g., "R" or
+"Times-Roman") or a table index returned by the builtin function
+.cR setfont .
+The
+.cR textfont
+variable is presumed to store a value returned by some
+invocation of
+.cR setfont .
+Color and font values are checked for validity before they are ascribed
+to objects.
+.P
+The full set of builtin variables, with their default values, is given in
+Appendix\ C.
+These may be changed at any time, and the new values remain in force from
+picture to picture until changed again or forced back to the default values
+by a
+.cR reset
+statement.
+Variables changed within
+.cR [
+and
+.cR ]
+revert to their previous
+value upon exit from the block.
+.P
+It is possible to assign a list of expressions to a variable.
+Such things have limited usage in
+.IR Picasso ;
+for example, objects can be
+replicated by the statement
+.cR duplicate
+.cA object
+.cR at
+\f5(\f2xvar\f5,\f2yvar\f5)\f1.
+Individual elements of such a list are referred to by \f2variable.nth\f1
+syntax.
+.br
+.ne 9v
+.HU "Input and Output"
+Final
+.cR .PE
+or
+.cR .PF
+imply translation of all layers of the
+picture to PostScript and output of this to
+.IR stdout .
+The
+.cR show
+statement is followed by a \f2picture-part\fP:
+.iS
+.IR picture-part :
+	\f2object
+	\f2layer
+	\f5from \f2position\f5 to \f2position
+	\f2layer\f5 from \f2position\f5 to \f2position
+.iE
+A single object may be shown, all objects in a given layer, all objects
+whose bounding boxes intersect a rectangle given by a pair of diagonally
+opposite corner positions, or all such objects in a given layer.
+If \f2picture-part\f1 is omitted from a
+.cR show
+command, the entire
+picture to that point in the description is output.
+Normally, use of
+.cR show
+implies ending the picture
+with
+.cR .PN
+to suppress final output of the whole picture.
+.P
+The
+.cR print
+command writes to \f2stderr\f1 the value of an expression
+(perhaps just a variable)
+or a position or a single text string;
+this is primarily used for debugging.
+.P
+The
+\f5copy "\f2file\f5"\f1
+command allows input of an arbitrary file
+at any point of a
+.I Picasso
+picture;
+normally such a file should contain ordinary
+.I Picasso
+statements.
+However, the file may be passed a line at a time to a \f2macro\f1,
+with each space-separated field on the line becoming an argument to the
+macro.
+.P
+Besides the special case of
+.cR copy ing
+through a macro (either a name
+from a previous definition or an inline \f2replacement-text\f1), 
+macro expansion occurs on all input, with arguments in a macro invocation
+like \f2macro-name\f5(\f2arg1\f5,\f2 arg2\f5,\f2 \(el\f5)\f1
+referenced in the
+\f2replacement-text\f1 by
+.cR $1 ,
+.cR $2 ,
+etc.
+Non-existent arguments are replaced by null strings.
+The \f2replacement-text\f1 in a macro may contain newlines.
+Macro definitions remain in effect across pictures;
+they may be removed by the
+.cR undef
+statement.
+.P
+Arbitrary
+.sM UNIX
+commands may be passed by the
+.cR sh
+command
+to the system shell for execution.
+The predefined macro
+.cR pid
+containing an
+.sM ASCII
+representation of the process id of the current
+.I Picasso
+run
+may be of use here in generating unique file names.
+.HU "Object Transformations"
+The primitive objects of
+.I Picasso
+can be manipulated in various ways after
+their creation:
+.iS
+.IR replication :
+	\f5delete \f2object
+	\f5duplicate \f2object [\f5 at \f2position ]
+	\f5duplicate \f2object\f5 at (\f2variable\f5,\f2variable\f5)
+.sp 4p
+.IR transformation :
+	\f5move \f2[ place ]\f5 to \f2position
+	\f5translate \f2[ place ]\f5 by \f2position
+	\f5scale \f2[ place ]\f5 by \f2expr-list [\f5 at \f2position ]
+	\f5rotate \f2[ place ]\f5 by \f2expr [\f5 at \f2position ]
+	\f5reflect \f2[ place ] [\f5 at \f2position ]
+	\f5transform \f2[ place ]\f5 by \f2expr-list
+.iE
+If
+.cR at
+.cA position
+is not specified, the center of the \f2place\f1
+is assumed.
+A transformation applies either to a single object
+or to a position in space (by default,
+the origin, if no \f2place\f1 is mentioned).
+Point transformations that do not reference an object imply a global
+transformation of the coordinate system. 
+.P
+In the
+.cR duplicate
+command, if either of a pair of variable names
+refers to a list, multiple copies are made,
+with a shorter list in one variable recycled until the longer is exhausted.
+.P
+In transformations, the
+.cR by
+is optional syntactic noise.
+If the \f2place\f1 is omitted, it is taken to be the coordinate
+origin
+.cR O .
+.cR Scale
+expects one or two parameters (uniform scaling or different
+.IR x ,
+.I y
+scale factors);
+a longer \f2expr-list\f1 is quietly truncated to two expressions.
+The \f2expr\f1 parameter of
+.cR rotate
+is an angle in radians.
+.cR Transform
+expects four or six parameters in its \f2expr-list\f1 and will assume zeros
+if it finds fewer;
+this may lead to a complaint about a singular transformation.

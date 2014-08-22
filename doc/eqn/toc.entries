@@ -1,0 +1,27 @@
+.H1 1 "Introduction" 1
+.H1 2 "Displayed Equations" 1
+.H1 3 "Input Spaces" 2
+.H1 4 "Output Spaces" 2
+.H1 5 "Symbols, Special Names, Greek" 2
+.H1 6 "Spaces, Again" 2
+.H1 7 "Subscripts and Superscripts" 2
+.H1 8 "Braces for Grouping" 3
+.H1 9 "Shorthand for In-Line Equations" 3
+.H1 10 "Fractions" 4
+.H1 11 "Square Roots" 4
+.H1 12 "Summation, Integral, Etc." 4
+.H1 13 "Size and Font Changes" 5
+.H1 14 "Diacritical Marks" 5
+.H1 15 "Quoted Text" 6
+.H1 16 "Lining Up Equations" 6
+.H1 17 "Big Brackets, Etc." 6
+.H1 18 "Piles" 7
+.H1 19 "Matrices" 7
+.H1 20 "Local Motions" 7
+.H1 21 "Definitions" 8
+.H1 22 "File Inclusion" 8
+.H1 23 "A Large Example" 8
+.H1 24 "Keywords, Precedences, Etc." 9
+.H1 25 "Troubleshooting" 10
+.H1 26 "Use on the \s-1UNIX\s+1 System" 10
+.HA "" "Tuning \s-1EQN\s+1 Output"

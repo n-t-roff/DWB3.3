@@ -1,0 +1,24 @@
+.PS
+define triangle X
+line up .1 then down .05 right .086 then down .05 left .086
+X
+lineweight=.01
+B: box ht 1.2 wid 1.4 weight .02
+L: line weight .01 from B.nw + (.1,-.35) to B.ne - (.1,.35)
+line weight .04 from L.1st + (0,.05) up .10 right .10
+C: circle at last line.2nd rad .08 fill black
+circle at C + (-.02,.02) rad .08 fill white
+circle at C + (.05,.05) rad .067 fill black
+circle at last circle + (-.02,.02) rad .067 fill white
+textfont = setfont("Helvetica"); textsize=12; textspace=16
+"Transform" with .w at C + (.2,0)
+move to L - (0,.1)
+down
+"Scale" ljust "Rotate" "Reflect"
+move to L.2nd - (.2,.3)
+triangle()
+down; move .2
+triangle()
+down; move .2
+triangle()
+.PE

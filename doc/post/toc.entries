@@ -1,0 +1,29 @@
+.nf
+.in +0.4i
+FONT SAMPLER
+.sp 8p
+CHARACTER SET AND SYMBOLS
+.sp 3p
+.in +0.4i
+Standard Text Font Character Set
+.in +0.4i
+.ft 2
+\s-1ASCII\s+1 (Keyboard) Characters
+Non-\s-1ASCII\s+1 Special Characters
+Other (Unnamed) Characters
+.ft 1
+.in -0.4i
+.sp 3p
+Special Font Symbol Set
+.in +0.4i
+.ft 2
+Greek Alphabet
+Mathematical Symbols
+Bracket-Building Segments
+Miscellaneous Symbols
+Other (Unnamed) Symbols
+.ft 1
+.in -0.4i
+.sp 3p
+Zapf Dingbats
+.in 0

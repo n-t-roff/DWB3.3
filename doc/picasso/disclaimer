@@ -1,0 +1,71 @@
+.so ../defs.doc
+.PF ""
+.de tS
+.PH ""
+.ds pT "\\$1
+.DS
+.ft HB
+.ps 18
+.vs 20
+..
+.de tE
+.br
+\s36\l'\\nWu'\s0
+\f(HB\s14Disclaimer\s0\fP
+.ps 10
+.ft 1
+.DE
+.EH "@\f(HB\s-1Disclaimer\s+1@@\\*(pT\fP@"
+.OH "@\f(HB\\*(pT@@\s-1Disclaimer\s+1\fP@"
+.sp 2
+..
+.ig
+AT&T Computer Systems asked that we add a disclaimer about
+OPEN LOOK Picasso. They are afraid of getting a lot of
+phone calls from customers upset that they didn't get the
+right Picasso with DWB. All I need below is: your macros
+for getting the page style right, and page number ii.
+We'll insert it after the TOC in the Picasso divider.
+..
+.tS Picasso
+Picasso \(em An \s-1OPEN LOOK\s+1 Drawing Program
+.tE
+The 
+.I Picasso
+documentation which follows is for both batch/\s-1DWB\s+1
+and interactive/\s-1OPEN LOOK\s+1
+versions.
+Only the batch version is distributed as part of the
+Documenter's Workbench software package.
+If you are interested in the interactive version,
+please contact:
+.DS I
+UNIX Software Licensing
+(800) 828-8649  from within the U.S.A.
+(919) 855-2737  from elsewhere
+.DE
+.P
+Picasso should compile with no changes on any
+.sM UNIX
+system running version
+.sM SVR3.2
+or higher, with
+.sM "OPEN LOOK"
+4.0
+or higher libraries.
+.P
+Contact your computer salesperson concerning the availability of binary
+for your computer.
+Plans are in progress for
+.sM AT&T
+computers, including the
+6386, 3B2 and System 7000.
+.P
+Internal
+.sM AT&T
+employees can obtain binary copies of
+interactive/\s-1OPEN LOOK\s+1
+.I Picasso
+for a variety of computers from
+.sM USTOP ,
+(201)\ 564-3330.

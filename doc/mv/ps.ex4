@@ -1,0 +1,499 @@
+%!PS
+%%Version: 3.3
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+%
+% Version 3.3 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	/Symbol /S Sdefs cf
+	/Times-Roman /S1 S1defs cf
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/rotation 1 def
+/gotpagebbox true def
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+%%PageBoundingBox: (atend)
+/saveobj save def
+mark
+1 pagesetup
+8 S f
+(\257)0 100 w
+8 R f
+(cut)74 100 w
+8 S f
+(\257 \257)1 5135 1 197 100 t
+8 R f
+(cut)5358 100 w
+8 S f
+(\257)5481 100 w
+8 S1 f
+( ______)1 233( _)1 5023(_ ______)1 273 3 0 200 t
+8 R f
+(5/7/91)5044 350 w
+(Complex)4955 450 w
+(FOIL 4)1 244 1 5004 550 t
+(+ +)1 5083 1 165 920 t
+22 R f
+(Of Bits & Bytes & Words)5 2385 1 1543 1227 t
+14 I f
+(But let your communication be, Yea,)5 2096 1 2736 1514 t
+(yea; Nay, nay: for whatsoever is)5 1876 1 2736 1689 t
+(more than these cometh of evil.*)5 1875 1 2736 1864 t
+14 R f
+(Matthew 5:37)1 793 1 3456 2039 t
+18 R f
+(Binary notation has been around for a)6 2794 1 576 2376 t
+24 R f
+(long)3449 2376 w
+18 R f
+(time.)3935 2376 w
+15 S f
+(\267)576 2713 w
+18 R f
+(The above verse tells us to use:)6 2326 1 770 2713 t
+(1\) binary notation,)2 1359 1 837 3050 t
+18 I f
+(and)2255 3050 w
+18 R f
+(2\) redundancy)1 1044 1 837 3387 t
+18 S1 f
+()922 3612 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_rh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+15 66 moveto
+15 86 lineto
+16 131 lineto
+17 146 lineto
+18 158 lineto
+19 167 lineto
+21 181 lineto
+24 190 lineto
+34 193 lineto
+49 189 lineto
+58 182 lineto
+60 177 lineto
+60 166 lineto
+59 156 lineto
+58 143 lineto
+57 130 lineto
+56 117 lineto
+55 102 lineto
+54 42 lineto
+53 39 lineto
+49 35 lineto
+34 34 lineto
+19 39 lineto
+16 47 lineto
+15 66 lineto
+stroke
+
+65 60 moveto
+65 111 lineto
+66 127 lineto
+67 139 lineto
+69 153 lineto
+72 163 lineto
+83 171 lineto
+98 177 lineto
+113 182 lineto
+128 187 lineto
+143 190 lineto
+158 194 lineto
+173 196 lineto
+188 199 lineto
+203 201 lineto
+218 203 lineto
+233 205 lineto
+248 205 lineto
+263 206 lineto
+278 206 lineto
+293 206 lineto
+308 206 lineto
+323 206 lineto
+338 205 lineto
+353 203 lineto
+368 202 lineto
+383 200 lineto
+394 197 lineto
+389 190 lineto
+389 180 lineto
+391 176 lineto
+391 173 lineto
+380 173 lineto
+365 173 lineto
+350 174 lineto
+335 175 lineto
+320 176 lineto
+305 176 lineto
+290 176 lineto
+275 177 lineto
+260 177 lineto
+245 177 lineto
+240 173 lineto
+240 170 lineto
+245 165 lineto
+260 164 lineto
+275 164 lineto
+290 164 lineto
+305 163 lineto
+320 160 lineto
+327 155 lineto
+330 149 lineto
+330 134 lineto
+328 129 lineto
+323 124 lineto
+309 121 lineto
+294 121 lineto
+279 121 lineto
+264 121 lineto
+249 121 lineto
+234 121 lineto
+228 118 lineto
+228 112 lineto
+234 109 lineto
+249 109 lineto
+264 109 lineto
+279 108 lineto
+294 108 lineto
+306 104 lineto
+311 97 lineto
+312 91 lineto
+312 88 lineto
+311 82 lineto
+305 74 lineto
+290 72 lineto
+275 72 lineto
+260 72 lineto
+245 73 lineto
+230 73 lineto
+215 73 lineto
+205 70 lineto
+205 63 lineto
+217 60 lineto
+232 60 lineto
+247 60 lineto
+262 60 lineto
+277 57 lineto
+283 52 lineto
+285 44 lineto
+285 41 lineto
+284 35 lineto
+280 30 lineto
+268 26 lineto
+253 25 lineto
+238 26 lineto
+223 28 lineto
+208 31 lineto
+193 33 lineto
+178 34 lineto
+163 33 lineto
+148 31 lineto
+133 28 lineto
+118 27 lineto
+103 28 lineto
+88 34 lineto
+73 43 lineto
+67 52 lineto
+65 60 lineto
+stroke
+
+396 180 moveto
+396 188 lineto
+399 194 lineto
+410 196 lineto
+416 190 lineto
+416 180 lineto
+415 177 lineto
+411 173 lineto
+400 173 lineto
+396 180 lineto
+stroke
+
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+18 S1 f
+922 3612 m
+180 build_rh
+1102 3612 m
+18 R f
+(\(in communicating\))1 1434 1 1161 3612 t
+15 S f
+(\267)576 3949 w
+18 R f
+(Binary notation is not)3 1605 1 770 3949 t
+18 S f
+(_ __)1 230 1 2145 3965 t
+18 R f
+(suited for human use, above)4 2074 1 2434 3949 t
+(verse to the contrary notwithstanding.)4 2772 1 770 4149 t
+16 S f
+(_ ________________________________________________)1 3911 1 877 4189 t
+16 B f
+( Bytes/Word Bits/Word)2 2009(System Bits/Byte)1 1546 2 1153 4389 t
+16 S f
+(_ ________________________________________________)1 3911 1 877 4429 t
+16 R f
+( 36)1 1045( 6)1 959(IBM-7090/94 6)1 1471 3 957 4629 t
+( 32)1 1045( 4)1 959(IBM-360/370 8)1 1471 3 957 4829 t
+( 16)1 1045( 2)1 959(PDP-11/70 8)1 1471 3 957 5029 t
+16 S f
+( \347)1 -3911(_ ________________________________________________)1 3911 2 877 5069 t
+(\347)877 4989 w
+(\347)877 4829 w
+(\347)877 4669 w
+(\347)877 4509 w
+(\347)877 4349 w
+(\347)1957 5069 w
+(\347)1957 4989 w
+(\347)1957 4829 w
+(\347)1957 4669 w
+(\347)1957 4509 w
+(\347)1957 4349 w
+(\347)2819 5069 w
+(\347)2819 4989 w
+(\347)2819 4829 w
+(\347)2819 4669 w
+(\347)2819 4509 w
+(\347)2819 4349 w
+(\347)3876 5069 w
+(\347)3876 4989 w
+(\347)3876 4829 w
+(\347)3876 4669 w
+(\347)3876 4509 w
+(\347)3876 4349 w
+(\347)4788 5069 w
+(\347)4788 4989 w
+(\347)4788 4829 w
+(\347)4788 4669 w
+(\347)4788 4509 w
+(\347)4788 4349 w
+12 S f
+(________)770 5229 w
+12 R f
+(* The use of this verse in this context is plagiarized from C. Shannon.)13 3486 1 770 5419 t
+8 R f
+(+ +)1 5083 1 165 5960 t
+8 S1 f
+( ______)1 233( _)1 5023(_ ______)1 273 3 0 7040 t
+8 S f
+(\255)0 7140 w
+8 R f
+(cut)74 7140 w
+8 S f
+(\255 \255)1 5135 1 197 7140 t
+8 R f
+(cut)5358 7140 w
+8 S f
+(\255)5481 7140 w
+cleartomark
+showpage
+saveobj restore
+%%PageBoundingBox: -10 63 563 800
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Bold Times-Italic Times-Roman Times-Roman Symbol
+%%BoundingBox: -10 63 563 800

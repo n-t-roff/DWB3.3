@@ -1,0 +1,14 @@
+'''	\" redefine input start and end macros to downsize one point size
+'''	\" all input segments indented, constant width, size-1
+'''	\" set tabs for code alignment
+.de iS
+.DS I
+.ft 5
+.S -1
+.ta +8n +8n +8n +8n
+..
+.de iE
+.S +1
+.ft 1
+.DE
+..

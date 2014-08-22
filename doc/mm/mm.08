@@ -1,0 +1,227 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "FOOTNOTES"
+There are two macros that delimit the text of footnotes,
+a string used to automatically number the footnotes,
+and a macro that specifies the style of the footnote text.
+.iS
+\&\0\(el\|\*(iAmark\*(iR
+\&.FS \f1[\*(iAlabel\f1]
+.cA "one or more lines"
+.cA "of footnote text"
+\*(iR.FE
+.iE
+.P
+The segment of text to be footnoted is immediately followed by the
+footnote mark.
+If a label is supplied to
+.cR .FS ,
+then it will be used to mark the footnote;
+otherwise the footnote will be numbered automatically.
+Automatically-numbered footnotes and user-labeled footnotes may be intermixed.
+.P
+The
+.cR .FS
+(footnote start)
+and
+.cR .FE
+(footnote end)
+macros mark the beginning and end of the footnote text.
+The text between
+.cR .FS
+and
+.cR .FE
+is processed in fill mode.
+Another
+.cR .FS ,
+a
+.cR .DS
+or a
+.cR .DF
+are not permitted between the
+.cR .FS
+and
+.cR .FE
+macros.
+.P
+Appendix E illustrates footnote styles using
+both automatically-numbered footnotes and labeled footnotes.
+.br
+.ne 5v
+.H 2 "Automatically-Numbered Footnotes"
+Footnotes may be numbered automatically by
+invoking the string
+.cR \e*F '' ``
+immediately after the text to
+be footnoted, without any intervening spaces.
+This will place the
+next sequential footnote number (in a smaller point size) a half-line
+above the text to be footnoted.
+The footnote text follows, enclosed in the
+.cR .FS
+and
+.cR .FE
+macro pair.
+Since the footnote number is generated automatically,
+.cR .FS
+is used with no argument.
+For example:
+.iS
+This is the segment of text\e*F
+\&.FS
+This is the text of the footnote.
+The same number is used to mark the text
+and the footnote.
+\&.FE
+to be footnoted.
+.iE
+produces an automatically-numbered footnote.
+.P
+The number register
+.cR :p
+keeps track of the current footnote number.
+The string
+.cR F
+automatically increments register
+.cR :p
+and then uses that value as the footnote number in the footnote mark;
+the
+.cR .FS
+macro uses that same value to mark the text of the footnote.
+The
+.cR :p
+register may have its format or value changed to affect the footnote marks.
+.P
+Automatically-numbered footnotes may not be used in a title
+(following
+.cR .TL ),
+in an abstract
+(between
+.cR .AS
+and
+.cR .AE ),
+or in a table
+(between
+.cR .TS
+and
+.cR .TE ).
+.H 2 "Labeled Footnotes"
+.P
+Footnotes may be labeled manually by using the footnote label
+immediately after the text to be footnoted,
+without any intervening spaces.
+The footnote text follows, enclosed in the
+.cR .FS
+and
+.cR .FE
+macro pair.
+The same label used in the text must be supplied as an argument to the
+.cR .FS
+macro.
+For example:
+.iS
+This is the segment of text*
+\&.FS *
+This is the text of the footnote.
+An asterisk is used to mark the text
+and to label the footnote.
+\&.FE
+to be footnoted.
+.iE
+produces a labeled footnote.
+If more than one labeled footnote appears on the same page,
+care must be taken to choose a different label for each footnote.
+.H 2 "Spacing Between Footnote Entries"
+Normally, one blank vertical space separates the 
+footnotes when more than one occurs on a page.
+To change this spacing, set the register
+.cR Fs
+to the desired value.
+For example:
+.iS
+\&.nr Fs 2
+.iE
+will cause two blank vertical spaces to occur between footnotes.
+.H 2 "Format of Footnote Text \*(BU"
+.iS
+\&.FD \f1[\*(iAmode\f1] [\*(iR1\f1]
+.iE
+The user can control the formatting style of the footnote text by
+specifying text hyphenation, right margin justification, and text
+indentation, as well as left- or right-justification of the label when
+text is indented.
+The
+.cR .FD
+macro is used to select the style.
+The argument
+.cA mode
+determines the particular combination of hyphenation,
+indentation, and margin and label justification that
+defines each style:
+.DS
+.TS
+center box tab(;);
+c   cf1 cf1 cf1 cf1
+c   cf1 cf1 cf1 cf1
+nf5 cf1 cf1 cf1 lf1.
+;;Right Margin;;Label
+\*(iAmode\fP;Hyphenation;Justification;Text Indent;Justification
+_
+0;off;on;on;left-justified
+1;on;on;on;left-justified
+2;off;off;on;left-justified
+3;on;off;on;left-justified
+4;off;on;off;left-justified
+5;on;on;off;left-justified
+6;off;off;off;left-justified
+7;on;off;off;left-justified
+8;off;on;on;right-justified
+9;on;on;on;right-justified
+10;off;off;on;right-justified
+11;on;off;on;right-justified
+.TE
+.DE
+.P
+The default value for
+.cA mode
+is 0.
+If
+.cA mode
+is omitted, null, or out of range, the default value is used.
+(Hyphenation is turned on and off with the
+.cR .hy
+and
+.cR .nh
+requests, respectively.
+Right margin justification is turned on and off
+with the
+.cR .ad
+and
+.cR .na
+requests, respectively.)
+.P
+If the second argument is the digit
+.cR 1 ,
+then automatically-numbered footnotes begin afresh with ``1'' when
+a first-level heading is encountered.
+This feature is most useful with ``section-page'' numbering.
+.P
+Footnotes are separated from the body of the text by a short rule.  
+Footnotes that continue to the next page are separated from the body 
+of the text by a full-width rule.
+Footnotes are set
+in type that is two points smaller than the point size used in the 
+body of the text.
+.P
+For long footnotes that continue onto the following page, it is
+possible that, if hyphenation is permitted, the last line of the
+footnote on the current page will be hyphenated.
+Except for this case (which can be controlled by specifying
+an even-numbered value for
+.cA mode ),
+hyphenation across pages is inhibited by
+.sM MM .

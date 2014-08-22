@@ -1,0 +1,13 @@
+'''	\"  troff -mview [-Tdevname] file | ...
+.VG
+.T A List Example
+.BL
+.LI
+First List Item
+.LI
+Second List Item
+.LI
+Last List Item
+.LE
+.VE clk
+\n(.F

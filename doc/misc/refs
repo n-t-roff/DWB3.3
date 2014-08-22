@@ -1,0 +1,179 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr L 12i
+.so ../defs.doc
+.tS
+AT&T UNIX\*(rG System
+DOCUMENTER'S WORKBENCH\*(rG Software
+.tE References
+.SA 0
+The documents in this package are
+revised or reprinted versions of
+the following publications:
+.VL 10
+.LI \s-2\f(HBeqn\f1\s+2
+.ul
+Typesetting Mathematics\|\(em\|User's Guide (Seond Edition)
+.sM by
+Brian\ W.\ Kernighan and Lorinda\ L.\ Cherry,
+.sM UNIX
+Research System Papers,
+Tenth Edition, Volume II,
+Saunders College Publishing, 1990
+(ISBN\ 0-03-047529-5).
+.LI \s-2\f(HBgrap\f1\s+2
+.ft 2
+.sM GRAP
+\(em
+A Language for Typesetting Graphs
+.ft 1
+.sM by
+Jon\ L.\ Bentley and Brian\ W.\ Kernighan,
+.br
+.sM UNIX
+Research System Papers,
+Tenth Edition, Volume II,
+Saunders College Publishing, 1990
+(ISBN\ 0-03-047529-5).
+.LI \s-2\f(HBmm\f1\s+2
+.ft 2
+.sM MM
+\(em
+Memorandum Macros
+.ft 1
+.sM by
+Dale\ W.\ Smith and John\ R.\ Mashey,
+Bell Telephone Laboratories, 1980.
+.LI \s-2\f(HBmpictures\f1\s+2
+.ul
+PostScript Pictures in Troff Documents
+.sM by
+Richard\ L.\ Drechsler and Allan\ R.\ Wilks,
+.br
+AT&T Bell Laboratories, 1987.
+.LI \s-2\f(HBmv\f1\s+2
+.ul
+A Macro Package for View Graphs and Slides
+.sM by
+Ted\ A.\ Dolotta and Dale\ W.\ Smith,
+.br
+Bell Telephone Laboratories, 1979.
+.LI \s-2\f(HBmview\f1\s+2
+.ft 2
+.sM MVIEW
+\(em
+A Set of Macrocommands for the
+Generation of View Graphs
+.ft 1
+.sM by
+Joel\ N.\ Sturman,
+Bell Telephone Laboratories, 1978.
+.LI \s-2\f(HBpic\f1\s+2
+.ft 2
+.sM PIC
+\(em
+A Graphics Language for Typesetting,
+.ul
+User Manual,
+.ft 1
+.sM by
+Brian\ W.\ Kernighan,
+.br
+.sM UNIX
+Research System Papers,
+Tenth Edition, Volume II,
+Saunders College Publishing, 1990
+(ISBN\ 0-03-047529-5).
+.LI \s-2\f(HBpicasso\f1\s+2
+.ft 2
+Picasso
+\(em An
+.sM "OPEN LOOK" \^\f1\*(Tm\fP
+Drawing Program
+.ft 1
+.sM by
+Nils-Peter\ Nelson,
+AT&T Bell Laboratories, 1989.
+.LI \s-2\f(HBtbl\f1\s+2
+.ft 2
+.sM TBL
+\(em
+A Program to Format Tables
+.ft 1
+.sM by
+Michael\ E.\ Lesk,
+.sM UNIX
+Research System Papers,
+.br
+Tenth Edition, Volume II,
+Saunders College Publishing, 1990
+(ISBN\ 0-03-047529-5).
+.LI \s-2\f(HBtroff\f1\s+2
+.ul
+Troff User's Manual
+.sM by
+Joseph\ F.\ Ossanna and Brian\ W.\ Kernighan,
+.sM UNIX
+Research System Papers,
+Tenth Edition, Volume II,
+Saunders College Publishing, 1990
+(ISBN\ 0-03-047529-5).
+.P
+.ul
+A Troff Tutorial
+.sM by
+Brian\ W.\ Kernighan,
+.sM UNIX
+Research System Papers,
+Tenth Edition, Volume II,
+Saunders College Publishing, 1990
+(ISBN\ 0-03-047529-5).
+.LE
+.sp
+.P
+The following publications were used as source materials:
+.BL
+.LI
+.ul
+AT&T Technical Journal,
+``Electronic Publication Technology,''
+Volume\ 68, Number\ 4,
+.br
+July/August 1989.
+.LI
+.ft 2
+Typing Documents on the
+.sM UNIX
+System
+.ft 1
+.sM by
+Michael\ E.\ Lesk,
+.sM UNIX
+Research System Papers,
+.br
+Tenth Edition, Volume II,
+Saunders College Publishing, 1990
+(ISBN\ 0-03-047529-5).
+.LI
+.ul
+PostScript\^\*(Rg Language Reference Manual,
+.ul
+PostScript\^\*(Rg Language Tutorial and Cookbook,
+and
+.ul
+PostScript\^\*(Rg Language Program Design
+.sM by
+Adobe Systems, Inc., Addison-Wesley Publishing, 1987.
+.LI
+.ft 2
+.sM "AT&T OPEN LOOK" \^\f1\*(Tm\fP
+Graphical User Interface,
+Programmer's Guide and Programmer's Reference Manual
+.ft 1
+.sM by
+AT&T and Sun Microsystems, Inc., 1989.
+.LE

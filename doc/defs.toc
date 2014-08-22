@@ -1,0 +1,62 @@
+.nr h 0
+.af P i
+.PF "''\fH\\\\nP\fP''"
+'''	\" titlebox start; argument is title for page header
+'''	\" USAGE:  .tS "page header title"
+'''	\"         one or more lines
+'''	\"         of title text
+'''	\"         .tE
+.de tS
+.PH ""
+.ds pT "\\$1
+.DS
+.ft HB
+.ps 18
+.vs 20
+..
+'''	\" titlebox end
+.de tE
+.br
+\s36\l'\\nWu'\s0
+\f(HB\s14Table of Contents\s0\fP
+.ps 10
+.ft 1
+.DE
+.EH "@\f(HB\s-1Contents\s+1@@\\*(pT\fP@"
+.OH "@\f(HB\\*(pT@@\s-1Contents\s+1\fP@"
+.sp 2
+.nf
+..
+.de H1
+.sp 8p
+.in 0
+.ta \w'00.0'u 6iR
+.ie '\\$1'' \\$2    \fH\s-1\\$3\s+1\f1
+.el \\$1.\t\\$2    \fH\s-1\\$3\s+1\f1
+.nr h 1
+..
+.de H2
+.if \\nh .sp 3p
+.in \w'00.0'u
+.ta +\w'00.00'u
+\\$1\t\\$2\0\0\0\fH\s-2\\$3\s+2\f1
+.nr h 0
+..
+.de H3
+.in \w'00.000.00'u
+.ta \w'00000'u
+\t\f2\\$2\f1
+.nr h 1
+..
+.de H4
+.ta \w'0000000000'u
+\t\f2\\$2\f1
+.nr h 1
+..
+.de HA
+.sp 6p
+.in 0
+.ta
+.ie '\\$1'' APPENDIX:  \\$2
+.el APPENDIX \\$1:  \\$2
+..

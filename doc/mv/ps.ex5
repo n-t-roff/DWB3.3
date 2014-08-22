@@ -1,0 +1,322 @@
+%!PS
+%%Version: 3.3
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+%
+% Version 3.3 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	/Symbol /S Sdefs cf
+	/Times-Roman /S1 S1defs cf
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/rotation 1 def
+/gotpagebbox true def
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+%%PageBoundingBox: (atend)
+/saveobj save def
+mark
+1 pagesetup
+8 S f
+(\257)0 100 w
+8 R f
+(cut)74 100 w
+8 S f
+(\257 \257)1 5135 1 197 100 t
+8 R f
+(cut)5358 100 w
+8 S f
+(\257)5481 100 w
+8 S1 f
+( ______)1 233( _)1 5023(_ ______)1 273 3 0 200 t
+8 R f
+(5/7/91)5044 350 w
+(Equations)4929 450 w
+(FOIL 5)1 244 1 5004 550 t
+8 S f
+(_ _)1 5328 1 72 1064 t
+8 R f
+(+ +)1 5083 1 165 920 t
+18 R f
+(Equations)2376 1152 w
+14 R f
+(Equations can be displayed or set in-line with the text.)9 3139 1 576 1414 t
+(A displayed equation is set apart from the text:)8 2708 1 576 1764 t
+14 I f
+(k)2016 2292 w
+14 S f
+(=)2112 2292 w
+14 R f
+(1)2212 2292 w
+23 S f
+(S)2081 2152 w
+14 S f
+(\245)2098 1958 w
+18 I f
+(m)2297 2098 w
+14 I f
+(k)2450 2026 w
+14 S f
+(-)2546 2026 w
+14 R f
+(1)2646 2026 w
+18 S f
+(=)2835 2098 w
+18 R f
+(1)3073 2224 w
+18 S f
+(-)3193 2224 w
+18 I f
+(m)3322 2224 w
+18 R f
+(1)3218 1990 w
+18 S1 f
+(_ ____)1 413 1 3057 2044 t
+14 R f
+(An in-line equation)2 1110 1 576 2518 t
+18 I f
+(f)1745 2518 w
+18 R f
+(\()1825 2518 w
+18 I f
+(t)1899 2518 w
+18 R f
+(\))1964 2518 w
+18 S f
+(=)2142 2518 w
+18 R f
+(2)2345 2518 w
+18 S f
+(p)2450 2518 w
+22 S f
+(\362)2564 2536 w
+18 R f
+(sin \()1 284 1 2689 2518 t
+18 S f
+(w)2988 2518 w
+18 I f
+(t)3127 2518 w
+18 R f
+(\))3192 2518 w
+18 I f
+(dt)3281 2518 w
+14 R f
+(is used in the)3 769 1 3467 2518 t
+(running text, rather than being displayed.)5 2359 1 576 2711 t
+8 R f
+(+ +)1 5083 1 165 4520 t
+8 S f
+(_ _)1 5328 1 72 4376 t
+8 S1 f
+( ______)1 233( _)1 5023(_ ______)1 273 3 0 5600 t
+8 S f
+(\255)0 5700 w
+8 R f
+(cut)74 5700 w
+8 S f
+(\255 \255)1 5135 1 197 5700 t
+8 R f
+(cut)5358 5700 w
+8 S f
+(\255)5481 5700 w
+cleartomark
+showpage
+saveobj restore
+%%PageBoundingBox: -10 207 563 800
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Italic Times-Roman Times-Roman Symbol
+%%BoundingBox: -10 207 563 800

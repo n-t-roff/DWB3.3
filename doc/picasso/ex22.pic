@@ -1,0 +1,11 @@
+.EQ
+delim $$
+.EN
+.PS 1.5 2.5 l
+textsize = 14; lineweight = 0.015
+N: circle "A" font "HB" label white fill black
+   circle "$x vec sub i$" at N-(.5,.75)
+   circle "$y vec sub j$" at N+(.5,-.75)
+   line from N to 2nd circle chop
+   line from N to 3rd circle chop
+.PF

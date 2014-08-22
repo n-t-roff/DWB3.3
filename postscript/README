@@ -1,0 +1,141 @@
+The instructions in this file ONLY apply if the PostScript support package
+has been separated from the DWB package.
+
+-------------
+Major Changes
+-------------
+
+See the VERSION file.
+
+-------------------
+Tuning The Makefile
+-------------------
+
+Source files, man pages, and low level makefiles can all be updated
+to reflect settings in postscript.mk in one simple step (described
+later). In most cases you only need to edit file postscript.mk.
+
+First save a copy of file postscript.mk. Then adjust the following
+definitions in file postscript.mk:
+
+  SYSTEM    best match for your version of Unix. Current choices for
+	    SYSTEM are:
+
+			SYSV	- System V
+			V9	- Ninth Edition
+			BSD4_2	- Berkeley (eg. Sun)
+
+	    Controls conditional compilation in a few places.
+
+  GROUP	    group assigned to all installed files
+
+  OWNER	    owner of everything that's installed
+
+  BINDIR    dpost and picpack go here. All other programs go in POSTBIN.
+	    BINDIR must already exist - it will not be created during an
+	    install.
+
+  HOSTDIR   hostresident font directory for PostScript printers. Only
+	    used in the font download program.
+
+  FONTDIR   width table directory - for troff and most postprocessors
+
+  MAN1DIR   command manpages. A command and its manpage are installed
+	    together - there's no easy way to avoid it. Setting MAN1DIR
+	    to an existing temporary directory (e.g. /tmp) means an
+	    install will work but manpages won't go anywhere permanent.
+	    MAN1DIR must already exist - it will not be created during
+	    an install.
+
+  POSTBIN   where most PostScript support programs go. dpost and picpack
+	    the exceptions.
+
+  POSTLIB   prologues and miscellaneous PostScript files. Primarily for
+	    the programs that live in POSTBIN.
+
+  CFLGS	    common compiler options - used to build CFLAGS in the low
+	    level makefiles. CLFGS and LDFLGS are best set on the make
+	    command line.
+
+  LDFLGS    common link editor options - used to build LDFLAGS in the
+	    low level makefiles. LDFLGS and CFLGS are best set on the
+	    make command line.
+
+  DKHOST    set it to TRUE to compile the DKHOST Datakit support code
+	    in postio. Temporarily resets SYSTEM to SYSV if DKHOST is
+	    TRUE and SYSTEM is BSD4_2. Ignored if SYSTEM is not SYSV
+	    or BSD4_2.
+
+  DKSTREAMS enables streams based DKHOST support in postio when DKHOST
+	    is TRUE and SYSTEM is SYSV or BSD4_2. Choices are TRUE,
+	    FALSE, or a stream module name (e.g. dknetty or dkty). TRUE
+	    selects dknetty. Newer systems may expect dkty.
+
+  ROUNDPAGE must only be set to TRUE or FALSE. TRUE means PostScript
+	    translators include code that maps clipping path dimensions
+	    into known paper sizes.
+
+  TARGETS   the default list of what's built by make. Each target must
+	    be the name of a source directory. A target that names a
+	    non-existent source directory is ignored. Setting TARGETS
+	    on the make command line overrides the default list.
+
+-------------------
+Updating The Source
+-------------------
+
+Whenever file postscript.mk changes you should update source files,
+man pages, and low level makefiles by typing,
+
+	make -f postscript.mk changes
+
+------------------------
+More System Dependencies
+------------------------
+
+The package has been compiled and tested on System V and Ninth Edition
+Unix Systems and on Sun workstations. Most differences are handled via
+the SYSTEM definition in postscript.mk. Problems that remain are:
+
+  SYSV - System V
+    Use the native compiler if you're on an internal System V UTS
+    machine.
+
+  V9 - Ninth or Tenth Edition
+    chown is in /etc and chgrp no longer exists - it's been folded into
+    the chown command. You may be forced to build a simple chgrp shell
+    script (put it in your bin) that calls chown. If you're not superuser
+    set OWNER to your login name and GROUP to your group id.
+
+  BSD4_2 - Sun Workstations
+    Use the Bourne shell. chown is should be in /usr/etc. Add /usr/etc
+    to your PATH and export PATH. If you're not superuser set OWNER to
+    your login name and GROUP to your group id.
+
+----------------------
+Installing The Package
+----------------------
+
+To build (but not install) the default package (i.e. everything named by
+TARGETS in postscript.mk) type,
+
+	make -f postscript.mk all
+
+To build and install the package type,
+
+	make -f postscript.mk all install
+
+After the package is installed use,
+
+	make -f postscript.mk clobber
+
+to delete binary files and compiled programs from the source directories.
+
+To select part of the package define TARGETS on the command line. For
+example,
+
+	make -f postscript.mk TARGETS="dpost devpost" all install
+
+builds and installs dpost and the PostScript font tables. Quotes hide
+white space from the shell.
+

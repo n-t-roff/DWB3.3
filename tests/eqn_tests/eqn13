@@ -1,0 +1,85 @@
+.nf
+Knuth, vol 2, page 317:
+.sp
+.EQ 
+Q sub n (x sub 1 ,x sub 2 , ... ,x sub n ) ~=~ left {
+matrix {
+lcol { 1, above x sub 1 , above 
+x sub 1 Q sub n-1 (x sub 2 , ... ,x sub n ) +
+Q sub n-2 (x sub 3 , ... ,x sub n ) }
+lcol {  if above  if above  if }
+lcol { n=0; above n=1; above n>1. }
+}
+.EN
+.sp
+Knuth, vol 2, p426:
+.sp
+.ti 3
+When zero occurs, the determinant is even easier to compute;
+for example, if
+.EQ
+x sub 11 =0 
+.EN
+but
+.EQ
+x sub 21  != 0,
+.EN
+we have
+.sp
+.nf
+.EQ
+det ~
+left [ 
+matrix {
+col { 0 above x sub 21 above x sub 31 above ...  above x sub n1 }
+col { x sub 12 above x sub 22 above x sub 32 above ~ above x sub n2 }
+col { ...  above ...  above ...  above ~ above ...  }
+col { x sub 1n above x sub 2n above x sub 3n above ~ above x sub nn }
+}
+right ]
+.EN
+.sp
+.ti 5
+.EQ
+=~-x sub 21 det
+left [
+matrix {
+col { 
+x sub 12 above x sub 32 -(x sub 31 /x sub 21 )x sub 22
+above ...  above x sub n2 -(x sub n1 /x sub 21 )x sub 22 }
+col { ...  above ...  above ~ above ...  }
+col {
+x sub 1n above x sub 3n -(x sub 31 /x sub 21 )x sub 2n
+above ...  above x sub nn -(x sub n1 /x sub 21 )x sub 2n
+   }
+}
+right ]
+~~.~~~(8)
+.EN
+
+.nf
+From John Butcher:
+.EQ
+A~=~ left [
+matrix {
+ ccol { a sub 11 above 0 above 0 above 0 above cdot above cdot above cdot above 0 above a sub ni }
+ ccol { a sub 12 above a sub 22 above a sub 32 above 0  above cdot above cdot above cdot  above 0 above 0 }
+ ccol { 0 above a sub 23 above a sub 33 above a sub 43 above cdot above cdot above cdot above 0 above 0 }
+ ccol { 0 above 0 above a sub 34 above a sub 44 above cdot above cdot above cdot above 0 above 0 }
+ ccol { cdot above cdot above cdot above cdot above nothing above nothing above nothing above cdot above cdot  }
+ ccol { cdot above cdot above cdot above cdot above nothing above nothing above nothing above cdot above cdot  }
+ ccol { cdot above cdot above cdot above cdot above nothing above nothing above nothing above cdot above cdot  }
+ ccol {0 above 0 above 0 above 0 above cdot above cdot above cdot above a sub n-1,n-1 above a sub n,n-1 }
+ ccol {0 above 0 above 0 above 0 above cdot above cdot above cdot above a sub n-1,n above a sub nn }
+}
+right ]~=
+.EN
+.nf
+
+.EQ
+X~=~ left [
+lpile { A above B above C above D above E above F above G above H} ~~~
+lpile { I above J above K above L above M above N above O above P} ~~~
+lpile { Q above R above S above T above U above V above X above Y} 
+right ] ~ finis
+.EN

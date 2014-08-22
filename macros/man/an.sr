@@ -1,0 +1,770 @@
+'''\" Manual Page Entry Macros - 1.40 of 2/27/83
+'''\" Revised April 1991
+'''\" Nroff/Troff Version	@(#)an.src	DWB 3.2
+'''\" 
+'''\" version 6 title macro
+.de th
+.tm wrong version of man entry macros (use -man6 if available)
+.ab 
+..
+'''\" set character strings and translation
+'''\" use monowidth (font 5) for troff; use bold (font 3) for nroff
+.if t \{\
+.fp 5 CW
+.ds mW \&\f5
+.ds mB \&\f(CB
+.ds Tm \v'-0.5m'\s-4TM\s+4\v'0.5m'
+.ds Sm \v'-0.5m'\s-4SM\s+4\v'0.5m'
+.ds Rg \v'-0.4m'\s-4\(rg\s+4\v'0.4m'
+.ds rq ''
+.ds lq ``
+.tr *\(**
+'br \}
+.if n \{\
+.ds mW \f3
+.ds mB \f3
+.ds Tm \uTM\d
+.ds Sm \uSM\d
+.ds Rg (Reg.)
+.ds lq \&"\"
+.ds rq \&"\"
+'br \}
+'''\" Command Line Option
+'''\" option in constant-width bold, arg in italic, after and before
+'''\" in previous font, for after=[], surround option/arg with [ and ]
+'''\" USAGE:  .OP option arg after before
+.de OP
+.ie '\\$3'[]' \ \f1[\ \*(mB\\$1\f2\^\\$2\|\f1\ ]
+.el \&\\$4\&\*(mB\\$1\fP\f2\^\\$2\|\fP\\$3
+..
+'''\" set title heading for BSD distribution   (from UCB -man)
+.de AT
+.if t \{\
+.	ds ]W 7th Edition
+.	if @\\$1@3@ .ds ]W 7th Edition
+.	if @\\$1@4@ .ds ]W System III
+.	if @\\$1@5@ \{\
+.		ie @\\$2@@  .ds ]W System V
+.		el .ds ]W System V Release \\$2
+'br \} \}
+..
+'''\" set title heading for IBM ACIS distribution   (from UCB -man)
+.de AC
+.if t \{\
+.\".	ie "\\$1"" .ds ]W Vers. ?, Rel. ?, of 4.2A on the IBM RT PC
+.\".	el .ds ]W Vers. \\$1, Rel. \\$2, of 4.2A on the IBM RT PC
+.	ds ]W PRPQ 5799-CGZ: IBM 4.3/RT
+'br \}
+..
+'''\" set title heading for UCB/BSD distribution   (from UCB -man)
+.de UC
+.if t \{\
+.	ds ]W 3rd Berkeley Distribution
+.	if @\\$1@3@ .ds ]W 3rd Berkeley Distribution
+.	if @\\$1@4@ .ds ]W 4th Berkeley Distribution
+.	if @\\$1@5@ .ds ]W 4.2 Berkeley Distribution
+.	if @\\$1@6@ .ds ]W 4.3 Berkeley Distribution
+.	if @\\$1@M@ .ds ]W M\s-1ORE\s+1/bsd
+.	if @\\$1@U@ .ds ]W Utah 4.3 HPBSD release 1.0
+'br \}
+..
+'''\" set title heading for SunOS distribution  (from UCB -man)
+.de SU
+.if t \{\
+.	ds ]W Sun Microsystems Rel 3.0
+.	if @\\$1@2@ .ds ]W Sun Microsystems Rel 3.2
+.	if @\\$1@D@ .ds ]W Sun Microsystems D/NFS
+'br \}
+..
+'''\" MORE/bsd limitations statement for NFS man pages   (from UCB -man)
+.de LX
+.ds ]K utility
+.if @\\$1@5@ .ds ]K file
+.if @\\$1@2@ .ds ]K system call
+.if @\\$1@3@ .ds ]K function
+.SH LIMITATIONS
+This \\*(]K is not available on those
+M\s-2ORE\s+2/bsd
+systems which do not include
+the Network File System.
+..
+'''\" display start   (from UCB -man)
+.de DS
+.RS
+.nf
+.sp
+..
+'''\" display end   (from UCB -man)
+.de DE
+.fi
+.RE
+.sp .5
+..
+'''\" reset basic page layout
+.de }E
+.}f
+.in \\n()Ru+\\n(INu
+.ll \\n(LLu
+.lt \\n(LLu
+.pl \\n()Lu
+..
+'''\" default tabs
+.de DT
+.if t .ta 3.6m 7.2m 10.8m 14.4m 18m 21.6m 25.2m 28.8m 32.4m 36m 39.6m 43.2m 46.8m
+.if n .ta 5n 10n 15n 20n 25n 30n 35n 40n 45n 50n 55n 60n 65n
+..
+'''\" hyphenation   (from V10 -man)
+.de HY
+.hy14
+..
+'''\" set font and size
+.de }f
+.if t .vs \\n()Vp
+.ps \\n()S
+.ft 1
+..
+'''\" header
+.de }H
+.ev 1
+'''\" obsolete (for cut marks)
+.}C
+.}E
+.ie \\n()s 'sp|2v
+.el 'sp|3v
+.ps \\n()S-1
+.ft 3
+.ie @@\\*(]L@ .tl @\\*(]H@\\*(]D@\\*(]H@
+.el .tl @\\*(]H@\\*(]D \|\\*(]L@\\*(]H@
+.ft 1
+.ps \\n()S
+.ie \\n()s 'sp 1.5v
+.el 'sp 3v
+.ev
+.ns
+..
+'''\" footer
+.de }F
+.ev 1
+.}E
+.if \\n()s 'sp |\\n(.pu-1v-1p
+.if \\n()t 'sp |\\n(.pu-3v
+.if n 'sp |\\n(.pu-4v
+.if n .tl @Page %@@\\*(]W@
+.if \\n()s .tl @@- % -@@
+.if \\n()t \{.if o .tl @Page %@@\\*(]W@
+.	      if e .tl @\\*(]W@@Page %@ \}
+'bp
+.ev
+..
+'''\" obsolete (cut marks)
+.de }C
+'''\"	.po 0i
+'''\"	.lt 7.5i
+'''\"	.ie @\*(.T@aps@ \{\
+'''\"	.if \\n()s .tl @\l@0.25i@@@\l@0.25i@\h@1i@\l@0.25i@@
+'''\"	.if \\n()t .tl @\l@0.25i@@@\l@0.25i@@ \}
+'''\"	.el .tl @@@@
+'''\"	.lt
+'''\"	.po
+..
+'''\" obsolete (final cut marks)
+.de }M
+.}N
+.wh -.5p }C
+.ll \\n(LLu
+.bp
+..
+'''\" no run-out unless there was a .TH
+.de }K
+.}N
+.pl 1
+.ll \\n(LLu
+..
+'''\" set title and heading
+.de TH
+.PD
+.nr IN \\n()Mu
+.ds ]H \\$1\^(\^\\$2\^)
+'''\" next 6 lines define center part of header
+.if \\n()s .ds ]D
+.if \\n()t .ds ]D UNIX System V
+.if n .ds ]D UNIX System V
+.ds ]L 
+.if !@\\$3@@ .ds ]L (\^\\$3\^)
+.if !@\\$4@@ .ds ]D \\$4
+.wh 0 }H
+.wh -\\n(:mu }F
+'''\" obsolete (for final cut marks)
+.em }M
+.if \\n(nl .bp 1
+.nr )I \\n()Mu
+.nr )R 0
+.}E
+.DT
+.if n \{.na
+.	 nh \}
+.if t \{.bd S 3 3
+.	 HY \}
+..
+'''\" generate index entry (from UCB -man)
+.de IX
+.if \\nF .tm .IE\tENTRY\t\\$1\t\\$2\t\\$3\t\\$4\t\\$5\t\\$6\t\\*(PN\\n%
+..
+'''\" resolve title reference for SunOS distribution (from UCB -man)
+.de TX
+.ds Tx "UNKNOWN TITLE ABBREVIATION: \\$1
+.if '\\$1'DOCBOX' .ds Tx "Documentation Set
+.if '\\$1'BGBOX' .ds Tx "Beginner's Guides Minibox
+.if '\\$1'GSBG' .ds Tx "Getting Started with SunOS: Beginner's Guide
+.if '\\$1'SUBG' .ds Tx "Setting Up Your SunOS Environment: Beginner's Guide 
+.if '\\$1'SHBG' .ds Tx "Self Help with Problems: Beginner's Guide
+.if '\\$1'SVBG' .ds Tx "SunView\ 1 Beginner's Guide
+.if '\\$1'MMBG' .ds Tx "Mail and Messages: Beginner's Guide
+.if '\\$1'DMBG' .ds Tx "Doing More with SunOS: Beginner's Guide
+.if '\\$1'UNBG' .ds Tx "Using the Network: Beginner's Guide
+.if '\\$1'GDBG' .ds Tx "Games, Demos & Other Pursuits
+.if '\\$1'SABOX' .ds Tx "System Administration Manuals Minibox
+.if '\\$1'CHANGE' .ds Tx "Release 4.0 Change Notes
+.if '\\$1'INSTALL' .ds Tx "Installing the SunOS
+.if '\\$1'ADMIN' .ds Tx "System and Network Administration
+.if '\\$1'SECUR' .ds Tx "Security Features Guide
+.if '\\$1'PROM' .ds Tx "PROM User's Manual
+.if '\\$1'DIAG' .ds Tx "Sun System Diagnostics Manual
+.if '\\$1'REFBOX' .ds Tx "Reference Manuals Minibox
+.if '\\$1'MANPAGES' .ds Tx "SunOS Reference Manual
+.if '\\$1'REFMAN' .ds Tx "SunOS Reference Manual
+.if '\\$1'SSI' .ds Tx "Sun System Introduction
+.if '\\$1'SSO' .ds Tx "System Services Overview
+.if '\\$1'TEXT' .ds Tx "Editing Text Files
+.if '\\$1'DOCS' .ds Tx "Formatting Documents
+.if '\\$1'TROFF' .ds Tx "Using \&\fLnroff\fP and \&\fLtroff\fP
+.if '\\$1'INDEX' .ds Tx "Global Index
+.if '\\$1'PTBOX' .ds Tx "Programmer's Tools Manuals Minibox
+.if '\\$1'CPG' .ds Tx "C Programmer's Guide
+.if '\\$1'CREF' .ds Tx "C Reference Manual
+.if '\\$1'ASSY' .ds Tx "Assembly Language Manual
+.if '\\$1'PUL' .ds Tx "Programming Utilities and Libraries
+.if '\\$1'DEBUG' .ds Tx "Debugging Tools
+.if '\\$1'NETP' .ds Tx "Network Programming
+.if '\\$1'DRIVER' .ds Tx "Writing Device Drivers
+.if '\\$1'FPOINT' .ds Tx "Floating Point Programmers Guide
+.if '\\$1'SVPG' .ds Tx "SunView\ 1 Programmer's Guide
+.if '\\$1'SVSPG' .ds Tx "SunView\ 1 System Programmer's Guide
+.if '\\$1'PIXRCT' .ds Tx "Pixrect Reference Manual
+.if '\\$1'CGI' .ds Tx "SunCGI Reference Manual
+.if '\\$1'CORE' .ds Tx "SunCore Reference Manual
+.if '\\$1'4ASSY' .ds Tx "Sun-4 Assembly Language Reference Manual
+'''\" non-Sun titles
+.if '\\$1'KR' .ds Tx "The C Programming Language
+\fI\\*(Tx\fP\\$2
+..
+'''\" section heading
+.de SH
+.}X 0 "\\$1" smaller
+.nr )E 2
+\&\\$1 \|\\$2 \|\\$3 \|\\$4 \|\\$5 \|\\$6
+..
+'''\" sub section heading
+.de SS
+.}X 3n "" ""
+.nr )E 2
+\&\\$1 \|\\$2 \|\\$3 \|\\$4 \|\\$5 \|\\$6
+..
+'''\" subroutine for section heading
+.de }X
+.}E
+.ti \\$1
+.sp \\n(PDu
+.ne 1.1v
+.nr )R 0
+.fi
+.it 1 }N
+.SM
+.B
+..
+'''\" end of SH (cf .}X above and .}N below)
+.de }2
+.nr )E 0
+.}E
+.nr )I \\n()Mu
+.ns
+.ft 1
+..
+'''\" start version changes (from UCB -man)
+.de VS
+'if '\\$1'4' .mc \s12\(br\s0
+..
+'''\" end version changes (from UCB -man)
+.de VE
+'mc
+..
+'''\" small
+.de SM
+.nh
+.ps \\n()S-1
+.if !@\\$1@@ \&\\$1
+.if !@\\$2@@ \&\\$2
+.if !@\\$3@@ \&\\$3
+.if !@\\$4@@ \&\\$4
+.if !@\\$5@@ \&\\$5
+.if !@\\$6@@ \&\\$6
+.if !@\\$1@@ .ps \\n()S
+.if @\\$1@@ .it 1 }N
+.HY
+..
+'''\" roman
+.de R
+.nh
+.ft 1
+.it 1 }N
+.if !@\\$1@@ \&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+.HY
+..
+'''\" italic
+.de I
+.nh
+.ft 2
+.it 1 }N
+.if !@\\$1@@ \&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+.HY
+..
+'''\" bold
+.de B
+.nh
+.ft 3
+.it 1 }N
+.if !@\\$1@@ \&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+.HY
+..
+'''\" monowidth
+.de MW
+.nh
+.it 1 }N
+.ie \\n(.$ \{\
+.	ie \\n(.$=1 \*(mW\&\\$1\fP
+.	el .ie \\n(.$=2 \*(mW\&\\$1 \\$2\fP
+.	el .ie \\n(.$=3 \*(mW\&\\$1 \\$2 \\$3\fP
+.	el .ie \\n(.$=4 \*(mW\&\\$1 \\$2 \\$3 \\$4\fP
+.	el .ie \\n(.$=5 \*(mW\&\\$1 \\$2 \\$3 \\$4 \\$5\fP
+.	el .ie \\n(.$=6 \*(mW\&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6\fP
+.	el .ie \\n(.$=7 \*(mW\&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7\fP
+.	el .ie \\n(.$=8 \*(mW\&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8\fP
+.	el \*(mW\&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9\fP \}
+.el \{\
+.	if t .ft 5
+.	if n .ft 3 \}
+.HY
+..
+'''\" literal font   (from V10 -man)
+.de L
+.nh
+.it1 }N
+.ift \{.ie!\\$1 \%\&\f5\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+.	el .ft 5 \}
+.ifn \{.ft 3
+.if!\\$1 \{.ie\\$2 `\\$1'
+.el .ie\\$3 `\\$1 \\$2'
+.el .ie\\$4 `\\$1 \\$2 \\$3'
+.el .ie\\$5 `\\$1 \\$2 \\$3 \\$4'
+.el .ie\\$6 `\\$1 \\$2 \\$3 \\$4 \\$5'
+.el `\\$1 \\$2 \\$3 \\$4 \\$5 \\$6'\}\}
+.HY
+..
+'''\" file font   (from V10 -man)
+.de F
+.nh
+.it1 }N
+.if t \{\
+.	ie!\\$1 \%\&\f5\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+.	el .ft 5 \}
+.if n \{\
+.	ie!\\$1 \%\&\f3\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+.	el .ft 3 \}
+.HY
+..
+'''\" roman-italic
+.de RI
+.}S 1 2 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" italic-roman
+.de IR
+.}S 2 1 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" italic-bold
+.de IB
+.}S 2 3 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" roman-bold
+.de RB
+.}S 1 3 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" bold-roman
+.de BR
+.}S 3 1 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" bold-italic
+.de BI
+.}S 3 2 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" roman-monowidth
+.de RM
+.if t .}S 1 5 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+.if n .}S 1 3 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" monowidth-roman
+.de MR
+.if t .}S 5 1 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+.if n .}S 3 1 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" italic-monowidth
+.de IM
+.if t .}S 2 5 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+.if n .}S 2 3 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" monowidth-italic
+.de MI
+.if t .}S 5 2 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+.if n .}S 3 2 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" bold-monowidth
+.de BM
+.if t .}S 3 5 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+.if n .}S 3 3 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" monowidth-bold
+.de MB
+.if t .}S 5 3 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+.if n .}S 3 3 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'''\" handle mixed fonts by making special case of shift-out of italic
+.de }S
+.nh
+.ds ]F
+.if @\\$1@2@ .if !@\\$5@@ .ds ]F\^
+.ie !@\\$4@@ .}S \\$2 \\$1 "\&\\$3\f\\$1\\$4\\*(]F" "\\$5" "\\$6" "\\$7" "\\$8" "\\$9"
+.el \&\\$3
+.}f
+.HY
+..
+'''\" small and boldface   (from UCB -man)
+.de SB
+.nh
+.ie \\n(.$=1 \f3\s-1\&\\$1\s0\fP
+.el .ie \\n(.$=2 \f3\s-1\&\\$1 \\$2\s0\fP
+.el .ie \\n(.$=3 \f3\s-1\&\\$1 \\$2 \\$3\s0\fP
+.el .ie \\n(.$=4 \f3\s-1\&\\$1 \\$2 \\$3 \\$4\s0\fP
+.el .ie \\n(.$=5 \f3\s-1\&\\$1 \\$2 \\$3 \\$4 \\$5\s0\fP
+.el .ie \\n(.$=6 \f3\s-1\&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6\s0\fP
+.el .ie \\n(.$=7 \f3\s-1\&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7\s0\fP
+.el .ie \\n(.$=8 \f3\s-1\&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8\s0\fP
+.el \f3\s-1\&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9\s0\fP
+.HY
+..
+'''\" literal_font-roman   (from V10 -man)
+.de LR
+.nh
+.if t \%\&\f5\\$1\f1\\$2
+.if n \%`\\$1'\\$2
+.HY
+..
+'''\" roman-literal_font  (from V10 -man)
+.de RL
+.nh
+.if t \%\&\f1\\$1\f5\\$2\f1\\$3
+.if n \%\\$1`\\$2'\\$3
+.HY
+..
+'''\" file_font(arg1)roman(arg2) ...   (from V10 -man)
+.de FR
+.if t \%\&\f5\\$1\f1\\$2 \\$3 \\$4 \\$5 \\$6
+.if n \%\&\f3\\$1\f1\\$2 \\$3 \\$4 \\$5 \\$6
+..
+'''\" roman(arg1)file_font(arg2)roman(arg3)   (from V10 -man)
+.de RF
+.if t \%\&\f1\\$1\f5\\$2\f1\\$3
+.if n \%\&\f1\\$1\f3\\$2\f1\\$3
+..
+'''\" begin example
+.de EX
+.sp \\n(PDu
+.in +5n
+.if n .ft 3
+.if t \{\
+.	ft 5
+.	if @\\$1@-1@ \{\
+.		ps -1
+.		vs -1
+.		nr eX 1 \}\}
+.nf
+..
+'''\" end example
+.de EE
+.fi
+.if \\n(eX \{\
+.	ps +1
+.	vs +1
+.	nr eX 0 \}
+.ft 1
+.in -5n
+.sp \\n(PDu
+..
+'''\" paragraph
+.de PP
+.sp \\n(PDu
+.ne 1.1v
+.}E
+.nr )I \\n()Mu
+.ns
+..
+'''\" synonym for .PP
+.de P
+.PP
+..
+'''\" obsolete synonym for PP (not advertised)
+.de LP
+.PP
+..
+'''\" paragraph distance
+.de PD
+.if t .nr PD .4v
+.if n .nr PD 1v
+.if !@\\$1@@ .nr PD \\$1v
+..
+'''\" paragraph with hanging indent
+.de HP
+.sp \\n(PDu
+.ne 1.1v
+.if !@\\$1@@ .nr )I \\$1n
+.ll \\n(LLu
+.in \\n()Ru+\\n(INu+\\n()Iu
+.ti \\n()Ru+\\n(INu
+.}f
+..
+'''\" indented paragraph
+.de IP
+.TP \\$2
+\&\\$1
+..
+'''\" tagged paragraph (paragraph with hanging label)
+.de TP
+.if !@\\$1@@ .nr )I \\$1n
+.sp \\n(PDu
+.ne 1.1v
+.in \\n()Ru
+.ns
+.it 1 }N
+.nr )E 1
+.di ]B
+..
+'''\" indented paragraph with monowidth label   (from V10 -man)
+.de TF
+.if t .IP "" \w'\f5\\$1\ \ \fP'u
+.if n .IP "" \w'\f3\\$1\ \ \fP'u
+.PD0
+..
+'''\" end of TP (cf .}N below)
+.de }1
+.ds ]X \&\\*(]B\\
+.rm ]B
+.nr )E 0
+.if !@\\$1@@ .nr )I \\$1n
+.}f
+.ll \\n(LLu
+.in \\n()Ru+\\n(INu+\\n()Iu
+.ti \\n(INu
+.ie !\\n()Iu+\\n()Ru-\w@\\*(]X@u-3p \{\\*(]X
+.br \}
+.el \\*(]X\h@|\\n()Iu+\\n()Ru@\c
+.}f
+..
+'''\" end of 1-line features
+.de }N
+.if \\n()E .br
+.di
+.if @\\n()E@0@ .}f
+.if @\\n()E@1@ .}1
+.if @\\n()E@2@ .}2
+..
+'''\" increase relative indent
+.de RS
+.nr ]\\n+()p \\n()I
+.nr )\\n()p \\n()R
+.ie !@\\$1@@ .nr )R +\\$1n
+.el .nr )R +\\n()I
+.nr )I \\n()Mu
+.}E
+..
+'''\" decrease relative indent
+.de RE
+.if !@\\$1@@ \{.ie @\\$1@0@ .nr )p 1 1
+.		el .nr )p \\$1 1 \}
+.ds ]i \\*(]I\\n()p
+.ds ]r \\*(]R\\n()p
+.nr )I \\*(]i
+.nr )R \\*(]r
+.if \\n()p .nr )p -1
+.}E
+..
+'''\" .de PM [P:RS:RG:CR:UW:CP] [year]
+'''\" disclosure notice invoking macro
+.de PM
+.ie @\\$2@@ .nr ;V \\n(yr
+.el \{.ie \\$2-1900 .nr ;V \\$2-1900
+.el .nr ;V \\$2 \}
+.ie @\\$1@@ \{\
+.	(B
+.	(E 2 0		\" clear position 2 - additional message
+.	(B
+.	(E 3 0 \}	\" clear position 3 - regular PM messages
+.el .ie @\\$1@RS@ \{\
+.	(B
+\!.	tl @@\f2AT&T \- PROPRIETARY (RESTRICTED)\fP@@
+\!.	tl @@\f1Solely for authorized persons having a need to know@@
+\!.	tl @@pursuant to Company Instructions.\fP@@
+.	(E 3 3v \}
+.el .ie @\\$1@RG@ \{\
+.	(B
+\!.	tl @@\f2AT&T \- PROPRIETARY (REGISTERED)\fP@@
+\!.	tl @@\f1Solely for authorized persons having a need to know@@
+\!.	tl @@and subject to cover sheet instructions.\fP@@
+.	(E 3 3v \}
+.el .ie @\\$1@CP@ \{\
+.	(B
+\!.	tl @@\f1SEE PROPRIETARY NOTICE ON COVER PAGE\fP@@
+.	(E 3 1v \}
+.el .ie @\\$1@CR@ \{\
+.	(B
+\!.	tl @@\f1Copyright \\(co 19\\n(;V AT&T@@
+\!.	tl @@All rights reserved.\fP@@
+.	(E 3 2v \}
+.el .ie @\\$1@UW@ \{\
+.	(B
+\!.	tl @@\f2AT&T \- PROPRIETARY\fP@@
+\!.	tl @@\f1THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF@@
+\!.	tl @@AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN@@
+\!.	tl @@ACCORDANCE WITH APPLICABLE AGREEMENTS.@@
+\!.	tl @@Copyright \\(co 19\\n(;V AT&T@@
+\!.	tl @@Unpublished & Not for Publication@@
+\!.	tl @@All rights reserved.\fP@@
+.	(E 3 7v \}
+.el \{\
+.	(B
+\!.	tl @@\f2AT&T \- PROPRIETARY\fP@@
+\!.	tl @@\f1Use pursuant to Company Instructions.\fP@@
+.	(E 3 2v \}
+..
+'''\" )G - print disclosure notice
+'''\" traps for bottom blocks as set by (B, (E
+.de )G
+.ev 2
+.nf
+.sp 1
+.?1		\" print all bottom blocks
+.?2
+.?3
+.?4
+.br
+.ev
+'bp		\" force end of page
+..
+'''\" (B: define a (generic) bottom block
+'''\" paired by the (E macro.
+.de (B
+.ev 1
+'fi
+.di >K		\" save a bottom block
+..
+'''\" (E: end a bottom block
+'''\" .(E <id> <size>
+'''\" close the current bottom block, make it number <id> (1-5) with
+'''\" <size> (if no <size> - use \n(dn)
+.de (E
+.br
+.di
+.ev
+.ie (\\n(dn=0)&(0\\$2=0) \{\
+.	nr ?\\$1 0		\" clear a bottom block
+.	rm >K ?\\$1
+'	br \}
+.el \{\
+.	ie 0\\$2>0 .nr ?\\$1 0\\$2	\" specific length
+.	el         .nr ?\\$1 \\n(dn \}	\" length of diversion
+'''\" Now compute bottom of page trap positions
+.nr :U \\n(:mu+\\n(?1+\\n(?2+\\n(?3+\\n(?4+\\n(?5+1v	\" new bottom trap pos
+.if \\n(:Uu>(\\n(.pu-\\n(nlu-.5v) 'bp	\" new page if bigger than room
+.ch )G			\" remove current trap, if any
+.rn >K ?\\$1		\" new bottom block
+.wh -\\n(:Uu )G		\" bottom mark position
+..
+'''\" DT, PD, and SM invoked internally!
+'''\" set page size
+.nr )s 0
+.if t .if \ns .nr )s 1		\" troff in small format
+.nr )t 0
+.if t .if !\ns .nr )t 1		\" troff in large format
+.if \n()s \{.nr )L 9i
+.	     nr LL 4.75i
+.	     nr )O .463i
+.	     nr )S 9
+.	     nr )V 10 \}
+.if \n()t \{.nr )L 11i
+.	     nr LL 6.5i
+.	     nr )O .75i
+.	     nr )S 10
+.	     nr )V 12 \}
+.if t .ds S \s\n()S
+.if n \{\
+.	ds S
+.	ie !\ns \{\
+.		nr )L 11i
+.		nr LL 6.5i
+.		nr )O .75i
+'		br \}
+.	el \{\
+.		nr )L 9i	\" small page for nroff
+.		nr LL 4.75i
+.		nr )O .463i
+'		br\} \}
+.if \nT .nr LL 80n		\" for TTY-43
+'''\" for Versatec
+.if \nV>1 \{\
+.	nr LL 82n
+.	nr )L 84v
+.	rm ul \}
+.nr )p 0 1
+.ds ]I \\\\n(]
+.ds ]R \\\\n()
+'''\" set month
+.if @\nd@0@ .nr m \n(mo-1
+.if @\nm@0@ .ds ]m January
+.if @\nm@1@ .ds ]m February
+.if @\nm@2@ .ds ]m March
+.if @\nm@3@ .ds ]m April
+.if @\nm@4@ .ds ]m May
+.if @\nm@5@ .ds ]m June
+.if @\nm@6@ .ds ]m July
+.if @\nm@7@ .ds ]m August
+.if @\nm@8@ .ds ]m September
+.if @\nm@9@ .ds ]m October
+.if @\nm@10@ .ds ]m November
+.if @\nm@11@ .ds ]m December
+'''\" set date
+.if n \{.nr m \nm+1
+.	 ie \nd .ds ]W (last mod. \nm/\nd/\ny)
+.	 el .ds ]W (printed \n(mo/\n(dy/\n(yr)
+'	 br \}
+.if \n()s .ds ]W
+.if \n()t \{.ie \nd .ds ]W \*(]m \nd, 19\ny
+.	      el .ds ]W \*(]m \n(dy, 19\n(yr
+'	      br \}
+.pl \n()Lu
+.ll \n(LLu
+.lt \n(LLu
+.po \n()Ou
+.}f
+.if \n()s .nr :m 3.5v
+.if \n()t .nr :m 6v
+.if n .nr :m 7v
+.if t .nr )M 3.6m
+.if n .nr )M 5n
+.em }K	\"redefined in .TH

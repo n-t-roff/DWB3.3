@@ -1,0 +1,1095 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.tS MVIEW
+\s-1MVIEW\s+1 \(em A Macro Package
+for Generating View Graphs
+.tE
+.aS
+This is a user's reference manual for
+.sM MVIEW ,
+a general-purpose macrocommand package for the generation of view graphs.
+The
+.sM MVIEW
+approach to view graph production differs significantly from that of other
+macrocommand packages
+wherein by automatically adjusting interline spacing
+and point size, an attempt is made to fill the projected transparency area.
+On the other hand, no attempt is made for consistent line spacing or
+character size from page to page (view graph to view graph).
+.P
+Some simple (optional) facilities are provided which can be used
+to aid in the layout of the view graph, generate titles and provide font and
+point size control.
+The features of
+.sM MVIEW
+and how to use it with
+.I troff
+as well as its preprocessors are shown by example.
+Many samples of
+.sM MVIEW
+input are included in the document; the resulting view graphs
+are included in the Appendix at the end of the document.
+.aE
+.H 1 "INTRODUCTION"
+The
+.sM MVIEW
+package is a set of macrocommands which aid
+in the formatting and phototypesetting of
+view graphs.
+These macrocommands are invoked by typing the
+.cR -mview
+formatter option on the
+.I troff
+command line.
+The
+.sM MVIEW
+package for
+.I troff
+enables the novice to produce well formatted view
+graphs with a minimal amount of advanced planning
+or knowledge of
+.IR troff .
+It removes the burden from the user of having to calculate
+point size and line spacing as well as having
+to ask continually ``will this line fit on the frames?'';
+.sM MVIEW
+adjusts the output text to be as large as
+possible within the frame boundaries.
+It then adjusts the interline spacing
+(within reasonable limits) to fill the frame.
+.P
+Although
+.sM MVIEW
+provides a few facilities
+to aid in the formatting of view graphs, these
+are not critical to its use.
+The
+.sM MVIEW
+package can be used effectively with plain text
+or with text and
+.I troff
+commands.
+It can be used in conjunction with
+.I troff
+preprocessors
+.RI ( tbl ,
+.IR eqn ,
+.IR pic ,
+.IR grap )
+as well.
+.P
+In the remainder of this document, the features of
+.sM MVIEW
+and how to use it with
+.I troff
+as well as its preprocessors are shown by example.
+Many samples of
+.sM MVIEW
+input are included in the document.
+The resulting view graphs are included in the Appendix at
+the end of the document.
+.H 1 "THE BASIC VIEW GRAPH"
+By default,
+.sM MVIEW
+operates in no-fill mode.
+That is, a line of input text produces a line on
+the view graph.
+The user is responsible for saying where a view graph
+starts
+.cR .VG ) (
+and where it ends
+.cR .VE ). (
+In other words, pagination must be explicit.
+.P
+In order to fill the view graph frame, point size
+and line spacing will automatically vary from page to
+page (view graph to view graph).
+There are a number of other features of
+.sM MVIEW
+but all of these are optional.
+The most basic example of a view graph includes lines of text
+surrounded by the
+.cR .VG
+and
+.cR .VE
+commands.
+For example, the following text:
+.iS
+\&.VG
+Here is Some Text
+Which Can Be
+Used to Produce
+A
+View Graph
+\&.VE
+.iE
+will produce the view graph shown in
+Example 1 of the Appendix.
+Perhaps the view graph would have looked better
+if the text had been centered.
+Inserting a
+.I troff
+request
+.cR .ce ) (
+to center many lines of text:
+.iS
+\&.VG
+\&.ce 99
+Here is Some Text
+Which Can Be Used
+To Produce
+A
+View Graph
+\&.VE
+.iE
+will produce the view graph shown in Example 2 of the Appendix.
+As another simple example, consider a view graph crammed with
+long lines of text and all sorts of insignificant details:
+.iS
+\&.VG
+\&.ce 99
+Here is some text for a poorly written
+view graph which I really do not want
+anyone to read because much of the
+information which it contains is of
+very little value.
+\&.VE
+.iE
+(see Example 3 of the Appendix).
+Note how
+.sM MVIEW
+uses a smaller point size for this last example
+to accommodate the longer lines of text.
+.H 1 "DETAILED USE OF \&\f(CB.VG\fP AND \&\f(CB.VE\fP"
+The
+.cR .VG
+and
+.cR .VE
+macrocommands mark the start and end of the view graph input.
+.iS
+\&.VG \*(iAwidth\0height\0point-size\0vertical-spacing\f5
+\0\0\u\z.\d\z.\d.
+.sp 0.5v
+\&.VE \*(iAon-frame
+off-frame
+.iE
+The
+.cR .VG
+command accepts optional arguments to override the
+default frame dimensions as well as the computed point size and
+vertical spacing.
+An on-frame identifier is supplied as an argument to the
+.cR .VE
+command.
+One or more lines of off-frame identification may follow the
+.cR .VE
+command.
+.H 2 "Starting a View Graph with \&\f(CB.VG\fP"
+.P
+By default,
+.sM MVIEW
+assumes a view graph mask
+is 7\(mu7 inches.
+However, if other dimensions of width and height are
+desired they should be appended to the
+.cR .VG
+command line.
+These dimensions are kept in effect until modified
+by subsequent width and/or height specifications.
+The
+.cR .VG
+command sets the output line length to be \(12-inch less than the
+requested frame width.
+(For historical reasons,
+.sM MVIEW
+assumes a maximum line length of 7\(12 inches.)
+A
+.cR .VG -specified
+width greater than
+seven inches will inhibit the printing of the
+bracketing frame mounting marks and the on-frame
+identification (see
+.cR .VE
+in \(sc3.2).
+.P
+The
+.sM MVIEW
+package automatically adjusts the values
+of point size and vertical line spacing to fill the
+frame.
+In this
+.ul
+automatic
+mode, the point size and vertical spacing for each view graph is printed
+at the terminal.
+The user may wish to override the automatic
+mode of
+.sM MVIEW
+and force the operation
+of a particular view graph to be in manual
+mode by designating the point size and vertical line spacing.
+.P
+A null argument (\*(iR""\fP)
+may be used to retain a particular default and override
+a subsequent argument.
+For example,
+.iS
+\&.VG "" "" 18 22
+.iE
+sets the point size to 18 and the vertical line spacing to 22
+without changing the default frame dimensions.
+.H 2 "Terminating a View Graph with \&\f(CB.VE\fP"
+.P
+The
+.cR .VE
+command will accept a line of identifying text to
+appear in the lower right hand corner of the concluded
+view graph and all subsequent view graphs unless
+the identifying string is changed by a subsequent
+.cR .VE
+command.
+For example,
+.iS
+\&.VE jns
+.iE
+uses the author's initials as an on-frame identifier on
+the view graph shown in Example 4 of the Appendix.
+.P
+One or more lines of text typed after the
+.cR .VE
+line and before the next
+.cR .VG
+will appear under the view graph off the frame.
+For example,
+.iS
+\&.VE
+SIZES
+Example 5
+.iE
+produced the two-line off-frame identifier on the
+view graph shown in Example 5 of the Appendix.
+This latter technique is preferred by some for
+view graph identification.
+.P
+Both on- and off-frame identifiers can be used on the same
+view graph as well.
+For example,
+.iS
+\&.VE jns
+Bullet List
+.iE
+produced the identifiers on the view graph shown in
+Example 6 of the Appendix.
+.H 1 "ADDING EMPHASIS TO A VIEW GRAPH"
+Within a view graph, that is, between a
+.cR .VG
+and its closing
+.cR .VE ,
+there are a number of
+simple facilities which can be used to add emphasis
+and clarify a presentation.
+.H 2 Titles
+The
+.cR .T
+command will accept a string of text
+and reproduce it centered, slightly larger and
+bolder than the remainder of the text.
+It can be used anywhere in the view graph, however,
+it is recommended for use to provide centered view
+graph titles.
+For example, the command
+.iS
+\&.T FONTS FOR EMPHASIS
+.iE
+produced the title shown in Example 4 of the Appendix.
+.P
+The
+.cR .TU
+command functions similarly to the
+.cR .T
+command.
+It can be used to provide an underlined title
+which appears larger, bolder and centered.
+For example, the command
+.iS
+\&.TU CHANGING SIZES
+.iE
+produced the underlined title shown in Example 5 of the Appendix.
+.P
+Fifty percent additional spacing is inserted between titles and the
+text that follows.
+.H 2 "Font Control"
+The
+.sM MVIEW
+package recognizes three font families:  Helvetica, Times Roman, and Palatino.
+Each family of fonts includes a regular, italic, bold, and bold-italic
+typeface to complement the particular typeface design.
+In addition, the typewriter-like Constant Width font
+(used for all input examples in this document)
+is available with each font family.
+.P
+By default,
+.sM MVIEW
+will generate view graphs using
+the sans-serif Helvetica font family.
+A different family of fonts can be requested by the
+\%\*(iR-rf\*(iAN\|\f1 option on the
+.I troff
+command line where
+.cA N
+selects the following family of fonts:
+.DS
+.TS
+center box;
+c lf1 lf1
+cf5 lf1 lf1.
+\*(iAN\fP	Family	Fonts
+_
+0	Helvetica  (default)	\fHHelvetica\fP
+		\f(HIHelvetica Oblique\fP
+		\f(HBHelvetica Bold\fP
+		\f(HXHelvetica Bold Oblique\fP
+_
+1	Times Roman	\fRTimes Roman\fP
+		\fITimes Roman Italic\fP
+		\fBTimes Roman Bold\fP
+		\f(BITimes Roman Bold Italic\fP
+_
+2	Palatino	\f(PAPalatino\fP
+		\f(PIPalatino Italic\fP
+		\f(PBPalatino Bold\fP
+		\f(PXPalatino Bold Italic\fP
+.TE
+.DE
+.P
+The
+.sM MVIEW
+package offers five font emphasis commands:
+.cR .R
+selects the regular font,
+.cR .I
+selects the italic font,
+.cR .B
+selects the bold font,
+.cR .BI
+selects the bold-italic font,
+and
+.cR .CW
+selects the constant-width font.
+The user may switch the typeface for
+one or more lines of output by preceding the text lines by
+.I one
+of the font emphasis commands.
+.P
+Consider a file named ``mview.ex4'' which contains the following text:
+.iS
+\&.VG
+\&.T FONTS FOR EMPHASIS
+Fonts are sometimes used for emphasis.
+\&.I
+This is the italic font.
+\&.B
+This is the bold font.
+\&.BI
+This is the bold-italic font.
+\&.CW
+This is constant width.
+\&.R
+Now back to the regular font.
+\&.VE jns
+.iE
+.br
+.ne 6v
+The formatting command line
+.iS
+troff -mview -rf2 mview.ex4 | \(el
+.iE
+will produce the view graph shown in Example 4 of the Appendix.
+Note that the Palatino font family is used for this view graph
+and that each line of text appears in the appropriate font
+according to the font emphasis commands used above.
+.H 2 "Point Size Control"
+Two commands,
+.cR .S
+and
+.cR .L ,
+are defined within
+.sM MVIEW
+to aid in the formatting of view graphs.
+The
+.cR .L
+command increases the point size to make the text larger.
+The
+.cR .S
+command decreases the point size to make the text smaller.
+Each use of
+.cR .L
+or
+.cR .S
+results in a change of one point in size.
+For example,
+the following text:
+.iS
+\&.VG
+\&.TU CHANGING SIZES
+Changing the point size (smaller or larger) by a single
+point may not be noticeable.  A change of several points
+may be necessary to see the difference.
+\&.sp
+\&.ce 99
+Some normal-sized text
+\&.S
+\&.S
+A Bit Smaller
+\&.S
+\&.S
+\&.S
+\&.S
+Much Smaller
+\&.L
+\&.L
+A Bit Larger
+\&.L
+\&.L
+\&.L
+\&.L
+Return to the normal point size
+\&.VE
+SIZES
+Example 5
+.iE
+will produce the view graph shown in Example 5 of the Appendix.
+Note that the number of
+.cR .L
+commands must match the number of
+.cR .S
+commands in order to return the text to the normal (original) point size.
+.H 1 "GENERATING LISTS WITHIN A VIEW GRAPH"
+Lists are a series of items which bear a unique marking
+in the output text for purposes of conveying emphasis or structure.
+For example, the view graph shown in Example 6 of the Appendix
+was generated with a title macrocommand
+.cR .T ) (
+followed by a bullet list
+.cR .BL ) (
+as follows:
+.iS
+\&.VG
+\&.T A List Example
+\&.BL
+\&.LI
+First List Item
+\&.LI
+Second List Item
+\&.LI
+Third (last) List Item
+\&.LE
+\&.VE jns
+Bullet List
+.iE
+'''	\" FORCE PAGE
+.SK
+.P
+Lists are composed of three essential parts:
+.AL 1
+.LI
+A
+.I "list initialization"
+command
+(see \(sc5.1)
+which designates the start of a list and its type.
+.br
+(The
+.cR .BL
+list initialization command was used for the
+bullet list in the previous example.)
+.LI
+One or more
+.I "list items"
+.cR .LI ) (
+which denote the components of the list.
+.LI
+The
+.I "list termination"
+command
+.cR .LE ) (
+to specify the end of a list.
+.LE
+.P
+Lists may be nested to generate sub-lists but each such
+sub-list must contain all three necessary parts of a
+list as indicated above.
+.H 2 "List Initialization Commands"
+The
+.sM MVIEW
+package offers five different list formats:
+bullet list, dash list, marked list, outline list, and variable list.
+A list initialization command serves to select the
+format of the generated list.
+Lists should be preceded by one of the
+following list initialization commands:
+.DS
+.TS
+center box;
+cf1 cf1
+lf1 lf1.
+Command	List Format
+_
+\*(iR.BL\f1	Bullet List
+\*(iR.DL\f1	Dash List
+\*(iR.ML \*(iAmark\f1	Marked List
+\*(iR.OL \*(iAflag\f1	Outline List
+\*(iR.VL \*(iAindent\f1	Variable List
+.TE
+.DE
+Each of the list initialization commands are explained in
+detail in the subsections that follow.
+.H 3 "Bullet List"
+.iS
+\&.BL
+.iE
+Each item is marked with a bullet.
+(See example above and the corresponding view graph shown in
+Example 6 of the Appendix.)
+.H 3 "Dash List"
+.iS
+\&.DL
+.iE
+Each item is marked with a long
+.RI ( em )
+dash.
+.H 3 "Marked List"
+.iS
+\&.ML \*(iAmark
+.iE
+The
+.cA mark
+string
+selects the symbol used to mark each item in the list:
+.DS
+.TS
+center box;
+cf1 cf1 cf1
+lf5 cf1 lf1.
+\*(iAmark\fP	Symbol	Description
+_
+\e*(BU	\(bu	Bullet
+\e*(DA	\(em	Dash
+\e*(CI	\(ci	Circle
+\e*(SQ	\(sq	Square
+\e*(FS	\(bx	Box (Filled Square)
+\e*(RH	\(rh	Right Hand
+\e*(NU		Null (produces only an indent)
+.TE
+.DE
+'''	\" FORCE PAGE
+.SK
+For example, consider a marked list and sub-list where
+first-level list items are marked with the box (filled square) symbol
+and second-level list items are marked with the square symbol.
+The following text:
+.iS
+\&.VG 7 8 18 20
+\&.T READER INQUIRY
+\&.I
+Please check all that apply:
+\&.R
+\&.ML \e*(FS
+\&.LI
+Why did you use this document?
+\&.ML \e*(SQ
+\&.LI
+To learn procedures
+\&.LI
+To reference information
+\&.LI
+To solve a problem
+\&.LI
+Other:
+\&.LE
+\&.LI
+What changes would improve this document?
+\&.ML \e*(SQ
+\&.LI
+Change structure and organization
+\&.LI
+Add more examples
+\&.LI
+More detailed information
+\&.LI
+Other:
+\&.LE
+\&.LI
+Comments:
+\&.LE
+\&.VE DocuCenter
+Reader Inquiry
+.iE
+will produce the view graph shown in Example 7 of the Appendix.
+.H 3 "Outline List"
+.iS
+\&.OL \*(iAflag
+.iE
+The list will be generated in standard outline format:  first-level list items
+are marked with capital Roman numerals,
+second-level lists with capital letters,
+third-level with Arabic numerals, etc.
+By default, the list item mark has the format ``#.'' where # represents the numeral
+generated for that item.
+.P
+The
+.cR .OL
+command allows for the provision of an optional
+mark separation flag which specifies the separation
+symbol between the outline
+numeral and the list item at a given level.
+The following values for
+.cA flag
+will generate the corresponding format for the list item mark
+(where ``#'' represents the outline numeral):
+.DS
+.TS
+center box;
+cf1 lf1 sf1
+nf5 cf1 1 lf1.
+\*(iAflag\fP	Mark Format
+_
+1	#.	(default)
+2	#)
+3	(#)
+4	[#]
+5	<#>
+6	{#}
+.TE
+.DE
+.P
+For example,
+consider an outline list (nested three levels deep)
+where the first- and second-level list items use the standard mark format
+and the third-level list items use the ``(#)'' mark format.
+The following text:
+.iS
+\&.VG
+\&.OL
+\&.LI
+Research
+\&.LI
+Electronics Technology
+\&.OL
+\&.LI
+Integrated Circuits Development
+\&.OL 3
+\&.LI
+LSI
+\&.LI
+VLSI
+\&.LE
+\&.LI
+Electronic Device Materials
+\&.LI
+System Assembly Technology
+\&.LE
+\&.LI
+Network Planning
+\&.LI
+Transmission Systems
+\&.LE
+\&.VE
+.iE
+will produce the view graph shown in Example 8 of the Appendix.
+.H 3 "Variable List"
+.iS
+\&.VL \*(iAindent
+.iE
+The variable list allows the user
+to label each item with a string of varying length.
+The argument to
+.cR .VL
+is the indent in characters
+(ens) required by the label.
+The indent should be longer than the longest label expected.
+The labels themselves are specified as arguments to the
+list item
+.cR .LI ) (
+commands.
+.P
+Some view graph formats can be quite effective when
+produced in \f2filled\f1 mode (using
+.cR .fi ).
+Consider, for example, the variable list view graph
+shown in Example 9 of the Appendix.
+It was produced with the following text:
+.iS
+\&.VG 7 7 18 20
+\&.fi
+\&.na
+\&.T TYPESETTING FACILITIES
+\&.VL 16
+\&.LI Preprocessors
+A number of
+\&.I
+troff
+\&.R
+preprocessors are available
+to aid in formatting view graphs
+with tables, equations, pictures, and graphs.
+\&.LI Formatter
+The
+\&.I
+troff
+\&.R
+text formatter is the heart of
+UNIX\e*(Rg system text processing.
+This software does the actual formatting
+of the input text.
+\&.LI Postprocessors
+Several postprocessors are available
+to translate the
+\&.I
+troff
+\&.R
+output language
+to the page description language
+needed to drive a particular type
+of output device:
+\&.I
+dpost
+\&.R
+prepares output for PostScript
+printers and typesetters,
+\&.I
+dimpress
+\&.R
+for Imagen printers, and
+\&.I
+dpcl
+\&.R
+for HP laser printers.
+\&.LE
+\&.VE Example 9
+Variable List in Filled mode
+.iE
+It is advisable to turn off justification (using
+.cR .na )
+for view graphs produced in filled mode; having a ragged right margin
+will avoid unsightly gaps between words.
+'''	\" FORCE PAGE
+.SK
+.H 1 "USING \s-1MVIEW\s+1 WITH \f4troff\fP \^PREPROCESSORS"
+The
+.sM MVIEW
+macro commands are compatible with the
+.I troff
+preprocessors
+.RI ( tbl ,
+.IR eqn ,
+.IR pic ,
+and
+.IR grap ).
+The preprocessor macros
+.cR .TS "" (
+and
+.cR .TE
+for
+.IR tbl ,
+.cR .EQ
+and
+.cR .EN
+for
+.IR eqn ,
+.cR .PS
+and
+.cR .PE
+for
+.IR pic ,
+and
+.cR .G1
+and
+.cR .G2
+for
+.IR grap )
+act as flags for the respective preprocessor
+and are also defined in
+.sM MVIEW
+to generate \(12-line vertical space to offset it
+from any surrounding text.
+.P
+Since
+.sM MVIEW
+determines the point size and vertical spacing for each view graph
+(in automatic mode),
+you may find that some text generated by a preprocessor is
+sized incorrectly.
+In this case, you may need to explicitly set the size of
+the text used in the view graph
+(i.e., generate the view graph in manual mode)
+as well as explicitly state the size of text
+generated by the preprocessor.
+Any potential problem for each preprocessor and an
+appropriate resolution are noted in the subsections that follow.
+.H 2 "Generating Tables"
+In many cases,
+.I tbl
+can be used to enhance the formatting
+facilities of
+.sM MVIEW .
+The
+.cR .TS
+and
+.cR .TE
+macros mark the start and end of
+.I tbl
+input.
+Consider a file named ``mview.ex10'' which contains the following text
+(the symbol \*(tB represents the tab character):
+.iS
+\&.VG
+\&.T READABILITY OF TEXT
+\&.S
+\&.S
+\&.T Line Width and Leading for 10-Point Type
+\&.L
+\&.L
+\&.TS
+\&box;
+\&c  || c   | c   | c   | c 
+\&c  || c   | c   | c   | c 
+\&r2 || ne2 | ne2 | ne2 | ne.
+\&Line\*(tBSet\*(tB1-Point\*(tB2-Point\*(tB4-Point
+\&Width\*(tBSolid\*(tBLeading\*(tBLeading\*(tBLeading
+\&=
+\&9 Pica\*(tB\e-9.3\*(tB\e-6.0\*(tB\e-5.3\*(tB\e-7.1
+\&14 Pica\*(tB\e-4.5\*(tB\e-0.6\*(tB\e-0.3\*(tB\e-1.7
+\&19 Pica\*(tB\e-5.0\*(tB\e-5.1\*(tB0.0\*(tB\e-2.0
+\&31 Pica\*(tB\e-3.7\*(tB\e-3.8\*(tB\e-2.4\*(tB\e-3.6
+\&43 Pica\*(tB\e-9.1\*(tB\e-9.0\*(tB\e-5.9\*(tB\e-8.8
+\&.TE
+\&.VE Example 10
+\&Readability of Text
+\&(tbl sample)
+.iE
+(The sequence
+.cR \e(mi
+generates a minus sign.)
+The formatting command line
+.iS
+tbl mview.ex10 | troff -mview | \(el
+.iE
+will produce the view graph shown in Example 10 of the Appendix.
+'''	\" FORCE PAGE
+.SK
+.H 2 "Generating Equations"
+The
+.I eqn 
+preprocessor can be used with
+.sM MVIEW
+to format mathematics on a view graph.
+However,
+.sM MVIEW
+is incapable of adjusting the character size of
+.I eqn
+generated equations.
+This difficulty can be overcome by preceding the first
+.cR .VG
+command with an explicit
+.I eqn
+command
+.cR gsize ) (
+which globally sets the size for all equations.
+.P
+The
+.cR .EQ
+and
+.cR .EN
+macros mark the start and end of
+.I eqn
+input for displayed equations, and to set
+delimiters for in-line equations.
+Consider a file named ``mview.ex11'' which contains the following text:
+.iS
+\&.VG
+\&.EQ
+gsize 24
+delim $$
+\&.EN
+\&.T Equations Are Easy
+You do not need to be a mathematician to
+format equations on the UNIX\e*(Rg system.
+For example, the input
+\&.sp 0.5v
+\&.S
+\&.S
+\&.CW
+\&.ce
+sum from i=1 to n x sub i
+\&.R
+\&.L
+\&.L
+\&.sp 0.5v
+produces $sum from i=1 to n x sub i$ on paper.
+\&.sp
+The eqn language makes it easy!
+\&.VE Example 11
+Equations Are Easy
+(eqn sample)
+.iE
+The formatting command line
+.iS
+eqn mview.ex11 | troff -rf1 -mview | \(el
+.iE
+will produce the view graph shown in Example 11 of the Appendix.
+Note that the Times Roman font family (option
+.cR -rf1 )
+is used for this view graph.
+.P
+If the equation size still does not match the
+size of the view graph text, then set the
+equation and view graph size to the same value
+using both the
+.I eqn
+.cR gsize
+command and the
+.sM MVIEW
+.cR .VG
+command:
+.iS
+\&.EQ
+gsize 18
+\&.EN
+\&.VG "" "" 18
+.iE
+This will ensure a uniform point size for the entire view graph.
+'''	\" FORCE PG
+.SK
+.H 2 "Generating Pictures and Diagrams"
+The
+.I pic
+preprocessor can be used with
+.sM MVIEW
+to include a picture on a view graph.
+The
+.cR .PS
+and
+.cR .PE
+macros mark the start and end of
+.I pic
+input.
+Consider a file named ``mview.ex12'' which contains the following text:
+.iS
+\&.VG 7 5 20 24
+\&.T A Working Model
+\&.PS
+boxwid = 1.25i ; boxht = 0.75i
+arrow
+box "input" ; arrow
+box "process" ; arrow
+box "output" ; arrow
+\&.PE
+\&.VE Example 12
+A Working Model
+(pic sample)
+.iE
+The formatting command line
+.iS
+pic mview.ex12 | troff -mview | \(el
+.iE
+will produce the view graph shown in Example 12 of the Appendix.
+.P
+The
+.I pic
+defaults for the dimensions of some elements
+(e.g., box height and width, circle radius) may not be large
+enough to accommodate text in a larger point size.
+In this case, you may need to reset dimensions as needed.
+(This was necessary in the example above.)
+.H 2 "Generating Plots and Graphs"
+The
+.I grap
+preprocessor can be used with
+.sM MVIEW
+and
+.I pic
+to plot a graph and display statistical data
+on a view graph.
+Consider a file named ``mview.ex13'' which contains the following text:
+.iS
+\&.VG "" "" 20 24
+\&.T 1984 Age Distribution in U.S.
+\&.G1
+coord x 0,89 y 0,5
+label left "\es-2Population\es+2" "\es-2(in millions)\es+2" left 0.2
+label bottom "\es-21984 Age\es+2" down 0.2
+draw solid
+copy "agepop.d"
+\&.G2
+\&.VE Example 13
+Age Distribution
+(grap sample)
+.iE
+(The file ``agepop.d'' contains the statistical data for this graph.)
+The
+.I grap
+program is a preprocessor to
+.IR pic ,
+so it must be used along with and before
+.I pic
+on the formatting command line.
+The formatting command line
+.iS
+grap mview.ex13 | pic | troff -mview | \(el
+.iE
+will produce the view graph shown in Example 13 of the Appendix.
+.P
+It may be necessary to adjust the size and position of
+label text to avoid collisions with the frame
+and axes labels of the plotted graph.
+(This was necessary in the example above.)
+'''	\" FORCE PG
+.SK
+.H 1 "DEFINED STRINGS"
+The registered mark, service mark, and trademark symbols
+are defined as strings in the
+.sM MVIEW
+package.
+Use the following string to generate the corresponding symbol:
+.DS
+.TS
+center box;
+cf1 cf1 cf1
+lf5 cf1 lf1.
+String	Symbol	Description
+_
+\e*(Rg	\*(Rg	registered mark
+\e*(Tm	\*(Tm	trademark
+\e*(Sm	\*(Sm	service mark
+.TE
+.DE
+Use the registration symbol for registered marks;
+for unregistered marks, use the service mark symbol or the
+trademark symbol, as appropriate.
+Marks should always be used as adjectives when they appear
+in printed text (.e.g, \s-1UNIX\s+1\*(Rg system,
+Tuxedo\*(Tm software, \s-1ACCUNET\s+1\^\*(Sm digital services).
+.H 1 "PROCESSING YOUR OUTPUT"
+The facility described above will not, in fact,
+produce a view graph, but rather will produce an
+opaque, high-quality, typeset facsimile
+on a laser printer or phototypesetter.
+.P
+The Reproduction Services organization is equipped to convert
+this output to a high-quality view graph transparency.
+Also, there are a number of self-service
+infrared transparency makers available in most secretarial offices
+or co-located with self-service xerographic copiers.
+These self-service facilities do a better than adequate
+job of producing transparencies of good quality.
+The length of the view graph transparency has been
+designed to be compatible with the 8\(12"-width capacity
+of these machines.
+Do not make the transparency from the original; make a good-quality
+xerographic copy first and then make the transparency from that.

@@ -1,0 +1,54 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.VG 7 7 18 20
+.fi
+.na
+.T TYPESETTING FACILITIES
+.VL 16
+.LI Preprocessors
+A number of
+.I
+troff
+.R
+preprocessors are available
+to aid in formatting view graphs
+with tables, equations, pictures, and graphs.
+.LI Formatter
+The
+.I
+troff
+.R
+text formatter is the heart
+of UNIX\*(Rg system text processing.
+This software does the actual formatting
+of the input text.
+.LI Postprocessors
+Several postprocessors are available
+to translate the
+.I
+troff
+.R
+output language
+to the page description language
+needed to drive a particular type
+of output device:
+.I
+dpost
+.R
+prepares output for PostScript
+printers and typesetters,
+.I
+dimpress
+.R
+for Imagen printers, and
+.I
+dpcl
+.R
+for HP laser printers.
+.LE
+.VE Example 9
+Variable List in Filled mode

@@ -1,0 +1,210 @@
+X97
+bset	0
+breset	0
+Hor	4
+Vert	5
+Newline	40
+Char	20
+Em	20
+Halfline	20
+Adj	20
+twinit	""
+twrest	""
+twnl	"\n"
+hlr	"\0338"
+hlf	"\0339"
+flr	"\0337"
+bdon	""
+bdoff	""
+iton	""
+itoff	""
+ploton	""
+plotoff	""
+up	"\0337"
+down	"\n"
+right	" "
+left	"\b"
+
+charset
+em 1 -
+hy 1 -
+\- 1 -
+bu 1 +\bo
+sq 1 " "
+bx 1 " "
+ru 1 _
+14 3 1/4
+12 3 1/2
+34 3 3/4
+fi 2 fi
+fl 2 fl
+ff 2 ff
+Fi 3 ffi
+Fl 3 ffl
+de 1 \0338o\0339
+dg 1 |\b-
+fm 1 '
+ct 1 c\b/
+rg 1 r\bO
+co 1 c\bO
+tm 1 " "
+pl 1 +
+mi 1 -
+eq 1 =
+** 1 *
+sc 1 S\b|
+aa 1 '
+ga 1 `
+ul 1 _
+sl 1 /
+*a 1 a
+*b 1 ,\bB
+*g 1 )\b/
+*d 1 o\b`
+*e 1 -\b<
+*z 1 /\b`\b_
+*y 1 `\bn
+*h 1 -\bO
+*i 1 i
+*k 1 k
+*l 1 \\\b>
+*m 1 ,\bu
+*n 1 v
+*c 1 (\b-\b`
+*o 1 o
+*p 1 -\bn
+*r 1 p
+*s 1 -\bo
+*t 1 t
+*u 1 v
+*f 1 |\bo
+*x 1 x
+*q 1 |\bu
+*w 1 w
+*A 1 A
+*B 1 B
+*G 1 |\b~
+*D 2 _\b/_\b\\
+*E 1 E
+*Z 1 Z
+*Y 1 H
+*H 1 =\bO
+*I 1 I
+*K 1 K
+*L 2 /\\
+*M 1 M
+*N 1 N
+*C 1 _\b-\b~
+*O 1 O
+*P 2 ~\b|~\b|
+*R 1 P
+*S 1 ~\b_\b>
+*T 1 T
+*U 1 Y
+*F 1 I\bo
+*X 1 X
+*Q 1 |\bU
+*W 3 (\b_|_\b)
+ts 1 s
+sr 1 /
+rn 1 \0337_\n
+>= 1 _\b>
+<= 1 _\b<
+== 1 _\b=
+~= 1 ~\b_
+ap 1 ~
+!= 1 =\b/
+-> 2 ->
+<- 2 <-
+ua 1 |\b^
+da 1 |\bv
+mu 1 x
+di 1 -\b:
++- 1 +\b_
+cu 2 ()
+ca 2 ()
+sb 1 " "
+sp 1 " "
+ib 1 " "
+ip 1 " "
+if 2 oo
+pd 1 o\b)
+gr 2 \/\b\b\0337__\n
+no 1 -
+is 1 S
+pt 2 oc
+es 1 /\bO
+mo 1 -\bC
+br 1 |
+dd 1 |\b=
+rh 2 =>
+lh 2 <=
+or 1 |
+ci 1 O
+lt 1 |
+lb 1 |
+rt 1 |
+rb 1 |
+lk 1 |
+rk 1 |
+bv 1 |
+lf 1 |
+rf 1 |
+lc 1 |
+rc 1 |
+x1 1 " "
+x3 1 " "
+x5 1 " "
+x7 1 " "
+xv 1 |
+xh 1 _
+xc 1 " "
+l1 1 " "
+l2 1 " "
+l3 1 " "
+l4 1 " "
+l5 1 " "
+l6 1 " "
+l7 1 " "
+l8 1 " "
+a1 1 " "
+a2 1 " "
+a3 1 " "
+a4 1 " "
+a5 1 " "
+a6 1 " "
+a7 1 " "
+a8 1 " "
+~a 1 " "
+~b 1 " "
+~c 1 " "
+~d 1 " "
+~e 1 " "
+~f 1 " "
+~g 1 " "
+~h 1 " "
+~i 1 " "
+~j 1 " "
+~k 1 " "
+~l 1 " "
+~m 1 " "
+~n 1 " "
+~o 1 " "
+~p 1 " "
+~q 1 " "
+~r 1 " "
+~s 1 " "
+~t 1 " "
+~u 1 " "
+~v 1 " "
+~w 1 " "
+~x 1 " "
+LH 9 \033L\033X\100\033X\101\033P
+Lb 9 \033L\033X\100\033X\101\033P
+LV 8 \033L\n\n\033X\101\b\033\n\033\n\033D\033X\100\033U\033P
+ds 0 ""
+ls 0 ""
+us 0 ""
+ue 0 ""
+dq 1 \"
+bs 1 \\

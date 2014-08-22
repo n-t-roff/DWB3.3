@@ -1,0 +1,30 @@
+.de iS
+.DS I
+.ft 5
+.S -1
+..
+.de iE
+.S +1
+.ft 1
+.DE
+..
+.de EX
+.br
+.ne \\$2i
+.sp -1.5
+.BP ex\\$1.ps \\$2 \\$3 \\$4 \\$5 \\$6
+.sp 2
+.in +\n(Sin
+.ft 5
+.S -1
+.nf
+.ec 
+.so ex$1.pic
+.ec
+.sp .5
+.S +1
+.ft 1
+.in -\\n(Sin
+.fi
+.EP
+..

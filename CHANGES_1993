@@ -1,0 +1,489 @@
+---------------------
+Version 3.3   7/6/92
+---------------------
+
+ 1: The new tbl attempts to fix all serious problems with multi-page boxed
+    tables. There are still a few unresolved appearance problems that do
+    not seriously affect readability. There are a number of other fixes as
+    well.
+
+    Page breaks and other spacing are different in some cases than with
+    previous versions of tbl. Hand-tuned tables containing .bp requests
+    may need them removed to obtain satisfactory with the new tbl. The
+    DWB 3.2 tbl is available as 'otbl', which may not be distributed in
+    future DWB releases.
+
+ 2: tbl recognizes a new column-format modifier 'x' or 'X' that increases
+    the width of the column to the remainder of the page width after the
+    widths of the other columns have been subtracted. tbl also now allows
+    an unlimited number of text blocks after the first 'maxline' lines.
+
+ 3: Added two lines to dx9700's curve.c routine to detect empty ellipses.
+    Change from Chris Scussel.
+
+ 4: L1toa and atoL1 do exit(0). Also fixed an indexing mistake in atoL1.
+    Changes from Peter Nelson.
+
+ 5: Add one to accommodate StrokeWidth entry in fatcourier.ps on clones
+    like UltraScript. Change from Johnathan Shopiro.
+
+ 6: Updated grap man page with the caveat suggested by Janet Pultorak.
+
+ 7: Fixed strcmp() test in dpost that used a NULL pointer while processing
+    control lines asked for a non-existent font (e.g. x font 1 X).
+
+ 8: dpost now assumes the optional fifth token in a font mounting command
+    (e.g. x font 2 R /usr/me/font/R) is the full pathname of the font. troff
+    outputs the pathname when a .fp request contains a third argument that
+    begins with a / as in .fp 1 R /usr/me/font/R.
+
+ 9: postio now outputs all unrecognized status reports - primarly for spooler
+    accounting purposes.
+
+10: The makefiles also enable the selection of alternate stream module names
+    for streams based DKHOST support in postio.
+
+11: Included a new checkdoc (version 3.3). Main change is the expansion of
+    .so and .nx directives which means xpand is no longer required. Code
+    comes from Dave Muir.
+
+12: Cover sheet macros (-mcs version) now include spacing adjustments that
+    help when used with nroff. Changes came from Carmela but originated with
+    a Denver customer.
+
+13: Commented out mesg code in the mm shell script. Seemed like a pointless
+    exercise that caused problems on systems where the mesg command has a
+    different syntax. Also changed DWBLIB to LIBDIR in mm.sh so makefile
+    updates work.
+
+14: Fixed a bug in mm's width calculation of caption label to account for
+    font change in label. Also changed table caption label from "TABLE" to
+    "Table" to conform to other caption labels which use initial caps.
+
+15: There's now a macro package called mps for PostScript printers. Includes
+    color and pictures macros along with macros for selecting portrait or
+    landscape mode on a per-page basis. Includes man page that's referenced
+    in the mcolor and mpictures man pages.
+
+16: Copy H to HM during an install of devpost and devLatin1 tables - for a
+    monk bug.
+
+17: By request Latin1's '-' character has been changed from minus to the
+    smaller hyphen character. The width change means lines and pages may
+    break differently.
+
+18: The man page for download now documents the -r option and notes that -p
+    is only for Unix 4.0 lp.
+
+19: Copied CW to CB in the devpcl and devi300 font tables - so man pages print
+    without generating troff warnings about missing fonts.
+
+20: New troff/nroff is now a single program that uses argv[0] to decide how
+    to behave. Runs as troff unless argv[0] after the last /, is nroff. Can
+    also -N to force troff to run as nroff. All nroff/troff changes came
+    from Brian Kernighan.
+
+21: Added \(dq and \(bs (for " and \ characters) to troff font tables and nroff
+    terminal tables. Skipped xerox and devopost tables.
+
+22: Added \(!! and \(?? to devpost tables - by request. Skipped devpost.add
+    tables.
+
+23: Helvetica-Light and Helvetica-LightOblique tables are included as HL and
+    HK in devpost and devLatin1. More changes for Multiweight, even though
+    fonts aren't generally available.
+
+24: LH and LV are horizontal and vertical AT&T logos from Matthijs Melchior
+    with slight adjustments to the scaling of "AT&T". Also adjusted LV so globe
+    sits on the baseline.
+
+25: Included L1 and LA outlines in devpost and devLatin1. Adjusted LA scaling
+    so size of "AT&T" matches what's in LH and LV. Original PostScript came
+    from Matthijs Melchior.
+
+26: Picked up a new version of pm from Brian Kernighan. Includes the latest
+    -mpm and -mspe macros. pm is written in C++ and so it's not built by
+    default. If you have a C++ compiler try,
+
+		make -f dwb.mk TARGETS=pm clobber changes all install
+
+     or add text/pm to the TARGETS list in dwb.mk. Your compiler may require
+     changes to text/pm/pm.mk.
+
+27: Included the "symmetric clippath" version of roundpage.ps as Nroundpage.ps
+    in directory postscript/psfiles. Move it to roundpage.ps if you want it to
+    be the default.
+
+28: Added a few lines of code to dpost for handling current implementation of
+    the portrait/landscape mode macros. Current implementation is a kludge that
+    we will eventually fix.
+
+29: Documented the -F option in nroff/troff man pages.
+
+30: New picasso (batch version only) includes various bug fixes, faster font
+    access, and an improved algorithm for determining the center of each page.
+    Changes came from Don Knudsen and Manijeh Shayegan.
+
+31: An mm enchancement generates information markers as special device control
+    commands that dpost then uses to output special PostScript comments that
+    keep track of key document information (e.g., title, abstract, author
+    info, sections, date, document type); intended for use in future hypertext
+    applications. Can be disabled by "troff -mm -rI1 ...".
+
+32: Fixed dx9700 to ignore unrecognized device control commands. New mm now
+    generates lots of them (see 31).
+
+33: Fixed dpcl so page selection with -o works in fast mode. Change was to
+    check if tf == stdout in download() (file rast.c).
+
+---------------------
+Version 3.2   4/30/91
+---------------------
+
+Brian Kernighan supplied pm and all troff changes, checkdoc came from Dave
+Muir, and the AT&T logos came from Matthijs Melchior.
+
+ 1: Full support for the ISO Latin 1 alphabet is available when troff
+    files are properly formatted and sent to a PostScript printer. Call
+    troff with -TLatin1,
+
+	    troff -mm -TLatin1 file | dpost | lp ...
+
+    to use the tables that support the Latin 1 alphabet. The new tables
+    recognize 8-bit characters. They also support \(xy escapes for all
+    characters assigned codes over 127.
+
+	The default output device remains post (i.e. -Tpost). Change
+	the name assigned to TDEVNAME in file dwb.mk for a different
+	default.
+
+ 2: troff now supports the TeX hyphenation algorithm, using standard TeX
+    data files. The .ha request selects the hyphenation algorithm. .ha 1
+    means TeX, with troff rules if TeX doesn't hyphenate; .ha 0 gives troff
+    rules, and .ha resets to the default.
+
+	DWB 3.2 source is distributed with the troff algorithm as
+	the default. Change the value assigned to HYPHALG in file
+	dwb.mk for a different default. Selecting the TeX algorithm
+	deserves consideration.
+
+    The TeX algorithm uses a hyphenation table. troff first tries file
+    /usr/lib/tex/macros/hyphen.tex, then /usr/lib/tmac/hyphen.tex, which
+    is installed with DWB 3.2.
+
+	/usr/lib/tex/macros/hyphen.tex is not tunable from dwb.mk.
+	It's defined as TEXHYPHENS in file text/troff/tdef.h.
+
+ 3: troff's fixed size corebuf array for string/macro storage has been
+    replaced by a dynamic structure that can grow. Should eliminate the
+    string/macro space problems that affected some jobs.
+
+ 4: Macro definitions to accommodate manual pages prepared on other UNIX
+    systems have been incorporated in the man page macros. See DWB 3.2
+    version of man(5) for details.
+
+    In the mm, mcs, and man macro packages strings Rg, Tm and Sm produce
+    the registered mark, trademark, and service mark symbols, respectively.
+
+    In mm and mcs number register Sg can be set to 1 before .AU to force
+    "ORIGINAL SIGNED BY" notation in author's signature block above name.
+    By default, Sg is 0 so signature space is left blank. Register Sg can
+    be set before each .AU macro.
+
+    In mm string Ol (organization label) can be defined to replace the
+    label prefix for the organization number in the author's block. By
+    default, Ol is "Org. ".
+
+    In mm the .OP macro (force odd page) accepts an optional argument as
+    text to appear on a forced blank page before the next odd-numbered
+    page.
+
+ 5: tbl has a number of fixes and a few enhancements.  All of the known
+    bugs that produce core dumps have been fixed.  A problem that caused
+    tbl to go into an infinite loop has also been fixed.  A bug that
+    caused long input lines (e.g. from pic output) to be broken has been
+    fixed.  Parsing of global options and format specifications is much
+    improved.  There are a number of fixes that affect the appearance
+    of formatted output, but many problems are still unresolved, including
+    most of the problems with multiple-page boxed tables (this is a high-
+    priority item for the next release).  There is a new global option
+    maxline(n) that makes it possible to increase the number of lines
+    of input data that are considered in calculating column widths, etc.
+    and the number of lines in which it is possible to change the format
+    of the table using .T&.  A file-inclusion facility has been added.
+    There is a new command-line option -c that causes tbl to continue
+    processing in spite of input errors (default is to stop on the
+    first error).  See the tbl man page for details of the new features.
+
+ 6: In picasso, a new object type, psfile, has been added to allow the
+    inclusion of Encapsulated PostScript files. Syntax is as for box,
+    except that at least one text string MUST be supplied, and the first
+    text string is the name of the PostScript file to be included.
+
+    A new command-line option, -L, permits printing in landscape mode
+    (rotated 90 degrees from the normal orientation).
+
+    Another new option, -T<devname> allows the user to choose either
+    the old 'post' font-width tables or the new 'Latin1' font-width
+    tables. By default, the Latin1 tables are used.
+
+    Picasso text (quoted) strings may contain the troff escape sequences
+    representing the Greek alphabet, the upper half of the Latin 1 set,
+    and most of the traditional troff special characters.
+
+ 7: Three filters have been provided to aid composing Latin 1 documents.
+    All read standard input and write to standard output, with no options.
+    atoL1 will convert 7-bit ASCII with \(xy escapes to 8-bit Latin-1.
+    L1toa does the opposite. atoL1sim will read 7-bit ASCII with \(xy
+    escapes and write these out as x <backspace> y.  Other 7-bit
+    characters are left alone in all filters.
+
+ 8: All PostScript translators understand -E for selecting a text font
+    encoding. As a result they also support the Latin 1 character set.
+    For example,
+
+	    postprint -ELatin1 | lp ...
+
+    means include /usr/lib/postscript/Latin1.enc, which is the PostScript
+    file that ensures text fonts use the ISO Latin 1 alphabet. The encoding
+    name is a full pathname if it begins with a /. Missing encoding files
+    are silently ignored.
+
+ 9: By default dpost uses the Encoding set in the appropriate DESC file.
+    Other translators use /usr/lib/postscript/Default.enc, if it exists.
+    For example,
+
+	    cd /usr/lib/postscript
+	    ln Latin1.enc Default.enc
+
+    makes Latin1 the default character set. See the psencoding man page.
+
+10: postio now runs quietly when the -t option is used. No ctrl-Ts are
+    sent (after the initial connection is established) and only errors
+    and warnings are written to stderr.
+
+	The -t option is for recovering data from a PostScript
+	printer. It may not be appropriate in a spooler interface.
+
+11: The -c option disables the ctrl-Cs that postio occasionally sends at
+    the start or end of a job. Means postio does nothing when it finds a
+    printer is busy; it patiently waits for the idle state.
+
+	The -c option is for printers (like the PS-410) that accept
+	jobs from multiple IO ports. It may not be appropriate if
+	your printer is only using the serial port.
+
+12: buildtables is a new user command that builds troff width tables or
+    the typesetter description file on a PostScript printer. New tables
+    are left in the current directory. buildtables assumes you have direct
+    access to the printer's serial port. Most details are hidden in shell
+    library files. For example,
+
+	    buildtables -TLatin1 -l/dev/tty00 R I B BI
+
+    builds troff tables (using /usr/lib/font/devLatin1/shell.lib) for R,
+    I, B, and BI on the PostScript printer attached to /dev/tty00.
+
+	All devpost tables were built on a Version 47.0 PS-810.
+	The devLatin1 tables used a Version 51.7 PS-820.
+
+13: printfont builds a PostScript program that prints tables displaying
+    the available (encoded) characters in one or more PostScript fonts.
+    For example,
+
+	    printfont -ELatin1 Times-Roman Courier | lp ...
+
+    prints Latin1 character set tables for Times-Roman and Courier fonts.
+
+14: cropmarks is special purpose PostScript program that centers each page
+    and draws cropmarks at each corner (just outside the image area). For
+    example,
+
+	    troff -mm file | dpost | cropmarks | lp ...
+
+    	The PostScript code that expands page sizes (when necessary)
+	is device dependent. File /usr/lib/postscript/cropmarks.ps
+	may require local tuning or changes to handle new devices.
+
+15: hardcopy and grabit are two new programs for more serious PostScript
+    programmers. hardcopy can be used to recover information from printers
+    that don't allow access to their serial port. For example,
+
+	    echo 'FontDirectory {pop ==} forall' | hardcopy | lp ...
+
+    prints a list of a printer's ROM based fonts. grabit resembles Adobe's
+    == procedure, but the output is easier to read. For a simple comparison
+    try,
+
+	    echo 'userdict {exch == ==} forall' | postio -l/dev/tty00 -t
+
+    and,
+
+	    grabit userdict | postio -l/dev/tty00 -t
+
+    Both return a dump of the userdict dictionary, using the PostScript
+    printer attached to /dev/tty00.
+
+16: Horizontal and vertical configurations of the AT&T logo (\(LH and \(LV)
+    are available with -Tpost and -TLatin1. Both adjust the number of lines
+    in the globe based on the point size.
+
+17: dpcl now downloads individual character bitmaps rather than complete
+    raster files. -s restores the original (slow) behavior. Fatter raster
+    files for 300dpi write-white printers are also available but they're
+    unsupported.
+
+18: dpcl recognizes a new font table entry called sync. It forces dpcl to
+    position itself (horizontally) where troff wants to be after printing
+    selected characters. For example the two entries,
+
+	    sync ul
+	    sync ru
+
+    in the S font file force horizontal synchronization whenever dpcl prints
+    \(ul or \(ru from the S font.
+
+19: Included the latest checkdoc (version 2.5). This program now provides
+    a consistent return value (1 if there are errors). The checking of table
+    format specifications is much more complete.
+
+20: Coversheet macros (-mcs) are in macros directory. coverdoc and docsend
+    are no longer included in the internal DWB package. macref has also been
+    removed from the package.
+
+21: Moved the main postscript prologues into source directories. Common files
+    like forms.ps are in the psfiles directory. PostScript translators now
+    rotate counterclockwise when printing in landscape mode. The direction
+    can't be changed by tuning the top level makefile.
+
+22: The macro package makefiles have been fixed. They no longer make changes
+    while installing files. Simplifies the job of building a binary package
+    (as described in the README file).
+
+---------------------
+Version 3.1   4/??/90
+---------------------
+
+The big change is to the font tables. You'll likely have some work to
+do if you've customized an earlier DWB release, particularly if you've
+built your own font tables or written programs that read the old binary
+tables. As a precaution we've included the source for the old makedev
+program (in directory misc/makedev). It's there if you need to build
+binary tables, but makedev will not be included in future DWB releases.
+
+In what follows TARGETS, BINDIR, and POSTBIN refer to definitions made
+in the top level makefile (file dwb.mk). All are described in the next
+section. The important changes are:
+
+ 1: troff and its postprocessors now read ASCII font tables. makedev
+    and the old binary font tables are completely gone (or will be in
+    any future DWB release). One consequence is the programs now run
+    a bit slower (when compared to DWB 3.0 versions). The penalty for
+    most jobs will not exceed 5%. Some will even run faster.
+
+    The exception (and only for our internal release) is the Xerox
+    printer support software. dx9700 still reads binary tables, so
+    the makefiles build and install both binary and ASCII tables.
+
+ 2: The default PostScript font tables (directory postscript/devpost)
+    now only include the standard 35 fonts available on most PostScript
+    printers. All width tables were built on a version 47.0 QMS PS-810
+    using files in postscript/buildtables.
+
+ 3: Additional tables (the ones that were in the devpost collection
+    in DWB 3.0) have been moved to directory postscript/devpost.add.
+    By default they are not installed. If you need these tables include
+    devpost.add in the TARGETS list in file postscript/postscript.mk.
+
+    If you're not already using the extra font tables don't start now.
+    Font names are poorly chosen, particularly since the .fp request
+    can now handle long font names (as synonyms). The devpost.add
+    tables are completely unsupported. There is no guarantee these
+    tables will be included in future DWB releases.
+
+ 4: The original collection of PostScript font tables are supplied
+    (directory postscript/devopost), but by default are not installed.
+    If you need the tables add devopost to the TARGETS list in file
+    postscript/postscript.mk.
+
+    If you're not already using the old PostScript font tables don't
+    start now. The devopost tables are unsupported and will likely not
+    be included in future DWB releases.
+
+ 5: dpost recognizes two new fields in the ASCII font tables. An entry
+    that begins with fontname, as in
+
+		fontname Times-Roman
+
+    is expected to be the full PostScript font name. All PostScript font
+    tables should include a fontname entry. The second entry is,
+
+		named in prologue
+
+    and is used to disable runtime abbreviation of font names - dpost
+    assumes the abbreviation is already in the prologue (file dpost.ps).
+
+ 6: Font table makefiles,
+
+		postscript/devpost/devpost.mk
+		imagen/devi300/devi300.mk
+		laserjet/devpcl/devpcl.mk
+
+    delete old binary tables before installing the new ASCII tables.
+
+ 7: All traces of the Varitimes font tables (VR, VI, VB, and VX) have
+    been removed.
+
+ 8: The old devi10 font tables are not (and should not) be installed.
+    Source for the devi10 font tables will likely not be included in
+    this release.
+
+ 9: eqn has been tuned some for PostScript printers. Square roots are
+    improved.
+
+10: Bracket building problems on PostScript printers have been fixed
+    by adding a Metrics entry for braceleftbt to dpost.ps. Compensates
+    for an apparent mistake in Adobe's Symbol font.
+
+11: PostScript translators (e.g. dpost, postprint) no longer leave
+    save objects on the operand stack. New and old versions of the
+    translators and prologues should not be mixed.
+
+12: Passing output from new translators through an old version of
+    postreverse may fail if the more than one page image is being
+    printed on each sheet of paper. The new version of postreverse
+    is safe and probably should be installed on all your systems,
+    even if you don't install any other part of the package.
+
+13: dpost and picpack are now only installed in directory BINDIR. The
+    makefiles,
+
+		postscript/dpost/dpost.mk
+		postscript/picpack/picpack.mk
+
+    delete dpost and picpack from POSTBIN before installing the new
+    versions. Change the two makefiles if you expect to find dpost
+    and picpack in directory POSTBIN.
+
+14: The mechanism for compiling DKHOST code in postio on internal
+    System V machines has been changed. The only way to get it is to
+    set DKHOST to TRUE in file dwb.mk. Makefiles now assume dk.h and
+    libdk.a are in standard places (i.e. /usr/include and /usr/lib).
+    If that's not the case on your system you may have to edit file
+    postscript/postio/postio.mk.
+
+15: Man pages and programs are installed together - there's no easy
+    way to avoid it. Setting MAN1DIR and MAN5DIR to some existing
+    temporary directory (e.g. /tmp) means programs will be properly
+    installed but man pages won't go anywhere permanent.
+
+16: The apseqnchar file is gone. cateqnchar is a reasonable starting
+    point if you need to build an eqnchar file for a new device.
+
+17: The next DWB release will likely replace nroff with troff and
+    something equivalent to the dnroff postprocessor. Things aren't
+    quite ready, so this release includes a version of nroff built
+    from old (DWB 3.0) source - troff source no longer compiles
+    nroff. The dnroff postprocessor (directory text/dnroff) is a
+    preliminary version subject to change in the next release.
+

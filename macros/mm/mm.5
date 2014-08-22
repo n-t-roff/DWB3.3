@@ -1,0 +1,45 @@
+.ds dM /usr/lib/macros
+.ds dT /usr/lib/tmac
+.TH MM 5
+.SH NAME
+.B mm
+\- the
+.SM MM
+macro package for formatting documents
+.SH SYNOPSIS
+\*(mBtroff \-mm\f1
+.OP "" options []
+.OP "" files []
+.sp 0.5v
+\*(cBmmt\f1
+.OP "" options []
+.OP "" files []
+.sp 0.5v
+\*(cBnroff \-mm\f1
+.OP "" options []
+.OP "" files []
+.sp 0.5v
+\*(cBmm\f1
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+.PP
+The
+.SM MM
+package provides a formatting capability for a very wide variety of documents.
+The manner in which you type and edit a document is essentially independent of
+whether the document is to be eventually formatted at a terminal or is to be phototypeset.
+See the reference cited below for details.
+.SH FILES
+.MW \*(dT/tmac.m
+.br
+.MW \*(dM/strings.mm
+.SH SEE ALSO
+.BR troff (1),
+.BR mmt (1), 
+.BR nroff (1), 
+.BR mm (1) 
+.SH REFERENCES
+D. W. Smith and J. R. Mashey,
+.ul
+MM \(em Memorandum Macros

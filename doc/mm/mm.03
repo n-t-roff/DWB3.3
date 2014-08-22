@@ -1,0 +1,291 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "FORMATTING CONCEPTS"
+.H 2 "Basic Terms"
+The normal action of the formatters is to ``fill''
+output lines from one or more input lines.
+The output lines may be ``justified''
+so that both the left and right margins are aligned.
+As the lines are being filled, words may also be hyphenated as necessary.
+It is possible to turn any of these modes on and off (see
+.cR .SA ,
+.cR Hy ,
+and the formatter
+.cR .nf
+and
+.cR .fi
+requests).
+Turning off fill mode also turns off justification and hyphenation.
+.P
+Certain formatting commands (requests and macros) cause
+the filling of the current output line to cease,
+the line (of whatever length) to be printed, and the
+subsequent text to begin a new output line.
+This printing of a partially filled output line is known as a ``break.''
+A few formatter requests and most of the
+.sM MM
+macros cause a break.
+.P
+While formatter requests can be used with
+.sM MM ,
+one must fully understand the consequences and side-effects that each
+such request might have.
+Actually, there is little need to use formatter requests; the macros
+described here should be used in most cases because:
+.BL "" 1
+.LI
+it is much easier to control (and change at any later point
+in time) the overall style of the document.
+.LI
+complicated features (such as footnotes or tables of
+contents) can be obtained with ease.
+.LI
+the user is insulated from the peculiarities of the formatter language.
+.LE
+.P
+A good rule is to use formatter requests only when absolutely necessary.
+.P
+In order to make it easy to revise the input text at a
+later time, input lines should be kept short and should
+be broken at the end of clauses; each new full sentence must
+begin on a new line.
+.H 2 "Arguments and Double Quotes"
+For any macro call, a ``null argument'' is an argument
+whose width is zero.
+Such an argument often has a
+special meaning; the preferred form for a null argument is
+\*(iR""\f1.
+Note that omitting an argument is not the
+same as supplying a null argument (for example, see the
+.cR .MT
+macro).
+Furthermore, omitted arguments
+can occur only at the end of an argument list, while
+null arguments can occur anywhere.
+.P
+.ne 6v
+Any macro argument containing ordinary (paddable) spaces
+must be enclosed in double quotes
+(\*(iR""\fP);
+otherwise, it will be treated as several separate arguments.
+A double quote (\*(iR"\fP) is
+not permitted as part of the value
+of a macro argument or of a string that is to be used
+as a macro argument.
+If you must, use two grave accents
+.cR `` ) (
+and/or two acute accents
+.cR '' ) (
+instead.
+This restriction is necessary because many macro
+arguments are processed (interpreted) a variable
+number of times; for example, headings are first
+printed in the text and may be (re)printed in the
+table of contents.
+.H 2 "Unpaddable Spaces"
+When output lines are justified to give an even
+right margin, existing spaces in a line may have
+additional spaces appended to them.
+This may harm the desired alignment of text.
+To avoid this problem, it is necessary to be able to specify a space that cannot
+be expanded during justification, i.e., an ``unpaddable space.''
+There are several ways to accomplish this.
+.P
+First, one may use the built-in
+.I troff
+escape sequence ``\*(iR\e\fP\(sq'' where \(sq is a single space
+from the keyboard.
+This sequence directly generates an unpaddable space.
+.tr ~~
+Second, one may sacrifice some seldom-used character to
+be translated into space upon output.
+Because this translation occurs
+after justification, the chosen character may be
+used anywhere an unpaddable space is desired.
+The tilde
+.cR ~ ) (
+is often used for this purpose.
+To use it in this way, insert the following at the beginning
+of the document:
+.iS
+\&.tr ~
+.iE
+You can then use
+.cR ~
+in the text to represent an unpaddable space.
+If a tilde must actually appear in the output, it can
+be temporarily ``recovered'' by inserting:
+.iS
+\&.tr ~~
+.iE
+before the place where it is needed (this translates
+.cR ~
+back into itself).
+Its previous
+usage is restored by repeating the
+.cR ".tr\ ~" '', ``
+but only after a break or after the line containing the
+tilde has been forced out.
+.br
+.tr ~
+.H 2 "Hyphenation"
+The formatters do not perform hyphenation unless the
+user requests it.
+Hyphenation can be turned on in the body of the text by specifying:
+.iS
+\&.nr Hy 1
+.iE
+once at the beginning of the document.
+.P
+If hyphenation is requested, the formatters will 
+automatically hyphenate words, if need be.
+However, the user may specify the hyphenation points
+for a small list of words or
+for a specific occurrence of any word by the use of
+a special character known as a ``hyphenation indicator.''
+.P
+If the hyphenation indicator (initially, the 
+two-character sequence
+.cR \e% )
+appears at the beginning of a word, the word is not hyphenated.
+Alternatively, it can be used to indicate legal
+hyphenation points inside a word.
+In any case,
+all occurrences of the hyphenation indicator
+disappear on output.
+.P
+The user may specify a different hyphenation indicator:
+.iS
+\&.HC \f1[\*(iAhyphenation-indicator\f1]
+.iE
+The circumflex
+.cR ^
+is often used for this purpose;
+this is done by inserting the following at the beginning of a document:
+.iS
+\&.HC ^
+.iE
+.P
+Any word containing hyphens or dashes \(em also known as
+.I em
+dashes \(em will be hyphenated immediately
+after a hyphen or dash if it is necessary to hyphenate
+the word, even if the formatter hyphenation function
+is turned off.
+.P
+The user may supply, via the
+.cR .hw
+request, a small list of words with the proper hyphenation points indicated.
+For example, to indicate the proper
+hyphenation of the word ``printout,'' one may specify:
+.iS
+\&.hw print-out
+.iE
+.H 2 Tabs
+The macros
+.cR .MT ,
+.cR .TC ,
+and
+.cR .CS
+use the formatter
+.cR .ta
+request to set tab stops, and then
+restore the default values
+of tab settings.
+By default, tabs are set every one-half inch.
+.P
+Note that a tab character is always interpreted with respect
+to its position on the input line, rather than
+its position on the output line.
+In general, tab characters
+should appear only on lines processed in ``no-fill'' mode.
+Also note that
+.I tbl
+changes tab stops, but does
+not restore the default tab settings.
+.H 2 "Special Use of the \s-1BEL\s+1 Character"
+The non-printing character
+.sM BEL
+is used as a delimiter in many macros
+where it is necessary to compute the width of an argument or to delimit
+arbitrary text, e.g., in headers and footers, headings, and list marks.
+Users who include
+.sM BEL
+characters in their input text
+(especially in arguments to macros)
+will receive mangled output.
+.H 2 "Strings for Special Symbols"
+.H 3 "Bullets."
+The string
+.cR \e*(BU
+produces a bullet (\*(BU) in the proper size
+and vertical position on the line for use in text.
+Note that the bullet list macro
+.cR .BL
+uses this string to generate the
+bullets for its list items.
+.H 3 "Dashes, Minus Signs, and Hyphens."
+.I Troff
+has distinct graphics for a dash (\*(EM), a minus sign (\-),
+and a hyphen (\(hy):
+.VL 9
+.LI Dash
+Use the string
+.cR \e*(EM
+for a text dash.
+This type of dash\*(EMcommonly called the em dash\*(EMis used
+as a mark of separation (as shown here).
+Note that the dash list macro
+.cR .DL
+generates the em dash for its list items.
+.LI Hyphen
+Use the character
+.cR -
+to produce a hyphen.
+.LI Minus
+Use the sequence
+.cR \e-
+for a true minus sign.
+.LE
+.H 3 "Registered and Unregistered Marks."
+Use the string
+.cR \e*(Rg
+to produce the registration\ \ \*(Rg  symbol for registered marks.
+For unregistered marks, use the strings
+.cR \e*(Tm
+and
+.cR \e*(Sm
+to produce the trademark\ \ \*(Tm  and
+the service mark\ \ \*(Sm  symbols, respectively.
+Marks should always be used as adjectives when they appear in printed
+text (e.g., \s-1UNIX\s+1\*(Rg system, Tuxedo\*(Tm software,
+\s-1ACCUNET\s+1\*(Sm digital services).
+.H 2 "Use of Formatter Requests \*(BU"
+Most formatter requests should not be used with
+.sM MM
+because
+.sM MM
+provides equivalent functionaltiy
+in a much more user-oriented and surprise-free fashion
+than do the basic formatter requests.
+However, some formatter requests are
+useful with
+.sM MM ,
+namely:
+.iS
+\&.af   .br   .ce   .de   .ds   .fi   .hw   .ls   .nf   .nr
+\&.nx   .rm   .rr   .rs   .so   .sp   .ta   .ti   .tl   .tr
+.iE
+.P
+The
+.cR .fp ,
+.cR .lg ,
+and
+.cR .ss
+requests are also sometimes useful.
+Use of other requests without fully understanding their
+implications very often leads to disaster.

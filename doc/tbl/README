@@ -1,0 +1,35 @@
+TBL
+=============================================================================
+TITLE      TBL - A Program to Format Tables
+
+AUTHOR(s)  Michael E. Lesk
+           Bell Telephone Laboratories
+
+REVISED    April 1990 by C. L'Hommedieu, AT&T Bell Laboratories
+REPRINTED  May 1990, AT&T Bell Laboratories
+=============================================================================
+FILE            PURPOSE
+------------    ----------------------------------------------------------
+tbl.doc         TBL document body
+tbl.appA        Appendix A:  Examples
+tbl.appB        Appendix B:  List of Input Commands
+Run             Shell script to format and print entire TBL document
+=============================================================================
+To produce the entire TBL document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the TBL document (body only), use the command:
+
+   tbl doc.tbl | eqn | troff -Tpost - | dpost
+
+To produce each of the appendices, use the commands:
+
+   tbl tbl.appA | eqn | troff -Tpost - | dpost
+   tbl tbl.appB | troff -Tpost - | dpost
+=============================================================================

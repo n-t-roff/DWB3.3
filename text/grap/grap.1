@@ -1,0 +1,414 @@
+.ds dL /usr/lib/dwb
+.TH GRAP 1
+.SH NAME
+.B grap
+\-
+.B pic
+preprocessor for drawing graphs
+.SH SYNOPSIS
+\*(mBgrap\f1
+.OP "" files []
+.SH DESCRIPTION
+.B grap
+is a
+.B pic
+preprocessor for drawing graphs on a typesetter.
+A line beginning with the
+.MW .G1
+command
+marks the start of a graph; the end of a graph is marked by
+a line beginning with the
+.MW .G2
+command.
+Data that is enclosed is scaled and plotted,
+with tick marks supplied automatically.
+.PP
+.B grap
+commands are summarized below.
+Commands exist to modify the frame,
+add labels, override the default ticks,
+change the plotting style,
+define coordinate ranges and transformations,
+and include data from files.
+In addition,
+.B grap
+provides the same loops, conditionals and macro processing that
+.B pic
+does.
+.PP
+Predefined strings include
+.MR bullet ,
+.MR plus ,
+.MR box ,
+.MR star ,
+.MR dot ,
+.MR times ,
+.MR htick ,
+.MR vtick ,
+.MR square ,
+and
+.MR delta .
+Built-in functions include
+.MW log
+(base 10),
+.MW exp
+(base 10),
+.MR int ,
+.MR sin ,
+.MR cos ,
+.MR atan2 ,
+.MR sqrt ,
+.MR min ,
+.MR max ,
+and
+.MR rand .
+.PP
+Order is mostly irrelevant; no category is mandatory.
+Any arguments on the
+.MW .G1
+line are placed on the
+generated
+.MW .PS
+line for
+.BR pic .
+.SH EXAMPLE
+.EX -1
+\&.G1
+frame top invis right invis
+coord x 0, 10 y 1, 5 log y
+ticks left in at 1 "bottommost tick", 2,3,4,5 "top tick"
+ticks bot in from 0 to 10 by 2
+label bot "this is a" "silly graph"
+label left "left side label" "here"
+grid bot dotted at 2,4,6,8
+grid left dashed at 2.5
+copy thru / circle at $1,$2 /
+1 1
+2 1.5
+3 2
+4 1.5
+10 5
+\&.G2
+.EE
+.SH FILES
+.MW \*(dL/grap.defines
+.SH "SEE ALSO"
+.BR graph (1),
+.BR pic (1),
+.BR plot (3)
+.SH REFERENCES
+J. L. Bentley and B. W. Kernighan,
+.ul 2
+.SM GRAP
+\(em A Language for Typesetting Graphs
+.SH SUMMARY
+In this command summary,
+.I italic
+terms are syntactic categories,
+.MW typewriter
+terms are literals, parenthesized constructs are optional,
+and \(el indicates repetition.
+.sp 0.5v
+.ds | \&\f5|\f1
+.in +1i
+.de XX
+.sp 1p
+.in -1i
+.ta +1i
+.in +1i
+.ti -1i
+\&\f2\\$1\f1\t\c
+..
+.ps -1
+.vs -1
+.XX "grap program
+.MW .G1
+.RI ( "width in inches" )
+.br
+.I "grap statement"
+.br
+\(el
+.br
+.MW .G2
+.XX "grap statement"
+.I frame
+\*|
+.I label
+\*|
+.I coord
+\*|
+.I ticks
+\*|
+.I grid
+\*|
+.I plot
+\*|
+.I line
+\*|
+.I circle
+\*|
+.I draw
+\*|
+.I new
+\*|
+.I next
+.br
+\*|
+.I graph
+\*|
+.I numberlist
+\*|
+.I copy
+\*|
+.I for
+\*|
+.I if
+\*|
+.I pic
+\*|
+.I assignment
+\*|
+.I print
+\*|
+.I define
+\*|
+.I copy
+\*|
+.I sh
+.XX frame
+.MW frame
+.RM ( ht
+.IR expr )
+.RM ( wid
+.IR expr )
+.RI (( side )
+.IR linedesc )
+\(el
+.XX side
+.MW top
+\*|
+.MW bot
+\*|
+.MW left
+\*|
+.MW right
+.XX linedesc
+.MW solid
+\*|
+.MW invis
+\*|
+.MW dotted
+.RI ( expr )
+\*|
+.MW dashed
+.RI ( expr )
+.XX label
+.MW label
+.I side
+.I strlist
+\(el
+.I shift
+.XX shift
+.MW left
+\*|
+.MW right
+\*|
+.MW up
+\*|
+.MW down
+.I expr
+\(el
+.XX strlist
+.I str
+\(el
+.RM ( rjust
+\*|
+.MW ljust
+\*|
+.MW above
+\*|
+.MR below )
+\(el
+.RM ( size
+(\(+-)
+.IR expr )
+\(el
+.XX str
+.MW \&"
+\(el
+.MW \&"
+.XX coord
+.MW coord
+.RI ( name )
+.RM ( x
+.IM expr ,
+.IR expr )
+.RM ( y
+.RM expr ,
+.IR expr )
+.RM ( "log x"
+\*|
+.MW "log y"
+\*|
+.MR "log log" )
+.XX ticks
+.MW ticks
+.I side
+.RM ( in
+\*|
+.MW out
+.RI ( expr ))
+.RI ( shift )
+.RI ( tick-locations )
+.XX tick-locations
+.MW at
+.RI ( name )
+.I expr
+.RI ( str ),
+.I expr
+.RI ( str )
+\(el
+.br
+\*|
+.MW from
+.RI ( name )
+.I expr
+.MW to
+.I expr
+.MR ( by
+.MR ( +
+\*|
+.MW -
+\*|
+.MW *
+\*|
+.MR / )
+.IR expr )
+.I str
+.XX grid
+.MW grid
+.I side
+.RI ( linedesc )
+.RI ( shift )
+.RI ( tick-locations )
+.XX plot
+.I strlist
+.MW at
+.I point 
+\*|
+.MW plot
+.I expr
+.RI ( str )
+.MW at
+.I point
+.XX point
+.RI ( name )
+.IM expr , expr
+.XX line
+.RM ( line
+\*|
+.MR arrow )
+.MW from
+.I point
+.MW to
+.I point
+.RI ( linedesc )
+.XX circle
+.MW "circle at"
+.I point
+.RM ( radius
+.IR expr )
+.XX draw
+.MW draw
+.RI ( name )
+.I linedesc
+.RI ( str )
+.XX new
+.MW new
+.RI ( name )
+.I linedesc
+.RI ( str ) 
+.XX next
+.MW next
+.RI ( name )
+.MW at
+.I point
+.RI ( linedesc )
+.XX numberlist
+.I number
+\(el
+.XX for
+.MW for
+.I var
+.MW from
+.I expr
+.MW to
+.I expr
+.RM ( by
+.RM ( +
+\*|
+.MW -
+\*|
+.MW *
+\*|
+.MR / )
+.IR expr )
+.MW do
+.I "X anything X"
+.XX if
+.MW if
+.I expr
+.MW then
+.I "X anything X"
+.MW else
+.I "X anything X"
+.XX graph
+.MW graph
+.I Picname
+.RI ( pic-text )
+.XX print
+.MW print
+.RI ( expr
+\*|
+.IR str )
+.XX define
+.MW define
+.I macro_name
+.I "X anything X"
+.XX copy
+.MW copy
+.RI ( \f5"\f2filename\f5" )
+.RM ( thru
+.I macro_name
+\*|
+.IR "X macro_body X" )
+.RM ( until
+.MI " endstring "\f1)
+.XX sh
+.MW sh
+.I "X anything X"
+.XX pic
+.MW pic
+.I anything
+.XX assignment
+.I var
+.MW =
+.I expr	
+.XX X
+.I "any single character, or braces"
+.MW "{}"
+.sp 0.5v
+.ps +1
+.vs +1
+.in -1i
+Order is mostly irrelevant; no category is mandatory.
+.SH CAVEATS
+If using both
+.I coord
+and
+.I ticks
+statements, specify
+.I coord
+before marking
+.I ticks;
+otherwise you may not receive any graphic output.

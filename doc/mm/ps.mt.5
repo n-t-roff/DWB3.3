@@ -1,0 +1,250 @@
+%!PS
+%%Version: 3.3
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	/Symbol /S Sdefs cf
+	/Times-Roman /S1 S1defs cf
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 B f
+(Document Headings and Paragraphs)3 1576 1 720 600 t
+(April 1, 1990)2 553 1 4032 1560 t
+9 B f
+( AND HEADINGS)2 721(1. PARAGRAPHS)1 739 2 720 1920 t
+10 R f
+(This section describes the types of paragraphs and the kinds of headings that are available.)14 3612 1 720 2100 t
+9 B f
+(1.1 Paragraphs)1 609 1 720 2280 t
+10 R f
+( number register Pt is used to)6 1226( The)1 215( \257ush left.)2 423( they are)2 361( Usually,)1 395(Paragraphs are speci\256ed by the .P macro.)6 1700 6 720 2460 t
+(change the paragraph style.)3 1091 1 720 2580 t
+9 B f
+(1.2 Headings)1 519 1 720 2760 t
+10 I f
+( Headings.)1 444(1.2.1 Numbered)1 666 2 720 2940 t
+10 R f
+( the most major or)4 781( 1 is)2 189( Level)1 288(There are seven levels of numbered headings.)6 1891 4 1891 2940 t
+(highest; level 7, the lowest.)4 1094 1 720 3060 t
+(Headings are speci\256ed with the .H macro, whose \256rst argument is the level of heading \(1 through 7\).)17 4021 1 720 3240 t
+( and)1 181( Level-1)1 372( headings are preceded by two blank lines; all others, by one blank line.)13 3015(On output, level-1)2 752 4 720 3420 t
+( 3 through 7 are)4 636(level-2 headings are normally emboldened and stand apart from the text that follows; levels)13 3684 2 720 3540 t
+(normally italicized and run in with the text that follows.)9 2232 1 720 3660 t
+10 I f
+( Headings.)1 434(1.2.2 Unnumbered)1 771 2 720 3840 t
+10 R f
+( is a special case of .H, in that no heading number is printed.)13 2439(The macro .HU)2 625 2 1976 3840 t
+( of that)2 283( the value)2 390( Usually,)1 387(Each .HU heading has the level given by the register Hu, whose initial value is 2.)15 3260 4 720 3960 t
+(register is set to make unnumbered headings occur at the lower heading level in a document.)15 3693 1 720 4080 t
+10 B f
+(S. P. Lename)2 561 1 2880 4560 t
+10 R f
+(MH-98765-SPL-mc)720 4560 w
+(Copy to)1 320 1 720 4800 t
+(J. J. Jones)2 400 1 720 4920 t
+(F. G. Swatter)2 533 1 720 5040 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Bold Times-Italic Times-Roman

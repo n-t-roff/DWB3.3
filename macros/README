@@ -1,0 +1,99 @@
+The MM and MV macro packes contain company-specific information
+and should be tuned to suit the customer's work evironment.
+ -  The MV package defines a string for the company name.
+ -  The MM package defines several strings for the company logo,
+    company name, location addresses, and proprietary markings
+    and copyright notices.
+
+The strings listed below should be redefined as appropriate:
+
+
+MV:
+
+	)N	company name
+
+
+MM:
+
+	IN FILE strings.mm :
+
+	]S	company logo
+	}Z	company name
+
+	The text for proprietary markings and copyright notices
+	are defined as a series of strings, one string per line.
+	In the definition of the .PM macro (files mmt and mmn),
+	the type determines which strings are used and how many
+	lines are needed at the bottom of the page.  The strings
+	for each type are implemented as three-part titles (.tl)
+	following the .(B macro; the number of lines needed at the
+	bottom of page is given as second argument to the .(E macro.
+	The allotted strings for .PM can be defined in any way and
+	used in any combination provided the are defined properly
+	with respect to .(B and .(E.
+	Default string assignments for type are:
+
+	]M	line 1 of type P or 1
+	]O	line 2 of same
+
+	]A	line 1 of type RS or 2
+	]F	line 2 of same
+	]G	line 3 of same
+
+	]I	line 1 of type RG or 3
+	]J	line 2 of same
+	]K	line 3 of same
+
+	]U	only line of type CP or 4
+
+	]i	line 1 of type CR or 5
+	]j	line 2 of same
+
+	]m	line 1 of type UW or 6
+	]o	line 2 of same
+	]p	line 3 of same
+	]q	line 4 of same
+		(also uses ]i and ]j)
+
+	IN FILES mmn AND mmt :
+
+	Location code strings are assigned addresses directly in
+	the defintion of the >5 (released-paper style) macro.
+	In many cases, the location code is also the name of the string.
+	Some locations have the same address, so some codes map into
+	a single location code string.  In the case where the location
+	code name was already defined as a macro or string for some
+	other purpose, the code name is checked in the definition of
+	the .AU (author) macro and then assigned a different string
+	name to hold the address.
+
+	string	address					code(s)
+	------	-------------------------------------	-------
+	AK	Norcross, Georgia 30071			AK
+	CB	Columbus, Ohio 43213			CB
+	CH	Chester, New Jersey 07930		CH
+	CP	Summit, New Jersey 07901		SF
+	DR	Denver, Colorado 80234			DR
+	HL	Short Hills, New Jersey 07078		HL, HK
+	HO	Holmdel, New Jersey 07733		HO, FJ
+	IH	Naperville, Illinois 60566		IH, IW, IX
+	IN	Indianapolis, Indiana 46206		IN
+	INH	Indianapolis, Indiana 46250		}I
+	MH	Murray Hill, New Jersey 07974		MH
+	MV	North Andover, Massachusetts 01845	MV
+	PY	Piscataway, New Jersey 08854		PY, CP, RR
+	RR	Middletown, New Jersey 07748		HR, MT
+	WB	West Long Branch, New Jersey 07764	WB
+	WH	Whippany, New Jersey 07981		WH
+	WV	Warren, New Jersey 07060		WV, LC
+	}A	South Plainfield, New Jersey 07080	HP
+	}B	Allentown, Pennsylvania 18103		AL, ALC
+	}E	Reading, Pennsylvania 19604		RD
+	}F	Springfield, New Jersey 07081		SZ
+	}H,HO   Crawford Hill Laboratory		HOH
+		Holmdel, New Jersey 07733
+	}K	Lincroft, New Jersey 07738		LZ
+	}M	Morristown, New Jersey 07960		MO
+	}N	Andover, Massachusetts 01810		AN
+	}P	Parsippany, New Jersey 07054		PK
+	}W	Ward Hill, Massachusetts 01830		WI

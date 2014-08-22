@@ -1,0 +1,175 @@
+.ds dT /usr/lib/tmac
+.TH MVIEW 5
+.SH NAME
+.B mview
+\- a
+.B troff
+macro package for typesetting viewgraphs
+.SH SYNOPSIS
+\*(mBtroff \-mview\f1
+.OP \-rf n []
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+.B mview
+is a general purpose macrocommand package for typesetting view graphs.
+The
+.B mview
+approach to view graph production differs significantly
+from that of other view graph macro packages as it automatically
+adjusts interline spacing and point size in an attempt to fill the
+projected transparency area.
+Default view graph size is 7"\^\(mu\^7".
+.PP
+A few macros (briefly described below) accomplish most
+of the formatting tasks needed in making transparencies.
+All of the facilities of
+.BR troff (1),
+.BR eqn (1),
+.BR tbl (1),
+.BR pic (1),
+and
+.BR grap (1)
+are available for more difficult tasks.
+By default, all lines of text are centered.
+.PP
+Use the
+.OP \-rf n
+option to select a family of fonts.
+By default,
+.B mview
+uses the Helvetica fonts.
+Set
+.I n
+to
+.MW 1
+or
+.MW 2
+to select the Times or Palatino fonts, respectively.
+.PP
+Macro usage is summarized below.
+The strings
+.MR Rg ,
+.MR Tm ,
+and
+.MW Sm
+produce the registered mark, trademark, and service mark symbols,
+respectively.
+.SH BUGS
+No attempt is made for consistent line spacing or character point size
+from view graph to view graph.
+For size consistency, especially if using
+.BR eqn ,
+set the global size for both eqn (using
+.MR gsize )
+and the view graph (using
+.MW .VG
+macro).
+Recommended size for most view graphs is point size 18.
+.P
+Use of the
+.MW .TU
+macro is limited to a maximum size of 30 for underscoring text.
+.SH FILES
+.MW \*(dT/tmac.view
+.SH SEE ALSO
+.BR troff (1)
+.SH REFERENCE
+J. N. Sturman,
+.ul
+.SM MVIEW
+.ul
+\(em A Set of Macrocommands for the Generation of View Graphs
+.SH SUMMARY
+.in +7P
+.de XX
+.sp 2p
+.in -7P
+.ta +7P
+.in +7P
+.ti -7P
+\&\f5\\$1\ \f2\\$2\f1\t\c
+..
+.XX .VG \f1[\|\f2width\f1\|]\ [\|\f2height\f1\|]\ [\|\f2size\f1\|]\ [\|\f2spacing\f1\|]
+\&
+.br
+Start the view graph; use any of
+.IR width ,
+.IR height ,
+.IR size ,
+and
+.I spacing
+to override the default frame width, frame height,
+point size and vertical spacing.
+.XX .T title
+Print the title in the bold font and in a larger size.
+.XX .TU title
+Print an underlined title in a larger size.
+.XX .B
+Switch to the bold font.
+.XX .I
+Switch to the italic font.
+.XX .R
+Switch to the regular (roman) font.
+.XX .CW
+Switch to the constant-width font.
+.XX .L
+Increase the size by one point.
+.XX .S
+Decrease the size by one point.
+.XX .BL
+Start a bullet list.
+.XX .DL
+Start a dash list.
+.br
+.ne 8v
+.XX .ML mark
+Start a marked list.
+Select
+.I mark
+from:
+.EX
+\e*(BU     \f1bullet\fP
+\e*(DA     \f1dash\fP
+\e*(CI     \f1circle\fP
+\e*(SQ     \f1square\fP
+\e*(FS     \f1box (filled square)\fP
+\e*(RH     \f1right hand\fP
+\e*(NU     \f1null (plain indent)\fP
+.EE
+.XX .OL \f1[\|\f2flag\f1\|]
+Start an outline list.
+Use
+.I flag
+to select outline format
+.RI ( #
+is the outline number):
+.EX
+1     \f2#\f1.\*(mW
+2     \f2#\f1)\*(mW
+3     \f1(\f2#\f1)\*(mW
+4     \f1[\f2#\f1]\*(mW
+5     \f1<\f2#\f1>\*(mW
+6     \f1{\f2#\f1}\*(mW
+.EE
+.XX .VL \f1[\|\f2indent\f1\|]
+Start a variable-item list.
+Use
+.I indent
+to supply the width of the widest item in the list.
+.XX .LI \f1[\|\f2label\f1\|]
+Start the list item; supply
+.I label
+for variable-item lists.
+.XX .LE
+End the list.
+.XX .VE \f1[\|\f2identifier\f1\|]
+End the view graph.
+Specify
+.I identifier
+as on-frame text that appears in the lower right corner
+on the view graph frame.
+Any lines of text that follow
+.MW .VE
+are treated as off-frame identifiers and
+appear at the left margin after the view graph frame.

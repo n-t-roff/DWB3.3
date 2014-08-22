@@ -1,0 +1,94 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so ../defs.doc
+.so defs.trfman
+.TL "Introduction"
+.P
+\f2Troff\fP and \f2nroff\fP are text processors 
+that format text for typesetter- and
+typewriter-like terminals, respectively.
+They accept lines of text interspersed with lines of
+format control information and
+format the text into a printable, paginated document
+having a user-designed style.
+\f2Troff\fP and \f2nroff\fP offer
+unusual freedom in document styling:
+arbitrary style headers and footers;
+arbitrary style footnotes;
+multiple automatic sequence numbering for paragraphs, sections, etc;
+multiple column output;
+dynamic font and point-size control;
+arbitrary horizontal and vertical local motions at any point;
+and
+a family of automatic overstriking, bracket construction, and
+line-drawing functions.
+.P
+.I Troff
+produces its output in a device-independent form,
+although parameterized for a specific device;
+\f2troff\fP output must be processed by a driver for that
+device to produce printed output.
+.P
+\f2Troff\fP and \f2nroff\fP are highly compatible with each other and it is almost always
+possible to prepare input acceptable to both.
+Conditional input is provided that enables
+the user to embed input expressly destined for either program.
+\f2Nroff\fP can prepare output directly for a variety of terminal types and
+is capable of utilizing the full resolution of each terminal.
+A warning for the future, however:
+\f2nroff\fP
+is near the end of its useful life,
+and it is not supported or maintained.
+There has been no attempt to add modern 
+\f2troff\fP
+features to
+\f2nroff\fP.
+.P
+\f2Troff\fP
+reads parameter files
+each time it is invoked, to
+set values for machine resolution,
+legal type sizes and fonts, and character names,
+character widths
+and the like.
+\f2Troff\fP
+output is
+.sM ASCII
+characters
+in a simple language
+that describes where each character is to be placed
+and in what size and font.
+A post-processor must be written for each device
+to convert this typesetter-independent language
+into specific instructions for that device.
+.P
+The output language contains information that was not readily
+identifiable in the older output.
+Most notably, the beginning of each page and line
+is marked,
+so post-processors can do device-specific optimizations
+such as sorting the data vertically or printing it boustrophedonically,
+independent of
+\f2troff\fP.
+.P
+\f2Troff\fP
+recognizes commands for drawing diagonal lines,
+circles, ellipses, circular arcs,
+and quadratic B\(hysplines;
+the actual drawing is implemented by the postprocessor.
+There are also ways to pass arbitrary information to the output
+unprocessed by
+\f2troff\fP.
+.P
+The remainder of this document contains a description of
+usage and command-line options;
+a summary of requests, escape sequences, and predefined number registers;
+a reference manual;
+tutorial examples;
+and a list of commonly-available characters.

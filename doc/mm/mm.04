@@ -1,0 +1,798 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "PARAGRAPHS AND HEADINGS"
+This section describes simple paragraphs and section headings.
+Additional paragraph styles are covered later
+in this section; list styles are covered in the next section.
+.H 2 "Paragraphs"
+.iS
+\&.P \f1[\*(iAtype\f1]
+.cA "one or more lines of text"
+.iE
+This macro is used to begin two kinds of paragraphs.
+In a ``blocked''
+(e.g., left-justified)
+paragraph, the first line begins at the left margin, while in an
+``indented'' paragraph, the first line is indented 3 ens.
+.P
+.ne 5.5v
+A document possesses a default paragraph style
+obtained by specifying
+.cR .P
+before each paragraph that does not
+follow a heading.
+The default style is controlled by the register
+.cR Pt .
+The initial value of
+.cR Pt
+is 0, which always provides blocked paragraphs.
+To force all paragraphs to be indented, insert:
+.iS
+\&.nr Pt 1
+.iE
+at the beginning of the document.
+To indent all paragraphs except those that follow headings,
+lists, and displays, insert:
+.iS
+\&.nr Pt 2
+.iE
+at the beginning of the document.
+.P
+The amount of paragraph indentation is contained in the register
+.cR Pi ;
+this amount must be an unscaled number and is treated as ens.
+By default,
+.cR Pi
+is set to 3.
+To indent paragraphs by 10 ens, insert:
+.iS
+\&.nr Pi 10
+.iE
+at the beginning of the document.
+Of course, both the
+.cR Pi
+and
+.cR Pt
+register values must be greater than zero for
+any paragraphs to be indented.
+.P
+The number register
+.cR Ps
+controls the amount of spacing between paragraphs.
+By default,
+.cR Ps
+is set to 1, yielding one blank vertical space.
+.P
+Regardless of
+.cR Pt ,
+an individual
+paragraph can be forced to be blocked or indented.
+Use
+.cR .P
+with
+.cA type
+.cR 0
+(e.g.,
+.cR ".P\ 0" '') ``
+to force left justification;
+.cA type
+.cR 1
+(e.g.,
+.cR ".P\ 1" '') ``
+always causes indentation by the amount specified by the register
+.cR Pi .
+If
+.cR .P
+occurs inside a list (see \(sc5),
+the indent (if any) of the paragraph is added to the current list indent.
+.P
+Numbered paragraphs may be produced by setting the register
+.cR Np
+to 1.
+This produces paragraphs numbered
+within first level headings (e.g., 1.01, 1.02, 1.03, 2.01, etc.).
+A different style of numbered paragraphs is obtained by using the
+.cR .nP
+macro rather than the
+.cR .P
+macro for paragraphs.
+This produces paragraphs that are numbered within second level headings
+and contain a ``double-line indent'' in which the text of the
+second line is indented to be aligned with the text of the
+first line so that the number stands out.
+.iS
+\&.H 1 "FIRST HEADING"
+\&.H 2 "Second Heading"
+\&.nP
+.cA "one or more lines of text"
+.iE
+.H 2 "Numbered Headings"
+.iS
+\&.H \*(iAlevel \f1[\*(iAheading-text\f1] [\*(iAheading-suffix\f1]
+.cA "zero or more lines of text"
+.iE
+The
+.cR .H
+macro provides seven levels of numbered headings,
+as illustrated by this document. 
+Level 1 is the most major or highest; level 7 the lowest.
+.P
+The
+.I heading-suffix
+is appended to the
+.I heading-text
+and may be used for footnote marks which should not appear
+with the heading text in the table of contents.
+.P
+Strictly speaking, there is no need for a
+.cR .P
+macro immediately after a
+.cR .H 
+(or
+.cR .HU ),
+because the
+.cR .H
+macro also performs the function of the
+.cR .P
+macro, and an immediately following
+.cR .P
+is ignored.
+It is, however, good practice to start every paragraph with a 
+.cR .P
+macro, thereby ensuring that all paragraphs uniformly begin with a
+.cR .P
+throughout an entire document.
+.H 3 "Normal Appearance."
+The effect of
+.cR .H
+varies according to the
+.I level
+argument.
+First-level headings are preceded
+by two blank vertical spaces;
+all others are preceded
+by one blank vertical space.
+.DS I F
+.TS
+tab (;);
+l lw(4.25i).
+\*(iR.H 1 \*(iAheading-text\f1;T{
+gives a bold heading followed by one blank vertical space.
+The following text begins on a new line and
+is indented according to the current
+paragraph type.
+Normally, full capital letters are used to make the
+heading stand out.
+T}
+.sp 0.3v
+\*(iR.H 2 \*(iAheading-text\f1;T{
+yields a bold heading followed by one blank vertical space.
+The following text begins on a new line and
+is indented according to the current paragraph type.
+Normally, initial capitals are used.
+T}
+.sp 0.3v
+\*(iR.H \*(iAn\0heading-text\f1;T{
+for 3\ \(<=\ \*(iAn\fP\ \(<=\ 7, produces an italic heading
+followed by two spaces.
+The following text appears on the
+same line, i.e., these are run-in headings.
+T}
+.TE
+.DE
+.P
+Appropriate numbering and spacing (horizontal and vertical)
+occur even if the heading text is omitted from a
+.cR .H
+macro call.
+.P
+Here are the
+.cR .H
+calls of \(sc4:
+.iS
+\&.H 1 "PARAGRAPHS AND HEADINGS"
+\&.H 2 "Paragraphs"
+\&.H 3 "Numbered Headings"
+\&.H 3 "Normal Appearance."
+\&.H 3 "Altering Appearance of Headings."
+\&.H 4 "Pre-Spacing and Page Ejection."
+\&.H 4 "Spacing After Headings."
+\&.H 4 "Centered Headings."
+\&.H 4 "Heading Fonts."
+\&.H 4 "Heading Point Sizes."
+\&.H 4 "Marking Styles\e*(EMNumerals and Concatenation"
+\&.H 2 "Unnumbered Headings"
+\&.H 2 "Headings and the Table of Contents"
+\&.H 2 "First-Level Headings and Page Numbering Style"
+\&.H 2 "User Exit Macros \e*(BU"
+\&.H 2 "Hints for Large Documents"
+.iE
+.H 3 "Altering Appearance of Headings."
+Users satisfied with the default appearance of headings
+may skip to \(sc4.3.
+One can modify the appearance of
+headings quite easily by setting certain registers and
+strings at the beginning of the document.
+This permits quick alteration of a document's style, because this
+style-control information is concentrated in a few
+lines, rather than being distributed throughout the document.
+.H 4 "Pre-Spacing and Page Ejection."
+A first-level heading normally has two blank
+vertical spaces preceding it, and all others have one
+blank vertical space.
+If a multi-line
+heading were to be split across pages, it is automatically
+moved to the top of the next page.
+Every first-level
+heading may be forced to the top of a new page by inserting:
+.iS
+\&.nr Ej 1
+.iE
+at the beginning of the document.
+Long documents may be
+made more manageable if each section starts on a new page.
+Setting
+.cR Ej
+to a higher value causes the same
+effect for headings up to that level, i.e., a page
+eject occurs if the heading level is less than or equal to
+.cR Ej .
+.H 4 "Spacing After Headings."
+Three registers control the appearance of text immediately
+following a
+.cR .H
+call.
+They are
+.cR Hb
+(heading break level),
+.cR Hs
+(heading space level), and
+.cR Hi
+(post-heading indent).
+.P
+If the heading level is less than or equal to
+.cR Hb ,
+a break occurs after the heading.
+If the heading level is less than or equal to
+.cR Hs ,
+a blank vertical space is inserted after the heading.
+Defaults for
+.cR Hb
+and
+.cR Hs
+are 2.
+If a heading level is greater than
+.cR Hb
+and also greater than
+.cR Hs ,
+then the heading (if any) is run into the following text.
+These registers permit headings to be separated
+from the text in a consistent way throughout a document,
+while allowing easy alteration of white space and heading emphasis.
+.P
+.ne 5v
+For any stand-alone
+heading, i.e., a heading not run
+into the following text, the alignment of the next line
+of output is controlled by the register
+.cR Hi .
+If
+.cR Hi
+is 0, text is left-justified.
+If
+.cR Hi
+is 1 (the default value), the text is indented according to
+the paragraph type as specified by the register 
+.cR Pt .
+Finally, if
+.cR Hi
+is 2, text is indented
+to line up with the first word of the heading itself,
+so that the heading number stands out more clearly.
+.P
+For example, to cause a blank vertical space
+to appear after the first three heading levels, to
+have no run-in headings, and to force the text
+following all headings to be left-justified (regardless of
+.cR Pt ,
+the following should appear at the top of the document:
+.iS
+\&.nr Hs 3
+\&.nr Hb 7
+\&.nr Hi 0
+.iE
+.H 4 "Centered Headings."
+The register
+.cR Hc
+can be used to obtain centered headings.
+A heading is centered if its level is less than or equal to 
+.cR Hc ,
+and if it is also stand-alone.
+For example,
+.iS
+\&.nr Hs 2
+\&.nr Hc 2
+.iE
+centers first- and second-level headings.
+By default, headings are not centered;
+register
+.cR Hc
+is 0 initially.
+.H 4 "Heading Fonts."
+The string
+.cR HF
+contains seven codes that specify the fonts for heading
+levels 1 through 7.
+The digits
+.cR 1 ,
+.cR 2 ,
+and
+.cR 3
+are used to select the roman, italic, and bold font, respectively.
+By default, the
+.cR HF
+string
+is defined as
+.iS
+\&.ds HF 3 3 2 2 2 2 2
+.iE
+Thus, the first two levels are bold and the remaining levels are italic.
+.P
+The user may reset
+.cR HF
+as desired.
+Any value omitted from the end of the list is taken to be 1.
+For example,
+.iS
+\&.ds HF 3 3 3 2 2
+.iE
+would result in three bold levels,
+two italic levels,
+and two roman (normal text font) levels.
+.H 4 "Heading Point Sizes."
+The user may also specify the desired point size for each
+heading level with the
+.cR HP
+string.
+By default, the text of headings
+.cR .H "" (
+and
+.cR .HU )
+is printed in the same point size as the body except that
+bold stand-alone headings are printed in a size one point
+smaller than the body.
+.P
+The string
+.cR HP ,
+similar to the string
+.cR HF ,
+can be specified to contain up to
+seven values, corresponding to the seven levels of headings.
+Each value can be an absoluate or a relative point size.
+Null or zero values imply that the default size
+will be used for the corresponding heading level.
+For example:
+.iS
+\&.ds HP 12 12 10 10 10 10 10
+.iE
+specifies that the first- and second-level headings are to be
+printed in 12-point type, with the remainder printed in 10-point.
+On the other hand, given relative point sizes changes:
+.iS
+\&.ds HP +2 +2 -1 -1 
+.iE
+specifies that the first- and second-level headings are
+two points larger, the third- and fourth-level headings
+are one point smaller, and the remaining level headings
+appear in the default size.
+.P
+If absolute point sizes are specified, then those sizes
+will be used regardless of the point size of the body
+of the document.
+If relative point sizes are specified,
+then the point sizes for the headings will be relative to the
+point size of the body, even if the latter is changed.
+.P
+Note:  Only the point size of the heading is affected.
+Specifying a large point size without providing increased
+vertical spacing (via
+.cR .HX
+or
+.cR .HZ )
+may cause overprinting.
+.br
+.ne 5v
+.H 4 "Marking Styles \(em Numerals and Concatenation"
+.iS
+\&.HM \f1[\*(iAstyle1\|\f1] \(el [\*(iAstyle7\|\f1]
+.iE
+The registers names
+.cR H1
+through
+.cR H7
+are used as counters for the seven levels of headings.
+Their values are normally printed using Arabic numerals.
+The
+.cR .HM
+macro (heading mark style)
+allows this choice to be overridden, thus providing
+``outline'' and other document styles.
+This macro can have up to seven
+.cA style
+arguments, and each argument is a string
+indicating the type of marking to be used:
+.DS
+.TS
+center box tab(;);
+c cf1
+cf5 lf1.
+\*(iAstyle\fP;Interpretation
+_
+1;Arabic (default for all levels)
+0001;Arabic with enough leading zeroes
+;\0to get the specified number of digits
+A;Upper-case alphabetic
+a;Lower-case alphabetic
+I;Upper-case Roman
+i;Lower-case Roman
+.TE
+.DE
+.P
+By default, the complete heading mark for a given level is
+built by concatenating the mark for that level to the right
+of all marks for all levels of higher value.
+To inhibit the concatenation of heading level marks,
+i.e., to obtain just the current level mark followed
+by a period, set the register
+.cR Ht
+(heading-mark type) to 1.
+For example, a commonly-used outline style is obtained by:
+.iS
+\&.HM I A 1 a i
+\&.nr Ht 1
+.iE
+.H 2 "Unnumbered Headings"
+.iS
+\&.HU \*(iAheading-text
+.iE
+.cR .HU 
+is a special case of
+.cR .H ;
+it is handled in the same way as
+.cR .H ,
+except that no heading mark is printed.
+In order to preserve the hierarchical structure of
+headings when
+.cR .H
+and
+.cR .HU
+calls are intermixed, each
+.cR .HU
+heading is considered to exist at the level given by register
+.cR Hu ,
+whose initial value is 2.
+Thus, in the normal case, the only difference between
+.iS
+\&.HU \*(iAheading-text
+.iE
+and
+.iS
+\&.H 2 \*(iAheading-text
+.iE
+is the printing of the heading mark for the latter.
+Both have the effect of incrementing the numbering
+counter for level 2, and resetting to zero the
+counters for levels 3 through 7.
+Typically, the value of
+.cR Hu
+should be set to make unnumbered headings
+(if any) be the lowest-level headings in a document.
+.P
+.cR .HU
+can be especially helpful in setting up appendices
+and other sections that may not fit well into the
+numbering scheme of the main body of a document.
+.H 2 "Headings and the Table of Contents"
+The text of headings and their corresponding page
+numbers can be automatically collected for a table
+of contents.
+This is accomplished by doing the following two things:
+.BL "" 1
+.LI
+specifying in the register
+.cR Cl
+what level headings are to be saved
+.LI
+invoking the
+.cR .TC
+macro (see \(sc10.1) at the end of the document
+.LE
+.P
+Any heading whose level is less than or equal to
+.cR Cl
+(contents level) is saved and
+later displayed in the table of contents.
+The default value for
+.cR Cl
+is 2, i.e., the first two levels of headings are saved.
+.P
+Due to the way the headings are saved, it is possible to
+exceed the formatter's storage capacity, particularly
+when saving many levels of many headings, while also
+processing displays and footnotes.
+If this happens, the ``Out of temp file space'' diagnostic
+(see Appendix F) will be issued; the only remedy is to save
+fewer levels and/or to have fewer words in the heading text.
+.H 2 "First-Level Headings and Page Numbering Style"
+By default, pages are numbered sequentially at the top of the page.
+For large documents, it may be desirable
+to use page numbering of the form ``\*(iAsection\fP-\*(iApage\fP,'' where
+.cA section
+is the number of the current first-level heading
+and
+.cA page
+is the number of the page in that section.
+This page numbering style can be achieved by specifying the
+.cR \-rN3
+or
+.cR \-rN5
+flag on the command line.
+As a side effect, this also has the effect of setting
+.cR Ej
+to 1, i.e., each section begins on a new page.
+In this style, the page number
+is printed at the bottom of the page, so that the
+correct section number is used.
+.H 2 "User Exit Macros  \*(BU"
+.iS
+\&.HX \*(iAdlevel\0rlevel\0heading-text
+\*(iR.HY \*(iAdlevel\0rlevel\0heading-text
+\*(iR.HZ \*(iAdlevel\0rlevel\0heading-text
+.iE
+The
+.cR .HX ,
+.cR .HY
+and
+.cR .HZ 
+macros are the means by which
+the user obtains a final level of control over
+the previously-described heading mechanism.
+.sM MM 
+does not define
+.cR .HX ,
+.cR .HY 
+and
+.cR .HZ ;
+they are intended to be defined by the user.
+The
+.cR .H
+macro invokes
+.cR .HX
+shortly before the actual
+heading text is printed; it calls
+.cR .HZ
+as its last action.
+After
+.cR .HX
+is invoked, the size of the heading is calculated.
+This processing causes certain features that may have been included in
+.cR .HX ,
+such as
+.cR .ti
+for temporary indent, to be lost.
+After the size calculation,
+.cR .HY
+is invoked so that the user may respecify these features.
+All the default actions occur if these macros are not defined.
+If the
+.cR .HX ,
+.cR .HY
+or
+.cR .HZ
+are defined by the user, the user-suppled definition is interpreted at
+the appropriate point.
+These macros can therefore influence the handling of all headings, because the
+.cR .HU
+macro is actually a special case of the
+.cR .H
+macro.
+.P
+If the user originally invoked the
+.cR .H
+macro, then the derived level
+.RI ( dlevel )
+and the real level
+.RI ( rlevel )
+are both equal to the level given in the
+.cR .H
+invocation.
+If the user originally invoked the
+.cR .HU 
+macro,
+.I dlevel
+is equal to the contents of register
+.cR Hu ,
+and
+.I rlevel
+is 0.
+In both cases,
+.I heading-text
+is the text of the original invocation.
+.P
+By the time
+.cR .H
+calls
+.cR .HX ,
+it has already incremented
+the heading counter of the specified level,
+produced blank vertical space to precede
+the heading, and accumulated the ``heading mark,''
+i.e., the string of digits, letters, and periods needed
+for a numbered heading.
+When
+.cR .HX
+is called, all user-accessible registers and strings can be referenced,
+as well as the following:
+.DS I F
+.TS
+tab(+);
+r1 lf5 lf1w(4.7i).
+string+}0+T{
+If
+.cA rlevel
+is non-zero, this string contains the ``heading mark.''
+Two unpaddable spaces
+(to separate the mark from the heading) have been appended to this string.
+If
+.cA rlevel
+is 0, this string is null.
+T}
+.sp 0.3v
+register+;0+T{
+This register indicates the type of spacing that is to follow the heading.
+A value of 0 means that the heading is run-in.
+A value of 1 means a break (but no blank vertical space)
+is to follow the heading.
+A value of 2 means that a blank vertical
+space is to follow the heading.
+T}
+.sp 0.3v
+string+}2+T{
+If register
+.cR ;0
+is 0, this string contains two unpaddable spaces
+that will be used to separate the (run-in) heading
+from the following text.
+If register
+.cR ;0
+is non-zero, this string is null.
+T}
+.sp 0.3v
+register+;3+T{
+This register contains an adjustment factor for a
+.cR .ne
+request issued before the heading is actually printed.
+On entry to
+.cR .HX ,
+it has the value 3 if
+.cA dlevel
+equals 1, and 1 otherwise.
+The
+.cR .ne
+request is for the following number of lines: the contents
+of the register
+.cR ;0
+(taken as blank vertical
+spaces) plus the contents of register
+.cR ;3
+(taken as blank
+vertical spaces) plus the number of lines of the heading.
+T}
+.TE
+.DE
+.P
+The user may alter the values of
+.cR }0 ,
+.cR }2
+and
+.cR ;3
+within
+.cR .HX
+as desired.
+The following are examples of actions that might
+be performed by defining
+.cR .HX
+to include the lines shown
+(\*(iR\e\(sq\fP represents an unpaddable space):
+.br
+.ne 3v
+.BL
+.LI
+Change first-level heading mark from format
+``\*(iAn\*(iR.\f1'' to ``\*(iAn\*(iR.0\f1'':
+.iS
+\&.if \e\e$1=1 .ds }0 \e\en(H1.0\e\(sq\e\(sq
+.iE
+.LI
+Separate run-in heading from the text with a period and two unpaddable spaces:
+.iS
+\&.if \e\en(;0=0 .ds }2 .\e\(sq\e\(sq
+.iE
+.LI
+Assure that at least 15 lines are left on the page
+before printing a first-level heading:
+.iS
+\&.if \e\e$1=1 .nr ;3 15\-\e\en(;0
+.iE
+.LI
+Add 3 additional blank lines before each first-level heading:
+.iS
+\&.if \e\e$1=1 .sp 3
+.iE
+.LI
+Indent level 3 run-in headings by 5 ens:
+.iS
+\&.if \e\e$1=3 .ti 5n
+.iE
+.LE
+.P
+If temporary strings or macros are used within
+.cR .HX ,
+choose their names with care (see \(sc14.1).
+.P
+.cR .HY
+is called after the
+.cR .ne
+is issued.
+Certain features requested in
+.cR .HX
+must be repeated.
+For example:
+.iS
+\&.de HY
+\&.if \e\e$1=3 .ti 5n
+\&..
+.iE
+.cR .HZ
+is called at the end of
+.cR .H
+to permit user-controlled
+actions after the heading is produced.
+For example,
+in a large document, sections may correspond to chapters
+of a book, and the user may want to change a page header
+or footer, e.g.:
+.iS
+\&.de HZ
+\&.if \e\e$1=1 .PF "''Section \e\e$3''"
+\&..
+.iE
+.H 2 "Hints for Large Documents"
+A large document is often organized for convenience into
+one file per section.
+If the files are numbered,
+it is wise to use enough digits in the names of these
+files for the maximum number of sections, i.e., use
+suffix numbers 01 through 20 rather than 1 through 9
+and 10 through 20.
+.P
+Users often want to format individual sections of long documents.
+To do this with the correct section
+numbers, it is necessary to set register
+.cR Hl
+to 1 less than the number of the section just before
+the corresponding
+.cR ".H\ 1"
+call.
+For example, at the
+beginning of section 5, insert:
+.iS
+\&.nr H1 4
+.iE
+Note:  This is a dangerous practice\*(EMit defeats the automatic
+(re)numbering of sections when sections are added or deleted.
+Remove such lines as soon as possible.

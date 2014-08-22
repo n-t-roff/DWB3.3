@@ -1,0 +1,115 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "ERRORS AND DEBUGGING"
+.H 2 "Error Terminations"
+When a macro discovers an error, the following actions occur:
+.BL "" 1
+.LI
+A break occurs.
+.LI
+To avoid confusion regarding the location of the error, the formatter
+output buffer (which may contain some text) is printed.
+.LI
+A brief message is printed giving the name of the macro that found the
+error, the type of error, and the approximate line number in the
+current input file of the last processed input line.
+(All of the error messages are explained in Appendix D.)
+.LI
+Processing terminates, unless register
+.cR D
+has a positive value.
+In the latter case, processing continues even though the output
+is guaranteed to be deranged from that point on.
+.LE
+.P
+A harmless ``broken pipe'' message may result if any of the
+preprocessors
+.RI ( eqn ,
+.IR tbl ,
+.IR pic ,
+.IR grap )
+are used and if the
+.I troff
+option \*(iR\-o\*(iAlist\f1
+causes the last page of
+the document not to be printed.
+.P
+The following error conditions
+with the business letter macros (see \(sc6.3)
+will cause processing to abort:
+.BL "" 1
+.LI
+if you omit the
+.cR .LT
+macro,
+.LI
+if you use an unrecognized code as an argument to the
+.cR .LT
+macro,
+.LI
+if you omit either or both of the
+.cR .WA
+and
+.cR .WE
+macros,
+.LI
+if you omit either or both of the
+.cR .IA
+and
+.cR .IE
+macros,
+.LI
+if you use the
+.cR .LO
+macro without an argument or if the argument is an
+unrecognized code.
+.LE
+.P
+In each case, an appropriate error message will be printed.
+.H 2 "Disappearance of Output"
+This usually occurs because of an unclosed diversion (e.g., missing
+.cR .DE
+or
+.cR .FE ).
+Fortunately, the macros that use diversions are careful about
+it, and they check to make sure that illegal nesting does not occur.
+If a message is issued about a missing
+.cR .DE
+or
+.cR .FE ,
+the appropriate action is to search backwards from the termination
+point looking for the corresponding
+.cR .DF ,
+.cR .DS
+or
+.cR .FS .
+.P
+Use the
+.I checkdoc
+command to check for illegal
+nesting and/or omission of these macros.
+.H 2 "The \f4checkdoc\fP Command"
+For a quick check on proper usage of the
+.sM MM
+macros, use the command:
+.iS
+checkdoc \*(iAfilename\fP
+.iE
+The
+.I checkdoc
+command finds mismatched macro pairs, missing arguments,
+macros out of sequence,
+or any other misuse of the
+.sM MM
+macros as well as mismatched delimiters for
+.I eqn
+and other miscellaneous error conditions that cause problems
+in formatting.
+If a problem is encountered,
+.I checkdoc
+prints an appropriate message with the input filename and the line number
+where the problem occurs.

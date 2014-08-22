@@ -1,0 +1,35 @@
+MPICTURES
+============================================================================
+TITLE      PostScript Pictures in Troff Documents
+
+AUTHOR(s)  Richard L. Drechsler, Allan R. Wilks
+           AT&T Bell Laboratories
+
+REVISED    May 1990 by C.L'Hommedieu, AT&T Bell Laboratories
+REPRINTED  May 1990, AT&T Bell Laboratories
+============================================================================
+FILE             PURPOSE
+--------------   --------------------------------------------------------
+mpics.doc        MPICTURES document
+Run              Shell script to format and print MPICTURES document
+page.in          Troff input source for ickypage.ps and croppage.ps images
+
+PostScript Image Files:
+   box.ps        croppage.ps      flag.ps
+   squares.ps    ickypage.ps      usa.ps
+   nosmoke.ps
+============================================================================
+To produce the MPICTURES document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (PS.doc).
+
+The MPICTURES document is produced with the command:
+
+   troff -mpictures -Tpost mpics.doc | dpost
+
+(that's what Run does).
+============================================================================

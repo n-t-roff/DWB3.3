@@ -1,0 +1,10 @@
+.PS 5
+     d = 0.5
+     [ box ht d wid 3.5 weight d/20
+       box ht d wid d/2 filled 0.5 noedge
+       spline weight 0.2 edge .75 right d then up d then right d then up d
+     ] 
+linecolor = red; lineweight = 0.375
+circle rad 3 at last block - 0,d/2
+line from last circle .4th to last circle .8th
+.PE

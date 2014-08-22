@@ -1,0 +1,24 @@
+.H1 1 "INTRODUCTION" 1
+.H1 2 "THE BASIC VIEW GRAPH" 1
+.H1 3 "DETAILED USED OF \f5.VG\fP AND \f5.VE\fP" 2
+.H2 3.1 "Starting a View Graph with \f5.VG\fP" 2
+.H2 3.2 "Terminating a View Graph with \f5.VE\fP" 3
+.H1 4 "ADDING EMPHASIS TO A VIEW GRAPH" 3
+.H2 4.1 "Titles" 3
+.H2 4.2 "Font Control" 3
+.H2 4.3 "Point Size Control" 4
+.H1 5 "GENERATING LISTS WITHIN A VIEW GRAPH" 5
+.H2 5.1 "List Initialization Commands" 6
+.H3 5.1.1 "Bullet List" 6
+.H3 5.1.2 "Dash List" 6
+.H3 5.1.3 "Marked List" 6
+.H3 5.1.4 "Outline List" 7
+.H3 5.1.5 "Variable List" 8
+.H1 6 "USING \s-1MVIEW\s+1 WITH \s+1\f2troff\fP\s-1  PREPROCESSORS" 10
+.H2 6.1 "Generating Tables" 10
+.H2 6.2 "Generating Equations" 11
+.H2 6.3 "Generating Pictures and Diagrams" 12
+.H2 6.4 "Generating Plots and Graphs" 12
+.H1 7 "DEFINED STRINGS" 13
+.H1 8 "PROCESSING YOUR OUTPUT" 13
+.HA "" Examples

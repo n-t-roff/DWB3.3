@@ -1,0 +1,512 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so defs.grap
+.ds pT GRAP
+.EQ
+delim $$
+.EN
+.aP A "\s-1GRAP\s+1 Reference Manual"
+In the following, 
+.I italic
+terms are syntactic categories,
+.cR typewriter
+terms are literals,
+parenthesized constructs are optional, and \(el indicates repetition.
+In most cases, the order of statements,
+constructs and attributes is immaterial.
+.iS
+.IR "grap program" :
+.sp 2p
+	.G1 \f1(\f2width in inches\f1)\f5
+	\f2grap statement\fP
+	\(el
+	.G2
+.iE
+A width on the
+.cR .G1
+line overrides the computed width, as in
+.IR pic .
+.iS
+.IR "grap statement" :
+.sp 2p
+.I
+	  frame \(or label \(or coord \(or ticks \(or grid \(or plot \(or line \(or circle \(or draw \(or new \(or next
+	\(or graph \(or numberlist \(or copy \(or for \(or if \(or sh \(or pic \(or assignment \(or print
+.ft
+.iE
+The
+.cR frame
+statement defines the frame that surrounds the graph:
+.iS
+.IR frame :
+	frame \f1(\f5ht \f2expr\f1)  (\f5wid \f2expr\f1)  ((\f2side\f1)\f2 linedesc\f1)  \(el\f5
+.sp 2p
+.IR side :
+	top \(or bot \(or left \(or right
+.sp 2p
+.IR linedesc :
+	solid \(or invis \(or dotted \f1(\f2expr\f1)\f5 \(or dashed \f1(\f2expr\f1)\f5
+.iE
+Height and width default to 2 and 3 inches;
+sides default to solid.
+If
+.I side
+is omitted, the
+.I linedesc
+applies to the entire frame.
+The optional expressions after
+.cR dotted
+and
+.cR dashed
+change the spacing exactly as in
+.IR pic .
+.P
+The
+.cR label
+statement places a label on a specified side:
+.iS
+.IR label :
+	label \f2side  strlist\f1  \(el  \f2shift\f5
+.sp 2p
+.IR shift:
+	left \(or right \(or up \(or down \f2expr \f1\(el\f5
+.sp 2p
+.IR strlist :
+	\f2str\f1  \(el  (\f5rjust \(or ljust \(or above \(or below\f1)  \(el  (\f5size \f1(\(+-) \f2expr\f1) \(el\f5
+.sp 2p
+.IR str :
+	"\(el"
+.iE
+Lists of text strings are stacked vertically.
+In any context, string lists may contain clauses
+to adjust the position or change the point size.
+Each clause applies to the string preceding it
+and all following strings.
+.P
+Normally the coordinate system is defined by the data,
+with 7 percent extra on each side.
+(To change that to 5 percent, assign 0.05 to the
+.I grap
+variable
+.cR margin ,
+which is reset to 0.07 at each
+.cR .G1
+statement.)
+The
+.cR coord
+statement defines an overriding system:
+.iS
+.IR coord :
+	coord \f1(\f2name\f1)  (\f5x \f2expr\f5,\f2expr\f1)  (\f5y \f2expr\f5,\f2expr\f1)  (\f5log x \(or log y \(or log log\f1)
+.iE
+Coordinate systems can be named;
+ranges, logarithmic scaling, etc., are done separately for each.
+.P
+The
+.cR ticks
+statement places tick marks on one side of the frame:
+.iS
+.IR ticks :
+	ticks \f2side  \f1(\f5in \(or out \f1(\f2expr\f1))  (\f2shift\f1)  (\f2tick-locations\f1)\f5
+.sp 2p
+.IR tick-locations :
+	  at \f1(\f2name\f1) \f2expr \f1(\f2str\f1)\f5, \f2expr \f1(\f2str\f1)\f5, \(el
+	\(or from \f1(\f2name\f1)\f2 expr\f5 to \f2expr  \f1(\f5by \f1(\f2op\f1)\f2 expr\f1)  \f2str\f5
+.iE
+If no ticks are specified, they will be provided automatically;
+.cR ticks
+.cR off
+suppresses automatic ticks.
+The optional expression after
+.cR in
+or
+.cR out
+specifies the length of the ticks in inches.
+The optional name refers to a coordinate system.
+If
+.I str
+contains
+format specifiers like
+.cR %f
+or
+.cR %g ,
+they are interpreted as by
+.cR printf .
+If no
+.I str
+is supplied, the tick labels will be the values of the
+expressions.
+.P
+If the
+.cR by
+clause is omitted, steps are of size 1.
+If the
+.cR by
+expression is preceded by one of
+.cR + ,
+.cR - ,
+.cR *
+or
+.cR / ,
+the step is scaled by that operator,
+e.g.,
+.cR *10
+means that each step is 10 times the previous one.
+.P
+The
+.cR grid
+statement produces grid lines along (i.e., perpendicular to)
+the named side.
+.iS
+.IR grid :
+	grid \f2side \f1(\f2linedesc\f1)  (\f2shift\f1)  (\f2tick-locations\f1)
+.iE
+Grids are labeled by the same mechanism as
+.cR ticks .
+.P
+Plot
+statements place text at a point:
+.iS
+.IT ploR :
+	\f2strlist\fP at \f2point\fP
+	plot \f2expr \f1(\f2str\f1)\f5 at \f2point\fP
+.sp 2p
+.IR point :
+	\f1(\f2name\f1) \f2expr\f5,\f2expr\f5
+.iE
+As in the
+.cR label
+statement, the string list may contain
+position and size modifiers.
+The
+.cR plot
+statement uses the optional format string as in the
+.sM C
+.cR printf
+statement\*(EMit may contain a
+.cR %f
+or
+.cR %g .
+The optional name refers to a coordinate system.
+.P
+The
+.cR line
+statement draws a line or arrow from here to there:
+.iS
+.IR line :
+	\f1(\f5line \(or arrow\f1)  \f5from \f2point\f5 to \f2point \f1(\f2linedesc\f1)\f5
+.iE
+The
+.cR circle
+statement draws a circle:
+.iS
+.IR circle :
+	circle at \f2point \f1(\f5radius \f2expr\f1)\f5
+.iE
+The radius is in inches; the default size is small.
+.P
+The 
+.cR draw
+statement defines a sequence of lines:
+.iS
+.IR draw :
+	draw \f2(\f2name\f1)\f2 linedesc \f1(\f2str\f1)\f5
+.iE
+Subsequent data for the named sequence
+will be plotted as a line of the specified style,
+with the optional
+.I str
+plotted at each point.
+The
+.cR next
+statement continues a sequence:
+.iS
+.IR next :
+	next \f1(\f2name\f1)\f5 at \f2point \f1(\f2linedesc\f1)\f5
+.iE
+If a line description is specified, it overrides the default
+display mode for the line segment ending at
+.I point .
+The
+.cR new
+statement starts a new sequence; it has the same format as the
+.cR draw
+statement.
+.P
+A line consisting of a set of numbers
+is treated as a family of points
+$x$, $y sub 1$, $y sub 2$, etc.,
+to be plotted at the single
+$x$ value.
+.iS
+.IR numberlist :
+	\f2number\fP \(el
+.iE
+If there is only one number it is treated as
+a $y$ value, and $x$ values of 1, 2, 3, \(el
+are supplied automatically.
+.P
+.hy
+.I Grap
+provides arithmetic with the operators
+.cR + ,
+.cR - ,
+.cR *
+and
+.cR / .
+One may assign values to variables;
+assign\%ments are expressions.
+Built-in functions include
+.cR log ,
+.cR exp
+(both base 10\*(EMbeware!),
+.nh
+.cR int
+(truncates towards zero),
+.cR sin ,
+.cR cos 
+(both use radians),
+.cR atan2(dy,dx) ,
+.cR sqrt ,
+.cR min
+(two arguments only),
+.cR max
+(ditto),
+and
+.cR rand()
+(returns a real number random on [0,1)).
+.br
+.ne 4v
+.P
+The
+.cR for
+statement provides a modest looping facility:
+.iS
+.IR for :
+	for \f2var\f5 from \f2expr\f5 to \f2expr  \f1(\f5by \f1(\f2op\f1) \f2expr\f1)\f5 do X \f2anything\f5 X
+.iE
+.cR X
+is any single character that doesn't appear in the string.
+If
+.cR X
+is a left brace
+.cR { ,
+then the string may contain
+internally balanced braces and is terminated by a right brace
+.cR } .
+The text
+.I anything
+(which may contain newlines) is repeated as 
+.I var
+takes on values from
+.I expr1
+to
+.IR expr2 .
+As with tick iterators, the
+.cR by
+clause is optional, and may proceed arithmetically or multiplicatively.
+In a
+.cR for
+statement,
+the
+.cR from
+may be replaced by
+.cR = ''. ``
+.P
+The
+.cR if-then-else
+statement provides conditional evaluation:
+.iS
+.IR if :
+	if \f2expr\fP then X \f2anything\fP X else X \f2anything\fP X
+.iE
+The
+.cR else -clause
+is optional.
+Relational operators include
+.cR == ,
+.cR != ,
+.cR > ,
+.cR >= ,
+.cR < ,
+.cR <= ,
+.cR ! ,
+.cR || ,
+and
+.cR && .
+Strings may be compared with the operators
+.cR ==
+and
+.cR != .
+.P
+.I Grap
+provides the same macro processor that
+.I pic
+does:
+.iS
+define \f2macro_name\fP X \f2anything\fP X
+.iE
+Subsequent occurrences of the macro name will be replaced
+by the string, with arguments of the form
+$ dollar n $ replaced by corresponding actual arguments.
+Macro definitions persist across
+.cR .G2
+boundaries, as do values of variables.
+.P
+The
+.cR copy
+statement is somewhat overloaded:
+.iS
+copy "\f2filename\fP"
+.iE
+includes the contents of the named file at that point;
+.iS
+copy "\f2filename\fP" thru \f2macro_name\fP
+.iE
+copies the file through the macro; and
+.iS
+copy thru \f2macro_name\fP
+.iE
+copies subsequent lines through the macro;
+each number or quoted string is treated as an argument.
+In each case, copying continues until end of file or the next
+.cR .G2 .
+The optional clause
+.cR until
+.I str
+causes copying to terminate when a line whose
+first field is
+.I str
+occurs.
+In all cases, the macro can be specified inline rather than by name:
+.iS
+copy thru X \f2macro body\fP X
+.iE
+.P
+The
+.cR sh
+command passes text through to the
+.sM UNIX
+shell.
+.iS
+.IR sh :
+	sh X \f2anything\fP X
+.iE
+The body of the command is scanned for macros.
+The built-in macro
+.cR pid
+is a string consisting of the process identification number;
+it can be used to generate unique file names.
+.P
+The
+.cR pic
+command passes text through to
+.I pic
+with the 
+.cR pic '' ``
+removed; variables and macros are not evaluated.
+Lines beginning with a period (that are not numbers)
+are passed through literally, under the assumption that they
+are
+.I troff
+commands.
+.P
+The
+.cR graph
+statement
+.iS
+.IR graph :
+	graph \f2Picname \f1(\f2pic-text\f1)\f5
+.iE
+defines a new graph named
+.I Picname ,
+resetting all coordinate systems.
+If any
+.cR graph
+commands are used in a
+.I grap
+program, then the statement after the
+.cR \&.G1
+must be a
+.cR graph
+command.
+The
+.I pic-text
+can be used to position this graph relative
+to previous graphs by referring to their
+.cR Frame s,
+as in
+.iS
+	graph First
+	 \(el
+	graph Second with .Frame.w at First.Frame.e + (0.1,0)
+.iE
+Macros and expressions in
+.I pic-text
+are not evaluated.
+.I Picname s
+must begin with a capital letter to satisfy 
+.I pic
+syntax.
+.P
+The
+.cR print
+statement
+.iS
+.IR print :
+	print \f1(\f2expr  \(or  str\f1)\f5
+.iE
+writes on
+.cR stderr
+as
+.I grap
+processes its input; it is sometimes useful for debugging.
+.P
+Many reserved words have synonyms, such as
+.cR thru
+for
+.cR through ,
+.cR tick
+for
+.cR ticks,
+and
+.cR bot
+for
+.cR bottom .
+.P
+The
+.cR #
+introduces a comment, which ends at the end of the line.
+Statements may be continued over several lines by preceding each
+newline with a
+backslash character.
+Multiple statements may appear on a single line separated
+by semicolons.
+.I Grap
+ignores any line that is entirely blank, including those
+processed by
+.cR "copy thru"
+commands.
+.P
+When
+.I grap
+is first executed it reads standard macro definitions
+from the file
+.cR \s-1/usr/lib/grap.defines\s+1 .
+The definitions include
+.cR bullet ,
+.cR plus ,
+.cR box ,
+.cR star ,
+.cR dot ,
+.cR times ,
+.cR htick ,
+.cR vtick ,
+.cR square ,
+and
+.cR delta .

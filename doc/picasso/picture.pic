@@ -1,0 +1,55 @@
+.PS
+xsh = .02; ysh = -.02
+define triangle X
+line at $1, $2 up .10 right .06 then left .12 then down .10 right .06 $3
+X
+lineweight=0.01
+down
+A: box wid 4 ht 3.2
+L: line from A.nw + (.1,-.3) to A.ne + (-.1,-.3)
+line weight .04 from L.1st + (0,.05) up .10 right .10
+C: circle at last line.2nd rad .08 fill black
+circle at C + (-.02,.02) rad .08 fill white
+circle at C + (.05,.05) rad .067 fill black
+circle at last circle + (-.02,.02) rad .067 fill white
+textsize=12
+textspace=14
+textfont=setfont("H")
+"Picasso: Picture Files" with .c at L.c + (0,.15)
+F: box wid 1.6 ht 1.5 with .n at L.c - (0,.1)
+"edit.pic" "file.pic" "main.pic" "menu.pic" "obj.pic" "orgchart.pic" "view.pic" ljust with .w at F.w + (.1,0)
+"Existing files: " with .e at F.w
+down
+boxwid=0.18
+box ht .1 at F.ne + (.15,-.05)
+lineweight=0.03
+line .15 edge .5; E: line 1.0; line .15 edge .5
+lineweight=0.01
+box ht .1
+S: box ht .6 at E filled white
+right
+fillcolor=0
+line .18 at S.w - (0,.1)
+T: triangle(S.n.x, S.n.y - .15,fill)
+Ctr: line at T noedge
+reflect T about Ctr
+line .18 at S.w + (0,.1)
+triangle(S.s.x, S.s.y + .05,fill)
+boxht=0.25
+boxwid=2.6
+movewid=.2
+down
+Z: box with .nw at F.sw - (0,.1) fill .5
+"ex1.pic" font "HB" label white with .w at Z.w + (.1,0)
+"File: " with .e at Z.w
+move to Z; move .2
+box fill .5
+"Directory: " with .e at last box .w
+"/usr/gwb/demos" font "HB" label white with .w at last box .w + (.1,0)
+right
+boxrad=.12
+box wid .7 "Save" with .w at A.sw + (.2,.3); move
+box wid .6 "Get"; move
+box wid 1.1 "Clear Screen";move
+box wid .6 "pwd"
+.PE

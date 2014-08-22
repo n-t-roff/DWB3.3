@@ -1,0 +1,685 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.tS MPICTURES
+\s-1MPICTURES\s+1 \(em A Picture Inclusion Package
+.tE
+.aS
+Combining text and graphics using a computer can be surprisingly difficult.
+Most modern page description facilities do not
+integrate well with the entire text processing environment.
+Fortunately, intelligent page description languages,
+like Adobe Systems' PostScript\*(Rg language,
+offer features that have proven invaluable,
+like the ability to save and restore environments,
+and to scale, translate, and rotate coordinate systems.
+.P
+This document describes a mechanism for integrating
+text prepared for the
+.I troff
+text formatter
+with graphic images described as PostScript programs.
+This approach allows virtually any PostScript
+image to be included in a
+.I troff
+document at any position of the page,
+in any orientation and scaling, and with the
+possibility of wrapping text around it.
+.hy
+The growing use of PostScript as a standard page description language,
+and the cor\%re\%spond\%ing proliferation of programs that produce
+PostScript and printers that accept it, promise to make this
+an attractive alternative.
+.nh
+.aE
+.rs
+.sp
+.H 1 INTRODUCTION
+This document describes a mechanism for integrating
+text prepared for the
+.I troff
+text formatter
+with graphic images described as PostScript programs.
+This approach allows virtually any PostScript
+image to be included in a
+.I troff
+document at any position of the page,
+in any orientation and scaling, and with the
+possibility of wrapping text around it.
+.P
+The
+.I troff
+text formatter
+has been around for more than 15 years and has been surrounded
+by a powerful family of programs.
+Several preprocessors
+.RI (\| pic
+and
+.IR grap ,
+to name just two)
+provide picture inclusion capabilities.
+In each case the mechanism is the same:  a ``little language''
+is translated into input suitable for
+.IR troff .
+From that point the picture can be sent to any supported device\*(EMdevice
+independence is built into the languages because their translation
+is to
+.I troff
+input.
+When
+.I troff
+supports a new printer, so do the preprocessors.
+That's a big advantage and has been a continuing source of stability.
+.P
+But relying on
+.I troff
+to provide device independence has its drawbacks.
+.IR Troff 's
+graphics operators are relatively primitive and do not integrate
+well with its text processing capabilities.
+For example, it is difficult if not impossible to produce rotated text
+strings in
+.IR troff ,
+and that means picture preprocessors cannot expect this capability.
+The problem is really historical:
+.I troff
+evolved as a text processing language with graphics operators added
+after the basic design was in place.
+.P
+The picture inclusion mechanism described here uses a very different
+approach than the traditional graphic interfaces to
+.IR troff .
+.I Mpictures
+is a macro package, rather than a preprocessor.
+Its main function is to reserve space on the page to accommodate
+a picture which is pasted in later by the
+.I troff
+device postprocessor
+(in this case,
+.IR dpost ).
+Although
+.I mpictures
+is a general picture inclusion facility,
+the only reasonable implementation at this time is for the
+PostScript page description language.
+.ig
+Why PostScript?
+PostScript includes powerful graphics operators,
+a good model for coordinate systems,
+a rich set of operators for dealing with text,
+and an extensive and extensible knowledge of fonts.
+Text and graphics are easy to merge because they are treated uniformly.
+PostScript's graphics model is applied consistently throughout
+the language, even when describing text.
+..
+.P
+A major advantage of the
+.I mpictures
+approach is that it allows access from high-level applications
+to PostScript language capabilities that
+.I troff
+does not support,
+like rotation, shading, color, line widths and line styles.
+Including line art, graphs, and pictures of any kind
+becomes a matter of creating the appropriate PostScript file.
+This can be done using a number of commercially available
+Microsoft
+.sM MS-DOS \*(Tm
+or Apple Macintosh\*(Tm
+software packages, or even using
+.I troff
+and
+.I dpost .
+In addition, if you learn the language, you can write your own
+PostScript programs to generate pictures.
+Addison-Wesley publishes three excellent books,
+.ul
+PostScript Language Reference Manual,
+.ul
+PostScript Language Program Design,
+and
+.ul
+PostScript Language Tutorial and Cookbook,
+written by Adobe Systems, Inc.
+All three books are interesting reading, not difficult to
+understand, and full of examples.
+.SK
+.BP squares.ps 2.0i 2.0i r
+.H 1 "THE MACROS"
+Basically,
+.I mpictures
+uses size and placement information
+to create a ``hole'' on the page, and then instructs
+.I troff
+to pass a request to the postprocessor to ``fit'' the
+picture into the reserved space.
+It is the
+.I troff
+postprocessor,
+.IR dpost ,
+that places the image on the page and makes sure
+that it is properly scaled, rotated, etc.
+For example, the
+macro call:
+.sp 0.5v
+.ft 5
+\0\0\0\&.BP squares.ps 2.0i 2.0i r
+.ft 1
+.sp 0.5v
+was used to place the
+picture shown here.
+.I Mpictures
+took the image from the file
+.cR squares.ps
+(originally 8\(12\|\(mu\|11 inches in size),
+scaled it to fit into a 2\|\(mu\|2-inch hole,
+and placed it at the right margin.
+.EP
+.rs
+.sp -1v
+.P
+The
+.I mpictures
+package consists of three macros
+.cR .BP , (
+.cR .EP ,
+and
+.cR .PI )
+which serve as the interface to
+.IR troff .
+Here is a synopsis of each macro call followed
+by a brief description:
+.BL
+.LI
+The
+.cR .BP
+(Begin Picture)
+macro:
+.iS
+\&.BP \f2file\^\f1[\f5(\f2page\f5)\f1]\0[\f2height\f1]\0[\f2width\f1]\0[\f2\^position\f1]\0[\f2offset\f1]\0[\f2\|flags\f1]\0[\f2label\^\f1]\f5
+.iE
+The
+.cR .BP
+macro reserves space on the page and arranges to
+have the named PostScript file placed there in the desired format.
+In addition,
+.cR .BP
+tries to fill text around the sides of the frame, if there's room,
+and restores things to their original state when it passes the
+bottom of the frame.
+Most likely, this is the only picture inclusion macro
+you will need.
+.LI
+The
+.cR .EP
+(End Picture)
+macro:
+.iS
+\&.EP
+.iE
+The
+.cR .EP
+macro terminates the text wrap-around function
+initiated by
+.cR .BP
+and skips to the end of the frame.
+The
+.cR .BP
+macro calls
+.cR .EP
+automatically when the text passes
+the bottom of the frame.
+You may need to use
+.cR .EP
+on occasion to force the end of a picture.
+For example, if a new section starts in the
+middle of the text running around a picture,
+you may want to force the section heading to
+begin anew at the margin following the picture
+rather than alongside it.
+.LI
+The
+.cR .PI
+(Picture Include)
+macro:
+.iS
+\&.PI \f2file\^\f1[\f5(\f2page\f5)\f1]\0\f2height\^\f1[\f5,\f2width\^\f1[\f5,\f2yoffset\^\f1[\f5,\f2xoffset\^\f1]]]\0[\f2\|flags\f1]
+.iE
+The
+.cR .PI
+macro is a low-level macro that is used automatically by
+.cR .BP
+to insert the picture on the page.
+It is the
+.cR .PI
+macro that instructs
+.I troff
+to pass the appropriate device control command to
+.I dpost
+to do whatever voodoo is needed to get the picture
+fitted into the space accordingly (e.g., scaling, rotation, outline).
+If you need to do things that
+.cR .BP
+will not allow or does not do well,
+you can build your own macro to control the text flow and use
+.cR .PI
+to include the picture itself.
+.LE
+.P
+Any argument enclosed in [\ ] is optional.
+A pair of double quotes
+.cR \&"" ) (
+skips an argument;
+skipped or missing arguments are assigned reasonable defaults.
+.P
+Each parameter is discussed in detail in the sections that follow.
+.H 1 "THE PICTURE FILE"
+The mandatory
+.cA file
+parameter gives the name of the PostScript image file.
+If the file contains multiple page images, an optional
+page number (enclosed in parentheses) can follow the
+picture filename.
+For example,
+.cR ".BP\ pictures(3)"
+uses the third page image in the file
+.cR pictures .
+By default, the first page image is used.
+If you ask for a non-existent page,
+.I dpost
+will use the whole file with unpredictable results.
+.P
+If you only want to reserve space on the page but not merge
+a picture with the text, then make sure the picture file is
+not readable.
+This way,
+.I mpictures
+will reserve the space and
+.I dpost
+will ignore the picture.
+.H 1 "THE FRAME"
+The picture frame is an area set aside for the picture
+(i.e., the ``hole'' on the page).
+The frame size is defined by the
+.cA height
+and
+.cA width
+parameters, and is positioned horizontally
+by the
+.cA position
+and
+.cA offset
+parameters.
+(We'll talk about
+positioning in \(sc4.3.)
+The
+.I dpost
+postprocessor fits the picture in the frame and the
+.cR .BP
+macro arranges to have
+.I troff
+set text around it, provided there is sufficient room.
+.H 2 Dimensions
+.P
+The
+.cA height
+and
+.cA width
+parameters define the vertical and horizontal dimensions
+of the frame, respectively.
+By default, the values for
+.cA height
+and
+.cA width
+are assumed to be in inches; values could also be given in units.
+The only valid scale indicators are
+.cR i
+for inches and
+.cR u
+for units.
+.P
+You should always supply a height.
+If you don't, the
+.cR .BP
+macro will make the picture 3 inches high.
+If you omit the width parameter,
+.cR .BP
+assumes the frame is as wide as a line of text
+(i.e., the line length less the current indent).
+For example, the macro call
+.iS
+\&.BP nosmoke.ps
+.iE
+places a ``No Smoking'' sign in the default frame size:
+.BP nosmoke.ps
+The
+.cR .BP
+macro looks at the dimensions and figures out what can be done with
+the text that follows.
+In this example, the only argument was the picture file so all
+dimensions were assigned default values.
+Since there was no room to fill text around the frame,
+.cR .BP
+breaks the current line, steps over the frame, and continues
+processing text normally.
+.H 2 "Scaling and Fit"
+The picture is scaled uniformly in both dimensions
+until either the height
+.I or
+the width of the frame is filled.
+As such, the picture may not always fill the frame.
+To ensure a tight fit, it may be necessary to crop the picture by eliminating
+the surrounding white space.
+.P
+The PostScript structuring comment
+.iS
+%%BoundingBox: \f2llx\0lly\0urx\0ury\fP
+.iE
+defines the coordinates
+of an imaginary box that encloses the picture
+.cA llx "" (
+and
+.cA lly
+for lower left,
+.cA urx
+and
+.cA ury
+for upper right).
+The coordinates must be in PostScript's default coordinate system
+which has its origin in the lower left corner, positive
+.cA x
+to the right and positive
+.cA y
+up the page, and scaled at 72\ units per inch.
+If the PostScript picture file has more than one bounding box comment,
+the last one takes precedence.
+If the bounding box is not defined,
+.I dpost
+assumes the picture size is 8\(12\^\(mu\^11 inches,
+which is equivalent to
+.cR "%%BoundingBox:\ 0\ 0\ 612\ 792" .
+Right now, the easiest way to calculate the bounding box parameters is to
+print the picture separately and use a ruler to determine the coordinates.
+Although this may seem cumbersome, it's not terribly difficult.
+.P
+Output from
+.I dpost
+is a PostScript file that can itself be included as a picture.
+By default,
+.I dpost
+omits the bounding box comment so the image is a standard 8\(12\^\(mu\^11-inch page size.
+For a tight fit, use the
+.cR -B
+option to eliminate the surrounding white space:
+.I dpost
+will determine the outermost printable elements on all four sides
+and insert a bounding box comment with the appropriate coordinates.
+For example, compare the following two pictures:
+.br
+.sy troff page.in | dpost >ickypage.ps
+.sy troff page.in | dpost -B >croppage.ps
+.br
+.mk
+.BP ickypage.ps 2.5i 2.5i "" "" o "\f3A Poor Fit\fP"
+.EP
+.br
+.rt
+.po +3.25i
+.BP croppage.ps 2.5i 2.5i "" "" o "\f3A Snug Fit\fP"
+.EP
+.po \nOu
+The same
+.I troff
+input was used to create both page images and the same
+.cR .BP
+macro call was used to place the image on the page.
+The only difference is that
+.cR "dpost -B"
+was used to crop the picture image on the right;
+the
+.cR -B
+option was not used for the picture on the left so the entire
+8\(12\^\(mu\^11-inch page image was used.
+.H 2 Positioning
+The parameters
+.cA position
+and
+.cA offset
+together determine where the picture is placed on the page.
+.P
+The
+.cA position
+parameter defines the horizontal position of the frame relative to
+a line of text in the page width area (e.g., left, center, right).
+The
+.cA position
+argument can be
+.cR l ,
+.cR c ,
+or
+.cR r .
+Use
+.cR l
+to line up the left side of the frame with the left text margin;
+similarly, use
+.cR r
+to line up the right side of the frame with the right text margin.
+Use
+.cR c
+to line up the center of the frame with the center of the
+text line (e.g., line length less text indent).
+By default, the picture is placed at the left margin.
+.P
+The
+.cA offset
+parameter is the displacement of the picture from the specified
+frame position.
+The value for
+.I offset
+can be scaled in inches or units, and it can be signed
+to move the frame to the right (positive) or to the
+left (negative).
+The default offset is 0.
+.mk
+.BP squares.ps 1.0i 1.5i r 0.5i st
+.P
+The offset feature is useful in placing a picture outside
+the ``write space'' of the page (i.e., in the actual
+left- or right-margin of the page).
+For example,
+the picture on the left was placed in a 1\^\(mu\^1-inch frame
+at position
+.cR l
+with a negative one-inch
+.cR -1i ) (
+offset, while
+the picture on the right was placed in a 1\^\(mu\^1.5-inch
+frame at position
+.cR r
+with a positive half-inch
+.cR +0.5i ) (
+offset.
+Be careful though\*(EMif you ask
+.I mpictures
+to place the picture
+off the page, it will do just that.
+.EP
+.rt
+.sp
+.BP squares.ps 1.0i 1.0i l -1.0i l
+.sp 1i+1v
+.P
+The
+.cR .BP
+macro uses the position and offset information
+to determine the
+.cA yoffset
+and
+.cA xoffset
+values used with
+.cR .PI
+to place the picture.
+For raw picture inclusion using
+.cR .PI ,
+.cA yoffset
+is the vertical displacement from the baseline of the current line
+of text to the top of the picture frame, and
+.cA xoffset
+is the horizontal displacement from the current page offset plus indent
+(if any) to the left edge of the picture frame.
+.H 1 "CONTROL FLAGS"
+The
+.cA flags
+parameter allows finer control over how the picture appears in the frame.
+For example,
+.cA flags
+can be used to rotate the picture, outline the picture,
+or attach the picture to a given
+side or corner of the frame.
+The
+.cA flags
+parameter is a string consisting of one or more key letters:
+.in +3n
+.ll -3n
+.VL 9
+.LI \f5o\fP
+Outline the picture (not the frame) with a box.
+.LI \f5s\fP
+Freely scale both picture dimensions (see below).
+.LI \f5l\fP
+Attach the picture to the left side of the frame.
+.LI \f5r\fP
+Attach the picture to the right side of the frame.
+.LI \f5t\fP
+Attach the picture to the top of the frame.
+.LI \f5b\fP
+Attach the picture to the bottom of the frame.
+.LI \f5w\fP
+White out (erase) the area to be occupied by the picture
+before drawing it.
+This flag can be used with the
+.cR .PI
+macro for special effects, for example, to
+overlay several pictures.
+.LI \f5a\f1[\f2angle\f1]
+Rotate the picture clockwise by
+.cA angle
+degrees.
+The degree of rotation is optional; if
+.cA angle
+is missing, 90 degrees is added to the current angle
+(initially 0).
+.LE
+.ll +3n
+.in -3n
+.P
+By default, the picture is scaled uniformly in both dimensions
+until either the height or width of the frame is filled.
+When the picture is scaled freely, each dimension is adjusted
+separately to fill the frame.
+Use this feature with care as free scaling can cause distortions
+in the picture image.
+Consider these two pictures of the American flag:
+.br
+.mk
+.BP flag.ps 2.5i 2.5i "" "" "" "\f3Uniform Scaling\fP"
+.EP
+.br
+.rt
+.po +3.5i
+.BP flag.ps 2.5i 2.5i "" "" s "\f3Free Scaling\fP"
+.EP
+.po \nOu
+.sp
+The same frame size was used for both pictures.
+However, the picture on the left was scaled uniformly till the
+frame width was filled (the flag is wider than it is tall),
+whereas the picture on the right was scaled freely.
+Notice how the use of free scaling stretched the flag
+as if it were silly-putty.
+.P
+By default, the picture is centered in the frame.
+The four frame attachment flags
+.cR l , (
+.cR r ,
+.cR t ,
+.cR b )
+can be used separately to attach the
+picture to a particular side of the frame.
+In addition, the left or right and the top or bottom flags
+can be used together to attach the picture to a particular
+corner of the frame.
+'''	\" FORCE PAGE
+.SK
+.H 1 LABELS
+There's not much to say about labels.
+The
+.cR .BP
+macro takes the text given in the
+.cA label
+argument and centers it 1.5 vertical lines
+below the frame.
+The label is printed in whatever font and size
+that were in effect when
+.cR .BP
+is called.
+Of course, you can include in-line font and size changes
+to change the appearance of the label text.
+For example, the macro call:
+.iS
+.ti -1.5n
+\&.BP usa.ps 1.5i 1.5i c "" ota "\ef3\es-1Our Country `Tis of Thee\es+1\efP"
+.iE
+was used with some filler text to produce:
+.nr Hy 1
+.br
+.BP usa.ps 1.75i 1.5i c "" ot "\f3\s-1Our Country `Tis of Thee\s0\fP"
+.sp
+We the people of the United States, in order to form a
+more perfect union, establish justice, ensure domestic tranquility,
+provide for the common defense, and secure the blessings of
+liberty to ourselves and our posterity, do ordain and establish
+this Constitution to the United States of America.
+We the people of the United States, in order to form a
+more perfect union, establish justice, ensure domestic tranquility,
+provide for the common defense, and secure the blessings of
+liberty to ourselves and our posterity, do ordain and establish
+this Constitution to the United States of America.
+We the people of the United States, in order to form a
+more perfect union, establish justice, ensure domestic tranquility,
+provide for the common defense, and secure the blessings of
+liberty to ourselves and our posterity, do ordain and establish
+this Constitution to the United States of America.
+.EP
+.P
+(The
+.cR .EP
+macro was used here to break out of the wrap-around text
+and jump past the end of the picture.)
+.nr Hy 0
+.H 1 "USAGE"
+Since
+.I mpictures
+is a macro package, all you need to do is use the
+.cR -mpictures
+option with
+.I troff .
+Also, the
+.I dpost
+postprocessor is needed to include PostScript images.
+.P
+Typically, the command line would look like:
+.iS
+troff -mpictures \f1[\f2options\f1]\0\f2filename\f5 | dpost
+.iE
+.P
+Of course, the usual options may be used on the
+.I troff
+command, including other macro packages.
+If preprocessors are needed, prepend them to the
+.I troff
+command in the usual fashion.

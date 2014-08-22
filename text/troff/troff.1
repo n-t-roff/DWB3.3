@@ -1,0 +1,181 @@
+.ds dF /usr/lib/font
+.ds dM /usr/lib/macros
+.ds dP /usr/pub
+.ds dT /usr/lib/tmac
+.TH TROFF 1
+.SH NAME
+.B troff
+\- text formatting and typesetting
+.SH SYNOPSIS
+\*(mBtroff\f1
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+.B troff
+formats text in the named
+.I files
+for
+printing on a laser printer or phototypesetter.
+.PP
+If no
+.I files
+argument is present, the standard input is read.
+An argument consisting of a single minus
+.OP - "" ) (
+is taken to be a file name corresponding to the standard input.
+The options, which may appear in any order so long as they appear
+before the files, are:
+.TP 0.75i
+.OP \-o list
+Print pages in the comma-separated
+.I list
+of numbers and ranges.
+A range
+.I N\-M
+means
+.I N
+through
+.IR M ;
+initial
+.I \-M
+means up to and including
+.IR M ;
+final
+.I N\-
+means
+from
+.I N
+to the end.
+.TP
+.OP \-n N
+Number first generated page
+.IR N .
+.TP
+.OP \-m name
+Prepend the macro file
+.MI \*(dT/tmac. name
+to the input
+.IR files .
+.TP
+.OP \-r aN
+Set register
+.I a
+(one-character name) to
+.IR N .
+.TP
+.OP \-i
+Read standard input after the input files are exhausted.
+.TP
+.OP \-q
+Invoke the simultaneous input-output mode of the
+.MW .rd
+request.
+.TP
+.OP \-a
+Send a printable
+.SM ASCII
+approximation of the results to the standard output.
+.TP
+.OP \-F dir
+Use
+.I dir
+as the font directory.
+The default
+.I dir
+is
+.MR \*(dF .
+.TP
+.OP \-N
+Run the program as
+.BR nroff .
+.TP
+.OP \-T name
+Prepare output for typesetter
+.IR name .
+The default
+.I name
+is \*(mBpost\fP.
+.SH EXAMPLES
+.PP
+Format
+.I file
+with
+.SM MM
+macros:
+.EX
+troff -mm \f2file\fP | \f2spool
+.EE
+Use the local
+.I spool
+command
+(e.g.,
+.B lp
+or
+.BR prt )
+to send output to a printer.
+Use
+.B proof
+to preview output on
+.SM DMD
+5620 or 630
+.SM MTG
+terminals.
+.PP
+Format
+.I file
+with tables and
+.SM MS
+macros; send Imagen 8/300 output to the local printer using
+.BR lp :
+.EX
+tbl \f2file\fP | troff -ms -Ti300 | lp
+.EE
+Preview view graphs with pictures and equations (using
+.BR eqnchar (5)
+symbols) on a 630
+.SM MTG
+terminal:
+.EX
+pic \f2file\fP | eqn \*(dP/eqnchar - | troff -mview | proof
+.EE
+Format
+.I file
+with the works (graphs, pictures, tables, equations) and
+.SM MM
+macros:
+.EX
+grap \f2file\fP | pic | tbl | eqn | troff -Tpost -mm | \f2spool
+.EE
+A few rules of order may apply if certain preprocessors
+are used in combination.
+A safe bet is to use the preprocessors in
+the order given above.
+Since
+.B grap
+is a preprocessor to
+.BR pic ,
+it must be used before
+.I pic
+on the command line.
+.SH FILES
+.MW \*(dT/tmac.*
+.br
+.MW \*(dF/dev*/*
+.SH SEE ALSO
+.BR dpost (1),
+.BR eqn (1),
+.BR grap (1),
+.BR nroff (1),
+.BR pic (1),
+.BR tbl (1),
+.BR font (5),
+.BR troff (5)
+.SH REFERENCES
+.PP
+B. W. Kernighan and J. F. Ossanna,
+.ul
+Troff User's Manual
+.PP
+B. W. Kernighan,
+.ul
+A Troff Tutorial

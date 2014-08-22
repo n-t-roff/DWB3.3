@@ -1,0 +1,648 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "DISPLAYS AND CAPTIONS"
+Displays are blocks of text that are to be kept
+together\*(EMnot split across pages.
+.sM MM
+provides two styles of displays:
+a ``static'' style
+.cR .DS ) (
+and a ``floating'' style
+.cR .DF ). (
+In the static style, the display appears in the same relative
+position in the output text as it does in the input text;
+this may result in extra white space at the bottom of the page
+if the display is too big to fit there.
+In the floating style, the display ``floats'' through the input text
+to the top of the next page if there
+is not enough room for it on the current page;
+thus the input text that follows a floating display may precede
+it in the output text.
+A queue of floating displays is maintained so that their relative order
+is not disturbed.
+.br
+.ne 5v
+.P
+By default, a display is processed in no-fill mode,
+with single-spacing, and is not indented from the existing margins.
+The user can specify indentation or centering,
+as well as fill-mode processing.
+.P
+Displays and footnotes may never be nested
+in any combination.
+Although lists and paragraphs are permitted,
+no headings
+.cR .H "" (
+or
+.cR .HU )
+can occur within displays or footnotes.
+.H 2 "Static Displays"
+.iS
+\&.DS \f1[\|\*(iAformat\|\f1] [\|\*(iAfill\|\f1] [\*(iArindent\f1]
+.cA "one or more lines of text"
+\&\*(iR.DE
+.iE
+A static display is started by the
+.cR .DS
+macro and terminated by the
+.cR .DE
+macro.
+With no arguments,
+.cR .DS
+will accept the lines of text exactly as they are typed (no-fill mode)
+and will not indent them from the prevailing left margin indentation
+or from the right margin.
+The
+.cA rindent
+argument is the amount by which the line length should be decreased,
+i.e., an indentation from the right margin.
+(This amount may be scaled or else defaults to ems.)
+.P
+The
+.cA format
+argument to
+.cR .DS
+is an integer or letter used to control the left margin indentation
+and centering with the following meanings:
+.DS
+.TS
+center box tab(;);
+c s s cf1
+c1f5 c1f1p-2 cf5 lf1.
+\*(iAformat\fP;Meaning
+_
+0;or;L;left-justified (default)
+1;or;I;indent by standard amount
+2;or;C;center each line
+3;or;CB;center as a block
+.TE
+.DE
+.P
+The
+.cA fill
+argument is also an integer or letter and can have the 
+following meanings:
+.DS
+.TS
+center box tab(;);
+c s s cf1
+c1f5 c1f1p-2 cf5 lf1.
+\*(iAfill\fP;Meaning
+_
+0;or;N;no-fill mode (default)
+1;or;F;fill mode
+.TE
+.DE
+.P
+The standard amount of indentation is taken from the register
+.cR Si ,
+which is initially 3 ens.
+Thus, by default, the text of an indented display
+aligns with the first line of indented paragraphs, whose indent is 
+contained in the
+.cR Pi
+register.
+Even though their initial values are the same,
+these two registers are independent of one another.
+(The value for registers
+.cR Si
+and
+.cR Pi
+must be an unscaled number and are treated as ens.)
+.P
+The display format value
+.cR 3
+.cR CB ) (
+centers the entire display as a block
+(as opposed to
+.cR ".DS C"
+and
+.cR ".DF 2" ,
+which center each line individually).
+That is, all the collected lines are left-justified,
+and then the display is centered, based on the width of the longest line.
+This format must be used in order for the
+.I eqn
+``mark'' and ``lineup'' feature to work with centered 
+equations (see \(sc7.4).
+This format must be used to center pictures and graphs as well
+(see \(sc7.5 and \(sc7.6).
+.P
+By default, a blank vertical space is placed before and
+after static and floating displays.
+These blank vertical spaces before and after
+static displays can be inhibited by setting the register
+.cR Ds
+to 0.
+.P
+The following example uses all three arguments to
+display a block of text that is filled and indented 5 ens
+from both the left and right margins.
+The input:
+.iS
+\&.nr Si 5
+\&.DS I F 5n
+``We the people of the United States, in order to form a
+more perfect union, establish justice, ensure domestic tranquility,
+provide for the common defense, and secure the blessings of
+liberty to ourselves and our posterity, do ordain and establish
+this Constitution to the United States of America.''
+\&.DE
+.iE
+.br
+.ne 5v
+yields:
+.nr Si 5
+.DS I F 5n
+``We the people of the United States, in order to form a
+more perfect union, establish justice, ensure domestic tranquility,
+provide for the common defense, and secure the blessings of
+liberty to ourselves and our posterity, do ordain and establish
+this Constitution to the United States of America.''
+.DE
+.nr Si 3
+.H 2 "Floating Displays"
+.iS
+\&.DF \f1[\|\*(iAformat\f1] [\|\*(iAfill\f1] [\*(iArindent\f1]
+.cA "one or more lines of text"
+\*(iR.DE
+.iE
+A floating display is started by the
+.cR .DF
+macro and terminated  by the
+.cR .DE
+macro.
+The arguments have the same meanings as  for
+.cR .DS ,
+except that, for floating displays, indent,
+no indent, and centering are always calculated with respect to the 
+initial left margin, because the prevailing indent may change 
+between the time when the formatter first reads the floating display
+and the time that the display is printed.
+One blank vertical space always occurs both before and after
+a floating display.
+.P
+The user may exercise great control over the output positioning of
+floating displays through the use of two number registers,
+.cR De 
+and
+.cR Df .
+When a floating display is encountered,
+it is processed and placed onto a queue of displays waiting to be output.
+Displays are always removed from the queue and printed in the order
+that they were entered on the queue, which is the
+order that they appeared in the input file.
+If a new floating display is encountered and the queue of displays is empty,
+then the new display is a candidate for immediate output on the current page.
+Immediate output is governed by the size of the display and the setting of the
+.cR Df
+register.
+The
+.cR De
+register controls whether or not text will appear on the current page after a
+floating display has been produced.
+.DS I F
+.TS
+box tab(;);
+cf5 cf1
+cf5 lf1w(5.1i).
+Df;Action
+_
+.sp 2p
+0;T{
+.na
+Floating displays will not be output until the end of the section
+(with ``section-page'' numbering) or the end of the document.
+T}
+1;T{
+.na
+Output the new floating display on the current page if there is room,
+otherwise hold it until the end of the section or document.
+T}
+2;T{
+.na
+Output one floating display from the queue at the top of a new
+page or column (when in two-column mode).
+T}
+3;T{
+.na
+Output one floating display on the current page if there is room,
+otherwise output one floating display at the top of a new page or column.
+T}
+4;T{
+.na
+Output as many displays as will fit (at least one), starting at the top of a
+new page or column.
+Note that if register
+.cR De
+is set to 1, each display
+will be followed by a page eject, causing a new top of page to be reached
+where at least one more display will be output.
+(This also applies to value 5 below.)
+T}
+5;T{
+.na
+Output a new floating display on the current page if there is room.
+Output a least one, but as many displays as will fit starting at the
+top of a new page or column.
+(This is the default action.)
+.sp 2p
+Note:  If \*(iRDf\f1 is set to any other value, the action performed is the same as for value 5.
+T}
+=
+.sp 1p
+.T&
+cf5 cf1
+cf5 lf1w(5.1i).
+De;Action
+_
+.sp 2p
+0;T{
+.na
+No special action occurs.
+(This is the default action.)
+T}
+1;T{
+.na
+A page eject will always follow the output of each floating display,
+so only one floating display will appear on a page and no text will follow it.
+.sp 2p
+Note:  If \*(iRDe\f1 is set to any other value, the action performed is the same as for value 1.
+T}
+.TE
+.DE
+.P
+As long as the queue contains one or more displays, new displays will
+be automatically entered there rather than being output.
+When a new  page is started
+(or the top of the second column when in two-column mode)
+the next display from the queue becomes a candidate for output if the
+.cR Df
+register has specified ``top-of-page'' output.
+When a display is output it is also removed from the queue.
+When the end of a section (with section-page numbering) or the
+.hy
+end of a document is reached, all displays are auto\%matically output.
+This occurs before a
+.cR .SG ,
+.cR .CS ,
+or
+.cR .TC
+macro is processed.
+.P
+.nh
+A display is said to ``fit on the current page'' if there is enough 
+room to contain the entire display on the page, or if the display 
+is longer than one page in length and less than half of the
+current page has been used.
+In two-column mode, a wide (full page width) display will never fit in 
+the second column.
+The
+.cR .WC
+macro (see \(sc12.3.1) may be used to control handling of 
+displays in double-column mode and to control the break in the text 
+before floating displays.
+.H 2 "Tables with \f4tbl\fP"
+.iS
+\&.TS \f1[\*(iRH\f1]
+\*(iAglobal options\|\*(iR;
+\*(iAcolumn descriptors\|\*(iR.
+\*(iAheader data\*(iR
+\f1[\*(iR.TH \f1[\*(iRN\f1]]
+\*(iAdata entries
+\*(iR.TE
+.iE
+The
+.cR .TS
+(table start) and
+.cR .TE
+(table end) macros are used to delimit the text to be examined by the
+.I tbl
+preprocessor as well as to set proper spacing around the table.
+The display function and the
+.I tbl
+delimiting function are independent of one another.
+However, a static or floating display should be used to keep together any mixture
+of tables, equations, filled and unfilled text, and captions.
+.P
+The macros
+.cR .TS
+and
+.cR .TE
+also permit the processing of tables
+that extend over several pages.
+If a table heading is needed for each
+page of a multiple-page table, specify the argument
+.cR H
+to the 
+.cR .TS 
+macro as above.
+Following the options and format information,
+the table heading is typed on as many lines as required and
+followed by the
+.cR .TH
+macro.
+The
+.cR .TH
+macro must occur when 
+.cR ".TS\ H"
+is used.
+Note that this is not a feature of
+.IR tbl ,
+but of the macro definitions provided by
+.sM MM .
+.P
+The table header macro
+.cR .TH
+may take as an argument the letter
+.cR N.
+This argument causes the table header to be printed only 
+if it is the first table header on the page.
+This option is used when it is necessary to build long tables from smaller
+\*(iR\&.TS\ H\fP\|/\*(iR.TE\fP segments.
+For example:
+.iS
+\&.TS H
+\*(iAglobal options\|\*(iR;
+\*(iAcolumn descriptors\|\*(iR.
+\*(iAheader data\*(iR
+\*(iR.TH
+\*(iAdata entries
+\*(iR.TE
+\&.TS H
+\*(iAglobal options\|\*(iR;
+\*(iAcolumn descriptors\|\*(iR.
+\*(iAheader data\*(iR
+\*(iR.TH N
+\*(iAdata entries
+\*(iR.TE
+.iE
+will cause the table heading to appear at the top of the first table
+segment, and no heading to appear at the top of the second segment
+when both appear on the same page.
+However, the heading will still
+appear at the top of each page that the table continues onto.
+This feature is used when a single table must be broken into segments 
+because of table complexity (for example, too many blocks of filled text).
+If each segment had its own
+\*(iR\&.TS\ H\fP\|/\*(iR.TH\fP
+sequence, each segment would have its own header.
+However, if each table segment after the first uses
+\*(iR\&.TS\ H\fP\|/\*(iR.TH\ N\fP
+then the table header will 
+appear at the beginning of the table and the top of each new page or 
+column that the table continues onto.
+.H 2 "Equations with \f4eqn\fP"
+.iS
+\&.DS \f1[\|\*(iAformat\f1]
+\*(iR.EQ \f1[\*(iAlabel\|\f1]
+.cA "equation input"
+\*(iR.EN
+\&.DE
+.iE
+The
+.cR .EQ 
+(equation start) and
+.cR .EN
+(equation end) macros are used to delimit the text to be examined by the 
+.I eqn
+preprocessor.
+The
+.cR .EQ
+and
+.cR .EN
+macros must occur inside a display.
+There is an exception to this rule:  if
+.cR .EQ
+and
+.cR .EN
+are used only to specify the delimiters for in-line equations or to specify
+.I eqn
+``defines'',
+.cR .DS
+and
+.cR .DE
+must not be used;
+otherwise extra blank lines will appear in the output.
+In order for the
+.I eqn
+``mark'' and ``lineup'' feature to work with centered equations,
+the entire set of equations must be enclosed in a centered-block display
+(display format
+.cR CB
+or
+.cR 3 ).
+.P
+The
+.cR .EQ
+macro takes an argument that will be used as a label for
+the equation.
+By default, the label will appear at the right margin 
+in the ``vertical center'' of the general equation.
+If the register
+.cR Eq
+is set to 1, the label will appear at the left margin.
+The equation will be centered for centered displays;
+otherwise the
+equation will be adjusted to the opposite margin from the label.
+.H 2 "Pictures with \f4pic\fP"
+.iS
+\&.DS \f1[\|\*(iAformat\f1]\*(iR
+\&.PS
+.cA "picture input"
+\*(iR.PE
+\&.DE
+.iE
+The
+.cR .PS 
+(picture start) and
+.cR .PE
+(picture end) macros are used to delimit the text to be examined by the 
+.I pic
+preprocessor.
+The
+.cR .PS
+and
+.cR .PE
+macros must occur inside a display.
+A picture may be displayed at the left margin,
+indented,
+or centered as a block.
+Do not use a centered-line display
+(display format
+.cR C
+or
+.cR 2 )
+to center a picture; use a centered-block display instead
+(display format
+.cR CB
+or
+.cR 3 ).
+.H 2 "Graphs with \f4grap\fP"
+.iS
+\&.DS \f1[\|\*(iAformat\f1]\*(iR
+\&.G1
+.cA "graph input"
+\*(iR.G2
+\&.DE
+.iE
+The
+.cR .G1 
+(graph start) and
+.cR .G2
+(graph end) macros are used to delimit the text to be examined by the 
+.I grap
+preprocessor.
+The
+.cR .G1
+and
+.cR .G2
+macros must occur inside a display.
+A graph may be displayed at the left margin,
+indented,
+or centered as a block.
+Do not use a centered-line display
+(display format
+.cR C
+or
+.cR 2 )
+to center a graph; use a centered-block display instead
+(display format
+.cR CB
+or
+.cR 3 ).
+.H 2 "Figure, Table, Equation, and Exhibit Captions"
+.iS
+\&.FG\0\f1[\*(iAtitle\f1]\0[\*(iAoverride\f1]\0[\*(iA\|flag\f1]\*(iR
+\&.TB\0\f1[\*(iAtitle\f1]\0[\*(iAoverride\f1]\0[\*(iA\|flag\f1]\*(iR
+\&.EC\0\f1[\*(iAtitle\f1]\0[\*(iAoverride\f1]\0[\*(iA\|flag\f1]\*(iR
+\&.EX\0\f1[\*(iAtitle\f1]\0[\*(iAoverride\f1]\0[\*(iA\|flag\f1]\*(iR
+.iE
+The
+.cR .FG
+(figure title),
+.cR .TB
+(table title),
+.cR .EC
+(equation caption) and
+.cR .EX
+(exhibit caption) macros are normally used inside 
+a display to automatically number and title figures, tables, 
+equations, and exhibits, respectively.
+For example:
+.iS
+\&.FG "This is an illustration"
+.iE
+.br
+.ne 4v
+yields:
+.DS C
+\f3Figure 1.\f1  This is an illustration
+.DE
+.P
+The
+.cR .FG
+macro generates ``Figure'' as the caption label;
+the
+.cR .TB ,
+.cR .EC ,
+and
+.cR .EX
+macros generate ``TABLE'', ``Equation'', and ``Exhibit'' as
+their respective caption labels.
+Figures, tables, equations, and exhibits are automatically numbered
+using registers
+.cR Fg ,
+.cR Tb ,
+.cR Ec ,
+and
+.cR Ex ,
+respectively.
+The caption is centered if it can fit on a single line;
+otherwise, the second and succeeding lines of the caption title
+are indented after the caption label and number (as in a variable list).
+.P
+The
+.cA override
+string is used to modify the normal numbering.
+If
+.cA flag
+is omitted or 0,
+.cA override
+is used as a prefix to the number; if
+.cA flag
+is 1,
+.cA override
+is used as a suffix to the number; if
+.cA flag
+is 2,
+.cA override
+replaces the number.
+The option
+.cR \-rN5
+automatically sets ``section-figure'' numbering and
+.cA override
+is ignored.
+.P
+The register
+.cR Of
+controls the mark that separates the caption label from the caption title.
+By default,
+.cR Of
+is 0 and the separation mark consists of a period and two spaces
+(e.g., ``\f3Figure\ 1.\fP\ \ Title'').
+If
+.cR Of
+is set to 1, the separation mark consists of a hyphen surrounded by spaces
+(e.g., ``\f3Figure 1\fP\ -\ Title'').
+.P
+As a matter of style, table headings are usually placed ahead of the
+text of the tables, while figure, equation, and exhibit captions usually 
+occur after the corresponding figures and equations.
+.H 2 "List of Figures, Tables, Equations, and Exhibits"
+A list of figures, tables, exhibits, and equations
+will be printed after the Table of Contents
+if registers
+.cR Lf ,
+.cR Lt ,
+.cR Lx ,
+and
+.cR Le ,
+respectively, are set to 1.
+By default,
+.cR Lf ,
+.cR Lt ,
+and
+.cR Lx
+are 1, and
+.cR Le
+is 0.
+If any of the List of Figures, List of Tables, List of Equations,
+and List of Exhibits are printed, each list appears on a separate
+page following the Table of Contents.
+If register
+.cR Cp
+is set to 1, each list is printed as part
+of the Table of Contents.
+.P
+The title for the list of figures, tables, exhibits, and equations
+are contained in the strings
+.cR Lf ,
+.cR Lt ,
+.cR Lx ,
+and
+.cR Le ,
+respectively.
+By default, the strings are defined as:
+.iS
+\&.ds Lf LIST OF FIGURES
+\&.ds Lt LIST OF TABLES
+\&.ds Lx LIST OF EXHIBITS
+\&.ds Le LIST OF EQUATIONS
+.iE
+To change the title for a given list, simply redefine the
+appropriate string.

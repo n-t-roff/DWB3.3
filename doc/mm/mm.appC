@@ -1,0 +1,86 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.ds pT MM
+.aP C "Sample Memorandum, Released Paper, and External Letter"
+This appendix demonstrates the use of
+.sM MM
+in generating various document styles.
+The information needed for memoranda, released papers, and external letters
+is entered in the same way.
+In this appendix, the input for all three documents varies in
+only one respect\*(EMa different
+.cR .MT
+type is used to select the document style:
+.DS I
+.TS
+lf5 5 l.
+\&.MT 0	Memorandum
+\&.MT 4	Released Paper
+\&.MT 5	External Letter
+.TE
+.DE
+.P
+The following input was used to produce the sample documents shown on the next three pages.
+.iS
+.S -1
+\&.ND "April 1, 1990"
+\&.TL
+\&Document Headings and Paragraphs
+\&.AF "DocuCenter Services, Inc."
+\&.AU "S. P. Lename" SPL MH 98765 "(201) 582-1234" 4W-567 systemx!spl
+\&.MT \*(iAtype\fP
+\&.H 1 "PARAGRAPHS AND HEADINGS"
+\&This section describes the types of paragraphs and the
+\&kinds of headings that are available.
+\&.H 2 Paragraphs
+\&Paragraphs are specified by the .P macro.
+\&Usually, they are flush left.
+\&The number register Pt is used to change the paragraph style.
+\&.H 2 Headings
+\&.H 3 "Numbered Headings."
+\&There are seven levels of numbered headings.
+\&Level 1 is the most major or highest;
+\&level 7, the lowest.
+\&.P
+\&Headings are specified with the .H macro,
+\&whose first argument is the level of heading
+\&(1 through 7).
+\&.P
+\&On output, level-1 headings are preceded by two blank lines;
+\&all others, by one blank line.
+\&Level-1 and level-2 headings are normally emboldened and
+\&stand apart from the text that follows;
+\&levels 3 through 7 are normally italicized and run in with the
+\&text that follows.
+\&.H 3 "Unnumbered Headings."
+\&The macro .HU is a special case of .H, in that no heading
+\&number is printed.
+\&Each .HU heading has the level given by the register Hu,
+\&whose initial value is 2.
+\&Usually, the value of that register is set to make
+\&unnumbered headings occur at the lower heading level
+\&in a document.
+\&.SG mc
+\&.NS
+\&J. J. Jones
+\&F. G. Swatter
+\&.NE
+.S +1
+.iE
+.SK
+.HU "\s-1OUTPUT\s+1:  Memorandum  (\*(iR.MT 0\fP)"
+.sy troff -mm -Tpost ex.mt.0 | dpost >ps.mt.0
+.BP ps.mt.0 8i 6i 0 o
+.SK
+.HU "\s-1OUTPUT\s+1:  Released Paper  (\*(iR.MT 4\fP)"
+.sy troff -mm -Tpost ex.mt.4 | dpost >ps.mt.4
+.BP ps.mt.4 8i 6i 0 o
+.SK
+.HU "\s-1OUTPUT\s+1:  External Letter  (\*(iR.MT 5\fP)"
+.sy troff -mm -Tpost ex.mt.5 | dpost >ps.mt.5
+.BP ps.mt.5 8i 6i 0 o

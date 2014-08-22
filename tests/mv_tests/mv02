@@ -1,0 +1,15 @@
+'''	\"  troff -mv [-Tdevname] file | ...
+.Vw 2 \\n(.F "June 29, 1980"
+.T "What the Walrus Said"
+``The time has come,'' the Walrus said,
+.BR
+``To talk of many things:
+.I .5
+.B
+Of shoes\(emand ships\(emand sealing wax\(em
+.B
+Of cabbages\(emand kings\(em
+.B
+And why the sea is boiling hot\(em
+.B
+And whether pigs have wings.''

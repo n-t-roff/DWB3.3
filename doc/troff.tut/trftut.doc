@@ -1,0 +1,2551 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so../defs.doc
+.nr Hy 1
+.de BD
+\&\\$3\f1\\$1\h'-\w'\\$1'u+3u'\\$1\fP\\$2
+..
+.tS "TROFF Tutorial"
+A TROFF Tutorial
+.tE
+.aS
+.I Troff
+is a text-formatting program for typesetters and laser printers.
+Such devices normally provide multiple fonts,
+and a substantial number of mathematical symbols
+and other special characters.
+Characters can be printed in a range of sizes,
+and placed anywhere on the page.
+.P
+.I Troff
+allows the user full control over fonts,
+sizes, and character positions,
+as well as the usual features of a
+formatter\*(EMright-margin justification, automatic hyphenation,
+page titling and numbering, and so on.
+It also provides macros, arithmetic variables and operations,
+and conditional testing, for complicated formatting tasks.
+.P
+This document is an introduction to the most basic use of
+.IR troff .
+It presents just enough information to enable the user
+to do simple formatting
+tasks like making viewgraphs,
+and to make incremental changes to existing packages
+of
+.I troff
+commands.
+.aE
+.2C
+.H 1 Introduction
+.tr ^.
+.P
+.I Troff
+is a text-formatting program
+for producing
+high-quality printed output from phototypesetters and laser printers.
+This document is an example of
+.I troff
+output.
+.P
+The single most important rule
+of using
+.I troff
+is
+not to use it directly, but through some intermediary.
+In many ways,
+.I troff
+resembles an assembly language\*(EMa remarkably powerful and
+flexible one\*(EMbut none\%the\%less such that many operations must be specified
+at a level of detail and in a form that is too hard 
+for most people to use effectively.
+.P
+For some special applications, there are programs that provide
+an interface to
+.I troff
+for the majority of users.
+For example,
+.I eqn 
+provides an easy to learn language for typesetting mathematics;
+the 
+.I eqn
+user
+need know no 
+.I troff
+whatsoever
+to typeset mathematics.
+.I Tbl
+provides the same convenience for producing tables.
+.P
+For producing straight text (which may well contain mathematics or tables),
+there are a number of ``macro packages''
+that define formatting rules and operations for specific styles
+of documents,
+and reduce the amount of
+direct contact with 
+.IR troff .
+In particular, the
+.cR -ms
+and
+.cR -mm
+packages
+for internal memoranda and external papers
+provide most of the facilities needed
+for a wide range of document preparation.
+(This paper was prepared with
+.cR -mm .)
+There are also packages for viewgraphs,
+various journals,
+and other special applications.
+Typically you will find these packages easier to use
+than
+.I troff
+once you get beyond the most trivial operations;
+you should always consider them first.
+'''	\" FORCE COLUMN
+.nC
+.P
+In the few cases where existing packages don't do the whole job,
+the solution is
+.ul
+not
+to write an entirely new set of
+.I troff
+instructions from scratch, but to make small changes
+to adapt packages that already exist.
+.P
+In accordance with this philosophy of letting someone else
+do the work,
+the part of
+.I troff
+described here is only a small part of the whole,
+although it tries to concentrate on the more useful parts.
+In any case, there is no attempt to be complete.
+Rather, the emphasis is on showing how to do simple things,
+and how to make incremental changes to what already exists.
+The contents of the remaining sections are:
+.fS 1p
+.DS
+.in .1i
+.ta .3i
+\02.	Point sizes and line spacing
+\03.	Fonts and special characters
+\04.	Indents and line lengths
+\05.	Tabs
+\06.	Local motions: drawing lines and characters
+\07.	Strings
+\08.	Introduction to macros
+\09.	Titles, pages and numbering
+10.	Number registers and arithmetic
+11.	Macros with arguments
+12.	Conditionals
+13.	Environments
+14.	Diversions
+	Appendix:  Character set
+.in 0
+.DE
+.fS 0.8p
+.P
+To use
+.I troff
+you have to prepare not only the actual text you want printed,
+but some information that tells
+.ul
+how
+you want it printed.
+For
+.I troff
+the text
+and
+the \%formatting information are often intertwined quite \%intimately.
+.ne 6v
+Most commands to
+.I troff
+are placed on a line separate from the text itself,
+beginning with a period (one command per line).
+For example,
+.iS
+.S -1
+Some text.
+^ps 14
+Some more text.
+.S +1
+.iE
+will change the `point size',
+that is,
+the size of the letters being printed,
+to `14 point' (one point is 1/\^72 inch) like this:
+.DS I F
+Some text.
+.ps 14
+Some more text.
+.ps 10
+.DE
+.P
+Occasionally, though,
+something special occurs in the middle of a line\*(EMto produce
+.DS I F
+Area = \(*p\fIr\fR\|\s8\u2\d\s0
+.DE
+you have to type
+.iS
+.S -1
+Area = \e(*p\efIr\efR\e\^|\^\es8\eu2\ed\es0
+.S +1
+.iE
+(which we will explain shortly).
+The backslash character
+.cR  \e 
+is used 
+to introduce
+.I troff
+commands and \%special characters within a line of text.
+.H 1 "Point Sizes and Line Spacing"
+.P
+As mentioned above,
+the command
+.cR .ps
+sets the point size.
+One point is 1/\^72 inch,
+so 6-point characters are at most 1/12 inch high,
+and 36-point characters are \(12 inch.
+Different devices provide different sets of sizes;
+a representative set is shown below.
+.fS -2p
+.DS I
+.ps 6
+6 point: Pack my box with five dozen liquor jugs.
+.ps 7
+.vs 8p
+7 point: Pack my box with five dozen liquor jugs.
+.vs 9p
+.ps 8
+8 point: Pack my box with five dozen liquor jugs.
+.vs 10p
+.ps 9
+9 point: Pack my box with five dozen liquor jugs.
+.vs 11p
+.ps 10
+10 point: Pack my box with five dozen liquor
+.vs 12p
+.ps 11
+11 point: Pack my box with five dozen 
+.vs 14p
+.ps 12
+12 point: Pack my box with five dozen
+.vs 16p
+.ps 14
+14 point: Pack my box with five
+.vs 21p
+\s1616 point\s18 18 point\s20 20 point
+.vs 37p
+\s2222\s24 24\s28 28\s36 36
+.ps 10
+.vs 12p
+.DE
+.P
+If the number after
+.cR .ps 
+is not a
+legal size,
+it is rounded up to the next valid value.
+If no number \%follows
+.cR .ps ,
+.I troff
+reverts to the previous size, whatever it was.
+.I Troff
+begins with point size 10,
+which is \%usually fine.
+This document is printed in \n(.s point.
+.P
+The point size can also be changed in the middle of a line
+or even a word
+with the in-line command
+.cR \es .
+To produce
+.DS I F
+\s8UNIX\s10 ran on a \s8PDP-\s1011/45
+.DE
+'''	\" FORCE COLUMN
+.nC
+type
+.iS
+.S -1
+\es8UNIX\es10 ran on a \es8PDP-\es1011/45
+.S +1
+.iE
+As above,
+.cR \es 
+should be followed by a legal point size,
+except that
+.cR \es0 
+causes the size to revert to
+its \%previous value.
+Notice that
+.cR \es1011
+can be understood correctly as `size 10, followed by an 11', if the size is legal,
+but not otherwise.
+Be cautious with \%similar constructions.
+.P
+Relative size changes are also legal and useful:
+.iS
+.S -1
+\es-2UNIX\es+2
+.S +1
+.iE
+temporarily decreases the size, whatever it is, by two points, then
+restores it, producing \s-2UNIX\s+2.
+Relative size changes have the advantage that the size difference
+is independent of the starting size of the document.
+The amount of the relative change is restricted
+to a single digit.
+.P
+The other parameter that determines what the type looks like
+is the spacing between lines,
+which is set independently of the point size.
+Vertical spacing is measured from the bottom of one line to
+the bottom of the next.
+The command to control vertical spacing is
+.cR .vs .
+For running text, it is usually best to set the \%vertical spacing
+about 20% bigger than the character size.
+For example, so far in this document, we have used
+``10 on 12'', that is,
+.iS
+.S -1
+^ps 10
+^vs 12p
+.S +1
+.iE
+If we changed to
+.iS
+.S -1
+^ps 10
+^vs 10p
+.S +1
+.iE
+.vs 10p
+.ne 3
+the running text would look like this.
+After a few lines, you will agree it looks a little cramped.
+The right vertical spacing is partly a matter of taste, depending on how
+much text you want to squeeze into a given space,
+and partly a matter of traditional printing style.
+By default,
+.I troff
+uses 10 on 12.
+.P
+.vs 14p
+.ps 12
+Point size and vertical spacing make a substantial difference in the amount of text
+per square inch.
+This is 12 on 14.
+.fS 2p
+.P
+.ps 6
+.vs 7p
+Point size and vertical spacing make a substantial difference in the amount of text
+per square inch.
+For example,
+10 on 12 uses about twice as much space as 7 on 8.
+This is 6 on 7, which is even smaller.
+It packs a lot more words per line,
+but you can go blind trying to read it.
+.br
+.ps 10
+.vs 12p
+.P
+When used without arguments,
+.cR .ps
+and
+.cR .vs
+revert to the previous size and vertical spacing
+respectively.
+.P
+The command
+.cR .sp
+is used to get extra vertical space.
+Unadorned, 
+it gives you one extra blank line (one
+.cR .vs ,
+whatever that has been set to).
+Typically, that's more or less than you want,
+'ne 4v
+so
+.cR .sp
+can be followed by
+information about how much space you want\*(EM
+.iS
+.S -1
+^sp 2i
+.S +1
+.iE
+means `two inches of vertical space'.
+.iS
+.S -1
+^sp 2p
+.S +1
+.iE
+means `two points of vertical space';
+and
+.iS
+.S -1
+^sp 2
+.S +1
+.iE
+means `two vertical spaces'\*(EMtwo of whatever
+.cR .vs
+is set to
+(this can also be made explicit with
+.cR .sp\ 2v );
+.I troff
+also understands decimal fractions in most places,
+so
+.iS
+.S -1
+^sp 1.5i
+.S +1
+.iE
+is a space of 1.5 inches.
+These same scale factors can be used after
+.cR .vs
+to define line spacing, and in fact after most commands
+that deal with physical dimensions.
+.P
+It should be noted that all size numbers are converted internally
+to `machine units', which are much smaller, reflecting the finer
+resolution of particular output devices.
+Many laser printers run at 300 units/inch;
+typesetters are often more than 1000 units/inch.
+.H 1 "Fonts and Special Characters"
+.P
+.I Troff
+allows many different fonts at any one time.
+Normally a family of serif fonts (Times roman, italic and bold),
+a family of san-serif fonts (Helvetica), and a collection of special characters
+are available.
+.DS I
+.ft R
+abcdefghijklmnopqrstuvwxyz 0123456789
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+.ft I
+abcdefghijklmnopqrstuvwxyz 0123456789
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+.ft B
+abcdefghijklmnopqrstuvwxyz 0123456789
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+.ft BI
+abcdefghijklmnopqrstuvwxyz 0123456789
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+.sp 6p
+.ft H
+abcdefghijklmnopqrstuvwxyz 0123456789
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+.ft HI
+abcdefghijklmnopqrstuvwxyz 0123456789
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+.ft HB
+abcdefghijklmnopqrstuvwxyz 0123456789
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+.ft HX
+abcdefghijklmnopqrstuvwxyz 0123456789
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+.DE
+A representative collection of
+greek, mathematical symbols and miscellaneous other characters are
+listed in the Appendix.
+'''	\" FORCE COLUMN
+.nC
+.P
+.I Troff
+prints in roman unless told otherwise.
+To switch into bold, use
+the
+.cR .ft
+command
+.iS
+.S -1
+^ft B
+.S +1
+.iE
+and for italics,
+.iS
+.S -1
+^ft I
+.S +1
+.iE
+To return to roman, use
+.cR .ft\ R \^;
+to return to the \%previous font,
+whatever it was,
+use either
+.cR .ft\ P
+or just
+.cR .ft  .
+The `underline' command
+.iS
+.S -1
+^ul
+.S +1
+.iE
+causes the next input line to print in italics.
+.cR .ul
+can be followed by a count to
+indicate that more than one line is to be italicized.
+.P
+Fonts can also be changed within a line or word
+with the in-line command
+.cR \ef :
+.DS I
+\fBbold\fIface\fR text
+.DE
+is produced by
+.iS
+.S -1
+\efBbold\efIface\efR text
+.S +1
+.iE
+If you want to do this so the previous font, whatever it was,
+is left undisturbed, insert extra
+.cR \efP
+commands, like this:
+.iS
+.S -1
+\efBbold\efP\efIface\efP\efR text\efP
+.S +1
+.iE
+Because only the immediately previous font is \%remembered,
+you have to restore the previous font after each change
+or you can lose it.
+The same is true of 
+.cR .ps
+and
+.cR .vs
+when used without an argument.
+.P
+There are many other fonts available besides the \%standard set.
+Normally you can just use a font by naming it,
+but if an entire document is to be printed
+in a non-standard set of fonts,
+it is best to mount the fonts explicitly.
+This tells 
+.I troff
+which fonts you will make the most use of.
+The
+.cR .fp
+command
+.iS
+.S -1
+^fp 3 PB
+.S +1
+.iE
+says that the Palatino Bold font
+.ft PB
+(which looks like this)
+.ft
+is mounted on position 3.
+.P
+It is possible to make a document relatively independent
+of the actual fonts used to print it
+by using font numbers instead of names;
+for example,
+.cR \ef3
+and
+.cR ".ft\ 3"
+mean `whatever font is mounted at position 3',
+and thus work for any setting.
+The standard macro packages assume that fonts 1 through 4 contain
+roman, italic, bold, and bold italic members of a family.
+.P
+There is also a way to get synthetic bold fonts
+by overstriking letters with a slight offset,
+with the
+.cR .bd
+\%command;
+it is illustrated in \(sc11.
+'''	\" FORCE PAGE
+.nC
+.P
+Special characters have four-character names beginning with
+.cR \e( ;
+they may be inserted anywhere.
+For example,
+.DS I
+\(14 + \(12 = \(34
+.DE
+is produced by
+.iS
+.S -1
+\e(14 + \e(12 = \e(34
+.S +1
+.iE
+In particular,
+greek letters are all of the form
+.cR  \e(*\- ,
+where
+.cR -
+is an upper or lower case roman letter
+\%reminiscent of the greek.
+Thus
+to get
+.DS I
+\(*S(\(*a\(mu\(*b) \(-> \(if
+.DE
+in bare
+.I troff
+we have to type
+.iS
+.S -1
+\e(*S(\e(*a\e(mu\e(*b) \e(\(mi> \e(if
+.S +1
+.iE
+That line is unscrambled as follows:
+.iS
+.S -1
+.vs -1
+.ta +1i
+\e(*S	\(*S
+(	(
+\e(*a	\(*a
+\e(mu	\(mu
+\e(*b	\(*b
+)	)
+\e(\(mi>	\(->
+\e(if	\(if
+.vs +1
+.S +1
+.iE
+The Appendix contains a sample of special names.
+.P
+In
+.I eqn 
+the same effect can be achieved with the input
+.iS
+.S -1
+SIGMA ( alpha times beta ) \-> inf
+.S +1
+.iE
+which is less concise, but clearer to the uninitiated.
+.P
+Notice that each
+four-character name is a single character
+as far as
+.I troff
+is concerned\*(EMthe
+`translate' \%command
+.iS
+.S -1
+^tr \e(mi\e(em
+.S +1
+.iE
+is perfectly clear, meaning
+.iS
+.S -1
+^tr \f1\(mi\^\(em
+.S +1
+.iE
+that is, to translate \(mi into \(em.
+.P
+Some characters are automatically translated into \%others:
+grave  \(ga  and acute  \(aa  accents (apostrophes)
+become open and close single quotes
+`\0';
+the combination of ``\(el'' is generally preferable to the double quotes "\(el".
+Similarly a typed minus sign becomes a hyphen -.
+To print an explicit \- sign, use
+.cR \e- .
+To print a backslash, use
+.cR \ee .
+.H 1 "Indents and Line Lengths"
+.P
+.I Troff
+starts with a line length of 6.5 inches,
+too wide for 8\(12\(mu11 paper.
+To reset the line length,
+use the
+.cR .ll
+command:
+.iS
+.S -1
+^ll 6i
+.S +1
+.iE
+'''	\" FORCE COLUMN
+.nC 
+As with
+.cR .sp ,
+the actual length can be specified in several ways;
+inches are probably the most intuitive.
+.P
+Output is normally positioned an inch from the left edge of the paper.
+To reset the default physical left margin (``page offset''),
+use the
+.cR .po
+command.
+.iS
+.S -1
+^po 0
+.S +1
+.iE
+sets the offset as far to the left as it will go.
+.P
+The indent command
+.cR .in
+causes the left margin to be indented
+by some specified amount from the page offset.
+If we use
+.cR .in
+to move the left margin in,
+and
+.cR .ll
+to move the right margin to the left,
+we can
+make offset blocks of text:
+.iS
+.S -1
+^in 0.3i
+^ll \-0.3i
+.S +1
+.cA "text to be set into a block"
+.S -1
+^ll +0.3i
+^in \-0.3i
+.S +1
+.iE
+will create a block that looks like this:
+.DS L F
+.in 0.3i
+.ll -0.3i
+Pater noster qui est in caelis sanctificetur nomen tuum;
+adveniat regnum tuum; fiat voluntas tua, sicut in caelo,
+et in terra. \(el
+Amen.
+.ll +0.3i
+.in -0.3i
+.DE
+Notice the use of `+' and `\(mi'
+to specify the amount of change.
+These change the previous setting by the specified amount,
+rather than just overriding it.
+The distinction is quite important:
+.cR .ll\ +1i
+makes lines one inch longer;
+.cR .ll\ 1i
+makes them one inch
+.IR long .
+.P
+With 
+.cR .in ,
+.cR .ll
+and
+.cR .po ,
+the previous value is used if no argument is specified.
+.P
+.ti 3
+To indent a single line, use the `temporary indent'
+command
+.cR .ti .
+For example, this paragraph
+effectively began with the command
+.iS
+.S -1
+^ti 3
+.S +1
+.iE
+Three of what?
+The default unit for
+.cR .ti ,
+as for most horizontally oriented commands
+.cR .ll , (
+.cR .in ,
+.cR .po ),
+is ems;
+an em is roughly the width of the letter `m'
+in the current point size.
+(Precisely, a em in size
+.ul
+p
+is
+.ul
+p
+points.)
+Although inches are usually clearer than ems to people who don't set type
+for a living,
+ems have a place:
+they are a measure of size that is proportional to the current point size.
+If you want to make text that keeps its proportions
+regardless of point size,
+you should use ems for all dimensions.
+Ems can be specified as scale factors directly,
+as in
+.cR .ti\ 2.5m \|.
+.P
+Lines can also be indented negatively
+if the indent is already positive:
+.iS
+.S -1
+^ti \(mi0.3i
+.S +1
+.iE
+'''	\" FORCE PAGE
+.nC
+causes the next line to be moved back three tenths of an inch.
+Thus to make a decorative initial capital,
+we indent the whole paragraph, then move the letter `P' back with a
+.cR .ti
+command:
+.DS L F
+.ll -0.3i
+.in +.6i
+.ti -0.3i
+\s36\v'2'P\v'-2'\s0ater noster qui est in caelis sanctificetur
+nomen tuum;
+adveniat regnum tuum;
+'in -.3i
+fiat voluntas tua,
+sicut in caelo, et in terra. \(el
+Amen.
+.br
+.ll +0.3i
+.in 0
+.DE
+.P
+Of course, there is also some trickery to make the `P'
+bigger (just a
+.cR \es36P\es0 ),
+and to move it
+down from its normal position
+(see the section on local motions).
+.H 1 Tabs
+.P
+Tabs
+(the
+.sM ASCII
+`horizontal tab' character,
+represented here by the symbol \*(tB)
+can be used to produce output in columns,
+or to set the horizontal position of output.
+Typically
+tabs are used only in unfilled text.
+Tab stops are set by default every half inch from the
+current indent,
+but
+can be changed by the
+.cR .ta
+command.
+To set stops every inch, for example,
+.iS
+.S -1
+^ta 1i 2i 3i 4i 5i 6i
+.S +1
+.iE
+.P
+By default the stops are left-justified
+(as on a typewriter),
+but there are also centering and right-adjusting tabs.
+.P
+For a handful of numeric columns, use right-adjusting tabs:
+.iS
+.S -1
+^nf
+^ta .5iR 1iR 1.5iR
+\*(tB1\*(tB2\*(tB3
+\*(tB40\*(tB50\*(tB60
+\*(tB700\*(tB800\*(tB900
+^fi
+.S +1
+.iE
+The 
+.cR R
+means ``right adjust.''
+When printed, this will produce
+.DS
+.ta .5iR 1iR 1.5iR
+	1	2	3
+	40	50	60
+	700	800	900
+.DE
+If you have many numbers,
+or if you need more complicated table layout,
+don't use
+.I troff 
+directly;
+use
+.IR tbl .
+.P
+It is also possible to fill up tabbed-over space with
+some character other than blanks by setting the `tab replacement character'
+with the
+.cR .tc
+command:
+.iS
+.S -1
+^ta 1.5i 2.5i
+^tc \e(ru          \f1(\*(iR\e(ru \f1is ``\(ru'')\*(iR
+Name\*(tBAge\*(tB 
+.S +1
+.iE
+produces
+.DS
+.ta 1.5i 2.5i
+.tc \(ru
+Name	 Age 	
+.tc
+.DE
+'''	\" FORCE COLUMN
+.nC
+To reset the tab replacement character to a blank, use
+.cR .tc
+with no argument.
+(Lines can also be drawn with the
+.cR \el
+command, described in \(sc6.)
+.P
+.I Troff
+also provides a very general mechanism called `fields'
+for setting up complicated columns.
+(This is used by
+.IR tbl .)
+We will not go into it in this paper.
+.H 1 "Local Motions:  Drawing lines and characters"
+.fS 4p
+Remember `Area = \(*pr\u2\d' and the big `P'
+in the Paternoster.
+How are they done?
+.I Troff
+provides a host of commands for placing characters of any size
+at any place.
+You can use them to draw special characters 
+or to tune your output for a particular appearance.
+Most of these commands are straightforward, but messy to read
+and tough to type correctly.
+.P
+If you won't use 
+.IR eqn ,
+subscripts and superscripts are most easily done with
+the half-line local motions
+.cR \eu
+and
+.cR \ed .
+To go back up the page half a point-size, insert a
+.cR \eu
+at the desired place;
+to go down, insert a
+.cR \ed .
+.cR \eu \& (
+and
+.cR \ed
+should always
+be used in pairs, as explained below.)
+Thus
+.iS
+.S -1
+Area = \e(*pr\eu2\ed
+.S +1
+.iE
+produces
+.DS I
+Area = \(*pr\u2\d
+.DE
+To make the `2' smaller, bracket it with
+.cR \es\-2
+and
+.cR \es0 .
+Since
+.cR \eu
+and
+.cR \ed
+refer to the current point size,
+be sure to put them either both inside or both outside
+the size changes,
+or you will get an unbalanced vertical motion.
+.P
+Sometimes the space given by
+.cR \eu
+and
+.cR \ed
+isn't the right amount.
+The 
+.cR \ev
+command can be used to request an arbitrary amount of vertical motion.
+The in-line command
+.iS
+.S -1
+\ev'\*(iAamount\fP'
+.S +1
+.iE
+causes motion up or down the page by the amount specified in
+`\*(iAamount\fP'.
+For example, to move the `P' down, we used
+.iS
+.S -1
+^in +0.6i          \f1(move paragraph in)\fP
+^ll -0.3i          \f1(shorten lines)\fP
+^ti -0.3i          \f1(move P back)\fP
+\ev'2'\es36P\es0\ev'\-2'ater noster qui
+est in caelis \(el
+.S +1
+.iE
+A minus sign causes upward motion, while
+no sign or a plus sign means down the page.
+Thus
+.cR \ev'\-2'
+causes an upward vertical motion 
+of two line spaces.
+.P
+There are many other ways to specify the amount of motion\*(EM
+.iS
+.S -1
+\ev'0.1i'
+\ev'3p'
+\ev'\-0.5m'
+.S +1
+.iE
+and so on are all legal.
+Notice that the scale specifier
+.cR i
+or
+.cR p
+or
+.cR m
+goes inside the quotes.
+Any character can be used in place of the quotes;
+this is also true of all other
+.I troff
+commands described in this section.
+.P
+Since
+.I troff
+does not take within-the-line vertical motions into account
+when figuring out where it is on the page,
+output lines can have unexpected positions
+if the left and right ends aren't at the same
+vertical position.
+Thus
+.cR \ev ,
+like
+.cR \eu
+and
+.cR \ed ,
+should always balance upward vertical motion in a line with
+the same amount in the downward direction.
+.P
+Arbitrary horizontal motions are also available \(em
+.cR \eh
+is like
+.cR \ev ,
+except that the default scale factor is ems instead of line spaces.
+As an example,
+.fS -1p
+.iS
+.S -1
+\eh'\-0.1i'
+.S +1
+.iE
+.fS -1p
+causes a backwards motion of a tenth of an inch.
+Consider printing the mathematical symbol
+`>>'.
+The default spacing is a bit too wide, so
+.I eqn
+replaces this by
+.fS -1p
+.iS
+.S -1
+>\eh'\-0.1m'>
+.S +1
+.iE
+.fS -1p
+to produce >\h'-.1m'>.
+.P
+Frequently
+.cR \eh
+is used with the `width function'
+.cR \ew
+to generate motions equal to the width
+of some character string.
+The construction
+.fS -1p
+.iS
+.S -1
+\ew'\s+1\*(iAthing\fP\s-1'
+.S +1
+.iE
+.fS -1p
+is a number equal to the width of `\*(iAthing\fP' in machine units.
+All
+.I troff
+computations are ultimately done in these units.
+To move horizontally the width of an `x',
+we can say
+.fS -1p
+.iS
+.S -1
+\eh'\ew'x'u'
+.S +1
+.iE
+.fS -1p
+As we mentioned above,
+the default scale factor for
+all horizontal dimensions is
+.cR m ,
+ems, so here we must have the
+.cR u
+for machine units,
+or the motion produced will be far too large.
+.I Troff
+is quite happy with the nested quotes, by the way,
+so long as you don't leave any out.
+.P
+There are also several special-purpose
+.I troff
+commands for local motion.
+.cR \e0
+is an unpaddable white space
+of the same width as a digit.
+`Unpaddable' means that it will never be widened
+or split across a line by line justification and filling.
+There is also
+.cR \e (blank),
+.tr ^^
+which is an unpaddable character the width of a space,
+.cR \e| ,
+which is half that width,
+.cR \e^ ,
+which is one quarter of the width of a space,
+and
+.cR \e& ,
+which has zero width.
+.tr ^.
+(This last one is useful, for example, in entering
+a text line which would otherwise begin with a `.'.)
+.P
+The command
+.cR \eo ,
+used like
+.iS
+.S -1
+\eo'\*(iAset of characters\fP'
+.S +1
+.iE
+causes (up to 9)
+characters to be overstruck,
+centered on the widest.
+This is nice for accents, as in
+.iS
+.S -1
+m\eo"e\e(aa"long\eo"e\e(ga"ne
+.S +1
+.iE
+which makes
+.DS I
+m\o"e\(aa"long\o"e\(ga"ne
+.DE
+The accents are
+.cR \e(ga
+and
+.cR \e(aa ,
+or
+.cR \e\` 
+and
+.cR \e\' ;
+remember that each is just one character to
+.IR troff .
+.P
+You can make your own overstrikes with another \%special convention,
+.cR \ez ,
+the zero-motion command.
+.cR \ezx
+suppresses the normal horizontal motion
+after printing the single character
+.cR x ,
+so another character can be laid on top of it.
+Although sizes can be changed within
+.cR \eo ,
+it centers the characters on the widest,
+and
+there can be no horizontal or vertical motions,
+so
+.cR \ez
+may be the only way to get what you want:
+.DS I
+.sp 1.5v
+\s8\z\(sq\s14\z\(sq\s22\z\(sq\s36\(sq
+.DE
+.fS 2p
+is produced by
+.iS
+.S -1
+^sp 2
+\es8\ez\e(sq\es14\ez\e(sq\es22\ez\e(sq\es36\e(sq
+.S +1
+.iE
+The
+.cR .sp
+is needed to leave room for the result.
+.P
+As another example, an extra-heavy semicolon
+that looks like
+.DS I
+\s+6\z,\v'-0.25m'.\v'0.25m'\s0  instead of  ;  or  \s+6;\s0
+.DE
+can be constructed with a big comma and a big period above it:
+.iS
+.S -1
+\es+6\ez,\ev'\(mi0.25m'.\ev'0.25m'\es0 
+.S +1
+.iE
+`0.25m' is an empirical constant.
+.P
+A more ornate overstrike is given by the bracketing function
+.cR \eb ,
+which piles up characters vertically,
+\%centered on the current baseline.
+Thus we can get big brackets,
+constructing them with piled-up smaller pieces:
+.DS I
+.sp
+\b'\(lt\(lk\(lb' \b'\(lc\(lf' x \b'\(rc\(rf' \b'\(rt\(rk\(rb'
+.sp
+.DE
+by typing in only this:
+.iS
+.S -1
+\&^sp
+\eb'\e(lt\e(lk\e(lb' \eb'\e(lc\e(lf' x \e
+\eb'\e(rc\e(rf' \eb'\e(rt\e(rk\e(rb'
+.S +1
+.iE
+.P
+.I Troff
+also provides a convenient facility for drawing horizontal and vertical
+lines of arbitrary length with arbitrary characters.
+.cR \el'1i'
+draws a line one inch long, like this:  \l'1i'\|.
+The length can be followed by
+the character to use if the  \(ru  is not \%appropriate;
+.cR \el'0.5i.'\&
+draws a half-inch line of dots: \l'.5i.'\|.
+The construction
+.cR \eL
+is analogous to
+.cR \el ,
+except that it draws a vertical line instead of hori\%zontal.
+.H 1 Strings
+.P
+Obviously if a paper contains a large number of occurrences
+of an acute accent over a letter `e',
+typing
+.cR \eo"e\e'"
+for each \*e
+would be a great nuisance.
+.P
+Fortunately,
+.I troff
+provides a way in which you can store an arbitrary
+collection of text in a `string',
+and thereafter use the string name as a shorthand
+for its contents.
+Strings are one of several
+.I troff
+mechanisms whose judicious use
+lets you type a document
+with less effort and organize
+it
+so that extensive format changes
+can be made with few editing changes.
+.P
+Strings are defined with the command
+.cR .ds .
+The line
+.iS
+.S -1
+\&^ds e \eo"e\e'"
+.S +1
+.iE
+defines the string
+.cR e
+to have the value
+.cR \eo"e\e'" .
+.P
+A reference to a string is replaced by whatever
+text
+the string was defined as.
+String names may be either one or two characters long,
+and are referred to by
+.cR \e*x
+for one character names or
+.cR \e*(xy
+for two character names.
+Thus to get
+.ds e \o"e\*'"
+t\*el\*ephone,
+given the definition of the string
+.cR e
+as above,
+we can type
+.cR t\e*el\e*ephone ,
+to produce t\*el\*ephone.
+.P
+If a string must begin with blanks, define it as
+.iS
+.S -1
+\&.ds xx "      text
+.S +1
+.iE
+The double quote signals the beginning of the defi\%nition.
+There is no trailing quote;
+the end of the line \%terminates the string.
+.P
+A string may actually be several lines long;
+if
+.I troff
+encounters a 
+.cR \e
+at the end of
+.ul
+any
+line, it is thrown away and the next line
+added to the current one.
+So you can make a long string simply by ending each line
+but the last with a backslash:
+.iS
+.S -1
+\&^ds xx this \e
+is a very \e
+long string
+.S +1
+.iE
+.P
+Strings may be defined in terms of other strings, or even in terms of themselves;
+we will discuss some of these possibilities later.
+.H 1 "Introduction to Macros"
+.P
+Before we can go much further in
+.IR troff ,
+we need to learn a bit about the
+macro
+facility.
+In its simplest form, a macro is just a shorthand notation
+quite similar to a string.
+Suppose we want every paragraph to start
+in exactly the same way\*(EMwith a space and a \%temporary indent of two ems:
+.iS
+.S -1
+^sp
+^ti +2m
+.S +1
+.iE
+Then to save typing, we would like to collapse these into
+one shorthand line, a
+.I troff
+`command' like
+.iS
+.S -1
+^PP
+.S +1
+.iE
+that would be treated by
+.I troff
+exactly as
+.iS
+.S -1 -2
+^sp
+^ti +2m
+.S +1 +2
+.iE
+.cR .PP
+is called a
+.IR macro .
+The way we tell
+.I troff
+what
+.cR .PP
+means is to
+.ul
+define
+it with the
+.cR .de
+command:
+.iS
+.S -1
+.vs -1p
+^de PP
+^sp
+^ti +2m
+^^
+.vs +1p
+.S +1
+.iE
+The first line names the macro
+(we used
+.cR .PP ' `
+for `paragraph',
+and upper case so it wouldn't conflict with
+any name that
+.I troff
+might
+already know about).
+The last line
+.cR ..\&
+marks the end of the definition.
+In between is the text,
+which is simply inserted whenever
+.I troff
+sees the `command'
+or macro call
+.iS
+.S -1
+^PP
+.S +1
+.iE
+A macro
+can contain any mixture of text and formatting commands.
+.P
+The definition of
+.cR .PP
+has to precede its first use;
+undefined macros are simply ignored.
+Names are \%restricted to one or two characters.
+.P
+Using macros for commonly occurring sequences of commands
+is critically important.
+Not only does it save typing,
+but it makes later changes much easier.
+Suppose we decide that the paragraph indent is too small,
+the vertical space is much too big,
+and roman font should be forced.
+Instead of changing the whole document,
+we need only change the definition of
+.cR .PP
+to
+something like
+.iS
+.S -1 -2
+.ta +1i
+^de PP	\e" paragraph macro
+^sp 2p
+^ti +3m
+^ft R
+^^
+.S +1 +2
+.iE
+and the change takes
+effect everywhere we used
+.cR .PP .
+'''	\" FORCE COLUMN
+.nC
+.P
+.cR \e"
+is a
+.I troff
+command that causes the rest of the line to be ignored.
+We use it here to add comments to the macro
+definition
+(a wise idea once definitions get \%complicated).
+.P
+As another example of macros,
+consider these two which start and end a block of offset,
+unfilled text, like most of the examples in this paper:
+.iS
+.S -1
+.ta +1i
+^de BS	\e" start indented block
+^sp
+^nf
+^in +0.3i
+^ft CW	\e" constant width font
+^^
+^de BE	\e" end indented block
+^sp
+^ft 1
+^fi
+^in \(mi0.3i
+^^
+.S +1
+.iE
+Now we can surround text like
+.iS
+.S -1
+Copy to
+John Doe
+Richard Roberts
+Stanley Smith
+.S +1
+.iE
+by the commands
+.cR .BS
+and
+.cR .BE ,
+and it will come out as it did above.
+Notice that we indented by
+.cR ".in\ +0.3i"
+instead of
+.cR ".in\ 0.3i" .
+This way we can nest our uses of
+.cR .BS
+and
+.cR .BE
+to get blocks within blocks.
+.P
+If later on we decide that the indent
+should be 0.5i, then it is only necessary to
+change the definitions of
+.cR .BS
+and
+.cR .BE ,
+not the whole paper.
+.H 1 "Titles, Pages and Numbering"
+.P
+This is an area where things get tougher,
+because \%nothing is done for you automatically.
+Of necessity, some of this section is a cookbook,
+to be copied literally until you get some experience.
+.P
+Suppose you want a title at the top of each page,
+\%saying just
+.DS
+.tl '\0\0\0left top'center top'right top\0\0\0'
+.DE
+Unfortunately, this requires work.
+.P
+You have to say what the actual title is (easy);
+when to print it (easy enough);
+and what to do at and around the title line (harder).
+Taking these in reverse order,
+first we define a macro
+.cR .NP
+(for `new page') to process
+titles and the like at the end of one page
+and the beginning of the next:
+.iS
+.S -1
+^de NP
+\&'bp
+\&'sp 0.5i
+\&\&.tl 'left top'center top'right top'
+\&'sp 0.3i
+\&^^
+.S +1
+.iE
+To make sure we're at the top of a page,
+we issue a `begin page' command
+.cR 'bp ,
+which causes a skip to top-of-page
+(we'll explain the
+.cR '
+shortly).
+Then we space down half an inch,
+print the title
+(the use of
+.cR .tl
+should be self explanatory; later we will discuss parameterizing the titles),
+space another 0.3 inches,
+and we're done.
+.P
+To ask for
+.cR .NP
+at the bottom of each page,
+we have to say something like
+`when the text is within an inch
+of the bottom of the page,
+start the processing
+for a new page.'
+This is done with a `when' command
+.cR .wh :
+.iS
+.S -1
+^wh \-1i NP
+.S +1
+.iE
+(No `.' is used before
+.cR NP ;
+this is simply the name of a macro, not a macro call.)
+The minus sign means
+`measure up from the bottom of the page',
+so
+.cR -1i
+means `one inch from the bottom'.
+.P
+The
+.cR .wh
+command appears in the input outside the definition of
+.cR .NP ;
+typically the input would be
+.iS
+.S -1
+^de NP
+ \(el
+^^
+^wh \-1i NP
+.S +1
+.iE
+.P
+Now what happens?
+As text is actually being output,
+.I troff 
+keeps track of its vertical position on the page,
+and after a line is printed within one inch from the \%bottom,
+the
+.cR .NP
+macro is activated.
+(In the jargon, the
+.cR .wh
+command sets a
+.ul
+trap
+at the specified place,
+which is `sprung' when that point is passed.)
+.cR .NP
+causes a skip to the top of the next page
+(that's what the
+.cR 'bp
+was for),
+then prints the title with the appropriate \%margins.
+.P
+Why
+.cR 'bp
+and
+.cR 'sp 
+instead of
+.cR .bp
+and
+.cR .sp ?
+The answer is that
+.cR .sp
+and
+.cR .bp ,
+like several other \%commands,
+cause a
+.ul
+break
+to take place.
+That is, all the input text collected but not yet printed
+is flushed out as soon as possible,
+and the next input line is guaranteed to start
+a new line of output.
+If we had used
+.cR .sp
+or
+.cR .bp
+in the
+.cR .NP
+macro,
+this would cause a break in the middle
+of the current output line when a new page is started.
+The effect would be to print the left-over part of that line
+at the top of the page, followed by the next input line on a new output line.
+This is
+.ul
+not
+what we want.
+Using
+.cR '
+instead of
+.cR . \&
+for a command
+tells
+.IR troff 
+that no break is to take place\*(EMthe output line
+'ne 1i
+currently being filled should
+.ul
+not
+be forced out before the space or new page.
+.P
+The list of commands that cause a break 
+is short and natural:
+.iS
+.S -1
+.ti -1n
+^bp  ^br  ^ce  ^fi  ^nf  ^sp  ^in  ^ti
+.S +1
+.iE
+All others cause
+.ul
+no
+break,
+regardless of whether you use a
+.cR . \&
+or a 
+.cR ' .
+If you really need a break, add a
+.cR .br 
+command at the appropriate place.
+.P
+One other thing to beware of\*(EMif you're
+changing fonts or point sizes a lot,
+you may find that
+if you cross a page boundary
+in an unexpected font or size,
+your titles come out in that size and font
+instead of what you intended.
+Furthermore, the length of a title is independent of the current line length,
+so titles will come out at the default length of 6.5 inches
+unless you change it,
+which is done with the
+.cR .lt
+command.
+.P
+There are several ways to fix the problems of point sizes
+and fonts in titles.
+For the simplest applications, we can change
+.cR .NP 
+to set the proper size and font for the title,
+then restore the previous values as shown below.
+.iS
+.S -1
+.ta .8i
+^de NP
+\&'bp
+\&'sp 0.5i
+^ft R	\e" set title font to roman
+^ps 10	\e" and size to 10 point
+^lt 6i	\e" and length to 6 inches
+^tl 'left'center'right'
+^ps	\e" revert to previous size
+^ft P	\e" and to previous font
+\&'sp 0.3i
+^^
+.S +1
+.iE
+.P
+This version of
+.cR .NP
+does
+.ul
+not
+work if the fields in the
+.cR .tl
+command contain size or font changes.
+To cope with that
+requires
+.IR troff 's
+`environment' mechanism,
+which we will discuss in \(sc13.
+.P
+To get a footer at the bottom of a page,
+you can modify
+.cR .NP
+so it does
+some processing before
+the
+.cR 'bp
+command,
+or split the job into a footer macro invoked
+at the bottom margin and a header macro invoked
+at the top of the page.
+These variations are left as exercises.
+.SP
+.P
+Output page numbers are computed automatically
+as each page is produced (starting at 1),
+but no numbers are printed unless you ask for them explicitly.
+To get page numbers printed,
+include the character
+.cR %
+in the
+.cR .tl
+line at
+the position where you want the number to appear.
+For example
+.iS
+.S -1
+^tl ''- % -''
+.S +1
+.iE
+centers the page number inside hyphens.
+You can set the page number at any time
+with either
+.cR .bp\ n ,
+which immediately starts a new page numbered
+.cR n ,
+or with
+.cR .pn\ n ,
+which sets the page number for the next page
+but doesn't cause a skip to the new page.
+Again,
+.cR .bp\ +n
+sets the page number to
+.cR n
+more than its current value;
+.cR .bp
+means
+.cR .bp\ +1 .
+.H 1 "Number Registers and Arithmetic"
+.P
+.I Troff
+has a facility for doing arithmetic,
+and for defining and using variables with numeric values,
+called
+.IR "number registers" .
+Number registers, like strings and macros, can be useful in setting up a document
+so it is easy to change later.
+And of course they serve for any sort of arithmetic computation.
+.P
+Like strings, number registers have one or two character names.
+They are set by the
+.cR .nr
+command,
+and are referenced anywhere by
+.cR \enx
+(one character name) or
+.cR \en(xy
+(two character name).
+.P
+There are quite a few pre-defined number registers maintained by
+.IR troff ,
+among them
+.cR %
+for the current page number;
+.cR nl
+for the current vertical position on the page;
+.cR dy ,
+.cR mo
+and
+.cR yr
+for the current day, month and year; and
+.cR .s
+and
+.cR .f
+for the current size and font.
+(The font is a number from 1 to typically around 10.)
+Any of these can be used in computations like any other register,
+but some, like
+.cR .s
+and
+.cR .f ,
+cannot be changed with
+.cR .nr .
+.tr!-
+.P
+As an example of the use of number registers,
+in the
+.cR !ms
+macro package,
+most significant parameters are defined in terms of the values
+of a handful of number registers.
+.tr!!
+These include the point size for text, the vertical spacing,
+and the line and title lengths.
+To set the point size and vertical spacing for the following paragraphs, for example, a user may say
+.iS
+.S -1
+^nr PS 9
+^nr VS 11
+.S +1
+.iE
+The paragraph macro
+.cR .PP
+is defined (roughly) as \%follows:
+.iS
+.S -1 -2
+.ta 1.5i
+^de PP
+^ps \e\en(PS	\e" reset size
+^vs \e\en(VSp	\e" spacing
+^ft 1	\e" font
+^sp 0.5v	\e" half a line
+^ti +3m
+^^
+.S +1 +2
+.iE
+This sets the font to font 1 and the point size and line spacing
+to whatever values are stored in the number registers
+.cR PS
+and
+.cR VS .
+.P
+Why are there two backslashes?
+This is the eternal problem of how to quote a quote.
+When
+.I troff
+originally reads the macro definition,
+it peels off one backslash
+to see what's coming next.
+To ensure that another is left in the definition when the 
+macro is
+.ul
+used,
+we have to put in two backslashes in the definition.
+If only one backslash is used, 
+point size and vertical spacing will be frozen at the time the macro
+is defined, not when it is used.
+.P
+Protecting by an extra layer of backslashes
+is only needed for
+.cR \en ,
+.cR \e* ,
+.cR \e$
+(which we haven't come to yet),
+and
+.cR \e
+itself.
+Things like
+.cR \es ,
+.cR \ef ,
+.cR \eh ,
+.cR \ev ,
+and so on do not need an extra backslash,
+since they are converted by
+.I troff
+to an internal code immediately upon being seen.
+.P
+Arithmetic expressions can appear anywhere that
+a number is expected.
+As a trivial example,
+.iS
+.S -1
+^nr PS \e\en(PS\-2
+.S +1
+.iE
+decrements
+.cR PS
+by 2.
+Expressions can use the arithmetic operators +, \-, *, /, % (mod),
+the relational operators >, >=, <, <=, =, and != (not equal),
+and parentheses.
+.P
+Although the arithmetic we have done so far
+has been straightforward,
+more complicated things are somewhat tricky.
+First,
+number registers hold only integers.
+.I troff
+arithmetic uses truncating integer division, just like Fortran.
+Second, in the absence of parentheses,
+evaluation is done left-to-right
+without any operator precedence
+(including relational operators).
+Thus
+.iS
+.S -1
+7*\-4+3/13
+.S +1
+.iE
+becomes `\-1'.
+Number registers can occur anywhere in an expression,
+and so can scale indicators like
+.cR p ,
+.cR i ,
+.cR m \^,
+and so on (but no spaces).
+Although integer division causes truncation,
+each number and its scale \%indicator is converted
+to machine units before any arithmetic is done,
+so
+.cR 1i/2u
+evaluates to
+0.5i
+correctly.
+.P
+The scale indicator
+.cR u
+often has to appear
+when you wouldn't expect it \(em
+in particular, when arithmetic is being done
+in a context that implies horizontal or ver\^tical dimensions.
+For example,
+.iS
+.S -1
+^ll 7/2i
+.S +1
+.iE
+would seem obvious enough \(em 3\(12 inches.
+Sorry.
+Remember that the default units for horizontal \%parameters like
+.cR .ll
+are ems.
+That's really `7\ ems\|/ 2\ inches',
+and when translated into machine units, it becomes zero.
+How about
+.iS
+.S -1
+^ll 7i/2
+.S +1
+.iE
+'''	\" FORCE COLUMN
+.nC
+Sorry, still no good\*(EMthe `2' is `2 ems', so `7i\^/\^2' is small,
+although not zero.
+You
+.ul
+must
+use
+.iS
+.S -1
+^ll 7i/2u
+.S +1
+.iE
+So again, a safe rule is to
+attach a scale indicator to every number,
+even constants.
+.P
+For arithmetic done within a
+.cR .nr
+command,
+there is no implication of horizontal or vertical dimension,
+so the default units are `units',
+and
+.cR 7i/2
+and
+.cR 7i/2u
+mean the same thing.
+Thus
+.iS
+.S -1
+^nr ll 7i/2
+^ll \e\en(llu
+.S +1
+.iE
+does just what you want,
+so long as you
+don't forget the
+.cR u
+on the
+.cR .ll
+command.
+.H 1 "Macros with arguments"
+.P
+The next step is to define macros that can change from one
+use to the next
+according to parameters supplied as arguments.
+To make this work, we need two things.
+First, when we define the macro, we have to indicate that some
+parts of it will be provided as arguments when the macro is called.
+Then when the macro is 
+called
+we have to provide actual arguments
+to be plugged into the definition.
+.P
+Let us illustrate by defining a macro
+.cR .SM
+that will print its argument two points
+smaller than the surrounding text.
+That is, the macro call
+.iS
+.S -1
+^SM UNIX
+.S +1
+.iE
+will produce
+\s-2UNIX\s0
+instead of UNIX.
+.P
+The definition of
+.cR .SM
+is
+.iS
+.S -1 -2
+^de SM
+\es\-2\e\e$1\es+2
+^^
+.S +1 +2
+.iE
+Within a macro definition,
+the symbol
+.cR \e\e$ \*(iAn\f1
+refers to the
+.cA n th
+argument
+that the macro was called with.
+Thus
+.cR \e\e$1
+is the string to be placed in a smaller point
+size when
+.cR .SM
+is called.
+.P
+As a slightly more complicated version, the following definition of
+.cR .SM
+permits optional second and third arguments
+that will be printed in the normal size:
+.iS
+.S -1 -2
+^de SM
+\e\e$3\es\-2\e\e$1\es+2\e\e$2
+^^
+.S +1 +2
+.iE
+Arguments not provided when the macro is called are treated
+as empty,
+so
+.iS
+.S -1
+^SM UNIX ),
+.S +1
+.iE
+produces
+.sM UNIX ),
+while
+.iS
+.S -1
+^SM UNIX ). (
+.S +1
+.iE
+produces
+.sM UNIX ). (
+It is convenient to reverse 
+the order of arguments because trailing punctuation
+is much more common than leading.
+.P
+By the way, the number of arguments that a macro was called with
+is available in number register
+.cR .$ .
+.P
+The following macro
+.cR ^BD
+is used to make
+`bold roman',
+.BD like
+.BD this
+.BD phrase.
+It combines horizontal motions, width computations,
+and argument rearrangement.
+.fS -1p
+.DS
+.ft 5
+.S -1
+\&.de BD
+\e&\e\e$3\ef1\e\e$1\eh'-\ew'\e\e$1'u+3u'\e\e$1\efP\e\e$2
+\&..
+.S +1
+.ft 1
+.DE
+.fS -1p
+The
+.cR \eh
+and
+.cR \ew
+commands need no extra backslash, as we discussed above.
+The
+.cR \e&
+is there in case the argument begins with a period.
+.P
+Two backslashes are needed with the
+.cR \e\e$ \*(iAn\f1
+commands, though,
+to protect one of them when the macro is
+being defined.
+Perhaps a second example will make this clearer.
+Consider a macro called
+.cR .NH
+which
+produces numbered headings rather like those in this paper,
+with the sections numbered automatically,
+and the title in bold in a smaller size.
+The use is
+.fS +1p
+.iS
+.S -1
+^NH "Section title \(el"
+.S +1
+.iE
+.fS +1p
+(If the argument to a macro is to contain blanks,
+then it must be
+.ul
+surrounded
+by double quotes,
+unlike a string, where only one leading quote is permitted.)
+.P
+Here is the definition of the
+.cR .NH
+macro:
+.iS
+.S -1
+.ta .75i 1.25i
+^nr NH 0  \e" initialize section number
+^de NH
+^sp 0.3i
+^ft B
+^nr NH \e\en(NH+1	\e" increment number
+^ps \e\en(PS\-1	\e" decrease PS
+\e\en(NH.  \e\e$1	\e" number. title
+^ps \e\en(PS		\e" restore PS
+^sp 0.3i
+^ft R
+^^
+.S +1
+.iE
+The section number is kept in number register
+.cR NH ,
+which is incremented each
+time just before it is used.
+(A number register, but not a string, may have the same name as a macro
+without conflict.)
+.P
+We used
+.cR \e\en(NH
+instead of
+.cR \en(NH
+and
+.cR \e\en(PS
+instead of
+.cR \en(PS .
+If we had used
+.cR \en(NH ,
+we would get the value of the register at the time the macro was
+.IR defined ,
+not at the time it was
+.IR used .
+If that's what you want, fine,
+but not here.
+Similarly,
+by using
+.cR \e\en(PS ,
+we get the point size at the time the macro is called.
+.P
+As an example that does not involve numbers,
+recall our
+.cR .NP
+macro which had a
+.fS -1p
+.iS
+.S -1
+^tl 'left'center'right'
+.S +1
+.iE
+.fS -1p
+We could make these into parameters by using instead
+.fS -1p
+.iS
+.S -1
+^tl '\e\e*(LT'\e\e*(CT'\e\e*(RT'
+.S +1
+.iE
+.fS -1p
+so the title comes from three strings called
+.cR LT ,
+.cR CT
+and 
+.cR RT .
+If these are empty, then the title will be a blank line.
+Normally
+.cR CT
+would be set with something like
+.fS -1p
+.iS
+.S -1
+\&^ds CT - % -
+.S +1
+.iE
+.fS -1p
+to give just the page number between hyphens,
+but a user could supply private definitions for
+any of the strings.
+.H 1 Conditionals
+.P
+Suppose we want the
+.cR .NH
+macro to leave two extra inches of space just before section 1,
+but nowhere else.
+The cleanest way to do that is to test inside the
+.cR .NH
+macro
+whether
+the section number is 1,
+and add some space if it is.
+The
+.cR .if
+command provides the conditional test
+that we can add
+just before the heading line is output:
+.iS
+.S -1
+.ti -1n
+^if \e\en(NH=1 ^sp 2i \e" 1st section only
+.S +1
+.iE
+.P
+The condition after the
+.cR .if
+can be any arithmetic or logical expression.
+If the condition is logically true, or arithmetically greater than zero,
+the rest of the line is treated as if
+it were text\*(EMhere a command.
+If the condition is false, or zero or negative,
+the rest of the line is skipped.
+.P
+It is possible to do more than one command if a condition is true.
+Suppose several operations are to be done before section 1.
+One possibility is to define a macro 
+.cR .S1
+and invoke it
+if we are about to do section 1
+(as determined by an
+.cR .if ).
+.iS
+.S -1 -2
+^de S1
+.cA "\s+1---  processing for section 1 ---\s-1"
+^^
+^de NH
+ \(el
+^if \e\en(NH=1 ^S1
+ \(el
+^^
+.S +1 +2
+.iE
+.P
+An alternate way is to use the
+extended form of the
+.cR .if ,
+like this:
+.iS
+.S -1
+^if \e\en(NH=1 \e{\s+1\*(iA--- processing
+for section 1 ---\*(iR\s-1\e}
+.S +1
+.iE
+The braces
+.cR \e{
+and
+.cR \e}
+must occur in the positions shown
+or you will get unexpected extra lines in your output.
+.I Troff
+also provides
+an `if-else' construction,
+which we will not go into here.
+.P
+A condition can be negated by preceding it with
+.cR ! ;
+we get the same effect as above (but less clearly) by using
+.iS
+.S -1
+^if !\e\en(NH>1 ^S1
+.S +1
+.iE
+There are a handful of 
+other conditions that can be tested with
+.cR .if .
+For example, is the current page even or odd?
+.iS
+.S -1
+^if e ^tl ''\s+1\*(iAeven page title\fP\s-1''
+^if o ^tl ''\s+1\*(iAodd page title\fP\s-1''
+.S +1
+.iE
+gives facing pages different titles
+when used inside an appropriate new page macro.
+.P
+Two other conditions
+are
+.cR t
+and
+.cR n ,
+which tell you whether the formatter is
+.I troff
+or
+.IR nroff . 
+.iS
+.S -1
+^if t \s+1\*(iAtroff stuff \(el\fP\s-1
+^if n \s+1\*(iAnroff stuff \(el\fP\s-1
+.S +1
+.iE
+Finally, string comparisons may be made in an
+.cR .if :
+.fS -1p
+.iS
+.S -1
+^if '\s+1\*(iAstring1\fP\s-1'\s+1\*(iAstring2\fP\s-1'\s+1 \*(iAstuff\fP\s-1
+.S +1
+.iE
+.fS -1p
+does
+.cA stuff
+if
+.cA string1
+is the same as
+.cA string2 .
+The \%character separating the strings can be anything
+reasonable that is
+not contained in either string.
+The strings themselves can reference strings with
+.cR \e* ,
+\%arguments with 
+.cR \e$ ,
+and so on.
+.H 1 Environments
+.P
+As we mentioned, there is a potential problem
+when going across a page boundary:
+parameters like size and font
+for a page title may well be different from those
+in effect in the text when the page boundary occurs.
+.I Troff
+provides a very general way to deal with this and
+similar situations.
+There are three `environments',
+each of which has independently settable versions of
+many of the parameters associated with processing,
+including size, font, line and title lengths,
+fill/nofill mode, tab stops, and even partially collected lines.
+Thus the titling problem may be readily solved by processing the main text
+in one environment and titles in a separate one
+with its own suitable parameters.
+.P
+The command
+.cR .ev
+.cA n
+shifts to environment
+.cA n \^;
+.cA n
+must be 0, 1 or 2.
+The command
+.cR .ev
+with no argument returns to the
+previous environment.
+Environment names are maintained in a stack, so calls
+for different environments may be nested and unwound consistently.
+.P
+Suppose we say that the main text is processed in environment 0,
+which is where 
+.I troff
+begins by default.
+Then we can modify the new page macro
+.cR .NP
+to process titles in environment 1 like this:
+.iS
+.S -1
+.ta +0.6i
+^de NP
+^ev 1	\e" shift to new environment
+^lt 6i	\e" set parameters here
+^ft 1
+^ps 10
+.sp +1p
+.cA " \s+1\(el any other processing \(el\s-1"
+.sp +1p
+^ev	\e" return to prev environment
+^^
+.S +1
+.iE
+It is also possible to initialize the parameters for an environment
+outside the
+.cR .NP
+macro,
+but the version shown keeps all the processing in one place
+and is thus easier to understand and change.
+.H 1 Diversions
+.P
+There are numerous occasions in page layout
+when it is necessary to store some text
+for a period of time without actually printing it.
+Footnotes are one obvious example:  the
+text of the footnote usually appears in the input well before the place
+on the page where it is to be printed is reached.
+In fact,
+the place where it is output normally depends on how big it is,
+which implies that there must be a way
+to process the footnote at least
+enough to decide its size
+without printing it.
+.P
+.I Troff
+provides a mechanism called a diversion
+for doing this processing.
+Any part of the output may be diverted into a macro instead
+of being printed,
+and then at some convenient time the macro may be put back into
+the input.
+.P
+The command
+.cR .di\ xy
+begins a diversion\*(EMall subsequent output is collected into the macro
+.cR xy
+until the command
+.cR .di
+with no arguments is encountered.
+This terminates the diversion.
+The processed text is available at any time thereafter, simply
+by giving the command
+.iS
+.S -1
+^xy
+.S +1
+.iE
+The vertical size of the last finished diversion is contained in
+the built-in number register
+.cR dn .
+.P
+As a simple example,
+suppose we want to implement a `keep-release'
+operation,
+so that text between the \%commands
+.cR .KS 
+and
+.cR .KE
+will not be split across a page boundary
+(as for a figure or table).
+Clearly, when a
+.cR .KS
+is encountered, we have to begin diverting
+the output so we can find out how big it is.
+Then when a
+.cR .KE
+is seen, we decide
+whether the diverted text will fit on the current page,
+and print it either there if it fits, or at the top of the next page if it doesn't.
+So:
+.iS
+.in -2n
+.S -1
+^de KS  \e" start keep
+^br     \e" start fresh line
+^ev 1   \e" collect in new environment
+^fi     \e" make it filled text
+^di XX  \e" collect in XX
+^^
+
+^de KE  \e" end keep
+^br     \e" get last partial line
+^di     \e" end diversion
+^if \e\en(dn>=\e\en(.t .bp  \e" bp if too big
+^nf     \e" bring it back in no-fill
+^XX     \e" text
+^ev     \e" return to normal environment
+^^
+.S +1
+.in +2n
+.iE
+Recall that number register
+.cR nl
+is the current position
+on the output page.
+Since output was being diverted, this remains
+at its value when the diversion started.
+.cR dn
+is the amount of text in the diversion;
+.cR .t
+(another built-in register)
+is the distance to the next trap,
+which we assume is at the bottom margin of the page.
+If the diversion is large enough to go past the trap,
+the
+.cR .if
+is satisfied, and a
+.cR .bp
+is issued.
+In either case, the diverted output is then brought back with
+.cR .XX .
+It is essential to bring it back in no-fill mode so
+.I troff
+will do no further processing on it.
+.P
+This is not the most general keep-release,
+nor is it robust in the face of all conceivable inputs,
+but it would require more space than we have here to write it
+in full generality.
+This section is not intended
+to teach everything about diversions,
+but to sketch out enough that you can read
+existing macro packages with some comprehension.

@@ -1,0 +1,165 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+'''	\" FORCE PAGE
+.SK
+.H 1 REFERENCES
+There are two macros that delimit the text of references,
+a string used to automatically number the references,
+and an optional macro to produce the reference page(s)
+within the document.
+The input format for a reference is:
+.iS
+\*(iAsegment of text to be referenced\|\*(iR\e*(Rf
+\&.RS \f1[\*(iAstring-name\f1]
+.cA "one or more lines of"
+.cA "reference text"
+\*(iR.RF
+.iE
+The string
+.cR Rf
+generates the reference mark.
+The
+.cR .RS
+and
+.cR .RF
+macros delimit the text of each reference.
+The reference text is saved and printed on the reference page at
+the end of the document.
+The argument
+.cA string-name
+may be used to keep track of a particular reference mark
+for subsequent references.
+.H 2 "Automatic Numbering of References"
+The string call
+.cR \e*(Rf
+generates an automatically-numbered reference mark in the text.
+The reference mark consists of the reference number
+enclosed in square brackets,
+and is printed in a smaller size and raised
+(e.g., superscripted).
+.P
+The register
+.cR :R
+keeps track of the current reference number.
+The string
+.cR Rf
+automatically increments
+.cR :R
+and then uses that value as the reference number in
+the reference mark.
+The
+.cR :R
+register may have its format or value changed
+to affect the reference marks.
+.H 2 "Subsequent References"
+The
+.cR .RS
+macro accepts one argument
+.cA string-name ) (
+and uses it as the name of string for subsequent references.
+If given,
+.cA string-name
+is assigned the current reference mark and
+can be used later in the document to reference text
+which must be labeled with a prior reference number.
+No \*(iR.RS\fP/\*(iR.RF\fP pair is needed for subsequent references
+marked in the text.
+For example, if the input for a reference was:
+.iS
+and the ABC package\e*(Rf
+\&.RS aA
+A. B. Smith and J. R. Doe,
+\&.ul
+The ABC Package \e(em Reference Manual,
+SoftPackagers, Inc.
+\&.RF
+.iE
+and that reference was numbered ``4'', then later
+in the document, the input:
+.iS
+is available with ABC\e*(aA as well.
+.iE
+produces:
+.DS I
+.ds rX 4
+is available with ABC\*(rF as well.
+.DE
+.H 2 "Reference Page"
+A reference page will be generated
+automatically at the end of the document (before the table of
+contents and the cover sheet, if any) and will be listed in the table of
+contents.
+This page contains the reference items (i.e., text enclosed
+in \*(iR\&.RS\fP/\*(iR.RF\fP pairs).
+Reference items will be separated by one blank vertical space;
+if the register
+.cR Ls
+is set to 0, this spacing is suppressed.
+.P
+The string
+.cR Rp
+contains the reference page title.
+By default, ``REFERENCES'' is used as the title.
+The user may change the reference page title by defining the
+.cR Rp
+string:
+.iS
+\&.ds Rp List of References
+.iE
+.br
+.ne 5v
+.P
+The
+.cR .RP
+macro may be used to produce the reference
+page anywhere else within a document (i.e., after each major section);
+.cR .RP
+is not needed to produce a separate reference page with
+default spacings at the end of the document.
+.iS
+\&.RP \f1[\*(iAarg1\f1] [\*(iAarg2\f1]
+.iE
+The two arguments allow the user to control resetting of reference
+numbering and page skipping.
+.DS
+.TS
+center box tab(;);
+c cf1
+nf5 lf1.
+\*(iAarg1\fP;Meaning
+_
+0;reset reference counter (default)
+1;do not reset reference counter
+=
+.sp 0.2v
+.T&
+c cf1
+nf5 lf1.
+\*(iAarg2\f1;Meaning
+_
+0;put on separate page (default)
+1;do not cause a following \*(iR.SK\fP
+2;do not cause a preceding \*(iR.SK\fP
+3;no \*(iR.SK\fP before or after
+.TE
+.DE
+.P
+If
+.cR .RP
+does not issue a
+.cR .SK ,
+then a single blank vertical space will 
+separate the references from the preceding or following text.
+The user may wish to adjust the spacing.
+For example:
+.iS
+\&.sp 3
+\&.RP 1 2
+\&.H 1 "Next Section"
+.iE
+produces references at 
+the end of each major section.

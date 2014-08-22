@@ -1,0 +1,10 @@
+# nroff simulator font for 12-pitch terminals (e.g., thinkjet)
+
+fonts 5 R I B CW S
+sizes 10  0
+res 240
+hor 20
+vert 10
+unitwidth 10
+
+charset

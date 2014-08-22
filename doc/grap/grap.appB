@@ -1,0 +1,124 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.ds pT GRAP
+.EQ
+delim $$
+define cw / font CW /
+define | / { ~ \(or ~ } /
+define ... / ~"..."~ /
+.EN
+.aP B "Summary of \s-1GRAP\s+1 Commands"
+In the following, 
+.I italic
+terms are syntactic categories,
+.cR typewriter
+terms are literals,
+parenthesized constructs are optional, and \(el indicates repetition.
+In most cases, the order of statements,
+constructs and attributes is immaterial.
+.DS I
+.S -1
+.ta +1i
+$grap~program :$	$cw .G1 ~(width~in~inches)$
+	$grap~statement$
+	\(el
+	$cw .G2$
+.sp 1p
+$grap~statement :$	$frame | label | coord | ticks | grid | plot | line | circle | draw | new | next$
+	$| graph | numberlist | "copy" | "for" | "if" | pic | assignment | print $
+	$| "define" | "copy" | sh$
+.sp 1p
+$frame$:	$cw frame~ ( cw ht ~expr) ~ ( cw wid ~expr) ~((side)~ linedesc) ...$
+.sp 1p
+$side:$	$cw top | cw bot | cw "left" | cw "right"$
+.sp 1p
+$linedesc:$	$cw solid | cw invis | cw dotted ~(expr) | cw dashed ~(expr)$
+.sp 1p
+$label:$	$cw label~ side ~strlist ... shift$
+.sp 1p
+$shift:$	$cw "left" | cw "right" | cw "up" | cw "down" ~expr ...$
+.sp 1p
+$strlist:$	$str ... ( cw rjust | cw ljust | cw "above" | cw below) ... ( cw "size"~ (\(+-) expr) ...$
+.sp 1p
+$str:$	$cw "\"" "..." cw "\""$
+.sp 1p
+$coord:$	$cw coord~ (name) ~( cw x~ expr cw , expr)~ ( cw y~ expr cw , expr)~ ( cw "log x" | cw "log y" | cw "log log") $
+.sp 1p
+$ticks:$	$cw ticks ~ side ~( cw in | cw out~ (expr)) ~(shift) ~(tick"-"locations)$
+.sp 1p
+$tick$-$locations :$	  $cw at ~(name)~ expr~ (str),~ expr~ (str), ...$
+	$| cw "from"~ (name)~ expr~ cw "to"~ expr~
+              ( cw by ~( cw "+" | cw "-" | cw "*" | cw "/")~ expr)~ str$
+.sp 1p
+$grid:$	$cw grid~ side~ (linedesc)~ (shift)~  (tick"-"locations)$
+.sp 1p
+$plot:$	$strlist~ cw at~ point | cw plot~ expr~ (str)~ cw at~ point$
+.sp 1p
+$point:$	$(name)~ expr,expr$
+.sp 1p
+$line:$	$( cw line | cw arrow )~ cw "from"~ point~ cw "to"~ point~ (linedesc)$
+.sp 1p
+$circle:$	$cw circle~ cw at ~point ~( cw radius~ expr)$
+.sp 1p
+$draw:$	$cw draw~ (name)~ linedesc~ (str)$
+.sp 1p
+$new:$	$cw new~ (name)~ linedesc~ (str)$
+.sp 1p
+$next:$	$cw next~ (name)~ cw at ~point~ (linedesc)$
+.sp 1p
+$numberlist:$	$number ...$
+.sp 1p
+$for:$	$cw "for"~ var~ cw "from"~ expr ~ cw "to"~ expr~
+           ( cw by ~( cw "+" | cw "-" | cw "*" | cw "/") ~ expr)~ cw do~ X~ anything~ X$
+.sp 1p
+$if:$	$cw "if"~ expr~ cw then~ X ~anything ~ X ~cw else~ X ~anything~ X$
+.sp 1p
+$graph:$	$cw graph~ Picname~ (pic"-"text)$
+.sp 1p
+$print:$	$cw print~ (expr | str)$
+.sp 1p
+$define:$	$ cw "define"~ macro_name~ X ~anything ~ X$
+.sp 1p
+$copy:$	\f5copy \f1(\f5"\f2filename\f5"\f1)  (\f5thru \f2macro_name | X macro body X \f1)  (\f5until "\f2endstring\f5"\f1)\f5
+.sp 1p
+$sh:$	$cw sh~ X~ anything ~ X$
+.sp 1p
+$pic:$	$cw pic~ anything$
+.sp 1p
+$assignment:$	$var ~ cw "=" ~ expr$
+.sp 1p
+$X:$	$any~single~character,~ or ~ braces ~ roman "{ }" $
+.S +1
+.DE
+.P
+Predefined strings include
+.cR bullet ,
+.cR plus ,
+.cR box ,
+.cR star ,
+.cR dot ,
+.cR times ,
+.cR htick ,
+.cR vtick ,
+.cR square ,
+and
+.cR delta .
+Built-in functions include
+.cR log 
+(base 10),
+.cR exp
+(base 10),
+.cR int ,
+.cR sin ,
+.cR cos ,
+.cR atan2 ,
+.cR sqrt ,
+.cR min ,
+.cR max ,
+and
+.cR rand .

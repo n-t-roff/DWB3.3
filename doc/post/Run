@@ -1,0 +1,17 @@
+# set print spooler command
+PRINT=""
+
+# set the list of PostScript output files to print
+# in the proper order to make the complete document
+PSFILES="PS.fonts PS.charset PS.symbols PS.dingbats"
+
+# run document parts and create PostScript output files
+tbl fonts | troff -Tpost - | dpost >PS.fonts
+tbl charset | troff -Tpost - | dpost >PS.charset
+tbl symbols | troff -Tpost - | dpost >PS.symbols
+tbl dingbats | troff -Tpost - | dpost >PS.dingbats
+
+# print document parts if PRINT is set
+if [ x"$PRINT" != "x" ]; then
+   $PRINT $PSFILES
+fi

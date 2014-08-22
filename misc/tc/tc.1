@@ -1,0 +1,107 @@
+.TH TC 1
+.SH NAME
+.B tc
+\-
+.B troff
+output interpreter
+.SH SYNOPSIS
+\*(mBtc\f1
+.OP \-t "" []
+.OP \-o list []
+.OP \-a n []
+.OP \-e "" []
+.OP "" file []
+.SH DESCRIPTION
+.B tc
+interprets its
+input from
+.I file
+(default is standard input)
+as output from
+.BR troff (1).
+The standard output of
+.B tc
+is intended for a Tektronix 4015 (a 4014 terminal
+with
+.SM ASCII
+and
+.SM APL
+character sets).
+The various typesetter sizes are mapped into the 4014's
+four sizes;
+the entire
+.B troff
+character set is drawn using the 4014's
+character generator,
+using overstruck combinations where necessary,
+producing an altogether displeasing effect.
+Typical usage:
+.EX
+troff  \f2file\fP | tc
+.EE
+At the end of each page
+.B tc
+waits for a new-line (empty line) from the keyboard before
+continuing on to the next page.
+In this wait state,
+the following commands are recognized:
+.TP
+.OP ! cmd
+Send
+.I cmd
+to the shell.
+.TP
+.OP e
+inverts state of the screen erase.
+.TP
+.OP \- n
+skip backward
+.I n
+pages.
+.TP
+.OP a n
+sets the aspect ratio to
+.IR n .
+.TP
+.OP ?
+prints list of available options.
+.PP
+The command line options are:
+.TP
+.OP \-t
+does not wait between pages (for directing output into a file).
+.TP
+.OP \-o list
+prints only the pages enumerated in
+.IR list .
+The list consists of pages and page ranges (e.g., 5-17)
+separated by commas.  
+The range
+.I N\-
+goes from
+.I N
+to the end;
+the range
+.I \-N
+goes from the beginning to and including
+page
+.IR N .
+.TP
+.OP \-a n
+sets the aspect ratio to
+.IR n ;
+default is 1.5.
+.TP
+.OP \-e
+does not erase before each page.
+.SH BUGS
+Font distinctions are lost.
+.br
+.B tc
+needs a
+.OP \-w
+option to wait for input to arrive.
+.SH SEE ALSO
+.BR nroff (1),
+.BR tplot (1G),
+.BR troff (1)

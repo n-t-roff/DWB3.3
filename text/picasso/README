@@ -1,0 +1,40 @@
+
+			MAKING BATCH PICASSO
+
+Yacc'ing picassoy.y should produce 328 shift/reduce conflicts.
+
+When compiling xstubs.c, your compiler may issue warnings about formal
+parameters not being used.  This is not a problem.
+
+Using a make command-line option "DEFINES=-DNOWRITE" should produce
+a version of picasso that refuses to write out any file.  This is an
+easy way to make an interactive version that can be used for previewing
+.pic files.  For batch picasso, about the only thing it would accomplish
+is to allow someone to get the syntax errors out of their .pic files.
+
+		     NEW FEATURES IN PICASSO 2.1
+
+Various bugs have been fixed.
+
+The specification of parameters to macros is now done through a separate
+popup window.  (User interface improvement.) (Interactive only.)
+
+The accessing of fonts has been speeded up.
+
+The algorithm that calculates the page center has been changed, to try
+to make it agree better with dpost (on some printers where the printable
+area is not symmetric with the actual page, part of pictures included
+with -mpictures got clipped).
+
+The "Browse" buttons have removed from the file popup windows, since 
+this feature depended on a connection only provided on some OPEN LOOK
+implementations on 6386 machines. (Interactive only.)
+
+If the Attach edit mode if on, newly created objects will snap to the
+corners of already selected objects, and already selected objects will
+remain selected when new objects are created.  (Interactive only.)
+
+In order to provide a hook for the prtfmt command, the interactive
+version now adds "#picasso" to the .PS line of output files, and
+both versions deal with this string properly on input (by discarding
+it).

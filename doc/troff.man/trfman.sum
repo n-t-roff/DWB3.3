@@ -1,0 +1,555 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so ../defs.doc
+.so defs.trfman
+.EQ
+delim @@
+define cw % "\&" font CW %
+.EN
+.TL "Summary of Requests, Escape Sequences, and Number Registers" "Summary"
+.MT "Requests" -
+The notation @+- N@ in the
+.bI "Request Form"
+column means that the forms @N@, @+N@, or @-N@ are permitted,
+to set the parameter to @N@, increment it by @N@, or decrement it by @N@,
+respectively;
+plain @N@ means that the value is used to set the parameter.
+In the
+.bI "Initial Value"
+column, values
+separated by 
+.cR ;
+are for
+\f2troff\fP
+and
+\f2nroff\fP,
+respectively.
+In the 
+.bI Notes
+column,
+.DS CB F
+.TS
+c lw(4i).
+B	T{
+Request normally causes a break.
+The use of
+.cR ' \&
+as control character
+.br
+(instead of
+.cR . )\&
+suppresses the break function.
+T}
+D	T{
+Mode or relevant parameters associated with current diversion level.
+T}
+E	T{
+Relevant parameters are a part of the current environment.
+T}
+O	T{
+Must stay in effect until logical output.
+T}
+P	T{
+Mode must be still or again in effect at the time of physical output.
+T}
+T	T{
+\f2troff\fP only; no effect in \f2nroff\fP.
+T}
+@bold v@, @bold p@, @bold m@, @bold u@	T{
+Default scale indicator; if not specified, scale indicators are ignored.
+T}
+.TE
+.DE
+.sp 0.5v
+.tr &.
+.ps 9
+.vs 11
+.nr z 0 1
+.TS H
+lf4 lf4 lf4 lf4 lf4
+lf4 lf4 lf4 lf4 lf4
+lf5 l l l l.
+Request	Initial	If No
+Form	Value	Argument	Notes	Explanation
+.sp .5
+.TH
+.T&
+lf3 s s s s.
+\\n+z.  General Information
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Font and Character Size Control
+.sp .5
+&ps @+- N@	10 point	previous	E,T	Point size; also @cw "\es" +- N@.
+&ss @N@	12/36\fBm\fP	ignored	E,T	Space-character size set to @N/36@ em.
+&cs @ F~N~ M@	off	-	P,T	Constant character space (width) mode (font @F@).
+&bd @F~N@	off	-	P,T	Embolden font @F@ by @N-1@ units.
+&bd S@~F~N@	off	-	P,T	Embolden Special Font when current font is @F@.
+&ft@~F@	Roman	previous	E	Change to font @F@; also @cw "\ef" x@, @cw "\ef(" xx@, @cw "\ef" N@.
+&fp@~N~F~L@	R,I,B,...,S	ignored	-	Mount font named @F@ on physical position @N>=1@;
+				  long name is @L@ if given.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Page Control
+&pl @+- N@	11i	11i	@bold v@	Page length.
+&bp @+- N@	@N=1@	-	B,@bold v@	Eject current page; next page number @N@.
+&pn @+- N@	@N=1@	ignored	-	Next page number @N@.
+&po @+- N@	1i; 0	previous	@bold v@	Page offset.
+&ne @N@	-	@N=1 roman v@	D,@bold v@	Need @N@ vertical space.
+&mk @R@	none	internal	D	Mark current vertical place in register @R@.
+&rt @+- N@	none	internal	D,@bold v@	Return (upward only) to marked vertical place.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Text Filling, Adjusting, and Centering
+&br	-	-	B	Break.
+&fi	fill	-	B,E	Fill output lines.
+&nf	fill	-	B,E	No filling or adjusting of output lines.
+&ad @c@	adj, both	adjust	E	Adjust output lines with mode @c@;  @c = cw l , cw r , cw c , cw b , none@
+&na	adjust	-	E	No output line adjusting.
+&ce @N@	off	@N=1@	B,E	Center next @N@ input text lines.
+.sp .5
+.br
+.ne 4v
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Vertical Spacing
+&vs @N@	12p; 1/6i	previous	E,@bold p@	Vertical baseline spacing (@V@).
+&ls @N@	@N=1@	previous	E	Output @N-1@ @bold v@'s after each text output line.
+&sp @N@	-	@N=1@v	B,@bold v@	Space vertical distance @N@ in either direction.
+&sv @N@	-	@N=1@v	@bold v@	Save vertical distance @N@.
+&os	-	-	-	Output saved vertical distance.
+&ns	space	-	D	Turn no-space mode on.
+&rs	-	-	D	Restore spacing; turn no-space mode off.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Line Length and Indenting
+&ll @+- N@	6.5i	previous	E,@bold m@	Line length.
+&in @+- N@	@N=0@	previous	B,E,@bold m@	Indent.
+&ti @+- N@	-	ignored	B,E,@bold m@	Temporary indent.
+.sp .5
+.ne 2.1
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Macros, Strings, Diversion, and Position Traps
+&de @xx~yy@	-	@.yy= cw ".."@	-	Define or redefine macro @xx@; end at call of @yy@.
+&am @xx~yy@	-	@.yy= cw ".."@	-	Append to a macro.
+&ds @xx~string@	-	ignored	-	Define a string @xx@ containing @string@.
+&as @xx~string@	-	ignored	-	Append @string@ to string @xx@.
+&rm @xx@	-	ignored	-	Remove request, macro, or string.
+&rn @xx~yy@	-	ignored	-	Rename request, macro, or string @xx@ to @yy@.
+&di @xx@	-	end	D	Divert output to macro @xx@.
+&da @xx@	-	end	D	Divert and append to @xx@.
+&wh @N~xx@	-	-	@bold v@	Set location trap; negative is w.r.t. page bottom.
+&ch @xx~N@	-	-	@bold v@	Change trap location.
+&dt @N~xx@	-	off	D,@bold v@	Set a diversion trap.
+&it @N~xx@	-	off	E	Set an input-line count trap.
+&em @xx@	none	none	-	End macro is @xx@.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Number Registers
+&nr @R~+- N~M@	@N=0@	-	@bold u@	Define and set number register @R@; auto-increment by @M@.
+&af @R~c@	arabic	-	-	Assign format to register @R@ (@c= cw "1" , cw i , cw I , cw a , cw A@).
+&rr @R@	-	-	-	Remove register @R@.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Tabs, Leaders, and Fields
+&ta@~Nt~. . .@	0.5i; 0.8n	none	E,@bold m@	Tab settings; left-adjusting, unless @t= cw R@ (right), @cw C@ (centered).
+&tc@~c@	none	none	E	Tab repetition character.
+&lc@~c@	@cw "."@	none	E	Leader repetition character.
+&fc@~a~b@	off	off	-	Set field delimiter @a@ and pad character @b@.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Input and Output Conventions and Character Translations
+&ec@~c@	\e	\e	-	Set escape character.
+&eo	on	-	-	Turn off escape character mechanism.
+&lg@~N@	on; -	on	T	Ligature mode on if @N>0@.
+&ul@~N@	off	@N=1@	E	Underline (italicize in \f2troff\fP) @N@ input lines.
+&cu@~N@	off	@N=1@	E	Continuous underline in \f2nroff\fP; in \f2troff\fP, like @cw ul@.
+&uf@~F@	Italic	Italic	-	Underline font set to @F@ (to be switched to by @cw ul@).
+&cc@~c@	@cw .@	@cw .@	E	Set control character to @c@.
+&c2@~c@	@cw "'"@	@cw "'"@	E	Set no-break control character to @c@.
+&tr@~abcd....@	none	-	O	Translate @a@ to @b@, etc., on output.
+.sp .5
+.T&
+lf3 s s s s.
+\\n+z.  Local Horizontal and Vertical Motions, and the Width Function
+.sp .5
+.T&
+lf3 s s s s.
+\\n+z.  Overstrike, Bracket, Line-drawing, Graphics, and Zero-width Functions
+.sp .5
+.ne 5v
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Hyphenation
+&nh	hyphenate	-	E	No hyphenation.
+&hy@~N@	hyphenate	hyphenate	E	Hyphenate; @N =@ mode.
+&hc@~c@	@cw "\e%"@	@cw "\e%"@	E	Hyphenation indicator character @c@.
+&hw@~word~. . .@		ignored	-	Add words to hyphenation dictionary.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Three-Part Titles
+&tl@~'l'c'r'@		-	-	Three-part title; delimiter may be any character.
+&pc@~c@	@cw %@	off	-	Page number character.
+&lt@~+- N@	6.5i	previous	E,@bold m@	Length of title.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Output Line Numbering
+&nm@~+- N^M^S^I@		off	E	Number mode on or off, set parameters.
+&nn@~N@	-	@N=1@	E	Do not number next @N@ lines.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Conditional Acceptance of Input
+&if@~c~any@		-	-	If condition @c@ true, accept @any@ as input;
+				  for multi-line, use @cw "\e{" any cw "\e}"@.
+&if !@c~any@		-	-	If condition @c@ false, accept @any@.
+&if@~N~any@		-	@bold u@	If expression @N > 0@, accept @any@.
+&if !@N~any@		-	@bold u@	If expression @N <= 0@ [sic], accept @any@.
+&if@~ 's1 's2 '~any@		-	-	If string @s1@ identical to @s2@, accept @any@.
+&if !@ 's1 's2 '~any@		-	-	If string @s1@ not identical to @s2@, accept @any@.
+&ie@~c~any@		-	@bold u@	If portion of if-else; all above forms (like @cw "if"@).
+&el@~any@		-	-	Else portion of if-else.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Environment Switching
+&ev@~N@	@N=0@	previous	-	Environment switch (push down).
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Insertions from the Standard Input
+&rd@~prompt@	-	@prompt@=\s-1BEL\s+1	-	Read insertion.
+&ex	-	-	-	Exit.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Input/Output File Switching
+&so@~filename@		-	-	Switch source file (push down).
+&nx@~filename@		end-of-file	-	Next file.
+&sy@~string@		-	-	Execute program @string@.  Output is not interpolated.
+&pi@~string@		-	-	Pipe output to program @string@.
+&cf@~filename@		-	-	Copy file contents to \f2troff\fP output.
+.sp .5
+.T&
+lf3 s s s s
+lf5 l l l l.
+\\n+z.  Miscellaneous
+&mc@~c~N@	-	off	E,@bold m@	Set margin character @c@ and separation @N@.
+&tm@~string@	-	newline	-	Print @string@ on terminal (standard error).
+&ab@~string@	-	newline	-	Print @string@ on standard error, exit program.
+&ig@~yy@	-	@.yy= cw ".."@	-	Ignore input until call of @yy@.
+&lf@~N ~f@		-	-	Set input line number to @N@ and filename to @f@.
+&pm@~t@	-	all	-	Print macro names, sizes; if @t@ present, print only total of sizes.
+&fl	-	-	B	Flush output buffer.
+.sp .5
+.T&
+lf3 s s s s.
+\\n+z.  Output and Error Messages
+.sp .5
+\\n+z.  Output Language
+.sp .5
+\\n+z.  Device and Font Description Files
+.TE
+.br
+.ne 2i
+.MT "Alphabetical Request and Section Number Cross Reference"
+.nr z 9
+.de cL
+.ie \\n+c<\nz \{\
+.	po +\\n(.lu/\nzu+3p
+.	rt\}
+.el \{.po 1i\}
+..
+.nr c 0 1
+.di zZ
+.ta .35iR
+.nf
+.ps 9
+.vs 10.5
+\f5ab\fP	20
+\f5ad\fP	4
+\f5af\fP	8
+\f5am\fP	7
+\f5as\fP	7
+\f5bd\fP	2
+\f5bp\fP	3
+\f5br\fP	4
+\f5c2\fP	10
+\f5cc\fP	10
+\f5ce\fP	4
+\f5cf\fP	19
+\f5ch\fP	7
+\f5cs\fP	2
+\f5cu\fP	10
+\f5da\fP	7
+\f5de\fP	7
+\f5di\fP	7
+\f5ds\fP	7
+\f5dt\fP	7
+\f5ec\fP	10
+\f5el\fP	16
+\f5em\fP	7
+\f5eo\fP	10
+\f5ev\fP	17
+\f5ex\fP	18
+\f5fc\fP	9
+\f5fi\fP	4
+\f5fl\fP	20
+\f5fp\fP	2
+\f5ft\fP	2
+\f5hc\fP	13
+\f5hw\fP	13
+\f5hy\fP	13
+\f5ie\fP	16
+\f5if\fP	16
+\f5ig\fP	20
+\f5in\fP	6
+\f5it\fP	7
+\f5lc\fP	9
+\f5lg\fP	10
+\f5lf\fP	20
+\f5ll\fP	6
+\f5ls\fP	5
+\f5lt\fP	14
+\f5mc\fP	20
+\f5mk\fP	3
+\f5na\fP	4
+\f5ne\fP	3
+\f5nf\fP	4
+\f5nh\fP	13
+\f5nm\fP	15
+\f5nn\fP	15
+\f5nr\fP	8
+\f5ns\fP	5
+\f5nx\fP	19
+\f5os\fP	5
+\f5pc\fP	14
+\f5pi\fP	19
+\f5pl\fP	3
+\f5pm\fP	20
+\f5pn\fP	3
+\f5po\fP	3
+\f5ps\fP	2
+\f5rd\fP	18
+\f5rm\fP	7
+\f5rn\fP	7
+\f5rr\fP	8
+\f5rs\fP	5
+\f5rt\fP	3
+\f5so\fP	19
+\f5sp\fP	5
+\f5ss\fP	2
+\f5sv\fP	5
+\f5sy\fP	19
+\f5ta\fP	9
+\f5tc\fP	9
+\f5ti\fP	6
+\f5tl\fP	14
+\f5tm\fP	20
+\f5tr\fP	10
+\f5uf\fP	10
+\f5ul\fP	10
+\f5vs\fP	5
+\f5wh\fP	7
+.di
+.nr a \n(dn/\nz
+.ne \\nau+10p
+.br
+.nf
+.wh \n(nlu+\nau cL
+.nr q \n(nlu+\nau
+.ps
+.vs
+.mk
+.zZ
+.rt
+.sp \n(.tu
+.ch cL 12i
+.br
+.fi
+.po \nOu
+'''	\" FORCE PAGE
+.SK
+.MT "Escape Sequences for Characters, Indicators, and Functions"
+.tr &&
+.ps -1
+.vs -1
+.in +0.5i
+.TS
+cf4 lf4 lf4
+cf4 lf4 lf4
+nf1 lf5 lf1.
+Section	Escape
+Reference	Sequence	Meaning
+.sp .5
+10.1	\e\e	\e prevents or delays the interpretation of \&\f5\e\fP
+10.1	\ee	Printable version of the current escape character
+2.1	\e'	\' (acute accent); equivalent to \&\f5\e(aa\fP
+2.1	\e`	\` (grave accent); equivalent to \&\f5\e(ga\fP
+2.1	\e\-	\- (minus sign) in the current font
+7.	\e\^.	Period (dot) (see \&\f5de\fP)
+11.1	\e\f2space\fP	Unpaddable space-size space character
+11.1	\e0	Digit width space
+11.1	\e|	1/6 em narrow space character (zero width in \f2nroff\fP)
+11.1	\e^	1/12 em half-narrow space character (zero width in \f2nroff\fP)
+4.1	\e&	Non-printing, zero width character
+10.6	\e!	Transparent line indicator
+10.8	\e"	Beginning of comment; continues to end of line
+13.	\e%	Default optional hyphenation character
+2.1	\e(@xx@	Character named @xx@
+7.1	\e*@x,~@\e*(@xx@	Interpolate string @x@ or @xx@
+7.3	\e$@N@	Interpolate argument @1 <= N <= 9@
+9.1	\ea	Non-interpreted leader character
+12.3	\eb'@abc...@'	Bracket building function
+4.2	\ec	Connect to next input text
+2.1	\eC'@xyz@'	Character named @xyz@
+11.1	\ed	Downward \(12 em vertical motion (\(12 line in \f2nroff\fP)
+12.5	\eD'@c...@'	Draw graphics function @c@ with parameters @. . .@; @c= cw l , cw c , cw e , cw a , cw "~"@
+2.2	\ef@x,~@\ef(@xx,~@\ef@N@	Change to font named @x@ or @xx@, or position @N@
+8.	\eg@x,~@\eg(@xx@	Format of number register @x@ or @xx@
+11.1	\eh'@N@'	Local horizontal motion; move right @N@ (negative left)
+2.3	\eH'@N@'	Height of current font is @N@
+11.3	\ek@x@	Mark horizontal input place in register @x@
+12.4	\el'@Nc@'	Horizontal line drawing function (optionally with @c@ )
+12.4	\eL'@Nc@'	Vertical line drawing function (optionally with @c@ )
+8.	\en@x,~@\en(@xx@	Contents of number register @x@ or @xx@
+2.1	\eN'@N@'	Character number @N@ on current font
+12.1	\eo'@abc...@'	Overstrike characters @a,~ b,~ c@, ...
+4.1	\ep	Break and spread output line
+11.1	\er	Reverse 1 em vertical motion (reverse line in \f2nroff\fP)
+2.3	\es@N,~@\es@+- N@	Point-size change function; also @cw "\es(" nn@, @cw "\es" +- cw "(" nn@
+2.2	\eS'@N@'	Slant output @N@ degrees
+9.1	\et	Non-interpreted horizontal tab
+11.1	\eu	Reverse (up) \(12 em vertical motion (\(12 line in \f2nroff\fP)
+11.1	\ev'@N@'	Local vertical motion; move down N (negative up)
+11.2	\ew'@string@'	Width of @string@
+5.2	\ex'@N@'	Extra line-space function (negative before, positive after)
+10.7	\eX'@string@'	Output @string@ as device control function
+12.2	\ez@c@	Print @c@ with zero width (without spacing)
+16.	\e{	Begin conditional input
+16.	\e}	End conditional input
+10.8	\e@newline@	Concealed (ignored) newline
+-	\e@Z@	@Z@, any character not listed above
+.TE
+.in -0.5i
+.ps +1
+.vs +1
+.P
+The escape sequences
+.cR \e\e ,
+.cR \e\^. ,
+.cR \e" ,
+.cR \e$ ,
+.cR \e* ,
+.cR \ea ,
+.cR \en ,
+.cR \et ,
+.cR \eg ,
+and \*(iR\e\*(iAnewline\f1 are interpreted in copy mode (\(sc7.2).
+'''	\" FORCE PAGE
+.SK
+.MT "Predefined Number Registers"
+.ps -1
+.vs -1
+.in +0.5i
+.TS
+cf4 lf4 lf4
+cf4 lf4 lf4
+nf1 af5 lf1.
+Section	Register
+Reference	Name	Description
+.sp .5
+3.	%	Current page number
+11.2	ct	Character type (set by \*(iR\ew\fP function)
+7.4	dl	Width (maximum) of last completed diversion
+7.4	dn	Height (vertical size) of last completed diversion
+-	dw	Current day of the week (1-7)
+-	dy	Current day of the month (1-31)
+15.	ln	Output line number
+-	mo	Current month (1-12)
+4.1	nl	Vertical position of last printed text baseline
+11.2	sb	Depth of string below baseline (generated by \*(iR\ew\fP function)
+11.2	st	Height of string above baseline (generated by \*(iR\ew\fP function)
+-	yr	Last two digits of current year
+.TE
+.in -0.5i
+.ps +1
+.vs +1
+.MT "Predefined Read-Only Number Registers"
+.tr &.
+.ps -1
+.vs -1
+.in +0.5i
+.TS
+cf4 lf4 lf4
+cf4 lf4 lf4
+nf1 af5 lf1.
+Section	Register
+Reference	Name	Description
+.sp .5
+19.	$$	Process id of \f2troff\fP or \f2nroff\fP
+7.3	&$	Number of arguments available at the current macro level
+5.2	\&.a	Post-line extra line-space most recently used in \*(iR\ex'\*(iAN\*(iR'\f1
+-	\&.A	Set to 1 in \f2troff\fP, if @cw -a@ option used; always 1 in \f2nroff\fP
+2.3	\&.b	Emboldening level
+20.	\&.c	Number of lines read from current input file
+7.4	\&.d	Current vertical place in current diversion; equal to \*(iRnl\fP, if no diversion
+2.2	\&.f	Current font number
+20.	\&.F	Current input file name [sic]
+4.	\&.h	Text baseline high-water mark on current page or diversion
+11.1	\&.H	Available horizontal resolution in basic units
+6.	\&.i	Current indent
+4.2	\&.j	Current \*(iRad\fP mode
+4.1	\&.k	Current output horizontal position
+6.	\&.l	Current line length
+5.1	\&.L	Current \*(iRls\fP value
+4.	\&.n	Length of text portion on previous output line
+3.	\&.o	Current page offset
+3.	\&.p	Current page length
+7.5	.R	Number of unused number registers
+-	\&.T	Set to 1 in \f2nroff\fP, if \*(iR\-T\fP option used; always 0 in \f2troff\fP
+2.3	\&.s	Current point size
+7.5	\&.t	Distance to the next trap
+4.1	\&.u	Equal to 1 in fill mode and 0 in no-fill mode
+5.1	\&.v	Current vertical line spacing
+11.1	\&.V	Available vertical resolution in basic units
+11.2	\&.w	Width of previous character
+-	\&.x	Reserved version-dependent register
+-	\&.y	Reserved version-dependent register
+7.4	\&.z	Name [sic] of current diversion
+.TE
+.in -0.5i
+.ps +1
+.vs +1

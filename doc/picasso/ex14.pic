@@ -1,0 +1,15 @@
+.PS
+  xstar = (cos(234d),cos(18d),cos(162d),cos(306d),cos(90d))
+  ystar = (sin(234d),sin(18d),sin(162d),sin(306d),sin(90d))
+Star: line from (0,1) touching (xstar,ystar) filled white noedge
+  scale Star 1/11
+  box wid 3 ht 2 at (0,0) filled blue
+  y = 1st box.n.y - 0.2
+  xrow = (-5/4,-3/4,-1/4,1/4,3/4,5/4)
+  dup Star at (xrow,y)
+  xrow = (-5/4,-1,-3/4,-1/2,-1/4,0,1/4,1/2,3/4,1,5/4)
+  yrow = (y - 2/5, y - 1/5);  dup Star at (xrow,yrow)
+  yrow = (y - 4/5, y - 3/5);  dup Star at (xrow,yrow)
+  yrow = (y - 6/5, y - 1);    dup Star at (xrow,yrow)
+  yrow = (y - 8/5, y - 7/5);  dup Star at (xrow,yrow)
+.PF

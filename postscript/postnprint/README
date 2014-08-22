@@ -1,0 +1,24 @@
+ASCII file to PostScript translator. Expanded postprint (by
+request) to handle escape sequences for reverse video and font
+changes. The program is a preliminary version and it is NOT
+supported. It's subject to change or elimination in the next
+release. We eventually expect to include the capabilities
+provided by postnprint in the default ASCII file translator.
+
+Currently recognized escape sequences:
+
+	<esc>O	increment shading level
+	<esc>N	decrement shading level
+
+	<esc>R	Courier
+	<esc>I	Courier-Oblique
+	<esc>B	Courier-Bold
+	<esc>X	Courier-BoldOblique
+
+The shading level controls the gray level of the background box.
+Definitions in shade.ps control the number of background gray
+levels and the minimum gray level. Both can be tuned. The escape
+character (octal 33 by default) can be changed using the -e option.
+Use -e0 to disable escape sequences. Requests made via escape
+sequences persist across page boundaries.
+

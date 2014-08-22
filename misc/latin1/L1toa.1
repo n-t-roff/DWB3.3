@@ -1,0 +1,48 @@
+.TH L1TOA 1 "DWB 3.2"
+.SH NAME
+.B L1toa
+\- convert Latin-1 to
+.SM ASCII
+.SH SYNOPSIS
+\*(mBL1toa\f1
+.SH DESCRIPTION
+.B L1toa
+reads standard input and copies to standard output.
+Characters numerically greater than decimal 128
+(viz., 8-bit characters) are assumed to be Latin 1
+(\s-1ISO\ 8859-1\s+1) and are replaced by a 7-bit
+.SM ASCII
+.BR troff -style
+escape string as defined in the table
+``PostScript Character Set and Symbols/Latin-1 (\s-1ISO\ 8859-1\s+1)
+Character Set'' in the DWB\ 3.2 PostScript documentation.
+Control characters in the range
+.MW 0x80
+to
+.MW 0x9F
+are mapped into
+.MW \e(80
+through
+.MR \e(9F .
+.P
+For example, the 8-bit character
+.MW 0xA3
+(the British Pound sign) would be replaced by
+.MR \e(L- .
+.SH BUGS
+The Latin 1 file may itself have strings of the form
+.MI \e( xy
+or
+.MI \e space\f1.
+Thus, the pipeline
+.EX
+L1toa | atoL1
+.EE
+is not guaranteed to preserve the original standard input.
+However, if processed by
+.B troff
+the output should appear identical.
+.SH SEE ALSO
+.BR atoL1 (1),
+.BR atoL1sim (1),
+.BR troff (1)

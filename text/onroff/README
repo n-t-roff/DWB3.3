@@ -1,0 +1,5 @@
+troff source from dwb 3.0 that builds and installs an old version
+of nroff called onroff. This is unsupported code that should only
+built and installed if there are unexpected problems with the new
+troff/nroff source.
+

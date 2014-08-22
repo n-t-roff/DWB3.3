@@ -1,0 +1,353 @@
+%!PS
+%%Version: 3.3
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+%
+% Version 3.3 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	/Symbol /S Sdefs cf
+	/Times-Roman /S1 S1defs cf
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/rotation 1 def
+/gotpagebbox true def
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+%%PageBoundingBox: (atend)
+/saveobj save def
+mark
+1 pagesetup
+8 S f
+(\347`` `` ``\347)2 5040 1 194 720 t
+21 HB f
+(READABILITY OF TEXT)2 2359 1 1534 1230 t
+19 HB f
+(Line Width and Leading for 10-Point Type)6 3750 1 839 1590 t
+20 S f
+(_ _____________________________________________)1 4534 1 447 2110 t
+20 H f
+( 2-Point 4-Point)2 1832( 1-Point)1 1083(Line Set)1 1234 3 692 2470 t
+( Leading Leading)2 1832( Leading)1 1051(Width Solid)1 1372 3 626 2830 t
+20 S f
+(_ _____________________________________________)1 4534 1 447 2980 t
+(_ _____________________________________________)1 4534 1 447 3000 t
+20 H f
+( \2615.3 \2617.1)2 1832( \2616.0)1 895( \2619.3)1 768(9 Pica)1 558 4 659 3350 t
+( \2610.3 \2611.7)2 1832( \2610.6)1 895( \2614.5)1 768(14 Pica)1 670 4 547 3710 t
+( \2612.0)1 916( 0.0)1 916( \2615.1)1 895( \2615.0)1 768(19 Pica)1 670 5 547 4070 t
+( \2612.4 \2613.6)2 1832( \2613.8)1 895( \2613.7)1 768(31 Pica)1 670 4 547 4430 t
+( \2615.9 \2618.8)2 1832( \2619.0)1 895( \2619.1)1 768(43 Pica)1 670 4 547 4790 t
+20 S f
+( \347)1 -4534(_ _____________________________________________)1 4534 2 447 4950 t
+(\347)447 4910 w
+(\347)447 4710 w
+(\347)447 4510 w
+(\347)447 4310 w
+(\347)447 4110 w
+(\347)447 3910 w
+(\347)447 3710 w
+(\347)447 3510 w
+(\347)447 3310 w
+(\347)447 3110 w
+(\347)447 2910 w
+(\347)447 2710 w
+(\347)447 2510 w
+(\347)447 2310 w
+(\347)1307 4950 w
+(\347)1307 4910 w
+(\347)1307 4710 w
+(\347)1307 4510 w
+(\347)1307 4310 w
+(\347)1307 4110 w
+(\347)1307 3910 w
+(\347)1307 3710 w
+(\347)1307 3510 w
+(\347)1307 3310 w
+(\347)1307 3110 w
+(\347)1307 2910 w
+(\347)1307 2710 w
+(\347)1307 2510 w
+(\347)1307 2310 w
+(\347)1327 4950 w
+(\347)1327 4910 w
+(\347)1327 4710 w
+(\347)1327 4510 w
+(\347)1327 4310 w
+(\347)1327 4110 w
+(\347)1327 3910 w
+(\347)1327 3710 w
+(\347)1327 3510 w
+(\347)1327 3310 w
+(\347)1327 3110 w
+(\347)1327 2910 w
+(\347)1327 2710 w
+(\347)1327 2510 w
+(\347)1327 2310 w
+(\347)2233 4950 w
+(\347)2233 4910 w
+(\347)2233 4710 w
+(\347)2233 4510 w
+(\347)2233 4310 w
+(\347)2233 4110 w
+(\347)2233 3910 w
+(\347)2233 3710 w
+(\347)2233 3510 w
+(\347)2233 3310 w
+(\347)2233 3110 w
+(\347)2233 2910 w
+(\347)2233 2710 w
+(\347)2233 2510 w
+(\347)2233 2310 w
+(\347)3149 4950 w
+(\347)3149 4910 w
+(\347)3149 4710 w
+(\347)3149 4510 w
+(\347)3149 4310 w
+(\347)3149 4110 w
+(\347)3149 3910 w
+(\347)3149 3710 w
+(\347)3149 3510 w
+(\347)3149 3310 w
+(\347)3149 3110 w
+(\347)3149 2910 w
+(\347)3149 2710 w
+(\347)3149 2510 w
+(\347)3149 2310 w
+(\347)4065 4950 w
+(\347)4065 4910 w
+(\347)4065 4710 w
+(\347)4065 4510 w
+(\347)4065 4310 w
+(\347)4065 4110 w
+(\347)4065 3910 w
+(\347)4065 3710 w
+(\347)4065 3510 w
+(\347)4065 3310 w
+(\347)4065 3110 w
+(\347)4065 2910 w
+(\347)4065 2710 w
+(\347)4065 2510 w
+(\347)4065 2310 w
+(\347)4981 4950 w
+(\347)4981 4910 w
+(\347)4981 4710 w
+(\347)4981 4510 w
+(\347)4981 4310 w
+(\347)4981 4110 w
+(\347)4981 3910 w
+(\347)4981 3710 w
+(\347)4981 3510 w
+(\347)4981 3310 w
+(\347)4981 3110 w
+(\347)4981 2910 w
+(\347)4981 2710 w
+(\347)4981 2510 w
+(\347)4981 2310 w
+10 H f
+(Example 10)1 530 1 4592 5580 t
+8 S f
+(\347__ __ __\347)2 5040 1 194 5683 t
+10 H f
+(Readability of Text)2 831 1 194 5923 t
+(\(tbl sample\))1 523 1 194 6043 t
+cleartomark
+showpage
+saveobj restore
+%%PageBoundingBox: 8 172 533 738
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Helvetica Symbol Helvetica-Bold
+%%BoundingBox: 8 172 533 738

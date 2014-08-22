@@ -1,0 +1,152 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.ds pT MM
+.aP G "Company-Related Information"
+.P
+This appendix summarizes company-related information in the
+.sM MM
+package, such as
+the company logo, the company name, company location addresses,
+and proprietary markings and copyright notices.
+.HU "Logo and Company Name"
+In memoranda, the company name and logo are used in the letterhead
+block on the first page and on the cover sheet, if any.
+In the released paper style, the company name follows the author's
+name(s) on the first page and on the cover sheet, if any.
+By default, the company name and logo are defined as:
+.DS I
+.TS
+r l.
+Company name:	\*(}Z
+.sp
+Logo:	\v'1.5v'\*(]S
+.TE
+.sp
+.DE
+.P
+The user-definable string
+.cR }Z
+contains the company name, and the string
+.cR ]S
+contains the company logo.
+Use the
+.cR .AF
+macro to change the company name (see \(sc6.1.7.2).
+.sp 0.5v
+.HU "Company Location Addresses"
+Location codes represent a particular company location or branch.
+In the
+.sM MM
+package, location codes are assigned strings which contain the
+corresponding company address (city, state, and zip code).
+In the released-paper style, the location code for each author
+(given as the third argument to the
+.cR .AU
+macro) generates the company address following
+the author's name(s) and affiliation on the first page
+and cover sheet, if any.
+.P
+In some cases, branch locations share the same address.
+Here is an alphabetized list of recognized location codes and the
+corresponding company address:
+.DS
+.TS
+center box;
+cf1 cf1 | cf1 cf1
+cf1 ^   | cf1 ^
+af5 lf1 | af5 lf1.
+Location	Company Address	Location	Company Address
+Code		Code	
+_
+.sp 2p
+AK	Norcross, Georgia  30071	IW	Naperville, Illinois  60566
+AL	Allentown, Pennsylvania  18103	IX	Naperville, Illinois  60566
+ALC	Allentown, Pennsylvania  18103	LC	Warren, New Jersey  07060
+AN	Andover, Massachusetts  01810	LZ	Lincroft, New Jersey  07738
+CB	Columbus, Ohio  43213	MH	Murray Hill, New Jersey  07974
+CH	Chester, New Jersey  07930	MO	Morristown, New Jersey  07960
+CP	Piscataway, New Jersey  08854	MT	Middletown, New Jersey  07748
+DR	Denver, Colorado  80234	MV	North Andover, Massachusetts  01845
+FJ	Holmdel, New Jersey  07733	PK	Parsippany, New Jersey  07054
+HL	Short Hills, New Jersey  07078	PY	Piscataway, New Jersey  08854
+HK	Short Hills, New Jersey  07078	RD	Reading, Pennsylvania  19604
+HO	Holmdel, New Jersey  07733	RR	Piscataway, New Jersey  08854
+HOH	Crawford Hill Laboratory	SF	Summit, New Jersey  07901
+	Holmdel, New Jersey  07733	SZ	Springfield, New Jersey  07081
+HP	South Plainfield, New Jersey  07080	WB	West Long Branch, New Jersey  07764
+HR	Middletown, New Jersey  07748	WH	Whippany, New Jersey  07981
+IH	Naperville, Illinois  60566	WI	Ward Hill, Massachusetts  01830
+IN	Indianapolis, Indiana  46206	WV	Warren, New Jersey  07060
+INH	Indianapolis, Indiana  46206
+.TE
+.DE
+.P
+To define an address not on this list, see \(sc6.1.8.
+.SK
+.HU "Proprietary Markings and Copyright Notice"
+Most companies use some form of proprietary marking or copyright
+notice to protect their assets and information.
+The wording for each company's markings and the types used vary.
+.P
+The
+.sM MM
+package provides six distinct markings, each with a specific purpose.
+The macro call
+.iS
+\&.PM\0\f1[\*(iAtype\f1]\0[\*(iAyear\f1]
+.iE
+produces the desired marking at the bottom of the page:
+.sp
+\*(iR.PM\ P\ \f1\s-2or\s+2\*(iR\ .PM\ 1\f1
+.DS C
+\f2AT&T \- PROPRIETARY\fP
+Use pursuant to Company Instructions.
+.DE
+.sp
+\*(iR.PM\ RS\ \f1\s-2or\s+2\*(iR\ .PM\ 2\f1
+.DS C
+\f2AT&T \- PROPRIETARY (RESTRICTED)\fP
+Solely for authorized persons having a need to know
+pursuant to Company Instructions.
+.DE
+.sp
+\*(iR.PM\ RG\ \f1\s-2or\s+2\*(iR\ .PM\ 3\f1
+.DS C
+\f2AT&T \- PROPRIETARY (REGISTERED)\fP
+Solely for authorized persons having a need to know
+and subject to cover sheet instructions.
+.DE
+.sp
+\*(iR.PM\ CP\ \f1\s-2or\s+2\*(iR\ .PM\ 4\f1
+.DS C
+SEE PROPRIETARY NOTICE ON COVER PAGE
+.DE
+.sp
+\*(iR.PM\ CR\ \f1\s-2or\s+2\*(iR\ .PM\ 5\f1
+.DS C
+Copyright \(co 1990 AT&T
+All Rights Reserved.
+.DE
+.sp
+\*(iR.PM\ UW\ \f1\s-2or\s+2\*(iR\ .PM\ 6\f1
+.DS C
+THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+ACCORDANCE WITH APPLICABLE AGREEMENTS.
+.sp 0.5v
+Copyright \(co 1990 AT&T
+Unpublished & Not for Publication
+All Rights Reserved.
+.DE
+.sp
+.P
+By default, the current year is used for those markings
+that include a copyright notice.
+To override the default, give the year as the second argument to the
+.cR .PM
+macro.

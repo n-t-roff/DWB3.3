@@ -1,0 +1,41 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.VG 7 8 18 20
+.T READER INQUIRY
+.I
+Please check all that apply:
+.R
+.ML \*(FS
+.LI
+Why did you use this document?
+.ML \*(SQ
+.LI
+To learn procedures
+.LI
+To reference information
+.LI
+To solve a problem
+.LI
+Other:
+.LE
+.LI
+What changes would improve this document?
+.ML \*(SQ
+.LI
+Change structure and organization
+.LI
+Add more examples
+.LI
+More detailed information
+.LI
+Other:
+.LE
+.LI
+Comments:
+.LE
+.VE DocuCenter
+Reader Inquiry

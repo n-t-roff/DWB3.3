@@ -1,0 +1,302 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so defs.post
+.AT "PostScript" "Dingbats"
+.TL "PostScript Character Set and Symbols" "Zapf Dingbats"
+.fp 7 ZD
+.fp 8 S
+.fp 9 S1
+.ds dG \v'-0.3v'\s-3\(dg\s+3\v'0.3v'
+The Zapf Dingbat font
+.cR ZD ) (
+offers a variety of graphic symbols
+which can be used as markers, icons, or even in sequence to form a border.
+.P
+These symbols do not have unique
+.cI \e\h'-1p'( xx
+input names.
+Instead, each symbol may be accessed either by a character access code
+or by an assigned alias character name.
+The access code represents the numeric position of the symbol on the
+Zapf Dingbat font;
+the alias name is simply the name of a standard text font character or special symbol
+assigned arbitrarily for the sake of convenience.
+.P
+To select one of these symbols, switch to font
+.cR ZD
+and input
+either
+the access code format (\f5\eN'\f2code\f5'\f1)
+with the appropriate number
+or the alias name.
+(Don't forget to switch back to the previous font!)
+For example,
+the input for the telephone (\f(ZD\N'37'\fP) symbol is
+.cR \ef(ZD\eN'37'\efP
+using the access code, or
+.cR \ef(ZD%\efP
+using the alias name.
+.br
+.mk
+.TS
+cf1 cf1 cf1
+cf1 cf1 cf1
+c   nf5 cf5.
+	Access	Alias
+Symbol	Code	Name
+_
+.sp 2p
+\f(ZD\N'33'\fP	33	!
+\f(ZD\N'34'\fP	34	"
+\f(ZD\N'35'\fP	35	#
+\f(ZD\N'36'\fP	36	$
+\f(ZD\N'37'\fP	37	%
+\f(ZD\N'38'\fP	38	&
+\f(ZD\N'39'\fP	39	'
+\f(ZD\N'40'\fP	40	(
+\f(ZD\N'41'\fP	41	)
+\f(ZD\N'42'\fP	42	*
+\f(ZD\N'43'\fP	43	+
+\f(ZD\N'44'\fP	44	,
+\f(ZD\N'45'\fP	45	-
+\f(ZD\N'46'\fP	46	.
+\f(ZD\N'47'\fP	47	/
+\f(ZD\N'48'\fP	48	0
+\f(ZD\N'49'\fP	49	1
+\f(ZD\N'50'\fP	50	2
+\f(ZD\N'51'\fP	51	3
+\f(ZD\N'52'\fP	52	4
+\f(ZD\N'53'\fP	53	5
+\f(ZD\N'54'\fP	54	6
+\f(ZD\N'55'\fP	55	7
+\f(ZD\N'56'\fP	56	8
+\f(ZD\N'57'\fP	57	9
+\f(ZD\N'58'\fP	58	:
+\f(ZD\N'59'\fP	59	;
+\f(ZD\N'60'\fP	60	<
+\f(ZD\N'61'\fP	61	\&=
+\f(ZD\N'62'\fP	62	>
+.TE
+.rt
+.po +2.2i
+.TS
+cf1 cf1 cf1
+cf1 cf1 cf1
+c   nf5 cf5.
+	Access	Alias
+Symbol	Code	Name
+_
+.sp 2p
+\f(ZD\N'63'\fP	63	?
+\f(ZD\N'64'\fP	64	@
+\f(ZD\N'65'\fP	65	A
+\f(ZD\N'66'\fP	66	B
+\f(ZD\N'67'\fP	67	C
+\f(ZD\N'68'\fP	68	D
+\f(ZD\N'69'\fP	69	E
+\f(ZD\N'70'\fP	70	F
+\f(ZD\N'71'\fP	71	G
+\f(ZD\N'72'\fP	72	H
+\f(ZD\N'73'\fP	73	I
+\f(ZD\N'74'\fP	74	J
+\f(ZD\N'75'\fP	75	K
+\f(ZD\N'76'\fP	76	L
+\f(ZD\N'77'\fP	77	M
+\f(ZD\N'78'\fP	78	N
+\f(ZD\N'79'\fP	79	O
+\f(ZD\N'80'\fP	80	P
+\f(ZD\N'81'\fP	81	Q
+\f(ZD\N'82'\fP	82	R
+\f(ZD\N'83'\fP	83	S
+\f(ZD\N'84'\fP	84	T
+\f(ZD\N'85'\fP	85	U
+\f(ZD\N'86'\fP	86	V
+\f(ZD\N'87'\fP	87	W
+\f(ZD\N'88'\fP	88	X
+\f(ZD\N'89'\fP	89	Y
+\f(ZD\N'90'\fP	90	Z
+\f(ZD\N'91'\fP	91	[
+\f(ZD\N'92'\fP	92	\e
+.TE
+.rt
+.po +2.2i
+.TS
+cf1 cf1 cf1
+cf1 cf1 cf1
+c   nf5 cf5.
+	Access	Alias
+Symbol	Code	Name
+_
+.sp 2p
+\f(ZD\N'93'\fP	93	]
+\f(ZD\N'94'\fP	94	^
+\f(ZD\N'95'\fP	95	\&_
+\f(ZD\N'96'\fP	96	`
+\f(ZD\N'97'\fP	97	a
+\f(ZD\N'98'\fP	98	b
+\f(ZD\N'99'\fP	99	c
+\f(ZD\N'100'\fP	100	d
+\f(ZD\N'101'\fP	101	e
+\f(ZD\N'102'\fP	102	f
+\f(ZD\N'103'\fP	103	g
+\f(ZD\N'104'\fP	104	h
+\f(ZD\N'105'\fP	105	i
+\f(ZD\N'106'\fP	106	j
+\f(ZD\N'107'\fP	107	k
+\f(ZD\N'108'\fP	108	l
+\f(ZD\N'109'\fP	109	m
+\f(ZD\N'110'\fP	110	n
+\f(ZD\N'111'\fP	111	o
+\f(ZD\N'112'\fP	112	p
+\f(ZD\N'113'\fP	113	q
+\f(ZD\N'114'\fP	114	r
+\f(ZD\N'115'\fP	115	s
+\f(ZD\N'116'\fP	116	t
+\f(ZD\N'117'\fP	117	u
+\f(ZD\N'118'\fP	118	v
+\f(ZD\N'119'\fP	119	w
+\f(ZD\N'120'\fP	120	x
+\f(ZD\N'121'\fP	121	y
+\f(ZD\N'122'\fP	122	z
+.TE
+.po \nOu
+.br
+.SK
+.rs
+.sp 1v
+.mk
+.TS
+cf1 cf1 cf1
+cf1 cf1 cf1
+c   nf5 cf5.
+	Access	Alias
+Symbol	Code	Name
+_
+.sp 2p
+\f(ZD\N'123'\fP	123	{
+\f(ZD\N'124'\fP	124	|
+\f(ZD\N'125'\fP	125	}
+\f(ZD\N'126'\fP	126	~
+\f(ZD\N'161'\fP	161	\e(hy
+\f(ZD\N'162'\fP	162	\e(em
+\f(ZD\N'163'\fP	163	\e(de
+\f(ZD\N'164'\fP	164	\e-
+\f(ZD\N'165'\fP	165	\e(en
+\f(ZD\N'166'\fP	166	\e(ff
+\f(ZD\N'167'\fP	167	\e(fi
+\f(ZD\N'168'\fP	168	\e(fl
+\f(ZD\N'169'\fP	169	\e(Fi
+\f(ZD\N'170'\fP	170	\e(Fl
+\f(ZD\N'171'\fP	171	\e(fm
+\f(ZD\N'172'\fP	172	\e(ru
+\f(ZD\N'173'\fP	173	\e(dg
+\f(ZD\N'174'\fP	174	\e(bu
+\f(ZD\N'175'\fP	175	\e(14
+\f(ZD\N'176'\fP	176	\e(34
+\f(ZD\N'177'\fP	177	\e(12
+\f(ZD\N'178'\fP	178	\e(ct
+\f(ZD\N'179'\fP	179	\e(rg
+\f(ZD\N'180'\fP	180	\e(sq
+\f(ZD\N'181'\fP	181	\e(sl
+\f(ZD\N'182'\fP	182	\e(ul
+\f(ZD\N'183'\fP	183	\e(or
+\f(ZD\N'184'\fP	184	\e(no
+\f(ZD\N'185'\fP	185	\e(->
+\f(ZD\N'186'\fP	186	\e(<-
+\f(ZD\N'187'\fP	187	\e(da
+\f(ZD\N'188'\fP	188	\e(lh
+\f(ZD\N'189'\fP	189	\e(ua
+.TE
+.rt
+.po +2.2i
+.TS
+cf1 cf1 cf1
+cf1 cf1 cf1
+c   nf5 cf5.
+	Access	Alias
+Symbol	Code	Name
+_
+.sp 2p
+\f(ZD\N'190'\fP	190	\e(ab
+\f(ZD\N'191'\fP	191	\e(!b
+\f(ZD\N'192'\fP	192	\e(aa
+\f(ZD\N'193'\fP	193	\e(!m
+\f(ZD\N'194'\fP	194	\e(ga
+\f(ZD\N'195'\fP	195	\e(pl
+\f(ZD\N'196'\fP	196	\e(mi
+\f(ZD\N'197'\fP	197	\e(mu
+\f(ZD\N'198'\fP	198	\e(di
+\f(ZD\N'199'\fP	199	\e(eq
+\f(ZD\N'200'\fP	200	\e(==
+\f(ZD\N'201'\fP	201	\e(>=
+\f(ZD\N'202'\fP	202	\e(<=
+\f(ZD\N'203'\fP	203	\e(!=
+\f(ZD\N'204'\fP	204	\e(+-
+\f(ZD\N'205'\fP	205	\e(-+
+\f(ZD\N'206'\fP	206	\e(ap
+\f(ZD\N'207'\fP	207	\e(~=
+\f(ZD\N'208'\fP	208	\e(gr
+\f(ZD\N'209'\fP	209	\e(is
+\f(ZD\N'210'\fP	210	\e(pd
+\f(ZD\N'211'\fP	211	\e(if
+\f(ZD\N'212'\fP	212	\e(sr
+\f(ZD\N'213'\fP	213	\e(rn
+\f(ZD\N'214'\fP	214	\e(sb
+\f(ZD\N'215'\fP	215	\e(sp
+\f(ZD\N'216'\fP	216	\e(cu
+\f(ZD\N'217'\fP	217	\e(ca
+\f(ZD\N'218'\fP	218	\e(ib
+\f(ZD\N'219'\fP	219	\e(ip
+\f(ZD\N'220'\fP	220	\e(mo
+\f(ZD\N'221'\fP	221	\e(es
+\f(ZD\N'222'\fP	222	\e(sc
+.TE
+.rt
+.po +2.2i
+.TS
+cf1 cf1 cf1
+cf1 cf1 cf1
+c   nf5 cf5.
+	Access	Alias
+Symbol	Code	Name
+_
+.sp 2p
+\f(ZD\N'223'\fP	223	\e(dd
+\f(ZD\N'224'\fP	224	\e(lc
+\f(ZD\N'225'\fP	225	\e(rc
+\f(ZD\N'226'\fP	226	\e(lf
+\f(ZD\N'227'\fP	227	\e(rf
+\f(ZD\N'228'\fP	228	\e(bv
+\f(ZD\N'229'\fP	229	\e(**
+\f(ZD\N'230'\fP	230	\e(br
+\f(ZD\N'231'\fP	231	\e(ci
+\f(ZD\N'232'\fP	232	\e(ts
+\f(ZD\N'233'\fP	233	\e(co
+\f(ZD\N'234'\fP	234	\e(lt
+\f(ZD\N'235'\fP	235	\e(rt
+\f(ZD\N'236'\fP	236	\e(lb
+\f(ZD\N'237'\fP	237	\e(rb
+\f(ZD\N'238'\fP	238	\e(lk
+\f(ZD\N'239'\fP	239	\e(rk
+\f(ZD\N'241'\fP	241	\e(rh
+\f(ZD\N'242'\fP	242	\e(tm
+\f(ZD\N'243'\fP	243	\e(Sl
+\f(ZD\N'244'\fP	244	\e(ps
+\f(ZD\N'245'\fP	245	\e(cs
+\f(ZD\N'246'\fP	246	\e(cy
+\f(ZD\N'247'\fP	247	\e(as
+\f(ZD\N'248'\fP	248	\e(os
+\f(ZD\N'249'\fP	249	\e(=.
+\f(ZD\N'250'\fP	250	\e(ld
+\f(ZD\N'251'\fP	251	\e(rd
+\f(ZD\N'252'\fP	252	\e(le
+\f(ZD\N'253'\fP	253	\e(ge
+\f(ZD\N'254'\fP	254	\e(pp
+.TE
+.po \nOu
+.br

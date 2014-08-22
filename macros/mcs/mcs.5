@@ -1,0 +1,435 @@
+.ds dP /usr/pub
+.ds dT /usr/lib/tmac
+.tr ~ 
+.TH MCS 5 "DWB 3.2"
+.SH NAME
+.B mcs
+\- macros for formatting document cover sheets
+.SH SYNOPSIS
+\*(mBdocsend \-mcs\f1
+.OP "" options []
+.OP "" files []
+.sp 0.5v
+\*(mBtroff \-mcs\f1
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+The
+.SM MCS
+macros are a special stand-alone
+.BR troff (1)
+package developed specifically for preparing the G.E.I.-required
+document cover sheet for internal technical memoranda.
+The
+.SM MCS
+macros are styled after the Memorandum Macros (\s-1MM\s+1),
+but the two macro packages are not compatible.
+.SM MCS
+macro usage is summarized below.
+The strings
+.MR Rg ,
+.MR Tm ,
+and
+.MW Sm
+produce the registered mark, trademark, and service mark,
+respectively.
+.SH WARNINGS
+The
+.MW .CS
+macro has been redefined (effective March 1988).
+Only one argument,
+.IR pages ,
+is recognized; all other arguments are ignored.
+.PP
+If you choose to include
+.SM MCS
+macros in an
+.SM MM
+macros document, bracket the
+.SM MCS
+macros in an ignore block (e.g., between the
+.MW .ig
+and
+.MW ..
+requests.
+This way,
+.BR troff (1)
+will ignore the
+.SM MCS
+macros during
+.SM MM
+processing.
+See the
+.BR coverdoc (1)
+manual page for additional information.
+.PP
+A subset of \s-1MM\s+1-like macros can be used to format
+the document cover sheet title and abstract text (summarized below).
+It should be noted, however, that several of these macros may conflict with
+.SM MM
+usage.
+Specifically, the footnote macros may not be used within the title
+and the display macros may not be used within title or abstract.
+.SH FILES
+.MW \*(dT/tmac.cs
+.br
+.MW \*(dP/model.cs
+.SH "SEE ALSO"
+.BR coverdoc (1),
+.BR docsend (1),
+.BR mm (5)
+.SH REFERENCE
+.ul 2
+A Primer For Creating Document Cover Sheets
+With Memorandum Macros and Cover Sheet Macros
+.SH SUMMARY
+Macros marked with
+.SM \(**
+are mandatory; all other macros are optional.
+Optional arguments are enclosed in square brackets.
+Use
+.MW \&""
+to represent a null argument (i.e., to skip an argument).
+The macros must be used in the order presented.
+.sp 2p
+.in +9P
+.de XX
+.ie '\\$3'*' .ds m \s-1\(**\s+1
+.el .ds m
+.sp 2p 
+.in -9P
+.ta +1P +8P
+.in +9P
+.ti -9P
+\\*m\t\&\f5\\$1\ \f2\\$2\f1\t\c
+..
+.XX .aC code
+Define
+.SM AT&T
+company for whom cover sheet is generated.
+Usage for
+.I code
+is:
+.EX
+BL   \f1AT&T Bell Laboratories (default)\fP
+IS   \f1AT&T Information Systems\fP
+TI   \f1AT&T Technologies, Inc.\fP
+CH   \f1AT&T Corporate Headquarters\fP
+.EE
+.XX .TL "" * 
+Start title (followed by one or more lines of title text).
+.XX .AU "n \f1[\f2i\|\f1] \f2l d e r \f1[\f2a\f1]" *
+Define author(s) information where
+.I n
+is name,
+.I i
+is initials (or null),
+.I l
+is location code,
+.I d
+is department,
+.I e
+is extension,
+.I r
+is room, and
+.I a
+is affiliation.
+A separate macro is required for each author (maximum 12).
+(Note: If register
+.MW Sg
+is set to
+.MW 0
+before the author macro,
+then ``ORIGINAL SIGNED BY'' is placed above the
+author's signature line; by default,
+.MW Sg
+is set to
+.MW 1
+and the space above the signature line is left blank to
+accommodate the author's signature.)
+.XX .rP name
+Define responsible person (for use when no company author supplied).
+.br
+.ne 2v
+.XX .AS "" *
+Start abstract, followed by one or more lines of abstract text.
+An abstract is not required for Technical Correspondence.
+.XX .AE "" *
+End of abstract.
+.XX .OK "keyword  ..."
+Specify one to nine topical keywords or keyword phrases.
+.XX .MT type *
+Define memorandum type.
+Usage for
+.I type
+is:
+.EX
+1   \f1Technical Memorandum\fP
+2   \f1Internal Memorandum\fP
+3   \f1Technical Correspondence\fP
+.EE
+.XX .sF
+Appends ``S'' to document number string.
+.XX .dN org-date-seq *
+Define numeric portion of the document number(s) where
+.I org
+is the organization number,
+.I date
+is six digits of the form
+.ul
+.SM YYMMDD
+(only 2 digits of the form
+.ul
+.SM YY
+for \s-1AT&T-TI\s+1), and
+.I seq
+is 2 digits.
+A separate macro is required for each document number (maximum 12).
+.XX .fD date *
+Specify full date for
+.SM AT&T-TI
+only; date has 6 digits of the form
+.ul
+.SM YYMMDD .
+.XX .fC case *
+Define filing case(s) for
+.SM AT&T-BL
+and
+.SM AT&T-IS
+only.
+A separate macro is required for each filing case (maximum 12).
+.XX .wP number *
+Define project/time charge/case number(s).
+A separate macro is required for each number (maximum 12).
+.XX .mC "c \f1[\f2c\f1] [\f2c\f1]"
+Define
+.SM MERCURY
+code(s).
+Usage for
+.I c
+is:
+.EX
+chm   \f1Chemistry and Materials\fP
+cmm   \f1Communications\fP
+cmp   \f1Computing\fP
+elc   \f1Electronics\fP
+lfs   \f1Life Sciences\fP
+man   \f1Manufacturing\fP
+mas   \f1Mathematics and Statistics\fP
+mkt   \f1Marketing\fP
+phy   \f1Physics\fP
+std   \f1Standards\fP
+.EE
+A maximum of three codes are allowed.
+At least one code is required for non-restricted
+Technical Memoranda.
+.XX .PM "\f1[\f2code\f1]"
+Change the proprietary marking.
+By default, all coversheets carry the standard
+.RB `` "AT&T \- PROPRIETARY" ''
+marking.
+If
+.I code
+is
+.MR RS ,
+then the restrictive
+.RB `` "AT&T \- PROPRIETARY (RESTRICTED)" ''
+marking is used instead.
+.XX .gS
+Designate as government security classified.
+.XX .eD n
+Specify complete document number (including the document number suffix (e.g.,
+.MR TM ,
+.MR IM ,
+.MW TC
+or
+.MR S )
+of earlier document.
+.XX .fA  code
+Indicate policy
+.SM ITDS
+should follow concerning Future Distribution of document to
+.SM  AT&T
+employees (excluding contract employees).
+Usage for
+.I code
+is:
+.EX
+y   \f1\s-1RELEASE\s+1 to any \s-1AT&T\s+1 employee\fP
+n   \f1\s-1DO NOT RELEASE\s+1 to any \s-1AT&T\s+1 employee \fP
+       \f1without obtaining appropriate approval\fP
+.EE
+(Note:
+.I code
+must be
+.MW n
+for restricted documents.)
+.XX .oA name
+Define name(s) to appear under signature lines in the Organizational
+Approval section.
+A separate macro is required for each name (maximum 12).
+.XX .cC
+Start complete copy distribution list, followed by list of names
+(maximum 350 names).
+.XX .cE
+End of distribution list
+(for
+.MW .cC
+list and/or
+.MW .cS
+list).
+.XX .cS
+Start cover sheet only distribution list, followed by list of names
+(maximum 350 names).
+.XX .CS pages *
+Define total page count of the document in
+.I pages
+(not including the pages of the cover sheet)
+and generate the coversheet.
+The macros automatically calculate the ``total pages'' (including document
+cover sheet) by adding
+.I pages
+to the number of cover sheet pages generated.
+.in -9P
+.PP
+The following \s-1MM\s+1-like macros are available for
+formatting the text of the abstract.
+The macros for font selection and in-line equations
+can also be used to format the title text.
+.sp 2p
+.in +7P
+.de XX
+.sp 2p 
+.in -7P
+.ta +7P
+.in +7P
+.ti -7P
+\&\f5\\$1\ \f2\\$2\f1\t\c
+..
+.XX .B text
+Make
+.I text
+bold.
+.XX .I text
+Make
+.I text
+italic.
+.XX .RI "a\ b"
+Concatenate roman
+.I a
+with italic
+.IR b ,
+and alternate these two fonts for up to six arguments.
+.XX .IR "a\ b"
+Concatenate italic
+.I a
+with roman
+.IR b ,
+and alternate these two fonts for up to six arguments.
+.XX .RB "a\ b"
+Concatenate roman
+.I a
+with bold
+.IR b ,
+and alternate these two fonts for up to six arguments.
+.XX .BR "a\ b"
+Concatenate bold
+.I a
+with roman
+.IR b ,
+and alternate these two fonts for up to six arguments.
+.XX .IB "a\ b"
+Concatenate italic
+.I a
+with bold
+.IR b ,
+and alternate these two fonts for up to six arguments.
+.XX .BI "a\ b"
+Concatenate bold
+.I a
+with italic
+.IR b ,
+and alternate these two fonts for up to six arguments.
+.XX .P "\f1[\f2type\f1]"
+Begin paragraph;
+.I type
+is
+.MW 0
+for left-adjusted block paragraph (default), and
+.MW 1
+for indented (5 spaces) paragraph.
+.XX .FS "\f1[\f2label\|\f1]"
+Start footnote with optional
+.IR label ,
+followed by one or more lines of footnote text.
+Automatically numbered footnotes are not supported.
+.XX .FE
+End of footnote.
+.XX .BL \f1[\f2t\f1] [\*(mW1\f1]"
+Start bullet list where
+.I t
+is text-indent.
+.XX .LI "\f1[\f2mark\f1] [\*(mW1\f1]"
+List item (followed by list item text).
+.XX .LE "\f1[\*(mW1\f1]"
+End of list.
+.XX .ML "mark \f1[\f2t\f1] [\*(mW1\f1]"
+Start marked list where
+.I t
+is text-indent.
+.XX .LI "\f1[\f2mark\f1] [\*(mW1\f1]"
+List item, followed by list item text.
+.XX .LE "\f1[\*(mW1\f1]"
+End of list.
+.XX .VL "t \f1[\f2m\f1] [\*(mW1\f1]"
+Start variable-item list where
+.I t
+is text-indent and
+.I m
+is mark-indent.
+.XX .LI "mark \f1[\*(mW1\f1]"
+List item (followed by list item text).
+.XX .LE "\f1[\*(mW1\f1]"
+End of list.
+.XX .DS "\f1[\|\f2f\|\f1] [\f2l\|\f1] [\f2i\|\f1]"
+Start of static display.
+Usage for the format code
+.I f
+is:
+.EX
+0 \f1\s-1or\s+1\fP L    \f1left-justified (default)\fP
+1 \f1\s-1or\s+1\fP I    \f1indented (5 spaces)\fP
+2 \f1\s-1or\s+1\fP C    \f1centered lines (individually)\fP
+3 \f1\s-1or\s+1\fP CB   \f1centered as a block\fP
+.EE
+The fill code
+.I l
+is
+.MW 0
+or
+.MW N
+for no-fill mode (default), and
+.MW 1
+or
+.MW F
+for fill mode.
+The code
+.I i
+is the number spaces for the right indent.
+.XX .DE
+End of display.
+.XX .EQ "\f1[\f2label\|\f1]"
+Start of equation, followed by equation text.
+(Note: If the
+.MW .EQ
+and
+.MW .EN
+macros are used to produce an equation, the macros and the
+equation input must be enclosed within a display (e.g., surrounded by
+.MW .DS
+and
+.MW .DE
+macros.)
+.XX .EN
+End of equation.
+.in -7P

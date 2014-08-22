@@ -1,0 +1,19 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.Vw 7 "Model"
+.T "A Working Model"
+.SP
+.PS
+boxwid = 1.25i ; boxht = 0.75i
+arrow 
+box "input"
+arrow
+box "process"
+arrow
+box "output"
+arrow
+.PE

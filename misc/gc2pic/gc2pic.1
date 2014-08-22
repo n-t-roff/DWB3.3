@@ -1,0 +1,109 @@
+.TH GC2PIC 1 unsupported
+.SH NAME
+.B gc2pic
+\-
+.BR gc
+for
+.B troff 
+.SH SYNOPSIS
+\*(mBgc2pic\f1
+.OP +s "" []
+.OP "" file 
+\(el
+.SH DESCRIPTION
+.B Gc2pic
+converts
+.B gc
+figures within its input files to
+.B pic
+format.
+This allows
+.BR gc -style
+figures to be used within documents formatted with
+.BR troff .
+.P
+.B gc2pic
+uses
+.BR pic 's
+drawing facilities and the constant-width
+(e.g.,
+.MW CW
+or
+.MR CO )
+font so as to approximate
+.BR gc 's
+output as closely as possible.
+This includes curves
+(from
+.MR ( ,
+.MR ) ,
+and
+.MR @ );
+they're built from splines,
+as they are in
+.B gc
+(see warning below).
+The normal horizontal,
+vertical,
+and diagonal lines
+and arrows are supported.
+Also,
+numerous hyperascii characters are translated into
+.B troff
+special characters.
+These are:
+.EX
+.ds hA \f2\s-5\uH\dA\s+5\fP\^
+\*(hA?  \*(hA@  \*(hAA  \*(hAB  \*(hAF  \*(hAM  \*(hAO  \*(hAP  \*(hAR  \*(hAU  \*(hAV  \*(hAW  \*(hAb  \*(hAe  \*(hAf
+.EE
+.B gc2pic
+is also useful for generating
+the skeleton of a
+.B pic
+figure.
+Instead of directly writing input for \fIpic\fP,
+write
+.B gc
+input, run it through
+.BR gc2pic ,
+and edit the resulting output,
+adding what couldn't be expressed in
+.BR gc2pic 's
+input.
+It is anticipated that this will become more useful as
+.B gc2pic
+continues to evolve.
+.B gc2pic
+translates the
+.MW .GS
+and
+.MW .GE
+surrounding each figure into
+.MW .PS
+and
+.MR .PE ,
+respectively.
+Definitions for these macros should be included in the
+.B troff
+input.
+Otherwise the figures will be left-justified.
+.SH EXAMPLES
+.EX
+gc2pic \f2file\fP | pic | troff -TX97.ti10p -mm | dx9700 | \f2spool
+.EE
+.SH WARNINGS
+Splines are not currently supported by
+.BR dx9700 ,
+and so
+.B gc2pic
+translates curves to line segments instead.
+Splines can be had by using the
+.OP +s
+option.
+.SH BUGS
+Overprinted non-graphics characters are not yet fielded correctly.
+.SH SEE ALSO
+.BR dx9700 (1),
+.BR gc (1),
+.BR pic (1),
+.BR troff (1)

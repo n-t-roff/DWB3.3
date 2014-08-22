@@ -1,0 +1,338 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so ../defs.doc
+.so defs.post
+.AT "PostScript" "Symbols"
+.TL "PostScript Character Set and Symbols" "Special Font Symbol Set"
+.ds dG \v'-0.3v'\s-3\(dg\s+3\v'0.3v'
+The ``special'' fonts offer a variety of graphic symbols designed
+independently of any particular font style.
+The special-fonts symbol set includes the Greek alphabet,
+mathematical symbols, bracket-building segments, and
+other miscellaneous symbols.
+.P
+Most symbols have assigned
+input names;
+the remaining unnamed symbols are represented by character access codes.
+In addition, the
+.sM ASCII
+characters |\|, _\|, > and <
+are taken from the special fonts.
+.MT "Greek Alphabet"
+.rs
+.sp -1v
+.mk
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 2p
+\(*A	\e(*A	Alpha\*(dG
+\(*B	\e(*B	Beta\*(dG
+\(*G	\e(*G	Gamma
+\(*D	\e(*D	Delta
+\(*E	\e(*E	Epsilon\*(dG
+\(*Z	\e(*Z	Zeta\*(dG
+\(*Y	\e(*Y	Eta\*(dG
+\(*H	\e(*H	Theta
+\(*I	\e(*I	Iota\*(dG
+\(*K	\e(*K	Kappa\*(dG
+\(*L	\e(*L	Lambda
+\(*M	\e(*M	Mu\*(dG
+\(*N	\e(*N	Nu\*(dG
+\(*C	\e(*C	Xi
+\(*O	\e(*O	Omicron\*(dG
+\(*P	\e(*P	Pi
+\(*R	\e(*R	Rho\*(dG
+\(*S	\e(*S	Sigma
+\(*T	\e(*T	Tau\*(dG
+\(*U	\e(*U	Upsilon
+\(*F	\e(*F	Phi
+\(*X	\e(*X	Chi\*(dG
+\(*Q	\e(*Q	Psi
+\(*W	\e(*W	Omega
+.TE
+.br
+.rt
+.po +3.5i
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 2p
+\(*a	\e(*a	alpha
+\(*b	\e(*b	beta
+\(*g	\e(*g	gamma
+\(*d	\e(*d	delta
+\(*e	\e(*e	epsilon
+\(*z	\e(*z	zeta
+\(*y	\e(*y	eta
+\(*h	\e(*h	theta
+\(*i	\e(*i	iota
+\(*k	\e(*k	kappa
+\(*l	\e(*l	lambda
+\(*m	\e(*m	mu
+\(*n	\e(*n	nu
+\(*c	\e(*c	xi
+\(*o	\e(*o	omicron
+\(*p	\e(*p	pi
+\(*r	\e(*r	rho
+\(*s	\e(*s	sigma
+\(*t	\e(*t	tau
+\(*u	\e(*u	upsilon
+\(*f	\e(*f	phi
+\(*x	\e(*x	chi
+\(*q	\e(*q	psi
+\(*w	\e(*w	omega
+\(ts	\e(ts	terminal sigma
+.TE
+.po \nOu
+.FS \*(dG
+Mapped into upper-case English letter in the standard text font.
+.FE
+.SK
+.MT "Mathematical Symbols"
+.rs
+.sp -1v
+.mk
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 2p
+\(pl	\e(pl	math plus
+\(mi	\e(mi	math minus
+\(eq	\e(eq	math equals
+\(**	\e(**	math star
+\(mu	\e(mu	multiply
+\(di	\e(di	divide
+\(sl	\e(sl	slash
+\(or	\e(or	or (vertical bar)
+\(c.	\e(c.	centered dot
+\(+-	\e(+-	plus-minus
+\(==	\e(==	identically equal
+\(!=	\e(!=	not equal
+\(<=	\e(<=	less than or equal
+\(>=	\e(>=	greater than or equal
+\(~~	\e(~~	approximately
+\(~=	\e(~=	approximately equal
+\(ap	\e(ap	approximates
+\(cg	\e(cg	congruent to
+\(pt	\e(pt	proportional to
+\(cu	\e(cu	union
+\(ca	\e(ca	intersection
+\(sb	\e(sb	subset of
+\(ib	\e(ib	improper subset of
+\(!b	\e(!b	not subset of
+\(sp	\e(sp	superset of
+\(ip	\e(ip	improper superset of
+.TE
+.rt
+.po +3.5i
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 2p
+\(pd	\e(pd	partial derivative
+\(gr	\e(gr	gradient
+\(if	\e(if	infinity
+\(es	\e(es	empty set
+\(mo	\e(mo	member of
+\(!m	\e(!m	not member of
+\(sr	\e(sr	square root
+\(rn	\e(rn	root extender
+\(is	\e(is	integral sign
+\(no	\e(no	logical not
+\(l&	\e(l&	logical and
+\(l|	\e(l|	logical or
+\(el	\e(el	ellipsis
+\(tf	\e(tf	therefore
+\(st	\e(st	such that
+\(fa	\e(fa	for all (universal)
+\(te	\e(te	there exists (existential)
+\(pp	\e(pp	perpendicular
+\(an	\e(an	angle
+\(O+	\e(O+	sum of two elements
+\(Ox	\e(Ox	product of two elements
+\(b<	\e(b<	left angle bracket
+\(b>	\e(b>	right angle bracket
+\(fm	\e(fm	footmark (minute)
+\(de	\e(de	degree
+.TE
+.po \nOu
+.br
+.MT "Bracket-Building Segments"
+.rs
+.sp -1v
+.mk
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 3p
+\(lc	\e(lc	square bracket, left ceiling
+.sp 1p
+\(lf	\e(lf	square bracket, left floor
+.sp 2p
+\(lt	\e(lt	paren or curly brace, left top
+.sp 1p
+\(lb	\e(lb	paren or curly brace, left bottom
+.sp 2p
+\(lk	\e(lk	curly brace, left middle
+.sp 2p
+\(bv	\e(bv	bold vertical (extender)
+.TE
+.rt
+.po +3.5i
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 3p
+\(rc	\e(rc	square bracket, right ceiling
+.sp 1p
+\(rf	\e(rf	square bracket, right floor
+.sp 2p
+\(rt	\e(rt	paren or curly brace, right top
+.sp 1p
+\(rb	\e(rb	paren or curly brace, right bottom
+.sp 2p
+\(rk	\e(rk	curly brace, right middle
+.sp 1v+2p
+.TE
+.po \nOu
+.SK
+.MT "Miscellaneous Symbols"
+.rs
+.sp -1v
+.mk
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 2p
+\(ru	\e(ru	baseline rule
+\(br	\e(br	box rule
+\(ul	\e(ul	underline
+\(lh	\e(lh	left-hand index
+\(rh	\e(rh	right-hand index
+\(bu	\e(bu	bullet
+\(ob	\e(ob	open bullet
+\(ci	\e(ci	circle
+\(bx	\e(bx	box (filled square)
+\(sq	\e(sq	square
+\(lz	\e(lz	lozenge
+\(co	\e(co	copyright (serif)
+\(rg	\e(rg	register (serif)
+\(tm	\e(tm	trademark (serif)
+\(CO	\e(CO	copyright (sans serif)
+\(RG	\e(RG	register (sans serif)
+\(TM	\e(TM	trademark (sans serif)
+.TE
+.rt
+.po +3.5i
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Input
+Symbol	Name	Description
+_
+.sp 2p
+\(14	\e(14	one-quarter
+\(12	\e(12	one-half
+\(34	\e(34	three-quarters
+\(->	\e(->	right arrow
+\(<-	\e(<-	left arrow
+\(ua	\e(ua	up arrow
+\(da	\e(da	down arrow
+\(ab	\e(ab	arrow both
+\(ah	\e(ah	arrow horizontal extender
+\(av	\e(av	arrow vertical extender
+\(CR	\e(CR	carriage return
+\(Sl	\e(Sl	script ell
+\(af	\e(af	aleph
+\(If	\e(If	Ifraktur
+\(Rf	\e(Rf	Rfraktur
+\(ws	\e(ws	weierstrass
+.TE
+.po \nOu
+.br
+.MT "Other (Unnamed) Symbols"
+The following symbols are represented by character access codes
+(the input format is
+.cI \eN' code \f5'\fP\|).
+To select one of these symbols,
+switch to the Symbol font
+.cR S ) (
+and input the access code format
+with the appropriate number.
+(Don't forget to switch back to the previous font!)  For example,
+the input for the club (\fS\N'167'\fP) symbol is
+.cR \efS\eN'167'\efP .
+.br
+.mk
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Access
+Symbol	Code	Description
+_
+.sp 2p
+\fS\N'74'\fP	74	theta (alternate)
+\fS\N'106'\fP	106	phi (alternate)
+\fS\N'118'\fP	118	omega (alternate)
+\fS\N'161'\fP	161	Upsilon (alternate)
+\fS\N'167'\fP	167	club
+\fS\N'168'\fP	168	diamond
+\fS\N'169'\fP	169	heart
+\fS\N'170'\fP	170	spade
+.TE
+.rt
+.po +3.5i
+.TS
+cf1 cf1 lf1
+cf1 cf1 lf1
+cf1 cf5 lf1w(1.75i).
+	Access
+Symbol	Code	Description
+_
+.sp 2p
+\fS\N'178'\fP	178	second
+\fS\N'219'\fP	219	double arrow both
+\fS\N'220'\fP	220	double left arrow
+\fS\N'221'\fP	221	double up arrow
+\fS\N'222'\fP	222	double right arrow
+\fS\N'223'\fP	223	double down arrow
+.TE
+.po \nOu
+.br

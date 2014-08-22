@@ -1,0 +1,19 @@
+fonts 10 R I B BI H S S1 GR S2 LO
+sizes 6 7 8 9 10 11 12 14 16 18 20 22 24 28 36 0
+res 300
+hor 1
+vert 1
+unitwidth 10
+biggestfont 128
+charset
+ hy em de \- en ff fi fl Fi Fl fm ru dg
+bu 14 34 12 ct rg sq sl ul or no -> <- da lh
+ua \e \' aa \` ga pl mi mu di eq == >= <= !=
++- -+ ap ~= gr is pd if sr rn sb sp cu ca ib
+ip mo es sc dd lc rc lf rf bv ** br ci ts co
+lt rt lb rb lk rk pt rh tm bx Sl ps cs cy as
+os =. ld rd le ge pp an TR ob O+ O- Ox O/ O.
+*a *b *g *d *e *z *y *h *i *k *l *m *n *c *o
+*p *r *s *t *u *f *x *q *w *A *B *G *D *E *Z
+*Y *H *I *K *L *M *N *C *O *P *S *T *U *F *X
+*Q *W LH Lb L1 LA LV dq bs

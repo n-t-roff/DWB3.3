@@ -1,0 +1,33 @@
+TROFF (Tutorial)
+=============================================================================
+TITLE      A Troff Tutorial
+
+AUTHOR(s)  Brian W. Kernighan
+           AT&T Bell Laboratories
+
+REVISED    1990 by B.W.Kernighan, AT&T Bell Laboratories
+REPRINTED  May 1990, AT&T Bell Laboratories
+=============================================================================
+FILE            PURPOSE
+------------    ----------------------------------------------------------
+trftut.doc      Troff Tutorial document body
+trftut.app      Troff Tutorial appendix
+Run             Shell script to format and print entire Troff Tutorial document
+=============================================================================
+To produce the entire Troff Tutorial document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the Troff Tutorial document (body only), use the command:
+
+   tbl trftut.doc | troff -Tpost - | dpost
+
+To produce only the appendix, use the command:
+
+   tbl trftut.app | troff -Tpost - | dpost
+=============================================================================

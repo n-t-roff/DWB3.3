@@ -1,0 +1,95 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.ds pT MM
+.aP D "Sample Business Letters"
+This appendix demonstrates the use of
+.sM MM
+in generating common business letters.
+The information needed for the four formats
+(blocked, semi-blocked, full-blocked, simplified)
+is entered in the same way.
+In this appendix, the input for all four documents varies in
+only one respect\*(EMa different
+.cR .LT
+type is used to select the business letter format:
+.DS I
+.TS
+lf5 5 l.
+\&.LT BL	Blocked Letter
+\&.LT SB	Semi-Blocked Letter
+\&.LT FB	Full-Blocked Letter
+\&.LT SP	Simplified Letter
+.TE
+.DE
+.P
+The following input was used to produce the sample business letters
+shown on the next four pages.
+.iS
+.S -1
+\&.ND "April 1, 1990"
+\&.WA "S. P. Lename" "Manager, Product Sales"
+\&SoftPackers, Inc.
+\&25 Bubble Sheet Road
+\&Columbia, Maryland  21046
+\&.WE
+\&.IA "J. J. Jones" "Purchasing Supervisor"
+\&Getem Electronics, Inc.
+\&9 Circuit Lane
+\&St. Louis, Missouri  63101
+\&.IE
+\&.LO SA "Dear Mr. Jones,"
+\&.LT \*(iAtype\fP
+\&.P
+\&Thank you for your interest in Softpackers' new
+\&EnviroPack\e*(Tm packaging sheets.
+\&.P
+\&I am sure you will find that EnviroPack offers many advantages
+\&over other commercially-available packaging materials:
+\&.BL
+\&.LI
+\&EnviroPack is of a lighter weight material, thereby reducing
+\&shipping costs.
+\&.LI
+\&EnviroPack is less expensive than standard bubble sheets or
+\&styrofoam chips.
+\&.LI
+\&EnviroPack is made of a completely biodegradable
+\&compound so it is environmentally sound, an important factor
+\&in a world where environmental issues are of great concern.
+\&.LE
+\&.P
+\&We expect this product to enjoy great success and we are
+\&delighted that you will be among the first to try it.
+\&The attached brochure provides additional product information.
+\&.P
+\&You will receive your trial shipment in one week.
+\&If you do not receive this shipment or are not pleased
+\&with the product, please contact me at 201-567-9876.
+\&.FC
+\&.SG
+\&.NS 3
+\&Brochure
+\&.NE
+.S +1
+.iE
+.SK
+.HU "\s-1OUTPUT\s+1:  Blocked Business Letter  (\*(iR.LT BL\fP)"
+.sy troff -mm -Tpost ex.lt.bl | dpost >ps.lt.bl
+.BP ps.lt.bl 8i 6i 0 o
+.SK
+.HU "\s-1OUTPUT\s+1:  Semi-Blocked Business Letter  (\*(iR.LT SB\fP)"
+.sy troff -mm -Tpost ex.lt.sb | dpost >ps.lt.sb
+.BP ps.lt.sb 8i 6i 0 o
+.SK
+.HU "\s-1OUTPUT\s+1:  Full-Blocked Business Letter  (\*(iR.LT FB\fP)"
+.sy troff -mm -Tpost ex.lt.fb | dpost >ps.lt.fb
+.BP ps.lt.fb 8i 6i 0 o
+.SK
+.HU "\s-1OUTPUT\s+1:  Simplified Business Letter  (\*(iR.LT SP\fP)"
+.sy troff -mm -Tpost ex.lt.sp | dpost >ps.lt.sp
+.BP ps.lt.sp 8i 6i 0 o

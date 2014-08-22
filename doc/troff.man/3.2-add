@@ -1,0 +1,35 @@
+'''	\"               Copyright c 1991 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so ../defs.add
+.tS "TROFF"
+TROFF User's Manual
+.tE
+This addendum reflects changes in the
+DWB 3.2 version of this software.
+.P
+A heading marked \(rh refers to the section in the
+user documentation where this topic is discussed.
+.sC 13 Hyphenation
+The
+.cR ha
+request may be used to select the hyphenation algorithm.
+.P
+The \s-1T\v'0.04i'E\v'-0.04i'X\s+1 hyphenation algorithm can be invoked
+in preference to the
+.B troff
+algorithm by using the
+.cR "\&.ha\ 1" '' ``
+request.
+This new algorithm is somewhat more cautious,
+but about ten times more accurate.
+Set this by default unless you are trying to
+exactly mimic page breaks on existing documents.
+.P
+To restore the default algorithm, use the
+.cR "\&.ha\ 0" '' ``
+request.

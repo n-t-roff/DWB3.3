@@ -1,0 +1,598 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "LISTS"
+This section describes many different kinds of lists:
+automatically-numbered and alphabetized lists,
+bullet lists, dash lists, lists with arbitrary
+marks, and lists starting with arbitrary strings.
+.H 2 "Basic Approach"
+In order to avoid repetitive typing of arguments to describe
+the appearance of items in a list,
+.sM MM
+provides a convenient way to specify lists.
+All lists are composed of the following parts:
+.BL "" 1
+.LI
+A
+.I "list-initialization"
+macro that controls the appearance of the list: line spacing, indentation,
+marking with special symbols, and numbering or alphabetizing.
+.LI
+One or more
+.I "list item"
+.cR .LI ) (
+macros, each followed by the actual text of the corresponding list item.
+.LI
+The
+.I "list end"
+.cR .LE ) (
+macro that terminates the list and restores the previous indentation.
+.LE
+.P
+Lists may be nested up to six levels.
+The list-initialization macro saves the previous list status (indentation,
+marking style, etc.); the
+.cR .LE
+macro restores it.
+.P
+With this approach, the format of a list is specified
+only once at the beginning of that list.
+In addition, by building on the existing structure,
+users may create their own customized sets of list
+macros with relatively little effort (see \(sc5.4 and Appendix\ B).
+.P
+Spacing at the beginning of the list and between the items
+can be suppressed by setting the
+.cR Ls
+(list space) register.
+.cR Ls
+is set to the innermost list level for which spacing
+is done.
+For example,
+.iS
+\&.nr Ls 0
+.iE
+specifies that no spacing will occur around any
+list items.
+The default value for
+.cR Ls
+is 6 (which is the maximum list nesting level).
+.H 2 "Sample Nested Lists"
+The input for several lists is shown below
+and the corresponding output
+is shown on the following page.
+The
+.cR .AL
+and
+.cR .DL
+macro calls contained therein are examples of the
+list-initialization macros.
+This example will help us to explain the material in the following sections.
+.DS I
+.ft 5
+\&.AL A
+\&.LI
+This is an alphabetized item.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+\&.AL
+\&.LI
+This is a numbered item.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+\&.DL
+\&.LI
+This is a dash item.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+\&.LI + 1
+This is a dash item with a ``plus'' as prefix.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+\&.LE
+\&.LI
+This is numbered item 2.
+\&.LE
+\&.LI
+This is another alphabetized item, B.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+\&.LE
+\&.P
+This paragraph appears at the left margin.
+.sp
+.ce
+.ft 3
+Sample Nested Lists \(em Input
+.ft 1
+.sp
+.DE
+.DS L F
+.AL A
+.LI
+This is an alphabetized item.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.AL
+.LI
+This is a numbered item.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.DL
+.LI
+This is a dash item.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.LI + 1
+This is a dash item with a ``plus'' as prefix.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.LE
+.LI
+This is numbered item 2.
+.LE
+.LI
+This is another alphabetized item, B.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.LE
+.P
+This paragraph appears at the left margin.
+.sp
+.ce
+.ft 3
+Sample Nested Lists \(em Output
+.ft 1
+.DE
+.H 2 "Basic List Macros"
+Because all lists share the same overall structure
+except for the list-initialization macro, we first
+discuss the macros common to all lists.
+Each list-initialization macro is covered in \(sc5.3.3.
+.H 3 "List Item"
+.iS
+\&.LI \f1[\*(iAmark\f1] [\*(iR1\f1]
+.cA "one or more lines of text"
+.cA "for the list item"
+.iE
+The
+.cR .LI
+macro is used with all lists.
+It normally causes the output of one blank vertical
+space before its item, although this may be suppressed.
+If no arguments are given, it labels its item with the current mark
+which is specified by the most recent list-initialization macro.
+If a single argument is given to
+.cR .LI ,
+that argument is output instead of the current mark.
+If two arguments are given, the first argument becomes a prefix
+to the current mark, thus allowing the user to emphasize one or more items in a list.
+One unpaddable space is inserted between the prefix and the mark.
+For example:
+.iS
+\&.BL 6
+\&.LI
+This is a simple bullet item.
+\&.LI +
+This replaces the bullet with a ``plus.''
+\&.LI + 1
+But this uses ``plus'' as prefix to the bullet.
+\&.LE
+.iE
+yields:
+.DS L F
+.BL 6
+.LI
+This is a simple bullet item.
+.LI +
+This replaces the bullet with a ``plus.''
+.LI + 1
+But this uses ``plus'' as prefix to the bullet.
+.LE
+.DE
+.P
+If the current mark (in the current list)
+is a null string, and the first argument of
+.cR .LI
+is omitted or null, the resulting effect is that of a
+hanging indent,
+i.e., the first line of the following text is ``outdented,''
+starting at the same place where the mark would have started.
+.P
+Note:  The mark must not contain ordinary (paddable)
+spaces, because alignment of items will be lost if
+the right margin is justified.
+.H 3 "List End"
+.iS
+\&.LE [\*(iR1\f1]
+.iE
+The list end macro restores the state of the list back to that
+existing just before the most recent list-initialization macro call.
+If the second argument is the digit
+.cR 1 ,
+then the list is followed by one blank vertical space.
+This option should generally be used only when the
+.cR .LE
+is followed by running text, but not when
+followed by a macro that produces a blank vertical space of its own, such as
+.cR .P ,
+.cR .H
+or
+.cR .LI .
+.P
+.cR .H
+and
+.cR .HU
+automatically clear all list information, so one may legally omit the
+.cR .LE (s)
+that would normally occur just before either of these macros.
+Such a practice is
+.I not
+recommended, however, because errors will occur if the list text is separated from
+the heading at some later time (e.g., by insertion of text).
+.H 3 "List Initialization Macros."
+The following are the various list-initialization macros.
+They are actually implemented as calls to the more basic
+.cR .LB
+macro (see \(sc5.4).
+.P
+Each type of list has a default indentation appropriate for that style.
+It is possible to override the default indentation for a particular list
+by supplying the
+.cA text\(hyindent
+argument to the list initialization macro.
+If a value is given for the
+.cA text\(hyindent
+argument, that value must be an unscaled number
+and is treated as ens; if
+.cA text\(hyindent
+is null, the default indentation is used.
+.P
+The spacing between list items may be suppressed for a particular list.
+If the last argument to the list initialization macro is the digit
+.cR 1 ,
+a blank vertical space will not separate the items in the list.
+However, a blank vertical space will occur before the first item.
+.H 4 "Automatically-Numbered or Alphabetized Lists"
+.iS
+\&.AL \f1[\*(iAtype\f1] [\*(iAtext-indent\|\f1] [\*(iR1\f1]
+.iE
+The
+.cR .AL
+macro is used to begin sequentially-numbered or alphabetized lists.
+If there are no arguments, the list is numbered, and text is indented
+5 ens from the indent in force when
+.cR .AL
+is called, thus leaving room for a space, two digits, a period, and two
+spaces before the text.
+.P
+The
+.cA type
+argument may be given to obtain a different type
+of sequencing, and its value should indicate the first
+element in the sequence desired, i.e., it must be
+.cR 1 ,
+.cR A ,
+.cR a ,
+.cR I 
+or
+.cR i .
+If
+.cA type
+is omitted or null, then 1 is assumed.
+.P
+By default, the indentation for an automatically-numbered list
+is taken from the value in register
+.cR Li ,
+which is initially 5 ens.
+Register
+.cR Li
+may be changed to specify a different indent for all
+automatically-numbered lists.
+The
+.cA text\(hyindent
+argument overrides the default indentation for that list only.
+.H 4 "Bullet List"
+.iS
+\&.BL \f1[\*(iAtext-indent\|\f1] [\*(iR1\f1]
+.iE
+The
+.cR .BL
+macro begins a bullet list in which each item is marked
+by a bullet (\*(BU) followed by one space.
+By default, the indentation for a bullet list is the same
+as for an indented paragraph as given in register
+.cR Pi .
+The
+.cA text\(hyindent
+argument overrides the default indentation for that list only.
+.H 4 "Dash List"
+.iS
+\&.DL \f1[\*(iAtext-indent\|\f1] [\*(iR1\f1]
+.iE
+The
+.cR .DL
+macro is identical to
+.cR .BL ,
+except that an em dash (\*(EM) is used instead of a bullet.
+.H 4 "Marked List"
+.iS
+\&.ML \*(iAmark\f1 [\*(iAtext-indent\|\f1] [\*(iR1\f1]
+.iE
+The
+.cR .ML
+macro is much like
+.cR .BL
+and
+.cR .DL ,
+but expects the user to specify an arbitrary mark which may consist of more
+than a single character.
+By default, text is indented one more space than the width of
+.cA mark .
+The
+.cA text\(hyindent
+argument overrides the default indentation for that list only.
+.H 4 "Reference List"
+.iS
+\&.RL \f1[\*(iAtext-indent\|\f1] [\*(iR1\f1]
+.iE
+The
+.cR .RL
+macro begins an automatically-numbered reference list in
+which the numbers are enclosed by square brackets [\ ].
+By default, the indentation for a reference list is 5 ens,
+a convenient value for lists numbered up to 99.
+The
+.cA text\(hyindent
+argument overrides the default indentation for that list only.
+.H 4 "Variable-Item List"
+.iS
+\&.VL \*(iAtext-indent\|\f1 [\*(iAmark-indent\|\f1] [\*(iR1\f1]
+.iE
+When a list begins with a
+.cR .VL ,
+there is effectively no current mark;
+it is expected that each
+.cR .LI
+will provide its own mark.
+This form is typically used to display definitions of terms or phrases.
+The
+.cA mark\(hyindent
+argument gives the number of spaces from the current indent
+to the beginning of the mark;
+.cA mark\(hyindent
+defaults to 0 if omitted or null.
+The
+.cA text\(hyindent
+argument gives the distance (in ens) from the current indent
+to the beginning of the text.
+For example:
+.tr~~
+.iS
+\&.VL 20 2
+\&.LI "mark\e 1"
+\&Here is a description of mark 1;
+\&the argument ``mark\ 1'' of the .LI line contains
+\&an unpaddable space in order to avoid extra spaces
+\&between ``mark'' and ``1''.
+\&.LI "second\e mark"
+\&This is the second mark, also using an unpaddable space.
+\&.LI "third\e mark\e longer\e than\e indent:"
+\&This item shows the effect of a long mark;
+\&one space separates the mark from the text that follows.
+\&.LI "\e "
+\&This item effectively has no mark due to the unpaddable space
+\&following the .LI macro.
+\&The unpaddable space is needed for this list item,
+\&otherwise a ``hanging indent'' would have been produced.
+\&.LE
+.iE
+.tr~
+yields:
+.DS L F
+.VL 20 2
+.LI "mark\ 1"
+Here is a description of mark 1;
+the argument ``mark 1'' of the .LI line contains
+an unpaddable space in order to avoid extra spaces
+between ``mark'' and ``1''.
+.LI "second\ mark"
+This is the second mark, also using an unpaddable space.
+.LI "third\ mark\ longer\ than\ indent:"
+This item shows the effect of a long mark;
+one space separates the mark from the text that follows.
+.LI "\ "
+This item effectively has no mark due to the unpaddable space
+following the .LI macro.
+The unpaddable space is needed for this list item,
+otherwise a ``hanging indent'' would have been produced.
+.LE
+.DE
+.P
+A hanging indent is produced by using
+.cR .VL
+and calling
+.cR .LI
+with no arguments or with a null first argument.
+For example:
+.iS
+\&.VL 10
+\&.LI
+Here is some text to show a hanging indent.
+The first line of text is at the left margin.
+The second is indented 10 ens.
+\&.LE
+.iE
+.br
+.ne4v
+yields:
+.DS L F
+.VL 10
+.LI
+Here is some text to show a hanging indent.
+The first line of text is at the left margin.
+The second is indented 10 ens.
+.LE
+.DE
+.H 2 "List-Begin Macro and Customized Lists \*(BU"
+.iS
+\&.LB \*(iAtext-indent\0mark-indent\0pad\0type\0\f1[\*(iAmark\f1] [\*(iALI-space\f1] [\*(iALB-space\f1]
+.iE
+The list-initialization macros described above suffice for almost all cases.
+However, one may obtain more control over the layout of lists by
+using the basic list-begin macro
+.cR .LB ,
+which is also used by all the other list-initialization macros.
+(Appendix B shows how to use
+.cR .LB
+to build other kinds of lists.)
+.P
+The argument
+.cA text\(hyindent
+gives the number of ens that
+text is indented from the current indent.
+Normally, this value is taken from register
+.cR Li
+for automatic lists and from register
+.cR Pi
+for bullet and dash lists. 
+.P
+The combination of
+.cA mark\(hyindent
+and
+.cA pad
+determines the placement of the mark.
+The mark is placed within an area (called ``mark area'') that starts
+.cA mark\(hyindent
+spaces to the right of the current indent, and ends where the text begins (i.e., ends
+.cA text\(hyindent
+spaces to the right of the current indent).
+Within the mark area, the mark is left-justified if
+.cA pad
+is 0.
+If
+.cA pad
+is greater than 0, say
+.IR n ,
+blanks are appended to the mark; the
+.cA mark\(hyindent
+value (typically 0) is ignored.
+The resulting string immediately precedes the text.
+That is, the mark is effectively right-justified
+.cA pad
+spaces immediately to the left of the text.
+.P
+The arguments
+.cA type
+and
+.cA mark
+interact with one another to control the marking style.
+If
+.cA type
+is 0, simple marking is performed using the format given in
+.cA mark .
+If
+.cA type
+is greater than 0,
+automatic numbering or alphabetizing is performed and
+.cA mark
+is interpreted as the first 
+item in the sequence for numbering or alphabetizing
+(chosen from the set
+.cR 1 ,
+.cR A ,
+.cR a ,
+.cR I ,
+.cR i
+as in \(sc5.3.3.1).
+.DS
+.TS
+center box tab(;);
+c c cf1
+cf5 lf1 lf1.
+\*(iAtype\fP;\*(iAmark\fP;Result
+_
+0;omitted;hanging indent
+\^;\*(iAstring\fP;\*(iAstring\fP is the mark
+_
+\f1greater;omitted;Arabic numbering
+\f1than\fP 0;one of:;automatic numbering or
+;\*(iR1\fP, \*(iRA\fP, \*(iRa\fP, \*(iRI\fP, \*(iRi\fP;  alphabetic sequencing
+.TE
+.DE
+.P
+Each non-zero value of
+.cA type
+from 1 to 6 selects a different way of displaying the marks:
+.DS
+.TS
+center box tab(;);
+l lf1
+nf5 cf1.
+\*(iAtype\fP;Appearance
+_
+1;\*(iAx\fP.
+2;\*(iAx\fP)
+3;(\*(iAx\fP)
+4;[\*(iAx\fP]
+5;<\*(iA\|x\|\fP>
+6;{\*(iAx\fP}
+.TE
+.DE
+.P
+where \f2x\f1 is the generated number or letter.
+.P
+.cA LI-space
+gives the number of blank vertical spaces that should be output by each
+.cR .LI
+macro in the list.
+If omitted,
+.cA LI-space
+defaults to 1; the value 0 can be used to obtain compact lists.
+If
+.cA LI-space
+is greater than 0, the
+.cR .LI
+macro issues a
+.cR .ne
+request for two lines just before printing the mark.
+.cA LB-space
+gives the number of blank vertical spaces to be output by
+.cR .LB
+itself.
+If omitted,
+.cA LB-space
+defaults to 0.
+.P
+There are three reasonable combinations of
+.cA LI-space
+and
+.cA LB-space .
+The normal case is to set
+.cA LI-space
+to 1 and
+.cA LB-space
+to 0, yielding one blank vertical space before
+each item in the list; such a list is usually terminated with a
+.cR ".LE\ 1"
+to end the list with a blank vertical space.
+In the second case, for a more compact list, set
+.cA LI-space
+to 0 and
+.cA LB-space
+to 1, and, again, use
+.cR ".LE\ 1"
+at the end of the list.
+The result is a list with one blank vertical space before and after it.
+If you set both
+.cA LI-space
+and
+.cA LB-space
+to 0, and use
+.cR .LE
+to end the list, a list without any
+blank vertical spaces will result.

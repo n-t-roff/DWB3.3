@@ -1,0 +1,350 @@
+.ds dN /usr/lib/nterm
+.TH NTERM 5
+.SH NAME
+.B nterm
+\- terminal driving tables for
+.B nroff
+.SH DESCRIPTION
+.BR nroff (1)
+uses driving tables to customize its output for various types of
+output devices, such as printing terminals, special word-processing
+terminals (such as Diablo, Qume, or
+.SM NEC
+Spinwriter mechanisms),
+or special output filter programs.  
+These driving tables are written as
+.SM ASCII
+files, and are installed in
+.MI \*(dN/tab. name\f1,
+where
+.I name
+is the name for that terminal type as given in
+.BR nroff (1).
+.PP
+The first line of a driving table should contain the name of the
+terminal:  simply a string with no embedded white space.
+``White space'' means any
+combination of spaces, tabs and newlines.
+The next part of the driver table is structured as follows:
+.nr PD 1p
+.RS 0.25i
+.TP 1i
+.MW bset
+[\|\f2integer\f1\|]     (not supported in all versions of
+.BR nroff )
+.TP
+.MW breset
+[\|\f2integer\f1\|]     (not supported in all versions of
+.BR nroff )
+.TP
+.MW Hor
+[\|\f2integer\f1\|]
+.TP
+.MW Vert
+[\|\f2integer\f1\|]
+.TP
+.MW Newline
+[\|\f2integer\f1\|]
+.TP
+.MW Char
+[\|\f2integer\f1\|]
+.TP
+.MW Em
+[\|\f2integer\f1\|]
+.TP
+.MW Halfline
+[\|\f2integer\f1\|]
+.TP
+.MW Adj
+[\|\f2integer\f1\|]
+.TP
+.MW twinit
+[\|\f2character string\f1\|]
+.TP
+.MW twrest
+[\|\f2character string\f1\|]
+.TP
+.MW twnl
+[\|\f2character string\f1\|]
+.TP
+.MW hlr
+[\|\f2character string\f1\|]
+.TP
+.MW hlf
+[\|\f2character string\f1\|]
+.TP
+.MW flr
+[\|\f2character string\f1\|]
+.TP
+.MW bdon
+[\|\f2character string\f1\|]
+.TP
+.MW bdoff
+[\|\f2character string\f1\|]
+.TP
+.MW iton
+[\|\f2character string\f1\|]
+.TP
+.MW itoff
+[\|\f2character string\f1\|]
+.TP
+.MW ploton
+[\|\f2character string\f1\|]
+.TP
+.MW plotoff
+[\|\f2character string\f1\|]
+.TP
+.MW up
+[\|\f2character string\f1\|]
+.TP
+.MW down
+[\|\f2character string\f1\|]
+.TP
+.MW right
+[\|\f2character string\f1\|]
+.TP
+.MW left
+[\f2character string\f1]
+.RE
+.PP
+The meanings of these fields are as follows:
+.nr PD 3p
+.TP 1i
+.MW bset
+bits to set in the
+.I c_oflag
+field of the
+.B termio
+structure before output.
+.TP
+.MW breset
+bits to reset in the
+.I c_oflag
+field of the
+.B termio
+structure before output.
+.TP 
+.MW Hor
+horizontal resolution in units of 1/240 of an inch.
+.TP
+.MW Vert
+vertical resolution in units of 1/240 of an inch.
+.TP
+.MW Newline
+space moved by a newline (linefeed) character in
+units of 1/240 of an inch.
+.TP
+.MW Char
+quantum of character sizes, in units of 1/240 of an inch.
+(i.e., a character is a multiple of
+.MW Char
+units wide)
+.TP
+.MW Em
+size of an em in units of 1/240 of an inch.
+.TP
+.MW Halfline
+space moved by a half-linefeed (or half-reverse-linefeed)
+character in units in 1/240 of an inch.
+.TP
+.MW Adj
+quantum of white space, in 1/240 of an inch.
+(i.e., white spaces are a multiple of
+.MW Adj
+units wide).
+Note:  If this is less than the size of the space character,
+.B nroff
+will output fractional spaces using plot mode.
+Also, if the
+.OP \-e
+switch to
+.B nroff
+is used,
+.MW Adj
+is set equal to
+.MW Hor
+by
+.BR nroff .
+.TP
+.MW twinit
+sequence of characters used to initialize the terminal in a mode suitable for
+.BR nroff .
+.TP
+.MW twrest
+sequence of characters used to restore the terminal to normal mode.
+.TP
+.MW twnl
+sequence of characters used to move down one line.
+.TP
+.MW hlr
+sequence of characters used to move up one-half line.
+.TP
+.MW hlf
+sequence of characters used to move down one-half line.
+.TP
+.MW flr
+sequence of characters used to move up one line.
+.TP
+.MW bdon
+sequence of characters used to turn on hardware boldface mode, if any.
+.TP
+.MW bdoff
+sequence of characters used to turn off hardware boldface mode, if any.
+.TP
+.MW iton
+sequence of characters used to turn on hardware italics mode, if any.
+.TP
+.MW itoff
+sequence of characters used to turn off hardware italics mode, if any.
+.TP
+.MW ploton
+sequence of characters used to turn on hardware plot mode
+(for Diablo-type mechanisms), if any.
+.TP
+.MW plotoff
+sequence of characters used to turn off hardware plot mode
+(for Diablo-type mechanisms), if any.
+.TP
+.MW up
+sequence of characters used to move up one resolution unit
+.RM ( Vert )
+in plot mode, if any.
+.TP
+.MW down
+sequence of characters used to move down one resolution unit
+.RM ( Vert )
+in plot mode, if any.
+.TP
+.MW right
+sequence of characters used to move right one resolution unit
+.RM ( Hor )
+in plot mode, if any.
+.TP
+.MW left
+sequence of characters used to move left one resolution unit
+.RM ( Hor )
+in plot mode, if any.
+.PP
+This part of the driving table is fixed format, and 
+you cannot change the order of entries.
+You should put entries on separate lines, and these lines
+should contain exactly two fields (no comments allowed)
+separated by white space. 
+For example, 
+.EX
+bset     0
+breset   0
+Hor      24
+.EE
+and so on.
+.PP
+Follow this first part of the driving table with a line 
+containing the word
+.MR charset ,
+and then specify a table of special characters that you want to include. 
+That is, specify all the non-\s-1ASCII\s+1 characters that 
+.BR nroff (1)
+knows by two character names, such as
+.MR \e(hy .
+If 
+.B nroff
+does not find the word
+.MW charset
+where it expects to,
+it will abort with an error message.
+.PP
+Each definition in the part after
+.MW charset
+occupies one line, and has the following format:
+.EX
+.ul
+chname  width  output
+.EE
+where
+.I chname
+is the two-character name (e.g.,
+.MW \e(dg
+for dagger)
+of the special character,
+.I width
+is its width in ems, and
+.I output
+is the string of characters and escape sequences to send to
+the terminal to produce the special character.
+.PP
+If any field in the
+.MW charset
+part of the driving
+table does not pertain to the output device,
+you may give that particular sequence as a null string, or leave
+out the entry.
+Special characters that do not have a definition
+in this file are ignored on output by 
+.BR nroff (1).
+.PP
+The following escapes may be used in the definition of the
+character output:
+.EX
+\eb     \f1backspace\fP
+\et     \f1tab\fP
+\er     \f1return (no linefeed)\fP
+.br
+\en     \f1line return (newline)\fP
+.EE
+You may put the
+.MW charset
+definitions in any order,
+so it is possible to speed up 
+.B nroff 
+by putting the most frequently used characters first.
+For example,
+.EX
+charset
+em  1  -
+hy  1  -
+\e-  1  -
+bu  1  +\ebo
+.EE
+and so on.
+.PP
+The best way to create a terminal table for a new device is to
+take an existing terminal table and edit it to suit your needs.
+Once you create such a file, put it in the directory
+.MR \*(dN ,
+and give it the name
+.MI tab. xyz
+where
+.I xyz
+is the name of the terminal and the name that you pass
+.B nroff
+via the
+.OP \-T
+option
+(for example,
+.OP "nroff -T" xyz ).
+.SH NOTES
+Normal 8-bit input is an encoding of local motions interpreted by
+.BR nroff .
+For example, octal codes 000 through 177 represent
+ordinary 7-bit \s-1ASCII\s+1.
+Some local motions (for octal codes 200 through 377) include:
+200 means ``right,'' 240 means ``left,'' 300 means ``down'' and
+340 means ``up,''
+any of which can be used with a 5-bit value (octal codes 001 through 037)
+to represent the magnitude of motion.
+.PP
+By default,
+.B nroff
+treats any octal value of 200 or greater as a local motion;
+however, if a definition includes a
+.MW %
+the following byte is output verbatim.
+To pass through an octal code for a particular device, uninterpreted by
+.BR nroff ,
+use the form \*(mW%\f2nnn\f1 where
+.I nnn
+is the octal value (three digits).
+.SH FILES
+.MI \*(dN/tab. name
+.SH SEE ALSO
+.BR nroff (1)

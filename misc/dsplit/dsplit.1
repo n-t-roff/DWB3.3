@@ -1,0 +1,81 @@
+.TH DSPLIT 1
+.SH NAME
+.B dsplit
+\- split
+.B troff
+output into segments
+.SH SYNOPSIS
+\*(mBdsplit\f1
+.OP "" options []
+.OP "" file []
+.SH DESCRIPTION
+.B dsplit
+splits
+.B troff
+output files into small, self-contained pieces.
+Breaks always occur at page boundaries, and are
+only forced when the specified
+number of pages or bytes
+in the current segment has been exceeded.
+Standard input is used if
+.I file
+is omitted.
+The following options are recognized:
+.TP 0.75i
+.OP \-p num
+Segmentation by pages.
+Split output into segments consisting of no more than
+.I num
+pages (default is 20).
+.TP 0.75i
+.OP \-b num
+Segmentation by bytes.
+Complete current page in segment when there are more than
+.I num
+bytes (default 100,000) in the current segment.
+The next segment will begin with the next new page.
+.TP 0.75i
+.OP \-f name
+Use
+.I name
+as the pathname prefix for the different segments.
+The default is
+.MR dsplit.out .
+Consecutive integers, starting at 01, are appended to
+.I name
+to produce the name of the file used for the next segment.
+.TP 0.75i
+.OP \-r
+Report the name of the file containing the segment
+just completed.
+.TP 0.75i
+.OP \-s string
+Separate each segment with a line containing
+.I string
+(default is \s-1NULL\s+1).
+This option is only used if writing to standard output, and is
+automatically disabled if the
+.MW \-f
+option is used.
+.PP
+.SH EXAMPLES
+If file
+.MW troff.out
+contains the output from a large
+.B troff
+run
+(say 144 pages), the command
+.EX
+dsplit -p50 -fpart troff.out
+.EE
+splits the file into 50-page segments;
+the first 50 pages, the second 50 pages, and the remaining pages
+are contained in files
+.MR part01 ,
+.MR part02 ,
+and
+.MR part03 ,
+respectively.
+.SH "SEE ALSO"
+.BR troff (1),
+.BR troff (5)

@@ -1,0 +1,239 @@
+%!PS-Adobe-2.0
+%%Creator: picasso
+%%BoundingBox: (atend)
+%%Pages: (atend)
+%%EndComments
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+%!
+%	@(#)newpic newpic.ps 1.0b@(#)	10/27/89
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+%%EndProlog
+%%BeginSetup
+%%EndSetup
+%%Page: ? 1
+%%PageBoundingBox: 131 295 479 496
+%%BeginPageSetup
+-1.75 0.85714 53.308 53.308 PIC
+%%EndPageSetup
+ 0 w
+ 0 g
+ [] 0 d
+2.9802e-07 0.17772 0.053435 0.013263 -0.086459 0.1149 0.08646 0.1149 -0.053435 0.013263 5 2.7093e-07 0.17772 L 1 g
+ c f
+-1.5 -1 1.5 1 Q 0 g
+ gs 0 0 1 rgb f gr s
+-1.25 0.88223 -1.1966 0.71777 -1.3365 0.81941 -1.1635 0.81941 -1.3034 0.71777 5 -1.25 0.88223 L 1 g
+ c f
+-0.75 0.88223 -0.69657 0.71777 -0.83646 0.81941 -0.66354 0.81941 -0.80344 0.71777 5 -0.75 0.88223 L c f
+-0.25 0.88223 -0.19657 0.71777 -0.33646 0.81941 -0.16354 0.81941 -0.30344 0.71777 5 -0.25 0.88223 L c f
+0.25 0.88223 0.30343 0.71777 0.16354 0.81941 0.33646 0.81941 0.19656 0.71777 5 0.25 0.88223 L c f
+0.75 0.88223 0.80343 0.71777 0.66354 0.81941 0.83646 0.81941 0.69656 0.71777 5 0.75 0.88223 L c f
+1.25 0.88223 1.3034 0.71777 1.1635 0.81941 1.3365 0.81941 1.1966 0.71777 5 1.25 0.88223 L c f
+-1.25 0.48223 -1.1966 0.31777 -1.3365 0.41941 -1.1635 0.41941 -1.3034 0.31777 5 -1.25 0.48223 L c f
+-1 0.68223 -0.94657 0.51777 -1.0865 0.61941 -0.91354 0.61941 -1.0534 0.51777 5 -1 0.68223 L c f
+-0.75 0.48223 -0.69657 0.31777 -0.83646 0.41941 -0.66354 0.41941 -0.80344 0.31777 5 -0.75 0.48223 L c f
+-0.5 0.68223 -0.44657 0.51777 -0.58646 0.61941 -0.41354 0.61941 -0.55344 0.51777 5 -0.5 0.68223 L c f
+-0.25 0.48223 -0.19657 0.31777 -0.33646 0.41941 -0.16354 0.41941 -0.30344 0.31777 5 -0.25 0.48223 L c f
+0 0.68223 0.053435 0.51777 -0.08646 0.61941 0.08646 0.61941 -0.053435 0.51777 5 -2.7093e-08 0.68223 L c f
+0.25 0.48223 0.30343 0.31777 0.16354 0.41941 0.33646 0.41941 0.19656 0.31777 5 0.25 0.48223 L c f
+0.5 0.68223 0.55343 0.51777 0.41354 0.61941 0.58646 0.61941 0.44656 0.51777 5 0.5 0.68223 L c f
+0.75 0.48223 0.80343 0.31777 0.66354 0.41941 0.83646 0.41941 0.69656 0.31777 5 0.75 0.48223 L c f
+1 0.68223 1.0534 0.51777 0.91354 0.61941 1.0865 0.61941 0.94656 0.51777 5 1 0.68223 L c f
+1.25 0.48223 1.3034 0.31777 1.1635 0.41941 1.3365 0.41941 1.1966 0.31777 5 1.25 0.48223 L c f
+-1.25 0.082228 -1.1966 -0.082228 -1.3365 0.019411 -1.1635 0.019411 -1.3034 -0.082228 5 -1.25 0.082228 L c f
+-1 0.28223 -0.94657 0.11777 -1.0865 0.21941 -0.91354 0.21941 -1.0534 0.11777 5 -1 0.28223 L c f
+-0.75 0.082228 -0.69657 -0.082228 -0.83646 0.019411 -0.66354 0.019411 -0.80344 -0.082228 5 -0.75 0.082228 L c f
+-0.5 0.28223 -0.44657 0.11777 -0.58646 0.21941 -0.41354 0.21941 -0.55344 0.11777 5 -0.5 0.28223 L c f
+-0.25 0.082228 -0.19657 -0.082228 -0.33646 0.019411 -0.16354 0.019411 -0.30344 -0.082228 5 -0.25 0.082228 L c f
+0 0.28223 0.053435 0.11777 -0.08646 0.21941 0.08646 0.21941 -0.053435 0.11777 5 -2.7093e-08 0.28223 L c f
+0.25 0.082228 0.30343 -0.082228 0.16354 0.019411 0.33646 0.019411 0.19656 -0.082228 5 0.25 0.082228 L c f
+0.5 0.28223 0.55343 0.11777 0.41354 0.21941 0.58646 0.21941 0.44656 0.11777 5 0.5 0.28223 L c f
+0.75 0.082228 0.80343 -0.082228 0.66354 0.019411 0.83646 0.019411 0.69656 -0.082228 5 0.75 0.082228 L c f
+1 0.28223 1.0534 0.11777 0.91354 0.21941 1.0865 0.21941 0.94656 0.11777 5 1 0.28223 L c f
+1.25 0.082228 1.3034 -0.082228 1.1635 0.019411 1.3365 0.019411 1.1966 -0.082228 5 1.25 0.082228 L c f
+-1.25 -0.31777 -1.1966 -0.48223 -1.3365 -0.38059 -1.1635 -0.38059 -1.3034 -0.48223 5 -1.25 -0.31777 L c f
+-1 -0.11777 -0.94657 -0.28223 -1.0865 -0.18059 -0.91354 -0.18059 -1.0534 -0.28223 5 -1 -0.11777 L c f
+-0.75 -0.31777 -0.69657 -0.48223 -0.83646 -0.38059 -0.66354 -0.38059 -0.80344 -0.48223 5 -0.75 -0.31777 L c f
+-0.5 -0.11777 -0.44657 -0.28223 -0.58646 -0.18059 -0.41354 -0.18059 -0.55344 -0.28223 5 -0.5 -0.11777 L c f
+-0.25 -0.31777 -0.19657 -0.48223 -0.33646 -0.38059 -0.16354 -0.38059 -0.30344 -0.48223 5 -0.25 -0.31777 L c f
+0 -0.11777 0.053435 -0.28223 -0.08646 -0.18059 0.08646 -0.18059 -0.053435 -0.28223 5 -2.7093e-08 -0.11777 L c f
+0.25 -0.31777 0.30343 -0.48223 0.16354 -0.38059 0.33646 -0.38059 0.19656 -0.48223 5 0.25 -0.31777 L c f
+0.5 -0.11777 0.55343 -0.28223 0.41354 -0.18059 0.58646 -0.18059 0.44656 -0.28223 5 0.5 -0.11777 L c f
+0.75 -0.31777 0.80343 -0.48223 0.66354 -0.38059 0.83646 -0.38059 0.69656 -0.48223 5 0.75 -0.31777 L c f
+1 -0.11777 1.0534 -0.28223 0.91354 -0.18059 1.0865 -0.18059 0.94656 -0.28223 5 1 -0.11777 L c f
+1.25 -0.31777 1.3034 -0.48223 1.1635 -0.38059 1.3365 -0.38059 1.1966 -0.48223 5 1.25 -0.31777 L c f
+-1.25 -0.71777 -1.1966 -0.88223 -1.3365 -0.78059 -1.1635 -0.78059 -1.3034 -0.88223 5 -1.25 -0.71777 L c f
+-1 -0.51777 -0.94657 -0.68223 -1.0865 -0.58059 -0.91354 -0.58059 -1.0534 -0.68223 5 -1 -0.51777 L c f
+-0.75 -0.71777 -0.69657 -0.88223 -0.83646 -0.78059 -0.66354 -0.78059 -0.80344 -0.88223 5 -0.75 -0.71777 L c f
+-0.5 -0.51777 -0.44657 -0.68223 -0.58646 -0.58059 -0.41354 -0.58059 -0.55344 -0.68223 5 -0.5 -0.51777 L c f
+-0.25 -0.71777 -0.19657 -0.88223 -0.33646 -0.78059 -0.16354 -0.78059 -0.30344 -0.88223 5 -0.25 -0.71777 L c f
+0 -0.51777 0.053435 -0.68223 -0.08646 -0.58059 0.08646 -0.58059 -0.053435 -0.68223 5 -2.7093e-08 -0.51777 L c f
+0.25 -0.71777 0.30343 -0.88223 0.16354 -0.78059 0.33646 -0.78059 0.19656 -0.88223 5 0.25 -0.71777 L c f
+0.5 -0.51777 0.55343 -0.68223 0.41354 -0.58059 0.58646 -0.58059 0.44656 -0.68223 5 0.5 -0.51777 L c f
+0.75 -0.71777 0.80343 -0.88223 0.66354 -0.78059 0.83646 -0.78059 0.69656 -0.88223 5 0.75 -0.71777 L c f
+1 -0.51777 1.0534 -0.68223 0.91354 -0.58059 1.0865 -0.58059 0.94656 -0.68223 5 1 -0.51777 L c f
+1.25 -0.71777 1.3034 -0.88223 1.1635 -0.78059 1.3365 -0.78059 1.1966 -0.88223 5 1.25 -0.71777 L c f
+1.5 0.71429 5 1 Q 1 0 0 rgb
+ c f
+1.5 0.42857 5 0.71429 Q 1 g
+ c f
+1.5 0.14286 5 0.42857 Q 1 0 0 rgb
+ c f
+1.5 -0.14286 5 0.14286 Q 1 g
+ c f
+1.5 -0.42857 5 -0.14286 Q 1 0 0 rgb
+ c f
+1.5 -0.71429 5 -0.42857 Q 1 g
+ c f
+1.5 -1 5 -0.71429 Q 1 0 0 rgb
+ c f
+-1.5 -1.2857 5 -1 Q 1 g
+ c f
+-1.5 -1.5714 5 -1.2857 Q 1 0 0 rgb
+ c f
+-1.5 -1.8571 5 -1.5714 Q 1 g
+ c f
+-1.5 -2.1429 5 -1.8571 Q 1 0 0 rgb
+ c f
+-1.5 -2.4286 5 -2.1429 Q 1 g
+ c f
+-1.5 -2.7143 5 -2.4286 Q 1 0 0 rgb
+ c f
+-1.5 -2.7143 5 1 Q 0 g
+ s
+showpage
+%%Trailer
+%%BoundingBox: 131 295 479 496
+%%Pages: 1

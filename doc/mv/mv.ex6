@@ -1,0 +1,36 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.ds Rg \v'-0.35m'\s-4\(rg\s+4\v'0.35m'
+.Vw 6 "The Works"
+.EQ
+gsize 14
+delim $$
+.EN
+.TS
+center doublebox tab(!);
+Cip+4 | Cb  S   S
+^     | L | L | L
+^     | C | C | C
+^     | C | C | C
+Li    | C | C | N.
+Users!Hardware
+!_!_!_
+!UNIX\*(Rg!Model!Serial
+!System!\^!Number
+=
+OS Dev.!A!VAX!54
+SGS Dev.!B!11/70!3275
+Low-End!C!11/23!221
+_
+And now ...!T{
+.NA
+Some filled text and an equation:
+T}!T{
+$zeta (s)~=~ prod from k=1 to inf k sup -s$
+.AD
+T}!1.2
+.TE

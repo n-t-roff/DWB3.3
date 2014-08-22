@@ -1,0 +1,59 @@
+'''	\"  eqn file | troff -mm [-Tdevname] | ...
+.EQ
+delim $$
+.EN
+.PH "'EQN:  File(\n(.F)''Device(\*(.T)'"
+.P
+.HU Proof
+.DS 3
+.EQ
+-i~cos~omega t~=~i~cos~omega t~=~-i~
+{e sup it~-~e sup -it} over 2~=~
+{e sup +it~-~e sup -it} over 2i
+.EN
+.DE
+.P
+Let us consider $delta (t)$, the unit
+impulse (or Dirac) function.
+We shall define $delta (t)$ conceptually
+as a limit of time functions
+$delta sub n (t)$, which: (i) vanish
+outside $(- epsilon sub n ,+ epsilon sub n )$,
+(ii) are nonnegative in $(- epsilon sub n sup n ,+ epsilon sub n )$,
+(iii) have $int from {- epsilon sub n} to {epsilon sub n}~
+delta (t)dt~=~1$
+(iv) $lim from s~int from {- epsilon sub n} to {epsilon sub n}~
+delta (t)dt~=~0$
+(other alternatives for the approximating
+functions would also have been reasonable).
+.sp 2
+\l'6i'
+.sp 2
+.P
+We are now in a position to define and describe
+the important concept of the transfer function
+of an IS box.
+We have already shown that if
+$cos~omega t~->~B over A~cos ( omega t + delta )$
+and $K$ and $n$ are integers, then
+$K over n~cos~omega t~->~K over n~B over A~cos ( omega t + delta )$.
+If there is even a shred of continuity, we
+may extend the result for rationals to the reals.
+Then for $lambda$ real,
+.DS C
+$lambda~cos~omega t~->~lambda~B over A~cos ( omega t + delta )~$.
+.DE
+.sp 2
+\l'6i'
+.sp 2
+.P
+Now the expectations of the second and third
+series vanish term by term, while the others yield
+$-2~left ( sqrt {1+r over 2}~+~sqrt {1-r over 2} right )~
+e sup {-~{2 pi sup 2} over h sup 2}~cos~{2 pi} over h~phi sub 0$,
+which we have already seen to be small.
+Here is another line of text so that it will continue
+underneath the in-line equation, and we can see how
+it looks.
+Beware:  The square root symbol can only be as large as the largest
+size available on the target device.

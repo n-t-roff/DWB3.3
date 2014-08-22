@@ -1,0 +1,45 @@
+.sp 1i
+.PS
+define foo X
+.ps $1
+box "$1"
+arrow down .25 right .25; move right .05
+arrow right .25; move right .05
+arrow up .25; move right .05
+arc cw ->; move right .05
+arc ->; move right .05
+arc <-; move right .05
+arc cw <-; move right .05
+X
+.PE
+.PS
+foo(24)
+.PE
+.PS
+foo(16)
+.PE
+.PS
+foo(10)
+.PE
+.PS
+foo(9)
+.PE
+.PS
+foo(8)
+.PE
+.PS
+arrowhead = 7
+foo(24)
+.PE
+.PS
+foo(16)
+.PE
+.PS
+foo(10)
+.PE
+.PS
+foo(9)
+.PE
+.PS
+foo(8)
+.PE

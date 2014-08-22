@@ -1,0 +1,44 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.Vh 3 "Levels & Marks"
+.T "Foil Levels & Level Marks"
+This is the .A (left margin) level;
+.B
+this is the .B level,
+.B
+as is this;
+.C
+this is the .C level,
+.C
+as is this;
+.D
+and this is the .D level,
+.D
+as is this.
+.A
+The large bullet, the dash, and the small
+bullet are the default ``marks'' for
+levels .B, .C, and .D, respectively.
+However, these three levels can also
+be marked arbitrarily:
+.B B.
+Like this (this is the .B level);
+.C 3.
+like this (this is the .C level);
+.D d.
+like this (this is the .D level), or
+.D iv.
+like this, or even
+.D \(rh\(bu +4
+like this.
+.A
+The .A level cannot be marked.
+.B
+An arbitrary number of lines of text
+can be included in any item at any level;
+the text will be filled, but neither adjusted
+nor hyphenated, just like this .B level item.

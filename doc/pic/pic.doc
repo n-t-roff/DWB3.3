@@ -1,0 +1,2123 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so defs.pic
+.tS PIC
+\s-1PIC\s+1 \(em A Graphics Language for Typesetting
+.tE
+.aS
+.I Pic
+is a language for drawing simple figures
+on a typesetter.
+The basic objects in
+.I pic
+are
+boxes,
+circles,
+ellipses,
+lines,
+arrows,
+arcs,
+spline curves,
+and text.
+These may be placed anywhere,
+at positions specified absolutely
+or in terms of previous objects.
+The example below illustrates the style and basic capabilities
+of the language.
+.DS CB
+.PS
+ellipse "document"
+arrow
+box "PIC"
+arrow
+box "TBL/EQN" "(optional)" dashed
+arrow
+box "TROFF"
+arrow
+ellipse "typesetter"
+.PE
+.DE
+This picture was created with the input
+.iS
+\&.PS
+ellipse "document"
+arrow
+box "PIC"
+arrow
+box "TBL/EQN" "(optional)" dashed
+arrow
+box "TROFF"
+arrow
+ellipse "typesetter"
+\&.PE
+.iE
+.P
+.I Pic 
+is a
+.I troff
+preprocessor;
+it passes most of its input through untouched, but translates
+commands between
+.cR .PS
+and
+.cR .PE
+into
+.I troff
+commands that draw the pictures.
+.aE
+.H 1 INTRODUCTION
+.I Pic
+is a language for drawing
+pictures.
+It operates as yet another
+.I troff
+preprocessor
+(in the same style as
+.I eqn
+and
+.IR tbl ),
+with pictures delimited by
+.cR .PS
+and
+.cR .PE .
+.I Pic
+is a procedural language\*(EMa picture
+is drawn by specifying (sometimes in painful detail)
+the motions that one goes through to draw it.
+.P
+This document is primarily a user's manual for
+.IR pic .
+The next section shows how to use
+.I pic
+in the most simple way.
+Subsequent sections describe how to change
+the sizes of objects when the defaults are wrong,
+and how to change their positions when the standard positioning rules
+are wrong.
+An appendix describes the language succinctly.
+.H 1 BASICS
+.I Pic
+provides boxes, lines, arrows, circles, ellipses, arcs,
+and splines (smooth curves),
+plus facilities for positioning
+and labeling them.
+The picture below shows all of the fundamental objects
+(except for splines)
+in their default sizes:
+.DS CB
+.PS
+box "box"
+move
+line "line" above
+move
+arrow "arrow" above
+move
+circle "circle"
+move
+ellipse "ellipse"
+move down .25 right
+arc "arc"
+.PE
+.DE
+.br
+.ne 5.5v
+Each picture begins with
+.cR .PS
+and ends with
+.cR .PE ;
+between them are commands to describe the picture.
+Each command is typed on a line by itself.
+For example
+.iS
+\&.PS
+box "this is" "a box"
+\&.PE
+.iE
+creates a standard box (\(34 inch wide, \(12 inch high)
+and centers the two pieces of text in it:
+.DS CB
+.PS
+box "this is" "a box"
+.PE
+.DE
+.P
+Each line of text is a separate quoted string.
+Quotes are mandatory, even if the text contains no blanks.
+(Of course there needn't be any text at all.)
+Each line will be
+printed in the current size and font,
+centered horizontally, and separated
+vertically by the current
+.I troff
+line spacing.
+.I Pic
+does
+not
+center the complete drawing itself,
+but the default definitions of
+.cR .PS
+and
+.cR .PE
+in the
+.cR -ms
+macro package do.
+With the
+.cR -mm
+macro package, the picture should be enclosed in a centered-block
+display.
+.P
+You can use
+.cR circle
+or
+.cR ellipse
+in place of
+.cR box :
+.DS CB
+.PS
+circle "this is" "a box"
+move; move
+ellipse "this is" "a box"
+.PE
+.DE
+.P
+Text is centered on lines and arrows; if there is more than one
+line of text, the lines are centered above and below:
+.iS
+line "this is" "a line"
+.iE
+.DS CB
+.PS
+line "this is" "a line"
+.PE
+.DE
+.iS
+arrow "this is" "an arrow"
+.iE
+.DS CB
+.PS
+arrow "this is" "an arrow"
+.PE
+.DE
+.rs
+.sp 0.5v
+.P
+Boxes and lines may be dashed or dotted;
+just add the word
+.cR dashed
+or
+.cR dotted
+after
+.cR box
+or
+.cR line :
+.iS
+line dashed "dashed" "line"
+.iE
+.DS CB
+.PS
+line dashed "dashed" "line"
+.PE
+.DE
+.rs
+.sp 0.5v
+.P
+Arcs by default turn 90 degrees counterclockwise from the current direction;
+you can make them turn clockwise by saying
+.cR arc
+.cR cw :
+.iS
+line; arc; arc cw; arrow
+.iE
+.DS CB
+.PS
+line; arc; arc cw; arrow
+.PE
+.DE
+A spline might well do this job better; we will return to that shortly.
+.P
+As you might guess,
+.iS
+arc; arc; arc; arc
+.iE
+draws a circle, though not very efficiently.
+Notice that several commands can be put on a single line
+if they are separated by semicolons.
+.br
+.ne 0.8i
+.P
+Objects are normally drawn one after another,
+left to right,
+and connected at the obvious places:
+.iS
+arrow; box "input"; arrow; box "process"; arrow; box "output"; arrow
+.iE
+.DS CB
+.PS
+arrow; box "input"; arrow; box "process"; arrow; box "output"; arrow
+.PE
+.DE
+One way to leave a space is with
+.cR move :
+.iS
+box; move; box; move; box
+.iE
+.DS CB
+.PS
+box; move; box; move; box
+.PE
+.DE
+.P
+Although objects are normally connected left to right,
+this can be changed.
+If you specify a direction (as a separate object), subsequent objects
+will be joined in that direction:
+.iS
+down; box; arrow; ellipse; arrow; circle
+.iE
+.DS CB
+.PS
+down; box; arrow; ellipse; arrow; circle
+.PE
+.DE
+.iS
+left; box; arrow; ellipse; arrow; circle
+.iE
+.DS CB
+.PS
+left; box; arrow; ellipse; arrow; circle
+.PE
+.DE
+Each new picture begins going to the right.
+.P
+Normally, figures are drawn at a fixed scale,
+with objects of a standard size.
+It is possible, however, to arrange that a figure be expanded or shrunk
+to fit a particular width.
+If the
+.cR .PS
+line contains a number, the drawing is forced to be that many inches wide,
+with the height scaled proportionately.
+Thus
+.iS
+\&.PS 3.5
+.iE
+causes the picture to be 3.5 inches wide.
+If two dimensions are specified, the second is the height.
+.P
+.I Pic
+is pretty dumb about the size of text in relation
+to the size of boxes, circles, and so on.
+There is no way to say
+``make a box that just fits around this text''
+or ``make this text fit inside this circle''
+or ``draw a line as long as this text.''
+Tight fitting of text
+can generally only be done by trial and error.
+.br
+.ne 3.5
+.P
+Speaking of errors,
+if you make a grammatical error in the way you describe
+a picture,
+.I pic
+will complain and try to indicate where.
+For example, the invalid input
+.iS
+box arrow box
+.iE
+will draw the message
+.iS
+pic: syntax error near line 5, file -
+ context is
+        box >>>  arrow <<<  box
+.iE
+The brackets
+point to the place where the error was first noted;
+it sometimes follows 
+the word in error, although in this example it's right on target.
+The filename
+.cR - ' `
+is the standard input.
+.H 1 "CONTROLLING SIZES"
+This section deals with how to
+control the sizes of objects
+when the default sizes are not what is wanted.
+The next section deals with positioning them
+when the default positions are not right.
+.P
+Each object that
+.I pic
+knows about
+(boxes, circles, etc.) has
+associated dimensions, like height, width, radius, and so on.
+By default,
+.I pic
+tries to choose sensible default values for these dimensions,
+so that simple pictures can be drawn with a minimum
+of fuss and bother.
+All of the figures and motions shown so far
+have been in their default sizes:
+.DS I
+.TS
+l l.
+box	\(34" wide \(mu \(12" high
+circle	\(12" diameter
+ellipse	\(34" wide \(mu \(12" high
+arc	\(12" radius
+line or arrow	\(12" long
+move	\(12" in the current direction
+.TE
+.DE
+When necessary,
+you can make any object any size you want:
+.iS
+box width 3 height 0.1; circle radius 0.1
+.iE
+.DS CB
+.PS
+	box wid 3 ht 0.1; circle radius 0.1
+.PE
+.DE
+All positions and dimensions are in inches, so
+the box is 3 inches wide and 1/10 inch high and the circle has radius 1/10 inch.
+.P
+An attribute like 
+.cR width
+changes only the one instance of the object.
+You can also change the default size for all objects
+of a particular type by assigning values to
+.I pic
+variables;
+this will be discussed in \(sc6.
+.P
+The attributes of
+.cR height
+(which you can abbreviate to
+.cR ht )
+and
+.cR width
+(or
+.cR wid )
+apply to boxes, circles,
+ellipses,
+and to the head on an arrow.
+The attributes of
+.cR radius
+(or
+.cR rad )
+and
+.cR diameter
+(or
+.cR diam )
+can be used for circles and arcs if they seem more natural.
+.P
+Lines and arrows are most easily drawn by specifying
+the amount of motion from where you are right now,
+in terms of directions.
+Accordingly the words
+.cR up ,
+.cR down ,
+.cR left
+and
+.cR right
+and an optional distance can be attached to
+.cR line ,
+.cR arrow ,
+and
+.cR move :
+.iS
+line up 1 right 2
+arrow left 2
+move left 0.1
+line <-> down 1 "height " rjust
+.iE
+.DS CB
+.PS
+line up 1 right 2
+arrow left 2
+move left 0.1
+line <-> down 1 "height " rjust
+.PE
+.DE
+.br
+.ne 2v
+The notation
+.cR <->
+indicates a two-headed arrow;
+use
+.cR ->
+for a head on the end and
+.cR <-
+for one on the start.
+Lines and arrows are really the same thing;
+in fact,
+.cR arrow
+is a synonym for
+.cR line
+.cR -> .
+.P
+If you don't specify any distance after
+.cR up ,
+.cR down ,
+etc.,
+.I pic
+uses the standard distance:
+.iS
+line up right; line down; line down left; line up
+.iE
+.DS CB
+.PS
+line up right; line down; line down left; line up
+.PE
+.DE
+If you omit the direction associated with a distance,
+the current direction is used.
+.P
+Boxes and lines may be dotted or dashed:
+.iS
+box dotted; line dotted; move; line dashed; box dashed
+.iE
+.DS CB
+.PS
+box dotted; line dotted; move; line dashed; box dashed
+.PE
+.DE
+If there is a number after
+.cR dot ,
+the dots will be approximately that far apart.
+You can also control the size of the dashes (at least somewhat):
+if there is a length after the word
+.cR dashed ,
+the dashes will be that long,
+and the intervening spaces will be as close as possible to that size:
+.iS
+line right 5 dashed; move left 5 down .25; right
+line right 5 dashed 0.25; move left 5 down .25; right
+line right 5 dashed 0.5; move left 5 down .25; right
+line right 5 dashed 1
+.iE
+.DS CB
+.PS
+line right 5 dashed; move left 5 down .25; right
+line right 5 dashed 0.25; move left 5 down .25; right
+line right 5 dashed 0.5; move left 5 down .25; right
+line right 5 dashed 1
+.PE
+.DE
+Dotted or dashed attributes apply only to lines and boxes.
+.P
+You can make any object invisible by adding the word
+.cR invis
+after it.
+This is particularly useful for positioning things correctly
+near text:
+.iS
+box invis "input"; arrow; box invis "output"
+.iE
+.DS CB
+.PS
+box invis "input"; arrow; box invis "output"
+.PE
+.DE
+.br
+.ne 6.5v
+.P
+Text may be positioned on lines and arrows:
+.iS
+arrow "on top of"; move
+arrow "above" "below"; move
+arrow "above" above; move
+arrow "below" below; move
+arrow "above" "on top of" "below"
+.iE
+.rs
+.sp 0.5v
+.DS CB
+.PS
+arrow "on top of"; move
+arrow "above" "below"; move
+arrow "above" above; move
+arrow "below" below; move
+arrow "above" "on top of" "below"
+.PE
+.DE
+.rs
+.sp 0.5v
+.P
+The ``width'' of an arrowhead is the distance across
+its tail;
+the ``height'' is the distance along the shaft.
+The arrowheads in this picture are default size and shape.
+.P
+As we said earlier, arcs go 90 degrees counterclockwise
+from where you are right now, and
+.cR arc
+.cR cw
+changes this to clockwise.
+The default radius is the same as for circles,
+but you can change it with the
+.cR rad
+attribute.
+It is also easy to draw arcs between specific places;
+this will be described in the next section.
+.P
+To put an arrowhead on an arc, use one of
+.cR <- ,
+.cR ->
+or
+.cR <-> ,
+as with lines.
+.P
+In all cases,
+unless an explicit dimension for some object is specified,
+you will get the default size.
+If you want an object to have the same size
+as the previous one of that kind,
+add the word
+.cR same .
+Thus
+in the set of boxes given by
+.iS
+down; box ht 0.2 wid 1.5; move down 0.15; box same; move same; box same
+.iE
+.DS CB
+.PS
+down; box ht 0.2 wid 1.5; move down 0.15; box same; move same; box same
+.PE
+.DE
+the dimensions set by the first
+.cR box
+are used several times;
+similarly, the amount of motion for the second
+.cR move
+is the same as for the first one.
+.P
+You can change the default sizes of objects
+by assigning values to the variables that define their values.
+Here is the list, with their default values:
+.DS I
+.S -1
+.TS
+lf5 lf5 lf1.
+boxwid = 0.75;	boxht = 0.5
+linewid = 0.75;	lineht = 0.5
+circlerad = 0.25;	arcrad = 0.25
+ellipsewid = 0.75;	ellipseht = 0.5
+movewid = 0.75;	moveht = 0.5
+textwid = 0;	textht = 0
+arrowwid = 0.05;	arrowht = 0.1	(These refer to the arrowhead.)
+dashwid = 0.05;	arrowhead = 2	(Arrowhead fill style)
+maxpsht = 11;	maxpswid = 8.5	(Maximum picture dimensions)
+fillval = 0.3;	scale = 1
+.TE
+.S +1
+.DE
+So if you want all your boxes to be long and skinny, and relatively close together,
+.iS
+boxwid = 0.1; boxht = 1
+movewid = 0.2
+box; move; box; move; box
+.iE
+.DS CB
+.PS
+boxwid = 0.1; boxht = 1
+movewid = 0.2
+box; move; box; move; box
+.PE
+.DE
+.PS
+x = boxwid
+ y = boxht
+boxwid = 0.1
+ boxht = 1
+movewid = 0.2
+boxwid = x
+ boxht = y
+arrowhead = 7
+ arrowhead = 2
+.PE
+.P
+Setting the variable
+.cR arrowhead
+to a value like 7 causes arrowheads to be filled by overstriking;
+the default is 2:
+.iS
+arrowhead = 7; arrow; move; arrowhead = 2; arrow
+.iE
+.DS CB
+.PS
+arrowhead = 7; arrow; move; arrowhead = 2; arrow
+.PE
+.DE
+.P
+.I Pic
+works internally in inches.
+Setting the variable
+.cR scale
+to some value causes all dimensions to be scaled down
+by that value.
+Thus, for example,
+.cR scale=2.54
+causes dimensions to be interpreted as centimeters.
+.P
+The numbers given in the
+.cR .PS
+line override the dimensions given in the picture;
+these can be used to force a picture to a particular width and height.
+Experience indicates that a good way to get a picture
+of the right size is to enter its dimensions in inches,
+then if necessary add a width and perhaps height to the
+.cR .PS
+line.
+.P
+Once set, variables like
+.cR boxht
+retain their values from one picture to the next.
+You can reset variables to their default values by listing them in a
+.cR reset
+statement:
+.iS
+reset boxht, boxwid
+.iE
+A bare
+.cR reset
+resets all variables.
+.P
+There is a minimal facility for filling or shading objects,
+intended for Postscript output devices.
+The attribute
+.cR fill
+.I expr
+sets the gray scale value to
+.IR expr ;
+the default, determined by the variable
+.cR fillval ,
+is 0.3.
+Following Postscript, smaller values are darker.
+Thus:
+.iS
+box fill
+box ht boxht/2 wid boxwid/2 "hello" at last box
+.iE
+.DS CB
+.PS
+reset
+box fill
+box ht boxht/2 wid boxwid/2 "hello" at last box
+.PE
+.DE
+.cR fill
+currently only applies to boxes, circles, and ellipses.
+.H 1 "CONTROLLING POSITIONS"
+You can place things anywhere you want;
+.I pic
+provides a variety of ways to talk about positions.
+.I Pic
+uses a standard Cartesian coordinate system with
+.I x
+increasing rightwards and
+.I y
+increasing upwards,
+so any point or object has an
+.I x
+and
+.I y
+position, measured in inches.
+The first object is placed with its start at position 0,0 by default.
+The
+.I x,y
+position of a box, circle or ellipse is its geometric center;
+the position of a line or spline or motion is its beginning;
+the position of an arc is the center of the corresponding circle.
+.P
+Position modifiers like
+.cR from ,
+.cR to ,
+.cR by
+and
+.cR at
+are followed by an
+.I x,y
+pair, and
+can be attached to boxes, circles, lines, motions, and so on,
+to specify or modify a position.
+.P
+You can also use
+.cR up ,
+.cR down ,
+.cR right ,
+and
+.cR left
+with
+.cR line
+and
+.cR move :
+.iS
+.ta +2.5i
+box ht 0.2 wid 0.2 at 0,0 "1"
+move right 0.5	# or "move to 0.5,0"
+box ht 0.2 wid 0.2 "2"
+move right 0.5	# or "move 0.5" or "move same"
+box ht 0.2 wid 0.2 "3"
+.iE
+.DS CB
+.PS 2
+box ht 0.2 wid 0.2 at 0,0 "1"
+move right 0.5	# or "move to 0.5,0"
+box ht 0.2 wid 0.2 "2"
+move right 0.5	# or "move 0.5" or "move same"
+box ht 0.2 wid 0.2 "3"
+.PE
+.DE
+Comments can be used in pictures;
+they begin with a
+.cR #
+and end at the end of the line.
+.P
+Attributes like
+.cR ht
+and
+.cR wid
+and positions like
+.cR at
+can be written out in any order.
+So
+.iS
+box ht 0.2 wid 0.2 at 0,0
+box at 0,0 wid 0.2 ht 0.2
+box ht 0.2 at 0,0 wid 0.2
+.iE
+are all equivalent, though the last is harder to read
+and thus less desirable.
+.P
+The
+.cR from
+and
+.cR to
+attributes are particularly useful with arcs,
+to specify the endpoints.
+By default, arcs are drawn counterclockwise,
+.iS
+"+" at 0,0
+arc -> from 0.5,0 to 0,0.5
+arc -> cw from 0,0 to 1,0.5
+.iE
+.DS CB
+.PS
+"+" at 0,0
+arc -> from 0.5,0 to 0,0.5
+arc -> cw from 0,0 to 1,0.5
+.PE
+.DE
+The radius can be made large to provide flat arcs:
+.iS
+arc -> cw from 0,0 to 2,0 rad 15
+.iE
+.DS CB
+.PS
+arc -> cw from 0,0 to 2,0 rad 15
+.PE
+.DE
+If the circle is under-specified,
+.I pic
+guesses a radius and/or center;
+you will have to provide them explicitly if the guess is wrong.
+.P
+We said earlier that
+objects are normally connected left to right.
+This is an over-simplification.
+The truth is that objects are connected together
+in the direction specified by the most recent
+.cR up ,
+.cR down ,
+.cR left
+or
+.cR right
+(either alone or as part of some object).
+Thus, in
+.iS
+arrow left; box; arrow; circle; arrow
+.iE
+the
+.cR left
+implies connection towards the left:
+.DS CB
+.PS
+arrow left; box; arrow; circle; arrow
+.PE
+.DE
+This could also be written as
+.iS
+left; arrow; box; arrow; circle; arrow
+.iE
+.P
+Objects are joined in the direction determined by the last
+.cR up ,
+.cR down ,
+etc., with the entry point of the second object attached
+to the exit point of the first
+(which is fixed at the time of entry).
+Entry and exit points for boxes, circles and ellipses are
+on opposite sides.
+This automatic connection and direction selection
+works well if the direction doesn't change but it will occasionally surprise you:
+.iS
+arrow; circle; down; arrow
+.iE
+.DS CB
+.PS
+arrow; circle; down; arrow
+.PE
+.DE
+The arrow comes out of the right side of the circle, not the bottom,
+as might be expected.
+.P
+If a set of commands is enclosed in braces
+.cR {\(el} ,
+the current position and direction of motion when the group is finished
+will be exactly where it was when entered.
+Nothing else is restored.
+There is also a more general way to group objects,
+using
+.cR [
+and
+.cR ] ,
+which is discussed in \(sc9.
+.H 1 "LABELS AND CORNERS"
+Objects can be labelled or named so that you can talk about them later.
+For example,
+.iS
+Box1:	box
+	# \(el other stuff \(el
+	move to Box1
+.iE
+Place names 
+.I must
+begin with an upper case letter
+(to distinguish them from variable names,
+which begin with lower case letters).
+The name refers to the ``center''
+of the object,
+which is the geometric center for most things.
+.P
+.br
+.ne 5.5v
+Other combinations also work:
+.iS
+line from Box1 to Box2
+move to Box1 up 0.1 right 0.2
+move to Box1 + 0.2,0.1	     # same as previous
+line to Box1 - 0.5,0
+.iE
+The reserved name
+.cR Here
+may be used to refer to the current position.
+.P
+Labels can be reset several times in a single picture,
+so a statement like
+.iS
+Box1:  Box1 + 1,1
+.iE
+is perfectly legal.
+.P
+You can also refer to previously drawn objects of each type,
+using the word
+.cR last .
+For example, given the input
+.iS
+box "A"; circle "B"; box "C"
+.iE
+then
+.cR last \& `
+.cR box '
+refers to box
+.cR C ,
+.cR last \& `
+.cR circle '
+refers to circle
+.cR B ,
+and
+.cR 2nd \& `
+.cR last
+.cR box '
+refers to box
+.cR A .
+Numbering of objects can also be done from the beginning,
+so boxes
+.cR A
+and
+.cR C
+are
+.cR 1st \& `
+.cR box '
+and
+.cR 2nd \& `
+.cR box '
+respectively.
+.P
+To cut down the need for explicit coordinates,
+objects have ``corners'' named by compass points:
+.iS
+B: box	"B.c" ht 1 wid 1.5
+	" B.e" at B.e ljust
+	" B.ne" at B.ne ljust
+	" B.se" at B.se ljust
+	"B.s" at B.s below
+	"B.n" at B.n above
+	"B.sw " at B.sw rjust
+	"B.w " at B.w rjust
+	"B.nw " at B.nw rjust
+.iE
+.rs
+.sp 0.5v
+.DS CB
+.PS
+B: box "B.c" ht 1 wid 1.5
+" B.e" at B.e ljust
+" B.ne" at B.ne ljust
+" B.se" at B.se ljust
+"B.s" at B.s below
+"B.n" at B.n above
+"B.sw " at B.sw rjust
+"B.w " at B.w rjust
+"B.nw " at B.nw rjust
+.PE
+.DE
+.rs
+.sp 0.5v
+Note the use of
+.cR ljust ,
+.cR rjust ,
+.cR above ,
+and
+.cR below
+to alter the default positioning of text,
+and of a blank within some strings to help space them away from a vertical line.
+.P
+Lines and arrows have a
+.cR start ,
+an
+.cR end
+and a 
+.cR center
+in addition to corners.
+Circles and ellipses have corners too;
+an arc has the same corners as the circle of which it is a part.
+The words
+.cR left ,
+.cR right ,
+.cR top ,
+and
+.cR bottom
+are synonyms for
+.cR west ,
+.cR east ,
+.cR north
+and
+.cR south .
+.P
+It is often easiest to position objects by positioning
+some part of one at some part of another,
+for example the southwest corner of one at the southeast corner
+of another.
+The
+.cR with
+attribute
+permits this kind of positioning:
+.iS
+box ht 0.75 wid 0.75
+box ht 0.5 wid 0.5 with .sw at last box.se
+.iE
+.DS CB
+.PS
+box ht 0.75 wid 0.75
+box ht 0.5 wid 0.5 with .sw at last box.se
+.PE
+.DE
+Notice that the corner after
+.cR with
+is written
+.cR .sw .
+.P
+As another example, consider
+.iS
+ellipse
+ellipse ht .2 wid .3 with .se at 1st ellipse.nw
+ellipse ht .2 wid .3 with .sw at 1st ellipse.ne
+.iE
+.DS CB
+.PS
+ellipse
+ellipse ht .2 wid .3 with .se at 1st ellipse.nw
+ellipse ht .2 wid .3 with .sw at 1st ellipse.ne
+.PE
+.DE
+.P
+Sometimes it is desirable to have a line intersect a circle
+at a point which is not one of the eight compass points
+that
+.I pic
+knows about.
+In such cases, the proper visual effect can be obtained by using
+the attribute
+.cR chop
+to chop off part of the line:
+.iS
+circlerad = 0.15; arrowhead = 7
+circle "a"
+circle "b" at 1st circle - (0.4, 0.6)
+circle "c" at 1st circle + (0.4, -0.6)
+arrow from 1st circle to 2nd circle chop
+arrow from 1st circle to 3rd circle chop
+.iE
+.DS CB
+.PS
+circlerad = 0.15; arrowhead = 7
+circle "a"
+circle "b" at 1st circle - (0.4, 0.6)
+circle "c" at 1st circle + (0.4, -0.6)
+arrow from 1st circle to 2nd circle chop
+arrow from 1st circle to 3rd circle chop
+reset
+.PE
+.DE
+By default the line is chopped by
+.cR circlerad
+at each end.
+This may be changed:
+.iS
+line \(el chop \f2r\fP
+.iE
+chops both ends by
+\f2r\fP, and
+.iS
+line \(el chop \f2r1\fP chop \f2r2\fP
+.iE
+chops the beginning by
+.I r1
+and the end by
+.IR r2 .
+More complicated intersections can be computed with
+the built-in trigonometric functions listed in the next section.
+.br
+.ne 3.5v
+.P
+There is one other form of positioning that is sometimes useful,
+to refer to a point some fraction of the way between
+two other points.
+This can be expressed in 
+.I pic
+as
+.iS
+\f2fraction\fP of the way between \f2position1\fP and \f2position2\fP
+.iE
+where
+.I fraction
+is any expression, and
+.I position1
+and
+.I position2
+are any positions.
+You can abbreviate this rather windy phrase;
+.cR "of\ the\ way" '' ``
+is optional, and the whole thing can
+be written instead as
+.iS
+\f2fraction\fP < \f2position1\fP , \f2position2\fP >
+.iE
+As a pair of examples:
+.iS
+box
+arrow right from 1/3 of the way between last box.ne and last box.se
+arrow right from 2/3 <last box.ne, last box.se>
+.iE
+.DS CB
+.PS
+box
+arrow right from 1/3 of the way between last box.ne and last box.se
+arrow right from 2/3 <last box.ne, last box.se>
+.PE
+.DE
+.iS
+A:  ellipse
+    ellipse ht .2 wid .3 with .se at 1st ellipse.nw
+    ellipse ht .2 wid .3 with .sw at 1st ellipse.ne
+    circle rad .05 at 0.5 <A.nw,A.c>
+    circle rad .05 at 0.5 <A.ne,A.c>
+    arc from 0.25 <A.w,A.e> to 0.75 <A.w,A.e>
+.iE
+.DS CB
+.PS
+A:	ellipse
+	ellipse ht .2 wid .3 with .se at 1st ellipse.nw
+	ellipse ht .2 wid .3 with .sw at 1st ellipse.ne
+	circle rad .05 at 0.5 <A.nw,A.c>
+	circle rad .05 at 0.5 <A.ne,A.c>
+	arc from 0.25 <A.w,A.e> to 0.75 <A.w,A.e>
+.PE
+.DE
+Naturally,
+the distance given by
+.I fraction
+can be greater than 1 or less than 0.
+.P
+Advice:  Experience suggests that the easiest way to position objects
+is by placing them relative to previous objects
+and places, using
+.cR with ,
+.cR at ,
+etc.
+This is better than using
+.cR move ;
+you should generally avoid
+.cR move .
+.H 1 "VARIABLES, EXPRESSIONS AND BUILT-IN FUNCTIONS"
+It's generally a bad idea to write everything in 
+absolute coordinates if you are likely
+to change things.
+.I Pic
+variables let you parameterize your picture:
+.iS
+a = 0.5;  b = 1
+
+box wid a ht b
+ellipse wid a/2 ht 1.5*b
+Box2:  Box1 - (a/2, b/2)
+.iE
+Expressions may use the standard operators
+.cR + ,
+.cR - ,
+.cR * ,
+.cR / ,
+.cR % ,
+.cR ^
+(exponentiation),
+and parentheses for grouping.
+.P
+The most important variables are the predefined ones for
+controlling the default sizes of objects,
+listed in \(sc3.
+These may be set at any time in any picture,
+and retain their values from picture to picture until reset.
+.P
+You can use the height, width, radius,
+and
+.I x
+and
+.I y
+coordinates of any object or corner in an expression:
+.iS
+.ta +1.75i
+Box1.x	# the \f2x\fP coordinate of the center of Box1
+Box1.ne.y	# the \f2y\fP coordinate of the northeast corner of Box1
+Box1.wid	# the width of Box1
+Box1.ht	# and its height
+2nd last circle.rad	# the radius of the 2nd last circle
+.iE
+.P
+Any pair of expressions enclosed in parentheses
+defines a position; furthermore such positions
+can be added or subtracted to yield new positions:
+.br
+.EQ
+delim $$
+define cw % "\&" font CW %
+.EN
+.iS
+($x^$,$^y$)
+($x sub 1 ^$,$^ y sub 1$) + ($x sub 2 ^$,$^ y sub 2$)
+.iE
+If $p sub 1$ and $p sub 2$ are positions, then
+$cw ( p sub 1 cw , p sub 2 cw )$
+refers to the point
+$cw ( p sub 1 cw .x^ cw , ^ p sub 2 cw .y)$.
+.P
+.I Pic
+provides a small collection of standard functions:
+.DS I
+.TS
+lf5 lf1.
+sin($expr$)\f1,\fP cos($expr$)\f1,\fP atan2($y$,$x$)	(angle in radians)
+log($expr$)\f1,\fP exp($expr$)	(Beware: both base 10)
+sqrt($expr$)\f1,\fP max($e sub 1$,$e sub 2$)\f1,\fP min($e sub 1$,$e sub 2$)
+int($expr$)	(integer part of $expr$)
+rand()	(random number between 0 and 1)
+.TE
+.DE
+.br
+.EQ
+delim off
+.EN
+.H 1 "MORE ON TEXT"
+Normally, text is centered
+at the geometric center of the object it is associated with.
+The attribute
+.cR ljust
+causes the left end to be at the specified point
+(which means that the text lies to the right of the specified place!),
+and
+.cR rjust
+puts the right end at the place.
+.cR above
+and
+.cR below
+center the text one half line space in the given direction.
+.P
+Text attributes can be compounded:
+.iS
+arrow 1 "ljust above" ljust above
+.iE
+.DS CB
+.PS
+arrow 1 "ljust above" ljust above
+.PE
+.DE
+.P
+Text is most often an attribute of some other object,
+but you can also have self-standing text:
+.iS
+"origin" "(0,0)" at 0,0
+"this is" "(1,1)" at 1,1
+box ht 1 wid 1 dotted with .sw at 0,0
+.iE
+.DS CB
+.PS
+"origin" "(0,0)" at 0,0
+"this is" "(1,1)" at 1,1
+box ht 1 wid 1 dotted with .sw at 0,0
+.PE
+.DE
+.rs
+.sp 0.5v
+In effect, \f2n\fP text strings are contained in an invisible box
+of width
+.cR textwid
+and height \f2n\fP \(mu
+.cR textht .
+The variables
+.cR textwid
+and
+.cR textht
+may be set to any values;
+they are normally zero.
+.P
+A list of numeric expressions can be converted to a formatted string
+with the
+.cR sprintf
+function and used anywhere a quoted string can be:
+.iS
+B: box wid log(20)
+   sprintf("width = %g, height = %g ", B.wid, B.ht) rjust at B.w
+.iE
+.DS CB
+.PS
+B: box wid log(20)
+   sprintf("width = %g, height = %g ", B.wid, B.ht) rjust at B.w
+.PE
+.DE
+.br
+.ne 1.5i
+.H 1 "LINES AND SPLINES"
+A ``line'' may actually be a path,
+that is, it may consist of connected segments:
+.iS
+line right 1 then down .5 left 1 then right 1
+.iE
+.DS CB
+.PS
+line right 1 then down .5 left 1 then right 1
+.PE
+.DE
+The word
+.cR then
+separates components of the path.
+.P
+A spline is a smooth curve guided by a set of straight lines
+just like the line above.
+It begins at the same place, ends at the same place,
+and in between is tangent to the mid-point of each guiding line.
+The syntax for a spline is identical to a (path) line
+except for using
+.cR spline
+instead of
+.cR line :
+.iS
+line dashed right 1 then down .5 left 1 then right 1
+spline from start of last line \e
+  right 1 then down .5 left 1 then right 1
+.iE
+.DS CB
+.PS
+line dashed right 1 then down .5 left 1 then right 1
+spline from start of last line \
+  right 1 then down .5 left 1 then right 1
+.PE
+.DE
+(Long input lines can be split by ending each piece
+with a backslash.)
+.P
+The elements of a path, whether line or spline,
+are specified as a series of points,
+either in absolute terms or by
+.cR up ,
+.cR down , 
+etc.
+.iS
+spline right then up then left then down ->
+.iE
+.DS CB
+.PS
+spline right then up then left then down ->
+.PE
+.DE
+.iS
+spline right then up left then down ->
+.iE
+.DS CB
+.PS
+spline right then up left then down ->
+.PE
+.DE
+Notice that arrowheads may be put on the ends
+of a line or spline.
+.H 1 BLOCKS
+Any sequence of
+.I pic
+statements may be enclosed in
+brackets
+.cR [
+and
+.cR ]
+to form
+a block,
+which can then be treated as a single object,
+and manipulated rather like an ordinary box:
+.iS
+box "1"
+[ box "2"; arrow "3" above; box "4" ] with .n at last box.s - (0,0.1)
+"Thing 2: " rjust at last [].w
+.iE
+.DS CB
+.PS
+box "1"
+[ box "2"; arrow "3" above; box "4" ] with .n at last box.s - (0,0.1)
+"Thing 2: " rjust at last [].w
+.PE
+.DE
+.br
+.ne 2v
+Notice that
+``last''-type constructs treat blocks as a unit and don't look
+inside for objects:
+.cR last "" ``
+.cR box.s ''
+refers to box 1, not box 2 or 4.
+You can use
+.cR last\ [] ,
+etc.,
+just like
+.cR last\ box .
+.P
+Blocks have the same compass corners as
+boxes (determined by the bounding box).
+It is also
+possible to position a block by placing either an absolute 
+coordinate (like
+.cR 0,0 )
+or an internal label (like
+.cR A )
+at some
+external point, as in
+.iS
+[ \(el; A: \(el; \(el ] with .A at \(el
+.iE
+By default, blocks join with other things as boxes do, at the
+center of the appropriate side.
+.P
+Names of variables and places within a block are local
+to that block, and thus do not affect variables and places
+of the same name outside.
+(In particular, that includes the built-in variables like
+.cR boxwid ,
+etc.;
+if they are set within a block,
+they revert to their original values when the block is left.)
+You can get at the internal
+place names with constructs like
+.iS
+last [].A
+.iE
+or
+.iS
+B.A
+.iE
+where
+.cR B
+is a name attached to a block:
+.iS
+B:  [ \(el ;  A: \(el;  ]
+.iE
+When combined with
+.cR define
+statements (next section), blocks provide
+a reasonable simulation of a procedure mechanism.
+.P
+Although blocks nest,
+it is currently possible to look only one level deep
+with constructs like
+.cR B.A ,
+although
+.cR A
+may be
+further qualified by a corner name (i.e.,
+.cR B.A.sw
+or
+.cR top
+.cR of
+.cR B.A
+are legal).
+.P
+The following example illustrates most of the points made above
+about how blocks work:
+.iS
+h = .5;  dh = .02;  dw = .1
+[
+	Ptr: [
+		boxht = h; boxwid = dw
+		A: box
+		B: box
+		C: box
+		box wid 2*boxwid "..."
+		D: box
+	]
+	Block: [
+		boxht = 2*dw; boxwid = 2*dw
+		movewid = 2*dh
+		A: box; move
+		B: box; move
+		C: box; move
+		box invis "..." wid 2*boxwid; move
+		D: box
+	] with .t at Ptr.s - (0,h/2)
+	arrow from Ptr.A to Block.A.nw + (dh,0)
+	arrow from Ptr.B to Block.B.nw + (dh,0)
+	arrow from Ptr.C to Block.C.nw + (dh,0)
+	arrow from Ptr.D to Block.D.nw + (dh,0)
+]
+box dashed ht last [].ht+dw wid last [].wid+dw at last []
+.iE
+.br
+.ne 1i
+This produces
+.DS CB
+.PS
+h = .5
+dh = .02
+dw = .1
+[
+	Ptr: [
+		boxht = h; boxwid = dw
+		A: box
+		B: box
+		C: box
+		box wid 2*boxwid "..."
+		D: box
+	]
+	Block: [
+		boxht = 2*dw; boxwid = 2*dw
+		movewid = 2*dh
+		A: box; move
+		B: box; move
+		C: box; move
+		box invis "..." wid 2*boxwid; move
+		D: box
+	] with .t at Ptr.s - (0,h/2)
+	arrow from Ptr.A to Block.A.nw + (dh,0)
+	arrow from Ptr.B to Block.B.nw + (dh,0)
+	arrow from Ptr.C to Block.C.nw + (dh,0)
+	arrow from Ptr.D to Block.D.nw + (dh,0)
+]
+box dashed ht last [].ht+dw wid last [].wid+dw at last []
+.PE
+.DE
+.H 1 MACROS
+.I Pic
+provides a basic macro facility.
+In the simplest form,
+.iS
+define  \f2name\fP  { \f2replacement text\fP }
+.iE
+defines
+.I name
+to be the
+.IR "replacement text" .
+Any subsequent occurrence of
+.I name
+will be replaced by
+.IR "replacement text" .
+.P
+Macros may have arguments.
+If the replacement text of a macro definition contains occurrences of
+.cR $1 ,
+.cR $2 ,
+etc.,
+these will be replaced by the corresponding actual arguments
+when the macro is invoked.
+The invocation for a macro with arguments is
+.iS
+name(arg1, arg2, \(el)
+.iE
+Non-existent arguments are replaced by null strings.
+Macro definitions last from picture to picture;
+a macro definition can be removed by
+.iS
+undef \f2macro-name\fP
+.iE
+.P
+As an example, one might define a
+.cR square
+by
+.iS
+define square { box ht $1 wid $1  $2 }
+.iE
+and use it as
+.iS
+square(1, "one" "inch")
+square(0.5)
+square(0.25, "\es-4tiny\es+4" dashed)
+.iE
+.DS CB
+.PS
+define square { box ht $1 wid $1  $2 }
+square(1, "one" "inch")
+square(0.5)
+square(0.25, "\s-4tiny\s+4" dashed)
+.PE
+.DE
+Notice how the second argument may be used to pass in arbitrary contents.
+.P
+Coordinates like
+.I x,y
+may be enclosed in parentheses,
+as in
+.RI ( x,y ),
+so they can be included in a macro argument.
+.H 1 "FILE COPY"
+The statement
+.iS
+copy "\f2filename\fP"
+.iE
+inserts the contents of the named file
+at that point in the input.
+Any
+.cR .PS
+or
+.cR .PE
+lines within the file
+are ignored, so previously prepared pictures
+can be used as parts of larger ones without editing.
+.br
+.ne 4v
+.P
+.I Pic
+also provides the
+.cR copy
+.cR thru
+mechanism found in
+.IR grap :
+.iS
+copy "\f2file\fP" thru \f2macro-name\fP
+.iE
+copies
+.IR file ,
+treating each line as an invocation of the named macro
+(each field being an argument).
+A literal macro may be used instead of a name:
+.iS
+copy "\f2file\fP" thru { \f2macro replacement text\fP }
+.iE
+and if no file name is given,
+the remainder of the input until the next
+.cR .PE
+is used.
+So to plot a set of circles at points whose coordinates and radii
+are included in-line:
+.iS
+copy thru { circle rad $3 at $1,$2 }
+0 0 .05
+1 1 .1
+.2 .3 .03
+.4 .7 .05
+\(el
+.iE
+.DS CB
+.PS
+copy thru { circle rad $3 at $1,$2 }
+0 0 .05
+1 1 .1
+.2 .3 .03
+.4 .7 .05
+.1 .8 .1
+.4 .9 .02
+.7 .5 .15
+1 .4 .04
+.8 0 .075
+.5 .25 .03
+.PE
+.DE
+.P
+The
+.cR sh
+command executes an arbitrary command line:
+.iS
+sh { \f2anything\fP }
+.iE
+Macros within
+.I anything
+are expanded first.
+.H 1 "LOOPS AND CONDITIONALS"
+.I Pic
+provides an
+.cR if
+statement and a
+.cR for
+loop.
+.iS
+pi = atan2(0,-1)
+for i = 0 to 2 * pi by 0.1 do {
+        "\-" at i/2, 0
+        "s" at i/2, sin(i)/2
+        "c" at i/2, cos(i)/2
+}
+.iE
+.DS CB
+.PS
+.ps -2
+pi = atan2(0,-1)
+for i = 0 to 2 * pi by 0.1 do {
+	"\-" at i/2, 0
+	"s" at i/2, sin(i)/2
+	"c" at i/2, cos(i)/2
+}
+.ps +2
+.PE
+.DE
+The
+.cR by
+clause is optional;
+if the value is preceded by a
+.cR * ,
+the steps are multiplicative, not additive.
+The body of the loop is delimited by braces,
+which are also used for definitions,
+.cR copy ,
+.cR sh
+and
+.cR if
+statements.
+.P
+The
+.cR if
+statement is
+.iS
+if \f2expression\fP then { \f2anything\fP } else { \f2anything\fP }
+.iE
+where the
+.cR else
+clause is optional.
+The
+.I expression
+may use the usual relational operators:
+.cR == ,
+.cR != ,
+.cR > ,
+.cR >= ,
+.cR < ,
+.cR <= ,
+.cR && ,
+and
+.cR || .
+.iS
+pi = atan2(0,-1)
+for i = 0 to pi by 0.1 do {
+        if (s = sin(i)) > 0.8 then { s = 0.8 }
+        "x" at i/2, s/2
+}
+.iE
+.DS CB
+.PS
+.ps -2
+pi = atan2(0,-1)
+for i = 0 to pi by 0.1 do {
+	if (s = sin(i)) > 0.8 then { s = 0.8 }
+	"x" at i/2, s/2
+}
+.ps +2
+.PE
+.DE
+A string comparison using
+.cR ==
+or
+.cR !=
+is also permitted, to compare quoted strings:
+.iS
+if "\f2string1\fP" == "\f2string2\fP" then ...
+.iE
+.H 1 "\f4Troff\fP\0INTERFACE"
+.I Pic
+is usually run as a
+.I troff
+preprocessor:
+.iS
+pic file | troff -ms                \f1(or \f5-mm\f1)
+.iE
+Run it before
+.I eqn
+if it is also present.
+.P
+If the
+.cR .PS
+line looks like
+.iS
+\&.PS <file
+.iE
+then the contents of 
+.cR file
+are inserted in place of the
+.cR .PS
+line,
+whether or not the file contains
+.cR .PS
+or
+.cR .PE .
+(This feature is deprecated in favor of the
+.cR copy
+statement.)
+.P
+.I Pic
+copies the
+.cR .PS
+and
+.cR .PE
+lines from input to output intact,
+except that it adds two things on the same line as the
+.cR .PS :
+.iS
+\&.PS h w
+.iE
+.cR h
+and
+.cR w
+are the picture height and width in inches.
+(This is, through a bizarre historical accident,
+exactly opposite to the
+.I pic
+input argument order.)  The
+.cR -ms
+macro package has definitions for
+.cR .PS
+and
+.cR .PE
+that cause
+pictures to be centered and offset a bit from surrounding text
+(see the appendix).
+With the
+.cR -mm
+macro package, the picture must be enclosed within a display.
+.P
+If 
+.cR .PF '' ``
+is used instead of
+.cR .PE ,*
+.FS *
+Unfortunately, the
+.cR -mm
+macro package defines the
+.cR .PF
+macro to assign text for the page footer.
+If the ``picture flyback'' feature is used with
+.sM MM ,
+any page footer previously set with
+.cR .PF
+will disappear.
+.FE
+the position after printing is restored to where
+it was before the picture started, instead of being at the bottom.
+.cR F '' (``
+is for ``flyback.'')
+.P
+Any input line that begins with a
+period is assumed to be a
+.I troff
+command that makes sense at that point;
+it is copied to the output at that point in the document.
+It is asking for trouble to add vertical space or in any way fiddle with
+the line spacing here,
+but point size and font changes are generally harmless:
+.iS
+\&.ps 24
+circle radius .4 at 0,0
+\&.ps 12
+circle radius .2 at 0,0
+\&.ps 8
+circle radius .1 at 0,0
+\&.ps 6
+circle radius .05 at 0,0
+\&.ps 10		\e" don't forget to restore size
+.iE
+.DS CB
+.PS
+.ps 24
+circle radius .4 at 0,0
+.ps 12
+circle radius .2 at 0,0
+.ps 8
+circle radius .1 at 0,0
+.ps 6
+circle radius .05 at 0,0
+.ps 10	\" don't forget to restore size
+.PE
+.DE
+.I Pic
+does preserve the state of 
+.IR troff 's
+fill mode across pictures.
+.P
+It is also safe to include sizes, fonts and local motions
+within quoted strings
+.cR \&"\(el" ) (
+in
+.IR pic ,
+so long as whatever changes are made are unmade before exiting the string.
+For example, to print text in Helvetica Bold 2 points larger:
+.iS
+ellipse "\es+2\ef(HBSmile!\efP\es-2"
+.iE
+.DS CB
+.PS
+ellipse "\s+2\f(HBSmile!\fP\s-2"
+.PE
+.DE
+This is essentially the same rule as applies in
+.IR eqn .
+.P
+There is a subtle problem with complicated equations inside
+.I pic
+pictures \(em they come out wrong
+if
+.I eqn
+has to leave extra vertical space for the equation.
+If your equation involves more than subscripts and superscripts,
+you must add to the beginning of each equation the extra information
+.cR "space\ 0" :
+.iS
+arrow
+box "$space 0 {H( omega )} over {1 - H( omega )}$"
+arrow
+.iE
+.br
+.EQ
+delim $$
+.EN
+.DS CB
+.PS
+arrow
+box "$space 0 {H( omega )} over {1 - H( omega )}$"
+arrow
+.PE
+.DE
+'''	\" FORCE PAGE
+.SK
+.H 1 "SOME EXAMPLES"
+Here are a handful of larger examples:
+.rs
+.sp
+.DS CB
+.PS
+define ndblock X
+	box wid boxwid/2 ht boxht/2
+	down;  box same with .t at bottom of last box;   box same
+X
+.ps -2
+.ft CW
+boxht = .2; boxwid = .3; dx = 0.05
+down; box; box; box; box ht 3*boxht "." "." "."
+L: box; box; box invis wid 2*boxwid "hashtab:" with .e at 1st box .w
+right
+Start: box wid .5 with .sw at 1st box.ne + (.4,.2) "..."
+N1: box wid .2 "n1";  D1: box wid .3 "d1"
+N3: box wid .4 "n3";  D3: box wid .3 "d3"
+box wid .4 "..."
+N2: box wid .5 "n2";  D2: box wid .2 "d2"
+
+arrow right from 2nd box 
+ndblock
+spline -> right .2 from 3rd last box then to N1.sw + (dx,0)
+spline -> right .3 from 2nd last box then to D1.sw + (dx,0)
+arrow right from last box
+ndblock
+spline -> right .2 from 3rd last box to N2.sw-(dx,.2) to N2.sw+(dx,0)
+spline -> right .3 from 2nd last box to D2.sw-(dx,.2) to D2.sw+(dx,0)
+arrow right 2*linewid from L
+ndblock
+spline -> right .2 from 3rd last box to N3.sw + (dx,0)
+spline -> right .3 from 2nd last box to D3.sw + (dx,0)
+
+circlerad = .3
+circle invis "ndblock"  at last box.e + (1.2,.2)
+arrow dashed from last circle.w to last box chop 0 chop .3
+
+box invis wid 2*boxwid "ndtable:" with .e at Start.w
+.ps
+.ft
+.PE
+.DE
+.sp
+.iS
+define ndblock {
+	box wid boxwid/2 ht boxht/2
+	down;  box same with .t at bottom of last box;   box same
+}
+boxht = .2; boxwid = .3; circlerad = .3; dx = 0.05
+down; box; box; box; box ht 3*boxht "." "." "."
+L: box; box; box invis wid 2*boxwid "hashtab:" with .e at 1st box .w
+right
+Start: box wid .5 with .sw at 1st box.ne + (.4,.2) "..."
+N1: box wid .2 "n1";  D1: box wid .3 "d1"
+N3: box wid .4 "n3";  D3: box wid .3 "d3"
+box wid .4 "..."
+N2: box wid .5 "n2";  D2: box wid .2 "d2"
+arrow right from 2nd box 
+ndblock
+spline -> right .2 from 3rd last box then to N1.sw + (dx,0)
+spline -> right .3 from 2nd last box then to D1.sw + (dx,0)
+arrow right from last box
+ndblock
+spline -> right .2 from 3rd last box to N2.sw-(dx,.2) to N2.sw+(dx,0)
+spline -> right .3 from 2nd last box to D2.sw-(dx,.2) to D2.sw+(dx,0)
+arrow right 2*linewid from L
+ndblock
+spline -> right .2 from 3rd last box to N3.sw + (dx,0)
+spline -> right .3 from 2nd last box to D3.sw + (dx,0)
+circlerad = .3
+circle invis "ndblock"  at last box.e + (1.2,.2)
+arrow dashed from last circle.w to last box chop 0 chop .3
+box invis wid 2*boxwid "ndtable:" with .e at Start.w
+.iE
+.DS CB
+.PS 5
+.ps 8
+boxht = .5; boxwid = .75
+circlerad = .25
+	arrow "source" "code"
+LA:	box "lexical" "analyzer"
+	arrow "tokens" above
+P:	box "parser"
+	arrow "intermediate" "code"
+Sem:	box "semantic" "checker"
+	arrow
+
+	arrow <-> up from top of LA
+LC:	box "lexical" "corrector"
+	arrow <-> up from top of P
+Syn:	box "syntactic" "corrector"
+	arrow up
+DMP:	box "diagnostic" "message" "printer"
+	arrow <-> right  from right of DMP
+ST:	box "symbol" "table"
+	arrow from LC.ne to DMP.sw
+	arrow from Sem.nw to DMP.se
+	arrow <-> from Sem.top to ST.bot
+.PE
+.DE
+.sp
+.iS
+\&.PS 5
+\&.ps 8
+\&	arrow "source" "code"
+\&LA:	box "lexical" "analyzer"
+\&	arrow "tokens" above
+\&P:	box "parser"
+\&	arrow "intermediate" "code"
+\&Sem:	box "semantic" "checker"
+\&	arrow
+\&
+\&	arrow <-> up from top of LA
+\&LC:	box "lexical" "corrector"
+\&	arrow <-> up from top of P
+\&Syn:	box "syntactic" "corrector"
+\&	arrow up
+\&DMP:	box "diagnostic" "message" "printer"
+\&	arrow <-> right  from right of DMP
+\&ST:	box "symbol" "table"
+\&	arrow from LC.ne to DMP.sw
+\&	arrow from Sem.nw to DMP.se
+\&	arrow <-> from Sem.top to ST.bot
+\&.PE
+.iE
+.P
+There are eighteen objects (boxes and arrows) in the picture,
+and one line of
+.I pic
+input for each;
+this seems like an acceptable level of verbosity.
+'''	\" FORCE PAGE
+.SK
+.DS CB
+.PS
+.ps -2
+	circle "DISK"
+	arrow "character" "defns"
+CPU:	box "CPU" "(16-bit mini)"
+	{ arrow <- from top of CPU up "input " rjust }
+	arrow
+CRT:	"   CRT" ljust
+	line from CRT - 0,0.075 up 0.15 \
+		then right 0.5 \
+		then right 0.5 up 0.25 \
+		then down 0.5+0.15 \
+		then left 0.5 up 0.25 \
+		then left 0.5
+Paper:	CRT + 1.05,0.75
+	arrow <- from Paper down 1.5
+	" ...  paper" ljust at end of last arrow + 0, 0.25
+	circle rad 0.05 at Paper + (-0.055, -0.25)
+	circle rad 0.05 at Paper + (0.055, -0.25)
+	"   rollers" ljust at Paper + (0.1, -0.25)
+.ps +2
+.PE
+.ce
+Basic Digital Typesetter
+.DE
+.sp
+.iS
+\&.PS
+\&.ps -2
+	circle "DISK"
+	arrow "character" "defns"
+CPU:	box "CPU" "(16-bit mini)"
+	{ arrow <- from top of CPU up "input " rjust }
+	arrow
+CRT:	"   CRT" ljust
+	line from CRT - 0,0.075 up 0.15 \e
+		then right 0.5 \e
+		then right 0.5 up 0.25 \e
+		then down 0.5+0.15 \e
+		then left 0.5 up 0.25 \e
+		then left 0.5
+Paper:	CRT + 1.05,0.75
+	arrow <- from Paper down 1.5
+	" ...  paper" ljust at end of last arrow + 0, 0.25
+	circle rad 0.05 at Paper + (-0.055, -0.25)
+	circle rad 0.05 at Paper + (0.055, -0.25)
+	"   rollers" ljust at Paper + (0.1, -0.25)
+\&.ps +2
+\&.PE
+\&.ce
+\&Basic Digital Typesetter
+.iE

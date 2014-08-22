@@ -1,0 +1,86 @@
+MM
+=============================================================================
+TITLE      MM - Memorandum Macros
+
+AUTHOR(s)  Dale W. Smith, John R. Mashey
+           Bell Telephone Laboratories
+
+REVISED    April 1990 by C.L'Hommedieu, AT&T Bell Laboratories
+REPRINTED  May 1990, AT&T Bell Laboratories
+=============================================================================
+FILE            PURPOSE
+------------    ----------------------------------------------------------
+mm.00           MM document header file
+mm.01           Section 1, "Introduction"
+mm.02           Section 2, "Invoking the Macros"
+mm.03           Section 3, "Formatting Concepts"
+mm.04           Section 4, "Paragraphs and Headings"
+mm.05           Section 5, "Lists"
+mm.06           Section 6, "Document Styles"
+mm.07           Section 7, "Displays and Captions"
+mm.08           Section 8, "Footnotes"
+mm.09           Section 9, "Page Headers and Footers"
+mm.10           Section 10, "Table of Contents and Cover Sheet"
+mm.11           Section 11, "References"
+mm.12           Section 12, "Miscellaneous Features"
+mm.13           Section 13, "Errors and Debugging"
+mm.14           Section 14, "Extending and Modifying the Macros"
+mm.15           Appendix A, "Summary of Differences for MM with nroff"
+mm.16           Appendix B, "User-Defined List Structures"
+mm.17           Appendix C, "Sample Memorandum, Released Paper, and
+                             External Letter"
+mm.18           Appendix D, "Sample Business Letters"
+mm.19           Appendix E, "Sample Footnotes"
+mm.20           Appendix F, "Error Messages"
+mm.21           Appendix G, "Company-Related Information"
+mm.22           Appendix H, "Summary of Macros, Strings, and Number Registers"
+ex.mt.0         Input for Appendix C (sample Memorandum)
+ex.mt.4         Input for Appendix C (sample Released Paper)
+ex.mt.5         Input for Appendix C (sample External Letter)
+ex.lt.bl        Input for Appendix D (sample Blocked business letter)
+ex.lt.sb        Input for Appendix D (sample Semi-Blocked business letter)
+ex.lt.fb        Input for Appendix D (sample Full-Blocked business letter)
+ex.lt.sp        Input for Appendix D (sample Simplified business letter)
+Run             Shell script to format and print entire MM document
+CHANGES         Noticeable changes from 2.0A to 3.1 version of MM
+=============================================================================
+To produce the entire MM document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the MM document (body only), use the command:
+
+   tbl mm.[01]* | troff -Tpost - | dpost
+
+To produce each of the appendices, use the commands:
+
+   troff -Tpost mm.appA | dpost
+   troff -Tpost mm.appB | dpost
+   tbl mm.appC | troff -Tpost -mpictures - | dpost
+   tbl mm.appD | troff -Tpost -mpictures - | dpost
+   troff -Tpost mm.appE | dpost
+   tbl mm.appF | troff -Tpost - | dpost
+   tbl mm.appG | troff -Tpost - | dpost
+   tbl mm.appH | troff -Tpost - | dpost
+
+When App. C and D are produced, each output sample is generated on the fly
+using the troff .sy request; the dpost -B option crops the PostScript image
+and assigns appropriate bounding box parameters; the image is then scaled to
+size, boxed, and merged onto the page using the mpictures PostScript picture
+inclusion facility.
+
+To produce output samples as individual full-page images, use the commands:
+
+   troff -mm -Tpost ex.mt.0 | dpost
+   troff -mm -Tpost ex.mt.4 | dpost
+   troff -mm -Tpost ex.mt.5 | dpost
+   troff -mm -Tpost ex.lt.bl | dpost
+   troff -mm -Tpost ex.lt.sb | dpost
+   troff -mm -Tpost ex.lt.fb | dpost
+   troff -mm -Tpost ex.lt.sp | dpost
+=============================================================================

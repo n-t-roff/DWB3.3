@@ -1,0 +1,16 @@
+.PS 1 .75
+define Terminal X
+tw = $1; th = .75*tw; scrw = .85*tw; scrh = .85*th
+kh = .3*th; kw = .9*tw; bw = .85*kw; bh = .15*kh
+Cabinet: box wid tw ht th filled black
+Screen: box at Cabinet.c wid scrw ht scrh \
+ rad .1*scrw filled white
+Keyboard: line at Cabinet.sw - (0,1.5*kh) up kh \
+ right (tw-kw)/2 then right kw then down kh \
+ right (tw-kw)/2 then left tw filled black
+box wid bw ht bh filled white at Keyboard.c
+box same filled white at Keyboard.c + (0,2*bh)
+box wid bw/2 ht bh filled white at Keyboard.c - (0,2*bh)
+X
+Terminal(.8)
+.PE

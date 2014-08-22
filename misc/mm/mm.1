@@ -1,0 +1,318 @@
+.ds dP /usr/pub
+.TH MM 1
+.SH NAME
+.B mm
+\- prints documents formatted with the
+.SM MM
+macros
+.SH SYNOPSIS
+\*(mBmm\f1
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+Use
+.B mm
+to format documents using
+.B nroff
+and the
+.SM MM
+text-formatting macro package.
+.B mm
+has options to specify preprocessing by
+.B tbl
+and/or
+.BR neqn ,
+and postprocessing by various terminal-oriented output filters.
+The proper pipelines and the
+required arguments and flags for
+.B nroff
+and
+.B mm
+are generated,
+depending on the options that you select.
+.PP
+.I Options
+for
+.B mm
+are given below.
+Any other arguments or flags (e.g.,
+.OP \-rC3 "" )
+are passed to
+.B nroff
+as appropriate.
+You may use
+such options in any order,
+but you must put them before the
+.I files
+arguments.
+If you do not specify arguments,
+.B mm
+prints a list of its options.
+.PP
+.PD 0
+.TP
+.OP \-T type
+specifies the type of output terminal.
+Here is a list of recognized values for
+.IR type .
+.sp 0.5v
+.in +0.75i
+.de XX
+.sp 2p
+.ti -0.75i
+\*(mB\\$1\f1
+.sp -1v
+..
+.XX 450
+prepares output for a
+.SM DASI
+450 (default for 
+.BR mm )
+.XX 450\-12
+prepares output for a
+.SM DASI
+450 in 12-pitch mode.
+.XX 300
+prepares output for a
+.SM DASI
+300 terminal.
+.XX 300-12
+prepares output for a
+.SM DASI
+300 in 12-pitch mode.
+.XX 300s
+prepares output for a
+.SM DASI
+300S.
+.XX 300s-12
+prepares output for a
+.SM DASI
+300S in 12-pitch mode.
+.XX 37
+prepares output for a
+.SM TELETYPE
+Model 37
+(default for
+.BR nroff ).
+.XX 382
+prepares output for a \s-1DTC\s+1-382.
+.XX 4000a
+prepares output for a
+.SM TRENDATA
+4000A.
+.XX hp
+prepares output for a Hewlett-Packard HP262x or HP264x
+(implies
+.OP \-c "" );
+also equivalent to
+.OP -T2621 "" ,
+.OP -T2640 "" ,
+and
+.OP -T2645 "" .
+.XX 2631
+prepares output for a HP2631 printer (implies
+.OP \-c "" ).
+.XX 2631\-e
+same as
+.OP \-T2631 "" ,
+but in expanded mode.
+.XX 2631\-c
+same as
+.OP \-T2631 "" ,
+but in compressed mode.
+.XX 832
+prepares output for an Anderson Jacobson 832 printer
+(implies 
+.OP \-c "" ).
+.XX 8510
+prepares output for a C.Itoh printer (implies
+.OP \-c "" ).
+.XX tn300
+prepares output for a Terminet 300 printer (implies
+.OP \-c "" ).
+.XX lp
+prepares output for a device with no reverse or 
+partial line motions or other special features (implies
+.OP \-c "" ).
+If you do not use this option,
+.B mm
+uses the value of the shell 
+variable
+.MW $TERM
+from the environment (see
+.BR profile (4)
+and
+.BR environ (5))
+as the value of 
+.I type 
+if
+.MW $TERM
+is set; otherwise,
+.B mm
+uses \*(mB450\fP as the value of
+.I type .
+If you specify several terminal types, the last one takes precedence.
+.in -0.75i
+.sp .5
+Note:  To generate output on a Xerox page printer, use the
+.B mmx
+command.
+.sp
+.TP
+.OP \-12
+indicates that the document is to be produced in 12-pitch.
+You may use this option when
+.MW $TERM
+is set to one of
+\*(mB300\fP, \*(mB300s\fP, and \*(mB450\fP.
+(You must manually set the pitch switch on the
+.SM DASI
+300 and 300s terminals to ``12'' if you use this option.)
+.TP
+.OP \-c
+causes
+.B mm
+to invoke
+.BR col (1);
+note that
+.B col
+is invoked automatically by
+.B mm
+unless
+.I type
+is one of \*(mB300\fP, \*(mB300s\fP, \*(mB450\fP, \*(mB37\fP,
+\*(mB4000a\fP, \*(mB382\fP, and \*(mBX\fP.
+.TP
+.OP \-e
+causes
+.B mm
+to invoke
+.BR neqn ;
+also causes
+.BR neqn (1)
+to read the
+.MW \*(dP/eqnchar
+file (see
+.BR eqnchar (5)).
+.TP
+.OP \-t
+causes
+.B mm
+to invoke
+.BR tbl (1).
+.TP
+.OP \-E
+invokes the
+.OP \-e
+option of
+.BR nroff .
+.PD
+.br
+.ne 5v
+.SH EXAMPLES
+Assume that the shell variable
+.MW $TERM
+is set in the environment to \*(mB450\fP.
+These two command lines are then equivalent:
+.EX
+mm -t -rC3 -12  \f2files\fP
+.sp 0.5v
+tbl  \f2files\fP | nroff -mm -T450-12 -h -rC3
+.EE
+.B mm
+reads the standard input
+when
+you specify
+.OP \-
+instead of any file names.
+(Mentioning other files together with
+.OP \-
+leads to undesired results.)
+This option allows
+you to use
+.B mm
+as a filter, for example:
+.EX
+cat  \f2files\fP | mm -\f1
+.EE
+.SH HINTS
+.PP
+.B mm
+invokes
+.B nroff
+with the
+.OP \-h
+flag.
+With this flag,
+.B nroff
+assumes that the terminal has tabs set
+every 8 character positions.
+.PP
+Use the
+.OP \-o list
+option of
+.B nroff
+to specify ranges of pages to be output.
+Note, however, that if you invoke
+.B mm
+with one or more of the
+.OP \-e ,
+.OP \-t ,
+and
+.OP \-
+options,
+together
+with the
+.OP \-o list
+option of
+.BR nroff ,
+you may cause a harmless ``broken pipe'' diagnostic
+if you do not specify the last page of the document in
+.IR list .
+.PP
+If you use the
+.OP \-s
+option of
+.B nroff
+(to stop between pages of output),
+use linefeed (rather than return or newline)
+to restart the output.
+The
+.OP \-s
+option of
+.B nroff
+does not work with the
+.OP \-c
+option of
+.BR mm ,
+or if
+.B mm
+automatically invokes
+.B col
+(see
+.OP \-c
+option above).
+.PP
+If you lie to
+.B mm
+about the kind of terminal its output will be printed on,
+you will get (often subtle) garbage;
+however, if you are redirecting output into a file, use the
+.OP \-T37
+option, and then use the appropriate terminal filter when you actually print that file.
+.SH DIAGNOSTICS
+.MW "mm: no input file"
+.ti +3n
+If none of the arguments is a readable file and
+you do not use
+.B mm
+as a filter.
+.SH SEE ALSO
+.BR checkdoc (1),
+.BR mmt (1),
+.BR nroff (1),
+.BR tbl (1),
+.BR neqn (1),
+.BR eqnchar (5),
+.BR mm (5),
+.BR term (5)

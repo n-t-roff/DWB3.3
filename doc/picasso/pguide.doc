@@ -1,0 +1,1918 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so defs.pguide
+.tr ^
+.nr Hy 1
+.tS Picasso
+Picasso\*(EMAn \s-1OPEN LOOK\s+1 Drawing Program
+.tE
+.IR Picasso \*(Tm
+is a
+.sM UNIX \*(Rg
+system line drawing program, based on
+.IR pic .
+It is intended chiefly for technical document
+illustration, such as flow charts, Gantt charts,
+state diagrams, architectural illustrations, and so on.
+.I Picasso
+can be run in either of two very different modes:
+as a batch program, like
+.IR pic ,
+it accepts a structured English input (``\f(CWbox; arrow; circle\fP'') and produces
+PostScript\(Rg
+(Adobe Systems, Inc.)
+output;
+as an interactive program
+under the
+.sM "OPEN LOOK" \*(Rg
+Graphical User Interface
+it accepts mouse/menu commands and draws directly on
+the bitmapped terminal.
+The two modes are interoperable, so that interactively
+created pictures can be saved as batch programs, and
+batch programs can be displayed and edited interactively.
+.P
+In addition to the usual
+.I pic
+capabilities of drawing
+boxes, circles, ellipses, arrows, etc.,
+.I Picasso
+can
+do line thicknesses, and gray-scale or color filling;
+new objects include corner-rounding for boxes and
+compound lines;
+symbols (complex objects) may be built up from simpler
+objects, and these may be rotated, scaled and reflected.
+Although we have made great effort to retain compatibility
+with
+.IR pic ,
+some differences were inevitable.
+These are detailed in Appendix\ A.
+.P
+Used with a suitable PostScript interpreter,
+batch
+.I Picasso
+output can be displayed in the office,
+and with a modified
+.I lp
+or similar printer spooler command
+it can be sent to any PostScript printer.
+.I Picasso
+is compatible with
+.sM "DOCUMENTER'S WORKBENCH" \*(Rg
+(Release 3.1), so pictures
+can be included with wrap-around text in
+.I troff
+documents.
+.HU "\s-1OPEN LOOK\s+1"
+Many
+.I Picasso
+users will prefer the interactive method of picture preparation.
+The power is somewhat diminished (for example, later on we'll see how
+to write loops in batch
+.IR Picasso ,
+something you can't
+do, yet, interactively) but informal tests have shown
+that anyone can successfully draw pictures after just
+a few minutes familiarization with the
+.sM "OPEN LOOK"
+interface.
+.sM "OPEN LOOK"
+is available on standalone systems such as the
+.sM "AT&T 6386 WGS"
+or Sun\ 4, or via an X Window terminal, such as the
+.sM "AT&T 730X"
+connected to a System V host with
+the X Toolkit software.
+Since
+.sM "OPEN LOOK"
+is so new, we'll take some time out to
+go over the basics of this Graphical User Interface 
+.sM GUI , (
+or ``gooey'').
+.P
+Under
+.sM "OPEN LOOK" ,
+.I Picasso
+starts up with the following screen:
+.BP main.menu.ps 2.9 6 c
+.br
+.ne 3
+The big empty area is the \f2pane\fP, the part of the
+screen you will be using as a \f2drawing area\fP.
+The rectangle at the right edge is a \f2scrollbar\fP,
+used to reveal additional parts of the drawing area
+in case you need more room than the pane provides.
+The round-cornered rectangles above the pane are called \f2menu buttons\fP.
+.P
+.sp -1.5
+.BP mouse.ps 1.5 2.0 r
+.sp 1.5
+The primary device for interacting with
+.I Picasso
+is the
+3-button mouse: button 1 (leftmost) is called
+.sM SELECT ,
+and is generally used to point to objects; button 2 is called
+.sM ADJUST
+and is used to modify object
+selections; button 3 is called
+.sM MENU .
+Because left-handed people frequently reverse these buttons
+(an
+.sM "OPEN LOOK"
+feature), we will use these names instead of button numbers.
+Throughout this document, \f2click\fP means push a button on
+the mouse and release it; \f2press\fP means hold the button
+in and don't let go; \f2drag\fP means slide the mouse around
+without letting go of the pressed button
+(and watch things happen on the screen).
+.br
+.EP
+.P
+.sp -1.5
+.BP edit.ps 1.5 1.2 l 0
+.sp 1.5
+In 
+.IR Picasso ,
+as in all
+.sM "OPEN LOOK"
+applications, press
+.sM MENU
+on a menu button to reveal the menu itself
+(a list of further actions you may request), or click
+.sM SELECT
+to automatically go to the default action on the menu.
+(In
+.sM "OPEN LOOK"
+2.0 this feature is triggered by the Workspace Manager
+Properties menu.)
+If a button has a triangle, drag the mouse in the direction indicated
+to reveal submenus; if it has `. . .' release
+.sM MENU
+to get
+a \f2pop-up window\fP.
+Most menus will have a \f2pushpin\fP at the upper left, and
+a \f2header bar\fP at the top.
+If the pushpin is ``out'' the menu will disappear after it's used.
+Menus can be moved to a more convenient place on the screen by
+selecting the header bar (where the word ``Edit'' appears in
+the example to the left) and dragging the mouse.
+.EP
+.sp -1
+.H 1 "A FIRST EXAMPLE"
+Let's jump right in;
+as a first example of some of
+.IR Picasso 's
+capabilities, consider the following flow diagram:
+.EX 1 .75 0
+This places a few simple objects (arrows, circles, and boxes) in the
+default left to right order.
+Each new object will appear so its leftmost point touches
+the rightmost point of the previous object.
+The quoted text strings are positioned at the objects' centers, or, in the case of the
+arrows, moved a line above or below the center for legibility.
+The boxes and arrows in this example rely on default dimensions, but the circles have
+explicit radii (in inches) and the final
+box has rounded corners overriding the default right angles.
+The
+.cR fill
+property can produce colors or shades of gray.
+.P
+The above representation is what we will call ``batch
+.IR Picasso .''
+Each picture begins with
+.cR .PS
+and ends with
+.cR .PE ;
+between them are statements, one per line or separated by semicolons,
+describing the picture.
+We will generally omit the
+.cR .PS
+and
+.cR .PE
+in the examples that follow.
+The `#' character causes the rest of the line to be ignored, and
+so serves as a commenting convention.
+Statements which create pictures are generally of the form:
+.DS I
+.I
+Label: object properties "text"
+.R
+.DE
+The \f2Label\fP lets you refer to objects later on,
+the \f2objects\fP are specific geometric figures, the \f2properties\fP
+usually define the size, color or position of the object, and \f2"text"\fP
+is whatever you would like to appear at the center of the object.
+'ne 3v
+Batch
+.I Picasso
+is, in fact, a computer language, much as C
+or
+.IR awk ,
+and so provides a great deal of power at
+the cost of a relatively steep learning curve.
+Appendices B and C constitute the reference manual for the
+.I Picasso
+language.
+.P 
+Now let's try drawing the same picture interactively.
+We strongly suggest starting by first clicking
+.sM SELECT
+on the
+.B View
+menu button, to automatically bring up the default
+pop-up window for \f3Grid\fP specification.
+.sM "SELECT ``YES''"
+on the
+.B Draw^Grid
+and
+.B Snap^to^Grid 
+options.
+You must then further
+.sM SELECT
+.B Apply ,
+a minor annoyance to experienced
+.sM UNIX
+system users who are used
+to computers doing what they are told the first time.
+This sequence will cause an unobtrusive grid to
+be drawn on the screen, and furthermore, forces precise alignment of objects
+on the grid points.
+.P
+.sp -1.5
+.BP obj.menu.ps 2.6 1.0
+.sp 1.5
+Now click
+.sM SELECT
+on the
+.B Draw
+menu button, and you will see a \f2pop-up menu\fP
+of basic \f3Objects\fP that can be drawn with
+.IR Picasso ;
+each object is represented by an \f2icon\fP.
+If the menu obscures your drawing area, grab the header and
+move it some place more convenient.
+Click
+.sM SELECT
+on any icon and you will be in \f2draw mode\fP;
+the icon will be highlighted to verify your selection, and
+the mouse pointer will now look like a pencil whenever you are in
+the drawing area.
+Reselect the same icon to return to \f2command mode\fP (arrow pointer).
+.P
+The procedure for drawing objects is, in general:
+.sM SELECT
+an object from the pop-up menu,
+move the mouse to position the pencil on the screen where you want
+the object to appear, then click
+.sM SELECT
+to draw the object.
+The top six objects\*(EMboxes (rectangular, square, rounded rectangular and rounded square),
+ellipses and circles\*(EMwill appear in a default size.
+If you want a different size, press
+.sM SELECT
+and drag the mouse
+until the object is the size you want,
+then release the button to ``freeze'' the object.
+(Make sure your hand is at rest before releasing the button to
+freeze each object\*(EMit is common to start the next motion before the release is complete,
+like a short stop throwing to first before he's caught the ball,
+thus causing an unwanted change of the object's size.)
+.P
+The next two objects\*(EMarcs and sectors\*(EMrequire you
+.sM SELECT
+the end points, then
+move the mouse to adjust the curvature,
+.sM ADJUST
+to finish.
+The next four objects\*(EMlines, arrows, splines and polygons\*(EMuse
+.sM SELECT
+to start and to specify corners or critical points,
+and
+.sM ADJUST
+to ``finish off.''
+(We'll discuss the last two objects, \fH\s-1TEXT\s+1\fP and ``doodles,'' later)
+.P
+To make things a little easier, ignore the text and shading
+but otherwise try to draw the first example, using the default size
+for the boxes and varying the size for the circles.
+.P
+One thing you will discover is that it's hard to
+draw a small circle.
+That's because the
+.B Snap^to^Grid
+option assures the radius of the circle is at least
+one grid point long.
+If you want a small circle, you'll have to go back to the
+.B View
+menu and turn
+.B Snap^to^Grid
+off, or make the grid finer.
+.P
+Are the objects in the right place?
+The right size?
+If not, here are several remedies.
+.P
+If the size is right but the position is wrong, and you haven't yet
+released
+.sM SELECT ,
+press
+.sM ADJUST
+and you'll
+be able to reposition the object without affecting the size.
+If you decide in the middle of a drawing operation that both the
+size and position are wrong, just hit
+.cR \s-1ESCAPE\s+1
+and the
+current object will vanish;
+you will remain in draw mode (pencil pointer visible).
+You can also repeatedly select the
+.B Undo
+button under the
+.B Edit
+menu to cancel operations in reverse order.
+.cR \s-1CTL-U\s+1 "" (
+is the default keyboard shortcut for this.)
+If you backtrack too far,
+.B Redo
+will recover the last ``undone'' operation.
+.P
+All other \f3Edit\fP and \f3Transform\fP operations require you to first
+select an object\*(EMclick
+.sM SELECT
+anywhere
+inside the object\*(EMyou'll see little ``handles'' on
+the screen as visual assurance you've got the right one.
+(Each newly drawn object is automatically selected.)
+To ``deselect'' an object, click
+.sM ADJUST
+on it, or
+select another object, or click
+.sM SELECT
+anywhere in the empty pane.
+Occasionally, extraneous handles or blips will remain on the screen after deselection;
+this is a side-effect of the X environment.
+Until this is fixed, click the \f3Refresh\fP button under \f3View\fP
+to clear such droppings.
+Under \f3Transform\fP you'll find: \f3Scale, Rotate\fP and \f3Reflect\fP;
+under \f3Edit\fP you'll be able to \f3Delete, Move\fP and \f3Duplicate\fP objects,
+and rearrange the apparent plane with \f3Front\fP and \f3Back\fP
+(important for filled areas).
+These are discussed later.
+For now, be content with the ``move shortcut''\*(EMgrab a selected object
+by pressing
+.sM SELECT ,
+then drag the mouse and watch as the object's
+\f2bounding box\fP moves
+around the screen to a new position.
+Release the button when the box is at the position you want the object to occupy.
+(Note that with
+.B Snap^to^Grid
+turned on, a move will always leave the object aligned on the grid.)
+If your leftmost circle is too large, experiment with scaling or delete
+it and redraw it with
+.B Snap^to^Grid
+off.
+.P
+.sp -1.5
+.BP properties.ps 1.4 1.1 r
+.sp 1.5
+Now let's go back and fill in the shading on our first drawing.
+Press
+.sM MENU
+on
+.B Properties
+and slide the mouse down to the
+.B Fill^Color
+button, then release to expose the color pop-up menu\*(EM\f2pin\fP it,
+because we're going to use it more than once.
+Then
+.sM SELECT
+your leftmost circle,
+.sM SELECT
+.B black
+from the color pop-up menu, and, finally,
+.sM SELECT
+.B Apply .
+The first circle will now be black.
+.P
+Now
+.sM SELECT
+your right-most box, go to
+the color menu and
+.sM SELECT
+.B green
+and then
+.B Apply .
+(Any fill color but
+.B white
+or
+.B none
+will do; when sent to the printer, later on, colors will automatically
+appear as unique shades of gray.)
+.P
+.EP
+We still haven't shown you how to add text to complete the first example.
+.I Picasso
+knows about two kinds of text, \f2object-text\fP and \f2free-text\fP.
+Object-text is tightly bound to an object\*(EMwhen you move the
+object, the text goes with it, like the ticket on a shipping crate.
+Free-text, which may sit on top of an object and \f2appear\fP to
+be object-text, is a ``first class'' object in its own right,
+and so can be treated
+just like a box, circle or other geometric object.
+In batch, object-text is created by including a quoted string
+in the same statement that creates the object (e.g., \f(CWbox\ "A"\fP);
+free-text is created by specifying the quoted string on a line
+by itself.
+In interactive, you create object-text by selecting an object,
+then typing at the keyboard.
+To create free-text,
+.sM SELECT
+the \fH\s-1TEXT\s+1\fP icon from the
+.B Objects
+menu, then aim the pencil where you want the text to
+be aligned, click
+.sM SELECT ,
+then type.
+For both types of text, finish off each line
+with the
+.cR \s-1RETURN\s+1
+(or
+.cR \s-1ENTER\s+1 )
+key.
+Additional text typed after the
+.cR \s-1RETURN\s+1
+will
+automatically align underneath the previous text.
+Use the backspace to erase individual characters as you type,
+or
+.cR \s-1CTL-K\s+1
+to erase an entire line.
+.P
+You should now be able to produce the picture in the first example interactively.
+Create the
+.cR A
+and 
+.cR E
+as free-text, the others as object-text.
+.br
+.ne 1.5i
+.H 1 "MORE ABOUT OBJECTS"
+.I Picasso
+provides ellipses, arcs, and sectors
+as in the picture below:
+.BP ex2.ps .50
+Ellipses are drawn just like circles, but when altering the
+default size interactively both the height and width are
+sensitive to the dragging of the mouse.
+Drawing arcs and sectors is a little different from drawing other objects:
+first click
+.sM SELECT
+to determine one end of the arc,
+again to determine the other end, then move the mouse to
+adjust the curvature of the arc and click
+.sM ADJUST
+to finish.
+The direction of curvature reverses if the ends are clicked in opposite order.
+Arrow heads can be added to arcs from the \f3Properties\fP
+menu, or in batch by appending one of:
+.cR -> ,
+.cR <-
+or
+.cR <-> .
+Properties
+.cR cw
+and
+.cR ccw
+can be applied
+to force clockwise or counterclockwise rotation.
+.P
+Lines or arrows may be composed of several segments:
+.EX 3 .50 1.5
+.P
+The
+.cR 0.5
+in this example is a distance in inches.
+Interactively, lines and arrows are created via clicking
+.sM SELECT
+to begin, and at each corner,
+with a final click of
+.sM ADJUST
+to finish the object (e.g., add the arrowhead).
+For example, to draw the picture above, select the segmented
+arrow icon, aim the pencil where you want the tail, then:
+.sM SELECT ,
+move right,
+.sM SELECT ,
+move up,
+.sM SELECT ,
+move right,
+.sM ADJUST .
+(You'll find \f3Snap^to^Grid\fP makes it a lot easier to keep
+the lines horizontal and vertical.)
+.br
+.ne 1i
+.P
+The batch
+.cR chop
+property is useful if you can't remember where
+the edge of a circle is:
+.EX 3a .75 2 l
+.cR chop
+assumes you're connecting two circles and normally chops
+at both ends; the extra
+.cR chop^0
+suppresses this overzealousness.
+Note the use of
+.cR same
+to recall the dimensions of the most
+recent object of similar type, and the use of
+.cR first
+and
+.cR last
+to identify which circle each arrow was
+to be superimposed upon.
+.P
+Polygons (the ``home plate'' icon) are just like lines, except that the final click
+of
+.sM ADJUST
+automatically joins the current pencil position to the
+initial position by a straight line.
+Polygons can be filled with color, as can most anything else.
+.P
+Lines may be curved as well as straight.
+To turn sharp corners into arcs,
+specify the radius:
+.EX 4 .6 1.5 l
+.P
+In interactive, you will need the \f3Corner^Arc\fP option
+under the \f3Properties\fP menu.
+As with \f2all\fP property modifiers,
+you will have the choice of changing only selected objects (\f3Apply\fP),
+or defining the appearance of all new objects (\f3Set Default\fP).
+.P
+.ne 1.5i
+.br
+A spline is a smooth curve guided by a set of straight ``construction lines.''
+The result is more serpentine than round-cornered lines.
+The syntax for a spline is similar to a segmented line:
+.EX 5 .75 2 l
+This example also illustrates that long statements can be
+split over several lines by ending with backslash,
+and that the
+.cR weight
+property can be used to adjust
+the thickness (in inches) of the outline of any object.
+To draw splines in interactive, just select the wiggly-looking icon
+and everything else is the same as a segmented line or arrow.
+(Straight lines will appear until the operation
+is completed with
+.sM ADJUST ,
+at which time the
+finished spline will be drawn.)
+.br
+.pl +0.5i
+.P
+.sp -1.5
+.BP guernica.ps 2.8 2.5
+.sp 1.5
+As an example of how versatile splines are, consider this illustration,
+created interactively almost entirely from splines.
+(Those of great cultural literacy will recognize this as a detail
+from ``the other
+.IR Picasso 's''
+famous \f2Guernica\fP;
+if you don't like it we can debate which
+.I Picasso
+is at fault.)
+.P
+Finally, interactive provides a ``doodle'' capability
+(the scribbly icon) not present
+in batch.
+As long as
+.sM SELECT
+is pressed, dragging the mouse will
+draw a line on the screen which tracks the mouse motion.
+We do not suggest this as a way of doing high-quality freehand illustration,
+since the mouse makes a very poor writing implement, but you
+can get some interesting effects by changing the default
+\f3Line^Style\fP and \f3Line^Color\fP via the \f3Properties\fP
+menu before doodling.
+Doodles can be filled.
+.P
+Complex doodles sometimes cause printers fits (see next section
+for printing files).
+This is a problem with the printer (not enough buffer space), not
+.IR Picasso .
+.EP 
+.br
+.pl \nLu
+.H 1 "\f4\s+1Picasso\s-1\fP IN CONTEXT"
+.sp -1.5
+.BP picture.ps 2 3.5 r
+.sp 1.5
+Even the interactive user will need to run
+.I Picasso
+as
+a batch program.
+Interactively created pictures can be turned into batch
+programs by simply selecting the
+.B Picture
+button under the
+.B File
+menu:
+type the file name of your choice in the pop-up window and
+.sM SELECT
+\f3Save\fP.
+If the file already exists,
+.I Picasso
+will ask your permission
+to overwrite it.
+.I Picasso
+encourages ending file names
+with
+.cR .pic
+by offering you a scrolling list of
+all such files in the pop-up window.
+.P
+To run
+.I Picasso
+as a batch program
+you must leave the interactive
+.I Picasso
+window.
+At
+.sM UNIX
+shell level, type
+.cR picasso
+followed by
+names of the files you want processed, or use
+.cR picasso
+in
+a pipeline of
+.sM UNIX
+commands, and it
+will write a PostScript translation of these files to standard output.
+This in turn can be sent directly to a PostScript interpreter such as NeWS
+on a Sun workstation.
+It may also be sent to a print spooler such as
+.I lp
+provided it has
+appropriate supporting PostScript software.
+(Until this support is standard we will make it available
+as part of the
+.I Picasso
+installation package.)
+Each picture will be centered on a separate page.
+If the picture extends beyond an 8\(12-by-11 inch imaging area,
+the output is scaled down to fit.
+You can turn off this centering and scaling with the \f5picasso\ \-x\fP flag.
+.P
+.EP
+Let's suppose we saved our first example on file
+.cR ex1.pic .
+Then to display it on our local PostScript printer (shell prompt not shown):
+.iS
+picasso ex1.pic | lp -opost
+.iE
+There are several ways to incorporate
+.I Picasso
+drawings in a
+.I troff
+document.
+The first is to include the
+.I Picasso
+descriptions directly in the
+.I troff
+source code, as you would with
+.IR pic :
+.iS
+\&.P
+This is some troff text.
+\&.PS
+box; arrow; box
+\&.PE
+This is some more troff text.
+.iE
+The file must be preprocessed by Picasso with the
+.cR \-t
+flag:
+.iS
+picasso -t \f2file\fP | troff -mm -mpictures | dpost | lp -opost
+.iE
+If you omit the
+.cR \-t
+option,
+.I Picasso
+will throw away
+everything outside the \f5.PS\fP/\f5.PE\fP.
+If you omit the
+.cR \(hympictures
+the document will appear with blank spaces where the pictures belong.
+Preprocessors such as
+.I eqn
+or
+.I tbl
+may be placed in the pipeline before or after
+.IR Picasso .
+Note the additional
+.I dpost
+command (included with
+.sM DWB
+3.1)\*(EMit will
+translate the output of
+.I troff
+to PostScript
+and combine this with the output previously created by
+.IR Picasso .
+.P
+Normally, figures are drawn in their natural scale; however,
+the
+.cR .PS
+line may contain a height in inches and optionally
+a width as well.
+The drawing is then scaled to the indicated size.
+The
+.cR .PS
+line in
+.I Picasso
+accepts all position and size
+parameters associated with the
+.cR .BP
+macro in
+.sM DWB
+3.1.
+Thus
+.iS
+\&.PS 2 3 r
+.iE
+causes the picture to be typeset in a rectangle 2 inches high and
+3 inches wide, right-justified with text filling on the left.
+(The
+.B Picture^Files
+menu above was done just this way.)
+.br
+.ne 5v
+.P
+A second way of including pictures is through source file diversion:
+.iS
+troff text \(el
+\&.PS <ex1.pic
+more troff \(el
+.iE
+This avoids having to copy interactively created pictures
+into the
+.I troff
+file\*(EMinstead, just refer to the
+saved file by name.
+(The file itself must also contain the \f5.PS\fP/\f5.PE.\fP, but interactive
+.I Picasso
+always does this automatically.)
+.P
+A third way to include pictures is to direct
+.I Picasso
+to create a PostScript file.
+(We caution that such files are ``non-revisable.''
+They cannot be read back into
+.IR Picasso ,
+just sent to
+devices with PostScript interpreters.)
+Interactively, just select the
+.B PostScript
+button under the
+.B File
+menu, or, from the shell:
+.iS
+picasso ex1.pic >ex1.ps
+.iE
+Then, in your
+.I troff
+file, insert the line:
+.iS
+\&.BP ex1.ps \f2height width
+.iE
+where you want the picture to appear.
+(The
+.cR .BP
+macro
+has additional options and capabilities which you should learn,
+for getting text wrapped-around pictures, left or right
+justified pictures, captions, etc.
+See
+.sM \f(HBMPICTURES\fP
+documentation for a complete discussion.)
+Since the pictures have already been fully processed, from now
+on only
+.I troff
+need be invoked:
+.iS
+troff -mm -mpictures \f2file\fP | dpost | lp -opost
+.iE
+.P
+This document was generated using this last technique.
+It's more efficient than the other ways, because
+.I Picasso
+does not have to be re-invoked every time you
+.IR troff "" re-
+the file,
+and our experience is that the pictures are a lot less likely to
+change than the text during the editing cycle.
+In several cases we scaled the picture to improve layout
+appearance, so don't be concerned if some of the one-inch
+boxes are a bit smaller or larger. 
+.H 1 "LABELS AND CORNERS"
+In batch, objects can be labeled or named so that you can talk about them later.
+For example:
+.iS
+Box1:  box
+       # ... other stuff ...
+       move to Box1
+.iE
+Place names \f2must\fP begin with an upper case letter (to distinguish them
+from variable names, which begin with lower case letters).
+The name refers to the center of the object.
+.P
+To cut down on the need for explicit coordinates, objects have ``corners''
+named by compass points:
+.EX 6 1.5 2.1
+As you may have guessed,
+.cR ht
+and
+.cR wid
+are properties
+for the height and width of the box.
+Note the use of \f5with .e at B.w\fP, for example,
+to position the ``east end'' of the text string at the
+``west end'' of the box, and the blank within some strings
+to help space them away from a vertical line.
+The words
+.cR left ,
+.cR right ,
+.cR top ,
+and
+.cR bottom
+are
+synonyms for
+.cR west ,
+.cR east ,
+.cR north ,
+and
+.cR south .
+The compass points may be abbreviated as in the example or spelled out in full.
+.br
+.ne 5.5v
+.P
+Free-text can be treated exactly like a box of the same
+height and width as the text:
+.EX 6a .8 2.0
+By default, a reference to a whole object is to its center
+.cR .c ). (
+Batch
+.I Picasso
+provides another handy way of referring to corners:
+.iS
+\&.2 <B.sw, B.se>
+.iE
+specifies a point 20% of the way from the southwest
+corner of B to the southeast corner, and so on.
+The number can be greater than 1.
+.P
+Line segment corners are referenced by number: \f5.1st\fP
+(the starting point), \f5.2nd\fP, etc.
+Other objects can use the notation as well, starting
+with \f5.1st\fP for \f5.e\fP, \f5.2nd\fP for \f5.ne\fP, etc.
+There is a critical difference between the notations: after rotation,
+the numbered points move but the compass points stay relative
+to the bounding box which surrounds the rotated object.
+.EX 6b 1 1.5 l
+.P
+In interactive, merely aim the
+pencil at the corner, or any other point, of interest.
+In fact, interactive positioning is so simple and obvious
+that it is difficult to imagine why this is so complicated in batch,
+until you try to describe in words the picture you have in mind.
+.H 1 "CONTROLLING POSITIONS"
+.I Picasso
+will let you place objects anywhere you want within the confines
+of a ``virtual page.''
+In batch, the page dimensions are determined by the extremes
+of the objects you draw;
+in interactive, the drawing window can be scrolled left, right,
+up and down within an 8\(12-by-11 inch area by
+using the
+.sM "OPEN LOOK"
+scrollbars at the right side
+and bottom of the pane (see illustration in the beginning of this guide;
+if the pane is 8\(12 or more inches wide the horizontal scrollbar will not appear).
+The fineness of placement is determined
+by your hand-eye coordination and the resolution of your X Window terminal;
+in batch, by specifying
+to the nearest decimal fraction of an inch (to 9 decimal places!)
+.P
+To interactively move several on-screen objects at once, use
+the move shortcut:
+.BL 5 1
+.LI
+click
+.sM SELECT
+on any object, and add others with
+.sM ADJUST ,
+or, pressing
+.sM SELECT ,
+sweep a box completely around all the
+objects you want to move; you'll see highlights on the objects
+.LI
+press
+.sM SELECT
+inside any highlighted object, drag the mouse to move
+the entire ensemble.
+.LE
+.P
+If you inadvertantly select more objects than you want,
+deselect the extras with
+.sM ADJUST .
+.P
+.I Picasso
+uses a standard Cartesian coordinate system,
+so any point or object has an
+.I x
+and
+.I y
+position, measured in inches from the origin,
+.cR O
+or (0,0),
+to the center of the object.
+In batch, the first object is placed with its start at the origin by default;
+in interactive,
+.cR O
+is at the center of the screen.
+For segmented lines, including polygons, the center is the same as for a box that
+fits snugly around it\*(EMi.e., midway between the leftmost and rightmost
+points of the line horizontally, and midway between the top and bottom
+points vertically (the \f2bounding box\fP).
+.P
+In interactive mode, you always determine the position
+of each object by aiming the mouse, then clicking.
+In batch, objects are automatically positioned, left to right
+by default with each new picture,
+so that they just touch at the centers of the common side.
+If you specify a new direction, subsequent objects
+will be joined in that direction, for example from right to left:
+.EX 8 .5 3 l 0
+This can lead to surprising results, until you get used to it.
+For example, if we added
+.cR arrow^down
+to the above example,
+the arrow would point down from the left side of the circle.
+To get the arrow to emerge from the bottom of the circle,
+we'd need to add:
+.iS
+arrow down from last circle .s
+.iE
+.P
+Consider aligning the bases of adjacent boxes of different size:
+.EX 7 .75 1.6
+.P
+Notice that the corner after
+.cR with
+is written \f5.sw\fP, with a dot
+prefixing it, but that
+.cR 1st
+is not, because it's referring
+to the entire first box (it's a synonym for
+.cR first ),
+not corner position 1.
+Without the alignment specified above, the center of the
+second box would have aligned with the center of the first.
+.P
+Position modifiers like
+.cR from ,
+.cR to ,
+.cR by
+and
+.cR at
+are followed by an
+.IR x , y
+pair (optionally enclosed in parentheses) or the
+name of some previously drawn object and can be attached to boxes,
+circles, lines, motions, and so on:
+.EX 9 .6 1.7 l 0
+As shown in several examples, objects
+can be referenced by labeling them (\f5A:^box\fP) or by sequencing them
+(\f51st^box\fP or \f5first box, 2nd box, \(el, 2nd last box, last box\fP).
+.P
+The very first example of this document may have made you feel
+that batch mode is simpler than interactive.
+Sometimes this is true.
+But most often, batch
+requires an iterative process\*(EMcreate a picture, send it to
+a printer or screen, change the input language, try again,
+over and over\*(EMuntil the picture is satisfactory.
+In interactive mode, you will get immediate visual feedback from
+each command,
+and so picture drawing usually proceeds much faster.
+In fact, pictures that take hours to create in batch can
+take minutes interactively.
+This is especially true if there is a large amount of
+positioning necessary, above and beyond the default
+``left-to-right'' positioning of batch mode.
+.P
+On the other hand, for very fine positioning you may get better
+results from batch.
+(Go back and look at the pushpin on the \f3Objects\fP menu illustrated
+in section 1; that's tough to do interactively.)
+We frequently go back and forth between the two modes, usually
+starting in interactive to get the approximate position right,
+then editing the language file to nail down the precise position.
+.H 1 "VARIABLES, EXPRESSIONS AND BUILT-IN FUNCTIONS"
+In batch, you can change the default size of objects by assigning values to
+the variables that define them.
+Here is the list of predefined variables, with their default values:
+.iS
+linewid    = 0.5         lineht     = 0.5
+boxrad     = 0           linerad    = 0      \f1(curvature on corners)\fP
+boxwid     = 0.75        boxht      = 0.5
+ellipsewid = 0.75        ellipseht  = 0.5
+circlerad  = 0.25        arcrad     = 0.25
+movewid    = 0.5         moveht     = 0.5
+arrowwid   = 0.05        arrowht    = 0.1    \f1(arrowhead dimensions)\fP
+arrowfill  = 1           lineweight = 0      \f1(thinnest line possible)
+.iE
+Any of these variables can be temporarily superseded by
+specifying
+.cR ht ,
+.cR wid
+or
+.cR rad
+after an object,
+as we have already seen in several examples.
+.P
+In interactive, changing defaults is easy and intuitive:
+just create a prototype object, select it, and click the
+.B Default^Size
+button on the
+.B Draw
+menu.
+Subsequent objects of the same type will come up looking
+like your prototype; as with the initial defaults, press
+.sM SELECT
+and drag to create the object with different dimensions.
+.P
+If you typically invoke the same properties every time you
+use
+.IR Picasso ,
+you should probably create a \f3Configuration\fP file.
+This can be done in two ways:
+.BL 5 1
+.LI
+you can \f3Set^Default\fP properties as
+you like, say, thicken lines with \f3Line Style\fP,
+and make boxes 1 inch wide by default with the \f3Default Size\fP
+button; then
+.sM SELECT
+the \f3Configuration\fP
+button under the \f3Files\fP menu, assign a file name
+(we suggest ending it with
+.cR .cfg )
+and
+.sM SELECT
+the \f3Save\fP button.
+.LI
+you can use any editor to create a file of batch commands
+(\f5circlerad=.2; boxwid=1.0\fP, etc.)
+.LE
+.P
+Each time you begin a new interactive
+.I Picasso
+session, read your
+configuration file in via the \f3Get\fP option of the \f3Configuration\fP
+pop-up.
+To get back the settings above, click the \f3Factory\fP button.
+.P
+The rest of this section applies to batch programs only.
+.br
+.ne 1.2i
+.P
+Good programming style suggests defining
+your own variables for changeable elements:
+.EX 9a 0.7 2 r
+Expressions may use the standard operators
+.cR + ,
+.cR - ,
+.cR * ,
+.cR / ,
+and
+.cR % ,
+and parentheses for grouping.
+Any pair of expressions enclosed in parentheses and separated by comma defines a position;
+furthermore such positions can be added or subtracted to yield new positions,
+as in the position of
+.cR Box2
+above.
+.P
+This method of specifying \f2relative\fP position is greatly preferable to
+specifying \f2absolute\fP position.
+In the above example, if you changed your mind about
+the position or size of
+.cR Box1 ,
+the upper right corner of
+.cR Box2
+would still be positioned at the center of
+.cR Box1 .
+.P
+You can use the height, width, radius, and \f2x\fP and \f2y\fP coordinates
+of any object or the coordinates of a corner point in any expression:
+.iS
+Box1.x          # the \f2x\f(CW coordinate of the center of Box1
+Box1.ne.y       # the \f2y\f(CW coordinate of the its northeast corner
+Box1.wid        # the width of Box1
+2nd last circle.rad  # radius of next-to-last circle
+.iE
+.P
+.I Picasso
+provides a small collection of standard functions:
+.iS
+.ta +2i
+abs(\f2expr\fP)
+cos(\f2expr\fP)	\f2expr\f1 is angle in radians\f5
+sin(\f2expr\fP)	\f2expr\f1 is angle in radians\f5
+atan2(\f2y\fP,\f2x\fP)	\f1returns an angle in radians\f5
+ln(\f2expr\fP)	\f1natural logarithm\f5
+log(\f2expr\fP)	\f1logarithm base 10\f5
+exp(\f2expr\fP)	\f1inverse of \f5ln
+pow(\f2x\fP,\f2y\fP)	\f2x\f1 raised to the \f2y\f1 power\f5
+sqrt(\f2expr\fP)
+rand(\f2expr\fP)	\f1random number between 0 and 1\f5
+int(\f2expr\fP)	\f1integer part of \f2expr\f5
+max(\f2e1\fP,\f2e2 ...\fP)	\f1maximum of a list of expressions\f5
+min(\f2e1\fP,\f2e2 ...\fP)
+setrgb(\f2r\fP,\f2g\fP,\f2b\fP)	\f1define color table index\f5
+setfont(\f2string\fP)	\f1define font table index\f5
+.iE
+.ta 8m
+.br
+.ne 4v
+Note that the batch trigonometric functions deal with angles in radians;
+append a `d' to numbers for degrees (as in
+.cR sin(45d) ).
+If you have some old
+.I pic
+files around, you may stumble across
+name conflicts due to some new functions in this list;
+e.g., trying to define a variable or macro named
+.cR ln
+will work
+fine in
+.I pic
+but give
+.I Picasso
+conniptions.
+.P
+The
+.cR reset
+statement can be used to restore variables to their
+original values; if no variables follow 
+.cR reset ,
+all are restored.
+.H 1 "COLOR AND OTHER FANCY THINGS"
+So far we have illustrated only simple line drawing capabilities,
+following (somewhat slavishly) the \f2PIC User Manual\fP.
+But PostScript enables a much wider range of effects than older
+typesetting languages.
+The most spectacular effects use color (which will appear
+as unique shades of gray when sent to a black-and-white
+PostScript device):
+.EX 10 1.5 1.75
+Batch
+.I Picasso
+predefines common colors, as shown above.
+To mix your own, provide the
+.cR setrgb
+function with the
+fractional amount (from 0 to 1) of red, blue and green and
+assign a name, as we did with
+.cR orange .
+(Light mixing rules, not paint mixing rules!)
+See Appendix\ C for more predefined color names.
+.P
+In interactive mode, just choose a color from the
+.B Fill^Color
+pop-up under
+.B Properties .
+The
+.B Apply
+button will then cause currently selected objects to be filled in the desired color;
+.B Set^Default
+will cause newly-created objects to be filled automatically.
+The result of filling is what you'd expect for boxes, circles, etc.,
+but even arcs, splines and doodles can be filled, with perhaps
+unexpected results.
+You can't mix your own colors in interactive, yet, and batch-defined
+colors will be unpredictable on-screen.
+.P
+You may also fill a figure with any value between 0 (black) and 1 (white) to get an
+appropriate gray:
+.EX 11 .9 1.75
+.P
+The first box is filled with a medium gray, and then a white filled box
+is overlaid on top of the first.
+In this example, the
+.cR noedge
+attribute causes the omission of the
+hairline edge that was traced in black around the colored boxes above.
+The color of this edge and its thickness can also be changed: 
+.EX 12 .9 1.75
+.P
+In interactive, choose the
+.B Line^Color
+and
+.B Line^Style
+items under
+.B Properties .
+Interactive observes the same rule as batch:  new objects
+always appear ``in front of'' old objects if they intersect,
+as is the case with the boxes above.
+To change the relative plane of objects in batch you can use
+the
+.cR layers
+statement, as discussed in Appendix\ D; interactively,
+use the
+.B Front
+and
+.B Back
+buttons under
+.B Edit .
+.P
+.ne 2v+.6i
+Lines are normally drawn as thin as possible on the
+output device
+.cR "weight\ 0" ). (
+You may prefer a value nearer .01 inch (which gives a line
+three pixels wide on the common 300 dot per inch laser printers):
+.EX 13 .6 2.5 l
+We also show in this example that you can control both the width
+of dashed lines, and the spacing between dashes.
+.H 1 "DUPLICATING AND TRANSFORMING OBJECTS"
+In preparation for our next example we'll introduce two new
+batch concepts, lists and the
+.cR touching
+property.
+Instead of specifying each change of direction for a line
+or arc, we can pre-specify all the coordinates we want that
+line or arc to pass through via lists, then create the
+object so that it ``touches'' those points:
+.EX 13a .6 2 r
+.ne 30
+Now let's use some of the things we've learned about
+positions, variables, labels, expressions and lists,
+and some new capabilites as well, to create a
+fairly complex picture\*(EMthe
+field of stars in a U.S. flag:
+.EX 14 2.2 6
+Several new concepts are shown.
+.cR scale
+shrinks or expand
+.cR dup
+copies it.
+This example sketches a model star
+by drawing a line through five equally spaced points
+(as specified in the lists
+.cR xstar
+and
+.cR ystar )
+on
+an implicit circle of radius 1.
+The star is scaled proportionally to fit into the 3 by 2 inch field,
+copied across the first row and then in pairs of rows for the
+remaining stars.
+After the copying, the model star
+could be deleted from the picture,
+but in this case it is just covered up by the blue rectangle.
+.br
+.ne 4
+.P
+In interactive, the method is analogous\*(EMwe
+would begin by constructing a large star.
+This might be done by drawing a horizontal or vertical line,
+then selecting the 
+.B Rotate
+button and the
+.B Degrees
+pop-up window under the
+.B Transform
+menu to get the sides aligned to the precise angles required.
+This is quite tedious.
+We'd do better to plagiarize the first three lines of the code
+above\*(EMtype them into a file (with
+.cR .PS
+fore and
+.cR .PE
+aft), then
+invoke the code via the
+.B Picture
+button under the
+.B File
+menu.
+This leads to an amusing problem\*(EMthe
+.cR noedge
+will cause the white star to be completely invisible
+against the white background of the pane!
+Best to omit
+.cR noedge
+if you copy the code.
+If you're especially rushed, or careless, you can construct
+a sleazy star via the polygon icon; draw it big because \(el
+.P
+Either way, you'll need to shrink the star.
+Here's how:
+.sM SELECT
+the star, go to the
+.B Transform
+menu and select the
+.B Scale
+submenu,
+then the
+.B Proportional
+button.
+You'll see a box around the star.
+Move the mouse until the box is ``about the right size,''
+then click
+.sM SELECT
+and you're done.
+If you're unhappy with the result you can either
+.B Undo
+and start over, or rescale the little star.
+.P
+Then:
+.BL 5 1
+.LI
+Apply the \f3Grid\fP and \f3Snap to Grid\fP options under \f3View\fP.
+(The default grid size is fine.)
+.LI
+Draw a box 12 units wide and 10 units high.
+.LI
+Fill the box with blue.
+.LI
+Select the star, then go to the
+.B Edit
+menu and select the
+.B Duplicate
+button; copy the star to the upper left-hand corner of the blue
+box by dragging the mouse, then clicking
+.sM SELECT
+and
+.sM ADJUST .
+.LI
+Now that it's on the blue background you can erase the
+ugly black lines used to construct the star.
+Do this by selecting the star, then going to the
+.B Line^Color
+pop-up window under 
+.B Properties
+and setting the color to
+.B none .
+(Don't forget to
+.B Apply .)
+.LI
+Fill the top row by duplicating this first star five times.
+Do this by clicking
+.sM SELECT
+at every other grid point;
+with snap-to-grid the copies should nestle in place.
+Click
+.sM ADJUST
+to end copy mode.
+.LI
+Sweep a rectangle around the entire row; then copy the entire row eight times,
+offsetting every other row by one grid point.
+You should now have (oops!) 54 stars\*(EMfour too many.
+.LI
+Go back and select the excess stars on every other row
+(either by
+.sM SELECT
+for the first one and
+.sM ADJUST
+for the others, or by sweeping a
+rectangle around all the offending stars), then select
+.B Delete
+from the
+.B Edit
+menu.
+.LE
+.P
+As an exercise, add thirteen alternating red and white
+stripes and you've got a complete American flag.
+(You'll have to change the grid size so that seven
+stripes coincide with the height of the blue field;
+you'll need your calculator for that one!
+Apply \f3Line^Color none\fP at the end for a cleaner picture.)
+.P
+The complete list
+of operations you can do to objects once they have been described is:
+.iS
+dup \f2object \f1[\f5at \f2position\f1]\f5
+delete \f2object\f5
+move \f2object \f5to \f2position\f5
+reflect \f2object \f1[\f5at \f2position\f1]\f5
+rotate \f2object \f1[\f5by\f1] \f2radians \f1[\f5at \f2position\f1]\f5
+scale \f2object\f1 [\f5by\f1] \f2expr1 \f1[, \f2expr2\f1]\f5
+transform \f2object \f1[\f5by\f1] \f2e1,e2,e3,e4\f1[\f2,e5,e6\f1]\f5
+translate \f2object \f1[\f5by\fR] \f2position
+.iE
+Bracketed parts of these statements are optional.
+The \f2position\fP can be a point or a line;
+for instance, to invert the star in the previous example, add:
+.iS
+L: line from -.5,.5 to .5,.5
+reflect Star at L
+delete L
+.iE
+Since objects don't appear until the
+.cR .PE
+is reached,
+deleted objects will never materialize.
+The
+.cR transform
+operation is generated automatically
+by interactive Picasso for a variety of transformations,
+but is too arcane to be described in this document.
+.br
+.ne 1i
+.P
+The
+.cR scale
+transformation may be uniform in all directions, or it
+can apply a different scaling factor horizontally and vertically:
+.EX 15 .8 3 r
+.P
+In interactive, the
+.B Scale
+submenu offers buttons for
+.B Proportional
+and
+.B Nonproportional
+scaling, and a
+.B Factor
+pop-up window to achieve the effects illustrated above.
+You might also try pressing the
+.B Rotate
+button now.
+It will let you rotate
+.B Freehand
+or by specifying
+.B Degrees .
+Freehand rotation is accomplished by moving the mouse.
+(The lower left hand corner of the object's bounding box is the axis of rotation.)
+Similarly,
+.B Reflect
+will bring up submenus for reflection (mirror image) about various axes.
+.H 1 BLOCKS
+Any sequence of
+.I Picasso
+statements may be enclosed in brackets
+.cR [\(el]
+to form a block, which can then be treated as a single object and manipulated
+rather like an ordinary box:
+.EX 16 .8 2.25
+.ne 2
+Notice that the ``last'' construct treats blocks as a unit
+and doesn't look inside for objects: ``\f5last box.s\fP'' refers to
+box 1, not box 2 or 4.
+You can use \f5last block\fP just
+like \f5last box\fP.
+.P
+Blocks have the same compass corners as boxes
+(determined by the bounding box).
+It is also possible to position a block
+by placing either an absolute coordinate (like
+.cR 0,0 )
+or an internal
+label (such as
+.cR A )
+at some external point, as in
+.iS
+B: [ ...; A: ...; ...] with .A at ...
+.iE
+By default, blocks join with other things as boxes do, touching
+the side opposite the direction from which you entered the previous object.
+.P
+The nearest interactive analog to blocks is object grouping:
+press
+.sM SELECT ,
+sweep a rectangle containing the objects
+you want grouped, then release.
+Or,
+.sM SELECT
+any object, add additional objects via
+.sM ADJUST .
+The entire group can be moved, deleted, filled, rotated, etc.
+.H 1 "LOOPS, CONDITIONALS AND THE OUTSIDE WORLD"
+This discussion is only relevant to batch; moreover,
+interactive
+.I Picasso
+is not quite smart enough to even
+generate the statements described in this section.
+Programs containing these statements will
+be displayed correctly when read into interactive
+.IR Picasso ;
+unfortunately, if you \f3Save\fP the very same file in an
+interactive session, all the elegant structure will be lost.
+.P
+.I Picasso
+provides
+.cR if
+statements and
+.cR for
+loops, permitting a
+certain amount of programming structure.
+The
+.cR for
+statement is:
+\f5for \f2var\f5 = \f2expr\f5 to \f2expr\f5 by \f2expr\f5 do X \f2 anything\f5 X\f1
+.sp .5
+.EX 17 1.0 2.0
+.ne 3
+The
+.cR by
+phrase is optional, and its value may be preceded by an optional
+operator
+.cR - , (
+.cR * ,
+or
+.cR / )
+to step the variable by subtraction, multiplication
+or division as well as the default addition.
+The body of the loop can be delimited by any character
+.cR A "" (
+in the above example).
+.P
+As an exercise, try constructing the stars on the U.S. flag
+shown previously using loops.
+Read Appendix\ D if you get stuck.
+.br
+.ne 6
+.P
+The
+.cR if
+statement is
+.iS
+if \f2expression\f5 then X \f2anything\f5 X else X \f2anything\f5 X
+.iE
+where the
+.cR else
+clause is optional.
+The \f2expression\fP may use the usual relational operators:
+.cR == ,
+.cR != ,
+.cR > ,
+.cR >= ,
+.cR < ,
+.cR <= ,
+.cR &&
+and
+.cR || ,
+as defined in the C Programming Language.
+.EX 18 .75 2 l
+Note that braces may be used instead of matching characters.
+String comparison with
+.cR ==
+or
+.cR !=
+is also permitted, 
+to compare quoted strings:
+.iS
+if "\f2string1\f5" == "\f2string2\f5" then \(el
+.iE
+.P
+The \f5include "\f2file\f5"\f1 statement can be used to read in a
+.I Picasso
+program from another file (\f5.PS\f1/\f5.PE\f1) are ignored).
+It works just like the
+.cR #include
+statement in C.
+The file might contain standard variables you like to use over and
+over, or definitions of customized objects, such as the star in our flag example.
+.P
+There is a capability
+of escaping to the
+.sM UNIX
+shell:
+.iS
+sh X \f2UNIX command line\f5 X
+.iE
+Output from such commands is diverted to
+.IR Picasso 's
+\f2stderr\fP stream.
+.P
+Last, the
+.cR print
+\f2expression\fR statement can be used
+to output any currently defined variables or expressions to \f2stderr\fP.
+This can be useful for debugging.
+To divert this to a file, invoke
+.I Picasso
+itself with
+.cI 2> file . 
+.H 1 MACROS
+Batch
+.I Picasso
+provides a basic macro facility.
+In the simplest form,
+.iS
+define \f2 name \f5X \f2replacement text\f5 X
+.iE
+defines \f2name\fP to be the \f2replacement text\fP;
+.cR X
+is any
+character that does not appear in the replacement text, or matching braces
+.cR {} ). (
+Any subsequent occurrence of \f2name\fP will be replaced by
+.cA "replacement text" .
+.P
+Macros may have arguments.
+If the replacement text of a macro definition contains occurrences of
+.cR "$1,\ $2,"
+etc., these will be replaced by the corresponding actual arguments
+when the macro is invoked.
+The invocation for a macro with arguments is
+.iS
+name(arg1, arg2, \(el)
+.iE
+Nonexistent arguments (\f5$n\fP when there are fewer than n
+actual arguments) are replaced by null strings.
+.P
+For example, you could define a parameterized square such as
+.EX 19 1 2 l
+.br
+.ne 3
+.P
+Notice how the second argument was used to pass in arbitrary contents.
+Coordinates like \f2x,y\fP may be enclosed in parentheses so they can be
+included in a single macro argument rather than being distributed to
+successive parameters.
+.P
+We expect that as
+.I Picasso
+gains popularity, creation of
+symbol libraries and macros for product-specific icons
+will be a significant activity.
+For example, here is an icon for a terminal:
+.EX 20 2.3 .82
+The single argument to this macro is the width in inches
+you want the icon to appear.
+The piece parts of the terminal are completely parameterized,
+so that with a simple change (to the constant
+.cR .75 )
+the screen can be made taller or
+shorter or square.
+.P
+A more complex form of macro is \f5copy "\f2file\fP" thru X . . . X\f1.
+Lines are read one at a time from \f2file\fP, and each
+blank separated field on a line is assigned to \f5$1, $2,\fP
+and so on in the macro.
+The macro can be explicit, or the name of a previously defined macro.
+If the file is omitted, the remainder of the current file,
+up to the next
+.cR .PE ,
+is gobbled up.
+For example, if our previous example were saved on file
+.cR terminal.pic ,
+then
+.iS
+include "terminal.pic"
+copy thru Terminal
+\&.5
+\&.75
+1.0
+\&.PE
+.iE
+would add three succesively larger terminals.
+.H 1 "MORE ON TEXT, \f4troff\fP AND PostScript INTERFACES"
+We learned early on about two kinds of text,
+object-text and free-text.
+Although object-text follows an object during moves and copies,
+it is generally immune to transformations.
+In the earlier example of a circle which gets transformed
+into a larger circle and an ellipse, note that the
+word ``circle'' did not get taller or wider.
+However, free-text is subject to transformation:
+.EX 20a .35 1
+(A temporary shortcoming of the X Window System may cause on-screen
+text not to appear correctly rotated; despite this, such text will
+be correctly produced on the printer.)
+.P
+The rule-of-thumb for text is to treat it the same as
+a box which fits snugly around the top of the capital letters
+in the font (even if you don't use them), the lowest descender
+(e.g., lower case `y'), and left and right ends.
+Within that bounding box, lines may be left-, right- or center-adjusted.
+Here is a typical, simple case:
+.EX 20b .6 2.5 l
+.br
+.P
+Finer adjustment of free-text can be achieved through use of the
+.cR with
+\f2corner\f5 at \f2position\f1 property shown earlier.
+.P
+Both kinds of text have their (default) appearance determined
+by the predefined variables:
+.iS
+textfont  = setfont("R")     \f1Times Roman\f5
+textsize  = 10               \f2i.e.\f1, 10 points (1 point = 1/72 inch)\f5
+textspace = 12               \f1baseline to baseline\f5
+textcolor = black
+.iE
+or in interactive by the
+.B Text
+pop-up window accessed via the
+.B Properties
+menu.
+.br
+.ne 1.3i
+.P
+The
+.cR font
+and
+.cR size
+properties can be used to override
+the
+.cR textfont
+and
+.cR textsize
+variables, and
+.cR label
+can be used to override
+.cR textcolor :
+.EX 21 1.1 2.0 l
+.P
+.I Picasso
+knows the standard ``built-in'' fonts in current Adobe Systems, Inc.
+implementations of PostScript.
+You may use either their long proper names or the
+.I troff
+abbreviations for them:
+.iS
+R        Times-Roman
+I        Times-Italic
+B        Times-Bold
+BI       Times-BoldItalic
+H        Helvetica
+HI       Helvetica-Oblique
+HB       Helvetica-Bold
+HX       Helvetica-BoldOblique
+CW       Courier
+CO       Courier
+CI       Courier-Oblique
+CB       Courier-Bold
+CX       Courier-BoldOblique
+PA       Palatino-Roman
+PI       Palatino-Italic
+PB       Palatino-Bold
+PX       Palatino-BoldItalic
+Hr       Helvetica-Narrow
+Hi       Helvetica-Narrow-Oblique
+Hb       Helvetica-Narrow-Bold
+Hx       Helvetica-Narrow-BoldOblique
+ZD       ZapfDingbats
+ZI       ZapfChancery-MediumItalic
+GR       Symbol
+.iE
+.br
+.ne 4
+.P
+At the present time, interactive
+.I Picasso
+is unable to display
+all these fonts, nor can it produce every possible size.
+You will have to be content with seeing ``something close'' on the
+screen, then getting what you really want on paper.
+(This gets into legal issues that are interesting but beyond
+the scope of this document.)
+You can determine the font and size of text already on screen by
+selecting the text, then clicking
+.B Menu
+on the
+.B Set/Show
+button in the
+.B Text
+properties pop-up window, then
+.sM SELECT
+on the
+.B Show^Object
+button.
+.P
+Picasso is \f2not\fP a
+.I troff
+preprocessor, despite its being shoehorned into
+the traditional
+.I troff
+pipeline when invoked with the
+.cR \-t
+flag.
+.I Picasso
+produces a PostScript output file, with a ``prologue'' file
+defining PostScript routines for the
+.I Picasso
+objects
+.cR box , (
+.cR line ,
+etc.) and standard comments counting pages and defining page bounding boxes.
+.I Picasso
+does, however, understand
+.I troff
+fonts, vertical spacing and point sizes.
+In particular,
+.cR .ft ,
+.cR .ps ,
+and
+.cR .vs
+commands have
+exactly the same effect on
+.I Picasso
+as explicit assignments to the
+.I Picasso
+variables
+.cR textfont ,
+.cR textsize ,
+and
+.cR textspace .
+But be aware that
+.I Picasso
+knows nothing about
+.I troff
+macros or registers.
+It does attempt to track
+.I troff
+commands in text \f2outside\fP the
+.cR .PS
+and
+.cR .PE
+brackets around its picture descriptions,
+but anything more complex than the most elementary uses of
+.I troff
+is likely
+to confuse
+.IR Picasso .
+.br
+.ne 2i
+.P
+.I Picasso
+also recognizes
+.I eqn
+delimiter characters.
+Object-text or free-text with
+.I eqn
+delimiters
+is passed to a  (\f5eqn | troff | dpost\fP)  pipeline for processing
+and then brought back into Picasso as embedded PostScript.
+For example:
+.EX 22 1.2 1.7 l
+(The required \f5.EQ\f1/\f5delim $$\f1/\f5.EN\f1 is not shown in the example.)
+.IR Picasso 's
+idea of the size of the results is likely to be uncertain.
+More elaborate
+.I eqn
+input (one or more lines of text between \f5.EQ\f1/\f5.EN\f1)
+will be passed as a unit to
+.I eqn
+and then fitted back into the picture at
+the current position, as if you had placed a quoted string there.
+We caution that
+.I Picasso
+may have only an approximate idea of the size of such a thing.
+The delimiters set in this example remain in effect for subsequent pictures;
+you need an explicit \f5.EQ\f1/\f5delim off\f1/\f5.EN\fP 
+to reset to the default (no delimiters) state.
+And, as with the
+.I troff
+requests it understands,
+.I Picasso
+will scan for
+.I eqn
+delimiter settings outside the picture brackets.
+.P
+Finally,
+.I Picasso
+keeps tabs on the PostScript parameters
+.cR flatness ,
+.cR linecap ,
+.cR linejoin ,
+and
+.cR miterlimit . 
+There are builtin variables for these, and you may change them
+to modify the properties of subsequent objects.
+See a PostScript reference manual
+for the meaning and possible values of these parameters.
+.P
+The Appendices include a more complete if less readable definition
+of the
+.I Picasso
+language.
+If you intend to program in batch you should read these.

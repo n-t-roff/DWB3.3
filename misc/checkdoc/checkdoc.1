@@ -1,0 +1,59 @@
+.TH CHECKDOC 1
+.SH NAME
+.B checkdoc
+\- check integrity of input for
+.SM MM
+document file
+.SH SYNOPSIS
+\*(mBcheckdoc\fP
+.OP "" files []
+.SH DESCRIPTION
+The
+.B checkdoc
+command scans the document input file
+and checks for proper usage of the Memorandum Macros (\s-1MM\s+1).
+For example, it checks for a
+.MW .DE
+(display end)
+macro for every
+.MW .DS
+(display start) macro.
+The
+.B checkdoc
+command also checks for syntax errors
+in the usage of macros for preprocessors
+.RB ( tbl (1)),
+.BR eqn (1),
+.BR pic (1),
+.BR grap (1)).
+In addition, it checks for common
+user errors as well as known (and sometimes undocumented)
+idiosyncracies of the text processing tools.
+.PP
+.B checkdoc
+now examines additional source files specified in
+.MW .so
+and
+.MW .nx
+formatting directives.
+The use of
+.B xpand
+is no longer required.
+.SH DIAGNOSTICS
+If
+.B checkdoc
+encounters any errors, exit status ``1'' is returned.
+For each error found,
+.B checkdoc
+prints a message that describes the nature of the problem
+and the offending line number.
+.PP
+If no errors are found, exit status ``0'' is returned.
+.SH BUGS
+.B checkdoc
+does not examine the content of user defined macros
+and does not attempt to expand them when they are invoked.
+.SH "SEE ALSO"
+.BR mm (1),
+.BR mmt (1),
+.BR mm (5),

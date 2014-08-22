@@ -1,0 +1,48 @@
+/square
+ {
+  gsave
+   edge 0 rlineto
+   0 edge rlineto
+   edge neg 0 rlineto
+   closepath
+   fill
+  grestore
+} def
+
+/check
+ {
+   black setgray square
+   side 0 rmoveto
+   light setgray square
+   0 side rmoveto
+   dark setgray square
+   side neg 0 rmoveto
+   graylev setgray square
+} def
+
+72 72 scale
+
+/xloc .25 def
+/xincr 1 def
+/graylev 0 def
+/grayincr 1 79 div def
+/side .475 def
+/edge .45 def
+/light 2 3 div def
+/dark 1 3 div def
+/black 0 def
+
+9.5 -1 .5
+ {
+   /yloc exch def
+   8
+   {
+     xloc yloc moveto check
+     /xloc xloc xincr add def
+     /graylev graylev grayincr add def
+   } repeat
+   /xincr xincr neg def
+   /xloc xloc xincr add def
+ } for
+
+showpage

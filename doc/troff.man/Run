@@ -1,0 +1,18 @@
+# set print spooler command
+PRINT=""
+
+# set list of PostScript output files to print
+PSFILES="PS.intro PS.usage PS.sum PS.ref PS.tutex PS.chars"
+
+# run document parts and create PostScript output files
+troff -Tpost trfman.intro | dpost >PS.intro
+tbl trfman.usage | eqn | troff -Tpost - | dpost >PS.usage
+tbl trfman.sum | eqn | troff -Tpost - | dpost >PS.sum
+tbl trfman.ref | eqn | troff -Tpost - | dpost >PS.ref
+troff -Tpost trfman.tutex | dpost >PS.tutex
+tbl trfman.chars | troff -Tpost - | dpost >PS.chars
+
+# print document parts if PRINT is set
+if [ x"$PRINT" != "x" ]; then
+   $PRINT $PSFILES
+fi

@@ -1,0 +1,84 @@
+PICASSO
+============================================================================
+TITLE      Picasso - An Open Look Drawing Program
+
+AUTHOR(s)  Nils-Peter Nelson
+           AT&T Bell Laboratories
+
+REPRINTED  May 1990, AT&T Bell Laboratories
+============================================================================
+FILE             PURPOSE
+--------------   --------------------------------------------------------
+disclaimer       OPEN LOOK interface disclaimer for Picasso
+pguide.doc       Picasso User's Guide document body
+pguide.appA      Appendix A:  PIC Incompatibilities
+pguide.appB      Appendix B:  Formal Language
+pguide.appC      Appendix C:  Keywords, Abbreviations, and Default Variables
+pguide.appD      Appendix D:  Some Larger Examples
+pguide.defs      Additional macro definitions for Picasso document
+Run              Shell script to format and print entire Picasso User's Guide document
+
+Picasso source files for sample pictures:
+   edit.pic     ex7.pic      ex16.pic     exA2.pic     properties.pic
+   ex1.pic      ex8.pic      ex17.pic     exA3.pic     transform.pic
+   ex2.pic      ex9.pic      ex18.pic     exA4.pic     view.pic
+   ex3.pic      ex9a.pic     ex19.pic     file.pic
+   ex3a.pic     ex10.pic     ex20.pic     guernica.pic
+   ex4.pic      ex11.pic     ex20a.pic    main.menu.pic
+   ex5.pic      ex12.pic     ex20b.pic    mouse.pic
+   ex6.pic      ex13.pic     ex21.pic     obj.menu.pic
+   ex6a.pic     ex14.pic     ex22.pic     picture.pic
+   ex6b.pic     ex15.pic     exA1.pic     pool.pic
+
+PostScript output for sample pictures:
+   edit.ps      ex7.ps       ex16.ps      exA2.ps      properties.ps 
+   ex1.ps       ex8.ps       ex17.ps      exA3.ps      transform.ps 
+   ex2.ps       ex9.ps       ex18.ps      exA4.ps      view.ps 
+   ex3.ps       ex9a.ps      ex19.ps      file.ps 
+   ex3a.ps      ex10.ps      ex20.ps      guernica.ps 
+   ex4.ps       ex11.ps      ex20a.ps     main.menu.ps 
+   ex5.ps       ex12.ps      ex20b.ps     mouse.ps 
+   ex6.ps       ex13.ps      ex21.ps      obj.menu.ps 
+   ex6a.ps      ex14.ps      ex22.ps      ps ture.ps 
+   ex6b.ps      ex15.ps      exA1.ps      pool.ps 
+
+============================================================================
+To produce the entire Picasso User's Guide document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the Picasso document (body only), use the command:
+
+   troff -Tpost -mpictures pguide.doc | dpost
+
+To produce each of the appendices, use the commands:
+
+   troff -Tpost pguide.appA | dpost
+   troff -Tpost pguide.appB | dpost
+   tbl pguide.appC | troff -Tpost | dpost
+   troff -Tpost -mpictures pguide.appD | dpost
+
+NOTE:  The shell script "makepics" uses Picasso to process the source
+files (ending with ".pic") and creates the resulting PostScript output
+files (ending with ".ps").  The resulting PostScript files are included
+here, so this shell script need not be run unless the picasso source has
+changed.
+
+The sequence:
+   .sp -1.5
+   picture
+   .sp 1.5
+is used frequently because the BP macro leaves a space at the top of
+the picture, and these pictures are generally at the beginning of a
+paragraph where there is already space.
+============================================================================
+In addition, an overview document for Picasso in included in this source.
+To produce the Picasso Overview document, use the command:
+
+   troff -mpictures overview | dpost
+============================================================================

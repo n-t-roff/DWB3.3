@@ -1,0 +1,40 @@
+.TH HYPHEN 1
+.SH NAME
+.B hyphen
+\- find hyphenated words
+.SH SYNOPSIS
+\*(mBhyphen\f1
+.OP "" files []
+.SH DESCRIPTION
+.B hyphen
+finds all the hyphenated words ending lines in
+.I files
+and prints them on the standard output.
+If no arguments are given or if
+.B hyphen
+encounters
+.OP - "" ,
+it uses the standard input.
+Thus,
+.B hyphen
+may be used as a filter.
+.SH EXAMPLE
+You would use the following command line to proofread
+.BR nroff 's
+hyphenation in
+.IR files :
+.EX
+mm  \f2files\fP | hyphen
+.EE
+.SH BUGS
+.B hyphen
+cannot cope with hyphenated italic (or underlined words);
+it frequently will either miss them altogether or mishandle them.
+.B hyphen
+occasionally gets confused but with no ill effects
+other than spurious extra output.
+.SH SEE ALSO
+.BR mm (1),
+.BR mmt (1),
+.BR nroff (1),
+.BR troff (1)

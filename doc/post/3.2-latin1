@@ -1,0 +1,191 @@
+.ig
+USAGE:  tbl 3.2-latin1 | troff -Tlatin1 - | dpost
+..
+'''	\"               Copyright c 1991 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so ../defs.doc
+.so defs.post
+.AT "PostScript" "Latin 1"
+.TL "PostScript Character Set and Symbols" "Latin 1 (ISO 8859-1) Character Set"
+.ds dG \v'-0.3v'\s-3\(dg\s+3\v'0.3v'
+Latin 1, formally defined by ISO 8859-1, is an 8-bit character set commonly
+used in western European countries.
+The first 128 characters are the same as in
+.sM ASCII ;
+the next 32 are undefined control codes;
+the remaining 96 characters are shown below in numeric order,
+with the 8-bit value shown in hexadecimal in the first column.
+.P
+These characters are usually typed from special keyboards designed to
+create 8-bit characters, the most common convention being the
+.sM COMPOSE
+key sequence for the
+.sM VT200
+terminal.
+In this convention, one depresses the
+.sM COMPOSE
+key, followed by two other keys, and a single 8-bit character
+is sent to the host.
+For example, to get the 8-bit Latin 1 code for the British Pound sign,
+one would type
+\f(CWCOMPOSE L-\fP.
+.P
+The input names below, which are defined by invoking the
+\f(CW-TLatin1\fP option on
+.I troff ,
+are 7-bit
+.sM ASCII
+representations for the Latin 1 characters;
+the names are the same as the two characters
+you would type following the
+.sM COMPOSE
+key.
+In most cases, there are other names defined elsewhere in this manual;
+either name will work.
+Thus, lacking a
+.sM VT200
+compatible keyboard, you could also get the British Pound sign by
+\f(CW\e(L- \fPor \f(CW\e(ps.\fP
+.P
+A caution is in order: although
+.sM "UNIX SVR4"
+is designed to cope with 8-bit characters, earlier versions are not.
+Editors may dump core or otherwise get confused with 8-bit files.
+Mail programs, file transfer utilities and others may mangle such files.
+We have provided the commands
+.I atoL1
+and
+.I L1toa
+as a way to alternate between 7-bit and 8-bit representations.
+As of Release 3.2, any
+.sM DWB
+utility will accept either 7-bit or 8-bit codes, with the general rule
+``8-bit in, 8-bit out.''
+.SK
+.br
+.mk
+.TS
+l2f1 c2f1 cf1 lf1
+l2f1 c2f1 cf1 lf1
+l2f5 c2f1 lf5 lf1w(1.75i).
+		Input
+Hex		Name	Description
+_
+.sp 2p
+a0	\ 	\e	(backslash space) no-break space
+a1	\(!!	\e(!!	inverted exclamation mark
+a2	\(c|	\e(c|	cent sign
+a3	\(L-	\e(L-	pound sign
+a4	\(xo	\e(xo	currency sign
+a5	\(Y-	\e(Y-	yen sign
+a6	\(||	\e(||	broken bar
+a7	\(so	\e(so	section sign
+a8	\(""	\e(""	diaerisis
+a9	\(co	\e(co	copyright sign
+aa	\(a_	\e(a_	feminine ordinal indicator
+ab	\(<<	\e(<<	left angle quotation mark
+ac	\(-,	\e(-,	not sign
+ad	\(--	\e(--	soft hyphen
+ae	\(ro	\e(ro	registered trade mark sign
+af	\(-^	\e(-^	macron
+b0	\(0^	\e(0^	degree sign
+b1	\(+-	\e(+-	plus-minus sign
+b2	\(2^	\e(2^	superscript 2
+b3	\(3^	\e(3^	superscript 3
+b4	\'	\e\'	acute accent	
+b5	\(/u	\e(/u	micro sign
+b6	\(P!	\e(P!	pilcrow sign
+b7	\(.^	\e(.^	middle dot
+b8	\(,,	\e(,,	cedilla
+b9	\(1^	\e(1^	superscript 1
+ba	\(o_	\e(o_	masculine ordinal indicator
+bb	\(>>	\e(>>	right angle quotation mark
+bc	\(14	\e(14	vulgar fraction one quarter
+bd	\(12	\e(12	vulgar fraction one half
+be	\(34	\e(34	vulgar fraction three quarters 
+bf	\(??	\e(??	inverted question mark
+c0	\(A`	\e(A\`	A with grave accent
+c1	\(A'	\e(A\'	A with acute accent
+c2	\(A^	\e(A^	A with circumflex accent
+c3	\(A~	\e(A~	A with tilde
+c4	\(A"	\e(A"	A with diaerisis
+c5	\(A*	\e(A*	A with ring above
+c6	\(AE	\e(AE	dipthong A with E
+c7	\(C,	\e(C,	C with cedilla
+c8	\(E`	\e(E\`	E with grave accent
+c9	\(E'	\e(E\'	E with acute accent
+ca	\(E^	\e(E^	E with circumflex accent
+cb	\(E"	\e(E"	E with diaerisis
+cc	\(I`	\e(I\`	I with grave accent
+cd	\(I'	\e(I\'	I with acute accent
+ce	\(I^	\e(I^	I with circumflex accent
+cf	\(I"	\e(I"	I with diaerisis
+.TE
+.rt
+.po +3.5i
+.sp -1
+.TS
+l2f1 c2f1 cf1 lf1
+l2f1 c2f1 cf1 lf1
+l2f5 c2f1 lf5 lf1w(1.75i).
+		Input
+Hex		Name	Description
+_
+.sp 2p
+d0	\(D-	\e(D-	capital Icelandic letter eth
+d1	\(N~	\e(N~	N with tilde
+d2	\(O`	\e(O\`	O with grave accent
+d3	\(O'	\e(O\'	O with acute accent
+d4	\(O^	\e(O^	O with circumflex accent
+d5	\(O~	\e(O~	O with tilde
+d6	\(O"	\e(O"	O with diaerisis
+d7	\(xx	\e(xx	multiplication sign
+d8	\(O/	\e(O/	O with oblique stroke
+d9	\(U`	\e(U\`	U with grave accent
+da	\(U'	\e(U\'	U with acute accent
+db	\(U^	\e(U^	U with circumflex accent
+dc	\(U"	\e(U"	U with diaerisis
+dd	\(Y'	\e(Y\'	Y with acute accent
+de	\(TH	\e(TH	capital Icelandic letter thorn
+df	\(ss	\e(ss	German sharp s
+e0	\(a`	\e(a\`	a with grave accent
+e1	\(a'	\e(a\'	a with acute accent
+e2	\(a^	\e(a^	a with circumflex accent
+e3	\(a~	\e(a~	a with tilde
+e4	\(a"	\e(a"	a with diaerisis
+e5	\(a*	\e(a*	a with ring above
+e6	\(ae	\e(ae	dipthong a with e
+e7	\(c,	\e(c,	c with cedilla
+e8	\(e`	\e(e\`	e with grave accent
+e9	\(e'	\e(e\'	e with acute accent
+ea	\(e^	\e(e^	e with circumflex accent
+eb	\(e"	\e(e"	e with diaerisis
+ec	\(i`	\e(i\`	i with grave accent
+ed	\(i'	\e(i\'	i with acute accent
+ee	\(i^	\e(i^	i with circumflex accent
+ef	\(i"	\e(i"	i with diaerisis
+f0	\(d-	\e(d-	small Icelandic letter eth
+f1	\(n~	\e(n~	n with tilde
+f2	\(o`	\e(o\`	o with grave accent
+f3	\(o'	\e(o\'	o with acute accent
+f4	\(o^	\e(o^	o with circumflex accent
+f5	\(o~	\e(o~	o with tilde
+f6	\(o"	\e(o"	o with diaerisis
+f7	\(-:	\e(-:	division sign
+f8	\(o/	\e(o/	o with oblique stroke
+f9	\(u`	\e(u\`	u with grave accent
+fa	\(u'	\e(u\'	u with acute accent
+fb	\(u^	\e(u^	u with circumflex accent
+fc	\(u"	\e(u"	u with diaerisis
+fd	\(y'	\e(y\'	y with acute accent
+fe	\(th	\e(th	small Icelandic letter thorn
+ff	\(y"	\e(y"	y with diaerisis
+.TE
+.po \nOu
+.br

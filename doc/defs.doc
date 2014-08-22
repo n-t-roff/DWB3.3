@@ -1,0 +1,181 @@
+.so /usr/lib/tmac/tmac.m
+'''	\" registered mark for sans-serif type
+.ds rG \v'-0.4m'\s-4\(RG\s+4\v'0.4m'
+.fp 1 R
+.fp 2 I
+.fp 3 B
+.fp 4 BI
+.fp 5 CW
+.fp 6 CI
+.fp 7 HB
+.fp 8 HX
+.ds HF 3 3 3 2 2 2 2
+.ds HP 10 10 10
+'''	\" Visible tab symbol
+.ds tB \f(ZD\s-3\N'228'\s+3\fP
+'''	\" Em-dash with just a tad of space around it
+.ds EM \|\(em\|
+'''	\" string for in-line commands in cw (macros, keywords, etc.)
+.ds iR \&\f5
+'''	\" string for in-line arguments in italic
+.ds iA \&\f2
+'''	\" macro for in-line or stand-alone commands in cw
+'''	\" USAGE:  .cR text [after] [before]
+.de cR
+\\$3\&\f5\\$1\fP\\$2
+..
+'''	\" macro for in-line or stand-alone commands in cw followed by arg in italic
+'''	\" USAGE:  .cI cmd [arg] [after] [before]
+.de cI
+\\$4\&\f5\\$1\fP\f2\\$2\fP\\$3
+..
+'''	\" macro for in-line or stand-alone register/strings in cw-italic
+'''	\" macro for in-line or stand-alone arguments in italic
+'''	\" USAGE:  .cA text [after] [before]
+.de cA
+\\$3\&\f2\\$1\fP\\$2
+..
+'''	\" macro to downsize one point
+'''	\" USAGE:  .sM text [after] [before]
+.de sM
+\\$3\s-1\\$1\s+1\\$2
+..
+'''	\" titlebox start; argument is title for page header
+'''	\" USAGE:  .tS "page header title"
+'''	\"         one or more lines
+'''	\"         of title text
+'''	\"         .tE [subheading]
+.de tS
+.PH ""
+.ds pT "\\$1
+.DS
+.ft HB
+.ps 18
+.vs 20
+..
+'''	\" titlebox end
+.de tE
+.br
+\s36\l'\\nWu'\s0
+.if !'\\$1'' \f(HB\s14\\$1\s0\fP
+.ps 10
+.ft 1
+.DE
+.EH "'\f(HB\\\\\\\\nP''\\*(pT\fP'"
+.OH "'\f(HB\\*(pT''\\\\\\\\nP\fP'"
+.sp 2
+..
+'''	\" input segment start (indented, nofill, constant-width)
+'''	\" USAGE:  .iS
+'''	\"         one or more lines
+'''	\"         of input data
+'''	\"         .iE
+.de iS
+.DS I
+.ft 5
+..
+'''	\" input segment end
+.de iE
+.ft 1
+.DE
+..
+'''	\" abstract start
+'''	\" USAGE:  .aS
+'''	\"         one or more lines
+'''	\"         of abstract text
+'''	\"         .aE
+.de aS
+.sp 0.5v
+.ds aH \f(HB\s-1ABSTRACT\fP\s0
+.nr a \w'\\*(aH\0\0\0'u
+\\*(aH
+.sp -1v
+.in +\\nau
+..
+'''	\" abstract end
+.de aE
+.br
+.in -\\nau
+.sp 0.5v
+..
+'''	\" Some junk for reference marks (not used)
+.ds rX "
+.ds rF \v'-0.4v'\s-3[\\*(rX]\s+3\v'0.4v'
+.deRS
+.if\\n(;R=2 .)D "RS:missing RF"
+.nr;R 2 
+.nrRf +1 
+.if\\n(.$ .ds \\$1 \v'-.4m'\s-3[\\n(:R]\s0\v'.4m'
+.ie\\n(;C .ev 1
+.el.ev 2
+.)R
+'in\w[\0\0]\ \ u
+'ti-\w[\\*(]r]\ \ u
+.nr:D 1
+.da>r
+\!.ne 2
+[\\*(]r]\ \ \&\c
+..
+.ds Rp \f3REFERENCES\fP
+'''	\" fudge spacing; argument is amount of space (use - for reverse spacing)
+.de fS
+.rs
+.sp 0\\$1
+..
+'''	\" force a new column or page (for double-column mode)
+.de nC
+.br
+.ne 1i
+..
+'''	\" appendix
+'''	\" USAGE:  .aP [letter#] [title]
+.de aP
+.ie '\\$1'' \{\
+.	ds aN A
+.	ds aT APPENDIX:  \}
+.el \{\
+.	ds aN \\$1
+.	ds aT "APPENDIX\ \\$1:  \}
+.PH ""
+.OH ""
+.EH ""
+.SK
+.if \\n(;C .1C
+.nr P 1
+.DS L F
+\!.rs
+\!.sp -0.75v
+\s18\l'\\nWu'\s0
+.sp 4p
+.na
+.S +2
+.ft HB
+\\*(aT
+.br
+.in +\w'\\*(aT\ \ 'u
+.rs
+.sp -1v
+\\$2
+.br
+.in 0
+.ad
+.ft 1
+.S -2
+.sp
+.DE
+.OH "'\f(HB\\*(pT''\\*(aN-\\\\\\\\nP\fP'"
+.EH "'\f(HB\\*(aN-\\\\\\\\nP''\\*(pT\fP'"
+..
+'''	\" Minor title head
+'''	\" USAGE:  .MT "title" -
+'''	\" 2nd arg - suppresses preceding space and line
+'''	\" (for subtitle after major title)
+.de MT
+.if !'\\$2'-' \{.sp 1.5v
+\s18\l'\\nWu'\s0
+.sp 4p   \}
+\f(HB\s12\\$1\fP
+.ps 10
+.sp
+..
+.ds rL 3.1

@@ -1,0 +1,232 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so defs.pguide
+.ds pT Picasso
+.aP C "Keywords, Abbreviations and Default Variables"
+.I Picasso
+has one predefined place name (for the origin), one macro (giving
+the process id of the
+.I Picasso
+invocation) and 28 variables that
+can affect the appearance of pictures.
+It would be unwise to reuse these names for any other purposes.
+There are also sixteen predefined color indexes.
+These are purely for convenience,
+and no harm would result in using these variable names in other ways.
+We caution that colors displayed interactively may not match
+colors which are printed, and secondary and tertiary colors may
+be downright unappetizing, depending on technology.
+.P
+Dimensions are in inches, except for the text variables.
+The suffix
+.cR d
+converts radians to degrees.
+.in +0.5i
+.sp 4p
+.S -1
+.TS H
+lp+1f1 lp+1f1
+lf5w(1i) lf5w(3.5i).
+Variable	Value
+_
+.sp 2p
+.TH
+O	(0,0) \f1origin\fP
+pid	\f1UNIX process id\fP
+arcrad	0.25
+arrowfill	1 \f1(implies filling)\fP
+arrowht	0.1
+arrowwid	0.05
+boxht	0.5
+boxrad	0
+boxwid	0.75
+circlerad	0.25
+curlayer	0
+dashwid	0.05
+ellipseht	0.5
+ellipsewid	0.75
+fillcolor	0 \f1(black)\fP
+flatness	\f1uninitialized\fP
+linecap	\f1uninitialized\fP
+linecolor	0 \f1(black)\fP
+lineht	0.5
+linejoin	\f1uninitialized\fP
+linerad	0
+lineweight	0 == \f1device minimum (1 pixel)\fP
+linewid	0.5
+miterlimit	\f1uninitialized\fP
+moveht	0.5
+movewid	0.5
+textcolor	0 \f1(black)\fP
+textfont	0 == setfont("Times-Roman")
+textsize	10 \f1points\fP
+textspace	12 \f1points\fP
+black	0 == setrgb(0,0,0)
+white	1 == setrgb(1,1,1)
+red	2 == setrgb(1,0,0)
+green	3 == setrgb(0,1,0)
+blue	4 == setrgb(0,0,1)
+yellow	5 == setrgb(1,1,0)
+magenta	6 == setrgb(1,0,1)
+cyan	7 == setrgb(0,1,1)
+lightgrey	8 == setrgb(0.6588, 0.6588, 0.6588)	
+navy	9 == setrgb(0.1372, 0.1372, 0.5568)
+skyblue	10 == setrgb(0.196, 0.6, 0.8)
+orange	11 == setrgb(0.8, 0.2, 0.2)
+sienna	12 == setrgb(0.5568, 0.4196, 0.1372)
+palegreen	13 == setrgb(0.5607, 0.7372, 0.5607)	
+darkgreen	14 == setrgb(0.1843, 0.3098, 0.1843)	
+blueviolet	15 == setrgb(0.6235, 0.3725, 0.6235)	
+.TE
+.S +1
+.in 0
+.P
+The lexicon of the
+.I Picasso
+language contains quite a few synonyms, but not
+every possible variant on its key words.
+Those occurring \f2only\f1 after a
+.cR . ' `
+or in the verbose corner references
+such as ``top of'' could be reused for variable names, at the risk of some
+confusion.
+.in +0.5i
+.sp 4p
+.S -1
+.TS H
+lp+1f1 lp+1f1
+lf5w(1i) lf5w(3.5i).
+Keyword	Synonyms
+_
+.sp 2p
+.TH
+\&.1st	\&.first, .1nd, .1rd, .1th
+\&.2nd	\&.2st, .2rd, .2th
+  \(el
+\&.bottom	\&.b, bot, bottom of, .south, .s, south of
+\&.center	\&.c, center of
+\&.east	\&.e, east of, .right, .r, right of
+\&.end	end of
+\&.first	\&.1st, .1nd, .1rd, .1th
+\&.height	\&.ht
+\&.left	\&.l, left of, .west, .w, west of
+\&.north	\&.n, north of, .top,  .t, top of
+\&.northeast	\&.ne, northeast of
+\&.northwest	\&.nw, northwest of
+\&.radius	\&.rad
+\&.right	\&.r, right of, .east, .e, east of
+\&.south	\&.s, south of, .bottom, .bot, .b, bottom of 
+\&.southeast	\&.se, southeast of
+\&.southwest	\&.sw, southwest of
+\&.start	start of
+\&.top	\&.t, top of, .north, .n, north of
+\&.west	\&.w, west of, .left,  .l, left of
+\&.width	\&.wid
+\&.x
+\&.y
+1st	first, 1nd, 1rd, 1th
+2nd	2st, 2rd, 2th
+3rd
+  \(el
+Here
+about	at
+above
+abs
+and	between \f2P\fP and \f2Q\fP == <\f2P\fP,\f2Q\fP>
+arc
+arrow		line ->
+at
+atan2
+below
+between	between \f2P\fP and \f2Q\fP == <\f2P\fP,\f2Q\fP>
+block	[] \f1(e.g., \fPlast [] == last block\f1)\fP
+box
+by
+ccw
+center
+chop
+circle
+clockwise	cw
+copy	include
+cos
+cw	clockwise
+dashed	dash
+dashpat
+define
+delete	del
+diameter	diam
+do
+dotted	dot
+down
+duplicate	dup
+edged	edge
+ellipse
+else
+exp
+filled	lfill
+first	1st, 1nd, 1rd, 1th
+font
+for
+from	\&=   \f1(in the context of  \f5for\f1  statements)\fP
+height	lht
+if
+include	copy
+int
+invisible	invis, noedge
+labeled	label
+last
+layer
+left
+line
+ljust
+ln
+log
+max
+min
+move
+noedge	invisible, invis
+object
+of the way	\f1(optional prefix for \fPbetween\f1)\fP
+pow
+print
+radius	rad
+rand
+reflect
+reset
+right
+rjust
+rotate	rot
+same
+scale
+sector
+setfont
+setrgb
+sh
+show
+sin
+size
+space
+spline
+sprintf
+sqrt
+text
+then
+through	thru
+to
+touch	touching
+transform
+translate	trans
+undefine	undef
+until
+up
+weight
+width	wid
+with
+.TE
+.in 0
+.S +1

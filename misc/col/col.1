@@ -1,0 +1,126 @@
+.TH COL 1
+.SH NAME
+.B col
+\- filter reverse line-feeds
+.SH SYNOPSIS
+\*(mBcol\fP
+.OP \-bfpx "" []
+.SH DESCRIPTION
+.B col
+reads from the standard input and writes onto the standard output.
+It performs the line overlays implied by reverse line
+feeds (e.g.,
+.SM ASCII
+code \s-1ESC-7\s+1),
+and by forward and reverse half-line feeds
+(i.e.,
+.SM ESC-9
+and \s-1ESC-8\s+1).
+.B col
+is particularly useful for filtering multiple-column
+output made with the
+.MW .rt
+command of
+.B nroff
+and output resulting from use of the
+.B tbl
+preprocessor.
+.TP
+.OP \-b
+.B col
+assumes that the output device in use is not capable of backspacing.
+If two or more characters are to appear in the same place,
+only the last one read will be output.
+.TP
+.OP \-f
+suppresses partial line motions.
+Although
+.B col
+accepts half-line motions in its input, it normally does not
+emit them on output.
+Instead, text that would appear between lines is moved to the next lower
+full-line boundary.
+This treatment is suppressed by the
+.OP \-f
+(fine) option.
+The output from
+.B col
+may contain forward half-line feeds (i.e., \s-1ESC-9\s+1),
+but will still never contain
+either kind of reverse line motion.
+.TP
+.OP \-x
+suppresses conversion of white space to tabs to shorten printing time.
+.TP
+.OP \-p
+output unknown escape sequences as regular characters, subject
+to overprinting from reverse line motions;
+normally,
+.B col
+ignores unknown escape sequences.
+The use of this option is highly discouraged unless the user
+is fully aware of the textual position of the escape sequences.
+.PP
+.B col
+assumes the
+.SM ASCII
+control characters
+.SM SO
+.RM ( \e016 )
+and
+.SM SI
+.RM ( \e017 )
+start and end text in an alternate character set.
+The character set to which each input character belongs is remembered,
+and on output
+.SM SI
+and
+.SM SO
+characters are generated as appropriate to ensure
+that each character is printed in the correct character set.
+.PP
+On input,
+.B col
+accepts only the control characters space, backspace,
+tab, return, newline, \s-1SI\s+1, \s-1SO\s+1,
+.SM VT
+.RM ( \e013 ),
+and \s-1ESC-7\s+1, \s-1ESC-8\s+1, or \s-1ESC-9\s+1.
+The
+.SM VT
+character is an alternate form of full reverse line-feed,
+included for compatibility with earlier similar programs.
+All other non-printing characters are ignored.
+.SH NOTES
+The input format accepted by
+.B col
+matches the output produced by
+.B nroff
+with either the
+.OP \-T37
+or
+.OP \-Tlp
+options.
+Use
+.OP \-T37
+(and the
+.OP \-f
+option of
+.BR col )
+if the ultimate disposition of the output of
+.B col
+will be a device
+that can interpret half-line motions; use
+.OP \-Tlp
+otherwise.
+.SH BUGS
+Cannot back up more than 128 lines.
+.PP
+Allows at most 800 characters, including backspaces, on a line.
+.PP
+Local vertical motions that would result in backing up over the first
+line of the document are ignored.
+As a result, the first line must not have any superscripts.
+.SH SEE ALSO
+.BR nroff (1),
+.BR tbl (1)

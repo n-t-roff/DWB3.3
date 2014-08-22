@@ -1,0 +1,1007 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 "DOCUMENT STYLES"
+The
+.sM MM
+package provides several document styles:  memoranda,
+released papers, and external letters that conform to
+a given company standard, and common business letters
+in standard acceptable styles.
+.H 2 "Memoranda, Released Papers, and External Letters"
+One use of
+.sM MM
+is for the preparation of memoranda and released papers, 
+which have special requirements for the first page and for the cover sheet.
+The information needed for the memorandum or released paper
+(title, author, date, etc.) is entered in the same way for
+both styles; an argument to one macro
+.cR .MT ) (
+indicates which style is being used.
+The following sections describe the macros used to provide this data.
+The required order is shown in \(sc6.1.9.
+.P
+The same macros for memorandum and released paper styles are used
+to generate external letters on preprinted stationary with company letterhead.
+Appendix C shows the input and output samples for the
+three document styles:  memoranda, released paper, and external letter.
+.P
+If no particular document style is desired, the
+macros described in this section should be omitted from the input text.
+If these macros are omitted,
+the first page will simply have the page 
+header followed by the body of the document.
+.H 3 Title
+.iS
+\&.TL \f1[\*(iAcharging-case\f1] [\*(iA\|filing-case\f1]
+.cA "one or more lines"
+.cA "of title text"
+.iE
+The arguments to the
+.cR .TL
+macro are the charging case number(s) and filing case number(s).
+The ``charging case'' is the case number to which time was charged for the
+development of the project described in the memorandum (also referred 
+to as Work Project Number).
+The ``filing case'' is a number 
+under which the memorandum is to be filed
+(e.g., for library reference).
+.P
+The title of the memorandum or paper follows the
+.cR .TL
+macro and is processed in fill mode.
+Multiple charging case numbers are 
+entered as ``subarguments'' by separating each from the previous 
+with a comma and a space, and enclosing the
+.I entire
+argument within double quotes.
+Multiple filing case numbers are entered similarly.
+For example:
+.iS
+\&.TL "12345, 67890" 987654321
+On the Construction of a Table
+of All Even Prime Numbers
+.iE
+The
+.cR .br
+request may be used to break the title on output into several
+lines as follows:
+.iS
+\&.TL 12345
+First Title Line
+\&.br
+Second Title Line
+.iE
+On output, the title appears after the word ``subject'' in the memorandum style.
+In the released-paper style, the title is centered and bold.
+.P
+If only a charging case number or only a filing case number is given,
+then it will be separated from the title in the memorandum style by 
+a dash and will appear on the same line as the title.
+If both case numbers are given and are the same, then ``Work Project Number and Filing
+Case'' followed by the number will appear on a line following the title.
+If the two case numbers are different, then separate lines for ``Work 
+Project Number'' and ``File Case'' will appear after the title.
+.br
+.ne 7v
+.H 3 Author(s)
+.iS
+\&.AU \*(iAname \f1[\*(iAinitials\f1] [\*(iAlocation\f1] [\*(iAorganization\f1] [\*(iA\|phone\f1] [\*(iAroom\f1] [\*(iAarg\f1] [\*(iAarg\f1] [\*(iAarg\f1]
+\*(iR.AT \f1[\*(iAtitle\f1] \(el
+.iE
+The
+.cR .AU
+macro receives as arguments information that describes an author.
+If any argument contains blanks it must be enclosed within double quotes.
+The first six arguments must appear in the order given;  a separate
+.cR .AU
+macro is required for each author.
+.P
+The
+.cR .AT
+macro is used to specify the author's title.
+Up to nine arguments may be given.
+Each will appear in the signature block for
+memorandum style on a separate line following the signer's name.
+The
+.cR .AT
+must immediately follow the
+.cR .AU
+for the given author.
+For example:
+.iS
+\&.AU "J. J. Jones" JJJ HO 98760 "(201) 949-1234" 1Z-234
+\&.AT Director "Materials Research Laboratory"
+.iE
+In the ``from'' portion in the memorandum style, the author's name is
+followed by ``Org.'' and the organization number on one line,
+the location and room number together on one line, and the phone number\^*
+.FS *
+The argument
+.cA phone
+should be the complete phone number, including area code.
+.FE
+on another line.
+The printing of the location, organization number, room number and phone number
+may be suppressed on the first page of a memorandum by setting the register
+.cR Au
+to 0; the default value for
+.cR Au
+is 1.
+The last three
+.cA arg
+arguments of the
+.cR .AU
+macro, if present, will follow this normal author information in the ``from'' 
+portion, each on a separate line.
+These last three arguments may be used for miscellaneous information,
+such as the author's electronic address.
+For example:
+.iS
+\&.AU "S. P. Lename" SPL MH 98765 "(201) 582-1234" 2G-444 attmail!spl
+.iE
+The name, initials, location, and organization are also used in the
+signature block.
+The author information in the ``from'' portion,
+as well as the names and initials in the signature block will appear
+in the same order as the
+.cR .AU
+macros.
+.P
+The names of the authors in the released-paper style
+are centered below the title.
+After the name of the last author, the company name
+and the location are centered.
+For the case of authors from different 
+locations, see \(sc6.1.8; for authors from different companies, see \(sc6.1.7.2.
+.H 3 "Document Number(s)"
+.iS
+\&.TM \f1[\*(iAnumber\f1] \(el
+.iE
+Internal documents (e.g., technical memorandum or internal memorandum)
+are usually identified by document numbers.
+The document identification numbers are supplied via the
+.cR .TM
+macro:
+.iS
+\&.TM 12345-890101-01TM 12355-890101-03TM
+.iE
+Up to nine numbers may be specified.
+On output, the document
+identification number(s) will be listed following the ``from''
+section of memoranda.
+.H 3 "Abstract"
+.iS
+\&.AS \f1[\*(iAmode\f1] [\*(iAindent\f1] [\*(iAtype\f1]
+.cA "one or more lines of"
+.cA "of abstract text"
+\*(iR.AE
+.iE
+The
+.cR .AS
+(abstract start) and
+.cR .AE
+(abstract end) macros bracket the optional abstract.
+Abstracts are printed on the first page of a document and/or on its cover sheet (if any).
+Headings and displays are not permitted within an abstract.
+.br
+.ne 3v
+.P
+In a released paper and in a technical memorandum, if the
+.cA mode
+argument is 0,
+the abstract will be printed on page 1 and
+on the cover sheet (if any); if the
+.cA mode
+argument is 1, the abstract will appear only
+on the cover sheet (if any).
+.P
+In an internal memorandum and in all other documents (other than external 
+letters), if the 
+.cA mode
+argument is 0, the abstract will appear on the first page of the document
+and there will be no cover sheet printed; if the
+.cA mode
+argument is 2, the abstract will appear only
+on the cover sheet, which will be produced automatically in this case (i.e.,
+without invoking the
+.cR .CS
+macro).
+It is not possible to get either an abstract or a cover sheet with an external 
+letter.
+.P
+The abstract is printed with ordinary text margins.
+If a value is given for the
+.cA indent
+argument, it will be used as the amount of indentation from
+both the left and right margins.
+The indent amount must be an unscaled number and is treated as ens.
+.P
+By default, the abstract heading is ``ABSTRACT''.
+If the
+.cA type
+argument is
+.cR ER ,
+the abstract heading is ``ERRATA'';
+if the
+.cA type
+argument is
+.cR AD ,
+the abstract heading is ``ADDENDUM''.
+.P
+Headings and displays are not permitted within an abstract.
+.H 3 "Other Keywords"
+.iS
+\&.OK \f1[\*(iAkeyword\f1] \(el
+.iE
+Up to nine topical keywords or keyword phrases may be specified as arguments to the
+.cR .OK
+macro.
+If a keyword argument contains spaces, it must be enclosed within double quotes.
+.H 3 "Memorandum Types"
+.iS
+\&.MT \f1[\*(iAtype\f1] [\*(iAaddress\f1]
+.iE
+The
+.cR .MT
+macro controls the format of the top part of the first
+page of a memorandum or of a released paper, as well as the format 
+of the cover sheet (if any).
+The
+.cA type
+argument is used as follows to produced the corresponding
+document styles:
+.tr ~
+.DS
+.TS
+center box tab(;);
+c cf1 cf1
+cf5 lf1 lf1.
+\*(iAtype\fP;Document Style;Memorandum Heading
+_
+"";Memorandum
+0;Memorandum
+\f2none\f1;Memorandum;TECHNICAL MEMORANDUM
+1;Memorandum;TECHNICAL MEMORANDUM
+2;Memorandum;INTERNAL MEMORANDUM
+3;Memorandum;ADMINISTRATIVE MEMORANDUM~~  
+_
+4;Released Paper
+5;External Letter
+_
+"\f2string\fP";Memorandum;              \f2string\fP
+.TE
+.DE
+.P
+If
+.cA type
+indicates a memorandum style, then the appropriate heading will be
+printed after the last line of author information.
+If
+.cA type
+is longer than one character, then the string, itself, will be printed.
+For example:
+.iS
+\&.MT "Technical Note #5"
+.iE
+A simple memorandum is produced by calling
+.cR .MT
+with a null (but not omitted) or zero argument.
+.P
+The second argument to
+.cR .MT
+is the name of the addressee of a memorandum or external letter;
+if present, that name and the page number replaces the normal
+page header on the second and succeeding pages.
+For example:
+.iS
+\&.MT 1 "John Jones"
+.iE
+produces:
+.DS I
+John Jones \- 2
+.DE
+.P
+With the released-paper style
+.cR ".MT\ 4" ), (
+the second argument serves a different purpose
+(see \(sc6.1.8).
+.P
+In the external-letter style
+.cR ".MT 5" ), (
+only the title (without ``subject'') and the date are printed
+in the upper left and right corners, respectively, on the first page.
+It is expected that preprinted stationary will be used,
+providing the author's company logo and address.
+.H 3 "Date and Format Changes"
+.H 4 "Changing the Date."
+By default, the current date appears in the ``date'' part of a memorandum.
+This can be overridden by using:
+.iS
+\&.ND \*(iAnew-date\f1
+.iE
+The
+.cR .ND
+macro alters the value of the string
+.cR DT ,
+which is initially set to the current date.
+.H 4 "Alternate First-Page Format."
+.P
+One can specify an alternate format for the first page of memoranda and
+change the company name used for any document style.
+.iS
+\&.AF \f1[\*(iAcompany-name\f1]
+.iE
+If an argument is given,
+.cA company-name
+replaces the default company name
+on the first page of a released paper and in the letterhead block of a memoranda.
+If the argument is null,
+the company name is suppressed;
+in this case, an extra blank line is inserted to allow room for
+stamping the document with an appropriate name or signature element.
+.P
+For memoranda, use the
+.cR -rA \*(iA\^n\fP
+option (see \(sc2.3)
+to supress the entire letterhead block to accommodate preprinted stationary.
+The letterhead block includes the company name and logo as well as other
+signature elements (i.e., rule across the page between logo and name) that
+appear before the ``subject/date/from'' block.
+.P
+The command line option \*(iR\-rE\*(iAn\f1
+controls the font of the information fields in the ``subject/date/from'' block
+on memoranda.
+.P
+The user-definable string
+.cR }Z
+contains the company name,
+and the string
+.cR ]S
+contains the company logo.
+These string definitions are initialized in the file
+.cR /usr/lib/tmac/strings.mm \|.
+(Use the
+.cR .AF
+macro to redefine the company name string.)
+.H 3 "Released-Paper Style."
+The released-paper style is obtained by specifying:
+.iS
+\&.MT 4 \f1[\*(iR1\f1]
+.iE
+The released paper style provides a titlebox that contains:
+.BL "" 1
+.LI
+the title of the paper (emboldened)
+.LI
+the author's names (italicized), each on a separate line
+.LI
+the company name
+.LI
+the company address (city, state, zip code)
+.LE
+.P
+Each line in the titlebox is centered.
+The location of the last author is used to determine the company address.
+If the second argument
+is the digit
+.cR 1 ,
+then the name of each author is followed by the respective 
+company name and address.
+.P
+Information necessary for the memorandum style but not for the
+released-paper style is ignored.
+In addition, the macros described in \(sc6.3
+and their associated lines of input are ignored when the released-paper
+style is specified.
+.P
+In the released-paper style, location codes
+are defined as strings that contain the address of the corresponding location.
+(See Appendix G for a list of location codes and addresses.)
+Authors from non-affiliated locations may include their company name in the
+released-paper style by specifying the company name with the
+.cR .AF
+macro and defining a string (with a two-character name such as
+.cR XX )
+for the address before each
+.cR .AU .
+.P
+.ne 8.5v
+For example:
+.iS
+\&.TL
+\&A Learned Treatise
+\&.AU "Samuel P. Lename" SPL CB
+\&.AF "Getem Electronics, Inc."
+\&.ds XX "Philadelphia, Pennsylvania  19103
+\&.AU "Frank G. Swatter" FGS XX
+\&.MT 4 1
+.iE
+produces:
+.DS C
+.sp 0.5v
+.ft 3
+.S +1
+A Learned Treatise
+.S -1
+.ft 1
+.sp 0.5v
+.ul
+Samuel P. Lename
+General Ceramics, Inc.
+Columbus, Ohio  43213
+.sp 0.5v
+.ul
+Frank G. Swatter
+Getem Electronics, Inc.
+Philadelphia, Pennsylvania   19103
+.sp 0.5v
+.DE
+(Note that in this example, ``General Ceramics, Inc.'' is the default company name.)
+.H 3 "Sequence of ``Beginning'' Memorandum/Paper/Letter Macros."
+The macros described in \(sc6.1, if present, must be given in
+the following order:
+.iS
+\&.ND \*(iAnew-date
+\*(iR.TL \f1[\*(iAcharging-case\f1] [\*(iA\|filing-case\f1]
+.cA "one or more lines of title text"
+\*(iR.AF \f1[\*(iAcompany-name\f1]
+\*(iR.AU \*(iAname \f1[\*(iAinitials\f1] [\*(iAlocation\f1] [\*(iAorganization\f1] [\*(iA\|phone\f1] [\*(iAroom\f1] [\*(iAarg\f1] [\*(iAarg\f1] [\*(iAarg\f1]
+\*(iR.AT \f1[\*(iAtitle\f1] \(el
+\*(iR.TM \f1[\*(iAnumber\f1] \(el
+\*(iR.AS \f1[\*(iAmode\f1] [\*(iAindent\f1] [\*(iAtype\f1]
+.cA "one or more lines of abstract text"
+\*(iR.AE
+\&.MT \f1[\*(iAtype\f1] [\*(iAaddressee\f1]
+\*(iR.P
+.cA "body of document"
+\0\(el
+\*(iR.SG \f1[\*(iAinitials\f1]\0[\*(iR1\f1]
+\*(iR.NS \f1[\*(iAtype\f1]\0[\*(iR1\f1]
+.cA "lines of notation list"
+\*(iR.NE
+.iE
+The only required macros for a memorandum or a released paper  are
+.cR .TL ,
+.cR .AU ,
+and
+.cR .MT ;
+all the others (and their associated input lines)
+may be omitted if the features they provide are not needed.
+All macros before
+.cR .MT
+simply collect information for their respective parts.
+The
+.cR .MT
+macro then uses that information to produce the document in
+the desired format.
+(The macros following
+.cR .MT
+are discussed in \(sc6.3.)
+.H 2 "Business Letters"
+In addition to the document styles produced with
+.cR .MT ,
+you can obtain an entirely different style using a set of macros
+designed to produce common business letters.
+The information needed for business letters is entered in the same way;
+an argument to one macro
+.cR .LT ) (
+indicates which style is being used.
+Appendix D shows the input and output samples for each of the
+four types of common business letters.
+.H 3 "Letter Types"
+.iS
+\&.LT \f1[\*(iAtype\f1]
+.iE
+The letter-type macro
+formats a business letter in one of four common styles:  blocked,
+semi-blocked, full-blocked, and simplified.
+Use the
+.cA type
+argument to select the desired format:
+.DS CB F
+.TS
+box;
+c cf1
+lf5 lf1w(4.5i).
+\*(iAtype\fP	Letter Format
+_
+BL	T{
+\f4Blocked\f1
+\(em
+The date, return address, closing and writer's identification lines
+begin at the center of the page.
+All other text begins at the left margin.
+T}
+SB	T{
+\f4Semi-blocked\f1
+\(em
+The same as the blocked format, except the first line of each
+paragraph is indented 3 ens.
+T}
+FB	T{
+\f4Full-blocked\f1
+\(em
+All lines begin at the left margin.
+T}
+SP	T{
+\f4Simplified\f1
+\(em
+The same as the full-blocked format, except the salutation
+is replaced by a subject line and is followed by an additional blank line,
+the closing is omitted, and the writer's identification is on a single line.
+The subject and writer's identification lines are in all-capital letters.
+T}
+.TE
+.DE
+.P
+If
+.cA type
+is omitted,
+.cR .LT
+produces the ``blocked'' letter format.
+.H 3 "Writer's Address"
+.iS
+\&.WA \*(iAname\0\f1[\*(iAtitle\f1]
+.cA "one or more lines"
+.cA "of the writer's address"
+\*(iR.WE
+.iE
+.P
+The writer's complete address (but not the name) appears
+in the return-address block at the top of the letter.
+The writer's name and title, if any, appear in the signature block
+at the close of the letter.
+.H 3 "Recipient's Address"
+.iS
+\&.IA \f1[\*(iAname\0\f1[\*(iAtitle\f1]]
+\f1[\*(iAname\f1]
+.cA "one or more lines"
+.cA "of the recipient's address"
+\*(iR.IE
+.iE
+.P
+The inside address appears at the left margin before the salutation, if any.
+The inside address contains the recipient's complete address and may also
+include the recipient's name and title.
+If the
+.cA name
+and
+.cA title
+arguments are given, they are used in the inside address,
+each on a separate line, before the recipient's address;
+otherwise, a name may be given as part of the address.
+.H 3 "Letter Options"
+.iS
+\&.LO \*(iAtype\f1\0[\*(iAnotation\f1]
+.iE
+The
+.cR .LO
+(letter options)
+macro provides the salutation and four additional components frequently
+used in business correspondence.
+Use the
+.cA type
+argument to select the desired component:
+.DS
+.TS
+center box;
+l cf1
+lf5 lf1.
+\*(iAtype\fP	Component
+_
+SA	Salutation
+AT	Attention line
+SJ	Subject line
+RN	Reference line
+CN	Confidential notation
+.TE
+.DE
+A business letter may contain one or more component, or none at all.
+Thus, the
+.cR .LO
+macro may be ignored or
+it may be used multiple times
+in any order to generate different components.
+.H 4 Salutation.
+.P
+If
+.cA type
+is
+.cR SA ,
+the
+.cR .LO
+macro generates the salutation given in
+.cA notation.
+If
+.cA notation
+is not given, the saluation
+``To Whom It May Concern:'' is used.
+.P
+The salutation appears two blank vertical spaces below the inside address
+at the left margin.
+.H 4 "Attention Line."
+.P
+If
+.cA type
+is
+.cR AT ,
+the
+.cR .LO
+macro generates an attention line of the form:
+.DS I
+ATTENTION:  \*(iAnotation\fP
+.DE
+If
+.cA notation
+is not given, the attention field is blank
+(e.g., only ``ATTENTION:'' is used).
+.P
+The attention line appears two blank vertical spaces below the inside address
+at the left margin.
+The attention line is used to direct the letter to the attention of a
+specific person or department.
+.H 4 "Subject Line."
+If
+.cA type
+is
+.cR SJ ,
+the
+.cR .LO
+macro generates a subject line of the form:
+.DS I
+Subject:  \*(iAnotation\fP
+.DE
+If
+.cA notation
+is not given, the subject field is blank
+(e.g., only ``Subject:'' is used).
+.P
+The subject line appears one blank vertical space below the salutation
+at the left margin.
+Using a subject line allows your correspondents (or their secretary) to
+locate previous correspondence on the same subject.
+.H 4 "Reference Line."
+If
+.cA type
+is
+.cR RF ,
+the
+.cR .LO
+macro generates a reference line of the form:
+.DS I
+In reference to:  \*(iAnotation\fP
+.DE
+If
+.cA notation
+is not given, the reference field is blank
+(e.g., only ``In reference to:'' is used).
+.P
+The reference line appears two blank vertical spaces below the date and is
+aligned left with the date.
+Using a reference line allows your correspondents (or their secretary) to
+locate previous correspondence on the same subject.
+.H 4 "Confidential Notation."
+If
+.cA type
+is
+.cR CN ,
+the
+.cR .LO
+macro generates the notation ``Confidential'' below the date,
+aligned left with the date.
+If
+.cA notation
+is given, it replaces ``Confidential'' below the date.
+.H 3 "Sequence of Business Letter Macros"
+The macros
+.cR .WA ,
+.cR .WE ,
+.cR .IA ,
+.cR .IE ,
+and
+.cR .LT
+are mandatory and
+must be given in the following order:
+.iS
+\&.ND \*(iAnew-date\fP
+\&.WA \*(iAname\0\f1[\*(iAtitle\f1]
+.cA "lines of writer's address"
+\*(iR\&.WE
+\&.IA \f1[\*(iAname\f1\0[\*(iAtitle\f1]]
+\f1[\*(iAname\f1]
+.cA "lines of recipient's address"
+\*(iR.IE
+\&.LO \*(iAtype\0\f1[\*(iAnotation\f1]
+\*(iR.LT \f1[\*(iAtype\f1]
+\*(iR.P
+.cA "body of letter"
+\0\(el
+\*(iR.FC \f1[\*(iAclosing\f1]
+\*(iR.SG \f1[\*(iAinitials\f1] [\*(iR1\f1]
+\*(iR.NS \f1[\*(iAtype\f1] [\*(iR1\f1]
+.cA "lines of notation list"
+\*(iR.NE
+.iE
+.hy
+If the
+.cR .ND
+(see \(sc6.1.7.1) or
+.cR .LO
+macros are used, they must appear before the
+.cR .LT
+macro.
+All macros \%before
+.cR .LT
+simply collect information for their respective parts.
+The
+.cR .LT
+macro then uses that infor\%ma\%tion to produce the letter in
+the desired format.
+(The macros following
+.cR .LT
+are discussed in the next section.)
+.nh
+.H 2 "Macros for the End of a Memorandum or Letter"
+The signatures of the authors and a list of notations can be requested
+at the end of a memorandum, external letter, or business letter.
+The following macros provide information for the signature block
+and notation list;
+these macros and their input are ignored for the released-paper style.
+(See the examples in Appendix\ C and Appendix\ D.)
+.H 3 "Signature Block."
+The signature block consists of the formal closing (if any),
+a signature line for each author, and an optional reference line.
+The signature line includes the author's name preceded by a sufficient amount
+of space for the author's signature.
+.P
+The signature block is not used in the released-paper style.
+.H 4 "Formal Closing"
+.iS
+\&.FC \f1[\*(iAclosing\|\f1]
+.iE
+The
+.cR .FC
+macro generates the formal closing at the end of an external letter.
+The closing appears before the signature, so the
+.cR .FC
+macro must precede the
+.cR .SG
+macro.
+By default,
+``Yours very truly,'' is used as the formal closing.
+If the
+.cA closing
+argument is given, it will be used as the closing.
+For example,
+.iS
+\&.FC "Sincerely,"
+.iE
+generates ``Sincerely,'' as the formal closing before the signature.
+.H 4 "Signature and Reference Line"
+.iS
+\&.SG \f1[\f2initials\f1] [\*(iR1\f1]
+.iE
+.P
+The
+.cR .SG
+macro prints the author's names after the formal closing, if any.
+Each name begins at the center of the page.
+Three blank lines are left above each name for the actual signature.
+.P
+A reference line appears at the left margin on the same line as the
+last author's name.
+The reference line contains the location code, organization number,
+author's initials, and typist's initials, separated by hyphens.
+The typist's initials are supplied as an argument to the
+.cR .SG
+macro; the location code, organization number, and author's initials
+are taken from the
+.cR .AU
+macro.
+If the
+.cR .SG
+macro is used with no arguments, the reference line is suppressed.
+If the
+.cA initials
+argument is null, the reference line is printed without the typists's
+initials nor the preceding hyphen.
+.P
+If there are several authors and if the second argument is the digit
+.cR 1 ,
+then the reference data is placed on the same line
+as the name of the first author,
+rather than the last author.
+In this case,
+the reference data contains only the location and organization number 
+of the first author.
+Thus, if there are authors from different 
+organizations and/or from different locations, the reference data should
+be supplied manually after the
+.cR .SG
+macro:
+.iS
+\&.SG
+\&.rs
+\&.sp -1v
+\&PY/MH-9876/5432-JJJ/SPL-cen
+.iE
+In this case, the
+.cR .SG
+macro must be used alone, with no arguments.
+.H 3 "``Copy to'' and Other Notations"
+.iS
+\&.NS \f1[\*(iAtype\f1] [\*(iR1\f1]
+.cA "zero or more lines"
+.cA "of notation list"
+\*(iR.NE
+.iE
+After the signature and reference data, many types of notations may 
+follow, such as a list of attachments or ``copy to'' lists.
+The various notations are obtained through the
+.cR .NS
+macro, which provides for the proper spacing and for
+breaking the notations across pages, if necessary.
+.P
+.ne 2i
+The codes for
+.cA type
+and the corresponding notations are:
+.DS
+.TS
+center box tab(;);
+c cf1
+cf5 lf1.
+\*(iAtype\fP;Notations
+_
+\00;Copy to
+\01;Copy (with att.) to
+\02;Copy (without att.) to
+\03;Att.
+\04;Atts.
+\05;Enc.
+\06;Encs.
+\07;U.S.C.
+\08;Letter to
+\09;Memorandum to
+10;Copy (with atts.) to
+11;Copy (without atts.) to
+12;Abstract Only to
+13;Complete memorandum to
+14;Cover Sheet Only to
+"\*(iAstring\fP" \0;Copy (\*(iAstring\fP) to
+"\*(iAstring\fP" 1;\*(iAstring\fP
+.TE
+.DE
+.P
+If
+.cA type
+is omitted or null,
+the default notation ``Copy to'' is used.
+If
+.cA type
+consists of a multiple-character text string, it is placed 
+within parentheses between the words ``Copy'' and ``to.''  For example:
+.iS
+\&.NS "with att. 1 only"
+.iE
+will generate ``Copy (with att. 1 only) to'' as the notation.
+If the second argument is the digit
+.cR 1 ,
+then
+.cA string
+is used as the entire notation.
+.P
+More than one notation may be specified before the
+.cR .NE
+macro occurs, because a
+.cR .NS
+macro terminates the preceding notation, if any.
+For example:
+.iS
+\&.NS 4
+Attachment 1\e*(EMList of register names
+Attachment 2\e*(EMList of string and macro names
+\&.NS 1
+J. J. Jones
+\&.NS 2
+S. P. Lename
+G. H. Hurtz
+\&.NE
+.iE
+would be formatted as:
+.DS I
+Atts.
+Attachment 1\*(EMList of register names
+Attachment 2\*(EMList of string and macro names
+.sp 0.5v
+Copy (with att.) to
+J. J. Jones
+.sp 0.5v
+Copy (without att.) to
+S. P. Lename
+G. H. Hurtz
+.DE
+The
+.cR .NS
+and
+.cR .NE
+macros may also follow
+.cR ".AS 2"
+and
+.cR .AE
+to place the notation list on
+the cover page, if any.
+If notations are given 
+at the beginning without
+.cR ".AS 2" ,
+they will be saved and output
+at the end of the document.
+.br
+.ne 6v
+.H 3 "Approval Signature Line"
+.iS
+\&.AV \*(iAapprover's-name\| \f1[\*(iR1\f1]
+.iE
+The
+.cR .AV
+macro may be used after the last notation block to automatically
+generate a line with spaces for the approval signature and date.
+The approver's name is printed below the signature line.
+For example:
+.iS
+\&.AV "R. U. Sure"
+.iE
+produces:
+.DS I
+APPROVED:
+.sp 2
+.ta +4.2iC
+\l'3i'	\l'1.5i'
+R. U. Sure	Date
+.ta
+.DE
+.P
+If the second argument is the digit
+.cR 1 ,
+then the ``APPROVED:'' mark is suppressed.
+This feature is helpful for successive calls to
+.cR .AV
+when multiple approval lines are required.
+For example:
+.iS
+\&.AV "R. U. Sure"
+\&.AV "I. M. Certain" 1
+\&.AV "B. A. Sporte" 1
+.iE
+produces:
+.DS I
+APPROVED:
+.sp 2
+.ta +4.2iC
+\l'3i'	\l'1.5i'
+R. U. Sure	Date
+.sp 2
+\l'3i'	\l'1.5i'
+I. M. Certain	Date
+.sp 2
+\l'3i'	\l'1.5i'
+B. A. Sporte	Date
+.ta
+.DE
+.sp 0.5v
+.H 2 "Forcing a One-Page Letter"
+At times, one would like just a bit more space on the page, forcing the
+signature or items within notations onto the bottom of the page, so that
+the letter or memo is just one page in length.
+This can be accomplished by increasing the page length through the
+\*(iR\-rL\*(iAn\f1 option (e.g.,
+.cR \-rL12i
+for a 12-inch page length).
+This has the effect of making the 
+formatter believe that the page is longer and therefore
+has more room than usual to place the signature or the notations.
+This will only work for a single-page letter or memorandum.

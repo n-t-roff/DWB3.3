@@ -1,0 +1,2792 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so ../defs.doc
+.so defs.trfman
+.nr Hy 1
+.EQ
+delim @@
+define cw % "\&" font CW %
+.EN
+.TL "Reference Manual"
+.H 1 "GENERAL INFORMATION"
+.H 2 "Form of Input"
+Input consists of \f2text lines\f1, which are destined to be printed,
+interspersed with \f2control lines\f1,
+which set parameters or otherwise control subsequent processing.
+Control lines begin with a \f2control character\f1\*(EM\
+normally
+.cR .
+(period) or
+.cR '
+(single quote)\*(EM\
+followed by a one or two character name that specifies
+a basic \f2request\f1 or the substitution of
+a user-defined \f2macro\f1 in place of the control line.
+The control character
+.cR '
+suppresses the \f2break\f1 function\*(EM\
+the forced \%output of a partially filled line\*(EM\
+caused by certain requests.
+The control character may be separated from the request/macro name by
+white space (spaces and/or tabs) for aesthetic reasons.
+Names should be followed by either
+space or newline.
+Control lines with unrecognized names are ignored.
+.P
+Various special functions may be introduced anywhere in the input by
+means of an \f2escape\f1 character, normally
+.cR \e .
+For example, the function
+.cI \en \^R
+causes the interpolation of the contents of the
+\f2number register R\f1
+in place of the function;
+here @R@ is either a single character name
+as in
+.cI \en \^x ,
+or a two-character name introduced by
+a left-parenthesis, as in
+.cI \en( xx .
+.H 2 "Formatter and Device Resolution"
+\f2Troff\fP internally stores and processes dimensions in units that correspond to
+the particular device for which output is being prepared;
+values from 300 to 1200 per inch are typical
+(see \(sc23).
+\f2Nroff\fP internally uses 240 units per inch,
+corresponding to the least common multiple of the
+horizontal and vertical resolutions of various
+typewriter-like output devices.
+\f2Troff\fP rounds horizontal\^/vertical numerical parameter input to the actual
+horizontal/vertical resolution of the output device indicated by the
+.cR -T
+option
+(default
+.cR post ).
+\f2Nroff\fP similarly rounds numerical input to the actual resolution
+of its output device
+(default Model 37 Teletype).
+.H 2 "Numerical Parameter Input"
+Both \f2nroff\fP and \f2troff\fP
+accept numerical input with the appended scale
+indicators
+shown in the following table,
+where
+\f2S\f1 is the current type size in points and
+\f2V\f1 is the current vertical line spacing in
+basic units.
+.DS CB
+.TS
+box;
+cf1 cf1
+cf1 cf1
+cf5 lf1.
+Scale	Meaning
+Indicator	\^
+_
+.sp 2p
+i	Inch
+c	Centimeter
+P	Pica = 1/6 inch
+m	Em = \f2S\f1 points
+n	En = Em/\^2
+p	Point = 1/\^72 inch
+u	Basic unit
+v	Vertical line space \f2V\f1
+\f1none	Default, see below
+.TE
+.DE
+In \f2nroff\fP, both the em and the en are taken to be equal to the
+nominal character width,
+which is output-device \%dependent;
+common values are 1/10 and 1/12 inch.
+Actual character widths in \f2nroff\fP need not be all the same and constructed characters
+such as \-> (\(->) are often extra wide.
+The default scaling is
+.cR m
+for the horizontally-oriented requests
+and functions
+.cR ll ,
+.cR in ,
+.cR ti ,
+.cR ta ,
+.cR lt ,
+.cR po ,
+.cR mc ,
+.cR \eh ,
+.cR \el ,
+and horizontal coordinates of
+.cR \eD ;
+.cR v
+for the vertically-oriented requests and functions
+.cR pl ,
+.cR wh ,
+.cR ch ,
+.cR dt ,
+.cR sp ,
+.cR sv ,
+.cR ne ,
+.cR rt ,
+.cR \ev ,
+.cR \ex ,
+.cR \eL ,
+and vertical coordinates of
+.cR \eD ;
+.cR p
+for the
+.cR vs
+request;
+'ne 4v
+and
+.cR u
+for the requests
+.cR nr ,
+.cR if ,
+and
+.cR ie .
+\f2All\f1 other requests ignore any scale indicators.
+When a number register containing an already appropriately scaled number
+is interpolated to provide numerical input,
+the unit scale indicator
+.cR u
+may need to be appended to prevent
+an additional inappropriate default scaling.
+The number, @N@, may be specified in decimal-fraction form
+but the parameter finally stored is rounded to an integer number of basic units.
+Internal computations are performed in integer arithmetic.
+.P
+The \f2absolute position\f1 indicator
+.cR |
+may be prepended
+to a number @N@
+to generate the distance to the vertical or \%horizontal place @N@.
+For vertically-oriented requests and functions,
+.cI | N
+becomes the distance in basic units from the current vertical place on the page
+or in a \f2diversion\f1 (\(sc7.4)
+to the vertical place @N@.
+For \f2all\f1 other requests and functions,
+.cI | N
+becomes the distance from
+the current horizontal place on the \f2input\f1 line to the horizontal place @N@.
+For example,
+.iS
+\&.sp |3.2c
+.iE
+will space in the required direction to 3.2 centimeters from the top of the page.
+.H 2 "Numerical Expressions"
+.tr &&
+Wherever numerical input is expected an expression involving parentheses,
+the arithmetic operators
+.cR + ,
+.cR - ,
+.cR / ,
+.cR \(** ,
+.cR %
+(mod),
+and the logical operators
+.cR < ,
+.cR > ,
+.cR <= ,
+.cR >= ,
+.cR =
+(or
+.cR == ),
+.cR &
+(and),
+.cR :
+(or)
+may be used.
+Except where controlled by parentheses, evaluation of expressions is left-to-right;
+there is no operator precedence.
+In the case of certain requests, an initial
+.cR +
+or
+.cR -
+is stripped
+and interpreted as an increment or decrement indicator respectively.
+In the presence of default scaling, the desired scale indicator must be
+attached to \f2every\f1 number in an expression
+for which the desired and default scaling differ.
+For example,
+if the number register
+.cR x
+contains 2
+and the current point size is 10,
+then
+.iS
+\&.ll (4.25i+\enxP+3)/2u
+.iE
+will set the line length to 1/2 the sum of 4.25 inches + 2 picas + 3 ems.
+.H 2 "Notation"
+Numerical parameters are indicated in this manual in two ways.
+\(+-\^@N@ means that the argument may take the forms @N@, @+N@, or @-N@ and
+that the corresponding effect is to set the parameter
+to @N@, to increment it by @N@, or to decrement it by @N@ respectively.
+Plain @N@ means that an initial algebraic sign is \f2not\f1
+an increment indicator,
+but merely the sign of @N@.
+Generally, unreasonable numerical input is either ignored
+or truncated to a reasonable value.
+For example,
+most requests expect to set parameters to non-negative
+values;
+exceptions are
+.cR sp ,
+.cR wh ,
+.cR ch ,
+.cR nr ,
+and
+.cR if .
+The requests
+.cR ps ,
+.cR ft ,
+.cR po ,
+.cR vs ,
+.cR ls ,
+.cR ll ,
+.cR in ,
+and
+.cR lt 
+restore the previous parameter value in the absence
+of an argument.
+.P
+Single character arguments are indicated by single lower case letters
+and
+one/two character arguments are indicated by a pair of lower case letters.
+Character string arguments are indicated by multi-character mnemonics.
+.H 1 "FONT AND CHARACTER SIZE CONTROL"
+.H 2 "Character Set"
+The \f2troff\fP character set is defined by a description file specific to each output device (\(sc23).
+There are normally several regular fonts and one or more special fonts.
+Characters are input as themselves
+.sM ASCII ), (
+as
+.cI \e( xx ,
+as
+.cI \eC' name \f5'\f1,
+or as 
+.cI \eN' n \f5'\f1.
+The form
+.cI \eC' name \f5'\f1
+permits a name of any length;
+the form
+.cI \eN' n \f5'\f1
+refers to the @n@-th character on the current font,
+whether named or not.
+.P
+Normally the input characters
+.cR ' ,
+.cR ` ,
+and
+.cR -
+are printed as ', `, and - respectively;
+.cR \e' ,
+.cR \e` ,
+and
+.cR \e-
+produce \', \`, and \-.
+Non-existent characters are printed as a 1-em space.
+.P
+\f2Nroff\fP has an analogous, but different, mechanism for defining legal characters
+and how to print them.
+By default all
+.sM ASCII
+characters are valid.
+There are such
+additional characters as may be available on
+the output device,
+such characters as may be able to be constructed
+by overstriking or other combination,
+and those that can reasonably be mapped
+into other printable characters.
+The exact behavior is determined by a driving
+table prepared for each device.
+.br
+.ne 5.5v
+.H 2 "Fonts"
+\f2Troff\fP
+begins execution by reading information for a set of default fonts,
+said to be
+.IR mounted ;
+conventionally, the first four are
+Times Roman
+.cR R ), (
+.I "Times Italic"
+.cR I ), (
+.B "Times Bold"
+.cR B ), (
+and
+.bI "Times Bold Italic"
+.cR BI ), (
+and the last is a Special font
+.cR S ) (
+containing miscellaneous characters.
+These fonts are used in this document.
+The set of fonts and positions is determined by the device description file,
+described in \(sc23.
+.P
+The current font, initially Roman, may be changed
+by use of the
+.cR ft
+request,
+or by embedding at any desired point
+either
+.cI \ef x ,
+.cI \ef( xx ,
+or
+.cI \ef N ,
+where
+\f2x\f1 and \f2xx\f1 are the name of a font
+and @N@ is a numerical font position.
+.P
+It is not necessary to change to the Special font;
+characters on that font are automatically handled
+as if they were physically part of the current font.
+The Special font may actually be several fonts;
+the name
+.cR S
+is reserved and is generally used for one of these.
+All special fonts must be mounted after regular fonts.
+.P
+\f2Troff\fP can be informed that any particular font is mounted
+by use of the
+.cR fp
+request.
+The list of known fonts is installation dependent.
+In the subsequent discussion of font-related requests,
+@F@ represents either a one- or two-character
+font name or the numerical font position.
+The current font is available (as a numerical position) in the read-only number register
+.cR .f .
+.P
+A request for a named but not-mounted font is honored
+if the font description information exists.
+In this way, there is no limit on the number of fonts that may be printed
+in any part of a document.
+Mounted fonts may be handled more efficiently,
+and they may be referred to by their mount positions,
+but there is no other difference.
+.P
+The function
+.cI \eS' \(+-\^N \f5'\f1
+causes the current font to be slanted by
+\(+-\^@N@
+degrees.
+Not all devices support slanting.
+.P
+\f2Nroff\fP understands font control
+and normally underlines italic characters (see \(sc10.5).
+.H 2 "Character Size"
+Character point sizes available depend on the specific output device;
+a typical (historical) set of values is
+6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 28, and 36.
+This is a range of 1/12 inch to 1/2 inch.
+The
+.cR ps
+request is used to change or restore the point size.
+Alternatively the point size may be changed between any two characters
+by embedding a
+.cI \es N
+at the desired point
+to set the size to @N@,
+or a
+.cI \es \(+-\^N
+(@1<=N<=9@)
+to increment/decrement the size by @N@;
+.cR \es0
+restores the previous size.
+Requested point size values that are between two valid
+sizes yield the larger of the two.
+.P
+Note that through an accident of history, a construction like
+.cR \es39
+is parsed as size 39, and thus converted to size 36 (given the sizes above),
+while
+.cR \es40
+is parsed as size 4 followed by
+.cR 0 .
+The syntax
+@cw "\es(" nn@ and @cw "\es" +- cw "(" nn@
+permits specification of sizes that would otherwise be ambiguous.
+.P
+The current size is available in the
+.cR .s
+register.
+\f2Nroff\fP ignores type size requests.
+.P
+The function
+.cI \eH' \(+-\^N \f5'\f1
+sets \H'+2'the height of the current font\H'0' to
+@N@, or increments it by @+N@, or decrements it by @-N@;
+if @N=0@, the height is restored to the current point size.
+In each case, the width is unchanged.
+Not all devices support independent height and width for characters.
+.bH *
+.bT "\&\f5.ps\f2\0\(+-\^N\f1" "10\|point" "previous" "E" 4
+Point size
+set to \(+-\^@N@.
+Alternatively embed
+.cI \es N
+or
+.cI \es \(+-\^N .
+Any positive size value may be requested;
+if invalid, the next larger valid size will result,
+with a maximum of the largest valid size.
+A paired sequence
+@+N@, @-N@
+will work because the previous requested value is also remembered.
+Ignored in \f2nroff\fP.
+.bT "\&\f5.ss\f2\0N\f1" "12/36\|em" "ignored" "E" 3
+Space-character size
+(i.e., inter-word gap)
+is set to @N@/36 ems.
+This size is the minimum word spacing in adjusted text.
+Ignored in \f2nroff\fP.
+.bT "\&\f5.cs\f2\0F\0N\0M\f1" "off" "\-" "P" 7
+Constant character space
+(width) mode is
+set on for font @F@ (if mounted); the width of every character will be
+taken to be @N@/36 ems.
+If @M@ is absent,
+the em is that of the character's point size;
+if @M@ is given,
+the em is @M@ points.
+All affected characters
+are centered in this space, including those with an actual width
+larger than this space.
+Special Font characters occurring while the current font
+is @F@ are also so treated.
+If @N@ is absent, the mode is turned off.
+The mode must be in effect when the characters are physically printed.
+Ignored in \f2nroff\fP.
+.bT "\&\f5.bd\f2\0F\0N\f1" "off" "\-" "P" 6
+The characters in font @F@ will be artificially
+emboldened by printing each one twice, separated by @N-1@ basic units.
+A reasonable value for @N@ is 3 when the character size is near 10 points.
+If @N@ is missing the embolden mode is turned off.
+The emboldening value @N@ is in the
+.cR .b
+register.
+.sp 0.5v
+.bd R 3
+This paragraph is printed with
+.cR ".bd\ R\ 3" .
+The mode must be in effect when the characters are physically printed.
+Ignored in \f2nroff\fP.
+.br
+.bd R
+.bT "\&\f5.bd\ S\f2\0F\0N\f1" "off" "\-" "P" 3
+The characters in the Special font
+will be emboldened whenever the current font is @F@.
+The mode must be in effect when the characters are physically printed.
+Ignored in \f2nroff\fP.
+.bT "\&\f5.ft\f2\0F\f1" "Roman" "previous" "E" 3
+Font changed to
+@F@.
+Alternatively, embed
+.cI \ef F .
+The font name
+.cR P
+is reserved to mean the previous font,
+and the name
+.cR S
+for the special font.
+.bT "\&\f5.fp\f2\0N\0F\0L\f1" "R,I,B,\(el,S" "ignored" "\-" 4
+Font position.
+This is a statement
+that a font named @F@ is associated with position @N@.
+It is a fatal error if @F@ is not known.
+For fonts with names longer than two characters,
+.I L
+refers to the long name,
+and
+.I F
+becomes a synonym.
+There is generally a limit of about 10 mounted fonts.
+.bE
+.H 1 "PAGE CONTROL"
+Top and bottom margins are not automatically provided;
+it is conventional to define two \f2macros\f1 and to set \f2traps\f1
+for them at vertical positions 0 (top) and @-N@ (distance @N@ up from the bottom).
+See \(sc7 and Tutorial Examples \(scT2.
+A pseudo-page transition onto the first page occurs
+either when the first \f2break\f1 occurs or
+when the first \f2non-diverted\f1 text processing occurs.
+Arrangements
+for a trap to occur at the top of the first page
+must be completed before this transition.
+In the following, references to the \f2current diversion\f1 (\(sc7.4)
+mean that the mechanism being described works during both
+ordinary and diverted output (the former considered as the top diversion level).
+.P
+The limitations on \f2troff\fP and \f2nroff\fP output dimensions
+are device dependent.
+.bT "\&\f5.pl\f2\0\(+-\^N\f1" "11\|in" "11\|in" "\f3v\f1" 2
+Page length set to \(+-\^@N@.
+The current page length is available in the
+.cR .p
+register.
+.bT "\&\f5.bp\f2\0\(+-\^N\f1" "@N=1@" "\-" "B,\f3v\f1" 3
+Begin page.
+The current page is ejected and a new page is begun.
+If \(+-\^@N@ is given, the new page number will be \(+-\^@N@.
+Also see request
+.cR ns .
+.bT "\&\f5.pn\f2\0\(+-\^N\f1" "@N=1@" "ignored" "\-" 4
+Page number.
+The next page (when it occurs) will have the page number \(+-\^@N@.
+A
+.cR pn
+must occur before the initial pseudo-page transition
+to affect the page number of the first page.
+The current page number is in the
+.cR %
+register.
+.br
+.ne 1i
+.bT "\&\f5.po\f2\0\(+-\^N\f1" "1\|in; 0" "previous" "\f3v\f1" 3
+Page offset.
+The current \f2left margin\f1 is set to \(+-\^@N@.
+The \f2troff\fP initial value provides 1 inch of paper margin
+on a typical device.
+The current page offset is available in the
+.cR .o
+register.
+.bT "\&\f5.ne\f2\0N\f1" "\-" "@N=1V@" "D,\f3v\f1" 5
+Need @N@ vertical space.
+If the distance \f2D\f1 to the next trap position (see \(sc7.5) is less than @N@,
+a forward vertical space of size \f2D\f1 occurs,
+which will spring the trap.
+If there are no remaining
+traps on the page,
+\f2D\f1 is the distance to the bottom of the page.
+If @D<V@, another line could still be output
+and spring the trap.
+In a diversion, \f2D\f1 is the distance to the \f2diversion trap\f1, if any,
+or is very large.
+.bT "\&\f5.mk\f2\0R\f1" "none" "internal" "D" 3
+Mark the current vertical place
+in an internal register (both associated with the current diversion level),
+or in register @R@, if given.
+See
+.cR rt
+request.
+.bT "\&\f5.rt\f2\0\(+-\^N\f1" "none" "internal" "D,\f3v\f1" 6
+Return \f2upward only\f1 to a marked vertical place
+in the current diversion.
+If \(+-\^@N@ (with respect to current place) is given,
+the place is \(+-\^@N@ from the top of the page or diversion
+or, if @N@ is absent, to a
+place marked by a previous \&\f5mk\f1.
+The
+.cR sp
+request (\(sc5.3) may be used
+in all cases instead of
+.cR rt
+by spacing to the absolute place stored in a explicit register,
+e.g., using the sequence
+.cR .mk
+.cA R
+\(el
+.cR .sp
+.cI |\en \^R \f5u\f1;
+this also works when the motion is downwards.
+.bE
+.H 1 "TEXT FILLING, ADJUSTING, AND CENTERING"
+.H 2 "Filling and Adjusting"
+Normally,
+words are collected from input text lines
+and assembled into a output text line
+until some word does not fit.
+An attempt is then made
+to hyphenate the word to put part
+of it into the output line.
+The spaces between the words on the output line
+are then increased to spread out the line
+to the current \f2line length\f1
+minus any current \f2indent\f1.
+A \f2word\f1 is any string of characters delimited by
+the \f2space\f1 character or the beginning/end of the input line.
+Any \%adjacent pair of words that must be kept together
+(neither split across output lines nor spread apart
+in the adjustment process)
+can be tied together by separating them with the
+\f2unpaddable space\f1 character
+.cR "\e\0" '' ``
+(backslash-space).
+The adjusted word spacings are uniform in \f2troff\fP
+and the minimum interword spacing can be controlled
+with the
+.cR ss
+request (\(sc2).
+In \f2nroff\fP, they are normally nonuniform because of
+quantization to character-size spaces;
+however,
+the command line option
+.cR -e
+causes uniform
+spacing with full output device resolution.
+Filling, adjustment, and hyphen\%a\%tion (\(sc13) can all be
+prevented or controlled.
+The text length on the last line output is available in the
+.cR .n
+register,
+and text baseline position on the page for this line is in the
+.cR nl
+register.
+The text baseline high-water mark (lowest place) on the current page is in
+the
+.cR .h
+register.
+The current horizontal output position is in the
+.cR .k
+register.
+.P
+An input text line ending with
+.cR . \^,
+.cR ? ,
+or
+.cR ! ,
+optionally followed by any number of
+.cR \&" ,
+.cR ' ,
+.cR ) ,
+.cR ] ,
+.cR * ,
+or
+\(dg,
+is taken
+to be the end of a sentence, and an additional space character is
+automatically provided during filling.
+To prevent this, add
+.cR \e&
+to the end of the input line.
+Multiple inter-word space characters found in the input are retained,
+except for trailing spaces;
+initial spaces also cause a break.
+.P
+When filling is in effect, a
+.cR \ep
+may be embedded or attached to a word to
+cause a break at the end of the word and have the resulting output
+line spread out to fill the current line length.
+.P
+.tr &&
+A text input line that happens to begin
+with a control character can
+be made not to look like a control line
+by prefixing it with
+the non-printing, zero-width filler character
+.cR \e& .
+Still another way is to specify output translation of some
+convenient character into the control character
+using
+.cR tr
+(\(sc10.5).
+.tr &.
+'''	\" FORCE PAGE
+.SK
+.H 2 "Interrupted Text"
+The copying of an input line in \f2nofill\f (non-fill) mode can be interrupted
+by terminating
+the partial line with a
+.cR \ec .
+The next encountered input text line will be considered to be a continuation
+of the same line of input text.
+Similarly,
+a word within \f2filled\f1 text may be interrupted by terminating the
+word (and line) with
+.cR \ec ;
+the next encountered text will be taken as a continuation of the
+interrupted word.
+If the intervening control lines cause a break,
+any partial line will be forced out along with any partial word.
+.bT "\&\f5.br\f1" "\-" "\-" "B" 4
+Break.
+The filling of the line currently
+being collected is stopped and
+the line is output without adjustment.
+Text lines beginning with space characters
+(but not tabs)
+and empty text lines (blank lines) also cause a break.
+.bT "\&\f5.fi\f1" "fill on" \- B,E 2
+Fill subsequent output lines.
+The register
+.cR .u
+is 1 in fill mode and 0 in nofill mode.
+.bT "\&\f5.nf\f1" "fill on" "\-" "B,E" 3
+Nofill.
+Subsequent output lines are neither filled nor adjusted.
+Input text lines are copied directly to output lines
+without regard for the current line length.
+.bT "\&\f5.ad\f2\0c\f1" "adjust, both" "adjust" "E" 12
+Line adjustment is begun.
+If fill mode is not on, adjustment will be deferred until
+fill mode is back on.
+If the type indicator @c@ is present,
+the adjustment type is changed as shown in the following table.
+.DS CB
+.TS
+box;
+cf1 cf1
+cf5 lf1.
+Indicator	Adjust Type
+_
+.sp 2p
+l	adjust left margin only
+r	adjust right margin only
+c	center
+b \f1\s-1or\s+1\fP n	adjust both margins
+\f1absent\fP	unchanged
+.TE
+.DE
+The number register
+.cR .j
+contains the current value of the
+.cR ad
+setting;
+its value can be recorded and used subsequently to set adjustment.
+.bT "\&\f5.na\f1" "adjust" "\-" "E" 3
+No adjust.
+Adjustment is turned off;
+the right margin will be ragged.
+The adjustment type for
+.cR ad
+is not changed.
+Output line filling still occurs if fill mode is on.
+.bT "\&\f5.ce\f2\0N\f1" "off" "@N=1@" "B,E" 4
+Center the next @N@ input text lines
+within the current available horizontal space (line-length minus indent).
+If @N=0@, any residual count is cleared.
+A break occurs after each of the @N@ input lines.
+If the input line is too long,
+it will be left adjusted.
+.bE
+.H 1 "VERTICAL SPACING"
+.H 2 "Baseline Spacing"
+The vertical spacing @(V)@ between the baselines of successive
+output lines can be set
+using the
+.cR vs
+request.
+\f2V\f1 should be large enough to accommodate the character sizes
+on the affected output lines.
+For the common type sizes (9-12 points),
+usual typesetting practice is to set \f2V\f1 to 2 points greater than the
+point size;
+\f2troff\fP default is 10-point type on a 12-point spacing
+(as in this document).
+The current \f2V\f1 is available in the
+.cR .v
+register.
+Multiple-\f2V\|\f1 line separation (e.g., double spacing) may be requested
+with
+.cR ls ,
+but it is better to use a large
+.cR vs
+instead;
+certain preprocessors assume single spacing.
+The current line spacing is available in the
+.cR .L
+register.
+.br
+.ne 4v
+.H 2 "Extra Line-space"
+If a word contains a vertically tall construct requiring
+the output line containing it to have extra vertical space
+before and/or after it,
+the \f2extra-line-space\f1 function \&\f5\ex'\f2N\fP'\f1
+can be embedded in or attached to that word.
+If @N@ is negative,
+the output line containing the word will
+be preceded by @N@ extra vertical space;
+if @N@ is positive,
+the output line containing the word
+will be followed by @N@ extra vertical space.
+If successive requests for extra space apply to the same line,
+the maximum values are used.
+The most recently utilized post-line extra line-space is available in the
+.cR .a
+\%register.
+.P
+In \*(iR\ex'\fP\(el\*(iR'\fP
+and other functions having a pair of delimiters around
+their parameter,
+the delimiter choice (here 
+.cR ' )
+is arbitrary,
+except that it can not look like the continuation of a number expression for @N@.
+.H 2 "Blocks of Vertical Space"
+A block of vertical space is ordinarily requested using
+.cR sp ,
+which honors the \f2no-space\f1 mode and which does
+not space past a trap.
+A contiguous block of vertical space may be reserved using
+.cR sv .
+.bT "\&\f5.vs\f2\0N\f1" "12\|pts; 1/6\|in" "previous" "E,\f3p\f1" 3
+Set vertical baseline spacing size \f2V\f1.
+Transient extra vertical space is available with \&\f5\ex'\f2N\f5'\f1 (see above).
+.bT "\&\f5.ls\f2\0N\f1" "@N=1@" "previous" "E" 3
+\f2Line\f1 spacing
+set to \(+-\^@N@.
+@N-1@\|\f2V\f1\^s (blank lines) are
+appended to each output text line.
+Appended blank lines are omitted, if the text or previous appended blank line reached a trap position.
+.bT "\&\f5.sp\f2\0N\f1" "\-" "@N=1^V@" "B,\f3v\f1" 3
+Space vertically in either direction.
+If @N@ is negative, the motion is backward (upward)
+and is limited to the distance to the top of the page.
+Forward (downward) motion is truncated to the distance to the
+nearest trap.
+If the no-space mode is on,
+no spacing occurs (see \&\f5ns\f1, and \&\f5rs\f1 below).
+.bT "\&\f5.sv\f2\0N\f1" "\-" "@N=1^V@" "\f3v\f1" 5
+Save a contiguous vertical block of size @N@.
+If the distance to the next trap is greater
+than @N@, @N@ vertical space is output.
+No-space mode has no effect.
+If this distance is less than @N@,
+no vertical space is immediately output,
+but @N@ is remembered for later output (see \&\f5os\f1).
+Subsequent \&\f5sv\f1 requests will overwrite any still remembered @N@.
+.bT "\&\f5.os\f1" "\-" "\-" "\-" 3
+Output saved vertical space.
+No-space mode has no effect.
+Used to finally output a block of vertical space requested
+by an earlier
+.cR sv
+request.
+.bT "\&\f5.ns\f1" "space" "\-" "D" 3
+No-space mode turned on.
+When on, no-space mode inhibits
+.cR sp
+requests and
+.cR bp
+requests \f2without\f1 a next page number.
+No-space mode is turned off when a line of
+output occurs, or with
+.cR rs .
+.bT "\&\f5.rs\f1" "space" "\-" "D" 2
+Restore spacing.
+The no-space mode is turned off.
+.bT "\&Blank text line." "" "\-" "B" 2
+Causes a break and
+output of a blank line exactly like
+.cR "sp\ 1" .
+.bE
+.H 1 "LINE LENGTH AND INDENTING"
+The maximum line length for fill mode may be set with
+.cR ll .
+The indent may be set with
+.cR in ;
+an indent applicable to only the next output line may be set with
+.cR ti .
+The line length includes indent space but not
+page offset space.
+The line length minus the indent is the basis for centering with
+.cR ce .
+The effect of
+.cR ll ,
+.cR in ,
+or
+.cR ti
+is delayed, if a partially collected line exists,
+until after that line is output.
+'ne 1i
+In fill mode the length of text on an output line is less than or equal to
+the line length minus the indent.
+The current line length and indent are available in registers
+.cR .l
+and
+.cR .i
+respectively.
+The length of \f2three-part titles\f1 produced by
+.cR tl
+(see \(sc14) is independently set by
+.cR lt .
+.bT "\&\f5.ll\f2\0\(+-\^N\f1" "6.5\|in" "previous" "E,\f3m\f1" 2
+Line length is set to \(+-\^@N@.
+.bT "\&\f5.in\f2\0\(+-\^N\f1" "@N=0@" "previous" "B,E,\f3m\f1" 2
+Indent is set to \(+-\^@N@.
+The indent is prepended to each output line.
+.bT "\&\f5.ti\f2\0\(+-\^N\f1" "\-" "ignored" "B,E,\f3m\f1" 3
+Temporary indent.
+The next output text line will be indented a distance \(+-\^@N@
+with respect to the current indent.
+The resulting total indent may not be negative.
+The current indent is not changed.
+.bE
+.H 1 "MACROS, STRINGS, DIVERSIONS, AND POSITION TRAPS"
+.H 2 "Macros and Strings"
+A \f2macro\f1 is a named set of arbitrary \f2lines\f1 that may be invoked by name or
+with a \f2trap\f1.
+A \f2string\f1 is a named string of \f2characters\f1,
+not including a newline character,
+that may be interpolated by name at any point.
+Request, macro, and string names share the same name list.
+Macro and string names
+may be one or two characters long and may usurp previously defined
+request, macro, or string names;
+this implies that built-in operations may be (irrevocably) redefined.
+Any of these entities may be renamed with
+.cR rn
+or removed with
+.cR rm .
+.P
+Macros are created by
+.cR de
+and
+.cR di ,
+and appended to by
+.cR am
+and
+.cR da ;
+.cR di
+and
+.cR da
+cause normal output to be stored in a macro.
+A macro is invoked in the same way as a request;
+a control line beginning
+.cI . xx
+will interpolate the contents of macro \f2xx\f1.
+The remainder of the line may contain up to nine \f2arguments\f1.
+.P
+Strings are created by
+.cR ds
+and appended to by
+.cR as .
+The strings \f2x\f1 and \f2xx\f1 are interpolated at any desired point with
+.cI \e\(** x
+and
+.cI \e\(**( xx
+respectively.
+String references and macro invocations may be nested.
+.H 2 "Copy Mode Input Interpretation"
+During the definition and extension
+of strings and macros (not by diversion)
+the input is read in \f2copy mode\f1.
+In copy mode, input is copied without interpretation
+except that:
+.in +0.25i
+.BL "" 1
+.LI
+The contents of number registers indicated by
+.cR \en
+are interpolated.
+.LI
+Strings indicated by
+.cR \e\(**
+are interpolated.
+.LI
+Arguments indicated by
+.cR \e$
+are interpolated.
+.LI
+Concealed newlines indicated by
+.cI \e newline
+are eliminated.
+.LI
+Comments indicated by
+.cR \e"
+are eliminated.
+.LI
+.cR \et
+and
+.cR \ea
+are interpreted as
+.sM ASCII
+horizontal tab and
+.sM SOH
+respectively (\(sc9).
+.LI
+.cR \e\e
+is interpreted as
+.cR \e ''. ``
+.LI
+.cR \e.
+is interpreted as
+.cR . ''. ``
+.LE
+.in -0.25i
+.P
+These interpretations can be suppressed by
+prepending a
+.cR \e .
+For example, since
+.cR \e\e
+maps into a
+.cR \e ,
+.cR \e\en
+will copy as
+.cR \en ,
+which
+will be interpreted as a number register indicator when the
+macro or string is reread.
+.H 2 "Arguments"
+When a macro is invoked by name, the remainder of the line is
+taken to contain up to nine arguments.
+The argument separator is the space character (not tab), and arguments
+may be surrounded by double quotes to permit embedded space characters.
+Pairs of double quotes may be embedded in double-quoted arguments to
+represent a single double-quote character.
+The argument
+.cR \&""
+is explicitly null.
+If the desired arguments won't fit on a line,
+a concealed newline may be used to continue on the next line.
+A trailing double quote may be omitted.
+.br
+.ne 4v
+.P
+When a macro is invoked the \f2input level\f1 is \f2pushed down\f1 and
+any arguments available at the previous level become unavailable
+until the macro is completely read and the previous level is restored.
+A macro's own arguments can be interpolated at any point
+within the macro with
+.cI \e$ N ,
+which interpolates the @N@\^th
+argument
+(1\(<=\^@N@\^\(<=9).
+If an invoked argument does not exist,
+a null string results.
+For example, the macro \f2xx\f1 may be defined by
+.iS
+&de xx        \e" begin definition
+Today is \e\e$1 the \e\e$2.
+&.            \e" end definition
+.iE
+and called by
+.iS
+&xx Monday 14th
+.iE
+to produce the text
+.DS I
+Today is Monday the 14th.
+.DE
+Note that each
+.cR \e$
+was concealed in the definition with a prepended
+.cR \e .
+The number of
+arguments is in the
+.cR .$
+\%register.
+.P
+No arguments are available at the top (non-macro) level,
+within a string, or within a trap-invoked macro.
+.P
+Arguments are copied in copy mode onto a stack
+where they are available for reference.
+It is advisable to
+conceal string references (with an extra
+.cR \e \|)
+to delay interpolation until argument reference time.
+.H 2 "Diversions"
+Processed output may be diverted into a macro for purposes
+such as footnote processing (see Tutorial Examples \(scT5)
+or determining the horizontal and vertical size of some text for
+conditional changing of pages or columns.
+A single diversion trap may be set at a specified vertical position.
+The number registers
+.cR dn
+and
+.cR dl
+respectively contain the
+vertical and horizontal size of the most
+recently ended diversion.
+Processed text that is diverted into a macro
+retains the vertical size of each of its lines when reread
+in \f2nofill\f1 mode
+regardless of the current \f2V\f1.
+Constant-spaced
+.cR cs ) (
+or emboldened
+.cR bd ) (
+text that is diverted
+can be reread correctly only if these modes are again or still in effect
+at reread time.
+One way to do this is to embed in the diversion the appropriate
+.cR cs
+or 
+.cR bd
+requests with the \f2transparent\f1
+mechanism described in \(sc10.6.
+.P
+Diversions may be nested
+and certain parameters and registers
+are associated
+with the current diversion level
+(the top non-diversion level may be thought of as the
+0th diversion level).
+These are the diversion trap and associated macro,
+no-space mode,
+the internally-saved marked place (see
+.cR mk
+and
+.cR rt ),
+the current vertical place
+.cR .d "" (
+register),
+the current high-water text baseline
+.cR .h "" (
+register),
+and the current diversion name
+.cR .z "" (
+register).
+.H 2 "Traps"
+Three types of trap mechanisms are available\*(EMpage traps, a diversion trap, and
+an input-line-count trap.
+Macro-invocation traps may be planted using
+.cR wh
+at any page position including the top.
+This trap position may be changed using
+.cR ch .
+Trap positions at or below the bottom of the page
+have no effect unless or until
+moved to within the page or rendered effective by an increase in page length.
+Two traps may be planted at the same position only by first planting them at different
+positions and then moving one of the traps;
+the first planted trap will conceal the second unless and until the first one is moved
+(see Tutorial Examples).
+If the first one is moved back, it again conceals the second trap.
+The macro associated with a page trap is automatically
+invoked when a line of text is output whose vertical size reaches
+or sweeps past the trap position.
+Reaching the bottom of a page springs the top-of-page trap, if any,
+provided there is a next page.
+The distance to the next trap position is available in the
+.cR .t
+register;
+if there are no traps between the current position and the bottom of the page,
+the distance returned is the distance to the page bottom.
+.P
+A macro-invocation trap effective in the current diversion may be planted using
+.cR dt .
+The
+.cR .t
+register works in a diversion; if there is no subsequent trap a large
+distance is returned.
+For a description of input-line-count traps, see
+.cR it
+below.
+.bT "\&\f5&de\f2\0xx\0yy\f1" "\-" "\f2.yy\|=\|\&\f5..\f1" "\-" 7
+Define or redefine the macro \f2xx\f1.
+The contents of the macro begin on the next input line.
+Input lines are copied in \f2copy mode\f1 until the definition is terminated by a
+line beginning with
+.cI . yy ,
+whereupon the macro \f2yy\f1 is called.
+In the absence of \f2yy\f1, the definition
+is terminated by a
+line beginning with
+.cR .. ''. ``
+A macro may contain
+.cR de
+requests
+provided the terminating macros differ
+or the contained definition terminator is concealed.
+.cR .. '' ``
+can be concealed as
+.cR \e\e..
+which will copy as
+.cR \e..
+and be reread as
+.cR .. ''. ``
+.bT "\&\f5&am\f2\0xx\0yy\f1" "\-" "\f2.yy\|=\|\&\f5..\f1" "\-" 2
+Append to macro
+.I xx
+(append version of
+.cR de ).
+.bT "\&\f5&ds\f2\0xx\0string\f1" "\-" "ignored" "\-" 3
+Define a string
+\f2xx\f1 containing \f2string\f1.
+Any initial double quote in \f2string\f1 is stripped off to permit
+initial blanks.
+.bT "\&\f5&as\f2\0xx\0string\f1" "\-" "ignored" "\-" 2
+Append
+\f2string\f1 to string \f2xx\f1
+(append version of
+.cR ds ).
+.bT "\&\f5&rm\f2\0xx\f1" "\-" "ignored" "\-" 5
+Remove
+request, macro, or string.
+The name \f2xx\f1 is removed from the name list and
+any related storage space is freed.
+Subsequent references will have no effect.
+If many macros and strings are being created dynamically, it
+may become necessary to remove unused ones
+to recapture internal storage space for newer
+macros and strings.
+.bT "\&\f5&rn\f2\0xx\0yy\f1" "\-" "ignored" "\-" 2
+Rename request, macro, or string
+\f2xx\f1 to \f2yy\f1.
+If \f2yy\f1 exists, it is first removed.
+.bT "\&\f5&di\f2\0xx\f1" "\-" "end" "D" 4
+Divert output to macro \f2xx\f1.
+Normal text processing occurs during diversion
+except that page offsetting is not done.
+The diversion ends when the request
+.cR di
+or
+.cR da
+is encountered without an argument;
+extraneous
+requests of this type should not appear when nested diversions are being used.
+.bT "\&\f5&da\f2\0xx\f1" "\-" "end" "D" 2
+Divert, appending to macro \f2xx\f1
+(append version of
+.cR di ).
+.bT "\&\f5&wh\f2\0N\0xx\f1" "\-" "\-" "\f3v\f1" 4
+Install
+a trap to invoke \f2xx\f1 at page position \f2N\f1;
+a negative N will be interpreted as a distance from the
+page bottom.
+Any macro previously planted at @N@ is replaced by \f2xx\f1.
+A zero @N@ refers to the top of a page.
+In the absence of \f2xx\f1, the first trap found at @N@, if any, is removed.
+.bT "\&\f5&ch\f2\0xx\0N\f1" "\-" "\-" "\f3v\f1" 2
+Change
+the trap position for macro \f2xx\f1 to be @N@.
+In the absence of @N@, the trap, if any, is removed.
+.bT "\&\f5&dt\f2\0N\0xx\f1" "\-" "off" "D,\f3v\f1" 3
+Install a diversion trap
+at position @N@ in the \f2current\f1 diversion to invoke
+macro \f2xx\f1.
+Another
+.cR dt
+will redefine the diversion trap.
+If no arguments are given, the diversion trap is removed.
+.bT "\&\f5&it\f2\0N\0xx\f1" "\-" "off" "E" 4
+Set an input-line-count trap
+to invoke the macro \f2xx\f1 after @N@ lines of \f2text\f1 input
+have been read
+(control or request lines do not count).
+The text may be inline text or
+text interpolated by inline or trap-invoked macros.
+.bT "\&\f5&em\f2\0xx\f1" "none" "none" "\-" 3
+The
+macro \f2xx\f1 will be invoked
+when all input has ended.
+The effect is almost as if the contents of \f2xx\f1 had been at the end
+of the last file processed,
+but all processing ceases at the next page eject.
+.bE
+.H 1 "NUMBER REGISTERS"
+A variety of parameters are available to the user as
+predefined \f2number registers\f1 (see Summary).
+In addition, users may define their own registers.
+Register names are one or two characters long and do not conflict
+with request, macro, or string names.
+Except for certain predefined read-only registers,
+a number register can be read, written, automatically
+incremented or decremented, and interpolated
+into the input in a variety of formats.
+One common use of user-defined registers is to
+automatically number sections, paragraphs, lines, etc.
+A number register may be used any time numerical input is expected or desired
+and may be used in numerical \f2expressions\f1 (\(sc1.4).
+.P
+Number registers are created and modified using
+.cR nr ,
+which
+specifies the name, numerical value, and the auto-increment size.
+Registers are also modified, if accessed
+with an auto-incrementing sequence.
+If the registers \f2x\f1 and \f2xx\f1 both contain
+@N@ and have the auto-increment size @M@,
+the following access sequences have the effect shown:
+.DS CB
+.TS
+box;
+c c c
+c c c
+l c c.
+Sequence	Effect on Register	Value
+\^	\^	Interpolated
+_
+.sp 2p
+\&\f5\en\f2x\f1	none	@N@
+\&\f5\en(\f2xx\f1	none	@N@
+\&\f5\en+\f2x\f1	\f2x\f1 incremented by @M@	\f2N+M\f1
+\&\f5\en\-\f2x\f1	\f2x\f1 decremented by @M@	\f2N\-M\f1
+\&\f5\en+(\f2xx\f1	\f2xx\f1 incremented by @M@	\f2N+M\f1
+\&\f5\en\-(\f2xx\f1	\f2xx\f1 decremented by @M@	\f2N\-M\f1
+.TE
+.DE
+When interpolated, a number register is converted to
+decimal (default),
+decimal with leading zeros,
+lower-case Roman,
+upper-case Roman,
+lower-case sequential alphabetic,
+or
+upper-case sequential alphabetic
+according to the format specified by
+.cR af .
+.bT "\&\f5&nr\f2\0R\0\(+-\^N\0M\f1" "@N=0@" "\-" "\f3u\f1" 3
+The number register
+@R@ is assigned the value \(+-\^@N@
+with respect to the previous value, if any.
+The increment for auto-incrementing is set to @M@.
+.bT "\&\f5&af\f2\0R\0c\f1" "arabic" "\-" "\-" 16
+Assign
+format @c@ to register @R@.
+The available formats are:
+.DS CB
+.TS
+box;
+c c
+cf5 l.
+Format	Numbering Sequence
+_
+.sp 2p
+1	0, 1, 2, 3, 4, 5, \(el
+001	000, 001, 002, 003, 004, 005, \(el
+i	0, i, ii, iii, iv, v, \(el
+I	0, I, II, III, IV, V, \(el
+a	0, a, b, c, \(el, z, aa, ab, \(el, zz, aaa, \(el
+A	0, A, B, C, \(el, Z, AA, AB, \(el, ZZ, AAA, \(el
+.TE
+.DE
+An arabic format having @N@ digits
+specifies a field width of @N@ digits (example 2 above).
+The read-only registers and the width function
+.cR \ew
+(\(sc11.2)
+are always arabic.
+Warning:  The value of a number \%register in a non-arabic format
+is not numeric, and will not produce the expected results in expressions.
+.sp 0.5v
+The function
+.cI \eg x
+or
+.cI \eg( xx
+returns the format of a number register in a form suitable for
+.cR af ;
+it returns nothing if the register has not been used.
+.bT "\&\f5&rr\f2\0R\f1" "\-" "ignored" "\-" 4
+Remove number register @R@.
+If many registers are being created dynamically, it
+may become necessary to remove unused registers
+to recapture internal storage space for newer registers.
+The register
+.cR .R
+contains the number of number registers still available.
+.bE
+.H 1 "TABS, LEADERS, AND FIELDS"
+.H 2 "Tabs and Leaders"
+The
+.sM ASCII
+horizontal tab character and the
+.sM ASCII
+.sM SOH
+(control-A, hereafter called the \f2leader\f1 character)
+can both be used to generate either horizontal motion or
+a string of repeated characters.
+The length of the generated entity is governed
+by internal \f2tab stops\f1 specifiable
+with
+.cR ta .
+The default difference is that tabs generate motion and leaders generate
+a string of periods;
+.cR tc
+and
+.cR lc
+offer the choice of repeated character or motion.
+There are three types of internal tab stops\*(EM\
+\f2left\f1 adjusting, \f2right\f1 adjusting,
+and \f2centering\f1.
+In the following table,
+\f2D\f1 is the distance from the current position on the \f2input\f1 line
+(where a tab or leader was found)
+to the next tab stop,
+\f2next-string\f1 consists
+of the input characters following the tab (or leader) up to the next tab (or leader) or end of line,
+and
+\f2W\f1 is the width of \%\f2next-string\f1.
+.DS CB
+.TS
+box;
+c c c
+c c c
+c c l.
+Tab Type	Length of motion or	Location of \f2next-string\f1
+\^	repeated characters	\^
+_
+.sp 2p
+Left	\f2D\f1	Following \f2D\f1
+Right	\f2D\-W\f1	Right adjusted within \f2D\f1
+Centered	\f2D\-W/\f12	Centered on right end of \f2D\f1
+.TE
+.DE
+The length of generated motion is allowed to be negative, but
+that of a repeated character string cannot be.
+Repeated character strings contain an integer number of characters, and
+any residual distance is prepended as motion.
+Tabs or leaders found after the last tab stop are ignored, but may be used
+as \f2next-string\f1 terminators.
+.P
+Tabs and leaders are not interpreted in copy mode.
+.cR \et
+and
+.cR \ea
+always generate a non-interpreted
+tab and leader respectively, and
+are equivalent to actual tabs and leaders in copy mode.
+.H 2 "Fields"
+A \f2field\f1 is contained between
+a pair of \f2field delimiter\f1 characters,
+and consists of sub-strings
+separated by \f2padding\f1 indicator characters.
+The field length is the distance on the
+\f2input\f1 line from the position where the field begins to the next tab stop.
+The difference between the total length of all the sub-strings
+and the field length is incorporated as horizontal
+padding space that is divided among the indicated
+padding places.
+The incorporated padding is allowed to be negative.
+For example,
+if the field delimiter is
+.cR #
+and the padding indicator is
+.cR ^ ,
+\&\f5#^\f2xxx\&\f5^\f2right\|\&\f5#\f1
+specifies a right-adjusted string with the string \f2xxx\f1 centered
+in the remaining space.
+.bT "\&\f5&ta\f2\0Nt\0\(el\f1" "0.5\|in; 0.8\|in" "none" "E,\f3m\f1" 4
+Set tab stops and types.
+\f2t=\&\f5R\f1, right adjusting;
+\f2t=\&\f5C\f1, centering;
+\f2t\f1 absent, left adjusting.
+\f2Troff\fP tab stops are preset every 0.5\|inch,
+\f2nroff\fP every 0.8\|inch.
+The stop values are separated by spaces, and
+a value \%preceded by
+.cR +
+is treated as an increment to the previous stop value.
+.bT "\&\f5&tc\f2\0c\f1" "none" "none" "E" 2
+The tab repetition character
+becomes @c@,
+or is removed, thus specifying motion.
+.bT "\&\f5&lc\f2\0c\f1" "\&\f5.\f1" "none" "E" 2
+The leader repetition character
+becomes @c@,
+or is removed, thus specifying motion.
+.bT "\&\f5&fc\f2\0a\0b\f1" "off" "off" "\-" 3
+The field delimiter
+is set to \f2a\f1;
+the padding indicator is set to the space character or to
+\f2b\f1, if given.
+In the absence of arguments the field mechanism is turned off.
+.bE
+'''	\" FORCE PAGE
+.SK
+.H 1 "INPUT AND OUTPUT CONVENTIONS AND CHARACTER TRANSLATIONS"
+.H 2 "Input Character Translations"
+Ways of inputting the valid character set were
+discussed in \(sc2.1.
+The
+.sM ASCII
+control characters horizontal tab (\(sc9.1),
+.sM SOH
+(\(sc9.1), and backspace (\(sc10.3) are discussed elsewhere.
+The newline delimits input lines.
+In addition,
+.sM STX , 
+.sM ETX , 
+.sM ENQ , 
+.sM ACK ,
+and 
+.sM BEL
+are accepted,
+and may be used as delimiters or translated into a graphic with
+.cR tr
+(\(sc10.5).
+All others are ignored.
+.P
+The \f2escape\f1 character
+.cR \e
+introduces \f2escape sequences\f1,
+which cause the following character to mean
+another character, or to indicate
+some function.
+A complete list of such sequences is given in the Summary.
+The escape character
+.cR \e
+should not be confused with the
+.sM ASCII
+control character
+.sM ESC .
+The escape character
+.cR \e
+can be input with the sequence
+.cR \e\e .
+The escape character can be changed with
+.cR ec ,
+and all that has been said about the default
+.cR \e
+becomes true
+for the new escape character.
+.cR \ee
+can be used to print whatever the current escape character is.
+The escape mechanism may be turned off with
+.cR eo ,
+and restored with
+.cR ec .
+.bT "\&\f5&ec\f2\0c\f1" "\&\f5\e\f1" "\&\f5\e\f1" "\-" 2
+Set escape character to
+.cR \e ,
+or to @c@, if given.
+.bT "\&\f5&eo\f1" "on" "\-" "\-" 2
+Turn escape mechanism off.
+.bE
+.H 2 "Ligatures"
+.lg0
+The set of available ligatures is device and font dependent,
+but is often a subset of
+\(fi, \(fl, \(ff, \(Fi, and \(Fl.
+They may be input by
+.cR \e(fi , 
+.cR \e(fl , 
+.cR \e(ff , 
+.cR \e(Fi ,
+and 
+.cR \e(Fl
+respectively.
+.lg
+The ligature mode is normally on in \f2troff\fP, and automatically invokes 
+ligatures during input.
+.bT "\&\f5&lg\f2\0N\f1" "on; off" "on" "\-" 4
+Ligature mode
+is turned on if @N@ is absent or non-zero,
+and turned off if @N=0@.
+If @N=2@, only the two-character ligatures are automatically invoked.
+Ligature mode is inhibited for
+request, macro, string, register, or file names,
+and in copy mode.
+No effect in \f2nroff\fP.
+.bE
+.H 2 "Backspacing, Underlining, Overstriking, Etc."
+Unless in copy mode, the
+.sM ASCII
+backspace character is replaced
+by a backward horizontal motion having the width of the
+space character.
+Underlining as a form of line-drawing is discussed in \(sc12.4.
+A generalized overstriking function is described in \(sc12.1.
+.P
+\f2Nroff\fP automatically underlines
+characters in the \f2underline\f1 font,
+specifiable with
+.cR uf ,
+normally that on font position 2.
+In addition to
+.cR ft
+and
+.cI \ef F ,
+the underline font may be selected by
+.cR ul
+and
+.cR cu .
+Underlining is restricted to an output-device-dependent
+subset of reasonable characters.
+.bT "\&\f5&ul\f2\0N\f1" "off" "@N=1@" "E" 6
+Italicize in \f2troff\fP
+(underline in \f2nroff\fP\^) the next @N@
+input text lines.
+Actually, switch to underline font, saving the
+current font for later restoration;
+other font changes within the span of a
+.cR ul
+will take effect,
+but the restoration will undo the last change.
+Output generated by
+.cR tl
+(\(sc14) is affected by the
+font change, but does not decrement @N@.
+If @N>1@, there is the risk that
+a trap interpolated macro may provide text
+lines within the span;
+environment switching can prevent this.
+.bT "\&\f5&cu\f2\0N\f1" "off" "@N=1@" "E" 3
+Continuous underline.
+A variant
+of
+.cR ul
+that causes \f2every\f1 character to be underlined in \f2nroff\fP.
+Identical to
+.cR ul
+in \f2troff\fP.
+'''	\" FORCE PAGE
+.SK
+.bT "\&\f5&uf\f2\0F\f1" "Italic" "Italic" "\-" 2
+Underline font set to @F@.
+In \f2nroff\fP,
+@F@ may not be on position 1.
+.bE
+.H 2 "Control Characters"
+Both the control character
+.cR .
+and the \f2no-break\f1
+control character
+.cR '
+may be changed.
+Such a change must be com\%pat\%ible with the design
+of any macros used in the span of the change,
+and
+particularly of any trap-invoked macros.
+.bT "\&\f5&cc\f2\0c\f1" "\&\f5.\f1" "\&\f5.\f1" "E" 2
+The basic control character
+is set to @c@,
+or reset to
+.cR . ''. ``
+.bT "\&\f5&c2\f2\0c\f1" "\&\f5'" "'\f1" "E" 2
+The \f2no-break\f1 control character is set
+to @c@, or reset to
+.cR ' ''. ``
+.bE
+.H 2 "Output Translation"
+One character can be made a stand-in for another character using
+.cR tr .
+All text processing (e.g., character com\%par\%i\%sons) takes place
+with the input (stand-in) character which appears to have the width of the final
+character.
+The graphic translation occurs at the moment of output
+(including diversion).
+.bT "\&\f5&tr\f2\0abcd\^\(el\f1" "none" "\-" "O" 4
+Translate
+\f2a\f1 into \f2b\f1, @c@ into \f2d\f1, etc.
+If an odd number of characters is given,
+the last one will be mapped into the space character.
+To be consistent, a particular translation
+must stay in effect from \f2input\f1 to \f2output\f1 time.
+.bE
+.H 2 "Transparent Throughput"
+An input line beginning with a
+.cR \e!
+is read in copy mode and \f2trans\%parently\f1 output
+(without the initial
+.cR \e! );
+the text processor is otherwise unaware of the line's presence.
+This mechanism may be used to pass control information to a post-processor
+or to embed control lines in a macro created by a diversion.
+.H 2 "Transparent Output"
+The sequence
+.cI \eX' anything \f5'\f1
+copies
+.cA anything
+to the output, as a device control function of the form
+.cR x
+.cR X 
+.cA anything 
+(\(sc22).
+Escape sequences in
+.cA anything
+are processed.
+.H 2 "Comments and Concealed Newlines"
+An uncomfortably long input line that must stay
+one line (e.g., a string definition, or nofilled text)
+can be split into several physical lines by ending all but
+the last one with the escape
+.cR \e .
+The sequence
+.cI \e newline
+is always ignored,
+except in a comment.
+Comments may be embedded at the end of any line by
+prefacing them with
+.cR \e" .
+The newline at the end of a comment cannot be concealed.
+A line beginning with
+.cR \e"
+will appear as a blank line and
+behave like
+.cR ".sp\ 1" ;
+a comment can be on a line by itself by beginning the line with
+.cR .\e" .
+.H 1 "LOCAL HORIZONTAL AND VERTICAL MOTIONS, AND THE WIDTH FUNCTION"
+.H 2 "Local Motions"
+The functions
+.cI \ev' N \f5'\f1
+and
+.cI \eh' N \f5'\f1
+can be used for \f2local\f1 vertical and horizontal motion respectively.
+The distance @N@ may be negative; the positive directions
+are rightward and downward.
+A local motion is one contained within a line.
+To avoid unexpected vertical dislocations, it is necessary that
+the net vertical local motion within a word in filled text
+and otherwise within a line balance to zero.
+The above and certain other escape sequences providing local motion are
+summarized in the following table.
+.DS CB
+.TS
+box;
+c | c s || c | c s
+c|cf2 cf2||c|cf2 cf2.
+Vertical	Effect in	Horizontal	Effect in
+Local Motion	troff	nroff	Local Motion	troff	nroff
+_
+.sp 2p
+.T&
+af5|l s || af5 | l s.
+\ev'\f2N\fP'	Move distance \f2N\fP	\eh'\f2N\fP'	Move distance \f2N\fP
+.T&
+_|_ _||af5|l s.
+			\e\f2space\fP	Unpaddable space-size space
+.T&
+af5|l|l||af5|l s.
+\eu\fP	\(12 em up	\(12 line up	\e0\fP	Digit-size space
+.T&
+af5|l|l||-|- -
+af5|l|l||af5|l|l.
+\ed\fP	\(12 em down	\(12 line down
+\er\fP	1 em up	1 line up	\e|\fP	1/6 em space	ignored
+			\e^\fP	1/12 em space	ignored
+.TE
+.DE
+As an example,
+\&\f5E\s-2\v'-.4m'2\v'.4m'\s+2\f1
+could be generated by the sequence
+\&\f5E\es\-2\ev'\-0.4m'2\ev'0.4m'\es+2\f1;
+note that
+the 0.4 em vertical motions are at the smaller size.
+.H 2 "Width Function"
+The \f2width\f1 function
+.cI \ew' string \f5'\f1
+generates the numerical width of \f2string\f1 (in basic units).
+Size and font changes may be embedded in \f2string\f1,
+and will not affect the current environment.
+For example,
+.cR ".ti\ \-\ew'\efB1.\ 'u"
+could be used to
+temporarily indent leftward a distance equal to the
+size of the string
+.cR "1.\ " '' ``
+in font
+.cR B .
+.P
+The width function also sets three number registers.
+The registers
+.cR st
+and
+.cR sb
+are set respectively to the highest and
+lowest extent of \f2string\f1 relative to the baseline;
+then, for example,
+the total height of the string is
+.cR \en(stu\-\en(sbu .
+In \f2troff\fP the number register
+.cR ct
+is set to a value
+between 0 and 3.
+The value
+0 means that all of the characters in \f2string\f1 were short lower
+case characters without descenders (like
+.cR e );
+1 means that at least one character has a \%descender (like
+.cR y );
+2 means that at least one character is tall (like
+.cR H );
+and 3 means that both tall characters and characters with
+descenders are present.
+.H 2 "Mark Horizontal Place"
+The function
+.cI \ek x
+causes the current horizontal
+position in the \f2input line\f1 to be stored in register \f2x\f1.
+For example,
+the construction \&\f5\ekx\f2word\f5\eh'|\enxu+3u'\f2word\&\f5\f1
+will embolden \f2word\f1 by backing up to almost its beginning and overprinting it,
+resulting in \kz\f2word\f1\h'|\nzu+3u'\f2word\f1.
+.H 1 "OVERSTRIKE, BRACKET, LINE-DRAWING, GRAPHICS, AND ZERO-WIDTH FUNCTIONS"
+.H 2 "Overstriking"
+Automatically centered overstriking of up to nine characters
+is provided by the \f2overstrike\f1 function
+.cI \eo' string \f5'\f1.
+The characters in \f2string\f1 are overprinted with centers aligned; the total width
+is that of the widest character.
+\f2string\f1 may not contain local vertical motion.
+As examples,
+.cR \eo'e\e''
+produces \o'e\'', and
+.cR \eo'\e(mo\e(sl'
+produces \o'\(mo\(sl'.
+.H 2 "Zero-width Characters"
+The function
+.cI \ez c
+will output @c@ without spacing over
+it, and can be used to produce left-aligned overstruck
+combinations.
+As examples,
+.cR \ez\e(sl\e(ru
+produces \z\(sl\(ru, and
+.cR \ez\e(ua\e(da
+produces \z\(ua\(da\|.
+.H 2 "Large Brackets"
+The Special Font usually contains a number of bracket construction pieces
+\|\|\(lt\|\|\(lb\|\|\(rt\|\|\(rb\|\|\(lk\|\|\(rk\|\|\(bv\|\|\(lf\|\|\(rf\|\|\(lc\|\|\(rc\|\|
+that can be combined into various bracket styles.
+The function 
+.cI \eb' string \f5'\f1
+may be used to pile
+up vertically the characters in \f2string\f1
+(the first character on top and the last at the bottom);
+the characters are vertically separated by 1 em and the total
+pile is centered \(12 em above the current baseline
+(\(12 line in \f2nroff\fP).
+For example,
+.iS
+\eb'\e(lc\e(lf'E\eb'\e(rc\e(rf'\ex'\-0.5m'\ex'0.5m'
+.iE
+produces
+\x'-.5m'\x'.5m'\b'\(lc\(lf'E\b'\(rc\(rf'.
+'''	\" FORCE PAGE
+.SK
+.H 2 "Line Drawing"
+.tr &&
+The function
+.cI \el' Nc \f5'\f1
+(backslash-ell) draws a string of repeated @c@'s towards the right for a distance @N@.
+If @c@ looks like a continuation of
+an expression for @N@, it may be insulated from @N@ with a
+.cR \e& .
+If @c@ is not specified, the
+.cR \(ru
+(baseline rule) is used
+(underline character in \f2nroff\fP).
+If @N@ is negative, a backward horizontal motion
+of size @N@ is made before drawing the string.
+Any space resulting from @N@/(size of @c@) having a remainder is put at the beginning (left end)
+of the string.
+If @N@ is less than the width of @c@,
+a single @c@ is centered on a distance @N@.
+In the case of characters
+that are designed to be connected, such as
+baseline-rule\ \&\f5\(ru\f1\|,
+under-rule\ \&\f5\(ul\f1\|,
+and
+root-en\ \&\f5\(rn\f1\|,
+the remainder space is covered by overlapping.
+As an example, a macro to underscore a string can be written
+.tr &.
+.iS
+&de us
+\e\e$1\e\|l\|'|0\e(ul'
+&&
+.iE
+.de xU
+\\$1\l'|0\(ul'
+..
+or one to draw a box around a string
+.iS
+&de bx
+\e(br\e|\e\e$1\e|\e(br\ev'-\e\en(.sp'\el'|0\e(ul'\ev'\e\en(.sp'\el'|0\e(ul'
+&&
+.iE
+.de bX
+\(br\|\\$1\|\(br\v'-\\n(.sp'\l'|0\(ul'\v'\\n(.sp'\l'|0\(ul'
+..
+such that
+.iS
+&us "underlined words"
+.iE
+and
+.iS
+&bx "words in a box"
+.iE
+yield
+.xU "underlined words"
+and
+.bX "words in a box"
+\&.
+.P
+The function
+.cI \eL' Nc \f5'\f1
+draws a vertical line consisting
+of the (optional) character @c@ stacked vertically apart 1\|em
+(1\|line in \f2nroff\fP),
+with the first two characters overlapped,
+if necessary, to form a continuous line.
+The default character is the \f2box rule\f1 \|\(br\|
+.cR \e(br ); (
+the other suitable character is the \f2bold vertical\f1 \|\(bv\|
+.cR \e(bv ). (
+The line is begun without any initial motion relative to the
+current baseline.
+A positive @N@ specifies a line drawn downward and
+a negative @N@ specifies a line drawn upward.
+After the line is drawn no compensating
+motions are made;
+the instantaneous baseline is at the end of the line.
+.P
+.de eB
+.sp -1
+.nf
+\h'-.5n'\L'|\\nzu-1'\l'\\n(.lu+1n\(ul'\L'-|\\nzu+1'\l'|0u-.5n\(ul'
+.fi
+..
+.ne 2i
+.mk z
+.nr z \nz+1
+The horizontal and vertical line drawing functions may be used
+in combination to produce large boxes.
+The zero-width \f2box-rule\f1 and the \(12-em wide \f2under-rule\f1
+were designed to form corners when using 1-em vertical
+spacings.
+For example the macro
+.nr x \nd
+.nr d 0
+.sp 0.5v
+.nf
+.ft 5
+.ps -1
+.vs -1
+.in +3n
+.ta +0.75i
+\&.de eb
+\&.sp \-1	\e"compensate for next automatic baseline spacing
+\&.nf	\e"avoid possibly overflowing word buffer
+\&\eh'-.5n'\eL'|\e\enau\-1'\el'\e\en(.lu+1n\e(ul'\eL'-|\e\enau+1'\el'|0u-.5n\e(ul'  \e"draw box
+\&.fi
+\&..
+.in -3n
+.ps +1
+.vs +1
+.ft 1
+.fi
+.sp 0.5v
+.nr d \nx 
+will draw a box around some text whose beginning vertical place was
+saved in number register \f2a\f1
+(e.g., using \&\f5.mk\ a\f1)
+as was done for this paragraph.
+.sp 2p
+.eB
+'''	\"FORCE PAGE
+.SK
+.H 2 "Graphics"
+The function
+.cI \eD' c\(el \f5'\f1
+draws a graphic object of type @c@
+according to a sequence of parameters,
+which are generally pairs of numbers.
+.DS I
+.TS
+lf5 lf1.
+\eD'l @dh~ dv@'	draw line from current position by @dh,~dv@
+\eD'c @d@'	draw circle of diameter @d@ with left side at current position
+\eD'e @d sub 1 d sub 2@'	draw ellipse of diameters @d sub 1@ and @d sub 2@
+\eD'a @dh sub 1~ dv sub 1~ dh sub 2~ dv sub 2@'	draw arc from current position to @dh sub 1 +dh sub 2@, @dv sub 1 +dv sub 2@,
+	   with center at @dh sub 1 ,~ dv sub 1@ from current position
+\eD'~ @dh sub 1 dv sub 1 dh sub 2 dv sub 2@\(el'	draw B-spline from current position by @dh sub 1, dv sub 1@,
+	   then by @dh sub 2 , dv sub 2@, then by @dh sub 2 , dv sub 2@, then \(el
+.TE
+.DE
+For example,
+.cR "\eD'e0.2i\ 0.1i'"
+draws the ellipse
+\D'e.2i .1i'\|,
+and
+.cR "\eD'l.2i\ -.1i'\eD'l.1i\ .1i'"
+the line
+\D'l.2i -.1i'\D'l.1i .1i'\|.
+A
+.cR \eD
+with an unknown @c@ is processed and copied through to the output
+for unspecified interpretation.
+.P
+Numbers taken as horizontal (first, third, etc.) have default scaling of ems;
+vertical numbers (second, fourth, etc.) have default scaling of @V^@s (\(sc1.3).
+The position after a graphical object has been drawn is
+at its end; for circles and ellipses, the ``end''
+is at the right side.
+.H 1 HYPHENATION
+Automatic hyphenation may be switched off and on.
+When switched on with
+.cR hy ,
+several variants may be set.
+A \f2hyphenation indicator\f1 character may be embedded in a word to
+specify desired hyphenation points,
+or may be prepended to suppress hyphenation.
+In addition,
+the user may specify a small list of exception words.
+.P
+Only words that consist of a central alphabetic string
+surrounded by (usually null) non-alphabetic strings
+are candidates for automatic hyphenation.
+Words that contain hyphens
+(minus),
+em-dashes
+.cR \e(em ), (
+or hyphenation indicator characters
+are always subject to splitting after those characters,
+whether automatic hyphenation is on or off.
+.bT "\&\f5&nh\f1" "hyphenate" "\-" "E" 2
+Automatic hyphenation is turned off.
+.bT "\&\f5&hy\f2\0N\f1" "on, @N=1@" "on, @N=1@" "E" 4
+Automatic hyphenation is turned on
+for @N>=1@, or off for @N=0@.
+If @N=2@, last lines (ones that will cause a trap)
+are not hyphenated.
+For @N=4@ and 8, the last and first two characters
+respectively of a word are not split off.
+These values are additive;
+i.e., @N=14@ will invoke all three restrictions.
+.bT "\&\f5&hc\f2\0c\f1" "\&\f5\e%" "\e%\f1" "E" 3
+Hyphenation indicator character is set
+to @c@ or to the default
+.cR \e% .
+The indicator does not appear in the output.
+.bT "\&\f5&hw\f2\0word\0\(el\f1" "" "ignored" "\-" 4
+Specify
+hyphenation points in words
+with embedded minus signs.
+Versions of a word with terminal \f2s\f1 are implied,
+i.e.,
+.cR dig-it
+implies
+.cR dig-its .
+This list is examined initially and after
+each suffix stripping.
+The space available is small\*(EMabout 128 characters.
+.bE
+.H 1 "THREE-PART TITLES"
+The titling function
+.cR tl
+provides for automatic placement
+of three fields at the left, center, and right of a line
+with a title length
+specifiable with
+.cR lt .
+.cR tl
+may be used anywhere, and is independent of the
+normal text collecting process.
+A common use is in header and footer macros.
+.bT "\&\f5&tl '\f2left\fP'\f2center\fP'\f2right\fP'\f1" "\-" "\-" "" 6
+The strings
+\f2left\f1, \f2center\f1, and \f2right\f1 are
+respectively left-adjusted, centered, and right-adjusted
+in the current title length.
+Any of the strings may be empty,
+and overlapping is permitted.
+If the page-number character (initially
+.cR % )
+is found within any of the fields it is replaced
+by the current page number in the format assigned to register
+.cR % .
+Any character may be used in place of
+.cR '
+as the string delimiter.
+.bT "\&\f5&pc\f2\0c\f1" "\&\f5%\f1" "off" "\-" 2
+The page number character is set to @c@,
+or removed.
+The page number register remains
+.cR % .
+.bT "\&\f5&lt\f2\0\(+-\^N\f1" "6.5\|in" "previous" "E,\f3m\f1" 3
+Length of title
+is set to \(+-\^@N@.
+The line length and the title length are independent.
+Indents do not apply to titles; page offsets do.
+.bE
+.H 1 "OUTPUT LINE NUMBERING"
+.P
+.ll -\w'0000'u
+.nm 1 3
+Automatic sequence numbering of output lines may be
+requested with
+.cR nm .
+When in effect,
+a three-digit, arabic number plus a digit-space
+is prepended to output text lines.
+The text lines are thus offset by four digit-spaces,
+and otherwise retain their line length;
+a reduction in line length may be desired to keep the right margin
+aligned with an earlier margin.
+Blank lines, other vertical spaces, and lines generated by
+.cR tl
+are not numbered.
+Numbering can be temporarily suspended with
+.cR nn ,
+or with an
+.cR .nm
+followed by a later
+.cR ".nm\ +0" .
+In addition,
+a line number indent \f2I\f1, and the number-text separation \f2S\f1
+may be specified in digit-spaces.
+Further, it can be specified that only those line numbers that are
+multiples of some number @M@ are to be printed (the others will appear
+as blank number fields).
+.br
+.nm
+.ll
+.bT "\&\f5&nm\f2\0\(+-\^N\0M\0S\0I\f1" "" "off" "E" 6
+Line number mode.
+If \(+-\^@N@ is given,
+line numbering is turned on,
+and the next output line numbered is numbered \(+-\^@N@.
+Default values are @M=1@, @S=1@, and @I=0@.
+Parameters corresponding to missing arguments are unaffected;
+a non-numeric argument is considered missing.
+In the absence of all arguments, numbering is turned off;
+the next line number is preserved for possible further use
+in number register
+.cR ln .
+.bT "\&\f5&nn\f2\0N\f1" "\-" "@N=1@" "E" 2
+The next @N@ text output lines are not
+numbered.
+.bE
+.P
+.ll -\w'0000'u
+.nm +0
+As an example, the paragraph portions of this section
+are numbered with \f2M=\f1\|3:
+.cR ".nm\ 1\ 3"
+was placed at the beginning;
+.cR .nm
+was placed at the end of the first paragraph;
+and
+.cR ".nm\ +0"
+was placed in front of this paragraph;
+and
+.cR .nm
+finally placed at the end.
+Line lengths were also changed (by
+.cR \ew'0000'u )
+to keep the right side aligned.
+Another example is
+.cR ".nm\ +5\ 5\ x\ 3" ,
+which turns on numbering with the line number of the next
+line to be 5 greater than the last numbered line,
+with @M=5@, with spacing \f2S\f1 untouched, and with the indent \f2I\f1 set to 3.
+.br
+.ll
+.nm
+.H 1 "CONDITIONAL ACCEPTANCE OF INPUT"
+In the following,
+@c@ is a one-character built-in \f2condition\f1 name,
+.cR !
+signifies \f2not\f1,
+@N@ is a numerical expression,
+\f2string1\f1 and \f2string2\f1 are strings delimited by any non-blank,
+non-numeric character not in the strings, and
+\f2anything\f1 represents what is conditionally accepted.
+.bT "\&\f5&if\f2\0c\0anything\f1" "" "\-" "\-" 2
+If condition
+@c@ true, accept \f2anything\f1 as input;
+in multi-line case use
+.cI \e{ anything \|\f5\e}\f1.
+.bT "\&\f5&if !\f2c\0anything\f1" "" "\-" "\-" 2
+If condition @c@ false, accept \f2anything\f1.
+.bT "\&\f5&if\f2\0N\0anything\f1" "" "\-" "\f3u\f1" 2
+If expression @N@ > 0, accept \f2anything\f1.
+.bT "\&\f5&if !\f2N\0anything\f1" "" "\-" "\f3u\f1" 2
+If expression @N@ \(<= 0, accept \f2anything\f1.
+.bT "\&\f5&if '\f2string1\f5'\f2string2\f5'\f2\0anything\f1" "\-" "\-" "" 2
+If \f2string1\f1 identical to \f2string2\f1,
+accept \f2anything\f1.
+.bT "\&\f5&if !'\f2string1\f5'\f2string2\f5'\f2\0anything\f1" "\-" "\-" "" 2
+If \f2string1\f1 not identical to \f2string2\f1,
+accept \f2anything\f1.
+.bT "\&\f5&ie\f2\0c\0anything\f1" "" "\-" "\f3u\f1" 2
+If portion of if-else;
+all of the forms for
+.cR if
+above are valid.
+.bT "\&\f5&el\f2\0anything\f1" "" "\-" "\-" 2
+Else portion of if-else.
+.bE
+.P
+The built-in condition names are:
+.DS CB
+.TS
+box;
+c c
+c c
+cf5 l.
+Condition	True If
+Name	\^
+_
+.sp 2p
+o	Current page number is odd
+e	Current page number is even
+t	Formatter is \f2troff\fP
+n	Formatter is \f2nroff\fP
+.TE
+.DE
+If the condition @c@ is true, or if the number @N@ is greater than zero,
+or if the strings compare identically (including motions and character size and font),
+\f2anything\f1 is accepted as input.
+If a
+.cR !
+precedes the condition, number, or string comparison,
+the sense of the acceptance is reversed.
+.P
+Any spaces between the condition and the beginning of \f2anything\f1 are skipped over.
+The \f2anything\f1 can be either a single input line (text, macro, or whatever)
+or a number of input lines.
+In the multi-line case,
+the first line must begin with a left delimiter
+.cR \e{
+and
+the last line must end with a right delimiter
+.cR \e} .
+.P
+The request
+.cR ie
+(if-else) is identical to
+.cR if
+except that the acceptance state is remembered.
+A subsequent and matching
+.cR el
+(else) request then uses the reverse sense of that state.
+\&\f5ie\f1-\&\f5el\f1 pairs may be nested.
+.P
+Some examples are:
+.iS
+&if e .tl 'Even Page %'''
+.iE
+which outputs a title if the page number is even; and
+.iS
+.ta +0.4i
+&ie \en%>1 \e{\e
+\&'	sp 0.5i
+&	tl 'Page %'''
+\&'	sp |1.2i \e}
+&el .sp |2.5i
+.iE
+which treats page 1 differently from other pages.
+.bE
+'''	\" FORCE PAGE
+.SK
+.H 1 "ENVIRONMENT SWITCHING"
+A number of the parameters that
+control the text processing are gathered together into an
+\f2environment\f1, which can be switched by the user.
+The environment parameters are those associated
+with requests noting E in their \f2Notes\f1 column;
+in addition, partially collected lines and words are in the environment.
+Everything else is global; examples are page-oriented parameters,
+diversion-oriented parameters, number registers, and macro and string definitions.
+All environments are initialized with default parameter values.
+.bT "\&\f5&ev\f2\0N\f1" "@N=0@" "previous" "\-" 4
+Environment switched to
+environment @0<=N<=2@.
+Switching is done in push-down fashion so that
+\%restoring a previous environment \f2must\f1 be done with
+.cR .ev
+rather than specific reference.
+Note that what is pushed down and restored is the environment
+.I number,
+not its contents.
+.H 1 "INSERTIONS FROM THE STANDARD INPUT"
+The input can be temporarily switched to the system standard input with
+.cR rd ,
+which will switch back when two consecutive newlines
+are found (the extra blank line is not used).
+This mechanism is intended for insertions in form-letter-like documentation.
+On
+.sM UNIX ,
+the standard input can be the user's keyboard,
+a pipe, or a file.
+.bT "\&\f5&rd\f2\0prompt\f1" "\-" "\f2prompt=\f1\s-1BEL\s+1" "\-" 4
+Read insertion
+from the standard input until two newlines in a row are found.
+If the standard input is the user's keyboard, \f2prompt\f1 (or a
+.sM BEL )
+is written onto the standard output.
+.cR rd
+behaves like a macro,
+and arguments may be placed after \f2prompt\f1.
+.bT "\&\f5&ex\f1" "\-" "\-" "\-" 2
+Exit from
+.I troff
+and
+.IR nroff .
+Text processing is terminated exactly as if all input had ended.
+.bE
+.P
+If insertions are to be
+taken from the terminal keyboard while output is being printed
+on the terminal, the command line option
+.cR \-q
+will turn off the echoing
+of keyboard input and prompt only with
+.sM BEL .
+The regular input and insertion input cannot
+simultaneously come from the standard input.
+.P
+As an example,
+multiple copies of a form letter may be prepared by entering the insertions
+for all the copies in one file to be used as the standard input,
+and causing the file containing the letter to reinvoke itself with
+.cR nx
+(\(sc19);
+the process would ultimately be ended by an
+.cR ex
+in the insertion file.
+.H 1 "INPUT/OUTPUT FILE SWITCHING"
+.bT "\&\f5&so\f2\0filename\f1" "" "\-" "\-" 3
+Switch source file.
+The top input (file reading) level is switched to \f2filename\f1.
+When the new file ends,
+input is again taken from the original file.
+.cR so 's
+may be nested.
+.bT "\&\f5&nx\f2\0filename\f1" "" "end-of-file" "\-" 3
+Next file is \f2filename\f1.
+The current file is considered ended, and the input is immediately switched
+to \f2filename\f1.
+.bT "\&\f5&sy\f2\0string\f1" "" "\-" "\-" 4
+Execute program from \f2string\f1,
+which is the rest of the input line.
+The output is not collected automatically.
+The number register
+.cR $$ ,
+which contains the process id of the \f2troff\fP process,
+may be useful in generating unique filenames for output.
+.bT "\&\f5&pi\f2\0string\f1" "" "\-" "\-" 3
+Pipe output to \f2string\f1,
+which is the rest of the input line.
+This request must occur before any printing occurs.
+.bT "\&\f5&cf\f2\0filename\f1" "" "\-" "\-" 3
+Copy contents of file
+.I filename
+to output, completely unprocessed.
+The file is assumed to contain something meaningful
+to subsequent processes.
+.bE
+.H 1 MISCELLANEOUS
+.bT "\&\f5.mc\f2\0c\0N\f1" \- off E,\f3m\f1 6
+.mc \s12\(br\s0
+Specifies
+that a \f2margin\f1 character @c@ appear a distance
+@N@ to the right of the right margin
+after each non-empty text line (except those produced by
+.cR tl ).
+If the output line is too long (as can happen in nofill mode)
+the character will be appended to the line.
+If @N@ is not given, the previous @N@ is used; the initial @N@ is
+0.2 inches in \f2nroff\fP and 1 em in \f2troff\fP.
+The margin character used with this paragraph was a 12\(hypoint box-rule.
+.br
+.mc
+.bT "\&\f5.tm\f2\0string\f1" "\-" "newline" "\-" 3
+After skipping initial blanks,
+\f2string\f1 (rest of the line) is read in copy mode
+and written on the standard error.
+.bT "\&\f5&ab\f2\0string\f1" "\-" "newline" "\-" 3
+After skipping initial blanks,
+\f2string\f1 (rest of the line) is read in copy mode
+and written on the standard error.
+\f2Troff\fP or \f2nroff\fP then exits.
+.bT "\&\f5.ig\f2\0yy\f1" "\-" "\f2.yy\|=\|\&\f5..\f1" "\-" 3
+Ignore
+input lines.
+.cR ig
+behaves exactly like
+.cR de
+(\(sc7) except that the
+input is discarded.
+The input is read in copy mode, and any auto-incremented
+registers will be affected.
+.bT "\&\f5.lf\f2\0N\0filename\f1" "" "\-" "\-" 5
+Set
+line number to @N@ and filename to @filename@
+for purposes of subsequent error messages, etc.
+The number register [sic]
+.cR .F
+contains the name of the current input file,
+as set by command line argument,
+.cR so ,
+.cR nx ,
+or
+.cR lf .
+The number register
+.cR .c
+contains the number of input lines read from the current file,
+again perhaps as modified by
+.cR lf .
+.cR 
+.bT "\&\f5.pm\f2\0t\f1" "\-" "all" "\-" 3
+Print macros.
+The names and sizes of all of the defined macros and strings are printed
+on the standard error;
+if \f2t\f1 is given, only the total of the sizes is printed.
+The sizes is given in blocks
+of 128 characters.
+.bT "\&\f5.fl\f1" "\-" "\-" B 2
+Flush output buffer.
+Force output, including any pending position information.
+.bE
+.H 1 "OUTPUT AND ERROR MESSAGES"
+The output from
+.cR tm ,
+.cR pm ,
+and the prompt from 
+.cR rd ,
+as well as various error messages are written onto
+the standard error.
+The latter is different from the standard output,
+where formatted text goes.
+By default, both are written onto the user's terminal,
+but they can be independently redirected.
+.br
+.ne 4v
+.P
+Various error conditions may occur during
+the operation of
+.I troff
+and
+.IR nroff .
+Certain less serious errors having only local impact do not
+cause processing to terminate.
+Two examples are \f2word overflow\f1, caused by a word that is too large
+to fit into the word buffer (in fill mode), and
+\f2line overflow\f1, caused by an output line that grew too large
+to fit in the line buffer.
+In both cases, a message is printed, the offending excess
+is discarded,
+and the affected word or line is marked at the point of truncation
+with a \(** in \f2nroff\fP and a \(lh in \f2troff\fP.
+Processing continues if possible,
+on the grounds that output useful for debugging may be produced.
+If a serious error occurs, processing terminates,
+and a message is printed, along with a list of the macro names currently active.
+Examples of serious errors include the inability to create, read, or write files,
+and the exceeding of certain internal limits that
+make future output unlikely to be useful.
+.H 1 "OUTPUT LANGUAGE"
+\f2Troff\fP
+produces its output in a language that is independent of any
+specific output device,
+except that the numbers in it have been computed on the basis
+of the resolution of the device,
+and the sizes, fonts, and characters that that device can print.
+Nevertheless it is quite possible to interpret that output
+on a different device, within the latter's capabilities.
+.DS I
+.TS
+l l.
+@cw s n@	set point size to @n@
+@cw f n@	set font to @n@
+@cw c c@	print \s-1ASCII\s0 character @c@
+@cw C xx@	print character @xx@; terminate @xx@ by white space
+@cw N n@	print character @n@ on current font
+@cw H n@	go to absolute horizontal position \f2n\fP (@n>=0@)
+@cw V n@	go to absolute vertical position \f2n\fP (@n>=0@, down is positive)
+@cw h n@	go \f2n\fP units horizontally; @n < 0@ is to the left
+@cw v n@	go \f2n\fP units vertically; @n < 0@ is up
+@nnc@	move right \f2nn\fP, then print \s-1ASCII\s0 character \f2c\fP; \f2nn\fP must be exactly 2 digits
+@cw p n@	new page \f2n\fP begins\*(EMset vertical position to 0
+@cw n b~a@	end of line (information only\*(EMno action); \f2b\fP = space before line, \f2a\fP = after
+@cw w@	paddable word space (information only\*(EMno action)
+@cw D c@ \(el\e\^n	graphics function @c@; see below
+@cw x@ ...\e\^n	device control functions; see below
+@cw "#"@ ...\e\^n	comment
+.TE
+.DE
+All position values are in units.
+Sequences that end in digits must be followed by a non-digit.
+Blanks, tabs and newlines may occur as separators
+in the input, and are mandatory to separate constructions
+that would otherwise be confused.
+Graphics functions, device control functions, and comments extend to the
+end of the line they occur on.
+.P
+The device control and graphics commands are intended as open-ended
+families, to be expanded as needed.
+The graphics functions coincide directly with the
+.cR \eD 
+sequences:
+.DS I
+.TS
+l l.
+@cw Dl@ \f2dh dv\fP	draw line from current position by @dh,~ dv@
+@cw Dc@ \f2d\fP	draw circle of diameter \f2d\fP with left side here
+@cw De@ @dh sub 1~dv sub 2@	draw ellipse of diameters @dh sub 1@ and @ dv sub 2@\fP
+@cw Da ~dh sub 1~ dv sub 1 ~ dh sub 2 ~dv sub 2@	draw arc from current position to @dh sub 1 +dh sub 2 ,~ dv sub 1 +dv sub 2@,
+	   center at @dh sub 1 ,~ dv sub 1@ from current position
+@cw "D~" ~dh sub 1 ~dv sub 1 ~dh sub 2 ~dv sub 2@ \(el	draw B-spline from current position to @dh sub 1 ,~ dv sub 1@,
+	   then to @dh sub 2 , ~dv sub 2@, then to ...
+@cw "D"z ~dh sub 1 ~dv sub 1 ~dh sub 2 ~dv sub 2@ \(el	for any other @z@ is uninterpreted
+.TE
+.DE
+In all of these, @dh, ~dv@ is an increment on the current horizontal and
+vertical position,
+with down and right positive.
+All distances and dimensions are in units.
+.br
+.ne 13v
+.P
+The device control functions begin with
+.cR x ,
+then a command, then other parameters.
+.DS I
+.TS
+lf5 l.
+x T \f2s\fP	name of typesetter is @s@
+x r \f2n h v\fP	resolution is @n@ units per inch; @h@ = minimum horizontal motion, @v@ = minimum vertical
+x i	initialize
+x f \f2n s\fP	mount font @s@ on font position @n@
+x p	pause\*(EMcan restart
+x s	stop\*(EMdone forever
+x t	generate trailer information, if any
+x H \f2n\fP	set character height to @n@
+x S \f2n\fP	set slant to @n@
+x X \f2any\fP	generated by the \&\f5\eX\fP function
+x \f2any\fP	to be ignored if not recognized
+.TE
+.DE
+.br
+.ne 3.5v
+Subcommands like
+.cR i '' ``
+may be spelled out like
+.cR init ''. ``
+.P
+The commands
+.cR "x\ T" ,
+.cR "x\ r " \(el,
+and
+.cR "x\ i"
+must occur first;
+fonts must be mounted before they can be used;
+.cR "x\ s"
+comes last.
+There are no other order requirements.
+.P
+The following is the output from
+.cR "hello,\ world" '' ``
+for a typical Postscript printer,
+as described in \(sc23:
+.iS
+x T post
+x res 720 1 1
+x init
+V0
+p1
+x font 1 R
+x font 2 I
+x font 3 B
+x font 4 BI
+x font 5 CW
+x font 6 H
+x font 7 HB
+x font 8 HX
+x font 9 S1
+x font 10 S
+s10
+f1
+H0
+s10
+f1
+V0
+H720
+V120
+ch
+50e44l28l28o50,w58w72o50r33l28dn120 0
+x trailer
+V7920
+x stop
+.iE
+\f2Troff\fP output is normally not redundant;
+size and font changes and position information are not included
+unless needed.
+Nevertheless, each page is self-contained, for the benefit of postprocessors
+that re-order pages or process only a subset.
+.H 1 "DEVICE AND FONT DESCRIPTION FILES"
+The parameters that describe a output device
+.I name
+are read
+from the directory
+.cI /usr/lib/font/dev name ,
+each time
+\f2troff\fP
+is invoked.
+The device name is provided by default,
+by the environment variable
+.cR TYPESETTER ,
+or by a command-line argument
+.cI -T name .
+The default device name is
+.cR post ,
+for Postscript.
+The pre-defined string
+.cR .T
+contains the name of the device.
+The
+.cR -F
+command-line option may be used to change the default directory.
+.H 2 "Device Description File"
+The file 
+.cR DESC
+in
+.cI /usr/lib/font/dev name
+contains general parameters of the device, one per line,
+as a sequence of names and values.
+\f2Troff\fP recognizes these parameters, and ignores any
+others that may be present for specific drivers:
+.iS
+fonts @n ~ F sub 1 ~ F sub 2@ \(el @F sub n@
+sizes @s sub 1 ~ s sub 2@ \(el 0
+res @n@
+hor @n@
+vert @n@
+unitwidth @n@
+charset
+\f2list of multi-character character names (optional)\fP
+.iE
+The @F sub i@ are font names
+to be initially mounted.
+The list of sizes is a set of integers representing
+some or all of the legal sizes the device can produce,
+terminated by a zero.
+The 
+.cR res
+parameter gives the resolution of the machine in units per inch;
+.cR hor
+and
+.cR vert
+give the minimum number of units that can be moved
+horizontally and vertically.
+.P
+Character widths for each font are assumed to be given in machine units
+at point size
+.cR unitwidth .
+(In other words, a character with a width of
+@n@ is @n@ units wide at size
+.cR unitwidth .)
+.P
+A list of valid character names may be introduced by
+.cR charset ;
+the list of names is optional.
+.P
+A line whose first non-blank character is
+.cR #
+is a comment.
+Except that
+.cR charset
+must occur last, parameters may appear in any order.
+.P
+Here is a subset of the
+.cR DESC
+file for a typical Postscript printer:
+.iS
+# Description file for Postscript printers.
+
+fonts 10 R I B BI CW H HB HX S1 S
+sizes 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+   24 25 26 27 28 29 30 31 32 33 34 35 36 38 40 44 48 54 60 72 0
+res 720
+hor 1
+vert 1
+unitwidth 10
+charset
+hy ct fi fl ff Fi Fl dg em 14 34 12 en aa
+ga ru sc dd -> br Sl ps cs cy as os =. ld
+rd le ge pp -+ ob vr
+sq bx ci fa te ** pl mi eq ~= *A *B *X *D
+*E *F *G *Y *I *K *L *M *N *O *P *R *H *S *T *U *W
+*C *Q *Z ul rn *a *b *x *d *e *f *g *y *i *k
+*l *m *n *o *p *h *r *s *t *u *w *c *q *z
+.iE
+.H 2 "Font Description Files"
+Each font is described by an analogous description file,
+which begins with parameters of the font, one per line, followed by a
+list of characters and widths.
+The file for font
+.I f
+is
+.cR /usr/lib/font/dev@name@/@f@ .
+.DS I
+.TS
+l7f5 lf1.
+name @str@	name of font is @str@
+ligatures \(el 0	list of ligatures
+spacewidth @n@	width of a space on this font
+special	this is a special font
+charset
+.T&
+l s.
+\f2list of character name, width, ascender/descender, code\f1
+.TE
+.ft 1
+.DE
+.ft 1
+.P
+The
+.cR name
+and
+.cR charset
+fields are mandatory;
+.cR charset
+must be last.
+Comments are permitted,
+as are other unrecognized parameters.
+.br
+.ne 6v
+.P
+Each line following
+.cR charset 
+describes one character: its name, its width in units as described above,
+ascender/descender information, and a decimal, octal or hexadecimal value
+by which the output device knows it
+(the
+.cR \eN
+``number'' of the character).
+The character name is arbitrary, except that
+.cR ---
+signifies an unnamed character.
+If the width field contains
+.cR \&" ,
+the name is a synonym for the previous character.
+The ascender/descender field is 1 if
+the character has a descender (hangs below the baseline, like
+.cR y ),
+is 2 if it has an ascender (is tall, like
+.cR Y ),
+is 3 if both,
+and is 0 if neither.
+The value is returned
+in the 
+.cR ct
+register, as computed by the
+.cR \ew
+function (\(sc11.2).
+.P
+Here are excerpts from a typical font description file
+for the same Postscript printer.
+.iS
+.ta +0.6i +0.6i +0.6i +0.6i
+hy	33	0	45	hyphen \e(hy
+-	"			- is a synonym for \e(hy
+.sp .3
+Q	72	3	81
+.sp .3
+a	44	0	97
+b	50	2	98
+c	44	0	99
+d	50	2	100
+y	50	1	121
+.sp .3
+em	100	0	208
+---	44	2	220	English pound currency symbol \eN'220'
+---	36	0	221	centered dot \eN'221'
+.iE
+This says, for example, that the width of the letter
+.cR a
+is 44 units at point size 10,
+the value of 
+.cR unitwidth .
+Point sizes are scaled linearly and rounded, so the width of
+.cR a
+will be 44 at size 10, 40 at size 9, 35 at size 8,
+and so on.

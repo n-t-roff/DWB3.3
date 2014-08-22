@@ -1,0 +1,982 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.EQ
+delim $$
+.EN
+.tS TBL
+\s-1TBL\s+1 \(em A Program to Format Tables
+.tE
+.aS
+.I Tbl
+is a
+.sM UNIX \*(Rg
+system document formatting preprocessor for
+.I troff
+which makes even fairly complex tables easy to specify and enter.
+Tables are made up of columns which may be independently centered,
+right-adjusted, left-adjusted, or aligned by decimal points.
+Headings may be placed over single columns or groups of columns.
+A table entry may contain equations, or may consist of several rows of text.
+Horizontal or vertical lines may be drawn as desired in the table,
+and any table or element may be enclosed in a box.
+For example:
+.TS
+center, box, tab(:);
+cB    s     s     s     s 
+cp-2  s     s     s     s 
+c  || c   | c   | c   | c 
+c  || c   | c   | c   | c 
+r2 || ne2 | ne2 | ne2 | ne.
+Readability of Text
+Line Width and Leading for 10-Point Type
+=
+Line:Set:1-Point:2-Point:4-Point
+Width:Solid:Leading:Leading:Leading
+_
+9 Pica:\-9.3:\-6.0:\-5.3:\-7.1
+14 Pica:\-4.5:\-0.6:\-0.3:\-1.7
+19 Pica:\-5.0:\-5.1:0.0:\-2.0
+31 Pica:\-3.7:\-3.8:\-2.4:\-3.6
+43 Pica:\-9.1:\-9.0:\-5.9:\-8.8
+.TE
+.aE
+.H 1 INTRODUCTION
+.P
+.I Tbl
+turns a simple description of a table into a
+.IR troff
+program (list of requests) that prints the table.
+It attempts to isolate a portion of a job that it can
+successfully handle and leave the remainder for other programs.
+Thus
+.I tbl
+may be used with the equation formatting program
+.I eqn
+and/or various
+.I troff
+layout macro packages,
+but does not duplicate their functions.
+.P
+This document
+is divided into three parts:
+(1) the rules for preparing
+.I tbl
+input are discussed in the body of the document,
+(2) samples of
+.I tbl
+input and the resulting tables
+are shown in Appendix\ A, and
+(3) a reference list of
+.I tbl
+input commands (macros, options, key letters, modifiers, and data directives)
+is given in Appendix\ B.
+The description of rules is precise but technical, and
+the beginning user may prefer to study the examples first,
+as they show some common arrangements.
+.P
+The input to
+.I tbl
+is text for a document, with tables preceded by a
+.cR .TS
+(table start)
+command and followed by a
+.cR .TE
+(table end) command.
+.I Tbl
+processes the tables, generating
+.I troff
+formatting requests,
+and leaves the remainder of the text unchanged.
+The
+.cR .TS
+and
+.cR .TE
+lines are copied, too, so that
+.I troff
+layout macros
+(such as the memorandum formatting macros)
+can use these lines
+to delimit and place tables as they see fit.
+In particular, any arguments on the
+.cR .TS
+or
+.cR .TE
+lines are copied but otherwise ignored, and may be used by document layout
+macro requests.
+'''	\" FORCE PAGE
+.SK
+.P
+The format of
+.I tbl
+input is as follows:
+.iS
+.ft 1
+text
+.cR .TS
+.cA table
+.cR .TE
+.ft 1
+text
+.cR .TS
+.cA table
+.cR .TE
+.ft 1
+text
+ \(el
+.iE
+where the structure of each table is as follows:
+.iS
+.cR .TS
+\*(iAoptions\|\f5;
+\*(iAformat\|\f5.
+.cA data
+.cR .TE
+.iE
+Each table is independent, and must contain formatting
+information followed by the data to be entered in the table.
+The formatting information, which describes the
+individual columns and rows of the table, may be preceded
+by a few options that affect the entire table.
+.H 1 "INPUT COMMANDS"
+.P
+A table contains, first, global options,
+then a format section describing the layout of the table
+entries, and then the data to be printed.
+The format and data are always required, but not the options.
+In addition, a data section may be followed by additional commands
+to change the format specifications for the data that follows.
+.H 2 "Global Options"
+There may be a single line of options
+affecting the whole table.
+If present, this line must follow the
+.cR .TS
+line immediately,
+must contain a list of option names
+separated by spaces, tabs, or commas,
+and must be terminated by a semicolon
+.cR ; ). (
+The allowable global options are:
+.DS I
+.TS
+l l.
+\*(iRcenter\f1	center the table (default is left-adjust);
+.sp 0.5v
+\*(iRexpand\f1	make the table as wide as the current line length;
+.sp 0.5v
+\*(iRbox\f1	enclose the table in a box;
+.sp 0.5v
+\*(iRallbox\f1	enclose each item in the table in a box;
+.sp 0.5v
+\*(iRdoublebox\f1	enclose the table in two boxes;
+.sp 0.5v
+\*(iRtab(\*(iAx\*(iR)\f1	use \*(iAx\f1 instead of tab to separate data items;
+.sp 0.5v
+\*(iRlinesize(\*(iAn\*(iR)\f1	set lines or rules (e.g., from \*(iRbox\f1) in \*(iAn\f1-point type;
+.sp 0.5v
+\*(iRdelim(\*(iAxy\*(iR)\f1	recognize \*(iAx\f1 and \*(iAy\f1 as the \f2eqn\f1 delimiters (see \(sc3.2).
+.TE
+.DE
+.P
+The
+.I tbl
+program tries to keep boxed tables on one page by issuing appropriate
+.I troff
+``need''
+.cR .ne ) (
+requests.
+These requests are calculated from the number of lines in the tables,
+and if there are spacing requests embedded in the input, the
+.cR .ne
+requests may be inaccurate;
+in that case, use normal
+.I troff
+procedures, such as keep-release macros.
+The user who must have a multiple-page boxed table
+should use macros designed for this purpose (see \(sc3.4).
+'''	\" FORCE PAGE
+.SK
+.H 2 "Format Specifications"
+The format section of the table specifies the layout
+of the columns (both horizontally and vertically)
+as well as the appearance of data entries (e.g., font, size).
+In general, each line in the format section contains a key letter
+to describe each column in the table.
+A key letter may be accompanied by one or more
+modifiers to further describe the appearance of the
+corresponding data entry.
+.P
+Each line in the format section corresponds to one line or row
+of the table, except that the last line
+(terminated by a
+.cR . '') ``
+corresponds to all following
+lines of data up to the
+.cR .TE
+(or to the next
+.cR .T& ,
+if any\^\(em\^see \(sc2.4).
+.H 3 "Column Description Key Letters."
+Each column is assigned a key letter which describes the alignment
+of the data in that field.
+In addition, a data entry can be forced to span multiple
+columns or rows.
+Each column is described by one of the following key letters:
+.DS I F 3n
+.VL 10
+.LI "\*(iRL\ \&\f1\s-1or\s+1\*(iR\ l\f1"
+to indicate a left-adjusted entry;
+.LI "\*(iRR\ \&\f1\s-1or\s+1\*(iR\ r\f1"
+to indicate a right-adjusted entry;
+.LI "\*(iRC\ \&\f1\s-1or\s+1\*(iR\ c\f1"
+to indicate a centered entry;
+.LI "\*(iRN\ \&\f1\s-1or\s+1\*(iR\ n\f1"
+to indicate a numeric entry, to be aligned with other
+numeric entries so that the units digits of numbers line up
+(see below);
+.LI "\*(iRA\ \&\f1\s-1or\s+1\*(iR\ a\f1"
+to indicate an alphabetic column;
+all corresponding entries are aligned on the left, and positioned
+so that the widest is centered within the column;
+.LI "\*(iRS\ \&\f1\s-1or\s+1\*(iR\ s\f1"
+to indicate a spanned heading, i.e., the
+entry from the previous column continues across this column
+(not allowed for the first column of the table);
+.LI \*(iR^\f1
+to indicate a vertically spanned entry, i.e.,
+the entry from the same column of the previous row continues down through this row
+(not allowed for the first row of the table).
+.LE
+.DE
+.P
+.ul
+Numerical Alignment.
+When numerical alignment is specified, a location for the decimal
+point is sought.
+The rightmost dot
+.cR . ) (
+adjacent to a digit is used as a decimal point; if there is no
+dot adjoining a digit, the rightmost digit is used as a units digit;
+if no digits are found, the item is centered in the column.
+However, the special non-printing character string
+.cR \e&
+may be used
+to override unconditionally dots
+and digits, or to align alphabetic data;
+this string lines up where a decimal point would,
+and then disappears from the final output.
+In the example below, the items shown at the left will be
+aligned (in a numerical column) as shown on the right:
+.DS
+.TS
+center;
+lf5 7 n.
+13	13
+4.2	4.2
+26.4.12	26.4.12
+abc	abc
+abc\e&	abc\&
+4\e&33.22	4\&33.22
+749.12	749.12
+.TE
+.DE
+.P
+If numerical data are used in the same column with wider
+.cR L -
+or
+.cR R -type
+table entries, the widest
+.I number
+is centered relative
+to the wider
+.cR L
+or
+.cR R
+items.
+Alignment within the numerical items is preserved.
+This is similar to the behavior of
+.cR A -type
+data, as explained above.
+However, alphabetic subcolumns (requested by the
+.cR A
+or
+.cR a
+key letter)
+are always slightly indented relative to
+.cR L
+items;
+if necessary, the column width is increased to force this.
+This is not true for
+.cR N -type
+entries.
+.P
+\f4Note\^\f3:\f1  The
+.cR N
+and
+.cR A
+items should not be used in
+the same column.
+'''	\" FORCE PAGE
+.SK
+.P
+For readability, the key letters describing each column should
+be separated by spaces.
+The end of the format section is indicated by a period.
+The layout of the key letters in the format section resembles
+the layout of the actual data in the table.
+Thus a simple format might appear as:
+.iS
+c s s
+l n n.
+.iE
+which specifies a table of three columns.
+The first line of the table contains a heading centered across all three
+columns; each remaining line contains a left-adjusted item
+in the first column followed by two columns of numerical data.
+A sample table in this format might be:
+.DS I
+.TS
+c s s
+l n n.
+Overall Table Title
+Item-a	34.22	9.1
+Item-b	12.65	.02
+Items: c,d,e	23	5.8
+Total	69.87	14.92
+.TE
+.DE
+.P
+The first line in the format section
+defines the number of columns in the table.
+Column descriptors missing from the end of subsequent format lines are assumed to be
+.cR L .
+Extra columns in the data section are ignored silently.
+.P
+.I Tbl
+allows an alternative notation for the format section.
+Instead of listing the format of successive lines of a table
+on separate lines of the format section,
+several line formats may be given on the same line, separated
+by commas.
+For example, the format for the example
+above might have been written:
+.iS
+c s s , l n n .
+.iE
+.P
+The key-letter system offers additional features
+(called modifiers) to
+draw horizontal and vertical lines and to control the
+appearance of a column and its corresponding data.
+These modifiers may be used in combination with or in place of
+the column description key letters, as noted in the subsections
+that follow.
+.H 3 "Horizontal Lines."
+A key letter may be replaced by
+.cR _ '' ``
+(underscore) or
+.cR - '' ``
+(dash ) to indicate
+a single horizontal line in place of the corresponding column entry, or by
+.cR = '' ``
+(equal sign) to indicate a double horizontal line.
+If an adjacent column contains a horizontal line, or if
+there are vertical lines adjoining this column,
+this horizontal line is extended to meet the nearby lines.
+If any data entry is provided for this column, it is ignored and
+a warning message is printed.
+.H 3 "Vertical Lines."
+A vertical bar
+.cR | ) (
+may be placed between column key letters.
+This will cause a vertical line between the corresponding columns of the table.
+A vertical bar to the left of the first key letter
+or to the right of the last one produces a line at the
+edge of the table.
+If two vertical bars
+.cR || ) (
+appear between key letters, a double vertical
+line is drawn.
+.H 3 "Space Between Columns."
+A number may follow the key letter
+to indicate the amount of separation
+between this column and the next column.
+The number normally specifies the separation in
+.I ens
+(one en is about the width of the letter ``n'').*
+.FS *
+More precisely, an en is a number of points (1 point = 1/72 inch)
+equal to half the current type size.
+.FE
+The default column separation number is 3.
+If the separation is changed, the worst case
+(largest space requested) governs.
+If the
+.cR expand
+option is used, these numbers are multiplied
+by a constant such that the table is as wide as the current line length.
+.H 3 "Vertical Spanning."
+Normally, vertically spanned items extending over several
+rows of the table are centered in their vertical range.
+If a key letter is followed by
+.cR t
+or
+.cR T ,
+any corresponding vertically spanned item
+will begin at the top line of its range.
+.H 3 "Font Changes."
+A key letter may be followed by the letter
+.cR f
+or
+.cR F
+and a font number or font name.
+This indicates that the corresponding column should be in a different
+font from the default font (i.e., the one in effect at the beginning of the table).
+The font number (a single digit) or font name (typically one or two letters)
+may be enclosed in parentheses.
+A one-letter font name that is not enclosed in parentheses must be separated
+from whatever follows by a space or a tab.
+The single letters
+.cR I
+and
+.cR i
+are shorter synonyms for
+.cR f2
+(i.e., the font mounted on position 2, usually Italic);
+the single letters
+.cR B
+and
+.cR b
+are shorter synonyms for
+.cR f3
+(i.e., the font mounted on position 3, usually Bold).
+Font-change requests given with the data entries
+override these specifications.
+.H 3 "Point Size Changes."
+A key letter may be followed by the letter
+.cR p
+or
+.cR P
+and a number to indicate the point size of the corresponding data entries.
+The number may be a signed digit, in which case it is taken as
+an increment or decrement from the current point size.
+If both a point size and a column separation value are given,
+one or more blanks must separate them.
+.H 3 "Vertical Spacing Changes."
+A key letter may be followed by the letter
+.cR v
+or
+.cR V
+and a number to indicate the vertical line spacing to be used
+within a multiple-line corresponding data entry.
+The number may be a signed digit, in which case it is taken as an increment
+or decrement from the current vertical spacing.
+If both a vertical spacing and a column separation value are given,
+one or more blanks must separate them.
+This modifier has no effect unless the corresponding data entry
+is a text block (see \(sc2.3.7).
+.H 3 "Column Width Indication."
+A key letter may be followed by the letter
+.cR w
+or
+.cR W
+and a width value in parentheses.
+This width is used as a minimum column width.
+If the largest element in the column is not as wide as the width value
+given after the
+.cR w ,
+the largest element is assumed to be that wide.
+If the largest element in the column is wider than the specified value,
+its width is used.
+The width is also used as a default line
+length for included text blocks.
+.P
+Normal
+.I troff
+units can be used to scale the width value; if none are used,
+the default scale is ens.
+If the width specification is a unitless (unscaled) integer,
+the parentheses may be omitted.
+If the width value is changed in a column, the
+last value given controls the width.
+.H 3 "Equal-width Columns."
+A key letter may be followed by the letter
+.cR e
+or
+.cR E
+to indicate equal-width columns.
+All columns whose
+key letters are followed by
+.cR e
+or
+.cR E
+are made the same width.
+This permits the user to get a group of regularly spaced columns.
+.H 3 "Staggered Columns."
+A key letter may be followed by the letter
+.cR u
+or
+.cR U
+to indicate that the corresponding data entry is to be moved up one-half line.
+This makes it easy, for example, to have a column of differences
+between numbers in an adjoining column.
+The
+.cR allbox
+option does not work with staggered columns.
+.H 3 "Zero-width Item."
+A key letter may be followed by the letter
+.cR z
+or
+.cR Z
+to indicate that the corresponding
+data item is to be ignored in calculating column widths.
+This may be useful, for example, in allowing headings
+to run across adjacent columns where spanned headings
+would be inappropriate.
+.P
+\f4Note\^\f3:\f1  The order of the above modifiers is immaterial;
+they need not be separated
+by spaces, except as indicated above to avoid ambiguities involving
+point size and font changes.
+Thus a numerical column entry in Italic font and 12-point type with a minimum
+width of 2.5 inches and separated by 6 ens from the next column could
+be specified as
+.iS
+np12w(2.5i)fI 6
+.iE
+.H 2 "Data Entries"
+The data for the table are typed after the format section.
+Normally, the data for each line or row of the table is typed as one input line.
+Very long input lines can be broken:  any line with
+.cR \e '' ``
+as the last character is
+combined with the following line (and the
+.cR \e
+vanishes).
+The data for different columns (the table entries) are separated
+by whatever character has been specified in the global
+.cR tab
+option (if not specified, the default is the keyboard tab character).
+Special cases are noted in the subsections that follow.
+.H 3 "Using \f4troff\fP Within Tables."
+Many
+.I troff
+commands can be used safely
+within the data portion of a table.
+An input line beginning with
+.cR . '' ``
+followed by anything but a number is assumed to be a
+.I troff
+request and is passed through unchanged, retaining its position in the input data.
+For example, space within a table may be produced by
+.cR .sp
+requests in the data.
+.P
+Several
+.I troff
+escape sequences may be used in the data
+to print a symbol or to effect an in-line change of font or size.
+For example:  a dagger (\(dg) to refer to a footnote may be obtained by using
+.cR \e(dg
+in the data entry;
+a string (e.g., xyz) may be italicized by using
+.cR \efIxyz\efP
+within a data entry;
+an acronym (e.g., NSF) may be down-sized one point size by using
+.cR \es-1NSF\es0
+within a data entry.
+(The
+.I troff
+escape sequences
+.cR \efP
+and
+.cR \es0
+revert back to the previous font and size, respectively.)
+.H 3 "Full-width Horizontal Lines."
+An input
+.I line
+containing only the character
+.cR _ '' ``
+(underscore) or
+.cR = '' ``
+(equal sign) produces a single or double
+line, respectively, extending the
+full width of the
+.IR table .
+.H 3 "Single-column Horizontal Lines."
+An input table
+.I entry
+containing only the character
+.cR _ '' ``
+(underscore) or
+.cR = '' ``
+(equal sign) produces a single or double line,
+respectively, extending
+the full width of the
+.IR column .
+Such lines are extended to meet horizontal or vertical
+lines adjoining this column.
+To obtain these characters explicitly in a column, either
+precede them by the two-character sequence
+.cR \e& '' ``
+or follow them by a space before the usual tab or new-line.
+.H 3 "Short Horizontal Lines."
+An input table
+.I entry
+containing only the two-character string
+.cR \e_ '' ``
+or
+.cR \e= '' ``
+produces a single or double line, respectively,
+which is only as wide as the
+contents of the column and
+is not extended to meet adjoining lines.
+.H 3 "Repeated Characters."
+An input table
+.I entry
+containing only a three-character string of the form ``\*(iR\eR\^\*(iAx\f1''
+(where
+.cA x
+is any single character) is replaced by repetitions of the character
+.cA x
+as wide as the data in the column.
+The sequence of
+.cA x 's
+is not extended to meet adjoining columns.
+.H 3 "Vertically Spanned Items."
+An input table entry containing only the
+two-character string
+.cR \e^ '' ``
+indicates that the table entry immediately
+above spans downward over this row.
+It is equivalent
+to a table format key letter of
+.cR ^ .
+.H 3 "Text Blocks."
+In order to include a block of text as a table entry,
+precede it by
+.cR T{
+(begin text block)
+and follow it by
+.cR T}
+(end text block).
+Thus the sequence
+.iS
+\(el T{
+\*(iAone or more lines
+of text in this block
+\*(iRT} \f1\(el
+.iE
+is the way to enter, as a single entry in the table, something
+that cannot conveniently be typed as a simple string between tabs.
+Note that the
+.cR T}
+end delimiter must begin a line;
+additional columns of data may follow after a tab on the same line.
+If more than thirty or so text blocks are used in a table,
+various limits in the
+.I troff
+program are likely to be exceeded,
+producing diagnostics such as ``too many string/macro names'' or
+``too many number registers.''
+.P
+Text blocks are pulled out from the table, processed separately by
+.IR troff ,
+and replaced in the table as a solid block.
+If no line length
+is specified in the block of text
+itself, or in the table format,
+the default is to use
+$L times C / (N+1)$
+where $L$ is the current line length,
+$C$ is the number of table columns spanned by the text,
+and $N$ is the total number of columns in the table.
+.P
+The other parameters (point size, font, etc.) used to format the
+block of text are those in effect at the beginning of the table (including
+the effect of the
+.cR .TS
+macro)
+and any table format specifications of size, spacing, and font,
+using the
+.cR p ,
+.cR v
+and
+.cR f
+modifiers to the column key letters.
+Requests within the text block itself are also recognized, of course.
+However,
+.I troff
+requests within the table data but not within the text block
+do not affect that block.
+.P
+\f4Warning\^\f3:\f1  Although any number of lines may be present in a table,
+only the first 200 lines or so are used in
+setting up the table;
+a multiple-page table,
+of course, may be arranged as several single-page tables
+if this proves to be a problem.
+Other difficulties with formatting may arise because,
+in the calculation of column widths all table entries
+are assumed to be in the font and size being used when the
+.cR .TS
+command was encountered, except for font and size changes
+indicated in the table format section or
+within the table data (as in the entry
+.cR \es+3\efIData\efP\es0 ).
+Therefore, although arbitrary
+.I troff
+requests may be sprinkled in a table, care must be taken
+to avoid confusing the width calculations;
+use requests such as
+.cR .ps
+with care.
+'''	\" FORCE PAGE
+.SK
+.P
+A blank, null, or missing column entry in a line of input data will
+produce a blank entry in the table when the corresponding
+format item (key letter) is one that normally requires data.
+An example of this occurs in Example 7 where a blank line
+is needed to provide data for the key letter
+.cR c
+in the format line
+.cR "c\ =\ s\ s\ s" '' ``
+that is used to draw a double line above the last four columns of the table.
+Conversely, a warning message will appear if a data line does contain
+data in a column for which the corresponding format item is
+.cR ^ ,
+.cR _ ,
+.cR - ,
+or
+.cR = .
+.P
+A blank line in the input data will produce a blank line or a row
+of blank column entries in the table (see Example 9).
+Blank lines in the format section are ignored.
+.H 2 "Additional Command Lines"
+If the format of a table must be changed after many similar lines, the
+.cR .T&
+(table change)
+command can be used to change column parameters.
+The outline of such a table input is:
+.iS
+\&.TS
+\*(iAoptions\|\*(iR;
+\*(iAformat\|\*(iR.
+.cA data
+.cR .T&
+\*(iAformat\|\*(iR.
+.cA data
+.cR .T&
+\*(iAformat\|\*(iR.
+.cA data
+.cR .TE
+.iE
+Using this procedure,
+each input line of data can be close to its corresponding format line.
+.P
+\f4Warning\^\f3:\f1  It is not possible to change the number of columns, the space
+between columns, the global options such as
+.cR box ,
+or the selection of columns to be made equal-width.
+Furthermore,
+.cR .T&
+is not recognized after the first 200 lines of a table.
+.H 1 USAGE
+.H 2 "Command Line"
+.P
+On the
+.sM UNIX
+system,
+.I tbl
+can be run on a simple table with the command
+.iS
+tbl \*(iAfile\fP | troff | \(el
+.iE
+For more complicated use, where there are several input files
+and they contain equations and
+.sM MM
+macro requests as well as tables, the normal command would be
+.iS
+tbl \*(iAfile1\0file2\|\f1 \(el \*(iR| eqn | troff -mm | \(el
+.iE
+Of course, the usual options may be used on the
+.I troff
+and
+.I eqn
+commands.
+The
+.cR -mm
+option could be replaced with some other \*(iR-m\|\*(iAname\|\f1 option
+(e.g.,
+.cR \-ms )
+to select a different macro package.
+If a filename is
+.cR - '', ``
+the standard input is read at that point.
+.br
+.EQ
+delim off
+.EN
+.H 2 "Interactions with \f4eqn\fP"
+.P
+When
+.I eqn
+and
+.I tbl
+are used together on the same file,
+.I tbl
+should be used first.
+If there are no equations within tables,
+either order works, but it is usually faster to run
+.I tbl
+first since
+.I eqn
+normally produces a larger expansion of the input than
+.IR tbl .
+However, if there are in-line equations within tables (using the
+.cR delim
+mechanism in
+.IR eqn ),
+.I tbl
+must be first or the output will be scrambled.
+.P
+Users must also beware of using equations in
+.cR n -style
+columns; this is nearly always wrong, since
+.I tbl
+attempts to split numerical format items into two parts and this
+is not possible with equations.
+The user can defend against this by giving the \*(iRdelim(\*(iAxy\|\*(iR)\f1 table option;
+this prevents splitting of numerical columns within the delimiters.
+For example, if the
+.I eqn
+delimiters are
+.cR $$ ,
+giving
+.cR delim($$)
+causes a numerical column entry such as
+.cR "1245$+- 16$" '' ``
+to be aligned after 1245, not after 16.
+.H 2 "Internal \f4troff\fP Names and Registers"
+.I Tbl
+accepts up to about 35 columns, but the actual number
+that can be processed may be smaller, depending on availability of
+.I troff
+number registers.
+The user must avoid number register names used by
+.IR tbl ,
+which include two-digit numbers from 31 to 99 and strings of the form
+\*(iR4\*(iAx\|\f1,
+\*(iR5\*(iAx\|\f1,
+\*(iR#\*(iAx\|\f1,
+\*(iAx\|\*(iR+\f1,
+\*(iAx\|\*(iR|\f1,
+\*(iR^\*(iAx\|\f1,
+and \*(iAx\|\*(iR-\f1,
+where
+.cA x
+is any lower-case letter.
+The names
+.cR ## ,
+.cR #- ,
+and
+.cR #^
+are also used in certain circumstances.
+To conserve register names, the
+.cR n
+and
+.cR a
+formats share a register;
+hence the restriction that they may not be used in the same column.
+.H 2 "Macro Package Extensions"
+For aid in writing layout macros,
+.I tbl
+defines a number register
+.cR TW
+which is
+the table width.
+It is defined by the time the
+.cR .TE
+macro is invoked and may be used in the expansion of that macro.
+.P
+The macro
+.cR T#
+is defined to produce the vertical and bottom horizontal lines
+of a boxed table.
+.I Tbl
+uses this macro at the end of a boxed table.
+To assist in the layout of multiple-page boxed tables,
+this macro may be used in the definition of the page footer
+(in a macro package such as
+.sM MM
+or
+.sM MS )
+to draw the lines of the continuing boxed table at the end of the page.
+.P
+Some macro packages
+(such as
+.sM MM
+and
+.sM MS )
+allow multiple-page tables with repeated headings.
+The
+.cR .TS
+macro with the argument
+.cR H
+marks the start of a table with a repeated heading, and the
+.cR .TH
+macro separates the data of the repeated heading from the
+data that makes up the body of the table.
+Material up to the
+.cR .TH
+is placed at the top of each page of the table; the remaining lines in
+the table are placed on several pages as required.
+For example, the input
+.iS
+\&.TS H
+\&center;
+\&lfI  cfI lfI lfI
+\&lfCW l   l   l.
+\&Input Command\*(tBDescription\*(tBSection(s)\*(tBExample(s)
+\&=
+\&.sp 0.3v
+\&.TH
+\*(iAdata\f1
+.ft 1
+  \u\z.\d\z.\d.
+.sp 0.5v
+\*(iR\&.TE
+.iE
+was used to produce the repeated headings in the multiple-page
+table in Appendix\ B.
+(The symbol \*(tB represents a tab character.)
+.P
+\f4Note\f3\^:\f1  If the
+.cR H
+argument is given to
+.cR .TS ,
+then
+.cR .TH
+must be given in the table after any table heading
+(or at the start, if none).
+.P
+\f4Warning\f3\^:\f1  This is not
+a feature of
+.IR tbl ,
+but of the layout macros
+(e.g.,
+.sM MM
+or
+.sM MS ).
+In some cases, there may be a conflict between
+.I tbl
+and the macro package in determining the actual bottom of the page,
+resulting in strange and often undesirable behavior.
+In this case, the only alternative may be to break apart the table
+into separate tables for each page.

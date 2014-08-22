@@ -1,0 +1,45 @@
+POSTSCRIPT
+============================================================================
+TITLE      PostScript Font Sampler
+           PostScript Character Set and Symbols
+
+AUTHOR(s)  Carmela L'Hommedieu
+           AT&T Bell Laboratories
+
+REVISED    1990 by C.L'Hommedieu, AT&T Bell Laboratories
+REPRINTED  May 1990, AT&T Bell Laboratories
+============================================================================
+FILE             PURPOSE
+--------------   --------------------------------------------------------
+fonts            Font Sampler
+charset          Standard Text Font Character Set
+symbols          Special Font Symbol Set
+dingbats         Zapf Dingbats
+post.defs        Additional macro definitions for PostScript documents
+Run              Shell script to format and print entire PostScript document
+============================================================================
+To produce the entire PostScript document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the PostScript Font Sampler, use the command:
+
+   troff -Tpost fonts | dpost
+
+To produce the Standard Text Font Character Set document, use the command:
+
+   tbl charset | troff -Tpost | dpost
+
+To produce the Special Font Symbols Set document, use the command:
+
+   tbl symbols | troff -Tpost | dpost
+
+To produce the Zapf Dingbats document, use the command:
+
+   tbl dingbats | troff -Tpost | dpost
+============================================================================

@@ -1,0 +1,142 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr O 0.75i
+.nr W 6.5i
+.so ../defs.doc
+.so defs.font
+.tS "PostScript Font Sampler"
+PostScript Font Sampler
+.tE
+.rs
+.sp -1v
+The fonts listed on this page are available on most PostScript
+laser printers and typesetters.
+.TS
+center;
+c6f2 lf1
+c6f1 lf1
+c6f5 lf1.
+troff
+Name	Font
+_
+.sp 2p
+R	\fRTimes Roman\fP
+I	\fITimes Italic\fP
+B	\fBTimes Bold\fP
+BI	\f(BITimes Bold Italic\fP
+.sp 2p
+H	\fHHelvetica\fP
+HI	\f(HIHelvetica Oblique\fP
+HB	\f(HBHelvetica Bold\fP
+HX	\f(HXHelvetica Bold Oblique\fP
+.sp 2p
+CO	\f(COCourier\fP *
+CI	\f(CICourier Oblique\fP
+CB	\f(CBCourier Bold\fP
+CX	\f(CXCourier Bold Oblique\fP
+.sp 2p
+PA	\f(PAPalatino Roman\fP
+PI	\f(PIPalatino Italic\fP
+PB	\f(PBPalatino Bold\fP
+PX	\f(PXPalatino Bold Italic\fP
+.sp 2p
+Hr	\fHHelvetica Narrow\fP
+Hi	\f(HIHelvetica Narrow Oblique\fP
+Hb	\f(HBHelvetica Narrow Bold\fP
+Hx	\f(HXHelvetica Narrow Bold Oblique\fP
+.sp 2p
+AR	\f(ARAvant Garde Book\fP
+AI	\f(AIAvant Garde Book Oblique\fP
+AB	\f(ARAvant Garde Demi\fP
+AX	\f(AIAvant Garde Demi Oblique\fP
+.sp 2p
+KR	\f(KRBookman Light\fP
+KI	\f(KIBookman Light Italic\fP
+KB	\f(KBBookman Demi\fP
+KX	\f(KXBookman Demi Italic\fP
+.sp 2p
+NR	\f(NRNew Century Schoolbook Roman\fP
+NI	\f(NINew Century Schoolbook Italic\fP
+NB	\f(NBNew Century Schoolbook Bold\fP
+NX	\f(NXNew Century Schoolbook Bold Italic\fP
+.sp 2p
+ZI	\f(ZIZapf Chancery Medium Italic\fP
+.TE
+.FS *
+The Courier font is commonly referred to as Constant-Width;
+the font name
+.cR CW
+is a synonym for
+.cR CO .
+.FE
+A sample of the standard character set for each font is
+given in the pages that follow.
+.P
+The Greek alphabet and mathematical and other symbols
+are generally available with ``special'' symbol fonts.
+In addition, the Zapf Dingbat font
+.cR ZD ) (
+offers a variety of graphic symbols and icons.
+See PostScript Character Set and Symbols.
+.br
+'''	\" Sample of character set for each font
+.hD R Times
+.cS R Roman
+.cS I Italic
+.cS B Bold
+.cS BI "Bold Italic"
+.sF R I B BI
+.hD H Helvetica
+.cS H 
+.cS HI Oblique
+.cS HB Bold
+.cS HX "Bold Oblique"
+.sF H HI HB HX
+.hD CO Courier
+.cS CO
+.cS CI Oblique
+.cS CB Bold
+.cS CX "Bold Oblique"
+.sF CO CI CB CX
+.hD PA Palatino
+.cS PA Roman
+.cS PI Italic
+.cS PB Bold
+.cS PX "Bold Italic"
+.sF PA PI PB PX
+.hD Hr "Helvetica Narrow"
+.cS Hr
+.cS Hi Oblique
+.cS Hb Bold
+.cS Hx "Bold Oblique"
+.sF Hr Hi Hb Hx
+.hD AR "Avant Garde"
+.cS AR Book
+.cS AI "Book Oblique"
+.cS AB Demi
+.cS AX "Demi Oblique"
+.sF AR AI AB AX
+.hD KR Bookman
+.cS KR Light
+.cS KI "Light Italic"
+.cS KB Demi
+.cS KX "Demi Italic"
+.sF KR KI KB KX
+.hD NR "New Century Schoolbook"
+.cS NR Roman
+.cS NI Italic
+.cS NB Bold
+.cS NX "Bold Italic"
+.sF NR NI NB NX
+.hD ZI "Zapf Chancery"
+.cS ZI "Medium Italic"
+.sp 2
+.fi
+.na
+.ft ZI
+.tF
+.br

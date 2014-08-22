@@ -1,0 +1,2218 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so defs.grap
+.EQ
+delim $$
+.EN
+'''	\"CHECK
+.ds g /usr/bin/grap
+.tS "Graphs with \s-1GRAP\s+1"
+\s-1GRAP\s+1 \(em A Language for Typesetting Graphs
+.tE
+.aS
+.sM GRAP
+is a language for describing plots of data.
+This graph of the 1984
+age distribution in the United States
+.gRAP agepop1.g
+is produced by the
+.sM GRAP
+commands
+.iS
+.gET agepop1.g
+.iE
+(Each line in the data file
+.cR agepop.d
+contains an age and the number of Americans of that
+age alive in 1984; the file is sorted by age.)
+.P
+The
+.sM GRAP
+preprocessor works with
+.sM PIC
+and
+.sM TROFF .
+Most of its input is passed
+through untouched, but statements between
+.cR .G1
+and
+.cR .G2
+are translated into
+.sM PIC
+commands that draw graphs.
+.AE
+.NH
+Introduction
+.P
+.sM GRAP
+is a language for describing graphical
+displays of data.
+It provides such services as automatic scaling and
+labeling of axes, and
+.cR for
+statements,
+.cR if
+statements, and macros to facilitate user
+programmability.
+.sM GRAP
+is intended primarily for including graphs in
+documents prepared on the
+Unix\(dg
+.FS
+\(dg Unix is a Trademark of AT&T Bell Laboratories.
+.FE
+operating system, and is only marginally
+useful for elementary tasks in data analysis.
+.P
+Section 2 of this document is a tutorial introduction to
+.sM GRAP ;
+readers who find it slow going may wish to skim ahead.
+The examples in Section 3 illustrate
+the various kinds of graphs that
+.sM GRAP
+can produce and some common
+.sM GRAP
+idioms.
+Mundane matters about using
+.sM GRAP
+are discussed in Section 4,
+and Section 5 contains a brief reference manual.
+.P
+We have tried to illustrate good principles of
+statistics and graphical design in the
+graphs we present.
+In several places, though, good taste has lost to
+the necessity of illustrating
+.sM GRAP
+capabilities.
+Readers interested in statistical
+integrity and taste should
+consult the literature.\(dg\(dg
+.FS
+\(dg\(dg See, for instance,
+.I "Graphical Methods in Data Analysis"
+by Chambers, Cleveland, Kleiner and Tukey or
+.I "Visual Display of Quantitative Information"
+by Tufte.
+.FE
+.NH
+Tutorial
+.P
+The following is a simple
+.sM GRAP
+program\(dg\(dg\(dg
+.FS
+\(dg\(dg\(dg Throughout
+this document we will show only the first five
+lines and the last line of data files;
+omitted lines are indicated by ``...''.
+.FE
+.iS
+\&.G1
+.dD 400mtimes.d
+\&.G2
+.iE
+The single number on each line
+is the winning time in seconds for the
+men's 400 meter run,
+from the first modern Olympic Games (1896)
+to the nineteenth (1980).
+If the file
+.cR olymp.g
+contains the text above,
+then typing the command
+.iS
+grap olymp.g | pic | troff >junk
+.iE
+creates a
+.sM TROFF
+output file
+.cR junk
+that contains the
+picture
+.gRAP 4001.g
+The graph shows the decrease
+in winning times from 54.2
+seconds to 44.60 seconds.
+If the times are
+contained in the file
+.cR 400mtimes.d ,
+we could
+produce the same graph with the
+shorter program
+.iS
+.gET 4001.g
+.iE
+Writing
+.cR copy
+.cR \&"fname"
+in a
+.sM GRAP
+program is equivalent to including the
+contents of file
+.cR fname
+at that point in the file.
+(In the interests of compatibility with other programs,
+.cR include
+is a synonym for
+.cR copy .)
+.P
+Each line in the file
+.cR 400mpairs.d
+contains two numbers, the
+year of the Olympics and the winning time:
+.iS
+.dD 400mpairs.d
+.iE
+If we plot this data with the program
+.iS
+.gET 4002.g
+.iE
+the bottom ($x$) axis represents the year of the Olympics.
+.gRAP 4002.g
+The ``holes'' in $x$-values reflect the fact
+that the 1916, 1940, and 1944 Olympics
+were cancelled due to war.
+Because the previous data
+(in
+.cR 400mtimes.d )
+had just one number per
+line,
+.sM GRAP
+viewed it as a ``time series'' and
+supplied $x$-values of $1, ~ 2, ~ 3, ...$
+before plotting
+the data as $y$-values.
+The input to the
+second program has two values per line,
+so they are interpreted as $( x , y )$ pairs.
+.P
+Rather than a scatter plot of points, we might prefer to
+see the winning times connected by a solid
+line.
+The program
+.iS
+.gET 4003.g
+.iE
+produces the graph
+.gRAP 4003.g
+Eric Liddell of Great Britain
+won his gold medal
+in Paris in 1924 with a time of 47.6 seconds.
+(Remember ``Chariots
+of Fire''?)
+.P
+We can make the graph more attractive
+by modifying its frame
+and adding labels.
+.iS
+.gET 4004.g
+.iE
+The
+.cR frame
+command describes
+the graph's bounding box:
+the overall frame (which has four sides)
+is invisible, it is 2 inches high and 3 inches
+wide (which happen to be the
+default height and width),
+and the left and bottom
+sides are solid (they could have been
+dashed or dotted instead).
+The labels appear on the left and bottom, as requested.
+.gRAP 4004.g
+.P
+To set the range of each axis,
+.sM GRAP
+examines the data and pads both
+dimensions
+by seven percent at each end.
+The
+.cR coord
+(``coordinates'') command
+allows you to specify the range of one or both axes explicitly;
+it also turns off automatic padding.
+.iS
+.gET 4005.g
+.iE
+The $y$-axis now ranges from 42 to 56 seconds
+(a little more than before),
+and the $x$-axis from 1894 to 1982
+(a little less).
+.gRAP 4005.g
+.P
+The ticks in the preceding graphs were generated
+by
+.sM GRAP
+guessing at reasonable values.
+If you would rather provide your own,
+you may
+use the
+.cR ticks
+command,
+which comes in the flavors illustrated below.
+.iS
+.gET 4006.g
+.iE
+The first
+.cR ticks
+command deals with the left axis:
+it puts the ticks facing out at
+the numbers in the list.
+.sM GRAP
+puts labels only at values
+with strings,
+except that when no labels at all are
+given, each number serves as its own label,
+as in the second
+.cR ticks
+command.
+That command
+is for the bottom axis:
+it puts the ticks facing in at steps of 20
+from 1900 to 1980.
+The command
+.cR "ticks off"
+turns off all ticks.
+.sM GRAP
+does its best to place labels appropriately, but
+it sometimes needs your help:
+the
+.cR "left .2"
+clause moves the left label 0.2 inches further left to
+avoid the new ticks.
+.gRAP 4006.g
+.P
+The file
+.cR 400wpairs.d
+contains the times for
+the women's 400 meter race, which has been run
+only since 1964.
+.iS
+.dD 400wpairs.d
+.iE
+To add these times to the graph,
+we use
+.iS
+.gET 4007.g
+.iE
+The
+.cR new
+command tells
+.sM GRAP
+to end
+the old curve and to start a new curve
+(which in this case will be drawn
+with a dotted line).
+Text is placed on the graph by
+commands of the form
+.iS
+"string" at xvalue, yvalue
+.iE
+The
+.cR size
+clauses following the quoted strings tell
+.sM GRAP
+to shrink the characters by three points (absolute point sizes
+may also be specified).
+Strings are usually centered at the specified position,
+but can be adjusted by clauses to be illustrated shortly.
+.gRAP 4007.g
+.P
+The file
+.cR phone.d
+records the number of telephones in the United States from
+1900 to 1970.
+.iS
+.dD phone.d
+.iE
+Each line gives a year and the number of telephones
+present in that year
+(in millions, truncated to the nearest hundred thousand).
+The simple
+.sM GRAP
+program
+.iS
+.gET phone1.g
+.iE
+produces the simple graph
+.gRAP phone1.g
+.P
+The number of telephones appears to
+grow exponentially;
+to study that we will plot the data with
+a logarithmic $y$-axis by adding
+.cR log
+.cR y
+to the
+.cR coord
+command.
+We will also add cosmetic changes of labels, more ticks,
+and a solid line to replace the unconnected dots.
+.iS
+.gET phone2.g
+.iE
+The third
+.cR ticks
+command provides a string that is used to print the tick
+labels.
+.sM C
+programmers will recognize it as a
+.cR printf
+format string; others may view the
+.cR %g '' ``
+as the place to put
+the number and anything else (in this case just an apostrophe) as
+literal text to appear in the labels.
+To suppress
+labels, use the empty format string ("").
+The program produces
+.gRAP phone2.g
+The number of telephones grew rapidly
+in the first decade of this century,
+and then settled down to an exponential growth rate upset only
+by a decrease in the Great Depression and a post-war growth
+spurt
+to return the curve to its pre-Depression line.
+.P
+Our presentation so far has been to
+start with a simple
+.sM GRAP
+program that illustrates the data, and then refine it.
+Later in this document we will ignore the design
+phase, and present rather complex graphs in
+their final form.
+Beware.
+.P
+All the examples so far have placed data on the
+graph implicitly by
+.cR copy ing
+a file of numbers
+(either a time series with one number per line or
+pairs of numbers).
+It is also possible to draw points and lines explicitly.
+The
+.sM GRAP 
+commands to draw on a graph
+are illustrated in the following
+fragment.
+.iS
+.gET geom.g
+.iE
+.P
+The
+.cR grid
+command is similar to the
+.cR ticks
+command, except that grid lines extend
+across the frame.
+The next few commands plot text at specified positions.
+The plotting characters (such as
+.cR bullet )
+are implemented as predefined
+macros \(em more on that shortly.
+Unlike arbitrary characters,
+the visual centers of the markers
+are near their plotting centers.
+The
+.cR circle
+command draws a circle centered at the specified location.
+A radius in inches may be specified;
+if no radius is given, then the circle will be the
+small circle shown at the center of the graph.
+The
+.cR line
+and
+.cR arrow
+commands draw the obvious objects shown at the upper left.
+.gRAP geom.g
+.P
+This figure also illustrates the combined use of the
+.cR draw
+and
+.cR next
+commands.
+Saying
+.cR draw
+.cR A
+.cR solid
+defines the style
+for a connected sequence of line fragments to be called
+.cR A .
+Subsequent commands of
+.cR next
+.cR A
+.cR at
+.I point
+add
+.I point
+to the end of
+.cR A .
+There are two such sequences active in the above
+example
+.cR A "" (
+and
+.cR B );
+note that their
+.cR next
+commands are intermixed.
+Because the predefined string
+.cR delta
+follows the specification of
+.cR B ,
+that string is plotted at each point in the sequence.
+.P
+.sM GRAP
+has numeric variables (implemented as double-precision
+floating point numbers) and
+the usual collection of arithmetic operators and
+mathematical functions; see the reference section
+for details.
+.P
+.sM GRAP
+provides the same rudimentary macro facility that
+.sM PIC
+does:
+.iS
+define \f2name\fP  X \f2replacement text\fP X
+.iE
+defines
+.IT name
+to be the
+.IT "replacement text" .
+.cR X
+is any character that does not appear in the replacement;
+open and closing braces
+.cR "{ }"
+may also be used as
+delimiters.
+Any subsequent occurrence of
+.IT name
+will be replaced by
+.IT "replacement text" .
+.EQ
+delim %%
+.EN
+.P
+The replacement text of a macro definition may
+contain occurrences of
+.cR $1 ,
+.cR $2 ,
+etc.;
+these will be replaced by the corresponding actual
+arguments when the macro is invoked.
+The invocation for a macro with arguments is
+.iS
+name(arg1, arg2, ...)
+.iE
+Non-existent arguments are replaced by null
+strings.
+.EQ
+delim $$
+.EN
+.P
+The following
+.sM GRAP
+program uses macros and arithmetic to plot
+crude approximations to
+the square and square root functions.
+.iS
+.gET macarith.g
+.iE
+Because
+.sM GRAP
+has the square root function
+.cR sqrt ,
+the macro
+.cR root
+is superfluous.
+The program produces
+.gRAP macarith.g
+.P
+The
+.cR copy
+command has a
+.cR thru
+parameter that allows each line of a file to
+be treated as though it were a macro call, with
+the first field serving as
+the first argument,
+and so on.
+This is the typical
+.sM GRAP
+mechanism for plotting files that are not stored as
+time series or as $(x,y)$ pairs.
+We will illustrate its use on the file
+.cR states.d ,
+which contains data on the fifty states.
+.nr j \n%
+.iS
+.dD states.d
+.iE
+The first field is the postal abbreviation of the state's
+name (Alaska, Wyoming, Vermont, ...), the second field
+is the number of Representatives to Congress from the state
+after the 1981 reapportionment, and the third field is
+the population of the state as measured in the 1980 Census.
+The states appear in increasing order of
+population.
+.P
+We will first plot this data as
+population, representative pairs.
+(In the
+.cR coord
+statement,
+.cR "log log"
+is a synonym for
+.cR "log x log y" .)
+.iS
+.gET states1.g
+.iE
+Although the population is given in persons,
+the
+.cR PlotState
+macro
+plots the population in millions by dividing
+the third input field
+by one million (written in exponential notation
+as
+.cR 1e6 ,
+for $1 times 10 sup 6$).
+.gRAP states1.g
+Using
+.cR circle
+as a plotting symbol displays
+overlapping points that are obscured when
+the data is plotted with bullets.
+The representation of a state is roughly proportional
+to its population, except in the very small states.
+.P
+Our next plot will use the state's rank
+in population as the $x$-coordinate and two
+different $y$-coordinates: population and number of
+representatives.
+We will use two
+.cR coord
+commands to define the two coordinate systems
+.cR pop
+and
+.cR rep .
+We then explicitly give the coordinate system
+whenever we refer to a point,
+both in constructing axes and plotting data.
+.iS
+.gET states2.g
+.iE
+The
+.cR copy
+statement in the program uses an
+.I "immediate macro"
+enclosed in
+.cR X 's
+and thus avoids having to
+name a macro for this task.
+Because the program assumes that the states are
+sorted in increasing order of population, it
+generates
+.cR thisrank
+internally as a
+.sM GRAP
+variable.
+The program produces
+.gRAP states2.g
+.P
+The plotting symbols were chosen for contrast in
+both shape and shading.
+This graph also indicates that representation is proportional
+to population.
+Once we see this graph, though, we should realize that we don't
+really need two coordinate systems: we can relate the two by
+dividing the population of the U.S. \(em about 226,000,000 \(em by
+the number of representatives \(em 435 \(em to see that each
+representative should count as 520,000 people.
+If the purpose of this graph were to tell a story about
+American politics rather than to illustrate
+multiple coordinate systems,
+it should be redrawn with a single coordinate
+system.
+.P
+Many graphs plot both observed data and a function
+that (theoretically) describes the data.
+There are many ways to draw a function
+in
+.sM GRAP :
+a series of
+.cR next
+commands is tedious but works, as does writing a
+simple program to write a data file that is subsequently
+read and plotted by the
+.sM GRAP
+program.
+The
+.cR for
+statement often provides a better solution.
+This
+.sM GRAP
+program
+.iS
+.gET sin1.g
+.iE
+produces
+.gRAP sin1.g
+.a
+The
+.cR for
+statement uses the same syntax as the
+.cR ticks
+statement, but the
+.cR from
+keyword can be replaced by
+.cR = '', ``
+which will look more familiar to programmers.
+It varies the index variable over the specified range
+and for each value executes all statements inside the delimiter
+characters, which use the same rules as macro
+delimiters.
+It is, of course, useful for many tasks beyond plotting functions.
+.EQ
+delim %%
+.EN
+.P
+The
+.cR if
+statement provides a simple mechanism for conditional execution.
+If a file contains data on both cities and states (and lines
+describing states have ``S'' in the first field), it could be plotted
+by statements like
+.iS
+if "$1" == "S" then {
+    PlotState($2,$3,$4)
+} else {
+    PlotCity($2,$3,$4,$5,$6)
+}
+.iE
+The
+.cR else
+clause
+is optional; delimiters use the same rules as macros and
+.cR for
+statements.
+.EQ
+delim $$
+.EN 
+.NH
+A Collection of Examples
+.P
+The previous section covered the
+.sM GRAP
+commands that are used in common graphs.
+In this section we'll spend less time on
+language features, and survey a wider variety of
+graphs.
+These examples are intended more for browsing and
+reference than for straight-through reading.
+You should be prepared to refer to the
+manual in Section 5 when you stumble over a new
+.sM GRAP
+feature.
+.P
+The file
+.cR cars.d
+contains the mileage (miles per gallon) and the weight
+(pounds) for 74 models of automobiles sold in the United States
+in the 1979 model year.
+.iS
+.dD cars.d
+.iE
+The trivial
+.sM GRAP
+program
+.iS
+.gET cars1.g
+.iE
+produces
+.gRAP cars1.g
+This graph shows that weights bottom out somewhat
+below 2000
+pounds and that heavier cars get worse mileage;
+it is hard to say much more about the relationship
+between weight and mileage.
+.P
+The next graph provides labels, uses circles
+to expose data hidden in the clouds of bullets,
+and re-expresses the $x$-axis in gallons per mile.
+It also changes the point size and vertical spacing
+to a size appropriate for camera-ready journal articles
+and books; the size changes should be made outside the
+.sM GRAP
+program.
+The
+.cR \&.ft
+command changes to a Helvetica font, which
+some people prefer for graphs.
+.iS
+.gET cars2.g
+.iE
+.sM GRAP
+supports logarithmic re-expression of data with the
+.cR log
+clause in the
+.cR coord
+statement; any other re-expression of data must be done
+with
+.sM GRAP
+arithmetic, as above.
+.br
+.gRAP cars2.g
+This graph shows that
+gallons per mile is roughly proportional to weight.
+(The two outliers near 4000 pounds are the Cadillac
+Seville and the Oldsmobile 98.)
+.P
+In
+.I "Visual Display of Quantitative Information" ,
+Tufte proposes the ``dot-dash-plot'' as a means for maximizing
+data ink (showing the two-dimensional distribution and
+the two one-dimensional marginal distributions) while minimizing
+what he calls ``chart junk'' \(em ink wasted on borders
+and non-data labels.
+His preference is easy to express in
+.sM GRAP :
+.iS
+.gET cars3.g
+.iE
+Although visually attractive, we do not find the
+resulting graph as useful for interpreting the data.
+.gRAP cars3.g
+Tufte's graph does point out two facts that are
+not obvious in the previous graphs:
+there is a gap in car weights near 3000 pounds (exhibited
+by the hole in the $y$-axis ticks), and the gallons per
+mile axis is regularly structured (the ticks
+are the reciprocals of an almost dense sequence of integers).
+The reader may decide whether those insights are worth
+the decrease in clarity.
+.P
+Throughout the twentieth century, horses, cars and people
+have gotten faster;
+let's study those improvements.
+For horses, we'll consider the winning times
+of the Kentucky Derby from 1909 to 1983, in
+the file
+.cR speedhorse.d :
+.iS
+.dD speedhorse.d
+.iE
+The program
+.iS
+.gET speedhorse1.g
+.iE
+produces the graph
+.gRAP speedhorse1.g
+Each race is recorded with a bullet and
+record times are marked by horizontal lines.
+Secretariat is the only horse to have run the
+one-and-a-quarter-mile
+race in under two minutes; he won in 1973 in
+1:59.4.
+.P
+For automobiles we will study the
+world land speed record (even though those vehicles
+are by now just low-flying airplanes).
+The file
+.cR speedcar.d
+lists years in which speed records were set and the record
+set in that year, in miles per hour averaged over a one-mile
+course.
+.iS
+.dD speedcar.d
+.iE
+We will plot the data with the following
+.sM GRAP
+program, which uses nested braces in the
+.cR copy
+and
+.cR if
+statements.
+.iS
+.gET speedcar1.g
+.iE
+.P
+Each record line is drawn after the
+.I next
+record is read, because
+the program must know when the record was broken to draw
+its line.
+The
+.cR if
+statement handles the first record, and the extra
+.cR line
+command extends the last record out to the current date.
+.gRAP speedcar1.g
+The horizontal lines reflect the nature of world records: they
+last until they are broken.
+The records could also have been plotted by a scatterplot
+in which each point represents the setting of a record,
+but it would be misleading to connect adjacent
+points with line segments
+(which is what we inappropriately did in the graphs
+of the Olympic 400 meter run).
+.P
+The following graph shows the world record times for the
+one mile run;
+because its
+.sM GRAP
+program is so similar to its automotive counterpart,
+we won't show the program or data.
+.gRAP speedman1.g
+The three graphs show three different kinds of
+changes.
+Although horses are getting faster, they appear to
+be approaching a barrier near two minutes.
+Cars show great jumps as new technologies are introduced
+followed by a plateau as limits of the
+technology are reached.
+Milers have shown a fairly consistent
+linear improvement
+over this century, but there must be an
+asymptote down there somewhere.
+.P
+The next file gives the median heights of boys
+in the United States aged 2 to 18, together with
+the fifth and ninety-fifth percentiles.
+.iS
+.dD boyhts.d
+.iE
+The heights are given in centimeters (1 foot = 30.48 centimeters).
+The trivial program
+.iS
+.gET boyhts1.g
+.iE
+displays the data as
+.gRAP boyhts1.g
+Because there are four numbers on each input line, the first is
+taken as an $x$-value and the remaining three are plotted
+as $y$-values.
+.P
+The three curves appear to be roughly straight
+(at least up to age 16),
+so it makes sense to fit a line
+through them.
+We will use the standard least squares regression
+in which
+.EQ
+slope ~=~ {
+{n SIGMA x y ~ - ~ SIGMA x SIGMA y }
+over
+{n SIGMA x sup 2 ~ - ~ ( SIGMA x ) sup 2 }
+}
+.EN
+(where the summations range over all $n$ $x$ and $y$ values
+in the data set) and the $y$-intercept is
+.EQ
+{SIGMA y ~ - ~ slope times SIGMA x} over n
+.EN
+The following
+.sM GRAP
+program boldly (and rather foolishly) implements that formula.
+.iS
+.gET boyhts3.g
+.iE
+It plots the extreme fifth percentiles as a bar through
+the median, which is plotted as a bullet.
+All heights are converted to feet before plotting and calculating
+the regression line.
+.gRAP boyhts3.g
+.P
+.sM GRAP
+.cR print
+statements write on
+.cR stderr
+as they are processed by
+.sM GRAP ;
+their single argument can be either an expression or a string.
+The
+.cR print
+statements (which are commented out in
+the above
+.sM GRAP
+program) at one time
+showed that the regression line is
+.EQ
+Height ~ in ~ Feet ~ = ~ 2.61 ~ + ~ .19 times Age
+.EN
+Thus for most American
+boys between 3 and 16, you may safely assume
+that they started out life at 2 feet 7 inches and grew at the
+rate of two and a quarter inches per year.
+.P
+This program probably misapplies
+.sM GRAP ;
+if you really want to perform least squares regressions on
+data, you should usually use a simple
+.sM AWK
+program like
+.iS
+.gET regress.awk
+.iE
+(Be warned, though, that this program is not numerically
+robust.)
+.P
+While we're on the subject of fitting straight lines to data,
+we'll redraw three graphs from J. W. Tukey's
+.I "Exploratory Data Analysis" .
+The file
+.cR usapop.d
+records the population of the United States
+in millions at ten-year intervals.
+.iS
+.dD usapop.d
+.iE
+Tukey's first two graphs indicate that the later population
+growth was linear while the early growth was exponential.
+The following
+.sM GRAP
+program plots them as a pair, using
+.cR graph
+commands to place internally unrelated graphs adjacent to
+one another.
+.iS
+.gET usapop1.g
+.iE
+The statements defining each graph are indented for clarity.
+The second graph has the northern point of its frame 0.05
+inch below the southern point of the frame of the first graph;
+the
+.cR with
+clause is passed directly through to
+.sM PIC
+without being evaluated for macros or expressions.
+The names of both graphs begin with capital letters to
+conform to
+.sM PIC
+syntax for labels.
+.gRAP usapop1.g
+.P
+Polynomial functions lie between the linear and exponential
+functions; Tukey shows how a seventh-degree polynomial provides
+a better (and longer) fit to the early population growth.
+.iS
+.gET usapop2.g
+.iE
+This program re-expresses the $x$-axis with
+.sM GRAP
+arithmetic and uses an
+.cR if
+statement to graph only part of the data file.
+It produces
+.gRAP usapop2.g
+.nr k \n%
+The
+.sM EQN
+.cR "space 0"
+clause is necessary to keep
+.sM EQN
+from adding extra space that would interfere
+with positions computed by
+.sM GRAP ;
+see Section 4.
+.P
+The file
+.cR army.d
+contains four related time series
+describing the United States Army.
+.iS
+.dD army.d
+.iE
+The first field is the year; the next four fields give
+the number of male officers, female officers, enlisted males
+and enlisted females, each in thousands.
+(Actually, there were no female enlisted personnel in the
+Army until 1943; the value 1 in 1940 and 1942 is just
+a placeholder, since
+.sM GRAP
+has no mechanism for handling missing data.)
+The following
+.sM GRAP
+program draws the four series with four different sets of
+.cR draw
+and
+.cR next
+commands.
+.iS
+.gET army1.g
+.iE
+The program labels the lines by
+.cR copy ing
+immediate data;
+the program is therefore shorter to write and easier to change.
+The delimiter string
+.cR XXX
+in the
+.cR until
+clause could be deleted in this graph: the
+.cR \&.G2
+line also denotes the end of data.
+Even though that string is enclosed in quotes,
+it may not contain spaces.
+The $y$-positions of the labels are the
+result of several iterations.
+.gRAP army1.g
+.P
+This data can tell many stories: the buildup during the
+Second World War is obvious, as is the exodus after the
+war; increases during Korea and Vietnam are
+also apparent.
+We will consider a different story: the ratio of
+enlisted men to the three other classes of personnel.
+There are several ways to plot this data
+(the most obvious graph uses three time series showing how
+the ratios change over time, and is
+left as an exercise for the reader).
+.P
+We will instead construct a graph that gives little insight into this
+data, but illustrates a general method that is quite useful
+in conjunction with
+.sM GRAP .
+The graph is a ``scatterplot vector'' that shows how one
+variable (the number of enlisted men) varies as a function of
+the other three.
+Breaking with tradition, we first show the final graphs, all
+of which have logarithmic scales.
+.gRAP army2.g
+The number of enlisted men is almost linearly
+related to the number of male officers, it is somewhat related to the number
+of female officers, and it varies widely as a function of the number
+of enlisted women.
+.P
+Much more interesting than the graph itself is the method we used to
+produce it.
+We wrote a miniature ``compiler'' that accepts as
+its ``source language'' a description of a scatterplot vector and
+produces as ``object code'' a
+.sM GRAP
+program to draw the graph.
+The source program for the above example is
+.iS
+.gET army2.v
+.iE
+The program lists several
+global attributes of the graph, the
+$y$-variable to be plotted, and as many $x$-variables as
+are desired; with each variable is its field in the file
+and a descriptive string.
+The language is ``compiled'' by the following
+.sM AWK
+program.
+.iS
+.gET scatvec.awk
+.iE
+Running this program on the above description produces the following
+output, which is typically piped directly to
+.sM GRAP .
+.iS
+.gET army2.g
+.iE
+The generated program uses the
+.sM PIC
+trick of re-using the same name
+.cR A ) (
+for several objects.
+.P
+Although the program above is merely a toy,
+``minicompilers'' can produce useful preprocessors
+for
+.sM GRAP .
+The
+.cR scatmat
+program, for instance, is a 90-line
+.sM AWK
+program that reads a simple input language and produces as
+output a
+.sM GRAP
+program to produce a ``scatterplot matrix'', which
+is a handy graphical device for spotting pairwise interactions
+among several variables.
+If
+.sM GRAP
+lacks a feature you desire, consider building
+a simple preprocessor to provide it.
+An alternative is to define
+macros for the task; which approach is best depends
+strongly on the job you wish to accomplish.
+.P
+The next graph uses iterators to make a graph without
+reading data from a file.
+Rather, its ``data'' is a
+function of two variables
+that describes a
+derivative field and a function of one variable
+that describes one solution to the differential
+equation.
+.iS
+.gET ode1.g
+.iE
+The left label uses
+.sM EQN
+text between the $font CW "$$"$ delimiters.
+The variable
+.cR scale
+ensures that all lines in the direction field are the same
+length.
+The
+.cR in
+clauses in the
+.cR ticks
+statements specify that the ticks go in zero inches
+to avoid overprinting.
+The variables
+.cR tx
+and
+.cR ty
+are so named because
+.cR x
+and
+.cR y
+are reserved words for the
+.cR coord
+statement.
+.gRAP ode1.g
+.P
+Programmers familiar with floating point arithmetic may be
+surprised that the above graph is correct.
+Because of roundoff error, iteration
+.cR "from 0 to 1 by .05" '' ``
+usually produces the values
+$0, ~ .05, ~ .10, ~ ..., ~ .95$.
+.sM GRAP
+uses a ``fuzzy test''
+in the
+.cR for
+statement to avoid that problem, which may in turn introduce
+other problems.
+Such problems may be avoided by iterating over an integer range
+and incrementing a non-integer value within the loop.
+.P
+Most of the data we have seen so far is inherently
+two (or more) dimensional.
+As an example of one-dimensional data, we will return to
+the populations of the fifty states, which
+is the third field in the file
+.cR states.d
+introduced on page \nj;
+the file is sorted in increasing order of population.
+Our first graph takes the most space, but
+it also gives the most information.
+.iS
+.gET states8.g
+.iE
+The
+.cR L
+macro (for Label)
+with input parameter $X$ evaluates to the number
+$2 sup X / 1,000,000$ followed by the string "$X$"
+(the
+.cR ticks
+command expects a number followed by a string label).
+.gRAP states8.g
+The dotted line is the least squares regression
+.EQ
+log sub 10 ~ Population ~ = ~ 7.214 ~ - ~ .03 times Rank
+.EN
+which gives 15.3 million as the population of the
+largest state and .515 million as the population
+of the smallest state.
+It says that
+population drops by a factor of two every ten states
+(compare the top and left scales).
+As sloppy as the exponential fit is, though, it is a much better
+fit to this data
+than a Zipf's Law curve is (drawing that curve is left as
+an exercise for the reader).
+.P
+The next graph is a more standard representation of
+one-dimensional data.
+.iS
+.gET states3.g
+.iE
+The markers were chosen to be
+.cR vticks
+because they denote only an $x$-value.
+.gRAP states3.g
+.P
+The next one-dimensional graph uses the state's name as
+its marker; to reduce overprinting the graph is ``jittered''
+by using a random number as a $y$-value.
+.iS
+.gET states4.g
+.iE
+The function
+.cR rand()
+returns a pseudo-random real number chosen uniformly over the interval [0,1).
+.gRAP states4.g
+This graph is too cluttered; circles would have been
+a better choice as a plotting symbol (bullets, once again, would
+hide data).
+.P
+Histograms are a standard way of presenting one-dimensional
+data in two-dimensional form.
+Our first step in building a histogram of the population
+data is the following
+.sM AWK
+program, which counts how many states are in each ``bin''
+of a million people.
+.iS
+.gET states5.awk
+.iE
+The variable
+.cR bzs
+tells where bin zero starts; although it is zero in this
+graph, it might be 95 in a histogram
+of human body temperatures in degrees Fahrenheit.
+The program produces the following output in
+.cR states2.d :
+.iS
+.dD states2.d
+.iE
+There are 12 states with population between 0 and 999,999,
+5 states with population between 1,000,000 and 1,999,999,
+and so on.
+.P
+This
+.sM GRAP
+program uses three
+.cR line
+commands to plot each rectangle in the histogram.
+.iS
+.gET states5.g
+.iE
+It produces
+.gRAP states5.g
+.P
+The same file can be plotted in a
+more attractive (and more useful) form by
+.iS
+.gET states6.g
+.iE
+which produces
+one of Bill Cleveland's ``dot charts'' or ``lolliplots'':
+.gRAP states6.g
+(We use
+.cR \e(bu ,
+the
+.sM TROFF
+character for a bullet, rather than the built-in string to
+get a larger size.)
+.P
+Other histograms are possible.
+The following
+.sM AWK
+program
+.iS
+.gET states7.awk
+.iE
+produces the file
+.cR states3.d
+.iS
+.dD states3.d
+.iE
+which lists the state's abbreviation, bin number, and
+height within the bin.
+The
+.sM GRAP
+program
+.iS
+.gET states7.g
+.iE
+reads that file to make the following histogram, in which
+the state names are used to display the heights of the bins.
+In each bin, the states occur in increasing order of
+population from bottom to top.
+.gRAP states7.g
+.P
+The next data set is a run-time profile of an early version of
+.sM GRAP ,
+created by compiling the program with the
+.cR -p
+option and running
+.cR prof
+after the program executed.
+.iS
+.dD prof1.d
+.iE
+Although there were more than fifty procedures in the program, the
+top four time-hogs accounted for more than half of the run time.
+This file is difficult for
+.sM GRAP
+to deal with:
+even though
+.cR if
+statements would allow us to extract lines 2 through 11
+of the file, we could not remove the leading
+.cR _ '' ``
+from a routine name or access the last field in a record.
+We will therefore process it with
+the following
+.sM AWK
+program.
+.iS
+.gET prof1.awk
+.iE
+The program produces
+.iS
+.dD prof2.d
+.iE
+We could even use the
+.cR sh
+statement to execute the
+.sM AWK
+program from within the
+.sM GRAP
+program, which would make the latter entirely
+self-contained (see the reference manual for details).
+.P
+We will display the data with this program.
+.iS
+.gET prof1.g
+.iE
+Observe that the program knows nothing about the range of the data.
+It uses default ticks and a
+.cR frame
+statement with a computed height to achieve
+total data independence.
+.gRAP prof1.g
+This bar chart highlights the fact that most of the time spent by
+.sM GRAP
+is devoted to input and output.
+.P
+J. W. Tukey's box and whisker plots
+represent the median, quartiles, and extremes of a
+one-dimensional distribution.
+The following
+.sM GRAP
+program defines a macro to draw a box plot, and then
+uses that shape to compare the distribution of heights of
+volcanoes with the distribution of heights of States of the Union.
+.iS
+.gET box1.g
+.iE
+Boxes are one of many shapes used for the graphical
+representation of several quantities.
+If you use such shapes frequently then you should
+make a library file of their macros to
+.cR copy
+into your
+.sM GRAP
+programs.
+The above program produces
+.gRAP box1.g
+Even though the extreme heights are the same, state heights
+have a lower median and a greater spread.
+.P
+Someday you may use
+.sM GRAP
+to prepare overhead transparencies, only to find that
+everything comes out too small.
+The following program illustrates some ways to get larger
+graphs.
+.iS
+.gET slide1.g
+.iE
+The
+.cR ps
+and
+.cR vs
+commands preceding the graph set the text size to 14 points and
+the vertical spacing to 18 points; the two quantities are
+reset by the commands following the
+.cR .G2 .
+Such size changes should be made outside the
+.sM GRAP
+program, as mentioned earlier.
+The
+.cR 4
+following the
+.cR .G1
+stretches the graph (including
+.sM GRAP 's
+estimate of the accompanying text) to be four inches wide;
+it is an alternative to altering the
+.cR frame
+command.
+The macro
+.cR blob
+is a plotting symbol that is much larger than
+.cR bullet ;
+the different name ensures that later references to
+.cR bullet
+are unaffected.
+The
+.sM TROFF
+commands within the
+.cR blob
+string move the character down two-tenths of an em
+to center its plotting position (determined experimentally)
+and then reset the vertical position.
+The program produces this trivial (but large) graph.
+.br
+.gRAP slide1.g
+.NH
+Using GRAP
+.P
+Following are a few day-to-day matters about using
+.sM GRAP .
+.LP
+.IT "Errors" :
+.P
+.sM GRAP
+attempts to pinpoint input errors; for example,
+the input
+.iS
+\&.G1
+i = i + 1
+.iE
+results in this message on
+.cR stderr :
+.iS
+grap: syntax error near line 1, file -
+ context is
+	i = i >>>  + <<<  1
+.iE
+The error was noticed
+at the
+.cR + .
+Unfortunately, pinpointing is not the same as explaining:
+the real error is that the variable
+.cR i
+was not initialized.
+.P
+The ``words''
+.cR x
+and
+.cR y
+are reserved (for the
+.cR coord
+statement);
+you will get an equally inexplicable syntax error message if you use them
+as variable names.
+.P
+.sM GRAP
+tries to load a file of standard macro definitions
+.cR /usr/lib/grap.defines ) (
+for terms like
+.cR bullet ,
+.cR plus ,
+etc., but doesn't complain if that file isn't found.
+If you later use one of these words, however,
+you'll get a syntax error message.
+.P
+Certain constructs suggested by analogy to
+.sM PIC
+do not work.
+For example,
+.cR .GS
+and
+.cR .GE
+would have been nicer than
+.cR .G1
+and
+.cR .G2 ,
+but they were already taken.
+The
+.sM PIC
+construct
+.iS
+\&.PS <file
+.iE
+has been superseded by 
+.sM GRAP 's
+.cR copy
+command (which in turn has been retrofitted into
+.sM PIC ).
+.LP
+.IT "TROFF issues" :
+.P
+You may use
+.sM TROFF
+commands like
+.cR .ps
+or
+.cR .ft
+to change text sizes and fonts within a graph,
+or balanced
+.cR \es
+and
+.cR \ef
+commands within a string.
+Do not, however,
+add space
+.cR .sp ) (
+or change the line spacing
+.cR .vs , (
+.cR .ls )
+within a graph.
+Some defined terms like
+.cR bullet
+contain embedded size changes;
+further qualifying them with
+.sM GRAP
+.cR size
+commands may not always work.
+.P
+Because
+.sM GRAP
+is built on top of
+.sM PIC ,
+the following quote from the
+.sM PIC
+manual is relevant:
+``There is a subtle problem with complicated equations inside
+.sM PIC
+pictures \(em they come out wrong if
+.sM EQN
+has to leave extra vertical space for the equation.
+If your equation involves more than subscripts and superscripts,
+you must add to the beginning of each such equation the extra information
+.cR "space 0" ''.
+This feature was illustrated on page \nk.
+.LP
+.IT Alternatives :
+.P
+Besides
+.sM GRAP
+and your local draftsperson, what other choices are there?
+.P
+The S system provides
+a host of tools for statistical analysis,
+but somewhat fewer tools than
+.sM GRAP
+for producing document-quality graphs.
+S produces graphs on the screen of a 5620 terminal much more quickly than
+.sM GRAP
+(often in seconds rather than minutes), but it
+takes somewhat longer to learn (at least for us).
+If you expect to do a lot of interactive data analysis, then
+S is probably the right tool for you.
+S may be used to generate 
+.sM PIC
+commands.
+.P
+The standard Unix program
+.sM GRAPH
+provides many of the basic features of
+.sM GRAP ,
+though with quite a bit less control over details, particularly
+text.
+It produces output only in the Unix plot language,
+which may be processed by a variety of filters
+for a variety of output devices.
+.P
+The original Unix typesetter graphics programs are
+.sM PIC
+and
+.sM IDEAL ;
+you may be able to do as well without using
+.sM GRAP
+as an intermediary.
+In particular,
+.sM IDEAL 
+provides shading and clipping,
+which are useful
+in presentation-quality bar charts and the like, but are
+well beyond the capabilities of 
+.sM PIC .
+.P
+The Analyst's Workbench family of programs includes a plotting package
+called D.
+The 
+.sM DISSPLA
+software purveyed by Bell Labs computer centers has extensive facilities
+for drawing graphs.
+.EQ
+delim $$
+.EN
+.NH
+Reference Manual
+.P
+In the following, 
+.I italic
+terms are syntactic categories,
+.cR typewriter
+terms are literals,
+parenthesized constructs are optional, and ... indicates repetition.
+In most cases, the order of statements,
+constructs and attributes is immaterial.
+.iS
+.IT "grap program" :
+	.G1 \f2(width in inches)\fP
+	\f2grap statement\fP
+	...
+	.G2
+.iE
+A width on the
+.cR .G1
+line overrides the computed width, as in
+.sM PIC .
+.iS
+.IT "grap statement" :
+.I
+	  frame \(or label \(or coord \(or ticks \(or grid \(or plot \(or line \(or circle \(or draw \(or new \(or next
+	\(or graph \(or numberlist \(or copy \(or for \(or if \(or sh \(or pic \(or assignment \(or print
+.ft
+.iE
+.P
+The
+.cR frame
+statement defines the frame that surrounds the graph:
+.iS
+.IT frame :
+	frame \f2(\fPht \f2expr)\fP \f2(\fPwid \f2expr)\fP \f2((side) linedesc)\fP \f2...\fP
+.IT side :
+	top \(or bot \(or left \(or right
+.IT linedesc :
+	solid \(or invis \(or dotted \f2(expr)\fP \(or dashed \f2(expr)\fP
+.iE
+Height and width default to 2 and 3 inches;
+sides default to solid.
+If
+.I side
+is omitted, the
+.I linedesc
+applies to the entire frame.
+The optional expressions after
+.cR dotted
+and
+.cR dashed
+change the spacing exactly as in
+.sM PIC .
+.P
+The
+.cR label
+statement places a label on a specified side:
+.iS
+.IT label :
+	label \f2side\fP \f2strlist\fP \f2...\fP \f2shift\fP
+.IT shift:
+	left\f2 \(or \fPright\f2 \(or \fPup\f2 \(or \fPdown \f2expr ...\fP
+.IT strlist :
+	\f2str ... (\fPrjust\f2 \(or \fPljust\f2 \(or \fPabove\f2 \(or \fPbelow\f2) ... (\fPsize \f2(\fP\(+-\f2) expr) ...\fP
+.IT str :
+	"\f2...\fP"
+.iE
+Lists of text strings are stacked vertically.
+In any context, string lists may contain clauses
+to adjust the position or change the point size.
+Each clause applies to the string preceding it
+and all following strings.
+.P
+Normally the coordinate system is defined by the data,
+with 7 percent extra on each side.
+(To change that to 5 percent, assign 0.05 to the
+.sM GRAP
+variable
+.cR margin ,
+which is reset to 0.07 at each
+.cR .G1
+statement.)
+The
+.cR coord
+statement defines an overriding system:
+.iS
+.IT coord :
+	coord \f2(name)\fP \f2(\fPx \f2expr,expr)\fP \f2(\fPy \f2expr,expr)\fP \f2(\fPlog x \(or log y \(or log log\f2) \fP
+.iE
+Coordinate systems can be named;
+ranges, logarithmic scaling, etc., are done separately for each.
+.P
+The
+.cR ticks
+statement places tick marks on one side of the frame:
+.iS
+.IT ticks :
+	ticks \f2side\fP \f2(\fPin \(or out \f2(expr))\fP \f2(shift)  (tick-locations)\fP
+.IT tick-locations :
+	  at \f2(name) expr (str)\fP, \f2expr (str)\fP, \f2...\fP
+	\(or from \f2(name) expr\fP to \f2expr\fP \f2(\fPby \f2(op) expr)\fP \f2str\fP
+.iE
+If no ticks are specified, they will be provided automatically;
+.cR ticks
+.cR off
+suppresses automatic ticks.
+The optional expression after
+.cR in
+or
+.cR out
+specifies the length of the ticks in inches.
+The optional name refers to a coordinate system.
+If
+.IT str
+contains
+format specifiers like
+.cR %f
+or
+.cR %g ,
+they are interpreted as by
+.cR printf .
+If no
+.IT str
+is supplied, the tick labels will be the values of the
+expressions.
+.P
+If the
+.cR by
+clause is omitted, steps are of size 1.
+If the
+.cR by
+expression is preceded by one of
+.cR + ,
+.cR - ,
+.cR *
+or
+.cR / ,
+the step is scaled by that operator,
+e.g.,
+.cR *10
+means that each step is 10 times the previous one.
+.P
+The
+.cR grid
+statement produces grid lines along (i.e., perpendicular to)
+the named side.
+.iS
+.IT grid :
+	grid \f2side (linedesc) (shift)  (tick-locations)\fP
+.iE
+Grids are labeled by the same mechanism as
+.cR ticks .
+.P
+Plot
+statements place text at a point:
+.iS
+.IT plot :
+	\f2strlist\fP at \f2point\fP
+	plot \f2expr (str)\fP at \f2point\fP
+.IT point :
+	\f2(name) expr,expr\fP
+.iE
+As in the
+.cR label
+statement, the string list may contain
+position and size modifiers.
+The
+.cR plot
+statement uses the optional format string as in the
+.sM C
+.cR printf
+statement \(em it may contain a
+.cR %f
+or
+.cR %g .
+The optional name refers to a coordinate system.
+.P
+The
+.cR line
+statement draws a line or arrow from here to there:
+.iS
+.IT line :
+	\f2(\fPline \(or arrow\f2)\fP from \f2point\fP to \f2point (linedesc)\fP
+.iE
+The
+.cR circle
+statement draws a circle:
+.iS
+.IT circle :
+	circle at \f2point (\fPradius \f2expr)\fP
+.iE
+The radius is in inches; the default size is small.
+.P
+The 
+.cR draw
+statement defines a sequence of lines:
+.iS
+.IT draw :
+	draw \f2(name) linedesc (str)\fP
+.iE
+Subsequent data for the named sequence
+will be plotted as a line of the specified style,
+with the optional
+.IT str
+plotted at each point.
+The
+.cR next
+statement continues a sequence:
+.iS
+.IT next :
+	next \f2(name)\fP at \f2point (linedesc)\fP
+.iE
+If a line description is specified, it overrides the default
+display mode for the line segment ending at
+.I point .
+The
+.cR new
+statement starts a new sequence; it has the same format as the
+.cR draw
+statement.
+.P
+A line consisting of a set of numbers
+is treated as a family of points
+$x$, $y sub 1$, $y sub 2$, etc.,
+to be plotted at the single
+$x$ value.
+.iS
+.IT numberlist :
+	\f2number\fP ...
+.iE
+If there is only one number it is treated as
+a $y$ value, and $x$ values of 1, 2, 3, ...
+are supplied automatically.
+.P
+.sM GRAP 
+provides arithmetic with the operators
+.cR + ,
+.cR - ,
+.cR *
+and
+.cR / .
+Variables may be assigned to;
+assignments are expressions.
+Built-in functions include
+.cR log ,
+.cR exp
+(both base 10 \(em beware!),
+.cR int
+(truncates towards zero),
+.cR sin ,
+.cR cos 
+(both use radians),
+.cR atan2(dy,dx) ,
+.cR sqrt ,
+.cR min
+(two arguments only),
+.cR max
+(ditto),
+and
+.cR rand()
+(returns a real number random on [0,1)).
+.P
+The
+.cR for
+statement provides a modest looping facility:
+.iS
+.IT for :
+	for \f2var\fP from \f2expr\fP to \f2expr (\fPby \f2(op) expr)\fP do X \f2anything\fP X
+.iE
+.cR X
+is any single character that doesn't appear in the string.
+If
+.cR X
+is a left brace
+.cR { ,
+then the string may contain
+internally balanced braces and is terminated by a right brace
+.cR } .
+The text
+.IT anything
+(which may contain newlines) is repeated as 
+.IT var
+takes on values from
+.IT expr1
+to
+.IT expr2 .
+As with tick iterators, the
+.cR by
+clause is optional, and may proceed arithmetically or multiplicatively.
+In a
+.cR for
+statement,
+the
+.cR from
+may be replaced by
+.cR = ''. ``
+.P
+The
+.cR if-then-else
+statement provides conditional evaluation:
+.iS
+.IT if :
+	if \f2expr\fP then X \f2anything\fP X else X \f2anything\fP X
+.iE
+The
+.cR else -clause
+is optional.
+Relational operators include
+.cR == ,
+.cR != ,
+.cR > ,
+.cR >= ,
+.cR < ,
+.cR <= ,
+.cR ! ,
+.cR || ,
+and
+.cR && .
+Strings may be compared with the operators
+.cR ==
+and
+.cR != .
+.P
+.sM GRAP
+provides the same macro processor that
+.sM PIC
+does:
+.iS
+define \f2macro_name\fP X \f2anything\fP X
+.iE
+Subsequent occurrences of the macro name will be replaced
+by the string, with arguments of the form
+$ dollar n $ replaced by corresponding actual arguments.
+Macro definitions persist across
+.cR .G2
+boundaries, as do values of variables.
+.P
+The
+.cR copy
+statement is somewhat overloaded:
+.iS
+copy "\f2filename\fP"
+.iE
+includes the contents of the named file at that point;
+.iS
+copy "\f2filename\fP" thru \f2macro_name\fP
+.iE
+copies the file through the macro; and
+.iS
+copy thru \f2macro_name\fP
+.iE
+copies subsequent lines through the macro;
+each number or quoted string is treated as an argument.
+In each case, copying continues until end of file or the next
+.cR .G2 .
+The optional clause
+.cR until
+.IT str
+causes copying to terminate when a line whose
+first field is
+.IT str
+occurs.
+In all cases, the macro can be specified inline rather than by name:
+.iS
+copy thru X \f2macro body\fP X
+.iE
+.P
+The
+.cR sh
+command passes text through to the Unix shell.
+.iS
+.IT sh :
+	sh X \f2anything\fP X
+.iE
+The body of the command is scanned for macros.
+The built-in macro
+.cR pid
+is a string consisting of the process identification number;
+it can be used to generate unique file names.
+.P
+The
+.cR pic
+command passes text through to
+.sM PIC 
+with the 
+.cR pic '' ``
+removed; variables and macros are not evaluated.
+Lines beginning with a period (that are not numbers)
+are passed through literally, under the assumption that they
+are
+.sM TROFF
+commands.
+.P
+The
+.cR graph
+statement
+.iS
+.IT graph :
+	graph \f2Picname (pic-text)\fP
+.iE
+defines a new graph named
+.I Picname ,
+resetting all coordinate systems.
+If any
+.cR graph
+commands are used in a
+.sM GRAP
+program, then the statement after the
+.cR \&.G1
+must be a
+.cR graph
+command.
+The
+.I pic-text
+can be used to position this graph relative
+to previous graphs by referring to their
+.cR Frame s,
+as in
+.iS
+	graph First
+	 ...
+	graph Second with .Frame.w at First.Frame.e + (0.1,0)
+.iE
+Macros and expressions in
+.I pic-text
+are not evaluated.
+.I Picname s
+must begin with a capital letter to satisfy 
+.sM PIC
+syntax.
+.P
+The
+.cR print
+statement
+.iS
+.IT print :
+	print \f2(expr\fP \(or \f2str)\fP
+.iE
+writes on
+.cR stderr
+as
+.sM GRAP
+processes its input; it is sometimes useful for debugging.
+.P
+Many reserved words have synonyms, such as
+.cR thru
+for
+.cR through ,
+.cR tick
+for
+.cR ticks,
+and
+.cR bot
+for
+.cR bottom .
+.P
+The
+.cR #
+introduces a comment, which ends at the end of the line.
+Statements may be continued over several lines by preceding each
+newline with a
+backslash character.
+Multiple statements may appear on a single line separated
+by semicolons.
+.sM GRAP
+ignores any line that is entirely blank, including those
+processed by
+.cR "copy thru"
+commands.
+.P
+When
+.sM GRAP
+is first executed it reads standard macro definitions
+from the file
+.cR /usr/lib/grap.defines .
+The definitions include
+.cR bullet ,
+.cR plus ,
+.cR box ,
+.cR star ,
+.cR dot ,
+.cR times ,
+.cR htick ,
+.cR vtick ,
+.cR square ,
+and
+.cR delta .
+.EQ
+delim $$
+define cw / font CW /
+define | / { ~ \(or ~ } /
+define ... / ~"..."~ /
+.EN
+.nr dT
+.bp
+.SH
+Summary of GRAP Commands
+.P
+In the following, 
+.I italic
+terms are syntactic categories,
+.cR typewriter
+terms are literals,
+parenthesized constructs are optional, and ... indicates repetition.
+In most cases, the order of statements,
+constructs and attributes is immaterial.
+.DS
+.ps -1
+.vs -1
+.ta .75i
+.IT "grap program" :
+	$cw .G1 ~(width~in~inches)$
+	$grap~statement$
+	$...$
+	$cw .G2$
+.IT "grap statement" :
+	$frame | label | coord | ticks | grid | plot | line | circle | draw | new | next$
+	$| graph | numberlist | "copy" | "for" | "if" | pic | assignment | print $
+	$| "define" | "copy" | sh$
+$frame:	cw frame~ ( cw ht ~expr) ~ ( cw wid ~expr) ~((side)~ linedesc) ...$
+$side:	cw top | cw bot | cw "left" | cw "right"$
+$linedesc:	cw solid | cw invis | cw dotted ~(expr) | cw dashed ~(expr)$
+$label:	cw label~ side ~strlist ... shift$
+$shift:	cw "left" | cw "right" | cw "up" | cw "down" ~expr ...$
+$strlist:	str ... ( cw rjust | cw ljust | cw "above" | cw below) ... ( cw "size"~ (\(+-) expr) ...$
+$str:	cw "\"" "..." cw "\""$
+$coord:	cw coord~ (name) ~( cw x~ expr,expr)~ ( cw y~ expr,expr)~ ( cw "log x" | cw "log y" | cw "log log") $
+$ticks:	cw ticks ~ side ~( cw in | cw out~ (expr)) ~(shift) ~(tick"-"locations)$
+.IT tick-locations :
+	  $cw at ~(name)~ expr~ (str),~ expr~ (str), ...$
+	$| cw "from"~ (name)~ expr~ cw "to"~ expr~
+              ( cw by ~( cw "+" | cw "-" | cw "*" | cw "/")~ expr)~ str$
+$grid:	cw grid~ side~ (linedesc)~ (shift)~  (tick"-"locations)$
+$plot:	strlist~ cw at~ point | cw plot~ expr~ (str)~ cw at~ point$
+$point:	(name)~ expr,expr$
+$line:	( cw line | cw arrow )~ cw "from"~ point~ cw "to"~ point~ (linedesc)$
+$circle:	cw circle~ cw at ~point ~( cw radius~ expr)$
+$draw:	cw draw~ (name)~ linedesc~ (str)$
+$new:	cw new~ (name)~ linedesc~ (str)$
+$next:	cw next~ (name)~ cw at ~point~ (linedesc)$
+$numberlist :	number ...$
+$for:	cw "for"~ var~ cw "from"~ expr ~ cw "to"~ expr~
+           ( cw by ~( cw "+" | cw "-" | cw "*" | cw "/") ~ expr)~ cw do~ X~ anything~ X$
+$if:	cw "if"~ expr~ cw then~ X ~anything ~ X ~cw else~ X ~anything~ X$
+$graph:	cw graph~ Picname~ (pic"-"text)$
+$print:	cw print~ (expr | str)$
+$define:	 cw "define"~ macro_name~ X ~anything ~ X$
+$copy:	cw "copy" ~("\"filename\"") ~( cw thru~ macro_name | X~ macro~ body~ X ) ~(until~ "\"endstring\"")$
+$sh:	cw sh~ X~ anything ~ X$
+$pic:	cw pic~ anything$
+$assignment:	var ~ cw "=" ~ expr$
+$X:	any~single~character,~ or ~ braces ~ "{ }" $
+.DE
+Predefined strings include
+.cR bullet ,
+.cR plus ,
+.cR box ,
+.cR star ,
+.cR dot ,
+.cR times ,
+.cR htick ,
+.cR vtick ,
+.cR square ,
+and
+.cR delta .
+Built-in functions include
+.cR log 
+(base 10),
+.cR exp
+(base 10),
+.cR int ,
+.cR sin ,
+.cR cos ,
+.cR atan2 ,
+.cR sqrt ,
+.cR min ,
+.cR max ,
+and
+.cR rand .

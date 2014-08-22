@@ -1,0 +1,480 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.ds pT MM
+.aP F "Error Messages"
+.HU "MM Error Messages"
+An
+.sM MM
+error message has the following format:
+.iS
+ERROR:(\*(iAfilename\*(iR)input line \*(iAn\*(iR:
+.cA description
+.iE
+where
+.cA filename
+is the file in which the error occured,
+.cA n
+is the line number in that file,
+and
+.cA description
+is a descriptive message that indicates the macro in error
+and the nature of the erorr.
+Following is a list of descriptive messages (in alphabetical order
+by macro name) with some information on limitations or conditions
+that could cause that error.
+.SA 0
+.rs
+.sp -0.5v
+.TS H
+lf1 lf1
+rp-1f5 lf1w(3.3i).
+Error Message	Explanation
+_
+.sp 0.5v
+.TH
+check TL, AU, AS, AE, MT sequence	T{
+The order of macros at the beginning of a memorandum, released paper, or
+external letter is incorrect
+or some other macro has disturbed that order.
+T}
+.sp 0.5v
+check WA, WE, IA, IE, LT sequence	T{
+The order of macros at the beginning of a business letter is incorrect
+or some other macro has disturbed that order.
+T}
+.sp 0.5v
+DE:no DS or DF active	T{
+A display ends but has never started, i.e.,
+a
+.cR .DE
+macro occurs with no previous
+.cR .DS 
+or
+.cR .DF 
+macro to match it.
+T}
+.sp 0.5v
+DF:illegal inside TL or AS	T{
+Floating displays are not allowed in the title or abstract.
+T}
+.sp 0.5v
+DF:missing DE	T{
+A floating display starts inside a display,
+i.e., a previous
+.cR .DE
+macro was omitted or mistyped.
+T}
+.sp 0.5v
+DF:missing FE	T{
+A floating display starts inside a footnote.
+Most likely, a
+.cR .FE
+macro to end a previous footnote was omitted or mistyped.
+T}
+.sp 0.5v
+DF:too many displays	T{
+More than 26 floating displays are active at once,
+i.e., have accumulated but not yet output.
+T}
+.sp 0.5v
+DS:illegal inside TL or AS	T{
+Static displays are not allowed in the title or abstract.
+T}
+.sp 0.5v
+DS:missing DE	T{
+A static display starts inside a display,
+i.e., a previous
+.cR .DE
+macro was omitted or mistyped.
+T}
+.sp 0.5v
+DS:missing FE	T{
+A static display starts inside a footnote.
+Most likely, a
+.cR .FE
+macro to end a previous footnote was omitted or mistyped.
+T}
+.sp 0.5v
+FE:no FS active	T{
+A footnote ends but has never started, i.e.,
+a
+.cR .FE
+macro occurs with no previous
+.cR .FS
+macro to match it.
+T}
+.sp 0.5v
+FS:missing DE	T{
+A footnote starts inside a display.
+Most likely, a
+.cR .DE
+macro to end a previous display was omitted or mistyped.
+T}
+.sp 0.5v
+FS:missing FE	T{
+A footnote starts inside a footnote, i.e.,
+a previous
+.cR .FS
+macro was not matched by a closing
+.cR .FE
+macro.
+T}
+.sp 0.5v
+H:bad arg:\*(iAn\fP	T{
+The heading level argument must be a single digit from 1 to 7;
+.cA n
+is not a legal value.
+T}
+.sp 0.5v
+H:missing arg	T{
+The
+.cR .H
+macro needs at least one argument.
+T}
+.sp 0.5v
+H:missing DE	T{
+A heading macro
+.cR .H "" (
+or
+.cR .HU )
+occurs inside a display.
+Possibly, a
+.cR .DE
+macro to end a previous display was omitted or mistyped.
+T}
+.sp 0.5v
+H:missing FE	T{
+A heading macro
+.cR .H "" (
+or
+.cR .HU )
+occurs inside a footnote.
+Possibly, a
+.cR .FE
+macro to end a previous footnote was omitted or mistyped.
+T}
+.sp 0.5v
+HU:missing arg	T{
+The
+.cR .HU
+macro needs one argument.
+T}
+.sp 0.5v
+LB:missing arg(s)	T{
+The
+.cR .LB
+macro requires at least four arguments.
+T}
+.sp 0.5v
+LB:too many nested lists	T{
+Another list was start when six lists are already active.
+T}
+.sp 0.5v
+LE:mismatched	T{
+A list ends but has never started, i.e., a
+.cR .LE
+macro occurs without a previous list initialization macro.
+Although this is not a fatal error, the message is issued
+because there almost certainly exists some problem
+in the preceding text.
+T}
+.sp 0.5v
+LI:no lists active	T{
+A list item is requested but no list is active, i.e., a
+.cR .LI
+macro occurs without a preceding list-initialization macro.
+Most likely, a list initialization macro was omitted, mistyped,
+or separated from the
+.cR .LI
+macro by an intervening
+.cR .H
+or
+.cR .HU
+macro.
+T}
+.sp 0.5v
+LO argument not recognized	T{
+The argument given to the
+.cR .LO
+macro is incorrect; the only valid arguments are
+.cR SA ,
+.cR AT ,
+.cR SJ ,
+.cR RN ,
+and
+.cR CN .
+T}
+.sp 0.5v
+LT argument not recognized	T{
+The argument given to the
+.cR .LT
+macro is incorrect; the only valid arguments are
+.cR BL ,
+.cR SB ,
+.cR FB ,
+and
+.cR SP .
+T}
+.sp 0.5v
+ML:missing arg	T{
+The
+.cR .ML
+macro requires at least one argument.
+T}
+.sp 0.5v
+ND:missing arg	T{
+The
+.cR .ND
+macro requires one argument.
+T}
+.sp 0.5v
+RF:no RS active	T{
+A reference ends but has never started, i.e., a
+.cR .RF
+macro occurs with no previous
+.cR .RS
+macro to match it.
+T}
+.sp 0.5v
+RP:missing RF	T{
+A request to generate the reference page occurs
+inside a reference, i.e.,
+a previous
+.cR .RS
+macro was not matched by a closing
+.cR .RF
+macro.
+T}
+.sp 0.5v
+RS:missing RF	T{
+A reference starts inside a reference, i.e., a previous
+.cR .RS
+macro was not matched by a closing
+.cR .RF
+macro.
+T}
+.sp 0.5v
+S:bad arg \*(iAn\fP	T{
+The
+.cR .S
+macro was given an incorrect argument
+.cA n .
+T}
+.sp 0.5v
+SA:bad arg:\*(iAn\fP	T{
+The argument given to the
+.cR .SA
+macro is incorrect; the only valid arguments are
+.cR 0
+or
+.cR 1 .
+T}
+.sp 0.5v
+SG:missing DE	T{
+The signature block is requested inside a display.
+Most likely, a
+.cR .DE
+macro to end a previous display was omitted or mistyped.
+T}
+.sp 0.5v
+.br
+.ne 3v
+SG:missing FE	T{
+The signature block is requested inside a footnote.
+Most likely, a
+.cR .FE
+macro to end a previous footnote was omitted or mistyped.
+T}
+.sp 0.5v
+SG:no authors	T{
+The
+.cR .SG
+macro occurs without a previous
+.cR .AU
+macro.
+T}
+.sp 0.5v
+TE: used TS H but no TH	T{
+A table with repeating headers has ended but the
+header portion has not been defined.
+A table started with the
+.cR ".TS\ H"
+macro must have a
+.cR .TH
+macro to separate the repeating-header portion of the
+table from the data that follows.
+T}
+.sp 0.5v
+VL:missing arg	T{
+The
+.cR .VL
+macro requires at least one argument.
+T}
+.sp 0.5v
+WA macro missing	T{
+The writer's address block has ended but it
+was never started, i.e., a
+.cR .WE
+macro occurs with no previous
+.cR .WA
+macro to match it.
+T}
+.sp 0.5v
+WA or WE macro missing	T{
+The macros in the beginning of a business letter
+are not in order.
+The inside address block has started without a
+preceding writer's address block, i.e., a
+.cR .IA
+macro occurs with no previous
+\*(iR.WA\f1\|/\*(iR.WE\f1 macro pair.
+T}
+.sp 0.5v
+WA, WE, or IA macro missing	T{
+The macros in the beginning of a business letter are not in order.
+The inside address block has ended but was
+never started or preceded by the writer's address block,
+i.e., a
+.cR .IE
+macro occurs with no previous
+.cR .IA
+macro to match it, or with no previous
+\*(iR.WA\f1\|/\*(iR.WE\f1 macro pair.
+T}
+.sp 0.5v
+WA, WE, or IE macro missing	T{
+The macros in the beginning of a business letter
+are not in order.
+The letter type macro cannot generate the letter without
+the writer's address block and the inside address block,
+i.e., the
+.cR .LT
+macro occurs with no previous
+\*(iR.WA\f1\|/\*(iR.WE\f1 and
+\*(iR.IA\f1\|/\*(iR.IE\f1 macro pairs.
+T}
+.sp 0.5v
+WC:unknown option	T{
+The
+.cR .WC
+macro was given an incorrect argument.
+T}
+.TE
+.SK
+.SA 1
+.HU "Formatter Error Messages"
+Most messages issued by the
+.I troff
+text formatter are self-explanatory.
+Those error messages over which the user
+has some control are listed below.
+Any other error messages should be reported to the local
+system-support group.
+.SA 0
+.TS H
+lf1 lf1
+rp-1f5 lf1w(3.75i).
+Error Message	Explanation
+_
+.sp 0.5v
+.TH
+cannot do ev	T{
+This error is not an obvious one and occurs when
+some condition
+(e.g., setting a page length that is extremely short)
+does not allow a switch in environments.
+T}
+.sp 0.5v
+Cannot open file \*(iA\s+1filename\s0\fP	T{
+One of the files in the list of files to be processed cannot be opened,
+or the requested macro package does not exist.
+T}
+.sp 0.5v
+exception word list full	T{
+Too many words have been specified in the
+hyphenation exception list (via
+.cR .hw
+requests).
+T}
+.sp 0.5v
+Line overflow	T{
+The output line being generated was too long for
+the internal line buffer.
+This excess was discarded.
+See the 
+.cR "\s-1Word overflow\s+1" '' ``
+message below.
+T}
+.sp 0.5v
+Can't open font file \*(iAfont\fP	T{
+A request has been made to mount or to use an unknown font.
+The description file for
+.cA font
+cannot be found.
+T}
+.sp 0.5v
+Out of temp file space	T{
+Additional temporary space for macro definitions,
+diversions, etc. cannot be allocated.
+This message often occurs because of unclosed diversions
+(missing
+.cR .FE
+or
+.cR .DE
+macros),
+unclosed macro definitions (e.g., missing
+.cR .. ''), ``
+or a huge table of contents.
+T}
+.sp 0.5v
+too many page numbers	T{
+The list of pages specified to the
+.cR \-o
+option is too long.
+T}
+.sp 0.5v
+too many number registers\f1 \f5(\f2n\f5)	T{
+The pool of number register names is full;
+the limit was exceeded by
+.I n
+names.
+Unneeded registers can be deleted with the
+.cR .rr
+request.
+T}
+.sp 0.5v
+Too many\f1 \f5(\f2n\fP)\f1 \f5string/macro names	T{
+The pool of string and macro names is full;
+the limit was exceeded by
+.I n
+names.
+Unneeded strings and macros can be deleted with the
+.cR .rm
+request.
+T}
+.sp 0.5v
+Word overflow	T{
+The word being generated exceeded an internal word buffer.
+The excess characters were discarded.
+A likely cause for this and for the
+.cR "\s-1Line Overflow\s+1" '' ``
+message
+above are very long lines or words generated through the misuse of
+.cR \ec
+or of the
+.cR .cu
+request, or very long equations produced by
+.IR eqn .
+Word overflow can be cured by printing the offending word in
+no-fill mode (e.g., change an in-line equation to a
+displayed equation).
+The only cure for line overflow is to break the offending
+line into two lines.
+T}
+.TE
+.SA 1

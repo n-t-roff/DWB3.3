@@ -1,0 +1,61 @@
+.PS 3 
+textfont = setfont("Helvetica"); textsize = 10
+arrowwid = .1; arrowht = .1; linewid = .2; lineweight = 0.01
+
+define checkmark {
+  line filled $1 noedge by ($2,-$2) by (2*$2,2*$2) \
+     by (-2*$2,-1.4*$2) at $3 $4
+}
+define cursor {
+  line filled $1 noedge at $3 $4 by (9*$2,0) \
+    by (-4*$2,-2*$2) by \
+      (11*$2,-11*$2) by (-3*$2,-3*$2) \
+         by (-11*$2,11*$2) by (-2*$2,-4*$2)
+}
+define menuitem {
+  if $1 != $2 then X L$1: $3 with .w at x,y X \
+       else Y L$1: $3 with .w at x,y edged white layer 1 Y
+  y = y - .2
+}
+.ec \
+.bp
+define menu {
+   [  down
+      x = Here.x; y = Here.y
+      menuitem(1,$2,$5)
+      if $1 > 1 then X menuitem(2,$2,$6)  X
+      if $1 > 2 then X menuitem(3,$2,$7)  X
+      if $1 > 3 then X menuitem(4,$2,$8)  X
+      if $1 > 4 then X menuitem(5,$2,$9)  X
+      if $1 > 5 then X menuitem(6,$2,$10) X
+   ] $3
+   w = last [].wid + abs($4); h = last [].ht/$1
+   if $4 >= 0 then {
+	box ht $1 * h wid w with .nw at last [].nw
+   } else {
+	box ht $1 * h wid w with .ne at last [].ne
+   }
+   box ht h wid w with .w at (last box.w.x, last [].L$2.y) filled
+}
+Window: box weight .05 ht 3 wid 5
+	box ht .22 wid 5 with .n at last box .n filled
+	"H1 " edged white with .w at last box .w + (.1, 0)
+	box ht .1 wid .1 edged white with .sw at last text.e
+	box ht .1 wid .1 edged white with .nw at last box
+	"$" at last text + (.1,-.35); move right .1; box ht .2 wid .1 filled
+
+M1:	menu(5,3,at Window.c,0.4," Edit"," Font"," Buffer"," Peel"," Print")
+	x = last box.e.x - 0.25
+	arrow at x,last block.L1.y
+	arrow at x,last block.L2.y
+	arrow at x,last block.L3.y edged white
+	arrow at x,last block.L5.y
+
+M2:	last box.ne + (0.275,0)
+	menu(2,2,with .nw at M2,-0.25,"On ","Off ")
+	checkmark(black,0.0625,M2-(0.25,h/2))
+
+	u = 0.01
+	cursor(white, u, last block.L2.w-(.2,0)) 
+	line from last line.4th by -4*u,4*u by -4.25*u,0 to last line.5th fill
+.PE

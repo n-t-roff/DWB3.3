@@ -1,0 +1,12 @@
+
+Old makedev program for building binary font tables. Compile
+makedev using,
+
+	make makedev
+
+Run it like,
+
+	makedev DESC ? ??
+
+This program will not be included in future DWB releases.
+

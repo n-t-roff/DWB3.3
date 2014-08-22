@@ -1,0 +1,156 @@
+.ds dF /usr/lib/font
+.TH FONT 5
+.SH NAME
+.B font
+\- typesetter description tables
+.SH SYNOPSIS
+\*(mBtroff\f1
+.OP \-T name
+\(el
+.SH DESCRIPTION
+Typesetter tables for device
+.I name
+are located in directory
+.MI \*(dF/dev name\f1.
+The tables are used by
+.B troff
+and most postprocessors.
+.PP
+The tables are
+.SM ASCII
+and are read one line at a time.
+The first word on each line is a keyword.
+The remainder of the line is the value associated with
+that keyword.
+Lines that begin with unrecognized keywords are ignored.
+Programs that read typesetter tables are free to recognize
+their own collection of keywords provided they parse the
+standard set (below) properly.
+.PP
+A general description of the typesetter can be found in
+a file named
+.MR DESC .
+The standard set of
+.MW DESC
+file keywords includes:
+.nr PD 2p
+.RS .25i
+.TP 1i
+.MW res
+Device resolution in dots per inch.
+.TP
+.MW hor
+Smallest unit of horizontal motion.
+.TP
+.MW vert
+Smallest unit of vertical motion.
+.TP
+.MW sizes
+Available point sizes.
+List must be given in increasing numerical order,
+be terminated with a 0, and can span more than one line.
+.TP
+.MW unitwidth
+Widths in font tables are given at this point size.
+.TP
+.MW fonts
+Number of font positions followed by the list of
+default fonts.
+The list can span more than one line.
+.TP
+.MW charset
+List of special characters available in the typesetter.
+Starts on the next line and continues to the end of the
+.MW DESC
+file.
+.RE
+.PP
+The remaining files (e.g.,
+.MR R ,
+.MR I ,
+.MR B ,
+.MR CW )
+describe the fonts available on device
+.IR name .
+The standard set of font table keywords is:
+.RS .25i
+.TP 1i
+.MW name
+Font name as known to
+.BR troff .
+.TP
+.MW special
+Indicates the font is special.
+.TP
+.MW ligatures
+Which ligatures (if any) exist of this font.
+List is terminated by 0.
+.TP
+.MW spacewidth
+Width of a space on this font.
+.TP
+.MW charset
+Character data for this font.
+Starts on the next line and continues to the end of the
+font table.
+Character data includes name, width, ascender/descender,
+and code fields.
+Fields are separated by white space (tabs or spaces).
+A comment may begin at the fifth field, and is ignored or
+.B troff
+and
+.BR dpost (1).
+A double quote in the width field indicates a synonym
+for the preceding character.
+.RE
+.SH EXAMPLES
+A sample of a general device description (file
+.MR DESC ):
+.EX -1
+# Typesetter description file for ABC printers
+fonts 9 R I B BI CW H HI S GR
+sizes 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 24
+26 28 30 32 34 36 40 44 48 52 56 60 64 68 72 0
+res 720
+hor 1
+vert 1
+unitwidth 10
+charset
+fi fl ff Fi Fl hy ru ul br em en bu ci bx sq ct ps
+eq mi pl mu di ** == <= >= != +- sl dg dd de sc bv
+   \(el
+.EE
+.br
+.ne 5v
+A sample font description (file
+.MR R ):
+.EX -1
+name R
+fontname Times-Roman
+ligatures fi fl 0
+spacewidth 25
+charset
+!	33	2	33
+"	41	2	34
+#	50	2	35
+$	50	2	36
+%	83	2	37
+&	78	2	38
+hy	33	0	45	# hyphen
+-	"			# dash (synonym for hyphen)
+dg	50	3	178	# dagger
+dd	50	3	179	# double dagger
+em	100	0	208	# em-dash
+a	44	0	97
+b	50	2	98
+c	44	0	99
+  \(el
+.EE
+.SH "SEE ALSO"
+.BR dpost (1),
+.BR troff (1),
+.BR troff (5)
+.SH REFERENCE
+B. W. Kernighan and J. F. Ossanna,
+.ul
+Troff User's Manual

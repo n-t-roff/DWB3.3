@@ -1,0 +1,47 @@
+.TH ATOL1SIM 1 "DWB 3.2"
+.SH NAME
+.B atoL1sim
+\- convert
+.SM ASCII
+to simulated Latin-1
+.SH SYNOPSIS
+\*(mBatoL1sim\f1
+.SH DESCRIPTION
+.I AtoL1sim
+reads standard input and copies to standard output.
+Escape strings of the form
+.MI \e( xy
+are replaced by
+.I x\ backspace\ y
+provided the escape string is defined in the table
+``PostScript Character Set and Symbols/Latin-1 (\s-1ISO 8859-1\s+1)
+Character Set'' in the DWB\ 3.2 PostScript documentation.
+.P
+For example, the British Pound sign may be expressed in
+.SM ASCII
+by either of
+.MW \e(L-
+or
+.MR \e(ps .
+The first of these would be output as ``L'' overstruck by ``-'',
+the second would pass through unchanged.
+.P
+This command is presumably useful only on paper terminals,
+or printers attached to terminals.
+.SM CRT
+terminals will likely obliterate the first character
+with the second.
+.SH EXAMPLES
+.EX
+troff -a 7bitfile | atoL1sim
+.sp 0.5v
+troff -a 8bitfile | L1toa | atoL1sim
+.EE
+.SH BUGS
+.P
+While accented letters are generally readable, certain
+other digraphs will not produce anything useful.
+.SH SEE ALSO
+.BR atoL1 (1),
+.BR L1toa (1),
+.BR troff (1)

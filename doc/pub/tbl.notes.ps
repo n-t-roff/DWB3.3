@@ -1,0 +1,562 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+17 HB f
+(TBL)720 1040 w
+18 HB f
+(\320 A Program to Format Tables)5 2654 1 1100 1040 t
+36 S1 f
+(________________________)720 1240 w
+14 HB f
+(Addendum)720 1440 w
+13 HB f
+(DWB 3.3)1 528 1 4512 1440 t
+10 R f
+( heading marked)2 681( A)1 130( of this software.)3 695(This addendum re\257ects changes in the DWB 3.3 version)8 2311 4 720 1860 t
+10 S1 f
+()4570 1860 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_rh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+15 66 moveto
+15 86 lineto
+16 131 lineto
+17 146 lineto
+18 158 lineto
+19 167 lineto
+21 181 lineto
+24 190 lineto
+34 193 lineto
+49 189 lineto
+58 182 lineto
+60 177 lineto
+60 166 lineto
+59 156 lineto
+58 143 lineto
+57 130 lineto
+56 117 lineto
+55 102 lineto
+54 42 lineto
+53 39 lineto
+49 35 lineto
+34 34 lineto
+19 39 lineto
+16 47 lineto
+15 66 lineto
+stroke
+
+65 60 moveto
+65 111 lineto
+66 127 lineto
+67 139 lineto
+69 153 lineto
+72 163 lineto
+83 171 lineto
+98 177 lineto
+113 182 lineto
+128 187 lineto
+143 190 lineto
+158 194 lineto
+173 196 lineto
+188 199 lineto
+203 201 lineto
+218 203 lineto
+233 205 lineto
+248 205 lineto
+263 206 lineto
+278 206 lineto
+293 206 lineto
+308 206 lineto
+323 206 lineto
+338 205 lineto
+353 203 lineto
+368 202 lineto
+383 200 lineto
+394 197 lineto
+389 190 lineto
+389 180 lineto
+391 176 lineto
+391 173 lineto
+380 173 lineto
+365 173 lineto
+350 174 lineto
+335 175 lineto
+320 176 lineto
+305 176 lineto
+290 176 lineto
+275 177 lineto
+260 177 lineto
+245 177 lineto
+240 173 lineto
+240 170 lineto
+245 165 lineto
+260 164 lineto
+275 164 lineto
+290 164 lineto
+305 163 lineto
+320 160 lineto
+327 155 lineto
+330 149 lineto
+330 134 lineto
+328 129 lineto
+323 124 lineto
+309 121 lineto
+294 121 lineto
+279 121 lineto
+264 121 lineto
+249 121 lineto
+234 121 lineto
+228 118 lineto
+228 112 lineto
+234 109 lineto
+249 109 lineto
+264 109 lineto
+279 108 lineto
+294 108 lineto
+306 104 lineto
+311 97 lineto
+312 91 lineto
+312 88 lineto
+311 82 lineto
+305 74 lineto
+290 72 lineto
+275 72 lineto
+260 72 lineto
+245 73 lineto
+230 73 lineto
+215 73 lineto
+205 70 lineto
+205 63 lineto
+217 60 lineto
+232 60 lineto
+247 60 lineto
+262 60 lineto
+277 57 lineto
+283 52 lineto
+285 44 lineto
+285 41 lineto
+284 35 lineto
+280 30 lineto
+268 26 lineto
+253 25 lineto
+238 26 lineto
+223 28 lineto
+208 31 lineto
+193 33 lineto
+178 34 lineto
+163 33 lineto
+148 31 lineto
+133 28 lineto
+118 27 lineto
+103 28 lineto
+88 34 lineto
+73 43 lineto
+67 52 lineto
+65 60 lineto
+stroke
+
+396 180 moveto
+396 188 lineto
+399 194 lineto
+410 196 lineto
+416 190 lineto
+416 180 lineto
+415 177 lineto
+411 173 lineto
+400 173 lineto
+396 180 lineto
+stroke
+
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+4570 1860 m
+100 build_rh
+4670 1860 m
+10 R f
+(refers to)1 337 1 4703 1860 t
+( heading marked)2 671( A)1 128(the section in the user documentation where this topic is discussed.)10 2708 3 720 1980 t
+10 ZD f
+(v)4255 1980 w
+10 R f
+(introduces a new)2 680 1 4360 1980 t
+(section.)720 2100 w
+10 ZD f
+(v)720 2340 w
+10 B f
+( Column)1 370(2.2.13 Expanded-Width)1 1041 2 873 2340 t
+10 R f
+(A key letter may be followed by the letter)8 1685 1 720 2520 t
+10 CW f
+(x)2432 2520 w
+10 R f
+(or)2519 2520 w
+10 CW f
+(X)2629 2520 w
+10 R f
+( is used,)2 331( this modi\256er)2 538( If)1 118(to indicate an expanding column.)4 1337 4 2716 2520 t
+( the line length after the)5 1006(the width of the correponding column will be increased to use the remainder of)13 3314 2 720 2640 t
+( for a column containing text)5 1247( feature is useful)3 713( This)1 245(widths of the other columns have been calculated.)7 2115 4 720 2760 t
+( Only)1 253( line length.)2 481(blocks where it is desired to make the column as wide as possible without exceeding the)15 3586 3 720 2880 t
+( so this modi\256er is limited to a single column)9 1972(one expanded-width column is permitted for each table,)7 2348 2 720 3000 t
+(speci\256cation. Usage is shown in the following example.)7 2234 1 720 3120 t
+10 B f
+(Input:)720 3300 w
+9 CW f
+(.TS)870 3470 w
+(tab\(!\);)870 3580 w
+( cI)1 162(cI cI)1 486 2 870 3690 t
+( lXf\(R\))1 432(cf\(CW\) l)1 432 2 870 3800 t
+( lXf\(H\))1 432(cf\(CW\) l)1 432 2 870 3910 t
+( lXf\(KR\).)1 540(cf\(CW\) l)1 432 2 870 4020 t
+(Name!Typeface!Typeface Sample)1 1566 1 870 4130 t
+(_)870 4240 w
+(R!Times Roman!T{)1 864 1 870 4350 t
+(Let us know what words they had and how they used them,)11 2970 1 870 4460 t
+(and we can infer almost all the rest.)7 1998 1 870 4570 t
+(T})870 4680 w
+(.sp 0.5v)1 432 1 870 4790 t
+(H!Helvetica Medium!T{)1 1134 1 870 4900 t
+(Let us know what words they had and how they used them,)11 2970 1 870 5010 t
+(and we can infer almost all the rest.)7 1998 1 870 5120 t
+(T})870 5230 w
+(.sp 0.5v)1 432 1 870 5340 t
+(KR!Bookman Light!T{)1 1026 1 870 5450 t
+(Let us know what words they had and how they used them,)11 2970 1 870 5560 t
+(and we can infer almost all the rest.)7 1998 1 870 5670 t
+(T})870 5780 w
+(.TE)870 5890 w
+10 B f
+(Output:)720 6070 w
+10 I f
+( Sample)1 319( Typeface)1 1834(Name Typeface)1 936 3 720 6310 t
+10 S f
+(_ ____________________________________________________________________________________)1 4220 1 720 6330 t
+10 CW f
+(R)806 6450 w
+10 R f
+( can)1 171( us know what words they had and how they used them, and we)13 2637( Let)1 465(Times Roman)1 564 4 1103 6450 t
+(infer almost all the rest.)4 946 1 1999 6570 t
+10 CW f
+(H)806 6750 w
+10 R f
+(Helvetica Medium)1 746 1 1103 6750 t
+10 H f
+( and)1 206(Let us know what words they had and how they used them,)11 2735 2 1999 6750 t
+(we can infer almost all the rest.)6 1383 1 1999 6870 t
+10 CW f
+(KR)776 7050 w
+10 R f
+(Bookman Light)1 631 1 1103 7050 t
+10 KR f
+( had and how they used them,)6 1502(Let us know what words they)5 1439 2 1999 7050 t
+(and we can infer almost all the rest.)7 1760 1 1999 7170 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+9 HB f
+(Addendum \()1 525 1 720 600 t
+8 HB f
+(DWB 3.3)1 325 1 1245 600 t
+9 HB f
+(\))1570 600 w
+10 HB f
+(TBL)4846 600 w
+10 S1 f
+()720 960 w
+720 960 m
+100 build_rh
+820 960 m
+10 B f
+( Blocks)1 309(2.3.7 Text)1 444 2 895 960 t
+10 I f
+(Tbl)720 1140 w
+10 R f
+( number of text blocks after the \256rst)7 1476(allows an unlimited)2 799 2 884 1140 t
+10 CW f
+(maxline)3190 1140 w
+10 R f
+(rows of the table are processed; in)6 1399 1 3641 1140 t
+(previous versions,)1 735 1 720 1260 t
+10 I f
+(tbl)1488 1260 w
+10 R f
+( However,)1 448(did not recognize text blocks after that point.)7 1848 2 1627 1260 t
+10 I f
+(tbl)3956 1260 w
+10 R f
+(still imposes a limit on)4 945 1 4095 1260 t
+(the number of text blocks in the \256rst)7 1480 1 720 1380 t
+10 CW f
+(maxline)2229 1380 w
+10 R f
+( you get a message indicating that the)7 1536( If)1 121(rows of the table.)3 705 3 2678 1380 t
+(limit on the number of text blocks has been exceeded, try using the global parameter)14 3389 1 720 1500 t
+10 CW f
+(maxline)4135 1500 w
+10 R f
+(\(introduced)4580 1500 w
+(in the)1 234 1 720 1620 t
+9 R f
+(DWB)986 1620 w
+10 R f
+(3.2 version of)2 570 1 1230 1620 t
+10 I f
+(tbl)1835 1620 w
+10 R f
+(\) to reduce the number of input lines used to calculate column widths; this)13 3091 1 1949 1620 t
+(way,)720 1740 w
+10 I f
+(tbl)936 1740 w
+10 R f
+(may encounter some of those text blocks after)7 1838 1 1067 1740 t
+10 CW f
+(maxline)2930 1740 w
+10 R f
+(rows rather than before.)3 952 1 3375 1740 t
+10 S1 f
+()720 1980 w
+720 1980 m
+100 build_rh
+820 1980 m
+10 B f
+( Package Extensions)2 867(3.4 Macro)1 457 2 895 1980 t
+10 R f
+(This version of)2 605 1 720 2160 t
+10 I f
+(tbl)1350 2160 w
+10 R f
+(attempts to \256x most if not all of the known problems with multiple-page boxed tables.)14 3441 1 1481 2160 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Trailer
+done
+%%Pages: 2
+%%DocumentFonts: Courier ZapfDingbats Times-Roman Helvetica-Bold Times-Bold Helvetica Times-Italic Times-Roman
+%%+ Symbol Bookman-Light

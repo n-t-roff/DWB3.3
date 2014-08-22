@@ -1,0 +1,280 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.H 1 INTRODUCTION
+This document is the user's guide and reference manual
+for the Memorandum Macros
+.sM MM ), (
+a general-purpose package of text formatting macros for use with the
+.sM UNIX \*(Rg
+system text formatters
+.I troff
+and
+.IR nroff .
+.P
+The user must be familiar with the
+.sM UNIX
+system and with the use of an editor.
+Some familiarity with the request summary in the
+.ul
+Troff User's Manual
+is helpful.
+.ul
+A Troff Tutorial
+provides a general overview of formatter capabilities,
+while
+.ul
+Troff User's Manual
+provides detailed information as well as a summary of requests.
+.H 2 Purpose
+The purpose of
+.sM MM
+is to provide a unified, consistent, and
+flexible tool for producing many common types of documents.
+Although the
+.sM UNIX
+system provides other macro packages for various
+specialized formats,
+.sM MM
+has become the standard, general-purpose macro package for most documents.
+.P
+.sM MM
+can be used to produce:
+.P
+.nr Ls 0
+.BL
+.LI
+Letters
+.LI
+Reports
+.LI
+Technical Memoranda
+.LI
+Released Papers
+.LI
+Manuals
+.LI
+Books
+.LE
+.nr Ls 6
+.P
+The uses of
+.sM MM
+range from single-page letters to documents of several hundred pages
+in length, such as user guides, design proposals, etc.
+.H 2 Conventions
+Each section of this memorandum explains a single facility of
+.sM MM .
+In general, the earlier a section occurs, the more
+necessary it is for most users.
+Some of the later sections can be completely ignored if
+.sM MM
+defaults are acceptable.
+Likewise, each section progresses from normal-case
+to special-case facilities.
+Read a section in detail only until there is enough
+information to obtain the desired format, then skim the rest of it
+because some details may be of use to just a few people.
+Sections that require knowledge of the formatters have
+a bullet (\*(BU) at the end of their headings.
+.P
+A constant-width typeface is used for all
+instances of computer input.
+In all examples, keyboard input is shown in
+.cR "constant-width" ,
+and macro arguments and text representing user information
+are shown in the standard
+.cA italic
+font.
+In this text, macro, number register and string names
+are in constant-width (e.g.,
+.cR .P ,
+.cR .H ,
+.cR Pi ,
+.cR HF ).
+.P
+In the synopses of macro calls, square brackets [\ ] surrounding
+an argument indicate that it is optional;
+ellipses \(el show that the preceding argument may appear more than once.
+.P
+Many macros generate blank lines or vertical space.
+In this text, each reference to ``blank vertical space''
+means a half vertical line.
+Note that two blank vertical spaces means one full vertical line
+(two half-lines).
+'''	\" FORCE PAGE
+.SK
+.H 2 "Overall Structure of a Document"
+The input for a document that is to be formatted with
+.sM MM
+possesses four major segments, any of which may be
+omitted; if present, they
+.I must
+occur in the following order:
+.BL
+.LI
+.ul
+Parameter-setting
+\(em This segment sets the general style and appearance of a document.
+The user can control page width, margin justification, numbering styles
+for headings and lists, page headers and footers, and many other
+properties of the document.
+Also, the user can add macros or redefine existing ones.
+This segment can be omitted entirely if one is satisfied with default values;
+it produces no actual output, but only performs the setup for the rest of
+the document.
+.LI
+.ul
+Beginning
+\(em This segment includes those items that occur only once, at the beginning
+of a document, e.g., title, author's names, date.
+.LI
+.ul
+Body
+\(em This segment is the actual text of the document.
+It may be as small as a single paragraph, or as large as hundreds of pages.
+It may have a hierarchy of
+.I headings
+up to seven levels deep.
+Headings are automatically numbered (if desired) and can be saved
+to generate the table of contents.
+Five additional levels of subordination are provided by a set of
+.I list
+macros for automatic numbering, alphabetic sequencing,
+and ``marking'' of list items.
+The body may also contain various types of
+displays, tables, figures, references, and footnotes.
+.LI
+.ul
+Ending
+\(em This segment contains those items that occur
+once only, at the end of a document.
+Included here are
+signatures and notation lists (e.g., ``copy to'' lists).
+Certain macros may be invoked here to print information
+that is wholly or partially derived from the rest of the
+document, such as the table of contents or the cover sheet for a document.
+.LE
+.P
+The existence and size of these four segments varies widely
+among different document types.
+Although a specific item (such as date, title, author's name, etc.) may be
+printed in several different ways depending on the document
+type, there is a uniform way of typing it in.
+.H 2 "Definitions"
+The term
+.I formatter
+refers to either of the text-formatting programs
+.I troff
+and
+.IR nroff .
+The examples of output in this manual are as produced by
+.IR troff ;
+.I nroff
+output would, of course, look somewhat different.
+The discussion of commands and features
+focusses on the behavior of
+.sM MM
+with
+.IR troff ;
+in some cases,
+.I nroff
+behavior is different.
+For example:  where
+.I troff
+italicizes,
+.I nroff
+underlines;
+.I troff
+values are always scaled (e.g.,
+.cR 1.5i ,
+.cR 3n ,
+.cR 5p ),
+.I nroff
+values are unscaled (e.g.,
+.cR 15 ,
+.cR 3 ,
+.cR 5 );
+.I nroff
+ignores point size and vertical spacing requests.
+Appendix A provides a complete summary of those
+.I nroff
+actions that differ from
+.IR troff .
+.P
+.I Requests
+are built-in commands recognized by the formatter.
+Although one seldom needs to use these requests 
+directly, this document contains references to some of them.
+For example, the request:
+.iS
+\&.sp
+.iE
+inserts a full blank line in the output.
+.P
+.I Macros
+are named collections of requests.
+Each macro is an abbreviation for a collection of requests that would
+otherwise require repetition.
+MM supplies many macros, and the user can define additional ones.
+Macros and requests share the same set of names and are used in the same way.
+.P
+.I Strings
+provide character variables, each of which names a string of characters.
+Strings are often used in page headers, page footers, and lists.
+They share the pool of names used by
+.I requests
+and
+.I macros .
+A string can be given a value via the
+.cR .ds
+(define string) request, and its value can be obtained by
+referencing its name, preceded by
+.cR \e* '' ``
+(for one-character names) or
+.cR \e*( '' ``
+(for two-character names).
+For instance, the string
+.cR DT
+in
+.sM MM
+normally contains the current date, so that the input line:
+.iS
+Today is \e*(DT.
+.iE
+may result in the following output:
+.ds DT "April 1, 1990
+.DS I
+Today is \*(DT.
+.DE
+.ne 4v
+The current date can be replaced, e.g.:
+.iS
+\&.ds DT 01/01/90
+.iE
+or by invoking a macro designed for that purpose.
+.P
+.I "Number registers"
+fill the role of integer variables.
+They are used for flags, for arithmetic, and for automatic numbering.
+A register can be given a value using a
+.cR .nr
+request, and be referenced by preceding its name by
+.cR \en '' ``
+(for one-character names) or
+.cR \en( '' ``
+(for two-character names).
+For example, the following sets the value of the register
+.cR d
+to 1 more than that of the register
+.cR dd :
+.iS
+\&.nr d 1+\en(dd
+.iE
+See \(sc14.1 regarding naming conventions for requests, macros,
+strings, and number registers.
+Appendix\ H lists all macros, strings, and number registers defined in
+.sM MM .

@@ -1,0 +1,6 @@
+
+A terribly complicated package, clearly the product of some unknown
+lex-happy programmer. Haven't tried to figure out why our own version
+of deroff is included. Ugly but does no real harm since it's installed
+in $(LIBDIR).
+

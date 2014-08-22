@@ -1,0 +1,261 @@
+.DS
+.sp
+.EQ
+gsize 9
+.EN
+.ps 9
+.EQ 2
+size 20{
+roman det | roman{A- lambda cdot I}|= 
+pile{n above size 24 PI above i=1} lambda sub i
+}
+.EN
+.EQ 3
+e sup -x sup 2 + e sup -x sub i sup 2 + e sup{-x sub i}sup 2
+.EN
+.EQ 4
+{sum from i=0 to inf} over {2 pi}
+{int int} from {- inf} to {+ inf}
+   e sup{-{x sub i sup 2 + y sub i sup 2}over 2}
+= e sup{- x over y}
+.EN
+.EQ 5
+a over b = c over d = A over B times C over D
+.EN
+.EQ 6
+P(x) = pile{x sub 2 above sum above x=x sub 1}
+C sub x p sup x (1-p) sup n-x =
+pile{x sub 2 above sum  above x=x sub 1}
+C sub x p sup x q sup n-x
+.EN
+.EQ 7
+sum from i=0 to {i= inf} 1 over{2 sup n + 2 sup N}= 2
+.EN
+.EQ 8
+B sub a sub 2 +
+B sub a sup 2 +{B sub a}sup 2 + (B sub a ) sup 2 + (B sup 2 ) sub a
++B sup 2 sup x
++B sub a sub i +
+B sub a sup i +{B sub a}sup i + (B sub a ) sup i + (B sup i ) sub a
++B sup i sup x
+.EN
+.EQ 9
+c sub a sub 2 +
+c sub a sup 2 +{c sub a}sup 2 + (c sub a ) sup 2 + (c sup 2 ) sub a
++c sup 2 sup x
++c sub a sub i +
+c sub a sup i +{c sub a}sup i + (c sub a ) sup i + (c sup i ) sub a
++c sup i sup x
+.EN
+.EQ 8
+ PI sub a sub 2 +
+ PI sub a sup 2 +{ PI sub a}sup 2 + ( PI sub a ) sup 2 + ( PI sup 2 ) sub a
++ PI sup 2 sup x
++ PI sub a sub i +
+ PI sub a sup i +{ PI sub a}sup i + ( PI sub a ) sup i + ( PI sup i ) sub a
++ PI sup i sup x
+.EN
+.EQ 9
+ pi sub a sub 2 +
+ pi sub a sup 2 +{ pi sub a}sup 2 + ( pi sub a ) sup 2 + ( pi sup 2 ) sub a
++ pi sup 2 sup x
++ pi sub a sub i +
+ pi sub a sup i +{ pi sub a}sup i + ( pi sub a ) sup i + ( pi sup i ) sub a
++ pi sup i sup x
+.EN
+.EQ 10
+a sub 0 + b sub 1 over
+{a sub 1 + b sub 2 over
+ {a sub 2 + b sub 3 over
+  {a sub 3 + ...}
+ }
+}
+.EN
+.EQ 11
+{a over b + c over d} sup{x over y}over 89
++{{t times 32}over h-8}sub 2
+.EN
+.EQ
+x = a sup 2 + sqrt a sup 2 + sqrt a
+.EN
+.EQ
+x = sqrt{a sup 2 + b sup 2}+ sqrt a over b +
+sqrt a sup 2 over b sup 2
+.EN
+.EQ
+sqrt a+b over sqrt c+d
+.EN
+.EQ
+1 over sqrt{ax sup 2 +bx+c}
+.EN
+.DE
+.bp
+.EQ
+define emx "{e sup mx}"
+define mab "{m sqrt ab}"
+define sa "{sqrt a}"
+define sb "{sqrt b}"
+int dx over {a emx - be sup -mx} ~=~
+left { ~~ lpile {
+     1 over {2 mab} ~log~ {sa emx - sb} over {sa emx + sb}
+   above
+     1 over mab ~ tanh sup -1 ( sa over sb emx ) 
+   above
+     -1 over mab ~ coth sup -1 ( sa over sb emx )
+}
+.EN
+.EQ
+roman erf (z) ~=~ 2 over sqrt pi int sub 0 sup z e sup -t sup 2 dt
+.EN
+.EQ
+zeta (s) ~=~ sum from k=1 to inf k sup -s ~~~ ( Re~ s > 1)
+.EN
+.EQ
+lim from {x -> inf} left ( 1 + 1 over x right ) sup x ~=~ e
+.EN
+.EQ
+x dotdot ~=~ y bar
+.EN
+.EQ
+max from 1<=n<=m log sub 2 P sub n
+.EN
+.EQ
+union sub i ~~ union sup i ~~ union sub i sup 2 ~~ union sup {pi over 2}
+~~~ union sup {i sub 2}
+.EN
+.EQ
+int sub i ~~ int sup i ~~ int sub i sup 2 ~~ int sup {pi over 2}
+~~~ int sup {i sub 2}
+.EN
+.bp
+.ps 10
+.EQ
+gsize 10
+.EN
+.EQ 2
+size 20{
+roman det | roman{A- lambda cdot I}|= 
+pile{n above size 24 PI above i=1} lambda sub i
+}
+.EN
+.EQ 3
+e sup -x sup 2 + e sup -x sub i sup 2 + e sup{-x sub i}sup 2
+.EN
+.EQ 4
+{sum from i=0 to inf} over {2 pi}
+{int int} from {- inf} to {+ inf}
+   e sup{-{x sub i sup 2 + y sub i sup 2}over 2}
+= e sup{- x over y}
+.EN
+.EQ 5
+a over b = c over d = A over B times C over D
+.EN
+.EQ 6
+P(x) = pile{x sub 2 above sum above x=x sub 1}
+C sub x p sup x (1-p) sup n-x =
+pile{x sub 2 above sum  above x=x sub 1}
+C sub x p sup x q sup n-x
+.EN
+.EQ 7
+sum from i=0 to {i= inf} 1 over{2 sup n + 2 sup N}= 2
+.EN
+.EQ 8
+B sub a sub 2 +
+B sub a sup 2 +{B sub a}sup 2 + (B sub a ) sup 2 + (B sup 2 ) sub a
++B sup 2 sup x
++B sub a sub i +
+B sub a sup i +{B sub a}sup i + (B sub a ) sup i + (B sup i ) sub a
++B sup i sup x
+.EN
+.EQ 9
+c sub a sub 2 +
+c sub a sup 2 +{c sub a}sup 2 + (c sub a ) sup 2 + (c sup 2 ) sub a
++c sup 2 sup x
++c sub a sub i +
+c sub a sup i +{c sub a}sup i + (c sub a ) sup i + (c sup i ) sub a
++c sup i sup x
+.EN
+.EQ 8
+ PI sub a sub 2 +
+ PI sub a sup 2 +{ PI sub a}sup 2 + ( PI sub a ) sup 2 + ( PI sup 2 ) sub a
++ PI sup 2 sup x
++ PI sub a sub i +
+ PI sub a sup i +{ PI sub a}sup i + ( PI sub a ) sup i + ( PI sup i ) sub a
++ PI sup i sup x
+.EN
+.EQ 9
+ pi sub a sub 2 +
+ pi sub a sup 2 +{ pi sub a}sup 2 + ( pi sub a ) sup 2 + ( pi sup 2 ) sub a
++ pi sup 2 sup x
++ pi sub a sub i +
+ pi sub a sup i +{ pi sub a}sup i + ( pi sub a ) sup i + ( pi sup i ) sub a
++ pi sup i sup x
+.EN
+.EQ 10
+a sub 0 + b sub 1 over
+{a sub 1 + b sub 2 over
+ {a sub 2 + b sub 3 over
+  {a sub 3 + ...}
+ }
+}
+.EN
+.EQ 11
+{a over b + c over d} sup{x over y}over 89
++{{t times 32}over h-8}sub 2
+.EN
+.EQ
+x = a sup 2 + sqrt a sup 2 + sqrt a
+.EN
+.EQ
+x = sqrt{a sup 2 + b sup 2}+ sqrt a over b +
+sqrt a sup 2 over b sup 2
+.EN
+.EQ
+sqrt a+b over sqrt c+d
+.EN
+.EQ
+1 over sqrt{ax sup 2 +bx+c}
+.EN
+.bp
+.EQ
+define emx "{e sup mx}"
+define mab "{m sqrt ab}"
+define sa "{sqrt a}"
+define sb "{sqrt b}"
+int dx over {a emx - be sup -mx} ~=~
+left { ~~ lpile {
+     1 over {2 mab} ~log~ {sa emx - sb} over {sa emx + sb}
+   above
+     1 over mab ~ tanh sup -1 ( sa over sb emx ) 
+   above
+     -1 over mab ~ coth sup -1 ( sa over sb emx )
+}
+.EN
+.EQ
+roman erf (z) ~=~ 2 over sqrt pi int sub 0 sup z e sup -t sup 2 dt
+.EN
+.EQ
+zeta (s) ~=~ sum from k=1 to inf k sup -s ~~~ ( Re~ s > 1)
+.EN
+.EQ
+lim from {x -> inf} left ( 1 + 1 over x right ) sup x ~=~ e
+.EN
+.EQ
+x dotdot ~=~ y bar
+.EN
+.EQ
+max from 1<=n<=m log sub 2 P sub n
+.EN
+.EQ
+union sub i ~~ union sup i ~~ union sub i sup 2 ~~ union sup {pi over 2}
+~~~ union sup {i sub 2}
+.EN
+.EQ
+int sub i ~~ int sup i ~~ int sub i sup 2 ~~ int sup {pi over 2}
+~~~ int sup {i sub 2}
+.EN
+.nf
+.EQ (5)
+psi sub {nu k vec } ~=~ sum from ljm ~ C sub ljm sup {nu k vec } ~
+phi sub ljm ~ ( r vec , E sub {nu k vec }) ~.
+.EN

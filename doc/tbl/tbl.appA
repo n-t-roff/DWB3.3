@@ -1,0 +1,1003 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.ds pT TBL
+.aP A Examples
+A variety of examples illustrating features of
+.I tbl
+are included in the examples that follow.
+Each feature is listed in Appendix B along with a reference
+to the particular example(s) which demonstrates its use.
+.P
+The symbol \*(tB in the input data represents a tab character.
+.SK
+.HU "EXAMPLE 1"
+.ig
+EX: 1 box linesize L P
+..
+.HU Input:
+.iS
+.S -1
+\&.ft H
+\&.TS
+\&linesize(30), box;
+\&Lp-1 L L.
+\&COUNTRY\*(tBUnited States\*(tBCanada
+\&AREA\*(tB3,615,123 sq.mi.\*(tB3,851,809 sq.mi.
+\&CAPITAL\*(tBWashington, D.C.\*(tBOttawa
+\&HIGHEST POINT\*(tBMt. McKinley (20,320 ft.)\*(tBMt. Logan (19,850 ft.)
+\&MONETARY UNIT\*(tBU.S. dollar\*(tBCanadian dollar
+\&MAJOR LANGUAGES\*(tBEnglish\*(tBEnglish, French
+\&.TE
+.S +1
+.iE
+.rs
+.sp|6i
+.HU Output:
+.ft H
+.TS
+linesize(30), box;
+Lp-1 L L.
+COUNTRY	United States	Canada
+AREA	3,615,123 sq.mi.	3,851,809 sq.mi.
+CAPITAL	Washington, D.C.	Ottawa
+HIGHEST POINT	Mt. McKinley (20,320 ft.)	Mt. Logan (19,850 ft.)
+MONETARY UNIT	U.S. dollar	Canadian dollar
+MAJOR LANGUAGES	English	English, French
+.TE
+.ft
+.SK
+.EQ
+delim off
+.EN
+.HU "EXAMPLE 2"
+.ig
+EX: 2 allbox C N S E I F P
+..
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&allbox;
+\&cIp-2 cIp-2 cIp-2 cIp-2 cIp-2 cIp-2 cIp-2
+\&cf(HB) s    s     s     n     n     n
+\&ne    ne    ne    ne    ne    ne    ne.
+\&Sun\*(tBMon\*(tBTue\*(tBWed\*(tBThu\*(tBFri\*(tBSat
+\&AUGUST 1991\*(tB1\*(tB2\*(tB3
+\&4\*(tB5\*(tB6\*(tB7\*(tB8\*(tB9\*(tB10
+\&11\*(tB12\*(tB13\*(tB14\*(tB15\*(tB16\*(tB17
+\&18\*(tB19\*(tB20\*(tB21\*(tB22\*(tB23\*(tB24
+\&25\*(tB26\*(tB27\*(tB28\*(tB29\*(tB30\*(tB31
+\&.TE
+.S +1
+.iE
+.rs
+.sp|6i
+.HU Output:
+.TS
+allbox;
+cIp-2 cIp-2 cIp-2 cIp-2 cIp-2 cIp-2 cIp-2
+cf(HB) s    s     s     n     n     n
+ne    ne    ne    ne    ne    ne    ne.
+Sun	Mon	Tue	Wed	Thu	Fri	Sat
+AUGUST 1991	1	2	3
+4	5	6	7	8	9	10
+11	12	13	14	15	16	17
+18	19	20	21	22	23	24
+25	26	27	28	29	30	31
+.TE
+.SK
+.HU "EXAMPLE 3"
+.ig
+EX: 3 center box C L N S | _M _D =D \^ .T&
+..
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&box;
+\&c s s
+\&c | c | c
+\&l | l | n.
+\&Major New York Bridges
+\&=
+\&Bridge\*(tBDesigner\*(tBLength
+\&_
+\&Brooklyn\*(tBJ. A. Roebling\*(tB1595
+\&Manhattan\*(tBG. Lindenthal\*(tB1470
+\&Williamsburg\*(tBL. L. Buck\*(tB1600
+\&_
+\&Queensborough\*(tBPalmer &\*(tB1182
+\&\e^\*(tB  Hornbostel\*(tB\e^
+\&_
+\&\*(tB\*(tB1380
+\&.T&
+\&l | l | _
+\&l | l | n.
+\&Triborough\*(tBO. H. Ammann
+\&\*(tB\*(tB383
+\&_
+\&Bronx Whitestone\*(tBO. H. Ammann\*(tB2300
+\&Throgs Neck\*(tBO. H. Ammann\*(tB1800
+\&_
+\&George Washington\*(tBO. H. Ammann\*(tB3500
+\&.TE
+.S +1
+.iE
+.rs
+.sp|6i
+.HU Output:
+.TS
+box;
+c s s
+c | c | c
+l | l | n.
+Major New York Bridges
+=
+Bridge	Designer	Length
+_
+Brooklyn	J. A. Roebling	1595
+Manhattan	G. Lindenthal	1470
+Williamsburg	L. L. Buck	1600
+_
+Queensborough	Palmer &	1182
+\^	  Hornbostel	\^
+_
+		1380
+.T&
+l | l | _
+l | l | n.
+Triborough	O. H. Ammann
+		383
+_
+Bronx Whitestone	O. H. Ammann	2300
+Throgs Neck	O. H. Ammann	1800
+_
+George Washington	O. H. Ammann	3500
+.TE
+.SK
+.HU "EXAMPLE 4"
+.ig
+EX: 4 C N P | _D
+..
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&c c
+\&nP-2 | n | .
+\&\*(tBStack
+\&\*(tB_
+\&1\*(tB46
+\&\*(tB_
+\&2\*(tB23
+\&\*(tB_
+\&3\*(tB15
+\&\*(tB_
+\&4\*(tB6.5
+\&\*(tB_
+\&5\*(tB2.1
+\&\*(tB_
+\&.TE
+.S +1
+.iE
+.rs
+.sp|6i
+.HU Output:
+.TS
+c c
+nP-2 | n | .
+	Stack
+	_
+1	46
+	_
+2	23
+	_
+3	15
+	_
+4	6.5
+	_
+5	2.1
+	_
+.TE
+.SK
+.HU "EXAMPLE 5"
+.ig
+EX: 5 box L B | -M
+..
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&box;
+\&L L L
+\&L L -
+\&L L|LB
+\&L L -
+\&L L L.
+\&january\*(tBfebruary\*(tBmarch
+\&april\*(tBmay
+\&june\*(tBjuly\*(tBMonths
+\&august\*(tBseptember
+\&october\*(tBnovember\*(tBdecember
+\&.TE
+.S +1
+.iE
+.rs
+.sp|6i
+.HU Output:
+.TS
+box;
+L L L
+L L -
+L L|LB
+L L -
+L L L.
+january	february	march
+april	may
+june	july	Months
+august	september
+october	november	december
+.TE
+.SK
+.HU "EXAMPLE 6"
+.ig
+EX: 6 box center C L N S ^ E F | _D \R
+..
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&box, center;
+\&cf3 s s s
+\&c | c s s
+\&^ | c s s
+\&^ | c | c | c
+\&^ | ^ | ^ | c
+\&l |ne |ne |ne.
+\&Composition of Foods
+\&_
+\&Food\*(tBPercent by Weight
+\&\*(tB_
+\&\*(tBProtein\*(tBFat\*(tBCarbo-
+\&\*(tB\*(tB\*(tBhydrate
+\&_
+\&Apples\*(tB.4\*(tB.5\*(tB13.0
+\&Halibut\*(tB18.4\*(tB5.2\*(tB\eR.
+\&Lima beans\*(tB7.5\*(tB.8\*(tB22.0
+\&Milk\*(tB3.3\*(tB4.0\*(tB5.0
+\&Mushrooms\*(tB3.5\*(tB.4\*(tB6.0
+\&Rye bread\*(tB9.0\*(tB.6\*(tB52.7
+\&.TE
+.S +1
+.iE
+.rs
+.sp|6i
+.HU Output:
+.TS
+box, center;
+cf3 s s s
+c | c s s
+^ | c s s
+^ | c | c | c
+^ | ^ | ^ | c
+l |ne |ne |ne.
+Composition of Foods
+_
+Food	Percent by Weight
+	_
+	Protein	Fat	Carbo-
+			hydrate
+_
+Apples	.4	.5	13.0
+Halibut	18.4	5.2	\R.
+Lima beans	7.5	.8	22.0
+Milk	3.3	4.0	5.0
+Mushrooms	3.5	.4	6.0
+Rye bread	9.0	.6	52.7
+.TE
+.SK
+.HU "EXAMPLE 7"
+.ig
+EX: 7 center tab C N S B P || =M .xx
+..
+.HU "Input:"
+.iS
+.S -1
+\&.TS
+\&center, tab(:);
+\&cBp+2 s s s s
+\&c  cB s  s  s
+\&cB cB cB cB cB
+\&c  =  s  s  s
+\&c||n  n  n  n .
+\&Hexadecimal to Decimal Conversion Table
+\&.sp 4p
+\&:Digit Position
+\&.sp 2p
+\&Digit:3:2:1:0
+\&.sp 1p
+\&
+\&1:4,096:256:16:1 
+\&2:8,192:512:32:2
+\&3:12,288:768:48:3
+\&4:16,384:1,024:64:4
+\&5:20,480:1,280:80:5
+\&6:24,576:1,536:96:6
+\&7:28,672:1,792:112:7
+\&8:32,768:2,048:128:8
+\&9:36,864:2,304:144:9
+\&A:40,960:2,560:160:10
+\&B:45,056:2,816:176:11
+\&C:49,152:3,072:192:12
+\&D:53,348:3,328:208:13
+\&E:57,344:3,584:224:14
+\&F:61,440:3,840:240:15  
+\&.TE
+.S +1
+.iE
+.rs
+.sp|6.3i
+.HU "Output:"
+.TS
+center, tab(:);
+cBp+2 s s s s
+c  cB s  s  s
+cB cB cB cB cB
+c  =  s  s  s
+c||n  n  n  n .
+Hexadecimal to Decimal Conversion Table
+.sp 4p
+:Digit Position
+.sp 2p
+Digit:3:2:1:0
+.sp 1p
+
+1:4,096:256:16:1 
+2:8,192:512:32:2
+3:12,288:768:48:3
+4:16,384:1,024:64:4
+5:20,480:1,280:80:5
+6:24,576:1,536:96:6
+7:28,672:1,792:112:7
+8:32,768:2,048:128:8
+9:36,864:2,304:144:9
+A:40,960:2,560:160:10
+B:45,056:2,816:176:11
+C:49,152:3,072:192:12
+D:53,348:3,328:208:13
+E:57,344:3,584:224:14
+F:61,440:3,840:240:  15  
+.TE
+.SK
+.HU "EXAMPLE 8"
+.ig
+EX: 8 center allbox C L S F P V W T{...}T .xx
+..
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&center, allbox;
+\&cfB    s           s
+\&cfI    cw(1.5i)fI  cw(1.5i)fI
+\&lp9v11 lp9v11      lp9v11 .
+\&New York Area Rocks
+\&Era\*(tBFormation\*(tBAge (years)
+\&Precambrian\*(tBReading Prong\*(tB>1 billion
+\&Paleozoic\*(tBManhattan Prong\*(tB400 million
+\&Mesozoic\*(tBT{
+\&.na
+\&Newark Basin, including
+\&Stockton, Lockatong, and Brunswick
+\&formations; also Watchungs
+\&and Palisades.
+\&.ad
+\&T}\*(tB200 million
+\&Cenozoic\*(tBCoastal Plain\*(tBT{
+\&.na
+\&On Long Island 30,000 years;
+\&Cretaceous sediments redeposited
+\&by recent glaciation.
+\&.ad
+\&T}
+\&.TE
+.S +1
+.iE
+.rs
+.sp|6i
+.HU Output:
+.TS
+center, allbox;
+cfB    s           s
+cfI      cw(1.5i)fI  cw(1.5i)fI
+lp9v11 lp9v11      lp9v11 .
+New York Area Rocks
+Era	Formation	Age (years)
+Precambrian	Reading Prong	>1 billion
+Paleozoic	Manhattan Prong	400 million
+Mesozoic	T{
+.na
+Newark Basin, including
+Stockton, Lockatong, and Brunswick
+formations; also Watchungs
+and Palisades.
+.ad
+T}	200 million
+Cenozoic	Coastal Plain	T{
+.na
+On Long Island 30,000 years;
+Cretaceous sediments redeposited
+by recent glaciation.
+.ad
+T}
+.TE
+.SK
+.HU "EXAMPLE 9"
+.ig
+EX: 9 doublebox C L B .xx
+..
+.HU Input:
+.iS
+.S -1
+\&.EQ
+\&delim $$
+\&.EN
+\&.TS
+\&doublebox;
+\&cB cB
+\&l l.
+\&.sp 2p
+\&Name\*(tBDefinition
+\&
+\&.vs +2p
+\&Gamma\*(tB$GAMMA (z)~=~int sub 0 sup inf t sup {z-1} e sup -t dt$
+\&Sine\*(tB$sin (x)~=~1 over 2i ( e sup ix - e sup -ix )$
+\&Error\*(tB$roman erf (z)~=~2 over sqrt pi int sub 0 sup z e sup {-t sup 2} dt$
+\&Bessel\*(tB$J sub 0 (z)~=~1 over pi int sub 0 sup pi cos (z sin theta )d theta $
+\&Zeta\*(tB$zeta (s)~=~sum from k=1 to inf k sup -s ~( Re~s > 1)$
+\&.vs -2p
+\&.sp 2p
+\&.TE
+.S +1
+.iE
+.rs
+.sp|6i
+.HU Output:
+.EQ
+delim $$
+.EN
+.TS
+doublebox;
+cB cB
+l l.
+.sp 2p
+Name	Definition
+
+.vs +2p
+Gamma	$GAMMA (z)~=~int sub 0 sup inf t sup {z-1} e sup -t dt$
+Sine	$sin (x)~=~1 over 2i ( e sup ix - e sup -ix )$
+Error	$roman erf (z)~=~2 over sqrt pi int sub 0 sup z e sup {-t sup 2} dt$
+Bessel	$J sub 0 (z)~=~1 over pi int sub 0 sup pi cos (z sin theta )d theta $
+Zeta	$zeta (s)~=~sum from k=1 to inf k sup -s ~( Re~s > 1)$
+.vs -2p
+.sp 2p
+.TE
+.SK
+.HU "EXAMPLE 10"
+.ig
+EX: 10 box tab C N R S B E P n | || _D =D \E
+..
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&box, tab(:);
+\&cB    s     s     s     s 
+\&cp-2  s     s     s     s 
+\&c  || c   | c   | c   | c 
+\&c  || c   | c   | c   | c 
+\&r2 || ne2 | ne2 | ne2 | ne.
+\&Readability of Text
+\&Line Width and Leading for 10-Point Type
+\&=
+\&Line:Set:1-Point:2-Point:4-Point
+\&Width:Solid:Leading:Leading:Leading
+\&_
+\&9 Pica:\e-9.3:\e-6.0:\e-5.3:\e-7.1
+\&14 Pica:\e-4.5:\e-0.6:\e-0.3:\e-1.7
+\&19 Pica:\e-5.0:\e-5.1:0.0:\e-2.0
+\&31 Pica:\e-3.7:\e-3.8:\e-2.4:\e-3.6
+\&43 Pica:\e-9.1:\e-9.0:\e-5.9:\e-8.8
+\&.TE
+.S +1
+.iE
+.P
+\f4Note\^\f3:\f1  The
+.I troff
+escape sequence
+.cR \e-
+produces a minus sign in the current font.
+.rs
+.sp|6i
+.HU Output:
+.TS
+box, tab(:);
+cB    s     s     s     s 
+cp-2  s     s     s     s 
+c  || c   | c   | c   | c 
+c  || c   | c   | c   | c 
+r2 || ne2 | ne2 | ne2 | ne.
+Readability of Text
+Line Width and Leading for 10-Point Type
+=
+Line:Set:1-Point:2-Point:4-Point
+Width:Solid:Leading:Leading:Leading
+_
+9 Pica:\-9.3:\-6.0:\-5.3:\-7.1
+14 Pica:\-4.5:\-0.6:\-0.3:\-1.7
+19 Pica:\-5.0:\-5.1:0.0:\-2.0
+31 Pica:\-3.7:\-3.8:\-2.4:\-3.6
+43 Pica:\-9.1:\-9.0:\-5.9:\-8.8
+.TE
+.SK
+.HU "EXAMPLE 11"
+.ig
+EX: 11 A C L N R S B P Z .T& .xx \(xx
+..
+.sp 0.2v
+.mk
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&cBp+2 s
+\&l n
+\&a n.
+\&London Transport Statistics (1964)
+\&.sp .5
+\&Railway Route Miles\*(tB244
+\&Tube\*(tB66
+\&Sub-surface\*(tB22
+\&Surface\*(tB156
+\&.sp .5
+\&.T&
+\&lz r
+\&a  r.
+\&Passenger Traffic \e(em Railway
+\&Journeys\*(tB674 million
+\&Average length\*(tB4.55 miles
+\&Passenger miles\*(tB3,066 million
+\&.T&
+\&lz r
+\&a  r.
+\&Passenger Traffic \e(em Road
+\&Journeys\*(tB2,252 million
+\&Average length\*(tB2.26 miles
+\&Passenger miles\*(tB5,094 million
+\&.sp .5
+\&.T&
+\&l n
+\&a n.
+\&Vehicles\*(tB12,521
+\&Railway motor cars\*(tB2,905
+\&Railway trailer cars\*(tB1,269
+\&Total railway\*(tB4,174
+\&Omnibuses\*(tB8,347
+\&.sp .5
+\&.T&
+\&l n
+\&a n.
+\&Staff\*(tB73,739
+\&Administrative, etc.\*(tB5,582
+\&Civil engineering\*(tB5,134
+\&Electrical eng.\*(tB1,714
+\&Mech. eng. \e(em railway\*(tB4,310
+\&Mech. eng. \e(em road\*(tB9,152
+\&Railway operations\*(tB8,930
+\&Road operations\*(tB35,946
+\&Other\*(tB2,971
+\&.TE
+.S +1
+.iE
+.rt
+.po +3.5i
+.HU Output:
+.TS
+cBp+2 s
+l n
+a n.
+London Transport Statistics (1964)
+.sp .5
+Railway Route Miles	244
+Tube	66
+Sub-surface	22
+Surface	156
+.sp .5
+.T&
+lz r
+a  r.
+Passenger Traffic \(em Railway
+Journeys	674 million
+Average length	4.55 miles
+Passenger miles	3,066 million
+.T&
+lz r
+a  r.
+Passenger Traffic \(em Road
+Journeys	2,252 million
+Average length	2.26 miles
+Passenger miles	5,094 million
+.sp .5
+.T&
+l n
+a n.
+Vehicles	12,521
+Railway motor cars	2,905
+Railway trailer cars	1,269
+Total railway	4,174
+Omnibuses	8,347
+.sp .5
+.T&
+l n
+a n.
+Staff	73,739
+Administrative, etc.	5,582
+Civil engineering	5,134
+Electrical eng.	1,714
+Mech. eng. \(em railway	4,310
+Mech. eng. \(em road	9,152
+Railway operations	8,930
+Road operations	35,946
+Other	2,971
+.TE
+.po -3.5i
+.SK
+.HU "EXAMPLE 12"
+.ig
+EX: 12 center delim C L N S B E I P V n _D =D \_ \= .T& T{...}T .xx \(xx
+..
+.EQ
+delim off
+.EN
+.HU Input:
+.iS
+.S -1
+\&.EQ
+\&define fnote % nothing sup %
+\&gsize 9
+\&delim !!
+\&.EN
+\&.ps 9
+\&.vs 11
+\&.TS
+\&center, delim(!!);
+\&cp+1B s  s  s  s  s  s
+\&cp-1I s  s  s  s  s  s
+\&c     cB s  s  cB s  s
+\&c     c  s  s  c  s  s
+\&cB    cB cB cB cB cB cB .
+\&Share of Superrich (SR) in Wealth of All Persons, 1969 and 1972!fnote 1!
+\&(Dollar Amounts in Billions)
+\&.sp 2p
+\&=
+\&.sp 2p
+\&\*(tB1969\*(tB1972
+\&\*(tB\e_\*(tB\e_
+\&\*(tB\*(tB\*(tBSR\*(tB\*(tB\*(tBSR
+\&\*(tB\*(tBAll\*(tBShare\*(tB\*(tBAll\*(tBShare
+\&Asset\*(tBSR\*(tBPersons!fnote 2!\*(tB(%)\*(tBSR\*(tBPersons!fnote 2!\*(tB(%)
+\&_
+\&.sp 2p
+\&.T&
+\&l6   ne  ne  n6  ne  ne  n.
+\&Real estate\*(tB$   324.7\*(tB$1,188.8\*(tB27.4\*(tB$   443.0\*(tB$1,492.6\*(tB29.7
+\&Corporate stock\*(tB494.8\*(tB!fnote 3!832.1\*(tB59.5\*(tB580.5\*(tB!fnote 3!870.9\*(tB66.7
+\&State and local bonds\*(tB20.7\*(tB!fnote 3!33.0\*(tB62.7\*(tB33.8\*(tB!fnote 3!36.1\*(tB93.6
+\&Corporate and foreign bonds\*(tB13.2\*(tB14.1\*(tB93.6\*(tB26.7\*(tB34.6\*(tB77.2
+\&Savings bonds\*(tB15.8\*(tB51.1\*(tB30.9\*(tB21.2\*(tB53.6\*(tB39.6
+\&Other federal bonds\*(tB23.1\*(tB!fnote 3!35.7\*(tB64.7\*(tB32.9\*(tB!fnote 3!33.7\*(tB97.6
+\&Notes and mortgages\*(tB49.2\*(tB72.4\*(tB68.0\*(tB68.9\*(tB77.5\*(tB88.9
+\&Cash\*(tB155.3\*(tB496.9\*(tB31.3\*(tB217.7\*(tB748.8\*(tB29.1
+\&Business assets\*(tB67.8\*(tB171.6\*(tB39.5\*(tB66.8\*(tB177.3\*(tB37.7
+\&Other assets\*(tB86.4\*(tB588.4\*(tB14.7\*(tB151.0\*(tB819.3\*(tB18.4
+\&\*(tB\e_\*(tB\e_\*(tB\e_\*(tB\e_\*(tB\e_\*(tB\e_
+\&   Total Assets\*(tB$1,251.0\*(tB$3,484.1\*(tB35.9\*(tB$1,645.0\*(tB$4,344.4\*(tB37.9
+\&Debts\*(tB107.0\*(tB557.5\*(tB19.2\*(tB148.2\*(tB808.5\*(tB18.3
+\&\*(tB\e_\*(tB\e_\*(tB\e_\*(tB\e_\*(tB\e_\*(tB\e_
+\&   Net Worth\*(tB$1,144.0\*(tB$2,926.6\*(tB39.1\*(tB$1,496.8\*(tB$3,535.9\*(tB42.3
+\&.sp 2p
+\&\*(tB\e=\*(tB\e=\*(tB\e=\*(tB\e=\*(tB\e=\*(tB\e=
+\&.sp 0.5v
+\&.T&
+\&l ne ne n  ne ne n 
+\&l nu nu nu nu nu nu.
+\&Number of Persons
+\&   (millions)\*(tB5.0\*(tB!fnote 4!124.2\*(tB4.0\*(tB6.9\*(tB!fnote 4!131.9\*(tB5.2
+\&.sp 2p
+\&=
+\&.sp 3p
+.iE
+.iS
+\&.T&
+\&lp-1v-1 s s s s s s.
+\&T{
+\&!fnote 1! We normally define the superrich as the 4 to 5 percent
+\&of the adult population with a net worth of $60,000 on.
+\&.br
+\&!fnote 2! Preliminary national balance sheets.
+\&.br
+\&!fnote 3! Includes 51.3 percent of assets held in trust funds.
+\&.br
+\&!fnote 4! Population age 20 and over.
+\&T}
+\&.TE
+\&Source for these data is testimony presented by Professors James D. Smith
+\&and Stephen D. Franklin before a Congressional Committee (Task Force on
+\&Distributive Impacts of Budget and Economic Policies\e(emCommittee on the
+\&Budget, House of Representatives) in September 1977.  Although the data
+\&might seem a bit dated, as of 1979 they were actually the most recent
+\&available data on the distribution of ``wealth'' (as opposed to ``income''),
+\&and it took Smith and Franklin a great deal of effort and seven years to
+\&pry them loose from the files of the Internal Revenue Service.
+.S +1
+.iE
+.rs
+.sp 0.25i
+.HU Output:
+.EQ
+define fnote % nothing sup %
+gsize 9
+delim !!
+.EN
+.ps 9
+.vs 11
+.TS
+center, delim(!!);
+cp+1B s  s  s  s  s  s
+cp-1I s  s  s  s  s  s
+c     cB s  s  cB s  s
+c     c  s  s  c  s  s
+cB    cB cB cB cB cB cB .
+Share of Superrich (SR) in Wealth of All Persons, 1969 and 1972!fnote 1!
+(Dollar Amounts in Billions)
+.sp 2p
+=
+.sp 2p
+	1969	1972
+	\_	\_
+			SR			SR
+		All	Share		All	Share
+Asset	SR	Persons!fnote 2!	(%)	SR	Persons!fnote 2!	(%)
+_
+.sp 2p
+.T&
+l6   ne  ne  n6  ne  ne  n.
+Real estate	$   324.7	$1,188.8	27.4	$   443.0	$1,492.6	29.7
+Corporate stock	494.8	!fnote 3!832.1	59.5	580.5	!fnote 3!870.9	66.7
+State and local bonds	20.7	!fnote 3!33.0	62.7	33.8	!fnote 3!36.1	93.6
+Corporate and foreign bonds	13.2	14.1	93.6	26.7	34.6	77.2
+Savings bonds	15.8	51.1	30.9	21.2	53.6	39.6
+Other federal bonds	23.1	!fnote 3!35.7	64.7	32.9	!fnote 3!33.7	97.6
+Notes and mortgages	49.2	72.4	68.0	68.9	77.5	88.9
+Cash	155.3	496.9	31.3	217.7	748.8	29.1
+Business assets	67.8	171.6	39.5	66.8	177.3	37.7
+Other assets	86.4	588.4	14.7	151.0	819.3	18.4
+	\_	\_	\_	\_	\_	\_
+   Total Assets	$1,251.0	$3,484.1	35.9	$1,645.0	$4,344.4	37.9
+Debts	107.0	557.5	19.2	148.2	808.5	18.3
+	\_	\_	\_	\_	\_	\_
+   Net Worth	$1,144.0	$2,926.6	39.1	$1,496.8	$3,535.9	42.3
+.sp 2p
+	\=	\=	\=	\=	\=	\=
+.sp 0.5v
+.T&
+l ne ne n  ne ne n 
+l nu nu nu nu nu nu.
+Number of Persons
+   (millions)	5.0	!fnote 4!124.2	4.0	6.9	!fnote 4!131.9	5.2
+.sp 2p
+=
+.sp 3p
+.T&
+lp-1v-1 s s s s s s.
+T{
+!fnote 1! We normally define the superrich as the 4 to 5 percent
+of the adult population with a net worth of $60,000 on.
+.br
+!fnote 2! Preliminary national balance sheets.
+.br
+!fnote 3! Includes 51.3 percent of assets held in trust funds.
+.br
+!fnote 4! Population age 20 and over.
+T}
+.TE
+Source for these data is testimony presented by Professors James D. Smith
+and Stephen D. Franklin before a Congressional Committee (Task Force on
+Distributive Impacts of Budget and Economic Policies\(emCommittee on the
+Budget, House of Representatives) in September 1977.  Although the data
+might seem a bit dated, as of 1979 they were actually the most recent
+available data on the distribution of ``wealth'' (as opposed to ``income''),
+and it took Smith and Franklin a great deal of effort and seven years to
+pry them loose from the files of the Internal Revenue Service.
+.br
+.S 10 12
+.SK
+.HU "EXAMPLE 13"
+.ig
+EX: 13 expand C L N S F P .xx
+..
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&expand;
+\&cf(HB)p+1 s   s
+\&cf(HI) cf(HI) cf(HI)
+\&lf(H)  lf(H)  nf(H).
+\&AT&T Bell Laboratories Locations
+\&.sp 0.5v
+\&Name\*(tBAddress\*(tBPhone
+\&.sp 0.2v
+\&Holmdel\*(tBCrawfords Corner Road, Holmdel, N. J. 07733-1988\*(tB908-949-3000
+\&Murray Hill\*(tB600 Mountain Avenue, Murray Hill, N. J. 07974-2070\*(tB908-582-3000
+\&Whippany\*(tBWhippany Road, Whippany, N. J. 07981-0903\*(tB201-386-3000
+\&Indian Hill\*(tB2000 N. Naperville Road, Naperville, Illinois 60566-7033\*(tB312-979-2000
+\&.TE
+\&.sp 0.5v
+\&This is a paragraph of normal text placed here
+\&only to indicate where the left and right margins are.
+\&In this way, the reader can judge the appearance of expanded tables
+\&and observe how such tables are formatted.
+.S +1
+.iE
+.rs
+.sp|6i
+.HU Output:
+.TS
+expand;
+cf(HB)p+1 s   s
+cf(HI) cf(HI) cf(HI)
+lf(H)  lf(H)  nf(H).
+AT&T Bell Laboratories Locations
+.sp 0.5v
+Name	Address	Phone
+.sp 0.2v
+Holmdel	Crawfords Corner Road, Holmdel, N. J. 07733-1988	908-949-3000
+Murray Hill	600 Mountain Avenue, Murray Hill, N. J. 07974-2070	908-582-3000
+Whippany	Whippany Road, Whippany, N. J. 07981-0903	201-386-3000
+Indian Hill	2000 N. Naperville Road, Naperville, Illinois 60566-7033	312-979-2000
+.TE
+.sp 0.5v
+This is a paragraph of normal text placed here
+only to indicate where the left and right margins are.
+In this way, the reader can judge the appearance of expanded tables
+and observe how such tables are formatted.
+.SK
+.EQ
+delim off
+.EN
+.HU "EXAMPLE 14"
+.ig
+EX: 14 box C L R S B I P T W n | _D \^ T{...}T .xx \E 
+..
+.HU Input:
+.iS
+.S -1
+\&.TS
+\&box;
+\&cb   s   s   s
+\&c  | c | c   s
+\&ltiw(1i) | ltw(2i) | rP8 1 lP8.
+\&Some Interesting Places
+\&_
+\&Name\*(tBDescription\*(tBPractical Information
+\&_
+\&T{
+\&.na
+\&American Museum of Natural History
+\&T}\*(tBT{
+\&The collections fill 11.5 acres (Michelin) or 25 acres (\es-1MTA\es0)
+\&of exhibition halls on four floors.  There is a full-sized replica of a
+\&blue whale and the world's largest star sapphire (stolen in 1964).
+\&T}\*(tBHours:\*(tB10-5, Sun 11-5, Wed to 9
+\&\e^\*(tB\e^\*(tBLocation:\*(tBCentral Park West & 79th St.
+\&\e^\*(tB\e^\*(tBAdmission:\*(tBDonation $1.00 asked
+\&\e^\*(tB\e^\*(tBSubway:\*(tBAA to 81st St.
+\&\e^\*(tB\e^\*(tBTelephone:\*(tB212-873-4225
+\&_
+\&Bronx Zoo\*(tBT{
+\&About a mile long and 0.6 mile wide, this is the largest zoo in America.
+\&A lion eats 18 pounds of meat a day while a sea lion eats 15 pounds of fish.
+\&T}\*(tBHours:\*(tB10-4:30 winter, 10-5:00 summer
+\&\e^\*(tB\e^\*(tBLocation:\*(tB185th St. & Southern Blvd., Bronx
+\&\e^\*(tB\e^\*(tBAdmission:\*(tB$1.00, Tues/Wed/Thurs free
+\&\e^\*(tB\e^\*(tBSubway:\*(tB2,5 to East Tremont Ave.
+\&\e^\*(tB\e^\*(tBTelephone:\*(tB212-933-1759
+\&_
+\&Brooklyn Museum\*(tBT{
+\&Five floors of galleries contain American and ancient art.
+\&There are American period rooms and architectural ornaments saved
+\&from wreckers, such as a classical figure from Pennsylvania Station.
+\&T}\*(tBHours:\*(tBWed-Sat 10-5, Sun 12-5
+\&\e^\*(tB\e^\*(tBLocation:\*(tBEastern Pkwy. & Washington Ave., Brooklyn
+\&\e^\*(tB\e^\*(tBAdmission:\*(tBFree
+\&\e^\*(tB\e^\*(tBSubway:\*(tB2,3 to Eastern Parkway
+\&\e^\*(tB\e^\*(tBTelephone:\*(tB212-638-5000
+\&_
+\&T{
+\&.na
+\&New York Historical Society
+\&T}\*(tBT{
+\&All the original paintings for Audubon's \efIBirds of America\efP are here,
+\&as are exhibits of American decorative arts, New York history,
+\&Hudson River school paintings, carriages, and glass paperweights.
+\&T}\*(tBHours:\*(tBTues-Fri & Sun 1-5, Sat 10-5
+\&\e^\*(tB\e^\*(tBLocation:\*(tBCentral Park West & 77th St.
+\&\e^\*(tB\e^\*(tBAdmission:\*(tBFree
+\&\e^\*(tB\e^\*(tBSubway:\*(tBAA to 81st St.
+\&\e^\*(tB\e^\*(tBTelephone:\*(tB212-873-3400
+\&.TE
+.S +1
+.iE
+.SK
+.HU "EXAMPLE 14"
+.HU Output:
+.TS
+box;
+cb   s   s   s
+c  | c | c   s
+ltiw(1i) | ltw(2i) | rP8 1 lP8.
+Some Interesting Places
+_
+Name	Description	Practical Information
+_
+T{
+.na
+American Museum of Natural History
+T}	T{
+The collections fill 11.5 acres (Michelin) or 25 acres (\s-1MTA\s0)
+of exhibition halls on four floors.  There is a full-sized replica of a
+blue whale and the world's largest star sapphire (stolen in 1964).
+T}	Hours:	10-5, Sun 11-5, Wed to 9
+\^	\^	Location:	Central Park West & 79th St.
+\^	\^	Admission:	Donation $1.00 asked
+\^	\^	Subway:	AA to 81st St.
+\^	\^	Telephone:	212-873-4225
+_
+Bronx Zoo	T{
+About a mile long and 0.6 mile wide, this is the largest zoo in America.
+A lion eats 18 pounds of meat a day while a sea lion eats 15 pounds of fish.
+T}	Hours:	10-4:30 winter, 10-5:00 summer
+\^	\^	Location:	185th St. & Southern Blvd., Bronx
+\^	\^	Admission:	$1.00, Tues/Wed/Thurs free
+\^	\^	Subway:	2,5 to East Tremont Ave.
+\^	\^	Telephone:	212-933-1759
+_
+Brooklyn Museum	T{
+Five floors of galleries contain American and ancient art.
+There are American period rooms and architectural ornaments saved
+from wreckers, such as a classical figure from Pennsylvania Station.
+T}	Hours:	Wed-Sat 10-5, Sun 12-5
+\^	\^	Location:	Eastern Pkwy. & Washington Ave., Brooklyn
+\^	\^	Admission:	Free
+\^	\^	Subway:	2,3 to Eastern Parkway
+\^	\^	Telephone:	212-638-5000
+_
+T{
+.na
+New York Historical Society
+T}	T{
+All the original paintings for Audubon's \fIBirds of America\fP are here,
+as are exhibits of American decorative arts, New York history,
+Hudson River school paintings, carriages, and glass paperweights.
+T}	Hours:	Tues-Fri & Sun 1-5, Sat 10-5
+\^	\^	Location:	Central Park West & 77th St.
+\^	\^	Admission:	Free
+\^	\^	Subway:	AA to 81st St.
+\^	\^	Telephone:	212-873-3400
+.TE

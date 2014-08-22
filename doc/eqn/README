@@ -1,0 +1,33 @@
+EQN
+=============================================================================
+TITLE      Typesetting Mathematics - User's Guide (Second Edition)
+
+AUTHOR(s)  Brian W. Kernighan, Lorinda L. Cherry
+           AT&T Bell Laboratories
+
+REVISED    1990 by B.W.Kernighan
+REPRINTED  May 1990, AT&T Bell Laboratories
+=============================================================================
+FILE            PURPOSE
+------------    ----------------------------------------------------------
+eqn.doc         EQN document file
+eqn.app         EQN appendix
+Run             Shell script to format and print entire EQN document
+=============================================================================
+To produce the entire EQN document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the EQN document (body only), use the command:
+
+   tbl eqn.doc | eqn | troff -Tpost - | dpost
+
+To produce only the appendix, use the command:
+
+   troff -Tpost eqn.app | dpost
+=============================================================================

@@ -1,0 +1,75 @@
+'''	\"               Copyright c 1991 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so ../defs.add
+.tS MM
+\s-1MM\s+1 \(em A Macro Package
+for Generating Documents
+.tE
+This addendum reflects changes in the
+DWB 3.2 version of this software.
+.P
+A heading marked \(rh refers to the section in the
+user documentation where this topic is discussed.
+.sC 6.1.2 Author(s)
+.DL
+.LI
+The number register
+.cR Sg
+can be set to
+.cR 1
+before a
+.cR \&.AU
+macro call to force the notation
+``\fH\s-1ORIGINAL\ SIGNED\ BY\s+1\fP''
+to appear above the author's name in the signature block.
+By default, register
+.cR Sg
+is
+.cR 0
+and the signature space is left blank to accommodate
+the author's signature.
+Register
+.cR Sg
+can be set to either
+.cR 0
+or
+.cR 1
+before each
+.cR \&.AU
+macro call.
+.LI
+The string
+.cR Ol
+(organization label)
+can be defined to replace the label prefix
+for the organization number in the author's block on
+memorandum-style documents.
+By default, the label ``\f3Org.\ \f1'' is prepended to
+the organization number.
+.LE
+.sC 12.6 "Forcing an Odd Page"
+.iS
+\&.OP \f1[\*(iAtext\|\f1]
+.iE
+The
+.cR .OP
+macro is used to ensure that the text following it begins at the
+top of an odd-numbered page.
+If currently at the top of an odd page,
+no action takes place.
+If currently on an even page, text resumes
+printing at the top of the next page.
+.P
+If currently on an odd page (but
+not at the top of the page) one blank page is produced, and printing
+resumes on the next odd-numbered page.
+If given,
+.I text
+(e.g., ``\s-1THIS\ PAGE\ LEFT\ BLANK\s+1'')
+is centered on the blank page.
+.P

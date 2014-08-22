@@ -1,0 +1,568 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+%
+% Encoding vector and redefinition of findfont for the ISO Latin1 standard.
+% The 18 characters missing from ROM based fonts on older printers are noted
+% below.
+%
+
+/ISOLatin1Encoding [
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/space
+	/exclam
+	/quotedbl
+	/numbersign
+	/dollar
+	/percent
+	/ampersand
+	/quoteright
+	/parenleft
+	/parenright
+	/asterisk
+	/plus
+	/comma
+	/minus
+	/period
+	/slash
+	/zero
+	/one
+	/two
+	/three
+	/four
+	/five
+	/six
+	/seven
+	/eight
+	/nine
+	/colon
+	/semicolon
+	/less
+	/equal
+	/greater
+	/question
+	/at
+	/A
+	/B
+	/C
+	/D
+	/E
+	/F
+	/G
+	/H
+	/I
+	/J
+	/K
+	/L
+	/M
+	/N
+	/O
+	/P
+	/Q
+	/R
+	/S
+	/T
+	/U
+	/V
+	/W
+	/X
+	/Y
+	/Z
+	/bracketleft
+	/backslash
+	/bracketright
+	/asciicircum
+	/underscore
+	/quoteleft
+	/a
+	/b
+	/c
+	/d
+	/e
+	/f
+	/g
+	/h
+	/i
+	/j
+	/k
+	/l
+	/m
+	/n
+	/o
+	/p
+	/q
+	/r
+	/s
+	/t
+	/u
+	/v
+	/w
+	/x
+	/y
+	/z
+	/braceleft
+	/bar
+	/braceright
+	/asciitilde
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/dotlessi
+	/grave
+	/acute
+	/circumflex
+	/tilde
+	/macron
+	/breve
+	/dotaccent
+	/dieresis
+	/.notdef
+	/ring
+	/cedilla
+	/.notdef
+	/hungarumlaut
+	/ogonek
+	/caron
+	/space
+	/exclamdown
+	/cent
+	/sterling
+	/currency
+	/yen
+	/brokenbar		% missing
+	/section
+	/dieresis
+	/copyright
+	/ordfeminine
+	/guillemotleft
+	/logicalnot
+	/hyphen
+	/registered
+	/macron
+	/degree			% missing
+	/plusminus		% missing
+	/twosuperior		% missing
+	/threesuperior		% missing
+	/acute
+	/mu			% missing
+	/paragraph
+	/periodcentered
+	/cedilla
+	/onesuperior		% missing
+	/ordmasculine
+	/guillemotright
+	/onequarter		% missing
+	/onehalf		% missing
+	/threequarters		% missing
+	/questiondown
+	/Agrave
+	/Aacute
+	/Acircumflex
+	/Atilde
+	/Adieresis
+	/Aring
+	/AE
+	/Ccedilla
+	/Egrave
+	/Eacute
+	/Ecircumflex
+	/Edieresis
+	/Igrave
+	/Iacute
+	/Icircumflex
+	/Idieresis
+	/Eth			% missing
+	/Ntilde
+	/Ograve
+	/Oacute
+	/Ocircumflex
+	/Otilde
+	/Odieresis
+	/multiply		% missing
+	/Oslash
+	/Ugrave
+	/Uacute
+	/Ucircumflex
+	/Udieresis
+	/Yacute			% missing
+	/Thorn			% missing
+	/germandbls
+	/agrave
+	/aacute
+	/acircumflex
+	/atilde
+	/adieresis
+	/aring
+	/ae
+	/ccedilla
+	/egrave
+	/eacute
+	/ecircumflex
+	/edieresis
+	/igrave
+	/iacute
+	/icircumflex
+	/idieresis
+	/eth			% missing
+	/ntilde
+	/ograve
+	/oacute
+	/ocircumflex
+	/otilde
+	/odieresis
+	/divide			% missing
+	/oslash
+	/ugrave
+	/uacute
+	/ucircumflex
+	/udieresis
+	/yacute			% missing
+	/thorn			% missing
+	/ydieresis
+] def
+
+/NewFontDirectory FontDirectory maxlength dict def
+
+%
+% Apparently no guarantee findfont is defined in systemdict so the obvious
+%
+%	systemdict /findfont get exec
+%
+% can generate an error. So far the only exception is a VT600 (version 48.0).
+%
+
+userdict /@RealFindfont known not {
+	userdict begin
+		/@RealFindfont systemdict begin /findfont load end def
+	end
+} if
+
+/findfont {
+	dup NewFontDirectory exch known not {
+		dup
+		%dup systemdict /findfont get exec	% not always in systemdict
+		dup userdict /@RealFindfont get exec
+		dup /Encoding get StandardEncoding eq {
+			dup length dict begin
+				{1 index /FID ne {def}{pop pop} ifelse} forall
+				/Encoding ISOLatin1Encoding def
+				currentdict
+			end
+			/DummyFontName exch definefont
+		} if
+		NewFontDirectory 3 1 roll put
+	} if
+	NewFontDirectory exch get
+} bind def
+
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(Latin 1 \(ISO 8859\2551\) Character Set)5 2898 1 540 1040 t
+36 S1 f
+(__________________________)540 1240 w
+14 HB f
+(Addendum)540 1440 w
+13 HB f
+(DWB 3.3)1 528 1 4692 1440 t
+10 R f
+(This addendum reflects changes in the DWB 3.3 version of this software.)11 2931 1 540 1860 t
+(The Latin 1 text font character set differs slightly from that of standard PostScript fonts:)14 3518 1 540 2040 t
+8 S f
+(\267)603 2220 w
+10 R f
+(Ligature characters are not available with Latin 1, so ligature mode is turned off.)13 3218 1 690 2220 t
+8 S f
+(\267)603 2400 w
+10 R f
+(The character access codes described in the PostScript section titled ``)10 2949 1 690 2400 t
+9 H f
+(Other \(Unnamed\) Characters)2 1195 1 3639 2400 t
+10 R f
+('' for the)2 386 1 4834 2400 t
+(standard text font character set do not apply to Latin 1.)10 2188 1 690 2520 t
+(The)540 2700 w
+9 R f
+(ASCII)726 2700 w
+10 R f
+( produced by the input name)5 1185(dash produces a soft hyphen \(\255\) synonymous with the symbol)9 2528 2 994 2700 t
+10 CW f
+(\\\(hy)4741 2700 w
+10 R f
+(. The)1 239 1 4981 2700 t
+(input name)1 447 1 540 2820 t
+10 CW f
+(\\\(\255\255)1012 2820 w
+10 R f
+(produces a hard hyphen \(-\).)4 1122 1 1277 2820 t
+(The accent marks listed in the PostScript section titled ``)9 2343 1 540 3000 t
+9 H f
+(Non\255)2883 3000 w
+8 H f
+(ASCII)3078 3000 w
+9 H f
+(Special Characters)1 770 1 3322 3000 t
+10 R f
+('' for the standard text font)5 1128 1 4092 3000 t
+(character set have been implemented in Latin 1.)7 1912 1 540 3120 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Courier Times-Roman Helvetica-Bold Helvetica Times-Roman Symbol

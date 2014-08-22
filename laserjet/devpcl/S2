@@ -1,0 +1,11 @@
+# Special pre-processor font
+name S2
+internalname 43
+special
+charset
+ob	21	0	161
+O+	42	3	162
+O-	42	3	163
+Ox	42	3	164
+O/	42	3	165
+O.	42	3	166

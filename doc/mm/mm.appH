@@ -1,0 +1,770 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr L 11.5i
+.so ../defs.doc
+.ds pT MM
+.aP H "Summary of Macros, Strings, and Number Registers"
+.HU "Macros"
+The following is an alphabetical list of macro names used by
+.sM MM .
+For each macro entry, the first line gives the name of the macro,
+a brief description, and a reference to the section in which the
+macro is described.
+The second line gives a synopsis of the macro call.
+.P
+Macros whose descriptions are followed by \(dg are not,
+in general, invoked directly by the user.
+Rather, they are ``user exit'' macros that are defined
+by the user and called
+from inside header, footer, or other macros.
+.TS H
+expand;
+lf1 lf1 lf1
+lf5 lf1 lf1.
+Macro	Description and Synopsis	Section
+_
+.sp 3p
+.TH
+1C	One-column processing	12.3
+	\*(iR.1C\fP
+.sp 0.5v
+.ne 2v
+2C	Two-column processing	12.3
+	\*(iR.2C\f1
+.sp 0.5v
+.ne 2v
+AE	Abstract end	6.1.4
+	\*(iR.AE\f1
+.sp 0.5v
+.ne 2v
+AF	Alternate First-Page format	6.1.7.2,
+	\*(iR.AF\0\f1[\*(iAcompany-name\f1]	Appendix G
+.sp 0.5v
+.ne 2v
+AL	Automatically-numbered List start	5.3.3.1
+	\*(iR.AL\0\f1[\*(iAtype\f1]\0[\*(iAtext-indent\|\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+AS	Abstract start	6.1.4
+	\*(iR.AS\0\f1[\*(iAmode\f1]\0[\*(iAindent\f1]\0[\*(iAtype\f1]
+.sp 0.5v
+.ne 2v
+AT	Author's Title	6.1.2
+	\*(iR.AT\0\f1[\*(iAtitle\f1]\0\(el
+.sp 0.5v
+.ne 2v
+AU	Author information	6.1.2
+	\*(iR.AU\0\*(iAname\0\f1[\*(iAinitials\f1]\0[\*(iAlocation\f1]\0[\*(iAorganization\|\f1]\0[\*(iA\|phone\f1]\0[\*(iAroom\f1]\0[\*(iAarg\f1]\0[\*(iAarg\f1]\0[\*(iAarg\f1]
+.sp 0.5v
+.ne 2v
+AV	Approval Signature	6.3.3
+	\*(iR.AV\0\f1[\*(iAapprover's-name\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+B	Bold	12.1
+	\*(iR.B\0\f1[\*(iAbold\|\f1]\0[\*(iA\|previous\f1]\0\(el
+.sp 0.5v
+.ne 2v
+BE	Bottom Block end	9.6
+	\*(iR.BE\f1
+.sp 0.5v
+.ne 2v
+BI	Bold\^/\^Italic	12.1
+	\*(iR.BI\0\f1[\*(iAbold\|\f1]\0[\|\*(iAitalic\f1]\0\(el
+.sp 0.5v
+.ne 2v
+BL	Bullet List start	5.3.3.2
+	\*(iR.BL\0\f1[\*(iAtext-indent\|\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+BR	Bold\^/\^Roman	12.1
+	\*(iR.BR\0\f1[\*(iAbold\|\f1]\0[\*(iAroman\f1]\0\(el
+.sp 0.5v
+.ne 2v
+BS	Bottom Block start	9.6
+	\*(iR.BS\f1
+.sp 0.5v
+.ne 2v
+CS	Cover Sheet	10.2
+	\*(iR.CS\f1
+.sp 0.5v
+.ne 2v
+.bp
+DE	Display end	7.1, 7.2
+	\*(iR.DE\f1
+.sp 0.5v
+.ne 2v
+DF	Floating Display start	7.2
+	\*(iR.DF\0\f1[\|\*(iAformat\|\f1]\0[\|\*(iAfill\|\f1]\0[\*(iAright-indent\|\f1]
+.sp 0.5v
+.ne 2v
+DL	Dash List start	5.3.3.3
+	\*(iR.DL\0\f1[\*(iAtext-indent\|\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+DS	Static Display start	7.1
+	\*(iR.DS\0\f1[\|\*(iAformat\|\f1]\0[\|\*(iAfill\|\f1]\0[\*(iAright-indent\|\f1]
+.sp 0.5v
+.ne 2v
+EC	Equation Caption	7.7
+	\*(iR.EC\0\f1[\*(iAtitle\f1]\0[\*(iAoverride\f1]\0[\|\*(iAflag\f1]
+.sp 0.5v
+.ne 2v
+EF	Even-page Footer	9.3.1
+	\*(iR.EF\0\f1[\*(iA\|footer\f1]
+.sp 0.5v
+.ne 2v
+EH	Even-page Header	9.2.1
+	\*(iR.EH\0\f1[\*(iA\|header\f1]
+.sp 0.5v
+.ne 2v
+EN	Equation end	7.4
+	\*(iR.EN\f1
+.sp 0.5v
+.ne 2v
+EQ	Equation start	7.4
+	\*(iR.EQ\0\f1[\*(iAlabel\|\f1]
+.sp 0.5v
+.ne 2v
+EX	Exhibit Caption	7.7
+	\*(iR.EX\0\f1[\*(iAtitle\f1]\0[\*(iAoverride\f1]\0[\|\*(iAflag\f1]
+.sp 0.5v
+.ne 2v
+FC	Formal Closing	6.3.1.1
+	\*(iR.FC\0\f1[\*(iAclosing\f1]
+.sp 0.5v
+.ne 2v
+FD	Footnote Default format	8.4,
+	\*(iR.FD\0\f1[\*(iAmode\f1]\0[\*(iR1\f1]	Appendix E
+.sp 0.5v
+.ne 2v
+FE	Footnote end	8,
+	\*(iR.FE\f1	Appendix E
+.sp 0.5v
+.ne 2v
+FG	Figure Title	7.7
+	\*(iR.FG\0\f1[\*(iAtitle\f1]\0[\*(iAoverride\f1]\0[\|\*(iAflag\f1]
+.sp 0.5v
+.ne 2v
+FS	Footnote start	8,
+	\*(iR.FS\0\f1[\*(iAlabel\|\f1]	Appendix E
+.sp 0.5v
+.ne 2v
+G1	Graph start	7.6
+	\*(iR.G1\f1
+.sp 0.5v
+.ne 2v
+G2	Graph end	7.6
+	\*(iR.G2\f1
+.sp 0.5v
+.ne 2v
+H	Heading\*(EMNumbered	4.2
+	\*(iR.H\0\*(iAlevel\0\f1[\*(iAheading-text\|\f1]\0[\*(iAheading-suffix\f1]
+.sp 0.5v
+.ne 2v
+HC	Hyphenation Character	3.4
+	\*(iR.HC\0\f1[\*(iAhyphenation-indicator\f1]
+.sp 0.5v
+.ne 2v
+HM	Heading Mark numbering style (Arabic or Roman numerals, or letters)	4.2.2.6
+	\*(iR.HM\0\f1[\*(iAstyle1\f1]\0\(el\0[\*(iAstyle7\f1]
+.sp 0.5v
+.ne 2v
+.bp
+HU	Heading\*(EMUnnumbered	4.3
+	\*(iR.HU\0\*(iAheading-text\f1
+.sp 0.5v
+.ne 2v
+HX	Heading\*(EMUser-exit X macro (before heading is printed) \(dg	4.6
+	\*(iR.HX\0\*(iAdlevel\0rlevel\0heading-text\f1
+.sp 0.5v
+.ne 2v
+HY	Heading\*(EMUser-exit Y macro (before heading is printed) \(dg	4.6
+	\*(iR.HY\0\*(iAdlevel\0rlevel\0heading-text\f1
+.sp 0.5v
+.ne 2v
+HZ	Heading\*(EMUser-exit Z macro (after heading is printed) \(dg	4.6
+	\*(iR.HZ\0\*(iAdlevel\0rlevel\0heading-text\f1
+.sp 0.5v
+.ne 2v
+I	Italic	12.1
+	\*(iR.I\0\f1[\*(iAitalic\f1]\0[\*(iA\|previous\f1]\0\(el
+.sp 0.5v
+.ne 2v
+IA	Inside Address start	6.2.3
+	\*(iR.IA\0\f1[\*(iAname\f1\0[\*(iAtitle\f1]\|]
+.sp 0.5v
+.ne 2v
+IB	Italic\^/\^Bold	12.1
+	\*(iR.IB\0\f1[\*(iAitalic\f1]\0[\*(iAbold\|\f1]\0\(el
+.sp 0.5v
+.ne 2v
+IE	Inside Address end	6.2.3
+	\*(iR.IE\f1
+.sp 0.5v
+.ne 2v
+IR	Italic\^/\^Roman	12.1
+	\*(iR.IR\0\f1[\*(iAitalic\f1]\0[\*(iAroman\f1]\0\(el
+.sp 0.5v
+.ne 2v
+LB	List Begin	5.4
+	\*(iR.LB\0\*(iAtext-indent\0mark-indent\0pad\0type\0\f1[\*(iAmark\f1]\0[\*(iALI-space\f1]\0[\*(iALB-space\f1]
+.sp 0.5v
+.ne 2v
+LC	List Clear	Appendix B
+	\*(iR.LC\0\f1[\*(iAlist-level\f1\|]
+.sp 0.5v
+.ne 2v
+LE	List end	5.3.2
+	\*(iR.LE\0\f1[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+LI	List Item	5.3.1
+	\*(iR.LI\0\f1[\*(iAmark\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+LO	Letter Options	6.2.4
+	\*(iR.LO\0\*(iAtype\0\f1[\*(iAnotation\f1]
+.sp 0.5v
+.ne 2v
+LT	Letter Types	6.2.1,
+	\*(iR.LT\0\f1[\*(iAtype\f1]	Appendix D
+.sp 0.5v
+.ne 2v
+ML	Marked List start	5.3.3.4
+	\*(iR.ML\0\*(iAmark\0\f1[\*(iAtext-indent\|\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+MT	Memorandum Types	6.1.6, 6.1.8,
+	\*(iR.MT\0\f1[\*(iAtype\f1]\0[\*(iAaddressee\f1]   \s-2or\s+2   \*(iR.MT\04\0\f1[\*(iR1\f1]	Appendix C
+.sp 0.5v
+.ne 2v
+ND	New Date	6.1.7.1
+	\*(iR.ND\0\*(iAnew-date\f1
+.sp 0.5v
+.ne 2v
+NE	Notation end	6.3.2
+	\*(iR.NE\f1
+.sp 0.5v
+.ne 2v
+NS	Notation start	6.3.2
+	\*(iR.NS\0\f1[\*(iAtype\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+.bp
+nP	Numbered Paragraph with Double-Line Indent	4.1
+	\*(iR.nP\f1
+.sp 0.5v
+.ne 2v
+OF	Odd-page Footer	9.3.2
+	\*(iR.OF\0\f1[\*(iA\|footer\f1]
+.sp 0.5v
+.ne 2v
+OH	Odd-page Header	9.2.2
+	\*(iR.OH\0\f1[\*(iA\|header\f1]
+.sp 0.5v
+.ne 2v
+OK	Other Keywords	6.1.5
+	\*(iR.OK\0\f1[\*(iAkeyword\|\f1]\0\(el
+.sp 0.5v
+.ne 2v
+OP	Odd-numbered Page	12.6
+	\*(iR.OP\f1
+.sp 0.5v
+.ne 2v
+P	Paragraph	4.1
+	\*(iR.P\0\f1[\*(iAtype\f1]
+.sp 0.5v
+.ne 2v
+PS	Picture start	7.5
+	\*(iR.PS\f1
+.sp 0.5v
+.ne 2v
+PF	Page Footer	9.3
+	\*(iR.PF\0\f1[\*(iA\|footer\f1]
+.sp 0.5v
+.ne 2v
+PH	Page Header	9.2
+	\*(iR.PH\0\f1[\*(iA\|header\f1]
+.sp 0.5v
+.ne 2v
+PM	Proprietary Marking	9.7,
+	\*(iR.PM\0\f1[\*(iAtype\f1]\0[\*(iAyear\f1]	Appendix G
+.sp 0.5v
+.ne 2v
+PE	Picture end	7.5
+	\*(iR.PE\f1
+.sp 0.5v
+.ne 2v
+PX	Page Header\*(EMUser-exit macro \(dg	9.5
+	\*(iR.PX\f1
+.sp 0.5v
+.ne 2v
+R	Return to Roman (regular) font	12.1
+	\*(iR.R\f1
+.sp 0.5v
+.ne 2v
+RB	Roman\^\/\^Bold	12.1
+	\*(iR.RB\0\f1[\*(iAroman\f1]\0[\*(iAbold\|\f1]\0\(el
+.sp 0.5v
+.ne 2v
+RD	Read Insertion	12.10
+	\*(iR.RD\0\f1[\|\*(iAprompt\|\f1]\0[\*(iAdiversion-name\f1]\0[\*(iAstring-name\f1]
+.sp 0.5v
+.ne 2v
+RF	Reference end	11
+	\*(iR.RF\f1
+.sp 0.5v
+.ne 2v
+RI	Roman\^\/\^Italic	12.1
+	\*(iR.RI\0\f1[\*(iAroman\f1]\0[\*(iAitalic\f1]\0\(el
+.sp 0.5v
+.ne 2v
+RL	Reference List start	5.3.3.5
+	\*(iR.RL\0\f1[\*(iAtext-indent\|\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+RP	Reference Page	11.3
+	\*(iR.RP\0\f1[\*(iAarg\f1]\0[\*(iAarg\f1]
+.sp 0.5v
+.ne 2v
+RS	Reference start	11
+	\*(iR.RS\0\f1[\*(iAstring-name\f1]
+.sp 0.5v
+.ne 2v
+.bp
+S	Set Point Size and Vertical Spacing	12.7
+	\*(iR.S\0\f1[\|\*(iApoint-size\f1]\0[\*(iAvertical-spacing\f1]
+.sp 0.5v
+.ne 2v
+SA	Set Adjustment default (right-margin justification)	12.2
+	\*(iR.SA\0\f1[\*(iAmode\f1]
+.sp 0.5v
+.ne 2v
+SG	Signature line	6.3.1.2
+	\*(iR.SG\0\f1[\*(iAinitials\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+SK	Skip Pages	12.5
+	\*(iR.SK\0\f1[\|\*(iApages\f1]
+.sp 0.5v
+.ne 2v
+SM	Smaller (one-point size reduction)	12.8
+	\*(iR.SM\0\*(iAstring1\0\f1[\*(iAstring2\f1]\0[\*(iAstring3\f1]
+.sp 0.5v
+.ne 2v
+SP	Blank Vertical Spaces	12.4
+	\*(iR.SP\0\f1[\*(iAlines\f1]
+.sp 0.5v
+.ne 2v
+TB	Table Title	7.7
+	\*(iR.TB\0\f1[\*(iAtitle\f1]\0[\*(iAoverride\f1]\0[\|\*(iAflag\f1]
+.sp 0.5v
+.ne 2v
+TC	Table of Contents	10.1
+	\*(iR.TC\0\f1[\*(iAslevel\f1\|]\0[\*(iAspacing\f1]\0[\*(iAtlevel\|\f1]\0[\*(iAtab\f1]\0[\*(iAhead1\f1]\0[\*(iAhead2\f1]\0[\*(iAhead3\f1]\0[\*(iAhead4\f1]\0[\*(iAhead5\f1]
+.sp 0.5v
+.ne 2v
+TE	Table end	7.3
+	\*(iR.TE\f1
+.sp 0.5v
+.ne 2v
+TH	Table Repeating-Header	7.3
+	\*(iR.TH\0\f1[\*(iRN\f1]
+.sp 0.5v
+.ne 2v
+TL	Title	6.1.1
+	\*(iR.TL\0\f1[\*(iAcharging-case\f1]\0[\*(iA\|filing-case\f1]
+.sp 0.5v
+.ne 2v
+TM	Document Identification Number	6.1.3
+	\*(iR.TM\0\f1[\*(iAnumber\f1]\0\(el
+.sp 0.5v
+.ne 2v
+TP	Top-of-Page macro \(dg	9.5
+	\*(iR.TP\f1
+.sp 0.5v
+.ne 2v
+TS	Table start	7.3
+	\*(iR.TS\0\f1[\*(iRH\f1]
+.sp 0.5v
+.ne 2v
+TX	Table of Contents\*(EMUser-exit macro \(dg	10.1
+	\*(iR.TX\f1
+.sp 0.5v
+.ne 2v
+TY	Table of Contents\*(EMUser-exit macro (supress ``\s-1CONTENTS\s+1'') \(dg	10.1
+	\*(iR.TY\f1
+.sp 0.5v
+.ne 2v
+VL	Variable-item List start	5.3.3.6
+	\*(iR.VL\0\*(iAtext-indent\0\f1[\*(iAmark-indent\|\f1]\0[\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+WA	Writer's Address start	6.2.2
+	\*(iR.WA\0\*(iAname\0\f1[\*(iAtitle\f1]
+.sp 0.5v
+.ne 2v
+WC	Width Control	12.3.1
+	\*(iR.WC\0\f1[\|\*(iAcode\f1]
+.sp 0.5v
+.ne 2v
+WE	Writer's Address end	6.2.2
+	\*(iR.WE\f1
+.TE
+.SK
+.HU "Strings"
+The following is an alphabetical list of string names used by
+.sM MM .
+For each string entry,
+the first line gives the name of the string,
+a brief description, and a reference to the section in
+which the string is described.
+The second line gives the initial (default) definition.
+.sp 0.5v
+.ne 2v
+.TS H
+expand;
+lf1 lf1 lf1
+lf5 lf1 lf1.
+String	Description and Initial Definition	Section
+_
+.sp 3p
+.TH
+BU	Bullet (\*(BU) symbol	3.7.1
+	\*(iR\es-2\e(bu\es0\f1
+.sp 0.5v
+.ne 2v
+Ci	Table of Contents Indent list (for heading levels 1 through 7)	10.1
+	\*(iR0 0 0 0 0 0 0\f1
+.sp 0.5v
+.ne 2v
+DT	Date (override with \*(iR.ND\f1)	1.4,
+	Current date:  \*(iAmonth\ day, year\f1 (e.g., \*(iRApril 1, 1990\f1)	6.1.7.1
+.sp 0.5v
+.ne 2v
+EM	Em dash (\*(EM)	3.7.2
+	\*(iR\e(em\f1
+.sp 0.5v
+.ne 2v
+F	Footnote mark	8.1
+	\*(iR\ev'-.4m'\es-3\e\en+(:p\es0\ev'.4m'\f1
+.sp 0.5v
+.ne 2v
+HF	Heading Font list (for heading levels 1 through 7)	4.2.2.4
+	\*(iR3 3 2 2 2 2 2\f1
+.sp 0.5v
+.ne 2v
+HP	Heading Point Size list (for heading levels 1 through 7)	4.2.2.5
+	\*(iR-1 -1 0 0 0 0 0\f1
+.sp 0.5v
+.ne 2v
+Le	Title for ``List of Equations'' Page	7.8
+	\*(iRLIST OF EQUATIONS\f1
+.sp 0.5v
+.ne 2v
+Lf	Title for ``List of Figures'' Page	7.8
+	\*(iRLIST OF FIGURES\f1
+.sp 0.5v
+.ne 2v
+Lt	Title for ``List of Tables'' Page	7.8
+	\*(iRLIST OF TABLES\f1
+.sp 0.5v
+.ne 2v
+Lx	Title for ``List of Exhibits'' Page	7.8
+	\*(iRLIST OF EXHIBITS\f1
+.sp 0.5v
+.ne 2v
+Rf	Reference mark	11.1
+	\*(iR\ev'-.4m'\es-3[\e\en+(:R]\es0\ev'.4m'
+.sp 0.5v
+.ne 2v
+Rg	Registered Mark symbol \*(Rg	3.7.3
+	\*(iR\ev'-0.4m'\es-4\e(rg\es+4\ev'0.4m'\f1
+.sp 0.5v
+.ne 2v
+Rp	Title for Reference Page	11.3
+	\*(iRREFERENCES\f1
+.sp 0.5v
+.ne 2v
+Sm	Service Mark symbol \*(Sm	3.7.3
+	\*(iR\ev'-0.5m'\es-4SM\es+4\ev'0.5m'\f1
+.sp 0.5v
+.ne 2v
+Tm	Trademark symbol \*(Tm	3.7.3
+	\*(iR\ev'-0.5m'\es-4TM\es+4\ev'0.5m'\f1
+.sp 0.5v
+.ne 2v
+]S	Logo (for use on letterhead)	6.1.7.2,
+	\*(iR\es36\e(LH\es0\f1	Appendix G
+.sp 0.5v
+.ne 2v
+}Z	Company name	6.1.7.2,
+	\*(iRAT&T Bell Laboratories\f1	Appendix G
+.TE
+.P
+See \(sc1.4 for information on how to define and reference strings.
+See \(sc12.9 for the accent strings.
+.SK
+.HU "Number Registers"
+The following is an alphabetical list of number register names used by
+.sM MM .
+For each number register entry, the first line gives the name of the
+register, a brief description, and a reference to the section in which
+the register is described.
+The second line gives the initial (default) value and the legal values.
+The legal values are enclosed in square brackets [\ ] and may be
+a comma-separated list of values (i.e., [\*(iAn\f1,\|\*(iAn\f1,\|\*(iAn\f1])
+or a range of values (i.e., [\*(iAm\f1-\*(iAn\f1] meaning
+.cA m
+to
+.cA n
+inclusive; if
+.cA n
+is
+.cR ? ,
+then there is no upper limit).
+.P
+Any single-character register name can be set from the command line
+(see \(sc2.3).
+Number registers whose descriptions are followed by \(dg must be set
+before the
+.sM MM
+macro package is intialized (see \(sc2.3 and \(sc2.4).
+.P
+See \(sc1.4 for information on how to set number registers.
+.sp 0.5v
+.ne 2v
+.TS H
+expand;
+lf1 lf1 lf1
+lf5 lf1 lf1.
+Register	Description, and Initial and Legal Values	Section
+_
+.sp 3p
+.TH
+A	Alternate first-page format \(dg	2.3,
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]	Appendix A
+.sp 0.5v
+.ne 2v
+Au	Inhibit author's company information in ``from'' block	6.1.2
+	\*(iR1\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+C	Copy type (e.g., \s-1DRAFT\s+1) \(dg	2.3
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR5\f1]
+.sp 0.5v
+.ne 2v
+Cl	Table of Contents level of headings saved	4.4, 10.1
+	\*(iR2\f1\0\0\0[\*(iR0\f1-\*(iR7\f1]
+.sp 0.5v
+.ne 2v
+Cp	Placement of list of figures, tables, equations, and exhibits	7.8, 10.1
+	\*(iR1\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]          (e.g., on separate pages)
+.sp 0.5v
+.ne 2v
+D	Debug flag \(dg	2.3
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+De	Floating display eject	7.2
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+Df	Floating display format	7.2
+	\*(iR5\f1\0\0\0[\*(iR0\f1-\*(iR5\f1]
+.sp 0.5v
+.ne 2v
+Ds	Static display pre-space and post-space	7.1
+	\*(iR1\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+E	Font of ``subject/date/from'' fields \(dg	2.3
+	\*(iR1\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+Ec	Equation counter (incremented and used by \*(iR.EC\f1 macro)	7.7
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+Ej	Page eject for heading level	4.2.2.1
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR7\f1]
+.sp 0.5v
+.ne 2v
+Eq	Equation Label placement (e.g., right-adjusted)	7.4
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+Ex	Exhibit counter (incremented and used by \*(iR.EX\f1 macro)	7.7
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+Fg	Figure counter (increment and used by \*(iR.FG\f1 macro)	7.7
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+.bp
+Fs	Footnote space (i.e., spacing between footnotes)	8.3
+	\*(iR1\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+H1	Heading counter for level-1 headings	4.2.2
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+H2	Heading counter for level-2 headings	4.2.2
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+H3	Heading counter for level-3 headings	4.2.2
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+H4	Heading counter for level-4 headings	4.2.2
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+H5	Heading counter for level-5 headings	4.2.2
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+H6	Heading counter for level-6 headings	4.2.2
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+H7	Heading counter for level-7 headings	4.2.2
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+Hb	Heading break level (after \*(iR.H\f1 and \*(iR.HU\f1 macros)	4.2.2.2
+	\*(iR2\f1\0\0\0[\*(iR0\f1-\*(iR7\f1]
+.sp 0.5v
+.ne 2v
+Hc	Heading centering level (for \*(iR.H\f1 and \*(iR.HU\f1 macros)	4.2.2.3
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR7\f1]
+.sp 0.5v
+.ne 2v
+Hi	Heading temporary indent (after \*(iR.H\f1 and \*(iR.HU\f1 macros)	4.2.2.2
+	\*(iR1\f1\0\0\0[\*(iR0\f1-\*(iR2\f1]
+.sp 0.5v
+.ne 2v
+Hs	Heading space level (after \*(iR.H\f1 and \*(iR.HU\f1 macros)	4.2.2.2
+	\*(iR2\f1\0\0\0[\*(iR0\f1-\*(iR7\f1]
+.sp 0.5v
+.ne 2v
+Ht	Heading type (for \*(iR.H\f1 macro: single or concatenated numbers)	4.2.2.6
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+Hu	Heading level for unnumbered heading (\*(iR.HU\f1 macro)	4.3
+	\*(iR2\f1\0\0\0[\*(iR0\f1-\*(iR7\f1]
+.sp 0.5v
+.ne 2v
+Hy	Hyphenation control	3.4
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+L	Page length \(dg	2.3,
+	\*(iR11i\f1\0\0\0[\*(iR2i\f1-\*(iR?\f1]	Appendix A
+.sp 0.5v
+.ne 2v
+Le	List of Equations	7.8
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+Lf	List of Figures	7.8
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+Li	List indent for automatically-numbered lists	5.3.3.1,
+	\*(iR5\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]	Appendix A
+.sp 0.5v
+.ne 2v
+Ls	List spacing between items by level	5.1
+	\*(iR6\f1\0\0\0[\*(iR0\f1-\*(iR6\f1]
+.sp 0.5v
+.ne 2v
+.bp
+Lt	List of Tables	7.8
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+Lx	List of Exhibits	7.8
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+N	Page numbering style \(dg	2.3
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR5\f1]
+.sp 0.5v
+.ne 2v
+Np	Numbering style for paragraphs (unnumbered or numbered)	4.1
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+O	Page offset (i.e., left margin) \(dg	2.3,
+	\*(iR1i\f1\0\0\0[\*(iR0i\f1-\*(iR?\f1]	Appendix A
+.sp 0.5v
+.ne 2v
+Oc	Numbering style for Table of Contents page (e.g., lower-case Roman numerals)	10.1
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+Of	Figure caption style (e.g., period separator)	7.7
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+P	Page number (managed by the \s-1MM\s+1 package) \(dg	2.3, 9.4
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+Pi	Paragraph indent	4.1,
+	\*(iR3\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]	Appendix A
+.sp 0.5v
+.ne 2v
+Ps	Paragraph spacing (e.g., one blank vertical space)	4.1
+	\*(iR1\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+Pt	Paragraph type (e.g., blocked, indented)	4.1
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR2\f1]
+.sp 0.5v
+.ne 2v
+Pv	``\s-1PRIVATE\s+1'' header (e.g., not printed, printed)	9.8
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR2\f1]
+.sp 0.5v
+.ne 2v
+S	Point Size \(dg	2.3,
+	\*(iR10\f1\0\0\0[\*(iR6\f1-\*(iR?\f1]	Appendix A
+.sp 0.5v
+.ne 2v
+Si	Standard indent for displays	7.1, 7.2,
+	\*(iR3\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]	Appendix A
+.sp 0.5v
+.ne 2v
+T	Terminal type \(dg	Appendix A
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR2\f1]
+.sp 0.5v
+.ne 2v
+Tb	Table counter (incremented and used by \*(iR.TB\f1 macro)	7.7
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+U	Underlining style (e.g., continuous) \(dg	Appendix A
+	\*(iR0\f1\0\0\0[\*(iR0\f1,\*(iR1\f1]
+.sp 0.5v
+.ne 2v
+W	Page width (e.g., line length)	2.3,
+	\*(iR6i\f1\0\0\0[\*(iR2i\f1-\*(iR?\f1]	Appendix A
+.sp 0.5v
+.ne 2v
+:R	Reference counter (used by string \*(iRRf\f1 and \*(iR.RS\f1 macro)	11.1
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.sp 0.5v
+.ne 2v
+:p	Footnote counter (used by string \*(iRF\f1 and \*(iR.FS\f1 macro)	8.1
+	\*(iR0\f1\0\0\0[\*(iR0\f1-\*(iR?\f1]
+.TE

@@ -1,0 +1,90 @@
+'''	\"  tbl file | troff -mm [-Tdevname] | ...
+.PH "'TBL:  File(tbl.test1)''Device(\*(.T)'"
+.DS
+.TS
+box;
+c c c
+l l l.
+four	score	and
+seven	years	ago
+our	fathers	brought
+forth	on	this
+continent	a	new
+nation	conceived	in
+.TE
+.DE
+.sp
+.DS
+.TS
+allbox;
+c s s
+c c c
+n n n.
+Macbeth
+Act	Scene	Line
+1	2	3
+1	2.1	3.4
+1	4.3	12
+1	5	19.23
+2	5	0.1
+3	10	xxx
+3	10	10
+10	2.2
+.TE
+.DE
+.sp
+.DS
+.TS
+box;
+c s s
+c |c |c
+l |l |n.
+Bell System JSPEC
+=
+Part	Date	Usage
+_
+how	January	250
+where	February	125
+_
+		30
+Description	March	_
+		200
+_
+xxx	yyy	Zzz
+abc	def	12
+.TE
+.DE
+.sp
+.DS
+.TS
+box;
+l l l
+l l -
+l l | l
+l l -
+l l l.
+january	february	march
+april	may
+june	july	august
+september	october
+november	december	january
+.TE
+.DE
+.sp
+.DS
+.TS
+box;
+l l |l
+l - |=
+l l |l
+= l |-
+l |l |l
+l - |l.
+four	score	and
+seven
+years	ago	our
+	fathers brought
+forth	on	this
+continent		a
+.TE
+.DE

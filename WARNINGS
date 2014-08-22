@@ -1,0 +1,45 @@
+Things to watch out for, primarily on internal System V machines.
+
+-----------------
+dpost and picpack
+-----------------
+
+  By default this package removes the currently installed versions of
+  dpost and picpack from directory POSTBIN (file dwb.mk) before installing
+  the new dpost and picpack, which now only go in directory BINDIR (file
+  dwb.mk). If your spooler (e.g. Unison) or other programs are looking
+  for these programs in directory POSTBIN make the following changes
+  BEFORE doing anything else,
+
+	cd postscript/dpost
+	cp dpost.mk.old dpost.mk
+	cd ../pickpack
+	cp picpack.mk.old picpack.mk
+
+  dpost.mk.old and picpack.mk.old are makefiles that install dpost and
+  picpack in both BINDIR and POSTBIN (as in DWB 3.0 and DWB 3.0.1).
+
+--------
+devopost
+--------
+
+  The devopost font tables are included in the source, but they're no
+  longer supported and are not installed. If you need them add,
+
+	postscript/devopost
+
+  to the TARGETS list in file dwb.mk.
+
+-----------
+devpost.add
+-----------
+
+ The devpost.add tables are width tables for a collection of PostScript
+ fonts not generally available on PostScript printers. The tables are not
+ installed and not recommended, unless you're already using an older set.
+ If you need them add,
+
+	postscript/devpost.add
+
+ to the TARGETS list in file dwk.mk.
+

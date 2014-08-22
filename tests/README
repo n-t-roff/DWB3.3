@@ -1,0 +1,36 @@
+
+Test files for troff, preprocessors, and macro packages. Install the
+package and make sure your PATH picks up the new programs. To run the
+tests and save the results in directory ./$(SYSTEM) (where SYSTEM is
+defined in file tests.mk) type,
+
+	make -f tests.mk install
+
+By default the pipeline starts with pic (or grap) and ends with troff.
+Set TROFF to FALSE as in,
+
+	make -f tests.mk TROFF=FALSE install
+
+to break the pipe after the appropriate preprocessor runs. Results are
+again saved in directory ./$(SYSTEM).
+
+Choose all (instead of install) to run the command pipeline and leave
+the results (i.e. the .out files) in each test directory.
+
+Set TDEVNAME on the command line to select a different output device.
+For example,
+
+	make -f tests.mk TDEVNAME=i300 install
+
+formats files for printing on an Imagen 8/300. Define MACROS, as in,
+
+	make -f tests.mk MACROS=-ms install
+
+to use a different default macro package.
+
+Choose clean (or clobber), as in,
+
+	make -f tests.mk clean
+
+to remove output files from the test directories.
+

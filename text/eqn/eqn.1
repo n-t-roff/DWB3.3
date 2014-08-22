@@ -1,0 +1,286 @@
+.if t .ds ^ \s+1\v@.1m@^\v@-.1m@\s-1
+.if n .ds ^ ^
+.if t .ds ~ \s+1\v@.1m@~\v@-.1m@\s-1
+.if n .ds ~ ~
+.TH EQN 1
+.SH NAME
+.B eqn
+\- format mathematical text for
+.B troff
+.SH SYNOPSIS
+\*(mBeqn\f1
+.OP \-d xy []
+.OP \-p n []
+.OP \-s n []
+.OP \-f n []
+.OP \-T type []
+.OP "" files []
+.OP \- "" []
+.SH DESCRIPTION
+.B eqn
+is a
+.BR troff (1)
+preprocessor
+for typesetting mathematical text
+on a phototypesetter.
+Normal usage is:
+.EX
+eqn  \f1[\|\f2options\|\f1]\0\f2files\*(mW | troff  \f1[\|\f2options\f1\|]\*(mW | \(el\f1
+.EE
+If you do not specify
+.I files 
+(or if you specify
+.OP \-
+as the last
+argument),
+.B eqn
+reads the standard input.
+.B eqn
+prepares output for the typesetter
+that you name in the
+optional argument
+.OP \-T type .
+.PP
+A line beginning with
+.MW .EQ
+marks the start of an equation;
+the end of an equation
+is marked by a line beginning with
+.MR .EN .
+.B troff
+does not alter these lines,
+so they may be defined in macro packages
+to get
+centering, numbering, etc.
+You may also name two characters as
+delimiters;
+.B eqn
+treats subsequent text between delimiters as input.
+You may set delimiters to characters
+.I x\^
+and
+.I y\^
+with the command line argument
+.OP \-d xy
+or (more commonly) with
+.MW delim
+.I xy
+between
+.MW .EQ
+and
+.MR .EN .
+The left and right delimiters may be the same character;
+the dollar sign
+is often used as such a delimiter.
+Turn delimiters off with
+.MR "delim\ off" .
+.B eqn
+touches only
+text that is between delimiters or between
+.MW .EQ
+and
+.MR .EN .
+.PP
+Set apart keywords recognized by
+.B eqn
+with spaces, tabs, newlines, braces, double quotes,
+tildes, and circumflexes.
+Use braces,
+.MR {} ,
+for grouping;
+generally speaking,
+anywhere you can use a single character such as
+.IR x ,
+you may use a complicated construction
+enclosed in braces instead.
+Tilde
+.RM ( ~ )
+represents a full space in the output,
+circumflex
+.RM ( ^ )
+half as much.
+.PP
+Subscripts and superscripts are produced with the keywords
+.MW sub
+and
+.MR sup .
+Fractions are made with
+.MR over .
+.MW sqrt
+makes square roots.
+.PP
+The keywords
+.MW from
+and
+.MW to
+introduce lower and upper limits.
+Left and right brackets, braces, etc., of the right height are made with
+.MW left
+and
+.MR right .
+Legal characters after
+.MW left
+and
+.MW right
+are braces, brackets, bars,
+.MW c
+and
+.MW f
+for ceiling and floor,
+and
+.MW \&""
+for nothing at all (useful for a right-side-only bracket).
+A
+.MW left
+.I thing
+need not have a matching
+.MW right
+.IR thing ,
+but a
+.MW right
+.I thing 
+must have a matching
+.MW left
+.IR thing .
+.PP
+Vertical piles of things are made with
+.MR pile ,
+.MR lpile ,
+.MR cpile ,
+and
+.MR rpile .
+Piles may have arbitrary numbers of elements;
+.MW lpile
+left-justifies,
+.MW pile
+and
+.MW cpile
+center (but with different vertical spacing), and
+.MW rpile
+right-justifies.
+Matrices are made with
+.MR matrix .
+In addition, there is
+.MW rcol
+for a right-justified column.
+.PP
+Diacritical marks are made with
+.MR dot ,
+.MR dotdot ,
+.MR hat ,
+.MR tilde ,
+.MR bar ,
+.MR vec ,
+.MR dyad ,
+and
+.MR under .
+.PP
+You may change point sizes and fonts with
+.MW size
+.I n
+or
+.MW size
+.IR \(+-n ,
+.MR roman ,
+.MR italic ,
+.MR bold ,
+and
+.MW font
+.IR n .
+You may change point sizes and fonts globally in a document by
+.MW gsize
+.I n\^
+and
+.MW gfont
+.IR n ,
+or by the command line arguments
+.OP \-s n
+and
+.OP \-f n .
+.PP
+Normally, subscripts and superscripts are reduced by
+3 points from the previous size;
+you may change this with the command line argument
+.OP \-p n .
+.PP
+You can line up successive display arguments.
+Place
+.MW mark
+before the desired lineup point in the first equation;
+place
+.MW lineup
+at the place that is to line up vertically
+in subsequent equations.
+.PP
+You may define shorthands 
+or redefine existing keywords with
+.MR define :
+.EX
+define \f2thing\fP % \f2replacement\fP %
+.EE
+defines a new token called
+.I thing
+that is replaced by
+.I replacement
+whenever it appears thereafter.
+The
+.MW %
+may be any character that does not occur in
+.IR replacement .
+.PP
+Keywords such as
+.MR sum ,
+.MR int ,
+.MR inf ,
+and shorthands such as
+.MR >= ,
+.MR != ,
+and
+.MW ->
+are recognized.
+Greek letters are spelled out in the desired case, as in
+.MW alpha
+or
+.MR GAMMA .
+Mathematical words such as
+.MR sin ,
+.MR cos ,
+and
+.MW log
+are made Roman automatically.
+.B troff
+four-character escapes such as
+.MW \e(dd
+which produces the double dagger,
+may be used anywhere.
+Strings enclosed in double quotes
+.RM ( \&"\(el" )
+are passed through untouched;
+this permits keywords to be entered as text,
+and can be used to communicate
+with
+.B troff
+when all else fails.
+Full details are given in the
+.SM REFERENCE
+cited below.
+.SH BUGS
+To embolden digits, parentheses, etc.,
+it is necessary to quote them,
+as in
+.MR bold\ "12.3" .
+When you use
+.B eqn
+with the
+.SM MM
+macro package, displayed
+equations must appear only inside displays.
+.SH SEE ALSO
+.BR neqn (1),
+.BR nroff (1),
+.BR troff (1),
+.BR eqnchar (5)
+.SH REFERENCE
+B. W. Kernighan, L. L. Cherry,
+.ul
+Typesetting Mathematics \(em User's Guide (Second Edition)

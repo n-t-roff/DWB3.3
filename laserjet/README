@@ -1,0 +1,20 @@
+Limited troff support for LaserJet printers. Assumes your printer accepts
+downloaded fonts. dpcl now downloads individual bitmaps as they're needed,
+rather than sending complete raster files. A bit more work that produces
+significantly smaller output files. Use -s (slow) to get the old behavior.
+Use -r to eliminate the reset sequence at the start and end of dpcl output
+files.
+
+The default font tables and raster files (directory ./rastpcl) assume a
+300dpi write-black printer. Raster files in ./rastPCL are slightly fatter.
+They're unsupported but can produce better results on write-white printers.
+Use the (undocumented) -BPCL option to rastPCL tables with devpcl fonts.
+Raster files are installed in directory RASTDIR (see file ./laserjet.mk).
+rastpcl and rastPCL each need about 5meg.
+
+A typical command line would be,
+
+    pic file | tbl | eqn | troff -mm -Tpcl | dpcl >file.pcl
+
+file.pcl is PCL and can be sent directly to a printer.
+

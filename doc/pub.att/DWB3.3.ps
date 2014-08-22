@@ -1,0 +1,1360 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+%
+% Encoding vector and redefinition of findfont for the ISO Latin1 standard.
+% The 18 characters missing from ROM based fonts on older printers are noted
+% below.
+%
+
+/ISOLatin1Encoding [
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/space
+	/exclam
+	/quotedbl
+	/numbersign
+	/dollar
+	/percent
+	/ampersand
+	/quoteright
+	/parenleft
+	/parenright
+	/asterisk
+	/plus
+	/comma
+	/minus
+	/period
+	/slash
+	/zero
+	/one
+	/two
+	/three
+	/four
+	/five
+	/six
+	/seven
+	/eight
+	/nine
+	/colon
+	/semicolon
+	/less
+	/equal
+	/greater
+	/question
+	/at
+	/A
+	/B
+	/C
+	/D
+	/E
+	/F
+	/G
+	/H
+	/I
+	/J
+	/K
+	/L
+	/M
+	/N
+	/O
+	/P
+	/Q
+	/R
+	/S
+	/T
+	/U
+	/V
+	/W
+	/X
+	/Y
+	/Z
+	/bracketleft
+	/backslash
+	/bracketright
+	/asciicircum
+	/underscore
+	/quoteleft
+	/a
+	/b
+	/c
+	/d
+	/e
+	/f
+	/g
+	/h
+	/i
+	/j
+	/k
+	/l
+	/m
+	/n
+	/o
+	/p
+	/q
+	/r
+	/s
+	/t
+	/u
+	/v
+	/w
+	/x
+	/y
+	/z
+	/braceleft
+	/bar
+	/braceright
+	/asciitilde
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/.notdef
+	/dotlessi
+	/grave
+	/acute
+	/circumflex
+	/tilde
+	/macron
+	/breve
+	/dotaccent
+	/dieresis
+	/.notdef
+	/ring
+	/cedilla
+	/.notdef
+	/hungarumlaut
+	/ogonek
+	/caron
+	/space
+	/exclamdown
+	/cent
+	/sterling
+	/currency
+	/yen
+	/brokenbar		% missing
+	/section
+	/dieresis
+	/copyright
+	/ordfeminine
+	/guillemotleft
+	/logicalnot
+	/hyphen
+	/registered
+	/macron
+	/degree			% missing
+	/plusminus		% missing
+	/twosuperior		% missing
+	/threesuperior		% missing
+	/acute
+	/mu			% missing
+	/paragraph
+	/periodcentered
+	/cedilla
+	/onesuperior		% missing
+	/ordmasculine
+	/guillemotright
+	/onequarter		% missing
+	/onehalf		% missing
+	/threequarters		% missing
+	/questiondown
+	/Agrave
+	/Aacute
+	/Acircumflex
+	/Atilde
+	/Adieresis
+	/Aring
+	/AE
+	/Ccedilla
+	/Egrave
+	/Eacute
+	/Ecircumflex
+	/Edieresis
+	/Igrave
+	/Iacute
+	/Icircumflex
+	/Idieresis
+	/Eth			% missing
+	/Ntilde
+	/Ograve
+	/Oacute
+	/Ocircumflex
+	/Otilde
+	/Odieresis
+	/multiply		% missing
+	/Oslash
+	/Ugrave
+	/Uacute
+	/Ucircumflex
+	/Udieresis
+	/Yacute			% missing
+	/Thorn			% missing
+	/germandbls
+	/agrave
+	/aacute
+	/acircumflex
+	/atilde
+	/adieresis
+	/aring
+	/ae
+	/ccedilla
+	/egrave
+	/eacute
+	/ecircumflex
+	/edieresis
+	/igrave
+	/iacute
+	/icircumflex
+	/idieresis
+	/eth			% missing
+	/ntilde
+	/ograve
+	/oacute
+	/ocircumflex
+	/otilde
+	/odieresis
+	/divide			% missing
+	/oslash
+	/ugrave
+	/uacute
+	/ucircumflex
+	/udieresis
+	/yacute			% missing
+	/thorn			% missing
+	/ydieresis
+] def
+
+/NewFontDirectory FontDirectory maxlength dict def
+
+%
+% Apparently no guarantee findfont is defined in systemdict so the obvious
+%
+%	systemdict /findfont get exec
+%
+% can generate an error. So far the only exception is a VT600 (version 48.0).
+%
+
+userdict /@RealFindfont known not {
+	userdict begin
+		/@RealFindfont systemdict begin /findfont load end def
+	end
+} if
+
+/findfont {
+	dup NewFontDirectory exch known not {
+		dup
+		%dup systemdict /findfont get exec	% not always in systemdict
+		dup userdict /@RealFindfont get exec
+		dup /Encoding get StandardEncoding eq {
+			dup length dict begin
+				{1 index /FID ne {def}{pop pop} ifelse} forall
+				/Encoding ISOLatin1Encoding def
+				currentdict
+			end
+			/DummyFontName exch definefont
+		} if
+		NewFontDirectory 3 1 roll put
+	} if
+	NewFontDirectory exch get
+} bind def
+
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(AT&T UNIX)1 961 1 720 1040 t
+14 S f
+(\342)1681 968 w
+18 HB f
+(System)1842 1040 w
+(DOCUMENTER'S WORKBENCH)1 2722 1 720 1240 t
+14 S f
+(\342)3442 1168 w
+18 HB f
+(Software)3603 1240 w
+(\(Release 3.3\))1 1105 1 720 1440 t
+36 S1 f
+(________________________)720 1640 w
+14 HB f
+(Release Notes)1 957 1 720 1840 t
+9 HB f
+(ABSTRACT)720 2320 w
+10 R f
+( between releases)2 733(These notes document changes made)4 1548 2 1365 2320 t
+9 R f
+(3.2)3687 2320 w
+10 R f
+(and)3843 2320 w
+9 R f
+(3.3)4028 2320 w
+10 R f
+(of the Documenter's)2 856 1 4184 2320 t
+(Workbench \()1 526 1 1365 2440 t
+9 R f
+(DWB)1891 2440 w
+10 R f
+( the)1 149(\). See)1 255 2 2101 2440 t
+9 R f
+(DWB 3.2)1 346 1 2530 2440 t
+10 R f
+(release notes and the)3 834 1 2903 2440 t
+9 R f
+(DWB 3.1)1 346 1 3762 2440 t
+10 R f
+(overview for a general)3 905 1 4135 2440 t
+(discussion of the content of the entire package.)7 1874 1 1365 2560 t
+(Version)1365 2740 w
+9 R f
+(3.3)1706 2740 w
+10 R f
+(will run under)2 570 1 1846 2740 t
+9 R f
+(UNIX SVR4)1 468 1 2441 2740 t
+10 R f
+( improved)1 411( an)1 147( includes:)1 389( It)1 114( as earlier releases.)3 761(as well)1 282 6 2936 2740 t
+10 I f
+(tbl)1365 2860 w
+10 R f
+( of)1 125(; a merged version)3 794 2 1479 2860 t
+10 I f
+(troff)2440 2860 w
+10 R f
+(and)2655 2860 w
+10 I f
+(nroff)2841 2860 w
+10 R f
+(; the)1 192 1 3044 2860 t
+9 R f
+(MPS)3276 2860 w
+10 R f
+(macro package; the latest)3 1062 1 3498 2860 t
+9 R f
+(MPM)4600 2860 w
+10 R f
+(page)4852 2860 w
+(makeup package; and various minor improvements and bug fixes.)8 2632 1 1365 2980 t
+10 B f
+(Introduction)720 3280 w
+10 R f
+(These notes document changes made between releases)6 2333 1 720 3460 t
+9 R f
+(3.2)3102 3460 w
+10 R f
+(and)3266 3460 w
+9 R f
+(3.3)3459 3460 w
+10 R f
+(of the Documenter's Workbench.)3 1416 1 3624 3460 t
+(Command)720 3580 w
+10 I f
+(dwbv)1169 3580 w
+10 R f
+( to)1 109( \(Prior)1 289( is currently installed on your system.)6 1538(will tell you what version)4 1050 4 1412 3580 t
+9 R f
+(DWB 3.0)1 346 1 4427 3580 t
+10 R f
+(,)4773 3580 w
+10 I f
+(dwbv)4829 3580 w
+10 R f
+(did not exist.\))2 553 1 720 3700 t
+( with)1 210(These changes are also documented in the Addendum pages and replacement manual pages provided)13 4110 2 720 3880 t
+( code, for inclusion in the user manual,)7 1605(the source)1 415 2 720 4000 t
+9 I f
+(AT&T UNIX)1 465 1 2770 4000 t
+10 I f
+(System Documenter's Workbench Software.)3 1773 1 3267 4000 t
+10 R f
+( licensees can obtain)3 850( Binary)1 331( source code product.)3 880(The machine\255readable text of this manual is part of the)9 2259 4 720 4120 t
+( Internal)1 372(paper copies from their vendor.)4 1307 2 720 4240 t
+9 R f
+(AT&T)2434 4240 w
+10 R f
+(people can also call Software Documentation and Sales,)7 2324 1 2716 4240 t
+(\(201\) 564\2554500.)1 649 1 720 4360 t
+(The source code has been compiled and tested under)8 2100 1 720 4540 t
+9 R f
+(SVR2.1)2843 4540 w
+10 R f
+(,)3131 4540 w
+9 R f
+(SVR3.2)3179 4540 w
+10 R f
+(,)3467 4540 w
+9 R f
+(SVR 4.0)1 311 1 3515 4540 t
+10 R f
+(and SunOS)1 453 1 3851 4540 t
+9 R f
+(4.1.1)4327 4540 w
+10 R f
+( a)1 70( you are)2 321(. If)1 141 3 4508 4540 t
+( licensees should)2 711( Source)1 344(source code licensee, no changes are needed to compile under these systems.)11 3265 3 720 4660 t
+(consult the top\255level)2 844 1 720 4780 t
+9 R f
+(README)1601 4780 w
+10 R f
+( The)1 220(file for instructions on changing defaults and building the package.)9 2800 2 2020 4780 t
+9 R f
+(CHANGES)720 4900 w
+10 R f
+( many of the changes made from)6 1308(file in that same directory is an informal description of)9 2192 2 1171 4900 t
+9 R f
+(DWB 3.0)1 346 1 4694 4900 t
+10 R f
+(to the present.)2 563 1 720 5020 t
+10 B f
+(The)720 5320 w
+10 BI f
+(tbl)912 5320 w
+10 B f
+(Preprocessor)1043 5320 w
+10 R f
+(Based on customer requests there are two new features:)8 2216 1 720 5500 t
+8 S f
+(\267)783 5680 w
+10 B f
+(Floating Column Width.)2 1049 1 870 5680 t
+10 R f
+(New column\255format modifier)2 1181 1 1969 5680 t
+10 CW f
+(x)3175 5680 w
+10 R f
+(or)3261 5680 w
+10 CW f
+(X)3370 5680 w
+10 R f
+(: the width of the corresponding column)6 1610 1 3430 5680 t
+( other)1 231(will be increased to use the remainder of the page width \(between margins\) after the widths of the)17 3939 2 870 5800 t
+( most one column can have this modifier.)7 1654( At)1 150(columns have been subtracted.)3 1225 3 870 5920 t
+8 S f
+(\267)783 6100 w
+10 B f
+(Unlimited Text Blocks.)2 993 1 870 6100 t
+10 R f
+(Like previous versions, this release of)5 1544 1 1919 6100 t
+10 I f
+(tbl)3494 6100 w
+10 R f
+( of)1 115(has a limit of 62 on the number)7 1294 2 3631 6100 t
+(text blocks in the first)4 912 1 870 6220 t
+10 CW f
+(maxline)1817 6220 w
+10 R f
+(lines of input data; this reflects a limit in the size of the)12 2312 1 2271 6220 t
+10 I f
+(troff)4617 6220 w
+10 R f
+(name)4824 6220 w
+( parameter)1 426(space. The)1 454 2 870 6340 t
+10 CW f
+(maxline)1778 6340 w
+10 R f
+(determines the number of lines of input data that are used to calculate)12 2814 1 2226 6340 t
+( A)1 134(column widths, etc.)2 807 2 870 6460 t
+10 I f
+(line)1848 6460 w
+10 R f
+( context is one of the following: the input data for one row of the)14 2745(in this)1 260 2 2035 6460 t
+( for a full\255width)3 677(table, including text blocks, if any; a troff request or macro call; an explicit request)14 3493 2 870 6580 t
+( versions of)2 490( Previous)1 412(horizontal line.)1 618 3 870 6700 t
+10 I f
+(tbl)2427 6700 w
+10 R f
+(do not recognize text blocks in the input data after the first)11 2470 1 2570 6700 t
+10 CW f
+(maxline)870 6820 w
+10 R f
+(lines; this version allows an unlimited number of text blocks after the first)12 2959 1 1315 6820 t
+10 CW f
+(maxline)4299 6820 w
+10 R f
+(lines.)4744 6820 w
+(Copyright \251 1992 AT&T)3 1029 1 2365 7224 t
+(All Rights Reserved.)2 836 1 2462 7344 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(2)720 600 w
+10 R f
+( exceeded, try)2 590(If you get a message indicating that the limit on the number of text blocks has been)16 3580 2 870 960 t
+(resetting the)1 500 1 870 1080 t
+10 CW f
+(maxline)1404 1080 w
+10 R f
+( in)1 111(global parameter \(introduced)2 1176 2 1858 1080 t
+9 R f
+(DWB 3.2)1 346 1 3176 1080 t
+10 R f
+(\) to)1 144 1 3522 1080 t
+10 I f
+(reduce)3699 1080 w
+10 R f
+(the number of input lines)4 1037 1 4003 1080 t
+( initial default value is 250.)5 1094( The)1 205(that are used to calculate column widths, etc.)7 1794 3 870 1200 t
+( a)1 90( are)1 166( There)1 302(This release attempts to fix all of the serious problems with multiple\255page boxed tables.)13 3762 4 720 1380 t
+(number of other fixes as well.)5 1192 1 720 1500 t
+10 I f
+(Warning:)720 1680 w
+10 R f
+(Page breaks and other spacing are different in some cases than with previous versions of)14 3615 1 1133 1680 t
+10 I f
+(tbl)4779 1680 w
+10 R f
+(. If)1 147 1 4893 1680 t
+(you have hand\255tuned tables that contain begin\255page \()7 2206 1 720 1800 t
+10 CW f
+(.bp)2926 1800 w
+10 R f
+(\) requests as a work\255around for problems with)7 1934 1 3106 1800 t
+( in order to obtain satisfactory output with the new)9 2149(multiple\255page tables, you may have to remove these)7 2171 2 720 1920 t
+( be done for some reason, you may wish to process these files using the previous)15 3388( this cannot)2 485(version. If)1 447 3 720 2040 t
+(\()720 2160 w
+9 R f
+(DWB 3.2)1 346 1 753 2160 t
+10 R f
+(\) version of)2 470 1 1099 2160 t
+10 I f
+(tbl)1599 2160 w
+10 R f
+(, which is distributed as)4 967 1 1713 2160 t
+10 I f
+(otbl)2710 2160 w
+10 R f
+( guarantee of future support for)5 1279( No)1 178(with this release.)2 686 3 2897 2160 t
+10 I f
+(otbl)720 2280 w
+10 R f
+(is expressed or implied.)3 949 1 901 2280 t
+10 BI f
+(nroff)720 2520 w
+10 B f
+(Lives)956 2520 w
+10 R f
+(Over the years,)2 646 1 720 2700 t
+10 I f
+(troff)1411 2700 w
+10 R f
+(and)1629 2700 w
+10 I f
+(nroff)1818 2700 w
+10 R f
+( latter)1 251(got out of synch; more precisely, the former progressed and the)10 2731 2 2058 2700 t
+( attempted to remedy this by discouraging use of)8 1948(stagnated. We)1 590 2 720 2820 t
+10 I f
+(nroff)3283 2820 w
+10 R f
+(in favor of)2 421 1 3503 2820 t
+10 CW f
+(troff \255Tnroff)1 780 1 870 3000 t
+10 I f
+(file)1710 3000 w
+10 CW f
+(| dnroff)1 480 1 1898 3000 t
+10 R f
+( a synchronized version,)3 1009( In)1 146( anyone's satisfaction.)2 916(However, this never worked entirely to)5 1623 4 720 3180 t
+10 I f
+(troff)4452 3180 w
+10 R f
+(and)4663 3180 w
+10 I f
+(nroff)4845 3180 w
+10 R f
+( program runs as)3 668( That)1 233( and use the same executable.)5 1180(now compile from the same source code)6 1619 4 720 3300 t
+10 I f
+(troff)4445 3300 w
+10 R f
+(unless the)1 397 1 4643 3300 t
+10 CW f
+(\255N)720 3420 w
+10 R f
+(option is used or the basename component of)7 1827 1 868 3420 t
+10 CW f
+(argv[0])2723 3420 w
+10 R f
+(is)3171 3420 w
+10 I f
+(nroff)3266 3420 w
+10 R f
+( drop additional)2 641( we will)2 328(. Accordingly,)1 602 3 3469 3420 t
+(effort on)1 346 1 720 3540 t
+10 I f
+(dnroff)1091 3540 w
+10 R f
+(.)1344 3540 w
+(Source licensees may notice the)4 1327 1 720 3720 t
+10 I f
+(troff)2085 3720 w
+10 R f
+(/)2258 3720 w
+10 I f
+(nroff)2286 3720 w
+10 R f
+(source includes conditional compilation directives that select)6 2520 1 2520 3720 t
+9 R f
+(ANSI)720 3840 w
+10 R f
+(or older\255style)1 535 1 955 3840 t
+9 R f
+(C)1513 3840 w
+10 R f
+( source is used if)4 671(. Older\255style)1 524 2 1573 3840 t
+10 CW f
+(UNANSI)2793 3840 w
+10 R f
+(is defined.)1 416 1 3178 3840 t
+10 B f
+(The MPS Macros)2 749 1 720 4080 t
+10 R f
+(The)720 4260 w
+9 R f
+(MPS)902 4260 w
+10 R f
+( a convenient collection of special purpose macros designed exclusively for use)11 3229(macro package is)2 700 2 1111 4260 t
+( everything that was in)4 934( currently includes)2 757( It)1 118(on PostScript output devices.)3 1188 4 720 4380 t
+9 R f
+(MPICTURES)3746 4380 w
+10 R f
+(and)4282 4380 w
+9 R f
+(MCOLOR)4455 4380 w
+10 R f
+(, and)1 200 1 4840 4380 t
+(two new macros,)2 689 1 720 4500 t
+10 CW f
+(.pM)1439 4500 w
+10 R f
+(and)1649 4500 w
+10 CW f
+(.lM)1823 4500 w
+10 R f
+(, that switch between portrait and landscape printing in a single document.)11 3037 1 2003 4500 t
+(The)720 4620 w
+10 CW f
+(.pM)900 4620 w
+10 R f
+(and)1105 4620 w
+10 CW f
+(.lM)1274 4620 w
+10 R f
+(macros rotate entire pages and require the)6 1667 1 1479 4620 t
+9 R f
+(DWB 3.3)1 346 1 3169 4620 t
+10 R f
+(version of)1 402 1 3540 4620 t
+10 I f
+(dpost)3967 4620 w
+10 R f
+(.)4192 4620 w
+(Most future macro enhancements that rely on PostScript devices will be inserted in this new package.)15 4055 1 720 4800 t
+10 B f
+(The MM Macros)2 726 1 720 5040 t
+10 R f
+(The)720 5220 w
+9 R f
+(MM)901 5220 w
+10 R f
+(macros now output special)3 1080 1 1090 5220 t
+10 I f
+(troff)2199 5220 w
+10 R f
+(device control commands designed to describe important parts of)8 2639 1 2401 5220 t
+( ``information markers'' are)3 1199( These)1 314( \(e.g. author, title, section headers\) to other software.)8 2317(a document)1 490 4 720 5340 t
+( example, in one existing)4 1030( For)1 196( document retrieval systems.)3 1164(intended for use in future hypertext and on\255line)7 1930 4 720 5460 t
+( section headers are displayed in a separate pop\255up window; a click on any header displays the)16 3785(prototype, all)1 535 2 720 5580 t
+( The)1 214(formatted output page containing that section.)5 1882 2 720 5700 t
+9 R f
+(DWB 3.3)1 346 1 2848 5700 t
+10 R f
+(version of)1 411 1 3228 5700 t
+10 I f
+(dpost)3673 5700 w
+10 R f
+(includes the information as)3 1115 1 3925 5700 t
+( post\255processors supplied with)3 1261( Other)1 294(PostScript comments in its output file.)5 1620 3 720 5820 t
+9 R f
+(DWB 3.3)1 346 1 3934 5820 t
+10 R f
+(ignore the device)2 719 1 4321 5820 t
+( Set)1 178(control commands.)1 766 2 720 5940 t
+10 I f
+(troff)1689 5940 w
+10 R f
+(option)1887 5940 w
+10 CW f
+(\255rI1)2168 5940 w
+10 R f
+(\(``eye one''\) to disable this feature.)5 1412 1 2433 5940 t
+(The)720 6120 w
+10 CW f
+(.2C)921 6120 w
+10 R f
+( as the width of the gutter between the)8 1701(macro now recognizes an argument, which is taken)7 2192 2 1147 6120 t
+( column will be half as wide as the current line length less the gutter.)14 2749(columns. Each)1 613 2 720 6240 t
+10 B f
+(The MPM Macros)2 787 1 720 6480 t
+9 R f
+(DWB 3.3)1 346 1 720 6660 t
+10 R f
+( latest version of the)4 834(source includes the)2 775 2 1096 6660 t
+9 R f
+(MPM)2734 6660 w
+10 R f
+(macros, which are based on and similar to)7 1722 1 2975 6660 t
+9 R f
+(MS)4726 6660 w
+10 R f
+(, but)1 184 1 4856 6660 t
+( at a page top or bottom\))6 1120(provide automatic figure placement and widow \(single line of a paragraph)10 3200 2 720 6780 t
+( macros dynamically call the)4 1264(suppression. The)1 731 2 720 6900 t
+10 I f
+(pm)2769 6900 w
+10 R f
+( used in)2 371(program at run\255time, so they cannot be)6 1724 2 2945 6900 t
+(Copyright \251 1992 AT&T)3 1029 1 2365 7224 t
+(All Rights Reserved.)2 836 1 2462 7344 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(3)4984 600 w
+10 R f
+(combination with the)2 880 1 720 960 t
+9 R f
+(MSAFE)1638 960 w
+10 R f
+( have)1 227( We)1 202( disable run\255time commands\).)3 1235(macros \(whose sole purpose is to)5 1398 4 1978 960 t
+( with this software ourselves; if demand warrants we will consider an)11 3001(relatively little experience)2 1082 2 720 1080 t
+9 R f
+(MM)4847 1080 w
+10 R f
+(\255)5007 1080 w
+(compatible version.)1 788 1 720 1200 t
+(Source licensees should note that)4 1330 1 720 1380 t
+10 I f
+(pm)2076 1380 w
+10 R f
+(is written in)2 480 1 2224 1380 t
+9 R f
+(C++)2728 1380 w
+10 R f
+( with access to a)4 658(. Those)1 320 2 2888 1380 t
+9 R f
+(C++)3890 1380 w
+10 R f
+( consult)1 316(compiler should)1 648 2 4076 1380 t
+(the top\255level)1 502 1 720 1500 t
+9 R f
+(README)1245 1500 w
+10 R f
+(file for instructions on building and installing)6 1817 1 1650 1500 t
+10 I f
+(pm)3492 1500 w
+10 R f
+(.)3622 1500 w
+10 B f
+(Font Tables)1 509 1 720 1740 t
+10 R f
+( demand, the keyboard character minus sign in all)8 2004(By popular)1 448 2 720 1920 t
+10 I f
+(devLatin1)3199 1920 w
+10 R f
+(text fonts has been changed from)5 1332 1 3626 1920 t
+10 S f
+(-)4985 1920 w
+10 R f
+( can now be used in its most common application)9 2073( It)1 122( character.)1 425(to the narrower \255)3 703 4 720 2040 t
+10 S1 f
+(\320)4059 2040 w
+10 R f
+(as an in\255line hyphen.)3 865 1 4175 2040 t
+(\(The)720 2160 w
+9 R f
+(ISO)954 2160 w
+10 R f
+( unfortunate and unavoidable)3 1239( An)1 196( is the minus sign.\))4 855(standard says this character, octal 55,)5 1603 4 1147 2160 t
+(consequence is that lines and pages may break differently with the new)11 2841 1 720 2280 t
+10 I f
+(devLatin1)3586 2280 w
+10 R f
+(tables.)4011 2280 w
+(Characters)720 2460 w
+10 CW f
+(\\\(dq)1177 2460 w
+10 R f
+(and)1448 2460 w
+10 CW f
+(\\\(bs)1623 2460 w
+10 R f
+( are available with)3 755( Both)1 252(print double quote and backslash in the current font.)8 2139 3 1894 2460 t
+10 I f
+(troff)720 2580 w
+10 R f
+(or)921 2580 w
+10 I f
+(nroff)1031 2580 w
+10 R f
+( were added as a convenience to users, since the usual way of entering these characters)15 3491(. These)1 315 2 1234 2580 t
+(is ungainly when they appear as macro arguments.)7 2018 1 720 2700 t
+(Font name)1 459 1 720 2880 t
+10 CW f
+(HM)1238 2880 w
+10 R f
+( synonym for)2 603(is a)1 170 2 1417 2880 t
+10 CW f
+(H)2250 2880 w
+10 R f
+(and width tables for Adobe's Helvetica\255Light and Helvetica\255)7 2670 1 2370 2880 t
+(LightOblique fonts are accessible as font names)6 1961 1 720 3000 t
+10 CW f
+(HL)2713 3000 w
+10 R f
+(and)2865 3000 w
+10 CW f
+(HK)3041 3000 w
+10 R f
+(, respectively \(despite the fact that those fonts)7 1879 1 3161 3000 t
+( changes support the MultiWeight package, which at present is only)10 2890( Both)1 263(are not generally available\).)3 1167 3 720 3120 t
+( only made to the)4 694( were)1 243(available to internal customers, and)4 1417 3 720 3240 t
+10 I f
+(devpost)3099 3240 w
+10 R f
+(and)3429 3240 w
+10 I f
+(devLatin1)3598 3240 w
+10 R f
+(tables.)4023 3240 w
+(The)720 3420 w
+10 I f
+(devLatin1)912 3420 w
+10 R f
+(characters)1349 3420 w
+10 CW f
+(\\\(!!)1789 3420 w
+10 R f
+(and)2091 3420 w
+10 CW f
+(\\\(??)2272 3420 w
+10 R f
+(, which print as \241 and \277, have been added to all)11 1997 1 2512 3420 t
+10 I f
+(devpost)4547 3420 w
+10 R f
+(text)4890 3420 w
+(fonts.)720 3540 w
+10 B f
+(Miscellany)720 3780 w
+10 R f
+(The new version of)3 785 1 720 3960 t
+10 I f
+(checkdoc)1534 3960 w
+10 R f
+(includes various fixes and now expands)5 1609 1 1933 3960 t
+10 CW f
+(.so)3571 3960 w
+10 R f
+(and)3780 3960 w
+10 CW f
+(.nx)3953 3960 w
+10 R f
+(requests.)4162 3960 w
+10 I f
+(xpand)4569 3960 w
+10 R f
+(is no)1 197 1 4843 3960 t
+(longer required.)1 637 1 720 4080 t
+(The horizontal and vertical configurations of the)6 1935 1 720 4260 t
+9 R f
+(AT&T)2678 4260 w
+10 R f
+(logo can now be used in the same job.)8 1523 1 2948 4260 t
+(The)720 4440 w
+10 I f
+(postio)900 4440 w
+10 R f
+(serial interface program now includes all unrecognized status messages in the printer log file.)13 3726 1 1170 4440 t
+(On many systems,)2 762 1 720 4620 t
+10 I f
+(dpost)1520 4620 w
+10 R f
+( than likely, this will be the)6 1176( More)1 280( print spooler.)2 586(is called automatically by the)4 1223 4 1775 4620 t
+(wrong version, even if the)4 1105 1 720 4740 t
+9 R f
+(DWB)1863 4740 w
+10 R f
+(test directory is in your)4 987 1 2113 4740 t
+10 CW f
+(PATH)3139 4740 w
+10 R f
+( recommend explicitly piping)3 1222(. We)1 227 2 3379 4740 t
+10 I f
+(troff)4867 4740 w
+10 R f
+(output into)1 448 1 720 4860 t
+10 I f
+(dpost)1205 4860 w
+10 R f
+( the case of)3 487( In)1 145(, then piping that output to the print spooler.)8 1863 3 1430 4860 t
+9 R f
+(UNISON)3960 4860 w
+10 R f
+(, pipe into the)3 586 1 4300 4860 t
+10 I f
+(prt)4923 4860 w
+10 R f
+(command using the language option ``)5 1540 1 720 4980 t
+10 CW f
+(\255lpost)2260 4980 w
+10 R f
+('' \(assuming PostScript\).)2 997 1 2620 4980 t
+10 B f
+(Availability)720 5220 w
+9 R f
+(DWB 3.3)1 346 1 720 5400 t
+10 R f
+(will be available world\255wide as a source code product through)9 2531 1 1096 5400 t
+9 R f
+(UNIX)3655 5400 w
+10 R f
+( and its)2 301(System Laboratories)1 829 2 3910 5400 t
+(affiliates,)720 5520 w
+9 R f
+(UNIX)1117 5520 w
+10 R f
+(Europe, Ltd. and)2 671 1 1367 5520 t
+9 R f
+(UNIX)2061 5520 w
+10 R f
+(Pacific.)2311 5520 w
+(Internal)720 5700 w
+9 R f
+(AT&T)1056 5700 w
+10 R f
+(employees can get binary for many systems, including)7 2196 1 1329 5700 t
+9 R f
+(AT&T)3552 5700 w
+10 R f
+(,)3797 5700 w
+9 R f
+(NCR)3849 5700 w
+10 R f
+(, Sun,)1 235 1 4034 5700 t
+9 R f
+(VAX)4296 5700 w
+10 R f
+(, Amdahl and)2 549 1 4491 5700 t
+9 R f
+(HP)720 5820 w
+10 R f
+(, from)1 252 1 835 5820 t
+9 R f
+(USTOP)1118 5820 w
+10 R f
+( to)1 110( or mail)2 327( 564\2553330,)1 433( \(201\))1 249(. Call)1 250 5 1403 5820 t
+10 CW f
+(whsds!uadm)2804 5820 w
+10 R f
+( you need binaries for a system type)7 1488(. If)1 148 2 3404 5820 t
+(not currently supported, inform Janet Pultorak \()6 1990 1 720 5940 t
+10 CW f
+(ihlpz!jfs)2710 5940 w
+10 R f
+(\) or Nils\255Peter Nelson \()4 993 1 3250 5940 t
+10 CW f
+(mhpo!npn)4243 5940 w
+10 R f
+( the)1 162(\) of)1 155 2 4723 5940 t
+( for all)2 292( Documentation)1 679(approximate number of systems that would benefit from a port.)9 2647 3 720 6060 t
+9 R f
+(DWB)4374 6060 w
+10 R f
+(releases is)1 419 1 4621 6060 t
+(available internally through Software Documentation and Sales, \(201\) 564\2554500.)8 3234 1 720 6180 t
+(Special source license arrangements for internal customers can be made by contacting Nils\255Peter Nelson.)13 4196 1 720 6360 t
+10 B f
+(A Note to Users of X\255Window Systems)6 1636 1 720 6600 t
+10 R f
+(We call your attention to a companion product, interactive)8 2516 1 720 6780 t
+10 I f
+(picasso)3284 6780 w
+10 R f
+(\(version)3632 6780 w
+9 R f
+(2.0)4005 6780 w
+10 R f
+( product is an)3 613(\). This)1 309 2 4118 6780 t
+( eliminates the repetitive)3 1054( It)1 134( pictures to be included in your documents.)7 1887(interactive tool for producing)3 1245 4 720 6900 t
+(Copyright \251 1992 AT&T)3 1029 1 2365 7224 t
+(All Rights Reserved.)2 836 1 2462 7344 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(4)720 600 w
+10 R f
+(tinkering with)1 566 1 720 960 t
+10 I f
+(pic)1313 960 w
+10 R f
+( runs on systems supporting)4 1129( It)1 114( to perfect complex pictures.)4 1151(input language often required)3 1184 4 1462 960 t
+(the)720 1080 w
+9 R f
+(X)877 1080 w
+10 R f
+(\255windows system and the)3 1049 1 942 1080 t
+9 R f
+(OPEN LOOK)1 520 1 2026 1080 t
+10 R f
+( Interactive)1 488(/Open Windows toolkits.)2 1027 2 2546 1080 t
+10 I f
+(picasso)4097 1080 w
+10 R f
+(is available, as)2 607 1 4433 1080 t
+( from the same sources as)5 1178(source or executables,)2 941 2 720 1200 t
+9 R f
+(DWB 3.3)1 346 1 2892 1200 t
+10 R f
+( current distribution includes an)4 1391(. The)1 260 2 3238 1200 t
+9 R f
+(X)4942 1200 w
+10 R f
+(\255)5007 1200 w
+(windows\255based)720 1320 w
+10 I f
+(troff/picasso)1387 1320 w
+10 R f
+(previewer,)1934 1320 w
+10 I f
+(xtv)2403 1320 w
+10 R f
+(. Adding)1 396 1 2527 1320 t
+10 I f
+(xtv)2968 1320 w
+10 R f
+(to the end of a)4 651 1 3129 1320 t
+9 R f
+(DWB)3823 1320 w
+10 R f
+(command pipeline will)2 962 1 4078 1320 t
+(produce a legible, accurate representation of your document on\255screen within seconds.)10 3452 1 720 1440 t
+10 B f
+(Acknowledgments)720 1680 w
+10 R f
+( Akkerhuis provided the)3 1055(Brian Kernighan of the Computing Science Research Center and Jaap)9 3038 2 720 1860 t
+10 I f
+(troff)4867 1860 w
+10 R f
+( Cherry provided)2 720(enhancements. Lorinda)1 975 2 720 1980 t
+10 I f
+(tbl)2459 1980 w
+10 R f
+( Muir supplied)2 625( Dave)1 278( tests.)1 246(fixes and regression)2 836 4 2609 1980 t
+10 I f
+(checkdoc)4637 1980 w
+10 R f
+(.)5015 1980 w
+(Matthijs Melchior of Network Systems International in the Netherlands contributed the scalable logos and)13 4320 1 720 2100 t
+(many helpful suggestions.)2 1047 1 720 2220 t
+(Carl Mee fixed the many)4 1014 1 720 2400 t
+10 I f
+(tbl)1763 2400 w
+10 R f
+( Knudsen and)2 559( Don)1 227( supplied the new features.)4 1087(bugs that he did not create, and)6 1269 4 1898 2400 t
+(Manijeh Shayegan provided the latest)4 1589 1 720 2520 t
+10 I f
+(picasso)2354 2520 w
+10 R f
+( L'Hommedieu enhanced the)3 1221(. Carmela)1 433 2 2662 2520 t
+9 R f
+(MM)4359 2520 w
+10 R f
+(macros and)1 476 1 4564 2520 t
+( for)1 143( Drechsler was responsible for porting and packaging this release,)9 2636( Rich)1 240(updated the user documentation.)3 1301 4 720 2640 t
+( for the wide)3 519( Pultorak does the binary packaging and testing)7 1930( Janet)1 260(fixing bugs, and for leading the project.)6 1611 4 720 2760 t
+(variety of platforms supported by)4 1337 1 720 2880 t
+9 R f
+(RDS/USTOP)2080 2880 w
+10 R f
+(, and is an integral part of the support team.)9 1739 1 2565 2880 t
+( giving us requirements and problems they)6 1764( By)1 177( the support of our customers.)5 1243(Last, we must acknowledge)3 1136 4 720 3060 t
+( purchasing the source or binary product they have provided the)10 2700( By)1 183(drive improvement of the product.)4 1437 3 720 3180 t
+(funding that keeps)2 738 1 720 3300 t
+9 R f
+(DWB)1481 3300 w
+10 R f
+(alive and healthy.)2 707 1 1716 3300 t
+(Copyright \251 1992 AT&T)3 1029 1 2365 7224 t
+(All Rights Reserved.)2 836 1 2462 7344 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Trailer
+done
+%%Pages: 4
+%%DocumentFonts: Courier Times-Roman Times-Bold Helvetica-Bold Times-Italic Times-Roman Symbol Times-BoldItalic

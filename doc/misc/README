@@ -1,0 +1,44 @@
+Miscellaneous Pages
+============================================================================
+REVISED &
+REPRINTED:   May 1990 by C.L'Hommedieu, AT&T Bell Laboratories
+============================================================================
+FILE             PURPOSE
+--------------   --------------------------------------------------------
+toc.do           macro definiton to collect table of contents info
+toc.master       master table of contents
+cover            cover page
+refs             reference page
+spine            binder spine and front text (below artwork)
+divtags          titles for divider tags
+feedback         information on user feedback
+
+============================================================================
+To produce the entire set of special pages, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spool command, then the entire document will be printed as well;
+otherwise, the script creates a PostScript output file (beginning
+with "PS.") for each document part.
+
+To produce the master table of contents page, use the command:
+   tbl toc.master | troff -Tpost - | dpost
+
+To produce the cover page, use the command:
+   troff -Tpost cover | dpost
+
+To produce the reference page, use the command:
+   troff -Tpost refs | dpost
+
+To produce the binder spine, use the command:
+   troff -Tpost spine | dpost
+
+To produce a set of tags for the binder dividers, use the command:
+   troff -Tpost divtags | dpost
+
+To produce the feedback page, use the command:
+   troff -Tpost feedback | dpost
+
+====================================================================

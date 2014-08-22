@@ -1,0 +1,75 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.so ../defs.doc
+.so defs.pguide
+.ds pT Picasso
+.aP D "Some Larger Examples"
+.P
+Herewith a handful of larger examples, intended to suggest a range
+of potential usage for
+.IR Picasso ,
+starting with a hash table diagram from a computer science text:
+.fS +6p
+.EX A1 2
+.P
+The macro definition for
+.cR ndblock
+draws the blocks of three
+small boxes connected to the `n' and `d' entries in the ndtable.
+Parameter substitution is literal text replacement, so the first
+parameter can be used in constructing the target label for the spline
+arrows.
+The second parameter is used as a vertical offset to the point where
+the spline bends up towards the appropriate box's corner in the table.
+'''	\" FORCE PAGE
+.SK
+.P
+Somewhat more elaborate definitions for menus, cursor arrows and such lead
+to the following picture of a
+.sM "630\ MTG"
+window.
+(Scroll bars are left as an exercise for the reader.)
+This example illustrates one more feature of
+.IR Picasso ,
+the
+.cR layer
+attribute. 
+In order to draw a filled black box \f2underneath\f1 the white text for
+the selected item in a menu, it is useful to organize the objects in a
+bottom to top order.
+By default, objects are drawn in layer 0 or in whatever layer is specified
+explicitly as an attribute for the object.
+The current default layer may also be changed from 0 by setting the variable
+.cR curlayer .
+When a picture is printed, lower layers are drawn first with higher layers
+successively drawn on top.
+You may also draw objects \f2underneath\f1 layer 0; negative layers are
+.I draft
+layers and are not drawn in the final picture.
+They may be useful to provide grids or other positional data that
+the visible objects may be based on.
+.fS +6p
+.EX A2 3
+'''	\" FORCE PAGE
+.SK
+.P
+We conclude with a pair of colorful examples, the first a simple no-smoking
+sign with its plume of smoke done with a thick spline emerging from the ash:
+.fS +6p
+.EX A3
+'''	\" FORCE PAGE
+.SK
+.P
+And last, a complete version of the U.S. flag that uses
+.cR for
+loops to
+replicate the stars and stripes in place of the cruder method shown earlier:
+.fS +6p
+.EX A4
+'''	\" FORCE PAGE
+.SK
+.BP pool.ps 6 6 c

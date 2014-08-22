@@ -1,0 +1,59 @@
+MV
+=============================================================================
+TITLE      A Macro Package for View Graphs and Slides
+
+AUTHOR(s)  Ted A. Dolotta, Dale W. Smith
+           Bell Telephone Laboratories
+
+REVISED    April 1990 by C.L'Hommedieu, AT&T Bell Laboratories
+REPRINTED  May 1990, AT&T Bell Laboratories
+=============================================================================
+FILE            PURPOSE
+------------    ----------------------------------------------------------
+mv.doc          MV document body
+mv.app          MV appendix
+mv.ex1          Input for Example 1, Output (trivial)
+mv.ex2          Input for Example 2, Output (Less Trivial)
+mv.ex3          Input for Example 3, Output (Levels & Marks)
+mv.ex4          Input for Example 4, Output (Complex)
+mv.ex5          Input for Example 5, Output (Equations)
+mv.ex6          Input for Example 6, Output (The Works)
+mv.ex7          Input for Example 7, Output (Model)
+mv.ex8          Input for Example 8, Output (Age Graph)
+Run             Shell script to format and print entire MV document
+agepop.d        Data for graph, Example 8
+=============================================================================
+To produce the entire MV document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the MV document (body only), use the command:
+
+   tbl mv.doc | eqn | troff -Tpost - | dpost
+
+To produce only the appendix, use the command:
+
+   troff -Tpost -mpictures mv.app | dpost
+
+To produce output samples as individual full-page images, use the commands:
+
+   troff -Tpost -mv mv.ex1 | dpost
+   troff -Tpost -mv mv.ex2 | dpost
+   troff -Tpost -mv mv.ex3 | dpost
+   tbl mv.ex4 | troff -Tpost -mv - | dpost
+   eqn mv.ex5 | troff -Tpost -mv - | dpost
+   tbl mv.ex6 | eqn | troff -Tpost -mv - | dpost
+   pic mv.ex7 | troff -Tpost -mv - | dpost
+   grap mv.ex8 | pic | troff -Tpost -mv - | dpost
+
+When the appendix is produced, each output sample is generated on the fly
+using the troff .sy request; the dpost -B option crops the PostScript image
+and assigns appropriate bounding box parameters; the image is then scaled to
+size, boxed, and merged onto the page using the mpictures PostScript picture
+inclusion facility.
+=============================================================================

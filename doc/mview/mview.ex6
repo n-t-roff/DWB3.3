@@ -1,0 +1,18 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.VG
+.T A List Example
+.BL
+.LI
+First List Item
+.LI
+Second List Item
+.LI
+Third (last) List Item
+.LE
+.VE jns
+Bullet List

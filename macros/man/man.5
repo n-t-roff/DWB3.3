@@ -1,0 +1,536 @@
+.ds dT /usr/lib/tmac
+.TH MAN 5 "DWB 3.2"
+.SH NAME
+.B man
+\- macros for formatting
+.SM UNIX
+system manual page entries
+.SH SYNOPSIS
+\*(mBtroff \-man\f1
+.OP \-rs1 "" []
+.OP "" options []
+.OP "" files []
+.sp 0.5v
+\*(cBnroff \-man\f1
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+The manual page macros are used to lay out the format of the entries of this manual.
+These macros are used by the
+.BR man (1)
+command.
+.PP
+The default page size is 8.5"\(mu11", with a 6.5"\(mu10" text area.
+The
+.OP \-rs1
+option reduces these dimensions to 6"\(mu9" and 4.75"\(mu8.375", respectively; this
+.BR troff -only
+option also reduces the default type size from 10-point to 9-point, and the
+vertical line spacing from 12-point to 10-point.
+.PP
+Macro usage is summarized below.
+Type font and size are reset to default values before each paragraph and
+after processing any macro that effects a change in font or size (e.g.,
+.MR .I ,
+.MR .RB ,
+.MR .SM ).
+Tab stops are neither used nor set by any macro except
+.MW .DT
+and
+.MR .TH .
+.SH DIAGNOSTICS
+.MW "wrong version of man entry macros (use -man6 if available)"
+.in +3n
+The macros used are not compatible with
+.BR man (5),
+but rather are defined in
+the Version\ 6 man entry package.
+Use the
+.MW \-man6
+option (if available) to format this manual page.
+.SH CAVEATS
+In addition to the macros, strings, and number registers listed in
+.SM SUMMARY,
+a number of internal macros, strings, and number registers are defined as well.
+Except for names predefined by
+.B troff 
+and number registers
+.MR d ,
+.MR m ,
+and
+.MR y ,
+all such internal names are of the form
+.IR XA ,
+where
+.I X
+is one of
+.MR ) ,
+.MR ] ,
+and
+.MR } ,
+and
+.I A
+stands for any alphanumeric character.
+.PP
+In order to format and print manual pages on-line, the
+.BR man (1)
+command needs to know if any preprocessing is required.
+If the first line of the manual page file has the format
+.EX
+\&'\e" \f2x \(el
+.EE
+where
+.I x
+can be
+.MW t
+for tables,
+.MW e
+for equations,
+or
+.MW te
+for tables and equations;
+the
+.BR eqn (1)
+and
+.BR tbl (1)
+preprocessors will be used as appropriate.
+.PP
+The programs that prepare the Table of Contents and the Permuted
+Index for this manual assume the
+.SM NAME
+section of each entry consists of a single line of input that has the following format:
+.EX
+\f2name\f1\|[, \f2name\f1, \f2name\f1 \(el] \- \f2explanatory text\f1
+.EE
+The macro package increases the inter-word spaces (to eliminate ambiguity) in the
+.SM SYNOPSIS
+section of each entry.
+.PP
+This version of the manual page macros recognizes most macro commands defined
+in other versions of
+.SM UNIX
+.BR man (5)
+(e.g., from Research V10,
+.SM "UCB BSD"
+and SunOS systems).
+Inclusion of these macros (see \s-1SUMMARY\s+1) ensures that text arguments are retained
+and appear reasonable on output.
+These macro definitions may not be identical to those on the originating system.
+.SH BUGS
+If the argument to
+.MW .TH
+contains
+.I any
+blanks and is
+.I not
+enclosed by double quotes (\*(mW""\fP),
+there will be strange irregular dots on the output.
+.SH FILES
+.MW \*(dT/tmac.an
+.br
+.SH SEE ALSO
+.BR eqn (1),
+.BR man (1),
+.BR neqn (1),
+.BR nroff (1),
+.BR tbl (1),
+.BR tc (1),
+.BR troff (1)
+.SH SUMMARY
+.PP
+Any macro argument
+.I text
+may be one to six strings;
+any string that includes one or more blanks must be enclosed in a pair of
+double quotes (e.g., if
+.I text
+is \*(mW"a\ few\ words"\f1).
+If
+.I text
+is empty, the special treatment is applied to
+the next line that contains text to be printed.
+For example,
+.MW .I
+may be used to italicize a whole line, or
+.MW .SM
+followed by
+.MW .B
+to print text in the bold font and a smaller point size.
+By default, hyphenation is turned off for
+.BR nroff ,
+but remains on for
+.BR troff .
+.PP
+Default units for indents
+.I in
+are ens;
+.I in
+may be a scaled value (.e.g,
+.MW 1.25i
+or
+.MR 4P).
+When
+.I in
+is omitted, the previous indent is used.
+.sp 4p
+.nr X 6P
+.in +\nXu
+.de XX
+.sp 2p
+.in -\\nXu
+.ta +\\nXu
+.in +\\nXu
+.ti -\\nXu
+\&\f5\\$1\ \f2\\$2\f1\t\c
+..
+.XX .TH t\0s\0c\0n
+Set the title and entry heading;
+.I t
+is the title,
+.I s
+is the section number,
+.I c
+is an extra commentary (e.g., ``local'')
+.I n
+is a new manual name.
+Invokes
+.MW .DT
+(see below).
+.XX .SH text
+Place subhead
+.I text
+(e.g., ``\s-1SYNOPSIS\s+1'') here.
+.XX .SS text
+Place sub-subhead
+.I text
+(e.g., ``Options'') here.
+.XX .PP
+Begin a paragraph with normal font, point size, and indent;
+.MW .P
+is a synonym.
+.XX .HP in
+Begin paragraph with hanging indent.
+.XX .TP in
+Begin indented paragraph with hanging tag.
+The next line that contains text to be printed is taken as the tag.
+If the tag does not fit, it is printed on a separate line.
+.XX .IP t\0in
+Same as
+.MR .TP ,
+but with tag
+.IR t ;
+often used to get an indented paragraph without a tag.
+.XX .RS in
+Increase relative indent (initially zero).
+Indent all output an extra
+.I in
+units from the current left margin.
+.XX .RE k
+Return to the
+.IR k th
+relative indent level (initially,
+.IR k =1;
+.IR k =0
+is equivalent to
+.IR k =1);
+if
+.I k
+is omitted, return to the most recent lower indent level.
+.XX .EX x
+Begin example.
+Example text is set in the monowidth font,
+using no-fill mode and an indented block format.
+If
+.I x
+is ``\*(mW-1\f1'',
+the point size and vertical spacing is reduced one point.
+.XX .EE
+End example.
+.XX .PM m\0y
+Produces the appropriate proprietary marking at the bottom of the page.
+Usage for
+.I m
+is:
+.EX
+P    \f3AT&T \- Proprietary\fP
+RS   \f3AT&T \- Proprietary (Restricted)\fP
+RG   \f3AT&T \- Proprietary (Registered)\fP
+CR   \f1Copyright notice\fP
+UW   \f1Unpublished Work notice\fP
+CP   \f1See Cover Page notice\fP
+.EE
+.I y
+is the year used in the date for the copyright notice
+(default is current year).
+.XX .OP "opt\0arg\0x\0y"
+\&
+.br
+Produce a command line option of the form
+.OP \-f file
+where
+.I opt
+is the option flag,
+.I arg
+is the option argument,
+.I x
+is regular-font text appended to the argument, and
+.I y
+is regular-font text prepended to the option.
+If
+.I x
+is ``\*(mW[]\f1'' the option is enclosed in square brackets (e.g.,
+``\*(mW.OP\ -f\ file\ []\f1''
+produces
+.OP -f file []
+on output).
+.XX .DT
+Restore default tab settings (every \(12-inch).
+.XX .PD v
+Set the interparagraph distance to
+.I v
+vertical spaces.
+If
+.I v
+is omitted, set the interparagraph distance to the default value
+(0.4v in
+.BR troff ,
+1v in
+.BR nroff ).
+.XX .B text
+Make
+.I text
+bold; if
+.I text
+is missing, switch to bold font.
+.XX .I text
+Make
+.I text
+italic; if
+.I text
+is missing, switch to italic font.
+.XX .MW text
+Make
+.I text
+monowidth (e.g., typewriter-like); if
+.I text
+is missing, switch to monowidth font
+(also known as constant-width).
+.XX .SM text
+Make
+.I text
+one point smaller than default point size.
+.XX .SB text
+Make
+.I text
+one point smaller and bold.
+.XX .R text
+Make
+.I text
+roman; if
+.I text
+is missing, switch to roman font.
+.XX .RI a\0b
+Concatenate roman
+.I a
+with italic
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .IR a\0b
+Concatenate italic
+.I a
+with roman
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .RB a\0b
+Concatenate roman
+.I a
+with bold
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .BR a\0b
+Concatenate bold
+.I a
+with roman
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .BI a\0b
+Concatenate bold
+.I a
+with italic
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .IB a\0b
+Concatenate italic
+.I a
+with bold
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .MR a\0b
+Concatenate monowidth
+.I a
+with roman
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .RM a\0b
+Concatenate roman
+.I a
+with monowidth
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .MI a\0b
+Concatenate monowidth
+.I a
+with italic
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .IM a\0b
+Concatenate italic
+.I a
+with monowidth
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .MB a\0b
+Concatenate monowidth
+.I a
+with bold
+.IR b ;
+alternate these fonts for up to six arguments.
+.XX .BM a\0b
+Concatenate bold
+.I a
+with monowidth
+.IR b ;
+alternate these fonts for up to six arguments.
+.sp 0.5v
+.in -\nXu
+The following strings are defined:
+.EX
+Rg     \f1registered mark symbol: \*(Rg\fP
+Tm     \f1trademark symbol: \*(Tm\fP
+Sm     \f1service mark symbol: \*(Sm\fP
+lq     \f1left quote: \*(lq (\fP"\f1 in \f3nroff\f1)\*(mW 
+rq     \f1right quote: \*(rq (\fP"\f1 in \f3nroff\f1)\*(mW
+S      \f1changes to the default point size\fP
+mW     \f1changes to the monowidth font (bold in \f3nroff\f1)\*(mW
+mB     \f1changes to the monowidth-bold font (bold in \f3nroff\f1)\*(mW
+.EE
+The
+.MW .TH
+macro assigns default values to these number registers:
+.EX
+IN     \f1Left margin indent relative to subheads\fP
+LL     \f1Line length including indent from register \fPIN
+PD     \f1Current interparagraph distance\fP
+.EE
+Additional macros taken from the Research V10 system version of
+.BR man(5):
+.in +\nXu
+.XX .HY
+Turn hyphenation on.
+.XX .F text
+Set
+.I text
+in the file font (monowidth); if
+.I text
+is missing, switch to file-font.
+.XX .FR "a\0b\0\(el"
+Concatenate file-font
+.I a
+with roman
+.IR "b \(el" .
+.XX .L text
+Set text in the literal font (monowidth); if
+.I text
+is missing, switch to literal-font.
+.XX .LR "a\0b"
+Concatenate literal font
+.I a
+with roman
+.IR b .
+.XX .RF "a\0b\0c"
+Concatenate roman
+.I a
+with file-font
+.I b
+and roman
+.IR c .
+.XX .RL "a\0b\0c"
+Concatenate roman
+.I a
+with literal-font
+.I b
+and roman
+.IR c .
+.XX .TF text
+Indented paragraph; set hanging label
+.I text
+in monowidth font.
+.in -\nXu
+.ds t \f1\s-1\|\(->\|\s+1\fP
+.sp 0.5v
+Additional macros taken from various
+.SM UCB
+systems' version of
+.BR man(5):
+.in +\nXu
+.XX .AC t
+Use
+.I t
+as title heading for
+.SM "IBM ACIS"
+distribution.
+.XX .AT t
+Use
+.I t
+as title heading for
+.SM BSD
+distribution.
+.XX .DE
+End display.
+.XX .DS
+Start display.
+Display text is set in no-fill mode as an indented block.
+.XX .IX "a\ b\ c\ d\ e\ f"
+Generate index entry;
+write arguments and current page number to
+.I stderr
+as:
+.br
+\*(mW   .IE\*tENTRY\*t\f2a\*tb\*tc\*td\*te\*tf\*tpage\f1
+.br
+where \*t represents a tab and
+.I page
+is the page number field used elsewhere on the manual page (e.g., ``Page 15''). 
+.XX .LX u
+Limitations statement for
+.SM NFS
+distribution;
+.I u
+is the utility type (e.g., utility, file, system call).
+.XX .SB text
+Set
+.I text
+in smaller point size and bold font.
+.XX .SU t
+Use
+.I t
+as title heading for SunOS distribution.
+.XX .TX x
+Use abbreviation code
+.I x
+to resolve title reference for SunOS distribution.
+.XX .UC t
+Use
+.I t
+as title heading for
+.SM BSD
+distribution.
+.XX .VE
+End version changes.
+.XX .VS m
+Start version changes.
+If mark
+.I m
+is 4, use small vertical bar as margin character.
+.in -\nXu
+

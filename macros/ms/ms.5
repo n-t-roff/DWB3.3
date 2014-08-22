@@ -1,0 +1,323 @@
+.ds dT /usr/lib/tmac
+.hc %
+.TH MS 5
+.SH NAME
+.B ms
+\- macros for formatting manuscripts
+.SH SYNOPSIS
+\*(mBtroff \-ms\f1
+.OP "" options []
+.OP "" files []
+.sp 0.5v
+\*(mBnroff \-ms\f1
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+The
+.SM MS
+package of
+.B troff
+and
+.B nroff
+macro definitions provides a canned formatting
+facility for tech%nical papers in various formats.
+When producing two-column output on a terminal, filter
+the output through
+.BR col (1).
+.PP
+Macro usage is summarized below.
+Many
+.B troff
+and
+.B nroff
+requests are unsafe in conjunction with
+this package, but the following requests may be used with
+impunity after the first
+.MR .PP ,
+.MR .bp ,
+.MR .br ,
+.MR .sp ,
+.MR .ls ,
+or
+.MR .na .
+Output of the
+.BR eqn (1),
+.BR neqn (1),
+.BR tbl (1),
+.BR pic (1),
+and
+.BR grap (1)
+preprocessors
+for equations, tables, pictures, and graphs is acceptable as input.
+.PP
+Diacritical marks may be applied to letters,
+as in these examples:
+.ta .5i 1i 1.5i 2i 2.5i 3i 3.5i 4i 4.5i 5i 5.5i
+.tr \'\'\`\`
+.ds ' \h'\w'e'u*4/10'\z\(aa\h'-\w'e'u*4/10'
+.ds ` \h'\w'e'u*4/10'\z\(ga\h'-\w'e'u*4/10'
+.ds : \v'-0.6m'\h'(1u-(\\n(.fu%2u))*0.13m+0.06m'\z.\h'0.2m'\z.\h'-((1u-(\\n(.fu%2u))*0.13m+0.26m)'\v'0.6m'
+.ds ^ \\k:\h'-\\n(.fu+1u/2u*2u+\\n(.fu-1u*0.13m+0.06m'\z^\h'|\\n:u'
+.ds ~ \\k:\h'-\\n(.fu+1u/2u*2u+\\n(.fu-1u*0.13m+0.06m'\z~\h'|\\n:u'
+.ds v \\k:\\h'+\\w'e'u/4u'\\v'-0.6m'\\s6v\\s0\\v'0.6m'\\h'|\\n:u'
+.ds , \\k:\\h'\\w'c'u*0.4u'\\z,\\h'|\\n:u'
+.IP
+.L
+\*(cW\e*`e	\e*`a	\e*'e	\e*^e	\e*^o	\e*:u	\e*~n	\e*,c	\e*vc\f1
+.br
+  \*`e 	  \*`a 	  \*'e 	  \*^e 	  \*^o 	  \*:u 	  \*~n 	  \*,c 	  \*vc
+.br
+.tr \''\``
+.SH FILES
+.MW \*(dT/tmac.s
+.SH "SEE ALSO"
+.BR troff (1), 
+.BR eqn (1), 
+.BR tbl (1),
+.BR pic (1),
+.BR grap (1),
+.BR nroff (1),
+.BR neqn (1),
+.BR col (1)
+.SH SUMMARY
+.ps -1
+.vs -1
+.de XX
+.sp 1p
+.in 0
+.ta 0.75i 1.25i 1.75i
+.in 1.75i
+.ti 0
+\&\f5\\$1\ \f2\\$2\f1\t\\$3\t\\$4\t\c
+..
+.in 0
+.ta 0.75i 1.25i 1.75i
+.ft 2
+	Initial	Cause
+.br
+Request	Value	Break	Explanation
+.br
+.ft 1
+.sp 4p
+.XX .1C "" yes yes
+One column format on a new page.
+.XX .2C "" no yes
+Two column format.
+.XX .AB "" no yes
+Begin abstract.
+.XX .AE "" - yes
+End abstract.
+.XX .AI "" no yes
+Author's institution follows.  Suppressed in TM style.
+.XX .AT "" no yes
+Print ``Attached'' and turn off line filling.
+.XX .AU "x\ y" no yes
+Author's name follows.
+.IR x
+is location and
+.I y
+is extension, ignored except in TM sytle.
+.XX .B "x\ y" no no
+Print
+.I x
+in boldface, append
+.IR y ;
+if no argument switch to boldface.
+.XX .B1 "" no yes
+Begin text to be enclosed in a box.
+.XX .B2 "" no yes
+End boxed text.
+.XX .BI "x\ y" no no
+Print
+.I x
+in bold italic and append
+.IR y ;
+if no argument switch to bold italic.
+.XX .BT date "" no
+Bottom title, automatically invoked at foot of page.
+May be redefined.
+.XX .BX x no no
+Print
+.I x
+in a box.
+.XX .CW "x\ y" no no
+Constant width font for
+.IR x ,
+append
+.IR y ;
+if no argument switch to constant-width font.
+.XX .CT "" no yes
+Print ``Copies to'' and turn off line filling.
+.XX .DA x nroff no
+``Date line'' at bottom of page is
+.IR x .
+Default is today.
+.XX .DE "" - yes
+End displayed text.
+Implies
+.MR .KE .
+.XX .DS x no yes
+Start of displayed text,
+to appear verbatim line-by-line:
+.MW I
+indented (default),
+.MW L
+left-justified,
+.MW C
+centered,
+.MW B
+(block)
+centered with straight left margin.
+Implies
+.MR .KS .
+.XX .EG "" no -
+Print document in Bell Labs format for ``Engineer's Notes.''
+Must be first.
+.XX .EN "" - yes
+Space after equation produced by
+.B eqn
+or
+.BR neqn .
+.XX .EQ "x\ y" - yes
+Display equation.
+Equation number is
+.IR y .
+Optional 
+.I x
+is
+.MR I ,
+.MR L ,
+or
+.MW C
+as in
+.MR .DS .
+.XX .FE "" - yes
+End footnote.
+.XX .FP x - no
+Set font positions for a family, (e.g.,
+.MR ".FP\ palatino" ).
+.XX .FS "" no no
+Start footnote. The note will be moved to the bottom of the page.
+.XX .HO "" - no
+``Bell Laboratories, Holmdel, New Jersey 07733''
+.XX .I "x\ y" no no
+Italicize
+.I x,
+append
+.IR y ;
+if no argument switch to italic.
+.XX .IH "" no no
+``Bell Laboratories, Naperville, Illinois 60540''
+.XX .IM "" no no
+Print document in Bell Labs format for an internal memorandum.  Must be first.
+.XX .IP "x\ y" no yes
+Start indented paragraph,
+with hanging tag
+.IR x .
+Indentation is
+.I y 
+ens (default 5).
+.XX .KE "" - yes
+End keep. Put kept text on next page if not enough room.
+.XX .KF "" no yes
+Start floating keep. 
+If kept text must be moved to next page, 
+float later text back to this page.
+.XX .KS "" no yes
+Start keeping following text.
+.XX .LG "" no no
+Make letters larger.
+.XX .LP "" yes yes
+Start left-blocked paragraph.
+.XX .LT "" no yes
+Start a letter with today's date; address follows.
+.XX .MF "" - -
+Print document in Bell Labs format for ``Memorandum for File.''  Must be first.
+.XX .MH "" - no
+``Bell Laboratories, Murray Hill, New Jersey 07974''
+.XX .MR "" - -
+Print document in Bell Labs format for ``Memorandum for Record.''  Must be first.
+.XX .ND date troff no
+Use date supplied (if any) as needed in Bell Labs formats; omit from page footer.
+.XX .NH n - yes
+Same as
+.MW .SH
+with automatic section numbers like ``1.2.3'';
+.I n
+is subsection level (default 1).
+.XX .NL "" yes no
+Make letters normal size.
+.XX .PE "" - yes
+End picture; see
+.BR pic (1).
+.XX .PF "" - yes
+End picture; restore vertical position.
+.XX .PP "" no yes
+Begin paragraph. First line indented.
+.XX .PS "h\ w" - yes
+Start picture; height and width in inches.
+.XX .PY "" - no
+``Bell Laboratories, Piscataway, New Jersey 08854''
+.XX .QE "" - yes
+End quoted material.
+.XX .QP "" - yes
+Begin quoted paragraph (indent both margins).
+.XX .QS "" - yes
+Begin quoted material (indent both margins).
+.XX .R "" yes no
+Roman text follows.
+.XX .RE "" - yes
+End relative indent level.
+.XX .RP "" no -
+Cover sheet and first page for released paper.
+Must precede other requests.
+.XX .RS "" - yes
+Start level of relative indentation
+from which subsequent indentation is measured.
+.XX .SG x no yes
+Insert signature(s) of author(s),
+ignored except in TM and LT styles.
+.I x
+is the reference line (initials of author and typist).
+.XX .SH "" - yes
+Section head follows, font automatically bold.
+.XX .SM "" no no
+Make letters smaller.
+.XX .TA "x \(el" "5 \(el" no
+Set tabs in ens.  Default is 5 10 15 \(el
+.XX .TE "" - yes
+End table; see
+.BR tbl (1).
+.XX .TH "" - yes
+End heading section of table.
+.XX .TL "" no yes
+Title follows.
+.XX .TM "x \(el" no -
+Print document in Bell Labs technical memorandum format.
+Arguments are TM number, (quoted list of) case number(s), and file number.
+Must precede other requests.
+.XX .TR x - -
+Print in Bell Labs technical report format;
+report number is
+.I x .
+Must be first.
+.XX .TS x - yes
+Begin table; if
+.I x
+is
+.MR H ;
+table heading is repeated on new pages.
+.XX .UL x - no
+Underline argument (even in
+.BR troff ).
+.XX .UX "y z" - no
+`\f2z\f1UNIX\f2y\f1'; first use gives registered trademark notice.
+.XX .WH "" - no
+``Bell Laboratories, Whippany, New Jersey 07981''
+.XX .[ "" - no
+Begin reference.
+.XX .] "" - no
+End reference.
+.in 0
+.ps +1
+.vs +1

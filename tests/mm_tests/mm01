@@ -1,0 +1,34 @@
+'''	\"  troff -mm [-Tdevname] file | ...
+.PF "'Memorandum Macros''TEST: \\n(.F'"
+.P
+This is a sample nested list:
+.AL A
+.LI
+This is an alphabetized item.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.AL
+.LI
+This is a numbered item.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.DL
+.LI
+This is a dash item.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.LI + 1
+This is a dash item with a ``plus'' as prefix.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.LE
+.LI
+This is numbered item 2.
+.LE
+.LI
+This is another alphabetized item, B.
+This text shows the alignment of the second line of the item.
+The quick brown fox jumped over the lazy dog's back.
+.LE
+.P
+This paragraph appears at the left margin.

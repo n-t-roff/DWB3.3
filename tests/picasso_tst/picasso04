@@ -1,0 +1,4 @@
+.PS 0.6 2 l 0
+lineweight = .006
+arrow rad .1 right 0.5 then up 0.5 then right
+.PF

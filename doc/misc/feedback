@@ -1,0 +1,55 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+.nr L 12i
+.nr Si 5
+.so ../defs.doc
+.tS
+AT&T UNIX\*(rG System
+DOCUMENTER'S WORKBENCH\*(rG Software
+.tE Feedback
+.P
+The documents in this book were prepared using the
+.sM "DWB \*(rL"
+software.
+Although these documents can be used as a general
+reference for the
+.sM DWB
+software tools,
+this edition of the package reflects the software
+distributed with the
+.sM "DWB \*(rL"
+release.
+.P
+Your feedback will help us provide the best documentation
+possible to meet your needs.
+In particular, we are interested in knowing about
+any errors you may find or
+topics that you feel need clarification.
+If you have any suggestions on how to improve this package,
+we would like to hear that too.
+.P
+Please send your comments by paper mail to:
+.DS I
+.ft H
+DWB Documentation
+\0\0Room 2F-239
+AT&T Bell Laboratories
+600 Mountain Avenue
+Murray Hill, New Jersey  07974
+.ft 1
+.DE
+or by electronic mail to:
+.DS I
+.ft 5
+dwb@mhpo.att.com
+.ft 1
+.DE
+Please include your name, phone number, and address
+(both electronic and paper mail).
+.P
+Your comments and suggestions are welcome.
+Thank you.

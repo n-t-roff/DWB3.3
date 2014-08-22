@@ -1,0 +1,69 @@
+'''	\"  eqn file | troff -mm [-Tdevname] | ...
+.PH "'EQN:  File(\n(.F)''Device(\*(.T)'"
+.P
+.B Knuth
+(Vol. 2, p. 317):
+.DS CB
+.EQ 
+Q sub n (x sub 1 ,x sub 2 , ... ,x sub n ) ~=~ left {
+matrix {
+lcol { 1, above x sub 1 , above 
+x sub 1 Q sub n-1 (x sub 2 , ... ,x sub n ) +
+Q sub n-2 (x sub 3 , ... ,x sub n ) }
+lcol {  if above  if above  if }
+lcol { n=0; above n=1; above n>1. }
+}
+.EN
+.DE
+.sp 0.5i
+.B Knuth
+(Vol. 2, p. 426):
+.sp
+.in +0.25i
+.P
+When zero occurs, the determinant is even easier to compute;
+for example, if
+.DS CB
+.EQ
+x sub 11 =0 
+.EN
+.DE
+but
+.DS CB
+.EQ
+x sub 21  != 0,
+.EN
+.DE
+we have
+.DS CB
+.EQ
+det ~
+left [ 
+matrix {
+col { 0 above x sub 21 above x sub 31 above ...  above x sub n1 }
+col { x sub 12 above x sub 22 above x sub 32 above ~ above x sub n2 }
+col { ...  above ...  above ...  above ~ above ...  }
+col { x sub 1n above x sub 2n above x sub 3n above ~ above x sub nn }
+}
+right ]
+.EN
+.DE
+.sp .5
+.DS CB
+.EQ (8)
+=~-x sub 21 det
+left [
+matrix {
+col { 
+x sub 12 above x sub 32 -(x sub 31 /x sub 21 )x sub 22
+above ...  above x sub n2 -(x sub n1 /x sub 21 )x sub 22 }
+col { ...  above ...  above ~ above ...  }
+col {
+x sub 1n above x sub 3n -(x sub 31 /x sub 21 )x sub 2n
+above ...  above x sub nn -(x sub n1 /x sub 21 )x sub 2n
+   }
+}
+right ]
+~~.
+.EN
+.DE

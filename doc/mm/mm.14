@@ -1,0 +1,229 @@
+'''	\"               Copyright c 1990 AT&T
+'''	\"                All Rights Reserved
+'''	\" THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF
+'''	\" AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN
+'''	\"      ACCORDANCE WITH APPLICABLE AGREEMENTS.
+'''	\"
+'''	\" FORCE PAGE
+.SK
+.H 1 "EXTENDING AND MODIFYING THE MACROS \*(BU"
+.H 2 "Naming Conventions"
+In this section, the following conventions are used to describe names:
+.DS I
+.TS
+l l.
+\*(iAn\f1	digit
+\*(iAa\f1	lower-case letter
+\*(iAA\f1	upper-case letter
+\*(iAx\f1	\*(iAn\fP, \*(iAa\fP or \*(iAA\fP\|: i.e., any letter or digit (any alphanumeric character)
+\*(iAs\f1	special character (any non-alphanumeric character)
+.TE
+.DE
+.P
+All other characters are literals (i.e., stand for themselves).
+.P
+The formatter keeps the names of requests, macros, and strings
+in a single internal table, so there must be no 
+duplication among such names.
+Names for number registers are kept in a separate table.
+.H 3 "Names Used by Formatters"
+.DS I
+.TS
+lf1 s
+a l.
+Requests:
+\*(iAaa\f1	most common
+\*(iAan\f1	only one, currently \*(iRc2\fP
+.sp 0.5v
+.T&
+lf1 s
+a l.
+Registers:
+\*(iAaa\f1	normal
+\&\*(iR.\*(iAa\f1	normal
+\&\*(iR.\*(iAA\f1	normal
+\&\*(iR.\*(iAs\f1	only one, currently \*(iR.$\fP
+\&\*(iAa\*(iR.\f1	only one, currently \*(iRc.\fP
+\*(iR%\fP	page number
+.TE
+.DE
+.H 3 "Names Used by \s-1MM\s+1"
+.DS I
+.TS
+lf1 s
+a l.
+Macros and Strings:
+\*(iAA\f1   \*(iAAA\f1   \*(iAAa\f1	accessible to users (e.g., macros \*(iR.P\f1 and \*(iR.HU\f1; strings \*(iRF\f1 and \*(iRRf\f1)
+\*(iAnA\f1	accessible to users; only two, currently \*(iR.1C\fP and \*(iR.2C\fP
+\*(iAaA\f1	accessible to users; only one, currently \*(iR.nP\fP
+\*(iAs\f1	accessible to users; only the seven accents in \(sc12.9
+\*(iR)\*(iAx\f1   \*(iR}\*(iAx\f1   \*(iR]\*(iAx\f1   \*(iR>\*(iAx\f1   \*(iR?\*(iAx\f1	internal
+.sp 0.5v
+.T&
+lf1 s
+a l.
+Registers:
+\*(iAAn\f1   \*(iAAa\f1	accessible to users (e.g., \*(iRH1\fP and \*(iRFg\fP)
+\*(iAA\f1	accessible to users; set on the command line (e.g., \*(iRW\fP\|)
+\*(iR:\*(iAx\f1   \*(iR;\*(iAx\f1   \*(iR#\*(iAx\f1   \*(iR?\*(iAx\f1   \*(iR!\*(iAx\f1	internal
+.TE
+.DE
+.H 3 "Names Used by \f4eqn\fP and \f4tbl\fP." 
+The equation preprocessor,
+.IR eqn ,
+uses registers and string names of
+the form \*(iAnn\f1.
+The table preprocessor,
+.IR tbl ,
+uses
+.cR T& ,
+.cR T# ,
+and
+.cR TW ,
+and names of the form:
+.DS C
+\*(iAa\*(iR-   \*(iAa\*(iR+   \*(iAa\*(iR|   \*(iAnn\*(iR   \*(iAna\*(iR   ^\*(iAa\*(iR   #\*(iAa\*(iR   #\*(iAs\*(iR
+.ft 1
+.DE
+.H 3 "User-Definable Names."
+Given the above, what is left for
+user extensions?
+To avoid collisions with existing names, use
+names that consist either of a single lower-case letter, or of a 
+lower-case letter followed by a character other than a lower-case
+letter (remembering, however, that the names
+.cR .c2
+and
+.cR .nP
+are already 
+used).
+The following is a possible user naming convention:
+.DS I
+.TS
+lf1 l l.
+Macros:	\*(iAa\^A\f1	(e.g., \*(iRbG\fP, \*(iRkW\fP)
+Strings:	\*(iAa\^s\f1	(e.g., \*(iRc)\fP, \*(iRf]\fP, \*(iRp}\fP)
+Registers:	\*(iAa\f1	(e.g., \*(iRf\fP, \*(iRt\fP)
+.TE
+.DE
+.br
+.ne 1i
+.H 2 "Sample Extensions"
+.H 3 "Appendix Headings." 
+The following is a way of generating
+and numbering appendix headings:
+.iS
+.S -1
+\&.nr Hu 1
+\&.nr Hc 1
+\&.nr a 0
+\&.de aH
+\&.nr a +1
+\&.nr P 0
+\&.PH "'''Appendix \e\ena-\e\e\e\e\e\e\e\enP'"
+\&.SK
+\&.HU "\e\e$1"
+\&..
+.S +1
+.iE
+After the above initialization and definition, each call of the form 
+.iS
+\&.aH \*(iAtitle\f1
+.iE
+begins a new page with the header changed to
+``Appendix \*(iAa\fP-\*(iAP\fP\|''
+where
+.cA a
+is the appendix number and
+.cA P
+is the page number.
+The appendix title is
+generated as an unnumbered, centered heading
+which can be saved for the table of contents, if desired.
+.H 3 "Hanging Indent with Tabs." 
+The following example illustrates
+the use of the hanging indent feature of variable-list items.
+First, a user-defined macro is built to accept four arguments that make
+up the mark.
+In the output, each argument is to be separated from
+the previous one by a tab; tab settings are defined later.
+Since the first argument may begin with a period or apostrophe, the
+.cR \e& '' ``
+is used so that the formatter will not interpret such a line as a formatter
+request or macro call.*
+.FS *
+The
+.I troff
+escape sequence
+.cR \e&
+produces a ``zero-width'' space,
+i.e., it causes no output characters to appear, but
+it removes the special meaning of a leading period or apostrophe.
+.FE
+The
+.cR \et '' ``
+is translated by the formatter into a tab.
+The
+.cR \ec '' ``
+is used to concatenate the input text that follows the macro call to the
+line built by the macro.
+The macro and an example of its use are:
+.iS
+.S -1
+\&.de aX
+\&.LI
+\e&\e\e$1\et\e\e$2\et\e\e$3\et\e\e$4\et\ec
+\&..
+\&\0\(el
+\&.ta 9n 18n 27n 36n
+\&.VL 36
+\&.aX .nh off \e- no
+No hyphenation.
+Automatic hyphenation is turned off.
+Words containing hyphens (e.g., mother-in-law)
+may still be split across lines.
+\&.aX .ht on \e- no
+Hyphenate.
+Automatic hyphenation is turned on.
+\&.aX .hc\e c none none no
+Hyphenation indicator character is set to ``c'' or removed.
+During text processing the indicator is suppressed
+and will not appear in the output.
+Prepend the indicator to a word has the effect
+of preventing hyphenation of that word.
+\&.LE
+.S +1
+.iE
+.br
+.ne 1i
+The resulting output is:
+.br
+.sp 0.5v
+.ne 2i
+.in +3n
+.br
+.de aX
+.LI
+\&\\$1\t\\$2\t\\$3\t\\$4\t\c
+..
+.br
+.ta 9n 18n 27n 36n
+.VL 36
+.aX .nh off \- no
+No hyphenation.
+Automatic hyphenation is turned off.
+Words containing hyphens
+(e.g., mother-in-law) may still be split across lines.
+.aX .ht on \- no
+Hyphenate.
+Automatic hyphenation is turned on.
+.aX .hc\ c none none no
+Hyphenation indicator character is set to ``c'' or removed.
+During text processing the indicator is suppressed
+and will not appear in the output.
+Prepend the indicator to a word has the effect
+of preventing hyphenation of that word.
+.LE
+.br
+.in -3n
+.sp 0.5v

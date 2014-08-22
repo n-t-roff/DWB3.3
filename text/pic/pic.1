@@ -1,0 +1,43 @@
+.TH PIC 1
+.SH NAME
+.B pic
+\-
+.B troff
+preprocessor for drawing pictures
+.SH SYNOPSIS
+\*(mBpic\f1
+.OP \-T type []
+.OP \- "" []
+.OP "" files []
+.SH DESCRIPTION
+.B pic
+is a
+.BR troff (1)
+preprocessor for drawing simple figures on a typesetter.
+.B pic
+prepares output for the typesetter that you name in the optional
+argument
+.MI \-T type\f1.
+.PP
+The basic objects are
+.MR box ,
+.MR circle ,
+.MR ellipse ,
+.MR line ,
+.MR spline ,
+.MR arrow ,
+.MR arc
+and text.
+For details about the
+.B pic
+command language, see the reference cited below.
+.SH "SEE ALSO"
+.BR grap (1),
+.BR troff (1),
+.BR troff (5)
+.SH REFERENCE
+B. W. Kernighan,
+.ul
+.SM PIC
+.ul
+\(em A Graphics Language for Typesetting

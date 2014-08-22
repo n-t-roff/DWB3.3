@@ -1,0 +1,281 @@
+.ds dT /usr/lib/tmac
+.TH MV 5
+.SH NAME
+.B mv
+\- a
+.B troff
+macro package for typesetting viewgraphs and slides
+.SH SYNOPSIS
+\*(mBtroff \-mv\f1
+.OP \-a "" []
+.OP "" options []
+.OP "" files []
+.sp 0.5v
+\*(mBmvt\f1
+.OP \-a "" []
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+The
+.SM MV
+package makes it easy to typeset viewgraphs
+and projection slides in a variety of sizes.
+A few macros (briefly described below) accomplish most
+of the formatting tasks needed in making transparencies.
+All of the facilities of
+.BR troff (1),
+.BR eqn (1),
+.BR tbl (1),
+.BR pic (1),
+and
+.BR grap (1)
+are available for more difficult tasks.
+To preview output on terminals, specify the
+.OP \-a
+option.
+.PP
+Macro usage is summarized below.
+The macro package recognizes the following upper-case synonyms
+for the corresponding lower-case
+.B troff
+requests:
+.EX
+\&.AD  .BR  .CE  .FI  .HY  .NA  .NF  .NH  .NX  .SO  .SP  .TA  .TI
+.EE
+The strings
+.MR Rg ,
+.MR Tm ,
+and
+.MW Sm
+produce the registered mark, trademark, and service mark, respectively.
+.SH BUGS
+The
+.MW .VW
+and
+.MW .SW
+foils are meant to be 9\(fm\(fm wide by 7\(fm\(fm high,
+but because of restrictions on paper size,
+they are printed 7\(fm\(fm wide by 5.4\(fm\(fm high
+and have to be enlarged by a factor of 9\(sl7 before use as viewgraphs;
+this makes them less than totally useful.
+.SH FILES
+.MW \*(dT/tmac.v
+.SH SEE ALSO
+.BR mvt (1), 
+.BR troff (1)
+.SH REFERENCE
+T. A. Dolotta and D. W. Smith,
+.ul
+A Macro Package for View Graphs and Slides
+.SH SUMMARY
+The last four macros
+.RM ( .S ,
+.MR .DF ,
+.MR .DV ,
+.MR .U )
+do not cause a break.
+The
+.MW .I
+macro causes a break only if it is invoked with more than one argument.
+All the other macros cause a break.
+.sp 4p
+.in +8P
+.de XX
+.sp 2p
+.in -8P
+.ta +8P
+.in +8P
+.ti -8P
+\&\f5\\$1\ \f2\\$2\f1\t\c
+..
+.XX .VS "\f1[\|\f2n\f1\|]\ [\|\f2n\f1\|]\ [\|\f2d\f1\|]"
+Foil-start macro;
+foil size is to be 7\(fm\(fm\^\(mu7\(fm\(fm;
+.I n
+is the foil number,
+.I i
+is the foil identification,
+.I d
+is the date;
+the foil-start macro resets all parameters (indent, point size, etc.)
+to initial default values, except for the values of
+.I i
+and
+.I d
+arguments
+inherited
+from a previous foil-start macro;
+it also invokes the
+.MW .A
+macro.
+.sp 3p
+The naming convention for this
+and the next 8 macros is that the first character of the name
+.RM ( V
+or
+.MR S )
+distinguishes between viewgraphs and slides, respectively,
+while the second character indicates whether the foil is square
+.RM ( S ),
+small wide
+.RM ( w ),
+small high
+.RM ( h ),
+big wide
+.RM ( W ),
+or big high
+.RM ( H ).
+Slides are ``skinnier'' than the corresponding viewgraphs:
+the ratio of the longer dimension to
+the shorter one is larger for slides than for viewgraphs.
+As a result, slide foils can be used for viewgraphs, but not vice versa;
+on the other hand, viewgraphs can accommodate
+a bit more text.
+.XX .Vw "\f1[\|\f2n\f1\|]\ [\|\f2i\f1\|]\ [\|\f2d\f1\|]"
+Same as
+.MR .VS ,
+except that foil size is 7\(fm\(fm wide \(mu 5\(fm\(fm high.
+.XX .Vh "\f1[\|\f2n\f1\|]\ [\|\f2i\f1\|]\ [\|\f2d\f1\|]"
+Same as
+.MR .VS ,
+except that foil size is 5\(fm\(fm\^\(mu7\(fm\(fm.
+.XX .VW "\f1[\|\f2n\f1\|]\ [\|\f2i\f1\|]\ [\|\f2d\f1\|]"
+Same as
+.MR .VS ,
+except that foil size is 7\(fm\(fm\^\(mu5.4\(fm\(fm.
+.XX .VH "\f1[\|\f2n\f1\|]\ [\|\f2i\f1\|]\ [\|\f2d\f1\|]"
+Same as
+.MR .VS ,
+except that foil size is 7\(fm\(fm\^\(mu9\(fm\(fm.
+.XX .Sw "\f1[\|\f2n\f1\|]\ [\|\f2i\f1\|]\ [\|\f2d\f1\|]"
+Same as
+.MR .VS ,
+except that foil size is 7\(fm\(fm\^\(mu5\(fm\(fm.
+.XX .Sh "\f1[\|\f2n\f1\|]\ [\|\f2i\f1\|]\ [\|\f2d\f1\|]"
+Same as
+.MR .VS ,
+except that foil size is 5\(fm\(fm\^\(mu7\(fm\(fm.
+.XX .SW "\f1[\|\f2n\f1\|]\ [\|\f2i\f1\|]\ [\|\f2d\f1\|]"
+Same as
+.MR .VS ,
+except that foil size is 7\(fm\(fm\^\(mu5.4\(fm\(fm.
+.XX .SH "\f1[\|\f2n\f1\|]\ [\|\f2i\f1\|]\ [\|\f2d\f1\|]"
+Same as
+.MR .VS ,
+except that foil size is 7\(fm\(fm\^\(mu9\(fm\(fm.
+.XX .A "\f1[\|\f2x\f1\|]"
+Place text that follows at the first indentation level (left margin);
+the presence of
+.I x
+suppresses the \(12 line spacing from the preceding text.
+.XX .B "\f1[\|\f2m\ \f1[\|\f2s\f1\|]\|]"
+Place text that follows at the second indentation level;
+text is preceded by a mark;
+.I m
+is the mark (default is a large bullet);
+.I s
+is the increment or decrement to the point size of the mark
+with respect to the
+prevailing
+point size
+(default is 0);
+if
+.I s
+is 100, it causes the point size of the mark to be the same as that of the
+default mark.
+.XX .C "\f1[\|\f2m\ \f1[\|\f2s\f1\|]\|]"
+Same as
+.MR .B ,
+but for the third indentation level;
+default mark is a dash (\(em).
+.XX .D "\f1[\|\f2m\ \f1[\|\f2s\f1\|]\|]"
+Same as
+.MR .B ,
+but for the fourth indentation level;
+default mark is a small bullet (\(bu).
+.XX .T string
+.I string
+is printed as a title which is centered and larger in size.
+.XX .I "\f1[\|\f2in\f1\|]\ [\|\f2a\ \f1[\|\f2x\f1\|]\|]"
+Change the current text indent (does not affect titles);
+.I in
+is the indent (in inches unless dimensioned, default is 0); if
+.I in
+is signed, it is an increment or decrement; the presence of
+.I a
+invokes the
+.MW .A
+macro (see above) and passes
+.I x
+(if any) to it.
+.XX .S "\f1[\|\f2p\f1\|]\ [\|\f2l\f1\|]"
+Set the point size and line length;
+.I p
+is the point size (default is previous size); if
+.I p
+is 100, the point size reverts to initial
+default for the current foil-start macro; if
+.I p
+is signed, it is an increment or decrement
+(default is 18 for
+.MR .VS ,
+.MR .VH ,
+and
+.MR .SH ,
+and 14 for the other foil-start macros);
+.I l
+is the line length (in inches unless scaled;
+default is 4.2\(fm\(fm for
+.MR .Vh ,
+3.8\(fm\(fm for
+.MR .Sh ,
+5\(fm\(fm for
+.MR .SH ,
+and 6\(fm\(fm for other foil-start macros).
+.XX .DF "n\0f\0\f1[\|\f2n\0f\0\(el\f1\|]"
+Define font positions;
+may not appear within foil input text (i.e.,
+may only appear after all input text for a foil, but before the
+next foil-start macro);
+.I n
+is the position of font
+.IR f \|;
+up to four
+.RI `` "n\0f\|" ''
+pairs may be specified;
+the first font named becomes the
+prevailing
+font;
+the initial setting is:
+.EX
+\&.DF 1 H 2 I 3 B 4 BI
+.EE
+The constant-width font is mounted on position 5.
+.XX .DV "\f1[\|\f2a\f1\|]\ [\|\f2b\f1\|]\ [\|\f2c\f1\|]\ [\|\f2d\f1\|]"
+Alter the vertical spacing between indentation levels;
+.I a
+is the spacing for
+.MR .A ,
+.I b
+is for
+.MR .B ,
+.I c
+is for
+.MR .C ,
+and
+.I d
+is for
+.MR .D ;
+all non-null arguments must be dimensioned;
+null arguments leave the corresponding spacing unaffected;
+initial setting is:
+.EX
+\&.DV .5v .5v .5v 0v
+.EE
+.XX .U "str1\0\f1[\|\f2str2\f1\|]"
+Underline
+.I str1
+and concatenate
+.I str2
+(if any) to it.
+.in -8P

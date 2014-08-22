@@ -1,0 +1,12 @@
+'''	\"  troff -mview [-Tdevname] file | ...
+.VG
+.ce 99
+Here is some text for a
+poorly written view graph
+which I really don't want
+anyone to read because
+much of the information
+which it contains is of
+very little value
+.VE
+\n(.F

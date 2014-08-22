@@ -1,0 +1,95 @@
+.ds dF /usr/lib/font
+.ds dN /usr/lib/nterm
+.TH DNROFF 1
+.SH NAME
+.B dnroff
+\-
+.B troff
+postprocessor for
+.B nroff
+devices
+.SH SYNOPSIS
+\*(mBdnroff\fP
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+.B dnroff
+translates
+.I files
+created by
+.BR troff (1)
+and writes the results on the
+standard output.
+If no
+.I files
+are specified, or if
+.OP \-
+is one of the input
+.IR files ,
+the standard input is read.
+The following
+.I options
+are understood:
+.TP 0.75i
+.OP \-o list
+Print pages whose numbers are given in the comma-separated
+.IR list .
+The list contains single numbers
+.I N
+and ranges
+.IR N1\-\|N2 .
+A missing 
+.I N1
+means the lowest numbered page, a missing
+.I N2
+means the highest.
+.TP
+.OP \-F dir
+Use
+.I dir
+as the
+.B nroff
+terminal table directory.
+By default
+.I dir
+is
+.MR \*(dN .
+.TP
+.OP \-T name
+Prepare output for specified terminal.
+The default
+.I name
+is \*(mB37\fP
+for the
+.SM TELETYPE
+Model 37 terminal.
+.PP
+The
+.I files
+should be prepared by
+.B troff
+by adding
+.OP \-Tnroff
+or
+.OP \-Tnroff\-12
+to the
+.B troff
+command line.
+A typical command line might be,
+.EX
+troff -mm -Tnroff  \f2files\fP | dnroff
+.EE
+.SH WARNINGS
+This is a preliminary version and is subject to change
+in future releases.
+.SH FILES
+.MW \*(dF/devnroff/*
+.br
+.MW \*(dF/devnroff-12/*
+.br
+.MW \*(dN/tab.*
+.ft 1
+.SH SEE ALSO
+.BR nroff (1),
+.BR troff (1),
+.BR troff (5)

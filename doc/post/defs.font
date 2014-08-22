@@ -1,0 +1,65 @@
+'	\" header for font family
+'	\" .hD font family_name
+.de hD
+.S 10 12
+.in 0
+.SK
+.fp 1 \\$1
+.ds fF "\\$2
+.nr f \w'\f3Font Family:\0\0\0'u
+\f3Font Family:\fP
+.in \\nfu
+.tr aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
+.rs
+.sp -1v
+\f1\\*(fF\fP
+.sp
+.tr aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz
+..
+'	\" Print character set for given font
+'	\" .cS font font_desc
+.de cS
+.ds fN \\$1
+.ds fD "\\$2
+.fp 1 \\*(fN
+.sp
+.nf
+.S 12 14
+.ft 1
+\\*(fF \\*(fD
+.sp 0.5v
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
+0123456789\|.\|,\|;\|:\|!\|?\|`\|'\|^\|~\|"
+@\|#\|$\|%\|&\|*\|+\|=\|\-\|-\|/\|\e\|(\^)\|[\^]\|{\^}
+.sp 0.5v
+..
+.de sF
+.sp 2
+.S 10 12
+.fp 1 \\$1
+.fp 2 \\$2
+.fp 3 \\$3
+.fp 4 \\$4
+.fi
+.na
+.ft 1
+.tF
+.ft 2
+.tF
+.ft 3
+.tF
+.ft 4
+.tF
+.ft 1
+.br
+.fp 1 R
+.fp 2 I
+.fp 3 B
+.fp 4 BI
+..
+.de tF
+Knowledge and courage are required to achieve the best results
+in typography. It is as true in this field as in any other that one
+receives what one deserves and one deserves whatever one accepts.
+..

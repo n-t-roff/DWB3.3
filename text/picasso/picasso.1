@@ -1,0 +1,274 @@
+.TH PICASSO 1 "DWB 3.2"
+.SH NAME
+.B picasso
+\- a line drawing program
+.SH SYNOPSIS
+\*(mBpicasso\f1
+[
+.OP \-b size
+.OP \-F path
+.OP \-T fonttables
+.OP \-I path
+.OP \-l n
+.OP \-M n
+.OP \-m margin
+.OP \-p m\*(mWx\fPn
+.OP \-txL
+]
+.OP \- "" []
+.OP "" files []
+.SH DESCRIPTION
+.B picasso
+is a
+processor for a
+.BR pic -like
+drawing language that produces PostScript output.
+By default, this output is scaled to fit an 8 by 10 inch print area, and
+centered on the page.
+.TP 0.75i
+.OP \-b size
+specifies a buffer of
+.I size
+objects accumulated before translation
+into PostScript.
+By default, an entire picture is buffered;
+on machines with small memories, a buffer of a few thousand objects 
+can prevent thrashing when processing a very large picture.
+This option is for exceptional cases and is not often needed.
+.TP
+.OP \-I path
+overrides the standard path for searching for the PostScript prologue
+(not needed in normal use).
+.TP
+.OP \-F path
+overrides the standard path for searching for the
+.B troff
+font width tables
+(not needed in normal use).
+.TP
+.OP \-T fonttables
+overrides the standard set of font width tables.
+The default is to use the
+.B Latin1
+tables,
+which allow the printing of the full Latin-1 (\s-1ISO 8859-1\s+1)
+character set, by using the appropriate
+.B troff
+sequences in
+.B picasso
+text strings.
+The only other meaningful value of this option is
+.MR \-Tpost .
+.TP
+.OP \-l n
+processes layer
+.I n
+only, as specified by
+.MI curlayer= n\f1.
+.TP
+.OP \-M n
+magnifies the output image by
+.I n
+(shrinks if 0\|<\|\f2n\fP\|<\|1).
+.TP
+.OP \-p m\*(mWx\fPn
+specifies output device size in inches (8.5\(mu11 default).
+.TP
+.OP \-t
+packages the PostScript with surrounding troff input so that the
+output file may be passed down a pipeline to
+.BR troff (1).
+The
+.SM MPICTURES
+macro package can be used with
+.B troff
+to insert the pictures appropriately within the document.
+Without the flag
+.B picasso
+outputs
+.I only
+PostScript, dropping any text outside the markers
+(e.g.,
+.MW .PS
+and
+.MR .PE )
+delimiting each picture.
+.TP
+.OP \-m margin
+specifies an empty border, in printer's points, that
+.B picasso
+will place around each picture.
+This may be useful at times to prevent too tight clipping against
+adjacent text or the edge of the paper.
+By default no margin is supplied;
+for example, to cause a 1/8" (9-point) margin, specify
+.MR \-m9 .
+.TP
+.OP \-x
+suppresses the default scaling and centering.
+.TP
+.OP \-L
+packages the output with additional PostScript to cause the picture
+to be rotated by 90 degrees from the default orientation when printed.
+.PP
+The
+.B picasso
+picture description language is object oriented, the basic objects being
+.MR arrow ,
+.MR arc ,
+.MR box ,
+.MR circle ,
+.MR ellipse ,
+.MR line ,
+.MR sector ,
+.MR spline ,
+.MW psfile
+(to include an Encapsulated PostScript file),
+and (quoted) text.
+These can be combined, hierarchically, into
+.MR blocks .
+Primitive objects can be drawn with
+.MR solid ,
+.MR dashed ,
+.MR dotted , 
+or
+.MW invisible
+edges.
+These edges may be of varying
+.MW weight
+(thickness)
+and of any shade of gray (from black = 0 to white = 1) or color.
+The predefined colors are
+.MR black ,
+.MR white ,
+.MR red ,
+.MR green ,
+.MR blue ,
+.MR cyan ,
+.MR magenta ,
+and
+.MR yellow .
+.PP
+Objects may be named and referred to by name or by anonymous
+references such as
+1st box, 4th object, or 2nd last circle.
+Object names require an initial upper case letter;
+names beginning with lower case or an underscore are numeric variables.
+There are a number of predefined variables such as
+.MR circlerad ,
+.MR boxwid ,
+.MR linecolor .
+.B picasso
+provides a limited set of programming language constructs
+(loops, if statements, macros, some arithmetic)
+for combining simple objects into relatively complex pictures. 
+.PP
+By default, objects are placed on the page adjacent to each other
+and from left to right.
+The default direction may be changed, and any object can be placed
+.MW at
+a specific position,
+given either in absolute coordinates or by reference to other objects and
+points of interest.
+Any object has a
+.MR top ,
+.MR bottom ,
+.MR left ,
+and
+.MW right
+point; these points may also be referred to directionally as
+.MR north ,
+.MR south ,
+.MR west ,
+and
+.MW east
+(or
+.MR n ,
+.MR s ,
+.MR w ,
+and
+.MR e ).
+The ``corner'' points may also be specified,
+e.g.,
+.MW northwest
+or
+.MR nw .
+Lines have
+.MW start
+and
+.MW end
+points;
+you may also refer to
+.MR 1st ,
+.MW 2nd
+\(el
+.MW nth
+points along a line.
+Boxes, circles, and ellipses have eight predefined points corresponding
+to the directional references mentioned above, the first point being in
+the eastern direction and the 8th point towards the southeast.
+For any object, the ``corner'' points really lie on the corners of a box
+surrounding the object while the ``counted'' points lie on the object itself.
+This distinction is normally relevant only for circles and ellipses, but
+since an object can be rotated or otherwise transformed it occasionally
+has significance for other objects as well.
+.SH EXAMPLE
+The following is a simple no-smoking sign described in the
+.B picasso
+language.
+.EX -1
+\&.PS
+d = 0.5
+[ box ht d wid 3.5 weight d/20
+  box ht d wid d/2 filled 0.5 noedge
+  spline weight 0.2 edge .75 right d then up d \e
+                        then right d then up d
+] 
+linecolor = red; lineweight = 0.375
+circle rad 3 at last block
+line from last circle .4th to last circle .8th
+\&.PE
+.EE
+If this is used in a
+.B troff
+document and processed through
+.B picasso
+with the
+.OP \-t
+flag, the
+.MW .PS
+marking the start of the picture can specify the size and
+placement of the picture at that point in your document.
+For example, to place the no smoking sign centered on the page in a 3
+inch square area, flag the start of the picture with
+.MR .PS\ 3\ 3\ c" .
+.SH BUGS
+.B picasso
+is not completely compatible with
+.BR pic (1).
+Besides having a number of new keywords and predefined variable names,
+.B picasso
+also centers pictures on a page rather than placing them at upper left.
+.PP
+The interactive version is unable to generate many elements
+of the language, nor will it preserve such elements (e.g., loops)
+if they are read in then written out.
+.SH "SEE ALSO"
+.BR troff (1),
+.BR pic (1),
+.BR troff (5)
+.SH REFERENCES
+R. L. Drechsler and A. R. Wilks,
+.ul
+PostScript Pictures in Troff Documents
+.PP
+B. W. Kernighan,
+.ul 2
+.SM PIC
+\(em A Graphics Language for Typesetting
+.PP
+N-P. Nelson,
+.ul 3
+Picasso 1.0 \(em An
+.SM "OPEN LOOK"
+Drawing Program

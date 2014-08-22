@@ -1,0 +1,53 @@
+.ds dT /usr/lib/tmac
+.TH MPTX 5
+.SH NAME
+.B mptx
+\- the macro package for formatting a permuted index
+.SH SYNOPSIS
+\*(mBtroff \-mptx\f1
+.OP "" options []
+.OP "" files []
+.sp 0.5v
+\*(mBnroff \-mptx\f1
+.OP "" options []
+.OP "" files []
+.SH DESCRIPTION
+The
+.SM MPTX
+package provides
+a definition for the
+.MW .xx
+macro used for formatting a permuted
+index as produced by
+.BR ptx (1):
+.EX
+\&.xx "" "\f2before_keyword\fP" "\f2keyword\fP" "\f2after_keyword\fP"
+.EE
+This package does not provide any other formatting
+capabilities such as headers and footers.
+If these or other capabilities are required,
+.SM MPTX
+may be used in conjunction with the
+.SM MM
+(or other) macro package.
+.SH EXAMPLES
+Produce a simple permuted index listing:
+.EX
+troff -mptx \f2file\fP | \f2spool
+.EE
+Produce a permuted index section using
+.SM MM
+formatting commands:
+.EX
+troff -mm -mptx \f2files\fP | \f2spool
+.EE
+or
+.EX
+mmt -mptx \f2files
+.EE
+.SH FILES
+.MW \*(dT/tmac.ptx
+.SH SEE ALSO
+.BR nroff (1),
+.BR ptx (1),
+.BR troff (1)

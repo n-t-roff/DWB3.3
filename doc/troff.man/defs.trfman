@@ -1,0 +1,79 @@
+.de TP
+'sp 3
+.if e \{\
+'	tl !!!\s+1\f(HB\\*(pT\fP\s0!
+'	tl !\f(HB\\nP!!\\*(sT\fP!   \}
+.if o \{\
+.ie \\nP=1 'sp 2v
+.el \{\
+'	tl !\s+1\f(HB\\*(pT\fP\s0!!!
+'	tl !\f(HB\\*(sT!!\\nP\fP!   \} \}
+'sp 2
+.nr h 1
+..
+'''	\" define main document title
+.ds pT "TROFF User's Manual
+.PH ""
+.EH ""
+.OH ""
+'''	\" titlebox; argument is subtitle
+'''	\" main document title defined in pT
+'''	\" subtitle for page header in sT
+'''	\" USAGE:  .TL "subtitle" [subhead]
+.de TL
+.ie '\\$2'' .ds sT \s-1\\$1\s0
+.el .ds sT "\s-1\\$2\s0
+.DS
+.ft HB
+.ps 18
+.vs 20
+\\*(pT
+.br
+\s36\l'\\nWu'\s0
+\f(HB\s14\\$1\s0\fP
+.ps 10
+.ft 1
+.DE
+.sp 2
+..
+'''	\" bold italic
+.de bI
+.nr q \\n(.f
+.if \\n(.$=0 .ft 4
+.if \\n(.$>0 \%\&\\$3\f4\\$1\\f\\nq\\$2
+..
+'''	\" format request summary line in reference manual
+.de bT
+.br
+.ie !'\\$5'' .nr n \\$5.7v
+.el .nr n 1v
+.if \\nh .nr n +1v
+.ne \\nnu
+.if \\nh .bH
+.sp 0.5v
+.in 0
+.ta 1.25i 2.5i 3.75i
+\\$1	\\$2	\\$3	\\$4
+.sp 0.2v
+.in 0.8i
+..
+'''	\" Header for block of request summary lines
+.de bH
+.sp 0.5v
+.in 0
+.ta 1.25i 2.5i 3.75i
+.ft 4
+\s-1Request Form	Initial Value	If No Argument	Notes\s+1\c
+.ie '\\$1'*' \{\s-2*\s+2
+.FS *
+The fields have the same meaning as described earlier
+in the summary of requests.
+.FE   \}
+.el \&
+.br
+.nr h 0
+..
+.de bE
+.in 0
+.nr h 1
+..

@@ -1,0 +1,236 @@
+.ds dP /usr/pub
+.ds dT /usr/lib/tmac
+.ds dN /usr/lib/nterm
+.TH NROFF 1
+.SH NAME
+.B nroff
+\- text formatting language
+.SH SYNOPSIS
+\*(mBnroff\f1
+.OP "" options []
+.OP "" files []
+\*(mB|\f1
+.I printer
+.SH DESCRIPTION
+.B nroff
+formats text contained in
+.I files
+(standard input by default)
+for printing on typewriter-like devices
+and line printers.
+.PP
+An argument consisting of a minus
+.OP \- "" ) (
+is taken to be
+a file name corresponding to the standard input.
+The
+.IR options ,
+which may appear in any order, but must appear
+before the
+.IR files ,
+are:
+.PP
+.PD 0
+.TP 0.75i
+.OP \-o list
+Print only pages whose page numbers appear in
+the
+.I list
+of numbers and ranges, separated by commas.
+A range
+.I N\-M
+means pages
+.I N
+through
+.IR M ;
+an initial
+.I \-N
+means
+from the beginning to page
+.IR N ;
+and a final
+.I N\-
+means
+from
+.I N
+to the end.
+(See
+.SM BUGS
+below.)
+.TP
+.OP \-n N
+Number first generated page
+.IR N .
+.TP
+.OP \-s N
+Stop every
+.I N
+pages.
+.B nroff
+will halt
+after
+every
+.I N
+pages (default
+.IR N =1)
+to allow paper loading or
+changing, and will resume upon receipt of a linefeed or newline
+(newlines do not work in pipelines, e.g., with
+.BR mm (1)).
+This option does not work if the output of
+.BR nroff
+is piped through
+.BR col (1).
+When
+.B nroff
+halts between pages, an
+.SM ASCII
+.SM BEL
+is sent to the terminal.
+.TP
+.OP \-r aN
+Set register
+.I a
+(which must have a one-character name) to
+.IR N .
+.TP
+.OP \-i
+Read standard input after
+.I files
+are exhausted.
+.TP
+.OP \-q
+Invoke the simultaneous input-output mode of the
+.MW .rd
+request.
+.TP
+.OP \-m name
+Prepend to the input
+.I files
+the macro file
+.MI \*(dT/tmac. name\f1.
+.TP
+.OP \-F prefix
+Combine
+.I prefix
+with the terminal
+.I type
+selected with the
+.OP \-T
+option to locate the terminal driving table.
+.MR \*(dN/tab.
+is the default
+.IR prefix .
+.TP
+.OP \-T type
+Prepare output for specified terminal.
+Known \f2type\f1 are:
+.sp 0.2v
+.in +0.75i
+.de XX
+.sp 1p
+.ti -0.75i
+\*(mB\\$1\f1
+.sp -1v
+..
+.XX 2631
+Hewlett-Packard 2631 printer in regular mode
+.XX 2631-c
+Hewlett-Packard 2631 printer in compressed mode
+.XX 2631-e
+Hewlett-Packard 2631 printer in expanded mode
+.XX 300
+\s-1DASI\s+1-300 printer
+.XX 300-12
+\s-1DASI\s+1-300 terminal set to 12-pitch 12 characters per inch)
+.XX 300s
+\s-1DASI\s+1-300s printer;
+\*(mB300S\fP is a synonym
+.XX 300s-12
+\s-1DASI\s+1-300s printer set to 12-pitch (12 characters per inch);
+\*(mB300S-12\fP is a synonym
+.XX 37
+.SM TELETYPE
+Model 37 terminal (default)
+.XX 382
+\s-1DTC\s+1-382
+.XX 4000a
+Trendata 4000a terminal;
+\*(mB4000A\fP is a synonym
+.XX 450
+\s-1DASI\s+1-450 (Diablo Hyterm) printer
+.XX 450-12
+\s-1DASI\s+1-450 terminal set to 12-pitch (12 characters per inch)
+.XX 832
+Anderson Jacobson 832 terminal
+.XX 8510
+C.Itoh printer
+.XX lp
+generic name for printers that can underline and tab;
+all text using reverse line feeds, such as those having tables,
+that is sent to
+.B lp
+must be processed with
+.BR col .
+.XX tn300
+.SM GE
+Terminet 300 terminal
+.in -0.75i
+.sp 4p
+.TP
+.OP \-e
+Produce equally-spaced words in adjusted
+lines, using the full resolution of particular terminal.
+.TP
+.OP \-h
+Use output tabs during horizontal spacing
+to speed output and reduce output character count.
+Tab settings are assumed to be every
+8 nominal character widths.
+.br
+.ne 2v
+.TP
+.OP \-u n
+Set the emboldening factor (number of character overstrikes) for the
+third font position (bold) to
+.IR n ,
+or to zero if
+.I n
+is missing.
+.PD
+.br
+.ne 1i
+.SH BUGS
+.B nroff
+believes in Eastern Standard Time;
+as a result, depending on the time of the year and on your local time zone,
+the date that
+.B nroff
+generates may be off by one day from your idea of what the date is.
+.PP
+When
+.B nroff
+is used with the
+.OP \-o list
+option inside a pipeline
+(e.g., with
+.BR eqn (1)
+or
+.BR tbl (1))
+it may cause a harmless ``broken pipe'' diagnostic
+if the last page of the document is not specified in
+.IR list .
+.SH FILES
+.MW \*(dT/tmac.*
+.br
+.MW \*(mW\*(dN/*
+.SH SEE ALSO
+.BR col (1),
+.BR neqn (1),
+.BR mm (1),
+.BR troff (1),
+.BR nterm (5)
+.SH REFERENCE
+J. F. Ossanna,
+.ul
+Nroff/Troff User's Manual

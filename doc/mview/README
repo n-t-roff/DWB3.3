@@ -1,0 +1,70 @@
+MVIEW
+=============================================================================
+TITLE      MVIEW - A Set of Macrocommands for the Generation of View Graphs
+
+AUTHOR(s)  Joel N. Sturman
+           Bell Telephone Laboratories
+
+REVISED    April 1990 by C.L'Hommedieu, AT&T Bell Laboratories
+REPRINTED  May 1990, AT&T Bell Laboratories
+=============================================================================
+FILE            PURPOSE
+------------    ----------------------------------------------------------
+mview.doc       MVIEW document body
+mview.app       MVIEW Appendix
+mview.ex1       Input for Example 1, A Simple View Graph
+mview.ex2       Input for Example 2, A Centered View Graph
+mview.ex3       Input for Example 3, A Poor Example Showing the Effect
+                                     of Long Lines
+mview.ex4       Input for Example 4, A Title and Font Emphasis
+mview.ex5       Input for Example 5, An Underlined Title and Size Changes
+mview.ex6       Input for Example 6, A View Graph Using a Bullet List
+mview.ex7       Input for Example 8, A Two-Level Marked List
+mview.ex8       Input for Example 8, A Simple Outline List
+mview.ex9       Input for Example 9, Using a Variable List in Fill Mode
+mview.ex10      Input for Example 10, A View Graph with a Table (tbl)
+mview.ex11      Input for Example 11, A View Graph with an Equation (eqn)
+mview.ex12      Input for Example 12, A View Graph with a Picture (pic)
+mview.ex13      Input for Example 13, A View Graph with a Graph (grap)
+Run             Shell script to format and printer entire MVIEW document
+agepop.d        Data for graph, Example 13
+=============================================================================
+To produce the entire MVIEW document, use the command:
+
+   ./Run
+
+If the PRINT variable in the "Run" script is set to your local print
+spooler command, then the entire document will be printed as well; otherwise,
+the script creates a PostScript output file (beginning with "PS.") for each
+document part.
+
+To produce the MVIEW document (body only), use the command:
+
+   tbl mview.doc | troff -Tpost - | dpost
+
+To produce only the appendix, use the command:
+
+   troff -Tpost -mpictures mview.app | dpost
+
+To produce output samples as individual full-page images, use the commands:
+
+   troff -Tpost -mview mview.ex1 | dpost
+   troff -Tpost -mview mview.ex2 | dpost
+   troff -Tpost -mview mview.ex3 | dpost
+   troff -rf2 -Tpost -mview mview.ex4 | dpost
+   troff -Tpost -mview mview.ex5 | dpost
+   troff -Tpost -mview mview.ex6 | dpost
+   troff -Tpost -mview mview.ex7 | dpost
+   troff -Tpost -mview mview.ex8 | dpost
+   troff -Tpost -mview mview.ex9 | dpost
+   tbl mview.ex10 | troff -Tpost -mview - | dpost
+   eqn mview.ex11 | troff -rf1 -Tpost -mview - | dpost
+   pic mview.ex12 | troff -Tpost -mview - | dpost
+   grap mview.ex13 | pic | troff -Tpost -mview - | dpost
+
+When the appendix is produced, each output sample is generated on the fly
+using the troff .sy request; the dpost -B option crops the PostScript image
+and assigns appropriate bounding box parameters; the image is then scaled to
+size, boxed, and merged onto the page using the mpictures PostScript picture
+inclusion facility.
+=============================================================================

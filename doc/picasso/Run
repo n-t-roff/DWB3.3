@@ -1,0 +1,20 @@
+# set print spooler command
+PRINT=""
+
+# set list of PostScript output files to print
+PSFILES="PS.doc PS.appA PS.appB PS.appC PS.appD PS.ov PS.disclaimer"
+
+# run document parts and create PostScript output files
+troff -Tpost -mpictures pguide.doc | dpost >PS.doc
+troff -Tpost pguide.appA | dpost >PS.appA
+troff -Tpost pguide.appB | dpost >PS.appB
+tbl pguide.appC | troff -Tpost - | dpost >PS.appC
+troff -Tpost -mpictures pguide.appD | dpost >PS.appD
+troff -Tpost -mpictures overview | dpost >PS.ov
+troff -Tpost disclaimer | dpost >PS.disclaimer
+
+
+# print document parts if PRINT is set
+if [ x"$PRINT" != "x" ]; then
+   $PRINT $PSFILES
+fi

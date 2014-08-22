@@ -1,0 +1,55 @@
+AT&T UNIX System DOCUMENTER'S WORKBENCH Software (Release 3.1)
+====================================================================
+
+REVISED &
+REPRINTED:   May 1990 by C.L'Hommedieu, AT&T Bell Laboratories
+
+====================================================================
+
+File         Purpose
+----------   --------------------------------------------------
+toc.master   master table of contents
+MACS.tune    instructions to tune macros for customer base
+defs.doc     macro definitions for all documents in this package
+defs.toc     macro definitions for tables of contents
+defs.add     macro definitions for addendum
+
+====================================================================
+
+Directory    Purpose
+----------   --------------------------------------------------
+misc         Miscellaneous pages (cover, spine, references, etc.)
+mm           Macro Package:  MM
+mpictures    Macro Package:  MPICTURES
+mv           Macro Package:  MV
+mview        Macro Package:  MVIEW
+eqn          Preprocessor:  EQN
+tbl          Preprocessor:  TBL
+pic          Preprocessor:  PIC
+grap         Preprocessor:  GRAP
+picasso      Preprocessor:  PICASSO
+troff.tut    Text Formatter:  A TROFF Tutorial
+troff.man    Text Formatter:  TROFF User's Manual
+post         PostScript:  Font Sampler
+                          Character Set and Symbols
+
+====================================================================
+Each directory contains a README file (similar to this one)
+with the following information:
+
+ - original document title and author
+ - revision and reprint
+ - list of files with purpose
+ - command line needed to produce document body and appendices
+
+Files that begin with "PS." are the PostScript output files created
+using the software in this release; these PostScript files were 
+used to produce the final camera-ready master copy for this
+documentation package.
+
+The file "Run" is a shell script that formats the entire document,
+creates the PostScript output files (one for each part of the document),
+and prints the document as a whole.  The resulting PostScript output
+files are not removed upon exit, but are saved to produce additional
+master copies, if needed.
+====================================================================
