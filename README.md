@@ -32,8 +32,7 @@ After installation locally build data is cleaned up with
 
 <code>make -f dwb.mk clobber</code>
 
-Bugs can be reported at:
-https://github.com/carsten-kunze/DWB3.3/issues
+Bugs can be reported at
+https://github.com/n-t-roff/DWB3.3/issues
 
-On problems you can contact me under:<br />
-Carsten Kunze &lt;carsten.kunze at arcor.de&gt;
+On problems send mail to troff@arcor.de
