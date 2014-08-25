@@ -8,9 +8,9 @@ OWNER=bin
 GROUP=bin
 
 BINDIR=/usr/bin
-FONTDIR=/usr/lib/font
+FONTDIR=/usr/local/dwb/lib/font
 MAN1DIR=/usr/man/u_man/man1
-POSTLIB=/usr/lib/postscript
+POSTLIB=/usr/local/dwb/lib/postscript
 
 CFLGS=-O 
 LDFLGS=-s 
