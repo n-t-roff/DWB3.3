@@ -7,12 +7,18 @@
 %n 750
 
 %{
-#undef	input
 #undef	unput
 #include <ctype.h>
 #include <math.h>
 #include "picasso.h"
 #include "y.tab.h"
+
+#undef	YY_INPUT
+/* YY_INPUT define (c) Gunnar Ritter */
+#define	YY_INPUT(buf, result, max_size) { \
+	int	c = dwb_input(); \
+	result = (c == EOF || c == 0) ? YY_NULL : (buf[0] = c, 1); \
+}
 
 extern	double	atof();
 extern	struct	symtab	symtab[];
@@ -33,8 +39,8 @@ D	[0-9]
 WS	[ \t]
 
 %%
-	/* switch (yybgin-yysvec-1) { */	/* witchcraft */
-	/*case 0:
+	switch (YY_START) {	/* witchcraft */
+	case 0:
 		BEGIN A;
 		break;
 	case sc:
@@ -43,7 +49,7 @@ WS	[ \t]
 	case br:
 		BEGIN A;
 		return(']');
-	}*/
+	}
 
 <A>{WS}		;
 <A>"\\"\n	;

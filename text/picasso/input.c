@@ -62,7 +62,7 @@ definition(s)	/* collect definition for s and install */
 	}
 	stp->s_val.p = p;
 }
-
+
 char *delimstr(s)	/* get body of X ... X */
 	char *s;		/* message if too big */
 {
@@ -73,12 +73,12 @@ char *delimstr(s)	/* get body of X ... X */
 
 	if (buf == NULL)
 		buf = grow(buf, "buf", nbuf += 1000, sizeof(buf[0]));
-	while ((delim = input()) == ' ' || delim == '\t' || delim == '\n')
+	while ((delim = dwb_input()) == ' ' || delim == '\t' || delim == '\n')
 		;
 	rdelim = baldelim(delim, "{}()");	/* could be "(){}[]`'" */
 	deep = 1;
 	for (p = buf; ; ) {
-		c = input();
+		c = dwb_input();
 		if (c == rdelim)
 			if (--deep == 0)
 				break;
@@ -133,13 +133,13 @@ dodef(stp)	/* collect args and switch input to defn */
 	if (ap >= args+10)
 		fatal("arguments too deep");
 	argcnt = 0;
-	if (input() != '(')
+	if (dwb_input() != '(')
 		fatal("disaster in dodef\n");
 	if (ap->argval == 0)
 		ap->argval = malloc(1000);
 	for (p = ap->argval; (len = getarg(p)) != -1; p += len) {
 		ap->argstk[argcnt++] = p;
-		if (input() == ')')
+		if (dwb_input() == ')')
 			break;
 	}
 	for (i = argcnt; i < MAXARGS; i++)
@@ -155,7 +155,7 @@ getarg(p)	/* pick up single argument, store in p, return length */
 
 	n = npar = 0;
 	for ( ;; ) {
-		c = input();
+		c = dwb_input();
 		if (c == EOF)
 			fatal("end of file in getarg!\n");
 		if (npar == 0 && (c == ',' || c == ')'))
@@ -164,7 +164,7 @@ getarg(p)	/* pick up single argument, store in p, return length */
 			do {
 				*p++ = c;
 				n++;
-			} while ((c = input()) != '"' && c != EOF);
+			} while ((c = dwb_input()) != '"' && c != EOF);
 		else if (c == '(')
 			npar++;
 		else if (c == ')')
@@ -189,8 +189,7 @@ extern	int	thru;
 extern	struct symtab	*thrudef;
 extern	char	*untilstr;
 
-input()
-{
+int dwb_input(void) {
 	register int c;
 
 	if (thru && begin) {
@@ -352,8 +351,7 @@ do_thru()	/* read one line, make into a macro expansion */
 	pushsrc(Macro, thrudef->s_val.p);
 }
 
-unput(c)
-{
+int unput(int c) {
 	if (++pb >= pbuf + sizeof pbuf)
 		fatal("pushback overflow\n");
 	if (--ep < ebuf)

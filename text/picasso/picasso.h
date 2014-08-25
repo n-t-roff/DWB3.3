@@ -271,3 +271,4 @@ extern	char	*parse_text();
 extern	obj	*print_obj();
 extern	obj	*print_xform();
 extern  FILE    *outfp;
+int dwb_input(void);
