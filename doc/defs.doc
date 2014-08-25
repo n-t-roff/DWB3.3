@@ -1,4 +1,4 @@
-.so /usr/lib/tmac/tmac.m
+.so /usr/local/dwb/lib/tmac/tmac.m
 '''	\" registered mark for sans-serif type
 .ds rG \v'-0.4m'\s-4\(RG\s+4\v'0.4m'
 .fp 1 R
