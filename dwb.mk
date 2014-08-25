@@ -275,6 +275,7 @@ $(TARGETS) ::
 	POSTLIB='$(POSTLIB)'; export POSTLIB; \
 	MACRODIR='$(MACRODIR)'; export MACRODIR; \
 	LIBDIR='$(LIBDIR)'; export LIBDIR; \
+	TMACDIR='$(TMACDIR)'; export TMACDIR; \
 	DIRS=`echo */$@ */*/$@`; \
 	DIRS="$@ $$DIRS"; \
 	HERE=`pwd`; \
