@@ -7,6 +7,7 @@
 .tm wrong version of man entry macros (use -man6 if available)
 .ab 
 ..
+.nr yr +1900
 '''\" set character strings and translation
 '''\" use monowidth (font 5) for troff; use bold (font 3) for nroff
 .if t \{\
@@ -609,8 +610,10 @@ the Network File System.
 '''\" disclosure notice invoking macro
 .de PM
 .ie @\\$2@@ .nr ;V \\n(yr
-.el \{.ie \\$2-1900 .nr ;V \\$2-1900
-.el .nr ;V \\$2 \}
+.el \{\
+.	ie     \\$2>1900 .nr ;V \\$2
+.	el .ie \\$2<70   .nr ;V \\$2+2000
+.	el               .nr ;V \\$2+1900 \}
 .ie @\\$1@@ \{\
 .	(B
 .	(E 2 0		\" clear position 2 - additional message
@@ -634,7 +637,7 @@ the Network File System.
 .	(E 3 1v \}
 .el .ie @\\$1@CR@ \{\
 .	(B
-\!.	tl @@\f1Copyright \\(co 19\\n(;V AT&T@@
+\!.	tl @@\f1Copyright \\(co \\n(;V AT&T@@
 \!.	tl @@All rights reserved.\fP@@
 .	(E 3 2v \}
 .el .ie @\\$1@UW@ \{\
@@ -643,7 +646,7 @@ the Network File System.
 \!.	tl @@\f1THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF@@
 \!.	tl @@AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN@@
 \!.	tl @@ACCORDANCE WITH APPLICABLE AGREEMENTS.@@
-\!.	tl @@Copyright \\(co 19\\n(;V AT&T@@
+\!.	tl @@Copyright \\(co \\n(;V AT&T@@
 \!.	tl @@Unpublished & Not for Publication@@
 \!.	tl @@All rights reserved.\fP@@
 .	(E 3 7v \}
@@ -754,8 +757,8 @@ the Network File System.
 .	 el .ds ]W (printed \n(mo/\n(dy/\n(yr)
 '	 br \}
 .if \n()s .ds ]W
-.if \n()t \{.ie \nd .ds ]W \*(]m \nd, 19\ny
-.	      el .ds ]W \*(]m \n(dy, 19\n(yr
+.if \n()t \{.ie \nd .ds ]W \*(]m \nd, \ny
+.	      el .ds ]W \*(]m \n(dy, \n(yr
 '	      br \}
 .pl \n()Lu
 .ll \n(LLu
