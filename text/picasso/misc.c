@@ -511,7 +511,8 @@ obj *makenode(type, n, layer)
 	{
 	int	jflags, lastf;
 	jflags = RJUST|LJUST|CENTER|ABOVE|BELOW;
-	lastf = text[ntext-1].t_type & jflags;
+	if (ntext)
+		lastf = text[ntext-1].t_type & jflags;
 	for ( ; ntext1 < ntext; ntext1++)
 		text[ntext1].t_type = text[ntext1].t_type & ~ jflags | lastf;
 	}
