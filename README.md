@@ -14,7 +14,7 @@ is not used).
 It can also generate PostSript output directly (which can be inserted via
 `.BP` or `.PI`).
 The language of picasso is similar to that of pic but it has additional
-capabilities (e.g. line thickness and gray-scale or color filling).
+capabilities (e.g. setting line thickness and gray-scale or color filling).
 Picasso also has a GUI on OPEN LOOK<sup>&reg;</sup> systems (not tested for
 this port).
 The picasso documentation can be generated in directory
