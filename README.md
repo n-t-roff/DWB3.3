@@ -19,6 +19,7 @@ Picasso also has a GUI on OPEN LOOK systems (not tested for
 this port).
 The picasso documentation can be generated in directory
 `doc/picasso` by typing `./Run`.
+(`text/picasso` also contains the original AT&T `yacc` source code...)
 
 Currently tested tools are `nroff`, `neqn` (slightly), `troff`, `eqn`, `tbl`,
 `pic`, `grap`, `picasso` and `dpost`.
