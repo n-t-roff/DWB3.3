@@ -24,6 +24,7 @@
   The output is a list of subjects.
   Subjects are defined as adjective-noun sequences.*/
 
+#include <string.h>
 #include <stdio.h>
 #include "cnst.h"
 

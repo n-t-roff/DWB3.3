@@ -31,6 +31,7 @@
 /* 	2) Y, X							*/
 /* 	3) both 1 and 2						*/
 %{
+#include <string.h>
 #include <stdio.h>
 
 #include "cnst.h"
