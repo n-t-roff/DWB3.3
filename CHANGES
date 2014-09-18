@@ -1,0 +1,11 @@
+2014-09-14
+    Any version of roff (e.g. UNIX V7) does count \} as a macro
+    argument regarding \n(.$.  This makes \n(.$ rather random if
+    you cannot force users to put \} on a separate line *or* to
+    put it behind the macro call and substract 1 from \n(.$.  To
+    make \n(.$ meaningful again this bug has been fixed now, i.e.
+    \} is not considered as a macro argument anymore.
+
+2014-08-18
+    Fixed page transition error which occurred when .bp is fol-
+    lowed by ..  (Text had been printed at footer trap position.)
