@@ -47,6 +47,7 @@ install : all
 	done
 
 clean :
+	rm -f HM
 
 clobber : clean
 
