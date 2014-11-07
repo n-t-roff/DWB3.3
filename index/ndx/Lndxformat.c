@@ -18,7 +18,7 @@ main()
 	char	*p, *strtok();
 	char	*args[3];
 	int	i, missing = FALSE;
-	while (gets(str) != NULL) {
+	while (fgets(str, sizeof str, stdin) != NULL) {
 		if ((p = strtok(str, SEP)) != NULL)                /* read past subject number in file */
 			;
 		for (i = 0; i < 3; i ++) {

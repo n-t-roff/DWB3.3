@@ -6,9 +6,7 @@
 #define SEP "] "                                                 /* separator string used by strtok */
 #define SEP1 "]"                                                 /* separator string used by strtok */
 
-#ifdef V9
 #define gets(s) fgets(s, sizeof(s), stdin)
-#endif
 
 main()
 {
