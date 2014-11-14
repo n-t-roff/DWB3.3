@@ -62,4 +62,7 @@ A git repository can be kept up-to-date with `git pull`.
 Bugs can be reported at the
 [issue list](https://github.com/n-t-roff/DWB3.3/issues).
 
+Please note that the included README file is kept unchanged from the original DWB package.
+Parts of it's contents may be outdated.
+
 If there are any problems mail can be send to [troff at arcor dot de](mailto:troff@arcor.de).
