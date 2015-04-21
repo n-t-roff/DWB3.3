@@ -12,6 +12,9 @@ char	ibuf[PUSHBACK+SSIZE];	/* pushback buffer for definitions, etc. */
 char	*ip	= ibuf;
 char *strsave(char *s);
 
+void define(int type);
+void getstr(char *s, int n);
+
 gtc() {
   loop:
 	if (ip > ibuf)
@@ -122,7 +125,8 @@ yylex() {
 	goto beg;
 }
 
-getstr(s, n) char *s; register int n; {
+void
+getstr(char *s, int n) {
 	register int c;
 	register char *p;
 
@@ -173,7 +177,8 @@ cstr(s, quote, maxs) char *s; int quote; {
 	return(0);
 }
 
-define(type) int type; {
+void
+define(int type) {
 	char *strsave(), *p1, *p2;
 	extern tbl *deftbl;
 

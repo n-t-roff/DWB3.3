@@ -16,8 +16,9 @@ char	*names[] = {
 	"pronoun", "article", "preposition", "auxiliary", "tobe", "", "subordinate conjunction",  "expletive"
 };
 
-
 extern int	barebones;
+
+void
 outp()
 {
 	struct ss *st;

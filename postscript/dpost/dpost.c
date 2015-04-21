@@ -175,6 +175,8 @@
 #include	"dpost.h"		/* a few definitions just used here */
 #include	"motion.h"		/* positioning macros */
 
+void put1(int c);
+
 char	*prologue = DPOST;		/* the PostScript prologue */
 char	*colorfile = COLOR;		/* color support */
 char	*drawfile = DRAW;		/* drawing routines */
@@ -1315,9 +1317,8 @@ xymove(x, y)
 
 /*****************************************************************************/
 
-put1(c)
-
-    register int	c;
+void
+put1(int c)
 
 {
 

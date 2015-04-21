@@ -101,6 +101,8 @@
 #include "path.h"			/* for the prologue */
 #include "ext.h"			/* external variable declarations */
 
+void addrast(int count);
+
 char	*optnames = "a:b:c:fm:n:o:p:ux:y:A:C:E:J:L:P:DI";
 
 char	*prologue = POSTDMD;		/* default PostScript prologue */
@@ -564,9 +566,10 @@ dimensions()
 
 /*****************************************************************************/
 
-addrast(count)
+void
+addrast(int count)
 
-    int		count;			/* repeat count for next pattern */
+/*    int		count;			repeat count for next pattern */
 
 {
 

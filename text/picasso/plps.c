@@ -130,8 +130,8 @@ double	tx, ty, pgscale = 72;
 static double	px, py, sx, sy;
 static int	pbnd[4];
 
-openpl(s)		/* initialize page */
-	char	*s;
+void
+openpl(char *s)		/* initialize page */
 {
 extern	FILE *tmpfile();
 	double	deltx, delty, r;
@@ -850,8 +850,8 @@ transparent(fp)
  *	include an encapsulated postscript file.  Apply any scaling and
  *	transformation specified by p.
  */
-puteps(o)
-	obj	*o;
+void
+puteps(obj *o)
 {
 	FILE	*fp;
 

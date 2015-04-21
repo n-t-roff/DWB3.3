@@ -112,6 +112,11 @@
 #include "ext.h"			/* external variable definitions */
 #include "posttek.h"			/* control codes and other definitions */
 
+void incremental(void);
+void graph(void);
+void alpha(void);
+void statemachine(FILE *fp);
+
 char	*optnames = "a:c:f:m:n:o:p:w:x:y:A:C:E:J:L:P:R:DI";
 
 char	*prologue = POSTTEK;		/* default PostScript prologue */
@@ -491,9 +496,10 @@ account()
 
 /*****************************************************************************/
 
-statemachine(fp)
+void
+statemachine(FILE *fp)
 
-    FILE	*fp;			/* used to set fp_in */
+/*    FILE	*fp;	used to set fp_in */
 
 {
 
@@ -563,7 +569,8 @@ reset()
 
 /*****************************************************************************/
 
-alpha()
+void
+alpha(void)
 
 {
 
@@ -648,7 +655,8 @@ alpha()
 
 /*****************************************************************************/
 
-graph()
+void
+graph(void)
 
 {
 
@@ -751,7 +759,8 @@ point()
 
 /*****************************************************************************/
 
-incremental()
+void
+incremental(void)
 
 {
 

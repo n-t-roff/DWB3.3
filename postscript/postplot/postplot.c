@@ -127,6 +127,8 @@
 #include "ext.h"			/* external variable declarations */
 #include "postplot.h"			/* a few special definitions */
 
+void getstring(char *s);
+
 char	*optnames = "a:c:f:m:n:o:p:s:w:x:y:A:C:E:J:L:P:R:DI";
 
 char	*prologue = POSTPLOT;		/* default PostScript prologue */
@@ -665,9 +667,8 @@ getint()
 
 /*****************************************************************************/
 
-getstring(s)
-
-    char	*s;
+void
+getstring(char *s)
 
 {
 

@@ -51,6 +51,12 @@ x ...\n	device control functions:
 #include "dev.h"
 #define	NFONT	10
 
+void t_page(int n);
+void t_text(char *s);
+void setsize(int n);
+void put1(int c);
+void put1s(char *s);
+
 int	output	= 0;	/* do we do output at all? */
 int	nolist	= 0;	/* output page list if > 0 */
 int	olist[20];	/* pairs of page numbers */
@@ -482,7 +488,8 @@ int	npmax;	/* high-water mark of np */
 int	pgnum[100];	/* their actual numbers */
 long	pgadr[100];	/* their seek addresses */
 
-t_page(n)	/* do whatever new page functions */
+void
+t_page(int n)	/* do whatever new page functions */
 {
 	long ftell();
 	int c, m, i;
@@ -613,8 +620,8 @@ char *s;
 	return(n);
 }
 
-t_text(s)	/* print string s as text */
-char *s;
+void
+t_text(char *s)	/* print string s as text */
 {
 	int c, w;
 	char str[100];
@@ -689,8 +696,8 @@ int n;
 	vgoto(vpos + n);	/* ignores rounding */
 }
 
-put1s(s)	/* s is a funny char name */
-char *s;
+void
+put1s(char *s)	/* s is a funny char name */
 {
 	int i;
 	char *p;
@@ -718,8 +725,8 @@ char *s;
 		prev[0] = 0;
 }
 
-put1(c)	/* output char c */
-int c;
+void
+put1(int c)	/* output char c */
 {
 	if (!output)
 		return;
@@ -728,8 +735,8 @@ int c;
 	oput(c);
 }
 
-setsize(n)	/* set point size to n (internal) */
-int n;
+void
+setsize(int n)	/* set point size to n (internal) */
 {
 
 	if (!output)

@@ -84,6 +84,10 @@ struct colstr *alocv();
 
 long int dwb_gettext(char **sp, int ilin, int icol); /* Read in a text block */
 int dwb_getline(char *s, int nmax);
+void drawline(int i, int cl, int cr, int lintype, int noheight, int shortl);
+void makeline(int i, int c, int lintype);
+void putline(int i, int nl);
+void skip_input(void);
 
 /*
  * Important data items
@@ -365,7 +369,8 @@ do_table1()
 	return 0;
 }
 
-skip_input()	/* Skip remainder of current table */
+void
+skip_input(void)	/* Skip remainder of current table */
 {
 	fprintf(stderr, "tbl: Skipping to the end of this table\n");
 	while (dwb_getline(inbuf, sizeof(inbuf)))
@@ -1971,7 +1976,8 @@ deftail() /* Generate code to define the bottom-of-page macro */
 /* t8.c: write out one line of output table */
 
 int once;
-putline(i, nl) /* Generate code to format one row of the table */
+void
+putline(int i, int nl) /* Generate code to format one row of the table */
 /* i is line number for deciding format */
 /* nl is line number for finding data (usually identical) */
 {
@@ -3308,9 +3314,11 @@ int c;	/* column index */
 
 /* tu.c: draws horizontal lines */
 
-makeline(i, c, lintype) /* Draw a less-than-full-width horizontal line */
-int i;	/* row index */
-int c;	/* column index */
+/* Draw a less-than-full-width horizontal line */
+void
+makeline(int i, int c, int lintype)
+/* int i;	 row index */
+/* int c;	 column index */
 {
 	int cr, type, shortl;
 
@@ -3356,7 +3364,9 @@ fullwide(i, lintype) /* Draw a full-width horizontal line */
 		printf(".vs \\n(%du\n", SVS);
 }
 
-drawline(i, cl, cr, lintype, noheight, shortl) /* Draw a horizontal line */
+/* Draw a horizontal line */
+void
+drawline(int i, int cl, int cr, int lintype, int noheight, int shortl)
 /* i = row number */
 /* cl = beginning column number */
 /* cr = ending column number */

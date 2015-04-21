@@ -798,8 +798,8 @@ nothertext(type, str, font, size, w)
 }
 #endif
 
-oprint(o)
-    obj     *o;
+void
+oprint(obj *o)
 {
     obj     *p;
     int	    t;

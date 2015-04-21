@@ -230,8 +230,8 @@ freesymtab(p)	/* free space used by symtab at p */
 	}
 }
 
-freedef(s)	/* free definition for string s */
-	char *s;
+void
+freedef(char *s)	/* free definition for string s */
 {
 	struct symtab *p, *q, *op;
 

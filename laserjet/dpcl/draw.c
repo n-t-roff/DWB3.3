@@ -21,9 +21,9 @@ int	maxdots	= 32000;	/* maximum number of dots in an object */
 #define	min(x,y)	((x) < (y) ? (x) : (y))
 #define	arcmove(x,y)	{ hgoto(x); vmot(-vpos-(y)); }
 
-drawline(dx, dy, s)	/* draw line from here to dx, dy using s */
-int dx, dy;
-char *s;
+/* draw line from here to dx, dy using s */
+void
+drawline(int dx, int dy, char *s)
 {
 	int xd, yd;
 	float val, slope;

@@ -11,7 +11,7 @@
 char	buf[512];
 typedef struct {long start, end;} Section;
 static print(FILE *, char **);
-static copy(FILE *, FILE *, Section *);
+static void copy(FILE *fin, FILE *fout, Section *s);
 
 
 ps_include(fin, fout, page_no, whiteout, outline, scaleboth, cx, cy, sx, sy, ax, ay, rot)
@@ -179,10 +179,8 @@ char **s;
 		fprintf(fout, "%s\n", *s++);
 }
 
-static
-copy(fin, fout, s)
-FILE *fin, *fout;
-Section *s;
+static void
+copy(FILE *fin, FILE *fout, Section *s)
 {
 	if (s->end <= s->start)
 		return;

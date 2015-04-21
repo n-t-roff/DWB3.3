@@ -49,9 +49,8 @@ framewid(f)	/* set width of frame */
 	frame_wid = f;
 }
 
-frameside(type, desc)	/* create and remember sides */
-	int type;
-	Attr *desc;
+void
+frameside(int type, Attr *desc)	/* create and remember sides */
 {
 	int n;
 	char buf[100];

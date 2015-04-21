@@ -19,7 +19,8 @@ int	flyback;
 int	redo_gbox = 0;
 int	objcount  = 0;
 
-print_buf()
+void
+print_buf(void)
 {
 	int	n;
 	obj	*p;

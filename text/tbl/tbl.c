@@ -98,6 +98,11 @@ extern char *chspace(), *gets1(), *maknew(), *reg(), *strsave();
 struct colstr *alocv();
 long int dwb_gettext(char **sp, int ilin, int icol); /* Read in a text block */
 int dwb_getline(char *s, int nmax);
+void drawline(int i, int cl, int cr, int lintype, int noheight, int shortl);
+void makeline(int i, int c, int lintype);
+void multipg(void);
+void putline(int i, int nl);
+void skip_input(void);
 
 int Vopt = 0;
 int Hflag = 0;		/* Set iff first argument to .TS is "H" */
@@ -334,7 +339,8 @@ do_table1() /* Compile one table */
 	return 0;
 }
 
-skip_input()	/* Skip remainder of current table */
+void
+skip_input(void)	/* Skip remainder of current table */
 {
 	fprintf(stderr, "tbl: Skipping to the end of this table\n");
 	while (dwb_getline(inbuf, sizeof(inbuf)))
@@ -1989,7 +1995,8 @@ check_prev()
 	}
 }
 
-putline(i, nl) /* Process one line of input data */
+void
+putline(int i, int nl) /* Process one line of input data */
 /* i is the line number for selecting the format */
 /* nl is the line number for finding the data (usually identical) */
 {
@@ -2469,7 +2476,8 @@ char *s;
 		printf("\\s%s", s);
 }
 
-multipg() /* Initialize stuff for multi-page boxed tables */
+void
+multipg(void) /* Initialize stuff for multi-page boxed tables */
 {
 	int c;
 
@@ -3478,9 +3486,10 @@ int c;	/* column index */
 
 /* tu.c: draws horizontal lines */
 
-makeline(i, c, lintype) /* Draw a less-than-full-width horizontal line */
-int i;	/* row index */
-int c;	/* column index */
+void
+makeline(int i, int c, int lintype) /* Draw a less-than-full-width horizontal line */
+/* int i;	row index */
+/* int c;	column index */
 {
 	int cr, type, shortl;
 
@@ -3526,7 +3535,9 @@ fullwide(i, lintype) /* Draw a full-width horizontal line */
 		printf(".vs \\n(%du\n", SVS);
 }
 
-drawline(i, cl, cr, lintype, noheight, shortl) /* Draw a horizontal line */
+/* Draw a horizontal line */
+void
+drawline(int i, int cl, int cr, int lintype, int noheight, int shortl)
 /* i = row number */
 /* cl = beginning column number */
 /* cr = ending column number */

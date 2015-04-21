@@ -94,6 +94,8 @@
 #include "ext.h"			/* external variable definitions */
 #include "motion.h"			/* positioning macros */
 
+void drawellip(int a, int b);
+
 int	gotdraw = FALSE;		/* TRUE when *drawfile has been added */
 int	gotbaseline = FALSE;		/* TRUE after *baselinefile is added */
 int	inpath = FALSE;			/* TRUE if we're putting pieces together */
@@ -191,9 +193,10 @@ drawcirc(d)
 
 /*****************************************************************************/
 
-drawellip(a, b)
+void
+drawellip(int a, int b)
 
-    int		a, b;			/* axes lengths for the ellipse */
+/*    int		a, b;			axes lengths for the ellipse */
 
 {
 

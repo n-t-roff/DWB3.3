@@ -202,9 +202,8 @@ troff(s)	/* output troff right here */
 	printf("%s\n", s);
 }
 
-label(s, t, nh)	/* text s of type t nh half-lines up */
-	char *s;
-	int t, nh;
+void
+label(char *s, int t, int nh)	/* text s of type t nh half-lines up */
 {
 	int q;
 	char *p;

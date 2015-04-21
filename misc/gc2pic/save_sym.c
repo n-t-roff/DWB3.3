@@ -117,11 +117,8 @@ char	*charstr[256] =
 	NULL ,	NULL ,	NULL ,	NULL ,	NULL ,	NULL ,	NULL ,	NULL ,
 } ;
 
-save_sym(pieces,n,x,y)
-int	pieces[] ;
-int	n ;
-int	x ;
-int	y ;
+void
+save_sym(int pieces[], int n, int x, int y)
 {
 	struct	object	*object ;
 	int		i ;

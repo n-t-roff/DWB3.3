@@ -13,6 +13,8 @@
 #include "picasso.h"
 #include "y.tab.h"
 
+void eqn_save(char *s);
+
 char	esc	    = '\\';
 char	eqn_delim[] = "\0";
 
@@ -612,8 +614,8 @@ FILE	*eqnfp  = NULL,
 	*pipefp = NULL;
 int	no_eqn = 0;
 
-eqn_save(s)
-	char	*s;
+void
+eqn_save(char *s)
 {
 extern	char	*gwblib;
 	char	*dp, private[64], buf[BUFSIZ];

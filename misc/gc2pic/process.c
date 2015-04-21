@@ -8,6 +8,7 @@ struct	input
 } ;
 
 int check(struct input *p, char *q);
+void read_line(char buf[], struct input (*p[3])[MAXDEPTH]);
 
 process(name)
 char	*name ;
@@ -169,9 +170,8 @@ char	buf[] ;
 	error("line too long\n") ;
 }
 
-read_line(buf,p)
-char		buf[] ;
-struct	input	(*p[3])[MAXDEPTH] ;
+void
+read_line(char buf[], struct input (*p[3])[MAXDEPTH])
 {
 	int		i ;
 	int		j ;

@@ -178,6 +178,8 @@
 #include "ext.h"			/* external variable declarations */
 #include "postbgi.h"			/* a few definitions just used here */
 
+void arc(int mode);
+
 char	*optnames = "a:c:f:m:n:o:p:w:x:y:A:C:E:J:L:P:R:DI";
 
 char	*prologue = POSTBGI;		/* default PostScript prologue */
@@ -1267,9 +1269,10 @@ line_plot()
 
 /*****************************************************************************/
 
-arc(mode)
+void
+arc(int mode)
 
-    int		mode;			/* FILL or OUTLINE the path */
+/*    int		mode;			FILL or OUTLINE the path */
 
 {
 

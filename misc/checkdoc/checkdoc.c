@@ -173,6 +173,22 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+void memo_ck(void);
+void letter_ck(void);
+void text_ck(void);
+void pic_ck(void);
+void nest_ck(void);
+void tbl_ck(void);
+void eqn_ck(void);
+void tl_ck(void);
+void lst_ck(void);
+void font_ck(void);
+void misc_ck(void);
+void comment_ck(void);
+void quote_ck(void);
+void ref_ck(void);
+void macro_ck(void);
+
 #define MAXLINE 512
 int maxline=MAXLINE;
 char line[MAXLINE+2];
@@ -393,7 +409,8 @@ char *dwb_index(s1,s2) char *s1, *s2;
 /* Added check for inline equation delimiter in IGNORE'd blocks -
    D. Muir 5/19/92 */
 
-macro_ck()
+void
+macro_ck(void)
 {
 	struct stack
 	{	int line_num;
@@ -543,7 +560,8 @@ ck_for_end: /* see if any level has ended */
 /* V. G. Dave and N. S. Patel 5/16/88 */
 /* Corrected a false diagnostic when .SG appeared with business
    letter type macros - D. Muir 8/31/88 */
-memo_ck()
+void
+memo_ck(void)
 {
 	/* 
 	STATE variable positions :
@@ -853,7 +871,8 @@ memo_ck()
 /* Check for beginning of business letter macros */
 /* D. Muir 8/1/88 */
 /* Added .SG check - D. Muir 8/31/88 */
-letter_ck(){
+void
+letter_ck(void){
 	static int state = 0;
 	/* state table:
 		0 = initial(base) state
@@ -1043,7 +1062,8 @@ letter_ck(){
    by macro_ck - D. Muir 11/7/89 */
 /* Added checks for text and break lines before .LT and added more
    strings to the break_cmd array - D. Muir 1/24/91 */
-text_ck(){
+void
+text_ck(void){
 	static int state = 0; /* non-zero means text lines allowed */
 	/* state table:
 		0 = initial(base) state
@@ -1194,7 +1214,8 @@ ltbr_diag:				printf("Line %d: Break causing command not allowed prior to .LT\n"
    toupper is called - D. Muir 9/26/91 */
 /* Removed toupper function calls entirely. They caused problems on
    SUN systems - D. Muir 10/15/91 */
-ref_ck(){
+void
+ref_ck(void){
 	static int state = 0;
 	/* State Table:
      0 = initial(base) state
@@ -1309,7 +1330,8 @@ ref_ck(){
    D. Muir 2/18/91 */
 /* Removed check for .tr ~ becuz DWB3.1 ignores character translations
    in drawing functions - D. Muir 3/29/91 */
-pic_ck(){
+void
+pic_ck(void){
 	static int state = 0;
 	/* State Table:
      0 = initial(base) state
@@ -1429,7 +1451,8 @@ pic_ck(){
  */
 #define PUSH(x) state_stack[i++]=state; state=x
 #define POP  state=state_stack[--i]
-nest_ck(){
+void
+nest_ck(void){
 	static int state=0, state_stack[20], i=0;
 	/* State Table:
      0 = initial(base) state
@@ -1811,7 +1834,8 @@ end:
 /* Added maxline to global options and made the default 250 - D. Muir
    10/21/91 */
 /* Added check for more than 43 format spec lines - D. Muir 5/20/92 */
-tbl_ck(){
+void
+tbl_ck(void){
 	static int state = 0;
 	/* state table:
 	0 = base (initial) state
@@ -2292,7 +2316,8 @@ char **nextp;
 /* Added external variable EQ_L_DELIM for use in checking for inline
    equations in IGNORE'd blocks (See also macro_ck function)
    D. Muir 5/19/92 */
-eqn_ck(){
+void
+eqn_ck(void){
 	static int EQ = 0, /* in an .EQ/.EN pair */
 	DEQ = 0, /* in delim/delim pair */
 	CONT = 0, /* continuation of a control line */
@@ -2512,7 +2537,8 @@ eqn_ck(){
 /* Removed check for .ig and .de blocks because they are now handled
    globally by macro_ck. Added code to exclude .tl in a BS/BE pair.
    D. MUir 10/24/89 */
-tl_ck(){
+void
+tl_ck(void){
 	static int state = 0;
 	/* State Table:
      0 = initial(base) state
@@ -2560,7 +2586,8 @@ tl_ck(){
 /* Added check for text-indent arg on .VL - D. Muir 11/14/88 */
 /* Changed diagnostic for missing .LE to provide line number where the
    list started - D. Muir 9/22/89 */
-lst_ck()
+void
+lst_ck(void)
 {
 	struct list
 	{
@@ -2774,7 +2801,8 @@ lst_ck()
 /* Added more allowable font names - D. Muir 10/2/90 */
 /* Allowed .ft with no argument or \f followed by space
    or newline - D. Muir 12/3/90 */
-font_ck(){
+void
+font_ck(void){
 	static char one_char_font[] = {
 		'B','C','H','I','P','R','S',
 		'1','2','3','4','5','6','7','8','9','\n'};
@@ -2868,7 +2896,8 @@ char *p;
 /* Added check for no quoted value at all after these escape
    sequences - D. Muir 11/3/89 */
 /* Added code to ignore an escaped backslash - D. Muir 11/27/90 */
-quote_ck(){
+void
+quote_ck(void){
 	static char letter[] = "bhlLovwxDHNS" ;
 	char *p, *q, *ltr;
 	int i;
@@ -2920,7 +2949,8 @@ repeat:				if((q=dwb_index(p,"\'")) == NULL){
 /* D. Muir 11/8/89 */
 /* tbl_ck looks for comments on table data lines */
 /* Added if ie and el to bad_ones - D. Muir 5/18/92 */
-comment_ck()
+void
+comment_ck(void)
 {	static char *bad_ones[] = {"ds","fp","AU",
 		"if","ie","el","\n\n"};
 	int i;
@@ -2954,7 +2984,8 @@ comment_ck()
 /* Took out bypass of .\"comment lines because this is now done in
    the main function - D. Muir 10/11/91 */
 /* Added check of .PM arguments - D. Muir 5/18/92 */
-misc_ck()
+void
+misc_ck(void)
 {	char *p;
 	int i;
 
@@ -2962,11 +2993,13 @@ misc_ck()
 
 	/* look for .xxx lines */
 	if(line[0]=='.' && strcspn(line," \n")>3)
+	{
 		/* .x\" and .xx\" are OK */
 		if((p=strchr(line,'\\'))!=NULL && (p-line)<4 && *(p+1)=='\"');
 		/* .TAG is OK */
 		else if(!strncmp(line,".TAG",4));
 		else warning(".xxx may be an unintended formatting command");
+	}
 
 	if(!strncmp(line,".ds",3))
 	{	p = &line[3];

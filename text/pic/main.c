@@ -151,7 +151,8 @@ setdefaults()	/* set default sizes for variables like boxht */
 	}
 }
 
-resetvar()	/* reset variables listed */
+void
+resetvar(void)	/* reset variables listed */
 {
 	int i, j;
 

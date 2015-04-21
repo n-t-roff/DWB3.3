@@ -22,6 +22,8 @@
 #define	MAX_FNAME	2
 #define	NFONT		100
 
+void out_file(void);
+
 int	argc;				/* global so everyone can use them */
 char	**argv;
 
@@ -326,7 +328,8 @@ file_init()
 
 /*****************************************************************************/
 
-out_file()
+void
+out_file(void)
 
 {
 

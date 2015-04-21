@@ -1,5 +1,8 @@
 # include "structs.h"
 
+void bounds(void);
+void revout(struct object *object);
+
 out()
 {
 	bounds() ;
@@ -7,8 +10,8 @@ out()
 	revout(Objects) ;
 }
 
-revout(object)
-struct	object	*object ;
+void
+revout(struct object *object)
 {
 	if ( object == NULL )
 		return ;
@@ -16,7 +19,8 @@ struct	object	*object ;
 	draw(object) ;
 }
 
-bounds()
+void
+bounds(void)
 {
 	struct	object	*object ;
 	struct	point	max ;

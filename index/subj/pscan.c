@@ -15,6 +15,9 @@
 #define issing(c)	(c == UNK || c == NOUN_VERB || c == NOUN || c == NOM || c == NOUN_ADJ)
 #define isnoun(c)	(c == NOUN || c == NOUN_VERB || c == NV_PL || c == UNK || c == PNOUN)
 #define nounnom(c)	(c == NOUN || c == NOM)
+
+void getv2(char ce);
+
 char	lastc, nextc;
 int	savsub;
 scan(si, ce, command)	/*scan a phrase */
@@ -506,7 +509,7 @@ vdone:
 	return(0);
 }
 
-
+void
 getv2(ce)
 char	ce;
 {

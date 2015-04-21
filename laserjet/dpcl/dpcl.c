@@ -63,6 +63,8 @@
 #include	"dpcl.h"		/* a few definitions just used here */
 #include	"motion.h"		/* positioning macros */
 
+void put1(int c);
+
 char	*fontdir = FONTDIR;		/* font table directories */
 char	*rastdir = RASTDIR;		/* host resident raster file directories */
 
@@ -947,10 +949,8 @@ t_sf()
 
 /*****************************************************************************/
 
-put1(c)
-
-    register int	c;
-
+void
+put1(int c)
 {
 
     register int	i;

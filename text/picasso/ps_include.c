@@ -31,6 +31,9 @@
 			? realloc((char *)global, n*sizeof(Section)) \
 			: calloc(n, sizeof(Section))))
 
+void ps_include(FILE *fin, FILE *fout, int page_no, double cx, double cy,
+    double sx, double sy, double ax, double ay /*, rot */);
+
 char	buf[512];
 typedef struct {long start, end;} Section;
 
@@ -43,10 +46,8 @@ char **s;
 		fprintf(fout, "%s\n", *s++);
 }
 
-static
-ps_copy(fin, fout, s)
-FILE *fin, *fout;
-Section *s;
+static void
+ps_copy(FILE *fin, FILE *fout, Section *s)
 {
 	if (s->end <= s->start)
 		return;
@@ -73,14 +74,16 @@ extern	float	eqn_move;
 	ps_include(eqnfp, outfp, neqn, x, y + eqn_move, 0., 0., ax, ay/*,0.*/);
 }
 
-ps_include(fin, fout, page_no, cx, cy, sx, sy, ax, ay /*, rot */)
+void
+ps_include(FILE *fin, FILE *fout, int page_no, double cx, double cy, double sx,
+    double sy, double ax, double ay /*, rot */)
 
-	FILE	*fin, *fout;		/* input and output files */
-	int	page_no;		/* physical page number from *fin */
-	double	cx, cy;			/* center of the picture and */
-	double	sx, sy;			/* its size - in current coordinates */
-	double	ax, ay;			/* left-right, up-down adjustment */
-/*	double	rot;			/* rotation - in clockwise degrees */
+/*	FILE	*fin, *fout;		input and output files */
+/*	int	page_no;		physical page number from *fin */
+/*	double	cx, cy;			center of the picture and */
+/*	double	sx, sy;			its size - in current coordinates */
+/*	double	ax, ay;			left-right, up-down adjustment */
+/*	double	rot;			rotation - in clockwise degrees */
 {
 	int	foundpage = 0;		/* found the page when non zero */
 	int	foundpbox = 0;		/* found the page bounding box  */
@@ -217,10 +220,11 @@ ps_include(fin, fout, page_no, cx, cy, sx, sy, ax, ay /*, rot */)
 		free(global);
 }
 
-pic_include(fin, fout, page_no, o)
-	FILE	*fin, *fout;		/* input and output files */
-	int	page_no;		/* physical page number from *fin */
-	obj	*o;			/* has bounds and transformation */
+void
+pic_include(FILE *fin, FILE *fout, int page_no, obj *o)
+/*	FILE	*fin, *fout;		input and output files */
+/*	int	page_no;		physical page number from *fin */
+/*	obj	*o;			has bounds and transformation */
 {
 extern	double	T[6];
 	int	foundpage = 0;		/* found the page when non zero */

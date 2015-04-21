@@ -18,9 +18,8 @@ extern	int	drawsize;	/* shrink point size by this facter */
 #define	abs(n)	((n) >= 0 ? (n) : -(n))
 #define	arcmove(x,y)	{ hgoto(x); vmot(-vpos-(y)); }
 
-drawline(dx, dy, s)	/* draw line from here to dx, dy using s */
-int dx, dy;
-char *s;
+void
+drawline(int dx, int dy, char *s)	/* draw line from here to dx, dy using s */
 {
 	int xd, yd;
 	float val, slope;

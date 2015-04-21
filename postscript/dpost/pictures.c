@@ -50,9 +50,10 @@ extern FILE	*tf;
 
 /*****************************************************************************/
 
-picture(buf)
+void
+picture(char *buf)
 
-    char	*buf;		/* stuff following 'x X PI' command */
+/*    char	*buf;		stuff following 'x X PI' command */
 
 {
 

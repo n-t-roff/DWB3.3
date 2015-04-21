@@ -75,9 +75,8 @@ matmult2 (A, B)			/* same, but updates a double array; this is  */
 	A[4] = p;
 }
 
-mat_inverse(Ainv, A)
-	double Ainv[6];
-	float  A[6];
+void
+mat_inverse(double Ainv[6], float A[6])
 {
 	double	det, det_1;
 
@@ -99,8 +98,8 @@ mat_inverse(Ainv, A)
 
 double	T[6];
 
-compose (p)			/* accumulate xforms over block hierarchy */
-	obj	*p;
+void
+compose (obj *p)		/* accumulate xforms over block hierarchy */
 {
 	if (p == NULL || p->o_type > TEXT) {
 		T[0] = T[3] = 1;
@@ -254,7 +253,8 @@ rescale (v)		/* implicit scaling from user's "scale = v" statement */
 	picscale = v;
 }
 
-scale_pic()		/* for PIC compatibility--called at end of parse */
+void
+scale_pic(void)		/* for PIC compatibility--called at end of parse */
 {
 	double	sc;
 	obj	*o;
@@ -311,9 +311,8 @@ scale_pic()		/* for PIC compatibility--called at end of parse */
 #endif
 }
 
-scale (p, n, q)
-	obj	*p, *q;
-	int	n;
+void
+scale (obj *p, int n, obj *q)
 {
 register double	det;
 	double	M[6];
@@ -333,10 +332,10 @@ register double	det;
 	apply(p, M, det);
 }
 
-olpscaleobj (p, sx, sy, cx, cy)
-	obj	*p;
-        double sx, sy;    /* scale factor in x and y directions */
-        double cx, cy;    /* center for scaling in real (inches) units */
+void
+olpscaleobj (obj *p, double sx, double sy, double cx, double cy)
+/*        double sx, sy;    scale factor in x and y directions */
+/*        double cx, cy;    center for scaling in real (inches) units */
 {
 register double	det;
        	 double	M[6];

@@ -4,6 +4,8 @@
 #include	"pic.h"
 #include	"y.tab.h"
 
+void makeattr(int type, int sub, YYSTYPE val);
+
 setdir(n)	/* set direction (hvmode) from LEFT, RIGHT, etc. */
 	int n;
 {
@@ -144,9 +146,8 @@ makevattr(p)	/* varname attribute */
 	makeattr(VARNAME, 0, val);
 }
 
-makeattr(type, sub, val)	/* add attribute type and val */
-	int type, sub;
-	YYSTYPE val;
+void
+makeattr(int type, int sub, YYSTYPE val) /* add attribute type and val */
 {
 	if (type == 0 && val.i == 0) {	/* clear table for next stat */
 		nattr = 0;

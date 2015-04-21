@@ -9,6 +9,8 @@
 #include	"picasso.h"
 #include	"y.tab.h"
 
+void makeattr(int type, int sub, YYSTYPE val);
+
 setdir(n)	/* set direction (hvmode) from LEFT, RIGHT, etc. */
 	int n;
 {
@@ -147,8 +149,8 @@ makelattr(p, q)	/* "locus" attribute; x and y coordinate lists via varnames */
 	makeattr(YLIST, 0, val);
 }
 
-makedattr(name)		/* dash pattern (array of dash/space widths) */
-	char	*name;
+void
+makedattr(char *name)		/* dash pattern (array of dash/space widths) */
 {
 	int	n;
 struct	symtab	*p;
@@ -175,9 +177,8 @@ struct	symtab	*p;
 	makeattr(DASHPAT, 0, val);
 }
 
-makeattr(type, sub, val)	/* add attribute type and val */
-	int type, sub;
-	YYSTYPE val;
+void
+makeattr(int type, int sub, YYSTYPE val)	/* add attribute type and val */
 {
 	if (type == 0 && val.i == 0) {	/* clear table for next stat */
 					/* happens at end of objects */

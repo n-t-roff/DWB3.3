@@ -15,6 +15,8 @@
 #include "picasso.h"
 #include "y.tab.h"
 
+void do_thru(void);
+
 extern int	batch;
 extern	jmp_buf	pic_env;
 extern	int	parsing;
@@ -43,8 +45,9 @@ popsrc()	/* restore an old one */
 	srcp--;
 }
 
-definition(s)	/* collect definition for s and install */
-	char *s;	/* definitions picked up lexically */
+void
+definition(char *s)	/* collect definition for s and install */
+/*	char *s;	definitions picked up lexically */
 {
 	char *p;
 	struct symtab *stp;
@@ -279,7 +282,8 @@ nextchar()
 	return c;
 }
 
-do_thru()	/* read one line, make into a macro expansion */
+void
+do_thru(void)	/* read one line, make into a macro expansion */
 {
 	int c, i;
 	char *p;

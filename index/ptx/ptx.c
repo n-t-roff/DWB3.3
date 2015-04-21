@@ -43,6 +43,8 @@ char *xxxvers = "@(#)ptx:ptx.c	1.4";
 
 #define isabreak(c) (btable[c])
 
+void msg(char *s, char *arg);
+
 extern char *dwb_getline();
 extern void onintr();
 int status;
@@ -277,9 +279,8 @@ char **argv;
 	onintr();
 }
 
-msg(s,arg)
-char *s;
-char *arg;
+void
+msg(char *s, char *arg)
 {
 	fprintf(stderr,"%s %s\n",s,arg);
 	return;

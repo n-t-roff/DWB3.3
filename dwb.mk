@@ -172,7 +172,7 @@
 # by TARGETS in file postscript/postscript.mk).
 #
 
-MAKE=/usr/bin/make
+#MAKE=/bin/make
 MAKEFILE=dwb.mk
 
 SYSTEM=BSD4_2

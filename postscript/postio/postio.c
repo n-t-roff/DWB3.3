@@ -104,6 +104,10 @@
 #include "gen.h"			/* general purpose definitions */
 #include "postio.h"			/* some special definitions */
 
+void done(void);
+void send(int fd_in, char *name);
+void start(void);
+
 char	**argv;				/* global so everyone can use them */
 int	argc;
 
@@ -413,7 +417,8 @@ initialize()
 
 /*****************************************************************************/
 
-start()
+void
+start(void)
 
 {
 
@@ -560,10 +565,11 @@ arguments()
 
 /*****************************************************************************/
 
-send(fd_in, name)
+void
+send(int fd_in, char *name)
 
-    int		fd_in;			/* next input file */
-    char	*name;			/* and it's pathname */
+/*    int		fd_in;			next input file */
+/*    char	*name;			and it's pathname */
 
 {
 
@@ -621,7 +627,8 @@ send(fd_in, name)
 
 /*****************************************************************************/
 
-done()
+void
+done(void)
 
 {
 

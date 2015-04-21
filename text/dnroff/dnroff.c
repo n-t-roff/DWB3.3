@@ -66,6 +66,9 @@ x ...\n	device control functions:
 #define	NCHARS	500
 #include	"tw.h"
 
+void put1(int k);
+void t_page(int n);
+
 struct	t	t;	/* general parameters */
 
 int	output	= 0;	/* do we do output at all? */
@@ -554,7 +557,8 @@ int reinit;
 	vtrue = t.Newline;	/* because we are already one line down the page */
 }
 
-t_page(n)	/* do whatever new page functions */
+void
+t_page(int n)	/* do whatever new page functions */
 {
 	int i;
 
@@ -683,8 +687,8 @@ setfont(n)	/* set font to n */
 	xfont = n;
 }
 
-put1(k)	/* output char k */
-	int k;
+void
+put1(int k)	/* output char k */
 {
 	char *codep;
 	extern char *plot();

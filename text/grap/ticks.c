@@ -3,6 +3,12 @@
 #include "grap.h"
 #include "y.tab.h"
 
+void maketick(int type, char *name, int side, int inflag, double val, char *lab,
+    char *lenstr, char *descstr);
+void ticklist(Obj *p, int explicit);
+void autolog(Obj *p, int side);
+void autoside(Obj *p, int side);
+
 #define	MAXTICK	200
 int	ntick	= 0;
 double	tickval[MAXTICK];	/* tick values (one axis at a time */
@@ -113,8 +119,8 @@ double	xquant, xmult;	/* quantization & scale for auto x ticks */
 double	yquant, ymult;
 double	lograt = 5;
 
-do_autoticks(p)	/* make set of ticks for default coord only */
-	Obj *p;
+void
+do_autoticks(Obj *p)	/* make set of ticks for default coord only */
 {
 	double x, xl, xu, q;
 
@@ -203,9 +209,8 @@ Obj *setauto()	/* compute new min,max, and quant & mult */
 	return p;
 }
 
-autoside(p, side)
-	Obj *p;
-	int side;
+void
+autoside(Obj *p, int side)
 {
 	double r, s, d, ub, lb;
 
@@ -236,9 +241,8 @@ autoside(p, side)
 	}
 }
 
-autolog(p, side)
-	Obj *p;
-	int side;
+void
+autolog(Obj *p, int side)
 {
 	double r, s, t, ub, lb;
 	int flg;
@@ -332,9 +336,9 @@ iterator(from, to, op, by, fmt)	/* create an iterator */
 		free(fmt);
 }
 
-ticklist(p, explicit)	/* fire out the accumulated ticks */
-	Obj *p;
-	int explicit;	/* 1 => list, 0 => auto */
+void
+ticklist(Obj *p, int explicit)	/* fire out the accumulated ticks */
+/*	int explicit;	1 => list, 0 => auto */
 {
 	if (p == NULL)
 		return;
@@ -401,11 +405,9 @@ print_ticks(type, explicit, p, lenstr, descstr)
 	ntick = 0;
 }
 
-maketick(type, name, side, inflag, val, lab, lenstr, descstr)
-	char *name;
-	int type, side, inflag;
-	double val;
-	char *lab, *lenstr, *descstr;
+void
+maketick(int type, char *name, int side, int inflag, double val, char *lab,
+    char *lenstr, char *descstr)
 {
 	char *sidestr, *td;
 

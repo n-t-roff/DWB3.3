@@ -17,6 +17,8 @@
 #include	"picasso.h"
 #include	"y.tab.h"
 
+void getdata(void);
+
 extern	int	yydebug;
 
 YYSTYPE	origin;
@@ -192,7 +194,7 @@ extern	int	optind;
 	if (argc <= 1) {
 		curfile->fin = batch ? stdin : NULL;
 		curfile->fname = tostring("-");
-		getdata(curfile);
+		getdata();
 	} else {
 		batch = 1;	/* because file names specified */
 		while (argc-- > 1) {
@@ -202,7 +204,7 @@ extern	int	optind;
 				exit(1);
 			}
 			curfile->fname = tostring(*argv);
-			getdata(curfile);
+			getdata();
 			fclose(curfile->fin);
 			free(curfile->fname);
 		}
@@ -344,7 +346,8 @@ setdefaults()	/* set default sizes for variables like boxht */
 	}
 }
 
-resetvar()	/* reset variables listed */
+void
+resetvar(void)	/* reset variables listed */
 {
 	int i, j;
 
@@ -415,7 +418,8 @@ decomment(s)		/* remove any #picasso from .PS line */
 	} while (*ns++ = *s++);
 }
 
-getdata()
+void
+getdata(void)
 {
 	char *p, buf[1000], buf1[100];
 	int ln;

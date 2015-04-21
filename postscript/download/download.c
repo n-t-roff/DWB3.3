@@ -64,6 +64,9 @@
 #include "ext.h"			/* external variable declarations */
 #include "download.h"			/* a few special definitions */
 
+void readresident(void);
+void readmap(void);
+
 char	*temp_dir = TEMPDIR;		/* temp directory - for copying stdin */
 char	*hostfontdir = HOSTDIR;		/* host resident directory */
 char	*mapname = "map";		/* map table - usually in *hostfontdir */
@@ -214,7 +217,8 @@ options()
 
 /*****************************************************************************/
 
-readmap()
+void
+readmap(void)
 
 {
 
@@ -277,7 +281,8 @@ readmap()
 
 /*****************************************************************************/
 
-readresident()
+void
+readresident(void)
 
 {
 

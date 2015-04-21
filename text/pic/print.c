@@ -2,6 +2,9 @@
 #include	"pic.h"
 #include	"y.tab.h"
 
+void dotline(double x0, double y0, double x1, double y1, int ddtype,
+    double ddval);
+
 print()
 {
 	obj *p;
@@ -137,10 +140,9 @@ print()
 	}
 }
 
-dotline(x0, y0, x1, y1, ddtype, ddval) /* dotted line */
-	double x0, y0, x1, y1;
-	int ddtype;
-	double ddval;
+/* dotted line */
+void
+dotline(double x0, double y0, double x1, double y1, int ddtype, double ddval)
 {
 	static double prevval = 0.05;	/* 20 per inch by default */
 	int i, numdots;

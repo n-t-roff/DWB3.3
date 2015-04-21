@@ -60,6 +60,8 @@
 #include	"ext.h"			/* external variable definitions */
 #include	"path.h"		/* just for TEMPDIR definition */
 
+void addpicfile(char *name);
+
 char		*keys[11] = {".BP", ".PI", NULL};
 int		quiet = FALSE;
 
@@ -414,9 +416,8 @@ gotpicfile(name)
 
 /*****************************************************************************/
 
-addpicfile(name)
-
-    char	*name;
+void
+addpicfile(char *name)
 
 {
 

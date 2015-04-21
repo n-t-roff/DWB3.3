@@ -43,6 +43,16 @@ All input is through the C macro; the most recently read character is in c.
 #define DIGIT 3
 #define LETTER 4
 
+void inpic();
+void refer(int c1);
+void backsl();
+void eqn();
+void sdis(char a1, char a2);
+void sce();
+void macro();
+void comline();
+void putwords(int macline);
+
 int linect = 0;
 int numflag = 0;
 int wordflag = NO;
@@ -197,7 +207,7 @@ eof()
 }
 
 
-
+void
 getfname()
 {
 	register char *p;
@@ -338,9 +348,8 @@ int constant;
 }
 
 
-
-putwords(macline)	/* break into words for -w option */
-int macline;
+void
+putwords(int macline)	/* break into words for -w option */
 {
 	register char *p, *p1;
 	int i, nlet;
@@ -369,7 +378,7 @@ int macline;
 	}
 }
 
-
+void
 comline()
 {
 	register int c1, c2;
@@ -535,7 +544,7 @@ comx:
 }
 
 
-
+void
 macro()
 {
 	if(msflag){
@@ -551,9 +560,8 @@ macro()
 
 
 
-
-sdis(a1,a2)
-char a1,a2;
+void
+sdis(char a1, char a2)
 {
 	register int c1,c2;
 	register int eqnf;
@@ -609,6 +617,7 @@ stbl()
 	}
 }
 
+void
 eqn()
 {
 	register int c1, c2;
@@ -666,7 +675,7 @@ eqn()
 	}
 }
 
-
+void
 backsl()	/* skip over a complete backslash construction */
 {
 	int bdelim;
@@ -744,10 +753,12 @@ register char *s;
 	if( (t0 = t = calloc( (unsigned)(strlen(s)+1), sizeof(*t) ) ) == NULL)
 		fatal("Cannot allocate memory", (char *) NULL);
 
-	while( *t++ = *s++ )
+	while(( *t++ = *s++ ))
 		;
 	return(t0);
 }
+
+void
 sce(){
 	register char *ap;
 	register int n, i;
@@ -787,7 +798,9 @@ sce(){
 		}
 	}
 }
-refer(c1)
+
+void
+refer(int c1)
 {
 	register int c2;
 	if(c1 != '\n')
@@ -807,6 +820,8 @@ refer(c1)
 		}
 	}
 }
+
+void
 inpic(){
 	register int c1;
 	register char *p1;
