@@ -110,7 +110,7 @@ yylex() {
 		return(CONTIG);
 	}
 	else if (tp->defn == (char *) DEFINE || tp->defn == (char *) NDEFINE || tp->defn == (char *) TDEFINE)
-		define(tp->defn);
+		define((int)(intptr_t) tp->defn);
 	else if (tp->defn == (char *) DELIM)
 		delim();
 	else if (tp->defn == (char *) GSIZE)
