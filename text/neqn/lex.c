@@ -1,3 +1,4 @@
+#include <stdint.h> /* required for FreeBSD11 */
 #include <stdlib.h>
 #include <string.h>
 #include "e.h"
