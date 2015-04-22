@@ -6,7 +6,7 @@ been made available as open source from AT&T Software Technology under Eclipse
 Public License 1.0 at http://www2.research.att.com/sw/download/.
 The purpose of this fork is to make this software compile and working on
 current UNIX systems while making only minimum changes to the source code.
-It is tested on 64 bit OpenBSD, NetBSD and Linux.
+It is tested on 64 bit OpenBSD, NetBSD, FreeBSD, and Linux.
 
 The DWB does include the preprocessor *Picasso* which can be
 used as a `pic`(1) replacement (at least if `grap`(1)
@@ -21,6 +21,17 @@ The picasso documentation can be generated in directory
 `doc/picasso` by typing `./Run`.
 (`text/picasso` also contains the original AT&T `yacc` source code...)
 
+Please note that DWB is of limited use for viewing today's manual pages.
+mdoc(7) had not been available when DWB 3.3 was released so this macro
+package is not included.
+Well written manual pages using man(7) usually should work but some
+(e.g. generated from other languages) are using special groff(1)
+features which are not available in DWB.
+On the other hand many DWB manual pages are only formated correctly by
+DWB itself since there are some DWB extensions in it's man macros.
+groff(1), Heirloom nroff, or mandoc(1) should not be used to view DWB
+manual pages.
+
 A list of the currently tested components can be found in the
 [wiki](https://github.com/n-t-roff/DWB3.3/wiki/Porting-status).
 If there are any problems please add an issue to the
@@ -29,7 +40,7 @@ If there are any problems please add an issue to the
 The source code can be downloaded as a zip archive with the "Download ZIP"
 button or with the git command
 ```bash
-git clone https://github.com/n-t-roff/DWB3.3
+git clone https://github.com/n-t-roff/DWB3.3.git
 ```
 For the configuration the file dwb.mk can be modified, although reasonable
 defaults has been set.
@@ -65,4 +76,4 @@ Bugs can be reported at the
 Please note that the included README file is kept unchanged from the original DWB package.
 Parts of it's contents may be outdated.
 
-If there are any problems mail can be send to [troff at arcor dot de](mailto:troff@arcor.de).
+If there are any problems mail can be send to &lt;troff [at] arcor [dot] de&gt;.
