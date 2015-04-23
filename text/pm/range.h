@@ -1,4 +1,4 @@
-const	NOGOAL = -1;
+const int	NOGOAL = -1;
 
 class stream;
 
@@ -19,8 +19,8 @@ class range {
 	range()		{ first = 0; accumV = 0; }
 	range(slug *p)	{ first = p; accumV = 0; }
 	char	*headstr()		{
-		return first ? first->headstr() : ""; }
-	char	*typename()		{ return first->typename(); }
+		return first ? first->headstr() : (char *)""; }
+	char	*type_name()		{ return first->type_name(); }
 	int	serialno()		{ return first->serialno(); }
 	int	lineno()		{ return first->lineno(); }
 	virtual void	dump()		{ first->dump(); }
@@ -306,7 +306,7 @@ class generator {
 
 extern stream	ptlist, btlist;		// page titles
 
-#define INFINITY 1000001
+#define INFINI 1000001
 
 // A queue is a distinguished kind of stream.
 // It keeps its contents in order by the serial numbers of the ranges.
@@ -325,7 +325,7 @@ class queue : public stream {
 	void	unblock()	{ blocked = 0; }
 	int	more()		{ return !blocked && stream::more(); }
 	int	empty()		{ return !stream::more(); }
-	int	serialno()	{ return empty() ? INFINITY : current()->serialno(); }
+	int	serialno()	{ return empty() ? INFINI : current()->serialno(); }
 };
 
 // functions in range.c

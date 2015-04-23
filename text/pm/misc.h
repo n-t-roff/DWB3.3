@@ -27,9 +27,9 @@ extern int	wantwarn;
 
 #define	eq(s,t)	(strcmp(s,t) == 0)
 
-inline	max(int x, int y)	{ return x > y ? x : y; }
-inline	min(int x, int y)	{ return x > y ? y : x; }
-inline	iabs(int x)		{ return (x >= 0) ? x : -x; }
+inline int	max(int x, int y)	{ return x > y ? x : y; }
+inline int	min(int x, int y)	{ return x > y ? y : x; }
+inline int	iabs(int x)		{ return (x >= 0) ? x : -x; }
 
 extern int	dbg;
 

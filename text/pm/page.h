@@ -116,4 +116,4 @@ class page {
 };
 
 // functions in page.c
-main(int, char **);
+//main(int, char **);

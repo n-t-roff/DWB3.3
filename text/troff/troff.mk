@@ -65,19 +65,27 @@ install : all
 	@chmod 644 $(TMACDIR)/hyphen.tex
 	@chgrp $(GROUP) $(TMACDIR)/hyphen.tex
 	@chown $(OWNER) $(TMACDIR)/hyphen.tex
-	cp troff.1 $(MAN1DIR)/troff.1
+	for i in *.1; do \
+		sed -e 's" /usr/lib/font$$" $(FONTDIR)"' \
+		    -e 's" /usr/lib/macros$$" $(MACRODIR)"' \
+		    -e 's" /usr/pub$$" $(PUBDIR)"' \
+		    -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+		    -e 's" /usr/lib/nterm$$" $(NTERMDIR)"' \
+		    $$i > $(MAN1DIR)/$$i; \
+	done
+	for i in *.5; do \
+		sed -e 's" /usr/lib/font$$" $(FONTDIR)"' \
+		    $$i > $(MAN5DIR)/$$i; \
+	done
 	@chmod 644 $(MAN1DIR)/troff.1
 	@chgrp $(GROUP) $(MAN1DIR)/troff.1
 	@chown $(OWNER) $(MAN1DIR)/troff.1
-	cp nroff.1 $(MAN1DIR)/nroff.1
 	@chmod 644 $(MAN1DIR)/nroff.1
 	@chgrp $(GROUP) $(MAN1DIR)/nroff.1
 	@chown $(OWNER) $(MAN1DIR)/nroff.1
-	cp troff.5 $(MAN5DIR)/troff.5
 	@chmod 644 $(MAN5DIR)/troff.5
 	@chgrp $(GROUP) $(MAN5DIR)/troff.5
 	@chown $(OWNER) $(MAN5DIR)/troff.5
-	cp font.5 $(MAN5DIR)/font.5
 	@chmod 644 $(MAN5DIR)/font.5
 	@chgrp $(GROUP) $(MAN5DIR)/font.5
 	@chown $(OWNER) $(MAN5DIR)/font.5

@@ -1,6 +1,6 @@
 #include	"misc.h"
 #include	"slug.h"
-#include	<libc.h>
+//#include	<libc.h>
 #include	<math.h>
 
 static char	*bufptr(int);
@@ -25,7 +25,7 @@ void slug::neutralize()
 		break;
 	default:
 		ERROR "neutralized %d (%s) with %s\n",
-			type, typename(), headstr() WARNING;
+			type, type_name(), headstr() WARNING;
 		break;
 	}
 }
@@ -33,13 +33,13 @@ void slug::neutralize()
 void slug::dump()	// print contents of a slug
 {
 	printf("# %d %-4.4s parm %d dv %d base %d s%d f%d H%d\n#\t\t%s\n",
-		serialno(), typename(), parm, dv, base,
+		serialno(), type_name(), parm, dv, base,
 		size, font, hpos, headstr());
 }
 
 char *slug::headstr()
 {
-	const HEADLEN = 65;
+	const int HEADLEN = 65;
 	static char buf[2*HEADLEN];
 	int j = 0;
 	char *s = bufptr(dp);
@@ -75,13 +75,13 @@ static char *strindex(char s[], char t[])	// index of earliest t[] in s[]
 
 void slug::slugout(int col)
 {
-	static numout = 0;
+	static int numout = 0;
 	if (seen++)
 		ERROR "%s slug #%d seen %d times [%s]\n",
-			typename(), serialno(), seen, headstr() WARNING;
+			type_name(), serialno(), seen, headstr() WARNING;
 	if (type == TM) {
 		char *p;
-		if (p = strindex(bufptr(dp), "x X TM "))
+		if (p = strindex(bufptr(dp), (char *)"x X TM "))
 			p += strlen("x X TM ");		// skip junk
 		else
 			ERROR "strange TM [%s]\n", headstr() FATAL;
@@ -101,28 +101,28 @@ void slug::slugout(int col)
 	fwrite(bufptr(dp), sizeof(char), (this+1)->dp - dp, stdout);
 }
 
-char *slug::typename()
+char *slug::type_name()
 {
 	static char buf[50];
 	char *p = buf;		// return value
 	switch(type) {
-	case EOF:	p = "EOF"; break;
-	case VBOX:	p = "VBOX"; break;
-	case SP:	p = "SP"; break;
-	case BS:	p = "BS"; break;
-	case US:	p = "US"; break;
-	case BF:	p = "BF"; break;
-	case UF:	p = "UF"; break;
-	case PT:	p = "PT"; break;
-	case BT:	p = "BT"; break;
-	case END:	p = "END"; break;
-	case NEUTRAL:	p = "NEUT"; break;
-	case PAGE:	p = "PAGE"; break;
-	case TM:	p = "TM"; break;
-	case COORD:	p = "COORD"; break;
-	case NE:	p = "NE"; break;
-	case CMD:	p = "CMD"; break;
-	case PARM:	p = "PARM"; break;
+	case EOF:	p = (char *)"EOF"; break;
+	case VBOX:	p = (char *)"VBOX"; break;
+	case SP:	p = (char *)"SP"; break;
+	case BS:	p = (char *)"BS"; break;
+	case US:	p = (char *)"US"; break;
+	case BF:	p = (char *)"BF"; break;
+	case UF:	p = (char *)"UF"; break;
+	case PT:	p = (char *)"PT"; break;
+	case BT:	p = (char *)"BT"; break;
+	case END:	p = (char *)"END"; break;
+	case NEUTRAL:	p = (char *)"NEUT"; break;
+	case PAGE:	p = (char *)"PAGE"; break;
+	case TM:	p = (char *)"TM"; break;
+	case COORD:	p = (char *)"COORD"; break;
+	case NE:	p = (char *)"NE"; break;
+	case CMD:	p = (char *)"CMD"; break;
+	case PARM:	p = (char *)"PARM"; break;
 	default:	sprintf(buf, "weird type %d", type);
 	}
 	return p;
@@ -134,10 +134,10 @@ char *slug::typename()
 
 // ================================================================================
 
-const	DELTABUF = 500000;		// grow the input buffer in chunks
+const size_t	DELTABUF = 500000;		// grow the input buffer in chunks
 
 static char	*inbuf = 0;		// raw text input collects here
-static int	ninbuf = 0;		// byte count for inbuf
+static size_t	ninbuf = 0;		// byte count for inbuf
 static char	*inbp = 0;		// next free slot in inbuf
 int		linenum = 0;		// input line number
 
@@ -288,14 +288,14 @@ slug eofslug()
 slug getslug(FILE *fp)
 {
 	if (inbuf == NULL) {
-		if ((inbuf = malloc(ninbuf = DELTABUF)) == NULL)
+		if ((inbuf = (char *)malloc(ninbuf = DELTABUF)) == NULL)
 			ERROR "no room for %d character input buffer\n", ninbuf FATAL;
 		inbp = inbuf;
 	}
 	if (wherebuf() > ninbuf-5000) {
 		// this is still flaky -- lines can be very long
 		int where = wherebuf();	// where we were
-		if ((inbuf = realloc(inbuf, ninbuf += DELTABUF)) == NULL)
+		if ((inbuf = (char *)realloc(inbuf, ninbuf += DELTABUF)) == NULL)
 			ERROR "no room for %d character input buffer\n", ninbuf FATAL;
 		ERROR "grew input buffer to %d characters\n", ninbuf WARNING;
 		inbp = inbuf + where;	// same offset in new array
@@ -485,7 +485,7 @@ slug getslug(FILE *fp)
 			}
 			if (ret.type != VBOX)
 				ERROR "%s slug (type %d) has base = %d\n",
-					ret.typename(), ret.type, ret.base WARNING;
+					ret.type_name(), ret.type, ret.base WARNING;
 			return ret;
 		case 'p':	// new page
 			fscanf(fp, "%d", &n);

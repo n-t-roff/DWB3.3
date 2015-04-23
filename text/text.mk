@@ -44,6 +44,7 @@ TARGETS=devnroff\
 	nterm\
 	pic\
 	picasso\
+	pm\
 	tbl\
 	troff
 
@@ -82,6 +83,7 @@ $(TARGETS) ::
 	YFLAGS=; unset YFLAGS; \
 	SYSTEM='$(SYSTEM)'; export SYSTEM; \
 	VERSION='$(VERSION)'; export VERSION; \
+	CXX='$(CXX)'; export CXX; \
 	CFLGS='$(CFLGS)'; export CFLGS; \
 	LDFLGS='$(LDFLGS)'; export LDFLGS; \
 	if [ -d $@ -a -f $@/$@.mk ]; then \

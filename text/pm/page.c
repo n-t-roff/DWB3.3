@@ -3,7 +3,7 @@
 #include	"range.h"
 #include	"page.h"
 
-const	MAXRANGES	= 1000;
+const int	MAXRANGES	= 1000;
 static range *ptemp[MAXRANGES];		// for movefloats()
 
 static void swapright(int n)		// used by movefloats()
@@ -21,7 +21,9 @@ static void swapright(int n)		// used by movefloats()
 static void movefloats(stream *scratch, double scale)
 {
 	const int Huge = 100000;
-	for (int nranges = 0; scratch->more(); scratch->advance()) {
+	int nranges;
+	int i;
+	for (nranges = 0; scratch->more(); scratch->advance()) {
 		if (nranges >= MAXRANGES)
 			ERROR "too many ranges" FATAL;	// temporary kludge; should grow
 		ptemp[nranges++] = scratch->current();
@@ -31,7 +33,7 @@ static void movefloats(stream *scratch, double scale)
 	ptemp[nranges] = &rtemp;
 	rtemp.setgoal(Huge);
 	int accumV = 0;				// compute accum values and
-	for (int i = 0; i < nranges; i++) {	// pick closest goal for floats
+	for (i = 0; i < nranges; i++) {	// pick closest goal for floats
 		ptemp[i]->pickgoal(accumV, scale);
 		ptemp[i]->setaccum(accumV += ptemp[i]->rawht());
 	}
@@ -80,7 +82,8 @@ static range *filter(generator *g)
 static void trimspace(stream *scratch)
 {
 	range *r, *prevr = 0;
-	for (generator g = scratch; (r = filter(&g)) != 0 && r->issp(); prevr = r)
+	generator g;
+	for (g = scratch; (r = filter(&g)) != 0 && r->issp(); prevr = r)
 		r->setheight(0);		// zap leading SP
 	for ( ; (r = filter(&g)) != 0; prevr = r)
 		if (r->issp())
@@ -101,11 +104,12 @@ static void trimspace(stream *scratch)
 static void justify(stream *scratch, int wantht)
 {
 	range *r;
+	generator g;
 	int nsp = 0, hsp = 0;
 
 	int adjht = scratch->height();
 					// Find all the spaces.
-	for (generator g = scratch; r = g.next(); )
+	for (g = scratch; r = g.next(); )
 		if (r->issp() && r->height() > 0) {
 			nsp++;
 			hsp += r->height();
@@ -150,10 +154,11 @@ int wouldfit(range *r, stream *s, int maxht)
 // The computational structure is similar to that above.
 int wouldfit(stream *s1, stream *s, int maxht)
 {
+	stream cd;
 	if (s1->rawht() + s->rawht() <= maxht)
 		return 1;
 	stream scratch;
-	for (stream cd = *s; cd.more(); cd.advance())
+	for (cd = *s; cd.more(); cd.advance())
 		scratch.append(cd.current());
 	for (cd = *s1; cd.more(); cd.advance())
 		scratch.append(cd.current());
@@ -187,13 +192,15 @@ double coltol = 0.5;
 // so that the total height is at most htavail.
 void multicol::compose(int defonly)
 {
+	int i;
+	stream cd;
 	if (!nonempty()) {
 		setheight(0);
 		return;
 	}
 	scratch.freeall();		// fill scratch with everything destined
 					// for either column
-	for (stream cd = definite; cd.more(); cd.advance())
+	for (cd = definite; cd.more(); cd.advance())
 		scratch.append(cd.current());
 	if (!defonly)
 		for (cd = *(currpage->stage); cd.more(); cd.advance())
@@ -205,7 +212,7 @@ void multicol::compose(int defonly)
 					// choose a goal height
 	int maxht = defonly ? halfheight : htavail;
 secondtry:
-	for (int i = 0; i < 2; i++)
+	for (i = 0; i < 2; i++)
 		column[i].freeall();
 	leftblocked = 0;
 	cd = scratch;
@@ -363,7 +370,7 @@ void page::tryout()
 		} else if (blank()) {
 			stage->current()->rdump();
 			ERROR "A %s is too big to continue.\n",
-			stage->current()->typename() FATAL;
+			stage->current()->type_name() FATAL;
 		} else
 			welsh();
 		break;
@@ -408,8 +415,9 @@ void page::compose(int final)
 // If defonly != 0, use only what's definitely on the page.
 void page::makescratch(int defonly)
 {
+	stream cd;
 	scratch.freeall();
-	for (stream cd = definite; cd.more(); cd.advance())
+	for (cd = definite; cd.more(); cd.advance())
 		scratch.append(cd.current());
 	if (!defonly)
 		for (cd = *stage; cd.more(); cd.advance())
@@ -566,7 +574,7 @@ static void conv(FILE *fp)
 	checkout();		// check that everything was printed
 }
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	static FILE *fp = stdin;
 	progname = argv[0];

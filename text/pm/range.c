@@ -2,7 +2,7 @@
 #include	"misc.h"
 #include	"slug.h"
 #include	"range.h"
-#include	<libc.h>
+//#include	<libc.h>
 
 void sprange::reheight(int *cv, int *mv)
 {
@@ -82,16 +82,18 @@ void stream::split()	// duplicate current() range
 
 int stream::height()
 {
+	int h;
 	stream s = *this;
-	for (int h = 0; s.more(); s.advance())
+	for (h = 0; s.more(); s.advance())
 		h += s.current()->height();
 	return h;
 }
 
 int stream::rawht()
 {
+	int h;
 	stream s = *this;
-	for (int h = 0; s.more(); s.advance())
+	for (h = 0; s.more(); s.advance())
 		h += s.current()->rawht();
 	return h;
 }
@@ -181,7 +183,7 @@ range *queue::enqueue(range *r)
 {
 	if (dbg & 8)
 		printf("#entering queue::enqueue()\n");
-	check("queue::enqueue");
+	check((char *)"queue::enqueue");
 	if (!last || last->rp->serialno() < r->serialno())	// common case
 		return append(r);
 	if (dbg & 8)
@@ -209,7 +211,7 @@ range *queue::dequeue()
 {
 	if (dbg & 8)
 		printf("#entering queue::dequeue()\n");
-	check("queue::dequeue");
+	check((char *)"queue::dequeue");
 	curr = first->next;
 	range *retval = first->rp;
 	delete first;
@@ -272,7 +274,8 @@ static void readslugs(FILE *fp)
 
 static slug *findend(slug *sp)
 {
-	for (slug *p = sp; p->type == sp->type; p++)	// skip runs
+	slug *p;
+	for (p = sp; p->type == sp->type; p++)	// skip runs
 		;				// espec UF UF UF 
 	for ( ; p < slugp; p++)
 		switch (p->type) {
@@ -287,7 +290,7 @@ static slug *findend(slug *sp)
 			return p;
 		}
 	ERROR "walked past EOF in findend looking for %d (%s), line %d\n",
-		sp->type, sp->typename(), sp->lineno() FATAL;
+		sp->type, sp->type_name(), sp->lineno() FATAL;
 	return sp;
 }
 
@@ -376,14 +379,15 @@ static void markbreak(slug *p)
 static void fixslugs()		// adjust bases and dv's, set parameters, etc.
 {
 	slug *prevV = 0;
-	for (slug *p = slugs; p < slugp; p++) {
+	slug *p;
+	for (p = slugs; p < slugp; p++) {
 		if (p->type == VBOX) {
 			prevV = p;
 			continue;
 		}
 		if (p->base != 0) {
 			ERROR "%s slug (type %d) has base = %d, line %d\n",
-				p->typename(), p->type, p->base, p->lineno() WARNING;
+				p->type_name(), p->type, p->base, p->lineno() WARNING;
 		}
 		if ((p->type == SP) || (p->type == NE))
 			continue;
@@ -395,7 +399,7 @@ static void fixslugs()		// adjust bases and dv's, set parameters, etc.
 				p->dv = 0;
 			} else {
 				ERROR "s slug (type %d) has dv = %d, line %d\n",
-					p->typename(), p->type, p->dv, p->lineno() WARNING;
+					p->type_name(), p->type, p->dv, p->lineno() WARNING;
 			}
 	}
 	prevV = 0;
@@ -509,7 +513,7 @@ void checkout()
 		case VBOX:
 			if (p->seen != 1)
 				ERROR "%s slug %d seen %d times\n",
-					p->typename(), p->serialno(),
+					p->type_name(), p->serialno(),
 					p->seen WARNING;
 			break;
 		}

@@ -14,13 +14,13 @@ void queue::check(char *whence)
 	if (dbg & 8) {
 		char *p;
 		if (this == &squeue)
-			p = "squeue";
+			p = (char *)"squeue";
 		else if (this == &bfqueue)
-			p = "bfqueue";
+			p = (char *)"bfqueue";
 		else if (this == &ufqueue)
-			p = "ufqueue";
+			p = (char *)"ufqueue";
 		else
-			p = "weird queue";
+			p = (char *)"weird queue";
 		printf("#checking %s\n", p);
 	}
 	if (first != curr)
@@ -146,7 +146,7 @@ int mergestream::prime()
 			break;
 		} else
 			ERROR "unexpected  %s[%s] in prime(), line %d\n",
-				r->typename(), r->headstr(), r->lineno() FATAL;
+				r->type_name(), r->headstr(), r->lineno() FATAL;
 	}
 	return more();			// 0 if nothing was staged
 }

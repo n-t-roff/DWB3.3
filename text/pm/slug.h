@@ -63,7 +63,7 @@ class slug {
 	void	dump();		// dump its contents for debugging
 	char	*headstr();	// string value of text
 	void	slugout(int);	// add the slug to the output
-	char	*typename();	// printable slug type
+	char	*type_name();	// printable slug type
 	int	serialno()	{ return serialnum; }
 	int	numcol()	{ return ncol; }
 	int	lineno()	{ return linenum; }

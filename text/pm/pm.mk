@@ -2,7 +2,8 @@
 # Won't compile without a good C++ compiler.
 #
 
-CC=CC
+#CC=CC
+CC=$(CXX)
 
 MAKE=/bin/make
 MAKEFILE=pm.mk
@@ -43,7 +44,8 @@ install : all
 	@chmod 664 $(TMACDIR)/tmac.spe
 	@chgrp $(GROUP) $(TMACDIR)/tmac.spe
 	@chown $(OWNER) $(TMACDIR)/tmac.spe
-	cp mpm.5 $(MAN5DIR)/mpm.5
+	sed -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    mpm.5 > $(MAN5DIR)/mpm.5
 	@chmod 644 $(MAN5DIR)/mpm.5
 	@chgrp $(GROUP) $(MAN5DIR)/mpm.5
 	@chown $(OWNER) $(MAN5DIR)/mpm.5
