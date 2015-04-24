@@ -268,8 +268,8 @@ $(TARGETS) ::
 	YFLAGS=; unset YFLAGS; \
 	SYSTEM='$(SYSTEM)'; export SYSTEM; \
 	VERSION='$(VERSION)'; export VERSION; \
-	CXX=`which clang++`; if [ "$$CXX" -a -x $$CXX ]; then CXX=clang++; \
-	else CXX=g++; fi; export CXX; \
+	CXX=`which clang++ 2>/dev/null`; if [ "$$CXX" -a -x $$CXX ]; then \
+	CXX=clang++; else CXX=c++; fi; export CXX; \
 	CFLGS='$(CFLGS)'; export CFLGS; \
 	LDFLGS='$(LDFLGS)'; export LDFLGS; \
 	FONTDIR='$(FONTDIR)'; export FONTDIR; \
