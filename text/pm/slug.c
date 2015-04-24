@@ -81,7 +81,7 @@ void slug::slugout(int col)
 			type_name(), serialno(), seen, headstr() WARNING;
 	if (type == TM) {
 		char *p;
-		if (p = strindex(bufptr(dp), (char *)"x X TM "))
+		if ((p = strindex(bufptr(dp), (char *)"x X TM ")))
 			p += strlen("x X TM ");		// skip junk
 		else
 			ERROR "strange TM [%s]\n", headstr() FATAL;
@@ -289,15 +289,15 @@ slug getslug(FILE *fp)
 {
 	if (inbuf == NULL) {
 		if ((inbuf = (char *)malloc(ninbuf = DELTABUF)) == NULL)
-			ERROR "no room for %d character input buffer\n", ninbuf FATAL;
+			ERROR "no room for %ld character input buffer\n", ninbuf FATAL;
 		inbp = inbuf;
 	}
 	if (wherebuf() > ninbuf-5000) {
 		// this is still flaky -- lines can be very long
 		int where = wherebuf();	// where we were
 		if ((inbuf = (char *)realloc(inbuf, ninbuf += DELTABUF)) == NULL)
-			ERROR "no room for %d character input buffer\n", ninbuf FATAL;
-		ERROR "grew input buffer to %d characters\n", ninbuf WARNING;
+			ERROR "no room for %ld character input buffer\n", ninbuf FATAL;
+		ERROR "grew input buffer to %ld characters\n", ninbuf WARNING;
 		inbp = inbuf + where;	// same offset in new array
 	}
 	static int baseV = 0;	// first V command of preceding slug

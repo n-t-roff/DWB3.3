@@ -165,7 +165,7 @@ range *generator::next()
 {
 	range *r;
 	if (child) {
-		if (r = child->next())
+		if ((r = child->next()))
 			return r;
 		delete child;
 		child = 0;
@@ -269,7 +269,7 @@ static void readslugs(FILE *fp)
 			break;
 	}
 	*++slugp = eofslug();
-	printf("# %d slugs\n", slugp-slugs);
+	printf("# %ld slugs\n", slugp-slugs);
 }
 
 static slug *findend(slug *sp)
@@ -394,13 +394,15 @@ static void fixslugs()		// adjust bases and dv's, set parameters, etc.
 		if (p->type == PAGE)
 			prevV = 0;
 		if (p->dv != 0)
+		{
 			if (prevV) {
 				prevV->base = max(prevV->base, p->dv);
 				p->dv = 0;
 			} else {
-				ERROR "s slug (type %d) has dv = %d, line %d\n",
+				ERROR "%s slug (type %d) has dv = %d, line %d\n",
 					p->type_name(), p->type, p->dv, p->lineno() WARNING;
 			}
+		}
 	}
 	prevV = 0;
 	int firstNP = 0, firstFO = 0, firstPL = 0;

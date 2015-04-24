@@ -42,7 +42,7 @@ class multicol : public range {
 	int	leftblocked;		// OK to add to left column?
 	int	htavail;		// max possible ht, set by page::tryout()
 	int	prevhtavail;		// max 2-colht last time we added something
-	friend	page;
+	friend class	page;
 public:
 	multicol(page *cp)	{ currpage = cp;
 				leftblocked = 0;
@@ -101,9 +101,9 @@ class page {
 					// (definite or twocol->definite)
   public:
 	mergestream *stage;
-	friend	mergestream;
+	friend class mergestream;
 	multicol *twocol;
-	friend multicol;
+	friend class multicol;
 	page(int p)	{ pagesize = p;
 			prevncol = 1;
 			vsince = 0;
