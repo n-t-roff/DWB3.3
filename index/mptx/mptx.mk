@@ -36,7 +36,8 @@ install : all
 	    chgrp $(GROUP) $(MAN5DIR); \
 	    chown $(OWNER) $(MAN5DIR); \
 	fi
-	cp mptx.5 $(MAN5DIR)/mptx.5
+	sed -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    mptx.5 > $(MAN5DIR)/mptx.5
 	@chmod 644 $(MAN5DIR)/mptx.5
 	@chgrp $(GROUP) $(MAN5DIR)/mptx.5
 	@chown $(OWNER) $(MAN5DIR)/mptx.5

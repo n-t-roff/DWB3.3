@@ -47,7 +47,8 @@ install : all
 	@chmod 644 $(LIBDIR)/grap.defines
 	@chgrp $(GROUP) $(LIBDIR)/grap.defines
 	@chown $(OWNER) $(LIBDIR)/grap.defines
-	cp grap.1 $(MAN1DIR)/grap.1
+	sed -e 's" /usr/lib/dwb$$" $(LIBDIR)"' \
+	    grap.1 > $(MAN1DIR)/grap.1;
 	@chmod 644 $(MAN1DIR)/grap.1
 	@chgrp $(GROUP) $(MAN1DIR)/grap.1
 	@chown $(OWNER) $(MAN1DIR)/grap.1

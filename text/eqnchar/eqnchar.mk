@@ -25,7 +25,8 @@ install : all
 	    chgrp $(GROUP) $(PUBDIR)/$$i; \
 	    chown $(OWNER) $(PUBDIR)/$$i; \
 	done
-	cp eqnchar.5 $(MAN5DIR)/eqnchar.5
+	sed -e 's" /usr/pub$$" $(PUBDIR)"' \
+	    eqnchar.5 > $(MAN5DIR)/eqnchar.5
 	@chmod 644 $(MAN5DIR)/eqnchar.5
 	@chgrp $(GROUP) $(MAN5DIR)/eqnchar.5
 	@chown $(OWNER) $(MAN5DIR)/eqnchar.5

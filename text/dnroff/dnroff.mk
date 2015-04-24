@@ -27,7 +27,9 @@ install : all
 	@chmod 755 $(BINDIR)/dnroff
 	@chgrp $(GROUP) $(BINDIR)/dnroff
 	@chown $(OWNER) $(BINDIR)/dnroff
-	cp dnroff.1 $(MAN1DIR)/dnroff.1
+	sed -e 's" /usr/lib/font$$" $(FONTDIR)"' \
+	    -e 's" /usr/lib/nterm$$" $(NTERMDIR)"' \
+	    dnroff.1 > $(MAN1DIR)/dnroff.1;
 	@chmod 644 $(MAN1DIR)/dnroff.1
 	@chgrp $(GROUP) $(MAN1DIR)/dnroff.1
 	@chown $(OWNER) $(MAN1DIR)/dnroff.1

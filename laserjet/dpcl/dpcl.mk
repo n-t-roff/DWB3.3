@@ -34,7 +34,8 @@ install : all
 	@chmod 755 $(BINDIR)/dpcl
 	@chgrp $(GROUP) $(BINDIR)/dpcl
 	@chown $(OWNER) $(BINDIR)/dpcl
-	cp dpcl.1 $(MAN1DIR)/dpcl.1
+	sed -e 's" /usr/lib/font$$" $(FONTDIR)"' \
+	    dpcl.1 > $(MAN1DIR)/dpcl.1
 	@chmod 644 $(MAN1DIR)/dpcl.1
 	@chgrp $(GROUP) $(MAN1DIR)/dpcl.1
 	@chown $(OWNER) $(MAN1DIR)/dpcl.1

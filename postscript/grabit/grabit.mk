@@ -32,7 +32,8 @@ install : all
 	@chmod 644 $(POSTLIB)/grabit.ps
 	@chgrp $(GROUP) $(POSTLIB)/grabit.ps
 	@chown $(OWNER) $(POSTLIB)/grabit.ps
-	cp grabit.1 $(MAN1DIR)/grabit.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    grabit.1 > $(MAN1DIR)/grabit.1
 	@chmod 644 $(MAN1DIR)/grabit.1
 	@chgrp $(GROUP) $(MAN1DIR)/grabit.1
 	@chown $(OWNER) $(MAN1DIR)/grabit.1

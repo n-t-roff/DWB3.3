@@ -22,11 +22,13 @@ install : all
 	@chmod 755 $(BINDIR)/mvt
 	@chgrp $(GROUP) $(BINDIR)/mvt
 	@chown $(OWNER) $(BINDIR)/mvt
-	cp mmt.1 $(MAN1DIR)/mmt.1
+	for i in *.1; do \
+		sed -e 's" /usr/pub$$" $(PUBDIR)"' \
+		    $$i > $(MAN1DIR)/$$i; \
+	done
 	@chmod 644 $(MAN1DIR)/mmt.1
 	@chgrp $(GROUP) $(MAN1DIR)/mmt.1
 	@chown $(OWNER) $(MAN1DIR)/mmt.1
-	cp mvt.1 $(MAN1DIR)/mvt.1
 	@chmod 644 $(MAN1DIR)/mvt.1
 	@chgrp $(GROUP) $(MAN1DIR)/mvt.1
 	@chown $(OWNER) $(MAN1DIR)/mvt.1

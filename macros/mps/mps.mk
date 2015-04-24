@@ -25,7 +25,8 @@ install : all
 	@chmod 644 $(TMACDIR)/tmac.ps
 	@chgrp $(GROUP) $(TMACDIR)/tmac.ps
 	@chown $(OWNER) $(TMACDIR)/tmac.ps
-	cp mps.5 $(MAN5DIR)/mps.5
+	sed -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    mps.5 > $(MAN5DIR)/mps.5
 	@chmod 644 $(MAN5DIR)/mps.5
 	@chgrp $(GROUP) $(MAN5DIR)/mps.5
 	@chown $(OWNER) $(MAN5DIR)/mps.5

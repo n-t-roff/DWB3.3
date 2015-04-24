@@ -54,7 +54,8 @@ install : all
 	@chmod 644 $(POSTLIB)/postdaisy.ps
 	@chgrp $(GROUP) $(POSTLIB)/postdaisy.ps
 	@chown $(OWNER) $(POSTLIB)/postdaisy.ps
-	cp postdaisy.1 $(MAN1DIR)/postdaisy.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    postdaisy.1 > $(MAN1DIR)/postdaisy.1
 	@chmod 644 $(MAN1DIR)/postdaisy.1
 	@chgrp $(GROUP) $(MAN1DIR)/postdaisy.1
 	@chown $(OWNER) $(MAN1DIR)/postdaisy.1

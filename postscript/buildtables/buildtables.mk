@@ -25,7 +25,9 @@ install : all
 	@chmod 755 $(POSTBIN)/buildtables
 	@chgrp $(GROUP) $(POSTBIN)/buildtables
 	@chown $(OWNER) $(POSTBIN)/buildtables
-	cp buildtables.1 $(MAN1DIR)/buildtables.1
+	sed -e 's" /usr/lib/font$$" $(FONTDIR)"' \
+	    -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    buildtables.1 > $(MAN1DIR)/buildtables.1
 	@chmod 644 $(MAN1DIR)/buildtables.1
 	@chgrp $(GROUP) $(MAN1DIR)/buildtables.1
 	@chown $(OWNER) $(MAN1DIR)/buildtables.1

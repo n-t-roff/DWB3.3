@@ -25,7 +25,8 @@ install : all
 	    chgrp $(GROUP) $(TMACDIR)/$$i; \
 	    chown $(OWNER) $(TMACDIR)/$$i; \
 	done
-	cp ms.5 $(MAN5DIR)/ms.5
+	sed -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    ms.5 > $(MAN5DIR)/ms.5
 	@chmod 644 $(MAN5DIR)/ms.5
 	@chgrp $(GROUP) $(MAN5DIR)/ms.5
 	@chown $(OWNER) $(MAN5DIR)/ms.5

@@ -32,7 +32,8 @@ install : all
 	@chmod 644 $(POSTLIB)/printfont.ps
 	@chgrp $(GROUP) $(POSTLIB)/printfont.ps
 	@chown $(OWNER) $(POSTLIB)/printfont.ps
-	cp printfont.1 $(MAN1DIR)/printfont.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    printfont.1 > $(MAN1DIR)/printfont.1
 	@chmod 644 $(MAN1DIR)/printfont.1
 	@chgrp $(GROUP) $(MAN1DIR)/printfont.1
 	@chown $(OWNER) $(MAN1DIR)/printfont.1

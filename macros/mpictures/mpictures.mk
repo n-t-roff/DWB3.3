@@ -30,7 +30,8 @@ install : all
 	@chmod 644 $(TMACDIR)/tmac.pictures
 	@chgrp $(GROUP) $(TMACDIR)/tmac.pictures
 	@chown $(OWNER) $(TMACDIR)/tmac.pictures
-	cp mpictures.5 $(MAN5DIR)/mpictures.5
+	sed -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    mpictures.5 > $(MAN5DIR)/mpictures.5
 	@chmod 644 $(MAN5DIR)/mpictures.5
 	@chgrp $(GROUP) $(MAN5DIR)/mpictures.5
 	@chown $(OWNER) $(MAN5DIR)/mpictures.5

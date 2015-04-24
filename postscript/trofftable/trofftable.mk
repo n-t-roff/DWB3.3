@@ -35,7 +35,9 @@ install : all
 	@chmod 644 $(POSTLIB)/trofftable.ps
 	@chgrp $(GROUP) $(POSTLIB)/trofftable.ps
 	@chown $(OWNER) $(POSTLIB)/trofftable.ps
-	cp trofftable.1 $(MAN1DIR)/trofftable.1
+	sed -e 's" /usr/lib/font$$" $(FONTDIR)"' \
+	    -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    trofftable.1 > $(MAN1DIR)/trofftable.1
 	@chmod 644 $(MAN1DIR)/trofftable.1
 	@chgrp $(GROUP) $(MAN1DIR)/trofftable.1
 	@chown $(OWNER) $(MAN1DIR)/trofftable.1

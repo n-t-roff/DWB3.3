@@ -32,7 +32,8 @@ install : all
 	@chmod 644 $(POSTLIB)/hardcopy.ps
 	@chgrp $(GROUP) $(POSTLIB)/hardcopy.ps
 	@chown $(OWNER) $(POSTLIB)/hardcopy.ps
-	cp hardcopy.1 $(MAN1DIR)/hardcopy.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    hardcopy.1 > $(MAN1DIR)/hardcopy.1
 	@chmod 644 $(MAN1DIR)/hardcopy.1
 	@chgrp $(GROUP) $(MAN1DIR)/hardcopy.1
 	@chown $(OWNER) $(MAN1DIR)/hardcopy.1

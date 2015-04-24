@@ -67,7 +67,9 @@ install : all
 	@chmod 644 $(POSTLIB)/draw.ps
 	@chgrp $(GROUP) $(POSTLIB)/draw.ps
 	@chown $(OWNER) $(POSTLIB)/draw.ps
-	cp dpost.1 $(MAN1DIR)/dpost.1
+	sed -e 's" /usr/lib/font$$" $(FONTDIR)"' \
+	    -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    dpost.1 > $(MAN1DIR)/dpost.1
 	@chmod 644 $(MAN1DIR)/dpost.1
 	@chgrp $(GROUP) $(MAN1DIR)/dpost.1
 	@chown $(OWNER) $(MAN1DIR)/dpost.1

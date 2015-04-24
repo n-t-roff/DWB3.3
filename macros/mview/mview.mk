@@ -30,7 +30,8 @@ install : all
 	@chmod 644 $(TMACDIR)/tmac.view
 	@chgrp $(GROUP) $(TMACDIR)/tmac.view
 	@chown $(OWNER) $(TMACDIR)/tmac.view
-	cp mview.5 $(MAN5DIR)/mview.5
+	sed -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    mview.5 > $(MAN5DIR)/mview.5
 	@chmod 644 $(MAN5DIR)/mview.5
 	@chgrp $(GROUP) $(MAN5DIR)/mview.5
 	@chown $(OWNER) $(MAN5DIR)/mview.5

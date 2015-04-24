@@ -32,7 +32,8 @@ install : all
 	@chmod 644 $(TMACDIR)/tmac.safe
 	@chgrp $(GROUP) $(TMACDIR)/tmac.safe
 	@chown $(OWNER) $(TMACDIR)/tmac.safe
-	cp msafe.5 $(MAN5DIR)/msafe.5
+	sed -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    msafe.5 > $(MAN5DIR)/msafe.5
 	@chmod 644 $(MAN5DIR)/msafe.5
 	@chgrp $(GROUP) $(MAN5DIR)/msafe.5
 	@chown $(OWNER) $(MAN5DIR)/msafe.5

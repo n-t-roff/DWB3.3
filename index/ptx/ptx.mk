@@ -35,7 +35,9 @@ install : all
 	@chmod 644 $(LIBDIR)/eign
 	@chgrp $(GROUP) $(LIBDIR)/eign
 	@chown $(OWNER) $(LIBDIR)/eign
-	cp ptx.1 $(MAN1DIR)/ptx.1
+	sed -e 's" /usr/lib/dwb$$" $(LIBDIR)"' \
+	    -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    ptx.1 > $(MAN1DIR)/ptx.1
 	@chmod 644 $(MAN1DIR)/ptx.1
 	@chgrp $(GROUP) $(MAN1DIR)/ptx.1
 	@chown $(OWNER) $(MAN1DIR)/ptx.1

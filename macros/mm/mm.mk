@@ -39,7 +39,9 @@ install : all
 	    chgrp $(GROUP) $(DOTSODIR)/$$i; \
 	    chown $(OWNER) $(DOTSODIR)/$$i; \
 	done
-	cp mm.5 $(MAN5DIR)/mm.5
+	sed -e 's" /usr/lib/macros$$" $(MACRODIR)"' \
+	    -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    mm.5 > $(MAN5DIR)/mm.5
 	@chmod 644 $(MAN5DIR)/mm.5
 	@chgrp $(GROUP) $(MAN5DIR)/mm.5
 	@chown $(OWNER) $(MAN5DIR)/mm.5

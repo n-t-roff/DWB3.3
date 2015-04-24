@@ -55,7 +55,8 @@ install : all
 	@chmod 644 $(POSTLIB)/postmd.ps
 	@chgrp $(GROUP) $(POSTLIB)/postmd.ps
 	@chown $(OWNER) $(POSTLIB)/postmd.ps
-	cp postmd.1 $(MAN1DIR)/postmd.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    postmd.1 > $(MAN1DIR)/postmd.1
 	@chmod 644 $(MAN1DIR)/postmd.1
 	@chgrp $(GROUP) $(MAN1DIR)/postmd.1
 	@chown $(OWNER) $(MAN1DIR)/postmd.1

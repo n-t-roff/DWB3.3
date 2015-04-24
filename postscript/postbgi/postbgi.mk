@@ -54,7 +54,8 @@ install : all
 	@chmod 644 $(POSTLIB)/postbgi.ps
 	@chgrp $(GROUP) $(POSTLIB)/postbgi.ps
 	@chown $(OWNER) $(POSTLIB)/postbgi.ps
-	cp postbgi.1 $(MAN1DIR)/postbgi.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    postbgi.1 > $(MAN1DIR)/postbgi.1
 	@chmod 644 $(MAN1DIR)/postbgi.1
 	@chgrp $(GROUP) $(MAN1DIR)/postbgi.1
 	@chown $(OWNER) $(MAN1DIR)/postbgi.1

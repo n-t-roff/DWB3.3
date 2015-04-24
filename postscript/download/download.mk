@@ -45,7 +45,8 @@ install : all
 	@chmod 755 $(POSTBIN)/download
 	@chgrp $(GROUP) $(POSTBIN)/download
 	@chown $(OWNER) $(POSTBIN)/download
-	cp download.1 $(MAN1DIR)/download.1
+	sed -e 's" /usr/lib/font/postscript$$" $(HOSTDIR)"' \
+	    download.1 > $(MAN1DIR)/download.1
 	@chmod 644 $(MAN1DIR)/download.1
 	@chgrp $(GROUP) $(MAN1DIR)/download.1
 	@chown $(OWNER) $(MAN1DIR)/download.1

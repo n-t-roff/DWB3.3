@@ -30,7 +30,8 @@ install : all
 	@chmod 644 $(TMACDIR)/tmac.an
 	@chgrp $(GROUP) $(TMACDIR)/tmac.an
 	@chown $(OWNER) $(TMACDIR)/tmac.an
-	cp man.5 $(MAN5DIR)/man.5
+	sed -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    man.5 > $(MAN5DIR)/man.5
 	@chmod 644 $(MAN5DIR)/man.5
 	@chgrp $(GROUP) $(MAN5DIR)/man.5
 	@chown $(OWNER) $(MAN5DIR)/man.5

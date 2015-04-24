@@ -53,7 +53,8 @@ install : all
 	@chmod 644 $(POSTLIB)/postgif.ps
 	@chgrp $(GROUP) $(POSTLIB)/postgif.ps
 	@chown $(OWNER) $(POSTLIB)/postgif.ps
-	cp postgif.1 $(MAN1DIR)/postgif.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    postgif.1 > $(MAN1DIR)/postgif.1
 	@chmod 644 $(MAN1DIR)/postgif.1
 	@chgrp $(GROUP) $(MAN1DIR)/postgif.1
 	@chown $(OWNER) $(MAN1DIR)/postgif.1

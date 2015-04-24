@@ -31,7 +31,9 @@ install : all
 	@chmod 644 $(TMACDIR)/tmac.cs
 	@chgrp $(GROUP) $(TMACDIR)/tmac.cs
 	@chown $(OWNER) $(TMACDIR)/tmac.cs
-	cp mcs.5 $(MAN5DIR)/mcs.5
+	sed -e 's" /usr/pub$$" $(PUBDIR)"' \
+	    -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    mcs.5 > $(MAN5DIR)/mcs.5
 	@chmod 644 $(MAN5DIR)/mcs.5
 	@chgrp $(GROUP) $(MAN5DIR)/mcs.5
 	@chown $(OWNER) $(MAN5DIR)/mcs.5

@@ -54,7 +54,8 @@ install : all
 	@chmod 644 $(POSTLIB)/posttek.ps
 	@chgrp $(GROUP) $(POSTLIB)/posttek.ps
 	@chown $(OWNER) $(POSTLIB)/posttek.ps
-	cp posttek.1 $(MAN1DIR)/posttek.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    posttek.1 > $(MAN1DIR)/posttek.1
 	@chmod 644 $(MAN1DIR)/posttek.1
 	@chgrp $(GROUP) $(MAN1DIR)/posttek.1
 	@chown $(OWNER) $(MAN1DIR)/posttek.1

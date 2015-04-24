@@ -32,7 +32,8 @@ install : all
 	@chmod 644 $(POSTLIB)/Latin1.enc
 	@chgrp $(GROUP) $(POSTLIB)/Latin1.enc
 	@chown $(OWNER) $(POSTLIB)/Latin1.enc
-	cp psencoding.1 $(MAN1DIR)/psencoding.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    psencoding.1 > $(MAN1DIR)/psencoding.1
 	@chmod 644 $(MAN1DIR)/psencoding.1
 	@chgrp $(GROUP) $(MAN1DIR)/psencoding.1
 	@chown $(OWNER) $(MAN1DIR)/psencoding.1

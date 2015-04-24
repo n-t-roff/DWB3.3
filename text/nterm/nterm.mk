@@ -25,7 +25,8 @@ install : all
 	    chgrp $(GROUP) $(NTERMDIR)/$$i; \
 	    chown $(OWNER) $(NTERMDIR)/$$i; \
 	done
-	cp nterm.5 $(MAN5DIR)/nterm.5
+	sed -e 's" /usr/lib/nterm$$" $(NTERMDIR)"' \
+	    nterm.5 > $(MAN5DIR)/nterm.5
 	@chmod 644 $(MAN5DIR)/nterm.5
 	@chgrp $(GROUP) $(MAN5DIR)/nterm.5
 	@chown $(OWNER) $(MAN5DIR)/nterm.5

@@ -32,7 +32,8 @@ install : all
 	@chmod 644 $(POSTLIB)/cropmarks.ps
 	@chgrp $(GROUP) $(POSTLIB)/cropmarks.ps
 	@chown $(OWNER) $(POSTLIB)/cropmarks.ps
-	cp cropmarks.1 $(MAN1DIR)/cropmarks.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    cropmarks.1 > $(MAN1DIR)/cropmarks.1
 	@chmod 644 $(MAN1DIR)/cropmarks.1
 	@chgrp $(GROUP) $(MAN1DIR)/cropmarks.1
 	@chown $(OWNER) $(MAN1DIR)/cropmarks.1

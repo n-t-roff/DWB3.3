@@ -54,7 +54,8 @@ install : all
 	@chmod 644 $(POSTLIB)/postplot.ps
 	@chgrp $(GROUP) $(POSTLIB)/postplot.ps
 	@chown $(OWNER) $(POSTLIB)/postplot.ps
-	cp postplot.1 $(MAN1DIR)/postplot.1
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    postplot.1 > $(MAN1DIR)/postplot.1
 	@chmod 644 $(MAN1DIR)/postplot.1
 	@chgrp $(GROUP) $(MAN1DIR)/postplot.1
 	@chown $(OWNER) $(MAN1DIR)/postplot.1

@@ -29,7 +29,8 @@ install : all
 	@chmod 644 $(LIBDIR)/terminals
 	@chgrp $(GROUP) $(LIBDIR)/terminals
 	@chown $(OWNER) $(LIBDIR)/terminals
-	cp mm.1 $(MAN1DIR)/mm.1
+	sed -e 's" /usr/pub$$" $(PUBDIR)"' \
+	    mm.1 > $(MAN1DIR)/mm.1
 	@chmod 644 $(MAN1DIR)/mm.1
 	@chgrp $(GROUP) $(MAN1DIR)/mm.1
 	@chown $(OWNER) $(MAN1DIR)/mm.1

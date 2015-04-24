@@ -29,7 +29,8 @@ install : all
 	@chmod 755 $(BINDIR)/xpand
 	@chgrp $(GROUP) $(BINDIR)/xpand
 	@chown $(OWNER) $(BINDIR)/xpand
-	cp xpand.5 $(MAN5DIR)/xpand.5
+	sed -e 's" /usr/lib/dwb$$" $(BINDIR)"' \
+	    xpand.5 > $(MAN5DIR)/xpand.5
 	@chmod 644 $(MAN5DIR)/xpand.5
 	@chgrp $(GROUP) $(MAN5DIR)/xpand.5
 	@chown $(OWNER) $(MAN5DIR)/xpand.5

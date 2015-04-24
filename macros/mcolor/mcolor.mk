@@ -31,7 +31,9 @@ install : all
 	@chmod 644 $(TMACDIR)/tmac.color
 	@chgrp $(GROUP) $(TMACDIR)/tmac.color
 	@chown $(OWNER) $(TMACDIR)/tmac.color
-	cp mcolor.5 $(MAN5DIR)/mcolor.5
+	sed -e 's" /usr/lib/postscript$$" $(POSTLIB)"' \
+	    -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \
+	    mcolor.5 > $(MAN5DIR)/mcolor.5
 	@chmod 644 $(MAN5DIR)/mcolor.5
 	@chgrp $(GROUP) $(MAN5DIR)/mcolor.5
 	@chown $(OWNER) $(MAN5DIR)/mcolor.5
