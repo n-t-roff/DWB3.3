@@ -3993,7 +3993,7 @@ SUBJECT:  \\*(}m \}
 .if \n(mo-9 .ds DT October
 .if \n(mo-10 .ds DT November
 .if \n(mo-11 .ds DT December
-.as DT " \n(dy, 19\n(yr
+.as DT " \n(dy, \n(yr
 '\"			INITIALIZE ALL THREE ENVIRONMENTS
 .S D D\"set up point size
 'ev 0

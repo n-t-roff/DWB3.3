@@ -10,6 +10,7 @@
 '''\"	Tm: Trademark indicator
 '''\"	Sm: Service Mark indicator
 '''\"	Rg: Registered mark indicator
+.if \n(yr<1970 .nr yr +1900
 .if n .ds Tm \uTM\d
 .if n .ds Sm \uSM\d
 .if n .ds Rg \uR\d

@@ -1,3 +1,4 @@
+.if \n(yr<1970 .nr yr +1900
 .lg 0
 .ds sd TMACDIR
 .\"	RT -  reset everything to normal state
@@ -852,7 +853,7 @@ Computing Science Technical Report No. \\*(MN
 .if \\n(dw-4 .ds DW Thursday
 .if \\n(dw-5 .ds DW Friday
 .if \\n(dw-6 .ds DW Saturday
-.if "\\*(DY"" .ds DY \\*(MO \\n(dy, 19\\n(yr
+.if "\\*(DY"" .ds DY \\*(MO \\n(dy, \\n(yr
 .if "\\*(CF"" .if n .ds CF "\\*(DY
 ..
 .	\"EM end up macro - process left over keep-release
