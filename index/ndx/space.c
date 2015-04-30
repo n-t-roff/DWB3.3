@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:space.c	1.3"
+*/
 #include	<stdio.h>
 #include        <stdlib.h>
 #include	"dstructs.h"

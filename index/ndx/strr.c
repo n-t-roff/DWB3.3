@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:strr.c	1.3"
+*/
 #include <stdio.h>
 /*
 	str_rev, given a string, returns a string which is the reverse.

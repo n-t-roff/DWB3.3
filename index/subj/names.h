@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:names.h	1.2"
+*/
 #define ART	'A'
 #define PREP	'P'
 #define PREP_ADV	'p'

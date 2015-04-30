@@ -1,4 +1,6 @@
+/*
 #ident "@(#)/usr/src/cmd/yacc/y2.c	1.3 6/6/85 02:44:35 - Amdahl/UTS"
+*/
 /*	@(#)y2.c	1.8	*/
 # include "dextern"
 # define IDENTIFIER 257

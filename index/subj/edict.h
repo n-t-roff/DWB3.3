@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:edict.h	1.3"
+*/
 struct dict able_d[] = {
 	"noihsaf", 'Y',
 	"mmalf", 'Y',

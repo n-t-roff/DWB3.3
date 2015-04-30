@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:style.h	1.3"
+*/
 extern int	part;
 extern int	style;
 extern int	topic;

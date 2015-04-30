@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:dstructs.h	1.3"
+*/
 struct subjl /*subject list for a word*/
 {
 	struct subj *s_ptr;		/*pointer to a subject*/

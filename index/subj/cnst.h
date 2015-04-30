@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:cnst.h	1.2"
+*/
 #define NOUN	'n'
 #define ADJ	'a'
 #define UNK	'u'

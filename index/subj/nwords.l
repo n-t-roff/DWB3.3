@@ -16,7 +16,9 @@
 %}
 
 %{
+/*
 #ident	"@(#)subndx:nwords.l	1.4"
+*/
 %}
 
 %{

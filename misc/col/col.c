@@ -1,4 +1,6 @@
+/*
 #ident	"@(#)col:col.c	1.8"
+*/
 char *xxxvers = "@(#)col:col.c	1.8";
 /*	col - filter reverse carraige motions
  *

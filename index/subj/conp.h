@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:conp.h	1.3"
+*/
 #define SLENG 250
 #define SCHAR 1500
 extern struct ss {

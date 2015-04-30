@@ -1,4 +1,6 @@
+/*
 #ident "@(#)/usr/src/cmd/yacc/y4.c	1.3 6/6/85 02:45:25 - Amdahl/UTS"
+*/
 /*	@(#)y4.c	1.3	*/
 # include "dextern"
 

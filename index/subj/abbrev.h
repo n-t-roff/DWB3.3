@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:abbrev.h	1.3"
+*/
 #define abtsize 71
 #define abp1 61
 #define abp2 67

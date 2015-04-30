@@ -16,7 +16,9 @@
 %}
 
 %{
+/*
 #ident	"@(#)subndx:ndexer.l	1.5"
+*/
 %}
 
 %{

@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)subndx:case.c	1.3"
+*/
 /*
 	ulcase searches the input string for any upper case letters and
 	changes them to lower case. It returns a 1 if a change is made,

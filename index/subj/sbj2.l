@@ -16,7 +16,9 @@
 %}
 
 %{
+/*
 #ident	"@(#)subndx:sbj2.l	1.4"
+*/
 %}
 
 /*   The input to this module is the output of parts on a file of headings.	*/

@@ -5,7 +5,9 @@
 /*	The copyright notice above does not evidence any   	*/
 /*	actual or intended publication of such source code.	*/
 
+/*
 #ident	"@(#)ptx:ptx.c	1.4"
+*/
 char *xxxvers = "@(#)ptx:ptx.c	1.4";
 #
 
