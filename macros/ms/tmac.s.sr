@@ -1,4 +1,3 @@
-.if \n(yr<1970 .nr yr +1900
 .lg 0
 .ds sd TMACDIR
 .\"	RT -  reset everything to normal state
@@ -832,7 +831,6 @@ Computing Science Technical Report No. \\*(MN
 .de ME
 .nr SJ \\n(.j
 .if \\n(LL .nr LT \\n(LL
-.nr YE 1
 .if !\\n(PO .nr PO \\n(.o
 .if \\n(mo-0 .ds MO January
 .if \\n(mo-1 .ds MO February
@@ -853,8 +851,10 @@ Computing Science Technical Report No. \\*(MN
 .if \\n(dw-4 .ds DW Thursday
 .if \\n(dw-5 .ds DW Friday
 .if \\n(dw-6 .ds DW Saturday
-.if "\\*(DY"" .ds DY \\*(MO \\n(dy, \\n(yr
+.nr YE 1900+\\n(yr \" !name reuse!
+.if "\\*(DY"" .ds DY \\*(MO \\n(dy, \\n(YE
 .if "\\*(CF"" .if n .ds CF "\\*(DY
+.nr YE 1
 ..
 .	\"EM end up macro - process left over keep-release
 .de EM

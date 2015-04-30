@@ -7,7 +7,7 @@
 .tm wrong version of man entry macros (use -man6 if available)
 .ab 
 ..
-.nr yr +1900
+.nr )Y 1900+\n(yr
 '''\" set character strings and translation
 '''\" use monowidth (font 5) for troff; use bold (font 3) for nroff
 .if t \{\
@@ -609,7 +609,7 @@ the Network File System.
 '''\" .de PM [P:RS:RG:CR:UW:CP] [year]
 '''\" disclosure notice invoking macro
 .de PM
-.ie @\\$2@@ .nr ;V \\n(yr
+.ie @\\$2@@ .nr ;V \\n()Y
 .el \{\
 .	ie     \\$2>1900 .nr ;V \\$2
 .	el .ie \\$2<70   .nr ;V \\$2+2000
@@ -754,11 +754,11 @@ the Network File System.
 '''\" set date
 .if n \{.nr m \nm+1
 .	 ie \nd .ds ]W (last mod. \nm/\nd/\ny)
-.	 el .ds ]W (printed \n(mo/\n(dy/\n(yr)
+.	 el .ds ]W (printed \n(mo/\n(dy/\n()Y)
 '	 br \}
 .if \n()s .ds ]W
 .if \n()t \{.ie \nd .ds ]W \*(]m \nd, \ny
-.	      el .ds ]W \*(]m \n(dy, \n(yr
+.	      el .ds ]W \*(]m \n(dy, \n()Y
 '	      br \}
 .pl \n()Lu
 .ll \n(LLu

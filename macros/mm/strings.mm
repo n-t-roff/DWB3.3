@@ -23,7 +23,7 @@
 '''\"	Free Strings:  ]Q ]R ]H ]L ]V ]W ]X ]k ]l
 '''\"	
 '''\"	Register ;V = user-specified year for copyright date
-.nr ;V \n(yr
+.nr ;V 1900+\n(yr
 '''\"	AT&T PROPRIETARY MARKINGS
 '''\"	The following strings are used by the macro PM:
 '''\"	

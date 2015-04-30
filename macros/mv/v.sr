@@ -10,7 +10,6 @@
 '''\"	Tm: Trademark indicator
 '''\"	Sm: Service Mark indicator
 '''\"	Rg: Registered mark indicator
-.if \n(yr<1970 .nr yr +1900
 .if n .ds Tm \uTM\d
 .if n .ds Sm \uSM\d
 .if n .ds Rg \uR\d
@@ -554,7 +553,8 @@ check for overflow.
 .ds )F FOIL
 .if \n(.A .ds )F FOIL
 .ds )N AT&T
-.ds )Y \n(mo/\n(dy/\n(yr
+.nr )G 1900+\n(yr
+.ds )Y \n(mo/\n(dy/\n()G
 .ds )B \(bu\ \|
 .ds )C \(em\ \|
 .ds )D \(bu\ \|

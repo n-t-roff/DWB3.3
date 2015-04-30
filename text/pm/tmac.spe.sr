@@ -1,5 +1,4 @@
 ..... July 1, 1991
-.if \n(yr<1970 .nr yr +1900
 .so TMACDIR/tmac.pm
 .ig
 .nr VN 1	\" VN -- volume
@@ -51,7 +50,8 @@ J. Author...
 .
 .de TL		\" TL -- title
 .ps 7
-SOFTWARE\(emPRACTICE AND EXPERIENCE, VOL. \\n(VN(\\n(NU), \\n(P<-\\n(P> (\\*(MO \\n(yr)
+.nr X 1900+\\n(yr
+SOFTWARE\(emPRACTICE AND EXPERIENCE, VOL. \\n(VN(\\n(NU), \\n(P<-\\n(P> (\\*(MO \\nX)
 .sp 6P-2v
 .ps 18
 .vs 21p
@@ -111,8 +111,9 @@ SUMMARY
 .lt \\n(LLu
 .nr x \\n(P>-\\n(P<+1
 .af P< 0000
-.tl "0038-0644/\\n(yr/\\n(NU\\n(P<-\\nx$05.00""\f2Received \\*(DY\f1"
-.tl '\(CO \\n(yr by John Wiley & Sons, Ltd.''\f2Revised \\*(DR\fP'
+.nr X 1900+\\n(yr
+.tl "0038-0644/\\nX/\\n(NU\\n(P<-\\nx$05.00""\f2Received \\*(DY\f1"
+.tl '\(CO \\nX by John Wiley & Sons, Ltd.''\f2Revised \\*(DR\fP'
 .KE
 ..
 .		\" SH - (unnumbered) section heading

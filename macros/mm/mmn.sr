@@ -2647,7 +2647,7 @@ PRIVATE
 .el .ie @\\$1@RS@ .	nr ;t 2
 .el .ie @\\$1@2@ .	nr ;t 2
 .el .nr ;t 1	\"includes 1, P and is also the default for an invalid arg.
-.ie @\\$2@@ .nr ;V \\n(yr
+.ie @\\$2@@ .nr ;V 1900+\\n(yr
 .el \{.ie \\$2-1900 .nr ;V \\$2-1900
 .el .nr ;V \\$2 \}
 .ie \\n(;t=0 \{\
@@ -3993,7 +3993,8 @@ SUBJECT:  \\*(}m \}
 .if \n(mo-9 .ds DT October
 .if \n(mo-10 .ds DT November
 .if \n(mo-11 .ds DT December
-.as DT " \n(dy, \n(yr
+.nr ;0 1900+\n(yr
+.as DT " \n(dy, \n(;0
 '\"			INITIALIZE ALL THREE ENVIRONMENTS
 .S D D\"set up point size
 'ev 0

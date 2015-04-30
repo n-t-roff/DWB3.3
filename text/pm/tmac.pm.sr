@@ -1,5 +1,4 @@
 .\" 5/6/92 activate next line before installing
-.if \n(yr<1970 .nr yr +1900
 .pi TMACDIR/pm
 .
 .		\" IZ - initialization
@@ -133,7 +132,8 @@
 .if \\n(dw-4 .ds DW Thursday
 .if \\n(dw-5 .ds DW Friday
 .if \\n(dw-6 .ds DW Saturday
-.if "\\*(DY"" .ds DY \\*(MO \\n(dy, \\n(yr
+.nr X 1900+\\n(yr
+.if "\\*(DY"" .ds DY \\*(MO \\n(dy, \\nX
 ..
 .		\" FP - font position for a family
 .de FP
