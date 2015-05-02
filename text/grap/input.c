@@ -412,8 +412,9 @@ void yyerror(char *s) {
 		return;
 	fflush(stdout);
 	fprintf(stderr, "%s: %s", cmdname, s);
-	if (errno > 0 && errno < sys_nerr)
-		fprintf(stderr, " (%s)", sys_errlist[errno]);
+	if (errno > 0 /*&& errno < sys_nerr*/)
+		fprintf(stderr, " (%s)", strerror(errno)
+		    /*sys_errlist[errno]*/);
 	fprintf(stderr, " near line %d, file %s\n",
 		curfile->lineno, curfile->fname);
 	eprint();
