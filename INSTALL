@@ -1,0 +1,202 @@
+Contents:
+
+  1. Indroduction
+  2. Download
+  3. Installation
+  4. Note on using nroff for displaying man pages
+  5. Porting status
+     5.1 Tested operating systems (amd64 architecture)
+     5.2 Tested components
+         5.2.1 Tools
+         5.2.2 Macro packages
+     5.3 Yet untested components
+         5.3.3 Tools
+         5.3.4 Macro packages
+
+
+1. Indroduction
+
+The file README is refering to the original DWB 3.3 release from 1993  and  is
+kept  unchanged since then.  Parts of it's contents may be outdated.  For this
+reason all up-to-date install and usage information can be found in this file.
+
+
+2. Download
+
+The source code can be downloaded as a zip archive  with  the  "Download  ZIP"
+button on
+
+  https://github.com/n-t-roff/DWB3.3
+
+or with the git command
+
+  $ git clone https://github.com/n-t-roff/DWB3.3.git
+
+A git repository can be kept up-to-date with
+
+  $ git pull
+
+
+3. Installation
+
+For configuration the file dwb.mk can be  modified,  although  reasonable  de-
+faults have already been set.  Default installation directory is
+
+  /usr/local/dwb
+
+which must (for usage after  installation)  be  set  as  environment  variable
+DWBHOME.   $DWBHOME/bin  needs to be added to the PATH variable.  For e.g. the
+bourne shell this can be done with
+
+  $ DWBHOME=/usr/local/dwb; export DWBHOME
+  $ PATH=$DWBHOME/bin:$PATH; export PATH
+
+The manual pages are installed to
+
+  /usr/local/dwb/man/man1  and
+  /usr/local/dwb/man/man5
+
+Other settings should only be changed if really necessary.  E.g. the variable
+
+  SYSTEM=BSD4_2
+
+must be left unchanged regardless of the OS.
+
+The software is build with
+
+  $ make -f dwb.mk
+
+and installed with
+
+  # make -f dwb.mk install
+
+After installation locally build data is cleaned up with
+
+  $ make -f dwb.mk clobber
+
+If there are problems questions can be send to
+
+  troff [at] arcor [dot] de
+
+and issues can be reported at
+
+  https://github.com/n-t-roff/DWB3.3/issues
+
+
+4. Note on using nroff for displaying man pages
+
+The default output device of nroff is the TELETYPE Model 37.  If  that  output
+is  piped  to more(1) or less(1) some control codes can't be interpreted which
+results in wrong display of man pages.  For a correct presentation the  output
+should be piped through col(1):
+
+  $ tbl <filename> | nroff -man | col -x | less
+
+Note that DWB is of limited use for viewing today's manual pages.  mdoc(7) had
+not  been available when DWB 3.3 was released so this macro package is not in-
+cluded.  Well written manual pages using man(7) usually should work  but  some
+(e.g.  generated  from  other  languages)  are using special groff(1) features
+which are not available in DWB.  On the other hand many DWB manual  pages  are
+only  formated  correctly by DWB itself since there are some DWB extensions in
+it's man macros.  groff(1), Heirloom nroff, or mandoc(1) should not be used to
+view DWB manual pages.
+
+
+5. Porting status
+
+5.1 Tested operating systems (amd64 architecture)
+
+ * OpenBSD 5.7-CURRENT
+ * NetBSD 7-CURRENT
+ * FreeBSD 8.4, 9.3, 10.1, and 11-CURRENT
+ * Linux
+ * SunOS 5.11 (SmartOS)
+
+
+5.2 Tested components
+
+Not all tools and macro packages had been tested yet.  Partly because they are
+not  important anymore or because of lack of input files or just because there
+had not been time for it yet.  The following list gives an overview.  If there
+are  problems  with an tested or untested item please report that to the issue
+list at
+
+  https://github.com/n-t-roff/DWB3.3/issues
+
+
+5.2.1 Tools
+
+ * nroff - typewriter text formatting
+ * troff - typesetter text formatting
+ * xpand - expand calls in troff and nroff files
+   (AT&T variant of BSD's soelim)
+ * tbl - prepare tables for nroff or troff
+ * eqn - format mathematical text for troff
+ * neqn - format mathematical text for nroff
+ * grap - pic preprocessor for drawing graphs
+ * pic - troff preprocessor for drawing pictures
+ * picasso - a line drawing program
+ * dpost - troff postprocessor for PostScript printers
+ * col - filter reverse line-feeds
+ * diffmk - mark differences between files
+ * checkdoc - check integrity of input for MM document file
+ * dwbv - identify DWB version
+ * tc - troff output interpreter
+
+
+5.2.2 Macro packages
+
+ * ms - macros for formatting manuscripts
+ * mm - the MM macro package for formatting documents
+ * man - macros for formatting UNIX system manual page entries
+ * mcolor - color and reverse video macro
+   (Enables changing between arbitrary colors for foreground and background
+   inside the document)
+ * mpictures - picture inclusion macros
+ * mps - troff macros for PostScript printers
+   (This macro package includes mcolor and mpictures)
+
+
+5.3 Yet untested components
+
+5.3.3 Tools
+
+ * deroff - strip troff, eqn, and tbl sequences
+ * mptx - the macro package for formatting a permuted index
+ * ndx - create a subject-page index for a document
+ * ptx - make permuted index
+ * subj - generate a list of subjects from a document
+ * dpcl - troff postprocessor for PCL-based printers
+ * dsplit - split troff output into segments
+ * gc2pic - gc for troff
+ * hyphen - find hyphenated words
+ * L1toa - convert Latin-1 to ASCII
+ * atoL1 - convert ASCII to Latin-1
+ * atoL1sim - convert ASCII to simulated Latin-1
+ * Scripts mm(1) and mmt(1) - does someone use them?
+ * grabit - recover the text representation of PostScript objects
+ * hardcopy - redirects output from PostScript file operators to paper
+ * picpack - PostScript picture packing preprocessor
+ * postbgi - PostScript translator for BGI (Basic Graphical Instructions)
+   files
+ * postdaisy - PostScript translator for Diablo 630 files
+ * postdmd - PostScript translator for DMD bitmap files
+ * postgif - PostScript translator for GIF files
+ * postio - serial interface for PostScript printers
+ * postmd - matrix display program for PostScript printers
+ * postplot - PostScript translator for plot(4) graphics files
+ * postprint - PostScript translator for text files
+ * postreverse - reverse the page order in a PostScript file
+ * posttek - PostScript translator for Tektronix 4014 files
+ * printfont - font listing program for PostScript printers
+ * psencoding - check or set the default PostScript font encoding
+ * trofftable - output a PostScript program that builds a font width table
+ * dnroff - troff postprocessor for nroff devices
+
+
+5.3.4 Macro packages
+
+ * mcs - macros for formatting document cover sheets
+ * msafe - a macro package for a safer troff
+ * mv - a troff macro package for typesetting viewgraphs and slides
+ * mview - a troff macro package for typesetting viewgraphs
