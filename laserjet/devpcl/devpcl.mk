@@ -28,6 +28,7 @@ install : all
 	fi
 	cp $(FONTFILES) $(FONTDIR)/devpcl
 	cd $(FONTDIR)/devpcl; \
+	rm -f G GI HB HM HK HL HX CB; \
 	ln -s H G ; ln -s HI GI; ln -s H  HB; ln -s H  HM; \
 	ln -s H HK; ln -s H  HL; ln -s HI HX; ln -s CW CB;
 	@for i in $(FONTFILES); do \

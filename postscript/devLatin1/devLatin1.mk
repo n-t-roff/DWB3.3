@@ -32,7 +32,7 @@ install :
 	    chown $(OWNER) $(FONTDIR)/devLatin1/charlib; \
 	fi
 	cp $(FONTFILES) $(FONTDIR)/devLatin1
-	cd $(FONTDIR)/devLatin1; ln -s H HM
+	cd $(FONTDIR)/devLatin1; rm -f HM; ln -s H HM
 	@for i in $(FONTFILES); do \
 	    chmod 644 $(FONTDIR)/devLatin1/$$i; \
 	    chgrp $(GROUP) $(FONTDIR)/devLatin1/$$i; \

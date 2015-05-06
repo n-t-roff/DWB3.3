@@ -33,7 +33,7 @@ install :
 	    chown $(OWNER) $(FONTDIR)/devpost/charlib; \
 	fi
 	cp $(FONTFILES) $(FONTDIR)/devpost
-	cd $(FONTDIR)/devpost; ln -s H HM
+	cd $(FONTDIR)/devpost; rm -f HM; ln -s H HM
 	@for i in $(FONTFILES); do \
 	    chmod 644 $(FONTDIR)/devpost/$$i; \
 	    chgrp $(GROUP) $(FONTDIR)/devpost/$$i; \
