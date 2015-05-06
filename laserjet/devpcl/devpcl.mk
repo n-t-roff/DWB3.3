@@ -11,7 +11,6 @@ FONTDIR=/usr/lib/font
 FONTFILES=DESC ? ??
 
 all :
-	@if [ -r LINKFILE ]; then sh LINKFILE; fi;
 
 install : all
 	@rm -f $(FONTDIR)/devpcl/*.out
@@ -28,6 +27,9 @@ install : all
 	    chown $(OWNER) $(FONTDIR)/devpcl; \
 	fi
 	cp $(FONTFILES) $(FONTDIR)/devpcl
+	cd $(FONTDIR)/devpcl; \
+	ln -s H G ; ln -s HI GI; ln -s H  HB; ln -s H  HM; \
+	ln -s H HK; ln -s H  HL; ln -s HI HX; ln -s CW CB;
 	@for i in $(FONTFILES); do \
 	    chmod 644 $(FONTDIR)/devpcl/$$i; \
 	    chgrp $(GROUP) $(FONTDIR)/devpcl/$$i; \

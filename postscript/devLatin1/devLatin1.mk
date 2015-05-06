@@ -8,12 +8,11 @@ GROUP=bin
 OWNER=bin
 
 FONTDIR=/usr/lib/font
-FONTFILES=DESC ? ?? [A-Z]??* shell.lib
+FONTFILES=DESC ? ?? shell.lib
 
 all :
-	@if [ -r LINKFILE ]; then sh LINKFILE; fi;
 
-install : all
+install :
 	@if [ ! -d $(FONTDIR) ]; then \
 	    mkdir $(FONTDIR); \
 	    chmod 755 $(FONTDIR); \
@@ -33,6 +32,7 @@ install : all
 	    chown $(OWNER) $(FONTDIR)/devLatin1/charlib; \
 	fi
 	cp $(FONTFILES) $(FONTDIR)/devLatin1
+	cd $(FONTDIR)/devLatin1; ln -s H HM
 	@for i in $(FONTFILES); do \
 	    chmod 644 $(FONTDIR)/devLatin1/$$i; \
 	    chgrp $(GROUP) $(FONTDIR)/devLatin1/$$i; \

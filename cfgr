@@ -3,7 +3,7 @@
 Cfg=cfg
 rm -f $Cfg
 
-Arg0 () {
+Arg1 () {
 	echo $1
 }
 # does ignore tool arguments
@@ -11,11 +11,11 @@ HaveTool () {
 	which $1 2>/dev/null | grep -q "/$1\$"
 }
 ToCfg () {
-	which `Arg0 $2`
+	which `Arg1 $2`
 	printf "%s='%s'; export %s\n" $1 "$2" $1 >> $Cfg
 }
 Info () {
-	printf "%s: " $1
+	printf "%s: " "$1"
 }
 Fail () {
 	echo "Not found"
