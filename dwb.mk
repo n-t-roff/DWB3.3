@@ -232,6 +232,7 @@ all : $(TARGETS)
 
 clean clobber:
 	@$(MAKE) -e -f $(MAKEFILE) MAKE=$(MAKE) ACTION=$@ $(TARGETS)
+	@rm -f cfg
 
 install changes :
 	@SYSTEM='$(SYSTEM)'; export SYSTEM; \
@@ -259,7 +260,7 @@ install changes :
 	ROUNDPAGE='$(ROUNDPAGE)'; export ROUNDPAGE; \
 	$(MAKE) -e -f $(MAKEFILE) MAKE=$(MAKE) ACTION=$@ $(TARGETS)
 
-$(TARGETS) ::
+$(TARGETS) :: cfg
 	@TARGETS=; unset TARGETS; \
 	HFILES=; unset HFILES; \
 	OFILES=; unset OFILES; \
@@ -268,8 +269,6 @@ $(TARGETS) ::
 	YFLAGS=; unset YFLAGS; \
 	SYSTEM='$(SYSTEM)'; export SYSTEM; \
 	VERSION='$(VERSION)'; export VERSION; \
-	CXX=`which clang++ 2>/dev/null`; if [ "$$CXX" -a -x $$CXX ]; then \
-	CXX=clang++; else CXX=c++; fi; export CXX; \
 	CFLGS='$(CFLGS)'; export CFLGS; \
 	LDFLGS='$(LDFLGS)'; export LDFLGS; \
 	FONTDIR='$(FONTDIR)'; export FONTDIR; \
@@ -278,6 +277,7 @@ $(TARGETS) ::
 	MACRODIR='$(MACRODIR)'; export MACRODIR; \
 	LIBDIR='$(LIBDIR)'; export LIBDIR; \
 	TMACDIR='$(TMACDIR)'; export TMACDIR; \
+	. ./cfg; \
 	DIRS=`echo */$@ */*/$@`; \
 	DIRS="$@ $$DIRS"; \
 	HERE=`pwd`; \
@@ -300,3 +300,5 @@ $(TARGETS) ::
 	    fi; \
 	done
 
+cfg:
+	CXX=$(CXX) LEX=$(LEX) ./cfgr

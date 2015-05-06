@@ -1,0 +1,38 @@
+#!/bin/sh
+
+Cfg=cfg
+rm -f $Cfg
+
+Arg0 () {
+	echo $1
+}
+# does ignore tool arguments
+HaveTool () {
+	which $1 2>/dev/null | grep -q "/$1\$"
+}
+ToCfg () {
+	which `Arg0 $2`
+	printf "%s='%s'; export %s\n" $1 "$2" $1 >> $Cfg
+}
+Info () {
+	printf "%s: " $1
+}
+Fail () {
+	echo "Not found"
+	exit 1
+}
+
+Info "C++ compiler"
+if   HaveTool $CXX   ; then ToCfg CXX "$CXX"
+elif HaveTool clang++; then ToCfg CXX clang++
+elif HaveTool c++    ; then ToCfg CXX c++
+elif HaveTool g++    ; then ToCfg CXX g++
+else Fail
+fi
+
+Info "Lexer"
+if   HaveTool $LEX; then ToCfg LEX "$LEX"
+elif HaveTool lex ; then ToCfg LEX lex
+elif HaveTool flex; then ToCfg LEX flex
+else Fail
+fi

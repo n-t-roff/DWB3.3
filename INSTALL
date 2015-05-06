@@ -1,27 +1,27 @@
 Contents:
 
-  1. Indroduction
-  2. Download
-  3. Installation
-  4. Note on using nroff for displaying man pages
-  5. Porting status
-     5.1 Tested operating systems (amd64 architecture)
-     5.2 Tested components
-         5.2.1 Tools
-         5.2.2 Macro packages
-     5.3 Yet untested components
-         5.3.3 Tools
-         5.3.4 Macro packages
+  1.  Indroduction
+  2.  Download
+  3.  Installation
+  4.  Note on using nroff for displaying man pages
+  5.  Porting status
+      5.1  Tested operating systems (amd64 architecture)
+      5.2  Tested components
+           5.2.1  Tools
+           5.2.2  Macro packages
+      5.3  Yet untested components
+           5.3.3  Tools
+           5.3.4  Macro packages
 
 
-1. Indroduction
+1.  Indroduction
 
 The file README is refering to the original DWB 3.3 release from 1993  and  is
 kept  unchanged since then.  Parts of it's contents may be outdated.  For this
 reason all up-to-date install and usage information can be found in this file.
 
 
-2. Download
+2.  Download
 
 The source code can be downloaded as a zip archive  with  the  "Download  ZIP"
 button on
@@ -37,7 +37,7 @@ A git repository can be kept up-to-date with
   $ git pull
 
 
-3. Installation
+3.  Installation
 
 For configuration the file dwb.mk can be  modified,  although  reasonable  de-
 faults have already been set.  Default installation directory is
@@ -83,7 +83,7 @@ and issues can be reported at
   https://github.com/n-t-roff/DWB3.3/issues
 
 
-4. Note on using nroff for displaying man pages
+4.  Note on using nroff for displaying man pages
 
 The default output device of nroff is the TELETYPE Model 37.  If  that  output
 is  piped  to more(1) or less(1) some control codes can't be interpreted which
@@ -102,9 +102,9 @@ it's man macros.  groff(1), Heirloom nroff, or mandoc(1) should not be used to
 view DWB manual pages.
 
 
-5. Porting status
+5.  Porting status
 
-5.1 Tested operating systems (amd64 architecture)
+5.1  Tested operating systems (amd64 architecture)
 
  * OpenBSD 5.7-CURRENT
  * NetBSD 7-CURRENT
@@ -113,7 +113,7 @@ view DWB manual pages.
  * SunOS 5.11 (SmartOS)
 
 
-5.2 Tested components
+5.2  Tested components
 
 Not all tools and macro packages had been tested yet.  Partly because they are
 not  important anymore or because of lack of input files or just because there
@@ -124,7 +124,7 @@ list at
   https://github.com/n-t-roff/DWB3.3/issues
 
 
-5.2.1 Tools
+5.2.1  Tools
 
  * nroff - typewriter text formatting
  * troff - typesetter text formatting
@@ -144,7 +144,7 @@ list at
  * tc - troff output interpreter
 
 
-5.2.2 Macro packages
+5.2.2  Macro packages
 
  * ms - macros for formatting manuscripts
  * mm - the MM macro package for formatting documents
@@ -157,9 +157,9 @@ list at
    (This macro package includes mcolor and mpictures)
 
 
-5.3 Yet untested components
+5.3  Yet untested components
 
-5.3.3 Tools
+5.3.3  Tools
 
  * deroff - strip troff, eqn, and tbl sequences
  * mptx - the macro package for formatting a permuted index
@@ -194,7 +194,7 @@ list at
  * dnroff - troff postprocessor for nroff devices
 
 
-5.3.4 Macro packages
+5.3.4  Macro packages
 
  * mcs - macros for formatting document cover sheets
  * msafe - a macro package for a safer troff

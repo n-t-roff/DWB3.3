@@ -84,6 +84,7 @@ $(TARGETS) ::
 	SYSTEM='$(SYSTEM)'; export SYSTEM; \
 	VERSION='$(VERSION)'; export VERSION; \
 	CXX='$(CXX)'; export CXX; \
+	LEX='$(LEX)'; export LEX; \
 	CFLGS='$(CFLGS)'; export CFLGS; \
 	LDFLGS='$(LDFLGS)'; export LDFLGS; \
 	if [ -d $@ -a -f $@/$@.mk ]; then \
