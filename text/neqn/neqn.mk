@@ -51,7 +51,7 @@ install : all
 	@chown $(OWNER) $(MAN1DIR)/neqn.1
 
 clean :
-	rm -f *.o y.tab.c y.tab.h
+	rm -f *.o y.tab.c y.tab.h e.c
 
 clobber : clean
 	rm -f neqn
@@ -60,6 +60,10 @@ neqn : $(OFILES)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o neqn $(OFILES) e.o
 
 $(OFILES) : e.h e.o
+
+e.c: e.y
+	$(YACC) -d e.y
+	sed -f yyval.sed <y.tab.c >$@
 
 changes :
 	@trap "" 1 2 3 15; \

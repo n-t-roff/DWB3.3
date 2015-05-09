@@ -4,9 +4,11 @@
 #include "e.h"
 #include "y.tab.h"
 
+extern YYSTYPE yyval;
+
 #define	SSIZE	400
 char	token[SSIZE];
-int	sp, yyval;
+int	sp;
 #define	putbak(c)	*ip++ = c;
 #define	PUSHBACK	300	/* maximum pushback characters */
 char	ibuf[PUSHBACK+SSIZE];	/* pushback buffer for definitions, etc. */
@@ -212,7 +214,7 @@ include() {
 }
 
 delim() {
-	yyval = eqnreg = 0;
+	yyval.token = eqnreg = 0;
 	if (cstr(token, 0, SSIZE))
 		error(FATAL, "Bizarre delimiters at %.20s", token);
 	lefteq = token[0];
