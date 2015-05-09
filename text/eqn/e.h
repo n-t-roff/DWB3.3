@@ -1,5 +1,12 @@
 #include <stdio.h>
+#ifndef UNANSI
 #include <stdlib.h>
+#else /* UNANSI */
+/* declarations instead of #define <stdilb.h> */
+extern char *getenv();
+extern char *malloc();
+/* end of fake stdlib.g */
+#endif /* UNANSI */
 #include <string.h>
 
 enum charclass {
@@ -53,7 +60,6 @@ extern int	lfont[];
 extern int	rfont[];
 extern int	lclass[];
 extern int	rclass[];
-extern int	dwb_yyval;
 extern int	eqnreg;
 extern double	eqnht;
 extern int	lefteq, righteq;
@@ -109,10 +115,16 @@ extern	int	nszstack;
 extern	Infile	infile[10];
 extern	Infile	*curfile;
 
+#ifndef UNANSI
 extern	tbl	*lookup(tbl **tblp, char *name);
 extern	void	install(tbl **tblp, char *name, char *cval, int ival);
+#else /* UNANSI */
+extern	tbl	*lookup();
+extern	void	install();
+#endif /* UNANSI */
 extern	tbl	*keytbl[], *deftbl[], *restbl[], *ftunetbl[];
 
+#ifndef UNANSI
 extern	int	salloc(void);
 extern	void	sfree(int);
 extern	void	nrwid(int, int, int);
@@ -124,18 +136,40 @@ extern	double	REL(double, int);
 extern	char	*pad(int);
 extern	void	getstr(char *, int);
 extern	char	*strsave(char *);
+#else /* UNANSI */
+extern	int	salloc();
+extern	void	sfree();
+extern	void	nrwid();
+extern	char	*ABSPS();
+extern	char	*DPS();
+extern	int	EFFPS();
+extern	double	EM();
+extern	double	REL();
+extern	char	*pad();
+extern	void	getstr();
+extern	char	*strsave();
+#endif /* UNANSI */
 
+#ifndef UNANSI
 extern	int	input(void);
 extern	int	unput(int);
 extern	void	pbstr(char *);
 extern	void	error(int, char *);
 extern	void	yyerror(char *);
+#else /* UNANSI */
+extern	int	input();
+extern	int	unput();
+extern	void	pbstr();
+extern	void	error();
+extern	void	yyerror();
+#endif /* UNANSI */
 
+#ifndef UNANSI
 extern	void	diacrit(int, int);
 extern	int	eqnbox(int, int, int);
 extern	int	setfont(char *);
 extern	int	font(int, int);
-extern	int	globfont(void);
+extern	void	globfont(void);
 extern	int	fatbox(int);
 extern	int	fromto(int, int, int);
 extern	int	funny(int);
@@ -150,8 +184,9 @@ extern int bshiftb(int, int, int);
 extern int shift2(int, int, int);
 extern void setsize(char *);
 extern int size(int, int);
-extern int globsize(void);
+extern void globsize(void);
 extern int dwb_sqrt(int);
+
 extern int boverb(int, int);
 extern int lineup(int);
 extern int mark(int);
@@ -161,4 +196,36 @@ extern int pile(int);
 extern int startcol(int);
 extern void column(int, int);
 extern int matrix(int);
-
+#else /* UNANSI */
+extern	void	diacrit();
+extern	void	eqnbox();
+extern	void	setfont();
+extern	void	font();
+extern	void	globfont();
+extern	void	fatbox();
+extern	void	fromto();
+extern	void	funny();
+extern	void	integral();
+extern	void	setintegral();
+extern	void	pushsrc();
+extern	void	popsrc();
+extern	void	putout();
+extern	void	text();
+extern void subsup();
+extern void bshiftb();
+extern void shift2();
+extern void setsize();
+extern void size();
+extern void globsize();
+extern void sqrt();
+extern void text();
+extern void boverb();
+extern void lineup();
+extern void mark();
+extern void paren();
+extern void move();
+extern void pile();
+extern int startcol();
+extern void column();
+extern void matrix();
+#endif /* UNANSI */

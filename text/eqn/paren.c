@@ -8,18 +8,24 @@ extern void brack(int, char *, char *, char *);
 extern void brack();
 #endif /* UNANSI */
 
+#ifndef UNANSI
 int paren(int leftc, int p1, int rightc)
+#else /* UNANSI */
+void paren(leftc, p1, rightc)
+	int leftc; int p1; int rightc;
+#endif /* UNANSI */
 {
 	int n, m, j;
 	double h1, b1;
 	double v, bv;	/* v = shift of inside, bv = shift of brackets */
 	extern double Parenbase, Parenshift, Parenheight;
+	int yyval;
 
 	bv = ttype == DEVPOST ? Parenshift : 0;	/* move brackets down this much */
 	h1 = eht[p1];
 	b1 = ebase[p1];
-	dwb_yyval = p1;
-	lfont[dwb_yyval] = rfont[dwb_yyval] = 0;
+	yyval = p1;
+	lfont[yyval] = rfont[yyval] = 0;
 	n = REL(h1,ps) + 0.99;	/* ceiling */
 	if (n < 2)
 		n = 1;
@@ -30,17 +36,17 @@ int paren(int leftc, int p1, int rightc)
 			n = 3;
 		m = n-3;
 	}
-	eht[dwb_yyval] = EM((double) n + Parenheight, ps);
-	ebase[dwb_yyval] = eht[dwb_yyval]/2 - EM(Parenbase, ps);
+	eht[yyval] = EM((double) n + Parenheight, ps);
+	ebase[yyval] = eht[yyval]/2 - EM(Parenbase, ps);
 
 	/* try to cope with things that are badly centered */
 	/* (top heavy or bottom heavy) */
 	if (abs(h1/2 - b1) >= EM(0.5, ps))
-		v = REL(-ebase[dwb_yyval] + (eht[dwb_yyval]-h1)/2 + b1, ps);
+		v = REL(-ebase[yyval] + (eht[yyval]-h1)/2 + b1, ps);
 	else
 		v = 0;	/* don't shift it at all */
 
-	printf(".ds %d \\^", dwb_yyval);	/* was \| */
+	printf(".ds %d \\^", yyval);	/* was \| */
 	if (bv)
 		printf("\\v'%gm'", bv);
 	switch (leftc) {
@@ -126,8 +132,8 @@ int paren(int leftc, int p1, int rightc)
 	}
 	printf("\n");
 	dprintf(".\tcurly: h=%g b=%g n=%d v=%g l=%c, r=%c\n", 
-		eht[dwb_yyval], ebase[dwb_yyval], n, v, leftc, rightc);
-	return dwb_yyval;
+		eht[yyval], ebase[yyval], n, v, leftc, rightc);
+	return yyval;
 }
 
 #ifndef UNANSI

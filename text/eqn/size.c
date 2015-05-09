@@ -30,22 +30,33 @@ void setsize(p)	/* set size as found in p */
 	dprintf(".\tsetsize %s; ps = %d\n", p, ps);
 }
 
+#ifndef UNANSI
 int size(int p1, int p2)
+#else /* UNANSI */
+void size(p1, p2)
+	int p1; int p2;
+#endif /* UNANSI */
 {
+	int yyval;
+
 		/* old size in p1, new in ps */
-	dwb_yyval = p2;
+	yyval = p2;
 	dprintf(".\tS%d <- \\s%d %d \\s%d; b=%g, h=%g\n", 
-		dwb_yyval, ps, p2, p1, ebase[dwb_yyval], eht[dwb_yyval]);
+		yyval, ps, p2, p1, ebase[yyval], eht[yyval]);
 	if (szstack[nszstack] != 0) {
-		printf(".ds %d %s\\*(%d\\s\\n(%d\n", dwb_yyval, ABSPS(ps), p2, 99-nszstack);
+		printf(".ds %d %s\\*(%d\\s\\n(%d\n", yyval, ABSPS(ps), p2, 99-nszstack);
 	} else
-		printf(".ds %d %s\\*(%d%s\n", dwb_yyval, DPS(p1,ps), p2, DPS(ps,p1));
+		printf(".ds %d %s\\*(%d%s\n", yyval, DPS(p1,ps), p2, DPS(ps,p1));
 	nszstack--;
 	ps = p1;
-	return dwb_yyval;
+	return yyval;
 }
 
-int globsize(void)
+#ifndef UNANSI
+void globsize(void)
+#else /* UNANSI */
+void globsize()
+#endif /* UNANSI */
 {
 	char temp[20];
 
@@ -65,7 +76,7 @@ int globsize(void)
 	} else {
 		ERROR "illegal gsize %s ignored", temp WARNING;
 	}
-	dwb_yyval = eqnreg = 0;
+	eqnreg = 0;
 	ps = gsize;
 	if (gsize < 12 && !dps_set)		/* sub and sup size change */
 		deltaps = gsize / 3;
@@ -73,5 +84,4 @@ int globsize(void)
 		deltaps = gsize / 4;
 	else
 		deltaps = gsize / 5;
-	return dwb_yyval;
 }

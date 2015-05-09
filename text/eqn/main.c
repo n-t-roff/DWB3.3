@@ -21,8 +21,8 @@ void	init_tbl(void);
 int	yyparse();
 void	settype();
 int	getdata();
-int	dwb_getline();
-void	dwb_inline();
+int	getline();
+void	inline();
 void	init();
 void	init_tbl();
 #endif /* UNANSI */
@@ -164,7 +164,7 @@ getdata()
 #ifndef UNANSI
 dwb_getline(char *s)
 #else /* UNANSI */
-dwb_getline(s)
+getline(s)
 	char *s;
 #endif /* UNANSI */
 {
@@ -187,7 +187,7 @@ dwb_getline(s)
 #ifndef UNANSI
 void dwb_inline(void)
 #else /* UNANSI */
-void dwb_inline()
+void inline()
 #endif /* UNANSI */
 {
 	int ds, n, sz1 = 0;
@@ -272,7 +272,11 @@ void init()
 		printf(".nr 99 \\n(.s\n");
 }
 
+#ifndef UNANSI
 int salloc(void)
+#else /* UNANSI */
+salloc()
+#endif /* UNANSI */
 {
 	int i;
 
@@ -295,7 +299,12 @@ void sfree(n)
 	used[n] = 0;
 }
 
+#ifndef UNANSI
 void nrwid(int n1, int p, int n2)
+#else /* UNANSI */
+void nrwid(n1, p, n2)
+	int n1; int p; int n2;
+#endif /* UNANSI */
 {
 	printf(".nr %d 0\\w'%s\\*(%d'\n", n1, DPS(gsize,p), n2);	/* 0 defends against - width */
 }

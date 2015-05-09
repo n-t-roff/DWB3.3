@@ -6,14 +6,22 @@
 #define	SSIZE	1000
 char	token[SSIZE];
 int	sp;
-int     dwb_yyval;
 
+#ifndef UNANSI
 void	space(void);
 void	dodef(tbl *);
 void	define(int);
 void	ifdef(void);
 void	include(void);
-int	delim(void);
+void	delim(void);
+#else /* UNANSI */
+void	space();
+void	dodef();
+void	define();
+void	ifdef();
+void	include();
+void	delim();
+#endif /* UNANSI */
 
 #ifndef UNANSI
 yylex(void)
@@ -87,13 +95,13 @@ yylex()
 		ifdef();
 		break;
 	case DELIM:
-		yylval.token = delim();
+		delim();
 		break;
 	case GSIZE:
-		yylval.token = globsize();
+		globsize();
 		break;
 	case GFONT:
-		yylval.token = globfont();
+		globfont();
 		break;
 	case INCLUDE:
 		include();
@@ -291,9 +299,13 @@ void include()
 	pushsrc(File, curfile->fname);
 }
 
-int delim(void)
+#ifndef UNANSI
+void delim(void)
+#else /* UNANSI */
+void delim()
+#endif /* UNANSI */
 {
-	dwb_yyval = eqnreg = 0;
+	eqnreg = 0;
 	if (cstr(token, 0, SSIZE))
 		ERROR "Bizarre delimiters" FATAL;
 	lefteq = token[0];
@@ -302,5 +314,4 @@ int delim(void)
 		ERROR "Bizarre delimiters" FATAL;
 	if (lefteq == 'o' && righteq == 'f')
 		lefteq = righteq = '\0';
-	return dwb_yyval;
 }

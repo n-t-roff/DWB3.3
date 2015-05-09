@@ -1,8 +1,15 @@
 # include "e.h"
 
+#ifndef UNANSI
 int setfont(char *ch1)
+#else /* UNANSI */
+void setfont(ch1)
+	char *ch1;
+#endif /* UNANSI */
 {
-	dwb_yyval = ft;
+	int yyval;
+
+	yyval = ft;
 	if (strcmp(ch1, "I") == 0) {	/* I and italic mean merely position 2 */
 		*ch1 = '2';
 		ft = ITAL;
@@ -25,25 +32,36 @@ int setfont(char *ch1)
 	} else
 		sprintf(ftp->name, "(%s", ch1);
 	dprintf(".\tsetfont %s %c\n", ch1, ft);
-	return dwb_yyval;
+	return yyval;
 }
 
+#ifndef UNANSI
 int font(int p1, int p2)
+#else /* UNANSI */
+void font(p1, p2)
+	int p1; int p2;
+#endif /* UNANSI */
 {
+	int yyval;
+
 		/* old font in p1, new in ft */
-	dwb_yyval = p2;
-	lfont[dwb_yyval] = rfont[dwb_yyval] = ft==ITAL ? ITAL : ROM;
+	yyval = p2;
+	lfont[yyval] = rfont[yyval] = ft==ITAL ? ITAL : ROM;
 	ftp--;
 	ft = p1;
-	return dwb_yyval;
+	return yyval;
 }
 
-int globfont(void)
+#ifndef UNANSI
+void globfont(void)
+#else /* UNANSI */
+void globfont()
+#endif /* UNANSI */
 {
 	char temp[20];
 
 	getstr(temp, sizeof(temp));
-	dwb_yyval = eqnreg = 0;
+	eqnreg = 0;
 	if (strcmp(temp, "I") == 0 || strncmp(temp, "it", 2) == 0) {
 		ft = ITAL;
 		strcpy(temp, "2");
@@ -61,14 +79,19 @@ int globfont(void)
 		strcpy(ftstack[0].name, temp);
 	else
 		sprintf(ftstack[0].name, "(%.2s", temp);
-	return dwb_yyval;
 }
 
+#ifndef UNANSI
 int fatbox(int p)
+#else /* UNANSI */
+void fatbox(p)
+	int p;
+#endif /* UNANSI */
 {
 	extern double Fatshift;
+	int yyval;
 
-	dwb_yyval = p;
+	yyval = p;
 	printf(".ds %d \\*(%d\\h'-\\w'\\*(%d'u+%gm'\\*(%d\n", p, p, p, Fatshift, p);
-	return dwb_yyval;
+	return yyval;
 }

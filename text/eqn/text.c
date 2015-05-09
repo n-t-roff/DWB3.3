@@ -31,23 +31,37 @@ int class[LAST][LAST] ={	/* guesswork, tuned to times roman postscript */
 
 };
 
+#ifndef UNANSI
 extern void shim(int, int);
 extern void roman(int);
 extern void sadd(char *);
 extern void cadd(int);
 extern int trans(int, char *);
+#else /* UNANSI */
+extern void shim();
+extern void roman();
+extern void sadd();
+extern void cadd();
+extern int trans();
+#endif /* UNANSI */
 
+#ifndef UNANSI
 int text(int t, char *p1)	/* convert text string p1 of type t */
+#else /* UNANSI */
+void text(t, p1)	/* convert text string p1 of type t */
+	int t; char *p1;
+#endif /* UNANSI */
 {
 	int c;
 	char *p;
 	tbl *tp;
+	int yyval;
 
-	dwb_yyval = salloc();
-	ebase[dwb_yyval] = 0;
-	eht[dwb_yyval] = EM(1.0, ps);	/* ht in ems of orig size */
-	lfont[dwb_yyval] = rfont[dwb_yyval] = ROM;
-	lclass[dwb_yyval] = rclass[dwb_yyval] = OTHER;
+	yyval = salloc();
+	ebase[yyval] = 0;
+	eht[yyval] = EM(1.0, ps);	/* ht in ems of orig size */
+	lfont[yyval] = rfont[yyval] = ROM;
+	lclass[yyval] = rclass[yyval] = OTHER;
 	if (t == QTEXT) {
 		for (p = p1; *p; p++)	/* scan for embedded \f's */
 			if (*p == '\\' && *(p+1) == 'f')
@@ -77,7 +91,7 @@ int text(int t, char *p1)	/* convert text string p1 of type t */
 			rf = trans(c, p1);
 			if (lf == 0) {
 				lf = rf;	/* left stuff is first found */
-				lclass[dwb_yyval] = nclass;
+				lclass[yyval] = nclass;
 			}
 			if (csp-cs > CSSIZE)
 				ERROR "converted token %.25s... too long", p1 FATAL ;
@@ -85,14 +99,14 @@ int text(int t, char *p1)	/* convert text string p1 of type t */
 		sadd("\\fP");
 		*csp = '\0';
 		p = cs;
-		lfont[dwb_yyval] = lf;
-		rfont[dwb_yyval] = rf;
-		rclass[dwb_yyval] = nclass;
+		lfont[yyval] = lf;
+		rfont[yyval] = rf;
+		rclass[yyval] = nclass;
 	}
 	dprintf(".\t%dtext: S%d <- %s; b=%g,h=%g,lf=%c,rf=%c,ps=%d\n",
-		t, dwb_yyval, p, ebase[dwb_yyval], eht[dwb_yyval], lfont[dwb_yyval], rfont[dwb_yyval], ps);
-	printf(".ds %d \"%s\n", dwb_yyval, p);
-	return dwb_yyval;
+		t, yyval, p, ebase[yyval], eht[yyval], lfont[yyval], rfont[yyval], ps);
+	printf(".ds %d \"%s\n", yyval, p);
+	return yyval;
 }
 
 #ifndef UNANSI

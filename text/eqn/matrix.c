@@ -1,6 +1,11 @@
 #include "e.h"
 
+#ifndef UNANSI
 int startcol(int type)	/* mark start of column in lp[] array */
+#else /* UNANSI */
+startcol(type)	/* mark start of column in lp[] array */
+	int type;
+#endif /* UNANSI */
 {
 	int oct = ct;
 
@@ -10,7 +15,12 @@ int startcol(int type)	/* mark start of column in lp[] array */
 	return oct;
 }
 
+#ifndef UNANSI
 void column(int oct, int sep)	/* remember end of column that started at lp[oct] */
+#else /* UNANSI */
+void column(oct, sep)	/* remember end of column that started at lp[oct] */
+	int oct; int sep;
+#endif /* UNANSI */
 {
 	int i, type;
 
@@ -25,12 +35,18 @@ void column(int oct, int sep)	/* remember end of column that started at lp[oct] 
 	}
 }
 
+#ifndef UNANSI
 int matrix(int oct)	/* matrix is list of columns */
+#else /* UNANSI */
+void matrix(oct)	/* matrix is list of columns */
+	int oct;
+#endif /* UNANSI */
 {
 	int nrow, ncol, i, j, k, val[100];
 	double b, hb;
 	char *space;
 	extern char *Matspace;
+	int yyval;
 
 	space = Matspace;	/* between columns of matrix */
 	nrow = lp[oct+1];	/* disaster if rows inconsistent */
@@ -59,20 +75,21 @@ int matrix(int oct)	/* matrix is list of columns */
 	}
 	j = oct;
 	for (i=0; i<ncol; i++) {
-		val[i] = pile(j);
+		yyval = pile(j);
+		val[i] = yyval;
 		j += nrow + 3;
 	}
-	dwb_yyval = salloc();
-	eht[dwb_yyval] = eht[val[0]];
-	ebase[dwb_yyval] = ebase[val[0]];
-	lfont[dwb_yyval] = rfont[dwb_yyval] = 0;
+	yyval = salloc();
+	eht[yyval] = eht[val[0]];
+	ebase[yyval] = ebase[val[0]];
+	lfont[yyval] = rfont[yyval] = 0;
 	dprintf(".\tmatrix S%d: r=%d, c=%d, h=%g, b=%g\n",
-		dwb_yyval,nrow,ncol,eht[dwb_yyval],ebase[dwb_yyval]);
-	printf(".ds %d \"", dwb_yyval);
+		yyval,nrow,ncol,eht[yyval],ebase[yyval]);
+	printf(".ds %d \"", yyval);
 	for( i=0; i<ncol; i++ )  {
 		printf("\\*(%d%s", val[i], i==ncol-1 ? "" : space);
 		sfree(val[i]);
 	}
 	printf("\n");
-	return dwb_yyval;
+	return yyval;
 }

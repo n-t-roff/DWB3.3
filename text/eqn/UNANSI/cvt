@@ -1,0 +1,71 @@
+
+nawk '
+
+BEGIN {
+	firstline = 1
+	# warn("Process: " FILENAME)
+}
+
+/^{/ {
+	if (prev != "") {
+		if (prev ~ /^#define/) {
+			print prev
+			next
+		}
+		# comments can be trouble (e.g. ffree())
+		if ( (c = match(prev, /\/\*.*\*\/$/)) != 0 ) {
+			comment = substr(prev, c)
+			sub(/\/\*.*\*\/$/, "", prev)
+		} else comment = ""
+
+		x = prev
+
+		# isolate argument list
+		sub(/\(void\)/, "()", x);
+		sub(/^[^(]*\(/, "", x)
+		sub(/\)[^)]*$/, "", x)
+
+		# find the names in it
+		n = split(x, args)
+		arglist = ""
+		for (i = 2; i <= n; i += 2)
+			arglist = arglist args[i]
+		gsub(/[*()\[\]]/, "", arglist)		# discard noise characters *()[]
+		gsub(/,/, ", ", arglist)		# space nicely
+		sub(/\(.*\)/, "(" arglist ")", prev)	# reconstruct
+		print prev comment
+
+		# argument declarations
+		gsub(/,/, ";", x)
+
+		if ( extra != "") {
+			print extra
+			extra = ""
+		}
+
+		if (x != "")
+			print "\t" x ";"
+	}
+	prev = $0
+	next
+}
+
+ {
+	if ( !firstline )
+		print prev
+	firstline = 0
+	if ($2 ~ /settype\(char/) { # in main.c
+		prev = $0
+		getline 
+		extra = $0
+	} else
+		prev = $0
+}
+
+function warn(s) {
+	print s | "cat 1>&2"
+}
+
+END { print prev }
+' $*
+

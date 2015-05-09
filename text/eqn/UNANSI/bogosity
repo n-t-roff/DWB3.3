@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# do some external declarations
+
+nawk '
+
+/<stdlib.h>/	{
+			print "/* declarations instead of #define <stdilb.h> */"
+			print "extern char *getenv();"
+			print "extern char *malloc();"
+			print "/* end of fake stdlib.g */"
+			next
+		}
+
+	{	print }
+'	$*
+

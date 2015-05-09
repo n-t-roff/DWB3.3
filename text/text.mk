@@ -46,6 +46,7 @@ TARGETS=devnroff\
 	picasso\
 	pm\
 	tbl\
+	otbl\
 	troff
 
 ACTION=all

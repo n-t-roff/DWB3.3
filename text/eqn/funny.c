@@ -4,11 +4,17 @@
 extern int Funnyps;
 extern double Funnyht, Funnybase;
 
+#ifndef UNANSI
 int funny(int n)
+#else /* UNANSI */
+void funny(n)
+	int n;
+#endif /* UNANSI */
 {
 	char *f;
+	int yyval;
 
-	dwb_yyval = salloc();
+	yyval = salloc();
 	switch (n) {
 	case SUM:
 		f = lookup(deftbl, "sum_def")->cval; break;
@@ -21,11 +27,11 @@ int funny(int n)
 	default:
 		ERROR "funny type %d in funny", n FATAL;
 	}
-	printf(".ds %d %s\n", dwb_yyval, f);
-	eht[dwb_yyval] = EM(1.0, ps+Funnyps) - EM(Funnyht, ps);
-	ebase[dwb_yyval] = EM(Funnybase, ps);
+	printf(".ds %d %s\n", yyval, f);
+	eht[yyval] = EM(1.0, ps+Funnyps) - EM(Funnyht, ps);
+	ebase[yyval] = EM(Funnybase, ps);
 	dprintf(".\tS%d <- %s; h=%g b=%g\n", 
-		dwb_yyval, f, eht[dwb_yyval], ebase[dwb_yyval]);
-	lfont[dwb_yyval] = rfont[dwb_yyval] = ROM;
-	return dwb_yyval;
+		yyval, f, eht[yyval], ebase[yyval]);
+	lfont[yyval] = rfont[yyval] = ROM;
+	return yyval;
 }

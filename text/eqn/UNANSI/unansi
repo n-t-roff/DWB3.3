@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+# Convert ANSI C troff/nroff source into older-style C.
+#
+# arguments: ansi source directory, unasi target directory
+#
+
+case $# in
+	2)	break ;;
+	*)	echo "unansi: sourcedir targetdir"; exit 1 ;;
+esac
+
+HERE=`pwd`
+
+SRC=`pwd`/$1
+TARGET=`pwd`/$2
+
+if /bin/test ! -d $TARGET
+then
+	mkdir $TARGET
+else
+	rm -f $TARGET/*.[yhco]
+fi
+
+cd $SRC
+
+# echo Phase 1
+
+for i in *.[chy]; do
+	sed \
+		-e 's/(void)/()/' \
+		-e 's/(int[^)]*);/();/' \
+		-e 's/(char[^)]*);/();/' \
+		-e 's/(tbl[^)]*);/();/' \
+		-e 's/(double[^)]*);/();/' \
+	$i > $TARGET/$i
+done
+
+
+
+cd $TARGET
+
+# echo Phase 2
+
+$HERE/bogosity e.h > foo; mv foo e.h
+
+for i in *.[ych]; do
+	$HERE/cvt $i >foo
+	mv foo $i
+done
+

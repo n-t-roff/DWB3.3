@@ -223,7 +223,6 @@ TARGETS=doc\
 	misc\
 	postscript\
 	text\
-	text/otbl\
 	xerox
 
 ACTION=all

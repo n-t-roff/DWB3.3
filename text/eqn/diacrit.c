@@ -3,7 +3,12 @@
 
 extern double Dvshift, Dhshift, Dh2shift, Dheight, Barv, Barh, Ubarv, Ubarh;
 
+#ifndef UNANSI
 void diacrit(int p1, int type)
+#else /* UNANSI */
+void diacrit(p1, type)
+	int p1; int type;
+#endif /* UNANSI */
 {
 	int c, t;
 

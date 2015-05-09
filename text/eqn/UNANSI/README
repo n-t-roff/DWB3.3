@@ -1,0 +1,36 @@
+This version of the UNANSI tools is based on the troff version and is
+meant for eqn only.
+
+
+Kudo's to bwk & drexler send the flames to jaap
+
+
+Basic conversion steps for new eqn source from bwk:
+
+ 1: Save a copy of the ansi source.
+
+ 2: Apply unansi to the unbwk'd source.
+
+ 3: Get unansi version to compile and run. Update unansi and cvt until
+    they produce correct code.
+
+ 4: Combine ansi and unansi versions with merge. merge arguments are the
+    directory containing ansi source from 2 and the directory with the
+    final unansi source from 5. Run merge in a new directory - result is
+    source that compiles unansi version with -DUNANSI and ansi version
+    otherwise.
+
+The Makefile is supposed to do this all automatically. Put the ansi
+sources in the directory ansi-eqn. Run the make. The result will be in
+directory kr-eqn.
+
+Note that the sed and awk scripts are tested for the eqn
+
+	char *version = "version Dec 3, 1991";
+
+only and they are really geared toward this. The scripts might easely
+break whenever there is more then just a trivial change in the ansi
+source. The whole mechanisme is based on the unansi scripts for troff
+by bwk & drexler.
+
+	Good Luck!

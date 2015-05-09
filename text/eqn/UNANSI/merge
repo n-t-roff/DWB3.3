@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# Merge ansi and unasi versions into k&R version
+#
+
+HERE=`pwd`
+
+
+case $# in
+	3)	break ;;
+	*)	echo "merge: ansi-src-dir unansi-src-dir targetdir"; exit 1 ;;
+esac
+
+HERE=`pwd`
+
+ANSIDIR=$HERE/$1
+UNANSIDIR=$HERE/$2
+TARGET=$HERE/$3
+
+if /bin/test ! -d $TARGET
+then
+	mkdir $TARGET
+else
+	rm -f $TARGET/*.[yhco]
+fi
+
+cd $ANSIDIR
+
+for i in *.[hyc]; do
+	echo "==== $i ===="
+	diff -DUNANSI $i $UNANSIDIR/$i > $TARGET/$i
+done
+exit 0
