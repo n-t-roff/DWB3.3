@@ -1,5 +1,18 @@
-2014-11-07
-    gets(3) replaced with fgets(3)
+Release 20150517
+================
+
+2015-05-17
+    col(1) buffer boundary bug fixed.
+
+2015-05-06
+    Workaround to GNU bash bug (case insensitive glob) and for
+    some system required configuring of CXX and LEX added.
+
+2015-04-30
+    Year 2000 problem fixed for all components.
+
+2015-04-23
+    Component pm ported.
 
 2014-09-14
     Any version of roff (e.g. UNIX V7) does count \} as a macro
@@ -8,6 +21,11 @@
     put it behind the macro call and substract 1 from \n(.$.  To
     make \n(.$ meaningful again this bug has been fixed now, i.e.
     \} is not considered as a macro argument anymore.
+
+2014-08-26
+    - picasso bugfix: Crashed if no text was used.
+    - Documentation of \n(yr fixed.
+    - Fixed year 2000 problem for man macros.
 
 2014-08-18
     Fixed page transition error which occurred when .bp is fol-

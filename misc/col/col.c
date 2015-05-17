@@ -369,7 +369,7 @@ emit (s, lineno)
 			}
 			putchar (*p & ~GREEK);
 			if (*p == '\b')	{
-				if ( *(p-2) && *(p-2) == ESC)
+				if (p-2 >= s && *(p-2) && *(p-2) == ESC)
 				{
 					pcp++;
 				}
