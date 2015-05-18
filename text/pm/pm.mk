@@ -2,8 +2,7 @@
 # Won't compile without a good C++ compiler.
 #
 
-#CC=CC
-CC=$(CXX)
+CC=CC
 
 MAKE=/bin/make
 MAKEFILE=pm.mk
@@ -67,7 +66,10 @@ tmac.spe : tmac.spe.sr
 	tmac.spe.sr >tmac.spe
 
 pm : $(OFILES)
-	$(CC) $(CFLAGS) -o pm $(OFILES) -lm
+	$(CXX) $(CFLAGS) -o pm $(OFILES) -lm
+
+.c.o:
+	$(CXX) $(CFLAGS) -c $<
 
 misc.o : misc.h
 slug.o : slug.h misc.h
