@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Builds one or more font width tables or the typesetter description
 # file on a PostScript printer. Assumes you have direct access to the

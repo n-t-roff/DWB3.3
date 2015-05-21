@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Formatted dump of encoded characters in one or more PostScript fonts.
 # Arguments should be PostScript font names or the word all, which dumps

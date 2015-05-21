@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Generate paper output from the data that a PostScript program normally
 # sends back to a host computer using file output operators.

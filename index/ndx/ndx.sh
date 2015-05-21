@@ -1,3 +1,4 @@
+#!/bin/sh
 trap  'rm -f /tmp/slist.$$ /tmp/cpy*$$ /tmp/sj* /tmp/sb* /tmp/ndx*$$ /tmp/$$.*; exit' 1 2 3 15
 UL=/usr/lib/dwb
 #

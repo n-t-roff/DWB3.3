@@ -1,3 +1,4 @@
+#!/bin/sh
 PATH='/bin:/usr/bin'
 L=/usr/lib/dwb
 wflag=

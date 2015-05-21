@@ -36,11 +36,11 @@ install : all
 	@chgrp $(GROUP) $(TMACDIR)/pm
 	@chown $(OWNER) $(TMACDIR)/pm
 	cp tmac.pm $(TMACDIR)/tmac.pm
-	@chmod 664 $(TMACDIR)/tmac.pm
+	@chmod 644 $(TMACDIR)/tmac.pm
 	@chgrp $(GROUP) $(TMACDIR)/tmac.pm
 	@chown $(OWNER) $(TMACDIR)/tmac.pm
 	cp tmac.spe $(TMACDIR)/tmac.spe
-	@chmod 664 $(TMACDIR)/tmac.spe
+	@chmod 644 $(TMACDIR)/tmac.spe
 	@chgrp $(GROUP) $(TMACDIR)/tmac.spe
 	@chown $(OWNER) $(TMACDIR)/tmac.spe
 	sed -e 's" /usr/lib/tmac$$" $(TMACDIR)"' \

@@ -1,3 +1,4 @@
+#!/bin/sh
 trap  'rm -f /tmp/sbj*$$; exit' 1 2 3 15
 UL=/usr/lib/dwb
 d=d

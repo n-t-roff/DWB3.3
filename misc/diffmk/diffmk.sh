@@ -1,3 +1,4 @@
+#!/bin/sh
 #	Copyright (c) 1984 AT&T
 #	  All Rights Reserved
 

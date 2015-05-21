@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Print a listing of an object, often a dictionary or an array. Something
 # like ==, but the output is often easier to read and closer to PostScript

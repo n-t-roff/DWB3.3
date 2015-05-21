@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Center pages and put cropmarks at each corner. Physical page size
 # is set with -w and -h. The default is 8.5 by 11.0 inches. Device

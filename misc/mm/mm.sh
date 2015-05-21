@@ -1,3 +1,4 @@
+#!/bin/sh
 
 LIBDIR=/usr/lib/dwb
 PUBDIR=/usr/pub

@@ -28,7 +28,8 @@ clobber : clean
 	rm -f dwbv
 
 dwbv ::
-	@echo "echo DWB $(VERSION)" >dwbv
+	@echo "#!/bin/sh" >dwbv
+	@echo "echo DWB $(VERSION)" >>dwbv
 
 changes :
 	@trap "" 1 2 3 15; \

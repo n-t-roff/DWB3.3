@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Writes a PostScript program on standard output that builds a width
 # table or typesetter description file. The program uses PostScript's

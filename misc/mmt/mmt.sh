@@ -1,3 +1,4 @@
+#!/bin/sh
 
 PUBDIR=/usr/pub
 

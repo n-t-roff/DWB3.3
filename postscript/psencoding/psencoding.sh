@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Trivial script for checking and setting the default PostScript font
 # encoding. Changing the default assumes you can write in $POSTLIB.
