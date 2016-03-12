@@ -222,8 +222,6 @@ reset()		/* done at each "graph ..." statement */
 
 opentemp()
 {
-	if (tfd != NULL)
-		fclose(tfd);
 	if (tfd != stdout) {
 		if (tfd != NULL)
 			fclose(tfd);

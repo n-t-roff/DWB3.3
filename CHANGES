@@ -1,6 +1,12 @@
+2016-03-12
+    grap double free(3) bug fixed.
+
 2015-05-18
     make(1) problem fixed: make(1) at top level did not fail if
     make(1) in a subdirectory did fail.
+
+Release 20150517
+================
 
 2015-05-17
     col(1) buffer boundary bug fixed.
