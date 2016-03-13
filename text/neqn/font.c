@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-setfont(ch1) char ch1; {
+void
+setfont(char ch1) {
 	/* use number '1', '2', '3' for roman, italic, bold */
 	yyval.token = ft;
 	if (ch1 == 'r' || ch1 == 'R')
@@ -15,32 +16,38 @@ setfont(ch1) char ch1; {
 	else
 		ft = ch1;
 	printf(".ft %c\n", ft);
-	if(dbg)printf(".\tsetfont %c\n", ft);
+	if (dbg)
+		printf(".\tsetfont %c\n", ft);
 }
 
-font(p1, p2) int p1, p2; {
+void
+font(int p1, int p2) {
 		/* old font in p1, new in ft */
 	yyval.token = p2;
 	lfont[yyval.token] = rfont[yyval.token] = ft==ITAL ? ITAL : ROM;
-	if(dbg)printf(".\tb:fb: S%d <- \\f%c S%d \\f%c b=%d,h=%d,lf=%c,rf=%c\n", 
-		yyval.token, ft, p2, p1, ebase[yyval.token], eht[yyval.token], lfont[yyval.token], rfont[yyval.token]);
-	printf(".ds %d \\f%c\\*(%d\\f%c\n", 
-		yyval.token, ft, p2, p1);
+	if (dbg)
+		printf(".\tb:fb: S%d <- \\f%c S%d \\f%c b=%d,h=%d,lf=%c,rf=%c\n",
+		    yyval.token, ft, p2, p1, ebase[yyval.token],
+		    eht[yyval.token], lfont[yyval.token], rfont[yyval.token]);
+	printf(".ds %d \\f%c\\*(%d\\f%c\n", yyval.token, ft, p2, p1);
 	ft = p1;
 	printf(".ft %c\n", ft);
 }
 
-fatbox(p) int p; {
+void
+fatbox(int p) {
 	int sh;
 
 	yyval.token = p;
 	sh = ps / 4;
 	nrwid(p, ps, p);
 	printf(".ds %d \\*(%d\\h'-\\n(%du+%du'\\*(%d\n", p, p, p, sh, p);
-	if(dbg)printf(".\tfat %d, sh=%d\n", p, sh);
+	if (dbg)
+		printf(".\tfat %d, sh=%d\n", p, sh);
 }
 
-globfont() {
+void
+globfont(void) {
 	char temp[20];
 
 	getstr(temp, 20);

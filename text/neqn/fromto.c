@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-fromto(p1, p2, p3) int p1, p2, p3; {
+void
+fromto(int p1, int p2, int p3) {
 	int b, h1, b1, pss;
 	yyval.token = oalloc();
 	lfont[yyval.token] = rfont[yyval.token] = 0;

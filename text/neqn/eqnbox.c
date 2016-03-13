@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-eqnbox(p1, p2, lu) {
+void
+eqnbox(int p1, int p2, int lu) {
 	int b, h;
 	char *sh;
 

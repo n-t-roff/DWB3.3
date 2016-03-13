@@ -13,12 +13,9 @@ int	sp;
 #define	PUSHBACK	300	/* maximum pushback characters */
 char	ibuf[PUSHBACK+SSIZE];	/* pushback buffer for definitions, etc. */
 char	*ip	= ibuf;
-char *strsave(char *s);
 
-void define(int type);
-void getstr(char *s, int n);
-
-gtc() {
+int
+gtc(void) {
   loop:
 	if (ip > ibuf)
 		return(*--ip);	/* already present */
@@ -43,9 +40,8 @@ gtc() {
 	return(EOF);
 }
 
-pbstr(str)
-register char *str;
-{
+void
+pbstr(char *str) {
 	register char *p;
 
 	p = str;
@@ -57,7 +53,8 @@ register char *str;
 		putbak(*--p);
 }
 
-yylex() {
+int
+yylex(void) {
 	register int c;
 	tbl *tp;
 	extern tbl *keytbl, *deftbl;
@@ -156,7 +153,8 @@ getstr(char *s, int n) {
 	yylval.str = s;
 }
 
-cstr(s, quote, maxs) char *s; int quote; {
+int
+cstr(char *s, int quote, int maxs) {
 	int del, c, i;
 
 	while((del=gtc()) == ' ' || del == '\t' || del == '\n');
@@ -198,8 +196,8 @@ define(int type) {
 	if (dbg)printf(".\tname %s defined as %s\n", p1, p2);
 }
 
-char *strsave(char *s)
-{
+char *
+strsave(char *s) {
 	register char *q;
 
 	q = malloc(strlen(s)+1);
@@ -209,11 +207,13 @@ char *strsave(char *s)
 	return(q);
 }
 
-include() {
+void
+include(void) {
 	error(!FATAL, "Include not yet implemented");
 }
 
-delim() {
+void
+delim(void) {
 	yyval.token = eqnreg = 0;
 	if (cstr(token, 0, SSIZE))
 		error(FATAL, "Bizarre delimiters at %.20s", token);

@@ -1,7 +1,8 @@
 # include "e.h"
 # include "y.tab.h"
 
-diacrit(p1, type) int p1, type; {
+void
+diacrit(int p1, int type) {
 	int c, t;
 
 	c = oalloc();

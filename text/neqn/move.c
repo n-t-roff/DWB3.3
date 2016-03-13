@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-move(dir, amt, p) int dir, amt, p; {
+void
+move(int dir, int amt, int p) {
 	int a;
 
 	yyval.token = p;

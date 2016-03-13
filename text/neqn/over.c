@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-boverb(p1, p2) int p1, p2; {
+void
+boverb(int p1, int p2) {
 	int h, b, treg, d;
 
 	treg = oalloc();

@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-column(type, p1) int type, p1; {
+void
+column(int type, int p1) {
 	int i;
 
 	lp[p1] = ct - p1 - 1;
@@ -16,7 +17,8 @@ column(type, p1) int type, p1; {
 	lp[ct++] = type;
 }
 
-matrix(p1) int p1; {
+void
+matrix(int p1) {
 	int nrow, ncol, i, j, k, hb, b, val[100];
 	char *space;
 

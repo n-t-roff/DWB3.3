@@ -3,14 +3,16 @@
 
 extern YYSTYPE yyval;
 
-mark(p1) int p1; {
+void
+mark(int p1) {
 	markline = 1;
 	printf(".ds %d \\k(97\\*(%d\n", p1, p1);
 	yyval.token = p1;
 	if(dbg)printf(".\tmark %d\n", p1);
 }
 
-lineup(p1) {
+void
+lineup(int p1) {
 	markline = 1;
 	if (p1 == 0) {
 		yyval.token = oalloc();

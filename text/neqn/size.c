@@ -1,10 +1,11 @@
 # include "e.h"
 #include "y.tab.h"
+#include <stdlib.h>
 
 extern YYSTYPE yyval;
 
-setsize(p)	/* set size as found in p */
-char *p;
+void
+setsize(char *p)	/* set size as found in p */
 {
 	if (*p == '+')
 		ps += atoi(p+1);
@@ -15,7 +16,8 @@ char *p;
 	if(dbg)printf(".\tsetsize %s; ps = %d\n", p, ps);
 }
 
-size(p1, p2) int p1, p2; {
+void
+size(int p1, int p2) {
 		/* old size in p1, new in ps */
 	int effps, effp1;
 
@@ -29,7 +31,8 @@ size(p1, p2) int p1, p2; {
 	ps = p1;
 }
 
-globsize() {
+void
+globsize(void) {
 	char temp[20];
 
 	getstr(temp, 20);

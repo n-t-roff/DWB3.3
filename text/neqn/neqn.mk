@@ -10,7 +10,7 @@ OWNER=bin
 BINDIR=/usr/bin
 MAN1DIR=/usr/man/u_man/man1
 
-CFLGS=-O
+CFLGS=-O -Wall
 LDFLGS=-s
 
 CFLAGS=$(CFLGS) -DNEQN

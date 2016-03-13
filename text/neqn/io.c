@@ -1,5 +1,8 @@
+#include <stdarg.h>
 #include <stdlib.h>
-# include "e.h"
+#include <string.h>
+#include "e.h"
+#include "y.tab.h"
 #define	MAXLINE	1200	/* maximum input line */
 
 char	in[MAXLINE];	/* input buffer */
@@ -9,12 +12,14 @@ int noeqn;
 int dwb_getline(register char *s);
 void dwb_inline(void);
 
-main(argc,argv) int argc; char *argv[];{
-
+int
+main(int argc, char **argv) {
 	eqnexit(eqn(argc, argv));
+	return 0;
 }
 
-int eqnexit(int n) {
+int
+eqnexit(int n) {
 #ifdef gcos
 	if (n)
 		fprintf(stderr, "run terminated due to eqn error\n");
@@ -23,7 +28,8 @@ int eqnexit(int n) {
 	exit(n);
 }
 
-eqn(argc,argv) int argc; char *argv[];{
+int
+eqn(int argc, char **argv) {
 	int i, type;
 
 	setfile(argc,argv);
@@ -63,8 +69,9 @@ eqn(argc,argv) int argc; char *argv[];{
 	return(0);
 }
 
-int dwb_getline(register char *s) {
-	register c;
+int
+dwb_getline(char *s) {
+	int c;
 	while((*s++=c=gtc())!='\n' && c!=EOF && c!=lefteq)
 		if (s >= in+MAXLINE) {
 			error( !FATAL, "input line too long: %.20s\n", in);
@@ -77,7 +84,8 @@ int dwb_getline(register char *s) {
 	return(c);
 }
 
-void dwb_inline(void) {
+void
+dwb_inline(void) {
 	int ds;
 
 	printf(".nr 99 \\n(.s\n.nr 98 \\n(.f\n");
@@ -101,7 +109,8 @@ void dwb_inline(void) {
 	ofree(ds);
 }
 
-putout(p1) int p1; {
+void
+putout(int p1) {
 	extern int gsize, gfont;
 	int before, after;
 	if(dbg)printf(".\tanswer <- S%d, h=%d,b=%d\n",p1, eht[p1], ebase[p1]);
@@ -120,11 +129,13 @@ putout(p1) int p1; {
 	eqnreg = p1;
 }
 
-max(i,j) int i,j; {
+int
+max(int i, int j) {
 	return (i>j ? i : j);
 }
 
-oalloc() {
+int
+oalloc(void) {
 	int i;
 	for (i=11; i<100; i++)
 		if (used[i]++ == 0) return(i);
@@ -132,19 +143,23 @@ oalloc() {
 	return(0);
 }
 
-ofree(n) int n; {
+void
+ofree(int n) {
 	used[n] = 0;
 }
 
-setps(p) int p; {
+void
+setps(int p) {
 	printf(".ps %d\n", EFFPS(p));
 }
 
-nrwid(n1, p, n2) int n1, p, n2; {
+void
+nrwid(int n1, int p, int n2) {
 	printf(".nr %d \\w'\\s%d\\*(%d'\n", n1, EFFPS(p), n2);
 }
 
-setfile(argc, argv) int argc; char *argv[]; {
+void
+setfile(int argc, char **argv) {
 	static char *nullstr = "-";
 
 	svargc = --argc;
@@ -172,9 +187,11 @@ setfile(argc, argv) int argc; char *argv[]; {
 		error( FATAL,"can't open file %s", svargv[1]);
 }
 
-yyerror() {;}
+void
+yyerror(char *s) {}
 
-init() {
+void
+init(void) {
 	ct = 0;
 	ps = gsize;
 	ft = gfont;
@@ -182,18 +199,17 @@ init() {
 	printf(".ft %c\n", ft);
 }
 
-error(fatal, s1, s2) int fatal; char *s1, *s2; {
-	if (fatal>0)
-		printf("eqn fatal error: ");
-	printf(s1,s2);
-	printf("\nfile %s, between lines %d and %d\n",
-		 svargv[ifile], eqline, linect);
+void
+error(int fatal, const char *fmt, ...) {
+	va_list argp;
 	fprintf(stderr, "eqn: ");
-	if (fatal>0)
+	if (fatal)
 		fprintf(stderr, "fatal error: ");
-	fprintf(stderr, s1, s2);
+	va_start(argp, fmt);
+	vfprintf(stderr, fmt, argp);
+	va_end(argp);
 	fprintf(stderr, "\nfile %s, between lines %d and %d\n",
-		 svargv[ifile], eqline, linect);
-	if (fatal > 0)
+		svargv[ifile], eqline, linect);
+	if (fatal)
 		eqnexit(1);
 }

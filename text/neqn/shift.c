@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-bshiftb(p1, dir, p2) int p1, dir, p2; {
+void
+bshiftb(int p1, int dir, int p2) {
 	int shval, d1, h1, b1, h2, b2;
 	yyval.token = p1;
 	h1 = eht[p1];
@@ -32,13 +33,15 @@ bshiftb(p1, dir, p2) int p1, dir, p2; {
 	ofree(p2);
 }
 
-shift(p1) int p1; {
+void
+shift(int p1) {
 	ps -= deltaps;
 	yyval.token = p1;
 	if(dbg)printf(".\tshift: %d;ps=%d\n", yyval.token, ps);
 }
 
-shift2(p1, p2, p3) int p1, p2, p3; {
+void
+shift2(int p1, int p2, int p3) {
 	int effps, h1, h2, h3, b1, b2, b3, subsh, d1, d2, supsh;
 	int treg;
 

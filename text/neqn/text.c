@@ -10,7 +10,8 @@ char	cs[420];
 
 int	lf, rf;	/* temporary spots for left and right fonts */
 
-text(t,p1) int t; char *p1; {
+void
+text(int t, char *p1) {
 	int c;
 	char *p;
 	tbl *tp;
@@ -44,12 +45,15 @@ text(t,p1) int t; char *p1; {
 		lfont[yyval.token] = lf;
 		rfont[yyval.token] = rf;
 	}
-	if(dbg)printf(".\t%dtext: S%d <- %s; b=%d,h=%d,lf=%c,rf=%c\n",
-		t, yyval.token, p, ebase[yyval.token], eht[yyval.token], lfont[yyval.token], rfont[yyval.token]);
+	if (dbg)
+		printf(".\t%dtext: S%d <- %s; b=%d,h=%d,lf=%c,rf=%c\n",
+		    t, yyval.token, p, ebase[yyval.token], eht[yyval.token],
+		    lfont[yyval.token], rfont[yyval.token]);
 	printf(".ds %d \"%s\n", yyval.token, p);
 }
 
-trans(c,p1) int c; char *p1; {
+int
+trans(int c, char *p1) {
 	int f;
 	f = ROM;
 	switch( c) {
@@ -154,17 +158,20 @@ trans(c,p1) int c; char *p1; {
 	return(f);
 }
 
-shim() {
+void
+shim(void) {
 	cs[csp++] = '\\'; cs[csp++] = '|';
 }
 
-roman(c) int c; {
+void
+roman(int c) {
 	cs[csp++] = '\\'; cs[csp++] = 'f'; cs[csp++] = ROM;
 	cs[csp++] = c;
 	cs[csp++] = '\\'; cs[csp++] = 'f'; cs[csp++] = 'P';
 }
 
-name4(c1,c2) int c1,c2; {
+void
+name4(int c1, int c2) {
 	cs[csp++] = '\\';
 	cs[csp++] = '(';
 	cs[csp++] = c1;

@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-lpile(type, p1, p2) int type, p1, p2; {
+void
+lpile(int type, int p1, int p2) {
 	int bi, hi, i, gap, h, b, nlist, nlist2, mid;
 	yyval.token = oalloc();
 	gap = VERT(1);

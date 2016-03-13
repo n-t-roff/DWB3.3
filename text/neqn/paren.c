@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-paren(leftc, p1, rightc) int p1, leftc, rightc; {
+void
+paren(int leftc, int p1, int rightc) {
 	int n, m, h1, j, b1, v;
 	h1 = eht[p1]; b1 = ebase[p1];
 	yyval.token = p1;
@@ -11,7 +12,8 @@ paren(leftc, p1, rightc) int p1, leftc, rightc; {
 	if( n<2 ) n = 1;
 	m = n-2;
 	if (leftc=='{' || rightc == '}') {
-		n = n%2 ? n : ++n;
+		if (!(n % 2))
+			n++;
 		if( n<3 ) n=3;
 		m = n-3;
 	}
@@ -100,7 +102,8 @@ paren(leftc, p1, rightc) int p1, leftc, rightc; {
 		eht[yyval.token], ebase[yyval.token], n, v, leftc, rightc);
 }
 
-brack(m, t, c, b) int m; char *t, *c, *b; {
+void
+brack(int m, char *t, char *c, char *b) {
 	int j;
 	printf("\\b'%s", t);
 	for( j=0; j<m; j++)

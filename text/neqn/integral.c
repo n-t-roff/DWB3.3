@@ -3,7 +3,8 @@
 
 extern YYSTYPE yyval;
 
-integral(p, p1, p2) {
+void
+integral(int p, int p1, int p2) {
 #ifndef	NEQN
 	if (p1 != 0)
 		printf(".ds %d \\h'-0.4m'\\v'0.4m'\\*(%d\\v'-0.4m'\n", p1, p1);
@@ -21,7 +22,8 @@ integral(p, p1, p2) {
 	lfont[p] = ROM;
 }
 
-setintegral() {
+void
+setintegral(void) {
 	char *f;
 
 	yyval.token = oalloc();
