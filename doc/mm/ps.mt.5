@@ -1,10 +1,10 @@
 %!PS
-%%Version: 3.3
+%%Version: 3.3.2
 %%DocumentFonts: (atend)
 %%Pages: (atend)
 %%EndComments
 %
-% Version 3.3 prologue for troff files.
+% Version 3.3.2 prologue for troff files.
 %
 
 /#copies 1 store
@@ -83,8 +83,7 @@
 	magnification dup aspectratio mul scale
 	scaling scaling scale
 
-	/Symbol /S Sdefs cf
-	/Times-Roman /S1 S1defs cf
+	addmetrics
 	0 0 moveto
 } def
 
@@ -101,6 +100,11 @@
 	add 2 div /xcenter exch def
 	add 2 div /ycenter exch def
 	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
 } def
 
 /pagesetup {
@@ -149,11 +153,14 @@
 	dup length 2 idiv
 	/entries exch def
 	/chtab exch def
+	/newencoding exch def
 	/newfont exch def
 
 	findfont dup length 1 add dict
 	/newdict exch def
-	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
 
 	newdict /Metrics entries dict put
 	newdict /Metrics get
@@ -204,42 +211,56 @@ setup
 /saveobj save def
 mark
 1 pagesetup
+%INFO[COMPANY:  AT&T Bell Laboratories]
+%INFO[DATE: April 1, 1990]
+%INFO[AUTHOR: NAME = S. P. Lename, ORG = 98765, LOC = MH, ROOM = 4W-567, PHONE = (201) 582-1234, AFFILIATION = DocuCenter Services, Inc.]
+%INFO[DOCUMENT STYLE: CODE = EL, TYPE = External Letter]
+%INFO[TITLE: <START>]
 10 B f
 (Document Headings and Paragraphs)3 1576 1 720 600 t
-(April 1, 1990)2 553 1 4032 1560 t
+%INFO[TITLE: <END>]
+(April 1, 1990)2 553 1 4032 1800 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = PARAGRAPHS AND HEADINGS]
 9 B f
-( AND HEADINGS)2 721(1. PARAGRAPHS)1 739 2 720 1920 t
+( AND HEADINGS)2 721(1. PARAGRAPHS)1 739 2 720 2160 t
 10 R f
-(This section describes the types of paragraphs and the kinds of headings that are available.)14 3612 1 720 2100 t
+(This section describes the types of paragraphs and the kinds of headings that are available.)14 3612 1 720 2340 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.1  , HEADING = Paragraphs]
 9 B f
-(1.1 Paragraphs)1 609 1 720 2280 t
+(1.1 Paragraphs)1 609 1 720 2520 t
 10 R f
-( number register Pt is used to)6 1226( The)1 215( \257ush left.)2 423( they are)2 361( Usually,)1 395(Paragraphs are speci\256ed by the .P macro.)6 1700 6 720 2460 t
-(change the paragraph style.)3 1091 1 720 2580 t
+( number register Pt is used to)6 1226( The)1 215( \257ush left.)2 423( they are)2 361( Usually,)1 395(Paragraphs are speci\256ed by the .P macro.)6 1700 6 720 2700 t
+(change the paragraph style.)3 1091 1 720 2820 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.2  , HEADING = Headings]
 9 B f
-(1.2 Headings)1 519 1 720 2760 t
+(1.2 Headings)1 519 1 720 3000 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 1.2.1  , HEADING = Numbered Headings.]
 10 I f
-( Headings.)1 444(1.2.1 Numbered)1 666 2 720 2940 t
+( Headings.)1 444(1.2.1 Numbered)1 666 2 720 3180 t
 10 R f
-( the most major or)4 781( 1 is)2 189( Level)1 288(There are seven levels of numbered headings.)6 1891 4 1891 2940 t
-(highest; level 7, the lowest.)4 1094 1 720 3060 t
-(Headings are speci\256ed with the .H macro, whose \256rst argument is the level of heading \(1 through 7\).)17 4021 1 720 3240 t
-( and)1 181( Level-1)1 372( headings are preceded by two blank lines; all others, by one blank line.)13 3015(On output, level-1)2 752 4 720 3420 t
-( 3 through 7 are)4 636(level-2 headings are normally emboldened and stand apart from the text that follows; levels)13 3684 2 720 3540 t
-(normally italicized and run in with the text that follows.)9 2232 1 720 3660 t
+( the most major or)4 781( 1 is)2 189( Level)1 288(There are seven levels of numbered headings.)6 1891 4 1891 3180 t
+(highest; level 7, the lowest.)4 1094 1 720 3300 t
+(Headings are speci\256ed with the .H macro, whose \256rst argument is the level of heading \(1 through 7\).)17 4021 1 720 3480 t
+( and)1 181( Level-1)1 372( headings are preceded by two blank lines; all others, by one blank line.)13 3015(On output, level-1)2 752 4 720 3660 t
+( 3 through 7 are)4 636(level-2 headings are normally emboldened and stand apart from the text that follows; levels)13 3684 2 720 3780 t
+(normally italicized and run in with the text that follows.)9 2232 1 720 3900 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 1.2.2  , HEADING = Unnumbered Headings.]
 10 I f
-( Headings.)1 434(1.2.2 Unnumbered)1 771 2 720 3840 t
+( Headings.)1 434(1.2.2 Unnumbered)1 771 2 720 4080 t
 10 R f
-( is a special case of .H, in that no heading number is printed.)13 2439(The macro .HU)2 625 2 1976 3840 t
-( of that)2 283( the value)2 390( Usually,)1 387(Each .HU heading has the level given by the register Hu, whose initial value is 2.)15 3260 4 720 3960 t
-(register is set to make unnumbered headings occur at the lower heading level in a document.)15 3693 1 720 4080 t
+( is a special case of .H, in that no heading number is printed.)13 2439(The macro .HU)2 625 2 1976 4080 t
+( of that)2 283( the value)2 390( Usually,)1 387(Each .HU heading has the level given by the register Hu, whose initial value is 2.)15 3260 4 720 4200 t
+(register is set to make unnumbered headings occur at the lower heading level in a document.)15 3693 1 720 4320 t
 10 B f
-(S. P. Lename)2 561 1 2880 4560 t
+(S. P. Lename)2 561 1 2880 4800 t
 10 R f
-(MH-98765-SPL-mc)720 4560 w
-(Copy to)1 320 1 720 4800 t
-(J. J. Jones)2 400 1 720 4920 t
-(F. G. Swatter)2 533 1 720 5040 t
+(MH-98765-SPL-mc)720 4800 w
+%INFO[NOTATION LIST: CODE = , TYPE = Copy to]
+%INFO[NOTATION LIST: <START>]
+(Copy to)1 320 1 720 5040 t
+(J. J. Jones)2 400 1 720 5160 t
+(F. G. Swatter)2 533 1 720 5280 t
+%INFO[NOTATION LIST: <END>]
 cleartomark
 showpage
 saveobj restore

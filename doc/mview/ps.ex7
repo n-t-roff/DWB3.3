@@ -1,11 +1,11 @@
 %!PS
-%%Version: 3.3
+%%Version: 3.3.2
 %%DocumentFonts: (atend)
 %%Pages: (atend)
 %%BoundingBox: (atend)
 %%EndComments
 %
-% Version 3.3 prologue for troff files.
+% Version 3.3.2 prologue for troff files.
 %
 
 /#copies 1 store
@@ -84,8 +84,7 @@
 	magnification dup aspectratio mul scale
 	scaling scaling scale
 
-	/Symbol /S Sdefs cf
-	/Times-Roman /S1 S1defs cf
+	addmetrics
 	0 0 moveto
 } def
 
@@ -102,6 +101,11 @@
 	add 2 div /xcenter exch def
 	add 2 div /ycenter exch def
 	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
 } def
 
 /pagesetup {
@@ -150,11 +154,14 @@
 	dup length 2 idiv
 	/entries exch def
 	/chtab exch def
+	/newencoding exch def
 	/newfont exch def
 
 	findfont dup length 1 add dict
 	/newdict exch def
-	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
 
 	newdict /Metrics entries dict put
 	newdict /Metrics get
@@ -343,5 +350,5 @@ saveobj restore
 %%Trailer
 done
 %%Pages: 1
-%%DocumentFonts: Helvetica Times-Roman Symbol Helvetica-Bold Helvetica-Oblique
+%%DocumentFonts: Helvetica-Bold Helvetica-Oblique Helvetica Symbol Times-Roman
 %%BoundingBox: 8 112 533 738

@@ -1,11 +1,11 @@
 %!PS
-%%Version: 3.3
+%%Version: 3.3.2
 %%DocumentFonts: (atend)
 %%Pages: (atend)
 %%BoundingBox: (atend)
 %%EndComments
 %
-% Version 3.3 prologue for troff files.
+% Version 3.3.2 prologue for troff files.
 %
 
 /#copies 1 store
@@ -84,8 +84,7 @@
 	magnification dup aspectratio mul scale
 	scaling scaling scale
 
-	/Symbol /S Sdefs cf
-	/Times-Roman /S1 S1defs cf
+	addmetrics
 	0 0 moveto
 } def
 
@@ -102,6 +101,11 @@
 	add 2 div /xcenter exch def
 	add 2 div /ycenter exch def
 	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
 } def
 
 /pagesetup {
@@ -150,11 +154,14 @@
 	dup length 2 idiv
 	/entries exch def
 	/chtab exch def
+	/newencoding exch def
 	/newfont exch def
 
 	findfont dup length 1 add dict
 	/newdict exch def
-	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
 
 	newdict /Metrics entries dict put
 	newdict /Metrics get
@@ -221,7 +228,7 @@ mark
 8 S1 f
 ( ______)1 233( _)1 5023(_ ______)1 273 3 0 200 t
 8 H f
-(5/7/91)5024 350 w
+(3/13/2016)4889 350 w
 (The Works)1 395 1 4853 450 t
 (FOIL 6)1 253 1 4995 550 t
 8 S f
@@ -264,8 +271,10 @@ mark
 ( 221)1 856(C 11/23)1 1271 2 2184 2132 t
 14 S f
 (_ ___________________________________________________)1 3573 1 949 2167 t
+14 I f
+(And now ...)2 656 1 1009 2342 t
 14 H f
-(Some filled)1 706 1 1875 2342 t
+( filled)1 340(1.2 Some)1 -1992 2 4233 2342 t
 (text and an)2 720 1 1875 2517 t
 (equation:)1875 2692 w
 14 S f
@@ -294,13 +303,9 @@ mark
 (-)3622 2347 w
 11 I f
 (s)3701 2347 w
-14 I f
-(And now ...)2 656 1 1009 2342 t
-14 H f
-(1.2)4233 2342 w
 14 S f
-(_ ___________________________________________________)1 3573 1 949 2737 t
-( \347)1 -3613(_ ___________________________________________________)1 3613 2 929 2757 t
+(_ ___________________________________________________)1 3573 1 949 2717 t
+( \347)1 -3613(_ ___________________________________________________)1 3613 2 929 2737 t
 (\347)929 2682 w
 (\347)929 2542 w
 (\347)929 2402 w
@@ -313,7 +318,7 @@ mark
 (\347)929 1422 w
 (\347)929 1282 w
 (\347)929 1142 w
-(\347)949 2737 w
+(\347)949 2717 w
 (\347)949 2702 w
 (\347)949 2562 w
 (\347)949 2422 w
@@ -326,7 +331,7 @@ mark
 (\347)949 1442 w
 (\347)949 1302 w
 (\347)949 1162 w
-(\347)1770 2737 w
+(\347)1770 2717 w
 (\347)1770 2702 w
 (\347)1770 2562 w
 (\347)1770 2422 w
@@ -339,7 +344,7 @@ mark
 (\347)1770 1442 w
 (\347)1770 1302 w
 (\347)1770 1162 w
-(\347)2700 2737 w
+(\347)2700 2717 w
 (\347)2700 2622 w
 (\347)2700 2482 w
 (\347)2700 2342 w
@@ -350,7 +355,7 @@ mark
 (\347)2700 1642 w
 (\347)2700 1502 w
 (\347)2700 1362 w
-(\347)3860 2737 w
+(\347)3860 2717 w
 (\347)3860 2622 w
 (\347)3860 2482 w
 (\347)3860 2342 w
@@ -361,7 +366,7 @@ mark
 (\347)3860 1642 w
 (\347)3860 1502 w
 (\347)3860 1362 w
-(\347)4522 2737 w
+(\347)4522 2717 w
 (\347)4522 2702 w
 (\347)4522 2562 w
 (\347)4522 2422 w
@@ -374,7 +379,7 @@ mark
 (\347)4522 1442 w
 (\347)4522 1302 w
 (\347)4522 1162 w
-(\347)4542 2757 w
+(\347)4542 2737 w
 (\347)4542 2682 w
 (\347)4542 2542 w
 (\347)4542 2402 w
@@ -411,5 +416,5 @@ saveobj restore
 %%Trailer
 done
 %%Pages: 1
-%%DocumentFonts: Times-Bold Helvetica Times-Italic Times-Roman Symbol
+%%DocumentFonts: Times-Bold Helvetica Times-Italic Symbol Times-Roman
 %%BoundingBox: -10 207 563 800

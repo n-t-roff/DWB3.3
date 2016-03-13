@@ -1,10 +1,10 @@
 %!PS
-%%Version: 3.3
+%%Version: 3.3.2
 %%DocumentFonts: (atend)
 %%Pages: (atend)
 %%EndComments
 %
-% Version 3.3 prologue for troff files.
+% Version 3.3.2 prologue for troff files.
 %
 
 /#copies 1 store
@@ -83,8 +83,7 @@
 	magnification dup aspectratio mul scale
 	scaling scaling scale
 
-	/Symbol /S Sdefs cf
-	/Times-Roman /S1 S1defs cf
+	addmetrics
 	0 0 moveto
 } def
 
@@ -101,6 +100,11 @@
 	add 2 div /xcenter exch def
 	add 2 div /ycenter exch def
 	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
 } def
 
 /pagesetup {
@@ -149,11 +153,14 @@
 	dup length 2 idiv
 	/entries exch def
 	/chtab exch def
+	/newencoding exch def
 	/newfont exch def
 
 	findfont dup length 1 add dict
 	/newdict exch def
-	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
 
 	newdict /Metrics entries dict put
 	newdict /Metrics get
@@ -239,8 +246,11 @@ mark
 ( you do not receive this shipment or are not pleased)10 2148( If)1 125(You will receive your trial shipment in one week.)8 2047 3 720 4260 t
 (with the product, please contact me at 201-567-9876.)7 2127 1 720 4380 t
 (S. P. LENAME, MANAGER, PRODUCT SALES)5 2031 1 720 4980 t
+%INFO[NOTATION LIST: CODE = 3, TYPE = Att.]
+%INFO[NOTATION LIST: <START>]
 (Att.)720 5340 w
 (Brochure)720 5460 w
+%INFO[NOTATION LIST: <END>]
 cleartomark
 showpage
 saveobj restore

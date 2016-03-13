@@ -6515,44 +6515,19 @@ mark
 (troff)3965 6564 w
 10 R f
 (process, may be useful in)4 1048 1 4172 6564 t
-( character sequence)2 793( There)1 288(generating unique \256lenames for output.)4 1597 3 1116 6684 t
+(generating unique \256lenames for output.)4 1573 1 1116 6684 t
 10 CW f
-(\\})3826 6684 w
-10 R f
-(in)3978 6684 w
+(.pi)540 6864 w
 10 I f
-(string)4088 6684 w
+(string)770 6864 w
 10 R f
-(is assumed to be part)4 866 1 4354 6684 t
-(of the argument of)3 740 1 1116 6804 t
-10 CW f
-(.sy)1881 6804 w
-10 R f
-(.)2061 6804 w
-10 CW f
-(.pi)540 6984 w
+(\261 \261)1 950 1 2340 6864 t
+(Pipe output to)2 572 1 1116 7008 t
 10 I f
-(string)770 6984 w
+(string)1718 7008 w
 10 R f
-(\261 \261)1 950 1 2340 6984 t
-(Pipe output to)2 572 1 1116 7128 t
-10 I f
-(string)1718 7128 w
-10 R f
-( request must occur before any printing)6 1605( This)1 234( line.)1 206(, which is the rest of the input)7 1223 4 1952 7128 t
-( character sequence)2 779(occurs. There)1 567 2 1116 7248 t
-10 CW f
-(\\})2487 7248 w
-10 R f
-(in)2632 7248 w
-10 I f
-(string)2735 7248 w
-10 R f
-(is assumed to be part of the argument of)8 1603 1 2994 7248 t
-10 CW f
-(.pi)4622 7248 w
-10 R f
-(.)4802 7248 w
+( request must occur before any printing)6 1605( This)1 234( line.)1 206(, which is the rest of the input)7 1223 4 1952 7008 t
+(occurs.)1116 7128 w
 cleartomark
 showpage
 saveobj restore

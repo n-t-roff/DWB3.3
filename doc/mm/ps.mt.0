@@ -1,10 +1,10 @@
 %!PS
-%%Version: 3.3
+%%Version: 3.3.2
 %%DocumentFonts: (atend)
 %%Pages: (atend)
 %%EndComments
 %
-% Version 3.3 prologue for troff files.
+% Version 3.3.2 prologue for troff files.
 %
 
 /#copies 1 store
@@ -83,8 +83,7 @@
 	magnification dup aspectratio mul scale
 	scaling scaling scale
 
-	/Symbol /S Sdefs cf
-	/Times-Roman /S1 S1defs cf
+	addmetrics
 	0 0 moveto
 } def
 
@@ -101,6 +100,11 @@
 	add 2 div /xcenter exch def
 	add 2 div /ycenter exch def
 	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
 } def
 
 /pagesetup {
@@ -149,11 +153,14 @@
 	dup length 2 idiv
 	/entries exch def
 	/chtab exch def
+	/newencoding exch def
 	/newfont exch def
 
 	findfont dup length 1 add dict
 	/newdict exch def
-	{1 index /FID ne {newdict 3 1 roll put} {pop pop} ifelse} forall
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
 
 	newdict /Metrics entries dict put
 	newdict /Metrics get
@@ -204,6 +211,10 @@ setup
 /saveobj save def
 mark
 1 pagesetup
+%INFO[COMPANY:  AT&T Bell Laboratories]
+%INFO[DATE: April 1, 1990]
+%INFO[AUTHOR: NAME = S. P. Lename, ORG = 98765, LOC = MH, ROOM = 4W-567, PHONE = (201) 582-1234, AFFILIATION = DocuCenter Services, Inc.]
+%INFO[DOCUMENT STYLE: CODE = IM, TYPE = Memorandum]
 36 S1 f
 ()3780 696 w
 cleartomark
@@ -234,8 +245,10 @@ mark
 (DocuCenter Services, Inc.)2 1165 1 720 1020 t
 8 R f
 (subject:)720 1416 w
+%INFO[TITLE: <START>]
 10 B f
 (Document Headings and Paragraphs)3 1576 1 1017 1416 t
+%INFO[TITLE: <END>]
 8 R f
 (date:)3792 1416 w
 10 B f
@@ -248,17 +261,21 @@ mark
 (MH 4W-567)1 530 1 4032 1896 t
 (\(201\) 582-1234)1 624 1 4032 2016 t
 (systemx!spl)4032 2136 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = PARAGRAPHS AND HEADINGS]
 9 B f
 ( AND HEADINGS)2 721(1. PARAGRAPHS)1 739 2 720 2616 t
 10 R f
 (This section describes the types of paragraphs and the kinds of headings that are available.)14 3612 1 720 2796 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.1  , HEADING = Paragraphs]
 9 B f
 (1.1 Paragraphs)1 609 1 720 2976 t
 10 R f
 ( number register Pt is used to)6 1226( The)1 215( \257ush left.)2 423( they are)2 361( Usually,)1 395(Paragraphs are speci\256ed by the .P macro.)6 1700 6 720 3156 t
 (change the paragraph style.)3 1091 1 720 3276 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.2  , HEADING = Headings]
 9 B f
 (1.2 Headings)1 519 1 720 3456 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 1.2.1  , HEADING = Numbered Headings.]
 10 I f
 ( Headings.)1 444(1.2.1 Numbered)1 666 2 720 3636 t
 10 R f
@@ -268,6 +285,7 @@ mark
 ( and)1 181( Level-1)1 372( headings are preceded by two blank lines; all others, by one blank line.)13 3015(On output, level-1)2 752 4 720 4116 t
 ( 3 through 7 are)4 636(level-2 headings are normally emboldened and stand apart from the text that follows; levels)13 3684 2 720 4236 t
 (normally italicized and run in with the text that follows.)9 2232 1 720 4356 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 1.2.2  , HEADING = Unnumbered Headings.]
 10 I f
 ( Headings.)1 434(1.2.2 Unnumbered)1 771 2 720 4536 t
 10 R f
@@ -278,9 +296,12 @@ mark
 (S. P. Lename)2 561 1 2880 5256 t
 10 R f
 (MH-98765-SPL-mc)720 5256 w
+%INFO[NOTATION LIST: CODE = , TYPE = Copy to]
+%INFO[NOTATION LIST: <START>]
 (Copy to)1 320 1 720 5496 t
 (J. J. Jones)2 400 1 720 5616 t
 (F. G. Swatter)2 533 1 720 5736 t
+%INFO[NOTATION LIST: <END>]
 cleartomark
 showpage
 saveobj restore
