@@ -1,0 +1,1975 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(PostScript Character Set and Symbols)4 3300 1 540 1040 t
+36 S1 f
+(__________________________)540 1240 w
+14 HB f
+(Special Font Symbol Set)3 1633 1 540 1440 t
+10 R f
+( The)1 218( symbols designed independently of any particular font style.)8 2543(The ``special'' fonts offer a variety of graphic)7 1919 3 540 1860 t
+( Greek alphabet, mathematical symbols, bracket-building segments, and other)8 3173(special-fonts symbol set includes the)4 1507 2 540 1980 t
+(miscellaneous symbols.)1 950 1 540 2100 t
+( symbols are represented by character access)6 1890(Most symbols have assigned input names; the remaining unnamed)8 2790 2 540 2280 t
+( addition, the)2 525(codes. In)1 385 2 540 2400 t
+9 R f
+(ASCII)1473 2400 w
+10 R f
+(characters)1733 2400 w
+10 S f
+(\357)2161 2400 w
+10 R f
+(,)2226 2400 w
+10 S f
+(_)2276 2400 w
+10 R f
+(,)2342 2400 w
+10 S f
+(>)2392 2400 w
+10 R f
+(and)2472 2400 w
+10 S f
+(<)2641 2400 w
+10 R f
+(are taken from the special fonts.)5 1280 1 2721 2400 t
+18 S1 f
+(____________________________________________________)540 2700 w
+12 HB f
+(Greek Alphabet)1 889 1 540 2860 t
+10 R f
+(Input)1016 3100 w
+(Symbol Name Description)2 1318 1 540 3220 t
+10 S f
+(_ __________________________________________)1 2112 1 540 3240 t
+(A)660 3380 w
+10 CW f
+(\\\(*A)1002 3380 w
+10 R f
+(Alpha)1392 3380 w
+7 R f
+(\262)1636 3344 w
+10 S f
+(B)662 3500 w
+10 CW f
+(\\\(*B)1002 3500 w
+10 R f
+(Beta)1392 3500 w
+7 R f
+(\262)1575 3464 w
+10 S f
+(G)666 3620 w
+10 CW f
+(\\\(*G)1002 3620 w
+10 R f
+(Gamma)1392 3620 w
+10 S f
+(D)665 3740 w
+10 CW f
+(\\\(*D)1002 3740 w
+10 R f
+(Delta)1392 3740 w
+10 S f
+(E)665 3860 w
+10 CW f
+(\\\(*E)1002 3860 w
+10 R f
+(Epsilon)1392 3860 w
+7 R f
+(\262)1698 3824 w
+10 S f
+(Z)665 3980 w
+10 CW f
+(\\\(*Z)1002 3980 w
+10 R f
+(Zeta)1392 3980 w
+7 R f
+(\262)1569 3944 w
+10 S f
+(H)660 4100 w
+10 CW f
+(\\\(*Y)1002 4100 w
+10 R f
+(Eta)1392 4100 w
+7 R f
+(\262)1525 4064 w
+10 S f
+(Q)659 4220 w
+10 CW f
+(\\\(*H)1002 4220 w
+10 R f
+(Theta)1392 4220 w
+10 S f
+(I)679 4340 w
+10 CW f
+(\\\(*I)1002 4340 w
+10 R f
+(Iota)1392 4340 w
+7 R f
+(\262)1547 4304 w
+10 S f
+(K)660 4460 w
+10 CW f
+(\\\(*K)1002 4460 w
+10 R f
+(Kappa)1392 4460 w
+7 R f
+(\262)1652 4424 w
+10 S f
+(L)661 4580 w
+10 CW f
+(\\\(*L)1002 4580 w
+10 R f
+(Lambda)1392 4580 w
+10 S f
+(M)651 4700 w
+10 CW f
+(\\\(*M)1002 4700 w
+10 R f
+(Mu)1392 4700 w
+7 R f
+(\262)1531 4664 w
+10 S f
+(N)660 4820 w
+10 CW f
+(\\\(*N)1002 4820 w
+10 R f
+(Nu)1392 4820 w
+7 R f
+(\262)1514 4784 w
+10 S f
+(X)663 4940 w
+10 CW f
+(\\\(*C)1002 4940 w
+10 R f
+(Xi)1392 4940 w
+10 S f
+(O)660 5060 w
+10 CW f
+(\\\(*O)1002 5060 w
+10 R f
+(Omicron)1392 5060 w
+7 R f
+(\262)1747 5024 w
+10 S f
+(P)657 5180 w
+10 CW f
+(\\\(*P)1002 5180 w
+10 R f
+(Pi)1392 5180 w
+10 S f
+(R)668 5300 w
+10 CW f
+(\\\(*R)1002 5300 w
+10 R f
+(Rho)1392 5300 w
+7 R f
+(\262)1559 5264 w
+10 S f
+(S)666 5420 w
+10 CW f
+(\\\(*S)1002 5420 w
+10 R f
+(Sigma)1392 5420 w
+10 S f
+(T)665 5540 w
+10 CW f
+(\\\(*T)1002 5540 w
+10 R f
+(Tau)1392 5540 w
+7 R f
+(\262)1547 5504 w
+10 S f
+(U)661 5660 w
+10 CW f
+(\\\(*U)1002 5660 w
+10 R f
+(Upsilon)1392 5660 w
+10 S f
+(F)658 5780 w
+10 CW f
+(\\\(*F)1002 5780 w
+10 R f
+(Phi)1392 5780 w
+10 S f
+(C)660 5900 w
+10 CW f
+(\\\(*X)1002 5900 w
+10 R f
+(Chi)1392 5900 w
+7 R f
+(\262)1537 5864 w
+10 S f
+(Y)656 6020 w
+10 CW f
+(\\\(*Q)1002 6020 w
+10 R f
+(Psi)1392 6020 w
+10 S f
+(W)657 6140 w
+10 CW f
+(\\\(*W)1002 6140 w
+10 R f
+(Omega)1392 6140 w
+(Input)3536 3100 w
+(Symbol Name Description)2 1318 1 3060 3220 t
+10 S f
+(_ __________________________________________)1 2112 1 3060 3240 t
+(a)3184 3380 w
+10 CW f
+(\\\(*a)3522 3380 w
+10 R f
+(alpha)3912 3380 w
+10 S f
+(b)3188 3500 w
+10 CW f
+(\\\(*b)3522 3500 w
+10 R f
+(beta)3912 3500 w
+10 S f
+(g)3195 3620 w
+10 CW f
+(\\\(*g)3522 3620 w
+10 R f
+(gamma)3912 3620 w
+10 S f
+(d)3191 3740 w
+10 CW f
+(\\\(*d)3522 3740 w
+10 R f
+(delta)3912 3740 w
+10 S f
+(e)3194 3860 w
+10 CW f
+(\\\(*e)3522 3860 w
+10 R f
+(epsilon)3912 3860 w
+10 S f
+(z)3191 3980 w
+10 CW f
+(\\\(*z)3522 3980 w
+10 R f
+(zeta)3912 3980 w
+10 S f
+(h)3186 4100 w
+10 CW f
+(\\\(*y)3522 4100 w
+10 R f
+(eta)3912 4100 w
+10 S f
+(q)3190 4220 w
+10 CW f
+(\\\(*h)3522 4220 w
+10 R f
+(theta)3912 4220 w
+10 S f
+(i)3199 4340 w
+10 CW f
+(\\\(*i)3522 4340 w
+10 R f
+(iota)3912 4340 w
+10 S f
+(k)3188 4460 w
+10 CW f
+(\\\(*k)3522 4460 w
+10 R f
+(kappa)3912 4460 w
+10 S f
+(l)3188 4580 w
+10 CW f
+(\\\(*l)3522 4580 w
+10 R f
+(lambda)3912 4580 w
+10 S f
+(m)3187 4700 w
+10 CW f
+(\\\(*m)3522 4700 w
+10 R f
+(mu)3912 4700 w
+10 S f
+(n)3190 4820 w
+10 CW f
+(\\\(*n)3522 4820 w
+10 R f
+(nu)3912 4820 w
+10 S f
+(x)3191 4940 w
+10 CW f
+(\\\(*c)3522 4940 w
+10 R f
+(xi)3912 4940 w
+10 S f
+(o)3188 5060 w
+10 CW f
+(\\\(*o)3522 5060 w
+10 R f
+(omicron)3912 5060 w
+10 S f
+(p)3188 5180 w
+10 CW f
+(\\\(*p)3522 5180 w
+10 R f
+(pi)3912 5180 w
+10 S f
+(r)3188 5300 w
+10 CW f
+(\\\(*r)3522 5300 w
+10 R f
+(rho)3912 5300 w
+10 S f
+(s)3186 5420 w
+10 CW f
+(\\\(*s)3522 5420 w
+10 R f
+(sigma)3912 5420 w
+10 S f
+(t)3194 5540 w
+10 CW f
+(\\\(*t)3522 5540 w
+10 R f
+(tau)3912 5540 w
+10 S f
+(u)3187 5660 w
+10 CW f
+(\\\(*u)3522 5660 w
+10 R f
+(upsilon)3912 5660 w
+10 S f
+(f)3190 5780 w
+10 CW f
+(\\\(*f)3522 5780 w
+10 R f
+(phi)3912 5780 w
+10 S f
+(c)3188 5900 w
+10 CW f
+(\\\(*x)3522 5900 w
+10 R f
+(chi)3912 5900 w
+10 S f
+(y)3181 6020 w
+10 CW f
+(\\\(*q)3522 6020 w
+10 R f
+(psi)3912 6020 w
+10 S f
+(w)3181 6140 w
+10 CW f
+(\\\(*w)3522 6140 w
+10 R f
+(omega)3912 6140 w
+10 S f
+(V)3194 6260 w
+10 CW f
+(\\\(ts)3522 6260 w
+10 R f
+(terminal sigma)1 597 1 3912 6260 t
+8 S1 f
+(__________________)540 6929 w
+5 R f
+(\262)540 7022 w
+8 R f
+(Mapped into upper-case English letter in the standard text font.)9 2009 1 660 7049 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+12 HB f
+(PostScript)4619 480 w
+(2)540 600 w
+11 HB f
+(Symbols)4759 600 w
+18 S1 f
+(____________________________________________________)540 960 w
+12 HB f
+(Mathematical Symbols)1 1298 1 540 1120 t
+10 R f
+(Input)1016 1360 w
+(Symbol Name Description)2 1318 1 540 1480 t
+10 S f
+(_ __________________________________________)1 2112 1 540 1500 t
+(+)668 1640 w
+10 CW f
+(\\\(pl)1002 1640 w
+10 R f
+(math plus)1 392 1 1392 1640 t
+10 S f
+(-)668 1760 w
+10 CW f
+(\\\(mi)1002 1760 w
+10 R f
+(math minus)1 470 1 1392 1760 t
+10 S f
+(=)668 1880 w
+10 CW f
+(\\\(eq)1002 1880 w
+10 R f
+(math equals)1 480 1 1392 1880 t
+10 S f
+(*)671 2000 w
+10 CW f
+(\\\(**)1002 2000 w
+10 R f
+(math star)1 369 1 1392 2000 t
+10 S f
+(\264)668 2120 w
+10 CW f
+(\\\(mu)1002 2120 w
+10 R f
+(multiply)1392 2120 w
+10 S f
+(\270)668 2240 w
+10 CW f
+(\\\(di)1002 2240 w
+10 R f
+(divide)1392 2240 w
+10 S f
+(/)682 2360 w
+10 CW f
+(\\\(sl)1002 2360 w
+10 R f
+(slash)1392 2360 w
+10 S f
+(|)686 2480 w
+10 CW f
+(\\\(or)1002 2480 w
+10 R f
+(or \(vertical bar\))2 625 1 1392 2480 t
+10 S f
+(\327)683 2600 w
+10 CW f
+(\\\(c.)1002 2600 w
+10 R f
+(centered dot)1 490 1 1392 2600 t
+10 S f
+(\261)668 2720 w
+10 CW f
+(\\\(+-)1002 2720 w
+10 R f
+(plus-minus)1392 2720 w
+10 S f
+(\272)668 2840 w
+10 CW f
+(\\\(==)1002 2840 w
+10 R f
+(identically equal)1 663 1 1392 2840 t
+10 S f
+(\271)668 2960 w
+10 CW f
+(\\\(!=)1002 2960 w
+10 R f
+(not equal)1 369 1 1392 2960 t
+10 S f
+(\243)668 3080 w
+10 CW f
+(\\\(<=)1002 3080 w
+10 R f
+(less than or equal)3 696 1 1392 3080 t
+10 S f
+(\263)668 3200 w
+10 CW f
+(\\\(>=)1002 3200 w
+10 R f
+(greater than or equal)3 822 1 1392 3200 t
+10 S f
+(\273)668 3320 w
+10 CW f
+(\\\(\304\304)1002 3320 w
+10 R f
+(approximately)1392 3320 w
+10 S f
+()668 3440 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_~= {
+    pop
+    (\176) stringwidth pop neg size -.15 mul (\176\055) ashow
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S f
+668 3440 m
+55 build_~=
+723 3440 m
+10 CW f
+(\\\(\304=)1002 3440 w
+10 R f
+(approximately equal)1 818 1 1392 3440 t
+10 S f
+(~)668 3560 w
+10 CW f
+(\\\(ap)1002 3560 w
+10 R f
+(approximates)1392 3560 w
+10 S f
+(@)668 3680 w
+10 CW f
+(\\\(cg)1002 3680 w
+10 R f
+(congruent to)1 502 1 1392 3680 t
+10 S f
+(\265)660 3800 w
+10 CW f
+(\\\(pt)1002 3800 w
+10 R f
+(proportional to)1 597 1 1392 3800 t
+10 S f
+(\310)657 3920 w
+10 CW f
+(\\\(cu)1002 3920 w
+10 R f
+(union)1392 3920 w
+10 S f
+(\307)657 4040 w
+10 CW f
+(\\\(ca)1002 4040 w
+10 R f
+(intersection)1392 4040 w
+10 S f
+(\314)660 4160 w
+10 CW f
+(\\\(sb)1002 4160 w
+10 R f
+(subset of)1 358 1 1392 4160 t
+10 S f
+(\315)660 4280 w
+10 CW f
+(\\\(ib)1002 4280 w
+10 R f
+(improper subset of)2 749 1 1392 4280 t
+10 S f
+(\313)660 4400 w
+10 CW f
+(\\\(!b)1002 4400 w
+10 R f
+(not subset of)2 511 1 1392 4400 t
+10 S f
+(\311)660 4520 w
+10 CW f
+(\\\(sp)1002 4520 w
+10 R f
+(superset of)1 435 1 1392 4520 t
+10 S f
+(\312)660 4640 w
+10 CW f
+(\\\(ip)1002 4640 w
+10 R f
+(improper superset of)2 826 1 1392 4640 t
+(Input)3536 1360 w
+(Symbol Name Description)2 1318 1 3060 1480 t
+10 S f
+(_ __________________________________________)1 2112 1 3060 1500 t
+(\266)3191 1640 w
+10 CW f
+(\\\(pd)3522 1640 w
+10 R f
+(partial derivative)1 679 1 3912 1640 t
+10 S f
+(\321)3180 1760 w
+10 CW f
+(\\\(gr)3522 1760 w
+10 R f
+(gradient)3912 1760 w
+10 S f
+(\245)3179 1880 w
+10 CW f
+(\\\(if)3522 1880 w
+10 R f
+(in\256nity)3912 1880 w
+10 S f
+(\306)3175 2000 w
+10 CW f
+(\\\(es)3522 2000 w
+10 R f
+(empty set)1 386 1 3912 2000 t
+10 S f
+(\316)3180 2120 w
+10 CW f
+(\\\(mo)3522 2120 w
+10 R f
+(member of)1 435 1 3912 2120 t
+10 S f
+(\317)3180 2240 w
+10 CW f
+(\\\(!m)3522 2240 w
+10 R f
+(not member of)2 588 1 3912 2240 t
+10 S f
+(\326)3188 2360 w
+10 CW f
+(\\\(sr)3522 2360 w
+10 R f
+(square root)1 446 1 3912 2360 t
+10 S f
+(`)3191 2480 w
+10 CW f
+(\\\(rn)3522 2480 w
+10 R f
+(root extender)1 529 1 3912 2480 t
+10 S f
+(\362)3191 2600 w
+10 CW f
+(\\\(is)3522 2600 w
+10 R f
+(integral sign)1 497 1 3912 2600 t
+10 S f
+(\330)3180 2720 w
+10 CW f
+(\\\(no)3522 2720 w
+10 R f
+(logical not)1 425 1 3912 2720 t
+10 S f
+(\331)3186 2840 w
+10 CW f
+(\\\(l&)3522 2840 w
+10 R f
+(logical and)1 441 1 3912 2840 t
+10 S f
+(\332)3186 2960 w
+10 CW f
+(\\\(l|)3522 2960 w
+10 R f
+(logical or)1 380 1 3912 2960 t
+10 S f
+(\274)3166 3080 w
+10 CW f
+(\\\(el)3522 3080 w
+10 R f
+(ellipsis)3912 3080 w
+10 S f
+(\\)3173 3200 w
+10 CW f
+(\\\(tf)3522 3200 w
+10 R f
+(therefore)3912 3200 w
+10 S f
+(')3194 3320 w
+10 CW f
+(\\\(st)3522 3320 w
+10 R f
+(such that)1 358 1 3912 3320 t
+10 S f
+(")3180 3440 w
+10 CW f
+(\\\(fa)3522 3440 w
+10 R f
+(for all \(universal\))2 698 1 3912 3440 t
+10 S f
+($)3188 3560 w
+10 CW f
+(\\\(te)3522 3560 w
+10 R f
+(there exists \(existential\))2 954 1 3912 3560 t
+10 S f
+(^)3183 3680 w
+10 CW f
+(\\\(pp)3522 3680 w
+10 R f
+(perpendicular)3912 3680 w
+10 S f
+(\320)3177 3800 w
+10 CW f
+(\\\(an)3522 3800 w
+10 R f
+(angle)3912 3800 w
+10 S f
+(\305)3177 3920 w
+10 CW f
+(\\\(O+)3522 3920 w
+10 R f
+(sum of two elements)3 830 1 3912 3920 t
+10 S f
+(\304)3177 4040 w
+10 CW f
+(\\\(Ox)3522 4040 w
+10 R f
+(product of two elements)3 968 1 3912 4040 t
+10 S f
+(\341)3199 4160 w
+10 CW f
+(\\\(b<)3522 4160 w
+10 R f
+(left angle bracket)2 692 1 3912 4160 t
+10 S f
+(\361)3199 4280 w
+10 CW f
+(\\\(b>)3522 4280 w
+10 R f
+(right angle bracket)2 748 1 3912 4280 t
+10 S f
+(\242)3203 4400 w
+10 CW f
+(\\\(fm)3522 4400 w
+10 R f
+(footmark \(minute\))1 735 1 3912 4400 t
+10 S f
+(\260)3196 4520 w
+10 CW f
+(\\\(de)3522 4520 w
+10 R f
+(degree)3912 4520 w
+18 S1 f
+(____________________________________________________)540 4940 w
+12 HB f
+(Bracket-Building Segments)1 1569 1 540 5100 t
+10 R f
+(Input)1016 5340 w
+(Symbol Name Description)2 1318 1 540 5460 t
+10 S f
+(_ __________________________________________)1 2143 1 540 5480 t
+(\351)671 5630 w
+10 CW f
+(\\\(lc)1002 5630 w
+10 R f
+(square bracket, left ceiling)3 1058 1 1392 5630 t
+10 S f
+(\353)671 5760 w
+10 CW f
+(\\\(lf)1002 5760 w
+10 R f
+(square bracket, left \257oor)3 975 1 1392 5760 t
+10 S f
+(\354)671 5900 w
+10 CW f
+(\\\(lt)1002 5900 w
+10 R f
+(paren or curly brace, left top)5 1135 1 1392 5900 t
+10 S f
+(\356)671 6030 w
+10 CW f
+(\\\(lb)1002 6030 w
+10 R f
+(paren or curly brace, left bottom)5 1291 1 1392 6030 t
+10 S f
+(\355)671 6170 w
+10 CW f
+(\\\(lk)1002 6170 w
+10 R f
+(curly brace, left middle)3 931 1 1392 6170 t
+10 S f
+(\357)671 6310 w
+10 CW f
+(\\\(bv)1002 6310 w
+10 R f
+(bold vertical \(extender\))2 936 1 1392 6310 t
+(Input)3536 5340 w
+(Symbol Name Description)2 1318 1 3060 5460 t
+10 S f
+(____________________________________________)3060 5480 w
+(\371)3197 5630 w
+10 CW f
+(\\\(rc)3522 5630 w
+10 R f
+(square bracket, right ceiling)3 1114 1 3912 5630 t
+10 S f
+(\373)3197 5760 w
+10 CW f
+(\\\(rf)3522 5760 w
+10 R f
+(square bracket, right \257oor)3 1031 1 3912 5760 t
+10 S f
+(\374)3191 5900 w
+10 CW f
+(\\\(rt)3522 5900 w
+10 R f
+(paren or curly brace, right top)5 1191 1 3912 5900 t
+10 S f
+(\376)3191 6030 w
+10 CW f
+(\\\(rb)3522 6030 w
+10 R f
+(paren or curly brace, right bottom)5 1347 1 3912 6030 t
+10 S f
+(\375)3191 6170 w
+10 CW f
+(\\\(rk)3522 6170 w
+10 R f
+(curly brace, right middle)3 987 1 3912 6170 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+12 HB f
+(PostScript)540 480 w
+11 HB f
+(Symbols)540 600 w
+12 HB f
+(3)5153 600 w
+18 S1 f
+(____________________________________________________)540 960 w
+12 HB f
+(Miscellaneous Symbols)1 1358 1 540 1120 t
+10 R f
+(Input)1016 1360 w
+(Symbol Name Description)2 1318 1 540 1480 t
+10 S f
+(_ __________________________________________)1 2112 1 540 1500 t
+10 S1 f
+(_)671 1640 w
+10 CW f
+(\\\(ru)1002 1640 w
+10 R f
+(baseline rule)1 507 1 1392 1640 t
+10 S f
+(\347)696 1760 w
+10 CW f
+(\\\(br)1002 1760 w
+10 R f
+(box rule)1 330 1 1392 1760 t
+10 S f
+(_)671 1880 w
+10 CW f
+(\\\(ul)1002 1880 w
+10 R f
+(underline)1392 1880 w
+10 S1 f
+()646 2000 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_lh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+16 177 moveto
+16 188 lineto
+21 193 lineto
+30 193 lineto
+34 189 lineto
+36 183 lineto
+36 180 lineto
+34 174 lineto
+27 170 lineto
+19 172 lineto
+16 177 lineto
+stroke
+
+38 194 moveto
+38 196 lineto
+53 199 lineto
+68 201 lineto
+83 202 lineto
+98 203 lineto
+113 204 lineto
+128 204 lineto
+143 205 lineto
+158 205 lineto
+173 205 lineto
+188 204 lineto
+203 203 lineto
+218 202 lineto
+233 200 lineto
+248 198 lineto
+263 196 lineto
+278 194 lineto
+293 190 lineto
+308 186 lineto
+323 181 lineto
+338 176 lineto
+353 168 lineto
+361 162 lineto
+364 153 lineto
+366 138 lineto
+367 126 lineto
+368 106 lineto
+369 80 lineto
+369 74 lineto
+368 60 lineto
+367 54 lineto
+362 43 lineto
+348 34 lineto
+333 28 lineto
+318 25 lineto
+303 26 lineto
+288 29 lineto
+273 31 lineto
+258 32 lineto
+243 32 lineto
+228 30 lineto
+213 27 lineto
+198 24 lineto
+183 23 lineto
+168 23 lineto
+153 27 lineto
+148 34 lineto
+148 47 lineto
+153 54 lineto
+168 58 lineto
+183 58 lineto
+198 58 lineto
+213 59 lineto
+226 60 lineto
+228 62 lineto
+228 67 lineto
+223 71 lineto
+208 71 lineto
+193 70 lineto
+178 70 lineto
+163 70 lineto
+148 70 lineto
+133 71 lineto
+123 76 lineto
+120 84 lineto
+120 91 lineto
+122 98 lineto
+129 104 lineto
+144 106 lineto
+159 107 lineto
+174 107 lineto
+189 107 lineto
+202 108 lineto
+204 110 lineto
+204 117 lineto
+201 119 lineto
+186 119 lineto
+171 119 lineto
+156 119 lineto
+141 119 lineto
+126 119 lineto
+111 121 lineto
+103 128 lineto
+101 137 lineto
+101 142 lineto
+103 150 lineto
+111 158 lineto
+126 161 lineto
+141 161 lineto
+156 162 lineto
+171 163 lineto
+186 163 lineto
+191 165 lineto
+192 167 lineto
+192 171 lineto
+190 174 lineto
+176 175 lineto
+161 175 lineto
+146 175 lineto
+131 174 lineto
+116 174 lineto
+101 174 lineto
+86 173 lineto
+71 172 lineto
+56 171 lineto
+41 171 lineto
+41 174 lineto
+43 178 lineto
+43 187 lineto
+38 194 lineto
+stroke
+
+373 169 moveto
+373 176 lineto
+375 182 lineto
+386 190 lineto
+401 193 lineto
+408 191 lineto
+411 185 lineto
+412 181 lineto
+414 167 lineto
+415 158 lineto
+416 144 lineto
+417 128 lineto
+418 110 lineto
+418 60 lineto
+417 45 lineto
+415 37 lineto
+409 34 lineto
+394 31 lineto
+381 35 lineto
+379 42 lineto
+379 52 lineto
+380 67 lineto
+380 77 lineto
+379 77 lineto
+378 106 lineto
+377 121 lineto
+376 133 lineto
+375 147 lineto
+374 158 lineto
+373 169 lineto
+
+stroke
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+646 2000 m
+100 build_lh
+746 2000 m
+10 CW f
+(\\\(lh)1002 2000 w
+10 R f
+(left-hand index)1 607 1 1392 2000 t
+10 S1 f
+()646 2120 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_rh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+15 66 moveto
+15 86 lineto
+16 131 lineto
+17 146 lineto
+18 158 lineto
+19 167 lineto
+21 181 lineto
+24 190 lineto
+34 193 lineto
+49 189 lineto
+58 182 lineto
+60 177 lineto
+60 166 lineto
+59 156 lineto
+58 143 lineto
+57 130 lineto
+56 117 lineto
+55 102 lineto
+54 42 lineto
+53 39 lineto
+49 35 lineto
+34 34 lineto
+19 39 lineto
+16 47 lineto
+15 66 lineto
+stroke
+
+65 60 moveto
+65 111 lineto
+66 127 lineto
+67 139 lineto
+69 153 lineto
+72 163 lineto
+83 171 lineto
+98 177 lineto
+113 182 lineto
+128 187 lineto
+143 190 lineto
+158 194 lineto
+173 196 lineto
+188 199 lineto
+203 201 lineto
+218 203 lineto
+233 205 lineto
+248 205 lineto
+263 206 lineto
+278 206 lineto
+293 206 lineto
+308 206 lineto
+323 206 lineto
+338 205 lineto
+353 203 lineto
+368 202 lineto
+383 200 lineto
+394 197 lineto
+389 190 lineto
+389 180 lineto
+391 176 lineto
+391 173 lineto
+380 173 lineto
+365 173 lineto
+350 174 lineto
+335 175 lineto
+320 176 lineto
+305 176 lineto
+290 176 lineto
+275 177 lineto
+260 177 lineto
+245 177 lineto
+240 173 lineto
+240 170 lineto
+245 165 lineto
+260 164 lineto
+275 164 lineto
+290 164 lineto
+305 163 lineto
+320 160 lineto
+327 155 lineto
+330 149 lineto
+330 134 lineto
+328 129 lineto
+323 124 lineto
+309 121 lineto
+294 121 lineto
+279 121 lineto
+264 121 lineto
+249 121 lineto
+234 121 lineto
+228 118 lineto
+228 112 lineto
+234 109 lineto
+249 109 lineto
+264 109 lineto
+279 108 lineto
+294 108 lineto
+306 104 lineto
+311 97 lineto
+312 91 lineto
+312 88 lineto
+311 82 lineto
+305 74 lineto
+290 72 lineto
+275 72 lineto
+260 72 lineto
+245 73 lineto
+230 73 lineto
+215 73 lineto
+205 70 lineto
+205 63 lineto
+217 60 lineto
+232 60 lineto
+247 60 lineto
+262 60 lineto
+277 57 lineto
+283 52 lineto
+285 44 lineto
+285 41 lineto
+284 35 lineto
+280 30 lineto
+268 26 lineto
+253 25 lineto
+238 26 lineto
+223 28 lineto
+208 31 lineto
+193 33 lineto
+178 34 lineto
+163 33 lineto
+148 31 lineto
+133 28 lineto
+118 27 lineto
+103 28 lineto
+88 34 lineto
+73 43 lineto
+67 52 lineto
+65 60 lineto
+stroke
+
+396 180 moveto
+396 188 lineto
+399 194 lineto
+410 196 lineto
+416 190 lineto
+416 180 lineto
+415 177 lineto
+411 173 lineto
+400 173 lineto
+396 180 lineto
+stroke
+
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+646 2120 m
+100 build_rh
+746 2120 m
+10 CW f
+(\\\(rh)1002 2120 w
+10 R f
+(right-hand index)1 663 1 1392 2120 t
+10 S f
+(\267)673 2240 w
+10 CW f
+(\\\(bu)1002 2240 w
+10 R f
+(bullet)1392 2240 w
+10 S1 f
+()677 2360 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_ob {
+    pop
+    size 3 mul 16 div /rad exch def
+    currentpoint
+    newpath
+    rad add exch rad add exch rad 0 360 arc
+    stroke
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+677 2360 m
+38 build_ob
+715 2360 m
+10 CW f
+(\\\(ob)1002 2360 w
+10 R f
+(open bullet)1 447 1 1392 2360 t
+10 S1 f
+()658 2480 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_ci {
+    pop
+    size 3 mul 8 div /rad exch def
+    currentpoint
+    newpath
+    rad add exch rad add exch rad 0 360 arc
+    stroke
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+658 2480 m
+75 build_ci
+733 2480 m
+10 CW f
+(\\\(ci)1002 2480 w
+10 R f
+(circle)1392 2480 w
+10 S1 f
+()671 2600 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_bx {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    fill
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+671 2600 m
+50 build_bx
+721 2600 m
+10 CW f
+(\\\(bx)1002 2600 w
+10 R f
+(box \(\256lled square\))2 732 1 1392 2600 t
+10 S1 f
+()671 2720 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_sq {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    font B eq {fill} {stroke} ifelse
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+671 2720 m
+50 build_sq
+721 2720 m
+10 CW f
+(\\\(sq)1002 2720 w
+10 R f
+(square)1392 2720 w
+10 S f
+(\340)671 2840 w
+10 CW f
+(\\\(lz)1002 2840 w
+10 R f
+(lozenge)1392 2840 w
+10 S f
+(\323)656 2960 w
+10 CW f
+(\\\(co)1002 2960 w
+10 R f
+(copyright \(serif\))1 651 1 1392 2960 t
+10 S f
+(\322)656 3080 w
+10 CW f
+(\\\(rg)1002 3080 w
+10 R f
+(register \(serif\))1 567 1 1392 3080 t
+10 S f
+(\324)651 3200 w
+10 CW f
+(\\\(tm)1002 3200 w
+10 R f
+(trademark \(serif\))1 672 1 1392 3200 t
+10 S f
+(\343)656 3320 w
+10 CW f
+(\\\(CO)1002 3320 w
+10 R f
+(copyright \(sans serif\))2 848 1 1392 3320 t
+10 S f
+(\342)656 3440 w
+10 CW f
+(\\\(RG)1002 3440 w
+10 R f
+(register \(sans serif\))2 764 1 1392 3440 t
+10 S f
+(\344)656 3560 w
+10 CW f
+(\\\(TM)1002 3560 w
+10 R f
+(trademark \(sans serif\))2 869 1 1392 3560 t
+(Input)3536 1360 w
+(Symbol Name Description)2 1318 1 3060 1480 t
+10 S f
+(_ __________________________________________)1 2112 1 3060 1500 t
+10 S1 f
+()3178 1640 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_14 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (4) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+3178 1640 m
+75 build_14
+3253 1640 m
+10 CW f
+(\\\(14)3522 1640 w
+10 R f
+(one-quarter)3912 1640 w
+10 S1 f
+()3178 1760 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_12 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (2) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+3178 1760 m
+75 build_12
+3253 1760 m
+10 CW f
+(\\\(12)3522 1760 w
+10 R f
+(one-half)3912 1760 w
+10 S1 f
+()3178 1880 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_34 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (3) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (4) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+3178 1880 m
+75 build_34
+3253 1880 m
+10 CW f
+(\\\(34)3522 1880 w
+10 R f
+(three-quarters)3912 1880 w
+10 S f
+(\256)3166 2000 w
+10 CW f
+(\\\(->)3522 2000 w
+10 R f
+(right arrow)1 446 1 3912 2000 t
+10 S f
+(\254)3166 2120 w
+10 CW f
+(\\\(<-)3522 2120 w
+10 R f
+(left arrow)1 390 1 3912 2120 t
+10 S f
+(\255)3186 2240 w
+10 CW f
+(\\\(ua)3522 2240 w
+10 R f
+(up arrow)1 357 1 3912 2240 t
+10 S f
+(\257)3186 2360 w
+10 CW f
+(\\\(da)3522 2360 w
+10 R f
+(down arrow)1 479 1 3912 2360 t
+10 S f
+(\253)3164 2480 w
+10 CW f
+(\\\(ab)3522 2480 w
+10 R f
+(arrow both)1 435 1 3912 2480 t
+10 S f
+(\276)3166 2600 w
+10 CW f
+(\\\(ah)3522 2600 w
+10 R f
+(arrow horizontal extender)2 1030 1 3912 2600 t
+10 S f
+(\275)3186 2720 w
+10 CW f
+(\\\(av)3522 2720 w
+10 R f
+(arrow vertical extender)2 924 1 3912 2720 t
+10 S f
+(\277)3183 2840 w
+10 CW f
+(\\\(CR)3522 2840 w
+10 R f
+(carriage return)1 583 1 3912 2840 t
+10 S1 f
+()3191 2960 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_Sl {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+14 93 moveto
+14 96 lineto
+29 110 lineto
+44 121 lineto
+54 127 lineto
+55 132 lineto
+57 146 lineto
+59 157 lineto
+62 171 lineto
+66 186 lineto
+70 199 lineto
+75 213 lineto
+81 228 lineto
+88 243 lineto
+96 257 lineto
+106 272 lineto
+118 287 lineto
+133 300 lineto
+148 307 lineto
+163 308 lineto
+178 304 lineto
+191 293 lineto
+197 281 lineto
+198 277 lineto
+198 260 lineto
+194 246 lineto
+187 231 lineto
+179 217 lineto
+168 202 lineto
+155 187 lineto
+141 172 lineto
+126 158 lineto
+111 146 lineto
+96 136 lineto
+94 131 lineto
+93 123 lineto
+92 112 lineto
+91 103 lineto
+90 93 lineto
+89 81 lineto
+89 40 lineto
+92 28 lineto
+97 18 lineto
+108 10 lineto
+122 10 lineto
+134 18 lineto
+145 33 lineto
+152 48 lineto
+158 62 lineto
+168 58 lineto
+168 59 lineto
+163 45 lineto
+157 31 lineto
+148 16 lineto
+133 3 lineto
+118 -1 lineto
+103 0 lineto
+88 5 lineto
+73 18 lineto
+64 31 lineto
+58 46 lineto
+55 59 lineto
+53 73 lineto
+52 111 lineto
+37 101 lineto
+22 86 lineto
+14 93 lineto
+
+97 152 moveto
+97 153 lineto
+99 166 lineto
+101 178 lineto
+103 190 lineto
+106 205 lineto
+109 218 lineto
+113 232 lineto
+118 246 lineto
+124 261 lineto
+132 275 lineto
+144 290 lineto
+157 298 lineto
+171 298 lineto
+181 291 lineto
+186 283 lineto
+187 279 lineto
+187 264 lineto
+186 260 lineto
+181 246 lineto
+174 233 lineto
+165 218 lineto
+155 204 lineto
+142 190 lineto
+127 175 lineto
+112 162 lineto
+97 152 lineto
+
+eofill
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+3191 2960 m
+50 build_Sl
+3241 2960 m
+10 CW f
+(\\\(Sl)3522 2960 w
+10 R f
+(script ell)1 347 1 3912 2960 t
+10 S f
+(\300)3175 3080 w
+10 CW f
+(\\\(af)3522 3080 w
+10 R f
+(aleph)3912 3080 w
+10 S f
+(\301)3181 3200 w
+10 CW f
+(\\\(If)3522 3200 w
+10 R f
+(Ifraktur)3912 3200 w
+10 S f
+(\302)3176 3320 w
+10 CW f
+(\\\(Rf)3522 3320 w
+10 R f
+(Rfraktur)3912 3320 w
+10 S f
+(\303)3166 3440 w
+10 CW f
+(\\\(ws)3522 3440 w
+10 R f
+(weierstrass)3912 3440 w
+18 S1 f
+(____________________________________________________)540 3860 w
+12 HB f
+(Other \(Unnamed\) Symbols)2 1516 1 540 4020 t
+10 R f
+( are represented by character access codes \(the input format is)10 2509(The following symbols)2 934 2 540 4260 t
+10 CW f
+(\\N')4012 4260 w
+10 I f
+(code)4192 4260 w
+10 CW f
+(')4380 4260 w
+10 R f
+( select one of)3 541(\). To)1 223 2 4456 4260 t
+(these symbols, switch to the Symbol font \()7 1727 1 540 4380 t
+10 CW f
+(S)2267 4380 w
+10 R f
+( \(Don't)1 318( appropriate number.)2 838(\) and input the access code format with the)8 1737 3 2327 4380 t
+( example, the input for the club \()7 1309( For)1 189(forget to switch back to the previous font!\))7 1711 3 540 4500 t
+10 S f
+(\247)3749 4500 w
+10 R f
+(\) symbol is)2 445 1 3824 4500 t
+10 CW f
+(\\fS\\N'167'\\fP)4294 4500 w
+10 R f
+(.)5074 4500 w
+(Access)1002 4740 w
+( Description)1 652(Symbol Code)1 708 2 540 4860 t
+10 S f
+(_ ___________________________________________)1 2154 1 540 4880 t
+(J)664 5020 w
+10 CW f
+(74)1083 5020 w
+10 R f
+(theta \(alternate\))1 628 1 1434 5020 t
+10 S f
+(j)666 5140 w
+10 CW f
+(106)1053 5140 w
+10 R f
+(phi \(alternate\))1 562 1 1434 5140 t
+10 S f
+(v)660 5260 w
+10 CW f
+(118)1053 5260 w
+10 R f
+(omega \(alternate\))1 700 1 1434 5260 t
+10 S f
+(\241)665 5380 w
+10 CW f
+(161)1053 5380 w
+10 R f
+(Upsilon \(alternate\))1 751 1 1434 5380 t
+10 S f
+(\247)658 5500 w
+10 CW f
+(167)1053 5500 w
+10 R f
+(club)1434 5500 w
+10 S f
+(\250)658 5620 w
+10 CW f
+(168)1053 5620 w
+10 R f
+(diamond)1434 5620 w
+10 S f
+(\251)658 5740 w
+10 CW f
+(169)1053 5740 w
+10 R f
+(heart)1434 5740 w
+10 S f
+(\252)658 5860 w
+10 CW f
+(170)1053 5860 w
+10 R f
+(spade)1434 5860 w
+(Access)3522 4740 w
+( Description)1 652(Symbol Code)1 708 2 3060 4860 t
+10 S f
+(_ ___________________________________________)1 2154 1 3060 4880 t
+(\262)3195 5020 w
+10 CW f
+(178)3573 5020 w
+10 R f
+(second)3954 5020 w
+10 S f
+(\333)3164 5140 w
+10 CW f
+(219)3573 5140 w
+10 R f
+(double arrow both)2 732 1 3954 5140 t
+10 S f
+(\334)3166 5260 w
+10 CW f
+(220)3573 5260 w
+10 R f
+(double left arrow)2 687 1 3954 5260 t
+10 S f
+(\335)3186 5380 w
+10 CW f
+(221)3573 5380 w
+10 R f
+(double up arrow)2 654 1 3954 5380 t
+10 S f
+(\336)3166 5500 w
+10 CW f
+(222)3573 5500 w
+10 R f
+(double right arrow)2 743 1 3954 5500 t
+10 S f
+(\337)3186 5620 w
+10 CW f
+(223)3573 5620 w
+10 R f
+(double down arrow)2 776 1 3954 5620 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Trailer
+done
+%%Pages: 3
+%%DocumentFonts: Helvetica-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

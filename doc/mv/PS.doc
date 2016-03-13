@@ -1,0 +1,2513 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+17 HB f
+(MV)720 1040 w
+18 HB f
+(\320 A Macro Package)3 1727 1 1025 1040 t
+(for View Graphs and Slides)4 2337 1 720 1240 t
+36 S1 f
+(________________________)720 1440 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = INTRODUCTION]
+10 B f
+(1. INTRODUCTION)1 925 1 720 1980 t
+10 R f
+(This manual describes a package of)5 1461 1 720 2160 t
+9 R f
+(UNIX)2213 2160 w
+6 S f
+(\322)2438 2120 w
+10 R f
+(system)2519 2160 w
+10 I f
+(troff)2831 2160 w
+10 R f
+(macros called)1 560 1 3038 2160 t
+9 R f
+(MV)3630 2160 w
+10 R f
+(, designed for typesetting view)4 1265 1 3775 2160 t
+( manual assumes that the reader has a basic knowledge of the)11 2601( This)1 242(graphs and slides.)2 741 3 720 2280 t
+9 R f
+(UNIX)4341 2280 w
+10 R f
+(system, an)1 435 1 4605 2280 t
+(editor, and the text formatter)4 1145 1 720 2400 t
+10 I f
+(troff)1890 2400 w
+10 R f
+(.)2071 2400 w
+( Table I\), as well as)5 811(With these macros, one can easily prepare view graphs in a variety of dimensions \(see)14 3509 2 720 2580 t
+(35-mm slides and 2)3 831 1 720 2700 t
+10 S f
+(\264)1559 2700 w
+10 R f
+( a variety of styles, in)5 930( transparencies can be made in)5 1296(2-inch``super-slides.'' These)1 1192 3 1622 2700 t
+(different fonts, with oversize titles, and with highlighted subordination levels.)9 3109 1 720 2820 t
+( contents of a foil can be readily)7 1402(Since the text from which the foils are typeset is stored in a \256le, the)14 2918 2 720 3000 t
+( of the foils can be)5 780( text)1 184( The)1 214(changed to include new data or can be incorporated into a new presentation.)12 3142 4 720 3120 t
+(passed through)1 604 1 720 3240 t
+10 I f
+(spell)1351 3240 w
+10 R f
+(to check for typos or spelling errors, and can be preprocessed by)11 2593 1 1567 3240 t
+10 I f
+(eqn)4187 3240 w
+10 R f
+(,)4339 3240 w
+10 I f
+(tbl)4391 3240 w
+10 R f
+(,)4505 3240 w
+10 I f
+(pic)4557 3240 w
+10 R f
+(, or)1 136 1 4687 3240 t
+10 I f
+(grap)4851 3240 w
+10 R f
+(to produce tables, equations, pictures, or graphs, respectively.)7 2462 1 720 3360 t
+( features of)2 502(In the remainder of this document, the)6 1684 2 720 3540 t
+9 R f
+(MV)2956 3540 w
+10 R f
+(and how to use it with)5 1021 1 3153 3540 t
+10 I f
+(troff)4226 3540 w
+10 R f
+(as well as its)3 589 1 4451 3540 t
+( examples of)2 554( Two)1 255(preprocessors are shown by example.)4 1581 3 720 3660 t
+9 R f
+(MV)3155 3660 w
+10 R f
+( in the document; the)4 928(input are included)2 765 2 3347 3660 t
+( resulting view graphs are included in the)7 1811( The)1 228( the Appendix.)2 637(remaining input examples are given in)5 1644 4 720 3780 t
+(Appendix at the end of the document.)6 1506 1 720 3900 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 2.  , HEADING = SIMPLE EXAMPLES]
+10 B f
+( EXAMPLES)1 581(2. SIMPLE)1 509 2 720 4140 t
+10 R f
+( you are)2 333( If)1 122( formatting process is illustrated with two examples.)7 2135(Before explaining the macros in detail, the)6 1730 4 720 4320 t
+(familiar enough with a)3 907 1 720 4440 t
+9 R f
+(UNIX)1650 4440 w
+10 R f
+(system editor to create the following text \256le, naming it ``trivial'':)10 2645 1 1900 4440 t
+10 CW f
+(.Sw)870 4620 w
+(Six stages of a project:)4 1440 1 870 4740 t
+(.B)870 4860 w
+(wild enthusiasm)1 900 1 870 4980 t
+(.B)870 5100 w
+(disillusionment)870 5220 w
+(.B)870 5340 w
+(total confusion)1 900 1 870 5460 t
+(.B)870 5580 w
+(search for the guilty)3 1260 1 870 5700 t
+(.B)870 5820 w
+(punishment of the innocent)3 1560 1 870 5940 t
+(.B)870 6060 w
+(promotion of the non-participants)3 1980 1 870 6180 t
+10 R f
+(and if you then format the \256le with)7 1396 1 720 6360 t
+10 I f
+(troff)2141 6360 w
+10 R f
+(and the)1 291 1 2339 6360 t
+9 R f
+(MV)2653 6360 w
+10 R f
+(macros:)2823 6360 w
+10 CW f
+(troff -mv trivial |)3 1140 1 870 6540 t
+10 S f
+(\274)2070 6540 w
+10 R f
+( The)1 214( rewarded with the view graph shown in Example 1 in the Appendix.)12 2862(you will be)2 466 3 720 6720 t
+10 CW f
+(.Sw)4296 6720 w
+10 R f
+(is a)1 145 1 4510 6720 t
+10 I f
+(foil-start)4689 6720 w
+(macro)720 6840 w
+10 R f
+(; by looking at that view graph, you should be able to \256gure out what the)15 2909 1 983 6840 t
+10 CW f
+(.B)3917 6840 w
+10 R f
+(macro does.)1 482 1 4062 6840 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(2 MV)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 2.1  , HEADING = Less Trivial Example]
+10 B f
+( Trivial Example)2 723(2.1 Less)1 364 2 720 960 t
+10 R f
+(The following input was used to produce the view graph shown in Example 2 of the Appendix:)16 3801 1 720 1140 t
+10 CW f
+(.Vw 2 "Less Trivial" "April 1, 1990")6 2160 1 870 1320 t
+(.T "What the Walrus Said")4 1500 1 870 1440 t
+(``The time has come,'' the Walrus said,)6 2340 1 870 1560 t
+(.BR)870 1680 w
+(``To talk of many things:)4 1500 1 870 1800 t
+(.I .5)1 300 1 870 1920 t
+(.B)870 2040 w
+(Of shoes\\\(emand ships\\\(emand sealing wax\\\(em)4 2640 1 870 2160 t
+(.B)870 2280 w
+(Of cabbages\\\(emand kings\\\(em)2 1680 1 870 2400 t
+(.B)870 2520 w
+(And why the sea is boiling hot\\\(em)6 2040 1 870 2640 t
+(.B)870 2760 w
+(And whether pigs have wings.'')4 1800 1 870 2880 t
+10 R f
+(The)720 3060 w
+10 CW f
+(.Vw)904 3060 w
+10 R f
+( bit later on, you will also)6 1055( A)1 127( foil-start macro and will be discussed in the next section.)10 2350(is another)1 395 4 1113 3060 t
+( macros in this example \()5 1022(\256nd out what the other)4 921 2 720 3180 t
+10 CW f
+(.T)2663 3180 w
+10 R f
+(,)2783 3180 w
+10 CW f
+(.BR)2836 3180 w
+10 R f
+(, and)1 197 1 3016 3180 t
+10 CW f
+(.I)3241 3180 w
+10 R f
+( input string)2 490( \(The)1 241(\) are all about.)3 585 3 3361 3180 t
+10 CW f
+(\\\(em)4705 3180 w
+10 R f
+(is)4973 3180 w
+(the)720 3300 w
+10 I f
+(troff)867 3300 w
+10 R f
+(name for the long em-dash.\))4 1128 1 1065 3300 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 3.  , HEADING = THE FOIL-START MACROS]
+10 B f
+( FOIL-START MACROS)2 1106(3. THE)1 337 2 720 3540 t
+10 R f
+(Each foil)1 370 1 720 3720 t
+10 I f
+(must)1122 3720 w
+10 R f
+( nine different-)2 614( are nine foil-start macros for generating)6 1654( There)1 289(start with a foil-start macro.)4 1140 4 1343 3720 t
+(sized foils; the names \(and the corresponding mounting-frame sizes\) of these macros are shown in Table I.)16 4255 1 720 3840 t
+10 B f
+(TABLE I)1 404 1 2678 4020 t
+(Foil-Start Macros)1 762 1 2499 4200 t
+10 S f
+(_ __________________________________)1 1735 1 2012 4280 t
+10 I f
+( and Type)2 394( Size*)1 539(Macro Name)1 524 3 2062 4400 t
+10 S f
+(_ __________________________________)1 1735 1 2012 4410 t
+(_ __________________________________)1 1735 1 2012 4430 t
+10 R f
+(7)2736 4540 w
+10 S f
+(\264)2794 4540 w
+10 R f
+(7-inch view graph)2 726 1 2857 4540 t
+10 I f
+(or)3608 4540 w
+10 CW f
+(.VS)2234 4600 w
+10 R f
+(2)2736 4660 w
+10 S f
+(\264)2794 4660 w
+10 R f
+(2-inch super-slide)1 718 1 2857 4660 t
+10 CW f
+(.Vw)2234 4780 w
+10 R f
+(7)2736 4780 w
+10 S f
+(\264)2794 4780 w
+10 R f
+(5-inch view graph)2 726 1 2857 4780 t
+10 CW f
+(.Vh)2234 4900 w
+10 R f
+(5)2736 4900 w
+10 S f
+(\264)2794 4900 w
+10 R f
+(7-inch view graph)2 726 1 2857 4900 t
+10 CW f
+(.VW)2234 5020 w
+10 R f
+(9)2736 5020 w
+10 S f
+(\264)2794 5020 w
+10 R f
+(7-inch view graph)2 726 1 2857 5020 t
+10 CW f
+(.VH)2234 5140 w
+10 R f
+(7)2736 5140 w
+10 S f
+(\264)2794 5140 w
+10 R f
+(9-inch view graph)2 726 1 2857 5140 t
+10 CW f
+(.Sw)2234 5260 w
+10 R f
+(7)2736 5260 w
+10 S f
+(\264)2794 5260 w
+10 R f
+(5-inch 35-mm slide)2 783 1 2857 5260 t
+10 CW f
+(.Sh)2234 5380 w
+10 R f
+(5)2736 5380 w
+10 S f
+(\264)2794 5380 w
+10 R f
+(7-inch 35-mm slide)2 783 1 2857 5380 t
+10 CW f
+(.SW)2234 5500 w
+10 R f
+(9)2736 5500 w
+10 S f
+(\264)2794 5500 w
+10 R f
+(7-inch 35-mm slide)2 783 1 2857 5500 t
+10 CW f
+(.SH)2234 5620 w
+10 R f
+(7)2736 5620 w
+10 S f
+(\264)2794 5620 w
+10 R f
+(9-inch 35-mm slide)2 783 1 2857 5620 t
+10 S f
+( \347)1 -1735(_ __________________________________)1 1735 2 2012 5640 t
+(\347)2012 5580 w
+(\347)2012 5480 w
+(\347)2012 5380 w
+(\347)2012 5280 w
+(\347)2012 5180 w
+(\347)2012 5080 w
+(\347)2012 4980 w
+(\347)2012 4880 w
+(\347)2012 4780 w
+(\347)2012 4680 w
+(\347)2012 4580 w
+(\347)2012 4480 w
+(\347)2012 4380 w
+(\347)2661 5640 w
+(\347)2661 5580 w
+(\347)2661 5480 w
+(\347)2661 5380 w
+(\347)2661 5280 w
+(\347)2661 5180 w
+(\347)2661 5080 w
+(\347)2661 4980 w
+(\347)2661 4880 w
+(\347)2661 4780 w
+(\347)2661 4680 w
+(\347)2661 4580 w
+(\347)2661 4480 w
+(\347)2661 4380 w
+(\347)3747 5640 w
+(\347)3747 5580 w
+(\347)3747 5480 w
+(\347)3747 5380 w
+(\347)3747 5280 w
+(\347)3747 5180 w
+(\347)3747 5080 w
+(\347)3747 4980 w
+(\347)3747 4880 w
+(\347)3747 4780 w
+(\347)3747 4680 w
+(\347)3747 4580 w
+(\347)3747 4480 w
+(\347)3747 4380 w
+10 R f
+( the \256rst character of the name \()7 1320(The naming convention for these nine macros is that)8 2145 2 720 5820 t
+10 CW f
+(V)4185 5820 w
+10 R f
+(or)4277 5820 w
+10 CW f
+(S)4392 5820 w
+10 R f
+(\) distinguishes)1 588 1 4452 5820 t
+( and slides, while the second character indicates whether the foil is square \()13 3095(between view graphs)2 858 2 720 5940 t
+10 CW f
+(S)4673 5940 w
+10 R f
+(\), small)1 307 1 4733 5940 t
+(wide \()1 255 1 720 6060 t
+10 CW f
+(w)975 6060 w
+10 R f
+(\), small high \()3 570 1 1035 6060 t
+10 CW f
+(h)1605 6060 w
+10 R f
+(\), big wide \()3 497 1 1665 6060 t
+10 CW f
+(W)2162 6060 w
+10 R f
+( \()1 62(\), or big high)3 531 2 2222 6060 t
+10 CW f
+(H)2815 6060 w
+10 R f
+( are ``skinnier'' than the corresponding view)6 1808(\). Slides)1 357 2 2875 6060 t
+( a)1 75( As)1 167( the shorter one is larger for slides than for view graphs.)11 2300(graphs: the ratio of the longer dimension to)7 1778 4 720 6180 t
+( on the other hand, view graphs can)7 1538(result, slide foils can be used for view graphs, but not vice versa;)12 2782 2 720 6300 t
+(accommodate a bit more text.)4 1184 1 720 6420 t
+(Note that)1 379 1 720 6600 t
+10 CW f
+(.VW)1134 6600 w
+10 R f
+(and)1349 6600 w
+10 CW f
+(.SW)1529 6600 w
+10 R f
+(produce foils that are 7)4 964 1 1745 6600 t
+10 S f
+(\264)2717 6600 w
+10 R f
+(5.4 inches because commonly available paper for laser)7 2260 1 2780 6600 t
+( 7)1 58( less than 9 inches wide; these foils must be enlarged by a factor of 9/)15 2956(printers and some typesetters is)4 1306 3 720 6720 t
+(before they can be used as 9-inch-wide by 7-inch-high view graphs.)10 2707 1 720 6840 t
+8 S1 f
+(__________________)720 7020 w
+8 R f
+( of the mounting frame opening \(width times height\) in inches.)10 2000(* Size)1 257 2 720 7140 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(MV 3)1 4320 1 720 600 t
+10 R f
+( be produced, and)3 727(Each foil-start macro causes the previous foil \(if any\) to be terminated, foil separators to)14 3593 2 720 960 t
+( The)1 220(certain heading information to be generated.)5 1843 2 720 1080 t
+10 I f
+(default)2823 1080 w
+10 R f
+(heading information consists of three lines of)6 1899 1 3141 1080 t
+10 I f
+(right)720 1200 w
+10 R f
+(-justi\256ed data:)1 575 1 923 1200 t
+8 S f
+(\267)783 1380 w
+10 R f
+(the current date in the form)5 1089 1 870 1380 t
+10 I f
+(mo/dy/yr)1984 1380 w
+8 S f
+(\267)783 1500 w
+10 R f
+(the company name)2 754 1 870 1500 t
+8 S f
+(\267)783 1620 w
+10 R f
+(Foil)870 1620 w
+10 I f
+(n)1057 1620 w
+10 R f
+(where)720 1800 w
+10 I f
+(n)1003 1800 w
+10 R f
+( sequence number in the current ``run''; as explained below, this heading information is)13 3718(is the)1 229 2 1093 1800 t
+(replaced by the three arguments of the foil-start macro, if those arguments are given.)13 3378 1 720 1920 t
+( into the corners of the view graph)7 1379(The actual projection area is marked by ``cross-hairs'' \(plus signs\) that \256t)11 2941 2 720 2100 t
+( foils other than the square \()6 1138( All)1 181(mount, helping one to position the foil for mounting.)8 2144 3 720 2220 t
+10 CW f
+(.VS)4183 2220 w
+10 R f
+(\) foil also have a)4 677 1 4363 2220 t
+( be seen if it is made)6 857(set of \(horizontal or vertical\) ``crop marks''; these indicate how much of the foil will)14 3463 2 720 2340 t
+(into a slide, rather than into a view graph.)8 1664 1 720 2460 t
+( foil-start)1 383(The default heading information can be changed by specifying three optional arguments to the)13 3937 2 720 2640 t
+(macro \(square brackets [ ] are used to indicate that the argument they enclose is optional\):)15 3589 1 720 2760 t
+10 CW f
+(.)870 2940 w
+10 CI f
+(XX)930 2940 w
+10 R f
+([)1126 2940 w
+10 I f
+(n)1175 2940 w
+10 R f
+(] [)1 91 1 1241 2940 t
+10 I f
+(id)1348 2940 w
+10 R f
+(] [)1 91 1 1442 2940 t
+10 I f
+(date)1549 2940 w
+10 R f
+(])1737 2940 w
+(where)720 3120 w
+10 CI f
+(XX)990 3120 w
+10 R f
+( of the line foil-start macros,)5 1152(stands for one)2 564 2 1137 3120 t
+10 I f
+(n)2881 3120 w
+10 R f
+(is the foil identi\256er \(typically a number\),)6 1647 1 2959 3120 t
+10 I f
+(id)4634 3120 w
+10 R f
+(is other)1 300 1 4740 3120 t
+( creating the foil\), and)4 916(identifying information \(typically the initials of the person)7 2398 2 720 3240 t
+10 I f
+(date)4067 3240 w
+10 R f
+(is usually the date.)3 768 1 4272 3240 t
+( text:)1 215(The resulting heading information consists of three lines of right-justi\256ed)9 3033 2 720 3360 t
+10 I f
+(id)4005 3360 w
+10 R f
+(,)4083 3360 w
+10 I f
+(date)4145 3360 w
+10 R f
+(, and)1 206 1 4317 3360 t
+10 CW f
+(FOIL)4560 3360 w
+10 I f
+(n)4837 3360 w
+10 R f
+(. If)1 153 1 4887 3360 t
+10 I f
+(date)720 3480 w
+10 R f
+(and)921 3480 w
+10 I f
+(id)1094 3480 w
+10 R f
+( corresponding values \(if any\) from the previous foil-)8 2153(are omitted on a foil-start macro, then the)7 1686 2 1201 3480 t
+(start macro are used.)3 825 1 720 3600 t
+(See the Appendix for examples of all this.)7 1681 1 720 3780 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 4.  , HEADING = THE LEVEL MACROS]
+10 B f
+( LEVEL MACROS)2 834(4. THE)1 337 2 720 4020 t
+10 R f
+(The)720 4200 w
+9 R f
+(MV)901 4200 w
+10 R f
+( indentation, called)2 771(macros provide four levels of)4 1187 2 1074 4200 t
+10 CW f
+(.A)3061 4200 w
+10 R f
+(,)3181 4200 w
+10 CW f
+(.B)3235 4200 w
+10 R f
+(,)3355 4200 w
+10 CW f
+(.C)3409 4200 w
+10 R f
+(, and)1 198 1 3529 4200 t
+10 CW f
+(.D)3756 4200 w
+10 R f
+( of these)2 346(. Each)1 278 2 3876 4200 t
+10 I f
+(level macros)1 511 1 4529 4200 t
+10 R f
+(causes the text that follows it to be placed at the corresponding level of indentation.)14 3337 1 720 4320 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.1  , HEADING = The \&.A Level]
+10 B f
+(4.1 The)1 342 1 720 4500 t
+10 CW f
+(.A)1087 4500 w
+10 B f
+(Level)1232 4500 w
+10 R f
+(The leftmost \(left margin\) level is obtained by:)7 1873 1 720 4680 t
+10 CW f
+(.A)870 4860 w
+10 R f
+([)1050 4860 w
+10 I f
+(x)1099 4860 w
+10 R f
+(])1159 4860 w
+(The)720 5040 w
+10 CW f
+(.A)906 5040 w
+10 R f
+( Each)1 256( by each of the foil-start macros.)6 1336(level is automatically invoked)3 1220 3 1057 5040 t
+10 CW f
+(.A)3901 5040 w
+10 R f
+(macro spaces a half-line)3 987 1 4053 5040 t
+(from the preceding text, unless the)5 1391 1 720 5160 t
+10 I f
+(x)2138 5160 w
+10 R f
+( speci\256ed \()2 440(argument is)1 471 2 2209 5160 t
+10 I f
+(x)3120 5160 w
+10 R f
+(can be any character or string of characters\);)7 1780 1 3190 5160 t
+10 I f
+(x)4996 5160 w
+10 R f
+( The)1 205(suppresses the spacing.)2 929 2 720 5280 t
+10 CW f
+(.A)1879 5280 w
+10 R f
+(macro can also be invoked through the)6 1547 1 2024 5280 t
+10 CW f
+(.I)3596 5280 w
+10 R f
+(macro \(see \2475.2\).)2 692 1 3741 5280 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.2  , HEADING = The \&.B Level]
+10 B f
+(4.2 The)1 342 1 720 5460 t
+10 CW f
+(.B)1087 5460 w
+10 B f
+(Level)1232 5460 w
+10 CW f
+(.B)870 5640 w
+10 R f
+([)1050 5640 w
+10 I f
+(mark)1099 5640 w
+10 R f
+([)1345 5640 w
+10 I f
+(size)1394 5640 w
+10 R f
+(] ])1 82 1 1560 5640 t
+(The)720 5820 w
+10 CW f
+(.B)906 5820 w
+10 R f
+( text that follows the)4 850( The)1 212( slightly reduced point size\).)4 1163(level items are marked by a bullet \(in a)8 1606 4 1057 5820 t
+10 CW f
+(.B)4920 5820 w
+10 R f
+( The)1 213(macro is spaced one-half line from the preceding text.)8 2217 2 720 5940 t
+10 CW f
+(.B)3183 5940 w
+10 R f
+(level mark may be changed by specifying)6 1705 1 3335 5940 t
+( mark \(which may be any character string\) as the \256rst argument \()12 2744(the desired)1 447 2 720 6060 t
+10 I f
+(mark)3911 6060 w
+10 R f
+( the second)2 475(\). Without)1 449 2 4116 6060 t
+( one can produce a numbered list as follows:)8 1780( Thus,)1 275(argument, the point size of the mark is not reduced.)9 2055 3 720 6180 t
+10 CW f
+(.VS)870 6360 w
+(This is a list of things:)5 1500 1 870 6480 t
+(.B 1.)1 300 1 870 6600 t
+(This is thing number 1.)4 1380 1 870 6720 t
+(.B 2.)1 300 1 870 6840 t
+(This is thing number 2.)4 1380 1 870 6960 t
+(.B 3.)1 300 1 870 7080 t
+(This is the third and last thing on this foil.)9 2760 1 870 7200 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(4 MV)1 4320 1 720 600 t
+10 R f
+( mark: the second argument \()5 1177(It is possible to change the point size of the)9 1738 2 720 960 t
+10 I f
+(size)3635 960 w
+10 R f
+(\), if given, speci\256es the desired)5 1255 1 3785 960 t
+( unsigned or positive \(+\) argument is taken as an increment; a negative \(\261\) argument)14 3414( An)1 176(point-size change.)1 730 3 720 1080 t
+( it were the)3 485(is a decrement; an argument greater than 99 causes the mark to be reduced in size just as if)18 3835 2 720 1200 t
+( these)1 240( All)1 188( restored.)1 381( the mark is printed, the previous point size is)9 1920( After)1 271(default mark, namely the bullet.)4 1320 6 720 1320 t
+(point-size changes are)2 886 1 720 1440 t
+10 I f
+(completely)1631 1440 w
+10 R f
+(invisible to the user.)3 811 1 2088 1440 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.3  , HEADING = The \&.C Level]
+10 B f
+(4.3 The)1 342 1 720 1620 t
+10 CW f
+(.C)1087 1620 w
+10 B f
+(Level)1232 1620 w
+10 CW f
+(.C)870 1800 w
+10 R f
+([)1050 1800 w
+10 I f
+(mark)1099 1800 w
+10 R f
+([)1345 1800 w
+10 I f
+(size)1394 1800 w
+10 R f
+(] ])1 82 1 1560 1800 t
+(The)720 1980 w
+10 CW f
+(.C)902 1980 w
+10 R f
+(level is just like the)4 790 1 1050 1980 t
+10 CW f
+(.B)1868 1980 w
+10 R f
+(level)2016 1980 w
+10 I f
+(except)2238 1980 w
+10 R f
+(that is is indented farther to the right than the)9 1828 1 2520 1980 t
+10 CW f
+(.B)4376 1980 w
+10 R f
+(level and the)2 516 1 4524 1980 t
+(default mark is a long em-dash \(\320\), also in a slightly reduced point size.)13 2910 1 720 2100 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.4  , HEADING = The \&.D Level]
+10 B f
+(4.4 The)1 342 1 720 2280 t
+10 CW f
+(.D)1087 2280 w
+10 B f
+(Level)1232 2280 w
+10 CW f
+(.D)870 2460 w
+10 R f
+([)1050 2460 w
+10 I f
+(mark)1099 2460 w
+10 R f
+([)1345 2460 w
+10 I f
+(size)1394 2460 w
+10 R f
+(] ])1 82 1 1560 2460 t
+(The)720 2640 w
+10 CW f
+(.D)908 2640 w
+10 R f
+(level's default mark is a bullet \(smaller than that used for the)11 2520 1 1061 2640 t
+10 CW f
+(.B)3614 2640 w
+10 R f
+(level\); the)1 411 1 3768 2640 t
+10 CW f
+(.D)4213 2640 w
+10 R f
+(level is indented)2 673 1 4367 2640 t
+(farther to the right than the)5 1173 1 720 2760 t
+10 CW f
+(.C)1938 2760 w
+10 R f
+(level and is does)3 723 1 2103 2760 t
+10 I f
+(not)2871 2760 w
+10 R f
+( previous text; it just causes the)6 1369(space from the)2 627 2 3044 2760 t
+( to start on a new line \(in other words, it causes a)12 2003(following text)1 567 2 720 2880 t
+10 I f
+(break)3319 2880 w
+10 R f
+( it behaves just like the)5 939(\). Otherwise,)1 547 2 3554 2880 t
+10 CW f
+(.B)720 3000 w
+10 R f
+(and)865 3000 w
+10 CW f
+(.C)1034 3000 w
+10 R f
+(levels.)1179 3000 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.5  , HEADING = More about Levels]
+10 B f
+( about Levels)2 567(4.5 More)1 407 2 720 3180 t
+8 S f
+(\267)783 3360 w
+10 R f
+(The)870 3360 w
+10 CW f
+(.A)1050 3360 w
+10 R f
+(macro never generates a mark of any sort; it is the ``left-margin'' macro.)12 2900 1 1195 3360 t
+8 S f
+(\267)783 3540 w
+10 R f
+(Repeated)870 3540 w
+10 CW f
+(.A)1269 3540 w
+10 R f
+(calls are ignored, but each successive call of any of the other three level macros generates)15 3623 1 1417 3540 t
+(the corresponding mark.)2 973 1 870 3660 t
+8 S f
+(\267)783 3840 w
+10 R f
+( of vertical pre-spacing generated by each level macro can be changed with the)13 3200(The amount)1 483 2 870 3840 t
+10 CW f
+(.DV)4582 3840 w
+10 R f
+(macro)4791 3840 w
+(\(see \2476.2\).)1 418 1 870 3960 t
+8 S f
+(\267)783 4140 w
+10 R f
+(Example 3 in the Appendix is devoted to the level macros.)10 2339 1 870 4140 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 5.  , HEADING = THE TITLE AND INDENT MACROS]
+10 B f
+( TITLE AND INDENT MACROS)4 1456(5. THE)1 337 2 720 4380 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 5.1  , HEADING = Titles]
+(5.1 Titles)1 414 1 720 4560 t
+10 R f
+(The title macro)2 610 1 720 4740 t
+10 CW f
+(.T)1355 4740 w
+10 R f
+(creates a centered title from its argument:)6 1657 1 1500 4740 t
+10 CW f
+(.T)870 4920 w
+10 I f
+(string)1050 4920 w
+10 R f
+( that the argument must)4 968( Remember)1 494( point size.)2 448(The size of the title is four points larger than the prevailing)11 2410 4 720 5100 t
+( quotes \()2 378(be enclosed within double)3 1100 2 720 5220 t
+10 CW f
+(")2198 5220 w
+10 S f
+(\274)2258 5220 w
+10 CW f
+(")2358 5220 w
+10 R f
+( indentation established by the)4 1284( Any)1 239(\) if it contains blanks.)4 937 3 2418 5220 t
+10 CW f
+(.I)4920 5220 w
+10 R f
+(macro has no effect on titles; they are always centered within the foil's horizontal dimension.)14 3724 1 720 5340 t
+(See Examples 2, 3, and 4 in the Appendix.)8 1701 1 720 5520 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 5.2  , HEADING = Global Indents]
+10 B f
+( Indents)1 348(5.2 Global)1 465 2 720 5700 t
+10 R f
+(The entire text \(except titles\) of the foil may be shifted right or left by the)15 2937 1 720 5880 t
+10 CW f
+(.I)3682 5880 w
+10 R f
+(macro:)3827 5880 w
+10 CW f
+(.I)870 6060 w
+10 R f
+([)1050 6060 w
+10 I f
+(indent)1099 6060 w
+10 R f
+(] [)1 91 1 1365 6060 t
+10 I f
+(a)1472 6060 w
+10 R f
+([)1563 6060 w
+10 I f
+(x)1612 6060 w
+10 R f
+(] ])1 82 1 1672 6060 t
+( This)1 243( amount of indentation that is to be used to establish a new left margin.)14 3044(The \256rst argument is the)4 1033 3 720 6240 t
+( If)1 117( current margin.)2 642(argument may be signed positive or negative, indicating right or left movement from the)13 3561 3 720 6360 t
+(unsigned, the argument speci\256es the new margin, relative to the)9 2612 1 720 6480 t
+10 I f
+(initial)3364 6480 w
+10 R f
+( argument is)2 510( the)1 154( If)1 123(default margin.)1 617 4 3636 6480 t
+( the argument is null or omitted,)6 1316( If)1 121( it is assumed to be in inches.)7 1207(not dimensioned,)1 695 4 720 6600 t
+10 CW f
+(0i)4089 6600 w
+10 R f
+(is assumed, causing)2 801 1 4239 6600 t
+(the margin to revert to the initial default margin.)8 1934 1 720 6720 t
+( is speci\256ed, the)3 662(If a second argument)3 854 2 720 6900 t
+10 CW f
+(.I)2267 6900 w
+10 R f
+(macro calls the)2 616 1 2418 6900 t
+10 CW f
+(.A)3065 6900 w
+10 R f
+( third argument, if)3 745( The)1 211(macro before exiting.)2 868 3 3216 6900 t
+(present, is passed to the)4 946 1 720 7020 t
+10 CW f
+(.A)1691 7020 w
+10 R f
+(macro.)1836 7020 w
+(See Examples 1, 2 and 4 in the Appendix.)8 1676 1 720 7200 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(MV 5)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 6.  , HEADING = SIZE AND FONT CONTROL]
+10 B f
+( AND FONT CONTROL)3 1075(6. SIZE)1 354 2 720 960 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 6.1  , HEADING = Point Sizes and Line Lengths]
+( Sizes and Line Lengths)4 1013(6.1 Point)1 403 2 720 1140 t
+10 R f
+( shows,)1 304( II)1 91( Table)1 281( point size and line length.)5 1075(Each foil-start macro begins the foil with an appropriate default)9 2569 5 720 1320 t
+( of lines of text \(at the default)7 1254(for each style of view graph, the default point size, the maximum number)12 3066 2 720 1440 t
+(point size\), and the height, width, and ``aspect ratio,'' both nominal and actual.)12 3159 1 720 1560 t
+10 B f
+(TABLE II)1 443 1 2658 1740 t
+(Default Point Size, Dimensions, and Aspect Ratios)6 2133 1 1813 1920 t
+10 S f
+(_ ________________________________________________________________________________)1 4010 1 875 2000 t
+10 I f
+( \(Text\))1 263(Nominal Actual)1 1652 2 2492 2120 t
+10 S f
+(_ ___________________________________________________________)1 2960 1 1925 2140 t
+10 I f
+(Macro)925 2272 w
+(Name)925 2392 w
+(Point)1341 2272 w
+(Size)1341 2392 w
+(Max.)1658 2272 w
+(Lines)1658 2392 w
+(Width)1975 2272 w
+(\(inches\))1975 2392 w
+(Height)2396 2272 w
+(\(inches\))2396 2392 w
+(Aspect)2817 2272 w
+(Ratio)2817 2392 w
+(AR)3208 2382 w
+10 R f
+(1)3244 2252 w
+10 S1 f
+(_ ___)1 152 1 3193 2282 t
+10 I f
+(Width)3455 2272 w
+(\(inches\))3455 2392 w
+(Height)3876 2272 w
+(\(inches\))3876 2392 w
+(Aspect)4297 2272 w
+(Ratio)4297 2392 w
+(AR)4688 2382 w
+10 R f
+(1)4724 2252 w
+10 S1 f
+(_ ___)1 152 1 4673 2282 t
+10 S f
+(_ ________________________________________________________________________________)1 4010 1 875 2402 t
+(_ ________________________________________________________________________________)1 4010 1 875 2422 t
+10 CW f
+(.VS)925 2532 w
+10 R f
+( .88)1 319( 1.13)1 419( 6.8)1 496( 6)1 371( 1)1 319( 1)1 369( 7)1 421( 7)1 331(18 21)1 417 9 1350 2532 t
+10 S f
+(_ ________________________________________________________________________________)1 4010 1 875 2552 t
+10 CW f
+(.Vw)925 2672 w
+10 R f
+( 1.25)1 369( 0.8)1 369( 4.8)1 496( 6)1 296( 1.4)1 269( 0.71)1 494( 5)1 421( 7)1 331(14 19)1 417 9 1350 2672 t
+10 CW f
+(.Vh)925 2792 w
+10 R f
+( 0.62)1 369( 1.6)1 369( 6.8)1 421( 4.2)1 321( 0.71)1 369( 1.4)1 444( 7)1 421( 5)1 331(14 27)1 417 9 1350 2792 t
+10 CW f
+(.VW)925 2912 w
+10 R f
+( 1.15)1 319( 0.87)1 419( 5.2)1 496( 6)1 296( 1.3)1 269( 0.77)1 419( 5.4)1 496( 7)1 331(14 21)1 417 9 1350 2912 t
+10 CW f
+(.VH)925 3032 w
+10 R f
+( 0.68)1 369( 1.5)1 369( 8.8)1 496( 6)1 246( 0.77)1 369( 1.3)1 444( 9)1 421( 7)1 331(18 28)1 417 9 1350 3032 t
+10 S f
+(_ ________________________________________________________________________________)1 4010 1 875 3052 t
+10 CW f
+(.Sw)925 3172 w
+10 R f
+( 1.4)1 269( 0.73)1 419( 4.4)1 496( 6)1 296( 1.5)1 269( 0.67)1 419( 4.6)1 496( 7)1 331(14 18)1 417 9 1350 3172 t
+10 CW f
+(.Sh)925 3292 w
+10 R f
+( 0.56)1 369( 1.8)1 369( 6.8)1 421( 3.8)1 321( 0.67)1 369( 1.5)1 444( 7)1 346( 4.6)1 406(14 27)1 417 9 1350 3292 t
+10 CW f
+(.SW)925 3412 w
+10 R f
+( 1.4)1 269( 0.73)1 419( 4.4)1 496( 6)1 296( 1.5)1 269( 0.67)1 419( 4.6)1 496( 7)1 331(14 18)1 417 9 1350 3412 t
+10 CW f
+(.SH)925 3532 w
+10 R f
+( 0.57)1 319( 1.76)1 419( 8.8)1 496( 5)1 246( 0.67)1 369( 1.5)1 444( 9)1 421( 6)1 331(18 28)1 417 9 1350 3532 t
+10 S f
+( \347)1 -4010(_ ________________________________________________________________________________)1 4010 2 875 3552 t
+(\347)875 3500 w
+(\347)875 3400 w
+(\347)875 3300 w
+(\347)875 3200 w
+(\347)875 3100 w
+(\347)875 3000 w
+(\347)875 2900 w
+(\347)875 2800 w
+(\347)875 2700 w
+(\347)875 2600 w
+(\347)875 2500 w
+(\347)875 2400 w
+(\347)875 2300 w
+(\347)875 2200 w
+(\347)875 2100 w
+(\347)1925 3552 w
+(\347)1925 3500 w
+(\347)1925 3400 w
+(\347)1925 3300 w
+(\347)1925 3200 w
+(\347)1925 3100 w
+(\347)1925 3000 w
+(\347)1925 2900 w
+(\347)1925 2800 w
+(\347)1925 2700 w
+(\347)1925 2600 w
+(\347)1925 2500 w
+(\347)1925 2400 w
+(\347)1925 2300 w
+(\347)1925 2200 w
+(\347)1925 2100 w
+(\347)3405 3552 w
+(\347)3405 3500 w
+(\347)3405 3400 w
+(\347)3405 3300 w
+(\347)3405 3200 w
+(\347)3405 3100 w
+(\347)3405 3000 w
+(\347)3405 2900 w
+(\347)3405 2800 w
+(\347)3405 2700 w
+(\347)3405 2600 w
+(\347)3405 2500 w
+(\347)3405 2400 w
+(\347)3405 2300 w
+(\347)3405 2200 w
+(\347)3405 2100 w
+(\347)4885 3552 w
+(\347)4885 3500 w
+(\347)4885 3400 w
+(\347)4885 3300 w
+(\347)4885 3200 w
+(\347)4885 3100 w
+(\347)4885 3000 w
+(\347)4885 2900 w
+(\347)4885 2800 w
+(\347)4885 2700 w
+(\347)4885 2600 w
+(\347)4885 2500 w
+(\347)4885 2400 w
+(\347)4885 2300 w
+(\347)4885 2200 w
+(\347)4885 2100 w
+10 R f
+(Notes:)920 3732 w
+( Lines'' is the maximum number of lines of text at the)11 2162(\320 ``Max.)1 424 2 920 3852 t
+10 I f
+(default)3531 3852 w
+10 R f
+(point size.)1 411 1 3834 3852 t
+( Ratio'' \()2 366(\320 ``Aspect)1 493 2 920 3972 t
+10 I f
+(AR)1779 3972 w
+10 R f
+(\) is the ratio of height over width.)7 1343 1 1901 3972 t
+( that, normally each)3 793(\320 Remember)1 588 2 920 4092 t
+10 CW f
+(.A)2326 4092 w
+10 R f
+(,)2446 4092 w
+10 CW f
+(.B)2496 4092 w
+10 R f
+(, and)1 194 1 2616 4092 t
+10 CW f
+(.C)2835 4092 w
+10 R f
+(macro generates a one-half line space.)5 1522 1 2980 4092 t
+(\320 The)1 305 1 920 4212 t
+10 CW f
+(.SW)1250 4212 w
+10 R f
+(\(if used as a view graph\) and)6 1152 1 1455 4212 t
+10 CW f
+(.VW)2632 4212 w
+10 R f
+( 7.)1 83(foils must be enlarged by a factor of 9/)8 1547 2 2837 4212 t
+(The prevailing point size and the line length may be changed by invoking the)13 3088 1 720 4392 t
+10 CW f
+(.S)3833 4392 w
+10 R f
+(macro:)3978 4392 w
+10 CW f
+(.S)870 4572 w
+10 R f
+([)1050 4572 w
+10 I f
+(ps)1099 4572 w
+10 R f
+(] [)1 91 1 1204 4572 t
+10 I f
+(ll)1311 4572 w
+10 R f
+(])1383 4572 w
+(If)720 4752 w
+10 I f
+(ps)811 4752 w
+10 R f
+(is null, the)2 420 1 925 4752 t
+10 I f
+(previous)1370 4752 w
+10 R f
+( If)1 116(point size is restored.)3 849 2 1739 4752 t
+10 I f
+(ps)2729 4752 w
+10 R f
+(is signed negative, the point size is decremented by the)9 2197 1 2843 4752 t
+( If)1 120(speci\256ed amount.)1 709 2 720 4872 t
+10 I f
+(ps)1578 4872 w
+10 R f
+( as an increment, and if)5 946(is signed positive, it is used)5 1121 2 1696 4872 t
+10 I f
+(ps)3791 4872 w
+10 R f
+(is unsigned, it is used as the)6 1132 1 3908 4872 t
+( If)1 128(new point size.)2 626 2 720 4992 t
+10 I f
+(ps)1511 4992 w
+10 R f
+( 99, the)2 323(is greater than)2 589 2 1637 4992 t
+10 I f
+(initial default)1 556 1 2587 4992 t
+10 R f
+( Vertical)1 384( II\).)1 149(point size is restored \(see Table)5 1326 3 3181 4992 t
+(spacing is always 1.25 times the current point size.)8 2031 1 720 5112 t
+( it is)2 187( If)1 123( may be dimensioned.)3 898( It)1 118(The second argument, if given, speci\256es the line length.)8 2289 5 720 5292 t
+10 I f
+(not)4368 5292 w
+10 R f
+(dimensioned)4529 5292 w
+(and less than 10, it is taken as inches; if it is)11 1799 1 720 5412 t
+10 I f
+(not)2548 5412 w
+10 R f
+(dimensioned and greater than or equal to 10, it is taken as)11 2335 1 2705 5412 t
+10 I f
+(troff)720 5532 w
+10 R f
+(units. The)1 425 1 918 5532 t
+10 CW f
+(.S)1369 5532 w
+10 R f
+(macro changes the point size and vertical spacing immediately, but a line-length change)12 3525 1 1515 5532 t
+(requested with that macro does not take effect until the next level-macro call.)12 3085 1 720 5652 t
+(See Examples 3, 4, and 6 in the Appendix.)8 1701 1 720 5832 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 6.2  , HEADING = Default Vertical Space]
+10 B f
+( Vertical Space)2 643(6.2 Default)1 491 2 720 6012 t
+10 R f
+( done by each of the four level)7 1335(The vertical space macro allows one to change the vertical pre-spacing)10 2985 2 720 6192 t
+(macros:)720 6312 w
+10 CW f
+(.DV)870 6492 w
+10 R f
+([)1110 6492 w
+10 I f
+(a)1159 6492 w
+10 R f
+(] [)1 116 1 1225 6492 t
+10 I f
+(b)1357 6492 w
+10 R f
+(] [)1 116 1 1423 6492 t
+10 I f
+(c)1555 6492 w
+10 R f
+(] [)1 116 1 1615 6492 t
+10 I f
+(d)1747 6492 w
+10 R f
+(])1813 6492 w
+( argument)1 404(The \256rst)1 337 2 720 6672 t
+10 I f
+(a)1488 6672 w
+10 R f
+(is the spacing for)3 691 1 1565 6672 t
+10 CW f
+(.A)2283 6672 w
+10 R f
+(,)2403 6672 w
+10 I f
+(b)2455 6672 w
+10 R f
+(is for)1 210 1 2532 6672 t
+10 CW f
+(.B)2769 6672 w
+10 R f
+(,)2889 6672 w
+10 I f
+(c)2941 6672 w
+10 R f
+(is for)1 210 1 3012 6672 t
+10 CW f
+(.C)3249 6672 w
+10 R f
+(, and)1 196 1 3369 6672 t
+10 I f
+(d)3592 6672 w
+10 R f
+(is for)1 210 1 3669 6672 t
+10 CW f
+(.D)3906 6672 w
+10 R f
+( non-null arguments)2 809(. All)1 205 2 4026 6672 t
+(must be dimensioned; null arguments leave the corresponding spacing unaffected.)9 3278 1 720 6792 t
+(By default, the)2 603 1 720 6972 t
+10 CW f
+(.A)1354 6972 w
+10 R f
+(,)1474 6972 w
+10 CW f
+(.B)1530 6972 w
+10 R f
+(, and)1 201 1 1650 6972 t
+10 CW f
+(.C)1883 6972 w
+10 R f
+(level macros generate one-half vertical pre-space, and the)7 2346 1 2035 6972 t
+10 CW f
+(.D)4413 6972 w
+10 R f
+(level macro)1 475 1 4565 6972 t
+( initial setting is equivalent to:)5 1215( The)1 205(generates no vertical pre-space.)3 1256 3 720 7092 t
+10 CW f
+(.DV .5v .5v .5v 0v)4 1080 1 870 7272 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+(6 MV)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 6.3  , HEADING = Default Fonts]
+10 B f
+( Fonts)1 264(6.3 Default)1 491 2 720 960 t
+10 R f
+( fonts can)2 394( Additional)1 481( that the Helvetica font, mounted in position 1, is the default font.)12 2654(The macros assume)2 791 4 720 1140 t
+(be mounted and the default font can be changed:)8 1940 1 720 1260 t
+10 CW f
+(.DF)870 1440 w
+10 I f
+(n font)1 256 1 1110 1440 t
+10 R f
+([)1407 1440 w
+10 I f
+(n font)1 256 1 1456 1440 t
+10 R f
+([)1753 1440 w
+10 S f
+(\274)1802 1440 w
+10 R f
+(] ])1 82 1 1918 1440 t
+(The)720 1620 w
+10 CW f
+(.DF)907 1620 w
+10 R f
+(macro informs)1 592 1 1119 1620 t
+10 I f
+(troff)1743 1620 w
+10 R f
+(that)1948 1620 w
+10 I f
+(font)2130 1620 w
+10 R f
+(is mounted on position)3 936 1 2318 1620 t
+10 I f
+(n)3286 1620 w
+10 R f
+( \256rst-named font is the default font.)6 1466(. The)1 238 2 3336 1620 t
+( The)1 218( be speci\256ed.)2 550(Up to four pairs of arguments may)6 1465 3 720 1740 t
+10 CW f
+(.DF)2991 1740 w
+10 R f
+(macro must immediately precede a foil-start)5 1831 1 3209 1740 t
+(macro; the initial setting is equivalent to:)6 1639 1 720 1860 t
+10 CW f
+(.DF 1 H 2 I 3 B 4 BI)8 1200 1 870 2040 t
+10 R f
+(By default, the constant-width font \()5 1454 1 720 2220 t
+10 CW f
+(CW)2174 2220 w
+10 R f
+( Examples 4 and 5 in the Appendix.)7 1432( See)1 194(\) is mounted on position 5.)5 1073 3 2294 2220 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 6.4  , HEADING = Underlining]
+10 B f
+(6.4 Underlining)1 693 1 720 2400 t
+10 R f
+(The underline macro)2 831 1 720 2580 t
+10 CW f
+(.U)1576 2580 w
+10 R f
+(takes one or two arguments:)4 1126 1 1721 2580 t
+10 CW f
+(.U)870 2760 w
+10 I f
+(string1)1050 2760 w
+10 R f
+([)1375 2760 w
+10 I f
+(string2)1424 2760 w
+10 R f
+(])1724 2760 w
+( second argument, if present, is not)6 1488( The)1 220( the string of characters to be underlined.)7 1740(The \256rst argument is)3 872 4 720 2940 t
+( example,)1 388( For)1 189(underlined, but concatenated to the \256rst argument.)6 2008 3 720 3060 t
+10 CW f
+(.U phototypesetter)1 1080 1 870 3240 t
+10 R f
+(produces)720 3420 w
+(phototypesetter)870 3600 w
+10 S f
+(_ ____________)1 616 1 870 3600 t
+10 R f
+(while)720 3780 w
+10 CW f
+(.U under line)2 780 1 870 3960 t
+10 R f
+(produces)720 4140 w
+(under)870 4320 w
+10 S f
+(_ ____)1 227 1 870 4320 t
+10 R f
+(line)1097 4320 w
+(See Example 4 in the Appendix.)5 1293 1 720 4500 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 7.  , HEADING = USING troff COMMANDS AND SYMBOLS]
+10 B f
+(7. USING)1 442 1 720 4740 t
+10 BI f
+(troff)1187 4740 w
+10 B f
+(COMMANDS AND SYMBOLS)2 1366 1 1395 4740 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.1  , HEADING = Use of troff Requests]
+( of)1 108(7.1 Use)1 330 2 720 4920 t
+10 BI f
+(troff)1183 4920 w
+10 B f
+(Requests)1391 4920 w
+10 R f
+( is not advisable to intermix arbitrary)6 1548(In general, it)2 527 2 720 5100 t
+10 I f
+(troff)2831 5100 w
+10 R f
+(requests with the)2 699 1 3040 5100 t
+9 R f
+(MV)3773 5100 w
+10 R f
+(macros, because this often)3 1086 1 3954 5100 t
+( the ones for)3 514( ``safe'' requests are)3 836( The)1 212(leads to undesirable \(and sometimes downright astonishing\) results.)7 2758 4 720 5220 t
+(which upper-case synonyms have been de\256ned in the)7 2126 1 720 5340 t
+9 R f
+(MV)2869 5340 w
+10 R f
+(package:)3039 5340 w
+10 CW f
+(.AD .BR .CE .FI .HY .NA .NF .NH .NX .SO .SP .TA .TI)12 3780 1 870 5520 t
+10 R f
+(Other)720 5700 w
+10 I f
+(troff)972 5700 w
+10 R f
+( dangerous)1 436( Particularly)1 517( and with care and discipline.)5 1175(requests should be used sparingly \(if at all\),)7 1742 4 1170 5700 t
+( requests that affect point size, indentation, page offset, line and title lengths, and vertical spacing)15 4041(are the)1 279 2 720 5820 t
+(between lines; use the)3 879 1 720 5940 t
+10 CW f
+(.S)1624 5940 w
+10 R f
+(and)1769 5940 w
+10 CW f
+(.I)1938 5940 w
+10 R f
+(macros instead.)1 621 1 2083 5940 t
+10 I f
+(Reserved Names.)1 689 1 720 6120 t
+10 R f
+( particular, all two-character)3 1138( In)1 136(Certain names are used internally by this macro package.)8 2305 3 1461 6120 t
+( that are the same as names of the)8 1397( Names)1 335(names starting with either \) and ] are reserved.)8 1917 3 720 6240 t
+9 R f
+(MV)4399 6240 w
+10 R f
+(macros and)1 464 1 4576 6240 t
+(strings described in this manual, or the same as any)9 2071 1 720 6360 t
+10 I f
+(troff)2818 6360 w
+10 R f
+( if any)2 261( Furthermore,)1 577( either.)1 280(names, cannot be used)3 904 4 3018 6360 t
+(of the preprocessors \(see \2478\) are used, their reserved names must also be avoided.)13 3266 1 720 6480 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.2  , HEADING = Breaks]
+10 B f
+(7.2 Breaks)1 475 1 720 6660 t
+10 R f
+(The)720 6840 w
+10 CW f
+(.S)903 6840 w
+10 R f
+(,)1023 6840 w
+10 CW f
+(.DF)1076 6840 w
+10 R f
+(,)1256 6840 w
+10 CW f
+(.DV)1309 6840 w
+10 R f
+(, and)1 197 1 1489 6840 t
+10 CW f
+(.U)1714 6840 w
+10 R f
+(macros do)1 416 1 1862 6840 t
+10 I f
+(not)2306 6840 w
+10 R f
+(cause a break; the)3 720 1 2462 6840 t
+10 CW f
+(.I)3210 6840 w
+10 R f
+( break)1 250(macro causes a)2 609 2 3358 6840 t
+10 I f
+(only)4246 6840 w
+10 R f
+(if it is invoked)3 593 1 4447 6840 t
+(with more than one argument; all the other)7 1783 1 720 6960 t
+9 R f
+(MV)2537 6960 w
+10 R f
+(macros)2718 6960 w
+10 I f
+(always)3042 6960 w
+10 R f
+( The)1 215(cause a break.)2 581 2 3355 6960 t
+10 I f
+(troff)4186 6960 w
+10 R f
+(synonyms)4394 6960 w
+10 CW f
+(.AD)4835 6960 w
+10 R f
+(,)5015 6960 w
+10 CW f
+(.BR)720 7080 w
+10 R f
+(,)900 7080 w
+10 CW f
+(.CE)950 7080 w
+10 R f
+(,)1130 7080 w
+10 CW f
+(.FI)1180 7080 w
+10 R f
+(,)1360 7080 w
+10 CW f
+(.NA)1410 7080 w
+10 R f
+(,)1590 7080 w
+10 CW f
+(.NF)1640 7080 w
+10 R f
+(,)1820 7080 w
+10 CW f
+(.SP)1870 7080 w
+10 R f
+(, and)1 194 1 2050 7080 t
+10 CW f
+(.TI)2269 7080 w
+10 R f
+(also cause a break.)3 747 1 2474 7080 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+10 HB f
+(MV 7)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.3  , HEADING = Text Filling, Adjusting, and Hyphenation]
+10 B f
+( Filling, Adjusting, and Hyphenation)4 1571(7.3 Text)1 369 2 720 960 t
+10 R f
+(By default, the)2 607 1 720 1140 t
+9 R f
+(MV)1358 1140 w
+10 R f
+( aesthetic judgement that)3 1023( is an)2 227( This)1 236(macros \256ll, but neither adjust nor hyphenate text.)7 2018 4 1536 1140 t
+( defaults can, of course, be changed by using the)9 1955( These)1 290(seems correct for foils.)3 920 3 720 1260 t
+10 CW f
+(.AD)3911 1260 w
+10 R f
+(,)4091 1260 w
+10 CW f
+(.FI)4142 1260 w
+10 R f
+(,)4322 1260 w
+10 CW f
+(.HY)4373 1260 w
+10 R f
+(,)4553 1260 w
+10 CW f
+(.NA)4604 1260 w
+10 R f
+(,)4784 1260 w
+10 CW f
+(.NF)4835 1260 w
+10 R f
+(,)5015 1260 w
+(and)720 1380 w
+10 CW f
+(.NH)889 1380 w
+10 R f
+(macros.)1094 1380 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.4  , HEADING = Defined Strings]
+10 B f
+( Strings)1 331(7.4 De\256ned)1 503 2 720 1560 t
+10 R f
+( mark, and trademark symbols are de\256ned as strings in the)10 2397(The registered mark, service)3 1153 2 720 1740 t
+9 R f
+(MV)4300 1740 w
+10 R f
+(package. Use)1 563 1 4477 1740 t
+(the following string to generate the corresponding symbol:)7 2345 1 720 1860 t
+10 S f
+(_ ________________________________)1 1635 1 2062 1940 t
+10 R f
+( Description)1 694(String Symbol)1 735 2 2139 2060 t
+10 S f
+(_ ________________________________)1 1635 1 2062 2080 t
+10 CW f
+(\\*\(Rg)2112 2200 w
+6 S f
+(\322)2694 2160 w
+10 R f
+(registered mark)1 623 1 3024 2200 t
+10 CW f
+(\\*\(Tm)2112 2320 w
+6 R f
+(TM)2673 2270 w
+10 R f
+(trademark)3024 2320 w
+10 CW f
+(\\*\(Sm)2112 2440 w
+6 R f
+(SM)2674 2390 w
+10 R f
+(service mark)1 512 1 3024 2440 t
+10 S f
+( \347)1 -1635(_ ________________________________)1 1635 2 2062 2460 t
+(\347)2062 2440 w
+(\347)2062 2340 w
+(\347)2062 2240 w
+(\347)2062 2140 w
+(\347)2062 2040 w
+(\347)3697 2460 w
+(\347)3697 2440 w
+(\347)3697 2340 w
+(\347)3697 2240 w
+(\347)3697 2140 w
+(\347)3697 2040 w
+10 R f
+( service mark symbol or)4 1005(Use the registration symbol for registered marks; for unregistered marks, use the)11 3315 2 720 2640 t
+( appear in)2 421( should always be used as adjectives when they)8 2011( Marks)1 320(the trademark symbol, as appropriate.)4 1568 4 720 2760 t
+(printed text \(e.g.,)2 685 1 720 2880 t
+9 R f
+(UNIX)1430 2880 w
+6 S f
+(\322)1655 2840 w
+10 R f
+(system, Tuxedo)1 633 1 1727 2880 t
+6 R f
+(TM)2360 2830 w
+10 R f
+(software,)2475 2880 w
+9 R f
+(ACCUNET)2866 2880 w
+6 R f
+(SM)3299 2830 w
+10 R f
+(digital services\).)1 660 1 3411 2880 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.5  , HEADING = Unpaddable Space]
+10 B f
+( Space)1 275(7.5 Unpaddable)1 699 2 720 3060 t
+10 R f
+(Normally,)720 3240 w
+10 I f
+(troff)1156 3240 w
+10 R f
+( appropriate place to break the line or to insert extra space to \256ll out the)15 2913(treats a space as an)4 770 2 1357 3240 t
+( ``unpaddable'' space is a \256xed-size non-adjustable space;)7 2359(line. An)1 352 2 720 3360 t
+10 I f
+(troff)3461 3360 w
+10 R f
+(will neither pad nor break the line)6 1377 1 3663 3360 t
+( produce an unpaddable space, use the built-in)7 1853( To)1 162(at this space.)2 515 3 720 3480 t
+10 I f
+(troff)3276 3480 w
+10 R f
+(escape sequence)1 656 1 3475 3480 t
+10 CW f
+(\\)4157 3480 w
+10 S1 f
+()4217 3480 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_sq {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    font B eq {fill} {stroke} ifelse
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+4217 3480 m
+50 build_sq
+4267 3480 m
+10 R f
+(where)4293 3480 w
+10 S1 f
+()4562 3480 w
+4562 3480 m
+50 build_sq
+4612 3480 m
+10 R f
+(is a single)2 402 1 4638 3480 t
+(space from the keyboard.)3 1008 1 720 3600 t
+( The)1 208( a visible character to represent an unpaddable space.)8 2142(A popular convention is to use)5 1234 3 720 3780 t
+9 R f
+(MV)4330 3780 w
+10 R f
+(package does)1 537 1 4503 3780 t
+( de\256ne one, you must use the)6 1235( To)1 173(not provide a visible unpaddable space character by default.)8 2487 3 720 3900 t
+10 I f
+(troff)4651 3900 w
+10 CW f
+(.tr)4860 3900 w
+10 R f
+( example, the request)3 848( For)1 189(request in the beginning of the \256le to translate the desired character to space.)13 3060 3 720 4020 t
+10 CW f
+(.tr \304)1 300 1 870 4200 t
+10 R f
+( can then use)3 548( You)1 232(translates a tilde into white space.)5 1398 3 720 4380 t
+10 CW f
+(\304)2933 4380 w
+10 R f
+( To)1 172( unpaddable space.)2 778(in the text to represent an)5 1062 3 3028 4380 t
+(print a tilde, the request)4 946 1 720 4500 t
+10 CW f
+(.tr \304\304)1 360 1 870 4680 t
+10 R f
+(will translate)1 519 1 720 4860 t
+10 CW f
+(\304)1264 4860 w
+10 R f
+(back into itself.)2 619 1 1349 4860 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 8.  , HEADING = THE troff  PREPROCESSORS]
+10 B f
+(8. THE)1 337 1 720 5100 t
+10 BI f
+(troff)1082 5100 w
+10 B f
+(PREPROCESSORS)1298 5100 w
+10 R f
+( to use the various)4 767(It is possible)2 524 2 720 5280 t
+10 I f
+(troff)2046 5280 w
+10 R f
+(preprocessors to typeset foils that require more powerful formatting)8 2786 1 2254 5280 t
+(capabilities.)720 5400 w
+8 S f
+(\267)783 5580 w
+10 R f
+(The)870 5580 w
+10 I f
+(tbl)1052 5580 w
+10 R f
+( The)1 208( within a view graph or slide.)6 1186(program can be used to set up columns of data)9 1873 3 1185 5580 t
+10 CW f
+(.TS)4480 5580 w
+10 R f
+(and)4688 5580 w
+10 CW f
+(.TE)4860 5580 w
+10 R f
+(macros mark the start and end of)6 1308 1 870 5700 t
+10 I f
+(tbl)2203 5700 w
+10 R f
+( Examples 4 and 6 in the Appendix.)7 1432(input. See)1 425 2 2334 5700 t
+8 S f
+(\267)783 5880 w
+10 R f
+(The)870 5880 w
+10 I f
+(eqn)1055 5880 w
+10 R f
+( provided one)2 561(program can be used to typeset mathematical expressions and formulas on foils,)11 3250 2 1229 5880 t
+( The)1 209(is careful to specify the proper fonts and point sizes.)9 2121 2 870 6000 t
+10 CW f
+(.EQ)3229 6000 w
+10 R f
+(and)3438 6000 w
+10 CW f
+(.EN)3611 6000 w
+10 R f
+(macros mark the start and end)5 1220 1 3820 6000 t
+(of)870 6120 w
+10 I f
+(eqn)982 6120 w
+10 R f
+( Examples 5 and 6)4 758( See)1 199( and to set delimiters for in-line equations.)7 1728(input for displayed equations,)3 1200 4 1155 6120 t
+(in the Appendix.)2 669 1 870 6240 t
+8 S f
+(\267)783 6420 w
+10 R f
+(The)870 6420 w
+10 I f
+(pic)1060 6420 w
+10 R f
+( to)1 114( may need to adjust the size of objects)8 1600( One)1 226(program can be used to draw simple pictures.)7 1883 4 1217 6420 t
+( The)1 221( within.)1 322(accommodate the text)2 910 3 870 6540 t
+10 CW f
+(.PS)2364 6540 w
+10 R f
+(and)2585 6540 w
+10 CW f
+(.PE)2770 6540 w
+10 R f
+(macros mark the start and end of)6 1404 1 2991 6540 t
+10 I f
+(pic)4436 6540 w
+10 R f
+(input. See)1 441 1 4599 6540 t
+(Example 7 in the Appendix.)4 1124 1 870 6660 t
+8 S f
+(\267)783 6840 w
+10 R f
+(The)870 6840 w
+10 I f
+(grap)1058 6840 w
+10 R f
+( to)1 112(program is a preprocessor)3 1057 2 1280 6840 t
+10 I f
+(pic)2483 6840 w
+10 R f
+(and can be used to plot graphs and display statistical data.)10 2401 1 2639 6840 t
+( The)1 209( due to the larger text size.)6 1080(One may need to adjust the size and placement of labels)10 2290 3 870 6960 t
+10 CW f
+(.G1)4478 6960 w
+10 R f
+(and)4687 6960 w
+10 CW f
+(.G2)4860 6960 w
+10 R f
+(macros mark the start and end of)6 1308 1 870 7080 t
+10 I f
+(grap)2203 7080 w
+10 R f
+( Example 8 in the Appendix.)5 1149(input. See)1 425 2 2417 7080 t
+(The preprocessor macros \()3 1081 1 720 7260 t
+10 CW f
+(.TS)1801 7260 w
+10 R f
+(and)2013 7260 w
+10 CW f
+(.TE)2190 7260 w
+10 R f
+(,)2370 7260 w
+10 CW f
+(.EQ)2428 7260 w
+10 R f
+(and)2641 7260 w
+10 CW f
+(.EN)2818 7260 w
+10 R f
+(,)2998 7260 w
+10 CW f
+(.PS)3056 7260 w
+10 R f
+(and)3269 7260 w
+10 CW f
+(.PE)3446 7260 w
+10 R f
+(,)3626 7260 w
+10 CW f
+(.G1)3684 7260 w
+10 R f
+(and)3897 7260 w
+10 CW f
+(.G2)4074 7260 w
+10 R f
+(\) are not de\256ned in)4 786 1 4254 7260 t
+(the)720 7380 w
+9 R f
+(MV)865 7380 w
+10 R f
+(macro package, but are merely \257ags to the particular preprocessor.)9 2656 1 1035 7380 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+10 HB f
+(8 MV)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 9.  , HEADING = THE FINISHED PRODUCT]
+10 B f
+( FINISHED PRODUCT)2 1028(9. THE)1 337 2 720 960 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 9.1  , HEADING = Laser Printer and Phototypesetter Output]
+( Printer and Phototypesetter Output)4 1554(9.1 Laser)1 419 2 720 1140 t
+10 R f
+( is more than adequate for most view graphs and slides; in some cases, actual)14 3473(Laser printer output)2 847 2 720 1320 t
+( is obtained via the formatting command:)6 1649( Output)1 328(phototypesetter output may be desired.)4 1551 3 720 1440 t
+10 CW f
+(troff -mv)1 540 1 870 1620 t
+10 R f
+([)1470 1620 w
+10 I f
+(options)1503 1620 w
+10 R f
+(])1814 1620 w
+10 I f
+(\256lename)1897 1620 w
+10 CW f
+(|)2295 1620 w
+10 S f
+(\274)2415 1620 w
+10 R f
+(where)720 1800 w
+10 I f
+(\256lename)997 1800 w
+10 R f
+(contains the text and the macro invocations for the foils, and)10 2506 1 1369 1800 t
+10 I f
+(options)3909 1800 w
+10 R f
+( or more)2 358(can be one)2 444 2 4238 1800 t
+10 I f
+(troff)720 1920 w
+10 R f
+(command line options.)2 914 1 918 1920 t
+(If any of the)3 541 1 720 2100 t
+10 I f
+(troff)1303 2100 w
+10 R f
+( before)1 297(preprocessors are used, they must appear)5 1719 2 1518 2100 t
+10 I f
+(troff)3577 2100 w
+10 R f
+(on the command line and the)5 1247 1 3793 2100 t
+(\256lename is given to the \256rst preprocessor:)6 1676 1 720 2220 t
+10 CW f
+(tbl)870 2400 w
+10 I f
+(\256lename)1110 2400 w
+10 CW f
+(| eqn | troff -mv)4 1020 1 1508 2400 t
+10 R f
+([)2588 2400 w
+10 I f
+(options)2621 2400 w
+10 R f
+(])2932 2400 w
+10 CW f
+(|)3050 2400 w
+10 S f
+(\274)3170 2400 w
+10 R f
+(When)720 2580 w
+10 I f
+(eqn)996 2580 w
+10 R f
+(and)1179 2580 w
+10 I f
+(tbl)1362 2580 w
+10 R f
+(are used together on the same \256le,)6 1445 1 1507 2580 t
+10 I f
+(tbl)2991 2580 w
+10 R f
+(should be used \256rst; if there are no equations)8 1904 1 3136 2580 t
+( Since)1 293(within tables, either order works.)4 1404 2 720 2700 t
+10 I f
+(grap)2463 2700 w
+10 R f
+( to)1 123(is a preprocessor)2 712 2 2698 2700 t
+10 I f
+(pic)3578 2700 w
+10 R f
+(,)3708 2700 w
+10 I f
+(grap)3778 2700 w
+10 R f
+(must precede)1 549 1 4012 2700 t
+10 I f
+(pic)4606 2700 w
+10 R f
+(on the)1 267 1 4773 2700 t
+( input for several view graphs with tables,)7 1780( example, given a \256le which contains the)7 1729( For)1 203(command line.)1 608 4 720 2820 t
+(equations, pictures, and a graph, the command line:)7 2058 1 720 2940 t
+10 CW f
+(grap)870 3120 w
+10 I f
+(\256le)1170 3120 w
+10 CW f
+(| pic | tbl | eqn | troff -mv)8 1740 1 1352 3120 t
+10 R f
+([)3152 3120 w
+10 I f
+(options)3185 3120 w
+10 R f
+(])3496 3120 w
+10 CW f
+(|)3589 3120 w
+10 S f
+(\274)3709 3120 w
+10 R f
+(produces the set of view graphs using the preprocessors discussed in \2478.)11 2884 1 720 3300 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 9.2  , HEADING = Output Approximation on a Terminal]
+10 B f
+( Approximation on a Terminal)4 1312(9.2 Output)1 487 2 720 3480 t
+10 R f
+(One can obtain an approximation of the typeset output by entering the command:)12 3246 1 720 3660 t
+10 CW f
+(troff -a -mv)2 720 1 870 3840 t
+10 I f
+(\256lename)1650 3840 w
+10 CW f
+(|)2048 3840 w
+10 S f
+(\274)2168 3840 w
+10 R f
+(The resulting output shows the formatted foils except that:)8 2337 1 720 4020 t
+8 S f
+(\267)783 4200 w
+10 R f
+(Point-size changes are not visible.)4 1362 1 870 4200 t
+8 S f
+(\267)783 4320 w
+10 R f
+(Font changes cannot be seen.)4 1167 1 870 4320 t
+8 S f
+(\267)783 4440 w
+10 R f
+(Titles that are too long appear proper.)6 1505 1 870 4440 t
+8 S f
+(\267)783 4560 w
+10 R f
+(All horizontal motions are reduced to one horizontal space to the right.)11 2829 1 870 4560 t
+8 S f
+(\267)783 4680 w
+10 R f
+(All vertical motions are reduced to one vertical space down.)9 2400 1 870 4680 t
+(Thus, for example, it appears that the lines of text following a)11 2532 1 720 4860 t
+10 CW f
+(.B)3283 4860 w
+10 R f
+(,)3403 4860 w
+10 CW f
+(.C)3459 4860 w
+10 R f
+(, or)1 139 1 3579 4860 t
+10 CW f
+(.D)3749 4860 w
+10 R f
+( properly)1 370(macro do not align)3 770 2 3900 4860 t
+(\(even though, in fact, they do\).)5 1231 1 720 4980 t
+(Although alignment cannot be determined from this approximation, one can observe line breaks and the)14 4320 1 720 5160 t
+( not full, the macro package prints the number of)9 2033( the foil is)3 433( If)1 126(amount of vertical space used by the text.)7 1728 4 720 5280 t
+( If)1 120( full, a warning is printed.)5 1055(blank lines \(in the then current point size\) that remain on the foil; if the foil is)16 3145 3 720 5400 t
+(the text)1 297 1 720 5520 t
+10 I f
+(did)1042 5520 w
+10 R f
+(over\257ow the foil, text will be printed after the ``cross-hairs.'')9 2442 1 1195 5520 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 9.3  , HEADING = Making Actual View Graphs and Slides]
+10 B f
+( Actual View Graphs and Slides)5 1360(9.3 Making)1 509 2 720 5700 t
+10 R f
+( paper)1 255(The output of the typesetter is so-called ``mechanical paper,'' which is white, opaque photographic)13 4065 2 720 5880 t
+( are several very simple processes for making transparent foils from opaque paper.)12 3318( There)1 284( letters.)1 296(with black)1 422 4 720 6000 t
+( these processes involve heat, and because mechanical paper is heat sensitive, one should)13 3634(Because some of)2 686 2 720 6120 t
+( a good-quality of\256ce copier,)4 1188(\256rst make copies of the typesetter output \(as well as laser printer output\) on)13 3132 2 720 6240 t
+(and then use these copies for making the transparencies.)8 2242 1 720 6360 t
+( is)1 93( It)1 112( left to professionals.)3 841(Getting slides made is a much more complicated photographic process that is best)12 3274 4 720 6540 t
+( letters)1 273(possible to make both positive \(opaque letters on transparent background\) and negative \(transparent)12 4047 2 720 6660 t
+(on opaque background\) slides, as well as colored-background slides.)8 2739 1 720 6780 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Page: 9 9
+/saveobj save def
+mark
+9 pagesetup
+10 HB f
+(MV 9)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 10.  , HEADING = OPINIONS AND SUGGESTIONS]
+10 B f
+( AND SUGGESTIONS)2 985(10. OPINIONS)1 670 2 720 960 t
+10 R f
+( from the examination of)4 1081(The following suggestions and opinions have been derived from experience,)9 3239 2 720 1140 t
+( foil-)1 200(several other macro packages for making foils, and from some publications that discuss good and bad)15 4120 2 720 1260 t
+(making practices:)1 707 1 720 1380 t
+10 S1 f
+()720 1560 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_rh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+15 66 moveto
+15 86 lineto
+16 131 lineto
+17 146 lineto
+18 158 lineto
+19 167 lineto
+21 181 lineto
+24 190 lineto
+34 193 lineto
+49 189 lineto
+58 182 lineto
+60 177 lineto
+60 166 lineto
+59 156 lineto
+58 143 lineto
+57 130 lineto
+56 117 lineto
+55 102 lineto
+54 42 lineto
+53 39 lineto
+49 35 lineto
+34 34 lineto
+19 39 lineto
+16 47 lineto
+15 66 lineto
+stroke
+
+65 60 moveto
+65 111 lineto
+66 127 lineto
+67 139 lineto
+69 153 lineto
+72 163 lineto
+83 171 lineto
+98 177 lineto
+113 182 lineto
+128 187 lineto
+143 190 lineto
+158 194 lineto
+173 196 lineto
+188 199 lineto
+203 201 lineto
+218 203 lineto
+233 205 lineto
+248 205 lineto
+263 206 lineto
+278 206 lineto
+293 206 lineto
+308 206 lineto
+323 206 lineto
+338 205 lineto
+353 203 lineto
+368 202 lineto
+383 200 lineto
+394 197 lineto
+389 190 lineto
+389 180 lineto
+391 176 lineto
+391 173 lineto
+380 173 lineto
+365 173 lineto
+350 174 lineto
+335 175 lineto
+320 176 lineto
+305 176 lineto
+290 176 lineto
+275 177 lineto
+260 177 lineto
+245 177 lineto
+240 173 lineto
+240 170 lineto
+245 165 lineto
+260 164 lineto
+275 164 lineto
+290 164 lineto
+305 163 lineto
+320 160 lineto
+327 155 lineto
+330 149 lineto
+330 134 lineto
+328 129 lineto
+323 124 lineto
+309 121 lineto
+294 121 lineto
+279 121 lineto
+264 121 lineto
+249 121 lineto
+234 121 lineto
+228 118 lineto
+228 112 lineto
+234 109 lineto
+249 109 lineto
+264 109 lineto
+279 108 lineto
+294 108 lineto
+306 104 lineto
+311 97 lineto
+312 91 lineto
+312 88 lineto
+311 82 lineto
+305 74 lineto
+290 72 lineto
+275 72 lineto
+260 72 lineto
+245 73 lineto
+230 73 lineto
+215 73 lineto
+205 70 lineto
+205 63 lineto
+217 60 lineto
+232 60 lineto
+247 60 lineto
+262 60 lineto
+277 57 lineto
+283 52 lineto
+285 44 lineto
+285 41 lineto
+284 35 lineto
+280 30 lineto
+268 26 lineto
+253 25 lineto
+238 26 lineto
+223 28 lineto
+208 31 lineto
+193 33 lineto
+178 34 lineto
+163 33 lineto
+148 31 lineto
+133 28 lineto
+118 27 lineto
+103 28 lineto
+88 34 lineto
+73 43 lineto
+67 52 lineto
+65 60 lineto
+stroke
+
+396 180 moveto
+396 188 lineto
+399 194 lineto
+410 196 lineto
+416 190 lineto
+416 180 lineto
+415 177 lineto
+411 173 lineto
+400 173 lineto
+396 180 lineto
+stroke
+
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+720 1560 m
+100 build_rh
+820 1560 m
+10 I f
+(Foils 3 and 4 in the Appendix violate some or most of the ``rules'' given below.)15 3175 1 845 1560 t
+8 S f
+(\267)783 1740 w
+10 R f
+(The most useful foil sizes are)5 1243 1 870 1740 t
+10 CW f
+(.VS)2152 1740 w
+10 R f
+(and)2371 1740 w
+10 CW f
+(.Vw)2554 1740 w
+10 R f
+(\(or)2773 1740 w
+10 CW f
+(.Sw)2928 1740 w
+10 R f
+( screens are)2 494( is because most projection)4 1138(\). This)1 300 3 3108 1740 t
+( are)1 160(either square, or ``wide'' \(i.e., are wider than they are tall\), and also because the resulting foils)16 4010 2 870 1860 t
+(smaller, easier to carry, and require no enlargement before using.)9 2598 1 870 1980 t
+8 S f
+(\267)783 2160 w
+10 R f
+(The)870 2160 w
+10 I f
+(default)1057 2160 w
+10 R f
+( is the)2 253( II\))1 124(point size for each type of foil \(see Table)8 1696 3 1367 2160 t
+10 I f
+(smallest)3472 2160 w
+10 R f
+( that will result in a)5 815(point size)1 393 2 3832 2160 t
+( the point size below the)5 1044( Reducing)1 447( legible by an audience of more than a dozen people.)10 2243(foil that is)2 436 4 870 2280 t
+( a foil, do not reduce the point size; use)9 1615( you have more text than \256ts onto)7 1369( If)1 120(default should be avoided.)3 1066 4 870 2400 t
+(two or more foils instead.)4 1024 1 870 2520 t
+8 S f
+(\267)783 2700 w
+10 R f
+( tend to use too many typefaces, resulting in foils)9 2019( novice foil-makers)2 786( Most)1 261(Do not abuse font changes.)4 1104 4 870 2700 t
+( \(e.g., for spatial)3 657( sure you need to use a different typeface)8 1655( Be)1 163(that look cluttered and distract the viewer.)6 1695 4 870 2820 t
+( should almost never use more than two)7 1709( You)1 239( single typeface.)2 685(emphasis\); when in doubt, stick to a)6 1537 4 870 2940 t
+(different typefaces on a single foil.)5 1391 1 870 3060 t
+8 S f
+(\267)783 3240 w
+10 R f
+(Even though this package contains a macro for underlining, do not use it: underlined typeset text almost)16 4170 1 870 3240 t
+(always looks awful; instead, if necessary, use a different typeface.)9 2637 1 870 3360 t
+8 S f
+(\267)783 3540 w
+10 R f
+( ``fatter'' and is, in foils,)5 994(The Helvetica sans-serif font \(which is the default font used by this package\) is)13 3176 2 870 3540 t
+( instance, the Times Roman or Palatino serif fonts used for typesetting)11 2814(considered easier to read than, for)5 1356 2 870 3660 t
+( the other hand, the Times Roman font)7 1578( On)1 177( in this paragraph\).)3 769(normal, ``running'' text \(such as the text)6 1646 4 870 3780 t
+( choice of fonts is primarily a)6 1176( the whole, the)3 591( On)1 173(will allow you to ``squeeze'' a bit more text onto a foil.)11 2230 4 870 3900 t
+(matter of personal aesthetics.)3 1164 1 870 4020 t
+8 S f
+(\267)783 4200 w
+10 R f
+(If possible, use the)3 752 1 870 4200 t
+10 CW f
+(.SP)1648 4200 w
+10 R f
+( insert a bit of additional white space \(say,)8 1705(macro to)1 353 2 1854 4200 t
+10 CW f
+(.5v)3939 4200 w
+10 R f
+(or)4146 4200 w
+10 CW f
+(1v)4256 4200 w
+10 R f
+(, where)1 295 1 4376 4200 t
+10 CW f
+(v)4698 4200 w
+10 R f
+(means)4785 4200 w
+(``vertical space''\) at the top of each foil \(i.e., increase the top margin\).)12 2808 1 870 4320 t
+8 S f
+(\267)783 4500 w
+10 R f
+( alphabetic characters to maximize)4 1445(Some people believe that foils should not contain any lower-case)9 2725 2 870 4500 t
+( far more legible than)4 927(legibility; this is not necessarily true: ``normal'' upper-and-lower-case text is)9 3243 2 870 4620 t
+( re\256ned over millenia)3 917( alphabets have evolved and been)5 1433( Upper-and-lower-case)1 959(upper-case-only text.)1 861 4 870 4740 t
+( such text is less ``bulky'' than upper-)7 1566( Furthermore,)1 581(precisely because they result in more legible text.)7 2023 3 870 4860 t
+(case-only text, so one can get more information onto a foil without crowding it.)13 3177 1 870 4980 t
+8 S f
+(\267)783 5160 w
+10 R f
+( sizes,)1 257(Make all the foils for a presentation as consistent as possible; changing fonts, typefaces, point)14 3913 2 870 5160 t
+( it is possible to introduce emphasis and)7 1611( While)1 296(etc., from foil to foil tends to jar and distract the viewer.)11 2263 3 870 5280 t
+( attention to particular items with such changes, this only works if you do it very)15 3430(draw the viewer's)2 740 2 870 5400 t
+(purposefully and very sparingly; overuse of these techniques is almost always counter-productive.)11 3921 1 870 5520 t
+( in doubt:)2 384( When)1 288(In summary, the dictum that ``the medium is the message'' does not apply to foil making.)15 3589 3 720 5700 t
+8 S f
+(\267)783 5880 w
+10 R f
+(Do not change point sizes.)4 1057 1 870 5880 t
+8 S f
+(\267)783 6000 w
+10 R f
+(Do not change fonts or typefaces.)5 1341 1 870 6000 t
+8 S f
+(\267)783 6120 w
+10 R f
+(Do not underline!)2 710 1 870 6120 t
+8 S f
+(\267)783 6240 w
+10 R f
+(Use many ``sparse'' foils, rather than few ``dense'' ones.)8 2281 1 870 6240 t
+8 S f
+(\267)783 6360 w
+10 R f
+(Use fewer words, rather than more.)5 1409 1 870 6360 t
+8 S f
+(\267)783 6480 w
+10 R f
+(Use larger point sizes, rather than smaller.)6 1685 1 870 6480 t
+8 S f
+(\267)783 6600 w
+10 R f
+(Use larger top and bottom margins, rather than smaller.)8 2213 1 870 6600 t
+8 S f
+(\267)783 6720 w
+10 R f
+(Use normal upper-and-lower-case text, rather than upper-case only.)7 2694 1 870 6720 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 9 9
+%%Trailer
+done
+%%Pages: 9
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-BoldItalic Times-Roman Symbol Courier-Oblique Courier
+%%+ Times-Roman

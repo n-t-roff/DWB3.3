@@ -1,0 +1,3633 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(A TROFF Tutorial)2 1490 1 540 1040 t
+36 S1 f
+(__________________________)540 1240 w
+9 HB f
+(ABSTRACT)540 1720 w
+10 I f
+(Troff)1185 1720 w
+10 R f
+( devices normally provide)3 1055( Such)1 255( typesetters and laser printers.)4 1209(is a text-formatting program for)4 1286 4 1415 1720 t
+( mathematical symbols and other special characters.)6 2196(multiple fonts, and a substantial number of)6 1839 2 1185 1840 t
+(Characters can be printed in a range of sizes, and placed anywhere on the page.)14 3162 1 1185 1960 t
+10 I f
+(Troff)1185 2140 w
+10 R f
+( over fonts, sizes, and character positions, as well as the usual fea-)12 2713(allows the user full control)4 1091 2 1416 2140 t
+( hyphenation, page titling and numbering,)5 1679( justi\256cation, automatic)2 946( \320 right-margin)2 637(tures of a formatter)3 773 4 1185 2260 t
+( for)1 147( also provides macros, arithmetic variables and operations, and conditional testing,)10 3354( It)1 116(and so on.)2 418 4 1185 2380 t
+(complicated formatting tasks.)2 1185 1 1185 2500 t
+(This document is an introduction to the most basic use of)10 2328 1 1185 2680 t
+10 I f
+(troff)3542 2680 w
+10 R f
+( just enough information)3 1001( presents)1 356(. It)1 140 3 3723 2680 t
+( to do simple formatting tasks like making viewgraphs, and to make incremental)12 3307(to enable the user)3 728 2 1185 2800 t
+(changes to existing packages of)4 1264 1 1185 2920 t
+10 I f
+(troff)2474 2920 w
+10 R f
+(commands.)2672 2920 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = Introduction]
+10 B f
+(1. Introduction)1 670 1 540 3220 t
+10 I f
+(Troff)540 3400 w
+10 R f
+( text-formatting program for producing high-)5 1830(is a)1 141 2 771 3400 t
+(quality printed output from phototypesetters and laser)6 2202 1 540 3520 t
+( document is an example of)5 1101(printers. This)1 558 2 540 3640 t
+10 I f
+(troff)2224 3640 w
+10 R f
+(output.)2422 3640 w
+(The single most important rule of using)6 1625 1 540 3820 t
+10 I f
+(troff)2197 3820 w
+10 R f
+(is not to)2 339 1 2403 3820 t
+( In)1 163( intermediary.)1 590(use it directly, but through some)5 1449 3 540 3940 t
+(many ways,)1 481 1 540 4060 t
+10 I f
+(troff)1050 4060 w
+10 R f
+( \320 a)2 176( assembly language)2 792(resembles an)1 522 3 1252 4060 t
+( nonethe-)1 387( \320 but)2 260( and \257exible one)3 702(remarkably powerful)1 853 4 540 4180 t
+( operations must be speci\256ed at a)6 1392(less such that many)3 810 2 540 4300 t
+( and in a form that is too hard for most)10 1633(level of detail)2 569 2 540 4420 t
+(people to use effectively.)3 1003 1 540 4540 t
+( are programs that)3 744(For some special applications, there)4 1458 2 540 4720 t
+(provide an interface to)3 930 1 540 4840 t
+10 I f
+(troff)1505 4840 w
+10 R f
+( users.)1 264(for the majority of)3 765 2 1713 4840 t
+(For example,)1 540 1 540 4960 t
+10 I f
+(eqn)1118 4960 w
+10 R f
+(provides an easy to learn language)5 1442 1 1300 4960 t
+(for typesetting mathematics; the)3 1327 1 540 5080 t
+10 I f
+(eqn)1906 5080 w
+10 R f
+( know)1 260(user need)1 393 2 2089 5080 t
+(no)540 5200 w
+10 I f
+(troff)677 5200 w
+10 R f
+(whatsoever to typeset mathematics.)3 1456 1 887 5200 t
+10 I f
+(Tbl)2405 5200 w
+10 R f
+(pro-)2576 5200 w
+(vides the same convenience for producing tables.)6 1965 1 540 5320 t
+( straight text \(which may well contain)6 1617(For producing)1 585 2 540 5500 t
+(mathematics or tables\), there are a number of ``macro)8 2202 1 540 5620 t
+( rules and operations)3 856(packages'' that de\256ne formatting)3 1346 2 540 5740 t
+( reduce the)2 523(for speci\256c styles of documents, and)5 1679 2 540 5860 t
+(amount of direct contact with)4 1216 1 540 5980 t
+10 I f
+(troff)1791 5980 w
+10 R f
+( particular, the)2 601(. In)1 169 2 1972 5980 t
+10 CW f
+(-ms)540 6100 w
+10 R f
+(and)763 6100 w
+10 CW f
+(-mm)950 6100 w
+10 R f
+(packages for internal memoranda and)4 1569 1 1173 6100 t
+( the facilities needed)3 874(external papers provide most of)4 1328 2 540 6220 t
+( paper)1 247( \(This)1 262(for a wide range of document preparation.)6 1693 3 540 6340 t
+( with)1 211(was prepared)1 535 2 540 6460 t
+10 CW f
+(-mm)1319 6460 w
+10 R f
+( are also packages for)4 895(.\) There)1 348 2 1499 6460 t
+( journals, and other special appli-)5 1386(viewgraphs, various)1 816 2 540 6580 t
+( will \256nd these packages easier)5 1274( you)1 181(cations. Typically)1 747 3 540 6700 t
+(to use than)2 451 1 540 6820 t
+10 I f
+(troff)1025 6820 w
+10 R f
+( beyond the most trivial)4 982(once you get)2 528 2 1232 6820 t
+(operations; you should always consider them \256rst.)6 2007 1 540 6940 t
+( the)1 154(In the few cases where existing packages don't do)8 2048 2 3017 3220 t
+(whole job, the solution is)4 1037 1 3017 3340 t
+10 I f
+(not)4086 3340 w
+10 R f
+( an entirely new)3 658(to write)1 315 2 4246 3340 t
+(set of)1 219 1 3017 3460 t
+10 I f
+(troff)3261 3460 w
+10 R f
+( to make small)3 589(instructions from scratch, but)3 1171 2 3459 3460 t
+(changes to adapt packages that already exist.)6 1787 1 3017 3580 t
+(In accordance with this philosophy of letting someone)7 2202 1 3017 3760 t
+( work, the part of)4 766(else do the)2 467 2 3017 3880 t
+10 I f
+(troff)4294 3880 w
+10 R f
+(described here is)2 708 1 4511 3880 t
+( it tries to con-)4 595(only a small part of the whole, although)7 1607 2 3017 4000 t
+( any case, there is)4 718( In)1 136( useful parts.)2 519(centrate on the more)3 829 4 3017 4120 t
+( on)1 130( the emphasis is)3 648( Rather,)1 345(no attempt to be complete.)4 1079 4 3017 4240 t
+( how to make)3 586(showing how to do simple things, and)6 1616 2 3017 4360 t
+( con-)1 211( The)1 214( already exists.)2 614(incremental changes to what)3 1163 4 3017 4480 t
+(tents of the remaining sections are:)5 1395 1 3017 4600 t
+( sizes and line spacing)4 893(2. Point)1 378 2 3139 4790 t
+( and special characters)3 899(3. Fonts)1 389 2 3139 4910 t
+( and line lengths)3 658(4. Indents)1 460 2 3139 5030 t
+(5. Tabs)1 360 1 3139 5150 t
+( motions: drawing lines and characters)5 1539(6. Local)1 393 2 3139 5270 t
+(7. Strings)1 450 1 3139 5390 t
+( to macros)2 416(8. Introduction)1 660 2 3139 5510 t
+( pages and numbering)3 879(9. Titles,)1 419 2 3139 5630 t
+( registers and arithmetic)3 962(10. Number)1 543 2 3089 5750 t
+( with arguments)2 644(11. Macros)1 515 2 3089 5870 t
+(12. Conditionals)1 728 1 3089 5990 t
+(13. Environments)1 777 1 3089 6110 t
+(14. Diversions)1 649 1 3089 6230 t
+( set)1 136(Appendix: Character)1 859 2 3305 6350 t
+(To use)1 284 1 3017 6598 t
+10 I f
+(troff)3341 6598 w
+10 R f
+( prepare not only the actual)5 1169(you have to)2 496 2 3554 6598 t
+(text you want printed, but some information that tells)8 2202 1 3017 6718 t
+10 I f
+(how)3017 6838 w
+10 R f
+( For)1 209(you want it printed.)3 843 2 3229 6838 t
+10 I f
+(troff)4326 6838 w
+10 R f
+( and the)2 358(the text)1 317 2 4544 6838 t
+( often intertwined quite)3 1055(formatting information are)2 1147 2 3017 6958 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+( Tutorial)1 395(2 TROFF)1 4285 2 540 600 t
+10 R f
+( commands to)2 593(intimately. Most)1 703 2 540 960 t
+10 I f
+(troff)1877 960 w
+10 R f
+(are placed on a)3 651 1 2091 960 t
+( beginning with a)3 775(line separate from the text itself,)5 1427 2 540 1080 t
+( example,)1 388( For)1 189(period \(one command per line\).)4 1261 3 540 1200 t
+9 CW f
+(Some text.)1 540 1 690 1370 t
+(.ps 14)1 324 1 690 1480 t
+(Some more text.)2 810 1 690 1590 t
+10 R f
+( of the let-)3 431(will change the `point size', that is, the size)8 1771 2 540 1770 t
+( 72)1 108( printed, to `14 point' \(one point is 1/)8 1678(ters being)1 416 3 540 1890 t
+(inch\) like this:)2 578 1 540 2010 t
+(Some text.)1 428 1 690 2190 t
+14 R f
+(Some more text.)2 921 1 1188 2190 t
+10 R f
+( the)1 156(Occasionally, though, something special occurs in)5 2046 2 540 2370 t
+( produce)1 346( \320 to)2 210(middle of a line)3 630 3 540 2490 t
+(Area =)1 274 1 690 2670 t
+10 S f
+(p)989 2670 w
+10 I f
+(r)1044 2670 w
+8 R f
+(2)1099 2630 w
+10 R f
+(you have to type)3 663 1 540 2850 t
+9 CW f
+( | \\s8\\u2\\d\\s0)2 662(Area = \\\(*p\\fIr\\fR\\)2 1026 2 690 3020 t
+10 R f
+( backslash char-)2 664( The)1 216( will explain shortly\).)3 894(\(which we)1 428 4 540 3200 t
+(acter)540 3320 w
+10 CW f
+(\\)795 3320 w
+10 R f
+(is used to introduce)3 891 1 917 3320 t
+10 I f
+(troff)1870 3320 w
+10 R f
+(commands and)1 638 1 2104 3320 t
+(special characters within a line of text.)6 1538 1 540 3440 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 2.  , HEADING = Point Sizes and Line Spacing]
+10 B f
+( Sizes and Line Spacing)4 1008(2. Point)1 353 2 540 3680 t
+10 R f
+(As mentioned above, the command)4 1428 1 540 3860 t
+10 CW f
+(.ps)1997 3860 w
+10 R f
+(sets the point)2 536 1 2206 3860 t
+( inch, so 6-point characters are)5 1249( 72)1 108( 1/)1 108( point is)2 335(size. One)1 402 5 540 3980 t
+( characters are)2 592(at most 1/12 inch high, and 36-point)6 1501 2 540 4100 t
+10 S1 f
+()2667 4100 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_12 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (2) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+2667 4100 m
+75 build_12
+2742 4100 m
+10 R f
+( different sets of sizes;)4 918( devices provide)2 666(inch. Different)1 618 3 540 4220 t
+(a representative set is shown below.)5 1436 1 540 4340 t
+6 R f
+(6 point: Pack my box with \256ve dozen liquor jugs.)9 1187 1 690 4500 t
+7 R f
+(7 point: Pack my box with \256ve dozen liquor jugs.)9 1393 1 690 4580 t
+8 R f
+(8 point: Pack my box with \256ve dozen liquor jugs.)9 1578 1 690 4670 t
+9 R f
+(9 point: Pack my box with \256ve dozen liquor jugs.)9 1785 1 690 4770 t
+10 R f
+(10 point: Pack my box with \256ve dozen liquor)8 1811 1 690 4880 t
+11 R f
+(11 point: Pack my box with \256ve dozen)7 1705 1 690 5000 t
+12 R f
+(12 point: Pack my box with \256ve dozen)7 1859 1 690 5140 t
+14 R f
+(14 point: Pack my box with \256ve)6 1797 1 690 5300 t
+16 R f
+(16 point)1 530 1 690 5510 t
+18 R f
+(18 point)1 595 1 1265 5510 t
+20 R f
+(20 point)1 662 1 1910 5510 t
+22 R f
+(22)690 5880 w
+24 R f
+(24)970 5880 w
+28 R f
+(28)1280 5880 w
+36 R f
+(36)1650 5880 w
+10 R f
+(If the number after)3 840 1 540 6060 t
+10 CW f
+(.ps)1435 6060 w
+10 R f
+(is not a legal size, it is)6 1072 1 1670 6060 t
+( no number)2 507( If)1 143(rounded up to the next valid value.)6 1552 3 540 6180 t
+(follows)540 6300 w
+10 CW f
+(.ps)877 6300 w
+10 R f
+(,)1057 6300 w
+10 I f
+(troff)1119 6300 w
+10 R f
+(reverts to the previous size, what-)5 1412 1 1330 6300 t
+(ever it was.)2 475 1 540 6420 t
+10 I f
+(Troff)1074 6420 w
+10 R f
+(begins with point size 10, which is)6 1434 1 1308 6420 t
+( document is printed in 10 point.)6 1303( This)1 228(usually \256ne.)1 489 3 540 6540 t
+( the middle of a)4 659(The point size can also be changed in)7 1543 2 540 6720 t
+( in-line command)2 713(line or even a word with the)6 1150 2 540 6840 t
+10 CW f
+(\\s)2432 6840 w
+10 R f
+(. To)1 190 1 2552 6840 t
+(produce)540 6960 w
+8 R f
+(UNIX)690 7140 w
+10 R f
+(ran on a)2 321 1 915 7140 t
+8 R f
+(PDP-)1261 7140 w
+10 R f
+(11/45)1435 7140 w
+(type)3017 960 w
+9 CW f
+(\\s8UNIX\\s10 ran on a \\s8PDP-\\s1011/45)4 1998 1 3167 1130 t
+10 R f
+(As above,)1 400 1 3017 1310 t
+10 CW f
+(\\s)3443 1310 w
+10 R f
+(should be followed by a legal point size,)7 1629 1 3590 1310 t
+(except that)1 476 1 3017 1430 t
+10 CW f
+(\\s0)3559 1430 w
+10 R f
+( to its)2 303(causes the size to revert)4 1111 2 3805 1430 t
+( that)1 196( Notice)1 337(previous value.)1 631 3 3017 1550 t
+10 CW f
+(\\s1011)4227 1550 w
+10 R f
+(can be under-)2 586 1 4633 1550 t
+( by an 11', if the)5 705(stood correctly as `size 10, followed)5 1497 2 3017 1670 t
+( cautious with)2 623( Be)1 192( not otherwise.)2 653(size is legal, but)3 734 4 3017 1790 t
+(similar constructions.)1 861 1 3017 1910 t
+(Relative size changes are also legal and useful:)7 1876 1 3017 2090 t
+9 CW f
+(\\s-2UNIX\\s+2)3167 2260 w
+10 R f
+( by two)2 324(temporarily decreases the size, whatever it is,)6 1878 2 3017 2440 t
+( it, producing)2 550(points, then restores)2 818 2 3017 2560 t
+8 R f
+(UNIX)4417 2560 w
+10 R f
+( size)1 187(. Relative)1 415 2 4617 2560 t
+( advantage that the size difference is)6 1505(changes have the)2 697 2 3017 2680 t
+( The)1 211( starting size of the document.)5 1234(independent of the)2 757 3 3017 2800 t
+( a single)2 355(amount of the relative change is restricted to)7 1847 2 3017 2920 t
+(digit.)3017 3040 w
+( determines what the type)4 1138(The other parameter that)3 1064 2 3017 3220 t
+( between lines, which is set)5 1173(looks like is the spacing)4 1029 2 3017 3340 t
+( spacing is)2 466( Vertical)1 393( point size.)2 480(independently of the)2 863 4 3017 3460 t
+( to the bottom of)4 675(measured from the bottom of one line)6 1527 2 3017 3580 t
+( to control vertical spacing is)5 1207( command)1 428( The)1 214(the next.)1 353 4 3017 3700 t
+10 CW f
+(.vs)3017 3820 w
+10 R f
+( it is usually best to set the)7 1206( running text,)2 580(. For)1 236 3 3197 3820 t
+(vertical spacing about 20% bigger than the character)7 2202 1 3017 3940 t
+( have)1 226( example, so far in this document, we)7 1593(size. For)1 383 3 3017 4060 t
+(used ``10 on 12'', that is,)5 1007 1 3017 4180 t
+9 CW f
+(.ps 10)1 324 1 3167 4350 t
+(.vs 12p)1 378 1 3167 4460 t
+10 R f
+(If we changed to)3 667 1 3017 4640 t
+9 CW f
+(.ps 10)1 324 1 3167 4810 t
+(.vs 10p)1 378 1 3167 4920 t
+10 R f
+( a few)2 293( After)1 284(the running text would look like this.)6 1625 3 3017 5080 t
+( The)1 226( looks a little cramped.)4 997(lines, you will agree it)4 979 3 3017 5180 t
+( spacing is partly a matter of taste,)7 1650(right vertical)1 552 2 3017 5280 t
+( to squeeze into)3 630(depending on how much text you want)6 1572 2 3017 5380 t
+( print-)1 256(a given space, and partly a matter of traditional)8 1946 2 3017 5480 t
+( default,)1 327( By)1 167(ing style.)1 367 3 3017 5580 t
+10 I f
+(troff)3903 5580 w
+10 R f
+(uses 10 on 12.)3 572 1 4101 5580 t
+12 R f
+( make a sub-)3 667(Point size and vertical spacing)4 1535 2 3017 5770 t
+( the amount of text per)5 1177(stantial difference in)2 1025 2 3017 5910 t
+( is 12 on 14.)4 591( This)1 274(square inch.)1 580 3 3017 6050 t
+6 R f
+( of text per)3 297(Point size and vertical spacing make a substantial difference in the amount)11 1905 2 3017 6210 t
+( is 6 on)3 178( This)1 138( example, 10 on 12 uses about twice as much space as 7 on 8.)14 1482( For)1 115(square inch.)1 289 5 3017 6280 t
+( a lot more words per line, but you can go blind trying to)13 1385( packs)1 151( It)1 68(7, which is even smaller.)4 598 4 3017 6350 t
+(read it.)1 166 1 3017 6420 t
+10 R f
+(When used without arguments,)3 1249 1 3017 6600 t
+10 CW f
+(.ps)4293 6600 w
+10 R f
+(and)4501 6600 w
+10 CW f
+(.vs)4673 6600 w
+10 R f
+(revert to)1 338 1 4881 6600 t
+(the previous size and vertical spacing respectively.)6 2026 1 3017 6720 t
+(The command)1 580 1 3017 6900 t
+10 CW f
+(.sp)3628 6900 w
+10 R f
+(is used to get extra vertical space.)6 1380 1 3839 6900 t
+( gives you one extra blank line \(one)7 1624(Unadorned, it)1 578 2 3017 7020 t
+10 CW f
+(.vs)3017 7140 w
+10 R f
+( that's)1 255( Typically,)1 466( to\).)1 169(, whatever that has been set)5 1132 4 3197 7140 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+( 3)1 3952(TROFF Tutorial)1 728 2 540 600 t
+10 R f
+(more or less than you want, so)6 1290 1 540 960 t
+10 CW f
+(.sp)1867 960 w
+10 R f
+(can be followed)2 659 1 2083 960 t
+( \320)1 116(by information about how much space you want)7 1928 2 540 1080 t
+9 CW f
+(.sp 2i)1 324 1 690 1250 t
+10 R f
+(means `two inches of vertical space'.)5 1479 1 540 1430 t
+9 CW f
+(.sp 2p)1 324 1 690 1600 t
+10 R f
+(means `two points of vertical space'; and)6 1641 1 540 1780 t
+9 CW f
+(.sp 2)1 270 1 690 1950 t
+10 R f
+( of whatever)2 504( \320 two)2 282( vertical spaces')2 648(means `two)1 465 4 540 2130 t
+10 CW f
+(.vs)2467 2130 w
+10 R f
+(is)2675 2130 w
+( also be made explicit with)5 1129(set to \(this can)3 616 2 540 2250 t
+10 CW f
+(.sp 2v)1 360 1 2321 2250 t
+10 R f
+(\);)2681 2250 w
+10 I f
+(troff)540 2370 w
+10 R f
+( fractions in most places,)4 1000(also understands decimal)2 1004 2 738 2370 t
+(so)540 2490 w
+9 CW f
+(.sp 1.5i)1 432 1 690 2660 t
+10 R f
+( same scale factors can)4 937( These)1 294( inches.)1 311(is a space of 1.5)4 660 4 540 2840 t
+(be used after)2 537 1 540 2960 t
+10 CW f
+(.vs)1116 2960 w
+10 R f
+(to de\256ne line spacing, and in fact)6 1407 1 1335 2960 t
+( physical dimen-)2 698(after most commands that deal with)5 1504 2 540 3080 t
+(sions.)540 3200 w
+( noted that all size numbers are converted)7 1716(It should be)2 486 2 540 3380 t
+( `machine units', which are much smaller,)6 1710(internally to)1 492 2 540 3500 t
+( of particular output)3 922(re\257ecting the \256ner resolution)3 1280 2 540 3620 t
+( units/inch;)1 472( laser printers run at 300)5 1098(devices. Many)1 632 3 540 3740 t
+(typesetters are often more than 1000 units/inch.)6 1900 1 540 3860 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 3.  , HEADING = Fonts and Special Characters]
+10 B f
+( and Special Characters)3 1019(3. Fonts)1 364 2 540 4100 t
+10 I f
+(Troff)540 4280 w
+10 R f
+( at any one time.)4 771(allows many different fonts)3 1179 2 792 4280 t
+( serif fonts \(Times roman, italic)5 1320(Normally a family of)3 882 2 540 4400 t
+( san-serif fonts \(Helvetica\), and a)5 1334(and bold\), a family of)4 868 2 540 4520 t
+(collection of special characters are available.)5 1788 1 540 4640 t
+(abcdefghijklmnopqrstuvwxyz 0123456789)1 1718 1 690 4820 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)690 4940 w
+10 I f
+(abcdefghijklmnopqrstuvwxyz 0123456789)1 1685 1 690 5060 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)690 5180 w
+10 B f
+(abcdefghijklmnopqrstuvwxyz 0123456789)1 1798 1 690 5300 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)690 5420 w
+10 BI f
+(abcdefghijklmnopqrstuvwxyz 0123456789)1 1726 1 690 5540 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)690 5660 w
+10 H f
+(abcdefghijklmnopqrstuvwxyz 0123456789)1 1864 1 690 5840 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)690 5960 w
+10 HI f
+(abcdefghijklmnopqrstuvwxyz 0123456789)1 1864 1 690 6080 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)690 6200 w
+10 HB f
+(abcdefghijklmnopqrstuvwxyz 0123456789)1 1991 1 690 6320 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)690 6440 w
+10 HX f
+(abcdefghijklmnopqrstuvwxyz 0123456789)1 1991 1 690 6560 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)690 6680 w
+10 R f
+(A representative collection of greek, mathematical)5 2202 1 540 6860 t
+( other characters are listed)4 1086(symbols and miscellaneous)2 1116 2 540 6980 t
+(in the Appendix.)2 669 1 540 7100 t
+10 I f
+(Troff)3017 960 w
+10 R f
+( switch)1 289( To)1 164(prints in roman unless told otherwise.)5 1520 3 3246 960 t
+(into bold, use the)3 689 1 3017 1080 t
+10 CW f
+(.ft)3731 1080 w
+10 R f
+(command)3936 1080 w
+9 CW f
+(.ft B)1 270 1 3167 1250 t
+10 R f
+(and for italics,)2 574 1 3017 1430 t
+9 CW f
+(.ft I)1 270 1 3167 1600 t
+10 R f
+( use)1 190(To return to roman,)3 875 2 3017 1780 t
+10 CW f
+(.ft R)1 300 1 4139 1780 t
+10 R f
+(; to return to the)4 772 1 4447 1780 t
+(previous font, whatever it was, use either)6 1737 1 3017 1900 t
+10 CW f
+(.ft P)1 300 1 4795 1900 t
+10 R f
+(or)5136 1900 w
+(just)3017 2020 w
+10 CW f
+(.ft)3187 2020 w
+10 R f
+( `underline' command)2 887(. The)1 230 2 3367 2020 t
+9 CW f
+(.ul)3167 2190 w
+10 R f
+(causes the next input line to print in italics.)8 1791 1 3017 2370 t
+10 CW f
+(.ul)4867 2370 w
+10 R f
+(can)5081 2370 w
+( a count to indicate that more than one)8 1587(be followed by)2 615 2 3017 2490 t
+(line is to be italicized.)4 880 1 3017 2610 t
+( be changed within a line or word with)8 1614(Fonts can also)2 588 2 3017 2790 t
+(the in-line command)2 827 1 3017 2910 t
+10 CW f
+(\\f)3869 2910 w
+10 R f
+(:)3989 2910 w
+10 B f
+(bold)3167 3090 w
+10 I f
+(face)3357 3090 w
+10 R f
+(text)3548 3090 w
+(is produced by)2 588 1 3017 3270 t
+9 CW f
+(\\fBbold\\fIface\\fR text)1 1188 1 3167 3440 t
+10 R f
+( want to do this so the previous font, whatever it)10 1959(If you)1 243 2 3017 3620 t
+(was, is left undisturbed, insert extra)5 1488 1 3017 3740 t
+10 CW f
+(\\fP)4543 3740 w
+10 R f
+(commands,)4761 3740 w
+(like this:)1 348 1 3017 3860 t
+9 CW f
+(\\fBbold\\fP\\fIface\\fP\\fR text\\fP)1 1674 1 3167 4030 t
+10 R f
+(Because only the immediately previous font is)6 2202 1 3017 4210 t
+( have to restore the previous font)6 1476(remembered, you)1 726 2 3017 4330 t
+( same is true)3 520( The)1 211( lose it.)2 304(after each change or you can)5 1167 4 3017 4450 t
+(of)3017 4570 w
+10 CW f
+(.ps)3125 4570 w
+10 R f
+(and)3330 4570 w
+10 CW f
+(.vs)3499 4570 w
+10 R f
+(when used without an argument.)4 1301 1 3704 4570 t
+( other fonts available besides the)5 1501(There are many)2 701 2 3017 4750 t
+( by)1 149( you can just use a font)6 1071( Normally)1 458(standard set.)1 524 4 3017 4870 t
+( if an entire document is to be printed in)9 1637(naming it, but)2 565 2 3017 4990 t
+( fonts, it is best to mount the fonts)8 1365(a non-standard set of)3 837 2 3017 5110 t
+( tells)1 203(explicitly. This)1 642 2 3017 5230 t
+10 I f
+(troff)3898 5230 w
+10 R f
+( will make)2 446(which fonts you)2 666 2 4107 5230 t
+( The)1 205(the most use of.)3 633 2 3017 5350 t
+10 CW f
+(.fp)3880 5350 w
+10 R f
+(command)4085 5350 w
+9 CW f
+(.fp 3 PB)2 432 1 3167 5520 t
+10 R f
+( font)1 203(says that the Palatino Bold)4 1131 2 3017 5700 t
+10 PB f
+(\(which looks like)2 826 1 4393 5700 t
+(this\))3017 5820 w
+10 R f
+(is mounted on position 3.)4 1015 1 3246 5820 t
+(It is possible to make a document relatively indepen-)8 2202 1 3017 6000 t
+( it by using font)4 678(dent of the actual fonts used to print)7 1524 2 3017 6120 t
+(numbers instead of names; for example,)5 1762 1 3017 6240 t
+10 CW f
+(\\f3)4837 6240 w
+10 R f
+(and)5075 6240 w
+10 CW f
+(.ft 3)1 300 1 3017 6360 t
+10 R f
+( 3',)1 133(mean `whatever font is mounted at position)6 1743 2 3343 6360 t
+( standard macro)2 679( The)1 226( work for any setting.)4 941(and thus)1 356 4 3017 6480 t
+(packages assume that fonts 1 through 4 contain roman,)8 2202 1 3017 6600 t
+(italic, bold, and bold italic members of a family.)8 1929 1 3017 6720 t
+( way to get synthetic bold fonts by over-)8 1623(There is also a)3 579 2 3017 6900 t
+( slight offset, with the)4 1011(striking letters with a)3 952 2 3017 7020 t
+10 CW f
+(.bd)5039 7020 w
+10 R f
+(command; it is illustrated in \24711.)5 1323 1 3017 7140 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+( Tutorial)1 395(4 TROFF)1 4285 2 540 600 t
+10 R f
+( have four-character names begin-)4 1457(Special characters)1 745 2 540 960 t
+(ning with)1 402 1 540 1080 t
+10 CW f
+(\\\()988 1080 w
+10 R f
+( For)1 210(; they may be inserted anywhere.)5 1424 2 1108 1080 t
+(example,)540 1200 w
+10 S1 f
+()690 1380 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_14 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (4) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+690 1380 m
+75 build_14
+765 1380 m
+10 R f
+(+)790 1380 w
+10 S1 f
+()871 1380 w
+871 1380 m
+75 build_12
+946 1380 m
+10 R f
+(=)971 1380 w
+10 S1 f
+()1052 1380 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_34 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (3) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (4) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+1052 1380 m
+75 build_34
+1127 1380 m
+10 R f
+(is produced by)2 588 1 540 1560 t
+9 CW f
+(\\\(14 + \\\(12 = \\\(34)4 972 1 690 1730 t
+10 R f
+( form)1 235(In particular, greek letters are all of the)7 1661 2 540 1910 t
+10 CW f
+(\\\(*\261)2477 1910 w
+10 R f
+(,)2717 1910 w
+(where)540 2030 w
+10 CW f
+(-)847 2030 w
+10 R f
+( upper or lower case roman letter)6 1546(is an)1 225 2 971 2030 t
+( to get)2 250( Thus)1 250(reminiscent of the greek.)3 992 3 540 2150 t
+10 S f
+(S)690 2330 w
+10 R f
+(\()749 2330 w
+10 S f
+(a\264b)782 2330 w
+10 R f
+(\))955 2330 w
+10 S f
+(\256 \245)1 197 1 1013 2330 t
+10 R f
+(in bare)1 274 1 540 2510 t
+10 I f
+(troff)839 2510 w
+10 R f
+(we have to type)3 629 1 1037 2510 t
+9 CW f
+(\\\(*S\(\\\(*a\\\(mu\\\(*b\) \\\()1 1134 1 690 2680 t
+9 S f
+(-)1824 2680 w
+9 CW f
+(> \\\(if)1 324 1 1874 2680 t
+10 R f
+(That line is unscrambled as follows:)5 1446 1 540 2860 t
+9 CW f
+(\\\(*S)690 3020 w
+9 S f
+(S)1410 3020 w
+9 CW f
+(\( \()1 774 1 690 3120 t
+(\\\(*a)690 3220 w
+9 S f
+(a)1410 3220 w
+9 CW f
+(\\\(mu)690 3320 w
+9 S f
+(\264)1410 3320 w
+9 CW f
+(\\\(*b)690 3420 w
+9 S f
+(b)1410 3420 w
+9 CW f
+(\) \))1 774 1 690 3520 t
+(\\\()690 3620 w
+9 S f
+(-)798 3620 w
+9 CW f
+(>)848 3620 w
+9 S f
+(\256)1410 3620 w
+9 CW f
+(\\\(if)690 3720 w
+9 S f
+(\245)1410 3720 w
+10 R f
+(The Appendix contains a sample of special names.)7 2024 1 540 3900 t
+(In)540 4080 w
+10 I f
+(eqn)648 4080 w
+10 R f
+(the same effect can be achieved with the input)8 1845 1 817 4080 t
+9 CW f
+(SIGMA \( alpha times beta \) \261> inf)7 1782 1 690 4250 t
+10 R f
+(which is less concise, but clearer to the uninitiated.)8 2036 1 540 4430 t
+( each four-character name is a single char-)7 1753(Notice that)1 449 2 540 4610 t
+(acter as far as)3 652 1 540 4730 t
+10 I f
+(troff)1253 4730 w
+10 R f
+( `translate')1 464( \320 the)2 254(is concerned)1 537 3 1487 4730 t
+(command)540 4850 w
+9 CW f
+(.tr \\\(mi\\\(em)1 648 1 690 5020 t
+10 R f
+(is perfectly clear, meaning)3 1058 1 540 5200 t
+9 CW f
+(.tr)690 5370 w
+9 S f
+(-)906 5370 w
+9 R f
+(\320)963 5370 w
+10 R f
+(that is, to translate)3 733 1 540 5550 t
+10 S f
+(-)1298 5550 w
+10 R f
+(into \320.)1 306 1 1378 5550 t
+( translated into)2 690(Some characters are automatically)3 1512 2 540 5730 t
+( \(apostrophes\))1 593( \302 accents)2 476( acute)1 260( \301 and)2 329(others: grave)1 544 5 540 5850 t
+( the combina-)2 551( ';)1 111( close single quotes `)4 842(become open and)2 698 4 540 5970 t
+(tion of ``)2 411 1 540 6090 t
+10 S f
+(\274)951 6090 w
+10 R f
+('' is generally preferable to the double)6 1691 1 1051 6090 t
+(quotes ")1 335 1 540 6210 t
+10 S f
+(\274)875 6210 w
+10 R f
+( a)1 78( a typed minus sign becomes)5 1192(". Similarly)1 497 3 975 6210 t
+( print an explicit \261 sign, use)6 1114( To)1 162(hyphen -.)1 378 3 540 6330 t
+10 CW f
+(\\-)2220 6330 w
+10 R f
+( print)1 215(. To)1 187 2 2340 6330 t
+(a backslash, use)2 640 1 540 6450 t
+10 CW f
+(\\e)1205 6450 w
+10 R f
+(.)1325 6450 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 4.  , HEADING = Indents and Line Lengths]
+10 B f
+( and Line Lengths)3 777(4. Indents)1 448 2 540 6690 t
+10 I f
+(Troff)540 6870 w
+10 R f
+( a line length of 6.5 inches, too wide)8 1542(starts with)1 424 2 776 6870 t
+(for 8)1 192 1 540 6990 t
+10 S1 f
+()732 6990 w
+732 6990 m
+75 build_12
+807 6990 m
+10 S f
+(\264)807 6990 w
+10 R f
+( the line length, use the)5 927( reset)1 214( To)1 162(11 paper.)1 372 4 862 6990 t
+10 CW f
+(.ll)2562 6990 w
+10 R f
+(command:)540 7110 w
+9 CW f
+(.ll 6i)1 324 1 690 7280 t
+10 R f
+(As with)1 315 1 3017 960 t
+10 CW f
+(.sp)3358 960 w
+10 R f
+( actual length can be speci\256ed in sev-)7 1508(, the)1 173 2 3538 960 t
+(eral ways; inches are probably the most intuitive.)7 1964 1 3017 1080 t
+( inch from the left)4 805(Output is normally positioned an)4 1397 2 3017 1260 t
+( the default physical left)4 1029( reset)1 230( To)1 178(edge of the paper.)3 765 4 3017 1380 t
+(margin \(``page offset''\), use the)4 1276 1 3017 1500 t
+10 CW f
+(.po)4318 1500 w
+10 R f
+(command.)4523 1500 w
+9 CW f
+(.po 0)1 270 1 3167 1670 t
+10 R f
+(sets the offset as far to the left as it will go.)11 1720 1 3017 1850 t
+(The indent command)2 855 1 3017 2030 t
+10 CW f
+(.in)3900 2030 w
+10 R f
+( be)1 123(causes the left margin to)4 988 2 4108 2030 t
+( off-)1 178(indented by some speci\256ed amount from the page)7 2024 2 3017 2150 t
+( we use)2 333(set. If)1 268 2 3017 2270 t
+10 CW f
+(.in)3660 2270 w
+10 R f
+(to move the left margin in, and)6 1337 1 3882 2270 t
+10 CW f
+(.ll)3017 2390 w
+10 R f
+( right margin to the left, we can make)8 1516(to move the)2 478 2 3225 2390 t
+(offset blocks of text:)3 824 1 3017 2510 t
+9 CW f
+(.in 0.3i)1 432 1 3167 2680 t
+(.ll \2610.3i)1 486 1 3167 2790 t
+10 I f
+(text to be set into a block)6 999 1 3167 2910 t
+9 CW f
+(.ll +0.3i)1 486 1 3167 3020 t
+(.in \2610.3i)1 486 1 3167 3130 t
+10 R f
+(will create a block that looks like this:)7 1524 1 3017 3310 t
+( sancti\256cetur)1 537(Pater noster qui est in caelis)5 1233 2 3233 3490 t
+( \256at)1 179(nomen tuum; adveniat regnum tuum;)4 1591 2 3233 3610 t
+( caelo, et in terra.)4 756(voluntas tua, sicut in)3 873 2 3233 3730 t
+10 S f
+(\274)4903 3730 w
+10 R f
+(Amen.)3233 3850 w
+( use of `+' and `)5 670(Notice the)1 418 2 3017 4030 t
+10 S f
+(-)4105 4030 w
+10 R f
+(' to specify the amount of)5 1059 1 4160 4030 t
+( previous setting by the)4 1057( change the)2 518(change. These)1 627 3 3017 4150 t
+( The)1 223( it.)1 124(speci\256ed amount, rather than just overriding)5 1855 3 3017 4270 t
+(distinction is quite important:)3 1224 1 3017 4390 t
+10 CW f
+(.ll +1i)1 420 1 4279 4390 t
+10 R f
+(makes lines)1 482 1 4737 4390 t
+(one inch longer;)2 649 1 3017 4510 t
+10 CW f
+(.ll 1i)1 360 1 3691 4510 t
+10 R f
+(makes them one inch)3 846 1 4076 4510 t
+10 I f
+(long)4947 4510 w
+10 R f
+(.)5133 4510 w
+(With)3017 4690 w
+10 CW f
+(.in)3244 4690 w
+10 R f
+(,)3424 4690 w
+10 CW f
+(.ll)3476 4690 w
+10 R f
+(and)3683 4690 w
+10 CW f
+(.po)3854 4690 w
+10 R f
+( previous value is used if)5 1011(, the)1 174 2 4034 4690 t
+(no argument is speci\256ed.)3 999 1 3017 4810 t
+(To indent a single line, use the `temporary)7 1902 1 3317 4990 t
+(indent' command)1 719 1 3017 5110 t
+10 CW f
+(.ti)3778 5110 w
+10 R f
+( this paragraph)2 625( example,)1 405(. For)1 231 3 3958 5110 t
+(effectively began with the command)4 1458 1 3017 5230 t
+9 CW f
+(.ti 3)1 270 1 3167 5400 t
+10 R f
+( default unit for)3 645( The)1 212(Three of what?)2 617 3 3017 5580 t
+10 CW f
+(.ti)4523 5580 w
+10 R f
+( most)1 228(, as for)2 288 2 4703 5580 t
+( commands \()2 536(horizontally oriented)1 846 2 3017 5700 t
+10 CW f
+(.ll)4399 5700 w
+10 R f
+(,)4579 5700 w
+10 CW f
+(.in)4639 5700 w
+10 R f
+(,)4819 5700 w
+10 CW f
+(.po)4879 5700 w
+10 R f
+(\), is)1 160 1 5059 5700 t
+( `m' in the)3 425(ems; an em is roughly the width of the letter)9 1777 2 3017 5820 t
+( a em in size)4 607( \(Precisely,)1 501(current point size.)2 772 3 3017 5940 t
+10 I f
+(p)4949 5940 w
+10 R f
+(is)5051 5940 w
+10 I f
+(p)5169 5940 w
+10 R f
+( usually clearer than ems)4 1024( inches are)2 440(points.\) Although)1 738 3 3017 6060 t
+( a living, ems have a)5 866(to people who don't set type for)6 1336 2 3017 6180 t
+( a measure of size that is proportional to)8 1619(place: they are)2 583 2 3017 6300 t
+( you want to make text that)6 1166( If)1 129(the current point size.)3 907 3 3017 6420 t
+( of point size, you)4 847(keeps its proportions regardless)3 1355 2 3017 6540 t
+( can be)2 358( Ems)1 266(should use ems for all dimensions.)5 1578 3 3017 6660 t
+(speci\256ed as scale factors directly, as in)6 1549 1 3017 6780 t
+10 CW f
+(.ti 2.5m)1 480 1 4591 6780 t
+10 R f
+(.)5087 6780 w
+( the indent is)3 550(Lines can also be indented negatively if)6 1652 2 3017 6960 t
+(already positive:)1 663 1 3017 7080 t
+9 CW f
+(.ti)3167 7250 w
+9 S f
+(-)3383 7250 w
+9 CW f
+(0.3i)3433 7250 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+( 5)1 3952(TROFF Tutorial)1 728 2 540 600 t
+10 R f
+( moved back three tenths of)5 1156(causes the next line to be)5 1046 2 540 960 t
+( a decorative initial capital, we)5 1260( to make)2 360( Thus)1 258(an inch.)1 324 4 540 1080 t
+(indent the whole paragraph, then move the letter `P')8 2202 1 540 1200 t
+(back with a)2 460 1 540 1320 t
+10 CW f
+(.ti)1025 1320 w
+10 R f
+(command:)1230 1320 w
+36 R f
+(P)756 1740 w
+10 R f
+( qui est in caelis)4 1048(ater noster)1 520 2 958 1500 t
+(sancti\256cetur nomen tuum; adveniat)3 1554 1 972 1620 t
+( voluntas tua, sicut)3 801(regnum tuum; \256at)2 753 2 972 1740 t
+(in caelo, et in terra.)4 770 1 756 1860 t
+10 S f
+(\274)1551 1860 w
+10 R f
+(Amen.)1676 1860 w
+( some trickery to make the `P')6 1257(Of course, there is also)4 945 2 540 2040 t
+( a)1 74(bigger \(just)1 464 2 540 2160 t
+10 CW f
+(\\s36P\\s0)1108 2160 w
+10 R f
+(\), and to move it down from)6 1154 1 1588 2160 t
+(its normal position \(see the section on local motions\).)8 2141 1 540 2280 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 5.  , HEADING = Tabs]
+10 B f
+(5. Tabs)1 337 1 540 2520 t
+10 R f
+(Tabs \(the)1 378 1 540 2700 t
+9 R f
+(ASCII)946 2700 w
+10 R f
+(`horizontal tab' character, represented)3 1531 1 1211 2700 t
+(here by the symbol)3 793 1 540 2820 t
+7 ZD f
+(\344)1368 2820 w
+10 R f
+( to produce output)3 757(\) can be used)3 553 2 1432 2820 t
+( horizontal position of output.)4 1216(in columns, or to set the)5 986 2 540 2940 t
+( stops)1 231( Tab)1 205( text.)1 200(Typically tabs are used only in un\256lled)6 1566 4 540 3060 t
+( every half inch from the current)6 1446(are set by default)3 756 2 540 3180 t
+(indent, but can be changed by the)6 1375 1 540 3300 t
+10 CW f
+(.ta)1946 3300 w
+10 R f
+(command. To)1 585 1 2157 3300 t
+(set stops every inch, for example,)5 1339 1 540 3420 t
+9 CW f
+(.ta 1i 2i 3i 4i 5i 6i)6 1134 1 690 3590 t
+10 R f
+(By default the stops are left-justi\256ed \(as on a type-)9 2202 1 540 3770 t
+( centering and right-adjusting)3 1185(writer\), but there are also)4 1017 2 540 3890 t
+(tabs.)540 4010 w
+( right-adjusting)1 621(For a handful of numeric columns, use)6 1581 2 540 4190 t
+(tabs:)540 4310 w
+9 CW f
+(.nf)690 4480 w
+(.ta .5iR 1iR 1.5iR)3 972 1 690 4590 t
+6 ZD f
+(\344)690 4700 w
+9 CW f
+(1)745 4700 w
+6 ZD f
+(\344)799 4700 w
+9 CW f
+(2)854 4700 w
+6 ZD f
+(\344)908 4700 w
+9 CW f
+(3)963 4700 w
+6 ZD f
+(\344)690 4810 w
+9 CW f
+(40)745 4810 w
+6 ZD f
+(\344)853 4810 w
+9 CW f
+(50)908 4810 w
+6 ZD f
+(\344)1016 4810 w
+9 CW f
+(60)1071 4810 w
+6 ZD f
+(\344)690 4920 w
+9 CW f
+(700)745 4920 w
+6 ZD f
+(\344)907 4920 w
+9 CW f
+(800)962 4920 w
+6 ZD f
+(\344)1124 4920 w
+9 CW f
+(900)1179 4920 w
+(.fi)690 5030 w
+10 R f
+(The)540 5210 w
+10 CW f
+(R)729 5210 w
+10 R f
+( printed, this will)3 714( When)1 297(means ``right adjust.'')2 908 3 823 5210 t
+(produce)540 5330 w
+(1 2 3)2 770 1 850 5510 t
+(40 50 60)2 820 1 800 5630 t
+(700 800 900)2 870 1 750 5750 t
+( if you need more com-)5 969(If you have many numbers, or)5 1233 2 540 5930 t
+(plicated table layout, don't use)4 1229 1 540 6050 t
+10 I f
+(troff)1794 6050 w
+10 R f
+(directly; use)1 491 1 1992 6050 t
+10 I f
+(tbl)2508 6050 w
+10 R f
+(.)2622 6050 w
+( to \256ll up tabbed-over space with)6 1447(It is also possible)3 755 2 540 6230 t
+( other than blanks by setting the `tab)7 1583(some character)1 619 2 540 6350 t
+(replacement character' with the)3 1259 1 540 6470 t
+10 CW f
+(.tc)1824 6470 w
+10 R f
+(command:)2029 6470 w
+9 CW f
+(.ta 1.5i 2.5i)2 702 1 690 6640 t
+(.tc \\\(ru)1 432 1 690 6750 t
+9 R f
+(\()1662 6750 w
+9 CW f
+(\\\(ru)1692 6750 w
+9 R f
+(is ``)1 143 1 1962 6750 t
+9 S1 f
+(_)2105 6750 w
+9 R f
+(''\))2150 6750 w
+9 CW f
+(Name)690 6860 w
+6 ZD f
+(\344)906 6860 w
+9 CW f
+(Age)961 6860 w
+6 ZD f
+(\344)1123 6860 w
+10 R f
+(produces)540 7040 w
+(Name)540 7220 w
+10 S1 f
+(________________)820 7220 w
+10 R f
+(Age)1645 7220 w
+10 S1 f
+(__________)1840 7220 w
+10 R f
+(To reset the tab replacement character to a blank, use)9 2202 1 3017 960 t
+10 CW f
+(.tc)3017 1080 w
+10 R f
+( with)1 204( can also be drawn)4 750( \(Lines)1 307(with no argument.)2 734 4 3224 1080 t
+(the)3017 1200 w
+10 CW f
+(\\l)3164 1200 w
+10 R f
+(command, described in \2476.\))3 1112 1 3309 1200 t
+10 I f
+(Troff)3017 1380 w
+10 R f
+( mechanism called)2 777(also provides a very general)4 1183 2 3259 1380 t
+( is)1 107( \(This)1 276( setting up complicated columns.)4 1379(`\256elds' for)1 440 4 3017 1500 t
+(used by)1 308 1 3017 1620 t
+10 I f
+(tbl)3350 1620 w
+10 R f
+( will not go into it in this paper.)8 1265(.\) We)1 246 2 3464 1620 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 6.  , HEADING = Local Motions:  Drawing lines and characters]
+10 B f
+( lines and characters)3 880( Drawing)1 422( Motions:)1 408(6. Local)1 364 4 3017 1860 t
+10 R f
+(Remember `Area =)2 790 1 3017 2080 t
+10 S f
+(p)3842 2080 w
+10 R f
+(r)3897 2080 w
+(2)3930 2030 w
+(' and the big `P' in the Pater-)7 1239 1 3980 2080 t
+( are they done?)3 639(noster. How)1 524 2 3017 2200 t
+10 I f
+(Troff)4240 2200 w
+10 R f
+(provides a host of)3 743 1 4476 2200 t
+( characters of any size at any)6 1271(commands for placing)2 931 2 3017 2320 t
+( characters or)2 542( can use them to draw special)6 1199(place. You)1 461 3 3017 2440 t
+( Most)1 265( a particular appearance.)3 1000(to tune your output for)4 937 3 3017 2560 t
+( messy to)2 402(of these commands are straightforward, but)5 1800 2 3017 2680 t
+(read and tough to type correctly.)5 1297 1 3017 2800 t
+(If you won't use)3 693 1 3017 2980 t
+10 I f
+(eqn)3748 2980 w
+10 R f
+(, subscripts and superscripts are)4 1319 1 3900 2980 t
+( done with the half-line local motions)6 1577(most easily)1 467 2 3017 3100 t
+10 CW f
+(\\u)5099 3100 w
+10 R f
+(and)3017 3220 w
+10 CW f
+(\\d)3207 3220 w
+10 R f
+( point-size,)1 466( go back up the page half a)7 1219(. To)1 207 3 3327 3220 t
+(insert a)1 303 1 3017 3340 t
+10 CW f
+(\\u)3357 3340 w
+10 R f
+( insert a)2 338(at the desired place; to go down,)6 1367 2 3514 3340 t
+10 CW f
+(\\d)3017 3460 w
+10 R f
+(. \()1 124 1 3137 3460 t
+10 CW f
+(\\u)3261 3460 w
+10 R f
+(and)3422 3460 w
+10 CW f
+(\\d)3607 3460 w
+10 R f
+( used in pairs, as)4 731(should always be)2 720 2 3768 3460 t
+( Thus)1 250(explained below.\))1 715 2 3017 3580 t
+9 CW f
+(Area = \\\(*pr\\u2\\d)2 918 1 3167 3750 t
+10 R f
+(produces)3017 3930 w
+(Area =)1 274 1 3167 4110 t
+10 S f
+(p)3466 4110 w
+10 R f
+(r)3521 4110 w
+(2)3554 4060 w
+(To make the `2' smaller, bracket it with)7 1726 1 3017 4290 t
+10 CW f
+(\\s\2612)4789 4290 w
+10 R f
+(and)5075 4290 w
+10 CW f
+(\\s0)3017 4410 w
+10 R f
+(. Since)1 304 1 3197 4410 t
+10 CW f
+(\\u)3532 4410 w
+10 R f
+(and)3683 4410 w
+10 CW f
+(\\d)3858 4410 w
+10 R f
+(refer to the current point size,)5 1210 1 4009 4410 t
+( both outside)2 537(be sure to put them either both inside or)8 1665 2 3017 4530 t
+( unbalanced verti-)2 736(the size changes, or you will get an)7 1466 2 3017 4650 t
+(cal motion.)1 450 1 3017 4770 t
+(Sometimes the space given by)4 1290 1 3017 4950 t
+10 CW f
+(\\u)4352 4950 w
+10 R f
+(and)4517 4950 w
+10 CW f
+(\\d)4707 4950 w
+10 R f
+(isn't the)1 346 1 4873 4950 t
+( The)1 243(right amount.)1 577 2 3017 5070 t
+10 CW f
+(\\v)3900 5070 w
+10 R f
+( be used to)3 541(command can)1 595 2 4083 5070 t
+( The)1 224( amount of vertical motion.)4 1167(request an arbitrary)2 811 3 3017 5190 t
+(in-line command)1 680 1 3017 5310 t
+9 CW f
+(\\v')3167 5480 w
+9 I f
+(amount)3329 5480 w
+9 CW f
+(')3599 5480 w
+10 R f
+( or down the page by the amount)7 1466(causes motion up)2 736 2 3017 5660 t
+(speci\256ed in `)2 544 1 3017 5780 t
+10 I f
+(amount)3561 5780 w
+10 R f
+( example, to move the `P')5 1097('. For)1 261 2 3861 5780 t
+(down, we used)2 596 1 3017 5900 t
+9 CW f
+(.in +0.6i)1 486 1 3167 6070 t
+9 R f
+(\(move paragraph in\))2 736 1 4193 6070 t
+9 CW f
+(.ll -0.3i)1 486 1 3167 6180 t
+9 R f
+(\(shorten lines\))1 518 1 4193 6180 t
+9 CW f
+(.ti -0.3i)1 486 1 3167 6290 t
+9 R f
+(\(move P back\))2 526 1 4193 6290 t
+9 CW f
+(\\v'2'\\s36P\\s0\\v'\2612'ater noster qui)2 1836 1 3167 6400 t
+(est in caelis)2 702 1 3167 6510 t
+9 S f
+(\274)3923 6510 w
+10 R f
+( sign causes upward motion, while no sign or)8 1855(A minus)1 347 2 3017 6690 t
+( Thus)1 278( down the page.)3 716(a plus sign means)3 795 3 3017 6810 t
+10 CW f
+(\\v'\2612')4859 6810 w
+10 R f
+(causes an upward vertical motion of two line spaces.)8 2104 1 3017 6930 t
+( specify the amount of)4 949(There are many other ways to)5 1253 2 3017 7110 t
+(motion \320)1 400 1 3017 7230 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+( Tutorial)1 395(6 TROFF)1 4285 2 540 600 t
+9 CW f
+(\\v'0.1i')690 950 w
+(\\v'3p')690 1060 w
+(\\v'\2610.5m')690 1170 w
+10 R f
+( that the scale speci\256er)4 941( Notice)1 324( on are all legal.)4 672(and so)1 265 4 540 1350 t
+10 CW f
+(i)540 1470 w
+10 R f
+(or)630 1470 w
+10 CW f
+(p)743 1470 w
+10 R f
+(or)833 1470 w
+10 CW f
+(m)946 1470 w
+10 R f
+( character can)2 560( Any)1 226(goes inside the quotes.)3 920 3 1036 1470 t
+(be used in place of the quotes; this is also true of all)12 2202 1 540 1590 t
+(other)540 1710 w
+10 I f
+(troff)770 1710 w
+10 R f
+(commands described in this section.)4 1446 1 968 1710 t
+(Since)540 1890 w
+10 I f
+(troff)834 1890 w
+10 R f
+(does not take within-the-line vertical)4 1662 1 1080 1890 t
+( is on)2 229(motions into account when \256guring out where it)7 1973 2 540 2010 t
+( unexpected positions if)3 961(the page, output lines can have)5 1241 2 540 2130 t
+( and right ends aren't at the same vertical posi-)9 1916(the left)1 286 2 540 2250 t
+(tion. Thus)1 433 1 540 2370 t
+10 CW f
+(\\v)1000 2370 w
+10 R f
+(, like)1 202 1 1120 2370 t
+10 CW f
+(\\u)1349 2370 w
+10 R f
+(and)1496 2370 w
+10 CW f
+(\\d)1667 2370 w
+10 R f
+( balance)1 332(, should always)2 623 2 1787 2370 t
+(upward vertical motion in a line with the same amount)9 2202 1 540 2490 t
+(in the downward direction.)3 1076 1 540 2610 t
+( available \320)2 530(Arbitrary horizontal motions are also)4 1517 2 540 2790 t
+10 CW f
+(\\h)2622 2790 w
+10 R f
+(is like)1 255 1 540 2910 t
+10 CW f
+(\\v)833 2910 w
+10 R f
+(, except that the default scale factor is ems)8 1789 1 953 2910 t
+( an example,)2 507( As)1 161(instead of line spaces.)3 876 3 540 3030 t
+9 CW f
+(\\h'\2610.1i')690 3190 w
+10 R f
+( Con-)1 252( inch.)1 224(causes a backwards motion of a tenth of an)8 1726 3 540 3360 t
+( the mathematical symbol `)4 1224(sider printing)1 571 2 540 3480 t
+10 S f
+(>>)2335 3480 w
+10 R f
+('. The)1 297 1 2445 3480 t
+(default spacing is a bit too wide, so)7 1480 1 540 3600 t
+10 I f
+(eqn)2055 3600 w
+10 R f
+(replaces this)1 507 1 2235 3600 t
+(by)540 3720 w
+9 CW f
+(>\\h'\2610.1m'>)690 3880 w
+10 R f
+(to produce)1 424 1 540 4050 t
+10 S f
+(> >)1 100 1 989 4050 t
+10 R f
+(.)1089 4050 w
+(Frequently)540 4230 w
+10 CW f
+(\\h)1003 4230 w
+10 R f
+( `width function')2 689(is used with the)3 640 2 1153 4230 t
+10 CW f
+(\\w)2513 4230 w
+10 R f
+(to)2664 4230 w
+(generate motions equal to the width of some character)8 2202 1 540 4350 t
+( construction)1 519(string. The)1 458 2 540 4470 t
+9 CW f
+(\\w')690 4630 w
+10 I f
+(thing)852 4630 w
+9 CW f
+(')1058 4630 w
+10 R f
+(is a number equal to the width of `)8 1472 1 540 4800 t
+10 I f
+(thing)2012 4800 w
+10 R f
+( machine)1 376(' in)1 148 2 2218 4800 t
+(units. All)1 419 1 540 4920 t
+10 I f
+(troff)1005 4920 w
+10 R f
+(computations are ultimately done in)4 1518 1 1224 4920 t
+( move horizontally the width of an `x',)7 1583( To)1 165(these units.)1 454 3 540 5040 t
+(we can say)2 437 1 540 5160 t
+9 CW f
+(\\h'\\w'x'u')690 5320 w
+10 R f
+( all)1 128(As we mentioned above, the default scale factor for)8 2074 2 540 5490 t
+( is)1 94(horizontal dimensions)1 889 2 540 5610 t
+10 CW f
+(m)1550 5610 w
+10 R f
+(, ems, so here we must have)6 1132 1 1610 5610 t
+(the)540 5730 w
+10 CW f
+(u)698 5730 w
+10 R f
+( units, or the motion produced will)6 1458(for machine)1 490 2 794 5730 t
+(be far too large.)3 664 1 540 5850 t
+10 I f
+(Troff)1265 5850 w
+10 R f
+(is quite happy with the nested)5 1241 1 1501 5850 t
+(quotes, by the way, so long as you don't leave any out.)11 2192 1 540 5970 t
+(There are also several special-purpose)4 1538 1 540 6150 t
+10 I f
+(troff)2107 6150 w
+10 R f
+(commands)2309 6150 w
+(for local motion.)2 685 1 540 6270 t
+10 CW f
+(\\0)1283 6270 w
+10 R f
+(is an unpaddable white space of)5 1307 1 1435 6270 t
+( means that it)3 554( `Unpaddable')1 604( as a digit.)3 429(the same width)2 615 4 540 6390 t
+( split across a line by line)6 1130(will never be widened or)4 1072 2 540 6510 t
+( is also)2 290( There)1 288(justi\256cation and \256lling.)2 944 3 540 6630 t
+10 CW f
+(\\)2093 6630 w
+10 R f
+(\(blank\), which)1 589 1 2153 6630 t
+( space,)1 284(is an unpaddable character the width of a)7 1735 2 540 6750 t
+10 CW f
+(\\|)2597 6750 w
+10 R f
+(,)2717 6750 w
+( that width,)2 477(which is half)2 538 2 540 6870 t
+10 CW f
+(\\\303)1592 6870 w
+10 R f
+(, which is one quarter of)5 1030 1 1712 6870 t
+(the width of a space, and)5 1062 1 540 6990 t
+10 CW f
+(\\&)1641 6990 w
+10 R f
+( width.)1 291(, which has zero)3 690 2 1761 6990 t
+( in entering a text)4 719(\(This last one is useful, for example,)6 1483 2 540 7110 t
+(line which would otherwise begin with a `.'.\))7 1800 1 540 7230 t
+(The command)1 574 1 3017 960 t
+10 CW f
+(\\o)3616 960 w
+10 R f
+(, used like)2 408 1 3736 960 t
+9 CW f
+(\\o')3167 1130 w
+9 I f
+(set of characters)2 601 1 3329 1130 t
+9 CW f
+(')3930 1130 w
+10 R f
+( overstruck, centered)2 857(causes \(up to 9\) characters to be)6 1345 2 3017 1310 t
+( is nice for accents, as in)6 978( This)1 228(on the widest.)2 558 3 3017 1430 t
+9 CW f
+(m\\o"e\\\(aa"long\\o"e\\\(ga"ne)3167 1600 w
+10 R f
+(which makes)1 524 1 3017 1780 t
+( ne)1 100( \301)1 -5( longe)1 228(me \302)1 117 4 3167 1960 t
+(The accents are)2 677 1 3017 2140 t
+10 CW f
+(\\\(ga)3748 2140 w
+10 R f
+(and)4042 2140 w
+10 CW f
+(\\\(aa)4240 2140 w
+10 R f
+(, or)1 162 1 4480 2140 t
+10 CW f
+(\\\301)4697 2140 w
+10 R f
+(and)4872 2140 w
+10 CW f
+(\\\302)5071 2140 w
+10 R f
+(;)5191 2140 w
+(remember that each is just one character to)7 1709 1 3017 2260 t
+10 I f
+(troff)4751 2260 w
+10 R f
+(.)4932 2260 w
+(You can make your own overstrikes with another)7 2202 1 3017 2440 t
+(special convention,)1 803 1 3017 2560 t
+10 CW f
+(\\z)3877 2560 w
+10 R f
+(, the zero-motion command.)3 1222 1 3997 2560 t
+10 CW f
+(\\zx)3017 2680 w
+10 R f
+( after)1 236(suppresses the normal horizontal motion)4 1733 2 3250 2680 t
+( single character)2 695(printing the)1 486 2 3017 2800 t
+10 CW f
+(x)4244 2800 w
+10 R f
+(, so another character)3 915 1 4304 2800 t
+( sizes can be)3 606( Although)1 463( laid on top of it.)5 842(can be)1 291 4 3017 2920 t
+(changed within)1 636 1 3017 3040 t
+10 CW f
+(\\o)3701 3040 w
+10 R f
+(, it centers the characters on the)6 1398 1 3821 3040 t
+( can be no horizontal or vertical)6 1461(widest, and there)2 741 2 3017 3160 t
+(motions, so)1 471 1 3017 3280 t
+10 CW f
+(\\z)3522 3280 w
+10 R f
+( way to get what you)5 875(may be the only)3 668 2 3676 3280 t
+(want:)3017 3400 w
+8 S1 f
+()3167 3760 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_sq {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    font B eq {fill} {stroke} ifelse
+} def
+%%EndGlobal
+/saveobj save def
+mark
+8 S1 f
+3167 3760 m
+40 build_sq
+3207 3760 m
+14 S1 f
+()3167 3760 w
+3167 3760 m
+70 build_sq
+3237 3760 m
+22 S1 f
+()3167 3760 w
+3167 3760 m
+110 build_sq
+3277 3760 m
+36 S1 f
+()3167 3760 w
+3167 3760 m
+180 build_sq
+3347 3760 m
+10 R f
+(is produced by)2 588 1 3017 3960 t
+9 CW f
+(.sp 2)1 270 1 3167 4130 t
+(\\s8\\z\\\(sq\\s14\\z\\\(sq\\s22\\z\\\(sq\\s36\\\(sq)3167 4240 w
+10 R f
+(The)3017 4420 w
+10 CW f
+(.sp)3197 4420 w
+10 R f
+(is needed to leave room for the result.)7 1508 1 3402 4420 t
+( an extra-heavy semicolon that)4 1329(As another example,)2 873 2 3017 4600 t
+(looks like)1 392 1 3017 4720 t
+16 R f
+(,)3167 4900 w
+(.)3167 4860 w
+10 R f
+( ; or)2 211(instead of)1 391 2 3257 4900 t
+16 R f
+(;)3909 4900 w
+10 R f
+( comma and a big period)5 1015(can be constructed with a big)5 1187 2 3017 5080 t
+(above it:)1 347 1 3017 5200 t
+9 CW f
+(\\s+6\\z,\\v')3167 5370 w
+9 S f
+(-)3707 5370 w
+9 CW f
+(0.25m'.\\v'0.25m'\\s0)3757 5370 w
+10 R f
+(`0.25m' is an empirical constant.)4 1315 1 3017 5550 t
+( bracketing)1 465(A more ornate overstrike is given by the)7 1737 2 3017 5730 t
+(function)3017 5850 w
+10 CW f
+(\\b)3415 5850 w
+10 R f
+( piles up characters vertically,)4 1350(, which)1 334 2 3535 5850 t
+( big)1 160( we can get)3 469( Thus)1 256(centered on the current baseline.)4 1317 4 3017 5970 t
+( them with piled-up smaller)4 1281(brackets, constructing)1 921 2 3017 6090 t
+(pieces:)3017 6210 w
+10 S f
+(\354)3167 6410 w
+(\355)3167 6510 w
+(\356)3167 6610 w
+(\351)3241 6460 w
+(\353)3241 6560 w
+10 R f
+(x)3316 6510 w
+10 S f
+(\371)3391 6460 w
+(\373)3391 6560 w
+(\374)3454 6410 w
+(\375)3454 6510 w
+(\376)3454 6610 w
+10 R f
+(by typing in only this:)4 885 1 3017 6810 t
+9 CW f
+(.sp)3167 6980 w
+(\\b'\\\(lt\\\(lk\\\(lb' \\b'\\\(lc\\\(lf' x \\)3 1782 1 3167 7090 t
+(\\b'\\\(rc\\\(rf' \\b'\\\(rt\\\(rk\\\(rb')1 1566 1 3167 7200 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+10 HB f
+( 7)1 3952(TROFF Tutorial)1 728 2 540 600 t
+10 I f
+(Troff)540 960 w
+10 R f
+( drawing)1 369(also provides a convenient facility for)5 1591 2 782 960 t
+( of arbitrary length with)4 1030(horizontal and vertical lines)3 1172 2 540 1080 t
+(arbitrary characters.)1 813 1 540 1200 t
+10 CW f
+(\\l'1i')1420 1200 w
+10 R f
+(draws a line one inch)4 920 1 1822 1200 t
+(long, like this:)2 592 1 540 1320 t
+10 S1 f
+(_ ______________)1 720 1 1190 1320 t
+10 R f
+( length can be)3 578(. The)1 238 2 1926 1320 t
+(followed by the character to use if the)7 1734 1 540 1440 t
+10 S1 f
+(_)2356 1440 w
+10 R f
+(is not)1 253 1 2489 1440 t
+(appropriate;)540 1560 w
+10 CW f
+(\\l'0.5i.')1073 1560 w
+10 R f
+( of)1 133(draws a half-inch line)3 945 2 1664 1560 t
+( construction)1 531( The)1 217( .)1 41(dots: ..............)1 592 4 540 1680 t
+10 CW f
+(\\L)1958 1680 w
+10 R f
+(is analogous to)2 626 1 2116 1680 t
+10 CW f
+(\\l)540 1800 w
+10 R f
+(, except that it draws a vertical line instead of hori-)10 2082 1 660 1800 t
+(zontal.)540 1920 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 7.  , HEADING = Strings]
+10 B f
+(7. Strings)1 431 1 540 2160 t
+10 R f
+( paper contains a large number of occur-)7 1628(Obviously if a)2 574 2 540 2340 t
+( over a letter `e', typing)5 1087(rences of an acute accent)4 1115 2 540 2460 t
+10 CW f
+(\\o"e\\'")540 2580 w
+10 R f
+(for each would be a great nuisance.)6 1409 1 985 2580 t
+(Fortunately,)540 2760 w
+10 I f
+(troff)1073 2760 w
+10 R f
+( which you can)3 676(provides a way in)3 773 2 1293 2760 t
+( and)1 183(store an arbitrary collection of text in a `string',)8 2019 2 540 2880 t
+( shorthand for its)3 737(thereafter use the string name as a)6 1465 2 540 3000 t
+( are one of several)4 766(contents. Strings)1 701 2 540 3120 t
+10 I f
+(troff)2041 3120 w
+10 R f
+(mechanisms)2248 3120 w
+( document with)2 666(whose judicious use lets you type a)6 1536 2 540 3240 t
+( extensive format)2 743(less effort and organize it so that)6 1459 2 540 3360 t
+(changes can be made with few editing changes.)7 1895 1 540 3480 t
+(Strings are de\256ned with the command)5 1518 1 540 3660 t
+10 CW f
+(.ds)2083 3660 w
+10 R f
+( line)1 175(. The)1 230 2 2263 3660 t
+9 CW f
+(.ds e \\o"e\\'")2 702 1 690 3830 t
+10 R f
+(de\256nes the string)2 683 1 540 4010 t
+10 CW f
+(e)1248 4010 w
+10 R f
+(to have the value)3 679 1 1333 4010 t
+10 CW f
+(\\o"e\\'")2037 4010 w
+10 R f
+(.)2457 4010 w
+(A reference to a string is replaced by whatever text the)10 2202 1 540 4190 t
+( names may be either one)5 1032( String)1 298(string was de\256ned as.)3 872 3 540 4310 t
+(or two characters long, and are referred to by)8 1844 1 540 4430 t
+10 CW f
+(\\*x)2415 4430 w
+10 R f
+(for)2626 4430 w
+(one character names or)3 1029 1 540 4550 t
+10 CW f
+(\\*\(xy)1630 4550 w
+10 R f
+( character)1 424(for two)1 327 2 1991 4550 t
+( of)1 118( given the de\256nition)3 830( phone,)1 274( \302)1 -5( le)1 77( \302)1 -5( to get te)3 374(names. Thus)1 539 8 540 4670 t
+(the string)1 377 1 540 4790 t
+10 CW f
+(e)944 4790 w
+10 R f
+(as above, we can type)4 880 1 1031 4790 t
+10 CW f
+(t\\*el\\*ephone)1937 4790 w
+10 R f
+(,)2717 4790 w
+( phone.)1 274( \302)1 -5( le)1 76( \302)1 -5(to produce te)2 521 5 540 4910 t
+(If a string must begin with blanks, de\256ne it as)9 1827 1 540 5090 t
+9 CW f
+( text)1 540(.ds xx ")2 432 2 690 5260 t
+10 R f
+( the beginning of the de\256-)5 1140(The double quote signals)3 1062 2 540 5440 t
+( line)1 185( is no trailing quote; the end of the)8 1465(nition. There)1 552 3 540 5560 t
+(terminates the string.)2 841 1 540 5680 t
+( lines long; if)3 594(A string may actually be several)5 1389 2 540 5860 t
+10 I f
+(troff)2569 5860 w
+10 R f
+(encounters a)1 502 1 540 5980 t
+10 CW f
+(\\)1068 5980 w
+10 R f
+(at the end of)3 499 1 1154 5980 t
+10 I f
+(any)1679 5980 w
+10 R f
+( thrown away)2 543(line, it is)2 350 2 1849 5980 t
+( you can)2 344( So)1 159( line added to the current one.)6 1207(and the next)2 492 4 540 6100 t
+( the)1 152(make a long string simply by ending each line but)9 2050 2 540 6220 t
+(last with a backslash:)3 852 1 540 6340 t
+9 CW f
+(.ds xx this \\)3 702 1 690 6510 t
+(is a very \\)3 594 1 690 6620 t
+(long string)1 594 1 690 6730 t
+10 R f
+( be de\256ned in terms of other strings, or)8 1703(Strings may)1 499 2 540 6910 t
+( some of)2 360(even in terms of themselves; we will discuss)7 1842 2 540 7030 t
+(these possibilities later.)2 936 1 540 7150 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 8.  , HEADING = Introduction to Macros]
+10 B f
+( to Macros)2 454(8. Introduction)1 670 2 3017 960 t
+10 R f
+( go much further in)4 839(Before we can)2 607 2 3017 1140 t
+10 I f
+(troff)4505 1140 w
+10 R f
+(, we need to)3 533 1 4686 1140 t
+( its simplest)2 521( In)1 154( bit about the macro facility.)5 1237(learn a)1 290 4 3017 1260 t
+(form, a macro is just a shorthand notation quite similar)9 2202 1 3017 1380 t
+( every paragraph to start)4 993( we want)2 374( Suppose)1 396(to a string.)2 439 4 3017 1500 t
+( a space and a)4 745( \320 with)2 310(in exactly the same way)4 1147 3 3017 1620 t
+(temporary indent of two ems:)4 1182 1 3017 1740 t
+9 CW f
+(.sp)3167 1910 w
+(.ti +2m)1 378 1 3167 2020 t
+10 R f
+( collapse these)2 608(Then to save typing, we would like to)7 1594 2 3017 2200 t
+(into one shorthand line, a)4 1013 1 3017 2320 t
+10 I f
+(troff)4055 2320 w
+10 R f
+(`command' like)1 635 1 4253 2320 t
+9 CW f
+(.PP)3167 2490 w
+10 R f
+(that would be treated by)4 965 1 3017 2670 t
+10 I f
+(troff)4007 2670 w
+10 R f
+(exactly as)1 396 1 4205 2670 t
+9 CW f
+(.sp)3167 2830 w
+(.ti +2m)1 378 1 3167 2930 t
+10 CW f
+(.PP)3017 3110 w
+10 R f
+( a)1 87(is called)1 347 2 3239 3110 t
+10 I f
+(macro)3716 3110 w
+10 R f
+( way we tell)3 539(. The)1 248 2 3979 3110 t
+10 I f
+(troff)4809 3110 w
+10 R f
+(what)5025 3110 w
+10 CW f
+(.PP)3017 3230 w
+10 R f
+(means is to)2 450 1 3222 3230 t
+10 I f
+(de\256ne)3697 3230 w
+10 R f
+(it with the)2 406 1 3960 3230 t
+10 CW f
+(.de)4391 3230 w
+10 R f
+(command:)4596 3230 w
+9 CW f
+(.de PP)1 324 1 3167 3390 t
+(.sp)3167 3490 w
+(.ti +2m)1 378 1 3167 3590 t
+(..)3167 3690 w
+10 R f
+( names the macro \(we used `)6 1273(The \256rst line)2 553 2 3017 3870 t
+10 CW f
+(.PP)4843 3870 w
+10 R f
+(' for)1 196 1 5023 3870 t
+( upper case so it wouldn't con\257ict)6 1516(`paragraph', and)1 686 2 3017 3990 t
+(with any name that)3 805 1 3017 4110 t
+10 I f
+(troff)3861 4110 w
+10 R f
+(might already know about\).)3 1146 1 4073 4110 t
+(The last line)2 526 1 3017 4230 t
+10 CW f
+(..)3584 4230 w
+10 R f
+( In)1 148( of the de\256nition.)3 734(marks the end)2 592 3 3745 4230 t
+( simply inserted whenever)3 1060(between is the text, which is)5 1142 2 3017 4350 t
+10 I f
+(troff)3017 4470 w
+10 R f
+(sees the `command' or macro call)5 1349 1 3215 4470 t
+9 CW f
+(.PP)3167 4640 w
+10 R f
+( text and format-)3 701(A macro can contain any mixture of)6 1501 2 3017 4820 t
+(ting commands.)1 639 1 3017 4940 t
+(The de\256nition of)2 726 1 3017 5120 t
+10 CW f
+(.PP)3795 5120 w
+10 R f
+(has to precede its \256rst use;)5 1192 1 4027 5120 t
+( are)1 183( Names)1 364( are simply ignored.)3 910(unde\256ned macros)1 745 4 3017 5240 t
+(restricted to one or two characters.)5 1379 1 3017 5360 t
+( commonly occurring sequences of)4 1473(Using macros for)2 729 2 3017 5540 t
+( does it)2 335( only)1 227( Not)1 224(commands is critically important.)3 1416 4 3017 5660 t
+(save typing, but it makes later changes much easier.)8 2202 1 3017 5780 t
+( paragraph indent is too)4 1027(Suppose we decide that the)4 1175 2 3017 5900 t
+( space is much too big, and roman)7 1463(small, the vertical)2 739 2 3017 6020 t
+( of changing the whole)4 951( Instead)1 347( be forced.)2 441(font should)1 463 4 3017 6140 t
+( of)1 115(document, we need only change the de\256nition)6 1875 2 3017 6260 t
+10 CW f
+(.PP)5039 6260 w
+10 R f
+(to something like)2 695 1 3017 6380 t
+9 CW f
+( paragraph macro)2 864( \\")1 504(.de PP)1 324 3 3167 6540 t
+(.sp 2p)1 324 1 3167 6640 t
+(.ti +3m)1 378 1 3167 6740 t
+(.ft R)1 270 1 3167 6840 t
+(..)3167 6940 w
+10 R f
+(and the change takes effect everywhere we used)7 1917 1 3017 7120 t
+10 CW f
+(.PP)4959 7120 w
+10 R f
+(.)5139 7120 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+10 HB f
+( Tutorial)1 395(8 TROFF)1 4285 2 540 600 t
+10 CW f
+(\\")540 960 w
+10 R f
+(is a)1 145 1 693 960 t
+10 I f
+(troff)872 960 w
+10 R f
+(command that causes the rest of the line)7 1663 1 1079 960 t
+( use it here to add comments to the)8 1441( We)1 195(to be ignored.)2 566 3 540 1080 t
+( idea once de\256nitions get)4 1135(macro de\256nition \(a wise)3 1067 2 540 1200 t
+(complicated\).)540 1320 w
+( two)1 203(As another example of macros, consider these)6 1999 2 540 1500 t
+( offset, un\256lled text, like)4 987(which start and end a block of)6 1215 2 540 1620 t
+(most of the examples in this paper:)6 1399 1 540 1740 t
+9 CW f
+( start indented block)3 1134( \\")1 504(.de BS)1 324 3 690 1910 t
+(.sp)690 2020 w
+(.nf)690 2130 w
+(.in +0.3i)1 486 1 690 2240 t
+( constant width font)3 1080( \\")1 504(.ft CW)1 324 3 690 2350 t
+(..)690 2460 w
+( end indented block)3 1026( \\")1 504(.de BE)1 324 3 690 2570 t
+(.sp)690 2680 w
+(.ft 1)1 270 1 690 2790 t
+(.fi)690 2900 w
+(.in)690 3010 w
+9 S f
+(-)906 3010 w
+9 CW f
+(0.3i)956 3010 w
+(..)690 3120 w
+10 R f
+(Now we can surround text like)5 1228 1 540 3300 t
+9 CW f
+(Copy to)1 378 1 690 3470 t
+(John Doe)1 432 1 690 3580 t
+(Richard Roberts)1 810 1 690 3690 t
+(Stanley Smith)1 702 1 690 3800 t
+10 R f
+(by the commands)2 717 1 540 3980 t
+10 CW f
+(.BS)1289 3980 w
+10 R f
+(and)1501 3980 w
+10 CW f
+(.BE)1677 3980 w
+10 R f
+(, and it will come out)5 885 1 1857 3980 t
+( by)1 183( that we indented)3 862( Notice)1 375(as it did above.)3 782 4 540 4100 t
+10 CW f
+(.in +0.3i)1 540 1 540 4220 t
+10 R f
+(instead of)1 417 1 1131 4220 t
+10 CW f
+(.in 0.3i)1 480 1 1599 4220 t
+10 R f
+( way we)2 384(. This)1 279 2 2079 4220 t
+(can nest our uses of)4 795 1 540 4340 t
+10 CW f
+(.BS)1362 4340 w
+10 R f
+(and)1569 4340 w
+10 CW f
+(.BE)1740 4340 w
+10 R f
+(to get blocks within)3 795 1 1947 4340 t
+(blocks.)540 4460 w
+( be 0.5i,)2 358(If later on we decide that the indent should)8 1844 2 540 4640 t
+( necessary to change the de\256nitions of)6 1609(then it is only)3 593 2 540 4760 t
+10 CW f
+(.BS)540 4880 w
+10 R f
+(and)745 4880 w
+10 CW f
+(.BE)914 4880 w
+10 R f
+(, not the whole paper.)4 865 1 1094 4880 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 9.  , HEADING = Titles, Pages and Numbering]
+10 B f
+( Pages and Numbering)3 970(9. Titles,)1 389 2 540 5120 t
+10 R f
+( get tougher, because)3 935(This is an area where things)5 1267 2 540 5300 t
+( necessity,)1 430( Of)1 170(nothing is done for you automatically.)5 1602 3 540 5420 t
+( section is a cookbook, to be copied liter-)8 1701(some of this)2 501 2 540 5540 t
+(ally until you get some experience.)5 1398 1 540 5660 t
+( want a title at the top of each page,)9 1662(Suppose you)1 540 2 540 5840 t
+(saying just)1 431 1 540 5960 t
+( top)1 153( right)1 600( top)1 153( center)1 710(left top)1 286 5 690 6140 t
+(Unfortunately, this requires work.)3 1356 1 540 6320 t
+( \(easy\); when to)3 646(You have to say what the actual title is)8 1556 2 540 6500 t
+( and what to do at and around)7 1275(print it \(easy enough\);)3 927 2 540 6620 t
+( these in reverse order,)4 965( Taking)1 347(the title line \(harder\).)3 890 3 540 6740 t
+(\256rst we de\256ne a macro)4 957 1 540 6860 t
+10 CW f
+(.NP)1534 6860 w
+10 R f
+( page'\) to pro-)3 606(\(for `new)1 385 2 1751 6860 t
+( the like at the end of one page and the)10 1631(cess titles and)2 571 2 540 6980 t
+(beginning of the next:)3 880 1 540 7100 t
+9 CW f
+(.de NP)1 324 1 3167 950 t
+('bp)3167 1060 w
+('sp 0.5i)1 432 1 3167 1170 t
+(.tl 'left top'center top'right top')4 1890 1 3167 1280 t
+('sp 0.3i)1 432 1 3167 1390 t
+(..)3167 1500 w
+10 R f
+( a page, we issue a)5 812(To make sure we're at the top of)7 1390 2 3017 1680 t
+(`begin page' command)2 954 1 3017 1800 t
+10 CW f
+('bp)4013 1800 w
+10 R f
+( skip to)2 327(, which causes a)3 699 2 4193 1800 t
+( the)1 171(top-of-page \(we'll explain)2 1093 2 3017 1920 t
+10 CW f
+(')4330 1920 w
+10 R f
+( we)1 165(shortly\). Then)1 615 2 4439 1920 t
+( of)1 109(space down half an inch, print the title \(the use)9 1887 2 3017 2040 t
+10 CW f
+(.tl)5039 2040 w
+10 R f
+( explanatory; later we will discuss)5 1567(should be self)2 635 2 3017 2160 t
+( 0.3 inches,)2 505(parameterizing the titles\), space another)4 1697 2 3017 2280 t
+(and we're done.)2 639 1 3017 2400 t
+(To ask for)2 414 1 3017 2580 t
+10 CW f
+(.NP)3458 2580 w
+10 R f
+(at the bottom of each page, we have to)8 1554 1 3665 2580 t
+( of)1 113(say something like `when the text is within an inch)9 2089 2 3017 2700 t
+( new)1 200(the bottom of the page, start the processing for a)9 2002 2 3017 2820 t
+( is done with a `when' command)6 1309(page.' This)1 474 2 3017 2940 t
+10 CW f
+(.wh)4825 2940 w
+10 R f
+(:)5005 2940 w
+9 CW f
+(.wh \2611i NP)2 540 1 3167 3110 t
+10 R f
+(\(No `.' is used before)4 866 1 3017 3290 t
+10 CW f
+(NP)3912 3290 w
+10 R f
+( is simply the name of a)6 985(; this)1 202 2 4032 3290 t
+( minus sign means `mea-)4 999( The)1 205( a macro call.\))3 570(macro, not)1 428 4 3017 3410 t
+(sure up from the bottom of the page', so)8 1694 1 3017 3530 t
+10 CW f
+(-1i)4747 3530 w
+10 R f
+(means)4964 3530 w
+(`one inch from the bottom'.)4 1107 1 3017 3650 t
+(The)3017 3830 w
+10 CW f
+(.wh)3216 3830 w
+10 R f
+(command appears in the input outside the)6 1779 1 3440 3830 t
+(de\256nition of)1 492 1 3017 3950 t
+10 CW f
+(.NP)3534 3950 w
+10 R f
+(; typically the input would be)5 1175 1 3714 3950 t
+9 CW f
+(.de NP)1 324 1 3167 4120 t
+9 S f
+(\274)3221 4230 w
+9 CW f
+(..)3167 4340 w
+(.wh \2611i NP)2 540 1 3167 4450 t
+10 R f
+( text is actually being output,)5 1206( As)1 170( happens?)1 405(Now what)1 421 4 3017 4630 t
+10 I f
+(troff)3017 4750 w
+10 R f
+( page,)1 253(keeps track of its vertical position on the)7 1735 2 3231 4750 t
+( one inch from the)4 812(and after a line is printed within)6 1390 2 3017 4870 t
+(bottom, the)1 456 1 3017 4990 t
+10 CW f
+(.NP)3498 4990 w
+10 R f
+( the jargon, the)3 599( \(In)1 166(macro is activated.)2 751 3 3703 4990 t
+10 CW f
+(.wh)3017 5110 w
+10 R f
+(command sets a)2 640 1 3223 5110 t
+10 I f
+(trap)3889 5110 w
+10 R f
+(at the speci\256ed place, which)4 1136 1 4083 5110 t
+( when that point is passed.\))5 1143(is `sprung')1 442 2 3017 5230 t
+10 CW f
+(.NP)4663 5230 w
+10 R f
+(causes a)1 340 1 4879 5230 t
+( next page \(that's what the)5 1111(skip to the top of the)5 875 2 3017 5350 t
+10 CW f
+('bp)5039 5350 w
+10 R f
+( then prints the title with the appropriate)7 1817(was for\),)1 385 2 3017 5470 t
+(margins.)3017 5590 w
+(Why)3017 5770 w
+10 CW f
+('bp)3256 5770 w
+10 R f
+(and)3481 5770 w
+10 CW f
+('sp)3670 5770 w
+10 R f
+(instead of)1 412 1 3895 5770 t
+10 CW f
+(.bp)4353 5770 w
+10 R f
+(and)4579 5770 w
+10 CW f
+(.sp)4769 5770 w
+10 R f
+(? The)1 270 1 4949 5770 t
+( that)1 217(answer is)1 417 2 3017 5890 t
+10 CW f
+(.sp)3718 5890 w
+10 R f
+(and)3965 5890 w
+10 CW f
+(.bp)4176 5890 w
+10 R f
+(, like several other)3 863 1 4356 5890 t
+(commands, cause a)2 773 1 3017 6010 t
+10 I f
+(break)3815 6010 w
+10 R f
+( the)1 148( is, all)2 242( That)1 233(to take place.)2 529 4 4067 6010 t
+( out as)2 261(input text collected but not yet printed is \257ushed)8 1941 2 3017 6130 t
+(soon as possible, and the next input line is guaranteed)9 2202 1 3017 6250 t
+( we had used)3 551( If)1 127(to start a new line of output.)6 1190 3 3017 6370 t
+10 CW f
+(.sp)4921 6370 w
+10 R f
+(or)5136 6370 w
+10 CW f
+(.bp)3017 6490 w
+10 R f
+(in the)1 226 1 3223 6490 t
+10 CW f
+(.NP)3475 6490 w
+10 R f
+( the)1 149(macro, this would cause a break in)6 1389 2 3681 6490 t
+(middle of the current output line when a new page is)10 2202 1 3017 6610 t
+( print the left-over part)4 933( effect would be to)4 768(started. The)1 501 3 3017 6730 t
+( the page, followed by the next)6 1246(of that line at the top of)6 956 2 3017 6850 t
+( is)1 103( This)1 239(input line on a new output line.)6 1313 3 3017 6970 t
+10 I f
+(not)4708 6970 w
+10 R f
+(what we)1 347 1 4872 6970 t
+(want. Using)1 517 1 3017 7090 t
+10 CW f
+(')3568 7090 w
+10 R f
+(instead of)1 400 1 3662 7090 t
+10 CW f
+(.)4096 7090 w
+10 R f
+(for a command tells)3 823 1 4190 7090 t
+10 I f
+(troff)5046 7090 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Page: 9 9
+/saveobj save def
+mark
+9 pagesetup
+10 HB f
+( 9)1 3952(TROFF Tutorial)1 728 2 540 600 t
+10 R f
+( output line cur-)3 698( \320 the)2 254(that no break is to take place)6 1250 3 540 960 t
+(rently being \256lled should)3 1027 1 540 1080 t
+10 I f
+(not)1600 1080 w
+10 R f
+( out before the)3 600(be forced)1 381 2 1761 1080 t
+(space or new page.)3 758 1 540 1200 t
+( and)1 181(The list of commands that cause a break is short)9 2021 2 540 1380 t
+(natural:)540 1500 w
+9 CW f
+(.bp .br .ce .fi .nf .sp .in .ti)7 2052 1 645 1670 t
+10 R f
+(All others cause)2 669 1 540 1850 t
+10 I f
+(no)1247 1850 w
+10 R f
+( you)1 189(break, regardless of whether)3 1168 2 1385 1850 t
+(use a)1 209 1 540 1970 t
+10 CW f
+(.)781 1970 w
+10 R f
+(or a)1 159 1 873 1970 t
+10 CW f
+(')1064 1970 w
+10 R f
+( you really need a break, add a)7 1260(. If)1 147 2 1124 1970 t
+10 CW f
+(.br)2562 1970 w
+10 R f
+(command at the appropriate place.)4 1377 1 540 2090 t
+( changing)1 418( you're)1 311( \320 if)2 193(One other thing to beware of)5 1280 4 540 2270 t
+(fonts or point sizes a lot, you may \256nd that if you cross)12 2202 1 540 2390 t
+(a page boundary in an unexpected font or size, your)9 2202 1 540 2510 t
+( and font instead of what)5 1070(titles come out in that size)5 1132 2 540 2630 t
+( of a title is)4 558( the length)2 474( Furthermore,)1 600(you intended.)1 570 4 540 2750 t
+( current line length, so titles will)6 1417(independent of the)2 785 2 540 2870 t
+( 6.5 inches unless you)4 892(come out at the default length of)6 1310 2 540 2990 t
+(change it, which is done with the)6 1318 1 540 3110 t
+10 CW f
+(.lt)1883 3110 w
+10 R f
+(command.)2088 3110 w
+( several ways to \256x the problems of point)8 1806(There are)1 396 2 540 3290 t
+( simplest applications,)2 900( the)1 152( For)1 194(sizes and fonts in titles.)4 956 4 540 3410 t
+(we can change)2 596 1 540 3530 t
+10 CW f
+(.NP)1167 3530 w
+10 R f
+(to set the proper size and font for)7 1364 1 1378 3530 t
+( shown)1 309(the title, then restore the previous values as)7 1893 2 540 3650 t
+(below.)540 3770 w
+9 CW f
+(.de NP)1 324 1 690 3940 t
+('bp)690 4050 w
+('sp 0.5i)1 432 1 690 4160 t
+( set title font to roman)5 1296( \\")1 414(.ft R)1 270 3 690 4270 t
+( and size to 10 point)5 1134( \\")1 360(.ps 10)1 324 3 690 4380 t
+( and length to 6 inches)5 1242( \\")1 360(.lt 6i)1 324 3 690 4490 t
+(.tl 'left'center'right')1 1242 1 690 4600 t
+( revert to previous size)4 1296(.ps \\")1 684 2 690 4710 t
+( and to previous font)4 1134( \\")1 414(.ft P)1 270 3 690 4820 t
+('sp 0.3i)1 432 1 690 4930 t
+(..)690 5040 w
+10 R f
+( of)1 115(This version)1 503 2 540 5220 t
+10 CW f
+(.NP)1190 5220 w
+10 R f
+(does)1402 5220 w
+10 I f
+(not)1617 5220 w
+10 R f
+(work if the \256elds in the)5 965 1 1777 5220 t
+10 CW f
+(.tl)540 5340 w
+10 R f
+( cope)1 221( To)1 169(command contain size or font changes.)5 1598 3 754 5340 t
+( requires)1 371(with that)1 377 2 540 5460 t
+10 I f
+(troff)1338 5460 w
+10 R f
+('s `environment' mechanism,)2 1223 1 1519 5460 t
+(which we will discuss in \24713.)5 1183 1 540 5580 t
+( footer at the bottom of a page, you can mod-)10 1865(To get a)2 337 2 540 5760 t
+(ify)540 5880 w
+10 CW f
+(.NP)695 5880 w
+10 R f
+(so it does some processing before the)6 1600 1 919 5880 t
+10 CW f
+('bp)2562 5880 w
+10 R f
+( the job into a footer macro invoked)7 1469(command, or split)2 733 2 540 6000 t
+( and a header macro invoked at)6 1324(at the bottom margin)3 878 2 540 6120 t
+( variations are left as exer-)5 1105( These)1 297(the top of the page.)4 800 3 540 6240 t
+(cises.)540 6360 w
+( are computed automatically as)4 1310(Output page numbers)2 892 2 540 6600 t
+( \(starting at 1\), but no numbers)6 1289(each page is produced)3 913 2 540 6720 t
+( get)1 154( To)1 168(are printed unless you ask for them explicitly.)7 1880 3 540 6840 t
+( include the character)3 900(page numbers printed,)2 922 2 540 6960 t
+10 CW f
+(%)2402 6960 w
+10 R f
+(in the)1 240 1 2502 6960 t
+10 CW f
+(.tl)540 7080 w
+10 R f
+( the number to)3 586(line at the position where you want)6 1410 2 746 7080 t
+( example)1 363(appear. For)1 479 2 540 7200 t
+9 CW f
+(.tl ''- % -'')3 702 1 3167 950 t
+10 R f
+( can set)2 315( You)1 230( number inside hyphens.)3 1001(centers the page)2 656 4 3017 1130 t
+(the page number at any time with either)7 1820 1 3017 1250 t
+10 CW f
+(.bp n)1 300 1 4894 1250 t
+10 R f
+(,)5194 1250 w
+(which immediately starts a new page numbered)6 1962 1 3017 1370 t
+10 CW f
+(n)5015 1370 w
+10 R f
+(, or)1 144 1 5075 1370 t
+(with)3017 1490 w
+10 CW f
+(.pn n)1 300 1 3227 1490 t
+10 R f
+(, which sets the page number for the next)8 1692 1 3527 1490 t
+( Again,)1 323( a skip to the new page.)6 964(page but doesn't cause)3 915 3 3017 1610 t
+10 CW f
+(.bp +n)1 360 1 3017 1730 t
+10 R f
+(sets the page number to)4 967 1 3408 1730 t
+10 CW f
+(n)4406 1730 w
+10 R f
+(more than its cur-)3 722 1 4497 1730 t
+(rent value;)1 424 1 3017 1850 t
+10 CW f
+(.bp)3466 1850 w
+10 R f
+(means)3671 1850 w
+10 CW f
+(.bp +1)1 360 1 3951 1850 t
+10 R f
+(.)4311 1850 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 10.  , HEADING = Number Registers and Arithmetic]
+10 B f
+( Registers and Arithmetic)3 1095(10. Number)1 530 2 3017 2090 t
+10 I f
+(Troff)3017 2270 w
+10 R f
+( arithmetic, and for)3 882(has a facility for doing)4 1056 2 3281 2270 t
+( variables with numeric values,)4 1389(de\256ning and using)2 813 2 3017 2390 t
+(called)3017 2510 w
+10 I f
+(number registers)1 737 1 3337 2510 t
+10 R f
+( like)1 233( registers,)1 445(. Number)1 459 3 4082 2510 t
+( setting up a docu-)4 750(strings and macros, can be useful in)6 1452 2 3017 2630 t
+( of course they)3 608( And)1 228( is easy to change later.)5 961(ment so it)2 405 4 3017 2750 t
+(serve for any sort of arithmetic computation.)6 1783 1 3017 2870 t
+( or two charac-)3 612(Like strings, number registers have one)5 1590 2 3017 3050 t
+( are set by the)4 562( They)1 257(ter names.)1 412 3 3017 3170 t
+10 CW f
+(.nr)4275 3170 w
+10 R f
+( are)1 147(command, and)1 590 2 4482 3170 t
+(referenced anywhere by)2 974 1 3017 3290 t
+10 CW f
+(\\nx)4026 3290 w
+10 R f
+(\(one character name\) or)3 978 1 4241 3290 t
+10 CW f
+(\\n\(xy)3017 3410 w
+10 R f
+(\(two character name\).)2 871 1 3342 3410 t
+( number registers)2 747(There are quite a few pre-de\256ned)5 1455 2 3017 3590 t
+(maintained by)1 594 1 3017 3710 t
+10 I f
+(troff)3661 3710 w
+10 R f
+(, among them)2 597 1 3842 3710 t
+10 CW f
+(%)4489 3710 w
+10 R f
+(for the current)2 620 1 4599 3710 t
+(page number;)1 560 1 3017 3830 t
+10 CW f
+(nl)3617 3830 w
+10 R f
+(for the current vertical position on)5 1442 1 3777 3830 t
+(the page;)1 377 1 3017 3950 t
+10 CW f
+(dy)3433 3950 w
+10 R f
+(,)3553 3950 w
+10 CW f
+(mo)3617 3950 w
+10 R f
+(and)3776 3950 w
+10 CW f
+(yr)3959 3950 w
+10 R f
+(for the current day, month)4 1101 1 4118 3950 t
+(and year; and)2 545 1 3017 4070 t
+10 CW f
+(.s)3591 4070 w
+10 R f
+(and)3740 4070 w
+10 CW f
+(.f)3914 4070 w
+10 R f
+(for the current size and font.)5 1155 1 4064 4070 t
+(\(The font is a number from 1 to typically around 10.\))10 2202 1 3017 4190 t
+( like any)2 388(Any of these can be used in computations)7 1814 2 3017 4310 t
+( like)1 193(other register, but some,)3 1025 2 3017 4430 t
+10 CW f
+(.s)4278 4430 w
+10 R f
+(and)4441 4430 w
+10 CW f
+(.f)4628 4430 w
+10 R f
+(, cannot be)2 471 1 4748 4430 t
+(changed with)1 535 1 3017 4550 t
+10 CW f
+(.nr)3577 4550 w
+10 R f
+(.)3757 4550 w
+(As an example of the use of number registers, in the)10 2202 1 3017 4730 t
+10 CW f
+(-ms)3017 4850 w
+10 R f
+(macro package, most signi\256cant parameters are)5 1980 1 3239 4850 t
+( of the values of a handful of number)8 1544(de\256ned in terms)2 658 2 3017 4970 t
+( include the point size for text, the ver-)8 1550(registers. These)1 652 2 3017 5090 t
+( the)1 153( set)1 141( To)1 166(tical spacing, and the line and title lengths.)7 1742 4 3017 5210 t
+( following para-)2 657(point size and vertical spacing for the)6 1545 2 3017 5330 t
+(graphs, for example, a user may say)6 1435 1 3017 5450 t
+9 CW f
+(.nr PS 9)2 432 1 3167 5620 t
+(.nr VS 11)2 486 1 3167 5730 t
+10 R f
+(The paragraph macro)2 916 1 3017 5910 t
+10 CW f
+(.PP)3990 5910 w
+10 R f
+(is de\256ned \(roughly\) as)3 992 1 4227 5910 t
+(follows:)3017 6030 w
+9 CW f
+(.de PP)1 324 1 3167 6190 t
+( reset size)2 594( \\")1 648(.ps \\\\n\(PS)1 540 3 3167 6290 t
+( spacing)1 432( \\")1 594(.vs \\\\n\(VSp)1 594 3 3167 6390 t
+( font)1 270( \\")1 918(.ft 1)1 270 3 3167 6490 t
+( half a line)3 648( \\")1 756(.sp 0.5v)1 432 3 3167 6590 t
+(.ti +3m)1 378 1 3167 6690 t
+(..)3167 6790 w
+10 R f
+( to font 1 and the point size and line)9 1498(This sets the font)3 704 2 3017 6970 t
+( whatever values are stored in the number)7 1777(spacing to)1 425 2 3017 7090 t
+(registers)3017 7210 w
+10 CW f
+(PS)3380 7210 w
+10 R f
+(and)3525 7210 w
+10 CW f
+(VS)3694 7210 w
+10 R f
+(.)3814 7210 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 9 9
+%%Page: 10 10
+/saveobj save def
+mark
+10 pagesetup
+10 HB f
+( Tutorial)1 395(10 TROFF)1 4285 2 540 600 t
+10 R f
+( is the eternal)3 595( This)1 248(Why are there two backslashes?)4 1359 3 540 960 t
+( When)1 303( quote.)1 287(problem of how to quote a)5 1137 3 540 1080 t
+10 I f
+(troff)2307 1080 w
+10 R f
+(origi-)2520 1080 w
+(nally reads the macro de\256nition, it peels off one back-)9 2202 1 540 1200 t
+( ensure that)2 532( To)1 197(slash to see what's coming next.)5 1473 3 540 1320 t
+( the de\256nition when the macro is)6 1316(another is left in)3 652 2 540 1440 t
+10 I f
+(used,)2534 1440 w
+10 R f
+( If)1 120( in two backslashes in the de\256nition.)6 1482(we have to put)3 600 3 540 1560 t
+( used, point size and vertical)5 1272(only one backslash is)3 930 2 540 1680 t
+( the time the macro is de\256ned,)6 1213(spacing will be frozen at)4 989 2 540 1800 t
+(not when it is used.)4 775 1 540 1920 t
+(Protecting by an extra layer of backslashes is only)8 2202 1 540 2100 t
+(needed for)1 444 1 540 2220 t
+10 CW f
+(\\n)1030 2220 w
+10 R f
+(,)1150 2220 w
+10 CW f
+(\\*)1221 2220 w
+10 R f
+(,)1341 2220 w
+10 CW f
+(\\$)1411 2220 w
+10 R f
+(\(which we haven't come to)4 1166 1 1576 2220 t
+(yet\), and)1 353 1 540 2340 t
+10 CW f
+(\\)922 2340 w
+10 R f
+( like)1 180(itself. Things)1 558 2 1011 2340 t
+10 CW f
+(\\s)1779 2340 w
+10 R f
+(,)1899 2340 w
+10 CW f
+(\\f)1954 2340 w
+10 R f
+(,)2074 2340 w
+10 CW f
+(\\h)2129 2340 w
+10 R f
+(,)2249 2340 w
+10 CW f
+(\\v)2304 2340 w
+10 R f
+(, and so)2 318 1 2424 2340 t
+( backslash, since they are con-)5 1238(on do not need an extra)5 964 2 540 2460 t
+(verted by)1 388 1 540 2580 t
+10 I f
+(troff)967 2580 w
+10 R f
+( code immediately upon)3 1008(to an internal)2 555 2 1179 2580 t
+(being seen.)1 449 1 540 2700 t
+( a)1 98(Arithmetic expressions can appear anywhere that)5 2104 2 540 2880 t
+( a trivial example,)3 721( As)1 161(number is expected.)2 801 3 540 3000 t
+9 CW f
+(.nr PS \\\\n\(PS\2612)2 810 1 690 3170 t
+10 R f
+(decrements)540 3350 w
+10 CW f
+(PS)1036 3350 w
+10 R f
+( can use the arith-)4 777( Expressions)1 550(by 2.)1 217 3 1198 3350 t
+( /, % \(mod\), the relational oper-)6 1270(metic operators +, \261, *,)4 932 2 540 3470 t
+(ators)540 3590 w
+10 S f
+(>)761 3590 w
+10 R f
+(,)816 3590 w
+10 S f
+(>)869 3590 w
+10 R f
+(=,)924 3590 w
+10 S f
+(<)1033 3590 w
+10 R f
+(,)1088 3590 w
+10 S f
+(<)1141 3590 w
+10 R f
+(=, =, and != \(not equal\), and parenthe-)7 1546 1 1196 3590 t
+(ses.)540 3710 w
+(Although the arithmetic we have done so far has been)9 2202 1 540 3890 t
+( some-)1 295(straightforward, more complicated things are)4 1907 2 540 4010 t
+( integers.)1 367( number registers hold only)4 1099( First,)1 259(what tricky.)1 477 4 540 4130 t
+10 I f
+(troff)540 4250 w
+10 R f
+(arithmetic uses truncating integer division, just)5 1982 1 760 4250 t
+( in the absence of parentheses,)5 1303( Second,)1 387(like Fortran.)1 512 3 540 4370 t
+( done left-to-right without any operator)5 1672(evaluation is)1 530 2 540 4490 t
+( Thus)1 250(precedence \(including relational operators\).)3 1739 2 540 4610 t
+9 CW f
+(7*\2614+3/13)690 4780 w
+10 R f
+( registers can occur anywhere)4 1236( Number)1 389(becomes `\2611'.)1 577 3 540 4960 t
+( can scale indicators like)4 997(in an expression, and so)4 977 2 540 5080 t
+10 CW f
+(p)2543 5080 w
+10 R f
+(,)2603 5080 w
+10 CW f
+(i)2657 5080 w
+10 R f
+(,)2717 5080 w
+10 CW f
+(m)540 5200 w
+10 R f
+( integer divi-)2 540( Although)1 440( spaces\).)1 355(, and so on \(but no)5 799 4 608 5200 t
+(sion causes truncation, each number and its scale)7 2202 1 540 5320 t
+(indicator is converted to machine units before any)7 2202 1 540 5440 t
+(arithmetic is done, so)3 915 1 540 5560 t
+10 CW f
+(1i/2u)1500 5560 w
+10 R f
+(evaluates to 0.5i cor-)3 897 1 1845 5560 t
+(rectly.)540 5680 w
+( indicator)1 398(The scale)1 396 2 540 5860 t
+10 CW f
+(u)1377 5860 w
+10 R f
+(often has to appear when you)5 1262 1 1480 5860 t
+( particular, when arithmetic is)4 1219(wouldn't expect it \320 in)4 983 2 540 5980 t
+( context that implies horizontal or)5 1502(being done in a)3 700 2 540 6100 t
+( example,)1 388( For)1 189( dimensions.)1 506(ver tical)1 307 4 540 6220 t
+9 CW f
+(.ll 7/2i)1 432 1 690 6390 t
+10 R f
+(would seem obvious enough \320 3)5 1471 1 540 6570 t
+10 S1 f
+()2011 6570 w
+2011 6570 m
+75 build_12
+2086 6570 m
+10 R f
+(inches. Sorry.)1 604 1 2138 6570 t
+( the default units for horizontal)5 1530(Remember that)1 672 2 540 6690 t
+(parameters like)1 631 1 540 6810 t
+10 CW f
+(.ll)1215 6810 w
+10 R f
+( /)1 44( ems)1 186( really `7)2 398( That's)1 324(are ems.)1 351 5 1439 6810 t
+( translated into machine units, it)5 1368( and when)2 446(2 inches',)1 388 3 540 6930 t
+( about)1 247( How)1 244(becomes zero.)1 570 3 540 7050 t
+9 CW f
+(.ll 7i/2)1 432 1 690 7220 t
+10 R f
+( is)1 105( / 2')2 127( `2' is `2 ems', so `7i)6 907( \320 the)2 254(Sorry, still no good)3 809 5 3017 960 t
+( You)1 222(small, although not zero.)3 991 2 3017 1080 t
+10 I f
+(must)4255 1080 w
+10 R f
+(use)4469 1080 w
+9 CW f
+(.ll 7i/2u)1 486 1 3167 1250 t
+10 R f
+( rule is to attach a scale indicator to)8 1534(So again, a safe)3 668 2 3017 1430 t
+(every number, even constants.)3 1211 1 3017 1550 t
+(For arithmetic done within a)4 1186 1 3017 1730 t
+10 CW f
+(.nr)4240 1730 w
+10 R f
+(command, there is)2 761 1 4458 1730 t
+(no implication of horizontal or vertical dimension, so)7 2202 1 3017 1850 t
+( `units', and)2 524(the default units are)3 853 2 3017 1970 t
+10 CW f
+(7i/2)4441 1970 w
+10 R f
+(and)4728 1970 w
+10 CW f
+(7i/2u)4919 1970 w
+10 R f
+( Thus)1 250(mean the same thing.)3 849 2 3017 2090 t
+9 CW f
+(.nr ll 7i/2)2 594 1 3167 2260 t
+(.ll \\\\n\(llu)1 594 1 3167 2370 t
+10 R f
+( don't forget)2 523(does just what you want, so long as you)8 1679 2 3017 2550 t
+(the)3017 2670 w
+10 CW f
+(u)3164 2670 w
+10 R f
+(on the)1 247 1 3249 2670 t
+10 CW f
+(.ll)3521 2670 w
+10 R f
+(command.)3726 2670 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 11.  , HEADING = Macros with arguments]
+10 B f
+( with arguments)2 694(11. Macros)1 496 2 3017 2910 t
+10 R f
+( can change from)3 698(The next step is to de\256ne macros that)7 1504 2 3017 3090 t
+( the next according to parameters supplied)6 1769(one use to)2 433 2 3017 3210 t
+( two things.)2 472( make this work, we need)5 1020( To)1 161(as arguments.)1 549 4 3017 3330 t
+( indicate)1 351(First, when we de\256ne the macro, we have to)8 1851 2 3017 3450 t
+( parts of it will be provided as arguments)8 1797(that some)1 405 2 3017 3570 t
+( when the macro is)4 830( Then)1 275(when the macro is called.)4 1097 3 3017 3690 t
+( arguments to be)3 759(called we have to provide actual)5 1443 2 3017 3810 t
+(plugged into the de\256nition.)3 1084 1 3017 3930 t
+(Let us illustrate by de\256ning a macro)6 1575 1 3017 4110 t
+10 CW f
+(.SM)4639 4110 w
+10 R f
+(that will)1 353 1 4866 4110 t
+( points smaller than the sur-)5 1238(print its argument two)3 964 2 3017 4230 t
+( is, the macro call)4 707( That)1 233(rounding text.)1 561 3 3017 4350 t
+9 CW f
+(.SM UNIX)1 432 1 3167 4520 t
+10 R f
+(will produce)1 502 1 3017 4700 t
+8 R f
+(UNIX)3539 4700 w
+10 R f
+(instead of UNIX.)2 690 1 3764 4700 t
+(The de\256nition of)2 672 1 3017 4880 t
+10 CW f
+(.SM)3714 4880 w
+10 R f
+(is)3919 4880 w
+9 CW f
+(.de SM)1 324 1 3167 5040 t
+(\\s\2612\\\\$1\\s+2)3167 5140 w
+(..)3167 5240 w
+10 R f
+( macro de\256nition, the symbol)4 1211(Within a)1 355 2 3017 5420 t
+10 CW f
+(\\\\$)4617 5420 w
+10 I f
+(n)4797 5420 w
+10 R f
+(refers to)1 338 1 4881 5420 t
+(the)3017 5540 w
+10 I f
+(n)3165 5540 w
+10 R f
+( Thus)1 250(th argument that the macro was called with.)7 1754 2 3215 5540 t
+10 CW f
+(\\\\$1)3017 5660 w
+10 R f
+( placed in a smaller point size)6 1223(is the string to be)4 709 2 3287 5660 t
+(when)3017 5780 w
+10 CW f
+(.SM)3258 5780 w
+10 R f
+(is called.)1 355 1 3463 5780 t
+( slightly more complicated version, the following)6 2016(As a)1 186 2 3017 5960 t
+(de\256nition of)1 513 1 3017 6080 t
+10 CW f
+(.SM)3576 6080 w
+10 R f
+(permits optional second and third)4 1418 1 3801 6080 t
+(arguments that will be printed in the normal size:)8 1965 1 3017 6200 t
+9 CW f
+(.de SM)1 324 1 3167 6360 t
+(\\\\$3\\s\2612\\\\$1\\s+2\\\\$2)3167 6460 w
+(..)3167 6560 w
+10 R f
+( when the macro is called are)6 1211(Arguments not provided)2 991 2 3017 6740 t
+(treated as empty, so)3 793 1 3017 6860 t
+9 CW f
+(.SM UNIX \),)2 594 1 3167 7030 t
+10 R f
+(produces)3017 7210 w
+9 R f
+(UNIX)3400 7210 w
+10 R f
+(\), while)1 305 1 3625 7210 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 10 10
+%%Page: 11 11
+/saveobj save def
+mark
+11 pagesetup
+10 HB f
+( 11)1 3952(TROFF Tutorial)1 728 2 540 600 t
+9 CW f
+(.SM UNIX \). \()3 702 1 690 950 t
+10 R f
+(produces \()1 422 1 540 1130 t
+9 R f
+(UNIX)962 1130 w
+10 R f
+( is convenient to reverse the order)6 1382(\). It)1 173 2 1187 1130 t
+( trailing punctuation is much)4 1274(of arguments because)2 928 2 540 1250 t
+(more common than leading.)3 1121 1 540 1370 t
+( the number of arguments that a macro)7 1684(By the way,)2 518 2 540 1550 t
+(was called with is available in number register)7 1855 1 540 1670 t
+10 CW f
+(.$)2420 1670 w
+10 R f
+(.)2540 1670 w
+(The following macro)2 911 1 540 1850 t
+10 CW f
+(.BD)1510 1850 w
+10 R f
+( make `bold)2 547(is used to)2 446 2 1749 1850 t
+( combines horizontal)2 930( It)1 157( phrase.)1 3( phrase.)1 356( this)1 3( this)1 216( like)1 3(roman', like)1 534 8 540 1970 t
+( and argument rearrange-)3 1010(motions, width computations,)2 1192 2 540 2090 t
+(ment.)540 2210 w
+9 CW f
+(.de BD)1 324 1 540 2370 t
+(\\&\\\\$3\\f1\\\\$1\\h'-\\w'\\\\$1'u+3u'\\\\$1\\fP\\\\$2)540 2480 w
+(..)540 2590 w
+10 R f
+(The)540 2760 w
+10 CW f
+(\\h)722 2760 w
+10 R f
+(and)869 2760 w
+10 CW f
+(\\w)1040 2760 w
+10 R f
+( no extra backslash, as)4 907(commands need)1 648 2 1187 2760 t
+( The)1 210(we discussed above.)2 822 2 540 2880 t
+10 CW f
+(\\&)1601 2880 w
+10 R f
+(is there in case the argu-)5 992 1 1750 2880 t
+(ment begins with a period.)4 1063 1 540 3000 t
+( with the)2 418(Two backslashes are needed)3 1231 2 540 3180 t
+10 CW f
+(\\\\$)2248 3180 w
+10 I f
+(n)2428 3180 w
+10 R f
+(com-)2537 3180 w
+( to protect one of them when the macro)8 1585(mands, though,)1 617 2 540 3300 t
+( a second example will make)5 1171( Perhaps)1 369(is being de\256ned.)2 662 3 540 3420 t
+( a macro called)3 627( Consider)1 418(this clearer.)1 472 3 540 3540 t
+10 CW f
+(.NH)2089 3540 w
+10 R f
+(which pro-)1 441 1 2301 3540 t
+( headings rather like those in this)6 1519(duces numbered)1 683 2 540 3660 t
+(paper, with the sections numbered automatically, and)6 2202 1 540 3780 t
+( use is)2 250( The)1 205(the title in bold in a smaller size.)7 1305 3 540 3900 t
+9 CW f
+(.NH "Section title)2 972 1 690 4080 t
+9 S f
+(\274)1716 4080 w
+9 CW f
+(")1806 4080 w
+10 R f
+( to contain blanks, then it)5 1016(\(If the argument to a macro is)6 1186 2 540 4270 t
+(must be)1 320 1 540 4390 t
+10 I f
+(surrounded)891 4390 w
+10 R f
+( string,)1 283(by double quotes, unlike a)4 1076 2 1383 4390 t
+(where only one leading quote is permitted.\))6 1739 1 540 4510 t
+(Here is the de\256nition of the)5 1096 1 540 4690 t
+10 CW f
+(.NH)1661 4690 w
+10 R f
+(macro:)1866 4690 w
+9 CW f
+( initialize section number)3 1404( \\")1 216(.nr NH 0)2 432 3 690 4860 t
+(.de NH)1 324 1 690 4970 t
+(.sp 0.3i)1 432 1 690 5080 t
+(.ft B)1 270 1 690 5190 t
+( increment number)2 918( \\")1 198(.nr NH \\\\n\(NH+1)2 810 3 690 5300 t
+( decrease PS)2 648( \\")1 360(.ps \\\\n\(PS\2611)1 648 3 690 5410 t
+( number. title)2 756( \\")1 306(\\\\n\(NH. \\\\$1)1 702 3 690 5520 t
+( restore PS)2 594( \\")1 468(.ps \\\\n\(PS)1 540 3 690 5630 t
+(.sp 0.3i)1 432 1 690 5740 t
+(.ft R)1 270 1 690 5850 t
+(..)690 5960 w
+10 R f
+(The section number is kept in number register)7 2007 1 540 6140 t
+10 CW f
+(NH)2597 6140 w
+10 R f
+(,)2717 6140 w
+( each time just before it is used.)7 1328(which is incremented)2 874 2 540 6260 t
+( the)1 171(\(A number register, but not a string, may have)8 2031 2 540 6380 t
+(same name as a macro without con\257ict.\))6 1611 1 540 6500 t
+(We used)1 371 1 540 6680 t
+10 CW f
+(\\\\n\(NH)961 6680 w
+10 R f
+(instead of)1 416 1 1371 6680 t
+10 CW f
+(\\n\(NH)1837 6680 w
+10 R f
+(and)2187 6680 w
+10 CW f
+(\\\\n\(PS)2382 6680 w
+10 R f
+(instead of)1 398 1 540 6800 t
+10 CW f
+(\\n\(PS)970 6800 w
+10 R f
+( we had used)3 539(. If)1 148 2 1270 6800 t
+10 CW f
+(\\n\(NH)1989 6800 w
+10 R f
+(, we would)2 453 1 2289 6800 t
+( value of the register at the time the macro was)10 1928(get the)1 274 2 540 6920 t
+10 I f
+(de\256ned)540 7040 w
+10 R f
+(, not at the time it was)6 898 1 836 7040 t
+10 I f
+(used)1761 7040 w
+10 R f
+( that's what you)3 647(. If)1 143 2 1952 7040 t
+( by using)2 375( Similarly,)1 452( but not here.)3 539(want, \256ne,)1 422 4 540 7160 t
+10 CW f
+(\\\\n\(PS)2357 7160 w
+10 R f
+(,)2717 7160 w
+(we get the point size at the time the macro is called.)11 2069 1 540 7280 t
+( not involve numbers, recall)4 1174(As an example that does)4 1028 2 3017 960 t
+(our)3017 1080 w
+10 CW f
+(.NP)3175 1080 w
+10 R f
+(macro which had a)3 756 1 3380 1080 t
+9 CW f
+(.tl 'left'center'right')1 1242 1 3167 1240 t
+10 R f
+(We could make these into parameters by using instead)8 2174 1 3017 1410 t
+9 CW f
+(.tl '\\\\*\(LT'\\\\*\(CT'\\\\*\(RT')1 1404 1 3167 1570 t
+10 R f
+(so the title comes from three strings called)7 1709 1 3017 1740 t
+10 CW f
+(LT)4754 1740 w
+10 R f
+(,)4874 1740 w
+10 CW f
+(CT)4927 1740 w
+10 R f
+(and)5075 1740 w
+10 CW f
+(RT)3017 1860 w
+10 R f
+( empty, then the title will be a blank)8 1529( these are)2 400(. If)1 153 3 3137 1860 t
+(line. Normally)1 608 1 3017 1980 t
+10 CW f
+(CT)3650 1980 w
+10 R f
+(would be set with something like)5 1325 1 3795 1980 t
+9 CW f
+(.ds CT - % -)4 648 1 3167 2140 t
+10 R f
+( page number between hyphens, but a)6 1577(to give just the)3 625 2 3017 2310 t
+( of the)2 299(user could supply private de\256nitions for any)6 1903 2 3017 2430 t
+(strings.)3017 2550 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 12.  , HEADING = Conditionals]
+10 B f
+(12. Conditionals)1 721 1 3017 2790 t
+10 R f
+(Suppose we want the)3 891 1 3017 2970 t
+10 CW f
+(.NH)3948 2970 w
+10 R f
+(macro to leave two extra)4 1050 1 4169 2970 t
+( space just before section 1, but nowhere else.)8 1837(inches of)1 365 2 3017 3090 t
+(The cleanest way to do that is to test inside the)10 1985 1 3017 3210 t
+10 CW f
+(.NH)5039 3210 w
+10 R f
+( section number is 1, and add some)7 1446(macro whether the)2 756 2 3017 3330 t
+( The)1 213(space if it is.)3 529 2 3017 3450 t
+10 CW f
+(.if)3792 3450 w
+10 R f
+(command provides the condi-)3 1214 1 4005 3450 t
+(tional test that we can add just before the heading line)10 2202 1 3017 3570 t
+(is output:)1 376 1 3017 3690 t
+9 CW f
+(.if \\\\n\(NH=1 .sp 2i \\" 1st section only)7 2106 1 3122 3860 t
+10 R f
+(The condition after the)3 942 1 3017 4040 t
+10 CW f
+(.if)3995 4040 w
+10 R f
+(can be any arithmetic or)4 1008 1 4211 4040 t
+( or)1 108( the condition is logically true,)5 1227( If)1 117(logical expression.)1 750 4 3017 4160 t
+(arithmetically greater than zero, the rest of the line is)9 2202 1 3017 4280 t
+( the)1 167( If)1 136( a command.)2 553( \320 here)2 303( text)1 195(treated as if it were)4 848 6 3017 4400 t
+( rest of the)3 463(condition is false, or zero or negative, the)7 1739 2 3017 4520 t
+(line is skipped.)2 603 1 3017 4640 t
+( more than one command if a condi-)7 1464(It is possible to do)4 738 2 3017 4820 t
+( be done)2 342( several operations are to)4 1009( Suppose)1 392(tion is true.)2 459 4 3017 4940 t
+( a macro)2 361( possibility is to de\256ne)4 939( One)1 224(before section 1.)2 678 4 3017 5060 t
+10 CW f
+(.S1)3017 5180 w
+10 R f
+( to do section 1 \(as)5 792(and invoke it if we are about)6 1196 2 3231 5180 t
+(determined by an)2 693 1 3017 5300 t
+10 CW f
+(.if)3735 5300 w
+10 R f
+(\).)3915 5300 w
+9 CW f
+(.de S1)1 324 1 3167 5460 t
+10 I f
+( for section 1 ---)4 649(--- processing)1 582 2 3167 5560 t
+9 CW f
+(..)3167 5660 w
+(.de NH)1 324 1 3167 5760 t
+9 S f
+(\274)3221 5860 w
+9 CW f
+(.if \\\\n\(NH=1 .S1)2 864 1 3167 5960 t
+9 S f
+(\274)3221 6060 w
+9 CW f
+(..)3167 6160 w
+10 R f
+( of the)2 289(An alternate way is to use the extended form)8 1913 2 3017 6340 t
+10 CW f
+(.if)3017 6460 w
+10 R f
+(, like this:)2 398 1 3197 6460 t
+9 CW f
+(.if \\\\n\(NH=1 \\{)2 810 1 3167 6630 t
+10 I f
+(--- processing)1 557 1 3977 6630 t
+(for section 1 ---)3 624 1 3167 6740 t
+9 CW f
+(\\})3791 6740 w
+10 R f
+(The braces)1 456 1 3017 6920 t
+10 CW f
+(\\{)3521 6920 w
+10 R f
+(and)3689 6920 w
+10 CW f
+(\\})3881 6920 w
+10 R f
+(must occur in the positions)4 1170 1 4049 6920 t
+( get unexpected extra lines in your)6 1441(shown or you will)3 761 2 3017 7040 t
+(output.)3017 7160 w
+10 I f
+(Troff)3366 7160 w
+10 R f
+(also provides an `if-else' construction,)4 1609 1 3610 7160 t
+(which we will not go into here.)6 1246 1 3017 7280 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 11 11
+%%Page: 12 12
+/saveobj save def
+mark
+12 pagesetup
+10 HB f
+( Tutorial)1 395(12 TROFF)1 4285 2 540 600 t
+10 R f
+( can be negated by preceding it with)7 1465(A condition)1 477 2 540 960 t
+10 CW f
+(!)2510 960 w
+10 R f
+(; we)1 172 1 2570 960 t
+(get the same effect as above \(but less clearly\) by using)10 2178 1 540 1080 t
+9 CW f
+(.if !\\\\n\(NH>1 .S1)2 918 1 690 1250 t
+10 R f
+( a handful of other conditions that can be)8 1804(There are)1 398 2 540 1430 t
+(tested with)1 461 1 540 1550 t
+10 CW f
+(.if)1051 1550 w
+10 R f
+( example, is the current page)5 1272(. For)1 239 2 1231 1550 t
+(even or odd?)2 515 1 540 1670 t
+9 CW f
+(.if e .tl '')3 648 1 690 1840 t
+10 I f
+(even page title)2 582 1 1338 1840 t
+9 CW f
+('')1920 1840 w
+(.if o .tl '')3 648 1 690 1950 t
+10 I f
+(odd page title)2 550 1 1338 1950 t
+9 CW f
+('')1888 1950 w
+10 R f
+( titles when used inside an)5 1082(gives facing pages different)3 1120 2 540 2130 t
+(appropriate new page macro.)3 1157 1 540 2250 t
+(Two other conditions are)3 1079 1 540 2430 t
+10 CW f
+(t)1671 2430 w
+10 R f
+(and)1783 2430 w
+10 CW f
+(n)1979 2430 w
+10 R f
+(, which tell you)3 703 1 2039 2430 t
+(whether the formatter is)3 956 1 540 2550 t
+10 I f
+(troff)1521 2550 w
+10 R f
+(or)1719 2550 w
+10 I f
+(nroff)1827 2550 w
+10 R f
+(.)2030 2550 w
+9 CW f
+(.if t)1 270 1 690 2720 t
+10 I f
+(troff stuff)1 371 1 1014 2720 t
+10 S f
+(\274)1410 2720 w
+9 CW f
+(.if n)1 270 1 690 2830 t
+10 I f
+(nroff stuff)1 393 1 1014 2830 t
+10 S f
+(\274)1432 2830 w
+10 R f
+(Finally, string comparisons may be made in an)7 1871 1 540 3010 t
+10 CW f
+(.if)2436 3010 w
+10 R f
+(:)2616 3010 w
+9 CW f
+(.if ')1 270 1 690 3170 t
+10 I f
+(string1)960 3170 w
+9 CW f
+(')1244 3170 w
+10 I f
+(string2)1298 3170 w
+9 CW f
+(')1582 3170 w
+10 I f
+(stuff)1696 3170 w
+10 R f
+(does)540 3340 w
+10 I f
+(stuff)782 3340 w
+10 R f
+(if)1014 3340 w
+10 I f
+(string1)1134 3340 w
+10 R f
+( same as)2 408(is the)1 248 2 1477 3340 t
+10 I f
+(string2)2193 3340 w
+10 R f
+(. The)1 265 1 2477 3340 t
+( strings can be anything rea-)5 1218(character separating the)2 984 2 540 3460 t
+( The)1 234( string.)1 307(sonable that is not contained in either)6 1661 3 540 3580 t
+( with)1 243(strings themselves can reference strings)4 1749 2 540 3700 t
+10 CW f
+(\\*)2597 3700 w
+10 R f
+(,)2717 3700 w
+(arguments with)1 619 1 540 3820 t
+10 CW f
+(\\$)1184 3820 w
+10 R f
+(, and so on.)3 458 1 1304 3820 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 13.  , HEADING = Environments]
+10 B f
+(13. Environments)1 781 1 540 4060 t
+10 R f
+( mentioned, there is a potential problem when)7 1936(As we)1 266 2 540 4240 t
+( page boundary: parameters like size and)6 1629(going across a)2 573 2 540 4360 t
+( those)1 247(font for a page title may well be different from)9 1955 2 540 4480 t
+(in effect in the text when the page boundary occurs.)9 2202 1 540 4600 t
+10 I f
+(Troff)540 4720 w
+10 R f
+( way to deal with this and)6 1039(provides a very general)3 936 2 767 4720 t
+( three `environments',)2 954( are)1 182( There)1 318(similar situations.)1 748 4 540 4840 t
+(each of which has independently settable versions of)7 2202 1 540 4960 t
+( with processing,)2 728(many of the parameters associated)4 1474 2 540 5080 t
+( font, line and title lengths, \256ll/no\256ll)6 1596(including size,)1 606 2 540 5200 t
+( lines.)1 265(mode, tab stops, and even partially collected)6 1937 2 540 5320 t
+( solved by pro-)3 608(Thus the titling problem may be readily)6 1594 2 540 5440 t
+( one environment and titles in)5 1226(cessing the main text in)4 976 2 540 5560 t
+(a separate one with its own suitable parameters.)7 1907 1 540 5680 t
+(The command)1 581 1 540 5860 t
+10 CW f
+(.ev)1153 5860 w
+10 I f
+(n)1365 5860 w
+10 R f
+( environment)1 538(shifts to)1 327 2 1447 5860 t
+10 I f
+(n)2345 5860 w
+10 R f
+(;)2403 5860 w
+10 I f
+(n)2464 5860 w
+10 R f
+(must)2547 5860 w
+( command)1 436( The)1 222(be 0, 1 or 2.)4 545 3 540 5980 t
+10 CW f
+(.ev)1784 5980 w
+10 R f
+(with no argument)2 737 1 2005 5980 t
+( Environment)1 608( the previous environment.)3 1179(returns to)1 415 3 540 6100 t
+( in a stack, so calls for different)7 1314(names are maintained)2 888 2 540 6220 t
+( unwound consis-)2 769(environments may be nested and)4 1433 2 540 6340 t
+(tently.)540 6460 w
+( text is processed in)4 892(Suppose we say that the main)5 1310 2 540 6640 t
+(environment 0, which is where)4 1250 1 540 6760 t
+10 I f
+(troff)1819 6760 w
+10 R f
+(begins by default.)2 721 1 2021 6760 t
+( page macro)2 499(Then we can modify the new)5 1186 2 540 6880 t
+10 CW f
+(.NP)2256 6880 w
+10 R f
+(to pro-)1 275 1 2467 6880 t
+(cess titles in environment 1 like this:)6 1467 1 540 7000 t
+9 CW f
+(.de NP)1 324 1 3167 950 t
+( shift to new environment)4 1350( \\")1 270(.ev 1)1 270 3 3167 1060 t
+( set parameters here)3 1080( \\")1 216(.lt 6i)1 324 3 3167 1170 t
+(.ft 1)1 270 1 3167 1280 t
+(.ps 10)1 324 1 3167 1390 t
+10 S f
+(\274)3190 1510 w
+10 I f
+(any other processing)2 838 1 3315 1510 t
+10 S f
+(\274)4178 1510 w
+9 CW f
+( return to prev environment)4 1458(.ev \\")1 540 2 3167 1630 t
+(..)3167 1740 w
+10 R f
+( an)1 138(It is also possible to initialize the parameters for)8 2064 2 3017 1920 t
+( the)1 163(environment outside)1 836 2 3017 2040 t
+10 CW f
+(.NP)4057 2040 w
+10 R f
+(macro, but the version)3 941 1 4278 2040 t
+( one place and is thus)5 862(shown keeps all the processing in)5 1340 2 3017 2160 t
+(easier to understand and change.)4 1299 1 3017 2280 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 14.  , HEADING = Diversions]
+10 B f
+(14. Diversions)1 625 1 3017 2520 t
+10 R f
+( numerous occasions in page layout when it)7 1815(There are)1 387 2 3017 2700 t
+( time)1 221(is necessary to store some text for a period of)9 1981 2 3017 2820 t
+( are one obvious)3 660( Footnotes)1 446( it.)1 107(without actually printing)2 989 4 3017 2940 t
+( of the footnote usually appears in)6 1455( text)1 192(example: the)1 555 3 3017 3060 t
+( well before the place on the page where it is)10 1844(the input)1 358 2 3017 3180 t
+( fact, the place where it is)6 1070( In)1 141( reached.)1 367(to be printed is)3 624 4 3017 3300 t
+( is, which)2 454(output normally depends on how big it)6 1748 2 3017 3420 t
+( to process the foot-)4 837(implies that there must be a way)6 1365 2 3017 3540 t
+(note at least enough to decide its size without printing)9 2202 1 3017 3660 t
+(it.)3017 3780 w
+10 I f
+(Troff)3017 3960 w
+10 R f
+( a diversion for)3 700(provides a mechanism called)3 1246 2 3273 3960 t
+( part of the output may be)6 1080( Any)1 230( processing.)1 485(doing this)1 407 4 3017 4080 t
+( printed, and)2 550(diverted into a macro instead of being)6 1652 2 3017 4200 t
+( may be put)3 514(then at some convenient time the macro)6 1688 2 3017 4320 t
+(back into the input.)3 772 1 3017 4440 t
+(The command)1 584 1 3017 4620 t
+10 CW f
+(.di xy)1 360 1 3636 4620 t
+10 R f
+( sub-)1 208( \320 all)2 232( diversion)1 408(begins a)1 340 4 4031 4620 t
+(sequent output is collected into the macro)6 1689 1 3017 4740 t
+10 CW f
+(xy)4735 4740 w
+10 R f
+(until the)1 335 1 4884 4740 t
+(command)3017 4860 w
+10 CW f
+(.di)3470 4860 w
+10 R f
+( encountered.)1 572(with no arguments is)3 938 2 3709 4860 t
+( text is)2 301( processed)1 436( The)1 223(This terminates the diversion.)3 1242 4 3017 4980 t
+( by giving the)3 589(available at any time thereafter, simply)5 1613 2 3017 5100 t
+(command)3017 5220 w
+9 CW f
+(.xy)3167 5390 w
+10 R f
+( con-)1 213(The vertical size of the last \256nished diversion is)8 1989 2 3017 5570 t
+(tained in the built-in number register)5 1468 1 3017 5690 t
+10 CW f
+(dn)4510 5690 w
+10 R f
+(.)4630 5690 w
+( a)1 71(As a simple example, suppose we want to implement)8 2131 2 3017 5870 t
+( between the)2 584(`keep-release' operation, so that text)4 1618 2 3017 5990 t
+(commands)3017 6110 w
+10 CW f
+(.KS)3496 6110 w
+10 R f
+(and)3722 6110 w
+10 CW f
+(.KE)3913 6110 w
+10 R f
+(will not be split across a)5 1079 1 4140 6110 t
+( when)1 241( Clearly,)1 370(page boundary \(as for a \256gure or table\).)7 1591 3 3017 6230 t
+(a)3017 6350 w
+10 CW f
+(.KS)3095 6350 w
+10 R f
+( we have to begin diverting the)6 1297(is encountered,)1 613 2 3309 6350 t
+( when a)2 322( Then)1 261(output so we can \256nd out how big it is.)9 1619 3 3017 6470 t
+10 CW f
+(.KE)3017 6590 w
+10 R f
+( the diverted text will)4 891(is seen, we decide whether)4 1098 2 3230 6590 t
+( if it \256ts,)3 343(\256t on the current page, and print it either there)9 1859 2 3017 6710 t
+( So:)1 184(or at the top of the next page if it doesn't.)10 1656 2 3017 6830 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 12 12
+%%Page: 13 13
+/saveobj save def
+mark
+13 pagesetup
+10 HB f
+( 13)1 3952(TROFF Tutorial)1 728 2 540 600 t
+9 CW f
+( start keep)2 594( \\")1 216(.de KS)1 324 3 590 950 t
+( start fresh line)3 918(.br \\")1 540 2 590 1060 t
+( collect in new environment)4 1458( \\")1 270(.ev 1)1 270 3 590 1170 t
+( make it filled text)4 1080(.fi \\")1 540 2 590 1280 t
+( collect in XX)3 756( \\")1 216(.di XX)1 324 3 590 1390 t
+(..)590 1500 w
+( end keep)2 486( \\")1 216(.de KE)1 324 3 590 1720 t
+( get last partial line)4 1188(.br \\")1 540 2 590 1830 t
+( end diversion)2 756(.di \\")1 540 2 590 1940 t
+( bp if too big)4 756( \\")1 216(.if \\\\n\(dn>=\\\\n\(.t .bp)2 1188 3 590 2050 t
+( bring it back in no-fill)5 1350(.nf \\")1 540 2 590 2160 t
+( text)1 270(.XX \\")1 540 2 590 2270 t
+( return to normal environment)4 1566(.ev \\")1 540 2 590 2380 t
+(..)590 2490 w
+10 R f
+( number register)2 674(Recall that)1 439 2 540 2670 t
+10 CW f
+(nl)1688 2670 w
+10 R f
+(is the current position)3 899 1 1843 2670 t
+( diverted,)1 386( output was being)3 738( Since)1 282(on the output page.)3 796 4 540 2790 t
+( value when the diversion started.)5 1442(this remains at its)3 760 2 540 2910 t
+10 CW f
+(dn)540 3030 w
+10 R f
+(is the amount of text in the diversion;)7 1539 1 691 3030 t
+10 CW f
+(.t)2260 3030 w
+10 R f
+(\(another)2410 3030 w
+( trap, which)2 484(built-in register\) is the distance to the next)7 1718 2 540 3150 t
+( the)1 152( If)1 121( the bottom margin of the page.)6 1287(we assume is at)3 642 4 540 3270 t
+( to go past the trap, the)6 961(diversion is large enough)3 1028 2 540 3390 t
+10 CW f
+(.if)2562 3390 w
+10 R f
+(is satis\256ed, and a)3 734 1 540 3510 t
+10 CW f
+(.bp)1316 3510 w
+10 R f
+( the)1 163( either case,)2 507( In)1 150(is issued.)1 384 4 1538 3510 t
+(diverted output is then brought back with)6 1727 1 540 3630 t
+10 CW f
+(.XX)2306 3630 w
+10 R f
+( is)1 106(. It)1 150 2 2486 3630 t
+( it back in no-\256ll mode so)6 1094(essential to bring)2 707 2 540 3750 t
+10 I f
+(troff)2377 3750 w
+10 R f
+(will)2586 3750 w
+(do no further processing on it.)5 1204 1 540 3870 t
+(This is not the most general keep-release, nor is it)9 2202 1 540 4050 t
+( inputs, but it)3 610(robust in the face of all conceivable)6 1592 2 540 4170 t
+( space than we have here to write it)8 1415(would require more)2 787 2 540 4290 t
+( not intended to teach)4 868( section is)2 406( This)1 231(in full generality.)2 697 4 540 4410 t
+( sketch out enough)3 779(everything about diversions, but to)4 1423 2 540 4530 t
+( can read existing macro packages with some)7 1867(that you)1 335 2 540 4650 t
+(comprehension.)540 4770 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 13 13
+%%Trailer
+done
+%%Pages: 13
+%%DocumentFonts: Helvetica-Bold Helvetica-Oblique Helvetica-BoldOblique Times-Bold Helvetica Times-Italic Times-BoldItalic Times-Roman
+%%+ Symbol Courier Palatino-Bold ZapfDingbats Times-Roman

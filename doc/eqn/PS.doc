@@ -1,0 +1,3932 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+17 HB f
+(EQN)540 1040 w
+18 HB f
+(\320 A Language for Typesetting Mathematics)5 3756 1 959 1040 t
+36 S1 f
+(__________________________)540 1240 w
+9 HB f
+(ABSTRACT)540 1720 w
+10 R f
+( for)1 160(This is the user's guide)4 999 2 1185 1720 t
+10 I f
+(eqn)2388 1720 w
+10 R f
+(, a language for typesetting mathematics on the)7 2019 1 2540 1720 t
+9 R f
+(UNIX)4601 1720 w
+6 S f
+(\322)4826 1680 w
+10 R f
+(system.)4917 1720 w
+( by people who)3 652(Mathematical expressions are described in a language designed to be easy to use)12 3383 2 1185 1840 t
+( of the language to set in-line expressions like)8 1919( Enough)1 372( mathematics nor typesetting.)3 1210(know neither)1 534 4 1185 1960 t
+7 I f
+(x)1185 2150 w
+7 S f
+(\256 p)1 119 1 1232 2150 t
+7 I f
+(/)1356 2150 w
+7 R f
+(2)1381 2150 w
+10 R f
+( tan)1 130(lim \()1 223 2 1233 2080 t
+10 I f
+(x)1627 2080 w
+10 R f
+(\))1679 2080 w
+7 R f
+(sin 2)1 145 1 1723 2040 t
+7 I f
+(x)1873 2040 w
+10 S f
+(=)1961 2080 w
+10 R f
+(1 or display equations like)4 1055 1 2065 2080 t
+10 I f
+(G)1335 2395 w
+10 R f
+(\()1415 2395 w
+10 I f
+(z)1456 2395 w
+10 R f
+(\))1503 2395 w
+10 S f
+(=)1593 2395 w
+10 I f
+(e)1697 2395 w
+7 R f
+(ln)1752 2355 w
+7 I f
+(G)1835 2355 w
+7 R f
+(\()1890 2355 w
+7 I f
+(z)1918 2355 w
+7 R f
+(\))1950 2355 w
+10 S f
+(=)2038 2395 w
+10 R f
+(exp)2142 2395 w
+10 S f
+(\354)2302 2308 w
+(\357)2302 2408 w
+(\356)2302 2508 w
+7 I f
+(k)2351 2495 w
+7 S f
+(\263)2398 2495 w
+7 R f
+(1)2448 2495 w
+15 S f
+(S)2372 2425 w
+10 I f
+(k)2599 2465 w
+(S)2523 2315 w
+7 I f
+(k)2584 2335 w
+10 I f
+(z)2631 2315 w
+7 I f
+(k)2681 2275 w
+10 S1 f
+(_ ____)1 227 1 2508 2365 t
+10 S f
+(\374)2745 2308 w
+(\357)2745 2408 w
+(\376)2745 2508 w
+(=)2843 2395 w
+7 I f
+(k)2955 2495 w
+7 S f
+(\263)3002 2495 w
+7 R f
+(1)3052 2495 w
+15 S f
+(P)2963 2425 w
+10 I f
+(e)3095 2395 w
+7 I f
+(S)3150 2341 w
+4 I f
+(k)3191 2355 w
+7 I f
+(z)3219 2341 w
+4 I f
+(k)3252 2304 w
+7 I f
+(/ k)1 56 1 3280 2341 t
+10 S f
+(=)1617 2765 w
+(\354)1696 2678 w
+(\357)1696 2778 w
+(\356)1696 2878 w
+10 R f
+(1)1745 2785 w
+10 S f
+(+)1811 2785 w
+10 I f
+(S)1882 2785 w
+7 R f
+(1)1943 2805 w
+10 I f
+(z)1994 2785 w
+10 S f
+(+)2057 2785 w
+10 R f
+(2 !)1 91 1 2207 2855 t
+10 I f
+(S)2153 2705 w
+7 R f
+(1)2208 2724 w
+(2)2208 2665 w
+10 I f
+(z)2259 2705 w
+7 R f
+(2)2309 2665 w
+10 S1 f
+(_ ____)1 229 1 2138 2755 t
+10 S f
+(+)2393 2785 w
+10 R f
+(. . .)2 125 1 2489 2760 t
+10 S f
+(\374)2639 2678 w
+(\357)2639 2778 w
+(\376)2639 2878 w
+(\354)2704 2678 w
+(\357)2704 2778 w
+(\356)2704 2878 w
+10 R f
+(1)2753 2780 w
+10 S f
+(+)2819 2780 w
+10 R f
+(2)2992 2850 w
+10 I f
+(S)2915 2700 w
+7 R f
+(2)2976 2720 w
+10 I f
+(z)3027 2700 w
+7 R f
+(2)3077 2660 w
+10 S1 f
+(_ ____)1 235 1 2900 2750 t
+10 S f
+(+)3161 2780 w
+10 R f
+(2)3257 2860 w
+7 R f
+(2)3312 2820 w
+10 R f
+(.)3363 2830 w
+(2 !)1 91 1 3396 2860 t
+10 I f
+(S)3273 2700 w
+7 R f
+(2)3328 2719 w
+(2)3328 2660 w
+10 I f
+(z)3379 2700 w
+7 R f
+(4)3429 2660 w
+10 S1 f
+(_ _____)1 260 1 3243 2750 t
+10 S f
+(+)3529 2780 w
+10 R f
+(. . .)2 125 1 3625 2755 t
+10 S f
+(\374)3775 2678 w
+(\357)3775 2778 w
+(\376)3775 2878 w
+10 R f
+(. . .)2 125 1 3857 2740 t
+10 S f
+(=)1609 3235 w
+7 I f
+(m)1680 3335 w
+7 S f
+(\263)1746 3335 w
+7 R f
+(0)1796 3335 w
+15 S f
+(S)1711 3265 w
+10 S f
+(\354)1847 3048 w
+(\357)1847 3148 w
+(\357)1847 3248 w
+(\357)1847 3348 w
+(\356)1847 3448 w
+7 I f
+(k)1896 3419 w
+4 R f
+(1)1933 3433 w
+7 S f
+(+)1969 3419 w
+7 R f
+(2)2019 3419 w
+7 I f
+(k)2059 3419 w
+4 R f
+(2)2096 3433 w
+7 S f
+(+)2132 3419 w
+7 R f
+(. . .)2 90 1 2200 3402 t
+7 S f
+(+)2319 3419 w
+7 I f
+(mk)2369 3419 w
+4 I f
+(m)2456 3433 w
+7 S f
+(=)2501 3419 w
+7 I f
+(m)2551 3419 w
+(k)1997 3335 w
+4 R f
+(1)2034 3349 w
+7 R f
+(,)2064 3335 w
+7 I f
+(k)2087 3335 w
+4 R f
+(2)2124 3349 w
+7 R f
+(, . . . ,)4 162 1 2154 3335 t
+7 I f
+(k)2332 3335 w
+4 I f
+(m)2369 3349 w
+7 S f
+(\263)2414 3335 w
+7 R f
+(0)2464 3335 w
+15 S f
+(S)2204 3265 w
+10 R f
+(1)2634 3329 w
+7 I f
+(k)2689 3275 w
+4 R f
+(1)2726 3289 w
+10 I f
+(k)2767 3329 w
+7 R f
+(1)2822 3349 w
+10 R f
+(!)2873 3329 w
+10 I f
+(S)2708 3155 w
+7 R f
+(1)2763 3174 w
+7 I f
+(k)2763 3101 w
+4 R f
+(1)2800 3115 w
+10 S1 f
+(_ ______)1 302 1 2620 3205 t
+10 R f
+(. . .)2 125 1 2998 3210 t
+(2)3181 3329 w
+7 I f
+(k)3236 3275 w
+4 R f
+(2)3273 3289 w
+10 I f
+(k)3314 3329 w
+7 R f
+(2)3369 3349 w
+10 R f
+(!)3420 3329 w
+10 I f
+(S)3255 3155 w
+7 R f
+(2)3310 3174 w
+7 I f
+(k)3310 3101 w
+4 R f
+(2)3347 3115 w
+10 S1 f
+(_ ______)1 302 1 3167 3205 t
+10 I f
+(m)3545 3329 w
+7 I f
+(k)3628 3275 w
+4 I f
+(m)3665 3289 w
+10 I f
+(k)3715 3329 w
+7 I f
+(m)3770 3349 w
+10 R f
+(!)3836 3329 w
+10 I f
+(S)3640 3155 w
+7 I f
+(m)3695 3174 w
+(k)3695 3101 w
+4 I f
+(m)3732 3115 w
+10 S1 f
+(_ _______)1 354 1 3530 3205 t
+10 S f
+(\374)3894 3048 w
+(\357)3894 3148 w
+(\357)3894 3248 w
+(\357)3894 3348 w
+(\376)3894 3448 w
+10 I f
+(z)3951 3235 w
+7 I f
+(m)4001 3195 w
+10 R f
+(can be learned in an hour or so.)7 1252 1 1185 3620 t
+( with the formatting language)4 1186(The language interfaces directly)3 1282 2 1185 3800 t
+10 I f
+(troff)3679 3800 w
+10 R f
+(, so mathematical expressions can)4 1360 1 3860 3800 t
+( a manuscript, and the entire document produced in one process.)10 2607(be embedded in the running text of)6 1428 2 1185 3920 t
+(This user's guide is an example of its output.)8 1796 1 1185 4040 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = Introduction]
+10 B f
+(1. Introduction)1 670 1 540 4340 t
+10 I f
+(Eqn)540 4520 w
+10 R f
+( typesetting)1 501(is a program and a language for)6 1479 2 762 4520 t
+(mathematics. The)1 754 1 540 4640 t
+10 I f
+(eqn)1338 4640 w
+10 R f
+( to be)2 258(language was designed)2 958 2 1526 4640 t
+(easy to use by people who know neither mathematics)8 2202 1 540 4760 t
+( Thus)1 253(nor typesetting.)1 625 2 540 4880 t
+10 I f
+(eqn)1446 4880 w
+10 R f
+(knows relatively little about)3 1125 1 1617 4880 t
+( particular, mathematical symbols like)4 1537(mathematics. In)1 665 2 540 5000 t
+(+,)540 5120 w
+10 S f
+(-)685 5120 w
+10 R f
+(,)740 5120 w
+10 S f
+(\264)829 5120 w
+10 R f
+( have no special)3 754(, parentheses, and so on)4 1104 2 884 5120 t
+(meanings.)540 5240 w
+10 I f
+(Eqn)1014 5240 w
+10 R f
+(is quite happy to set garbage \(but it)7 1526 1 1216 5240 t
+(will look good\).)2 642 1 540 5360 t
+10 I f
+(Eqn)540 5540 w
+10 R f
+(is a preprocessor for the typesetter formatter,)6 1984 1 758 5540 t
+10 I f
+(troff)540 5660 w
+10 R f
+( mode of operation is to prepare a)7 1400(, so the normal)3 621 2 721 5660 t
+( and ordinary text)3 791(document with both mathematics)3 1411 2 540 5780 t
+(interspersed, and let)2 851 1 540 5900 t
+10 I f
+(eqn)1441 5900 w
+10 R f
+(set the mathematics while)3 1107 1 1635 5900 t
+10 I f
+(troff)540 6020 w
+10 R f
+(does the body of the text.)5 1010 1 738 6020 t
+(To use)1 269 1 540 6200 t
+10 I f
+(eqn)834 6200 w
+10 R f
+(on the)1 247 1 1003 6200 t
+9 R f
+(UNIX)1273 6200 w
+10 R f
+(system,)1523 6200 w
+10 CW f
+(eqn)690 6380 w
+10 I f
+(\256les)930 6380 w
+10 CW f
+(| troff)1 420 1 1151 6380 t
+10 R f
+([)1631 6380 w
+10 I f
+(options)1664 6380 w
+10 R f
+(])1975 6380 w
+10 CW f
+(|)2068 6380 w
+10 S f
+(\274)2188 6380 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 2.  , HEADING = Displayed Equations]
+10 B f
+( Equations)1 460(2. Displayed)1 548 2 540 6620 t
+10 R f
+(To tell)1 282 1 540 6800 t
+10 I f
+(eqn)865 6800 w
+10 R f
+(where a mathematical expression begins)4 1689 1 1053 6800 t
+(and ends, one marks it with lines beginning)7 1808 1 540 6920 t
+10 CW f
+(.EQ)2383 6920 w
+10 R f
+(and)2598 6920 w
+10 CW f
+(.EN)540 7040 w
+10 R f
+( if you type the lines)5 819(. Thus)1 275 2 720 7040 t
+10 CW f
+(.EQ)3167 4340 w
+(x=y+z)3167 4460 w
+(.EN)3167 4580 w
+10 R f
+(your output will look like)4 1023 1 3017 4760 t
+10 I f
+(x)3959 4940 w
+10 S f
+(=)4027 4940 w
+10 I f
+(y)4098 4940 w
+10 S f
+(+)4166 4940 w
+10 I f
+(z)4237 4940 w
+10 R f
+(The)3017 5120 w
+10 CW f
+(.EQ)3200 5120 w
+10 R f
+(and)3408 5120 w
+10 CW f
+(.EN)3580 5120 w
+10 R f
+(are copied through untouched; they)4 1430 1 3789 5120 t
+(are not otherwise processed by)4 1274 1 3017 5240 t
+10 I f
+(eqn)4327 5240 w
+10 R f
+( that)1 185( means)1 291(. This)1 264 3 4479 5240 t
+( care of things like centering,)5 1404(you have to take)3 798 2 3017 5360 t
+( most common)2 639( The)1 228(numbering, and so on yourself.)4 1335 3 3017 5480 t
+(way is to use a)4 612 1 3017 5600 t
+10 I f
+(troff)3661 5600 w
+10 R f
+(macro package like)2 789 1 3866 5600 t
+10 CW f
+(\261ms)4687 5600 w
+10 R f
+(or)4899 5600 w
+10 CW f
+(\261mm)5014 5600 w
+10 R f
+(,)5194 5600 w
+(which allow you to center, indent, left-justify and)7 2202 1 3017 5720 t
+(number equations.)1 738 1 3017 5840 t
+(With the)1 380 1 3017 6020 t
+10 CW f
+(\261ms)3455 6020 w
+10 R f
+( centered by)2 555(package, equations are)2 971 2 3693 6020 t
+( an equation, use)3 818( left-justify)1 497(default. To)1 513 3 3017 6140 t
+10 CW f
+(.EQ L)1 300 1 4919 6140 t
+10 R f
+(instead of)1 413 1 3017 6260 t
+10 CW f
+(.EQ)3477 6260 w
+10 R f
+( indent it, use)3 605(. To)1 208 2 3657 6260 t
+10 CW f
+(.EQ I)1 300 1 4518 6260 t
+10 R f
+( of)1 131(. Any)1 270 2 4818 6260 t
+( be followed by an arbitrary ``equation)6 1792(these can)1 410 2 3017 6380 t
+( right margin.)2 595(number'' which will be placed at the)6 1607 2 3017 6500 t
+(For example, the input)3 905 1 3017 6620 t
+10 CW f
+(.EQ I \(3.1a\))2 720 1 3167 6800 t
+(x = f\(y/2\) + y/2)4 960 1 3167 6920 t
+(.EN)3167 7040 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(2 EQN)1 4680 1 540 600 t
+10 R f
+(produces the output)2 788 1 540 960 t
+10 I f
+(x)690 1140 w
+10 S f
+(=)758 1140 w
+10 I f
+(f)837 1140 w
+10 R f
+(\()881 1140 w
+10 I f
+(y /)1 80 1 922 1140 t
+10 R f
+(2 \))1 91 1 1010 1140 t
+10 S f
+(+)1117 1140 w
+10 I f
+(y /)1 80 1 1188 1140 t
+10 R f
+(2 \(3.1a\))1 1466 1 1276 1140 t
+(With the)1 354 1 540 1320 t
+10 CW f
+(\261mm)926 1320 w
+10 R f
+(package, equations must be surrounded)4 1604 1 1138 1320 t
+(by the)1 251 1 540 1440 t
+10 CW f
+(.DS)820 1440 w
+10 R f
+(and)1029 1440 w
+10 CW f
+(.DE)1202 1440 w
+10 R f
+(display macros.)1 631 1 1411 1440 t
+10 CW f
+(.DS)2095 1440 w
+10 R f
+(allows you)1 439 1 2303 1440 t
+( indent, and center equations;)4 1221(to left-justify,)1 561 2 540 1560 t
+10 CW f
+(.EQ)2359 1560 w
+10 R f
+(pro-)2576 1560 w
+( indent an equa-)3 652( To)1 165( if any.)2 288(vides the equation number,)3 1097 4 540 1680 t
+(tion, use)1 343 1 540 1800 t
+10 CW f
+(.DS I)1 304 1 912 1800 t
+10 R f
+(instead of)1 395 1 1245 1800 t
+10 CW f
+(.DS)1669 1800 w
+10 R f
+(; to center it, use)4 683 1 1849 1800 t
+10 CW f
+(.DS)2562 1800 w
+(CB)540 1920 w
+10 R f
+( the input)2 378(. Thus,)1 300 2 660 1920 t
+10 CW f
+(.DS I)1 300 1 690 2100 t
+(.EQ \(3.1a\))1 600 1 690 2220 t
+(x = f\(y/2\) + y/2)4 960 1 690 2340 t
+(.EN)690 2460 w
+(.DE)690 2580 w
+10 R f
+(produces the same output as above.)5 1414 1 540 2760 t
+( shorthand notation so in-line expres-)5 1575(There is also a)3 627 2 540 2940 t
+(sions like)1 399 1 540 3060 t
+10 S f
+(p)982 3060 w
+7 I f
+(i)1042 3079 w
+7 R f
+(2)1042 3020 w
+10 R f
+( without)1 348(can be entered)2 611 2 1128 3060 t
+10 CW f
+(.EQ)2129 3060 w
+10 R f
+(and)2351 3060 w
+10 CW f
+(.EN)2537 3060 w
+10 R f
+(.)2717 3060 w
+(We will talk about it in \2479.)6 1075 1 540 3180 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 3.  , HEADING = Input Spaces]
+10 B f
+( Spaces)1 314(3. Input)1 365 2 540 3420 t
+10 R f
+( expression are)2 640(Spaces, tabs, and newlines within an)5 1562 2 540 3600 t
+(thrown away by)2 671 1 540 3720 t
+10 I f
+(eqn)1250 3720 w
+10 R f
+( text is left absolutely)4 913(. \(Normal)1 427 2 1402 3720 t
+( between)1 357(alone.\) Thus)1 524 2 540 3840 t
+10 CW f
+(.EQ)1446 3840 w
+10 R f
+(and)1651 3840 w
+10 CW f
+(.EN)1820 3840 w
+10 R f
+(,)2000 3840 w
+10 CW f
+(x=y+z)690 4020 w
+10 R f
+(and)540 4200 w
+10 CW f
+(x = y + z)4 540 1 690 4380 t
+10 R f
+(and)540 4560 w
+10 CW f
+(x = y)2 540 1 690 4740 t
+(+ z)1 180 1 870 4860 t
+10 R f
+(and so on all produce the same output:)7 1540 1 540 5040 t
+10 I f
+(x)1482 5220 w
+10 S f
+(=)1550 5220 w
+10 I f
+(y)1621 5220 w
+10 S f
+(+)1689 5220 w
+10 I f
+(z)1760 5220 w
+10 R f
+( make)1 260(You should use spaces and newlines freely to)7 1942 2 540 5400 t
+( In)1 159( and easy to edit.)4 778(your input equations readable)3 1265 3 540 5520 t
+( since they are)3 576(particular, very long lines are a bad idea,)7 1626 2 540 5640 t
+(often hard to \256x if you make a mistake.)8 1573 1 540 5760 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 4.  , HEADING = Output Spaces]
+10 B f
+( Spaces)1 314(4. Output)1 437 2 540 6000 t
+10 R f
+(To force extra spaces into the)5 1207 1 540 6180 t
+10 I f
+(output)1778 6180 w
+10 R f
+(, use a tilde ``)4 574 1 2042 6180 t
+10 CW f
+(\304)2616 6180 w
+10 R f
+('')2676 6180 w
+(for each space you want:)4 991 1 540 6300 t
+10 CW f
+(x\304=\304y\304+\304z)690 6480 w
+10 R f
+(gives)540 6660 w
+10 I f
+(x)1424 6840 w
+10 S f
+(=)1517 6840 w
+10 I f
+(y)1621 6840 w
+10 S f
+(+)1714 6840 w
+10 I f
+(z)1818 6840 w
+10 R f
+( a circum\257ex ``)3 675(You can also use)3 739 2 540 7020 t
+10 CW f
+(\303)1954 7020 w
+10 R f
+('', which gives a)3 728 1 2014 7020 t
+( is mainly useful for)4 833( It)1 118( of a tilde.)3 426(space half the width)3 825 4 540 7140 t
+(\256ne-tuning.)540 7260 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 5.  , HEADING = Symbols, Special Names, Greek]
+10 B f
+( Special Names, Greek)3 960(5. Symbols,)1 512 2 3017 960 t
+10 I f
+(Eqn)3017 1140 w
+10 R f
+( some)1 304(knows some mathematical symbols,)3 1645 2 3270 1140 t
+( For)1 222(mathematical names, and the Greek alphabet.)5 1980 2 3017 1260 t
+(example,)3017 1380 w
+10 CW f
+(x=2 pi int sin \( omega t\)dt)6 1620 1 3167 1560 t
+10 R f
+(produces)3017 1740 w
+10 I f
+(x)3746 1931 w
+10 S f
+(=)3814 1931 w
+10 R f
+(2)3885 1931 w
+10 S f
+(p)3943 1931 w
+14 S f
+(\362)4006 1941 w
+10 R f
+(sin \()1 158 1 4084 1931 t
+10 S f
+(w)4250 1931 w
+10 I f
+(t)4327 1931 w
+10 R f
+(\))4363 1931 w
+10 I f
+(dt)4412 1931 w
+10 R f
+( to tell)2 280(Here the spaces in the input are necessary)7 1741 2 3017 2121 t
+10 I f
+(eqn)5075 2121 w
+10 R f
+(that)3017 2241 w
+10 CW f
+(int)3207 2241 w
+10 R f
+(,)3387 2241 w
+10 CW f
+(pi)3452 2241 w
+10 R f
+(,)3572 2241 w
+10 CW f
+(sin)3637 2241 w
+10 R f
+(, and)1 209 1 3817 2241 t
+10 CW f
+(omega)4066 2241 w
+10 R f
+(are separate entities)2 814 1 4405 2241 t
+( The)1 223(that should get special treatment.)4 1386 2 3017 2361 t
+10 CW f
+(sin)4669 2361 w
+10 R f
+(, digit 2,)2 370 1 4849 2361 t
+( are set in roman type instead of italic;)8 1563(and parentheses)1 639 2 3017 2481 t
+10 CW f
+(pi)3017 2601 w
+10 R f
+(and)3163 2601 w
+10 CW f
+(omega)3333 2601 w
+10 R f
+(are made Greek; and)3 830 1 3659 2601 t
+10 CW f
+(int)4515 2601 w
+10 R f
+(becomes the)1 498 1 4721 2601 t
+(integral sign.)1 522 1 3017 2721 t
+( separate parts of)3 711(When in doubt, leave spaces around)5 1491 2 3017 2901 t
+( common error is to type)5 1020( A)1 129(the input.)1 385 3 3017 3021 t
+10 CW f
+(f\(pi\))4582 3021 w
+10 R f
+(without)4913 3021 w
+(leaving spaces on both sides of the)6 1471 1 3017 3141 t
+10 CW f
+(pi)4527 3141 w
+10 R f
+( a result,)2 371(. As)1 201 2 4647 3141 t
+10 I f
+(eqn)3017 3261 w
+10 R f
+( recognize)1 418(does not)1 343 2 3193 3261 t
+10 CW f
+(pi)3985 3261 w
+10 R f
+(as a special word, and you)5 1083 1 4136 3261 t
+(get)3017 3381 w
+10 I f
+(f)3164 3381 w
+10 R f
+(\()3208 3381 w
+10 I f
+(pi)3249 3381 w
+10 R f
+(\) instead of)2 449 1 3335 3381 t
+10 I f
+(f)3809 3381 w
+10 R f
+(\()3853 3381 w
+10 S f
+(p)3894 3381 w
+10 R f
+(\).)3957 3381 w
+(A list of)2 356 1 3017 3561 t
+10 I f
+(eqn)3412 3561 w
+10 R f
+( Knowledgeable)1 691(names appears in \24724.)3 932 2 3596 3561 t
+( also use)2 364(users can)1 379 2 3017 3681 t
+10 I f
+(troff)3795 3681 w
+10 R f
+(four-character names for any-)3 1216 1 4003 3681 t
+(thing)3017 3801 w
+10 I f
+(eqn)3280 3801 w
+10 R f
+( about, like)2 513(doesn't know)1 573 2 3481 3801 t
+10 CW f
+(\\\(rh)4625 3801 w
+10 R f
+(for the)1 296 1 4923 3801 t
+(right-hand index symbol \()3 1041 1 3017 3921 t
+10 S1 f
+()4058 3921 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_rh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+15 66 moveto
+15 86 lineto
+16 131 lineto
+17 146 lineto
+18 158 lineto
+19 167 lineto
+21 181 lineto
+24 190 lineto
+34 193 lineto
+49 189 lineto
+58 182 lineto
+60 177 lineto
+60 166 lineto
+59 156 lineto
+58 143 lineto
+57 130 lineto
+56 117 lineto
+55 102 lineto
+54 42 lineto
+53 39 lineto
+49 35 lineto
+34 34 lineto
+19 39 lineto
+16 47 lineto
+15 66 lineto
+stroke
+
+65 60 moveto
+65 111 lineto
+66 127 lineto
+67 139 lineto
+69 153 lineto
+72 163 lineto
+83 171 lineto
+98 177 lineto
+113 182 lineto
+128 187 lineto
+143 190 lineto
+158 194 lineto
+173 196 lineto
+188 199 lineto
+203 201 lineto
+218 203 lineto
+233 205 lineto
+248 205 lineto
+263 206 lineto
+278 206 lineto
+293 206 lineto
+308 206 lineto
+323 206 lineto
+338 205 lineto
+353 203 lineto
+368 202 lineto
+383 200 lineto
+394 197 lineto
+389 190 lineto
+389 180 lineto
+391 176 lineto
+391 173 lineto
+380 173 lineto
+365 173 lineto
+350 174 lineto
+335 175 lineto
+320 176 lineto
+305 176 lineto
+290 176 lineto
+275 177 lineto
+260 177 lineto
+245 177 lineto
+240 173 lineto
+240 170 lineto
+245 165 lineto
+260 164 lineto
+275 164 lineto
+290 164 lineto
+305 163 lineto
+320 160 lineto
+327 155 lineto
+330 149 lineto
+330 134 lineto
+328 129 lineto
+323 124 lineto
+309 121 lineto
+294 121 lineto
+279 121 lineto
+264 121 lineto
+249 121 lineto
+234 121 lineto
+228 118 lineto
+228 112 lineto
+234 109 lineto
+249 109 lineto
+264 109 lineto
+279 108 lineto
+294 108 lineto
+306 104 lineto
+311 97 lineto
+312 91 lineto
+312 88 lineto
+311 82 lineto
+305 74 lineto
+290 72 lineto
+275 72 lineto
+260 72 lineto
+245 73 lineto
+230 73 lineto
+215 73 lineto
+205 70 lineto
+205 63 lineto
+217 60 lineto
+232 60 lineto
+247 60 lineto
+262 60 lineto
+277 57 lineto
+283 52 lineto
+285 44 lineto
+285 41 lineto
+284 35 lineto
+280 30 lineto
+268 26 lineto
+253 25 lineto
+238 26 lineto
+223 28 lineto
+208 31 lineto
+193 33 lineto
+178 34 lineto
+163 33 lineto
+148 31 lineto
+133 28 lineto
+118 27 lineto
+103 28 lineto
+88 34 lineto
+73 43 lineto
+67 52 lineto
+65 60 lineto
+stroke
+
+396 180 moveto
+396 188 lineto
+399 194 lineto
+410 196 lineto
+416 190 lineto
+416 180 lineto
+415 177 lineto
+411 173 lineto
+400 173 lineto
+396 180 lineto
+stroke
+
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+4058 3921 m
+100 build_rh
+4158 3921 m
+10 R f
+(\).)4158 3921 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 6.  , HEADING = Spaces, Again]
+10 B f
+( Again)1 281(6. Spaces,)1 439 2 3017 4161 t
+10 R f
+(The only way)2 571 1 3017 4341 t
+10 I f
+(eqn)3624 4341 w
+10 R f
+(can deduce that some sequence of)5 1414 1 3805 4341 t
+( sequence is separated)3 895(letters might be special is if that)6 1307 2 3017 4461 t
+( can be done)3 525( This)1 236( on either side of it.)5 817(from the letters)2 624 4 3017 4581 t
+( or)1 137(by surrounding a special word by spaces, tabs,)7 2065 2 3017 4701 t
+(newlines, as we did in the previous section.)7 1734 1 3017 4821 t
+( stand out by)3 649(You can also make special words)5 1553 2 3017 5001 t
+(surrounding them with tildes or circum\257exes:)5 1824 1 3017 5121 t
+10 CW f
+(x\304=\3042\304pi\304int\304sin\304\(\304omega\304t\304\)\304dt)3167 5301 w
+10 R f
+( as the last example, except that the)7 1484(is much the same)3 718 2 3017 5481 t
+( magic words like)3 782(tildes not only separate the)4 1167 2 3017 5601 t
+10 CW f
+(sin)5014 5601 w
+10 R f
+(,)5194 5601 w
+10 CW f
+(omega)3017 5721 w
+10 R f
+( so on, but also add extra spaces, one)8 1683(, and)1 219 2 3317 5721 t
+(space per tilde:)2 604 1 3017 5841 t
+10 I f
+(x)3585 6032 w
+10 S f
+(=)3678 6032 w
+10 R f
+(2)3782 6032 w
+10 S f
+(p)3873 6032 w
+14 S f
+(\362)3969 6042 w
+10 R f
+(sin \()1 191 1 4080 6032 t
+10 S f
+(w)4312 6032 w
+10 I f
+(t)4422 6032 w
+10 R f
+(\))4491 6032 w
+10 I f
+(dt)4573 6032 w
+10 R f
+( also be separated by braces)5 1140(Special words can)2 736 2 3017 6222 t
+10 CW f
+({})4924 6222 w
+10 R f
+(and)5075 6222 w
+(double quotes)1 574 1 3017 6342 t
+10 CW f
+("")3632 6342 w
+10 R f
+(, which have special meanings that)5 1467 1 3752 6342 t
+(we will see soon.)3 688 1 3017 6462 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 7.  , HEADING = Subscripts and Superscripts]
+10 B f
+( and Superscripts)2 751(7. Subscripts)1 576 2 3017 6702 t
+10 R f
+( obtained with the)3 845(Subscripts and superscripts are)3 1357 2 3017 6882 t
+(words)3017 7002 w
+10 CW f
+(sub)3286 7002 w
+10 R f
+(and)3491 7002 w
+10 CW f
+(sup)3660 7002 w
+10 R f
+(.)3840 7002 w
+10 CW f
+(x sup 2 + y sub k)6 1020 1 3167 7182 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(EQN 3)1 4680 1 540 600 t
+10 R f
+(gives)540 960 w
+10 I f
+(x)1501 1140 w
+7 R f
+(2)1556 1100 w
+10 S f
+(+)1615 1140 w
+10 I f
+(y)1686 1140 w
+7 I f
+(k)1741 1160 w
+10 I f
+(Eqn)540 1320 w
+10 R f
+( all the size changes and vertical)6 1441(takes care of)2 551 2 750 1320 t
+( The)1 224( to make the output look right.)6 1328(motions needed)1 650 3 540 1440 t
+(words)540 1560 w
+10 CW f
+(sub)825 1560 w
+10 R f
+(and)1046 1560 w
+10 CW f
+(sup)1231 1560 w
+10 R f
+(must be surrounded by spaces;)4 1290 1 1452 1560 t
+10 CW f
+(x sub2)1 360 1 540 1680 t
+10 R f
+( you)1 185(will give)1 364 2 936 1680 t
+10 I f
+(xsub)1520 1680 w
+10 R f
+(2 instead of)2 486 1 1711 1680 t
+10 I f
+(x)2232 1680 w
+7 R f
+(2)2287 1700 w
+10 R f
+(. Further-)1 412 1 2330 1680 t
+( to)1 133(more, don't forget to leave a space \(or a tilde, etc.\))10 2069 2 540 1800 t
+( common)1 377( A)1 124(mark the end of a subscript or superscript.)7 1701 3 540 1920 t
+(error is to say something like)5 1163 1 540 2040 t
+10 CW f
+(y = \(x sup 2\)+1)4 900 1 690 2220 t
+10 R f
+(which causes)1 529 1 540 2400 t
+10 I f
+(y)1440 2580 w
+10 S f
+(=)1508 2580 w
+10 R f
+(\()1579 2580 w
+10 I f
+(x)1620 2580 w
+7 R f
+(2 \))1 63 1 1675 2540 t
+7 S f
+(+)1749 2540 w
+7 R f
+(1)1799 2540 w
+10 R f
+(instead of the intended)3 907 1 540 2760 t
+10 I f
+(y)1413 2940 w
+10 S f
+(=)1481 2940 w
+10 R f
+(\()1552 2940 w
+10 I f
+(x)1593 2940 w
+7 R f
+(2)1648 2900 w
+10 R f
+(\))1699 2940 w
+10 S f
+(+)1748 2940 w
+10 R f
+(1)1819 2940 w
+( superscripts)1 522(Subscripted subscripts and superscripted)3 1680 2 540 3120 t
+(also work:)1 419 1 540 3240 t
+10 CW f
+(x sub i sub 1)4 780 1 690 3420 t
+10 R f
+(is)540 3600 w
+10 I f
+(x)1584 3780 w
+7 I f
+(i)1639 3800 w
+4 R f
+(1)1665 3814 w
+10 R f
+( are)1 176(A subscript and superscript on the same thing)7 2026 2 540 3974 t
+( other if the subscript comes)5 1259(printed one above the)3 943 2 540 4094 t
+10 I f
+(\256rst)540 4214 w
+10 R f
+(:)704 4214 w
+10 CW f
+(x sub i sup 2)4 780 1 690 4394 t
+10 R f
+(is)540 4574 w
+10 I f
+(x)1595 4754 w
+7 I f
+(i)1644 4773 w
+7 R f
+(2)1644 4714 w
+10 R f
+(Other than this special case,)4 1181 1 540 4934 t
+10 CW f
+(sub)1762 4934 w
+10 R f
+(and)1983 4934 w
+10 CW f
+(sup)2168 4934 w
+10 R f
+(group to)1 353 1 2389 4934 t
+(the right, so)2 475 1 540 5058 t
+10 CW f
+(x sup y sub z)4 780 1 1040 5058 t
+10 R f
+(means)1845 5058 w
+10 I f
+(x)2125 5058 w
+7 I f
+(y)2180 5004 w
+5 I f
+(z)2217 5018 w
+10 R f
+(, not)1 178 1 2250 5058 t
+10 I f
+(x)2453 5058 w
+7 I f
+(y)2508 5018 w
+(z)2558 5078 w
+10 R f
+(.)2593 5058 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 8.  , HEADING = Braces for Grouping]
+10 B f
+( for Grouping)2 595(8. Braces)1 413 2 540 5298 t
+10 R f
+( subscript or superscript is)4 1177(Normally, the end of a)4 1025 2 540 5478 t
+( What)1 271(marked simply by a blank \(or tab or tilde, etc.\).)9 1931 2 540 5598 t
+( something that has to)4 910(if the subscript or superscript is)5 1292 2 540 5718 t
+( can use)2 341( that case, you)3 604( In)1 144(be typed with blanks in it?)5 1113 4 540 5838 t
+(the braces)1 411 1 540 5958 t
+10 CW f
+({)986 5958 w
+10 R f
+(and)1081 5958 w
+10 CW f
+(})1260 5958 w
+10 R f
+( of)1 119(to mark the beginning and end)5 1268 2 1355 5958 t
+(the subscript or superscript:)3 1107 1 540 6078 t
+10 CW f
+(e sup {i omega t})4 1020 1 690 6258 t
+10 R f
+(is)540 6438 w
+10 I f
+(e)1560 6618 w
+7 I f
+(i)1615 6578 w
+7 S f
+(w)1640 6578 w
+7 I f
+(t)1693 6578 w
+10 R f
+( used to force)3 561( can always be)3 602(Rule: Braces)1 544 3 540 6798 t
+10 I f
+(eqn)2279 6798 w
+10 R f
+(to treat)1 287 1 2455 6798 t
+( just to make your intent per-)6 1238(something as a unit, or)4 964 2 540 6918 t
+( Thus:)1 278(fectly clear.)1 470 2 540 7038 t
+10 CW f
+(x sub {i sub 1} sup 2)6 1260 1 690 7218 t
+10 R f
+(is)3017 960 w
+10 I f
+(x)4064 1140 w
+7 I f
+(i)4113 1159 w
+4 R f
+(1)4139 1173 w
+7 R f
+(2)4113 1100 w
+10 R f
+(with braces, but)2 635 1 3017 1334 t
+10 CW f
+(x sub i sub 1 sup 2)6 1140 1 3167 1514 t
+10 R f
+(is)3017 1694 w
+10 I f
+(x)4062 1844 w
+7 I f
+(i)4117 1864 w
+4 R f
+(1)4140 1878 w
+(2)4140 1826 w
+10 R f
+(which is rather different.)3 986 1 3017 2038 t
+(Braces can occur within braces:)4 1268 1 3017 2218 t
+10 CW f
+(e sup {i pi sup {rho +1}})6 1500 1 3167 2398 t
+10 R f
+(is)3017 2578 w
+10 I f
+(e)4002 2758 w
+7 I f
+(i)4057 2718 w
+7 S f
+(p)4082 2718 w
+5 S f
+(r +)1 64 1 4124 2690 t
+5 R f
+(1)4196 2690 w
+10 R f
+(The general rule is that anywhere you could use some)9 2202 1 3017 2938 t
+(single thing like)2 663 1 3017 3058 t
+10 I f
+(x)3714 3058 w
+10 R f
+( compli-)1 344(, you can use an arbitrarily)5 1109 2 3766 3058 t
+(cated thing if you enclose it in braces.)7 1577 1 3017 3178 t
+10 I f
+(Eqn)4654 3178 w
+10 R f
+(will look)1 369 1 4850 3178 t
+( it and making it the)5 838(after all the details of positioning)5 1364 2 3017 3298 t
+(right size.)1 394 1 3017 3418 t
+( have the right number of)5 1072(In all cases, make sure you)5 1130 2 3017 3598 t
+( adding an extra will cause)5 1092( one out or)3 448(braces. Leaving)1 662 3 3017 3718 t
+10 I f
+(eqn)3017 3838 w
+10 R f
+(to complain bitterly.)2 814 1 3186 3838 t
+( this,)1 197( do)1 126( To)1 162(Occasionally you will have to print braces.)6 1717 4 3017 4018 t
+( like)1 186(enclose them in double quotes,)4 1283 2 3017 4138 t
+10 CW f
+("{")4522 4138 w
+10 R f
+( is)1 103(. Quoting)1 414 2 4702 4138 t
+(discussed in more detail in \24715.)5 1266 1 3017 4258 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 9.  , HEADING = Shorthand for In-line Equations]
+10 B f
+( for In-line Equations)3 921(9. Shorthand)1 582 2 3017 4498 t
+10 R f
+(With the)1 347 1 3017 4678 t
+10 CW f
+(\261ms)3390 4678 w
+10 R f
+(and)3596 4678 w
+10 CW f
+(\261mm)3766 4678 w
+10 R f
+(macro packages,)1 665 1 3972 4678 t
+10 CW f
+(.EQ)4663 4678 w
+10 R f
+(and)4869 4678 w
+10 CW f
+(.EN)5039 4678 w
+10 R f
+( it)1 82( in most documents,)3 812( But)1 197(imply a displayed equation.)3 1111 4 3017 4798 t
+( conventions not)2 699(is necessary to follow mathematical)4 1503 2 3017 4918 t
+( of the)2 281(just in display equations, but also in the body)8 1921 2 3017 5038 t
+( names like)2 503(text, for example by making variable)5 1590 2 3017 5158 t
+10 CW f
+(x)5159 5158 w
+10 R f
+(italic.)3017 5278 w
+10 I f
+(Eqn)3017 5458 w
+10 R f
+( in-line expressions.)2 808(provides a shorthand for short)4 1206 2 3205 5458 t
+( and)1 189(You can de\256ne two characters to mark the left)8 2013 2 3017 5578 t
+( of an in-line equation, and then type)7 1764(right ends)1 438 2 3017 5698 t
+( set)1 152( To)1 177( lines.)1 255(expressions right in the middle of text)6 1618 4 3017 5818 t
+( right characters to dollar signs, for)6 1502(both the left and)3 700 2 3017 5938 t
+( to the beginning of your document the)7 1655(example, add)1 547 2 3017 6058 t
+(three lines)1 413 1 3017 6178 t
+10 CW f
+(.EQ)3167 6358 w
+(delim $$)1 480 1 3167 6478 t
+(.EN)3167 6598 w
+10 R f
+(Having done this, you can then say things like)8 1846 1 3017 6778 t
+10 CW f
+(Let $alpha sub i$ be positive,)5 1800 1 3167 6958 t
+(and let $beta$ be zero.)4 1380 1 3167 7078 t
+(Then we can show that)4 1260 1 3167 7198 t
+($alpha sub 1$ is $>=0$.)4 1380 1 3167 7318 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(4 EQN)1 4680 1 540 600 t
+10 R f
+( newlines,)1 423( \320 spaces,)2 417( you might expect)3 773(This works as)2 589 4 540 960 t
+( the text, but not in the)6 1023(and so on are signi\256cant in)5 1179 2 540 1080 t
+( can occur in a)4 605( equations)1 413( Multiple)1 400(equation part itself.)2 784 4 540 1200 t
+(single input line.)2 670 1 540 1320 t
+( left before and after a line that)7 1491(Enough room is)2 711 2 540 1500 t
+( tall like)2 336(contains in-line expressions so that something)5 1866 2 540 1620 t
+7 I f
+(i)540 1890 w
+7 S f
+(=)576 1890 w
+7 R f
+(1)626 1890 w
+15 S f
+(S)556 1820 w
+7 I f
+(n)583 1690 w
+10 I f
+(x)669 1790 w
+7 I f
+(i)724 1810 w
+10 R f
+(does not interfere with the lines surrounding it.)7 1876 1 777 1790 t
+(To turn off the delimiters,)4 1035 1 540 2050 t
+10 CW f
+(.EQ)690 2230 w
+(delim off)1 540 1 690 2350 t
+(.EN)690 2470 w
+10 R f
+( or)1 133( use braces, tildes, circum\257exes,)4 1385(Warning: Don't)1 684 3 540 2650 t
+( will result.)2 453( \320 chaos)2 359(double quotes as delimiters)3 1091 3 540 2770 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 10.  , HEADING = Fractions]
+10 B f
+(10. Fractions)1 580 1 540 3010 t
+10 R f
+(To make a fraction, use the word)6 1316 1 540 3190 t
+10 CW f
+(over)1881 3190 w
+10 R f
+(:)2129 3190 w
+10 CW f
+(a+b over 2c =1)3 840 1 690 3370 t
+10 R f
+(gives)540 3550 w
+(2)1517 3840 w
+10 I f
+(c)1575 3840 w
+(a)1471 3710 w
+10 S f
+(+)1545 3710 w
+10 I f
+(b)1616 3710 w
+10 S1 f
+(_ ____)1 225 1 1456 3740 t
+10 S f
+(=)1715 3770 w
+10 R f
+(1)1786 3770 w
+( is made the right length and positioned auto-)8 1866(The line)1 336 2 540 4000 t
+( make clear what goes)4 886( can be used to)4 597(matically. Braces)1 719 3 540 4120 t
+(over what:)1 424 1 540 4240 t
+10 CW f
+({alpha + beta} over {sin \(x\)})5 1740 1 690 4420 t
+10 R f
+(is)540 4600 w
+(sin \()1 158 1 1515 4890 t
+10 I f
+(x)1681 4890 w
+10 R f
+(\))1733 4890 w
+10 S f
+(a + b)2 205 1 1538 4760 t
+10 S1 f
+(_ _____)1 281 1 1500 4790 t
+10 R f
+( is both an)3 429(What happens when there)3 1045 2 540 5050 t
+10 CW f
+(over)2044 5050 w
+10 R f
+(and a)1 218 1 2314 5050 t
+10 CW f
+(sup)2562 5050 w
+10 R f
+( an apparently ambig-)3 885( such)1 213( In)1 138(in the same expression?)3 966 4 540 5170 t
+(uous case,)1 410 1 540 5290 t
+10 I f
+(eqn)975 5290 w
+10 R f
+(does the)1 330 1 1144 5290 t
+10 CW f
+(sup)1499 5290 w
+10 R f
+(before the)1 401 1 1704 5290 t
+10 CW f
+(over)2130 5290 w
+10 R f
+(, so)1 139 1 2370 5290 t
+10 CW f
+(-b sup 2 over pi)4 960 1 690 5470 t
+10 R f
+(is)540 5791 w
+10 S f
+(p)721 5861 w
+(-)661 5731 w
+10 I f
+(b)732 5731 w
+7 R f
+(2)793 5691 w
+10 S1 f
+(_ ____)1 205 1 646 5761 t
+10 R f
+(instead of)1 395 1 890 5791 t
+10 S f
+(-)1314 5791 w
+10 I f
+(b)1385 5791 w
+7 S f
+(p)1471 5751 w
+7 R f
+(2)1473 5660 w
+7 S1 f
+(_ __)1 75 1 1453 5681 t
+10 R f
+( which)1 274( rules that decide)3 691(. The)1 234 3 1543 5791 t
+( cases like this are summa-)5 1158(operation is done \256rst in)4 1044 2 540 5961 t
+( in doubt, however, use braces to)6 1380( When)1 299( \24724.)1 211(rized in)1 312 4 540 6081 t
+(make clear what goes with what.)5 1308 1 540 6201 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 11.  , HEADING = Square Roots]
+10 B f
+( Roots)1 269(11. Square)1 481 2 540 6441 t
+10 R f
+(To draw a square root, use)5 1058 1 540 6621 t
+10 CW f
+(sqrt)1623 6621 w
+10 R f
+(:)1863 6621 w
+10 CW f
+(sqrt a+b + 1 over)4 1020 1 690 6801 t
+(sqrt {ax sup 2 +bx+c})4 1260 1 690 6921 t
+10 R f
+(is)540 7101 w
+11 S f
+(\326` ```)1 272 1 3626 1000 t
+10 I f
+(a)3695 1000 w
+10 S f
+(+)3769 1000 w
+10 I f
+(b)3840 1000 w
+10 S f
+(+)3930 1000 w
+12 S f
+(\326` ````````)1 550 1 4026 1108 t
+10 I f
+(ax)4100 1108 w
+7 R f
+(2)4205 1068 w
+10 S f
+(+)4264 1108 w
+10 I f
+(bx)4335 1108 w
+10 S f
+(+)4453 1108 w
+10 I f
+(c)4524 1108 w
+10 R f
+(1)4280 940 w
+10 S1 f
+(_ ___________)1 588 1 4011 970 t
+10 R f
+( of tall quantities look bad,)5 1217( roots)1 253(Warning: Square)1 732 3 3017 1268 t
+( root-sign big enough to cover the quantity is)8 1815(because a)1 387 2 3017 1388 t
+(too dark and heavy:)3 790 1 3017 1508 t
+10 CW f
+(sqrt {a sup 2 over b sub 2})7 1620 1 3167 1688 t
+10 R f
+(is)3017 1868 w
+29 S f
+(\326` `)1 330 1 3949 2250 t
+10 I f
+(b)4142 2230 w
+7 R f
+(2)4203 2250 w
+10 I f
+(a)4142 2100 w
+7 R f
+(2)4203 2060 w
+10 S1 f
+(_ __)1 134 1 4127 2130 t
+10 R f
+( better written as some-)4 973(Big square roots are generally)4 1229 2 3017 2410 t
+(thing to the power)3 730 1 3017 2530 t
+10 S1 f
+()3772 2530 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_12 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (2) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+3772 2530 m
+75 build_12
+3847 2530 m
+10 R f
+(:)3847 2530 w
+(\()3915 2710 w
+10 I f
+(a)3956 2710 w
+7 R f
+(2)4017 2670 w
+10 I f
+(/ b)1 86 1 4068 2710 t
+7 R f
+(2)4165 2730 w
+10 R f
+(\))4216 2710 w
+7 S1 f
+()4260 2670 w
+4260 2670 m
+53 build_12
+4313 2670 m
+10 R f
+(which is)1 336 1 3017 2890 t
+10 CW f
+(\(a sup 2 /b sub 2 \) sup half)8 1680 1 3167 3070 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 12.  , HEADING = Summation, Integral, Etc.]
+10 B f
+( Integral, Etc.)2 588(12. Summation,)1 695 2 3017 3310 t
+10 R f
+( are)1 168(Summations, integrals, and similar constructions)4 2034 2 3017 3490 t
+(easy:)3017 3610 w
+10 CW f
+(sum from i=0 to {i= inf} x sup i)8 1920 1 3167 3790 t
+10 R f
+(produces)3017 3970 w
+7 I f
+(i)4012 4300 w
+7 S f
+(=)4048 4300 w
+7 R f
+(0)4098 4300 w
+15 S f
+(S)4028 4230 w
+7 I f
+(i)4004 4100 w
+7 S f
+(= \245)1 101 1 4040 4100 t
+10 I f
+(x)4149 4200 w
+7 I f
+(i)4204 4160 w
+10 R f
+( indicate where the upper)4 1020(Notice that we used braces to)5 1182 2 3017 4460 t
+(part)3017 4580 w
+10 I f
+(i)3205 4580 w
+10 S f
+(= \245)1 144 1 3257 4580 t
+10 R f
+( braces were necessary)3 930( No)1 179(begins and ends.)2 677 3 3433 4580 t
+(for the lower part)3 698 1 3017 4700 t
+10 I f
+(i)3741 4700 w
+10 S f
+(=)3793 4700 w
+10 R f
+(0, because it contained no blanks.)5 1355 1 3864 4700 t
+(The braces will never hurt, and if the)7 1579 1 3017 4820 t
+10 CW f
+(from)4636 4820 w
+10 R f
+(and)4916 4820 w
+10 CW f
+(to)5099 4820 w
+10 R f
+( use braces around)3 769(parts contain any blanks, you must)5 1433 2 3017 4940 t
+(them.)3017 5060 w
+(The)3017 5240 w
+10 CW f
+(from)3205 5240 w
+10 R f
+(and)3478 5240 w
+10 CW f
+(to)3655 5240 w
+10 R f
+(parts are both optional, but if both)6 1411 1 3808 5240 t
+(are used, they have to occur in that order.)8 1651 1 3017 5360 t
+( can replace the)3 694(Other useful characters)2 970 2 3017 5540 t
+10 CW f
+(sum)4730 5540 w
+10 R f
+(in our)1 260 1 4959 5540 t
+(example:)3017 5660 w
+10 CW f
+(int prod union inter)3 1560 1 3167 5840 t
+10 R f
+(become, respectively,)1 867 1 3017 6020 t
+14 S f
+(\362)3233 6221 w
+15 S f
+( \307)1 486(P \310)1 569 2 3591 6241 t
+10 R f
+( before the)2 430(Since the thing)2 602 2 3017 6401 t
+10 CW f
+(from)4076 6401 w
+10 R f
+(can be anything, even)3 876 1 4343 6401 t
+( braces,)1 321(something in)1 538 2 3017 6521 t
+10 CW f
+(from)3918 6521 w
+10 R f
+(-)4158 6521 w
+10 CW f
+(to)4191 6521 w
+10 R f
+(can often be used in)4 866 1 4353 6521 t
+(unexpected ways:)1 712 1 3017 6641 t
+10 CW f
+(lim from {n -> inf} x sub n =0)8 1800 1 3167 6821 t
+10 R f
+(is)3017 7001 w
+7 I f
+(n)3914 7251 w
+7 S f
+(\256 \245)1 125 1 3954 7251 t
+10 R f
+(lim)3929 7181 w
+10 I f
+(x)4086 7181 w
+7 I f
+(n)4141 7201 w
+10 S f
+(=)4200 7181 w
+10 R f
+(0)4271 7181 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(EQN 5)1 4680 1 540 600 t
+10 R f
+( difference between)2 845(Notice the)1 442 2 540 960 t
+10 CW f
+(from)1882 960 w
+10 R f
+(-)2122 960 w
+10 CW f
+(to)2155 960 w
+10 R f
+(and)2330 960 w
+10 CW f
+(sub)2529 960 w
+10 R f
+(-)2709 960 w
+10 CW f
+(sup)540 1080 w
+10 R f
+(:)720 1080 w
+10 CW f
+(int from a to b \304\304\304)5 1140 1 690 1260 t
+(int sub a sup b)4 900 1 690 1380 t
+10 R f
+(is)540 1560 w
+7 I f
+(a)1509 1891 w
+14 S f
+(\362)1492 1801 w
+7 I f
+(b)1510 1660 w
+14 S f
+(\362)1669 1801 w
+7 I f
+(a)1716 1855 w
+(b)1747 1709 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 13.  , HEADING = Size and Font Changes]
+10 B f
+( and Font Changes)3 804(13. Size)1 347 2 540 2111 t
+10 R f
+( size)1 192(By default, equations are set in the current point)8 2010 2 540 2291 t
+( 10-point type\), with standard mathematical)5 1753(\(this text is)2 449 2 540 2411 t
+( in roman)2 389(conventions to determine what characters are)5 1813 2 540 2531 t
+( Although)1 458(and what in italic.)3 809 2 540 2651 t
+10 I f
+(eqn)1862 2651 w
+10 R f
+(makes a valiant)2 681 1 2061 2651 t
+( sizes and fonts, it)4 763(attempt to use esthetically pleasing)4 1439 2 540 2771 t
+( change sizes and fonts, use)5 1128( To)1 166(is not perfect.)2 558 3 540 2891 t
+10 CW f
+(size)2422 2891 w
+10 I f
+(n)2692 2891 w
+10 R f
+(and)540 3011 w
+10 CW f
+(roman)712 3011 w
+10 R f
+(,)1012 3011 w
+10 CW f
+(italic)1065 3011 w
+10 R f
+(,)1425 3011 w
+10 CW f
+(bold)1478 3011 w
+10 R f
+(and)1746 3011 w
+10 CW f
+(fat)1918 3011 w
+10 R f
+(. Like)1 262 1 2098 3011 t
+10 CW f
+(sub)2389 3011 w
+10 R f
+(and)2598 3011 w
+10 CW f
+(sup)540 3131 w
+10 R f
+( and font changes affect only the thing that)8 1804(, size)1 218 2 720 3131 t
+(follows them, and revert to the normal situation at the)9 2202 1 540 3251 t
+( Thus)1 250(end of it.)2 358 2 540 3371 t
+10 CW f
+(bold x y)2 480 1 690 3551 t
+10 R f
+(is)540 3731 w
+10 B f
+(x)1590 3871 w
+10 I f
+(y)1648 3871 w
+10 R f
+(and)540 4051 w
+10 CW f
+(size 12 bold x = y +)6 1200 1 690 4231 t
+(size 12 {alpha + beta})4 1320 1 690 4351 t
+10 R f
+(gives)540 4531 w
+12 B f
+(x)1374 4691 w
+10 S f
+(=)1450 4691 w
+10 I f
+(y)1521 4691 w
+10 S f
+(+)1589 4691 w
+12 S f
+(a + b)2 248 1 1660 4691 t
+10 R f
+( if you want to affect)5 914(As always, you can use braces)5 1288 2 540 4871 t
+( For)1 198( letter.)1 264(something more complicated than a single)5 1740 3 540 4991 t
+( equation)1 372(example, you can change the size of an entire)8 1830 2 540 5111 t
+(by)540 5231 w
+10 CW f
+(size 8 {)2 480 1 690 5411 t
+10 S f
+(\274)1230 5411 w
+10 CW f
+(})1390 5411 w
+10 R f
+( amount; for)2 518(You can also change the size by a given)8 1684 2 540 5591 t
+(example, you can say)3 877 1 540 5711 t
+10 CW f
+(size +2)1 420 1 1448 5711 t
+10 R f
+( size two)2 365(to make the)2 478 2 1899 5711 t
+(points bigger, or)2 702 1 540 5831 t
+10 CW f
+(size -3)1 420 1 1289 5831 t
+10 R f
+(to make it three points)4 986 1 1756 5831 t
+( has the advantage that you don't have to)8 1652(smaller. This)1 550 2 540 5951 t
+(know what the current size is.)5 1192 1 540 6071 t
+( fonts other than roman, italic and)6 1501(If you are using)3 701 2 540 6251 t
+(bold, you can say)3 723 1 540 6371 t
+10 CW f
+(font)1296 6371 w
+10 I f
+(X)1569 6371 w
+10 R f
+(where)1663 6371 w
+10 I f
+(X)1938 6371 w
+10 R f
+(is a)1 143 1 2031 6371 t
+10 I f
+(troff)2206 6371 w
+10 R f
+(name or)1 331 1 2411 6371 t
+( Since)1 274(number for the font, one or two characters long.)8 1928 2 540 6491 t
+10 I f
+(eqn)540 6611 w
+10 R f
+( other fonts)2 497(is tuned for roman, italic and bold,)6 1514 2 731 6611 t
+(may not give quite as good an appearance.)7 1696 1 540 6731 t
+(The)540 6911 w
+10 CW f
+(fat)721 6911 w
+10 R f
+( and widens it)3 564(operation takes the current font)4 1251 2 927 6911 t
+(by overstriking:)1 642 1 540 7031 t
+10 CW f
+(fat grad)1 445 1 1213 7031 t
+10 R f
+(is)1689 7031 w
+10 S f
+(\321 \321)1 76 1 1787 7031 t
+10 R f
+(and)1893 7031 w
+10 CW f
+(fat {x sub i})3 675 1 2067 7031 t
+10 R f
+(is)540 7151 w
+10 I f
+(x)632 7151 w
+7 I f
+(i)687 7171 w
+10 I f
+(x)637 7151 w
+7 I f
+(i)692 7171 w
+10 R f
+(.)720 7151 w
+( a non-standard size or)4 915(If an entire document is to be in)7 1287 2 3017 960 t
+( a size)2 259(font, it is a severe nuisance to have to write out)10 1943 2 3017 1080 t
+( you)1 186( Accordingly,)1 585( each equation.)2 623(and font change for)3 808 4 3017 1200 t
+( or font which thereafter affects)5 1264(can set a ``global'' size)4 938 2 3017 1320 t
+( beginning of any equation, you)5 1336( the)1 159( At)1 162(all equations.)1 545 4 3017 1440 t
+(might say, for instance,)3 935 1 3017 1560 t
+10 CW f
+(.EQ)3167 1740 w
+(gsize 16)1 480 1 3167 1860 t
+(gfont R)1 420 1 3167 1980 t
+10 S f
+(\274)3227 2100 w
+10 CW f
+(.EN)3167 2220 w
+10 R f
+( 16 and the font to roman thereafter.)7 1518(to set the size to)4 684 2 3017 2400 t
+(In place of)2 436 1 3017 2520 t
+10 CW f
+(R)3483 2520 w
+10 R f
+(, you can use any of the)6 975 1 3543 2520 t
+10 I f
+(troff)4547 2520 w
+10 R f
+(font names.)1 470 1 4749 2520 t
+(The size after)2 554 1 3017 2640 t
+10 CW f
+(gsize)3602 2640 w
+10 R f
+( a relative change with)4 931(can be)1 263 2 3933 2640 t
+10 CW f
+(+)5159 2640 w
+10 R f
+(or)3017 2760 w
+10 CW f
+(-)3125 2760 w
+10 R f
+(.)3185 2760 w
+(Generally,)3017 2940 w
+10 CW f
+(gsize)3495 2940 w
+10 R f
+(and)3855 2940 w
+10 CW f
+(gfont)4060 2940 w
+10 R f
+(will appear at the)3 798 1 4421 2940 t
+( a document but they can also appear)7 1666(beginning of)1 536 2 3017 3060 t
+( global font and size can)5 1038( the)1 185(throughout a document:)2 979 3 3017 3180 t
+(be changed as often as needed.\263)5 1279 1 3017 3300 t
+(Since)3017 3480 w
+10 I f
+(eqn)3280 3480 w
+10 R f
+( automatically,)1 611(manages most size changes)3 1143 2 3465 3480 t
+10 CW f
+(gsize)3017 3600 w
+10 R f
+(is rarely necessary.)2 761 1 3342 3600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 14.  , HEADING = Diacritical Marks]
+10 B f
+( Marks)1 308(14. Diacritical)1 624 2 3017 3840 t
+10 R f
+( letters, there are)3 733(To get diacritical marks on top of)6 1469 2 3017 4020 t
+(several words:)1 579 1 3017 4140 t
+10 CW f
+(x dot)1 300 1 3605 4295 t
+10 I f
+(x)4585 4295 w
+10 R f
+(.)4597 4228 w
+10 CW f
+(x dotdot)1 480 1 3605 4420 t
+10 I f
+(x)4585 4420 w
+10 R f
+(..)4584 4353 w
+10 CW f
+(x hat)1 300 1 3605 4545 t
+10 I f
+(x)4585 4545 w
+11 R f
+(\303)4591 4540 w
+10 CW f
+(x tilde)1 420 1 3605 4670 t
+10 I f
+(x)4585 4670 w
+11 R f
+(\304)4591 4665 w
+10 CW f
+(x vec)1 300 1 3605 4795 t
+10 I f
+(x)4585 4795 w
+7 S f
+(\256)4575 4745 w
+10 CW f
+(x dyad)1 360 1 3605 4920 t
+10 I f
+(x)4585 4920 w
+7 S f
+(\254 \256)1 80 1 4569 4870 t
+10 CW f
+(x bar)1 300 1 3605 5045 t
+10 I f
+(x)4585 5045 w
+10 S1 f
+(_)4584 4977 w
+10 CW f
+(x under)1 420 1 3605 5165 t
+10 I f
+(x)4585 5165 w
+10 S f
+(_)4580 5165 w
+10 CW f
+(x utilde)1 480 1 3605 5285 t
+10 I f
+(x)4585 5285 w
+12 R f
+(\304)4587 5385 w
+10 R f
+( The)1 211( mark is placed at the right height.)7 1407(The diacritical)1 584 3 3017 5465 t
+10 CW f
+(bar)3017 5585 w
+10 R f
+(and)3247 5585 w
+10 CW f
+(under)3440 5585 w
+10 R f
+(are made the right length for the)6 1430 1 3789 5585 t
+(entire construct, as in)3 995 1 3017 5710 t
+10 I f
+(x)4085 5710 w
+10 S f
+(+)4153 5710 w
+10 I f
+(y)4224 5710 w
+10 S f
+(+)4292 5710 w
+10 I f
+(z)4363 5710 w
+10 S1 f
+(_ ______)1 307 1 4092 5642 t
+10 R f
+(; other marks are)3 817 1 4402 5710 t
+(centered.)3017 5830 w
+(Sometimes)3017 6010 w
+10 I f
+(eqn)3496 6010 w
+10 R f
+( for bars.)2 377(guesses wrong on the height)4 1168 2 3674 6010 t
+(As an interim \256x, the words)5 1171 1 3017 6130 t
+10 CW f
+(highbar)4224 6130 w
+10 R f
+(and)4680 6130 w
+10 CW f
+(lowbar)4859 6130 w
+10 R f
+(are synonymous with)2 901 1 3017 6250 t
+10 CW f
+(bar)3967 6250 w
+10 R f
+(, but force the bar to be)6 1072 1 4147 6250 t
+(either high \(as with)3 783 1 3017 6375 t
+10 I f
+(X)3828 6375 w
+10 S1 f
+(_ _)1 51 1 3838 6282 t
+10 R f
+( low \(as with)3 525(\) or)1 144 2 3897 6375 t
+10 I f
+(x)4593 6375 w
+10 S1 f
+(_)4592 6307 w
+10 R f
+(\) regardless of)2 574 1 4645 6375 t
+( is useful for)3 556( This)1 246( object.)1 312(the apparent height of the)4 1088 4 3017 6495 t
+(constructions like)1 708 1 3017 6620 t
+10 I f
+(x)3750 6620 w
+7 R f
+(1)3805 6640 w
+10 S1 f
+(_ _)1 88 1 3760 6552 t
+10 R f
+(, which is)2 386 1 3848 6620 t
+10 CW f
+({x sub 1} lowbar)3 855 1 4259 6620 t
+10 R f
+(.)5114 6620 w
+8 S1 f
+(__________________)3017 6800 w
+8 R f
+( which we have a few random)6 1057( a footnote like this one, in)6 959(\263 In)1 186 3 3017 6920 t
+(expressions like)1 546 1 3137 7010 t
+8 I f
+(x)3740 7010 w
+5 I f
+(i)3783 7026 w
+8 R f
+(and)3860 7010 w
+8 S f
+(p)4032 7010 w
+5 R f
+(2)4080 6978 w
+8 R f
+(,)4111 7010 w
+8 I f
+(eqn)4188 7010 w
+8 R f
+(handles the size change)3 859 1 4360 7010 t
+(automatically.)3137 7100 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+(6 EQN)1 4680 1 540 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 15.  , HEADING = Quoted Text]
+10 B f
+( Text)1 219(15. Quoted)1 492 2 540 960 t
+10 R f
+(Any input entirely within quotes)4 1300 1 540 1140 t
+10 CW f
+(")1865 1140 w
+10 S f
+(\274)1925 1140 w
+10 CW f
+(")2025 1140 w
+10 R f
+( to)1 104(is not subject)2 528 2 2110 1140 t
+( adjust-)1 317(any of the normal font changes and spacing)7 1885 2 540 1260 t
+( spacing)1 344( provides a way to do your own)7 1353(ments. This)1 505 3 540 1380 t
+(and adjusting if needed:)3 957 1 540 1500 t
+10 CW f
+(italic "sin\(x\)" + sin \(x\))4 1500 1 690 1680 t
+10 R f
+(is)540 1860 w
+10 I f
+(sin\(x\))1358 2040 w
+10 S f
+(+)1601 2040 w
+10 R f
+(sin \()1 158 1 1672 2040 t
+10 I f
+(x)1838 2040 w
+10 R f
+(\))1890 2040 w
+(Quotes are also used to get braces and other)8 1815 1 540 2220 t
+10 I f
+(eqn)2388 2220 w
+10 R f
+(key-)2565 2220 w
+(words printed:)1 580 1 540 2340 t
+10 CW f
+("{ size alpha }")3 960 1 690 2520 t
+10 R f
+(is)540 2700 w
+10 I f
+({ size alpha })3 533 1 1374 2880 t
+10 R f
+(and)540 3060 w
+10 CW f
+(roman "{ size alpha }")4 1320 1 690 3240 t
+10 R f
+(is)540 3420 w
+({ size alpha })3 542 1 1370 3600 t
+(The construction)1 693 1 540 3780 t
+10 CW f
+("")1277 3780 w
+10 R f
+( place-holder)1 543(is often used as a)4 758 2 1441 3780 t
+(when grammatically)1 846 1 540 3900 t
+10 I f
+(eqn)1439 3900 w
+10 R f
+(needs something, but you)3 1106 1 1636 3900 t
+( For)1 225( anything in your output.)4 1136(don't actually want)2 841 3 540 4020 t
+(example, to make)2 853 1 540 4140 t
+7 R f
+(2)1496 4100 w
+10 R f
+(He, you can't just type)4 1195 1 1547 4140 t
+10 CW f
+(sup 2 roman He)3 840 1 540 4260 t
+10 R f
+(because a)1 426 1 1447 4260 t
+10 CW f
+(sup)1941 4260 w
+10 R f
+(has to be a)3 553 1 2189 4260 t
+(superscript)540 4380 w
+10 I f
+(on)1003 4380 w
+10 R f
+( you must say)3 553(something. Thus)1 692 2 1128 4380 t
+10 CW f
+("" sup 2 roman He)4 1020 1 690 4560 t
+10 R f
+( a literal quote use)4 772(To get)1 267 2 540 4740 t
+10 CW f
+("\\"")1614 4740 w
+10 R f
+( delimiters are set)3 737(. If)1 151 2 1854 4740 t
+(with)540 4860 w
+10 CW f
+(delim)751 4860 w
+10 R f
+( quoted string)2 564(, you can include them in a)6 1127 2 1051 4860 t
+(too.)540 4980 w
+10 I f
+(Troff)779 4980 w
+10 R f
+(special-character names like)2 1201 1 1041 4980 t
+10 CW f
+(\\\(rh)2303 4980 w
+10 R f
+(can)2604 4980 w
+(appear unquoted, but all other)4 1363 1 540 5100 t
+10 I f
+(troff)1970 5100 w
+10 R f
+(constructions)2209 5100 w
+(should always be quoted.)3 1010 1 540 5220 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 16.  , HEADING = Lining Up Equations]
+10 B f
+( Up Equations)2 613(16. Lining)1 460 2 540 5460 t
+10 R f
+(Sometimes it's necessary to line up a series of)8 2202 1 540 5640 t
+( an)1 152(equations at some horizontal position, often at)6 2050 2 540 5760 t
+( done with two operations called)5 1371( is)1 105( This)1 241(equals sign.)1 485 4 540 5880 t
+10 CW f
+(mark)540 6000 w
+10 R f
+(and)805 6000 w
+10 CW f
+(lineup)974 6000 w
+10 R f
+(.)1334 6000 w
+(The word)1 397 1 540 6180 t
+10 CW f
+(mark)975 6180 w
+10 R f
+(may appear once at any place in an)7 1489 1 1253 6180 t
+( remembers the horizontal position where)5 1711(equation. It)1 491 2 540 6300 t
+( equations can contain one)4 1187( Successive)1 519(it appeared.)1 496 3 540 6420 t
+( word)1 253(occurrence of the)2 739 2 540 6540 t
+10 CW f
+(lineup)1580 6540 w
+10 R f
+( place where)2 549(. The)1 253 2 1940 6540 t
+10 CW f
+(lineup)540 6660 w
+10 R f
+( with the place)3 651(appears is made to line up)5 1145 2 946 6660 t
+(marked by the previous)3 985 1 540 6780 t
+10 CW f
+(mark)1565 6780 w
+10 R f
+( for)1 155( Thus,)1 289(if possible.)1 453 3 1845 6780 t
+(example, you can say)3 859 1 540 6900 t
+10 CW f
+(.EQ I)1 300 1 3167 960 t
+(x+y mark = z)3 720 1 3167 1080 t
+(.EN)3167 1200 w
+(.EQ I)1 300 1 3167 1320 t
+(x lineup = 1)3 720 1 3167 1440 t
+(.EN)3167 1560 w
+10 R f
+(to produce)1 424 1 3017 1740 t
+10 I f
+(x)3167 1920 w
+10 S f
+(+)3235 1920 w
+10 I f
+(y)3306 1920 w
+10 S f
+(=)3374 1920 w
+10 I f
+(z)3445 1920 w
+(x)3306 2040 w
+10 S f
+(=)3374 2040 w
+10 R f
+(1)3445 2040 w
+( about, when you)3 730(For reasons too complicated to talk)5 1472 2 3017 2220 t
+(use)3017 2340 w
+10 I f
+(eqn)3180 2340 w
+10 R f
+(and)3354 2340 w
+10 CW f
+(\261ms)3528 2340 w
+10 R f
+( either)1 256(, use)1 188 2 3708 2340 t
+10 CW f
+(.EQ I)1 300 1 4181 2340 t
+10 R f
+(or)4510 2340 w
+10 CW f
+(.EQ L)1 300 1 4622 2340 t
+10 R f
+(;)4922 2340 w
+10 CW f
+(mark)4979 2340 w
+10 R f
+(and)3017 2460 w
+10 CW f
+(lineup)3220 2460 w
+10 R f
+(don't work with centered equations.)4 1579 1 3640 2460 t
+(When you use)2 647 1 3017 2580 t
+10 I f
+(eqn)3727 2580 w
+10 R f
+(and)3934 2580 w
+10 CW f
+(\261mm)4141 2580 w
+10 R f
+(, use either)2 511 1 4321 2580 t
+10 CW f
+(.DS L)1 300 1 4894 2580 t
+10 R f
+(,)5194 2580 w
+10 CW f
+(.DS I)1 300 1 3017 2700 t
+10 R f
+(, or)1 151 1 3317 2700 t
+10 CW f
+(.DS CB)1 360 1 3511 2700 t
+10 R f
+( bear in mind that)4 781(. Also)1 283 2 3871 2700 t
+10 CW f
+(mark)4979 2700 w
+10 R f
+(doesn't look ahead;)2 782 1 3017 2820 t
+10 CW f
+(x mark =1)2 540 1 3167 3000 t
+10 S f
+(\274)3227 3120 w
+10 CW f
+(x+y lineup =z)2 780 1 3167 3240 t
+10 R f
+(will not work if there isn't room for the)8 1600 1 3017 3420 t
+10 CW f
+(x+y)4645 3420 w
+10 R f
+(part after)1 366 1 4853 3420 t
+(the)3017 3540 w
+10 CW f
+(mark)3166 3540 w
+10 R f
+(remembers where the)2 862 1 3433 3540 t
+10 CW f
+(x)4322 3540 w
+10 R f
+( you indent the)3 600(is. If)1 210 2 4409 3540 t
+( to move)2 380(equation, that may suf\256ce; if not, use tildes)7 1822 2 3017 3660 t
+(the \256rst equation to the right.)5 1161 1 3017 3780 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 17.  , HEADING = Big Brackets, Etc.]
+10 B f
+( Brackets, Etc.)2 621(17. Big)1 320 2 3017 4020 t
+10 R f
+( big brackets, braces, parentheses, and bars)6 1912(To get)1 290 2 3017 4200 t
+(around things, use the)3 877 1 3017 4320 t
+10 CW f
+(left)3919 4320 w
+10 R f
+(and)4184 4320 w
+10 CW f
+(right)4353 4320 w
+10 R f
+(commands:)4678 4320 w
+10 CW f
+(left { a over b + 1 right })8 1620 1 3167 4500 t
+(\304=\304 left \( c over d right \))7 1620 1 3167 4620 t
+(+ left [ e right ])5 1080 1 3167 4740 t
+10 R f
+(is)3017 4920 w
+10 S f
+(\354)3653 5098 w
+(\355)3653 5198 w
+(\356)3653 5298 w
+10 I f
+(b)3727 5255 w
+(a)3727 5125 w
+10 S1 f
+(_ _)1 80 1 3712 5155 t
+10 S f
+(+)3826 5185 w
+10 R f
+(1)3897 5185 w
+10 S f
+(\374)3947 5098 w
+(\375)3947 5198 w
+(\376)3947 5298 w
+(=)4045 5185 w
+(\354)4157 5098 w
+(\357)4157 5198 w
+(\356)4157 5298 w
+10 I f
+(d)4231 5255 w
+(c)4234 5125 w
+10 S1 f
+(_ _)1 80 1 4216 5155 t
+10 S f
+(\374)4306 5098 w
+(\357)4306 5198 w
+(\376)4306 5298 w
+(+)4379 5185 w
+(\351)4458 5148 w
+(\353)4458 5248 w
+10 I f
+(e)4508 5195 w
+10 S f
+(\371)4552 5148 w
+(\373)4552 5248 w
+10 R f
+( enough to cover)3 710(The resulting brackets are made big)5 1492 2 3017 5470 t
+( be used)2 353( characters can)2 619( Other)1 291(whatever they enclose.)2 939 4 3017 5590 t
+( good.)1 272(besides these, but are not likely to look very)8 1930 2 3017 5710 t
+(The)3017 5830 w
+10 CW f
+(floor)3197 5830 w
+10 R f
+(and)3522 5830 w
+10 CW f
+(ceiling)3691 5830 w
+10 R f
+(characters are exceptions:)2 1029 1 4136 5830 t
+10 CW f
+(left floor x over y right floor)6 1860 1 3167 6010 t
+(<= left ceiling a over b)5 1440 1 3167 6130 t
+(right ceiling)1 780 1 3347 6250 t
+10 R f
+(produces)3017 6430 w
+10 S f
+(\357)3892 6608 w
+(\357)3892 6708 w
+(\353)3892 6808 w
+10 I f
+(y)3967 6765 w
+(x)3967 6635 w
+10 S1 f
+(_ _)1 74 1 3952 6665 t
+10 S f
+(\357)4036 6608 w
+(\357)4036 6708 w
+(\373)4036 6808 w
+(\243)4082 6695 w
+(\351)4153 6608 w
+(\357)4153 6708 w
+(\357)4153 6808 w
+10 I f
+(b)4227 6765 w
+(a)4227 6635 w
+10 S1 f
+(_ _)1 80 1 4212 6665 t
+10 S f
+(\371)4302 6608 w
+(\357)4302 6708 w
+(\357)4302 6808 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+10 HB f
+(EQN 7)1 4680 1 540 600 t
+10 R f
+( First,)1 279(Several warnings about brackets are in order.)6 1923 2 540 960 t
+( and paren-)2 488(braces are typically bigger than brackets)5 1714 2 540 1080 t
+( up of three, \256ve, seven,)5 989(theses, because they are made)4 1213 2 540 1200 t
+( up of two,)3 490(etc., pieces, while brackets can be made)6 1712 2 540 1320 t
+( left and right parentheses often)5 1281( big)1 156( Second,)1 372(three, etc.)1 393 4 540 1440 t
+( because the character set is poorly de-)7 1759(look poor,)1 443 2 540 1560 t
+(signed.)540 1680 w
+(The)540 1860 w
+10 CW f
+(right)728 1860 w
+10 R f
+( ``left something'')2 750(part may be omitted: a)4 931 2 1061 1860 t
+( If)1 123( something''.)1 540(need not have a corresponding ``right)5 1539 3 540 1980 t
+(the)540 2100 w
+10 CW f
+(right)688 2100 w
+10 R f
+( omitted, put braces around the thing)6 1480(part is)1 248 2 1014 2100 t
+( Otherwise,)1 504( the left bracket to encompass.)5 1309(you want)1 389 3 540 2220 t
+(the resulting brackets may be too large.)6 1572 1 540 2340 t
+( omit the)2 390(If you want to)3 611 2 540 2520 t
+10 CW f
+(left)1583 2520 w
+10 R f
+(part, things are more)3 877 1 1865 2520 t
+( technically you can't have a)5 1314(complicated, because)1 888 2 540 2640 t
+10 CW f
+(right)540 2760 w
+10 R f
+(without a corresponding)2 1005 1 882 2760 t
+10 CW f
+(left)1929 2760 w
+10 R f
+( you)1 193(. Instead)1 380 2 2169 2760 t
+(have to say)2 449 1 540 2880 t
+10 CW f
+(left "")1 420 1 690 3060 t
+10 S f
+(\274)1170 3060 w
+10 CW f
+(right \))1 420 1 1330 3060 t
+10 R f
+( The)1 212(for example.)1 511 2 540 3240 t
+10 CW f
+(left "")1 420 1 1295 3240 t
+10 R f
+(means a ``left nothing''.)3 994 1 1748 3240 t
+(This satis\256es the rules without hurting your output.)7 2045 1 540 3360 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 18.  , HEADING = Piles]
+10 B f
+(18. Piles)1 375 1 540 3600 t
+10 R f
+( a general facility for making vertical piles of)8 1871(There is)1 331 2 540 3780 t
+( example:)1 391( For)1 189(things; it comes in several \257avors.)5 1366 3 540 3900 t
+10 CW f
+(A \304=\304 left [)3 720 1 690 4080 t
+(pile { a above b above c } \304\304)8 1740 1 810 4200 t
+(pile { x above y above z })7 1560 1 810 4320 t
+(right ])1 420 1 690 4440 t
+10 R f
+(will make)1 397 1 540 4620 t
+10 I f
+(A)1402 4885 w
+10 S f
+(=)1512 4885 w
+(\351)1624 4798 w
+(\357)1624 4898 w
+(\353)1624 4998 w
+10 I f
+(c)1677 4995 w
+(b)1674 4895 w
+(a)1674 4795 w
+(z)1800 4995 w
+(y)1798 4895 w
+(x)1798 4795 w
+10 S f
+(\371)1842 4798 w
+(\357)1842 4898 w
+(\373)1842 4998 w
+10 R f
+( be as many as you)5 787(The elements of the pile \(there can)6 1415 2 540 5170 t
+( another, at the right)4 919(want\) are centered one above)4 1283 2 540 5290 t
+( keyword)1 401( The)1 232(height for most purposes.)3 1097 3 540 5410 t
+10 CW f
+(above)2322 5410 w
+10 R f
+(is)2675 5410 w
+( around the)2 455(used to separate the pieces; braces are used)7 1747 2 540 5530 t
+( elements of a pile can be as compli-)8 1570( The)1 219(entire list.)1 413 3 540 5650 t
+(cated as needed, even containing more piles.)6 1779 1 540 5770 t
+(Three other forms of pile exist:)5 1305 1 540 5950 t
+10 CW f
+(lpile)1882 5950 w
+10 R f
+(makes a pile)2 523 1 2219 5950 t
+(with the elements left-justi\256ed;)3 1262 1 540 6070 t
+10 CW f
+(rpile)1832 6070 w
+10 R f
+( right-)1 251(makes a)1 329 2 2162 6070 t
+(justi\256ed pile; and)2 719 1 540 6190 t
+10 CW f
+(cpile)1296 6190 w
+10 R f
+(makes a centered pile, just)4 1108 1 1634 6190 t
+(like)540 6310 w
+10 CW f
+(pile)720 6310 w
+10 R f
+( vertical spacing between the pieces is)6 1548(. The)1 234 2 960 6310 t
+(somewhat larger for)2 829 1 540 6430 t
+10 CW f
+(l)1407 6430 w
+10 R f
+(,)1467 6430 w
+10 CW f
+(r)1530 6430 w
+10 R f
+(, and)1 207 1 1590 6430 t
+10 CW f
+(cpile)1836 6430 w
+10 R f
+(s than it is for)4 606 1 2136 6430 t
+(ordinary piles.)1 577 1 540 6550 t
+10 CW f
+(roman sign \(x\)\304=\304)2 1020 1 690 6730 t
+(left {)1 360 1 690 6850 t
+(lpile {1 above 0 above -1} \304\304)6 1740 1 810 6970 t
+(lpile {if\304x>0 above if\304x=0)3 1560 1 810 7090 t
+(above if\304x<0})1 780 1 1230 7210 t
+10 R f
+(makes)540 7390 w
+(sign \()1 208 1 3615 1145 t
+10 I f
+(x)3831 1145 w
+10 R f
+(\))3883 1145 w
+10 S f
+(=)3973 1145 w
+(\354)4085 958 w
+(\357)4085 1058 w
+(\355)4085 1158 w
+(\357)4085 1258 w
+(\356)4085 1358 w
+(-)4134 1295 w
+10 R f
+(1)4205 1295 w
+(0)4134 1155 w
+(1)4134 1015 w
+(if)4329 1295 w
+10 I f
+(x)4431 1295 w
+10 S f
+(<)4499 1295 w
+10 R f
+(0)4570 1295 w
+(if)4329 1155 w
+10 I f
+(x)4431 1155 w
+10 S f
+(=)4499 1155 w
+10 R f
+(0)4570 1155 w
+(if)4329 1015 w
+10 I f
+(x)4431 1015 w
+10 S f
+(>)4499 1015 w
+10 R f
+(0)4570 1015 w
+(Notice the left brace without a matching right one.)8 2016 1 3017 1490 t
+( to change the default vertical separation)6 1678(It is possible)2 524 2 3017 1670 t
+( by adding a number)4 965(between elements of a pile,)4 1237 2 3017 1790 t
+(immediately after the word)3 1111 1 3017 1910 t
+10 CW f
+(lpile)4163 1910 w
+10 R f
+( number)1 340( The)1 215(, etc.)1 201 3 4463 1910 t
+( of an em \(an em is about the)8 1303(is in units of 1/100's)4 899 2 3017 2030 t
+( letter `m'\);)2 554(width of the)2 575 2 3017 2150 t
+10 CW f
+(lpile 33)1 480 1 4218 2150 t
+10 R f
+(makes the)1 449 1 4770 2150 t
+( of an em.)3 399( 3)1 58(spacing 1/)1 408 3 3017 2270 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 19.  , HEADING = Matrices]
+10 B f
+(19. Matrices)1 551 1 3017 2510 t
+10 R f
+( example, to)2 513( For)1 200( also possible to make matrices.)5 1326(It is)1 163 4 3017 2690 t
+(make a neat array like)4 880 1 3017 2810 t
+10 I f
+(y)4002 3130 w
+7 I f
+(i)4057 3150 w
+10 I f
+(x)4002 2960 w
+7 I f
+(i)4057 2980 w
+10 I f
+(y)4135 3130 w
+7 R f
+(2)4190 3090 w
+10 I f
+(x)4135 2960 w
+7 R f
+(2)4190 2920 w
+10 R f
+(you have to type)3 663 1 3017 3270 t
+10 CW f
+(matrix {)1 480 1 3167 3430 t
+(ccol { x sub i above y sub i })9 1800 1 3287 3550 t
+(ccol { x sup 2 above y sup 2 })9 1800 1 3287 3670 t
+(})3167 3770 w
+10 R f
+( columns.)1 412(This produces a matrix with two centered)6 1790 2 3017 3920 t
+( are then listed just as for)6 1028(The elements of the columns)4 1174 2 3017 4040 t
+( separated by the word)4 983(a pile, each element)3 849 2 3017 4160 t
+10 CW f
+(above)4894 4160 w
+10 R f
+(.)5194 4160 w
+(You can also use)3 691 1 3017 4280 t
+10 CW f
+(lcol)3737 4280 w
+10 R f
+(or)4006 4280 w
+10 CW f
+(rcol)4117 4280 w
+10 R f
+(to left or right adjust)4 834 1 4385 4280 t
+( and)1 170( column can be separately adjusted,)5 1419(columns. Each)1 613 3 3017 4400 t
+(there can be as many columns as you like.)8 1683 1 3017 4520 t
+(The words)1 441 1 3017 4700 t
+10 CW f
+(pile)3500 4700 w
+10 R f
+(and)3782 4700 w
+10 CW f
+(col)3968 4700 w
+10 R f
+(,)4148 4700 w
+10 CW f
+(lpile)4215 4700 w
+10 R f
+(and)4558 4700 w
+10 CW f
+(lcol)4745 4700 w
+10 R f
+(, etc.,)1 234 1 4985 4700 t
+(are synonyms.)1 577 1 3017 4820 t
+( instead of two adjacent)4 984(The reason for using a matrix)5 1218 2 3017 5000 t
+( of the piles)3 508(piles, by the way, is that if the elements)8 1694 2 3017 5120 t
+( height, they won't line up)5 1180(don't all have the same)4 1022 2 3017 5240 t
+( it)1 90( matrix forces them to line up, because)7 1617(properly. A)1 495 3 3017 5360 t
+( before deciding what)3 975(looks at the entire structure)4 1227 2 3017 5480 t
+(spacing to use.)2 591 1 3017 5600 t
+( column)1 357( \320 each)2 314( of warning about matrices)4 1198(A word)1 333 4 3017 5780 t
+( The)1 225( elements in it.)3 649(must have the same number of)5 1328 3 3017 5900 t
+(world will end if you get this wrong.)7 1466 1 3017 6020 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 20.  , HEADING = Local Motions]
+10 B f
+( Motions)1 375(20. Local)1 414 2 3017 6260 t
+10 R f
+(Although)3017 6440 w
+10 I f
+(eqn)3420 6440 w
+10 R f
+(tries to get most things at the right place,)8 1630 1 3589 6440 t
+( perfect, and occasionally you will need to tune)8 1936(it isn't)1 266 2 3017 6560 t
+( extra horizontal)2 660( Small)1 287(the output to make it just right.)6 1255 3 3017 6680 t
+( You)1 224( be obtained with tilde and circum\257ex.)6 1552(spaces can)1 426 3 3017 6800 t
+( say)1 192(can also)1 357 2 3017 6920 t
+10 CW f
+(back)3625 6920 w
+10 I f
+(n)3924 6920 w
+10 R f
+(and)4033 6920 w
+10 CW f
+(fwd)4236 6920 w
+10 I f
+(n)4475 6920 w
+10 R f
+(to move small)2 635 1 4584 6920 t
+(amounts horizontally.)1 876 1 3017 7040 t
+10 I f
+(n)3946 7040 w
+10 R f
+(is how far to move in 1/100's)6 1195 1 4024 7040 t
+( Thus)1 256(of an em.)2 386 2 3017 7160 t
+10 CW f
+(back 50)1 420 1 3691 7160 t
+10 R f
+(moves back about half the)4 1076 1 4143 7160 t
+( example,)1 392( For)1 193(width of an `m'.)3 664 3 3017 7280 t
+10 CW f
+(<<)4295 7280 w
+10 R f
+(produces)4444 7280 w
+10 S f
+(<<)4833 7280 w
+10 R f
+(, while)1 276 1 4943 7280 t
+10 CW f
+(< back 50 <)3 660 1 3033 7400 t
+10 R f
+(produces)3734 7400 w
+10 S f
+(< <)1 76 1 4119 7400 t
+10 R f
+(.)4195 7400 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+10 HB f
+(8 EQN)1 4680 1 540 600 t
+10 R f
+(Similarly you can move things up or down with)8 1967 1 540 960 t
+10 CW f
+(up)2539 960 w
+10 I f
+(n)2692 960 w
+10 R f
+(and)540 1080 w
+10 CW f
+(down)709 1080 w
+10 I f
+(n)974 1080 w
+10 R f
+(.)1024 1080 w
+10 CW f
+(x sub down 20 i sup up 20 j)8 1620 1 690 1260 t
+10 R f
+(produces)540 1440 w
+10 I f
+(x)925 1440 w
+7 I f
+(i)974 1468 w
+(j)974 1391 w
+10 R f
+(instead of the usual)3 774 1 1027 1440 t
+10 I f
+(x)1826 1440 w
+7 I f
+(i)1875 1459 w
+(j)1875 1400 w
+10 R f
+(.)1903 1440 w
+(As with)1 317 1 540 1620 t
+10 CW f
+(sub)885 1620 w
+10 R f
+(or)1093 1620 w
+10 CW f
+(sup)1204 1620 w
+10 R f
+(, the local motions affect the next)6 1358 1 1384 1620 t
+( and this can be something arbitrarily)6 1487(thing in the input,)3 715 2 540 1740 t
+(complicated if it is enclosed in braces.)6 1528 1 540 1860 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 21.  , HEADING = Definitions]
+10 B f
+(21. De\256nitions)1 637 1 540 2100 t
+10 I f
+(Eqn)540 2280 w
+10 R f
+( frequently-)1 481(provides a facility so you can give a)7 1523 2 738 2280 t
+( thereafter just)2 612(used string of characters a name, and)6 1590 2 540 2400 t
+( For)1 232( name instead of the whole string.)6 1609(type the)1 361 3 540 2520 t
+(example, if the sequence)3 986 1 540 2640 t
+10 CW f
+(x sub i + y sub i)6 1020 1 690 2820 t
+10 R f
+( can save)2 399(appears repeatedly throughout a paper, you)5 1803 2 540 3000 t
+(re-typing it each time by de\256ning it like this:)8 1789 1 540 3120 t
+10 CW f
+(define xy 'x sub i + y sub i')8 1740 1 690 3300 t
+10 R f
+(This makes)1 479 1 540 3480 t
+10 CW f
+(xy)1065 3480 w
+10 R f
+(a shorthand for whatever characters)4 1510 1 1232 3480 t
+( You)1 224( the de\256nition.)2 585(occur between the single quotes in)5 1393 3 540 3600 t
+( character instead of quote to mark the)7 1693(can use any)2 509 2 540 3720 t
+( appear)1 313(ends of the de\256nition, so long as it doesn't)8 1889 2 540 3840 t
+(inside the de\256nition.)2 820 1 540 3960 t
+(Now you can use)3 690 1 540 4140 t
+10 CW f
+(xy)1255 4140 w
+10 R f
+(like this:)1 348 1 1400 4140 t
+10 CW f
+(.EQ)690 4310 w
+(f\(x\) = xy)2 540 1 690 4430 t
+10 S f
+(\274)1290 4430 w
+10 CW f
+(.EN)690 4550 w
+10 R f
+( occurrence of)2 603( Each)1 266(and so on.)2 442 3 540 4720 t
+10 CW f
+(xy)1893 4720 w
+10 R f
+(will expand into)2 686 1 2056 4720 t
+( careful to leave spaces or)5 1082( Be)1 171( de\256ned as.)2 472(what it was)2 477 4 540 4840 t
+( the name when you actually)5 1240(their equivalent around)2 962 2 540 4960 t
+(use it, so)2 353 1 540 5080 t
+10 I f
+(eqn)918 5080 w
+10 R f
+(will be able to identify it as special.)7 1421 1 1087 5080 t
+( First,)1 297( several things to watch out for.)6 1490(There are)1 415 3 540 5260 t
+(although de\256nitions can use previous de\256nitions, as in)7 2172 1 540 5380 t
+10 CW f
+(.EQ)690 5550 w
+(define xi ' x sub i ')6 1260 1 690 5670 t
+(define xi1 ' xi sub 1 ')6 1380 1 690 5790 t
+(.EN)690 5910 w
+10 I f
+( itself!)1 267(Don't de\256ne something in terms of)5 1450 2 540 6080 t
+10 R f
+(A favorite)1 421 1 2321 6080 t
+(error is to say)3 546 1 540 6200 t
+10 CW f
+(define X ' roman X ')5 1200 1 690 6380 t
+10 R f
+(This is a guaranteed disaster, since)5 1396 1 540 6560 t
+10 CW f
+(X)1963 6560 w
+10 R f
+(is now de\256ned in)3 692 1 2050 6560 t
+( you say)2 333( If)1 116(terms of itself.)2 580 3 540 6680 t
+10 CW f
+(define X ' roman "X" ')5 1320 1 690 6860 t
+10 R f
+( second)1 314(however, the quotes protect the)4 1294 2 540 7040 t
+10 CW f
+(X)2185 7040 w
+10 R f
+(, and every-)2 497 1 2245 7040 t
+(thing works \256ne.)2 675 1 540 7160 t
+10 I f
+(Eqn)540 7340 w
+10 R f
+( can make)2 458( You)1 249( be rede\256ned.)2 594(keywords can)1 577 4 752 7340 t
+10 CW f
+(/)2682 7340 w
+10 R f
+(mean)540 7460 w
+10 CW f
+(over)781 7460 w
+10 R f
+(by saying)1 386 1 1046 7460 t
+10 CW f
+(define / ' over ')4 1020 1 3167 960 t
+10 R f
+(or rede\256ne)1 429 1 3017 1140 t
+10 CW f
+(over)3471 1140 w
+10 R f
+(as)3736 1140 w
+10 CW f
+(/)3844 1140 w
+10 R f
+(with)3929 1140 w
+10 CW f
+(define over ' / ')4 1020 1 3167 1320 t
+10 R f
+( de\256nition,)1 469(It is possible to create a parameterized)6 1733 2 3017 1500 t
+(which will expand into something different each time)7 2202 1 3017 1620 t
+( a de\256nition contains occurrences of)5 1494( If)1 126(it is used.)2 401 3 3017 1740 t
+10 CW f
+($1)5074 1740 w
+10 R f
+(,)5194 1740 w
+10 CW f
+($2)3017 1860 w
+10 R f
+(, etc., as in)3 427 1 3137 1860 t
+10 CW f
+(define f 'font $1 {"$2"}')4 1500 1 3167 2040 t
+10 R f
+( name that are followed by)5 1077(then subsequent uses of that)4 1125 2 3017 2220 t
+( will have the values)4 933(a parenthesized list of values)4 1269 2 3017 2340 t
+(substituted for the)2 722 1 3017 2460 t
+10 CW f
+($)3764 2460 w
+10 I f
+(n)3824 2460 w
+10 R f
+('s:)3874 2460 w
+10 CW f
+(f\(CW, a phrase\))2 900 1 3167 2640 t
+10 R f
+(will print)1 370 1 3017 2820 t
+10 CW f
+(a phrase)1 480 1 3412 2820 t
+10 R f
+(in the constant-width font)3 1030 1 3917 2820 t
+10 CW f
+(CW)4972 2820 w
+10 R f
+(.)5092 2820 w
+(You can test whether something is de\256ned with)7 2202 1 3017 3000 t
+10 CW f
+(ifdef)3017 3120 w
+10 R f
+(:)3317 3120 w
+10 CW f
+(ifdef f /)2 540 1 3167 3300 t
+10 I f
+(anything at all)2 584 1 3767 3300 t
+10 CW f
+(/)4411 3300 w
+10 R f
+(is replaced by)2 554 1 3017 3480 t
+10 I f
+(anything at all)2 584 1 3596 3480 t
+10 R f
+(if)4205 3480 w
+10 CW f
+(f)4291 3480 w
+10 R f
+(is de\256ned.)1 411 1 4376 3480 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 22.  , HEADING = File Inclusion]
+10 B f
+( Inclusion)1 421(22. File)1 336 2 3017 3720 t
+10 R f
+(You can include a \256le of)5 1119 1 3017 3900 t
+10 I f
+(eqn)4189 3900 w
+10 R f
+(input as part of an)4 833 1 4386 3900 t
+(equation by the construction)3 1135 1 3017 4020 t
+10 CW f
+(include ")1 540 1 3167 4200 t
+10 I f
+(\256lename)3707 4200 w
+10 CW f
+(")4045 4200 w
+10 R f
+(For historical reasons,)2 987 1 3017 4380 t
+10 CW f
+(copy)4080 4380 w
+10 R f
+( for)1 193(is a synonym)2 630 2 4396 4380 t
+10 CW f
+(include)3017 4500 w
+10 R f
+(.)3437 4500 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 23.  , HEADING = A Large Example]
+10 B f
+( Large Example)2 683(23. A)1 247 2 3017 4740 t
+10 R f
+( for the three display)4 962(Here is the complete source)4 1240 2 3017 4920 t
+(equations in the abstract of this guide.)6 1518 1 3017 5040 t
+8 CW f
+(.EQ I)1 240 1 3017 5200 t
+(G\(z\)\304mark =\304 e sup {ln \304 G\(z\)} \304=\304 exp left \()10 2160 1 3017 5300 t
+(sum from k>=1 {S sub k z sup k} over k right \))12 2208 1 3017 5400 t
+(\304=\304 prod from k>=1 e sup {S sub k z sup k /k})12 2160 1 3017 5500 t
+(.EN)3017 5600 w
+(.EQ I)1 240 1 3017 5700 t
+(lineup = left \( 1 + S sub 1 z +)10 1488 1 3017 5800 t
+({S sub 1 sup 2 z sup 2} over 2! + ... right \))13 2160 1 3017 5900 t
+(left \( 1+ {S sub 2 z sup 2} over 2)10 1632 1 3017 6000 t
+(+ {S sub 2 sup 2 z sup 4} over)9 1440 1 3017 6100 t
+({2 sup 2 cdot 2!} + ... right \) ...)9 1680 1 3113 6200 t
+(.EN)3017 6300 w
+(.EQ I)1 240 1 3017 6400 t
+(lineup = sum from m>=0 left \( sum from)8 1824 1 3017 6500 t
+(pile {k sub 1 ,k sub 2 ,..., k sub m >=0)11 1920 1 3017 6600 t
+(above k sub 1 +2k sub 2 + ... +mk sub m =m})12 2064 1 3017 6700 t
+({ S sub 1 sup {k sub 1} } over)9 1440 1 3017 6800 t
+({ 1 sup k sub 1 k sub 1 ! } \304 ...)12 1584 1 3017 6900 t
+({ S sub 2 sup {k sub 2} } over)9 1440 1 3017 7000 t
+({2 sup k sub 2 k sub 2 ! } \304)10 1344 1 3017 7100 t
+({ S sub m sup {k sub m} } over)9 1440 1 3017 7200 t
+({ m sup k sub m k sub m ! } right \) z sup m)15 2064 1 3017 7300 t
+(.EN)3017 7400 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Page: 9 9
+/saveobj save def
+mark
+9 pagesetup
+10 HB f
+(EQN 9)1 4680 1 540 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 24.  , HEADING = Keywords, Precedences, Etc.]
+10 B f
+( Precedences, Etc.)2 764(24. Keywords,)1 633 2 540 960 t
+10 R f
+(Here are the keywords of)4 1063 1 540 1140 t
+10 I f
+(eqn)1642 1140 w
+10 R f
+(in order of decreasing)3 917 1 1825 1140 t
+(precedence:)540 1260 w
+10 CW f
+(dyad vec under utilde bar)4 1740 1 690 1440 t
+(tilde hat dot dotdot)3 1380 1 1050 1560 t
+(left right)1 660 1 690 1680 t
+( up)1 360(fwd back down)2 1020 2 690 1800 t
+( italic bold size)3 1200(fat roman)1 660 2 690 1920 t
+(sub sup)1 540 1 690 2040 t
+(sqrt over)1 600 1 690 2160 t
+(from to)1 480 1 690 2280 t
+10 R f
+(These operations group to the left:)5 1373 1 540 2460 t
+10 CW f
+(over sqrt left right)3 1380 1 690 2640 t
+10 R f
+(All others group to the right.)5 1144 1 540 2820 t
+(Digits, parentheses, brackets, punctuation marks, and)5 2202 1 540 3000 t
+( to Roman)2 477(these mathematical words are converted)4 1725 2 540 3120 t
+(font when encountered:)2 942 1 540 3240 t
+10 CW f
+(sin sinh max log and)4 1680 1 690 3420 t
+( if)1 360(cos cosh min ln)3 1260 2 690 3540 t
+(tan tanh lim exp for)4 1680 1 690 3660 t
+( Re Im)2 720(arc det)1 540 2 690 3780 t
+10 R f
+( recognized and trans-)3 943(These character sequences are)3 1259 2 540 3960 t
+(lated as shown.)2 613 1 540 4080 t
+10 CW f
+(>=)764 4260 w
+10 S f
+(\263)1320 4260 w
+10 CW f
+(nothing)1822 4260 w
+(<=)764 4390 w
+10 S f
+(\243)1320 4390 w
+10 CW f
+(partial)1822 4390 w
+10 S f
+(\266)2430 4390 w
+10 CW f
+(==)764 4520 w
+10 S f
+(\272)1320 4520 w
+10 CW f
+(half)1822 4520 w
+10 S1 f
+()2417 4520 w
+2417 4520 m
+75 build_12
+2492 4520 m
+10 CW f
+(!=)764 4650 w
+10 S f
+(\271)1320 4650 w
+10 CW f
+(prime)1822 4650 w
+13 S f
+(\242)2438 4700 w
+10 CW f
+(+-)764 4780 w
+10 S f
+(\261)1320 4780 w
+10 CW f
+(cdot)1822 4780 w
+10 R f
+(.)2442 4750 w
+10 CW f
+(->)764 4910 w
+10 S f
+(\256)1298 4910 w
+10 CW f
+(times)1822 4910 w
+10 S f
+(\264)2427 4910 w
+10 CW f
+(<-)764 5040 w
+10 S f
+(\254)1298 5040 w
+10 CW f
+(del)1822 5040 w
+10 S f
+(\321)2419 5040 w
+10 CW f
+(<<)764 5170 w
+10 S f
+(<<)1293 5170 w
+10 CW f
+(grad)1822 5170 w
+10 S f
+(\321)2419 5170 w
+10 CW f
+(>>)764 5300 w
+10 S f
+(>>)1293 5300 w
+10 CW f
+(...)1822 5300 w
+10 I f
+(...)2417 5300 w
+10 CW f
+(approx)764 5430 w
+10 S f
+(~)1320 5410 w
+(~)1320 5435 w
+10 CW f
+(,...,)1822 5430 w
+10 I f
+(,...,)2392 5430 w
+10 CW f
+(inf)764 5560 w
+10 S f
+(\245)1311 5560 w
+10 CW f
+(dollar)1822 5560 w
+10 R f
+($)2429 5560 w
+10 CW f
+(sum)764 5700 w
+15 S f
+(S)1303 5730 w
+10 CW f
+(prod)764 5850 w
+15 S f
+(P)1290 5880 w
+10 CW f
+(int)764 6021 w
+14 S f
+(\362)1313 6031 w
+10 CW f
+(union)764 6181 w
+15 S f
+(\310)1290 6211 w
+10 CW f
+(inter)764 6331 w
+15 S f
+(\307)1290 6361 w
+10 R f
+( simply spell them out in)5 1158(To obtain Greek letters,)3 1044 2 3017 960 t
+(whatever case you want:)3 983 1 3017 1080 t
+10 CW f
+(DELTA)3273 1260 w
+10 S f
+(D)3852 1260 w
+10 CW f
+(iota)4323 1260 w
+10 S f
+(i)4911 1260 w
+10 CW f
+(GAMMA)3273 1380 w
+10 S f
+(G)3853 1380 w
+10 CW f
+(kappa)4323 1380 w
+10 S f
+(k)4900 1380 w
+10 CW f
+(LAMBDA)3273 1500 w
+10 S f
+(L)3848 1500 w
+10 CW f
+(lambda)4323 1500 w
+10 S f
+(l)4900 1500 w
+10 CW f
+(OMEGA)3273 1620 w
+10 S f
+(W)3844 1620 w
+10 CW f
+(mu)4323 1620 w
+10 S f
+(m)4898 1620 w
+10 CW f
+(PHI)3273 1740 w
+10 S f
+(F)3845 1740 w
+10 CW f
+(nu)4323 1740 w
+10 S f
+(n)4901 1740 w
+10 CW f
+(PI)3273 1860 w
+10 S f
+(P)3844 1860 w
+10 CW f
+(omega)4323 1860 w
+10 S f
+(w)4893 1860 w
+10 CW f
+(PSI)3273 1980 w
+10 S f
+(Y)3843 1980 w
+10 CW f
+(omicron)4323 1980 w
+10 S f
+(o)4900 1980 w
+10 CW f
+(SIGMA)3273 2100 w
+10 S f
+(S)3853 2100 w
+10 CW f
+(phi)4323 2100 w
+10 S f
+(f)4901 2100 w
+10 CW f
+(THETA)3273 2220 w
+10 S f
+(Q)3846 2220 w
+10 CW f
+(pi)4323 2220 w
+10 S f
+(p)4900 2220 w
+10 CW f
+(UPSILON)3273 2340 w
+10 S f
+(U)3848 2340 w
+10 CW f
+(psi)4323 2340 w
+10 S f
+(y)4893 2340 w
+10 CW f
+(XI)3273 2460 w
+10 S f
+(X)3850 2460 w
+10 CW f
+(rho)4323 2460 w
+10 S f
+(r)4900 2460 w
+10 CW f
+(alpha)3273 2580 w
+10 S f
+(a)3851 2580 w
+10 CW f
+(sigma)4323 2580 w
+10 S f
+(s)4897 2580 w
+10 CW f
+(beta)3273 2700 w
+10 S f
+(b)3855 2700 w
+10 CW f
+(tau)4323 2700 w
+10 S f
+(t)4905 2700 w
+10 CW f
+(chi)3273 2820 w
+10 S f
+(c)3855 2820 w
+10 CW f
+(theta)4323 2820 w
+10 S f
+(q)4901 2820 w
+10 CW f
+(delta)3273 2940 w
+10 S f
+(d)3858 2940 w
+10 CW f
+(upsilon)4323 2940 w
+10 S f
+(u)4898 2940 w
+10 CW f
+(epsilon)3273 3060 w
+10 S f
+(e)3861 3060 w
+10 CW f
+(xi)4323 3060 w
+10 S f
+(x)4903 3060 w
+10 CW f
+(eta)3273 3180 w
+10 S f
+(h)3853 3180 w
+10 CW f
+(zeta)4323 3180 w
+10 S f
+(z)4903 3180 w
+10 CW f
+(gamma)3273 3300 w
+10 S f
+(g)3862 3300 w
+10 I f
+(Eqn)3017 3480 w
+10 R f
+( Greek alphabet,)2 686(really ought to know the whole)5 1316 2 3217 3480 t
+( are identical to)3 654(but the missing upper-case characters)4 1548 2 3017 3600 t
+(Roman ones.)1 522 1 3017 3720 t
+( words known to)3 753(These are all the)3 737 2 3017 3900 t
+10 I f
+(eqn)4560 3900 w
+10 R f
+(, except for)2 507 1 4712 3900 t
+(characters with names.)2 911 1 3017 4020 t
+10 CW f
+(above)3167 4200 w
+(back)3167 4320 w
+(bar)3167 4440 w
+(bold)3167 4560 w
+(ccol)3167 4680 w
+(col)3167 4800 w
+(copy)3167 4920 w
+(cpile)3167 5040 w
+(define)3167 5160 w
+(delim)3167 5280 w
+(dot)3167 5400 w
+(dotdot)3167 5520 w
+(down)3167 5640 w
+(dyad)3167 5760 w
+(fat)3167 5880 w
+(font)3167 6000 w
+(from)3167 6120 w
+(fwd)3167 6240 w
+(gfont)3167 6360 w
+(gsize)3867 4200 w
+(hat)3867 4320 w
+(highbar)3867 4440 w
+(ifdef)3867 4560 w
+(include)3867 4680 w
+(int)3867 4800 w
+(integral)3867 4920 w
+(inter)3867 5040 w
+(italic)3867 5160 w
+(lcol)3867 5280 w
+(left)3867 5400 w
+(lineup)3867 5520 w
+(lowbar)3867 5640 w
+(lpile)3867 5760 w
+(mark)3867 5880 w
+(matrix)3867 6000 w
+(over)3867 6120 w
+(pile)3867 6240 w
+(prod)3867 6360 w
+(rcol)4567 4200 w
+(right)4567 4320 w
+(roman)4567 4440 w
+(rpile)4567 4560 w
+(size)4567 4680 w
+(space)4567 4800 w
+(sqrt)4567 4920 w
+(sub)4567 5040 w
+(sum)4567 5160 w
+(sup)4567 5280 w
+(tilde)4567 5400 w
+(to)4567 5520 w
+(under)4567 5640 w
+(union)4567 5760 w
+(up)4567 5880 w
+(utilde)4567 6000 w
+(vec)4567 6120 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 9 9
+%%Page: 10 10
+/saveobj save def
+mark
+10 pagesetup
+10 HB f
+(10 EQN)1 4680 1 540 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 25.  , HEADING = Troubleshooting]
+10 B f
+(25. Troubleshooting)1 882 1 540 960 t
+10 R f
+( leaving out)2 484(If you make a mistake in an equation, like)8 1718 2 540 1140 t
+( or having one too many \(very)6 1251(a brace \(very common\))3 951 2 540 1260 t
+( a)1 100(common\) or having)2 848 2 540 1380 t
+10 CW f
+(sup)1544 1380 w
+10 R f
+(with nothing before it)3 962 1 1780 1380 t
+(\(common\),)540 1500 w
+10 I f
+(eqn)1006 1500 w
+10 R f
+(will tell you with the message)5 1197 1 1175 1500 t
+10 CW f
+(syntax error near line)3 1320 1 690 1680 t
+10 I f
+(n)2070 1680 w
+10 CW f
+(, file)1 360 1 2120 1680 t
+10 I f
+(f)2540 1680 w
+10 CW f
+(,)2568 1680 w
+(context is >>>)2 840 1 810 1800 t
+10 I f
+(something)1710 1800 w
+10 CW f
+(<<<)2181 1800 w
+10 R f
+(where)540 1980 w
+10 I f
+(n)826 1980 w
+10 R f
+( trouble)1 327(is approximately the line where the)5 1496 2 919 1980 t
+(occurred,)540 2100 w
+10 I f
+(f)941 2100 w
+10 R f
+( \256le, and)2 351(is the name of the input)5 956 2 997 2100 t
+10 I f
+(something)2331 2100 w
+10 R f
+( line)1 197( The)1 227( input was in error.)4 845(is a guess about what)4 933 4 540 2220 t
+( nearby as)2 430( \320 look)2 310( context is approximate)3 974(number and)1 488 4 540 2340 t
+( self-explanatory messages that)3 1322( are also)2 378(well. There)1 502 3 540 2460 t
+(arise if you leave out a quote or try to run)10 1798 1 540 2580 t
+10 I f
+(eqn)2377 2580 w
+10 R f
+(on a)1 182 1 2560 2580 t
+(non-existent \256le.)1 672 1 540 2700 t
+( before actually)2 690(If you want to check a document)6 1512 2 540 2880 t
+(printing it,)1 423 1 540 3000 t
+10 CW f
+(eqn)690 3180 w
+10 I f
+(\256les)930 3180 w
+10 CW f
+(>/dev/null)1151 3180 w
+10 R f
+(will throw away the output but print the messages.)8 2018 1 540 3360 t
+( signs as delimiters, it)4 898(If you use something like dollar)5 1304 2 540 3540 t
+( causes very strange)3 872( This)1 252( out.)1 202(is easy to leave one)4 876 4 540 3660 t
+( program)1 367(troubles. The)1 556 2 540 3780 t
+10 I f
+(checkdoc)1492 3780 w
+10 R f
+( misplaced)1 435(checks for)1 416 2 1891 3780 t
+(or missing delimiters and similar troubles.)5 1689 1 540 3900 t
+( of an)2 275(In-line equations can only be so big because)7 1927 2 540 4080 t
+(internal limit in)2 647 1 540 4200 t
+10 I f
+(troff)1224 4200 w
+10 R f
+( get the message ``word)4 997( you)1 187(. If)1 153 3 1405 4200 t
+( you print)2 405( If)1 123(over\257ow,'' you have exceeded this limit.)5 1674 3 540 4320 t
+( displayed equation this message will)5 1516(the equation as a)3 686 2 540 4440 t
+( ``line over\257ow'' indi-)3 928( message)1 371( The)1 213(usually go away.)2 690 4 540 4560 t
+( have exceeded a different, bigger internal)6 1806(cates you)1 396 2 540 4680 t
+( is to break the equation)5 1017( only cure for this)4 754(limit. The)1 431 3 540 4800 t
+(into two separate ones.)3 915 1 540 4920 t
+(On a related topic,)3 788 1 3017 960 t
+10 I f
+(eqn)3847 960 w
+10 R f
+( break equations by)3 833(does not)1 353 2 4033 960 t
+( up across)2 495( must split long equations)4 1225(itself \320 you)2 482 3 3017 1080 t
+( a separate)2 432(multiple lines by yourself, marking each by)6 1770 2 3017 1200 t
+10 CW f
+(.EQ)3017 1320 w
+10 S f
+(\274)3222 1300 w
+10 CW f
+(.EN)3330 1320 w
+10 R f
+(sequence.)3535 1320 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 26.  , HEADING = Use on the UNIX System]
+10 B f
+( on the)2 289(26. Use)1 330 2 3017 1560 t
+9 B f
+(UNIX)3661 1560 w
+10 B f
+(System)3916 1560 w
+10 R f
+(To print a document that contains mathematics,)6 1901 1 3017 1740 t
+10 CW f
+(eqn)3167 1920 w
+10 I f
+(\256les)3407 1920 w
+10 CW f
+(| troff)1 420 1 3628 1920 t
+10 R f
+(If there are any)3 605 1 3017 2100 t
+10 I f
+(troff)3647 2100 w
+10 R f
+(options, they go after the)4 996 1 3845 2100 t
+10 I f
+(troff)4866 2100 w
+10 R f
+(part)5064 2100 w
+( example,)1 388( For)1 189(of the command.)2 674 3 3017 2220 t
+10 CW f
+(eqn)3167 2400 w
+10 I f
+(\256les)3407 2400 w
+10 CW f
+(| troff -ms)2 660 1 3628 2400 t
+10 R f
+(\(or)4708 2400 w
+10 CW f
+(-mm)4849 2400 w
+10 R f
+(\))5029 2400 w
+10 I f
+(Eqn)3017 2580 w
+10 R f
+( at a PostScript)3 714(assumes the output is aimed)4 1266 2 3239 2580 t
+( using some other typesetter or)5 1384( you are)2 385(device. If)1 433 3 3017 2700 t
+(printer, you have to tell)4 1099 1 3017 2820 t
+10 I f
+(eqn)4182 2820 w
+10 R f
+(with the same)2 639 1 4393 2820 t
+10 CW f
+(-T)5099 2820 w
+10 R f
+(argument that you use with)4 1088 1 3017 2940 t
+10 I f
+(troff)4130 2940 w
+10 R f
+(:)4311 2940 w
+10 CW f
+(eqn -Taps)1 540 1 3167 3120 t
+10 I f
+(\256les)3767 3120 w
+10 CW f
+(| troff -Taps)2 780 1 3988 3120 t
+10 S f
+(\274)4828 3120 w
+10 I f
+(Eqn)3017 3300 w
+10 R f
+(also uses the environment variable)4 1409 1 3210 3300 t
+9 CW f
+(TYPESETTER)4651 3300 w
+10 R f
+(;)5191 3300 w
+(the default is)2 516 1 3017 3420 t
+10 CW f
+(post)3558 3420 w
+10 R f
+(, as it is for)4 447 1 3798 3420 t
+10 I f
+(troff)4270 3420 w
+10 R f
+(.)4451 3420 w
+10 I f
+(Eqn)3017 3600 w
+10 R f
+( the)1 149(can be used with)3 671 2 3204 3600 t
+10 I f
+(tbl)4051 3600 w
+10 R f
+(program for setting tables)3 1035 1 4184 3600 t
+( Use)1 232(that contain mathematics.)2 1078 2 3017 3720 t
+10 I f
+(tbl)4379 3720 w
+10 R f
+(before)4536 3720 w
+10 I f
+(eqn)4841 3720 w
+10 R f
+(, like)1 226 1 4993 3720 t
+(this:)3017 3840 w
+10 CW f
+(tbl)3167 4020 w
+10 I f
+(\256les)3407 4020 w
+10 CW f
+(| eqn | troff)3 780 1 3628 4020 t
+10 R f
+(When)3017 4200 w
+10 I f
+(eqn)3304 4200 w
+10 R f
+(is used with)2 526 1 3497 4200 t
+10 I f
+(pic)4072 4200 w
+10 R f
+(or)4243 4200 w
+10 I f
+(grap)4375 4200 w
+10 R f
+(, the additional)2 647 1 4572 4200 t
+(vertical space that)2 746 1 3017 4320 t
+10 I f
+(eqn)3801 4320 w
+10 R f
+( from)1 231(adds to a line to keep it)6 1005 2 3983 4320 t
+( adjacent lines will con\257ict with)5 1310(colliding with)1 564 2 3017 4440 t
+10 I f
+(pic)4922 4440 w
+10 R f
+(and)5075 4440 w
+10 I f
+(grap)3017 4560 w
+10 R f
+( phrase)1 293(spacing. The)1 543 2 3239 4560 t
+10 CW f
+(space 0)1 420 1 4108 4560 t
+10 R f
+(at the beginning)2 658 1 4561 4560 t
+(of an equation will turn off the extra space.)8 1721 1 3017 4680 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 10 10
+%%Trailer
+done
+%%Pages: 10
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

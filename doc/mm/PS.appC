@@ -1,0 +1,1314 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( Memorandum, Released Paper, and External Letter)6 2943( Sample)1 564(APPENDIX C:)1 772 3 720 1050 t
+10 R f
+(This appendix demonstrates the use of)5 1544 1 720 1350 t
+9 R f
+(MM)2289 1350 w
+10 R f
+( needed)1 310( information)1 499( The)1 207(in generating various document styles.)4 1548 4 2476 1350 t
+( this appendix, the input)4 972( In)1 135( released papers, and external letters is entered in the same way.)11 2573(for memoranda,)1 640 4 720 1470 t
+( different)1 379( \320 a)2 176( documents varies in only one respect)6 1569(for all three)2 485 4 720 1590 t
+10 CW f
+(.MT)3365 1590 w
+10 R f
+(type is used to select the document)6 1459 1 3581 1590 t
+(style:)720 1710 w
+10 CW f
+(.MT 0)1 300 1 870 1890 t
+10 R f
+(Memorandum)1420 1890 w
+10 CW f
+(.MT 4)1 300 1 870 2010 t
+10 R f
+(Released Paper)1 612 1 1420 2010 t
+10 CW f
+(.MT 5)1 300 1 870 2130 t
+10 R f
+(External Letter)1 601 1 1420 2130 t
+(The following input was used to produce the sample documents shown on the next three pages.)15 3806 1 720 2310 t
+9 CW f
+(.ND "April 1, 1990")3 1026 1 870 2480 t
+(.TL)870 2590 w
+(Document Headings and Paragraphs)3 1728 1 870 2700 t
+(.AF "DocuCenter Services, Inc.")3 1674 1 870 2810 t
+(.AU "S. P. Lename" SPL MH 98765 "\(201\) 582-1234" 4W-567 systemx!spl)10 3618 1 870 2920 t
+(.MT)870 3030 w
+9 I f
+(type)1086 3030 w
+9 CW f
+(.H 1 "PARAGRAPHS AND HEADINGS")4 1620 1 870 3140 t
+(This section describes the types of paragraphs and the)8 2916 1 870 3250 t
+(kinds of headings that are available.)5 1998 1 870 3360 t
+(.H 2 Paragraphs)2 810 1 870 3470 t
+(Paragraphs are specified by the .P macro.)6 2214 1 870 3580 t
+(Usually, they are flush left.)4 1566 1 870 3690 t
+(The number register Pt is used to change the paragraph style.)10 3294 1 870 3800 t
+(.H 2 Headings)2 702 1 870 3910 t
+(.H 3 "Numbered Headings.")3 1350 1 870 4020 t
+(There are seven levels of numbered headings.)6 2376 1 870 4130 t
+(Level 1 is the most major or highest;)7 1998 1 870 4240 t
+(level 7, the lowest.)3 1080 1 870 4350 t
+(.P)870 4460 w
+(Headings are specified with the .H macro,)6 2214 1 870 4570 t
+(whose first argument is the level of heading)7 2376 1 870 4680 t
+(\(1 through 7\).)2 756 1 870 4790 t
+(.P)870 4900 w
+(On output, level-1 headings are preceded by two blank lines;)9 3240 1 870 5010 t
+(all others, by one blank line.)5 1620 1 870 5120 t
+(Level-1 and level-2 headings are normally emboldened and)7 3024 1 870 5230 t
+(stand apart from the text that follows;)6 2106 1 870 5340 t
+(levels 3 through 7 are normally italicized and run in with the)11 3348 1 870 5450 t
+(text that follows.)2 972 1 870 5560 t
+(.H 3 "Unnumbered Headings.")3 1458 1 870 5670 t
+(The macro .HU is a special case of .H, in that no heading)12 3078 1 870 5780 t
+(number is printed.)2 972 1 870 5890 t
+(Each .HU heading has the level given by the register Hu,)10 3024 1 870 6000 t
+(whose initial value is 2.)4 1350 1 870 6110 t
+(Usually, the value of that register is set to make)9 2700 1 870 6220 t
+(unnumbered headings occur at the lower heading level)7 2808 1 870 6330 t
+(in a document.)2 756 1 870 6440 t
+(.SG mc)1 324 1 870 6550 t
+(.NS)870 6660 w
+(J. J. Jones)2 594 1 870 6770 t
+(F. G. Swatter)2 702 1 870 6880 t
+(.NE)870 6990 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(C-2 MM)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = OUTPUT:  Memorandum  (\&.MT 0)]
+9 B f
+(OUTPUT)720 960 w
+10 B f
+(: Memorandum \()2 782 1 1095 960 t
+10 CW f
+(.MT 0)1 300 1 1877 960 t
+10 B f
+(\))2177 960 w
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 0 def
+/lly 0 def
+/urx 612 def
+/ury 792 def
+/w 0 def
+/o 1 def
+/s 0 def
+/cx 2880 def
+/cy -4140 def
+/sx 4320 def
+/sy 5760 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+mark
+/resolution 720 def
+setup
+2 setdecoding
+/build_sq {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    font B eq {fill} {stroke} ifelse
+} def
+/saveobj save def
+mark
+1 pagesetup
+36 S1 f
+()3780 696 w
+cleartomark
+saveobj restore
+/build_sq {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    font B eq {fill} {stroke} ifelse
+} def
+/saveobj save def
+mark
+36 S1 f
+3780 696 m
+180 build_sq
+3960 696 m
+10 S1 f
+(_ ________________________________________________________________________________________________________)1 5220 1 720 876 t
+10 H f
+(DocuCenter Services, Inc.)2 1165 1 720 1020 t
+8 R f
+(subject:)720 1416 w
+10 B f
+(Document Headings and Paragraphs)3 1576 1 1017 1416 t
+8 R f
+(date:)3792 1416 w
+10 B f
+(April 1, 1990)2 553 1 4032 1416 t
+8 R f
+(from:)3792 1656 w
+10 B f
+(S. P. Lename)2 561 1 4032 1656 t
+(Org. 98765)1 472 1 4032 1776 t
+(MH 4W-567)1 530 1 4032 1896 t
+(\(201\) 582-1234)1 624 1 4032 2016 t
+(systemx!spl)4032 2136 w
+9 B f
+( AND HEADINGS)2 721(1. PARAGRAPHS)1 739 2 720 2616 t
+10 R f
+(This section describes the types of paragraphs and the kinds of headings that are available.)14 3612 1 720 2796 t
+9 B f
+(1.1 Paragraphs)1 609 1 720 2976 t
+10 R f
+( number register Pt is used to)6 1226( The)1 215( \257ush left.)2 423( they are)2 361( Usually,)1 395(Paragraphs are speci\256ed by the .P macro.)6 1700 6 720 3156 t
+(change the paragraph style.)3 1091 1 720 3276 t
+9 B f
+(1.2 Headings)1 519 1 720 3456 t
+10 I f
+( Headings.)1 444(1.2.1 Numbered)1 666 2 720 3636 t
+10 R f
+( the most major or)4 781( 1 is)2 189( Level)1 288(There are seven levels of numbered headings.)6 1891 4 1891 3636 t
+(highest; level 7, the lowest.)4 1094 1 720 3756 t
+(Headings are speci\256ed with the .H macro, whose \256rst argument is the level of heading \(1 through 7\).)17 4021 1 720 3936 t
+( and)1 181( Level-1)1 372( headings are preceded by two blank lines; all others, by one blank line.)13 3015(On output, level-1)2 752 4 720 4116 t
+( 3 through 7 are)4 636(level-2 headings are normally emboldened and stand apart from the text that follows; levels)13 3684 2 720 4236 t
+(normally italicized and run in with the text that follows.)9 2232 1 720 4356 t
+10 I f
+( Headings.)1 434(1.2.2 Unnumbered)1 771 2 720 4536 t
+10 R f
+( is a special case of .H, in that no heading number is printed.)13 2439(The macro .HU)2 625 2 1976 4536 t
+( of that)2 283( the value)2 390( Usually,)1 387(Each .HU heading has the level given by the register Hu, whose initial value is 2.)15 3260 4 720 4656 t
+(register is set to make unnumbered headings occur at the lower heading level in a document.)15 3693 1 720 4776 t
+10 B f
+(S. P. Lename)2 561 1 2880 5256 t
+10 R f
+(MH-98765-SPL-mc)720 5256 w
+(Copy to)1 320 1 720 5496 t
+(J. J. Jones)2 400 1 720 5616 t
+(F. G. Swatter)2 533 1 720 5736 t
+cleartomark
+showpage
+saveobj restore
+done
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(MM C-3)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = OUTPUT:  Released Paper  (\&.MT 4)]
+9 B f
+(OUTPUT)720 960 w
+10 B f
+( \()1 83( Paper)1 280(: Released)1 460 3 1095 960 t
+10 CW f
+(.MT 4)1 300 1 1918 960 t
+10 B f
+(\))2218 960 w
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 0 def
+/lly 0 def
+/urx 612 def
+/ury 792 def
+/w 0 def
+/o 1 def
+/s 0 def
+/cx 2880 def
+/cy -4140 def
+/sx 4320 def
+/sy 5760 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+mark
+/resolution 720 def
+setup
+2 setdecoding
+/saveobj save def
+mark
+1 pagesetup
+12 B f
+(Document Headings and Paragraphs)3 1892 1 1919 960 t
+11 I f
+(S. P. Lename)2 581 1 2589 1140 t
+10 R f
+(DocuCenter Services, Inc.)2 1047 1 2356 1320 t
+(Murray Hill, New Jersey 07974)4 1267 1 2246 1440 t
+9 B f
+( AND HEADINGS)2 721(1. PARAGRAPHS)1 739 2 720 1680 t
+10 R f
+(This section describes the types of paragraphs and the kinds of headings that are available.)14 3612 1 720 1860 t
+9 B f
+(1.1 Paragraphs)1 609 1 720 2040 t
+10 R f
+( number register Pt is used to)6 1226( The)1 215( \257ush left.)2 423( they are)2 361( Usually,)1 395(Paragraphs are speci\256ed by the .P macro.)6 1700 6 720 2220 t
+(change the paragraph style.)3 1091 1 720 2340 t
+9 B f
+(1.2 Headings)1 519 1 720 2520 t
+10 I f
+( Headings.)1 444(1.2.1 Numbered)1 666 2 720 2700 t
+10 R f
+( the most major or)4 781( 1 is)2 189( Level)1 288(There are seven levels of numbered headings.)6 1891 4 1891 2700 t
+(highest; level 7, the lowest.)4 1094 1 720 2820 t
+(Headings are speci\256ed with the .H macro, whose \256rst argument is the level of heading \(1 through 7\).)17 4021 1 720 3000 t
+( and)1 181( Level-1)1 372( headings are preceded by two blank lines; all others, by one blank line.)13 3015(On output, level-1)2 752 4 720 3180 t
+( 3 through 7 are)4 636(level-2 headings are normally emboldened and stand apart from the text that follows; levels)13 3684 2 720 3300 t
+(normally italicized and run in with the text that follows.)9 2232 1 720 3420 t
+10 I f
+( Headings.)1 434(1.2.2 Unnumbered)1 771 2 720 3600 t
+10 R f
+( is a special case of .H, in that no heading number is printed.)13 2439(The macro .HU)2 625 2 1976 3600 t
+( of that)2 283( the value)2 390( Usually,)1 387(Each .HU heading has the level given by the register Hu, whose initial value is 2.)15 3260 4 720 3720 t
+(register is set to make unnumbered headings occur at the lower heading level in a document.)15 3693 1 720 3840 t
+cleartomark
+showpage
+saveobj restore
+done
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(C-4 MM)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = OUTPUT:  External Letter  (\&.MT 5)]
+9 B f
+(OUTPUT)720 960 w
+10 B f
+( \()1 83( Letter)1 290(: External)1 455 3 1095 960 t
+10 CW f
+(.MT 5)1 300 1 1923 960 t
+10 B f
+(\))2223 960 w
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 0 def
+/lly 0 def
+/urx 612 def
+/ury 792 def
+/w 0 def
+/o 1 def
+/s 0 def
+/cx 2880 def
+/cy -4140 def
+/sx 4320 def
+/sy 5760 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+mark
+/resolution 720 def
+setup
+2 setdecoding
+/saveobj save def
+mark
+1 pagesetup
+10 B f
+(Document Headings and Paragraphs)3 1576 1 720 600 t
+(April 1, 1990)2 553 1 4032 1800 t
+9 B f
+( AND HEADINGS)2 721(1. PARAGRAPHS)1 739 2 720 2160 t
+10 R f
+(This section describes the types of paragraphs and the kinds of headings that are available.)14 3612 1 720 2340 t
+9 B f
+(1.1 Paragraphs)1 609 1 720 2520 t
+10 R f
+( number register Pt is used to)6 1226( The)1 215( \257ush left.)2 423( they are)2 361( Usually,)1 395(Paragraphs are speci\256ed by the .P macro.)6 1700 6 720 2700 t
+(change the paragraph style.)3 1091 1 720 2820 t
+9 B f
+(1.2 Headings)1 519 1 720 3000 t
+10 I f
+( Headings.)1 444(1.2.1 Numbered)1 666 2 720 3180 t
+10 R f
+( the most major or)4 781( 1 is)2 189( Level)1 288(There are seven levels of numbered headings.)6 1891 4 1891 3180 t
+(highest; level 7, the lowest.)4 1094 1 720 3300 t
+(Headings are speci\256ed with the .H macro, whose \256rst argument is the level of heading \(1 through 7\).)17 4021 1 720 3480 t
+( and)1 181( Level-1)1 372( headings are preceded by two blank lines; all others, by one blank line.)13 3015(On output, level-1)2 752 4 720 3660 t
+( 3 through 7 are)4 636(level-2 headings are normally emboldened and stand apart from the text that follows; levels)13 3684 2 720 3780 t
+(normally italicized and run in with the text that follows.)9 2232 1 720 3900 t
+10 I f
+( Headings.)1 434(1.2.2 Unnumbered)1 771 2 720 4080 t
+10 R f
+( is a special case of .H, in that no heading number is printed.)13 2439(The macro .HU)2 625 2 1976 4080 t
+( of that)2 283( the value)2 390( Usually,)1 387(Each .HU heading has the level given by the register Hu, whose initial value is 2.)15 3260 4 720 4200 t
+(register is set to make unnumbered headings occur at the lower heading level in a document.)15 3693 1 720 4320 t
+10 B f
+(S. P. Lename)2 561 1 2880 4800 t
+10 R f
+(MH-98765-SPL-mc)720 4800 w
+(Copy to)1 320 1 720 5040 t
+(J. J. Jones)2 400 1 720 5160 t
+(F. G. Swatter)2 533 1 720 5280 t
+cleartomark
+showpage
+saveobj restore
+done
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Trailer
+done
+%%Pages: 4
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-Roman Courier Times-Roman

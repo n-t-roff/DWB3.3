@@ -1,0 +1,4833 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+17 HB f
+(MPICTURES)720 1040 w
+18 HB f
+(\320 A Picture Inclusion Package)4 2650 1 1771 1040 t
+36 S1 f
+(________________________)720 1240 w
+9 HB f
+(ABSTRACT)720 1720 w
+10 R f
+( modern)1 336( Most)1 262( can be surprisingly dif\256cult.)4 1176(Combining text and graphics using a computer)6 1901 4 1365 1720 t
+( integrate well with the entire text processing environment.)8 2363(page description facilities do not)4 1312 2 1365 1840 t
+( languages, like Adobe Systems' PostScript)5 1924(Fortunately, intelligent page description)3 1704 2 1365 1960 t
+6 S f
+(\322)4993 1920 w
+10 R f
+( ability to save and restore)5 1126(language, offer features that have proven invaluable, like the)8 2549 2 1365 2080 t
+(environments, and to scale, translate, and rotate coordinate systems.)8 2712 1 1365 2200 t
+(This document describes a mechanism for integrating text prepared for the)10 3247 1 1365 2380 t
+10 I f
+(troff)4664 2380 w
+10 R f
+(text)4890 2380 w
+( approach allows)2 712( This)1 246( programs.)1 445(formatter with graphic images described as PostScript)6 2272 4 1365 2500 t
+(virtually any PostScript image to be included in a)8 2089 1 1365 2620 t
+10 I f
+(troff)3493 2620 w
+10 R f
+( of the)2 285(document at any position)3 1050 2 3705 2620 t
+( the possibility of wrapping text around it.)7 1767(page, in any orientation and scaling, and with)7 1908 2 1365 2740 t
+( PostScript as a standard page description language, and the correspond-)10 2896(The growing use of)3 779 2 1365 2860 t
+( printers that accept it, promise to)6 1358(ing proliferation of programs that produce PostScript and)7 2317 2 1365 2980 t
+(make this an attractive alternative.)4 1372 1 1365 3100 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = INTRODUCTION]
+10 B f
+(1. INTRODUCTION)1 925 1 720 3520 t
+10 R f
+(This document describes a mechanism for integrating text prepared for the)10 3007 1 720 3700 t
+10 I f
+(troff)3755 3700 w
+10 R f
+( with graphic)2 535(text formatter)1 549 2 3956 3700 t
+( virtually any PostScript image to be)6 1593( approach allows)2 722( This)1 251(images described as PostScript programs.)4 1754 4 720 3820 t
+(included in a)2 552 1 720 3940 t
+10 I f
+(troff)1315 3940 w
+10 R f
+( and scaling, and with the)5 1116(document at any position of the page, in any orientation)9 2393 2 1531 3940 t
+(possibility of wrapping text around it.)5 1511 1 720 4060 t
+(The)720 4240 w
+10 I f
+(troff)911 4240 w
+10 R f
+( surrounded by a powerful)4 1101(text formatter has been around for more than 15 years and has been)12 2819 2 1120 4240 t
+( preprocessors \()2 667( Several)1 367(family of programs.)2 832 3 720 4360 t
+10 I f
+(pic)2602 4360 w
+10 R f
+(and)2767 4360 w
+10 I f
+(grap)2953 4360 w
+10 R f
+(, to name just two\) provide picture inclusion)7 1890 1 3150 4360 t
+( ``little language'' is translated into input suitable)7 2028( a)1 101( is the same:)3 518( each case the mechanism)4 1054(capabilities. In)1 619 5 720 4480 t
+(for)720 4600 w
+10 I f
+(troff)870 4600 w
+10 R f
+( independence is built)3 898( \320 device)2 392( that point the picture can be sent to any supported device)11 2398(. From)1 301 4 1051 4600 t
+(into the languages because their translation is to)7 1966 1 720 4720 t
+10 I f
+(troff)2719 4720 w
+10 R f
+(input. When)1 527 1 2925 4720 t
+10 I f
+(troff)3485 4720 w
+10 R f
+(supports a new printer, so do the)6 1349 1 3691 4720 t
+( a big advantage and has been a continuing source of stability.)11 2479(preprocessors. That's)1 878 2 720 4840 t
+(But relying on)2 614 1 720 5020 t
+10 I f
+(troff)1377 5020 w
+10 R f
+(to provide device independence has its drawbacks.)6 2134 1 1594 5020 t
+10 I f
+(Troff)3797 5020 w
+10 R f
+('s graphics operators are)3 1034 1 4006 5020 t
+( it is)2 215( example,)1 410( For)1 211(relatively primitive and do not integrate well with its text processing capabilities.)11 3484 4 720 5140 t
+( not impossible to produce rotated text strings in)8 2069(dif\256cult if)1 419 2 720 5260 t
+10 I f
+(troff)3250 5260 w
+10 R f
+(, and that means picture preprocessors)5 1609 1 3431 5260 t
+( is really historical:)3 787( problem)1 365( The)1 212(cannot expect this capability.)3 1186 4 720 5380 t
+10 I f
+(troff)3301 5380 w
+10 R f
+(evolved as a text processing language)5 1535 1 3505 5380 t
+(with graphics operators added after the basic design was in place.)10 2613 1 720 5500 t
+( traditional graphic)2 770(The picture inclusion mechanism described here uses a very different approach than the)12 3550 2 720 5680 t
+(interfaces to)1 491 1 720 5800 t
+10 I f
+(troff)1237 5800 w
+10 R f
+(.)1418 5800 w
+10 I f
+(Mpictures)1494 5800 w
+10 R f
+( main function is to reserve)5 1090( Its)1 150(is a macro package, rather than a preprocessor.)7 1875 3 1925 5800 t
+( by the)2 290(space on the page to accommodate a picture which is pasted in later)12 2801 2 720 5920 t
+10 I f
+(troff)3845 5920 w
+10 R f
+(device postprocessor \(in)2 988 1 4052 5920 t
+(this case,)1 404 1 720 6040 t
+10 I f
+(dpost)1187 6040 w
+10 R f
+(\). Although)1 524 1 1412 6040 t
+10 I f
+(mpictures)1999 6040 w
+10 R f
+( only reasonable)2 728(is a general picture inclusion facility, the)6 1856 2 2456 6040 t
+(implementation at this time is for the PostScript page description language.)10 3007 1 720 6160 t
+(A major advantage of the)4 1098 1 720 6340 t
+10 I f
+(mpictures)1864 6340 w
+10 R f
+(approach is that it allows access from high-level applications to)9 2736 1 2304 6340 t
+(PostScript language capabilities that)3 1491 1 720 6460 t
+10 I f
+(troff)2248 6460 w
+10 R f
+(does not support, like rotation, shading, color, line widths and)9 2582 1 2458 6460 t
+( creating the appropriate)3 978( line art, graphs, and pictures of any kind becomes a matter of)12 2479( Including)1 434(line styles.)1 429 4 720 6580 t
+( can be done using a number of commercially available Microsoft)10 2658( This)1 231(PostScript \256le.)1 593 3 720 6700 t
+9 R f
+(MS-DOS)4228 6700 w
+6 R f
+(TM)4568 6650 w
+10 R f
+(or Apple)1 354 1 4686 6700 t
+(Macintosh)720 6820 w
+6 R f
+(TM)1142 6770 w
+10 R f
+( using)1 248(software packages, or even)3 1094 2 1262 6820 t
+10 I f
+(troff)2635 6820 w
+10 R f
+(and)2839 6820 w
+10 I f
+(dpost)3014 6820 w
+10 R f
+( addition, if you learn the language, you)7 1637(. In)1 164 2 3239 6820 t
+( publishes three excellent)3 1048( Addison-Wesley)1 733(can write your own PostScript programs to generate pictures.)8 2539 3 720 6940 t
+(books,)720 7060 w
+10 I f
+( Reference Manual, PostScript Language Program Design,)6 2496(PostScript Language)1 862 2 1029 7060 t
+10 R f
+(and)4433 7060 w
+10 I f
+(PostScript)4623 7060 w
+( and Cookbook,)2 636(Language Tutorial)1 758 2 720 7180 t
+10 R f
+( three books are interesting reading,)5 1445( All)1 181(written by Adobe Systems, Inc.)4 1272 3 2142 7180 t
+(not dif\256cult to understand, and full of examples.)7 1929 1 720 7300 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(2 MPICTURES)1 4320 1 720 600 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 0 def
+/lly 0 def
+/urx 612 def
+/ury 792 def
+/w 0 def
+/o 0 def
+/s 0 def
+/cx 4320 def
+/cy -1800 def
+/sx 1440 def
+/sy 1440 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/square
+ {
+  gsave
+   edge 0 rlineto
+   0 edge rlineto
+   edge neg 0 rlineto
+   closepath
+   fill
+  grestore
+} def
+
+/check
+ {
+   black setgray square
+   side 0 rmoveto
+   light setgray square
+   0 side rmoveto
+   dark setgray square
+   side neg 0 rmoveto
+   graylev setgray square
+} def
+
+72 72 scale
+
+/xloc .25 def
+/xincr 1 def
+/graylev 0 def
+/grayincr 1 79 div def
+/side .475 def
+/edge .45 def
+/light 2 3 div def
+/dark 1 3 div def
+/black 0 def
+
+9.5 -1 .5
+ {
+   /yloc exch def
+   8
+   {
+     xloc yloc moveto check
+     /xloc xloc xincr add def
+     /graylev graylev grayincr add def
+   } repeat
+   /xincr xincr neg def
+   /xloc xloc xincr add def
+ } for
+
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+%INFO[SECTION: LEVEL = 1, NUMBER = 2. , HEADING = THE MACROS]
+10 B f
+( MACROS)1 469(2. THE)1 337 2 720 1080 t
+10 R f
+(Basically,)720 1260 w
+10 I f
+(mpictures)1150 1260 w
+10 R f
+(uses size and placement information to create a)7 1950 1 1578 1260 t
+( then instructs)2 581(``hole'' on the page, and)4 1027 2 720 1380 t
+10 I f
+(troff)2363 1380 w
+10 R f
+(to pass a request to the)5 957 1 2571 1380 t
+( the)1 162( is)1 106( It)1 125(postprocessor to ``\256t'' the picture into the reserved space.)8 2415 4 720 1500 t
+10 I f
+(troff)720 1620 w
+10 R f
+(postprocessor,)943 1620 w
+10 I f
+(dpost)1567 1620 w
+10 R f
+(, that places the image on the page and)8 1736 1 1792 1620 t
+( example, the)2 561( For)1 202(makes sure that it is properly scaled, rotated, etc.)8 2045 3 720 1740 t
+(macro call:)1 446 1 720 1860 t
+10 CW f
+(.BP squares.ps 2.0i 2.0i r)4 1560 1 900 2040 t
+10 R f
+(was used to place the picture shown here.)7 1706 1 720 2220 t
+10 I f
+(Mpictures)2483 2220 w
+10 R f
+(took the image)2 608 1 2920 2220 t
+( \256le)1 154(from the)1 343 2 720 2340 t
+10 CW f
+(squares.ps)1243 2340 w
+10 R f
+(\(originally 8)1 498 1 1869 2340 t
+10 S1 f
+()2367 2340 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_12 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (2) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+2367 2340 m
+75 build_12
+2442 2340 m
+10 S f
+(\264)2458 2340 w
+10 R f
+(11 inches in size\), scaled)4 999 1 2529 2340 t
+(it to \256t into a 2)5 593 1 720 2460 t
+10 S f
+(\264)1329 2460 w
+10 R f
+(2-inch hole, and placed it at the right margin.)8 1803 1 1400 2460 t
+(The)720 2701 w
+10 I f
+(mpictures)902 2701 w
+10 R f
+(package consists of three macros \()5 1381 1 1323 2701 t
+10 CW f
+(.BP)2704 2701 w
+10 R f
+(,)2884 2701 w
+10 CW f
+(.EP)2936 2701 w
+10 R f
+(, and)1 196 1 3116 2701 t
+10 CW f
+(.PI)3340 2701 w
+10 R f
+(\) which serve as the interface to)6 1286 1 3520 2701 t
+10 I f
+(troff)4834 2701 w
+10 R f
+(.)5015 2701 w
+(Here is a synopsis of each macro call followed by a brief description:)12 2766 1 720 2821 t
+8 S f
+(\267)783 3001 w
+10 R f
+(The)870 3001 w
+10 CW f
+(.BP)1050 3001 w
+10 R f
+(\(Begin Picture\) macro:)2 915 1 1255 3001 t
+10 CW f
+(.BP)1020 3181 w
+10 I f
+(\256le)1260 3181 w
+10 R f
+([)1390 3181 w
+10 CW f
+(\()1423 3181 w
+10 I f
+(page)1483 3181 w
+10 CW f
+(\))1677 3181 w
+10 R f
+(] [)1 116 1 1737 3181 t
+10 I f
+(height)1853 3181 w
+10 R f
+(] [)1 116 1 2103 3181 t
+10 I f
+(width)2219 3181 w
+10 R f
+(] [)1 116 1 2442 3181 t
+10 I f
+(position)2566 3181 w
+10 R f
+(] [)1 116 1 2889 3181 t
+10 I f
+(offset)3005 3181 w
+10 R f
+(] [)1 116 1 3222 3181 t
+10 I f
+(\257ags)3354 3181 w
+10 R f
+(] [)1 116 1 3543 3181 t
+10 I f
+(label)3659 3181 w
+10 R f
+(])3867 3181 w
+(The)870 3361 w
+10 CW f
+(.BP)1054 3361 w
+10 R f
+( placed there)2 519(macro reserves space on the page and arranges to have the named PostScript \256le)13 3258 2 1263 3361 t
+( addition,)1 385( In)1 140( desired format.)2 643(in the)1 233 4 870 3481 t
+10 CW f
+(.BP)2303 3481 w
+10 R f
+(tries to \256ll text around the sides of the frame, if there's room,)12 2525 1 2515 3481 t
+( likely, this is the)4 695( Most)1 258( bottom of the frame.)4 854(and restores things to their original state when it passes the)10 2363 4 870 3601 t
+(only picture inclusion macro you will need.)6 1740 1 870 3721 t
+8 S f
+(\267)783 3901 w
+10 R f
+(The)870 3901 w
+10 CW f
+(.EP)1050 3901 w
+10 R f
+(\(End Picture\) macro:)2 837 1 1255 3901 t
+10 CW f
+(.EP)1020 4081 w
+10 R f
+(The)870 4261 w
+10 CW f
+(.EP)1057 4261 w
+10 R f
+(macro terminates the text wrap-around function initiated by)7 2431 1 1269 4261 t
+10 CW f
+(.BP)3732 4261 w
+10 R f
+( to the end of the)5 714(and skips)1 382 2 3944 4261 t
+(frame. The)1 474 1 870 4381 t
+10 CW f
+(.BP)1381 4381 w
+10 R f
+(macro calls)1 469 1 1598 4381 t
+10 CW f
+(.EP)2104 4381 w
+10 R f
+( You)1 233( the frame.)2 451(automatically when the text passes the bottom of)7 2035 3 2321 4381 t
+(may need to use)3 658 1 870 4501 t
+10 CW f
+(.EP)1557 4501 w
+10 R f
+( example, if a new section starts in)7 1416( For)1 194( force the end of a picture.)6 1079(on occasion to)2 585 4 1766 4501 t
+( section heading to begin)4 1043(the middle of the text running around a picture, you may want to force the)14 3127 2 870 4621 t
+(anew at the margin following the picture rather than alongside it.)10 2593 1 870 4741 t
+8 S f
+(\267)783 4921 w
+10 R f
+(The)870 4921 w
+10 CW f
+(.PI)1050 4921 w
+10 R f
+(\(Picture Include\) macro:)2 975 1 1255 4921 t
+10 CW f
+(.PI)1020 5101 w
+10 I f
+(\256le)1260 5101 w
+10 R f
+([)1390 5101 w
+10 CW f
+(\()1423 5101 w
+10 I f
+(page)1483 5101 w
+10 CW f
+(\))1677 5101 w
+10 R f
+(])1737 5101 w
+10 I f
+(height)1820 5101 w
+10 R f
+([)2078 5101 w
+10 CW f
+(,)2111 5101 w
+10 I f
+(width)2171 5101 w
+10 R f
+([)2402 5101 w
+10 CW f
+(,)2435 5101 w
+10 I f
+(yoffset)2495 5101 w
+10 R f
+([)2764 5101 w
+10 CW f
+(,)2797 5101 w
+10 I f
+(xoffset)2857 5101 w
+10 R f
+(]]] [)1 182 1 3126 5101 t
+10 I f
+(\257ags)3324 5101 w
+10 R f
+(])3513 5101 w
+(The)870 5281 w
+10 CW f
+(.PI)1050 5281 w
+10 R f
+( a low-level macro that is used automatically by)8 1922(macro is)1 341 2 1255 5281 t
+10 CW f
+(.BP)3544 5281 w
+10 R f
+(to insert the picture on the page.)6 1290 1 3750 5281 t
+(It is the)2 316 1 870 5401 t
+10 CW f
+(.PI)1219 5401 w
+10 R f
+(macro that instructs)2 804 1 1432 5401 t
+10 I f
+(troff)2269 5401 w
+10 R f
+(to pass the appropriate device control command to)7 2072 1 2475 5401 t
+10 I f
+(dpost)4580 5401 w
+10 R f
+(to do)1 210 1 4830 5401 t
+( the picture \256tted into the space accordingly \(e.g., scaling, rotation,)10 2781(whatever voodoo is needed to get)5 1389 2 870 5521 t
+( you need to do things that)6 1085(outline\). If)1 456 2 870 5641 t
+10 CW f
+(.BP)2440 5641 w
+10 R f
+( build your own)3 645(will not allow or does not do well, you can)9 1746 2 2649 5641 t
+(macro to control the text \257ow and use)7 1512 1 870 5761 t
+10 CW f
+(.PI)2407 5761 w
+10 R f
+(to include the picture itself.)4 1096 1 2612 5761 t
+( pair of double quotes \()5 1004( A)1 137( is optional.)2 500( ])1 58(Any argument enclosed in [)4 1169 5 720 5941 t
+10 CW f
+("")3588 5941 w
+10 R f
+(\) skips an argument; skipped or)5 1332 1 3708 5941 t
+(missing arguments are assigned reasonable defaults.)5 2085 1 720 6061 t
+(Each parameter is discussed in detail in the sections that follow.)10 2555 1 720 6241 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 3.  , HEADING = THE PICTURE FILE]
+10 B f
+( PICTURE FILE)2 734(3. THE)1 337 2 720 6481 t
+10 R f
+(The mandatory)1 609 1 720 6661 t
+10 I f
+(\256le)1356 6661 w
+10 R f
+( the \256le contains multiple page)5 1240( If)1 118(parameter gives the name of the PostScript image \256le.)8 2177 3 1505 6661 t
+( example,)1 394( For)1 195( \256lename.)1 400(images, an optional page number \(enclosed in parentheses\) can follow the picture)11 3331 4 720 6781 t
+10 CW f
+(.BP pictures\(3\))1 900 1 720 6901 t
+10 R f
+(uses the third page image in the \256le)7 1439 1 1648 6901 t
+10 CW f
+(pictures)3115 6901 w
+10 R f
+( page image is)3 586( default, the \256rst)3 664(. By)1 195 3 3595 6901 t
+( you ask for a non-existent page,)6 1300(used. If)1 324 2 720 7021 t
+10 I f
+(dpost)2369 7021 w
+10 R f
+(will use the whole \256le with unpredictable results.)7 1965 1 2611 7021 t
+( make sure the)3 615(If you only want to reserve space on the page but not merge a picture with the text, then)18 3705 2 720 7201 t
+( way,)1 216( This)1 228(picture \256le is not readable.)4 1062 3 720 7321 t
+10 I f
+(mpictures)2251 7321 w
+10 R f
+(will reserve the space and)4 1030 1 2670 7321 t
+10 I f
+(dpost)3725 7321 w
+10 R f
+(will ignore the picture.)3 910 1 3967 7321 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(MPICTURES 3)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 4.  , HEADING = THE FRAME]
+10 B f
+( FRAME)1 391(4. THE)1 337 2 720 960 t
+10 R f
+( frame size is)3 574( The)1 220( picture \(i.e., the ``hole'' on the page\).)7 1631(The picture frame is an area set aside for the)9 1895 4 720 1140 t
+(de\256ned by the)2 612 1 720 1260 t
+10 I f
+(height)1380 1260 w
+10 R f
+(and)1677 1260 w
+10 I f
+(width)1868 1260 w
+10 R f
+(parameters, and is positioned horizontally by the)6 2077 1 2138 1260 t
+10 I f
+(position)4262 1260 w
+10 R f
+(and)4632 1260 w
+10 I f
+(offset)4823 1260 w
+10 R f
+( The)1 216( talk about positioning in \2474.3.\))5 1314(parameters. \(We'll)1 782 3 720 1380 t
+10 I f
+(dpost)3068 1380 w
+10 R f
+(postprocessor \256ts the picture in the frame)6 1719 1 3321 1380 t
+(and the)1 291 1 720 1500 t
+10 CW f
+(.BP)1036 1500 w
+10 R f
+(macro arranges to have)3 927 1 1241 1500 t
+10 I f
+(troff)2193 1500 w
+10 R f
+(set text around it, provided there is suf\256cient room.)8 2048 1 2391 1500 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.1  , HEADING = Dimensions]
+10 B f
+(4.1 Dimensions)1 670 1 720 1680 t
+10 R f
+(The)720 1860 w
+10 I f
+(height)908 1860 w
+10 R f
+(and)1191 1860 w
+10 I f
+(width)1368 1860 w
+10 R f
+(parameters de\256ne the vertical and horizontal dimensions of the frame, respectively.)10 3416 1 1624 1860 t
+( the values for)3 574(By default,)1 447 2 720 1980 t
+10 I f
+(height)1768 1980 w
+10 R f
+(and)2045 1980 w
+10 I f
+(width)2216 1980 w
+10 R f
+(are assumed to be in inches; values could also be given in units.)12 2574 1 2466 1980 t
+(The only valid scale indicators are)5 1372 1 720 2100 t
+10 CW f
+(i)2117 2100 w
+10 R f
+(for inches and)2 565 1 2202 2100 t
+10 CW f
+(u)2792 2100 w
+10 R f
+(for units.)1 361 1 2877 2100 t
+( don't, the)2 424( you)1 182( If)1 123(You should always supply a height.)5 1462 4 720 2280 t
+10 CW f
+(.BP)2944 2280 w
+10 R f
+( If)1 124(macro will make the picture 3 inches high.)7 1759 2 3157 2280 t
+(you omit the width parameter,)4 1231 1 720 2400 t
+10 CW f
+(.BP)1982 2400 w
+10 R f
+( wide as a line of text \(i.e., the line length less)11 1886(assumes the frame is as)4 961 2 2193 2400 t
+( example, the macro call)4 978( For)1 189(the current indent\).)2 762 3 720 2520 t
+10 CW f
+(.BP nosmoke.ps)1 840 1 870 2700 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 125 def
+/lly 215 def
+/urx 487 def
+/ury 577 def
+/w 0 def
+/o 0 def
+/s 0 def
+/cx 2880 def
+/cy -4080 def
+/sx 4320 def
+/sy 2160 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+-2.4187 -0.16875 56.471 56.471 PIC
+ 0.375 w
+ 1 0 0 rgb
+ [] 0 d
+0 -0.25 3.5 0.25 Q 0 g
+ 0.025 w
+ s
+3.5 -0.25 3.75 0.25 Q 0.5 g
+ c f
+4.75 1 4.75 0.5 4.25 0.5 3   4.25 0 3.75 0 Sp   0.75 g
+ 0.2 w
+ s
+n 2.4187 0.16875 3 0 360 arc 1 0 0 rgb
+ 0.375 w
+ s
+4.5401 -1.9526 1 0.29743 2.2901 L s
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+10 R f
+(places a ``No Smoking'' sign in the default frame size:)9 2193 1 720 2880 t
+(The)720 5400 w
+10 CW f
+(.BP)901 5400 w
+10 R f
+( this)1 172( In)1 135( with the text that follows.)5 1060(macro looks at the dimensions and \256gures out what can be done)11 2566 4 1107 5400 t
+( there)1 224( Since)1 272( values.)1 305(example, the only argument was the picture \256le so all dimensions were assigned default)13 3519 4 720 5520 t
+(was no room to \256ll text around the frame,)8 1694 1 720 5640 t
+10 CW f
+(.BP)2443 5640 w
+10 R f
+( over the frame, and continues)5 1233(breaks the current line, steps)4 1155 2 2652 5640 t
+(processing text normally.)2 1013 1 720 5760 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.2  , HEADING = Scaling and Fit]
+10 B f
+( and Fit)2 334(4.2 Scaling)1 487 2 720 5940 t
+10 R f
+( height)1 277(The picture is scaled uniformly in both dimensions until either the)10 2653 2 720 6120 t
+10 I f
+(or)3677 6120 w
+10 R f
+(the width of the frame is \256lled.)6 1247 1 3793 6120 t
+( ensure a tight \256t, it may be necessary to crop the)11 2057( To)1 170( the picture may not always \256ll the frame.)8 1739(As such,)1 354 4 720 6240 t
+(picture by eliminating the surrounding white space.)6 2056 1 720 6360 t
+(The PostScript structuring comment)3 1447 1 720 6540 t
+10 CW f
+(%%BoundingBox:)870 6720 w
+10 I f
+(llx lly urx ury)3 616 1 1770 6720 t
+10 R f
+( an imaginary box that encloses the picture \()8 1801(de\256nes the coordinates of)3 1032 2 720 6900 t
+10 I f
+(llx)3553 6900 w
+10 R f
+(and)3682 6900 w
+10 I f
+(lly)3855 6900 w
+10 R f
+(for lower left,)2 559 1 3984 6900 t
+10 I f
+(urx)4572 6900 w
+10 R f
+(and)4734 6900 w
+10 I f
+(ury)4907 6900 w
+10 R f
+( system which has its origin in)6 1241( coordinates must be in PostScript's default coordinate)7 2219( The)1 210(for upper right\).)2 650 4 720 7020 t
+( positive)1 349(the lower left corner,)3 854 2 720 7140 t
+10 I f
+(x)1955 7140 w
+10 R f
+(to the right and positive)4 978 1 2031 7140 t
+10 I f
+(y)3041 7140 w
+10 R f
+( If)1 123( per inch.)2 388( units)1 220(up the page, and scaled at 72)6 1192 4 3117 7140 t
+( the)1 151( If)1 120( precedence.)1 501(the PostScript picture \256le has more than one bounding box comment, the last one takes)14 3548 4 720 7260 t
+(bounding box is not de\256ned,)4 1222 1 720 7380 t
+10 I f
+(dpost)1987 7380 w
+10 R f
+( 8)1 96(assumes the picture size is)4 1134 2 2249 7380 t
+10 S1 f
+()3479 7380 w
+3479 7380 m
+75 build_12
+3554 7380 m
+10 S f
+(\264)3562 7380 w
+10 R f
+(11 inches, which is equivalent to)5 1415 1 3625 7380 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(4 MPICTURES)1 4320 1 720 600 t
+10 CW f
+(%%BoundingBox: 0 0 612 792)4 1560 1 720 960 t
+10 R f
+( way to calculate the bounding box)6 1638( now, the easiest)3 783(. Right)1 339 3 2280 960 t
+( this may)2 369( Although)1 429( ruler to determine the coordinates.)5 1402(parameters is to print the picture separately and use a)9 2120 4 720 1080 t
+(seem cumbersome, it's not terribly dif\256cult.)5 1757 1 720 1200 t
+(Output from)1 504 1 720 1380 t
+10 I f
+(dpost)1256 1380 w
+10 R f
+( default,)1 335( By)1 175( itself be included as a picture.)6 1265(is a PostScript \256le that can)5 1099 4 1505 1380 t
+10 I f
+(dpost)4412 1380 w
+10 R f
+(omits the)1 378 1 4662 1380 t
+( so the image is a standard 8)7 1143(bounding box comment)2 956 2 720 1500 t
+10 S1 f
+()2819 1500 w
+2819 1500 m
+75 build_12
+2894 1500 m
+10 S f
+(\264)2902 1500 w
+10 R f
+( a tight \256t, use the)5 727( For)1 191(11-inch page size.)2 727 3 2965 1500 t
+10 CW f
+(-B)4637 1500 w
+10 R f
+(option)4784 1500 w
+(to eliminate the surrounding white space:)5 1666 1 720 1620 t
+10 I f
+(dpost)2414 1620 w
+10 R f
+( elements on all four)4 837(will determine the outermost printable)4 1544 2 2659 1620 t
+( example, compare the)3 951( For)1 205( comment with the appropriate coordinates.)5 1816(sides and insert a bounding box)5 1348 4 720 1740 t
+(following two pictures:)2 933 1 720 1860 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 0 def
+/lly 0 def
+/urx 612 def
+/ury 792 def
+/w 0 def
+/o 1 def
+/s 0 def
+/cx 1620 def
+/cy -3000 def
+/sx 1800 def
+/sy 1800 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+mark
+/resolution 720 def
+setup
+2 setdecoding
+/saveobj save def
+mark
+1 pagesetup
+14 R f
+(there's more white space)3 1394 1 2363 3080 t
+(than text on this page)4 1198 1 2461 3280 t
+(and, unless it's cropped,)3 1357 1 2381 3480 t
+(you may not be able to)5 1279 1 2420 3680 t
+(read any of this.)3 901 1 2609 3880 t
+cleartomark
+showpage
+saveobj restore
+done
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+10 B f
+(A Poor Fit)2 449 1 1395 4080 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 225 def
+/lly 386 def
+/urx 386 def
+/ury 508 def
+/w 0 def
+/o 1 def
+/s 0 def
+/cx 3960 def
+/cy -3000 def
+/sx 1800 def
+/sy 1800 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+mark
+/rotation 1 def
+/gotpagebbox true def
+/resolution 720 def
+setup
+2 setdecoding
+/saveobj save def
+mark
+1 pagesetup
+14 R f
+(there's more white space)3 1394 1 2363 3080 t
+(than text on this page)4 1198 1 2461 3280 t
+(and, unless it's cropped,)3 1357 1 2381 3480 t
+(you may not be able to)5 1279 1 2420 3680 t
+(read any of this.)3 901 1 2609 3880 t
+cleartomark
+showpage
+saveobj restore
+done
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+10 B f
+(A Snug Fit)2 462 1 3729 4080 t
+10 R f
+(The same)1 390 1 720 4261 t
+10 I f
+(troff)1140 4261 w
+10 R f
+( the same)2 389(input was used to create both page images and)8 1892 2 1343 4261 t
+10 CW f
+(.BP)3655 4261 w
+10 R f
+(macro call was used to place)5 1174 1 3866 4261 t
+( that)1 181( only difference is)3 744( The)1 212(the image on the page.)4 929 4 720 4381 t
+10 CW f
+(dpost -B)1 486 1 2817 4381 t
+10 R f
+(was used to crop the picture image on the)8 1706 1 3334 4381 t
+(right; the)1 364 1 720 4501 t
+10 CW f
+(-B)1109 4501 w
+10 R f
+(option was not used for the picture on the left so the entire 8)13 2405 1 1254 4501 t
+10 S1 f
+()3659 4501 w
+3659 4501 m
+75 build_12
+3734 4501 m
+10 S f
+(\264)3742 4501 w
+10 R f
+(11-inch page image was used.)4 1200 1 3805 4501 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.3  , HEADING = Positioning]
+10 B f
+(4.3 Positioning)1 654 1 720 4681 t
+10 R f
+(The parameters)1 617 1 720 4861 t
+10 I f
+(position)1362 4861 w
+10 R f
+(and)1710 4861 w
+10 I f
+(offset)1879 4861 w
+10 R f
+(together determine where the picture is placed on the page.)9 2355 1 2121 4861 t
+(The)720 5041 w
+10 I f
+(position)912 5041 w
+10 R f
+(parameter de\256nes the horizontal position of the frame relative to a line of text in the page)16 3768 1 1272 5041 t
+( The)1 208( left, center, right\).)3 757(width area \(e.g.,)2 653 3 720 5161 t
+10 I f
+(position)2366 5161 w
+10 R f
+(argument can be)2 665 1 2717 5161 t
+10 CW f
+(l)3410 5161 w
+10 R f
+(,)3470 5161 w
+10 CW f
+(c)3523 5161 w
+10 R f
+(, or)1 136 1 3583 5161 t
+10 CW f
+(r)3747 5161 w
+10 R f
+(. Use)1 233 1 3807 5161 t
+10 CW f
+(l)4068 5161 w
+10 R f
+(to line up the left side)5 884 1 4156 5161 t
+(of the frame with the left text margin; similarly, use)9 2124 1 720 5281 t
+10 CW f
+(r)2875 5281 w
+10 R f
+( side of the frame with the right)7 1311(to line up the right)4 763 2 2966 5281 t
+( Use)1 212(text margin.)1 490 2 720 5401 t
+10 CW f
+(c)1454 5401 w
+10 R f
+( frame with the center of the text line \(e.g., line length less)12 2404(to line up the center of the)6 1090 2 1546 5401 t
+( default, the picture is placed at the left margin.)9 1888( By)1 167(text indent\).)1 483 3 720 5521 t
+(The)720 5701 w
+10 I f
+(offset)911 5701 w
+10 R f
+( value for)2 406( The)1 217( the displacement of the picture from the speci\256ed frame position.)10 2752(parameter is)1 501 4 1164 5701 t
+10 I f
+(offset)720 5821 w
+10 R f
+( can be signed to move the frame to the right \(positive\) or to the)14 2552(can be scaled in inches or units, and it)8 1525 2 963 5821 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 0 def
+/lly 0 def
+/urx 612 def
+/ury 792 def
+/w 0 def
+/o 0 def
+/s 1 def
+/cx 4860 def
+/cy -6421 def
+/sx 1080 def
+/sy 720 def
+/ax 0.5 def
+/ay 1 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/square
+ {
+  gsave
+   edge 0 rlineto
+   0 edge rlineto
+   edge neg 0 rlineto
+   closepath
+   fill
+  grestore
+} def
+
+/check
+ {
+   black setgray square
+   side 0 rmoveto
+   light setgray square
+   0 side rmoveto
+   dark setgray square
+   side neg 0 rmoveto
+   graylev setgray square
+} def
+
+72 72 scale
+
+/xloc .25 def
+/xincr 1 def
+/graylev 0 def
+/grayincr 1 79 div def
+/side .475 def
+/edge .45 def
+/light 2 3 div def
+/dark 1 3 div def
+/black 0 def
+
+9.5 -1 .5
+ {
+   /yloc exch def
+   8
+   {
+     xloc yloc moveto check
+     /xloc xloc xincr add def
+     /graylev graylev grayincr add def
+   } repeat
+   /xincr xincr neg def
+   /xloc xloc xincr add def
+ } for
+
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+10 R f
+( default offset is 0.)4 746( The)1 205(left \(negative\).)1 587 3 720 5941 t
+( a picture outside the ``write space'' of the page)9 1989(The offset feature is useful in placing)6 1539 2 720 6121 t
+( example, the picture on the left)6 1273( For)1 190( page\).)1 272(\(i.e., in the actual left- or right-margin of the)8 1793 4 720 6241 t
+(was placed in a 1)4 735 1 720 6361 t
+10 S f
+(\264)1463 6361 w
+10 R f
+(1-inch frame at position)3 993 1 1526 6361 t
+10 CW f
+(l)2556 6361 w
+10 R f
+( one-inch \()2 458(with a negative)2 634 2 2653 6361 t
+10 CW f
+(-1i)3745 6361 w
+10 R f
+(\) offset,)1 323 1 3925 6361 t
+( in a 1)3 283(while the picture on the right was placed)7 1713 2 720 6481 t
+10 S f
+(\264)2724 6481 w
+10 R f
+(1.5-inch frame at position)3 1068 1 2787 6481 t
+10 CW f
+(r)3892 6481 w
+10 R f
+(with a)1 259 1 3989 6481 t
+(positive half-inch \()2 780 1 720 6601 t
+10 CW f
+(+0.5i)1500 6601 w
+10 R f
+( you ask)2 353( \320 if)2 193( careful though)2 624( Be)1 171(\) offset.)1 320 5 1800 6601 t
+10 I f
+(mpictures)3496 6601 w
+10 R f
+(to place)1 323 1 3925 6601 t
+(the picture off the page, it will do just that.)9 1707 1 720 6721 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 0 def
+/lly 0 def
+/urx 612 def
+/ury 792 def
+/w 0 def
+/o 0 def
+/s 0 def
+/cx 360 def
+/cy -6421 def
+/sx 720 def
+/sy 720 def
+/ax 0 def
+/ay 1 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/square
+ {
+  gsave
+   edge 0 rlineto
+   0 edge rlineto
+   edge neg 0 rlineto
+   closepath
+   fill
+  grestore
+} def
+
+/check
+ {
+   black setgray square
+   side 0 rmoveto
+   light setgray square
+   0 side rmoveto
+   dark setgray square
+   side neg 0 rmoveto
+   graylev setgray square
+} def
+
+72 72 scale
+
+/xloc .25 def
+/xincr 1 def
+/graylev 0 def
+/grayincr 1 79 div def
+/side .475 def
+/edge .45 def
+/light 2 3 div def
+/dark 1 3 div def
+/black 0 def
+
+9.5 -1 .5
+ {
+   /yloc exch def
+   8
+   {
+     xloc yloc moveto check
+     /xloc xloc xincr add def
+     /graylev graylev grayincr add def
+   } repeat
+   /xincr xincr neg def
+   /xloc xloc xincr add def
+ } for
+
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+10 R f
+(The)720 6961 w
+10 CW f
+(.BP)910 6961 w
+10 R f
+( the position and offset information to determine the)8 2175(macro uses)1 456 2 1125 6961 t
+10 I f
+(yoffset)3792 6961 w
+10 R f
+(and)4089 6961 w
+10 I f
+(xoffset)4269 6961 w
+10 R f
+(values used)1 474 1 4566 6961 t
+(with)720 7081 w
+10 CW f
+(.PI)936 7081 w
+10 R f
+( raw picture inclusion using)4 1158( For)1 201( the picture.)2 498(to place)1 326 4 1154 7081 t
+10 CW f
+(.PI)3374 7081 w
+10 R f
+(,)3554 7081 w
+10 I f
+(yoffset)3616 7081 w
+10 R f
+(is the vertical displacement)3 1126 1 3914 7081 t
+(from the baseline of the current line of text to the top of the picture frame, and)16 3316 1 720 7201 t
+10 I f
+(xoffset)4073 7201 w
+10 R f
+( horizontal)1 443(is the)1 226 2 4371 7201 t
+(displacement from the current page offset plus indent \(if any\) to the left edge of the picture frame.)17 3913 1 720 7321 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(MPICTURES 5)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 5.  , HEADING = CONTROL FLAGS]
+10 B f
+( FLAGS)1 359(5. CONTROL)1 631 2 720 960 t
+10 R f
+(The)720 1140 w
+10 I f
+(\257ags)903 1140 w
+10 R f
+( example,)1 392( For)1 193( over how the picture appears in the frame.)8 1741(parameter allows \256ner control)3 1209 4 1120 1140 t
+10 I f
+(\257ags)4684 1140 w
+10 R f
+(can)4902 1140 w
+(be used to rotate the picture, outline the picture, or attach the picture to a given side or corner of the frame.)21 4320 1 720 1260 t
+(The)720 1380 w
+10 I f
+(\257ags)900 1380 w
+10 R f
+(parameter is a string consisting of one or more key letters:)10 2324 1 1114 1380 t
+10 CW f
+(o)870 1560 w
+10 R f
+(Outline the picture \(not the frame\) with a box.)8 1844 1 1320 1560 t
+10 CW f
+(s)870 1740 w
+10 R f
+(Freely scale both picture dimensions \(see below\).)6 1977 1 1320 1740 t
+10 CW f
+(l)870 1920 w
+10 R f
+(Attach the picture to the left side of the frame.)9 1846 1 1320 1920 t
+10 CW f
+(r)870 2100 w
+10 R f
+(Attach the picture to the right side of the frame.)9 1902 1 1320 2100 t
+10 CW f
+(t)870 2280 w
+10 R f
+(Attach the picture to the top of the frame.)8 1655 1 1320 2280 t
+10 CW f
+(b)870 2460 w
+10 R f
+(Attach the picture to the bottom of the frame.)8 1811 1 1320 2460 t
+10 CW f
+(w)870 2640 w
+10 R f
+( \257ag can)2 346( This)1 232( by the picture before drawing it.)6 1335(White out \(erase\) the area to be occupied)7 1657 4 1320 2640 t
+(be used with the)3 652 1 1320 2760 t
+10 CW f
+(.PI)1997 2760 w
+10 R f
+(macro for special effects, for example, to overlay several pictures.)9 2636 1 2202 2760 t
+10 CW f
+(a)870 2940 w
+10 R f
+([)930 2940 w
+10 I f
+(angle)963 2940 w
+10 R f
+( the picture clockwise by)4 1062(] Rotate)1 396 2 1185 2940 t
+10 I f
+(angle)2684 2940 w
+10 R f
+( rotation is optional; if)4 963( degree of)2 430(degrees. The)1 550 3 2947 2940 t
+10 I f
+(angle)1320 3060 w
+10 R f
+(is missing, 90 degrees is added to the current angle \(initially 0\).)11 2539 1 1567 3060 t
+( is)1 93(By default, the picture is scaled uniformly in both dimensions until either the height or width of the frame)18 4227 2 720 3240 t
+( this)1 177( Use)1 212( the frame.)2 443( the picture is scaled freely, each dimension is adjusted separately to \256ll)12 2961(\256lled. When)1 527 5 720 3360 t
+( two pictures of)3 642( these)1 235( Consider)1 416(feature with care as free scaling can cause distortions in the picture image.)12 3027 4 720 3480 t
+(the American \257ag:)2 743 1 720 3600 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 131 def
+/lly 295 def
+/urx 479 def
+/ury 496 def
+/w 0 def
+/o 0 def
+/s 0 def
+/cx 1620 def
+/cy -4740 def
+/sx 1800 def
+/sy 1800 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+-1.75 0.85714 53.308 53.308 PIC
+ 0 w
+ 0 g
+ [] 0 d
+2.9802e-07 0.17772 0.053435 0.013263 -0.086459 0.1149 0.08646 0.1149 -0.053435 0.013263 5 2.7093e-07 0.17772 L 1 g
+ c f
+-1.5 -1 1.5 1 Q 0 g
+ gs 0 0 1 rgb f gr s
+-1.25 0.88223 -1.1966 0.71777 -1.3365 0.81941 -1.1635 0.81941 -1.3034 0.71777 5 -1.25 0.88223 L 1 g
+ c f
+-0.75 0.88223 -0.69657 0.71777 -0.83646 0.81941 -0.66354 0.81941 -0.80344 0.71777 5 -0.75 0.88223 L c f
+-0.25 0.88223 -0.19657 0.71777 -0.33646 0.81941 -0.16354 0.81941 -0.30344 0.71777 5 -0.25 0.88223 L c f
+0.25 0.88223 0.30343 0.71777 0.16354 0.81941 0.33646 0.81941 0.19656 0.71777 5 0.25 0.88223 L c f
+0.75 0.88223 0.80343 0.71777 0.66354 0.81941 0.83646 0.81941 0.69656 0.71777 5 0.75 0.88223 L c f
+1.25 0.88223 1.3034 0.71777 1.1635 0.81941 1.3365 0.81941 1.1966 0.71777 5 1.25 0.88223 L c f
+-1.25 0.48223 -1.1966 0.31777 -1.3365 0.41941 -1.1635 0.41941 -1.3034 0.31777 5 -1.25 0.48223 L c f
+-1 0.68223 -0.94657 0.51777 -1.0865 0.61941 -0.91354 0.61941 -1.0534 0.51777 5 -1 0.68223 L c f
+-0.75 0.48223 -0.69657 0.31777 -0.83646 0.41941 -0.66354 0.41941 -0.80344 0.31777 5 -0.75 0.48223 L c f
+-0.5 0.68223 -0.44657 0.51777 -0.58646 0.61941 -0.41354 0.61941 -0.55344 0.51777 5 -0.5 0.68223 L c f
+-0.25 0.48223 -0.19657 0.31777 -0.33646 0.41941 -0.16354 0.41941 -0.30344 0.31777 5 -0.25 0.48223 L c f
+0 0.68223 0.053435 0.51777 -0.08646 0.61941 0.08646 0.61941 -0.053435 0.51777 5 -2.7093e-08 0.68223 L c f
+0.25 0.48223 0.30343 0.31777 0.16354 0.41941 0.33646 0.41941 0.19656 0.31777 5 0.25 0.48223 L c f
+0.5 0.68223 0.55343 0.51777 0.41354 0.61941 0.58646 0.61941 0.44656 0.51777 5 0.5 0.68223 L c f
+0.75 0.48223 0.80343 0.31777 0.66354 0.41941 0.83646 0.41941 0.69656 0.31777 5 0.75 0.48223 L c f
+1 0.68223 1.0534 0.51777 0.91354 0.61941 1.0865 0.61941 0.94656 0.51777 5 1 0.68223 L c f
+1.25 0.48223 1.3034 0.31777 1.1635 0.41941 1.3365 0.41941 1.1966 0.31777 5 1.25 0.48223 L c f
+-1.25 0.082228 -1.1966 -0.082228 -1.3365 0.019411 -1.1635 0.019411 -1.3034 -0.082228 5 -1.25 0.082228 L c f
+-1 0.28223 -0.94657 0.11777 -1.0865 0.21941 -0.91354 0.21941 -1.0534 0.11777 5 -1 0.28223 L c f
+-0.75 0.082228 -0.69657 -0.082228 -0.83646 0.019411 -0.66354 0.019411 -0.80344 -0.082228 5 -0.75 0.082228 L c f
+-0.5 0.28223 -0.44657 0.11777 -0.58646 0.21941 -0.41354 0.21941 -0.55344 0.11777 5 -0.5 0.28223 L c f
+-0.25 0.082228 -0.19657 -0.082228 -0.33646 0.019411 -0.16354 0.019411 -0.30344 -0.082228 5 -0.25 0.082228 L c f
+0 0.28223 0.053435 0.11777 -0.08646 0.21941 0.08646 0.21941 -0.053435 0.11777 5 -2.7093e-08 0.28223 L c f
+0.25 0.082228 0.30343 -0.082228 0.16354 0.019411 0.33646 0.019411 0.19656 -0.082228 5 0.25 0.082228 L c f
+0.5 0.28223 0.55343 0.11777 0.41354 0.21941 0.58646 0.21941 0.44656 0.11777 5 0.5 0.28223 L c f
+0.75 0.082228 0.80343 -0.082228 0.66354 0.019411 0.83646 0.019411 0.69656 -0.082228 5 0.75 0.082228 L c f
+1 0.28223 1.0534 0.11777 0.91354 0.21941 1.0865 0.21941 0.94656 0.11777 5 1 0.28223 L c f
+1.25 0.082228 1.3034 -0.082228 1.1635 0.019411 1.3365 0.019411 1.1966 -0.082228 5 1.25 0.082228 L c f
+-1.25 -0.31777 -1.1966 -0.48223 -1.3365 -0.38059 -1.1635 -0.38059 -1.3034 -0.48223 5 -1.25 -0.31777 L c f
+-1 -0.11777 -0.94657 -0.28223 -1.0865 -0.18059 -0.91354 -0.18059 -1.0534 -0.28223 5 -1 -0.11777 L c f
+-0.75 -0.31777 -0.69657 -0.48223 -0.83646 -0.38059 -0.66354 -0.38059 -0.80344 -0.48223 5 -0.75 -0.31777 L c f
+-0.5 -0.11777 -0.44657 -0.28223 -0.58646 -0.18059 -0.41354 -0.18059 -0.55344 -0.28223 5 -0.5 -0.11777 L c f
+-0.25 -0.31777 -0.19657 -0.48223 -0.33646 -0.38059 -0.16354 -0.38059 -0.30344 -0.48223 5 -0.25 -0.31777 L c f
+0 -0.11777 0.053435 -0.28223 -0.08646 -0.18059 0.08646 -0.18059 -0.053435 -0.28223 5 -2.7093e-08 -0.11777 L c f
+0.25 -0.31777 0.30343 -0.48223 0.16354 -0.38059 0.33646 -0.38059 0.19656 -0.48223 5 0.25 -0.31777 L c f
+0.5 -0.11777 0.55343 -0.28223 0.41354 -0.18059 0.58646 -0.18059 0.44656 -0.28223 5 0.5 -0.11777 L c f
+0.75 -0.31777 0.80343 -0.48223 0.66354 -0.38059 0.83646 -0.38059 0.69656 -0.48223 5 0.75 -0.31777 L c f
+1 -0.11777 1.0534 -0.28223 0.91354 -0.18059 1.0865 -0.18059 0.94656 -0.28223 5 1 -0.11777 L c f
+1.25 -0.31777 1.3034 -0.48223 1.1635 -0.38059 1.3365 -0.38059 1.1966 -0.48223 5 1.25 -0.31777 L c f
+-1.25 -0.71777 -1.1966 -0.88223 -1.3365 -0.78059 -1.1635 -0.78059 -1.3034 -0.88223 5 -1.25 -0.71777 L c f
+-1 -0.51777 -0.94657 -0.68223 -1.0865 -0.58059 -0.91354 -0.58059 -1.0534 -0.68223 5 -1 -0.51777 L c f
+-0.75 -0.71777 -0.69657 -0.88223 -0.83646 -0.78059 -0.66354 -0.78059 -0.80344 -0.88223 5 -0.75 -0.71777 L c f
+-0.5 -0.51777 -0.44657 -0.68223 -0.58646 -0.58059 -0.41354 -0.58059 -0.55344 -0.68223 5 -0.5 -0.51777 L c f
+-0.25 -0.71777 -0.19657 -0.88223 -0.33646 -0.78059 -0.16354 -0.78059 -0.30344 -0.88223 5 -0.25 -0.71777 L c f
+0 -0.51777 0.053435 -0.68223 -0.08646 -0.58059 0.08646 -0.58059 -0.053435 -0.68223 5 -2.7093e-08 -0.51777 L c f
+0.25 -0.71777 0.30343 -0.88223 0.16354 -0.78059 0.33646 -0.78059 0.19656 -0.88223 5 0.25 -0.71777 L c f
+0.5 -0.51777 0.55343 -0.68223 0.41354 -0.58059 0.58646 -0.58059 0.44656 -0.68223 5 0.5 -0.51777 L c f
+0.75 -0.71777 0.80343 -0.88223 0.66354 -0.78059 0.83646 -0.78059 0.69656 -0.88223 5 0.75 -0.71777 L c f
+1 -0.51777 1.0534 -0.68223 0.91354 -0.58059 1.0865 -0.58059 0.94656 -0.68223 5 1 -0.51777 L c f
+1.25 -0.71777 1.3034 -0.88223 1.1635 -0.78059 1.3365 -0.78059 1.1966 -0.88223 5 1.25 -0.71777 L c f
+1.5 0.71429 5 1 Q 1 0 0 rgb
+ c f
+1.5 0.42857 5 0.71429 Q 1 g
+ c f
+1.5 0.14286 5 0.42857 Q 1 0 0 rgb
+ c f
+1.5 -0.14286 5 0.14286 Q 1 g
+ c f
+1.5 -0.42857 5 -0.14286 Q 1 0 0 rgb
+ c f
+1.5 -0.71429 5 -0.42857 Q 1 g
+ c f
+1.5 -1 5 -0.71429 Q 1 0 0 rgb
+ c f
+-1.5 -1.2857 5 -1 Q 1 g
+ c f
+-1.5 -1.5714 5 -1.2857 Q 1 0 0 rgb
+ c f
+-1.5 -1.8571 5 -1.5714 Q 1 g
+ c f
+-1.5 -2.1429 5 -1.8571 Q 1 0 0 rgb
+ c f
+-1.5 -2.4286 5 -2.1429 Q 1 g
+ c f
+-1.5 -2.7143 5 -2.4286 Q 1 0 0 rgb
+ c f
+-1.5 -2.7143 5 1 Q 0 g
+ s
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+10 B f
+(Uniform Scaling)1 703 1 1268 5820 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 131 def
+/lly 295 def
+/urx 479 def
+/ury 496 def
+/w 0 def
+/o 0 def
+/s 1 def
+/cx 4140 def
+/cy -4740 def
+/sx 1800 def
+/sy 1800 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+-1.75 0.85714 53.308 53.308 PIC
+ 0 w
+ 0 g
+ [] 0 d
+2.9802e-07 0.17772 0.053435 0.013263 -0.086459 0.1149 0.08646 0.1149 -0.053435 0.013263 5 2.7093e-07 0.17772 L 1 g
+ c f
+-1.5 -1 1.5 1 Q 0 g
+ gs 0 0 1 rgb f gr s
+-1.25 0.88223 -1.1966 0.71777 -1.3365 0.81941 -1.1635 0.81941 -1.3034 0.71777 5 -1.25 0.88223 L 1 g
+ c f
+-0.75 0.88223 -0.69657 0.71777 -0.83646 0.81941 -0.66354 0.81941 -0.80344 0.71777 5 -0.75 0.88223 L c f
+-0.25 0.88223 -0.19657 0.71777 -0.33646 0.81941 -0.16354 0.81941 -0.30344 0.71777 5 -0.25 0.88223 L c f
+0.25 0.88223 0.30343 0.71777 0.16354 0.81941 0.33646 0.81941 0.19656 0.71777 5 0.25 0.88223 L c f
+0.75 0.88223 0.80343 0.71777 0.66354 0.81941 0.83646 0.81941 0.69656 0.71777 5 0.75 0.88223 L c f
+1.25 0.88223 1.3034 0.71777 1.1635 0.81941 1.3365 0.81941 1.1966 0.71777 5 1.25 0.88223 L c f
+-1.25 0.48223 -1.1966 0.31777 -1.3365 0.41941 -1.1635 0.41941 -1.3034 0.31777 5 -1.25 0.48223 L c f
+-1 0.68223 -0.94657 0.51777 -1.0865 0.61941 -0.91354 0.61941 -1.0534 0.51777 5 -1 0.68223 L c f
+-0.75 0.48223 -0.69657 0.31777 -0.83646 0.41941 -0.66354 0.41941 -0.80344 0.31777 5 -0.75 0.48223 L c f
+-0.5 0.68223 -0.44657 0.51777 -0.58646 0.61941 -0.41354 0.61941 -0.55344 0.51777 5 -0.5 0.68223 L c f
+-0.25 0.48223 -0.19657 0.31777 -0.33646 0.41941 -0.16354 0.41941 -0.30344 0.31777 5 -0.25 0.48223 L c f
+0 0.68223 0.053435 0.51777 -0.08646 0.61941 0.08646 0.61941 -0.053435 0.51777 5 -2.7093e-08 0.68223 L c f
+0.25 0.48223 0.30343 0.31777 0.16354 0.41941 0.33646 0.41941 0.19656 0.31777 5 0.25 0.48223 L c f
+0.5 0.68223 0.55343 0.51777 0.41354 0.61941 0.58646 0.61941 0.44656 0.51777 5 0.5 0.68223 L c f
+0.75 0.48223 0.80343 0.31777 0.66354 0.41941 0.83646 0.41941 0.69656 0.31777 5 0.75 0.48223 L c f
+1 0.68223 1.0534 0.51777 0.91354 0.61941 1.0865 0.61941 0.94656 0.51777 5 1 0.68223 L c f
+1.25 0.48223 1.3034 0.31777 1.1635 0.41941 1.3365 0.41941 1.1966 0.31777 5 1.25 0.48223 L c f
+-1.25 0.082228 -1.1966 -0.082228 -1.3365 0.019411 -1.1635 0.019411 -1.3034 -0.082228 5 -1.25 0.082228 L c f
+-1 0.28223 -0.94657 0.11777 -1.0865 0.21941 -0.91354 0.21941 -1.0534 0.11777 5 -1 0.28223 L c f
+-0.75 0.082228 -0.69657 -0.082228 -0.83646 0.019411 -0.66354 0.019411 -0.80344 -0.082228 5 -0.75 0.082228 L c f
+-0.5 0.28223 -0.44657 0.11777 -0.58646 0.21941 -0.41354 0.21941 -0.55344 0.11777 5 -0.5 0.28223 L c f
+-0.25 0.082228 -0.19657 -0.082228 -0.33646 0.019411 -0.16354 0.019411 -0.30344 -0.082228 5 -0.25 0.082228 L c f
+0 0.28223 0.053435 0.11777 -0.08646 0.21941 0.08646 0.21941 -0.053435 0.11777 5 -2.7093e-08 0.28223 L c f
+0.25 0.082228 0.30343 -0.082228 0.16354 0.019411 0.33646 0.019411 0.19656 -0.082228 5 0.25 0.082228 L c f
+0.5 0.28223 0.55343 0.11777 0.41354 0.21941 0.58646 0.21941 0.44656 0.11777 5 0.5 0.28223 L c f
+0.75 0.082228 0.80343 -0.082228 0.66354 0.019411 0.83646 0.019411 0.69656 -0.082228 5 0.75 0.082228 L c f
+1 0.28223 1.0534 0.11777 0.91354 0.21941 1.0865 0.21941 0.94656 0.11777 5 1 0.28223 L c f
+1.25 0.082228 1.3034 -0.082228 1.1635 0.019411 1.3365 0.019411 1.1966 -0.082228 5 1.25 0.082228 L c f
+-1.25 -0.31777 -1.1966 -0.48223 -1.3365 -0.38059 -1.1635 -0.38059 -1.3034 -0.48223 5 -1.25 -0.31777 L c f
+-1 -0.11777 -0.94657 -0.28223 -1.0865 -0.18059 -0.91354 -0.18059 -1.0534 -0.28223 5 -1 -0.11777 L c f
+-0.75 -0.31777 -0.69657 -0.48223 -0.83646 -0.38059 -0.66354 -0.38059 -0.80344 -0.48223 5 -0.75 -0.31777 L c f
+-0.5 -0.11777 -0.44657 -0.28223 -0.58646 -0.18059 -0.41354 -0.18059 -0.55344 -0.28223 5 -0.5 -0.11777 L c f
+-0.25 -0.31777 -0.19657 -0.48223 -0.33646 -0.38059 -0.16354 -0.38059 -0.30344 -0.48223 5 -0.25 -0.31777 L c f
+0 -0.11777 0.053435 -0.28223 -0.08646 -0.18059 0.08646 -0.18059 -0.053435 -0.28223 5 -2.7093e-08 -0.11777 L c f
+0.25 -0.31777 0.30343 -0.48223 0.16354 -0.38059 0.33646 -0.38059 0.19656 -0.48223 5 0.25 -0.31777 L c f
+0.5 -0.11777 0.55343 -0.28223 0.41354 -0.18059 0.58646 -0.18059 0.44656 -0.28223 5 0.5 -0.11777 L c f
+0.75 -0.31777 0.80343 -0.48223 0.66354 -0.38059 0.83646 -0.38059 0.69656 -0.48223 5 0.75 -0.31777 L c f
+1 -0.11777 1.0534 -0.28223 0.91354 -0.18059 1.0865 -0.18059 0.94656 -0.28223 5 1 -0.11777 L c f
+1.25 -0.31777 1.3034 -0.48223 1.1635 -0.38059 1.3365 -0.38059 1.1966 -0.48223 5 1.25 -0.31777 L c f
+-1.25 -0.71777 -1.1966 -0.88223 -1.3365 -0.78059 -1.1635 -0.78059 -1.3034 -0.88223 5 -1.25 -0.71777 L c f
+-1 -0.51777 -0.94657 -0.68223 -1.0865 -0.58059 -0.91354 -0.58059 -1.0534 -0.68223 5 -1 -0.51777 L c f
+-0.75 -0.71777 -0.69657 -0.88223 -0.83646 -0.78059 -0.66354 -0.78059 -0.80344 -0.88223 5 -0.75 -0.71777 L c f
+-0.5 -0.51777 -0.44657 -0.68223 -0.58646 -0.58059 -0.41354 -0.58059 -0.55344 -0.68223 5 -0.5 -0.51777 L c f
+-0.25 -0.71777 -0.19657 -0.88223 -0.33646 -0.78059 -0.16354 -0.78059 -0.30344 -0.88223 5 -0.25 -0.71777 L c f
+0 -0.51777 0.053435 -0.68223 -0.08646 -0.58059 0.08646 -0.58059 -0.053435 -0.68223 5 -2.7093e-08 -0.51777 L c f
+0.25 -0.71777 0.30343 -0.88223 0.16354 -0.78059 0.33646 -0.78059 0.19656 -0.88223 5 0.25 -0.71777 L c f
+0.5 -0.51777 0.55343 -0.68223 0.41354 -0.58059 0.58646 -0.58059 0.44656 -0.68223 5 0.5 -0.51777 L c f
+0.75 -0.71777 0.80343 -0.88223 0.66354 -0.78059 0.83646 -0.78059 0.69656 -0.88223 5 0.75 -0.71777 L c f
+1 -0.51777 1.0534 -0.68223 0.91354 -0.58059 1.0865 -0.58059 0.94656 -0.68223 5 1 -0.51777 L c f
+1.25 -0.71777 1.3034 -0.88223 1.1635 -0.78059 1.3365 -0.78059 1.1966 -0.88223 5 1.25 -0.71777 L c f
+1.5 0.71429 5 1 Q 1 0 0 rgb
+ c f
+1.5 0.42857 5 0.71429 Q 1 g
+ c f
+1.5 0.14286 5 0.42857 Q 1 0 0 rgb
+ c f
+1.5 -0.14286 5 0.14286 Q 1 g
+ c f
+1.5 -0.42857 5 -0.14286 Q 1 0 0 rgb
+ c f
+1.5 -0.71429 5 -0.42857 Q 1 g
+ c f
+1.5 -1 5 -0.71429 Q 1 0 0 rgb
+ c f
+-1.5 -1.2857 5 -1 Q 1 g
+ c f
+-1.5 -1.5714 5 -1.2857 Q 1 0 0 rgb
+ c f
+-1.5 -1.8571 5 -1.5714 Q 1 g
+ c f
+-1.5 -2.1429 5 -1.8571 Q 1 0 0 rgb
+ c f
+-1.5 -2.4286 5 -2.1429 Q 1 g
+ c f
+-1.5 -2.7143 5 -2.4286 Q 1 0 0 rgb
+ c f
+-1.5 -2.7143 5 1 Q 0 g
+ s
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+10 B f
+(Free Scaling)1 530 1 3875 5820 t
+10 R f
+( the picture on the left was scaled uniformly till)9 1931( However,)1 444( pictures.)1 370(The same frame size was used for both)7 1575 4 720 6121 t
+( right was scaled)3 704(the frame width was \256lled \(the \257ag is wider than it is tall\), whereas the picture on the)17 3616 2 720 6241 t
+( how the use of free scaling stretched the \257ag as if it were silly-putty.)14 2759(freely. Notice)1 573 2 720 6361 t
+( four frame attachment \257ags \()5 1218( The)1 212(By default, the picture is centered in the frame.)8 1935 3 720 6541 t
+10 CW f
+(l)4085 6541 w
+10 R f
+(,)4145 6541 w
+10 CW f
+(r)4202 6541 w
+10 R f
+(,)4262 6541 w
+10 CW f
+(t)4319 6541 w
+10 R f
+(,)4379 6541 w
+10 CW f
+(b)4436 6541 w
+10 R f
+(\) can be used)3 544 1 4496 6541 t
+( addition, the left or right and the top or)9 1618( In)1 137(separately to attach the picture to a particular side of the frame.)11 2565 3 720 6661 t
+(bottom \257ags can be used together to attach the picture to a particular corner of the frame.)16 3550 1 720 6781 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+(6 MPICTURES)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 6.  , HEADING = LABELS]
+10 B f
+(6. LABELS)1 521 1 720 960 t
+10 R f
+( The)1 221(There's not much to say about labels.)6 1591 2 720 1140 t
+10 CW f
+(.BP)2573 1140 w
+10 R f
+( the text given in the)5 904(macro takes)1 495 2 2794 1140 t
+10 I f
+(label)4235 1140 w
+10 R f
+(argument and)1 563 1 4477 1140 t
+( and size that were in)5 900( label is printed in whatever font)6 1370( The)1 217(centers it 1.5 vertical lines below the frame.)7 1833 4 720 1260 t
+(effect when)1 491 1 720 1380 t
+10 CW f
+(.BP)1260 1380 w
+10 R f
+( course, you can include in-line font and size changes to change the)12 2991( Of)1 180(is called.)1 380 3 1489 1380 t
+( example, the macro call:)4 1006( For)1 189(appearance of the label text.)4 1121 3 720 1500 t
+10 CW f
+(.BP usa.ps 1.5i 1.5i c "" ota "\\f3\\s-1Our Country `Tis of Thee\\s+1\\fP")11 4200 1 795 1680 t
+10 R f
+(was used with some \256ller text to produce:)7 1668 1 720 1860 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 21 def
+/lly 7 def
+/urx 590 def
+/ury 784 def
+/w 0 def
+/o 1 def
+/s 0 def
+/cx 2880 def
+/cy -2730 def
+/sx 1080 def
+/sy 1260 def
+/ax 0.5 def
+/ay 1 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/I {Coord SetPage 1 setlinecap 1 setlinejoin
+    LineTypes {RastersPerPoint ScaleArray} forall
+    /Helvetica findfont
+    PointSize RastersPerPoint mul Cex mul scalefont setfont} def
+/A {gsave} def
+/B {newpath} def
+/C {currentpoint stroke moveto} def
+/E {stroke} def
+/M {moveto} def
+/L {lineto} def
+/S {moveto lineto stroke} def
+/F {closepath fill} def
+/P {gsave moveto Pch-x Pch-y rmoveto Pch Show grestore} def
+/T {gsave translate StringRot rotate 0 0 moveto
+    dup stringwidth pop neg Adjust mul
+    Text-y rmoveto Show grestore} def
+/Z {gsave showpage grestore grestore} def
+/X {erasepage grestore} def
+/W {} def
+
+/St {1 sub LineTypes dup 3 1 roll length Rem floor get 0 setdash} def
+/Sw {abs 2 div RastersPerPoint mul setlinewidth SetClip} def
+/Sc {dup dup 1 lt exch 0 ge and {1 exch sub setgray}
+     {1 sub Colors dup 3 1 roll length Rem floor get setgray} ifelse} def
+/Sp {Pch exch 0 exch put
+     gsave
+     newpath 0 0 moveto Pch false charpath flattenpath pathbbox
+     exch 3 1 roll
+     add 2 div neg /Pch-y exch def
+     add 2 div neg /Pch-x exch def
+     grestore} def
+/Sx {dup Cex div /Ratio exch def
+     /Cex exch def
+     currentfont Ratio scalefont setfont
+     /Pch-x Pch-x Ratio mul def
+     /Pch-y Pch-y Ratio mul def
+     /Text-y Text-y Ratio mul def} def
+/So {4 1 roll exch 4 -1 roll Plot astore pop SetClip} def
+/Sg {4 1 roll exch 4 -1 roll Figure astore pop SetClip} def
+/Sr {/StringRot exch def} def
+/Sd {0 eq /ClipToPlot exch def SetClip} def
+/Sf {dup 0 lt /Outline exch def abs
+     1 sub Fonts dup 3 1 roll length Rem floor get
+     findfont PointSize Cex mul RastersPerPoint mul scalefont dup setfont
+     dup /FontMatrix get /Matrix exch def /FontBBox get aload pop
+     Matrix transform 4 2 roll Matrix transform
+     exch pop add 2 div neg /Text-y exch def pop} def
+/Sa {/Adjust exch def} def
+
+/Clip 4 array def
+/Page 4 array def
+/Figure [0 0 1 1] def
+/Plot [0 0 1 1] def
+/ClipToPlot true def
+/Cex 1 def
+/Outline false def
+/Pch 1 string def
+/Pch-x 0 def
+/Pch-y 0 def
+/Text-y 0 def
+/LineTypes [ % in default units
+	[]		[1 2]		[4 4]		[8 4]
+	[13 3]		[16 2 2 2]	[8 2 2 2]	[1 13]
+	[6 5]		[12 4]
+] def
+/Colors [0 .6 .3 .9 .4 .7 .1 .5 .8 .2] def
+/Fonts [
+	/Helvetica		/Courier		/Times-Roman
+	/Helvetica-Oblique	/Helvetica-Bold		/Helvetica-BoldOblique
+	/Courier-Oblique	/Courier-Bold		/Courier-BoldOblique
+	/Times-Italic		/Times-Bold		/Times-BoldItalic
+	/Symbol
+] def
+
+/Rem {2 copy div floor mul sub floor cvi} def
+/RastersPerPoint {RastersPerInch 72 div} def
+/ScaleArray {/Factor exch def /Array exch def
+	     0 1 Array length 1 sub
+	     {dup Array exch get Factor mul Array 3 1 roll put} for} def
+/Coord {72 72 scale
+	Landscape {90 rotate 0 -8.5 translate
+		   11 Width sub 2 div 8.5 Height sub 2 div translate}
+		  {8.5 Width sub 2 div 11 Height sub 2 div translate} ifelse
+	1 RastersPerInch div dup scale} def
+/Show {Outline {false charpath stroke} {show} ifelse} def
+/Box {/Uy exch def /Ux exch def /Ly exch def /Lx exch def
+      Lx Ly moveto Ux Ly lineto Ux Uy lineto Lx Uy lineto closepath} def
+/BoxClip {initclip newpath gsave [] 0 setdash 0 setgray
+	  currentlinewidth 0 eq {RastersPerPoint setlinewidth} if
+	  Box strokepath pathbbox grestore Box clip newpath} def
+/Subregion {/A exch def /Uy exch def /Ux exch def /Ly exch def /Lx exch def
+	    Ux Lx sub A 0 get mul Lx add
+	    Uy Ly sub A 1 get mul Ly add
+	    Ux Lx sub A 2 get mul Lx add
+	    Uy Ly sub A 3 get mul Ly add
+} def
+/SetPage {0 0 Width 72 mul Height 72 mul Page astore
+	   RastersPerPoint ScaleArray} def
+/SetFigure {Page aload pop Figure Subregion} def
+/SetPlot {SetFigure Plot Subregion} def
+/SetClip {ClipToPlot {SetPlot BoxClip} {SetFigure BoxClip} ifelse} def
+
+/Landscape true def
+/Width 10.8 def
+/Height 7.9 def
+/RastersPerInch 300 def
+/PointSize 14 def
+I
+
+A
+1 St
+1 Sw
+1 Sc
+42 Sp
+1 Sx
+0.0885802 0.95463 0.150633 0.878903 So
+0 1 0 1 Sg
+0 Sr
+0 Sd
+1 Sf
+0.5 Sa
+B 2317 1506 M
+2321 1517 L
+2334 1520 L
+2335 1531 L
+2339 1542 L
+2353 1547 L
+2362 1555 L
+2366 1568 L
+2368 1580 L
+2367 1591 L
+2368 1603 L
+2375 1615 L
+2383 1630 L
+2379 1642 L
+2372 1652 L
+2379 1663 L
+2386 1653 L
+2392 1643 L
+2401 1632 L
+2413 1637 L
+2416 1625 L
+2429 1623 L
+2443 1624 L
+2436 1634 L
+2450 1634 L
+2449 1648 L
+2440 1656 L
+2433 1667 L
+2421 1675 L
+2411 1683 L
+2408 1695 L
+2392 1698 L
+2376 1700 L
+2363 1706 L
+2350 1708 L
+2337 1707 L
+2324 1711 L
+2310 1711 L
+2295 1713 L
+2282 1714 L
+2266 1718 L
+2259 1728 L
+2246 1727 L
+2244 1739 L E
+B 2244 1739 M
+2240 1750 L
+2227 1752 L
+2230 1763 L
+2232 1774 L
+2221 1782 L
+2220 1795 L
+2213 1805 L
+2199 1800 L
+2183 1804 L
+2173 1811 L
+2168 1823 L
+2161 1837 L
+2154 1847 L
+2140 1848 L
+2124 1849 L
+2111 1850 L
+2098 1855 L
+2084 1859 L
+2084 1848 L
+2080 1837 L
+2066 1831 L
+2075 1846 L
+2064 1835 L
+2055 1825 L
+2056 1838 L
+2045 1832 L
+2036 1819 L
+2028 1811 L
+2017 1803 L
+2003 1797 L
+1987 1791 L
+1976 1784 L
+1962 1778 L
+1954 1770 L
+1946 1761 L
+1930 1748 L
+1919 1740 L
+1932 1737 L
+1948 1741 L
+1972 1747 L
+1969 1735 L
+1984 1730 L
+1997 1732 L E
+B 1997 1732 M
+2008 1738 L
+2024 1744 L
+2038 1747 L
+2049 1753 L
+2060 1762 L
+2071 1772 L
+2082 1778 L
+2095 1779 L
+2087 1769 L
+2078 1760 L
+2072 1750 L
+2085 1751 L
+2098 1745 L
+2111 1740 L
+2118 1730 L
+2131 1727 L
+2147 1723 L
+2158 1729 L
+2169 1735 L
+2182 1734 L
+2196 1735 L
+2207 1740 L
+2220 1741 L
+2219 1730 L
+2232 1724 L
+2245 1723 L
+2255 1715 L
+2262 1705 L
+2253 1697 L
+2240 1698 L
+2231 1690 L
+2221 1698 L
+2209 1704 L
+2195 1703 L
+2184 1697 L
+2171 1696 L
+2160 1688 L
+2149 1680 L
+2155 1691 L
+2141 1683 L
+2137 1695 L
+2131 1682 L
+2122 1667 L E
+B 2122 1667 M
+2113 1658 L
+2110 1647 L
+2101 1639 L
+2093 1628 L
+2106 1632 L
+2117 1640 L
+2124 1628 L
+2115 1613 L
+2114 1602 L
+2108 1589 L
+2109 1575 L
+2103 1559 L
+2100 1548 L
+2104 1534 L
+2105 1523 L
+2107 1509 L
+2104 1498 L
+2113 1486 L
+2117 1474 L
+2126 1466 L
+2141 1470 L
+2155 1480 L
+2163 1492 L
+2170 1508 L
+2173 1519 L
+2175 1532 L
+2171 1544 L
+2164 1556 L
+2160 1568 L
+2161 1582 L
+2160 1593 L
+2166 1606 L
+2170 1622 L
+2173 1633 L
+2182 1645 L
+2194 1653 L
+2195 1642 L
+2208 1636 L
+2206 1647 L
+2207 1659 L
+2218 1667 L
+2217 1678 L
+2221 1689 L E
+B 2221 1689 M
+2236 1685 L
+2251 1681 L
+2261 1673 L
+2274 1670 L
+2287 1666 L
+2293 1656 L
+2290 1645 L
+2296 1633 L
+2297 1621 L
+2293 1610 L
+2287 1597 L
+2276 1592 L
+2272 1579 L
+2281 1571 L
+2292 1578 L
+2294 1590 L
+2307 1597 L
+2320 1593 L
+2327 1583 L
+2330 1569 L
+2333 1552 L
+2339 1542 L E
+B 2321 1517 M
+2340 1508 L
+2329 1502 L
+2317 1506 L
+2308 1498 L
+2317 1486 L
+2335 1485 L
+2346 1495 L
+2357 1503 L
+2377 1516 L
+2388 1521 L
+2414 1518 L
+2429 1515 L
+2439 1530 L
+2453 1534 L
+2466 1535 L
+2478 1532 L
+2487 1538 L
+2484 1520 L
+2472 1510 L
+2458 1501 L
+2447 1496 L
+2438 1488 L
+2421 1484 L
+2405 1479 L
+2394 1474 L
+2381 1469 L
+2369 1460 L
+2354 1457 L
+2340 1452 L
+2326 1457 L
+2314 1461 L
+2302 1467 L
+2295 1477 L
+2304 1487 L
+2308 1498 L E
+B 2487 1538 M
+2482 1553 L
+2458 1554 L
+2458 1570 L
+2470 1576 L
+2479 1583 L
+2490 1588 L
+2504 1591 L
+2518 1593 L
+2531 1593 L
+2542 1598 L
+2555 1591 L
+2570 1588 L
+2567 1600 L
+2554 1600 L
+2570 1604 L
+2587 1608 L
+2601 1608 L
+2612 1613 L
+2622 1620 L
+2635 1632 L
+2645 1639 L
+2657 1648 L
+2671 1650 L
+2660 1645 L
+2647 1639 L
+2637 1629 L
+2628 1621 L
+2618 1612 L
+2608 1604 L
+2595 1604 L
+2611 1592 L
+2606 1581 L
+2593 1567 L
+2583 1558 L
+2572 1553 L
+2551 1554 L
+2538 1557 L
+2512 1561 L
+2496 1557 L
+2482 1553 L
+2482 1555 L E
+B 2671 1650 M
+2693 1650 L
+2718 1650 L
+2735 1649 L
+2757 1649 L
+2771 1650 L
+2791 1651 L
+2810 1651 L
+2816 1661 L
+2830 1665 L
+2841 1672 L
+2846 1683 L
+2856 1690 L
+2862 1700 L
+2859 1715 L
+2867 1725 L
+2871 1738 L
+2876 1751 L
+2886 1766 L
+2898 1782 L
+2910 1772 L
+2928 1772 L
+2944 1778 L
+2957 1770 L
+2967 1756 L
+2968 1736 L
+2972 1719 L
+2974 1704 L
+2974 1692 L
+2987 1684 L
+2994 1670 L
+3006 1660 L
+3012 1649 L
+3011 1635 L
+2998 1631 L
+2984 1623 L
+2970 1622 L
+2955 1621 L
+2953 1633 L
+2947 1623 L
+2947 1611 L
+2934 1614 L
+2923 1607 L
+2920 1594 L E
+B 2920 1594 M
+2905 1590 L
+2893 1586 L
+2878 1585 L
+2878 1573 L
+2867 1559 L
+2859 1549 L
+2853 1539 L
+2853 1527 L
+2865 1519 L
+2850 1513 L
+2847 1502 L
+2859 1497 L
+2867 1485 L
+2873 1474 L
+2888 1470 L
+2891 1481 L
+2900 1472 L
+2887 1466 L
+2875 1461 L
+2863 1469 L
+2853 1462 L
+2843 1455 L
+2838 1466 L
+2830 1456 L
+2820 1449 L
+2806 1448 L
+2792 1446 L
+2779 1445 L
+2765 1443 L
+2753 1437 L
+2741 1432 L
+2729 1428 L
+2722 1418 L
+2712 1410 L
+2703 1403 L
+2715 1398 L
+2717 1385 L
+2717 1374 L
+2710 1363 L
+2709 1351 L
+2702 1341 L
+2691 1337 L
+2688 1326 L E
+B 2688 1326 M
+2681 1315 L
+2678 1328 L
+2666 1331 L
+2657 1340 L
+2650 1351 L
+2654 1371 L
+2645 1352 L
+2652 1339 L
+2656 1323 L
+2664 1312 L
+2670 1301 L
+2675 1290 L
+2668 1280 L
+2665 1266 L
+2669 1277 L
+2660 1270 L
+2655 1257 L
+2647 1244 L
+2640 1234 L
+2635 1223 L
+2632 1236 L
+2637 1246 L
+2642 1257 L
+2640 1270 L
+2635 1281 L
+2622 1281 L
+2614 1290 L
+2618 1301 L
+2616 1313 L
+2621 1324 L
+2615 1335 L
+2625 1342 L
+2627 1354 L
+2620 1343 L
+2608 1336 L
+2606 1325 L
+2603 1314 L
+2603 1302 L
+2611 1288 L
+2613 1276 L
+2601 1278 L
+2585 1284 L
+2573 1289 L E
+B 2573 1289 M
+2578 1300 L
+2568 1288 L
+2580 1288 L
+2586 1277 L
+2597 1272 L
+2609 1267 L
+2620 1260 L
+2615 1249 L
+2620 1236 L
+2610 1224 L
+2618 1215 L
+2606 1216 L
+2595 1223 L
+2603 1214 L
+2607 1201 L
+2619 1208 L
+2631 1205 L
+2636 1194 L
+2638 1179 L
+2643 1168 L
+2647 1153 L
+2652 1142 L
+2657 1131 L
+2656 1119 L
+2649 1109 L
+2652 1120 L
+2654 1132 L
+2650 1145 L
+2641 1159 L
+2637 1175 L
+2634 1185 L
+2634 1173 L
+2623 1168 L
+2613 1159 L
+2599 1160 L
+2612 1154 L
+2625 1154 L
+2629 1140 L
+2639 1150 L
+2641 1138 L
+2631 1126 L
+2612 1120 L
+2605 1132 L E
+B 2605 1132 M
+2594 1125 L
+2607 1119 L
+2602 1106 L
+2587 1102 L
+2608 1102 L
+2616 1093 L
+2607 1083 L
+2616 1091 L
+2629 1104 L
+2621 1094 L
+2607 1083 L
+2593 1089 L
+2583 1084 L
+2566 1074 L
+2552 1065 L
+2547 1054 L
+2540 1041 L
+2526 1042 L
+2515 1037 L
+2503 1033 L
+2493 1020 L
+2488 1007 L
+2482 997 L
+2471 992 L
+2463 984 L
+2454 976 L
+2444 971 L
+2436 963 L
+2425 956 L
+2415 949 L
+2408 938 L
+2400 928 L
+2395 917 L
+2389 904 L
+2387 892 L
+2382 881 L
+2383 869 L
+2383 857 L
+2387 844 L
+2389 832 L
+2391 814 L
+2395 801 L
+2401 788 L E
+B 2401 788 M
+2407 775 L
+2411 761 L
+2419 753 L
+2414 739 L
+2412 752 L
+2407 762 L
+2409 750 L
+2411 735 L
+2415 724 L
+2415 736 L
+2420 726 L
+2424 715 L
+2429 704 L
+2430 689 L
+2434 678 L
+2439 667 L
+2440 655 L
+2438 643 L
+2438 631 L
+2433 620 L
+2432 605 L
+2428 594 L
+2421 583 L
+2419 572 L
+2417 560 L
+2404 551 L
+2395 546 L
+2386 541 L
+2373 541 L
+2363 539 L
+2352 537 L
+2363 539 L
+2373 541 L
+2384 541 L
+2393 546 L
+2402 551 L
+2412 556 L
+2418 567 L
+2407 565 L
+2395 566 L
+2386 573 L
+2386 585 L
+2382 596 L E
+B 2382 596 M
+2376 607 L
+2364 614 L
+2360 625 L
+2358 638 L
+2348 640 L
+2350 652 L
+2350 664 L
+2340 664 L
+2333 672 L
+2331 685 L
+2326 695 L
+2330 707 L
+2339 717 L
+2329 726 L
+2327 714 L
+2320 723 L
+2321 738 L
+2327 748 L
+2327 760 L
+2326 772 L
+2321 790 L
+2310 792 L
+2304 806 L
+2297 816 L
+2287 823 L
+2282 833 L
+2270 843 L
+2257 840 L
+2249 832 L
+2238 827 L
+2226 819 L
+2213 819 L
+2210 831 L
+2200 840 L
+2198 852 L
+2187 851 L
+2177 855 L
+2171 865 L
+2158 862 L
+2143 860 L
+2132 857 L
+2141 862 L
+2130 859 L E
+B 2130 859 M
+2119 858 L
+2108 853 L
+2095 852 L
+2106 855 L
+2100 865 L
+2097 877 L
+2092 866 L
+2083 860 L
+2072 861 L
+2061 860 L
+2049 859 L
+2038 856 L
+2027 852 L
+2016 855 L
+2004 863 L
+1997 855 L
+2003 842 L
+2013 844 L
+2026 850 L
+2017 841 L
+2025 833 L
+2032 842 L
+2042 834 L
+2035 825 L
+2024 822 L
+2030 812 L
+2039 804 L
+2052 798 L
+2046 787 L
+2034 783 L
+2041 792 L
+2031 800 L
+2019 804 L
+2013 813 L
+2003 817 L
+2011 809 L
+2010 797 L
+2001 791 L
+1996 803 L
+1985 800 L
+1978 791 L
+1966 799 L
+1954 802 L E
+B 1954 802 M
+1957 813 L
+1944 817 L
+1943 828 L
+1932 827 L
+1920 828 L
+1928 820 L
+1938 817 L
+1928 815 L
+1915 818 L
+1905 819 L
+1895 822 L
+1882 827 L
+1872 832 L
+1862 830 L
+1849 829 L
+1835 824 L
+1820 815 L
+1807 811 L
+1816 818 L
+1805 818 L
+1812 830 L
+1801 825 L
+1799 814 L
+1797 802 L
+1805 809 L
+1799 800 L
+1790 791 L
+1778 781 L
+1766 774 L
+1755 770 L
+1745 768 L
+1735 768 L
+1731 756 L
+1721 758 L
+1717 746 L
+1705 746 L
+1707 735 L
+1697 730 L
+1701 718 L
+1693 702 L
+1683 699 L
+1691 690 L
+1689 678 L E
+B 1689 678 M
+1691 664 L
+1691 653 L
+1697 641 L
+1699 653 L
+1695 667 L
+1693 683 L
+1695 699 L
+1699 714 L
+1707 725 L
+1711 737 L
+1721 744 L
+1729 751 L
+1737 758 L
+1723 744 L
+1715 737 L
+1709 728 L
+1703 716 L
+1697 699 L
+1693 685 L
+1695 669 L
+1701 657 L
+1703 644 L
+1701 632 L
+1703 620 L
+1694 620 L
+1684 627 L
+1674 629 L
+1664 629 L
+1654 633 L
+1641 639 L
+1627 648 L
+1619 655 L
+1616 669 L
+1610 678 L
+1607 692 L
+1605 708 L
+1594 719 L
+1588 730 L
+1581 739 L
+1575 750 L
+1568 759 L
+1562 771 L
+1557 782 L E
+B 1557 782 M
+1552 793 L
+1548 805 L
+1537 813 L
+1530 822 L
+1521 831 L
+1511 832 L
+1501 831 L
+1488 832 L
+1476 831 L
+1468 821 L
+1465 809 L
+1457 797 L
+1450 787 L
+1439 790 L
+1430 796 L
+1420 802 L
+1408 810 L
+1400 816 L
+1391 822 L
+1385 835 L
+1384 847 L
+1379 858 L
+1373 869 L
+1364 877 L
+1355 883 L
+1347 892 L
+1335 904 L
+1326 912 L
+1316 920 L
+1309 928 L
+1301 937 L
+1232 933 L
+1231 907 L
+1196 908 L
+1106 907 L
+941 965 L
+945 976 L
+838 967 L
+832 980 L
+832 992 L
+823 1007 L
+814 1014 L
+802 1025 L E
+B 802 1025 M
+795 1036 L
+784 1030 L
+777 1040 L
+765 1047 L
+750 1050 L
+741 1057 L
+731 1064 L
+716 1067 L
+698 1069 L
+685 1070 L
+679 1085 L
+677 1100 L
+669 1110 L
+665 1126 L
+655 1133 L
+645 1142 L
+637 1154 L
+629 1164 L
+621 1174 L
+616 1190 L
+625 1203 L
+615 1210 L
+603 1216 L
+599 1230 L
+596 1241 L
+595 1253 L
+605 1246 L
+615 1239 L
+609 1250 L
+606 1261 L
+602 1275 L
+595 1261 L
+584 1265 L
+574 1271 L
+565 1293 L
+552 1309 L
+541 1318 L
+539 1335 L
+540 1350 L
+539 1362 L
+534 1378 L
+519 1391 L
+517 1407 L E
+B 517 1407 M
+523 1421 L
+529 1440 L
+530 1453 L
+529 1465 L
+528 1486 L
+520 1496 L
+519 1508 L
+521 1521 L
+515 1531 L
+519 1545 L
+523 1558 L
+528 1569 L
+534 1580 L
+541 1592 L
+541 1604 L
+542 1616 L
+544 1631 L
+545 1646 L
+550 1657 L
+552 1670 L
+552 1681 L
+554 1694 L
+556 1706 L
+557 1721 L
+570 1717 L
+585 1716 L
+573 1725 L
+560 1724 L
+556 1737 L
+564 1749 L
+553 1756 L
+549 1771 L
+546 1783 L
+545 1794 L
+538 1809 L
+532 1820 L
+534 1832 L
+552 1832 L
+565 1828 L
+580 1826 L
+592 1822 L
+607 1823 L
+622 1820 L E
+B 622 1820 M
+622 1808 L
+628 1795 L
+629 1783 L
+616 1778 L
+630 1779 L
+632 1791 L
+634 1808 L
+625 1818 L
+619 1828 L
+630 1821 L
+641 1814 L
+638 1825 L
+629 1835 L
+629 1847 L
+626 1858 L
+620 1869 L
+643 1869 L
+678 1869 L
+713 1867 L
+745 1867 L
+779 1867 L
+813 1866 L
+847 1866 L
+867 1865 L
+896 1863 L
+915 1864 L
+952 1863 L
+983 1863 L
+997 1863 L
+1013 1863 L
+1049 1862 L
+1080 1861 L
+1110 1861 L
+1143 1863 L
+1168 1861 L
+1209 1861 L
+1242 1860 L
+1275 1861 L
+1310 1860 L
+1343 1861 L
+1375 1859 L
+1408 1859 L
+1440 1859 L E
+B 1440 1859 M
+1473 1859 L
+1505 1860 L
+1532 1859 L
+1567 1858 L
+1599 1860 L
+1629 1858 L
+1664 1859 L
+1696 1859 L
+1726 1857 L
+1758 1859 L
+1787 1857 L
+1787 1868 L
+1801 1873 L
+1806 1861 L
+1809 1848 L
+1822 1839 L
+1836 1836 L
+1852 1831 L
+1870 1835 L
+1886 1833 L
+1900 1826 L
+1913 1823 L
+1929 1818 L
+1939 1811 L
+1955 1810 L
+1972 1816 L
+1985 1811 L
+1998 1810 L
+2014 1807 L
+2022 1807 L E
+B 1051 1416 M
+1047 1427 L
+1036 1432 L
+1034 1444 L
+1023 1449 L
+1023 1460 L
+1032 1469 L
+1039 1459 L
+1048 1449 L
+1059 1443 L
+1071 1432 L
+1063 1423 L
+1054 1415 L
+1051 1416 L E
+B 2725 1419 M
+2715 1412 L
+2727 1407 L
+2741 1409 L
+2754 1410 L
+2769 1416 L
+2758 1412 L
+2741 1409 L
+2727 1407 L
+2739 1411 L
+2755 1412 L
+2767 1417 L
+2780 1418 L
+2793 1425 L
+2804 1429 L
+2791 1430 L
+2779 1426 L
+2787 1436 L
+2777 1428 L
+2764 1427 L
+2750 1425 L
+2736 1424 L
+2725 1419 L E
+B 2830 1665 M
+2827 1652 L
+2837 1600 L
+2837 1588 L
+2842 1573 L
+2842 1561 L
+2851 1551 L
+2859 1549 L E
+B 2810 1651 M
+2808 1640 L
+2808 1628 L
+2803 1617 L
+2789 1606 L
+2788 1592 L
+2780 1580 L
+2777 1566 L
+2777 1552 L
+2771 1542 L
+2771 1530 L
+2773 1527 L E
+B 2729 1650 M
+2730 1640 L
+2730 1626 L
+2733 1614 L
+2730 1600 L
+2730 1589 L
+2730 1575 L
+2741 1563 L
+2740 1549 L
+2740 1537 L
+2743 1522 L
+2740 1509 L
+2734 1496 L
+2734 1484 L
+2734 1472 L
+2733 1458 L
+2733 1446 L
+2728 1435 L
+2732 1430 L E
+B 2744 1527 M
+2828 1526 L
+2838 1533 L
+2852 1534 L E
+B 2735 1488 M
+2756 1488 L
+2769 1485 L
+2792 1489 L
+2808 1488 L
+2821 1485 L
+2833 1479 L
+2838 1468 L
+2847 1459 L E
+B 2813 1487 M
+2818 1450 L E
+B 2455 1499 M
+2455 1485 L
+2652 1485 L
+2660 1476 L
+2663 1464 L
+2675 1457 L
+2683 1448 L
+2718 1426 L
+2713 1413 L E
+B 2416 1482 M
+2423 1363 L
+2639 1363 L
+2643 1369 L
+2662 1372 L
+2671 1379 L
+2683 1384 L
+2672 1394 L
+2667 1407 L
+2661 1417 L
+2666 1428 L
+2673 1438 L
+2681 1448 L
+2681 1451 L E
+B 2636 1361 M
+2646 1287 L
+2675 1290 L E
+B 2641 1265 M
+2660 1268 L E
+B 2470 1361 M
+2470 1345 L
+2483 1345 L
+2494 1350 L
+2503 1358 L
+2514 1351 L
+2525 1356 L
+2538 1356 L
+2546 1347 L
+2557 1338 L
+2565 1327 L
+2576 1317 L
+2582 1309 L
+2578 1300 L E
+B 2420 1412 M
+2416 1397 L
+2413 1381 L
+2410 1360 L
+2401 1350 L
+2390 1343 L
+2377 1338 L
+2369 1323 L
+2357 1322 L
+2352 1304 L
+2341 1295 L
+2334 1279 L
+2339 1269 L
+2347 1256 L
+2358 1245 L
+2364 1235 L
+2375 1228 L
+2387 1231 L
+2406 1230 L
+2417 1235 L
+2432 1237 L
+2436 1248 L
+2443 1261 L
+2452 1271 L
+2460 1286 L
+2464 1297 L
+2476 1290 L
+2484 1298 L
+2494 1312 L
+2508 1319 L
+2520 1329 L
+2522 1340 L
+2539 1334 L
+2553 1341 L E
+B 2149 1476 M
+2235 1475 L
+2234 1469 L
+2302 1467 L E
+B 2234 1469 M
+2241 1332 L E
+B 2337 1288 M
+2325 1302 L
+2313 1308 L
+2303 1303 L
+2291 1307 L
+2279 1306 L
+2267 1312 L
+2252 1328 L
+2241 1332 L
+2237 1319 L
+2223 1309 L
+2211 1306 L
+2200 1291 L
+2190 1274 L
+2174 1273 L
+2164 1267 L
+2152 1266 L
+2139 1263 L
+2128 1267 L
+2116 1268 L
+2104 1264 L
+2097 1263 L E
+B 2117 1474 M
+2119 1353 L
+2115 1341 L
+2114 1330 L
+2121 1320 L
+2117 1307 L
+2109 1294 L
+2101 1285 L
+2100 1274 L
+2097 1263 L
+2091 1252 L
+2085 1241 L
+2078 1232 L
+2077 1221 L
+2063 1227 L
+2049 1223 L
+2053 1212 L
+2047 1198 L
+2040 1192 L
+2030 1181 L
+2031 1170 L
+2026 1158 L
+2016 1145 L
+2010 1130 L
+2009 1116 L
+2000 1110 L
+1994 1099 L
+1987 1085 L
+1982 1074 L
+1974 1065 L
+1967 1057 L
+1964 1045 L
+1965 1027 L
+1962 1013 L
+1966 999 L
+1965 985 L E
+B 1965 985 M
+1967 973 L
+1968 957 L
+1958 944 L
+1951 926 L
+1948 912 L
+1941 903 L
+1949 895 L
+2013 895 L
+2023 890 L
+2018 878 L
+2026 866 L
+2029 854 L
+2027 852 L E
+B 2078 861 M
+2079 940 L
+2097 1103 L
+2093 1108 L E
+B 2004 1112 M
+2111 1109 L
+2205 1107 L
+2306 1104 L
+2320 1106 L
+2335 1113 L
+2348 1116 L
+2359 1116 L
+2378 1113 L
+2394 1112 L
+2406 1110 L
+2416 1101 L
+2427 1094 L
+2443 1095 L
+2455 1095 L
+2466 1091 L
+2474 1082 L
+2484 1073 L
+2494 1061 L
+2506 1049 L
+2515 1037 L E
+B 2637 1187 M
+2533 1186 L
+2452 1186 L
+2376 1191 L
+2276 1193 L
+2081 1191 L
+2040 1192 L E
+B 2358 1245 M
+2353 1232 L
+2338 1227 L
+2327 1220 L
+2316 1207 L
+2308 1199 L
+2296 1197 L
+2288 1193 L E
+B 2376 1191 M
+2372 1180 L
+2363 1172 L
+2353 1166 L
+2338 1159 L
+2323 1157 L
+2312 1147 L
+2301 1147 L
+2290 1139 L
+2278 1136 L
+2269 1123 L
+2259 1118 L
+2258 1106 L E
+B 2313 1105 M
+2304 1092 L
+2312 1081 L
+2323 1075 L
+2328 1065 L
+2334 1054 L
+2341 1044 L
+2351 1035 L
+2361 1026 L
+2366 1011 L
+2378 999 L
+2385 986 L
+2387 973 L
+2395 965 L
+2397 952 L
+2407 943 L
+2409 943 L E
+B 2383 869 M
+2372 871 L
+2361 876 L
+2357 862 L
+2346 862 L
+2238 874 L
+2230 883 L
+2220 891 L
+2114 894 L
+2120 870 L
+2119 858 L E
+B 2226 885 M
+2222 903 L
+2223 914 L
+2223 926 L
+2223 943 L
+2231 953 L
+2230 965 L
+2227 977 L
+2222 990 L
+2219 1004 L
+2217 1019 L
+2214 1035 L
+2214 1050 L
+2213 1061 L
+2210 1074 L
+2207 1088 L
+2206 1100 L
+2205 1107 L E
+B 2051 1216 M
+2040 1224 L
+2033 1234 L
+2034 1248 L
+2028 1257 L
+2019 1267 L
+2008 1275 L
+1997 1285 L
+2000 1298 L
+2005 1309 L
+2006 1321 L
+1994 1324 L
+1982 1325 L
+1983 1336 L
+1974 1348 L
+1967 1357 L
+1955 1363 L
+1951 1377 L
+1947 1390 L
+1952 1404 L
+1960 1415 L
+1968 1426 L
+1971 1437 L
+1964 1451 L
+1977 1459 L
+1995 1467 L
+2003 1481 L
+1999 1499 L
+1987 1511 L
+1977 1523 L
+1965 1530 L
+1961 1544 L
+1961 1555 L
+1954 1567 L
+1955 1578 L
+1953 1590 L
+1940 1597 L
+1930 1604 L
+1920 1616 L
+1910 1623 L
+1898 1628 L
+1893 1646 L
+1893 1658 L
+1894 1669 L E
+B 1894 1669 M
+1886 1678 L
+1891 1689 L
+1899 1698 L
+1910 1704 L
+1911 1733 L
+1919 1740 L E
+B 2110 1654 M
+2106 1666 L
+2099 1675 L
+2097 1687 L
+2084 1695 L
+2072 1700 L
+2056 1701 L
+2046 1709 L
+2030 1712 L
+2005 1718 L
+1994 1727 L
+1989 1730 L E
+B 2107 1514 M
+1982 1516 L E
+B 1954 1569 M
+1735 1570 L E
+B 1733 1516 M
+1723 1525 L
+1711 1529 L
+1698 1536 L
+1661 1535 L
+1648 1542 L
+1413 1541 L E
+B 1410 1436 M
+1418 1860 L E
+B 1701 1859 M
+1704 1848 L
+1705 1815 L
+1711 1803 L
+1719 1770 L
+1720 1741 L
+1723 1725 L
+1728 1714 L
+1728 1692 L
+1718 1682 L
+1726 1671 L
+1737 1665 L
+1731 1525 L
+1751 1479 L
+1751 1468 L
+1759 1459 L
+1759 1436 L
+1761 1425 L
+1766 1414 L
+1766 1402 L
+1776 1393 L
+1781 1382 L
+1793 1377 L
+1802 1370 L
+1795 1361 L
+1797 1350 L
+1804 1340 L
+1814 1334 L
+1814 1194 L
+1818 1164 L
+1820 1134 L
+1818 1040 L E
+B 1842 1005 M
+1853 1005 L
+1866 1006 L
+1881 1006 L
+1894 1005 L
+1916 1004 L
+1927 1004 L
+1947 1005 L
+1964 1004 L E
+B 1845 826 M
+1847 840 L
+1852 852 L
+1850 863 L
+1853 875 L
+1857 889 L
+1860 905 L
+1854 914 L
+1850 926 L
+1846 942 L
+1840 954 L
+1841 968 L
+1839 982 L
+1841 993 L
+1842 1005 L
+1838 1016 L
+1840 1030 L
+1829 1035 L
+1818 1040 L
+1810 1047 L
+1799 1054 L
+1788 1059 L
+1774 1055 L
+1763 1052 L
+1752 1052 L
+1741 1048 L
+1728 1052 L
+1715 1054 L
+1704 1045 L
+1702 1057 L
+1691 1054 L
+1680 1058 L
+1669 1054 L
+1666 1065 L
+1653 1069 L
+1640 1067 L
+1628 1071 L
+1617 1070 L
+1613 1082 L
+1601 1081 L
+1590 1088 L
+1583 1099 L
+1583 1198 L
+1455 1194 L E
+B 1455 1219 M
+1454 951 L
+1298 946 L
+1301 937 L E
+B 1196 908 M
+1195 1437 L E
+B 1110 1487 M
+1002 1489 L
+883 1490 L
+868 1489 L
+768 1488 L
+653 1489 L
+528 1486 L E
+B 715 1487 M
+710 1325 L
+946 1106 L
+948 1097 L
+957 1085 L
+962 1071 L
+973 1064 L
+961 1057 L
+953 1048 L
+956 1036 L
+951 1023 L
+944 1014 L
+945 1000 L
+955 995 L
+953 982 L
+945 976 L E
+B 946 1104 M
+950 1117 L
+944 1161 L
+951 1170 L
+962 1165 L
+973 1172 L
+979 1488 L E
+B 847 1489 M
+852 1584 L
+854 1597 L
+854 1609 L
+846 1623 L
+851 1634 L
+860 1643 L
+863 1655 L
+871 1668 L
+879 1681 L
+877 1692 L
+864 1699 L
+859 1710 L
+865 1864 L E
+B 585 1716 M
+602 1715 L
+608 1703 L
+609 1689 L
+624 1685 L
+658 1693 L
+677 1688 L
+709 1691 L
+722 1696 L
+738 1699 L
+759 1701 L
+777 1708 L
+860 1706 L E
+B 907 1862 M
+908 1846 L
+907 1823 L
+910 1810 L
+921 1795 L
+923 1784 L
+934 1772 L
+943 1765 L
+954 1755 L
+959 1742 L
+971 1737 L
+976 1726 L
+970 1714 L
+975 1701 L
+966 1692 L
+971 1679 L
+984 1681 L
+1001 1677 L
+1003 1666 L
+1011 1654 L
+1010 1642 L
+1024 1637 L
+1029 1624 L
+1043 1622 L
+1059 1622 L
+1074 1627 L
+1093 1623 L
+1093 1634 L
+1108 1625 L
+1114 1619 L E
+B 973 1215 M
+1010 1216 L
+1132 1217 L
+1247 1219 L
+1357 1219 L
+1483 1221 L
+1589 1221 L
+1699 1222 L
+1815 1219 L E
+B 1814 1194 M
+2005 1192 L
+2006 1176 L
+1996 1168 L
+2012 1164 L
+2028 1163 L E
+B 1950 1397 M
+1938 1409 L
+1766 1409 L E
+B 1781 1382 M
+1495 1383 L E
+B 1494 1220 M
+1496 1435 L
+1314 1440 L
+1108 1438 L
+1115 1649 L
+1266 1650 L
+1414 1650 L E
+B 1414 1697 M
+1583 1700 L
+1728 1698 L E
+1.5 Sx
+1 Sd
+(The United States of America) 1690 2275 T
+0.5 Sx
+2 Sf
+(AL) 2154 982 T
+(AK) 405 1881 T
+(AZ) 1080 1069 T
+(AR) 1914 1097 T
+(CA) 728 1194 T
+(CO) 1344 1310 T
+(CT) 2775 1467 T
+(DE) 2661 1310 T
+(FL) 2372 727 T
+(GA) 2299 968 T
+(HI) 448 936 T
+(ID) 980 1574 T
+(IL) 2040 1384 T
+(IN) 2182 1384 T
+(IA) 1868 1486 T
+(KS) 1663 1296 T
+(KY) 2239 1241 T
+(LA) 1915 875 T
+(ME) 2921 1685 T
+(MD) 2590 1342 T
+(MA) 2808 1509 T
+(MI) 2243 1551 T
+(MN) 1815 1726 T
+(MS) 2022 986 T
+(MO) 1905 1292 T
+(MT) 1179 1750 T
+(NB) 1599 1453 T
+(NV) 854 1333 T
+(NH) 2817 1564 T
+(NJ) 2694 1379 T
+(NM) 1325 1083 T
+(NY) 2655 1551 T
+(NC) 2511 1134 T
+(ND) 1577 1773 T
+(OH) 2333 1393 T
+(OK) 1706 1139 T
+(OR) 715 1592 T
+(PA) 2555 1430 T
+(RI) 2828 1467 T
+(SC) 2423 1037 T
+(SD) 1594 1615 T
+(TN) 2166 1148 T
+(TX) 1634 917 T
+(UT) 1092 1333 T
+(VT) 2767 1611 T
+(VA) 2523 1250 T
+(WA) 729 1782 T
+(WV) 2416 1296 T
+(WI) 2014 1629 T
+(WY) 1268 1546 T
+Z
+W
+
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+9 B f
+(Our Country `Tis of Thee)4 992 1 2384 3540 t
+10 R f
+(We the people of the United States, in)7 1548 1 720 2100 t
+(order to form a more perfect union,)6 1548 1 720 2220 t
+(establish justice, ensure domestic)3 1548 1 720 2340 t
+( for the common)3 747(tranquility, provide)1 801 2 720 2460 t
+( secure the blessings of)4 1026(defense, and)1 522 2 720 2580 t
+(liberty to ourselves and our posterity,)5 1548 1 720 2700 t
+( establish this)2 773(do ordain and)2 775 2 720 2820 t
+( States of)2 424(Constitution to the United)3 1124 2 720 2940 t
+( the United)2 446( the people of)3 546(America. We)1 556 3 720 3060 t
+( form a more perfect)4 831(States, in order to)3 717 2 720 3180 t
+(union, establish justice, ensure)3 1548 1 720 3300 t
+( for the)2 338(domestic tranquility, provide)2 1210 2 720 3420 t
+( the)1 210(common defense, and secure)3 1338 2 720 3540 t
+( ourselves and)2 615(blessings of liberty to)3 933 2 720 3660 t
+( establish)1 389(our posterity, do ordain and)4 1159 2 3492 2100 t
+( to the United States)4 867(this Constitution)1 681 2 3492 2220 t
+( the people of the)4 821( We)1 220(of America.)1 507 3 3492 2340 t
+(United States, in order to form a more)7 1548 1 3492 2460 t
+( establish justice, ensure)3 989(perfect union,)1 559 2 3492 2580 t
+( for the)2 338(domestic tranquility, provide)2 1210 2 3492 2700 t
+( the)1 210(common defense, and secure)3 1338 2 3492 2820 t
+( ourselves and)2 615(blessings of liberty to)3 933 2 3492 2940 t
+( establish)1 389(our posterity, do ordain and)4 1159 2 3492 3060 t
+( to the United States)4 867(this Constitution)1 681 2 3492 3180 t
+(of America.)1 476 1 3492 3300 t
+(\(The)720 3840 w
+10 CW f
+(.EP)933 3840 w
+10 R f
+(macro was used here to break out of the wrap-around text and jump past the end of the picture.\))18 3816 1 1138 3840 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 7.  , HEADING = USAGE]
+10 B f
+(7. USAGE)1 470 1 720 4080 t
+10 R f
+(Since)720 4260 w
+10 I f
+(mpictures)974 4260 w
+10 R f
+(is a macro package, all you need to do is use the)11 2001 1 1400 4260 t
+10 CW f
+(-mpictures)3433 4260 w
+10 R f
+(option with)1 466 1 4065 4260 t
+10 I f
+(troff)4563 4260 w
+10 R f
+(. Also,)1 296 1 4744 4260 t
+(the)720 4380 w
+10 I f
+(dpost)867 4380 w
+10 R f
+(postprocessor is needed to include PostScript images.)6 2140 1 1109 4380 t
+(Typically, the command line would look like:)6 1830 1 720 4560 t
+10 CW f
+(troff -mpictures)1 960 1 870 4740 t
+10 R f
+([)1890 4740 w
+10 I f
+(options)1923 4740 w
+10 R f
+(])2218 4740 w
+10 I f
+(\256lename)2301 4740 w
+10 CW f
+(| dpost)1 420 1 2699 4740 t
+10 R f
+(Of course, the usual options may be used on the)9 2094 1 720 4920 t
+10 I f
+(troff)2859 4920 w
+10 R f
+( If)1 137(command, including other macro packages.)4 1825 2 3078 4920 t
+(preprocessors are needed, prepend them to the)6 1847 1 720 5040 t
+10 I f
+(troff)2592 5040 w
+10 R f
+(command in the usual fashion.)4 1224 1 2790 5040 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Trailer
+done
+%%Pages: 6
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

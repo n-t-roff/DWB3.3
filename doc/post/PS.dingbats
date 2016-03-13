@@ -1,0 +1,1062 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(PostScript Character Set and Symbols)4 3300 1 720 1040 t
+36 S1 f
+(________________________)720 1240 w
+14 HB f
+(Zapf Dingbats)1 930 1 720 1440 t
+10 R f
+(The Zapf Dingbat font \()4 999 1 720 1860 t
+10 CW f
+(ZD)1719 1860 w
+10 R f
+( icons, or)2 391(\) offers a variety of graphic symbols which can be used as markers,)12 2810 2 1839 1860 t
+(even in sequence to form a border.)6 1382 1 720 1980 t
+( not have unique)3 690(These symbols do)2 738 2 720 2160 t
+10 CW f
+(\\ \()1 110 1 2182 2160 t
+10 I f
+(xx)2292 2160 w
+10 R f
+( each symbol may be accessed either by a)8 1734( Instead,)1 372(input names.)1 520 3 2414 2160 t
+( access code represents the numeric)5 1505( The)1 222(character access code or by an assigned alias character name.)9 2593 3 720 2280 t
+( font)1 192(position of the symbol on the Zapf Dingbat font; the alias name is simply the name of a standard text)19 4128 2 720 2400 t
+(character or special symbol assigned arbitrarily for the sake of convenience.)10 3033 1 720 2520 t
+(To select one of these symbols, switch to font)8 1845 1 720 2700 t
+10 CW f
+(ZD)2592 2700 w
+10 R f
+( the access code format \()5 1003(and input either)2 631 2 2739 2700 t
+10 CW f
+(\\N')4373 2700 w
+10 I f
+(code)4553 2700 w
+10 CW f
+(')4741 2700 w
+10 R f
+(\) with)1 239 1 4801 2700 t
+( example,)1 389( For)1 190( font!\))1 253( forget to switch back to the previous)7 1498( \(Don't)1 318(the appropriate number or the alias name.)6 1672 6 720 2820 t
+(the input for the telephone \()5 1112 1 720 2940 t
+10 ZD f
+(%)1832 2940 w
+10 R f
+(\) symbol is)2 445 1 1904 2940 t
+10 CW f
+(\\f\(ZD\\N'37'\\fP)2374 2940 w
+10 R f
+( access code, or)3 628(using the)1 364 2 3239 2940 t
+10 CW f
+(\\f\(ZD%\\fP)4257 2940 w
+10 R f
+(using)4823 2940 w
+(the alias name.)2 596 1 720 3060 t
+(Access Alias)1 656 1 1182 3300 t
+( Name)1 424(Symbol Code)1 708 2 720 3420 t
+10 S f
+(_ ______________________)1 1132 1 720 3440 t
+10 ZD f
+(!)827 3580 w
+10 CW f
+(33 !)1 500 1 1263 3580 t
+10 ZD f
+(")828 3700 w
+10 CW f
+(34 ")1 500 1 1263 3700 t
+10 ZD f
+(#)827 3820 w
+10 CW f
+(35 #)1 500 1 1263 3820 t
+10 ZD f
+($)827 3940 w
+10 CW f
+(36 $)1 500 1 1263 3940 t
+10 ZD f
+(%)840 4060 w
+10 CW f
+(37 %)1 500 1 1263 4060 t
+10 ZD f
+(&)836 4180 w
+10 CW f
+(38 &)1 500 1 1263 4180 t
+10 ZD f
+(')836 4300 w
+10 CW f
+(39 ')1 500 1 1263 4300 t
+10 ZD f
+(\()836 4420 w
+10 CW f
+(40 \()1 500 1 1263 4420 t
+10 ZD f
+(\))841 4540 w
+10 CW f
+(41 \))1 500 1 1263 4540 t
+10 ZD f
+(*)828 4660 w
+10 CW f
+(42 *)1 500 1 1263 4660 t
+10 ZD f
+(+)829 4780 w
+10 CW f
+(43 +)1 500 1 1263 4780 t
+10 ZD f
+(,)848 4900 w
+10 CW f
+(44 ,)1 500 1 1263 4900 t
+10 ZD f
+(-)833 5020 w
+10 CW f
+(45 -)1 500 1 1263 5020 t
+10 ZD f
+(.)830 5140 w
+10 CW f
+(46 .)1 500 1 1263 5140 t
+10 ZD f
+(/)829 5260 w
+10 CW f
+(47 /)1 500 1 1263 5260 t
+10 ZD f
+(0)830 5380 w
+10 CW f
+(48 0)1 500 1 1263 5380 t
+10 ZD f
+(1)829 5500 w
+10 CW f
+(49 1)1 500 1 1263 5500 t
+10 ZD f
+(2)827 5620 w
+10 CW f
+(50 2)1 500 1 1263 5620 t
+10 ZD f
+(3)838 5740 w
+10 CW f
+(51 3)1 500 1 1263 5740 t
+10 ZD f
+(4)833 5860 w
+10 CW f
+(52 4)1 500 1 1263 5860 t
+10 ZD f
+(5)838 5980 w
+10 CW f
+(53 5)1 500 1 1263 5980 t
+10 ZD f
+(6)838 6100 w
+10 CW f
+(54 6)1 500 1 1263 6100 t
+10 ZD f
+(7)847 6220 w
+10 CW f
+(55 7)1 500 1 1263 6220 t
+10 ZD f
+(8)842 6340 w
+10 CW f
+(56 8)1 500 1 1263 6340 t
+10 ZD f
+(9)838 6460 w
+10 CW f
+(57 9)1 500 1 1263 6460 t
+10 ZD f
+(:)838 6580 w
+10 CW f
+(58 :)1 500 1 1263 6580 t
+10 ZD f
+(;)838 6700 w
+10 CW f
+(59 ;)1 500 1 1263 6700 t
+10 ZD f
+(<)838 6820 w
+10 CW f
+(60 <)1 500 1 1263 6820 t
+10 ZD f
+(=)851 6940 w
+10 CW f
+(61 =)1 500 1 1263 6940 t
+10 ZD f
+(>)848 7060 w
+10 CW f
+(62 >)1 500 1 1263 7060 t
+10 R f
+(Access Alias)1 656 1 2766 3300 t
+( Name)1 424(Symbol Code)1 708 2 2304 3420 t
+10 S f
+(_ ______________________)1 1132 1 2304 3440 t
+10 ZD f
+(?)2433 3580 w
+10 CW f
+(63 ?)1 500 1 2847 3580 t
+10 ZD f
+(@)2431 3700 w
+10 CW f
+(64 @)1 500 1 2847 3700 t
+10 ZD f
+(A)2425 3820 w
+10 CW f
+(65 A)1 500 1 2847 3820 t
+10 ZD f
+(B)2420 3940 w
+10 CW f
+(66 B)1 500 1 2847 3940 t
+10 ZD f
+(C)2420 4060 w
+10 CW f
+(67 C)1 500 1 2847 4060 t
+10 ZD f
+(D)2420 4180 w
+10 CW f
+(68 D)1 500 1 2847 4180 t
+10 ZD f
+(E)2420 4300 w
+10 CW f
+(69 E)1 500 1 2847 4300 t
+10 ZD f
+(F)2420 4420 w
+10 CW f
+(70 F)1 500 1 2847 4420 t
+10 ZD f
+(G)2420 4540 w
+10 CW f
+(71 G)1 500 1 2847 4540 t
+10 ZD f
+(H)2419 4660 w
+10 CW f
+(72 H)1 500 1 2847 4660 t
+10 ZD f
+(I)2419 4780 w
+10 CW f
+(73 I)1 500 1 2847 4780 t
+10 ZD f
+(J)2420 4900 w
+10 CW f
+(74 J)1 500 1 2847 4900 t
+10 ZD f
+(K)2418 5020 w
+10 CW f
+(75 K)1 500 1 2847 5020 t
+10 ZD f
+(L)2419 5140 w
+10 CW f
+(76 L)1 500 1 2847 5140 t
+10 ZD f
+(M)2418 5260 w
+10 CW f
+(77 M)1 500 1 2847 5260 t
+10 ZD f
+(N)2419 5380 w
+10 CW f
+(78 N)1 500 1 2847 5380 t
+10 ZD f
+(O)2418 5500 w
+10 CW f
+(79 O)1 500 1 2847 5500 t
+10 ZD f
+(P)2414 5620 w
+10 CW f
+(80 P)1 500 1 2847 5620 t
+10 ZD f
+(Q)2423 5740 w
+10 CW f
+(81 Q)1 500 1 2847 5740 t
+10 ZD f
+(R)2424 5860 w
+10 CW f
+(82 R)1 500 1 2847 5860 t
+10 ZD f
+(S)2422 5980 w
+10 CW f
+(83 S)1 500 1 2847 5980 t
+10 ZD f
+(T)2420 6100 w
+10 CW f
+(84 T)1 500 1 2847 6100 t
+10 ZD f
+(U)2420 6220 w
+10 CW f
+(85 U)1 500 1 2847 6220 t
+10 ZD f
+(V)2425 6340 w
+10 CW f
+(86 V)1 500 1 2847 6340 t
+10 ZD f
+(W)2421 6460 w
+10 CW f
+(87 W)1 500 1 2847 6460 t
+10 ZD f
+(X)2421 6580 w
+10 CW f
+(88 X)1 500 1 2847 6580 t
+10 ZD f
+(Y)2420 6700 w
+10 CW f
+(89 Y)1 500 1 2847 6700 t
+10 ZD f
+(Z)2422 6820 w
+10 CW f
+(90 Z)1 500 1 2847 6820 t
+10 ZD f
+([)2424 6940 w
+10 CW f
+(91 [)1 500 1 2847 6940 t
+10 ZD f
+(\\)2424 7060 w
+10 CW f
+(92 \\)1 500 1 2847 7060 t
+10 R f
+(Access Alias)1 656 1 4350 3300 t
+( Name)1 424(Symbol Code)1 708 2 3888 3420 t
+10 S f
+(_ ______________________)1 1132 1 3888 3440 t
+10 ZD f
+(])4010 3580 w
+10 CW f
+(93 ])1 470 1 4461 3580 t
+10 ZD f
+(^)4009 3700 w
+10 CW f
+(94 \303)1 470 1 4461 3700 t
+10 ZD f
+(_)4002 3820 w
+10 CW f
+(95 _)1 470 1 4461 3820 t
+10 ZD f
+(`)4003 3940 w
+10 CW f
+(96 `)1 470 1 4461 3940 t
+10 ZD f
+(a)4004 4060 w
+10 CW f
+(97 a)1 470 1 4461 4060 t
+10 ZD f
+(b)4004 4180 w
+10 CW f
+(98 b)1 470 1 4461 4180 t
+10 ZD f
+(c)4008 4300 w
+10 CW f
+(99 c)1 470 1 4461 4300 t
+10 ZD f
+(d)4009 4420 w
+10 CW f
+(100 d)1 530 1 4401 4420 t
+10 ZD f
+(e)4009 4540 w
+10 CW f
+(101 e)1 530 1 4401 4540 t
+10 ZD f
+(f)4009 4660 w
+10 CW f
+(102 f)1 530 1 4401 4660 t
+10 ZD f
+(g)4004 4780 w
+10 CW f
+(103 g)1 530 1 4401 4780 t
+10 ZD f
+(h)4004 4900 w
+10 CW f
+(104 h)1 530 1 4401 4900 t
+10 ZD f
+(i)4008 5020 w
+10 CW f
+(105 i)1 530 1 4401 5020 t
+10 ZD f
+(j)4004 5140 w
+10 CW f
+(106 j)1 530 1 4401 5140 t
+10 ZD f
+(k)4005 5260 w
+10 CW f
+(107 k)1 530 1 4401 5260 t
+10 ZD f
+(l)4004 5380 w
+10 CW f
+(108 l)1 530 1 4401 5380 t
+10 ZD f
+(m)4000 5500 w
+10 CW f
+(109 m)1 530 1 4401 5500 t
+10 ZD f
+(n)4006 5620 w
+10 CW f
+(110 n)1 530 1 4401 5620 t
+10 ZD f
+(o)4006 5740 w
+10 CW f
+(111 o)1 530 1 4401 5740 t
+10 ZD f
+(p)4006 5860 w
+10 CW f
+(112 p)1 530 1 4401 5860 t
+10 ZD f
+(q)4006 5980 w
+10 CW f
+(113 q)1 530 1 4401 5980 t
+10 ZD f
+(r)4006 6100 w
+10 CW f
+(114 r)1 530 1 4401 6100 t
+10 ZD f
+(s)3999 6220 w
+10 CW f
+(115 s)1 530 1 4401 6220 t
+10 ZD f
+(t)3999 6340 w
+10 CW f
+(116 t)1 530 1 4401 6340 t
+10 ZD f
+(u)4004 6460 w
+10 CW f
+(117 u)1 530 1 4401 6460 t
+10 ZD f
+(v)4005 6580 w
+10 CW f
+(118 v)1 530 1 4401 6580 t
+10 ZD f
+(w)4022 6700 w
+10 CW f
+(119 w)1 530 1 4401 6700 t
+10 ZD f
+(x)4037 6820 w
+10 CW f
+(120 x)1 530 1 4401 6820 t
+10 ZD f
+(y)4030 6940 w
+10 CW f
+(121 y)1 530 1 4401 6940 t
+10 ZD f
+(z)4023 7060 w
+10 CW f
+(122 z)1 530 1 4401 7060 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+12 HB f
+(PostScript)4439 480 w
+(2)720 600 w
+11 HB f
+(Dingbats)4569 600 w
+10 R f
+(Access Alias)1 657 1 1182 1200 t
+( Name)1 425(Symbol Code)1 708 2 720 1320 t
+10 S f
+(_ ______________________)1 1134 1 720 1340 t
+10 ZD f
+({)856 1480 w
+10 CW f
+(123 {)1 531 1 1233 1480 t
+10 ZD f
+(|)856 1600 w
+10 CW f
+(124 |)1 531 1 1233 1600 t
+10 ZD f
+(})842 1720 w
+10 CW f
+(125 })1 531 1 1233 1720 t
+10 ZD f
+(~)842 1840 w
+10 CW f
+(126 \304)1 531 1 1233 1840 t
+10 ZD f
+(\241)839 1960 w
+10 CW f
+(161 \\\(hy)1 621 1 1233 1960 t
+10 ZD f
+(\242)849 2080 w
+10 CW f
+(162 \\\(em)1 621 1 1233 2080 t
+10 ZD f
+(\243)849 2200 w
+10 CW f
+(163 \\\(de)1 621 1 1233 2200 t
+10 ZD f
+(\244)830 2320 w
+10 CW f
+(164 \\-)1 561 1 1233 2320 t
+10 ZD f
+(\245)842 2440 w
+10 CW f
+(165 \\\(en)1 621 1 1233 2440 t
+10 ZD f
+(\246)838 2560 w
+10 CW f
+(166 \\\(ff)1 621 1 1233 2560 t
+10 ZD f
+(\247)838 2680 w
+10 CW f
+(167 \\\(fi)1 621 1 1233 2680 t
+10 ZD f
+(\250)837 2800 w
+10 CW f
+(168 \\\(fl)1 621 1 1233 2800 t
+10 ZD f
+(\251)846 2920 w
+10 CW f
+(169 \\\(Fi)1 621 1 1233 2920 t
+10 ZD f
+(\252)841 3040 w
+10 CW f
+(170 \\\(Fl)1 621 1 1233 3040 t
+10 ZD f
+(\253)844 3160 w
+10 CW f
+(171 \\\(fm)1 621 1 1233 3160 t
+10 ZD f
+(\254)836 3280 w
+10 CW f
+(172 \\\(ru)1 621 1 1233 3280 t
+10 ZD f
+(\255)836 3400 w
+10 CW f
+(173 \\\(dg)1 621 1 1233 3400 t
+10 ZD f
+(\256)836 3520 w
+10 CW f
+(174 \\\(bu)1 621 1 1233 3520 t
+10 ZD f
+(\257)836 3640 w
+10 CW f
+(175 \\\(14)1 621 1 1233 3640 t
+10 ZD f
+(\260)836 3760 w
+10 CW f
+(176 \\\(34)1 621 1 1233 3760 t
+10 ZD f
+(\261)836 3880 w
+10 CW f
+(177 \\\(12)1 621 1 1233 3880 t
+10 ZD f
+(\262)836 4000 w
+10 CW f
+(178 \\\(ct)1 621 1 1233 4000 t
+10 ZD f
+(\263)836 4120 w
+10 CW f
+(179 \\\(rg)1 621 1 1233 4120 t
+10 ZD f
+(\264)836 4240 w
+10 CW f
+(180 \\\(sq)1 621 1 1233 4240 t
+10 ZD f
+(\265)836 4360 w
+10 CW f
+(181 \\\(sl)1 621 1 1233 4360 t
+10 ZD f
+(\266)836 4480 w
+10 CW f
+(182 \\\(ul)1 621 1 1233 4480 t
+10 ZD f
+(\267)836 4600 w
+10 CW f
+(183 \\\(or)1 621 1 1233 4600 t
+10 ZD f
+(\270)836 4720 w
+10 CW f
+(184 \\\(no)1 621 1 1233 4720 t
+10 ZD f
+(\271)836 4840 w
+10 CW f
+(185 \\\(->)1 621 1 1233 4840 t
+10 ZD f
+(\272)836 4960 w
+10 CW f
+(186 \\\(<-)1 621 1 1233 4960 t
+10 ZD f
+(\273)836 5080 w
+10 CW f
+(187 \\\(da)1 621 1 1233 5080 t
+10 ZD f
+(\274)836 5200 w
+10 CW f
+(188 \\\(lh)1 621 1 1233 5200 t
+10 ZD f
+(\275)836 5320 w
+10 CW f
+(189 \\\(ua)1 621 1 1233 5320 t
+10 R f
+(Access Alias)1 657 1 2766 1200 t
+( Name)1 425(Symbol Code)1 708 2 2304 1320 t
+10 S f
+(_ ______________________)1 1134 1 2304 1340 t
+10 ZD f
+(\276)2420 1480 w
+10 CW f
+(190 \\\(ab)1 621 1 2817 1480 t
+10 ZD f
+(\277)2420 1600 w
+10 CW f
+(191 \\\(!b)1 621 1 2817 1600 t
+10 ZD f
+(\300)2420 1720 w
+10 CW f
+(192 \\\(aa)1 621 1 2817 1720 t
+10 ZD f
+(\301)2420 1840 w
+10 CW f
+(193 \\\(!m)1 621 1 2817 1840 t
+10 ZD f
+(\302)2420 1960 w
+10 CW f
+(194 \\\(ga)1 621 1 2817 1960 t
+10 ZD f
+(\303)2420 2080 w
+10 CW f
+(195 \\\(pl)1 621 1 2817 2080 t
+10 ZD f
+(\304)2420 2200 w
+10 CW f
+(196 \\\(mi)1 621 1 2817 2200 t
+10 ZD f
+(\305)2420 2320 w
+10 CW f
+(197 \\\(mu)1 621 1 2817 2320 t
+10 ZD f
+(\306)2420 2440 w
+10 CW f
+(198 \\\(di)1 621 1 2817 2440 t
+10 ZD f
+(\307)2420 2560 w
+10 CW f
+(199 \\\(eq)1 621 1 2817 2560 t
+10 ZD f
+(\310)2420 2680 w
+10 CW f
+(200 \\\(==)1 621 1 2817 2680 t
+10 ZD f
+(\311)2420 2800 w
+10 CW f
+(201 \\\(>=)1 621 1 2817 2800 t
+10 ZD f
+(\312)2420 2920 w
+10 CW f
+(202 \\\(<=)1 621 1 2817 2920 t
+10 ZD f
+(\313)2420 3040 w
+10 CW f
+(203 \\\(!=)1 621 1 2817 3040 t
+10 ZD f
+(\314)2420 3160 w
+10 CW f
+(204 \\\(+-)1 621 1 2817 3160 t
+10 ZD f
+(\315)2420 3280 w
+10 CW f
+(205 \\\(-+)1 621 1 2817 3280 t
+10 ZD f
+(\316)2420 3400 w
+10 CW f
+(206 \\\(ap)1 621 1 2817 3400 t
+10 ZD f
+(\317)2420 3520 w
+10 CW f
+(207 \\\(\304=)1 621 1 2817 3520 t
+10 ZD f
+(\320)2420 3640 w
+10 CW f
+(208 \\\(gr)1 621 1 2817 3640 t
+10 ZD f
+(\321)2420 3760 w
+10 CW f
+(209 \\\(is)1 621 1 2817 3760 t
+10 ZD f
+(\322)2420 3880 w
+10 CW f
+(210 \\\(pd)1 621 1 2817 3880 t
+10 ZD f
+(\323)2420 4000 w
+10 CW f
+(211 \\\(if)1 621 1 2817 4000 t
+10 ZD f
+(\324)2415 4120 w
+10 CW f
+(212 \\\(sr)1 621 1 2817 4120 t
+10 ZD f
+(\325)2418 4240 w
+10 CW f
+(213 \\\(rn)1 621 1 2817 4240 t
+10 ZD f
+(\326)2409 4360 w
+10 CW f
+(214 \\\(sb)1 621 1 2817 4360 t
+10 ZD f
+(\327)2437 4480 w
+10 CW f
+(215 \\\(sp)1 621 1 2817 4480 t
+10 ZD f
+(\330)2422 4600 w
+10 CW f
+(216 \\\(cu)1 621 1 2817 4600 t
+10 ZD f
+(\331)2414 4720 w
+10 CW f
+(217 \\\(ca)1 621 1 2817 4720 t
+10 ZD f
+(\332)2422 4840 w
+10 CW f
+(218 \\\(ib)1 621 1 2817 4840 t
+10 ZD f
+(\333)2414 4960 w
+10 CW f
+(219 \\\(ip)1 621 1 2817 4960 t
+10 ZD f
+(\334)2413 5080 w
+10 CW f
+(220 \\\(mo)1 621 1 2817 5080 t
+10 ZD f
+(\335)2413 5200 w
+10 CW f
+(221 \\\(es)1 621 1 2817 5200 t
+10 ZD f
+(\336)2413 5320 w
+10 CW f
+(222 \\\(sc)1 621 1 2817 5320 t
+10 R f
+(Access Alias)1 657 1 4350 1200 t
+( Name)1 425(Symbol Code)1 708 2 3888 1320 t
+10 S f
+(_ ______________________)1 1134 1 3888 1340 t
+10 ZD f
+(\337)4002 1480 w
+10 CW f
+(223 \\\(dd)1 621 1 4401 1480 t
+10 ZD f
+(\340)4000 1600 w
+10 CW f
+(224 \\\(lc)1 621 1 4401 1600 t
+10 ZD f
+(\341)4002 1720 w
+10 CW f
+(225 \\\(rc)1 621 1 4401 1720 t
+10 ZD f
+(\342)3998 1840 w
+10 CW f
+(226 \\\(lf)1 621 1 4401 1840 t
+10 ZD f
+(\343)3998 1960 w
+10 CW f
+(227 \\\(rf)1 621 1 4401 1960 t
+10 ZD f
+(\344)3998 2080 w
+10 CW f
+(228 \\\(bv)1 621 1 4401 2080 t
+10 ZD f
+(\345)3997 2200 w
+10 CW f
+(229 \\\(**)1 621 1 4401 2200 t
+10 ZD f
+(\346)3997 2320 w
+10 CW f
+(230 \\\(br)1 621 1 4401 2320 t
+10 ZD f
+(\347)4021 2440 w
+10 CW f
+(231 \\\(ci)1 621 1 4401 2440 t
+10 ZD f
+(\350)4000 2560 w
+10 CW f
+(232 \\\(ts)1 621 1 4401 2560 t
+10 ZD f
+(\351)4002 2680 w
+10 CW f
+(233 \\\(co)1 621 1 4401 2680 t
+10 ZD f
+(\352)4002 2800 w
+10 CW f
+(234 \\\(lt)1 621 1 4401 2800 t
+10 ZD f
+(\353)4000 2920 w
+10 CW f
+(235 \\\(rt)1 621 1 4401 2920 t
+10 ZD f
+(\354)4000 3040 w
+10 CW f
+(236 \\\(lb)1 621 1 4401 3040 t
+10 ZD f
+(\355)4009 3160 w
+10 CW f
+(237 \\\(rb)1 621 1 4401 3160 t
+10 ZD f
+(\356)4009 3280 w
+10 CW f
+(238 \\\(lk)1 621 1 4401 3280 t
+10 ZD f
+(\357)4000 3400 w
+10 CW f
+(239 \\\(rk)1 621 1 4401 3400 t
+10 ZD f
+(\361)4000 3520 w
+10 CW f
+(241 \\\(rh)1 621 1 4401 3520 t
+10 ZD f
+(\362)4006 3640 w
+10 CW f
+(242 \\\(tm)1 621 1 4401 3640 t
+10 ZD f
+(\363)3996 3760 w
+10 CW f
+(243 \\\(Sl)1 621 1 4401 3760 t
+10 ZD f
+(\364)4005 3880 w
+10 CW f
+(244 \\\(ps)1 621 1 4401 3880 t
+10 ZD f
+(\365)4001 4000 w
+10 CW f
+(245 \\\(cs)1 621 1 4401 4000 t
+10 ZD f
+(\366)4005 4120 w
+10 CW f
+(246 \\\(cy)1 621 1 4401 4120 t
+10 ZD f
+(\367)3999 4240 w
+10 CW f
+(247 \\\(as)1 621 1 4401 4240 t
+10 ZD f
+(\370)3995 4360 w
+10 CW f
+(248 \\\(os)1 621 1 4401 4360 t
+10 ZD f
+(\371)3999 4480 w
+10 CW f
+(249 \\\(=.)1 621 1 4401 4480 t
+10 ZD f
+(\372)4002 4600 w
+10 CW f
+(250 \\\(ld)1 621 1 4401 4600 t
+10 ZD f
+(\373)4000 4720 w
+10 CW f
+(251 \\\(rd)1 621 1 4401 4720 t
+10 ZD f
+(\374)3997 4840 w
+10 CW f
+(252 \\\(le)1 621 1 4401 4840 t
+10 ZD f
+(\375)3995 4960 w
+10 CW f
+(253 \\\(ge)1 621 1 4401 4960 t
+10 ZD f
+(\376)3998 5080 w
+10 CW f
+(254 \\\(pp)1 621 1 4401 5080 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Trailer
+done
+%%Pages: 2
+%%DocumentFonts: Helvetica-Bold Times-Italic Times-Roman Symbol Courier ZapfDingbats Times-Roman

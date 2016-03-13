@@ -1,0 +1,2773 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( of Macros, Strings, and Number Registers)6 2434( Summary)1 684(APPENDIX H:)1 772 3 720 1050 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Macros]
+10 B f
+(Macros)720 1350 w
+10 R f
+( is an alphabetical list of macro names used by)9 1870(The following)1 569 2 720 1530 t
+9 R f
+(MM)3183 1530 w
+10 R f
+( each macro entry, the \256rst line gives)7 1482(. For)1 215 2 3343 1530 t
+( description, and a reference to the section in which the macro is described.)13 3079(the name of the macro, a brief)6 1241 2 720 1650 t
+(The second line gives a synopsis of the macro call.)9 2030 1 720 1770 t
+( they)1 199( Rather,)1 343(Macros whose descriptions are followed by \262 are not, in general, invoked directly by the user.)15 3778 3 720 1950 t
+(are ``user exit'' macros that are de\256ned by the user and called from inside header, footer, or other macros.)18 4229 1 720 2070 t
+( Section)1 2766( and Synopsis)2 556(Macro Description)1 807 3 720 2310 t
+10 S f
+(_ ______________________________________________________________________________________)1 4320 1 720 2330 t
+10 CW f
+(1C)720 2480 w
+10 R f
+( 12.3)1 2712(One-column processing)1 951 2 1061 2480 t
+10 CW f
+(.1C)1061 2600 w
+(2C)720 2780 w
+10 R f
+( 12.3)1 2695(Two-column processing)1 968 2 1061 2780 t
+10 CW f
+(.2C)1061 2900 w
+(AE)720 3080 w
+10 R f
+( 6.1.4)1 3181(Abstract end)1 507 2 1061 3080 t
+10 CW f
+(.AE)1061 3200 w
+(AF)720 3380 w
+10 R f
+( 6.1.7.2,)1 2690(Alternate First-Page format)2 1098 2 1061 3380 t
+10 CW f
+(.AF)1061 3500 w
+10 R f
+([)1301 3500 w
+10 I f
+(company-name)1334 3500 w
+10 R f
+( G)1 97(] Appendix)1 3000 2 1943 3500 t
+10 CW f
+(AL)720 3680 w
+10 R f
+( 5.3.3.1)1 2381(Automatically-numbered List start)2 1382 2 1061 3680 t
+10 CW f
+(.AL)1061 3800 w
+10 R f
+([)1301 3800 w
+10 I f
+(type)1334 3800 w
+10 R f
+(] [)1 116 1 1500 3800 t
+10 I f
+(text-indent)1616 3800 w
+10 R f
+(] [)1 116 1 2059 3800 t
+10 CW f
+(1)2175 3800 w
+10 R f
+(])2235 3800 w
+10 CW f
+(AS)720 3980 w
+10 R f
+( 6.1.4)1 3153(Abstract start)1 535 2 1061 3980 t
+10 CW f
+(.AS)1061 4100 w
+10 R f
+([)1301 4100 w
+10 I f
+(mode)1334 4100 w
+10 R f
+(] [)1 116 1 1550 4100 t
+10 I f
+(indent)1666 4100 w
+10 R f
+(] [)1 116 1 1916 4100 t
+10 I f
+(type)2032 4100 w
+10 R f
+(])2198 4100 w
+10 CW f
+(AT)720 4280 w
+10 R f
+( 6.1.2)1 3119(Author's Title)1 569 2 1061 4280 t
+10 CW f
+(.AT)1061 4400 w
+10 R f
+([)1301 4400 w
+10 I f
+(title)1334 4400 w
+10 R f
+(])1490 4400 w
+10 S f
+(\274)1573 4400 w
+10 CW f
+(AU)720 4580 w
+10 R f
+( 6.1.2)1 2908(Author information)1 780 2 1061 4580 t
+10 CW f
+(.AU)1061 4700 w
+10 I f
+(name)1301 4700 w
+10 R f
+([)1567 4700 w
+10 I f
+(initials)1600 4700 w
+10 R f
+(] [)1 116 1 1879 4700 t
+10 I f
+(location)1995 4700 w
+10 R f
+(] [)1 116 1 2323 4700 t
+10 I f
+(organization)2439 4700 w
+10 R f
+(] [)1 116 1 2967 4700 t
+10 I f
+(phone)3099 4700 w
+10 R f
+(] [)1 116 1 3343 4700 t
+10 I f
+(room)3459 4700 w
+10 R f
+(] [)1 116 1 3670 4700 t
+10 I f
+(arg)3786 4700 w
+10 R f
+(] [)1 116 1 3925 4700 t
+10 I f
+(arg)4041 4700 w
+10 R f
+(] [)1 116 1 4180 4700 t
+10 I f
+(arg)4296 4700 w
+10 R f
+(])4435 4700 w
+10 CW f
+(AV)720 4880 w
+10 R f
+( 6.3.3)1 2903(Approval Signature)1 785 2 1061 4880 t
+10 CW f
+(.AV)1061 5000 w
+10 R f
+([)1301 5000 w
+10 I f
+(approver's-name)1334 5000 w
+10 R f
+(] [)1 116 1 2021 5000 t
+10 CW f
+(1)2137 5000 w
+10 R f
+(])2197 5000 w
+10 CW f
+(B)720 5180 w
+10 R f
+(Bold 12.1)1 3663 1 1061 5180 t
+10 CW f
+(.B)1061 5300 w
+10 R f
+([)1241 5300 w
+10 I f
+(bold)1274 5300 w
+10 R f
+(] [)1 116 1 1468 5300 t
+10 I f
+(previous)1600 5300 w
+10 R f
+(])1944 5300 w
+10 S f
+(\274)2027 5300 w
+10 CW f
+(BE)720 5480 w
+10 R f
+( 9.6)1 2879(Bottom Block end)2 734 2 1061 5480 t
+10 CW f
+(.BE)1061 5600 w
+(BI)720 5780 w
+10 R f
+( 12.1)1 3219(Bold / Italic)2 444 2 1061 5780 t
+10 CW f
+(.BI)1061 5900 w
+10 R f
+([)1301 5900 w
+10 I f
+(bold)1334 5900 w
+10 R f
+(] [)1 116 1 1528 5900 t
+10 I f
+(italic)1660 5900 w
+10 R f
+(])1866 5900 w
+10 S f
+(\274)1949 5900 w
+10 CW f
+(BL)720 6080 w
+10 R f
+( 5.3.3.2)1 3140(Bullet List start)2 623 2 1061 6080 t
+10 CW f
+(.BL)1061 6200 w
+10 R f
+([)1301 6200 w
+10 I f
+(text-indent)1334 6200 w
+10 R f
+(] [)1 116 1 1777 6200 t
+10 CW f
+(1)1893 6200 w
+10 R f
+(])1953 6200 w
+10 CW f
+(BR)720 6380 w
+10 R f
+( 12.1)1 3135(Bold / Roman)2 528 2 1061 6380 t
+10 CW f
+(.BR)1061 6500 w
+10 R f
+([)1301 6500 w
+10 I f
+(bold)1334 6500 w
+10 R f
+(] [)1 116 1 1528 6500 t
+10 I f
+(roman)1644 6500 w
+10 R f
+(])1905 6500 w
+10 S f
+(\274)1988 6500 w
+10 CW f
+(BS)720 6680 w
+10 R f
+( 9.6)1 2851(Bottom Block start)2 762 2 1061 6680 t
+10 CW f
+(.BS)1061 6800 w
+(CS)720 6980 w
+10 R f
+( 10.2)1 3172(Cover Sheet)1 491 2 1061 6980 t
+10 CW f
+(.CS)1061 7100 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(H-2 MM)1 4320 1 720 600 t
+10 R f
+( Section)1 2766( and Synopsis)2 556(Macro Description)1 807 3 720 960 t
+10 S f
+(_ ______________________________________________________________________________________)1 4320 1 720 980 t
+10 CW f
+(DE)720 1130 w
+10 R f
+( 7.2)1 150( 7.1,)1 3158(Display end)1 480 3 1061 1130 t
+10 CW f
+(.DE)1061 1250 w
+(DF)720 1430 w
+10 R f
+( 7.2)1 2746(Floating Display start)2 867 2 1061 1430 t
+10 CW f
+(.DF)1061 1550 w
+10 R f
+([)1301 1550 w
+10 I f
+(format)1350 1550 w
+10 R f
+(] [)1 116 1 1633 1550 t
+10 I f
+(\256ll)1765 1550 w
+10 R f
+(] [)1 116 1 1887 1550 t
+10 I f
+(right-indent)2003 1550 w
+10 R f
+(])2497 1550 w
+10 CW f
+(DL)720 1730 w
+10 R f
+( 5.3.3.3)1 3180(Dash List start)2 583 2 1061 1730 t
+10 CW f
+(.DL)1061 1850 w
+10 R f
+([)1301 1850 w
+10 I f
+(text-indent)1334 1850 w
+10 R f
+(] [)1 116 1 1777 1850 t
+10 CW f
+(1)1893 1850 w
+10 R f
+(])1953 1850 w
+10 CW f
+(DS)720 2030 w
+10 R f
+( 7.1)1 2852(Static Display start)2 761 2 1061 2030 t
+10 CW f
+(.DS)1061 2150 w
+10 R f
+([)1301 2150 w
+10 I f
+(format)1350 2150 w
+10 R f
+(] [)1 116 1 1633 2150 t
+10 I f
+(\256ll)1765 2150 w
+10 R f
+(] [)1 116 1 1887 2150 t
+10 I f
+(right-indent)2003 2150 w
+10 R f
+(])2497 2150 w
+10 CW f
+(EC)720 2330 w
+10 R f
+( 7.7)1 2910(Equation Caption)1 703 2 1061 2330 t
+10 CW f
+(.EC)1061 2450 w
+10 R f
+([)1301 2450 w
+10 I f
+(title)1334 2450 w
+10 R f
+(] [)1 116 1 1490 2450 t
+10 I f
+(override)1606 2450 w
+10 R f
+(] [)1 116 1 1944 2450 t
+10 I f
+(\257ag)2076 2450 w
+10 R f
+(])2226 2450 w
+10 CW f
+(EF)720 2630 w
+10 R f
+( 9.3.1)1 2976(Even-page Footer)1 712 2 1061 2630 t
+10 CW f
+(.EF)1061 2750 w
+10 R f
+([)1301 2750 w
+10 I f
+(footer)1350 2750 w
+10 R f
+(])1589 2750 w
+10 CW f
+(EH)720 2930 w
+10 R f
+( 9.2.1)1 2950(Even-page Header)1 738 2 1061 2930 t
+10 CW f
+(.EH)1061 3050 w
+10 R f
+([)1301 3050 w
+10 I f
+(header)1350 3050 w
+10 R f
+(])1627 3050 w
+10 CW f
+(EN)720 3230 w
+10 R f
+( 7.4)1 3083(Equation end)1 530 2 1061 3230 t
+10 CW f
+(.EN)1061 3350 w
+(EQ)720 3530 w
+10 R f
+( 7.4)1 3055(Equation start)1 558 2 1061 3530 t
+10 CW f
+(.EQ)1061 3650 w
+10 R f
+([)1301 3650 w
+10 I f
+(label)1334 3650 w
+10 R f
+(])1550 3650 w
+10 CW f
+(EX)720 3830 w
+10 R f
+( 7.7)1 2976(Exhibit Caption)1 637 2 1061 3830 t
+10 CW f
+(.EX)1061 3950 w
+10 R f
+([)1301 3950 w
+10 I f
+(title)1334 3950 w
+10 R f
+(] [)1 116 1 1490 3950 t
+10 I f
+(override)1606 3950 w
+10 R f
+(] [)1 116 1 1944 3950 t
+10 I f
+(\257ag)2076 3950 w
+10 R f
+(])2226 3950 w
+10 CW f
+(FC)720 4130 w
+10 R f
+( 6.3.1.1)1 3137(Formal Closing)1 626 2 1061 4130 t
+10 CW f
+(.FC)1061 4250 w
+10 R f
+([)1301 4250 w
+10 I f
+(closing)1334 4250 w
+10 R f
+(])1623 4250 w
+10 CW f
+(FD)720 4430 w
+10 R f
+( 8.4,)1 2667(Footnote Default format)2 971 2 1061 4430 t
+10 CW f
+(.FD)1061 4550 w
+10 R f
+([)1301 4550 w
+10 I f
+(mode)1334 4550 w
+10 R f
+(] [)1 116 1 1550 4550 t
+10 CW f
+(1)1666 4550 w
+10 R f
+( E)1 86(] Appendix)1 3217 2 1726 4550 t
+10 CW f
+(FE)720 4730 w
+10 R f
+( 8,)1 3038(Footnote end)1 525 2 1061 4730 t
+10 CW f
+(.FE)1061 4850 w
+10 R f
+(Appendix E)1 480 1 4549 4850 t
+10 CW f
+(FG)720 5030 w
+10 R f
+( 7.7)1 3138(Figure Title)1 475 2 1061 5030 t
+10 CW f
+(.FG)1061 5150 w
+10 R f
+([)1301 5150 w
+10 I f
+(title)1334 5150 w
+10 R f
+(] [)1 116 1 1490 5150 t
+10 I f
+(override)1606 5150 w
+10 R f
+(] [)1 116 1 1944 5150 t
+10 I f
+(\257ag)2076 5150 w
+10 R f
+(])2226 5150 w
+10 CW f
+(FS)720 5330 w
+10 R f
+( 8,)1 3010(Footnote start)1 553 2 1061 5330 t
+10 CW f
+(.FS)1061 5450 w
+10 R f
+([)1301 5450 w
+10 I f
+(label)1334 5450 w
+10 R f
+( E)1 86(] Appendix)1 3393 2 1550 5450 t
+10 CW f
+(G1)720 5630 w
+10 R f
+( 7.6)1 3167(Graph start)1 446 2 1061 5630 t
+10 CW f
+(.G1)1061 5750 w
+(G2)720 5930 w
+10 R f
+( 7.6)1 3195(Graph end)1 418 2 1061 5930 t
+10 CW f
+(.G2)1061 6050 w
+(H)720 6230 w
+10 R f
+( 4.2)1 2722(Heading \320 Numbered)2 891 2 1061 6230 t
+10 CW f
+(.H)1061 6350 w
+10 I f
+(level)1241 6350 w
+10 R f
+([)1479 6350 w
+10 I f
+(heading-text)1512 6350 w
+10 R f
+(] [)1 116 1 2027 6350 t
+10 I f
+(heading-suf\256x)2143 6350 w
+10 R f
+(])2709 6350 w
+10 CW f
+(HC)720 6530 w
+10 R f
+( 3.4)1 2685(Hyphenation Character)1 928 2 1061 6530 t
+10 CW f
+(.HC)1061 6650 w
+10 R f
+([)1301 6650 w
+10 I f
+(hyphenation-indicator)1334 6650 w
+10 R f
+(])2228 6650 w
+10 CW f
+(HM)720 6830 w
+10 R f
+( 4.2.2.6)1 935(Heading Mark numbering style \(Arabic or Roman numerals, or letters\))9 2828 2 1061 6830 t
+10 CW f
+(.HM)1061 6950 w
+10 R f
+([)1301 6950 w
+10 I f
+(style1)1334 6950 w
+10 R f
+(])1567 6950 w
+10 S f
+(\274)1650 6950 w
+10 R f
+([)1800 6950 w
+10 I f
+(style7)1833 6950 w
+10 R f
+(])2066 6950 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(MM H-3)1 4320 1 720 600 t
+10 R f
+( Section)1 2766( and Synopsis)2 556(Macro Description)1 807 3 720 960 t
+10 S f
+(_ ______________________________________________________________________________________)1 4320 1 720 980 t
+10 CW f
+(HU)720 1130 w
+10 R f
+( 4.3)1 2622(Heading \320 Unnumbered)2 991 2 1061 1130 t
+10 CW f
+(.HU)1061 1250 w
+10 I f
+(heading-text)1301 1250 w
+10 CW f
+(HX)720 1430 w
+10 R f
+( 4.6)1 1240( X macro \(before heading is printed\) \262)7 1532(Heading \320 User-exit)2 841 3 1061 1430 t
+10 CW f
+(.HX)1061 1550 w
+10 I f
+(dlevel rlevel heading-text)2 1064 1 1301 1550 t
+10 CW f
+(HY)720 1730 w
+10 R f
+( 4.6)1 1240( Y macro \(before heading is printed\) \262)7 1532(Heading \320 User-exit)2 841 3 1061 1730 t
+10 CW f
+(.HY)1061 1850 w
+10 I f
+(dlevel rlevel heading-text)2 1064 1 1301 1850 t
+10 CW f
+(HZ)720 2030 w
+10 R f
+( 4.6)1 1323( Z macro \(after heading is printed\) \262)7 1449(Heading \320 User-exit)2 841 3 1061 2030 t
+10 CW f
+(.HZ)1061 2150 w
+10 I f
+(dlevel rlevel heading-text)2 1064 1 1301 2150 t
+10 CW f
+(I)720 2330 w
+10 R f
+(Italic 12.1)1 3663 1 1061 2330 t
+10 CW f
+(.I)1061 2450 w
+10 R f
+([)1241 2450 w
+10 I f
+(italic)1274 2450 w
+10 R f
+(] [)1 116 1 1480 2450 t
+10 I f
+(previous)1612 2450 w
+10 R f
+(])1956 2450 w
+10 S f
+(\274)2039 2450 w
+10 CW f
+(IA)720 2630 w
+10 R f
+( 6.2.3)1 2895(Inside Address start)2 793 2 1061 2630 t
+10 CW f
+(.IA)1061 2750 w
+10 R f
+([)1301 2750 w
+10 I f
+(name)1334 2750 w
+10 R f
+([)1600 2750 w
+10 I f
+(title)1633 2750 w
+10 R f
+(] ])1 82 1 1789 2750 t
+10 CW f
+(IB)720 2930 w
+10 R f
+( 12.1)1 3219(Italic / Bold)2 444 2 1061 2930 t
+10 CW f
+(.IB)1061 3050 w
+10 R f
+([)1301 3050 w
+10 I f
+(italic)1334 3050 w
+10 R f
+(] [)1 116 1 1540 3050 t
+10 I f
+(bold)1656 3050 w
+10 R f
+(])1850 3050 w
+10 S f
+(\274)1933 3050 w
+10 CW f
+(IE)720 3230 w
+10 R f
+( 6.2.3)1 2923(Inside Address end)2 765 2 1061 3230 t
+10 CW f
+(.IE)1061 3350 w
+(IR)720 3530 w
+10 R f
+( 12.1)1 3125(Italic / Roman)2 538 2 1061 3530 t
+10 CW f
+(.IR)1061 3650 w
+10 R f
+([)1301 3650 w
+10 I f
+(italic)1334 3650 w
+10 R f
+(] [)1 116 1 1540 3650 t
+10 I f
+(roman)1656 3650 w
+10 R f
+(])1917 3650 w
+10 S f
+(\274)2000 3650 w
+10 CW f
+(LB)720 3830 w
+10 R f
+( 5.4)1 3193(List Begin)1 420 2 1061 3830 t
+10 CW f
+(.LB)1061 3950 w
+10 I f
+(text-indent mark-indent pad type)3 1381 1 1301 3950 t
+10 R f
+([)2732 3950 w
+10 I f
+(mark)2765 3950 w
+10 R f
+(] [)1 116 1 2970 3950 t
+10 I f
+(LI-space)3086 3950 w
+10 R f
+(] [)1 116 1 3435 3950 t
+10 I f
+(LB-space)3551 3950 w
+10 R f
+(])3928 3950 w
+10 CW f
+(LC)720 4130 w
+10 R f
+( B)1 92( Appendix)1 3485(List Clear)1 397 3 1061 4130 t
+10 CW f
+(.LC)1061 4250 w
+10 R f
+([)1301 4250 w
+10 I f
+(list-level)1334 4250 w
+10 R f
+(])1694 4250 w
+10 CW f
+(LE)720 4430 w
+10 R f
+( 5.3.2)1 3363(List end)1 325 2 1061 4430 t
+10 CW f
+(.LE)1061 4550 w
+10 R f
+([)1301 4550 w
+10 CW f
+(1)1334 4550 w
+10 R f
+(])1394 4550 w
+10 CW f
+(LI)720 4730 w
+10 R f
+( 5.3.1)1 3324(List Item)1 364 2 1061 4730 t
+10 CW f
+(.LI)1061 4850 w
+10 R f
+([)1301 4850 w
+10 I f
+(mark)1334 4850 w
+10 R f
+(] [)1 116 1 1539 4850 t
+10 CW f
+(1)1655 4850 w
+10 R f
+(])1715 4850 w
+10 CW f
+(LO)720 5030 w
+10 R f
+( 6.2.4)1 3108(Letter Options)1 580 2 1061 5030 t
+10 CW f
+(.LO)1061 5150 w
+10 I f
+(type)1301 5150 w
+10 R f
+([)1517 5150 w
+10 I f
+(notation)1550 5150 w
+10 R f
+(])1884 5150 w
+10 CW f
+(LT)720 5330 w
+10 R f
+( 6.2.1,)1 3206(Letter Types)1 507 2 1061 5330 t
+10 CW f
+(.LT)1061 5450 w
+10 R f
+([)1301 5450 w
+10 I f
+(type)1334 5450 w
+10 R f
+( D)1 97(] Appendix)1 3443 2 1500 5450 t
+10 CW f
+(ML)720 5630 w
+10 R f
+( 5.3.3.4)1 3075(Marked List start)2 688 2 1061 5630 t
+10 CW f
+(.ML)1061 5750 w
+10 I f
+(mark)1301 5750 w
+10 R f
+([)1556 5750 w
+10 I f
+(text-indent)1589 5750 w
+10 R f
+(] [)1 116 1 2032 5750 t
+10 CW f
+(1)2148 5750 w
+10 R f
+(])2208 5750 w
+10 CW f
+(MT)720 5930 w
+10 R f
+( 6.1.8,)1 250( 6.1.6,)1 2878(Memorandum Types)1 835 3 1061 5930 t
+10 CW f
+(.MT)1061 6050 w
+10 R f
+([)1301 6050 w
+10 I f
+(type)1334 6050 w
+10 R f
+(] [)1 116 1 1500 6050 t
+10 I f
+(addressee)1616 6050 w
+10 R f
+(])2015 6050 w
+8 R f
+(or)2123 6050 w
+10 CW f
+(.MT 4)1 300 1 2264 6050 t
+10 R f
+([)2624 6050 w
+10 CW f
+(1)2657 6050 w
+10 R f
+( C)1 92(] Appendix)1 2226 2 2717 6050 t
+10 CW f
+(ND)720 6230 w
+10 R f
+( 6.1.7.1)1 3362(New Date)1 401 2 1061 6230 t
+10 CW f
+(.ND)1061 6350 w
+10 I f
+(new-date)1301 6350 w
+10 CW f
+(NE)720 6530 w
+10 R f
+( 6.3.2)1 3169(Notation end)1 519 2 1061 6530 t
+10 CW f
+(.NE)1061 6650 w
+(NS)720 6830 w
+10 R f
+( 6.3.2)1 3141(Notation start)1 547 2 1061 6830 t
+10 CW f
+(.NS)1061 6950 w
+10 R f
+([)1301 6950 w
+10 I f
+(type)1334 6950 w
+10 R f
+(] [)1 116 1 1500 6950 t
+10 CW f
+(1)1616 6950 w
+10 R f
+(])1676 6950 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(H-4 MM)1 4320 1 720 600 t
+10 R f
+( Section)1 2766( and Synopsis)2 556(Macro Description)1 807 3 720 960 t
+10 S f
+(_ ______________________________________________________________________________________)1 4320 1 720 980 t
+10 CW f
+(nP)720 1130 w
+10 R f
+( 4.1)1 1745(Numbered Paragraph with Double-Line Indent)4 1868 2 1061 1130 t
+10 CW f
+(.nP)1061 1250 w
+(OF)720 1430 w
+10 R f
+( 9.3.2)1 3009(Odd-page Footer)1 679 2 1061 1430 t
+10 CW f
+(.OF)1061 1550 w
+10 R f
+([)1301 1550 w
+10 I f
+(footer)1350 1550 w
+10 R f
+(])1589 1550 w
+10 CW f
+(OH)720 1730 w
+10 R f
+( 9.2.2)1 2983(Odd-page Header)1 705 2 1061 1730 t
+10 CW f
+(.OH)1061 1850 w
+10 R f
+([)1301 1850 w
+10 I f
+(header)1350 1850 w
+10 R f
+(])1627 1850 w
+10 CW f
+(OK)720 2030 w
+10 R f
+( 6.1.5)1 3026(Other Keywords)1 662 2 1061 2030 t
+10 CW f
+(.OK)1061 2150 w
+10 R f
+([)1301 2150 w
+10 I f
+(keyword)1334 2150 w
+10 R f
+(])1688 2150 w
+10 S f
+(\274)1771 2150 w
+10 CW f
+(OP)720 2330 w
+10 R f
+( 12.6)1 2840(Odd-numbered Page)1 823 2 1061 2330 t
+10 CW f
+(.OP)1061 2450 w
+(P)720 2630 w
+10 R f
+(Paragraph 4.1)1 3613 1 1061 2630 t
+10 CW f
+(.P)1061 2750 w
+10 R f
+([)1241 2750 w
+10 I f
+(type)1274 2750 w
+10 R f
+(])1440 2750 w
+10 CW f
+(PS)720 2930 w
+10 R f
+( 7.5)1 3133(Picture start)1 480 2 1061 2930 t
+10 CW f
+(.PS)1061 3050 w
+(PF)720 3230 w
+10 R f
+( 9.3)1 3133(Page Footer)1 480 2 1061 3230 t
+10 CW f
+(.PF)1061 3350 w
+10 R f
+([)1301 3350 w
+10 I f
+(footer)1350 3350 w
+10 R f
+(])1589 3350 w
+10 CW f
+(PH)720 3530 w
+10 R f
+( 9.2)1 3107(Page Header)1 506 2 1061 3530 t
+10 CW f
+(.PH)1061 3650 w
+10 R f
+([)1301 3650 w
+10 I f
+(header)1350 3650 w
+10 R f
+(])1627 3650 w
+10 CW f
+(PM)720 3830 w
+10 R f
+( 9.7,)1 2820(Proprietary Marking)1 818 2 1061 3830 t
+10 CW f
+(.PM)1061 3950 w
+10 R f
+([)1301 3950 w
+10 I f
+(type)1334 3950 w
+10 R f
+(] [)1 116 1 1500 3950 t
+10 I f
+(year)1616 3950 w
+10 R f
+( G)1 97(] Appendix)1 3150 2 1793 3950 t
+10 CW f
+(PE)720 4130 w
+10 R f
+( 7.5)1 3161(Picture end)1 452 2 1061 4130 t
+10 CW f
+(.PE)1061 4250 w
+(PX)720 4430 w
+10 R f
+( 9.5)1 2255( macro \262)2 349( \320 User-exit)2 503(Page Header)1 506 4 1061 4430 t
+10 CW f
+(.PX)1061 4550 w
+(R)720 4730 w
+10 R f
+( 12.1)1 2415(Return to Roman \(regular\) font)4 1248 2 1061 4730 t
+10 CW f
+(.R)1061 4850 w
+(RB)720 5030 w
+10 R f
+( 12.1)1 3135(Roman / Bold)2 528 2 1061 5030 t
+10 CW f
+(.RB)1061 5150 w
+10 R f
+([)1301 5150 w
+10 I f
+(roman)1334 5150 w
+10 R f
+(] [)1 116 1 1595 5150 t
+10 I f
+(bold)1711 5150 w
+10 R f
+(])1905 5150 w
+10 S f
+(\274)1988 5150 w
+10 CW f
+(RD)720 5330 w
+10 R f
+( 12.10)1 3128(Read Insertion)1 585 2 1061 5330 t
+10 CW f
+(.RD)1061 5450 w
+10 R f
+([)1301 5450 w
+10 I f
+(prompt)1350 5450 w
+10 R f
+(] [)1 116 1 1655 5450 t
+10 I f
+(diversion-name)1771 5450 w
+10 R f
+(] [)1 116 1 2392 5450 t
+10 I f
+(string-name)2508 5450 w
+10 R f
+(])2991 5450 w
+10 CW f
+(RF)720 5630 w
+10 R f
+( 11)1 3016(Reference end)1 572 2 1061 5630 t
+10 CW f
+(.RF)1061 5750 w
+(RI)720 5930 w
+10 R f
+( 12.1)1 3125(Roman / Italic)2 538 2 1061 5930 t
+10 CW f
+(.RI)1061 6050 w
+10 R f
+([)1301 6050 w
+10 I f
+(roman)1334 6050 w
+10 R f
+(] [)1 116 1 1595 6050 t
+10 I f
+(italic)1711 6050 w
+10 R f
+(])1917 6050 w
+10 S f
+(\274)2000 6050 w
+10 CW f
+(RL)720 6230 w
+10 R f
+( 5.3.3.5)1 2982(Reference List start)2 781 2 1061 6230 t
+10 CW f
+(.RL)1061 6350 w
+10 R f
+([)1301 6350 w
+10 I f
+(text-indent)1334 6350 w
+10 R f
+(] [)1 116 1 1777 6350 t
+10 CW f
+(1)1893 6350 w
+10 R f
+(])1953 6350 w
+10 CW f
+(RP)720 6530 w
+10 R f
+( 11.3)1 3041(Reference Page)1 622 2 1061 6530 t
+10 CW f
+(.RP)1061 6650 w
+10 R f
+([)1301 6650 w
+10 I f
+(arg)1334 6650 w
+10 R f
+(] [)1 116 1 1473 6650 t
+10 I f
+(arg)1589 6650 w
+10 R f
+(])1728 6650 w
+10 CW f
+(RS)720 6830 w
+10 R f
+( 11)1 2988(Reference start)1 600 2 1061 6830 t
+10 CW f
+(.RS)1061 6950 w
+10 R f
+([)1301 6950 w
+10 I f
+(string-name)1334 6950 w
+10 R f
+(])1817 6950 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(MM H-5)1 4320 1 720 600 t
+10 R f
+( Section)1 2766( and Synopsis)2 556(Macro Description)1 807 3 720 960 t
+10 S f
+(_ ______________________________________________________________________________________)1 4320 1 720 980 t
+10 CW f
+(S)720 1130 w
+10 R f
+( 12.7)1 2239(Set Point Size and Vertical Spacing)5 1424 2 1061 1130 t
+10 CW f
+(.S)1061 1250 w
+10 R f
+([)1241 1250 w
+10 I f
+(point-size)1290 1250 w
+10 R f
+(] [)1 116 1 1679 1250 t
+10 I f
+(vertical-spacing)1795 1250 w
+10 R f
+(])2444 1250 w
+10 CW f
+(SA)720 1430 w
+10 R f
+( 12.2)1 1647(Set Adjustment default \(right-margin justi\256cation\))4 2016 2 1061 1430 t
+10 CW f
+(.SA)1061 1550 w
+10 R f
+([)1301 1550 w
+10 I f
+(mode)1334 1550 w
+10 R f
+(])1550 1550 w
+10 CW f
+(SG)720 1730 w
+10 R f
+( 6.3.1.2)1 3205(Signature line)1 558 2 1061 1730 t
+10 CW f
+(.SG)1061 1850 w
+10 R f
+([)1301 1850 w
+10 I f
+(initials)1334 1850 w
+10 R f
+(] [)1 116 1 1613 1850 t
+10 CW f
+(1)1729 1850 w
+10 R f
+(])1789 1850 w
+10 CW f
+(SK)720 2030 w
+10 R f
+( 12.5)1 3221(Skip Pages)1 442 2 1061 2030 t
+10 CW f
+(.SK)1061 2150 w
+10 R f
+([)1301 2150 w
+10 I f
+(pages)1350 2150 w
+10 R f
+(])1583 2150 w
+10 CW f
+(SM)720 2330 w
+10 R f
+( 12.8)1 2296(Smaller \(one-point size reduction\))3 1367 2 1061 2330 t
+10 CW f
+(.SM)1061 2450 w
+10 I f
+(string1)1301 2450 w
+10 R f
+([)1635 2450 w
+10 I f
+(string2)1668 2450 w
+10 R f
+(] [)1 116 1 1952 2450 t
+10 I f
+(string3)2068 2450 w
+10 R f
+(])2352 2450 w
+10 CW f
+(SP)720 2630 w
+10 R f
+( 12.4)1 2776(Blank Vertical Spaces)2 887 2 1061 2630 t
+10 CW f
+(.SP)1061 2750 w
+10 R f
+([)1301 2750 w
+10 I f
+(lines)1334 2750 w
+10 R f
+(])1523 2750 w
+10 CW f
+(TB)720 2930 w
+10 R f
+( 7.7)1 3172(Table Title)1 441 2 1061 2930 t
+10 CW f
+(.TB)1061 3050 w
+10 R f
+([)1301 3050 w
+10 I f
+(title)1334 3050 w
+10 R f
+(] [)1 116 1 1490 3050 t
+10 I f
+(override)1606 3050 w
+10 R f
+(] [)1 116 1 1944 3050 t
+10 I f
+(\257ag)2076 3050 w
+10 R f
+(])2226 3050 w
+10 CW f
+(TC)720 3230 w
+10 R f
+( 10.1)1 2947(Table of Contents)2 716 2 1061 3230 t
+10 CW f
+(.TC)1061 3350 w
+10 R f
+([)1301 3350 w
+10 I f
+(slevel)1334 3350 w
+10 R f
+(] [)1 116 1 1577 3350 t
+10 I f
+(spacing)1693 3350 w
+10 R f
+(] [)1 116 1 2004 3350 t
+10 I f
+(tlevel)2120 3350 w
+10 R f
+(] [)1 116 1 2352 3350 t
+10 I f
+(tab)2468 3350 w
+10 R f
+(] [)1 116 1 2596 3350 t
+10 I f
+(head1)2712 3350 w
+10 R f
+(] [)1 116 1 2956 3350 t
+10 I f
+(head2)3072 3350 w
+10 R f
+(] [)1 116 1 3316 3350 t
+10 I f
+(head3)3432 3350 w
+10 R f
+(] [)1 116 1 3676 3350 t
+10 I f
+(head4)3792 3350 w
+10 R f
+(] [)1 116 1 4036 3350 t
+10 I f
+(head5)4152 3350 w
+10 R f
+(])4396 3350 w
+10 CW f
+(TE)720 3530 w
+10 R f
+( 7.3)1 3217(Table end)1 396 2 1061 3530 t
+10 CW f
+(.TE)1061 3650 w
+(TH)720 3830 w
+10 R f
+( 7.3)1 2636(Table Repeating-Header)1 977 2 1061 3830 t
+10 CW f
+(.TH)1061 3950 w
+10 R f
+([)1301 3950 w
+10 CW f
+(N)1334 3950 w
+10 R f
+(])1394 3950 w
+10 CW f
+(TL)720 4130 w
+10 R f
+(Title 6.1.1)1 3688 1 1061 4130 t
+10 CW f
+(.TL)1061 4250 w
+10 R f
+([)1301 4250 w
+10 I f
+(charging-case)1334 4250 w
+10 R f
+(] [)1 116 1 1905 4250 t
+10 I f
+(\256ling-case)2037 4250 w
+10 R f
+(])2453 4250 w
+10 CW f
+(TM)720 4430 w
+10 R f
+( 6.1.3)1 2362(Document Identi\256cation Number)2 1326 2 1061 4430 t
+10 CW f
+(.TM)1061 4550 w
+10 R f
+([)1301 4550 w
+10 I f
+(number)1334 4550 w
+10 R f
+(])1639 4550 w
+10 S f
+(\274)1722 4550 w
+10 CW f
+(TP)720 4730 w
+10 R f
+( 9.5)1 2760(Top-of-Page macro \262)2 853 2 1061 4730 t
+10 CW f
+(.TP)1061 4850 w
+(TS)720 5030 w
+10 R f
+( 7.3)1 3189(Table start)1 424 2 1061 5030 t
+10 CW f
+(.TS)1061 5150 w
+10 R f
+([)1301 5150 w
+10 CW f
+(H)1334 5150 w
+10 R f
+(])1394 5150 w
+10 CW f
+(TX)720 5330 w
+10 R f
+( 10.1)1 2095( macro \262)2 349( \320 User-exit)2 503(Table of Contents)2 716 4 1061 5330 t
+10 CW f
+(.TX)1061 5450 w
+(TY)720 5630 w
+10 R f
+( macro \(supress ``)3 717( \320 User-exit)2 503(Table of Contents)2 716 3 1061 5630 t
+9 R f
+(CONTENTS)2997 5630 w
+10 R f
+( 10.1)1 1083(''\) \262)1 174 2 3467 5630 t
+10 CW f
+(.TY)1061 5750 w
+(VL)720 5930 w
+10 R f
+( 5.3.3.6)1 2831(Variable-item List start)2 932 2 1061 5930 t
+10 CW f
+(.VL)1061 6050 w
+10 I f
+(text-indent)1301 6050 w
+10 R f
+([)1778 6050 w
+10 I f
+(mark-indent)1811 6050 w
+10 R f
+(] [)1 116 1 2315 6050 t
+10 CW f
+(1)2431 6050 w
+10 R f
+(])2491 6050 w
+10 CW f
+(WA)720 6230 w
+10 R f
+( 6.2.2)1 2807(Writer's Address start)2 881 2 1061 6230 t
+10 CW f
+(.WA)1061 6350 w
+10 I f
+(name)1301 6350 w
+10 R f
+([)1567 6350 w
+10 I f
+(title)1600 6350 w
+10 R f
+(])1756 6350 w
+10 CW f
+(WC)720 6530 w
+10 R f
+( 12.3.1)1 3157(Width Control)1 581 2 1061 6530 t
+10 CW f
+(.WC)1061 6650 w
+10 R f
+([)1301 6650 w
+10 I f
+(code)1350 6650 w
+10 R f
+(])1538 6650 w
+10 CW f
+(WE)720 6830 w
+10 R f
+( 6.2.2)1 2835(Writer's Address end)2 853 2 1061 6830 t
+10 CW f
+(.WE)1061 6950 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+(H-6 MM)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Strings]
+10 B f
+(Strings)720 960 w
+10 R f
+(The following is an alphabetical list of string names used by)10 2439 1 720 1140 t
+9 R f
+(MM)3185 1140 w
+10 R f
+( \256rst line gives)3 604( each string entry, the)4 874(. For)1 217 3 3345 1140 t
+( to the section in which the string is described.)9 1926(the name of the string, a brief description, and a reference)10 2394 2 720 1260 t
+(The second line gives the initial \(default\) de\256nition.)7 2076 1 720 1380 t
+( Section)1 1979( and Initial De\256nition)3 864(String Description)1 1284 3 720 1680 t
+10 S f
+(_ ______________________________________________________________________________________)1 4318 1 720 1700 t
+10 CW f
+(BU)720 1850 w
+10 R f
+(Bullet \()1 303 1 1538 1850 t
+8 S f
+(\267)1841 1850 w
+10 R f
+( 3.7.1)1 2516(\) symbol)1 353 2 1878 1850 t
+10 CW f
+(\\s-2\\\(bu\\s0)1538 1970 w
+(Ci)720 2150 w
+10 R f
+( 10.1)1 748(Table of Contents Indent list \(for heading levels 1 through 7\))10 2436 2 1538 2150 t
+10 CW f
+(0 0 0 0 0 0 0)6 780 1 1538 2270 t
+(DT)720 2450 w
+10 R f
+(Date \(override with)2 781 1 1538 2450 t
+10 CW f
+(.ND)2344 2450 w
+10 R f
+(\) 1.4,)1 2173 1 2524 2450 t
+(Current date:)1 524 1 1538 2570 t
+10 I f
+(month day, year)2 646 1 2112 2570 t
+10 R f
+(\(e.g.,)2783 2570 w
+10 CW f
+(April 1, 1990)2 780 1 3010 2570 t
+10 R f
+(\) 6.1.7.1)1 1032 1 3790 2570 t
+10 CW f
+(EM)720 2750 w
+10 R f
+( 3.7.2)1 2639( \320 \))2 165(Em dash \()2 405 3 1538 2750 t
+10 CW f
+(\\\(em)1538 2870 w
+(F)720 3050 w
+10 R f
+( 8.1)1 2548(Footnote mark)1 586 2 1538 3050 t
+10 CW f
+(\\v'-.4m'\\s-3\\\\n+\(:p\\s0\\v'.4m')1538 3170 w
+(HF)720 3350 w
+10 R f
+( 4.2.2.4)1 1297(Heading Font list \(for heading levels 1 through 7\))8 1987 2 1538 3350 t
+10 CW f
+(3 3 2 2 2 2 2)6 780 1 1538 3470 t
+(HP)720 3650 w
+10 R f
+( 4.2.2.5)1 1072(Heading Point Size list \(for heading levels 1 through 7\))9 2212 2 1538 3650 t
+10 CW f
+(-1 -1 0 0 0 0 0)6 900 1 1538 3770 t
+(Le)720 3950 w
+10 R f
+( 7.8)1 1739(Title for ``List of Equations'' Page)5 1395 2 1538 3950 t
+10 CW f
+(LIST OF EQUATIONS)2 1020 1 1538 4070 t
+(Lf)720 4250 w
+10 R f
+( 7.8)1 1839(Title for ``List of Figures'' Page)5 1295 2 1538 4250 t
+10 CW f
+(LIST OF FIGURES)2 900 1 1538 4370 t
+(Lt)720 4550 w
+10 R f
+( 7.8)1 1873(Title for ``List of Tables'' Page)5 1261 2 1538 4550 t
+10 CW f
+(LIST OF TABLES)2 840 1 1538 4670 t
+(Lx)720 4850 w
+10 R f
+( 7.8)1 1805(Title for ``List of Exhibits'' Page)5 1329 2 1538 4850 t
+10 CW f
+(LIST OF EXHIBITS)2 960 1 1538 4970 t
+(Rf)720 5150 w
+10 R f
+( 11.1)1 2551(Reference mark)1 633 2 1538 5150 t
+10 CW f
+(\\v'-.4m'\\s-3[\\\\n+\(:R]\\s0\\v'.4m')1538 5270 w
+(Rg)720 5450 w
+10 R f
+(Registered Mark symbol)2 988 1 1538 5450 t
+6 S f
+(\322)2551 5410 w
+10 R f
+(3.7.3)4547 5450 w
+10 CW f
+(\\v'-0.4m'\\s-4\\\(rg\\s+4\\v'0.4m')1538 5570 w
+(Rp)720 5750 w
+10 R f
+( 11.3)1 2207(Title for Reference Page)3 977 2 1538 5750 t
+10 CW f
+(REFERENCES)1538 5870 w
+(Sm)720 6050 w
+10 R f
+(Service Mark symbol)2 860 1 1538 6050 t
+6 R f
+(SM)2423 6000 w
+10 R f
+(3.7.3)4547 6050 w
+10 CW f
+(\\v'-0.5m'\\s-4SM\\s+4\\v'0.5m')1538 6170 w
+(Tm)720 6350 w
+10 R f
+(Trademark symbol)1 757 1 1538 6350 t
+6 R f
+(TM)2320 6300 w
+10 R f
+(3.7.3)4547 6350 w
+10 CW f
+(\\v'-0.5m'\\s-4TM\\s+4\\v'0.5m')1538 6470 w
+(]S)720 6650 w
+10 R f
+( 6.1.7.2,)1 2190(Logo \(for use on letterhead\))4 1119 2 1538 6650 t
+10 CW f
+(\\s36\\\(LH\\s0)1538 6770 w
+10 R f
+(Appendix G)1 491 1 4547 6770 t
+10 CW f
+(}Z)720 6950 w
+10 R f
+( 6.1.7.2,)1 2679(Company name)1 630 2 1538 6950 t
+10 CW f
+(AT&T Bell Laboratories)2 1320 1 1538 7070 t
+10 R f
+(Appendix G)1 491 1 4547 7070 t
+( \24712.9 for the accent strings.)5 1134( See)1 194(See \2471.4 for information on how to de\256ne and reference strings.)10 2556 3 720 7310 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+10 HB f
+(MM H-7)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Number Registers]
+10 B f
+(Number Registers)1 773 1 720 960 t
+10 R f
+( list of number register names used by)7 1635(The following is an alphabetical)4 1347 2 720 1140 t
+9 R f
+(MM)3741 1140 w
+10 R f
+( each number register)3 909(. For)1 230 2 3901 1140 t
+( \256rst line gives the name of the register, a brief description, and a reference to the section in which)19 3941(entry, the)1 379 2 720 1260 t
+( legal)1 228( The)1 214( second line gives the initial \(default\) value and the legal values.)11 2667( The)1 214(the register is described.)3 997 5 720 1380 t
+( and may be a comma-separated list of values \(i.e., [)10 2151( ])1 58( in square brackets [)4 831(values are enclosed)2 791 4 720 1500 t
+10 I f
+(n)4551 1500 w
+10 R f
+(,)4601 1500 w
+10 I f
+(n)4642 1500 w
+10 R f
+(,)4692 1500 w
+10 I f
+(n)4733 1500 w
+10 R f
+(]\) or a)2 257 1 4783 1500 t
+(range of values \(i.e., [)4 872 1 720 1620 t
+10 I f
+(m)1592 1620 w
+10 R f
+(-)1664 1620 w
+10 I f
+(n)1697 1620 w
+10 R f
+(] meaning)1 402 1 1747 1620 t
+10 I f
+(m)2174 1620 w
+10 R f
+(to)2271 1620 w
+10 I f
+(n)2374 1620 w
+10 R f
+(inclusive; if)1 475 1 2449 1620 t
+10 I f
+(n)2949 1620 w
+10 R f
+(is)3024 1620 w
+10 CW f
+(?)3116 1620 w
+10 R f
+(, then there is no upper limit\).)6 1188 1 3176 1620 t
+( registers whose)2 655( Number)1 383( line \(see \2472.3\).)3 636(Any single-character register name can be set from the command)9 2646 4 720 1800 t
+(descriptions are followed by \262 must be set before the)9 2110 1 720 1920 t
+9 R f
+(MM)2853 1920 w
+10 R f
+(macro package is intialized \(see \2472.3 and \2472.4\).)7 1901 1 3038 1920 t
+(See \2471.4 for information on how to set number registers.)9 2261 1 720 2100 t
+( Section)1 1991( and Initial and Legal Values)5 1156(Register Description,)1 977 3 720 2400 t
+10 S f
+(_ ______________________________________________________________________________________)1 4315 1 720 2420 t
+10 CW f
+(A)720 2570 w
+10 R f
+( 2.3,)1 2349(Alternate \256rst-page format \262)3 1139 2 1206 2570 t
+10 CW f
+(0)1206 2690 w
+10 R f
+([)1416 2690 w
+10 CW f
+(0)1449 2690 w
+10 R f
+(,)1509 2690 w
+10 CW f
+(1)1534 2690 w
+10 R f
+( A)1 97(] Appendix)1 3344 2 1594 2690 t
+10 CW f
+(Au)720 2870 w
+10 R f
+( 6.1.2)1 1330(Inhibit author's company information in ``from'' block)6 2208 2 1206 2870 t
+10 CW f
+(1)1206 2990 w
+10 R f
+([)1416 2990 w
+10 CW f
+(0)1449 2990 w
+10 R f
+(,)1509 2990 w
+10 CW f
+(1)1534 2990 w
+10 R f
+(])1594 2990 w
+10 CW f
+(C)720 3170 w
+10 R f
+(Copy type \(e.g.,)2 641 1 1206 3170 t
+9 R f
+(DRAFT)1872 3170 w
+10 R f
+( 2.3)1 2394(\) \262)1 108 2 2167 3170 t
+10 CW f
+(0)1206 3290 w
+10 R f
+([)1416 3290 w
+10 CW f
+(0)1449 3290 w
+10 R f
+(-)1509 3290 w
+10 CW f
+(5)1542 3290 w
+10 R f
+(])1602 3290 w
+10 CW f
+(Cl)720 3470 w
+10 R f
+( 10.1)1 200( 4.4,)1 1813(Table of Contents level of headings saved)6 1675 3 1206 3470 t
+10 CW f
+(2)1206 3590 w
+10 R f
+([)1416 3590 w
+10 CW f
+(0)1449 3590 w
+10 R f
+(-)1509 3590 w
+10 CW f
+(7)1542 3590 w
+10 R f
+(])1602 3590 w
+10 CW f
+(Cp)720 3770 w
+10 R f
+( 10.1)1 200( 7.8,)1 1159(Placement of list of \256gures, tables, equations, and exhibits)8 2329 3 1206 3770 t
+10 CW f
+(1)1206 3890 w
+10 R f
+([)1416 3890 w
+10 CW f
+(0)1449 3890 w
+10 R f
+(,)1509 3890 w
+10 CW f
+(1)1534 3890 w
+10 R f
+( on separate pages\))3 761(] \(e.g.,)1 485 2 1594 3890 t
+10 CW f
+(D)720 4070 w
+10 R f
+( 2.3)1 2947(Debug \257ag \262)2 516 2 1206 4070 t
+10 CW f
+(0)1206 4190 w
+10 R f
+([)1416 4190 w
+10 CW f
+(0)1449 4190 w
+10 R f
+(,)1509 4190 w
+10 CW f
+(1)1534 4190 w
+10 R f
+(])1594 4190 w
+10 CW f
+(De)720 4370 w
+10 R f
+( 7.2)1 2602(Floating display eject)2 861 2 1206 4370 t
+10 CW f
+(0)1206 4490 w
+10 R f
+([)1416 4490 w
+10 CW f
+(0)1449 4490 w
+10 R f
+(,)1509 4490 w
+10 CW f
+(1)1534 4490 w
+10 R f
+(])1594 4490 w
+10 CW f
+(Df)720 4670 w
+10 R f
+( 7.2)1 2524(Floating display format)2 939 2 1206 4670 t
+10 CW f
+(5)1206 4790 w
+10 R f
+([)1416 4790 w
+10 CW f
+(0)1449 4790 w
+10 R f
+(-)1509 4790 w
+10 CW f
+(5)1542 4790 w
+10 R f
+(])1602 4790 w
+10 CW f
+(Ds)720 4970 w
+10 R f
+( 7.1)1 1900(Static display pre-space and post-space)4 1563 2 1206 4970 t
+10 CW f
+(1)1206 5090 w
+10 R f
+([)1416 5090 w
+10 CW f
+(0)1449 5090 w
+10 R f
+(,)1509 5090 w
+10 CW f
+(1)1534 5090 w
+10 R f
+(])1594 5090 w
+10 CW f
+(E)720 5270 w
+10 R f
+( 2.3)1 1998(Font of ``subject/date/from'' \256elds \262)4 1465 2 1206 5270 t
+10 CW f
+(1)1206 5390 w
+10 R f
+([)1416 5390 w
+10 CW f
+(0)1449 5390 w
+10 R f
+(,)1509 5390 w
+10 CW f
+(1)1534 5390 w
+10 R f
+(])1594 5390 w
+10 CW f
+(Ec)720 5570 w
+10 R f
+(Equation counter \(incremented and used by)5 1738 1 1206 5570 t
+10 CW f
+(.EC)2969 5570 w
+10 R f
+(macro\) 7.7)1 1495 1 3174 5570 t
+10 CW f
+(0)1206 5690 w
+10 R f
+([)1416 5690 w
+10 CW f
+(0)1449 5690 w
+10 R f
+(-)1509 5690 w
+10 CW f
+(?)1542 5690 w
+10 R f
+(])1602 5690 w
+10 CW f
+(Ej)720 5870 w
+10 R f
+( 4.2.2.1)1 2505(Page eject for heading level)4 1108 2 1206 5870 t
+10 CW f
+(0)1206 5990 w
+10 R f
+([)1416 5990 w
+10 CW f
+(0)1449 5990 w
+10 R f
+(-)1509 5990 w
+10 CW f
+(7)1542 5990 w
+10 R f
+(])1602 5990 w
+10 CW f
+(Eq)720 6170 w
+10 R f
+( 7.4)1 1575(Equation Label placement \(e.g., right-adjusted\))4 1888 2 1206 6170 t
+10 CW f
+(0)1206 6290 w
+10 R f
+([)1416 6290 w
+10 CW f
+(0)1449 6290 w
+10 R f
+(,)1509 6290 w
+10 CW f
+(1)1534 6290 w
+10 R f
+(])1594 6290 w
+10 CW f
+(Ex)720 6470 w
+10 R f
+(Exhibit counter \(incremented and used by)5 1672 1 1206 6470 t
+10 CW f
+(.EX)2903 6470 w
+10 R f
+(macro\) 7.7)1 1561 1 3108 6470 t
+10 CW f
+(0)1206 6590 w
+10 R f
+([)1416 6590 w
+10 CW f
+(0)1449 6590 w
+10 R f
+(-)1509 6590 w
+10 CW f
+(?)1542 6590 w
+10 R f
+(])1602 6590 w
+10 CW f
+(Fg)720 6770 w
+10 R f
+(Figure counter \(increment and used by)5 1544 1 1206 6770 t
+10 CW f
+(.FG)2775 6770 w
+10 R f
+(macro\) 7.7)1 1689 1 2980 6770 t
+10 CW f
+(0)1206 6890 w
+10 R f
+([)1416 6890 w
+10 CW f
+(0)1449 6890 w
+10 R f
+(-)1509 6890 w
+10 CW f
+(?)1542 6890 w
+10 R f
+(])1602 6890 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+10 HB f
+(H-8 MM)1 4320 1 720 600 t
+10 R f
+( Section)1 1991( and Initial and Legal Values)5 1156(Register Description,)1 977 3 720 960 t
+10 S f
+(_ ______________________________________________________________________________________)1 4315 1 720 980 t
+10 CW f
+(Fs)720 1130 w
+10 R f
+( 8.3)1 1539(Footnote space \(i.e., spacing between footnotes\))5 1924 2 1206 1130 t
+10 CW f
+(1)1206 1250 w
+10 R f
+([)1416 1250 w
+10 CW f
+(0)1449 1250 w
+10 R f
+(-)1509 1250 w
+10 CW f
+(?)1542 1250 w
+10 R f
+(])1602 1250 w
+10 CW f
+(H1)720 1430 w
+10 R f
+( 4.2.2)1 2053(Heading counter for level-1 headings)4 1485 2 1206 1430 t
+10 CW f
+(0)1206 1550 w
+10 R f
+([)1416 1550 w
+10 CW f
+(0)1449 1550 w
+10 R f
+(-)1509 1550 w
+10 CW f
+(?)1542 1550 w
+10 R f
+(])1602 1550 w
+10 CW f
+(H2)720 1730 w
+10 R f
+( 4.2.2)1 2053(Heading counter for level-2 headings)4 1485 2 1206 1730 t
+10 CW f
+(0)1206 1850 w
+10 R f
+([)1416 1850 w
+10 CW f
+(0)1449 1850 w
+10 R f
+(-)1509 1850 w
+10 CW f
+(?)1542 1850 w
+10 R f
+(])1602 1850 w
+10 CW f
+(H3)720 2030 w
+10 R f
+( 4.2.2)1 2053(Heading counter for level-3 headings)4 1485 2 1206 2030 t
+10 CW f
+(0)1206 2150 w
+10 R f
+([)1416 2150 w
+10 CW f
+(0)1449 2150 w
+10 R f
+(-)1509 2150 w
+10 CW f
+(?)1542 2150 w
+10 R f
+(])1602 2150 w
+10 CW f
+(H4)720 2330 w
+10 R f
+( 4.2.2)1 2053(Heading counter for level-4 headings)4 1485 2 1206 2330 t
+10 CW f
+(0)1206 2450 w
+10 R f
+([)1416 2450 w
+10 CW f
+(0)1449 2450 w
+10 R f
+(-)1509 2450 w
+10 CW f
+(?)1542 2450 w
+10 R f
+(])1602 2450 w
+10 CW f
+(H5)720 2630 w
+10 R f
+( 4.2.2)1 2053(Heading counter for level-5 headings)4 1485 2 1206 2630 t
+10 CW f
+(0)1206 2750 w
+10 R f
+([)1416 2750 w
+10 CW f
+(0)1449 2750 w
+10 R f
+(-)1509 2750 w
+10 CW f
+(?)1542 2750 w
+10 R f
+(])1602 2750 w
+10 CW f
+(H6)720 2930 w
+10 R f
+( 4.2.2)1 2053(Heading counter for level-6 headings)4 1485 2 1206 2930 t
+10 CW f
+(0)1206 3050 w
+10 R f
+([)1416 3050 w
+10 CW f
+(0)1449 3050 w
+10 R f
+(-)1509 3050 w
+10 CW f
+(?)1542 3050 w
+10 R f
+(])1602 3050 w
+10 CW f
+(H7)720 3230 w
+10 R f
+( 4.2.2)1 2053(Heading counter for level-7 headings)4 1485 2 1206 3230 t
+10 CW f
+(0)1206 3350 w
+10 R f
+([)1416 3350 w
+10 CW f
+(0)1449 3350 w
+10 R f
+(-)1509 3350 w
+10 CW f
+(?)1542 3350 w
+10 R f
+(])1602 3350 w
+10 CW f
+(Hb)720 3530 w
+10 R f
+(Heading break level \(after)3 1043 1 1206 3530 t
+10 CW f
+(.H)2274 3530 w
+10 R f
+(and)2419 3530 w
+10 CW f
+(.HU)2588 3530 w
+10 R f
+(macros\) 4.2.2.2)1 2026 1 2793 3530 t
+10 CW f
+(2)1206 3650 w
+10 R f
+([)1416 3650 w
+10 CW f
+(0)1449 3650 w
+10 R f
+(-)1509 3650 w
+10 CW f
+(7)1542 3650 w
+10 R f
+(])1602 3650 w
+10 CW f
+(Hc)720 3830 w
+10 R f
+(Heading centering level \(for)3 1127 1 1206 3830 t
+10 CW f
+(.H)2358 3830 w
+10 R f
+(and)2503 3830 w
+10 CW f
+(.HU)2672 3830 w
+10 R f
+(macros\) 4.2.2.3)1 1942 1 2877 3830 t
+10 CW f
+(0)1206 3950 w
+10 R f
+([)1416 3950 w
+10 CW f
+(0)1449 3950 w
+10 R f
+(-)1509 3950 w
+10 CW f
+(7)1542 3950 w
+10 R f
+(])1602 3950 w
+10 CW f
+(Hi)720 4130 w
+10 R f
+(Heading temporary indent \(after)3 1288 1 1206 4130 t
+10 CW f
+(.H)2519 4130 w
+10 R f
+(and)2664 4130 w
+10 CW f
+(.HU)2833 4130 w
+10 R f
+(macros\) 4.2.2.2)1 1781 1 3038 4130 t
+10 CW f
+(1)1206 4250 w
+10 R f
+([)1416 4250 w
+10 CW f
+(0)1449 4250 w
+10 R f
+(-)1509 4250 w
+10 CW f
+(2)1542 4250 w
+10 R f
+(])1602 4250 w
+10 CW f
+(Hs)720 4430 w
+10 R f
+(Heading space level \(after)3 1043 1 1206 4430 t
+10 CW f
+(.H)2274 4430 w
+10 R f
+(and)2419 4430 w
+10 CW f
+(.HU)2588 4430 w
+10 R f
+(macros\) 4.2.2.2)1 2026 1 2793 4430 t
+10 CW f
+(2)1206 4550 w
+10 R f
+([)1416 4550 w
+10 CW f
+(0)1449 4550 w
+10 R f
+(-)1509 4550 w
+10 CW f
+(7)1542 4550 w
+10 R f
+(])1602 4550 w
+10 CW f
+(Ht)720 4730 w
+10 R f
+(Heading type \(for)2 709 1 1206 4730 t
+10 CW f
+(.H)1940 4730 w
+10 R f
+( 4.2.2.6)1 1138(macro: single or concatenated numbers\))4 1596 2 2085 4730 t
+10 CW f
+(0)1206 4850 w
+10 R f
+([)1416 4850 w
+10 CW f
+(0)1449 4850 w
+10 R f
+(,)1509 4850 w
+10 CW f
+(1)1534 4850 w
+10 R f
+(])1594 4850 w
+10 CW f
+(Hu)720 5030 w
+10 R f
+(Heading level for unnumbered heading \()5 1621 1 1206 5030 t
+10 CW f
+(.HU)2827 5030 w
+10 R f
+(macro\) 4.3)1 1637 1 3032 5030 t
+10 CW f
+(2)1206 5150 w
+10 R f
+([)1416 5150 w
+10 CW f
+(0)1449 5150 w
+10 R f
+(-)1509 5150 w
+10 CW f
+(7)1542 5150 w
+10 R f
+(])1602 5150 w
+10 CW f
+(Hy)720 5330 w
+10 R f
+( 3.4)1 2639(Hyphenation control)1 824 2 1206 5330 t
+10 CW f
+(0)1206 5450 w
+10 R f
+([)1416 5450 w
+10 CW f
+(0)1449 5450 w
+10 R f
+(,)1509 5450 w
+10 CW f
+(1)1534 5450 w
+10 R f
+(])1594 5450 w
+10 CW f
+(L)720 5630 w
+10 R f
+( 2.3,)1 2944(Page length \262)2 544 2 1206 5630 t
+10 CW f
+(11i)1206 5750 w
+10 R f
+([)1536 5750 w
+10 CW f
+(2i)1569 5750 w
+10 R f
+(-)1689 5750 w
+10 CW f
+(?)1722 5750 w
+10 R f
+( A)1 97(] Appendix)1 3156 2 1782 5750 t
+10 CW f
+(Le)720 5930 w
+10 R f
+( 7.8)1 2774(List of Equations)2 689 2 1206 5930 t
+10 CW f
+(0)1206 6050 w
+10 R f
+([)1416 6050 w
+10 CW f
+(0)1449 6050 w
+10 R f
+(,)1509 6050 w
+10 CW f
+(1)1534 6050 w
+10 R f
+(])1594 6050 w
+10 CW f
+(Lf)720 6230 w
+10 R f
+( 7.8)1 2874(List of Figures)2 589 2 1206 6230 t
+10 CW f
+(0)1206 6350 w
+10 R f
+([)1416 6350 w
+10 CW f
+(0)1449 6350 w
+10 R f
+(,)1509 6350 w
+10 CW f
+(1)1534 6350 w
+10 R f
+(])1594 6350 w
+10 CW f
+(Li)720 6530 w
+10 R f
+( 5.3.3.1,)1 1878(List indent for automatically-numbered lists)4 1760 2 1206 6530 t
+10 CW f
+(5)1206 6650 w
+10 R f
+([)1416 6650 w
+10 CW f
+(0)1449 6650 w
+10 R f
+(-)1509 6650 w
+10 CW f
+(?)1542 6650 w
+10 R f
+( A)1 97(] Appendix)1 3336 2 1602 6650 t
+10 CW f
+(Ls)720 6830 w
+10 R f
+( 5.1)1 2034(List spacing between items by level)5 1429 2 1206 6830 t
+10 CW f
+(6)1206 6950 w
+10 R f
+([)1416 6950 w
+10 CW f
+(0)1449 6950 w
+10 R f
+(-)1509 6950 w
+10 CW f
+(6)1542 6950 w
+10 R f
+(])1602 6950 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Page: 9 9
+/saveobj save def
+mark
+9 pagesetup
+10 HB f
+(MM H-9)1 4320 1 720 600 t
+10 R f
+( Section)1 1991( and Initial and Legal Values)5 1156(Register Description,)1 977 3 720 960 t
+10 S f
+(_ ______________________________________________________________________________________)1 4315 1 720 980 t
+10 CW f
+(Lt)720 1130 w
+10 R f
+( 7.8)1 2908(List of Tables)2 555 2 1206 1130 t
+10 CW f
+(0)1206 1250 w
+10 R f
+([)1416 1250 w
+10 CW f
+(0)1449 1250 w
+10 R f
+(,)1509 1250 w
+10 CW f
+(1)1534 1250 w
+10 R f
+(])1594 1250 w
+10 CW f
+(Lx)720 1430 w
+10 R f
+( 7.8)1 2840(List of Exhibits)2 623 2 1206 1430 t
+10 CW f
+(0)1206 1550 w
+10 R f
+([)1416 1550 w
+10 CW f
+(0)1449 1550 w
+10 R f
+(,)1509 1550 w
+10 CW f
+(1)1534 1550 w
+10 R f
+(])1594 1550 w
+10 CW f
+(N)720 1730 w
+10 R f
+( 2.3)1 2522(Page numbering style \262)3 941 2 1206 1730 t
+10 CW f
+(0)1206 1850 w
+10 R f
+([)1416 1850 w
+10 CW f
+(0)1449 1850 w
+10 R f
+(-)1509 1850 w
+10 CW f
+(5)1542 1850 w
+10 R f
+(])1602 1850 w
+10 CW f
+(Np)720 2030 w
+10 R f
+( 4.1)1 1069(Numbering style for paragraphs \(unnumbered or numbered\))6 2394 2 1206 2030 t
+10 CW f
+(0)1206 2150 w
+10 R f
+([)1416 2150 w
+10 CW f
+(0)1449 2150 w
+10 R f
+(,)1509 2150 w
+10 CW f
+(1)1534 2150 w
+10 R f
+(])1594 2150 w
+10 CW f
+(O)720 2330 w
+10 R f
+( 2.3,)1 2263(Page offset \(i.e., left margin\) \262)5 1225 2 1206 2330 t
+10 CW f
+(1i)1206 2450 w
+10 R f
+([)1476 2450 w
+10 CW f
+(0i)1509 2450 w
+10 R f
+(-)1629 2450 w
+10 CW f
+(?)1662 2450 w
+10 R f
+( A)1 97(] Appendix)1 3216 2 1722 2450 t
+10 CW f
+(Oc)720 2630 w
+10 R f
+( 10.1)1 328(Numbering style for Table of Contents page \(e.g., lower-case Roman numerals\))10 3185 2 1206 2630 t
+10 CW f
+(0)1206 2750 w
+10 R f
+([)1416 2750 w
+10 CW f
+(0)1449 2750 w
+10 R f
+(,)1509 2750 w
+10 CW f
+(1)1534 2750 w
+10 R f
+(])1594 2750 w
+10 CW f
+(Of)720 2930 w
+10 R f
+( 7.7)1 1739(Figure caption style \(e.g., period separator\))5 1724 2 1206 2930 t
+10 CW f
+(0)1206 3050 w
+10 R f
+([)1416 3050 w
+10 CW f
+(0)1449 3050 w
+10 R f
+(,)1509 3050 w
+10 CW f
+(1)1534 3050 w
+10 R f
+(])1594 3050 w
+10 CW f
+(P)720 3230 w
+10 R f
+(Page number \(managed by the)4 1214 1 1206 3230 t
+9 R f
+(MM)2445 3230 w
+10 R f
+( 9.4)1 150( 2.3,)1 1630(package\) \262)1 434 3 2630 3230 t
+10 CW f
+(0)1206 3350 w
+10 R f
+([)1416 3350 w
+10 CW f
+(0)1449 3350 w
+10 R f
+(-)1509 3350 w
+10 CW f
+(?)1542 3350 w
+10 R f
+(])1602 3350 w
+10 CW f
+(Pi)720 3530 w
+10 R f
+( 4.1,)1 2809(Paragraph indent)1 679 2 1206 3530 t
+10 CW f
+(3)1206 3650 w
+10 R f
+([)1416 3650 w
+10 CW f
+(0)1449 3650 w
+10 R f
+(-)1509 3650 w
+10 CW f
+(?)1542 3650 w
+10 R f
+( A)1 97(] Appendix)1 3336 2 1602 3650 t
+10 CW f
+(Ps)720 3830 w
+10 R f
+( 4.1)1 1483(Paragraph spacing \(e.g., one blank vertical space\))6 1980 2 1206 3830 t
+10 CW f
+(1)1206 3950 w
+10 R f
+([)1416 3950 w
+10 CW f
+(0)1449 3950 w
+10 R f
+(-)1509 3950 w
+10 CW f
+(?)1542 3950 w
+10 R f
+(])1602 3950 w
+10 CW f
+(Pt)720 4130 w
+10 R f
+( 4.1)1 1867(Paragraph type \(e.g., blocked, indented\))4 1596 2 1206 4130 t
+10 CW f
+(0)1206 4250 w
+10 R f
+([)1416 4250 w
+10 CW f
+(0)1449 4250 w
+10 R f
+(-)1509 4250 w
+10 CW f
+(2)1542 4250 w
+10 R f
+(])1602 4250 w
+10 CW f
+(Pv)720 4430 w
+10 R f
+(``)1206 4430 w
+9 R f
+(PRIVATE)1272 4430 w
+10 R f
+( 9.8)1 1607('' header \(e.g., not printed, printed\))5 1410 2 1652 4430 t
+10 CW f
+(0)1206 4550 w
+10 R f
+([)1416 4550 w
+10 CW f
+(0)1449 4550 w
+10 R f
+(-)1509 4550 w
+10 CW f
+(2)1542 4550 w
+10 R f
+(])1602 4550 w
+10 CW f
+(S)720 4730 w
+10 R f
+( 2.3,)1 3004(Point Size \262)2 484 2 1206 4730 t
+10 CW f
+(10)1206 4850 w
+10 R f
+([)1476 4850 w
+10 CW f
+(6)1509 4850 w
+10 R f
+(-)1569 4850 w
+10 CW f
+(?)1602 4850 w
+10 R f
+( A)1 97(] Appendix)1 3276 2 1662 4850 t
+10 CW f
+(Si)720 5030 w
+10 R f
+( 7.2,)1 175( 7.1,)1 2364(Standard indent for displays)3 1124 3 1206 5030 t
+10 CW f
+(3)1206 5150 w
+10 R f
+([)1416 5150 w
+10 CW f
+(0)1449 5150 w
+10 R f
+(-)1509 5150 w
+10 CW f
+(?)1542 5150 w
+10 R f
+( A)1 97(] Appendix)1 3336 2 1602 5150 t
+10 CW f
+(T)720 5330 w
+10 R f
+( A)1 97( Appendix)1 3094(Terminal type \262)2 638 3 1206 5330 t
+10 CW f
+(0)1206 5450 w
+10 R f
+([)1416 5450 w
+10 CW f
+(0)1449 5450 w
+10 R f
+(-)1509 5450 w
+10 CW f
+(2)1542 5450 w
+10 R f
+(])1602 5450 w
+10 CW f
+(Tb)720 5630 w
+10 R f
+(Table counter \(incremented and used by)5 1604 1 1206 5630 t
+10 CW f
+(.TB)2835 5630 w
+10 R f
+(macro\) 7.7)1 1629 1 3040 5630 t
+10 CW f
+(0)1206 5750 w
+10 R f
+([)1416 5750 w
+10 CW f
+(0)1449 5750 w
+10 R f
+(-)1509 5750 w
+10 CW f
+(?)1542 5750 w
+10 R f
+(])1602 5750 w
+10 CW f
+(U)720 5930 w
+10 R f
+( A)1 97( Appendix)1 2236(Underlining style \(e.g., continuous\) \262)4 1496 3 1206 5930 t
+10 CW f
+(0)1206 6050 w
+10 R f
+([)1416 6050 w
+10 CW f
+(0)1449 6050 w
+10 R f
+(,)1509 6050 w
+10 CW f
+(1)1534 6050 w
+10 R f
+(])1594 6050 w
+10 CW f
+(W)720 6230 w
+10 R f
+( 2.3,)1 2331(Page width \(e.g., line length\))4 1157 2 1206 6230 t
+10 CW f
+(6i)1206 6350 w
+10 R f
+([)1476 6350 w
+10 CW f
+(2i)1509 6350 w
+10 R f
+(-)1629 6350 w
+10 CW f
+(?)1662 6350 w
+10 R f
+( A)1 97(] Appendix)1 3216 2 1722 6350 t
+10 CW f
+(:R)720 6530 w
+10 R f
+(Reference counter \(used by string)4 1346 1 1206 6530 t
+10 CW f
+(Rf)2577 6530 w
+10 R f
+(and)2722 6530 w
+10 CW f
+(.RS)2891 6530 w
+10 R f
+(macro\) 11.1)1 1623 1 3096 6530 t
+10 CW f
+(0)1206 6650 w
+10 R f
+([)1416 6650 w
+10 CW f
+(0)1449 6650 w
+10 R f
+(-)1509 6650 w
+10 CW f
+(?)1542 6650 w
+10 R f
+(])1602 6650 w
+10 CW f
+(:p)720 6830 w
+10 R f
+(Footnote counter \(used by string)4 1299 1 1206 6830 t
+10 CW f
+(F)2530 6830 w
+10 R f
+(and)2615 6830 w
+10 CW f
+(.FS)2784 6830 w
+10 R f
+(macro\) 8.1)1 1680 1 2989 6830 t
+10 CW f
+(0)1206 6950 w
+10 R f
+([)1416 6950 w
+10 CW f
+(0)1449 6950 w
+10 R f
+(-)1509 6950 w
+10 CW f
+(?)1542 6950 w
+10 R f
+(])1602 6950 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 9 9
+%%Trailer
+done
+%%Pages: 9
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

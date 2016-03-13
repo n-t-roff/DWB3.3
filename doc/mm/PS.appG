@@ -1,0 +1,834 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( Information)1 695( Company-Related)1 1156(APPENDIX G:)1 780 3 720 1050 t
+10 R f
+(This appendix summarizes company-related information in the)6 2519 1 720 1350 t
+9 R f
+(MM)3263 1350 w
+10 R f
+( as the company logo, the)5 1031(package, such)1 560 2 3449 1350 t
+(company name, company location addresses, and proprietary markings and copyright notices.)10 3746 1 720 1470 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Logo and Company Name]
+10 B f
+(Logo and Company Name)3 1120 1 720 1650 t
+10 R f
+( the company name and logo are used in the letterhead block on the \256rst page and on the)18 3707(In memoranda,)1 613 2 720 1830 t
+( name follows the author's name\(s\) on the \256rst)8 1880( the released paper style, the company)6 1539( In)1 136(cover sheet, if any.)3 765 4 720 1950 t
+( default, the company name and logo are de\256ned as:)9 2079( By)1 167(page and on the cover sheet, if any.)7 1410 3 720 2070 t
+( Bell Laboratories)2 721( AT&T)1 422(Company name:)1 658 3 870 2250 t
+(Logo:)1289 2490 w
+36 S1 f
+()1678 2670 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% PostScript 12 and 8 line logos - horizontal configuration. Switch occurs
+% automatically below point size 29. Code from Matthijs Melchior.
+%
+
+/LOGO-dict-mm where not {
+	64 dict /LOGO-dict-mm exch def
+}{pop} ifelse
+LOGO-dict-mm begin		% initialize dictionary
+
+
+/globesetup {
+/r exch def
+/N exch def
+/d 2 N r mul N 1 sub add div def
+/h d r mul def
+} def
+/mkabs {
+/yp exch def
+/xl exch def
+dup dup 0 get xl mul 0 exch put
+dup dup 1 get h mul yp add 1 exch put
+dup dup 2 get xl mul 2 exch put
+dup dup 3 get h mul yp add 3 exch put
+dup dup 4 get xl mul 4 exch put
+dup dup 5 get h mul yp add 5 exch put
+} def
+/topsegment {
+/n exch def
+/y n r mul n .5 add add d mul def
+/a y 1 y dup mul sub sqrt atan def
+/x a cos def
+/c2 exch x y mkabs def
+/ly1 exch h mul y add def
+/lx1 exch x abs mul def
+/c1 exch x y mkabs def
+x y /moveto load
+0 0 1 a 180 a sub /arc load
+c1 aload pop /curveto load
+lx1 ly1 /lineto load
+c2 aload pop /curveto load
+/closepath load
+} def
+/botsegment {
+/n exch 1 add def
+/y n r mul n .5 sub add d mul def
+/a y 1 y dup mul sub sqrt atan def
+/x a cos def
+/c2 exch x y mkabs def
+/ly1 exch h mul y add def
+/lx1 exch x abs mul def
+/c1 exch x y mkabs def
+x y /moveto load
+0 0 1 a 540 a sub /arcn load
+c1 aload pop /curveto load
+lx1 ly1 /lineto load
+c2 aload pop /curveto load
+/closepath load
+} def
+/segment {
+/n exch def
+/dh exch 1 exch sub 2 div def
+/ylb n r mul n 0.5 add add d mul def
+/ylt ylb h add def
+/yrb ylb h dh mul add def
+/yrt ylt h dh mul sub def
+/alb ylb 1 ylb dup mul sub sqrt atan def
+/alt ylt 1 ylt dup mul sub sqrt atan def
+/arb yrb 1 yrb dup mul sub sqrt atan 180 exch sub def
+/art yrt 1 yrt dup mul sub sqrt atan 180 exch sub def
+/xlb alb cos def
+/xlt alt cos def
+/xrb arb cos def
+/xrt art cos def
+/c4 exch xrb abs ylb mkabs def
+/ly2 exch h mul ylb add def
+/lx2 exch xrb abs mul def
+/c3 exch xrb abs ylb mkabs def
+/c2 exch xrt abs ylt mkabs def
+/ly1 exch h mul ylt add def
+/lx1 exch xrt abs mul def
+/c1 exch xrt abs ylt mkabs def
+xlb ylb /moveto load
+0 0 1 alb alt /arc load
+c2 4 get c2 5 get /lineto load
+c2 2 get c2 3 get
+c2 0 get c2 1 get
+lx1 ly1	/curveto load
+c1 4 get c1 5 get /lineto load
+c1 2 get c1 3 get
+c1 0 get c1 1 get
+xrt yrt /curveto load
+0 0 1 art arb /arc load
+c3 aload pop /curveto load
+lx2 ly2 /lineto load
+c4 aload pop /curveto load
+/closepath load
+} def
+8 2.5 globesetup
+/globe8 [
+/newpath load
+[ -.9   .1  -.6   .2  -.5   .2  ] -.5   .2  [ -.4   .2   .0  .0  .4  .0 ] 3 topsegment
+[ -.9  -.35 -.85 -.35 -.8  -.35 ] -.1  -.35 [  .1  -.35  .3  .0  .5  .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ] -.1   .35 [  .1   .35  .4  .0  .55 .0 ] .55 2 segment
+[ -.8  -.35 -.75 -.35 -.7  -.35 ]  .05 -.35 [  .2  -.35  .4  .0  .55 .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ]  .05  .35 [  .2   .35  .45 .0  .6  .0 ] .7  1 segment
+[ -.8  -.35 -.75 -.35 -.7  -.35 ]  .0  -.35 [  .15 -.35  .4  .0  .6  .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ]  .0   .35 [  .15  .35  .4  .0  .6  .0 ] .7  0 segment
+[ -.7  -.35 -.65 -.35 -.6  -.35 ] -.1  -.35 [  .05 -.35  .35 .0  .55 .0 ]
+[ -.7   .35 -.65  .35 -.6   .35 ] -.1   .35 [  .05  .35  .25 .0  .4  .0 ] .8 -1 segment
+[ -.65 -.2  -.55 -.2 -.45  -.2  ] -.3   -.2 [ -.2  -.2   .2  .0  .3  .0 ]
+[ -.65  .1  -.55  .1 -.45   .1  ] -.45  .1  [ -.3   .1  -.1  .0  .0  .0 ] .96 -2 segment
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]  1 -3 segment
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] -4 botsegment
+] cvx def
+12 3 globesetup
+/globe12 [
+/newpath load
+[ -.8   .2  -.7  .25 -.5   .25 ] -.4  .25 [ -.2   .25  .0  .0  .2  .0 ] 5 topsegment
+[ -.7  -.35 -.7 -.35 -.6  -.35 ] -.3 -.35 [ -.1  -.35  .3  .0  .55 .0 ]
+[ -.7   .35 -.7  .35 -.6   .35 ] -.25 .35 [ -.05  .35  .4  .0  .55 .0 ] .6  4 segment
+[ -.8  -.35 -.7 -.35 -.6  -.35 ] -.1 -.35 [  .1  -.35  .4  .0  .5  .0 ]
+[ -.8   .35 -.7  .35 -.6   .35 ] -.1  .35 [  .1   .35  .4  .0  .5  .0 ] .7  3 segment
+[ -.8  -.35 -.7 -.35 -.6  -.35 ]  .0 -.35 [  .1  -.35  .45 .0  .55 .0 ]
+[ -.8   .35 -.7  .35 -.6   .35 ]  .0  .35 [  .15  .35  .4  .0  .5  .0 ] .8  2 segment
+[ -.75 -.35 -.7 -.35 -.6  -.35 ]  .0 -.35 [  .2  -.35  .4  .0  .5  .0 ]
+[ -.75  .35 -.7  .35 -.6   .35 ]  .0  .35 [  .2   .35  .45 .0  .55 .0 ] .9  1 segment
+[ -.7  -.35 -.6 -.35 -.55 -.35 ]  .0 -.35 [  .1  -.35  .45 .0  .55 .0 ]
+[ -.7   .35 -.6  .35 -.55  .35 ]  .0  .35 [  .1   .35  .5  .0  .6  .0 ] .9  0 segment
+] cvx
+[
+[ -.7 -.35 -.6 -.35 -.5  -.35 ] -.15 -.35 [  .0  -.35  .4  .0  .5  .0 ]
+[ -.65 .35 -.55 .35 -.45  .35 ] -.15  .35 [  .0   .35  .35 .0  .45 .0 ] .9 -1 segment
+[ -.8 -.1  -.5 -.3  -.4  -.3  ] -.2  -.3  [  .0  -.3   .3  .0  .4  .0 ]
+[ -.8  .1  -.5  .3  -.4   .3  ] -.2   .3  [  .0   .3   .2  .0  .3  .0 ] 1 -2 segment
+[ -.7 -.1  -.5 -.15 -.4  -.15 ] -.3  -.15 [ -.2  -.15  .0  .0  .2  .0 ]
+[ -.7  .05 -.5  .1  -.4   .1  ] -.4   .1  [ -.3   .1   .0  .0  .2  .0 ] 1 -3 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] 1 -4 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] 1 -5 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] -6 botsegment
+] cvx
+4 array cvx
+dup 0 5 -1 roll put
+dup 1 /exec load put
+dup 2 4 -1 roll put
+dup 3 /exec load put
+def
+
+/l {  lineto } def
+/rl {  rlineto } def
+/m {  moveto } def
+/rm {  rmoveto } def
+/C { closepath } def
+/c {  curveto } def
+/rc {  rcurveto } def
+/T { m 0 29 rl -9.5 0 rl 0 7 rl 29 0 rl 0 -7 rl -9.5 0 rl 0 -29 rl C } def
+/ATT {
+newpath
+1 36 div dup scale
+0  0 m  12 36 rl  8 0 rl -11 -36 rl C
+25  0 m -11 36 rl  8 0 rl  12 -36 rl C
+10  7 m   0  7 rl 14 0 rl   0  -7 rl C
+36  0 T
+80  6 m -3 0 -5 1.2 -6 2 rc -12 10 rl -2.4 2 -2.7 6 0 6 rc
+1 0 2 -1 2 -2 rc 0 -4 rl 7 0 rl 0 4 rl
+0 5 -3 7 -9 7 rc -6 0 -9 -3 -9 -7 rc
+0 -2 0 -3.6 2 -6 rc 12 -10 rl 6 -5 10 -6 13 -6 rc C
+71 18 m 0 -6 rl 0 -5 -3 -7 -7 -7 rc -3 0 -5 2 -5 4 rc 0 1 0 3 2 4 rc
+-4 5 rl -4 -2 -6 -6 -6 -9 rc 0 -7 6 -10 13 -10 rc
+9 0 14 6 14 11 rc 0 8 rl C
+82  0 T
+36 dup scale
+} def
+
+end
+
+/build_LH { % standard ATT logo
+    LOGO-dict-mm begin
+	/w exch def
+	ptsize 29 lt	% select globe, # lines depends on point size
+		{ /globe /globe8 load def }
+		{ /globe /globe12 load def } ifelse
+	gsave
+	 currentpoint translate
+	 size 2 div dup scale
+	 gsave
+	  1.02 1 transform round exch round exch itransform
+	  translate
+	  globe fill
+	 grestore
+	 gsave
+	  2.15 .62 translate
+	  .78 dup scale
+	  ATT fill
+	 grestore
+	grestore
+    end
+} def
+%%EndGlobal
+/saveobj save def
+mark
+36 S1 f
+1678 2670 m
+756 build_LH
+2434 2670 m
+10 R f
+(The user-de\256nable string)2 1020 1 720 2790 t
+10 CW f
+(}Z)1776 2790 w
+10 R f
+(contains the company name, and the string)6 1778 1 1933 2790 t
+10 CW f
+(]S)3748 2790 w
+10 R f
+(contains the company logo.)3 1135 1 3905 2790 t
+(Use the)1 302 1 720 2910 t
+10 CW f
+(.AF)1047 2910 w
+10 R f
+(macro to change the company name \(see \2476.1.7.2\).)7 2031 1 1252 2910 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Company Location Addresses]
+10 B f
+(Company Location Addresses)2 1278 1 720 3150 t
+10 R f
+( the)1 154( In)1 139(Location codes represent a particular company location or branch.)8 2688 3 720 3330 t
+9 R f
+(MM)3731 3330 w
+10 R f
+(package, location codes are)3 1117 1 3923 3330 t
+( the)1 168( In)1 154( code\).)1 292(assigned strings which contain the corresponding company address \(city, state, and zip)11 3706 4 720 3450 t
+( code for each author \(given as the third argument to the)11 2418(released-paper style, the location)3 1358 2 720 3570 t
+10 CW f
+(.AU)4537 3570 w
+10 R f
+(macro\))4758 3570 w
+( on the \256rst page and cover)6 1141(generates the company address following the author's name\(s\) and af\256liation)9 3179 2 720 3690 t
+(sheet, if any.)2 510 1 720 3810 t
+( recognized location)2 817( is an alphabetized list of)5 1011( Here)1 246(In some cases, branch locations share the same address.)8 2246 4 720 3990 t
+(codes and the corresponding company address:)5 1882 1 720 4110 t
+10 S f
+(_ _____________________________________________________________________________________)1 4286 1 737 4190 t
+10 R f
+(Location Location)1 2470 1 787 4310 t
+(Code)859 4430 w
+(Company Address)1 741 1 1651 4370 t
+(Code)2974 4430 w
+(Company Address)1 741 1 3819 4370 t
+10 S f
+(_ _____________________________________________________________________________________)1 4286 1 737 4450 t
+10 CW f
+(AK)856 4590 w
+10 R f
+( 30071)1 300(Norcross, Georgia)1 731 2 1292 4590 t
+10 CW f
+(IW)2996 4590 w
+10 R f
+( 60566)1 300(Naperville, Illinois)1 755 2 3407 4590 t
+10 CW f
+(AL)856 4710 w
+10 R f
+( 18103)1 300(Allentown, Pennsylvania)1 1005 2 1292 4710 t
+10 CW f
+(IX)2996 4710 w
+10 R f
+( 60566)1 300(Naperville, Illinois)1 755 2 3407 4710 t
+10 CW f
+(ALC)856 4830 w
+10 R f
+( 18103)1 300(Allentown, Pennsylvania)1 1005 2 1292 4830 t
+10 CW f
+(LC)2996 4830 w
+10 R f
+( 07060)1 300(Warren, New Jersey)2 810 2 3407 4830 t
+10 CW f
+(AN)856 4950 w
+10 R f
+( 01810)1 300(Andover, Massachusetts)1 976 2 1292 4950 t
+10 CW f
+(LZ)2996 4950 w
+10 R f
+( 07738)1 300(Lincroft, New Jersey)2 839 2 3407 4950 t
+10 CW f
+(CB)856 5070 w
+10 R f
+( 43213)1 300(Columbus, Ohio)1 662 2 1292 5070 t
+10 CW f
+(MH)2996 5070 w
+10 R f
+( 07974)1 300(Murray Hill, New Jersey)3 992 2 3407 5070 t
+10 CW f
+(CH)856 5190 w
+10 R f
+( 07930)1 300(Chester, New Jersey)2 817 2 1292 5190 t
+10 CW f
+(MO)2996 5190 w
+10 R f
+( 07960)1 300(Morristown, New Jersey)2 984 2 3407 5190 t
+10 CW f
+(CP)856 5310 w
+10 R f
+( 08854)1 300(Piscataway, New Jersey)2 961 2 1292 5310 t
+10 CW f
+(MT)2996 5310 w
+10 R f
+( 07748)1 300(Middletown, New Jersey)2 1001 2 3407 5310 t
+10 CW f
+(DR)856 5430 w
+10 R f
+( 80234)1 300(Denver, Colorado)1 715 2 1292 5430 t
+10 CW f
+(MV)2996 5430 w
+10 R f
+( 01845)1 300(North Andover, Massachusetts)2 1234 2 3407 5430 t
+10 CW f
+(FJ)856 5550 w
+10 R f
+( 07733)1 300(Holmdel, New Jersey)2 862 2 1292 5550 t
+10 CW f
+(PK)2996 5550 w
+10 R f
+( 07054)1 300(Parsippany, New Jersey)2 956 2 3407 5550 t
+10 CW f
+(HL)856 5670 w
+10 R f
+( 07078)1 300(Short Hills, New Jersey)3 949 2 1292 5670 t
+10 CW f
+(PY)2996 5670 w
+10 R f
+( 08854)1 300(Piscataway, New Jersey)2 961 2 3407 5670 t
+10 CW f
+(HK)856 5790 w
+10 R f
+( 07078)1 300(Short Hills, New Jersey)3 949 2 1292 5790 t
+10 CW f
+(RD)2996 5790 w
+10 R f
+( 19604)1 300(Reading, Pennsylvania)1 916 2 3407 5790 t
+10 CW f
+(HO)856 5910 w
+10 R f
+( 07733)1 300(Holmdel, New Jersey)2 862 2 1292 5910 t
+10 CW f
+(RR)2996 5910 w
+10 R f
+( 08854)1 300(Piscataway, New Jersey)2 961 2 3407 5910 t
+10 CW f
+(HOH)856 6030 w
+10 R f
+(Crawford Hill Laboratory)2 1031 1 1292 6030 t
+10 CW f
+(SF)2996 6030 w
+10 R f
+( 07901)1 300(Summit, New Jersey)2 830 2 3407 6030 t
+( 07733)1 300(Holmdel, New Jersey)2 862 2 1292 6150 t
+10 CW f
+(SZ)2996 6150 w
+10 R f
+( 07081)1 300(Spring\256eld, New Jersey)2 957 2 3407 6150 t
+10 CW f
+(HP)856 6270 w
+10 R f
+( 07080)1 300(South Plain\256eld, New Jersey)3 1155 2 1292 6270 t
+10 CW f
+(WB)2996 6270 w
+10 R f
+( 07764)1 300(West Long Branch, New Jersey)4 1266 2 3407 6270 t
+10 CW f
+(HR)856 6390 w
+10 R f
+( 07748)1 300(Middletown, New Jersey)2 1001 2 1292 6390 t
+10 CW f
+(WH)2996 6390 w
+10 R f
+( 07981)1 300(Whippany, New Jersey)2 928 2 3407 6390 t
+10 CW f
+(IH)856 6510 w
+10 R f
+( 60566)1 300(Naperville, Illinois)1 755 2 1292 6510 t
+10 CW f
+(WI)2996 6510 w
+10 R f
+( 01830)1 300(Ward Hill, Massachusetts)2 1029 2 3407 6510 t
+10 CW f
+(IN)856 6630 w
+10 R f
+( 46206)1 300(Indianapolis, Indiana)1 843 2 1292 6630 t
+10 CW f
+(WV)2996 6630 w
+10 R f
+( 07060)1 300(Warren, New Jersey)2 810 2 3407 6630 t
+10 CW f
+(INH)856 6750 w
+10 R f
+( 46206)1 300(Indianapolis, Indiana)1 843 2 1292 6750 t
+10 S f
+( \347)1 -4286(_ _____________________________________________________________________________________)1 4286 2 737 6770 t
+(\347)737 6690 w
+(\347)737 6590 w
+(\347)737 6490 w
+(\347)737 6390 w
+(\347)737 6290 w
+(\347)737 6190 w
+(\347)737 6090 w
+(\347)737 5990 w
+(\347)737 5890 w
+(\347)737 5790 w
+(\347)737 5690 w
+(\347)737 5590 w
+(\347)737 5490 w
+(\347)737 5390 w
+(\347)737 5290 w
+(\347)737 5190 w
+(\347)737 5090 w
+(\347)737 4990 w
+(\347)737 4890 w
+(\347)737 4790 w
+(\347)737 4690 w
+(\347)737 4590 w
+(\347)737 4490 w
+(\347)737 4390 w
+(\347)737 4290 w
+(\347)2827 6770 w
+(\347)2827 6690 w
+(\347)2827 6590 w
+(\347)2827 6490 w
+(\347)2827 6390 w
+(\347)2827 6290 w
+(\347)2827 6190 w
+(\347)2827 6090 w
+(\347)2827 5990 w
+(\347)2827 5890 w
+(\347)2827 5790 w
+(\347)2827 5690 w
+(\347)2827 5590 w
+(\347)2827 5490 w
+(\347)2827 5390 w
+(\347)2827 5290 w
+(\347)2827 5190 w
+(\347)2827 5090 w
+(\347)2827 4990 w
+(\347)2827 4890 w
+(\347)2827 4790 w
+(\347)2827 4690 w
+(\347)2827 4590 w
+(\347)2827 4490 w
+(\347)2827 4390 w
+(\347)2827 4290 w
+(\347)5023 6770 w
+(\347)5023 6690 w
+(\347)5023 6590 w
+(\347)5023 6490 w
+(\347)5023 6390 w
+(\347)5023 6290 w
+(\347)5023 6190 w
+(\347)5023 6090 w
+(\347)5023 5990 w
+(\347)5023 5890 w
+(\347)5023 5790 w
+(\347)5023 5690 w
+(\347)5023 5590 w
+(\347)5023 5490 w
+(\347)5023 5390 w
+(\347)5023 5290 w
+(\347)5023 5190 w
+(\347)5023 5090 w
+(\347)5023 4990 w
+(\347)5023 4890 w
+(\347)5023 4790 w
+(\347)5023 4690 w
+(\347)5023 4590 w
+(\347)5023 4490 w
+(\347)5023 4390 w
+(\347)5023 4290 w
+10 R f
+(To de\256ne an address not on this list, see \2476.1.8.)9 1896 1 720 6950 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(G-2 MM)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Proprietary Markings and Copyright Notice]
+10 B f
+(Proprietary Markings and Copyright Notice)4 1893 1 720 960 t
+10 R f
+( to protect their assets and)5 1140(Most companies use some form of proprietary marking or copyright notice)10 3180 2 720 1140 t
+( wording for each company's markings and the types used vary.)10 2553(information. The)1 702 2 720 1260 t
+(The)720 1440 w
+9 R f
+(MM)898 1440 w
+10 R f
+( macro call)2 443( The)1 205(package provides six distinct markings, each with a speci\256c purpose.)9 2754 3 1083 1440 t
+10 CW f
+(.PM)870 1620 w
+10 R f
+([)1110 1620 w
+10 I f
+(type)1143 1620 w
+10 R f
+(] [)1 116 1 1309 1620 t
+10 I f
+(year)1425 1620 w
+10 R f
+(])1602 1620 w
+(produces the desired marking at the bottom of the page:)9 2227 1 720 1800 t
+10 CW f
+(.PM P)1 300 1 720 2040 t
+8 R f
+(or)1080 2040 w
+10 CW f
+(.PM 1)1 300 1 1206 2040 t
+10 I f
+(AT&T \261 PROPRIETARY)2 995 1 2382 2220 t
+10 R f
+(Use pursuant to Company Instructions.)4 1563 1 2098 2340 t
+10 CW f
+(.PM RS)1 360 1 720 2640 t
+8 R f
+(or)1140 2640 w
+10 CW f
+(.PM 2)1 300 1 1266 2640 t
+10 I f
+(AT&T \261 PROPRIETARY \(RESTRICTED\))3 1664 1 2048 2820 t
+10 R f
+(Solely for authorized persons having a need to know)8 2102 1 1829 2940 t
+(pursuant to Company Instructions.)3 1383 1 2188 3060 t
+10 CW f
+(.PM RG)1 360 1 720 3360 t
+8 R f
+(or)1140 3360 w
+10 CW f
+(.PM 3)1 300 1 1266 3360 t
+10 I f
+(AT&T \261 PROPRIETARY \(REGISTERED\))3 1674 1 2043 3540 t
+10 R f
+(Solely for authorized persons having a need to know)8 2102 1 1829 3660 t
+(and subject to cover sheet instructions.)5 1548 1 2106 3780 t
+10 CW f
+(.PM CP)1 360 1 720 4080 t
+8 R f
+(or)1140 4080 w
+10 CW f
+(.PM 4)1 300 1 1266 4080 t
+10 R f
+(SEE PROPRIETARY NOTICE ON COVER PAGE)5 2097 1 1831 4260 t
+10 CW f
+(.PM CR)1 360 1 720 4560 t
+8 R f
+(or)1140 4560 w
+10 CW f
+(.PM 5)1 300 1 1266 4560 t
+10 R f
+(Copyright)2364 4740 w
+10 S f
+(\323)2795 4740 w
+10 R f
+(1990 AT&T)1 497 1 2899 4740 t
+(All Rights Reserved.)2 836 1 2462 4860 t
+10 CW f
+(.PM UW)1 360 1 720 5160 t
+8 R f
+(or)1140 5160 w
+10 CW f
+(.PM 6)1 300 1 1266 5160 t
+10 R f
+(THIS DOCUMENT CONTAINS PROPRIETARY INFORMATION OF)5 2929 1 1415 5340 t
+(AT&T AND IS NOT TO BE DISCLOSED OR USED EXCEPT IN)10 2726 1 1517 5460 t
+(ACCORDANCE WITH APPLICABLE AGREEMENTS.)3 2327 1 1716 5580 t
+(Copyright)2364 5760 w
+10 S f
+(\323)2795 5760 w
+10 R f
+(1990 AT&T)1 497 1 2899 5760 t
+(Unpublished & Not for Publication)4 1411 1 2174 5880 t
+(All Rights Reserved.)2 836 1 2462 6000 t
+( the)1 161( override)1 370( To)1 174(By default, the current year is used for those markings that include a copyright notice.)14 3615 4 720 6360 t
+(default, give the year as the second argument to the)9 2051 1 720 6480 t
+10 CW f
+(.PM)2796 6480 w
+10 R f
+(macro.)3001 6480 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Trailer
+done
+%%Pages: 2
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

@@ -1,0 +1,1725 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( Larger Examples)2 1004( Some)1 463(APPENDIX D:)1 772 3 720 1050 t
+10 R f
+( examples, intended to suggest a range of potential usage for)10 2465(Herewith a handful of larger)4 1151 2 720 1350 t
+10 I f
+(Picasso)4366 1350 w
+10 R f
+(, starting)1 355 1 4685 1350 t
+(with a hash table diagram from a computer science text:)9 2237 1 720 1470 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 161 def
+/lly 332 def
+/urx 450 def
+/ury 458 def
+/w 0 def
+/o 0 def
+/s 0 def
+/cx 2880 def
+/cy -2310 def
+/sx 4320 def
+/sy 1440 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+-1.9966 0.4525 72 72 PIC
+ 0.01 w
+ 0 g
+ [] 0 d
+R findfont 0.13889 scalefont setfont
+(hashtab: ) 1 0.49722 2.9802e-08 -0.048611 T
+0.49722 -0.1 0.79722 0.1 Q s
+0.49722 -0.305 0.79722 -0.105 Q s
+0.49722 -0.905 0.79722 -0.305 Q s
+(.) 0 0.034722 0.62986 -0.47306 T
+(.) 0 0.034722 0.62986 -0.63972 T
+(.) 0 0.034722 0.62986 -0.80639 T
+0.49722 -1.105 0.79722 -0.905 Q s
+0.49722 -1.305 0.79722 -1.105 Q s
+(ndtable: ) 1 0.48194 0.70625 0.25139 T
+1.1882 0.2 1.6882 0.4 Q s
+(...) 0 0.10417 1.3861 0.26528 T
+1.6882 0.2 1.8882 0.4 Q s
+(n1) 0 0.13889 1.7188 0.26528 T
+1.8882 0.2 2.1882 0.4 Q s
+(d1) 0 0.13889 1.9688 0.26528 T
+2.1882 0.2 2.5882 0.4 Q s
+(n3) 0 0.13889 2.3187 0.26528 T
+2.5882 0.2 2.8882 0.4 Q s
+(d3) 0 0.13889 2.6687 0.26528 T
+2.8882 0.2 3.2882 0.4 Q s
+(...) 0 0.10417 3.0361 0.26528 T
+3.2882 0.2 3.7882 0.4 Q s
+(n2) 0 0.13889 3.4687 0.26528 T
+3.7882 0.2 3.9882 0.4 Q s
+(d2) 0 0.13889 3.8187 0.26528 T
+1.1472 -0.205 1 0.64722 -0.205 L s
+1.0472 -0.23 1.1472 -0.205 2 1.0472 -0.18 L c f
+1.1472 -0.255 1.2972 -0.155 Q s
+1.1472 -0.36 1.2972 -0.26 Q s
+1.1472 -0.46 1.2972 -0.36 Q s
+1.7332 0.195 1.6332 -0.005 2   1.4222 -0.205 1.2222 -0.205 Sp   s
+1.7108 0.094377 1.7332 0.195 2 1.6661 0.11674 L c f
+1.9332 0.195 1.8332 -0.005 2   1.5222 -0.31 1.2222 -0.31 Sp   s
+1.9108 0.094377 1.9332 0.195 2 1.8661 0.11674 L c f
+1.7222 -0.41 1 1.2222 -0.41 L s
+1.6222 -0.435 1.7222 -0.41 2 1.6222 -0.385 L c f
+1.7222 -0.46 1.8722 -0.36 Q s
+1.7222 -0.565 1.8722 -0.465 Q s
+1.7222 -0.665 1.8722 -0.565 Q s
+3.3332 0.195 3.2332 -0.005 2   1.9972 -0.41 1.7972 -0.41 Sp   s
+3.3108 0.094377 3.3332 0.195 2 3.2661 0.11674 L c f
+3.8332 0.195 3.7332 -0.005 2   2.0972 -0.515 1.7972 -0.515 Sp   s
+3.8108 0.094377 3.8332 0.195 2 3.7661 0.11674 L c f
+1.6472 -1.005 1 0.64722 -1.005 L s
+1.5472 -1.03 1.6472 -1.005 2 1.5472 -0.98 L c f
+1.6472 -1.055 1.7972 -0.955 Q s
+1.6472 -1.16 1.7972 -1.06 Q s
+1.6472 -1.26 1.7972 -1.16 Q s
+2.2332 0.195 2.1332 -0.205 2   1.9222 -1.005 1.7222 -1.005 Sp   s
+2.2332 0.091922 2.2332 0.195 2 2.1847 0.10405 L c f
+2.6332 0.195 2.5332 -0.205 2   2.0222 -1.11 1.7222 -1.11 Sp   s
+2.6332 0.091922 2.6332 0.195 2 2.5847 0.10405 L c f
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+9 CW f
+(lineweight = 0.01)2 918 1 870 3380 t
+(define ndblock {)2 864 1 870 3490 t
+(box wid boxwid/2 ht boxht/2; down)5 1782 1 1230 3600 t
+(box same with .n at last box.s; box same)8 2160 1 1230 3710 t
+(spline -> right .2 from 3rd last box to N$1.sw-\(dx,$2\) to N$1.sw+\(dx,0\))11 3834 1 1230 3820 t
+(spline -> right .3 from 2nd last box to D$1.sw-\(dx,$2\) to D$1.sw+\(dx,0\))11 3834 1 1230 3930 t
+(})870 4040 w
+(boxht = 0.2; boxwid = 0.3; dx = 0.05)8 1944 1 870 4150 t
+( "; box; down; box with .n at 1st box .s)10 2160(Htab: "hashtab:)1 918 2 870 4370 t
+(box ht 3*boxht "." "." "."; box; box)7 1944 1 1302 4480 t
+( "ndtable: " at 1st box+\(.3,.3\))5 1674(NDtab: right;)1 756 2 870 4590 t
+(box wid .5 "...")3 864 1 1302 4700 t
+( box wid .3 "d1")4 864( D1:)1 270(N1: box wid .2 "n1";)4 1080 3 1302 4810 t
+( box wid .3 "d3")4 864( D3:)1 270(N3: box wid .4 "n3";)4 1080 3 1302 4920 t
+(box wid .4 "...")3 864 1 1518 5030 t
+( box wid .2 "d2")4 864( D2:)1 270(N2: box wid .5 "n2";)4 1080 3 1302 5140 t
+(arrow right from 2nd box)4 1296 1 870 5250 t
+(ndblock\(1, 0.2\))1 810 1 870 5360 t
+(arrow right from last box)4 1350 1 870 5470 t
+(ndblock\(2, 0.2\))1 810 1 870 5580 t
+(arrow right 2*linewid from 4th box)5 1836 1 870 5690 t
+(ndblock\(3, 0.4\))1 810 1 870 5800 t
+10 R f
+(The macro de\256nition for)3 1021 1 720 6035 t
+10 CW f
+(ndblock)1780 6035 w
+10 R f
+(draws the blocks of three small boxes connected to the `n' and `d')12 2801 1 2239 6035 t
+( substitution is literal text replacement, so the \256rst parameter can be used)12 2982( Parameter)1 460(entries in the ndtable.)3 878 3 720 6155 t
+( offset to)2 373( second parameter is used as a vertical)7 1582( The)1 213(in constructing the target label for the spline arrows.)8 2152 4 720 6275 t
+(the point where the spline bends up towards the appropriate box's corner in the table.)14 3402 1 720 6395 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(D-2 Picasso)1 4320 1 720 600 t
+10 R f
+( a)1 76(Somewhat more elaborate de\256nitions for menus, cursor arrows and such lead to the following picture of)15 4244 2 720 960 t
+9 R f
+(630 MTG)1 358 1 720 1080 t
+10 R f
+( example illustrates one more)4 1216( This)1 239( bars are left as an exercise for the reader.\))9 1791(window. \(Scroll)1 680 4 1114 1080 t
+(feature of)1 391 1 720 1200 t
+10 I f
+(Picasso)1143 1200 w
+10 R f
+(, the)1 179 1 1462 1200 t
+10 CW f
+(layer)1673 1200 w
+10 R f
+( draw a \256lled black box)5 980(attribute. In order to)3 825 2 2005 1200 t
+10 I f
+(underneath)3843 1200 w
+10 R f
+(the white text for)3 709 1 4331 1200 t
+( default, objects)2 637( By)1 168( order.)1 261(the selected item in a menu, it is useful to organize the objects in a bottom to top)17 3254 4 720 1320 t
+( current)1 315( The)1 213( is speci\256ed explicitly as an attribute for the object.)9 2114(are drawn in layer 0 or in whatever layer)8 1678 4 720 1440 t
+( 0 by setting the variable)5 1025(default layer may also be changed from)6 1633 2 720 1560 t
+10 CW f
+(curlayer)3411 1560 w
+10 R f
+( a picture is printed,)4 828(. When)1 321 2 3891 1560 t
+( may also draw objects)4 979( You)1 238(lower layers are drawn \256rst with higher layers successively drawn on top.)11 3103 3 720 1680 t
+10 I f
+(underneath)720 1800 w
+10 R f
+(layer 0; negative layers are)4 1118 1 1211 1800 t
+10 I f
+(draft)2365 1800 w
+10 R f
+( may be)2 336( They)1 265( drawn in the \256nal picture.)5 1104(layers and are not)3 739 4 2596 1800 t
+(useful to provide grids or other positional data that the visible objects may be based on.)15 3491 1 720 1920 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 126 def
+/lly 286 def
+/urx 485 def
+/ury 505 def
+/w 0 def
+/o 0 def
+/s 0 def
+/cx 2880 def
+/cy -3120 def
+/sx 4320 def
+/sy 2160 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+-2.5 -0.0025001 70.704 70.704 PIC
+ 0.01 w
+ 0 g
+ [] 0 d
+0 -1.5 5 1.5 Q 0.05 w
+ s
+-9.5367e-07 1.305 5 1.525 Q 0.01 w
+ c gs 0 g f gr s
+ 1 g
+H findfont 0.14144 scalefont setfont
+(H1 ) 1 0.22064 0.093013 1.3727 T
+0.31167 1.415 0.41167 1.515 Q s
+0.36167 1.365 0.46167 1.465 Q s
+ 0 g
+($) 0 0.079204 0.26373 1.0158 T
+0.44222 0.95805 0.54222 1.1581 Q c gs 0 g f gr s
+( Edit) 1 0.28428 2.2919 0.3577 T
+( Font) 1 0.32389 2.2915 0.1577 T
+( Peel) 1 0.32389 2.2915 -0.2423 T
+( Print) 1 0.33096 2.2915 -0.4423 T
+2.2944 -0.47639 3.1056 0.47639 Q s
+2.2894 -0.10222 3.1006 0.088333 Q c gs 0 g f gr s
+3.0556 0.39306 1 2.8556 0.39306 L s
+2.9556 0.34306 3.0556 0.39306 2 2.9556 0.44306 L c f
+3.0556 0.19306 1 2.8556 0.19306 L s
+2.9556 0.14306 3.0556 0.19306 2 2.9556 0.24306 L c f
+3.0556 -0.0069445 1 2.8556 -0.0069445 L 1 g
+ s
+2.9556 -0.056944 3.0556 -0.0069445 2 2.9556 0.043056 L c f
+3.0556 -0.40694 1 2.8556 -0.40694 L 0 g
+ s
+2.9556 -0.45694 3.0556 -0.40694 2 2.9556 -0.35694 L c f
+(On ) 1 0.22912 3.3785 -0.025359 T
+3.1306 -0.25944 3.6056 0.093333 Q s
+3.1256 -0.27819 3.6006 -0.10181 Q c gs 0 g f gr s
+3.1931 -0.019861 3.3181 0.067639 3.1931 -0.057361 3 3.1306 0.0051389 L c f
+3.1806 -0.27306 3.2006 -0.23306 3.3106 -0.34306 3.3406 -0.31306 3.2306 -0.20306 3.2706 -0.18306 6 3.1806 -0.18306 L 1 g
+ c f
+3.3106 -0.34306 3.2581 -0.27306 3.3006 -0.27306 3 3.3406 -0.31306 L 0 g
+ c gs 0 g f gr s
+ 1 g
+( Buffer) 1 0.41865 2.2907 -0.042303 T
+(Off ) 1 0.22912 3.3785 -0.22536 T
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+9 CW f
+(textfont = setfont\("Helvetica"\); textsize = 10)5 2484 1 870 4550 t
+(arrowwid = .1; arrowht = .1; linewid = .2; lineweight = 0.01)11 3240 1 870 4660 t
+(define checkmark {)2 972 1 870 4880 t
+(line filled $1 noedge by \($2,-$2\) by \(2*$2,2*$2\) \\)8 2700 1 978 4990 t
+(by \(-2*$2,-1.4*$2\) at $3 $4)4 1458 1 1140 5100 t
+(})870 5210 w
+(define cursor {)2 810 1 870 5320 t
+(line filled $1 noedge at $3 $4 by \(9*$2,0\) \\)9 2376 1 978 5430 t
+(by \(-4*$2,-2*$2\) by \\)3 1134 1 1086 5540 t
+(\(11*$2,-11*$2\) by \(-3*$2,-3*$2\) \\)3 1782 1 1194 5650 t
+(by \(-11*$2,11*$2\) by \(-2*$2,-4*$2\))3 1836 1 1356 5760 t
+(})870 5870 w
+(define menuitem {)2 918 1 870 5980 t
+(if $1 != $2 then X L$1: $3 with .w at x,y X \\)13 2430 1 978 6090 t
+(else Y L$1: $3 with .w at x,y edged white layer 1 Y)12 2754 1 1248 6200 t
+(y = y - .2)4 540 1 978 6310 t
+(})870 6420 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+9 HB f
+(Picasso D-3)1 4320 1 720 550 t
+9 CW f
+(define menu {)2 702 1 870 880 t
+([ down)1 378 1 1032 990 t
+(x = Here.x; y = Here.y)5 1188 1 1194 1100 t
+(menuitem\(1,$2,$5\))1194 1210 w
+( X)1 162(if $1 > 1 then X menuitem\(2,$2,$6\))6 1836 2 1194 1320 t
+( X)1 162(if $1 > 2 then X menuitem\(3,$2,$7\))6 1836 2 1194 1430 t
+( X)1 162(if $1 > 3 then X menuitem\(4,$2,$8\))6 1836 2 1194 1540 t
+( X)1 162(if $1 > 4 then X menuitem\(5,$2,$9\))6 1836 2 1194 1650 t
+(if $1 > 5 then X menuitem\(6,$2,$10\) X)7 1998 1 1194 1760 t
+(] $3)1 216 1 1032 1870 t
+(w = last [].wid + abs\($4\); h = last [].ht/$1)9 2376 1 1032 1980 t
+(if $4 >= 0 then {)5 918 1 1032 2090 t
+(box ht $1 * h wid w with .nw at last [].nw)11 2268 1 1230 2200 t
+(} else {)2 432 1 1032 2310 t
+(box ht $1 * h wid w with .ne at last [].ne)11 2268 1 1230 2420 t
+(})1032 2530 w
+(box ht h wid w with .w at \(last box.w.x, last [].L$2.y\) filled)12 3348 1 1032 2640 t
+(})870 2750 w
+(Window: box weight .05 ht 3 wid 5)7 1782 1 870 2860 t
+(box ht .22 wid 5 with .n at last box .n filled)11 2484 1 1230 2970 t
+("H1 " edged white with .w at last box .w + \(.1, 0\))12 2700 1 1230 3080 t
+(box ht .1 wid .1 edged white with .sw at last text.e)11 2808 1 1230 3190 t
+(box ht .1 wid .1 edged white with .nw at last box)11 2646 1 1230 3300 t
+("$" at last text + \(.1,-.35\); move right .1; box ht .2 wid .1 filled)14 3672 1 1230 3410 t
+( Window.c,0.4," Edit"," Font"," Buffer"," Peel"," Print"\))6 3078(M1: menu\(5,3,at)1 954 2 870 3630 t
+(x = last box.e.x - 0.25)5 1242 1 1230 3740 t
+(arrow at x,last block.L1.y)3 1404 1 1230 3850 t
+(arrow at x,last block.L2.y)3 1404 1 1230 3960 t
+(arrow at x,last block.L3.y edged white)5 2052 1 1230 4070 t
+(arrow at x,last block.L5.y)3 1404 1 1230 4180 t
+( box.ne + \(0.275,0\))3 1026(M2: last)1 576 2 870 4400 t
+(menu\(2,2,with .nw at M2,-0.25,"On ","Off "\))5 2322 1 1230 4510 t
+(checkmark\(black,0.0625,M2-\(0.25,h/2\)\))1230 4620 w
+(u = 0.01)2 432 1 1230 4840 t
+(cursor\(white, u, last block.L2.w-\(.2,0\)\))3 2160 1 1230 4950 t
+(line from last line.4th by -4*u,4*u by -4.25*u,0 to last line.5th fill)11 3780 1 1230 5060 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(D-4 Picasso)1 4320 1 720 600 t
+10 R f
+( plume of smoke)3 687(We conclude with a pair of colorful examples, the \256rst a simple no-smoking sign with its)15 3633 2 720 960 t
+(done with a thick spline emerging from the ash:)8 1909 1 720 1080 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 125 def
+/lly 215 def
+/urx 487 def
+/ury 577 def
+/w 0 def
+/o 0 def
+/s 0 def
+/cx 2880 def
+/cy -2280 def
+/sx 4320 def
+/sy 2160 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+-2.4187 -0.16875 56.471 56.471 PIC
+ 0.375 w
+ 1 0 0 rgb
+ [] 0 d
+0 -0.25 3.5 0.25 Q 0 g
+ 0.025 w
+ s
+3.5 -0.25 3.75 0.25 Q 0.5 g
+ c f
+4.75 1 4.75 0.5 4.25 0.5 3   4.25 0 3.75 0 Sp   0.75 g
+ 0.2 w
+ s
+n 2.4187 0.16875 3 0 360 arc 1 0 0 rgb
+ 0.375 w
+ s
+4.5401 -1.9526 1 0.29743 2.2901 L s
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+9 CW f
+(d = 0.5)2 378 1 1140 3710 t
+([ box ht d wid 3.5 weight d/20)7 1620 1 1140 3820 t
+(box ht d wid d/2 filled 0.5 noedge)7 1836 1 1248 3930 t
+(spline weight 0.2 edge .75 right d then up d then right d then up d)15 3618 1 1248 4040 t
+(])1140 4150 w
+(linecolor = red; lineweight = 0.375)5 1890 1 870 4260 t
+(circle rad 3 at last block - 0,d/2)7 1836 1 870 4370 t
+(line from last circle .4th to last circle .8th)8 2484 1 870 4480 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(Picasso D-5)1 4320 1 720 600 t
+10 R f
+(And last, a complete version of the U.S. \257ag that uses)10 2145 1 720 960 t
+10 CW f
+(for)2890 960 w
+10 R f
+( of)1 109(loops to replicate the stars and stripes in place)8 1836 2 3095 960 t
+(the cruder method shown earlier:)4 1319 1 720 1080 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 131 def
+/lly 295 def
+/urx 479 def
+/ury 496 def
+/w 0 def
+/o 0 def
+/s 0 def
+/cx 2880 def
+/cy -2280 def
+/sx 4320 def
+/sy 2160 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+-1.75 0.85714 53.308 53.308 PIC
+ 0 w
+ 0 g
+ [] 0 d
+2.9802e-07 0.17772 0.053435 0.013263 -0.086459 0.1149 0.08646 0.1149 -0.053435 0.013263 5 2.7093e-07 0.17772 L 1 g
+ c f
+-1.5 -1 1.5 1 Q 0 g
+ gs 0 0 1 rgb f gr s
+-1.25 0.88223 -1.1966 0.71777 -1.3365 0.81941 -1.1635 0.81941 -1.3034 0.71777 5 -1.25 0.88223 L 1 g
+ c f
+-0.75 0.88223 -0.69657 0.71777 -0.83646 0.81941 -0.66354 0.81941 -0.80344 0.71777 5 -0.75 0.88223 L c f
+-0.25 0.88223 -0.19657 0.71777 -0.33646 0.81941 -0.16354 0.81941 -0.30344 0.71777 5 -0.25 0.88223 L c f
+0.25 0.88223 0.30343 0.71777 0.16354 0.81941 0.33646 0.81941 0.19656 0.71777 5 0.25 0.88223 L c f
+0.75 0.88223 0.80343 0.71777 0.66354 0.81941 0.83646 0.81941 0.69656 0.71777 5 0.75 0.88223 L c f
+1.25 0.88223 1.3034 0.71777 1.1635 0.81941 1.3365 0.81941 1.1966 0.71777 5 1.25 0.88223 L c f
+-1.25 0.48223 -1.1966 0.31777 -1.3365 0.41941 -1.1635 0.41941 -1.3034 0.31777 5 -1.25 0.48223 L c f
+-1 0.68223 -0.94657 0.51777 -1.0865 0.61941 -0.91354 0.61941 -1.0534 0.51777 5 -1 0.68223 L c f
+-0.75 0.48223 -0.69657 0.31777 -0.83646 0.41941 -0.66354 0.41941 -0.80344 0.31777 5 -0.75 0.48223 L c f
+-0.5 0.68223 -0.44657 0.51777 -0.58646 0.61941 -0.41354 0.61941 -0.55344 0.51777 5 -0.5 0.68223 L c f
+-0.25 0.48223 -0.19657 0.31777 -0.33646 0.41941 -0.16354 0.41941 -0.30344 0.31777 5 -0.25 0.48223 L c f
+0 0.68223 0.053435 0.51777 -0.08646 0.61941 0.08646 0.61941 -0.053435 0.51777 5 -2.7093e-08 0.68223 L c f
+0.25 0.48223 0.30343 0.31777 0.16354 0.41941 0.33646 0.41941 0.19656 0.31777 5 0.25 0.48223 L c f
+0.5 0.68223 0.55343 0.51777 0.41354 0.61941 0.58646 0.61941 0.44656 0.51777 5 0.5 0.68223 L c f
+0.75 0.48223 0.80343 0.31777 0.66354 0.41941 0.83646 0.41941 0.69656 0.31777 5 0.75 0.48223 L c f
+1 0.68223 1.0534 0.51777 0.91354 0.61941 1.0865 0.61941 0.94656 0.51777 5 1 0.68223 L c f
+1.25 0.48223 1.3034 0.31777 1.1635 0.41941 1.3365 0.41941 1.1966 0.31777 5 1.25 0.48223 L c f
+-1.25 0.082228 -1.1966 -0.082228 -1.3365 0.019411 -1.1635 0.019411 -1.3034 -0.082228 5 -1.25 0.082228 L c f
+-1 0.28223 -0.94657 0.11777 -1.0865 0.21941 -0.91354 0.21941 -1.0534 0.11777 5 -1 0.28223 L c f
+-0.75 0.082228 -0.69657 -0.082228 -0.83646 0.019411 -0.66354 0.019411 -0.80344 -0.082228 5 -0.75 0.082228 L c f
+-0.5 0.28223 -0.44657 0.11777 -0.58646 0.21941 -0.41354 0.21941 -0.55344 0.11777 5 -0.5 0.28223 L c f
+-0.25 0.082228 -0.19657 -0.082228 -0.33646 0.019411 -0.16354 0.019411 -0.30344 -0.082228 5 -0.25 0.082228 L c f
+0 0.28223 0.053435 0.11777 -0.08646 0.21941 0.08646 0.21941 -0.053435 0.11777 5 -2.7093e-08 0.28223 L c f
+0.25 0.082228 0.30343 -0.082228 0.16354 0.019411 0.33646 0.019411 0.19656 -0.082228 5 0.25 0.082228 L c f
+0.5 0.28223 0.55343 0.11777 0.41354 0.21941 0.58646 0.21941 0.44656 0.11777 5 0.5 0.28223 L c f
+0.75 0.082228 0.80343 -0.082228 0.66354 0.019411 0.83646 0.019411 0.69656 -0.082228 5 0.75 0.082228 L c f
+1 0.28223 1.0534 0.11777 0.91354 0.21941 1.0865 0.21941 0.94656 0.11777 5 1 0.28223 L c f
+1.25 0.082228 1.3034 -0.082228 1.1635 0.019411 1.3365 0.019411 1.1966 -0.082228 5 1.25 0.082228 L c f
+-1.25 -0.31777 -1.1966 -0.48223 -1.3365 -0.38059 -1.1635 -0.38059 -1.3034 -0.48223 5 -1.25 -0.31777 L c f
+-1 -0.11777 -0.94657 -0.28223 -1.0865 -0.18059 -0.91354 -0.18059 -1.0534 -0.28223 5 -1 -0.11777 L c f
+-0.75 -0.31777 -0.69657 -0.48223 -0.83646 -0.38059 -0.66354 -0.38059 -0.80344 -0.48223 5 -0.75 -0.31777 L c f
+-0.5 -0.11777 -0.44657 -0.28223 -0.58646 -0.18059 -0.41354 -0.18059 -0.55344 -0.28223 5 -0.5 -0.11777 L c f
+-0.25 -0.31777 -0.19657 -0.48223 -0.33646 -0.38059 -0.16354 -0.38059 -0.30344 -0.48223 5 -0.25 -0.31777 L c f
+0 -0.11777 0.053435 -0.28223 -0.08646 -0.18059 0.08646 -0.18059 -0.053435 -0.28223 5 -2.7093e-08 -0.11777 L c f
+0.25 -0.31777 0.30343 -0.48223 0.16354 -0.38059 0.33646 -0.38059 0.19656 -0.48223 5 0.25 -0.31777 L c f
+0.5 -0.11777 0.55343 -0.28223 0.41354 -0.18059 0.58646 -0.18059 0.44656 -0.28223 5 0.5 -0.11777 L c f
+0.75 -0.31777 0.80343 -0.48223 0.66354 -0.38059 0.83646 -0.38059 0.69656 -0.48223 5 0.75 -0.31777 L c f
+1 -0.11777 1.0534 -0.28223 0.91354 -0.18059 1.0865 -0.18059 0.94656 -0.28223 5 1 -0.11777 L c f
+1.25 -0.31777 1.3034 -0.48223 1.1635 -0.38059 1.3365 -0.38059 1.1966 -0.48223 5 1.25 -0.31777 L c f
+-1.25 -0.71777 -1.1966 -0.88223 -1.3365 -0.78059 -1.1635 -0.78059 -1.3034 -0.88223 5 -1.25 -0.71777 L c f
+-1 -0.51777 -0.94657 -0.68223 -1.0865 -0.58059 -0.91354 -0.58059 -1.0534 -0.68223 5 -1 -0.51777 L c f
+-0.75 -0.71777 -0.69657 -0.88223 -0.83646 -0.78059 -0.66354 -0.78059 -0.80344 -0.88223 5 -0.75 -0.71777 L c f
+-0.5 -0.51777 -0.44657 -0.68223 -0.58646 -0.58059 -0.41354 -0.58059 -0.55344 -0.68223 5 -0.5 -0.51777 L c f
+-0.25 -0.71777 -0.19657 -0.88223 -0.33646 -0.78059 -0.16354 -0.78059 -0.30344 -0.88223 5 -0.25 -0.71777 L c f
+0 -0.51777 0.053435 -0.68223 -0.08646 -0.58059 0.08646 -0.58059 -0.053435 -0.68223 5 -2.7093e-08 -0.51777 L c f
+0.25 -0.71777 0.30343 -0.88223 0.16354 -0.78059 0.33646 -0.78059 0.19656 -0.88223 5 0.25 -0.71777 L c f
+0.5 -0.51777 0.55343 -0.68223 0.41354 -0.58059 0.58646 -0.58059 0.44656 -0.68223 5 0.5 -0.51777 L c f
+0.75 -0.71777 0.80343 -0.88223 0.66354 -0.78059 0.83646 -0.78059 0.69656 -0.88223 5 0.75 -0.71777 L c f
+1 -0.51777 1.0534 -0.68223 0.91354 -0.58059 1.0865 -0.58059 0.94656 -0.68223 5 1 -0.51777 L c f
+1.25 -0.71777 1.3034 -0.88223 1.1635 -0.78059 1.3365 -0.78059 1.1966 -0.88223 5 1.25 -0.71777 L c f
+1.5 0.71429 5 1 Q 1 0 0 rgb
+ c f
+1.5 0.42857 5 0.71429 Q 1 g
+ c f
+1.5 0.14286 5 0.42857 Q 1 0 0 rgb
+ c f
+1.5 -0.14286 5 0.14286 Q 1 g
+ c f
+1.5 -0.42857 5 -0.14286 Q 1 0 0 rgb
+ c f
+1.5 -0.71429 5 -0.42857 Q 1 g
+ c f
+1.5 -1 5 -0.71429 Q 1 0 0 rgb
+ c f
+-1.5 -1.2857 5 -1 Q 1 g
+ c f
+-1.5 -1.5714 5 -1.2857 Q 1 0 0 rgb
+ c f
+-1.5 -1.8571 5 -1.5714 Q 1 g
+ c f
+-1.5 -2.1429 5 -1.8571 Q 1 0 0 rgb
+ c f
+-1.5 -2.4286 5 -2.1429 Q 1 g
+ c f
+-1.5 -2.7143 5 -2.4286 Q 1 0 0 rgb
+ c f
+-1.5 -2.7143 5 1 Q 0 g
+ s
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+9 CW f
+(xstar = \(cos\(234d\),cos\(18d\),cos\(162d\),cos\(306d\),cos\(90d\)\))2 3078 1 1230 3710 t
+(ystar = \(sin\(234d\),sin\(18d\),sin\(162d\),sin\(306d\),sin\(90d\)\))2 3078 1 1230 3820 t
+( from \(0,1\) touching \(xstar,ystar\) filled white noedge)7 2916(Star: line)1 576 2 870 3930 t
+(scale Star 1/11)2 810 1 1230 4040 t
+( wid 3 ht 2 at \(0,0\) filled blue)8 1728(Field: box)1 522 2 870 4150 t
+(xrow = \(-5/4,-3/4,-1/4,1/4,3/4,5/4\); y = 1st box.n.y - 0.2)8 3132 1 1230 4260 t
+(dup Star at \(xrow,y\))3 1080 1 1230 4370 t
+(xrow = \(-5/4,-1,-3/4,-1/2,-1/4,0,1/4,1/2,3/4,1,5/4\))2 2754 1 1230 4480 t
+(for n = 2 to 8 by 2 do {)9 1296 1 1230 4590 t
+( Star at \(xrow,yrow\))3 1080( dup)1 270(yrow = \(y - n/5, y - \(n-1\)/5\);)7 1620 3 1590 4700 t
+(})1230 4810 w
+(down)1230 4920 w
+(boxht = Field.ht/7; boxwid = 3.5)5 1728 1 1230 5030 t
+(box with .nw at Field.ne filled red noedge)7 2268 1 1230 5140 t
+(for n = 1 to 6 do {)7 1026 1 1230 5250 t
+(box with .ne at last box.se filled white noedge)8 2538 1 1590 5360 t
+(box with .ne at last box.se filled red noedge)8 2430 1 1590 5470 t
+(if n == 3 then X boxwid = 6.5 X)9 1674 1 1590 5580 t
+(})1230 5690 w
+(box ht 13*boxht with .nw at Field.nw)6 1944 1 1230 5800 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+(D-6 Picasso)1 4320 1 720 600 t
+cleartomark
+saveobj restore
+%ps_include: begin
+save
+/ed {exch def} def
+{} /showpage ed
+{} /copypage ed
+{} /erasepage ed
+{} /letter ed
+currentdict /findfont known systemdict /findfont known and {
+	/findfont systemdict /findfont get def
+} if
+36 dict dup /PS-include-dict-dw ed begin
+/context ed
+count array astore /o-stack ed
+%ps_include: variables begin
+/llx 163 def
+/lly 297 def
+/urx 447 def
+/ury 493 def
+/w 0 def
+/o 0 def
+/s 0 def
+/cx 2880 def
+/cy -3240 def
+/sx 4320 def
+/sy 4320 def
+/ax 0.5 def
+/ay 0.5 def
+/rot -0 def
+%ps_include: variables end
+{llx lly urx ury} /bbox ed
+{newpath 2 index exch 2 index exch dup 6 index exch
+ moveto 3 {lineto} repeat closepath} /boxpath ed
+{dup mul exch dup mul add sqrt} /len ed
+{2 copy gt {exch} if pop} /min ed
+{2 copy lt {exch} if pop} /max ed
+{transform round exch round exch A itransform} /nice ed
+{6 array} /n ed
+n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed
+urx llx sub 0 A dtransform len /Sx ed
+0 ury lly sub A dtransform len /Sy ed
+llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed
+rot dup sin abs /S ed cos abs /C ed
+Sx S mul Sy C mul add /H ed
+Sx C mul Sy S mul add /W ed
+sy H div /Scaley ed
+sx W div /Scalex ed
+s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if
+sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed
+sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed
+urx llx sub 0 A dtransform exch atan rot exch sub /rot ed
+n currentmatrix initgraphics setmatrix
+cx cy translate
+Scalex Scaley scale
+rot rotate
+Cx neg Cy neg translate
+A concat
+bbox boxpath clip newpath
+w 0 ne {gsave bbox boxpath 1 setgray fill grestore} if
+end
+gsave
+%ps_include: inclusion begin
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/GR /Symbol def
+
+/s /stroke load def
+/f /fill load def
+/n /newpath load def
+/c /closepath load def
+/l /lineto load def
+/g /setgray load def
+/d /setdash load def
+/rgb /setrgbcolor load def
+/w /setlinewidth load def
+/gs /gsave load def
+/gr /grestore load def
+/slj /setlinejoin load def
+/clj /currentlinejoin load def
+/magnification 1 def
+
+/PIC { % tx ty sx sy $	-- place origin at center
+	clippath pathbbox newpath
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div translate
+	scale magnification magnification scale translate
+} bind def
+
+/L { % p*N N p $
+	moveto { lineto } repeat
+} bind def
+
+/rL { % p*N r N p $
+	moveto
+	1 sub
+	{ 3 1 roll 4 index 4 index 4 index arcto 4 { pop } repeat } repeat
+	pop
+	lineto
+} bind def
+
+/T { % string noofspace width p $
+	moveto
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/AT { % string noofspace width $
+	2 index stringwidth pop sub exch
+	dup 0 eq
+		{ pop 1 index length div 0 3 -1 roll ashow }
+		{ div 0 8#40 4 -1 roll widthshow }
+	ifelse
+} bind def
+
+/Q { % llx lly urx ury $
+	2 copy
+	moveto
+	3 index exch lineto
+	3 1 roll dup 3 1 roll lineto lineto
+	closepath
+} bind def
+
+/rQ { % llx lly urx ury r $
+	2 index 2 index 5 index add 2 div moveto
+	3 copy 7 index 2 index 3 -1 roll arcto 4 { pop } repeat
+	4 index 2 index 1 index 6 index 4 index arcto 4 { pop } repeat
+	5 copy exch pop 2 index exch arcto 4 { pop } repeat
+	2 index 5 1 roll arcto 5 { pop } repeat
+	closepath
+} bind def
+
+/E { % 0 0 1 ang1 ang2 matrix 
+	matrix currentmatrix
+	exch
+	concat
+	newpath
+	6 1 roll
+	arc
+	setmatrix
+} bind def
+
+/Sp { % p*N N p p $
+	2 copy
+	moveto
+	4 copy
+	exch 4 -1 roll add 2 div 3 1 roll add 2 div lineto
+	5 -1 roll
+	{
+		6 copy pop pop 2 copy
+		exch 8 -1 roll sub 6 div 3 index exch sub
+		exch 7 -1 roll sub 6 div 2 index exch sub
+		6 2 roll 4 copy
+		exch 4 -1 roll exch sub 6 div 4 index add
+		3 1 roll sub 6 div 2 index add
+		6 2 roll
+		exch 4 -1 roll add 2 div 3 1 roll add 2 div
+		curveto
+	} repeat
+	pop pop
+	lineto
+} bind def
+-0.95938 -1.5714 72 72 PIC
+ 0 w
+ 0 g
+ [] 0 d
+-0.94445 2.5357 -0.80159 2.5357 -0.80159 1.7024 3 -0.94445 1.7024 L c gs 0.5568 0.4196 0.1372 rgb f gr s
+-0.65476 1.3214 -1 2.6429 -1 2.9167 -0.64286 1.8809 4 -0.64286 1.3214 L gs 0.5568 0.4196 0.1372 rgb f gr s
+-0.64286 1.3095 2.9167 1.869 Q gs 0.5568 0.4196 0.1372 rgb f gr s
+-0.63612 1.881 2.9188 1.881 0.9034 2.9167 3 -1 2.9167 L c gs 0.5568 0.4196 0.1372 rgb f gr s
+-0.82143 2.8452 -0.51191 1.9643 2.5119 1.9643 0.79762 2.8452 4 -0.82143 2.8452 L gs 0.1843 0.3098 0.1843 rgb f gr s
+0 0 1 0 360 [0.083333 0 0 0.02381 -0.48809 1.9524] E c gs 0 g f gr s
+0 0 1 0 360 [0.083333 0 0 0.02381 2.4286 1.9762] E c gs 0 g f gr s
+0 0 1 0 360 [0.083333 0 0 0.02381 0.79762 2.8452] E c gs 0 g f gr s
+0 0 1 0 360 [0.083333 0 0 0.02381 -0.79762 2.8452] E c gs 0 g f gr s
+0.21429 1.5 2.0238 1.7381 0.1 rQ c gs 0 g f gr s
+n 0.36905 1.5952 0.095238 0 360 arc gs 1 1 0 rgb f gr s
+n 0.57143 1.5952 0.095238 0 360 arc gs 0 0 1 rgb f gr s
+n 0.77381 1.5952 0.095238 0 360 arc gs 1 0 0 rgb f gr s
+n 0.30952 2.1429 0.095238 0 360 arc c gs 1 g f gr s
+n 0.59524 2.7024 0.071429 0 360 arc c gs 0 g f gr s
+ 1 g
+CB findfont 0.11111 scalefont setfont
+(8) 0 0.066667 0.5619 2.6746 T
+n -0.21429 2.5119 0.083333 0 360 arc 0 g
+ gs 0.6235 0.3725 0.6235 rgb f gr s
+ 1 g
+(4) 0 0.066667 -0.24762 2.4841 T
+-0.27381 1.9048 -0.19048 1.9881 Q 0 g
+ gs 0.196 0.6 0.8 rgb f gr s
+2.3095 1.7619 2.2857 1.7024 2.2262 1.7143 3 2.2738 1.7857 L c c gs 0 g f gr s
+-0.53571 0.22619 -0.32143 1.2976 Q gs 0.5568 0.4196 0.1372 rgb f gr s
+2.5476 0.22619 2.7619 1.2976 Q gs 0.5568 0.4196 0.1372 rgb f gr s
+0 0 1 0 360 [0.083333 0 0 0.02381 -0.65476 2.3929] E c gs 0 g f gr s
+0 0 1 0 360 [0.083333 0 0 0.02381 1.5714 2.4405] E c gs 0 g f gr s
+0.84524 2.6667 2.2976 1.7738 2.2619 1.7024 3 0.83333 2.6548 L gs 1 1 0 rgb f gr s
+2.2976 1.7738 2.25 1.7024 1.6905 2.0833 3 1.7143 2.1191 L gs 0.5568 0.4196 0.1372 rgb f gr s
+1.8333 1.9643 1.7619 1.9643 2 0.83333 2.6429 L c c gs 0 g f gr s
+showpage
+%ps_include: inclusion end
+grestore
+PS-include-dict-dw begin
+o 0 ne {gsave A defaultmatrix /A ed llx lly nice urx ury nice
+	initgraphics 0.1 setlinewidth boxpath stroke grestore} if
+clear o-stack aload pop
+context end restore
+%ps_include: end
+/saveobj save def
+mark
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Trailer
+done
+%%Pages: 6
+%%DocumentFonts: Helvetica-Bold Times-Italic Times-Roman Courier Times-Roman

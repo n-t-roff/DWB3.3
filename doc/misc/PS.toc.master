@@ -1,0 +1,380 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(AT&T UNIX)1 961 1 720 1040 t
+14 S f
+(\342)1681 968 w
+18 HB f
+(System)1842 1040 w
+(DOCUMENTER'S WORKBENCH)1 2722 1 720 1240 t
+14 S f
+(\342)3442 1168 w
+18 HB f
+(Software)3603 1240 w
+36 S1 f
+(________________________)720 1440 w
+14 HB f
+(Table of Contents)2 1178 1 720 1640 t
+11 S f
+(_ ______________________________________________________________________________)1 4320 1 720 2090 t
+11 BI f
+(Macro Packages)1 753 1 1440 2340 t
+10 R f
+(MM)1680 2535 w
+11 R f
+( Macro Package for Generating Documents)5 1902(\320 A)1 207 2 1876 2535 t
+10 R f
+( Picture Inclusion Package)3 1062(MPICTURES \320 A)2 766 2 1680 2730 t
+9 R f
+(MV)1680 2925 w
+10 R f
+( Macro Package for View Graphs and Slides)7 1776(\320 A)1 188 2 1841 2925 t
+9 R f
+(MVIEW)1680 3120 w
+10 R f
+( Macro Package for Generating View Graphs)6 1805(\320 A)1 188 2 2011 3120 t
+11 S f
+(_ ______________________________________________________________________________)1 4320 1 720 3260 t
+11 BI f
+(Preprocessors)1440 3510 w
+10 R f
+(EQN)1705 3705 w
+11 R f
+( Language for Typesetting Mathematics)4 1756(\320 A)1 207 2 1928 3705 t
+10 R f
+(TBL)1680 3900 w
+11 R f
+( Program to Format Tables)4 1186(\320 A)1 207 2 1887 3900 t
+10 R f
+(PIC)1680 4095 w
+11 R f
+( Graphics Language for Typesetting)4 1584(\320 A)1 207 2 1854 4095 t
+10 R f
+(GRAP)1680 4290 w
+11 R f
+( Language for Typesetting Graphs)4 1505(\320 A)1 207 2 1965 4290 t
+(Picasso \320 An)2 610 1 1680 4485 t
+10 R f
+(OPEN LOOK)1 563 1 2318 4485 t
+11 R f
+(Drawing Program)1 789 1 2909 4485 t
+11 S f
+(_ ______________________________________________________________________________)1 4320 1 720 4625 t
+11 BI f
+(Text Formatter)1 695 1 1440 4875 t
+11 R f
+(A Troff Tutorial)2 719 1 1680 5070 t
+(Troff User's Manual)2 906 1 1680 5265 t
+11 S f
+(_ ______________________________________________________________________________)1 4320 1 720 5405 t
+11 BI f
+(PostScript)1440 5655 w
+11 R f
+(\320 Font Sampler)2 735 1 1680 5850 t
+(\320 Character Sets and Symbols)4 1375 1 1680 6045 t
+11 S f
+(_ ______________________________________________________________________________)1 4320 1 720 6185 t
+11 BI f
+(Manual Pages)1 659 1 1440 6435 t
+11 S f
+( \347)1 -4320(_ ______________________________________________________________________________)1 4320 2 720 6575 t
+(\347)720 6490 w
+(\347)720 6380 w
+(\347)720 6270 w
+(\347)720 6160 w
+(\347)720 6050 w
+(\347)720 5940 w
+(\347)720 5830 w
+(\347)720 5720 w
+(\347)720 5610 w
+(\347)720 5500 w
+(\347)720 5390 w
+(\347)720 5280 w
+(\347)720 5170 w
+(\347)720 5060 w
+(\347)720 4950 w
+(\347)720 4840 w
+(\347)720 4730 w
+(\347)720 4620 w
+(\347)720 4510 w
+(\347)720 4400 w
+(\347)720 4290 w
+(\347)720 4180 w
+(\347)720 4070 w
+(\347)720 3960 w
+(\347)720 3850 w
+(\347)720 3740 w
+(\347)720 3630 w
+(\347)720 3520 w
+(\347)720 3410 w
+(\347)720 3300 w
+(\347)720 3190 w
+(\347)720 3080 w
+(\347)720 2970 w
+(\347)720 2860 w
+(\347)720 2750 w
+(\347)720 2640 w
+(\347)720 2530 w
+(\347)720 2420 w
+(\347)720 2310 w
+(\347)720 2200 w
+(\347)5040 6575 w
+(\347)5040 6490 w
+(\347)5040 6380 w
+(\347)5040 6270 w
+(\347)5040 6160 w
+(\347)5040 6050 w
+(\347)5040 5940 w
+(\347)5040 5830 w
+(\347)5040 5720 w
+(\347)5040 5610 w
+(\347)5040 5500 w
+(\347)5040 5390 w
+(\347)5040 5280 w
+(\347)5040 5170 w
+(\347)5040 5060 w
+(\347)5040 4950 w
+(\347)5040 4840 w
+(\347)5040 4730 w
+(\347)5040 4620 w
+(\347)5040 4510 w
+(\347)5040 4400 w
+(\347)5040 4290 w
+(\347)5040 4180 w
+(\347)5040 4070 w
+(\347)5040 3960 w
+(\347)5040 3850 w
+(\347)5040 3740 w
+(\347)5040 3630 w
+(\347)5040 3520 w
+(\347)5040 3410 w
+(\347)5040 3300 w
+(\347)5040 3190 w
+(\347)5040 3080 w
+(\347)5040 2970 w
+(\347)5040 2860 w
+(\347)5040 2750 w
+(\347)5040 2640 w
+(\347)5040 2530 w
+(\347)5040 2420 w
+(\347)5040 2310 w
+(\347)5040 2200 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Helvetica-Bold Times-BoldItalic Times-Roman Symbol Times-Roman

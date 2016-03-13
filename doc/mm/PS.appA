@@ -1,0 +1,703 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( of Differences for)3 1030( Summary)1 684(APPENDIX A:)1 772 3 720 1050 t
+11 HB f
+(MM)3240 1050 w
+12 HB f
+(with)3456 1050 w
+11 HB f
+(NROFF)3731 1050 w
+10 R f
+(Some)720 1350 w
+9 R f
+(MM)980 1350 w
+10 R f
+(features behave differently with the)4 1454 1 1174 1350 t
+10 I f
+(nroff)2662 1350 w
+10 R f
+(text formatter than with)3 976 1 2892 1350 t
+10 I f
+(troff)3903 1350 w
+10 R f
+(. The)1 240 1 4084 1350 t
+10 I f
+(nroff)4359 1350 w
+10 R f
+(behavior is)1 451 1 4589 1350 t
+(noted below along with the section number in the manual where the feature is discussed.)14 3536 1 720 1470 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = General]
+10 B f
+(General)720 1770 w
+8 S f
+(\267)783 1950 w
+10 R f
+( the number of character positions \(e.g., spaces\) or vertical)9 2446(All values are unscaled and are treated as)7 1724 2 870 1950 t
+(lines, as appropriate.)2 826 1 870 2070 t
+8 S f
+(\267)783 2250 w
+10 R f
+( [\2471.2])1 291(Each reference to ``blank vertical space'' means a full vertical line.)10 2682 2 870 2250 t
+8 S f
+(\267)783 2430 w
+10 R f
+( [\2473.5])1 291(By default, tabs are set every 8 character spaces.)8 1932 2 870 2430 t
+8 S f
+(\267)783 2610 w
+10 R f
+(Not all formatter requests are available with)6 1793 1 870 2610 t
+10 I f
+(nroff)2694 2610 w
+10 R f
+( example, the)2 549(. For)1 220 2 2897 2610 t
+10 CW f
+(.fp)3698 2610 w
+10 R f
+(,)3878 2610 w
+10 CW f
+(.lg)3935 2610 w
+10 R f
+(, and)1 201 1 4115 2610 t
+10 CW f
+(.ss)4348 2610 w
+10 R f
+(requests are)1 480 1 4560 2610 t
+(for use with)2 477 1 870 2730 t
+10 I f
+(troff)1372 2730 w
+10 R f
+(only. [\2473.8])1 494 1 1570 2730 t
+8 S f
+(\267)783 2910 w
+10 R f
+( [\2474.2.2.4,)1 449( emboldened by overstriking.)3 1219(Text in the italic font is underlined; text in the bold font is)12 2502 3 870 2910 t
+(\24712.1])870 3030 w
+8 S f
+(\267)783 3210 w
+10 R f
+(Point size and vertical spacing are for use with)8 1943 1 870 3210 t
+10 I f
+(troff)2848 3210 w
+10 R f
+( ignored by)2 477(only and are)2 513 2 3056 3210 t
+10 I f
+(nroff)4082 3210 w
+10 R f
+( \24712.4,)1 286(. [\2474.2.2.5,)1 469 2 4285 3210 t
+(\24712.7])870 3330 w
+8 S f
+(\267)783 3510 w
+10 R f
+( \257ags are)2 370( default, the ``current'' and ``default'' justi\256cation)6 2038( By)1 171(Right-margin justi\256cation is turned off.)4 1591 4 870 3510 t
+(set to no justi\256cation; initially, justi\256cation is set with)8 2156 1 870 3630 t
+10 CW f
+(.SA 0)1 300 1 3051 3630 t
+10 R f
+(. [\24712.2])1 366 1 3351 3630 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Typical Command Lines]
+10 B f
+(Typical Command Lines)2 1057 1 720 3870 t
+10 R f
+([\2472.2])1827 3870 w
+8 S f
+(\267)783 4050 w
+10 R f
+(Plain text \(no tables or equations\):)5 1374 1 870 4050 t
+10 CW f
+(nroff -mm)1 540 1 1020 4230 t
+10 R f
+([)1620 4230 w
+10 I f
+(options)1653 4230 w
+10 R f
+(])1948 4230 w
+10 I f
+(\256lename)2031 4230 w
+10 CW f
+(|)2429 4230 w
+10 S f
+(\274)2549 4230 w
+8 S f
+(\267)783 4410 w
+10 R f
+(Text with tables:)2 672 1 870 4410 t
+10 CW f
+(tbl)1020 4590 w
+10 I f
+(\256lename)1260 4590 w
+10 CW f
+(| nroff -mm)2 660 1 1658 4590 t
+10 R f
+([)2378 4590 w
+10 I f
+(options)2411 4590 w
+10 R f
+(])2706 4590 w
+10 CW f
+(|)2799 4590 w
+10 S f
+(\274)2919 4590 w
+8 S f
+(\267)783 4770 w
+10 R f
+(Text with equations:)2 822 1 870 4770 t
+10 CW f
+(neqn /usr/pub/eqnchar)1 1260 1 1020 4950 t
+10 I f
+(\256lename)2340 4950 w
+10 CW f
+(| nroff -mm)2 660 1 2703 4950 t
+10 R f
+([)3423 4950 w
+10 I f
+(options)3456 4950 w
+10 R f
+(])3751 4950 w
+10 CW f
+(|)3844 4950 w
+10 S f
+(\274)3964 4950 w
+8 S f
+(\267)783 5130 w
+10 R f
+(Text with both tables and equations:)5 1452 1 870 5130 t
+10 CW f
+(tbl)1020 5310 w
+10 I f
+(\256lename)1260 5310 w
+10 CW f
+(| neqn /usr/pub/eqnchar - | nroff -mm)6 2220 1 1623 5310 t
+10 R f
+([)3903 5310 w
+10 I f
+(options)3936 5310 w
+10 R f
+(])4231 5310 w
+10 CW f
+(|)4324 5310 w
+10 S f
+(\274)4444 5310 w
+10 R f
+(Preprocessing by)1 694 1 720 5490 t
+10 I f
+(tbl)1448 5490 w
+10 R f
+(and)1588 5490 w
+10 I f
+(neqn)1766 5490 w
+10 R f
+( If)1 125(, if needed, must be invoked as shown in the command line prototypes.)12 2947 2 1968 5490 t
+(used,)720 5610 w
+10 I f
+(neqn)953 5610 w
+10 R f
+(immediately precedes)1 873 1 1172 5610 t
+10 I f
+(nroff)2070 5610 w
+10 R f
+(. \(The)1 263 1 2273 5610 t
+10 I f
+(grap)2561 5610 w
+10 R f
+(and)2775 5610 w
+10 I f
+(pic)2944 5610 w
+10 R f
+(preprocessors are for use with)4 1196 1 3091 5610 t
+10 I f
+(troff)4312 5610 w
+10 R f
+(only.\))4510 5610 w
+(When formatting a document with)4 1424 1 720 5790 t
+10 I f
+(nroff)2181 5790 w
+10 R f
+(, the output should normally be processed for a speci\256c type of)11 2656 1 2384 5790 t
+( a given terminal, e.g., reverse)5 1250(terminal, because the output may require some features that are speci\256c to)11 3070 2 720 5910 t
+( for any terminal incapable of reverse)6 1573( Output)1 341( motion in both directions.)4 1111(paper motion or half-line paper)4 1295 4 720 6030 t
+(paper motion and also lacking hardware tab stops should be processed as follows:)12 3267 1 720 6150 t
+10 CW f
+(nroff -mm -T745)2 900 1 870 6330 t
+10 I f
+(\256lename)1830 6330 w
+10 CW f
+(| col -x)2 480 1 2228 6330 t
+10 R f
+( is used with)3 530(If two-column processing)2 1042 2 720 6510 t
+10 I f
+(nroff)2326 6510 w
+10 R f
+(, the)1 181 1 2529 6510 t
+10 I f
+(nroff)2744 6510 w
+10 R f
+(output must be postprocessed by)4 1341 1 2973 6510 t
+10 I f
+(col)4348 6510 w
+10 R f
+( the latter)2 395(. In)1 167 2 4478 6510 t
+(case, the)1 356 1 720 6630 t
+10 CW f
+(\261T37)1114 6630 w
+10 R f
+( speci\256ed to)2 507(terminal type must be)3 908 2 1392 6630 t
+10 I f
+(nroff)2844 6630 w
+10 R f
+(and the output of)3 716 1 3076 6630 t
+10 I f
+(col)3829 6630 w
+10 R f
+(must be processed by the)4 1052 1 3988 6630 t
+(appropriate terminal \256lter \(e.g.,)3 1259 1 720 6750 t
+10 I f
+(450)2006 6750 w
+10 R f
+( example, two-column output for a)5 1397(\). For)1 249 2 2164 6750 t
+9 R f
+(DIABLO 450S)1 550 1 3835 6750 t
+10 R f
+(terminal should)1 628 1 4412 6750 t
+(be processed as follows:)3 973 1 720 6870 t
+10 CW f
+(nroff -mm \261T37)2 840 1 870 7050 t
+10 I f
+(\256lename)1770 7050 w
+10 CW f
+(| col -x | 450)4 840 1 2168 7050 t
+10 R f
+(To produce boxed tables on printers without fractional line capabilities, use)10 3015 1 720 7230 t
+10 I f
+(tbl)3760 7230 w
+10 R f
+(with the)1 325 1 3891 7230 t
+10 CW f
+(-TX)4241 7230 w
+10 R f
+(option.)4446 7230 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(A-2 MM)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Parameters that Can Be Set from the Command Line]
+10 B f
+(Parameters that Can Be Set from the Command Line)8 2274 1 720 960 t
+10 R f
+([\2472.3])3044 960 w
+10 CW f
+(-rA2)720 1140 w
+10 R f
+(suppresses the letterhead block to accommodate preprinted stationary.)7 2800 1 1020 1140 t
+10 CW f
+(-rT)720 1320 w
+10 I f
+(n)900 1320 w
+10 R f
+( If)1 124(provides register settings for certain devices.)5 1825 2 1020 1320 t
+10 I f
+(n)3003 1320 w
+10 R f
+(is 1, the page width \(e.g., line length\) and page)9 1953 1 3087 1320 t
+( If)1 122(offset are set to 80 and 3 character spaces, respectively.)9 2266 2 1020 1440 t
+10 I f
+(n)3439 1440 w
+10 R f
+( length is set to 84 lines)6 975(is 2, the page)3 545 2 3520 1440 t
+( default,)1 342( By)1 182(and underlining is turned off.)4 1224 3 1020 1560 t
+10 I f
+(n)2808 1560 w
+10 R f
+(is 0 for standard page length, page width and page)9 2142 1 2898 1560 t
+(offset.)1020 1680 w
+10 CW f
+(-rU1)720 1860 w
+10 R f
+( \257ag causes only letters and digits to be underlined;)9 2123( This)1 236(controls underlining of section headings.)4 1661 3 1020 1860 t
+(otherwise all characters \(including spaces\) are underlined.)6 2318 1 1020 1980 t
+( the page length is set to 66 lines \(e.g.,)9 1631(By default,)1 454 2 720 2160 t
+10 CW f
+(-rL66)2841 2160 w
+10 R f
+(\), the page offset is set to 10 character spaces)9 1899 1 3141 2160 t
+(\(e.g.,)720 2280 w
+10 CW f
+(-rO10)950 2280 w
+10 R f
+( to 60 character spaces \(e.g.,)5 1139(\), and the page width is set)6 1086 2 1250 2280 t
+10 CW f
+(-rW60)3502 2280 w
+10 R f
+( page width for 12-pitch)4 973(\). The)1 265 2 3802 2280 t
+(type would be 72 character spaces \(e.g.,)6 1592 1 720 2400 t
+10 CW f
+(-rW72)2337 2400 w
+10 R f
+(\).)2637 2400 w
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Strings for Special Symbols]
+10 B f
+(Strings for Special Symbols)3 1176 1 720 2640 t
+8 S f
+(\267)783 2820 w
+10 R f
+(The string)1 408 1 870 2820 t
+10 CW f
+(\\*\(BU)1303 2820 w
+10 R f
+(produces a real bullet \()4 914 1 1628 2820 t
+8 S f
+(\267)2542 2820 w
+10 R f
+( a bullet is represented)4 902( Otherwise,)1 486( that have one.)3 585(\) on printers)2 488 4 2579 2820 t
+(as)870 2940 w
+10 S f
+(\305)978 2940 w
+10 R f
+( [\2473.7.1])1 366(\(by overstriking ``o'' and ``+''\).)4 1288 2 1080 2940 t
+8 S f
+(\267)783 3120 w
+10 R f
+(Most)870 3120 w
+10 I f
+(nroff)1111 3120 w
+10 R f
+( string)1 264( The)1 216(printers do not offer distinct graphics for a dash, a minus sign, and a hyphen.)14 3219 3 1341 3120 t
+10 CW f
+(\\*\(EM)870 3240 w
+10 R f
+( hyphen is just the terminal dash \(-\) character.)8 1920( A)1 133( dash as two hyphens \(--\).)5 1086(represents an em)2 694 4 1207 3240 t
+(The sequence)1 549 1 870 3360 t
+10 CW f
+(\\-)1448 3360 w
+10 R f
+( \(\261\) on printers that have one; otherwise a hyphen is used.)11 2362(produces a real minus sign)4 1081 2 1597 3360 t
+([\2473.7.2])870 3480 w
+8 S f
+(\267)783 3660 w
+10 R f
+(The strings)1 462 1 870 3660 t
+10 CW f
+(\\*\(Rg)1372 3660 w
+10 R f
+(,)1672 3660 w
+10 CW f
+(\\*\(Tm)1737 3660 w
+10 R f
+(, and)1 209 1 2037 3660 t
+10 CW f
+(\\*\(Sm)2286 3660 w
+10 R f
+(produce the registered mark, trademark, and service mark)7 2413 1 2627 3660 t
+( the registered mark, trademark, and)5 1548( Otherwise,)1 506(symbols, respectively, on printers that have them.)6 2116 3 870 3780 t
+( respectively; in this case, the mark is)7 1568( \),)1 66( \(SM)1 213( and)1 178( TM \),)2 224( \()1 67( R\),)1 133(service mark symbols are represented as \()6 1721 8 870 3900 t
+( [\2473.7.3])1 366(raised one-half line for printers that have half-line capabilities.)8 2497 2 870 4020 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Paragraphs and Headings]
+10 B f
+(Paragraphs and Headings)2 1113 1 720 4260 t
+8 S f
+(\267)783 4440 w
+10 R f
+(By default, paragraph indentation is 5 character spaces; initially, register)9 2897 1 870 4440 t
+10 CW f
+(Pi)3792 4440 w
+10 R f
+( [\2474.1])1 291(is set to 5.)3 406 2 3937 4440 t
+8 S f
+(\267)783 4620 w
+10 R f
+(By default, all heading levels are underlined; string)7 2047 1 870 4620 t
+10 CW f
+(HF)2942 4620 w
+10 R f
+( [\2474.2.2.4])1 441(is set to all 2's.)4 603 2 3087 4620 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Lists]
+10 B f
+(Lists)720 4860 w
+8 S f
+(\267)783 5040 w
+10 R f
+(By default, list item indentation for an automatically-numbered list is 6 character spaces; initially,)13 4170 1 870 5040 t
+(register)870 5160 w
+10 CW f
+(Li)1194 5160 w
+10 R f
+( [\2475.3.3.1])1 441(is set to 6.)3 406 2 1339 5160 t
+8 S f
+(\267)783 5340 w
+10 R f
+( [\2475.3.3.5])1 441(By default, list item indentation for a reference list is 6 character spaces.)12 2888 2 870 5340 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Displays]
+10 B f
+(Displays)720 5580 w
+10 R f
+([\2477.1, \2477.2])1 466 1 1132 5580 t
+8 S f
+(\267)783 5760 w
+10 R f
+(By default, display indentation \(for display)5 1736 1 870 5760 t
+10 I f
+(format)2634 5760 w
+10 CW f
+(2)2929 5760 w
+10 R f
+(or)3017 5760 w
+10 CW f
+(I)3128 5760 w
+10 R f
+( register)1 328(\) is 5 character spaces; initially,)5 1279 2 3188 5760 t
+10 CW f
+(Si)4824 5760 w
+10 R f
+(is)4973 5760 w
+(set to 5.)2 314 1 870 5880 t
+8 S f
+(\267)783 6060 w
+10 R f
+(The)870 6060 w
+10 I f
+(rindent)1050 6060 w
+10 R f
+(argument must be an unscaled number and is treated as character spaces.)11 2903 1 1364 6060 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Footnotes]
+10 B f
+(Footnotes)720 6300 w
+10 R f
+(By default, footnote text is formatted with no hyphenation and no justi\256cation; initially, the footnote style)15 4320 1 720 6480 t
+(is set to)2 306 1 720 6600 t
+10 CW f
+(.FD 10)1 360 1 1051 6600 t
+10 R f
+(. [\2478.3])1 316 1 1411 6600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = References]
+10 B f
+(References)720 6840 w
+10 R f
+( by one)2 322(The reference mark appears full-sized on the main line and is separated from the preceding text)15 3998 2 720 7020 t
+( [\24711.1])1 341(space \(e.g., segment of text to be referenced [1] continue\).)9 2323 2 720 7140 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Trailer
+done
+%%Pages: 2
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

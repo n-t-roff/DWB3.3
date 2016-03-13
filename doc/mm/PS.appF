@@ -1,0 +1,954 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( Messages)1 609( Error)1 430(APPENDIX F:)1 759 3 720 1050 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = MM Error Messages]
+10 B f
+(MM Error Messages)2 886 1 720 1350 t
+10 R f
+(An)720 1530 w
+9 R f
+(MM)865 1530 w
+10 R f
+(error message has the following format:)5 1594 1 1050 1530 t
+10 CW f
+(ERROR:\()870 1710 w
+10 I f
+(\256lename)1290 1710 w
+10 CW f
+(\)input line)1 660 1 1628 1710 t
+10 I f
+(n)2348 1710 w
+10 CW f
+(:)2398 1710 w
+10 I f
+(description)870 1830 w
+10 R f
+(where)720 2010 w
+10 I f
+(\256lename)994 2010 w
+10 R f
+( error occured,)2 597(is the \256le in which the)5 916 2 1363 2010 t
+10 I f
+(n)2908 2010 w
+10 R f
+(is the line number in that \256le, and)7 1393 1 2990 2010 t
+10 I f
+(description)4415 2010 w
+10 R f
+(is a)1 143 1 4897 2010 t
+( is a list of)4 473( Following)1 476( the macro in error and the nature of the erorr.)10 1970(descriptive message that indicates)3 1401 4 720 2130 t
+( name\) with some information on limitations or)7 2065(descriptive messages \(in alphabetical order by macro)6 2255 2 720 2250 t
+(conditions that could cause that error.)5 1503 1 720 2370 t
+( Explanation)1 1831(Error Message)1 584 2 720 2550 t
+10 S f
+(_ ______________________________________________________________________________________)1 4308 1 720 2570 t
+9 CW f
+(check TL, AU, AS, AE, MT sequence)6 1782 1 720 2750 t
+10 R f
+(The order of macros at the beginning of a memorandum,)9 2262 1 2652 2750 t
+(released paper, or external letter is incorrect or some other)9 2326 1 2652 2870 t
+(macro has disturbed that order.)4 1239 1 2652 2990 t
+9 CW f
+(check WA, WE, IA, IE, LT sequence)6 1782 1 720 3170 t
+10 R f
+(The order of macros at the beginning of a business letter is)11 2343 1 2652 3170 t
+(incorrect or some other macro has disturbed that order.)8 2192 1 2652 3290 t
+9 CW f
+(DE:no DS or DF active)4 1134 1 1368 3470 t
+10 R f
+(A display ends but has never started, i.e., a)8 1708 1 2652 3470 t
+10 CW f
+(.DE)4385 3470 w
+10 R f
+(macro)4590 3470 w
+(occurs with no previous)3 957 1 2652 3590 t
+10 CW f
+(.DS)3634 3590 w
+10 R f
+(or)3839 3590 w
+10 CW f
+(.DF)3947 3590 w
+10 R f
+(macro to match it.)3 727 1 4152 3590 t
+9 CW f
+(DF:illegal inside TL or AS)4 1404 1 1098 3770 t
+10 R f
+(Floating displays are not allowed in the title or abstract.)9 2226 1 2652 3770 t
+9 CW f
+(DF:missing DE)1 702 1 1800 3950 t
+10 R f
+(A \257oating display starts inside a display, i.e., a previous)9 2235 1 2652 3950 t
+10 CW f
+(.DE)2652 4070 w
+10 R f
+(macro was omitted or mistyped.)4 1285 1 2857 4070 t
+9 CW f
+(DF:missing FE)1 702 1 1800 4250 t
+10 R f
+( likely, a)2 347( Most)1 256(A \257oating display starts inside a footnote.)6 1669 3 2652 4250 t
+10 CW f
+(.FE)2652 4370 w
+10 R f
+(macro to end a previous footnote was omitted or)8 1936 1 2857 4370 t
+(mistyped.)2652 4490 w
+9 CW f
+(DF:too many displays)2 1080 1 1422 4670 t
+10 R f
+(More than 26 \257oating displays are active at once, i.e., have)10 2351 1 2652 4670 t
+(accumulated but not yet output.)4 1263 1 2652 4790 t
+9 CW f
+(DS:illegal inside TL or AS)4 1404 1 1098 4970 t
+10 R f
+(Static displays are not allowed in the title or abstract.)9 2120 1 2652 4970 t
+9 CW f
+(DS:missing DE)1 702 1 1800 5150 t
+10 R f
+(A static display starts inside a display, i.e., a previous)9 2140 1 2652 5150 t
+10 CW f
+(.DE)4817 5150 w
+10 R f
+(macro was omitted or mistyped.)4 1285 1 2652 5270 t
+9 CW f
+(DS:missing FE)1 702 1 1800 5450 t
+10 R f
+( likely, a)2 347( Most)1 256(A static display starts inside a footnote.)6 1574 3 2652 5450 t
+10 CW f
+(.FE)2652 5570 w
+10 R f
+(macro to end a previous footnote was omitted or)8 1936 1 2857 5570 t
+(mistyped.)2652 5690 w
+9 CW f
+(FE:no FS active)2 810 1 1692 5870 t
+10 R f
+(A footnote ends but has never started, i.e., a)8 1752 1 2652 5870 t
+10 CW f
+(.FE)4429 5870 w
+10 R f
+(macro)4634 5870 w
+(occurs with no previous)3 957 1 2652 5990 t
+10 CW f
+(.FS)3634 5990 w
+10 R f
+(macro to match it.)3 727 1 3839 5990 t
+9 CW f
+(FS:missing DE)1 702 1 1800 6170 t
+10 R f
+( likely, a)2 347( Most)1 256(A footnote starts inside a display.)5 1338 3 2652 6170 t
+10 CW f
+(.DE)4618 6170 w
+10 R f
+(macro to end a previous display was omitted or mistyped.)9 2309 1 2652 6290 t
+9 CW f
+(FS:missing FE)1 702 1 1800 6470 t
+10 R f
+(A footnote starts inside a footnote, i.e., a previous)8 1992 1 2652 6470 t
+10 CW f
+(.FS)4669 6470 w
+10 R f
+(macro was not matched by a closing)6 1453 1 2652 6590 t
+10 CW f
+(.FE)4130 6590 w
+10 R f
+(macro.)4335 6590 w
+9 CW f
+(H:bad arg:)1 540 1 1917 6770 t
+9 I f
+(n)2457 6770 w
+10 R f
+(The heading level argument must be a single digit from 1)10 2292 1 2652 6770 t
+(to 7;)1 181 1 2652 6890 t
+10 I f
+(n)2858 6890 w
+10 R f
+(is not a legal value.)4 774 1 2933 6890 t
+9 CW f
+(H:missing arg)1 702 1 1800 7070 t
+10 R f
+(The)2652 7070 w
+10 CW f
+(.H)2832 7070 w
+10 R f
+(macro needs at least one argument.)5 1402 1 2977 7070 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(F-2 MM)1 4320 1 720 600 t
+10 R f
+( Explanation)1 1831(Error Message)1 584 2 720 960 t
+10 S f
+(_ ______________________________________________________________________________________)1 4308 1 720 980 t
+9 CW f
+(H:missing DE)1 648 1 1854 1160 t
+10 R f
+(A heading macro \()3 745 1 2652 1160 t
+10 CW f
+(.H)3397 1160 w
+10 R f
+(or)3542 1160 w
+10 CW f
+(.HU)3650 1160 w
+10 R f
+(\) occurs inside a display.)4 990 1 3830 1160 t
+(Possibly, a)1 434 1 2652 1280 t
+10 CW f
+(.DE)3111 1280 w
+10 R f
+(macro to end a previous display was)6 1453 1 3316 1280 t
+(omitted or mistyped.)2 831 1 2652 1400 t
+9 CW f
+(H:missing FE)1 648 1 1854 1580 t
+10 R f
+(A heading macro \()3 745 1 2652 1580 t
+10 CW f
+(.H)3397 1580 w
+10 R f
+(or)3542 1580 w
+10 CW f
+(.HU)3650 1580 w
+10 R f
+(\) occurs inside a footnote.)4 1034 1 3830 1580 t
+(Possibly, a)1 434 1 2652 1700 t
+10 CW f
+(.FE)3111 1700 w
+10 R f
+(macro to end a previous footnote was)6 1497 1 3316 1700 t
+(omitted or mistyped.)2 831 1 2652 1820 t
+9 CW f
+(HU:missing arg)1 756 1 1746 2000 t
+10 R f
+(The)2652 2000 w
+10 CW f
+(.HU)2832 2000 w
+10 R f
+(macro needs one argument.)3 1097 1 3037 2000 t
+9 CW f
+(LB:missing arg\(s\))1 918 1 1584 2180 t
+10 R f
+(The)2652 2180 w
+10 CW f
+(.LB)2832 2180 w
+10 R f
+(macro requires at least four arguments.)5 1557 1 3037 2180 t
+9 CW f
+(LB:too many nested lists)3 1296 1 1206 2360 t
+10 R f
+(Another list was start when six lists are already active.)9 2174 1 2652 2360 t
+9 CW f
+(LE:mismatched)1800 2540 w
+10 R f
+(A list ends but has never started, i.e., a)8 1542 1 2652 2540 t
+10 CW f
+(.LE)4219 2540 w
+10 R f
+(macro occurs)1 534 1 4424 2540 t
+( this)1 170( Although)1 428(without a previous list initialization macro.)5 1722 3 2652 2660 t
+(is not a fatal error, the message is issued because there)10 2175 1 2652 2780 t
+(almost certainly exists some problem in the preceding text.)8 2356 1 2652 2900 t
+9 CW f
+(LI:no lists active)2 972 1 1530 3080 t
+10 R f
+(A list item is requested but no list is active, i.e., a)11 1969 1 2652 3080 t
+10 CW f
+(.LI)4646 3080 w
+10 R f
+(macro occurs without a preceding list-initialization macro.)6 2338 1 2652 3200 t
+(Most likely, a list initialization macro was omitted,)7 2042 1 2652 3320 t
+(mistyped, or separated from the)4 1267 1 2652 3440 t
+10 CW f
+(.LI)3944 3440 w
+10 R f
+(macro by an)2 493 1 4149 3440 t
+(intervening)2652 3560 w
+10 CW f
+(.H)3132 3560 w
+10 R f
+(or)3277 3560 w
+10 CW f
+(.HU)3385 3560 w
+10 R f
+(macro.)3590 3560 w
+9 CW f
+(LO argument not recognized)3 1404 1 1098 3740 t
+10 R f
+(The argument given to the)4 1054 1 2652 3740 t
+10 CW f
+(.LO)3731 3740 w
+10 R f
+(macro is incorrect; the)3 895 1 3936 3740 t
+(only valid arguments are)3 990 1 2652 3860 t
+10 CW f
+(SA)3667 3860 w
+10 R f
+(,)3787 3860 w
+10 CW f
+(AT)3837 3860 w
+10 R f
+(,)3957 3860 w
+10 CW f
+(SJ)4007 3860 w
+10 R f
+(,)4127 3860 w
+10 CW f
+(RN)4177 3860 w
+10 R f
+(, and)1 194 1 4297 3860 t
+10 CW f
+(CN)4516 3860 w
+10 R f
+(.)4636 3860 w
+9 CW f
+(LT argument not recognized)3 1404 1 1098 4040 t
+10 R f
+(The argument given to the)4 1054 1 2652 4040 t
+10 CW f
+(.LT)3731 4040 w
+10 R f
+(macro is incorrect; the)3 895 1 3936 4040 t
+(only valid arguments are)3 990 1 2652 4160 t
+10 CW f
+(BL)3667 4160 w
+10 R f
+(,)3787 4160 w
+10 CW f
+(SB)3837 4160 w
+10 R f
+(,)3957 4160 w
+10 CW f
+(FB)4007 4160 w
+10 R f
+(, and)1 194 1 4127 4160 t
+10 CW f
+(SP)4346 4160 w
+10 R f
+(.)4466 4160 w
+9 CW f
+(ML:missing arg)1 756 1 1746 4340 t
+10 R f
+(The)2652 4340 w
+10 CW f
+(.ML)2832 4340 w
+10 R f
+(macro requires at least one argument.)5 1496 1 3037 4340 t
+9 CW f
+(ND:missing arg)1 756 1 1746 4520 t
+10 R f
+(The)2652 4520 w
+10 CW f
+(.ND)2832 4520 w
+10 R f
+(macro requires one argument.)3 1191 1 3037 4520 t
+9 CW f
+(RF:no RS active)2 810 1 1692 4700 t
+10 R f
+(A reference ends but has never started, i.e., a)8 1788 1 2652 4700 t
+10 CW f
+(.RF)4465 4700 w
+10 R f
+(macro)4670 4700 w
+(occurs with no previous)3 957 1 2652 4820 t
+10 CW f
+(.RS)3634 4820 w
+10 R f
+(macro to match it.)3 727 1 3839 4820 t
+9 CW f
+(RP:missing RF)1 702 1 1800 5000 t
+10 R f
+(A request to generate the reference page occurs inside a)9 2222 1 2652 5000 t
+(reference, i.e., a previous)3 1004 1 2652 5120 t
+10 CW f
+(.RS)3681 5120 w
+10 R f
+(macro was not matched by a)5 1139 1 3886 5120 t
+(closing)2652 5240 w
+10 CW f
+(.RF)2966 5240 w
+10 R f
+(macro.)3171 5240 w
+9 CW f
+(RS:missing RF)1 702 1 1800 5420 t
+10 R f
+(A reference starts inside a reference, i.e., a previous)8 2064 1 2652 5420 t
+10 CW f
+(.RS)4741 5420 w
+10 R f
+(macro was not matched by a closing)6 1453 1 2652 5540 t
+10 CW f
+(.RF)4130 5540 w
+10 R f
+(macro.)4335 5540 w
+9 CW f
+(S:bad arg)1 486 1 1917 5720 t
+9 I f
+(n)2457 5720 w
+10 R f
+(The)2652 5720 w
+10 CW f
+(.S)2832 5720 w
+10 R f
+(macro was given an incorrect argument)5 1576 1 2977 5720 t
+10 I f
+(n)4578 5720 w
+10 R f
+(.)4628 5720 w
+9 CW f
+(SA:bad arg:)1 594 1 1863 5900 t
+9 I f
+(n)2457 5900 w
+10 R f
+(The argument given to the)4 1054 1 2652 5900 t
+10 CW f
+(.SA)3731 5900 w
+10 R f
+(macro is incorrect; the)3 895 1 3936 5900 t
+(only valid arguments are)3 990 1 2652 6020 t
+10 CW f
+(0)3667 6020 w
+10 R f
+(or)3752 6020 w
+10 CW f
+(1)3860 6020 w
+10 R f
+(.)3920 6020 w
+9 CW f
+(SG:missing DE)1 702 1 1800 6200 t
+10 R f
+( Most)1 256(The signature block is requested inside a display.)7 1964 2 2652 6200 t
+(likely, a)1 322 1 2652 6320 t
+10 CW f
+(.DE)2999 6320 w
+10 R f
+(macro to end a previous display was omitted)7 1784 1 3204 6320 t
+(or mistyped.)1 500 1 2652 6440 t
+9 CW f
+(SG:missing FE)1 702 1 1800 6620 t
+10 R f
+( Most)1 256(The signature block is requested inside a footnote.)7 2008 2 2652 6620 t
+(likely, a)1 322 1 2652 6740 t
+10 CW f
+(.FE)2999 6740 w
+10 R f
+(macro to end a previous footnote was)6 1497 1 3204 6740 t
+(omitted or mistyped.)2 831 1 2652 6860 t
+9 CW f
+(SG:no authors)1 702 1 1800 7040 t
+10 R f
+(The)2652 7040 w
+10 CW f
+(.SG)2832 7040 w
+10 R f
+(macro occurs without a previous)4 1303 1 3037 7040 t
+10 CW f
+(.AU)4365 7040 w
+10 R f
+(macro.)4570 7040 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(MM F-3)1 4320 1 720 600 t
+10 R f
+( Explanation)1 1831(Error Message)1 584 2 720 960 t
+10 S f
+(_ ______________________________________________________________________________________)1 4308 1 720 980 t
+9 CW f
+(TE: used TS H but no TH)6 1242 1 1260 1160 t
+10 R f
+(A table with repeating headers has ended but the header)9 2230 1 2652 1160 t
+( table started with the)4 860( A)1 122(portion has not been de\256ned.)4 1157 3 2652 1280 t
+10 CW f
+(.TS H)1 300 1 2652 1400 t
+10 R f
+(macro must have a)3 751 1 2977 1400 t
+10 CW f
+(.TH)3753 1400 w
+10 R f
+(macro to separate the)3 850 1 3958 1400 t
+(repeating-header portion of the table from the data that)8 2189 1 2652 1520 t
+(follows.)2652 1640 w
+9 CW f
+(VL:missing arg)1 756 1 1746 1820 t
+10 R f
+(The)2652 1820 w
+10 CW f
+(.VL)2832 1820 w
+10 R f
+(macro requires at least one argument.)5 1496 1 3037 1820 t
+9 CW f
+(WA macro missing)2 864 1 1638 2000 t
+10 R f
+(The writer's address block has ended but it was never)9 2142 1 2652 2000 t
+(started, i.e., a)2 532 1 2652 2120 t
+10 CW f
+(.WE)3209 2120 w
+10 R f
+(macro occurs with no previous)4 1231 1 3414 2120 t
+10 CW f
+(.WA)4670 2120 w
+10 R f
+(macro to match it.)3 727 1 2652 2240 t
+9 CW f
+(WA or WE macro missing)4 1188 1 1314 2420 t
+10 R f
+(The macros in the beginning of a business letter are not in)11 2316 1 2652 2420 t
+( inside address block has started without a)7 1684(order. The)1 440 2 2652 2540 t
+(preceding writer's address block, i.e., a)5 1565 1 2652 2660 t
+10 CW f
+(.IA)4242 2660 w
+10 R f
+(macro occurs)1 534 1 4447 2660 t
+(with no previous)2 672 1 2652 2780 t
+10 CW f
+(.WA)3349 2780 w
+10 R f
+(/)3545 2780 w
+10 CW f
+(.WE)3573 2780 w
+10 R f
+(macro pair.)1 454 1 3778 2780 t
+9 CW f
+(WA, WE, or IA macro missing)5 1458 1 1044 2960 t
+10 R f
+(The macros in the beginning of a business letter are not in)11 2316 1 2652 2960 t
+( inside address block has ended but was never)8 1835(order. The)1 440 2 2652 3080 t
+(started or preceded by the writer's address block, i.e., a)9 2202 1 2652 3200 t
+10 CW f
+(.IE)2652 3320 w
+10 R f
+(macro occurs with no previous)4 1231 1 2857 3320 t
+10 CW f
+(.IA)4113 3320 w
+10 R f
+(macro to match)2 621 1 4318 3320 t
+(it, or with no previous)4 886 1 2652 3440 t
+10 CW f
+(.WA)3563 3440 w
+10 R f
+(/)3759 3440 w
+10 CW f
+(.WE)3787 3440 w
+10 R f
+(macro pair.)1 454 1 3992 3440 t
+9 CW f
+(WA, WE, or IE macro missing)5 1458 1 1044 3620 t
+10 R f
+(The macros in the beginning of a business letter are not in)11 2316 1 2652 3620 t
+( letter type macro cannot generate the letter)7 1731(order. The)1 440 2 2652 3740 t
+(without the writer's address block and the inside address)8 2263 1 2652 3860 t
+(block, i.e., the)2 566 1 2652 3980 t
+10 CW f
+(.LT)3243 3980 w
+10 R f
+(macro occurs with no previous)4 1231 1 3448 3980 t
+10 CW f
+(.WA)2652 4100 w
+10 R f
+(/)2848 4100 w
+10 CW f
+(.WE)2876 4100 w
+10 R f
+(and)3081 4100 w
+10 CW f
+(.IA)3250 4100 w
+10 R f
+(/)3446 4100 w
+10 CW f
+(.IE)3474 4100 w
+10 R f
+(macro pairs.)1 493 1 3679 4100 t
+9 CW f
+(WC:unknown option)1 918 1 1584 4280 t
+10 R f
+(The)2652 4280 w
+10 CW f
+(.WC)2832 4280 w
+10 R f
+(macro was given an incorrect argument.)5 1601 1 3037 4280 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(F-4 MM)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Formatter Error Messages]
+10 B f
+(Formatter Error Messages)2 1140 1 720 960 t
+10 R f
+(Most messages issued by the)4 1159 1 720 1140 t
+10 I f
+(troff)1905 1140 w
+10 R f
+( error messages over which the)5 1248( Those)1 295(text formatter are self-explanatory.)3 1393 3 2104 1140 t
+( other error messages should be reported to the local system-)10 2493( Any)1 229(user has some control are listed below.)6 1598 3 720 1260 t
+(support group.)1 583 1 720 1380 t
+( Explanation)1 1652(Error Message)1 584 2 720 1620 t
+10 S f
+(_ _________________________________________________________________________________________)1 4453 1 720 1640 t
+9 CW f
+(cannot do ev)2 648 1 1675 1820 t
+10 R f
+(This error is not an obvious one and occurs when some condition)11 2605 1 2473 1820 t
+(\(e.g., setting a page length that is extremely short\) does not allow a)12 2677 1 2473 1940 t
+(switch in environments.)2 958 1 2473 2060 t
+9 CW f
+(Cannot open file)2 864 1 1067 2240 t
+10 I f
+(\256lename)1985 2240 w
+10 R f
+(One of the \256les in the list of \256les to be processed cannot be opened,)14 2699 1 2473 2240 t
+(or the requested macro package does not exist.)7 1862 1 2473 2360 t
+9 CW f
+(exception word list full)3 1296 1 1027 2540 t
+10 R f
+(Too many words have been speci\256ed in the hyphenation exception)9 2665 1 2473 2540 t
+(list \(via)1 303 1 2473 2660 t
+10 CW f
+(.hw)2801 2660 w
+10 R f
+(requests\).)3006 2660 w
+9 CW f
+(Line overflow)1 702 1 1621 2840 t
+10 R f
+(The output line being generated was too long for the internal line)11 2599 1 2473 2840 t
+( the ``)2 238( See)1 194( excess was discarded.)3 897(buffer. This)1 496 4 2473 2960 t
+9 CW f
+(Word overflow)1 702 1 4298 2960 t
+10 R f
+('')5000 2960 w
+(message below.)1 632 1 2473 3080 t
+9 CW f
+(Can't open font file)3 1080 1 1049 3260 t
+9 I f
+(font)2183 3260 w
+10 R f
+( The)1 205(A request has been made to mount or to use an unknown font.)12 2477 2 2473 3260 t
+(description \256le for)2 738 1 2473 3380 t
+10 I f
+(font)3236 3380 w
+10 R f
+(cannot be found.)2 668 1 3417 3380 t
+9 CW f
+(Out of temp file space)4 1188 1 1135 3560 t
+10 R f
+(Additional temporary space for macro de\256nitions, diversions, etc.)7 2624 1 2473 3560 t
+( message often occurs because of)5 1326( This)1 228(cannot be allocated.)2 795 3 2473 3680 t
+(unclosed diversions \(missing)2 1161 1 2473 3800 t
+10 CW f
+(.FE)3659 3800 w
+10 R f
+(or)3864 3800 w
+10 CW f
+(.DE)3972 3800 w
+10 R f
+(macros\), unclosed)1 726 1 4177 3800 t
+(macro de\256nitions \(e.g., missing ``)4 1352 1 2473 3920 t
+10 CW f
+(..)3825 3920 w
+10 R f
+(''\), or a huge table of)5 847 1 3945 3920 t
+(contents.)2473 4040 w
+9 CW f
+(too many page numbers)3 1134 1 1189 4220 t
+10 R f
+(The list of pages speci\256ed to the)6 1293 1 2473 4220 t
+10 CW f
+(\261o)3791 4220 w
+10 R f
+(option is too long.)3 729 1 3936 4220 t
+9 CW f
+( \()1 77(too many number registers)3 1350 2 797 4400 t
+9 I f
+(n)2224 4400 w
+9 CW f
+(\))2269 4400 w
+10 R f
+(The pool of number register names is full; the limit was exceeded)11 2621 1 2473 4400 t
+(by)2473 4520 w
+10 I f
+(n)2598 4520 w
+10 R f
+( registers can be deleted with the)6 1308(names. Unneeded)1 734 2 2673 4520 t
+10 CW f
+(.rr)4740 4520 w
+10 R f
+(request.)2473 4640 w
+9 CW f
+( \()1 77(Too many)1 432 2 720 4820 t
+9 I f
+(n)1229 4820 w
+9 CW f
+( names)1 324(\) string/macro)1 725 2 1274 4820 t
+10 R f
+(The pool of string and macro names is full; the limit was exceeded)12 2663 1 2473 4820 t
+(by)2473 4940 w
+10 I f
+(n)2598 4940 w
+10 R f
+( strings and macros can be deleted with the)8 1719(names. Unneeded)1 734 2 2673 4940 t
+10 CW f
+(.rm)2473 5060 w
+10 R f
+(request.)2678 5060 w
+9 CW f
+(Word overflow)1 702 1 1621 5240 t
+10 R f
+( The)1 205(The word being generated exceeded an internal word buffer.)8 2411 2 2473 5240 t
+( likely cause for this and for)6 1120( A)1 122(excess characters were discarded.)3 1338 3 2473 5360 t
+(the ``)1 213 1 2473 5480 t
+9 CW f
+(Line Overflow)1 702 1 2686 5480 t
+10 R f
+('' message above are very long lines or)7 1565 1 3388 5480 t
+(words generated through the misuse of)5 1550 1 2473 5600 t
+10 CW f
+(\\c)4048 5600 w
+10 R f
+(or of the)2 338 1 4193 5600 t
+10 CW f
+(.cu)4556 5600 w
+10 R f
+(request,)4761 5600 w
+(or very long equations produced by)5 1417 1 2473 5720 t
+10 I f
+(eqn)3915 5720 w
+10 R f
+( over\257ow can be)3 662(. Word)1 302 2 4067 5720 t
+(cured by printing the offending word in no-\256ll mode \(e.g., change)10 2632 1 2473 5840 t
+( only cure for line)4 715( The)1 205(an in-line equation to a displayed equation\).)6 1756 3 2473 5960 t
+(over\257ow is to break the offending line into two lines.)9 2126 1 2473 6080 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Trailer
+done
+%%Pages: 4
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

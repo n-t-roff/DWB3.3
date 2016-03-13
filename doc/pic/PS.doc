@@ -1,0 +1,4275 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+17 HB f
+(PIC)720 1040 w
+18 HB f
+(\320 A Graphics Language for Typesetting)5 3447 1 1054 1040 t
+36 S1 f
+(________________________)720 1240 w
+9 HB f
+(ABSTRACT)720 1720 w
+10 I f
+(Pic)1365 1720 w
+10 R f
+( basic objects in)3 668( The)1 214(is a language for drawing simple \256gures on a typesetter.)9 2316 3 1531 1720 t
+10 I f
+(pic)4763 1720 w
+10 R f
+(are)4919 1720 w
+( placed)1 296( may be)2 340( These)1 300(boxes, circles, ellipses, lines, arrows, arcs, spline curves, and text.)9 2739 4 1365 1840 t
+( example)1 374( The)1 216( in terms of previous objects.)5 1215(anywhere, at positions speci\256ed absolutely or)5 1870 4 1365 1960 t
+(below illustrates the style and basic capabilities of the language.)9 2563 1 1365 2080 t
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% Version 3.3.2 drawing procedures for dpost. Automatically pulled in when
+% needed.
+%
+
+/inpath false def
+/savematrix matrix def
+
+/Dl {
+	inpath
+		{pop pop neg lineto}
+		{newpath neg moveto neg lineto stroke}
+	ifelse
+} bind def
+
+/De {
+	/y1 exch 2 div def
+	/x1 exch 2 div def
+	/savematrix savematrix currentmatrix def
+	neg exch x1 add exch translate
+	x1 y1 scale
+	0 0 1 0 360
+	inpath
+		{1 0 moveto arc savematrix setmatrix}
+		{newpath arc savematrix setmatrix stroke}
+	ifelse
+} bind def
+
+/Da {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arc}
+		{newpath arc stroke}
+	ifelse
+} bind def
+
+/DA {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arcn}
+		{newpath arcn stroke}
+	ifelse
+} bind def
+
+/Ds {
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	/y0 exch def
+	/x0 exch def
+	x0 5 x1 mul add 6 div
+	y0 5 y1 mul add -6 div
+	x2 5 x1 mul add 6 div
+	y2 5 y1 mul add -6 div
+	x1 x2 add 2 div
+	y1 y2 add -2 div
+	inpath
+		{curveto}
+		{newpath x0 x1 add 2 div y0 y1 add -2 div moveto curveto stroke}
+	ifelse
+} bind def
+%%EndGlobal
+/saveobj save def
+mark
+10 R f
+810 2440 540 360 De
+(document)883 2460 w
+1710 2440 1350 2440 Dl
+1710 2440 1638 2458 Dl
+1710 2440 1638 2422 Dl
+1710 2260 1710 2620 Dl
+2250 2260 1710 2260 Dl
+2250 2620 2250 2260 Dl
+1710 2620 2250 2620 Dl
+(PIC)1902 2460 w
+2610 2440 2250 2440 Dl
+2610 2440 2538 2458 Dl
+2610 2440 2538 2422 Dl
+2646 2620 2610 2620 Dl
+2718 2620 2682 2620 Dl
+2790 2620 2754 2620 Dl
+2862 2620 2826 2620 Dl
+2934 2620 2898 2620 Dl
+3006 2620 2970 2620 Dl
+3078 2620 3042 2620 Dl
+3150 2620 3114 2620 Dl
+3150 2584 3150 2620 Dl
+3150 2503 3150 2539 Dl
+3150 2422 3150 2458 Dl
+3150 2341 3150 2377 Dl
+3150 2260 3150 2296 Dl
+3114 2260 3150 2260 Dl
+3042 2260 3078 2260 Dl
+2970 2260 3006 2260 Dl
+2898 2260 2934 2260 Dl
+2826 2260 2862 2260 Dl
+2754 2260 2790 2260 Dl
+2682 2260 2718 2260 Dl
+2610 2260 2646 2260 Dl
+2610 2296 2610 2260 Dl
+2610 2376 2610 2340 Dl
+2610 2458 2610 2422 Dl
+2610 2538 2610 2502 Dl
+2610 2620 2610 2584 Dl
+(TBL/EQN)2669 2400 w
+(\(optional\))2683 2520 w
+3510 2440 3150 2440 Dl
+3510 2440 3438 2458 Dl
+3510 2440 3438 2422 Dl
+3510 2260 3510 2620 Dl
+4050 2260 3510 2260 Dl
+4050 2620 4050 2260 Dl
+3510 2620 4050 2620 Dl
+(TROFF)3624 2460 w
+4410 2440 4050 2440 Dl
+4410 2440 4338 2458 Dl
+4410 2440 4338 2422 Dl
+4410 2440 540 360 De
+(typesetter)4486 2460 w
+(This picture was created with the input)6 1553 1 1365 2800 t
+9 CW f
+(.PS)1515 2970 w
+(ellipse "document")1 972 1 1515 3080 t
+(arrow)1515 3190 w
+(box "PIC")1 486 1 1515 3300 t
+(arrow)1515 3410 w
+(box "TBL/EQN" "\(optional\)" dashed)3 1782 1 1515 3520 t
+(arrow)1515 3630 w
+(box "TROFF")1 594 1 1515 3740 t
+(arrow)1515 3850 w
+(ellipse "typesetter")1 1080 1 1515 3960 t
+(.PE)1515 4070 w
+10 I f
+(Pic)1365 4250 w
+10 R f
+(is a)1 152 1 1539 4250 t
+10 I f
+(troff)1732 4250 w
+10 R f
+(preprocessor; it passes most of its input through untouched, but translates)10 3094 1 1946 4250 t
+(commands between)1 790 1 1365 4370 t
+10 CW f
+(.PS)2180 4370 w
+10 R f
+(and)2385 4370 w
+10 CW f
+(.PE)2554 4370 w
+10 R f
+(into)2759 4370 w
+10 I f
+(troff)2940 4370 w
+10 R f
+(commands that draw the pictures.)4 1345 1 3138 4370 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = INTRODUCTION]
+10 B f
+(1. INTRODUCTION)1 925 1 720 4670 t
+10 I f
+(Pic)720 4850 w
+10 R f
+( operates as yet another)4 972( It)1 120(is a language for drawing pictures.)5 1425 3 887 4850 t
+10 I f
+(troff)3438 4850 w
+10 R f
+(preprocessor \(in the same style as)5 1394 1 3646 4850 t
+10 I f
+(eqn)720 4970 w
+10 R f
+(and)896 4970 w
+10 I f
+(tbl)1072 4970 w
+10 R f
+(\), with pictures delimited by)4 1158 1 1186 4970 t
+10 CW f
+(.PS)2376 4970 w
+10 R f
+(and)2588 4970 w
+10 CW f
+(.PE)2763 4970 w
+10 R f
+(.)2943 4970 w
+10 I f
+(Pic)3024 4970 w
+10 R f
+( picture is drawn)3 686( \320 a)2 176(is a procedural language)3 990 3 3188 4970 t
+(by specifying \(sometimes in painful detail\) the motions that one goes through to draw it.)14 3534 1 720 5090 t
+(This document is primarily a user's manual for)7 1948 1 720 5270 t
+10 I f
+(pic)2704 5270 w
+10 R f
+( next section shows how to use)6 1304(. The)1 241 2 2834 5270 t
+10 I f
+(pic)4415 5270 w
+10 R f
+(in the most)2 467 1 4573 5270 t
+( to change the sizes of objects when the defaults are wrong,)11 2405( sections describe how)3 913( Subsequent)1 515(simple way.)1 487 4 720 5390 t
+( appendix describes)2 803( An)1 180( change their positions when the standard positioning rules are wrong.)10 2879(and how to)2 458 4 720 5510 t
+(the language succinctly.)2 962 1 720 5630 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 2.  , HEADING = BASICS]
+10 B f
+(2. BASICS)1 487 1 720 5870 t
+10 I f
+(Pic)720 6050 w
+10 R f
+( arrows, circles, ellipses, arcs, and splines \(smooth curves\), plus facilities for)11 3248(provides boxes, lines,)2 898 2 894 6050 t
+( picture below shows all of the fundamental objects \(except for splines\))11 2886( The)1 208(positioning and labeling them.)3 1226 3 720 6170 t
+(in their default sizes:)3 835 1 720 6290 t
+810 6470 810 6830 Dl
+1350 6470 810 6470 Dl
+1350 6830 1350 6470 Dl
+810 6830 1350 6830 Dl
+(box)1005 6670 w
+(line)1815 6610 w
+2070 6650 1710 6650 Dl
+(arrow)2494 6610 w
+2790 6650 2430 6650 Dl
+2790 6650 2718 6668 Dl
+2790 6650 2718 6632 Dl
+3150 6650 360 360 De
+(circle)3220 6670 w
+3870 6650 540 360 De
+(ellipse arc)1 821 1 4010 6670 t
+4770 6830 0 -180 180 0 Da
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(2 PIC)1 4320 1 720 600 t
+10 R f
+(Each picture begins with)3 1026 1 720 960 t
+10 CW f
+(.PS)1783 960 w
+10 R f
+(and ends with)2 579 1 2000 960 t
+10 CW f
+(.PE)2616 960 w
+10 R f
+(; between them are commands to describe the picture.)8 2244 1 2796 960 t
+( example)1 363( For)1 189(Each command is typed on a line by itself.)8 1701 3 720 1080 t
+9 CW f
+(.PS)870 1250 w
+(box "this is" "a box")4 1134 1 870 1360 t
+(.PE)870 1470 w
+10 R f
+(creates a standard box \()4 941 1 720 1650 t
+10 S1 f
+()1661 1650 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_34 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (3) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (4) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+1661 1650 m
+75 build_34
+1736 1650 m
+10 R f
+(inch wide,)1 416 1 1761 1650 t
+10 S1 f
+()2202 1650 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_12 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (2) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+2202 1650 m
+75 build_12
+2277 1650 m
+10 R f
+(inch high\) and centers the two pieces of text in it:)10 1975 1 2302 1650 t
+2610 1830 2610 2190 Dl
+3150 1830 2610 1830 Dl
+3150 2190 3150 1830 Dl
+2610 2190 3150 2190 Dl
+(this is)1 237 1 2762 1970 t
+(a box)1 219 1 2771 2090 t
+( \(Of)1 189( are mandatory, even if the text contains no blanks.)9 2047( Quotes)1 334( text is a separate quoted string.)6 1268(Each line of)2 482 5 720 2370 t
+( printed in the current size and font, centered)8 1891( line will be)3 517( Each)1 263(course there needn't be any text at all.\))7 1649 4 720 2490 t
+(horizontally, and separated vertically by the current)6 2131 1 720 2610 t
+10 I f
+(troff)2888 2610 w
+10 R f
+(line spacing.)1 517 1 3098 2610 t
+10 I f
+(Pic)3677 2610 w
+10 R f
+( center the complete)3 845(does not)1 348 2 3847 2610 t
+(drawing itself, but the default de\256nitions of)6 1795 1 720 2730 t
+10 CW f
+(.PS)2550 2730 w
+10 R f
+(and)2765 2730 w
+10 CW f
+(.PE)2944 2730 w
+10 R f
+(in the)1 235 1 3159 2730 t
+10 CW f
+(-ms)3429 2730 w
+10 R f
+( the)1 156( With)1 259(macro package do.)2 768 3 3643 2730 t
+10 CW f
+(-mm)4860 2730 w
+10 R f
+(macro package, the picture should be enclosed in a centered-block display.)10 2987 1 720 2850 t
+(You can use)2 493 1 720 3030 t
+10 CW f
+(circle)1238 3030 w
+10 R f
+(or)1623 3030 w
+10 CW f
+(ellipse)1731 3030 w
+10 R f
+(in place of)2 421 1 2176 3030 t
+10 CW f
+(box)2622 3030 w
+10 R f
+(:)2802 3030 w
+2070 3390 360 360 De
+(this is)1 237 1 2132 3350 t
+(a box)1 219 1 2141 3470 t
+3150 3390 540 360 De
+(this is)1 237 1 3302 3350 t
+(a box)1 219 1 3311 3470 t
+( the lines are centered above and)6 1325(Text is centered on lines and arrows; if there is more than one line of text,)15 2995 2 720 3750 t
+(below:)720 3870 w
+9 CW f
+(line "this is" "a line")4 1242 1 870 4040 t
+10 R f
+(this is)1 237 1 2762 4180 t
+(a line)1 219 1 2771 4300 t
+3060 4220 2700 4220 Dl
+9 CW f
+(arrow "this is" "an arrow")4 1404 1 870 4390 t
+10 R f
+(this is)1 237 1 2762 4530 t
+(an arrow)1 351 1 2705 4650 t
+3060 4570 2700 4570 Dl
+3060 4570 2988 4588 Dl
+3060 4570 2988 4552 Dl
+(Boxes and lines may be dashed or dotted; just add the word)11 2378 1 720 4870 t
+10 CW f
+(dashed)3123 4870 w
+10 R f
+(or)3508 4870 w
+10 CW f
+(dotted)3616 4870 w
+10 R f
+(after)4001 4870 w
+10 CW f
+(box)4208 4870 w
+10 R f
+(or)4413 4870 w
+10 CW f
+(line)4521 4870 w
+10 R f
+(:)4761 4870 w
+9 CW f
+(line dashed "dashed" "line")3 1458 1 870 5040 t
+10 R f
+(dashed)2742 5180 w
+(line)2805 5300 w
+2736 5220 2700 5220 Dl
+2816 5220 2780 5220 Dl
+2898 5220 2862 5220 Dl
+2978 5220 2942 5220 Dl
+3060 5220 3024 5220 Dl
+( turn)1 205(Arcs by default turn 90 degrees counterclockwise from the current direction; you can make them)14 4115 2 720 5520 t
+(clockwise by saying)2 810 1 720 5640 t
+10 CW f
+(arc cw)1 325 1 1555 5640 t
+10 R f
+(:)1880 5640 w
+9 CW f
+(line; arc; arc cw; arrow)4 1296 1 870 5810 t
+10 R f
+2700 6350 2340 6350 Dl
+2700 6350 0 -180 180 0 Da
+3060 5990 0 180 -180 0 Da
+3420 5990 3060 5990 Dl
+3420 5990 3348 6008 Dl
+3420 5990 3348 5972 Dl
+(A spline might well do this job better; we will return to that shortly.)13 2711 1 720 6530 t
+(As you might guess,)3 817 1 720 6710 t
+9 CW f
+(arc; arc; arc; arc)3 972 1 870 6880 t
+10 R f
+( line if they)3 464( that several commands can be put on a single)9 1842( Notice)1 317(draws a circle, though not very ef\256ciently.)6 1697 4 720 7060 t
+(are separated by semicolons.)3 1147 1 720 7180 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(PIC 3)1 4320 1 720 600 t
+10 R f
+(Objects are normally drawn one after another, left to right, and connected at the obvious places:)15 3822 1 720 960 t
+9 CW f
+(arrow; box "input"; arrow; box "process"; arrow; box "output"; arrow)9 3672 1 870 1130 t
+10 R f
+1710 1490 1350 1490 Dl
+1710 1490 1638 1508 Dl
+1710 1490 1638 1472 Dl
+1710 1310 1710 1670 Dl
+2250 1310 1710 1310 Dl
+2250 1670 2250 1310 Dl
+1710 1670 2250 1670 Dl
+(input)1877 1510 w
+2610 1490 2250 1490 Dl
+2610 1490 2538 1508 Dl
+2610 1490 2538 1472 Dl
+2610 1310 2610 1670 Dl
+3150 1310 2610 1310 Dl
+3150 1670 3150 1310 Dl
+2610 1670 3150 1670 Dl
+(process)2731 1510 w
+3510 1490 3150 1490 Dl
+3510 1490 3438 1508 Dl
+3510 1490 3438 1472 Dl
+3510 1310 3510 1670 Dl
+4050 1310 3510 1310 Dl
+4050 1670 4050 1310 Dl
+3510 1670 4050 1670 Dl
+(output)3652 1510 w
+4410 1490 4050 1490 Dl
+4410 1490 4338 1508 Dl
+4410 1490 4338 1472 Dl
+(One way to leave a space is with)7 1305 1 720 1850 t
+10 CW f
+(move)2050 1850 w
+10 R f
+(:)2290 1850 w
+9 CW f
+(box; move; box; move; box)4 1350 1 870 2020 t
+10 R f
+1710 2200 1710 2560 Dl
+2250 2200 1710 2200 Dl
+2250 2560 2250 2200 Dl
+1710 2560 2250 2560 Dl
+2610 2200 2610 2560 Dl
+3150 2200 2610 2200 Dl
+3150 2560 3150 2200 Dl
+2610 2560 3150 2560 Dl
+3510 2200 3510 2560 Dl
+4050 2200 3510 2200 Dl
+4050 2560 4050 2200 Dl
+3510 2560 4050 2560 Dl
+( a direction \(as a)4 679( you specify)2 496( If)1 120(Although objects are normally connected left to right, this can be changed.)11 3025 4 720 2740 t
+(separate object\), subsequent objects will be joined in that direction:)9 2691 1 720 2860 t
+9 CW f
+(down; box; arrow; ellipse; arrow; circle)5 2160 1 870 3030 t
+10 R f
+2610 3210 2610 3570 Dl
+3150 3210 2610 3210 Dl
+3150 3570 3150 3210 Dl
+2610 3570 3150 3570 Dl
+2880 3930 2880 3570 Dl
+2880 3930 2862 3858 Dl
+2880 3930 2898 3858 Dl
+2610 4110 540 360 De
+2880 4650 2880 4290 Dl
+2880 4650 2862 4578 Dl
+2880 4650 2898 4578 Dl
+2700 4830 360 360 De
+9 CW f
+(left; box; arrow; ellipse; arrow; circle)5 2160 1 870 5180 t
+10 R f
+3420 5360 3420 5720 Dl
+3960 5360 3420 5360 Dl
+3960 5720 3960 5360 Dl
+3420 5720 3960 5720 Dl
+3060 5540 3420 5540 Dl
+3060 5540 3132 5522 Dl
+3060 5540 3132 5558 Dl
+2520 5540 540 360 De
+2160 5540 2520 5540 Dl
+2160 5540 2232 5522 Dl
+2160 5540 2232 5558 Dl
+1800 5540 360 360 De
+(Each new picture begins going to the right.)7 1720 1 720 5900 t
+( is possible, however, to)4 1018( It)1 124( size.)1 218(Normally, \256gures are drawn at a \256xed scale, with objects of a standard)12 2960 4 720 6080 t
+( the)1 149( If)1 118( width.)1 280(arrange that a \256gure be expanded or shrunk to \256t a particular)11 2452 4 720 6200 t
+10 CW f
+(.PS)3746 6200 w
+10 R f
+(line contains a number, the)4 1087 1 3953 6200 t
+( Thus)1 250(drawing is forced to be that many inches wide, with the height scaled proportionately.)13 3431 2 720 6320 t
+9 CW f
+(.PS 3.5)1 378 1 870 6490 t
+10 R f
+( two dimensions are speci\256ed, the second is the height.)9 2195( If)1 116(causes the picture to be 3.5 inches wide.)7 1605 3 720 6670 t
+10 I f
+(Pic)720 6850 w
+10 R f
+( is no way)3 414( There)1 284( of text in relation to the size of boxes, circles, and so on.)13 2306(is pretty dumb about the size)5 1157 4 879 6850 t
+( that just \256ts around this text'' or ``make this text \256t inside this circle'' or ``draw a line)18 3517(to say ``make a box)4 803 2 720 6970 t
+( \256tting of text can generally only be done by trial and error.)12 2371( Tight)1 267(as long as this text.'')4 830 3 720 7090 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(4 PIC)1 4320 1 720 600 t
+10 R f
+( you describe a picture,)4 964(Speaking of errors, if you make a grammatical error in the way)11 2604 2 720 960 t
+10 I f
+(pic)4322 960 w
+10 R f
+(will complain)1 562 1 4478 960 t
+( example, the invalid input)4 1069( For)1 189(and try to indicate where.)4 1017 3 720 1080 t
+9 CW f
+(box arrow box)2 702 1 870 1250 t
+10 R f
+(will draw the message)3 890 1 720 1430 t
+9 CW f
+(pic: syntax error near line 5, file -)7 1998 1 870 1600 t
+(context is)1 540 1 924 1710 t
+( box)1 270( <<<)1 216( arrow)1 378(box >>>)1 378 4 1302 1820 t
+10 R f
+( it sometimes follows the word in error,)7 1680(The brackets point to the place where the error was \256rst noted;)11 2640 2 720 2000 t
+( \256lename `)2 427( The)1 205(although in this example it's right on target.)7 1755 3 720 2120 t
+10 CW f
+(-)3107 2120 w
+10 R f
+(' is the standard input.)4 891 1 3167 2120 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 3.  , HEADING = CONTROLLING SIZES]
+10 B f
+( SIZES)1 310(3. CONTROLLING)1 887 2 720 2360 t
+10 R f
+( is wanted.)2 448(This section deals with how to control the sizes of objects when the default sizes are not what)17 3872 2 720 2540 t
+(The next section deals with positioning them when the default positions are not right.)13 3409 1 720 2660 t
+(Each object that)2 645 1 720 2840 t
+10 I f
+(pic)1391 2840 w
+10 R f
+(knows about \(boxes, circles, etc.\) has associated dimensions, like height, width, radius,)11 3501 1 1539 2840 t
+( default,)1 344( By)1 184(and so on.)2 442 3 720 2960 t
+10 I f
+(pic)1732 2960 w
+10 R f
+( values for these dimensions, so that simple)7 1850(tries to choose sensible default)4 1294 2 1896 2960 t
+( so far)2 273( of the \256gures and motions shown)6 1421( All)1 189(pictures can be drawn with a minimum of fuss and bother.)10 2437 4 720 3080 t
+(have been in their default sizes:)5 1261 1 720 3200 t
+(box)870 3380 w
+10 S1 f
+()1535 3380 w
+1535 3380 m
+75 build_34
+1610 3380 m
+10 R f
+(" wide)1 260 1 1610 3380 t
+10 S f
+(\264)1895 3380 w
+10 S1 f
+()1975 3380 w
+1975 3380 m
+75 build_12
+2050 3380 m
+10 R f
+(" high)1 244 1 2050 3380 t
+(circle)870 3500 w
+10 S1 f
+()1535 3500 w
+1535 3500 m
+75 build_12
+1610 3500 m
+10 R f
+(" diameter)1 415 1 1610 3500 t
+(ellipse)870 3620 w
+10 S1 f
+()1535 3620 w
+1535 3620 m
+75 build_34
+1610 3620 m
+10 R f
+(" wide)1 260 1 1610 3620 t
+10 S f
+(\264)1895 3620 w
+10 S1 f
+()1975 3620 w
+1975 3620 m
+75 build_12
+2050 3620 m
+10 R f
+(" high)1 244 1 2050 3620 t
+(arc)870 3740 w
+10 S1 f
+()1535 3740 w
+1535 3740 m
+75 build_12
+1610 3740 m
+10 R f
+(" radius)1 310 1 1610 3740 t
+(line or arrow)2 515 1 870 3860 t
+10 S1 f
+()1535 3860 w
+1535 3860 m
+75 build_12
+1610 3860 m
+10 R f
+(" long)1 244 1 1610 3860 t
+(move)870 3980 w
+10 S1 f
+()1535 3980 w
+1535 3980 m
+75 build_12
+1610 3980 m
+10 R f
+(" in the current direction)4 978 1 1610 3980 t
+(When necessary, you can make any object any size you want:)10 2463 1 720 4160 t
+9 CW f
+(box width 3 height 0.1; circle radius 0.1)7 2214 1 870 4330 t
+10 R f
+1728 4546 1728 4618 Dl
+3888 4546 1728 4546 Dl
+3888 4618 3888 4546 Dl
+1728 4618 3888 4618 Dl
+3888 4582 144 144 De
+( 1/10 inch high and the circle has)7 1330(All positions and dimensions are in inches, so the box is 3 inches wide and)14 2990 2 720 4834 t
+(radius 1/10 inch.)2 669 1 720 4954 t
+(An attribute like)2 661 1 720 5134 t
+10 CW f
+(width)1409 5134 w
+10 R f
+( can also change the default size)6 1309( You)1 226( the one instance of the object.)6 1241(changes only)1 527 4 1737 5134 t
+(for all objects of a particular type by assigning values to)10 2241 1 720 5254 t
+10 I f
+(pic)2986 5254 w
+10 R f
+(variables; this will be discussed in \2476.)6 1519 1 3133 5254 t
+(The attributes of)2 670 1 720 5434 t
+10 CW f
+(height)1420 5434 w
+10 R f
+(\(which you can abbreviate to)4 1182 1 1810 5434 t
+10 CW f
+(ht)3023 5434 w
+10 R f
+(\) and)1 208 1 3143 5434 t
+10 CW f
+(width)3382 5434 w
+10 R f
+(\(or)3713 5434 w
+10 CW f
+(wid)3860 5434 w
+10 R f
+(\) apply to boxes, circles,)4 1000 1 4040 5434 t
+( attributes of)2 515( The)1 210(ellipses, and to the head on an arrow.)7 1518 3 720 5554 t
+10 CW f
+(radius)2993 5554 w
+10 R f
+(\(or)3383 5554 w
+10 CW f
+(rad)3529 5554 w
+10 R f
+(\) and)1 207 1 3709 5554 t
+10 CW f
+(diameter)3946 5554 w
+10 R f
+(\(or)4455 5554 w
+10 CW f
+(diam)4600 5554 w
+10 R f
+(\) can)1 200 1 4840 5554 t
+(be used for circles and arcs if they seem more natural.)10 2152 1 720 5674 t
+(Lines and arrows are most easily drawn by specifying the amount of motion from where you are right now,)18 4320 1 720 5854 t
+( the words)2 430( Accordingly)1 556(in terms of directions.)3 898 3 720 5974 t
+10 CW f
+(up)2636 5974 w
+10 R f
+(,)2756 5974 w
+10 CW f
+(down)2812 5974 w
+10 R f
+(,)3052 5974 w
+10 CW f
+(left)3108 5974 w
+10 R f
+(and)3379 5974 w
+10 CW f
+(right)3554 5974 w
+10 R f
+(and an optional distance can)4 1155 1 3885 5974 t
+(be attached to)2 554 1 720 6094 t
+10 CW f
+(line)1299 6094 w
+10 R f
+(,)1539 6094 w
+10 CW f
+(arrow)1589 6094 w
+10 R f
+(, and)1 194 1 1889 6094 t
+10 CW f
+(move)2108 6094 w
+10 R f
+(:)2348 6094 w
+9 CW f
+(line up 1 right 2)4 918 1 870 6264 t
+(arrow left 2)2 648 1 870 6374 t
+(move left 0.1)2 702 1 870 6484 t
+(line <-> down 1 "height " rjust)6 1674 1 870 6594 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(PIC 5)1 4320 1 720 600 t
+3636 960 2196 1680 Dl
+2196 960 3636 960 Dl
+2196 960 2268 942 Dl
+2196 960 2268 978 Dl
+10 R f
+(height)1849 1340 w
+2124 960 2142 1032 Dl
+2124 960 2106 1032 Dl
+2124 1680 2124 960 Dl
+2124 1680 2106 1608 Dl
+2124 1680 2142 1608 Dl
+(The notation)1 512 1 720 1860 t
+10 CW f
+(<->)1261 1860 w
+10 R f
+(indicates a two-headed arrow; use)4 1373 1 1470 1860 t
+10 CW f
+(->)2873 1860 w
+10 R f
+(for a head on the end and)6 1038 1 3023 1860 t
+10 CW f
+(<-)4091 1860 w
+10 R f
+(for one on the start.)4 799 1 4241 1860 t
+(Lines and arrows are really the same thing; in fact,)9 2023 1 720 1980 t
+10 CW f
+(arrow)2768 1980 w
+10 R f
+(is a synonym for)3 669 1 3093 1980 t
+10 CW f
+(line ->)1 385 1 3787 1980 t
+10 R f
+(.)4172 1980 w
+(If you don't specify any distance after)6 1518 1 720 2160 t
+10 CW f
+(up)2263 2160 w
+10 R f
+(,)2383 2160 w
+10 CW f
+(down)2433 2160 w
+10 R f
+(, etc.,)1 216 1 2673 2160 t
+10 I f
+(pic)2914 2160 w
+10 R f
+(uses the standard distance:)3 1062 1 3061 2160 t
+9 CW f
+(line up right; line down; line down left; line up)9 2646 1 870 2330 t
+10 R f
+3060 2510 2700 2870 Dl
+3060 2870 3060 2510 Dl
+2700 3230 3060 2870 Dl
+2700 2870 2700 3230 Dl
+(If you omit the direction associated with a distance, the current direction is used.)13 3220 1 720 3410 t
+(Boxes and lines may be dotted or dashed:)7 1662 1 720 3590 t
+9 CW f
+(box dotted; line dotted; move; line dashed; box dashed)8 2916 1 870 3760 t
+7 R f
+( .)1 0(. . . . . . . . . . . . . . . .)15 558 2 1790 4303 t
+(.)2330 4267 w
+(.)2330 4231 w
+(.)2330 4195 w
+(.)2330 4159 w
+(.)2330 4123 w
+(.)2330 4087 w
+(.)2330 4051 w
+(.)2330 4015 w
+(.)2330 3979 w
+( .)1 0( . . . . . . . . . . . . . . .)15 -540(. .)1 18 3 2330 3943 t
+(.)1790 3979 w
+(.)1790 4015 w
+(.)1790 4051 w
+(.)1790 4087 w
+(.)1790 4123 w
+(.)1790 4159 w
+(.)1790 4195 w
+(.)1790 4231 w
+(.)1790 4267 w
+(.)1790 4303 w
+(. . . . . . . . . . .)10 378 1 2330 4123 t
+10 R f
+3096 4120 3060 4120 Dl
+3176 4120 3140 4120 Dl
+3258 4120 3222 4120 Dl
+3338 4120 3302 4120 Dl
+3420 4120 3384 4120 Dl
+3456 4300 3420 4300 Dl
+3528 4300 3492 4300 Dl
+3600 4300 3564 4300 Dl
+3672 4300 3636 4300 Dl
+3744 4300 3708 4300 Dl
+3816 4300 3780 4300 Dl
+3888 4300 3852 4300 Dl
+3960 4300 3924 4300 Dl
+3960 4264 3960 4300 Dl
+3960 4183 3960 4219 Dl
+3960 4102 3960 4138 Dl
+3960 4021 3960 4057 Dl
+3960 3940 3960 3976 Dl
+3924 3940 3960 3940 Dl
+3852 3940 3888 3940 Dl
+3780 3940 3816 3940 Dl
+3708 3940 3744 3940 Dl
+3636 3940 3672 3940 Dl
+3564 3940 3600 3940 Dl
+3492 3940 3528 3940 Dl
+3420 3940 3456 3940 Dl
+3420 3976 3420 3940 Dl
+3420 4056 3420 4020 Dl
+3420 4138 3420 4102 Dl
+3420 4218 3420 4182 Dl
+3420 4300 3420 4264 Dl
+( after)1 212(If there is a number)4 797 2 720 4480 t
+10 CW f
+(dot)1759 4480 w
+10 R f
+( can also control the size)5 1009( You)1 227(, the dots will be approximately that far apart.)8 1865 3 1939 4480 t
+( length after the word)4 875(of the dashes \(at least somewhat\): if there is a)9 1866 2 720 4600 t
+10 CW f
+(dashed)3490 4600 w
+10 R f
+(, the dashes will be that long,)6 1190 1 3850 4600 t
+(and the intervening spaces will be as close as possible to that size:)12 2641 1 720 4720 t
+9 CW f
+(line right 5 dashed; move left 5 down .25; right)9 2592 1 870 4890 t
+(line right 5 dashed 0.25; move left 5 down .25; right)10 2862 1 870 5000 t
+(line right 5 dashed 0.5; move left 5 down .25; right)10 2808 1 870 5110 t
+(line right 5 dashed 1)4 1134 1 870 5220 t
+10 R f
+1116 5400 1080 5400 Dl
+1188 5400 1152 5400 Dl
+1261 5400 1225 5400 Dl
+1334 5400 1298 5400 Dl
+1406 5400 1370 5400 Dl
+1479 5400 1443 5400 Dl
+1552 5400 1516 5400 Dl
+1625 5400 1589 5400 Dl
+1697 5400 1661 5400 Dl
+1770 5400 1734 5400 Dl
+1843 5400 1807 5400 Dl
+1915 5400 1879 5400 Dl
+1988 5400 1952 5400 Dl
+2061 5400 2025 5400 Dl
+2134 5400 2098 5400 Dl
+2206 5400 2170 5400 Dl
+2279 5400 2243 5400 Dl
+2352 5400 2316 5400 Dl
+2424 5400 2388 5400 Dl
+2497 5400 2461 5400 Dl
+2570 5400 2534 5400 Dl
+2643 5400 2607 5400 Dl
+2715 5400 2679 5400 Dl
+2788 5400 2752 5400 Dl
+2861 5400 2825 5400 Dl
+2934 5400 2898 5400 Dl
+3007 5400 2971 5400 Dl
+3080 5400 3044 5400 Dl
+3152 5400 3116 5400 Dl
+3225 5400 3189 5400 Dl
+3298 5400 3262 5400 Dl
+3371 5400 3335 5400 Dl
+3443 5400 3407 5400 Dl
+3516 5400 3480 5400 Dl
+3589 5400 3553 5400 Dl
+3661 5400 3625 5400 Dl
+3734 5400 3698 5400 Dl
+3807 5400 3771 5400 Dl
+3880 5400 3844 5400 Dl
+3952 5400 3916 5400 Dl
+4025 5400 3989 5400 Dl
+4098 5400 4062 5400 Dl
+4170 5400 4134 5400 Dl
+4243 5400 4207 5400 Dl
+4316 5400 4280 5400 Dl
+4389 5400 4353 5400 Dl
+4461 5400 4425 5400 Dl
+4534 5400 4498 5400 Dl
+4607 5400 4571 5400 Dl
+4680 5400 4644 5400 Dl
+1260 5580 1080 5580 Dl
+1602 5580 1422 5580 Dl
+1944 5580 1764 5580 Dl
+2286 5580 2106 5580 Dl
+2628 5580 2448 5580 Dl
+2970 5580 2790 5580 Dl
+3312 5580 3132 5580 Dl
+3654 5580 3474 5580 Dl
+3996 5580 3816 5580 Dl
+4338 5580 4158 5580 Dl
+4680 5580 4500 5580 Dl
+1440 5760 1080 5760 Dl
+2088 5760 1728 5760 Dl
+2736 5760 2376 5760 Dl
+3384 5760 3024 5760 Dl
+4032 5760 3672 5760 Dl
+4680 5760 4320 5760 Dl
+1800 5940 1080 5940 Dl
+3240 5940 2520 5940 Dl
+4680 5940 3960 5940 Dl
+(Dotted or dashed attributes apply only to lines and boxes.)9 2298 1 720 6120 t
+( by adding the word)4 867(You can make any object invisible)5 1464 2 720 6300 t
+10 CW f
+(invis)3093 6300 w
+10 R f
+( is particularly useful for)4 1055( This)1 245(after it.)1 305 3 3435 6300 t
+(positioning things correctly near text:)4 1499 1 720 6420 t
+9 CW f
+(box invis "input"; arrow; box invis "output")6 2376 1 870 6590 t
+10 R f
+(input)2398 6970 w
+3131 6950 2771 6950 Dl
+3131 6950 3059 6968 Dl
+3131 6950 3059 6932 Dl
+(output)3273 6970 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+(6 PIC)1 4320 1 720 600 t
+10 R f
+(Text may be positioned on lines and arrows:)7 1773 1 720 960 t
+9 CW f
+(arrow "on top of"; move)4 1242 1 870 1130 t
+(arrow "above" "below"; move)3 1458 1 870 1240 t
+(arrow "above" above; move)3 1350 1 870 1350 t
+(arrow "below" below; move)3 1350 1 870 1460 t
+(arrow "above" "on top of" "below")5 1782 1 870 1570 t
+10 R f
+(on top of)2 361 1 1259 1890 t
+1619 1870 1259 1870 Dl
+1619 1870 1547 1888 Dl
+1619 1870 1547 1852 Dl
+(above)2040 1830 w
+(below)2037 1950 w
+2339 1870 1979 1870 Dl
+2339 1870 2267 1888 Dl
+2339 1870 2267 1852 Dl
+(above)2760 1830 w
+3059 1870 2699 1870 Dl
+3059 1870 2987 1888 Dl
+3059 1870 2987 1852 Dl
+(below)3477 1950 w
+3779 1870 3419 1870 Dl
+3779 1870 3707 1888 Dl
+3779 1870 3707 1852 Dl
+(above)4200 1770 w
+(on top of)2 361 1 4139 1890 t
+(below)4197 2010 w
+4499 1870 4139 1870 Dl
+4499 1870 4427 1888 Dl
+4499 1870 4427 1852 Dl
+( arrowhead is the distance across its tail; the ``height'' is the distance along the shaft.)15 3529(The ``width'' of an)3 791 2 720 2170 t
+(The arrowheads in this picture are default size and shape.)9 2288 1 720 2290 t
+( right now, and)3 665(As we said earlier, arcs go 90 degrees counterclockwise from where you are)12 3265 2 720 2470 t
+10 CW f
+(arc cw)1 345 1 4695 2470 t
+10 R f
+( default radius is the same as for circles, but you can change it with the)15 2858( The)1 207(changes this to clockwise.)3 1049 3 720 2590 t
+10 CW f
+(rad)4860 2590 w
+10 R f
+( is also easy to draw arcs between speci\256c places; this will be described in the next section.)17 3638(attribute. It)1 469 2 720 2710 t
+(To put an arrowhead on an arc, use one of)9 1678 1 720 2890 t
+10 CW f
+(<-)2423 2890 w
+10 R f
+(,)2543 2890 w
+10 CW f
+(->)2593 2890 w
+10 R f
+(or)2738 2890 w
+10 CW f
+(<->)2846 2890 w
+10 R f
+(, as with lines.)3 575 1 3026 2890 t
+( you)1 181( If)1 122( the default size.)3 672(In all cases, unless an explicit dimension for some object is speci\256ed, you will get)14 3345 4 720 3070 t
+( object to have the same size as the previous one of that kind, add the word)16 3056(want an)1 318 2 720 3190 t
+10 CW f
+(same)4123 3190 w
+10 R f
+( in the set)3 398(. Thus)1 279 2 4363 3190 t
+(of boxes given by)3 713 1 720 3310 t
+9 CW f
+(down; box ht 0.2 wid 1.5; move down 0.15; box same; move same; box same)14 3834 1 870 3480 t
+10 R f
+2340 3660 2340 3804 Dl
+3420 3660 2340 3660 Dl
+3420 3804 3420 3660 Dl
+2340 3804 3420 3804 Dl
+2340 3912 2340 4056 Dl
+3420 3912 2340 3912 Dl
+3420 4056 3420 3912 Dl
+2340 4056 3420 4056 Dl
+2340 4164 2340 4308 Dl
+3420 4164 2340 4164 Dl
+3420 4308 3420 4164 Dl
+2340 4308 3420 4308 Dl
+( set by the \256rst)4 613(the dimensions)1 608 2 720 4488 t
+10 CW f
+(box)1972 4488 w
+10 R f
+(are used several times; similarly, the amount of motion for the second)11 2857 1 2183 4488 t
+10 CW f
+(move)720 4608 w
+10 R f
+(is the same as for the \256rst one.)7 1215 1 985 4608 t
+( to the variables that de\256ne their values.)7 1676(You can change the default sizes of objects by assigning values)10 2644 2 720 4788 t
+(Here is the list, with their default values:)7 1626 1 720 4908 t
+9 CW f
+( = 0.5)2 324( boxht)1 621(boxwid = 0.75;)2 756 3 870 5078 t
+( = 0.5)2 324( lineht)1 621(linewid = 0.75;)2 810 3 870 5188 t
+( = 0.25)2 378( arcrad)1 513(circlerad = 0.25;)2 918 3 870 5298 t
+( = 0.5)2 324( ellipseht)1 621(ellipsewid = 0.75;)2 972 3 870 5408 t
+( = 0.5)2 324( moveht)1 621(movewid = 0.75;)2 810 3 870 5518 t
+( = 0)2 216( textht)1 783(textwid = 0;)2 648 3 870 5628 t
+( = 0.1)2 324( arrowht)1 621(arrowwid = 0.05;)2 864 3 870 5738 t
+9 R f
+(\(These refer to the arrowhead.\))4 1120 1 2922 5738 t
+9 CW f
+( = 2)2 216( arrowhead)1 783(dashwid = 0.05;)2 810 3 870 5848 t
+9 R f
+(\(Arrowhead \256ll style\))2 781 1 2922 5848 t
+9 CW f
+( = 8.5)2 324( maxpswid)1 837(maxpsht = 11;)2 702 3 870 5958 t
+9 R f
+(\(Maximum picture dimensions\))2 1141 1 2922 5958 t
+9 CW f
+( = 1)2 216( scale)1 621(fillval = 0.3;)2 756 3 870 6068 t
+10 R f
+(So if you want all your boxes to be long and skinny, and relatively close together,)15 3266 1 720 6248 t
+9 CW f
+(boxwid = 0.1; boxht = 1)5 1242 1 870 6418 t
+(movewid = 0.2)2 702 1 870 6528 t
+(box; move; box; move; box)4 1350 1 870 6638 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+10 HB f
+(PIC 7)1 4320 1 720 600 t
+2628 960 2628 1680 Dl
+2700 960 2628 960 Dl
+2700 1680 2700 960 Dl
+2628 1680 2700 1680 Dl
+2844 960 2844 1680 Dl
+2916 960 2844 960 Dl
+2916 1680 2916 960 Dl
+2844 1680 2916 1680 Dl
+3060 960 3060 1680 Dl
+3132 960 3060 960 Dl
+3132 1680 3132 960 Dl
+3060 1680 3132 1680 Dl
+10 R f
+(Setting the variable)2 811 1 720 1860 t
+10 CW f
+(arrowhead)1573 1860 w
+10 R f
+(to a value like 7 causes arrowheads to be \256lled by overstriking; the)12 2884 1 2156 1860 t
+(default is 2:)2 472 1 720 1980 t
+9 CW f
+(arrowhead = 7; arrow; move; arrowhead = 2; arrow)8 2592 1 870 2150 t
+10 R f
+2808 2330 2448 2330 Dl
+2808 2330 2736 2348 Dl
+2807 2330 2734 2342 Dl
+2807 2330 2733 2335 Dl
+2807 2330 2733 2330 Dl
+2807 2330 2733 2325 Dl
+2807 2330 2734 2318 Dl
+2808 2330 2736 2312 Dl
+3312 2330 2952 2330 Dl
+3312 2330 3240 2348 Dl
+3312 2330 3240 2312 Dl
+10 I f
+(Pic)720 2510 w
+10 R f
+( the variable)2 525( Setting)1 350(works internally in inches.)3 1108 3 894 2510 t
+10 CW f
+(scale)2918 2510 w
+10 R f
+( be)1 136(to some value causes all dimensions to)6 1645 2 3259 2510 t
+( for example,)2 569( Thus,)1 295(scaled down by that value.)4 1142 3 720 2630 t
+10 CW f
+(scale=2.54)2771 2630 w
+10 R f
+( to be interpreted as)4 863(causes dimensions)1 761 2 3416 2630 t
+(centimeters.)720 2750 w
+( in the)2 256(The numbers given)2 775 2 720 2930 t
+10 CW f
+(.PS)1779 2930 w
+10 R f
+(line override the dimensions given in the picture; these can be used to force)13 3053 1 1987 2930 t
+( indicates that a good way to get a picture of the right)12 2154( Experience)1 500( and height.)2 473(a picture to a particular width)5 1193 4 720 3050 t
+(size is to enter its dimensions in inches, then if necessary add a width and perhaps height to the)18 3798 1 720 3170 t
+10 CW f
+(.PS)4543 3170 w
+10 R f
+(line.)4748 3170 w
+(Once set, variables like)3 943 1 720 3350 t
+10 CW f
+(boxht)1692 3350 w
+10 R f
+( can reset variables to)4 884( You)1 226(retain their values from one picture to the next.)8 1909 3 2021 3350 t
+(their default values by listing them in a)7 1563 1 720 3470 t
+10 CW f
+(reset)2308 3470 w
+10 R f
+(statement:)2633 3470 w
+9 CW f
+(reset boxht, boxwid)2 1026 1 870 3640 t
+10 R f
+(A bare)1 268 1 720 3820 t
+10 CW f
+(reset)1013 3820 w
+10 R f
+(resets all variables.)2 762 1 1338 3820 t
+( The)1 226( facility for \256lling or shading objects, intended for Postscript output devices.)11 3282(There is a minimal)3 812 3 720 4000 t
+(attribute)720 4120 w
+10 CW f
+(fill)1082 4120 w
+10 I f
+(expr)1351 4120 w
+10 R f
+(sets the gray scale value to)5 1087 1 1557 4120 t
+10 I f
+(expr)2673 4120 w
+10 R f
+( determined by the variable)4 1104(; the default,)2 510 2 2858 4120 t
+10 CW f
+(fillval)4500 4120 w
+10 R f
+(, is)1 120 1 4920 4120 t
+( Thus:)1 278( Postscript, smaller values are darker.)5 1494(0.3. Following)1 612 3 720 4240 t
+9 CW f
+(box fill)1 432 1 870 4410 t
+(box ht boxht/2 wid boxwid/2 "hello" at last box)8 2538 1 870 4520 t
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% Color and reverse video support for dpost. A call made to setcolor with two
+% arguments implies reverse video printing.
+%
+
+/rgb {setrgbcolor} bind def
+/hsb {sethsbcolor} bind def
+
+/colordict 50 dict dup begin
+	/red			{ 1 0 0 } def
+	/green			{ 0 1 0 } def
+	/blue			{ 0 0 1 } def
+	/cyan			{ 0 1 1 } def
+	/magenta		{ 1 0 1 } def
+	/yellow			{ 1 1 0 } def
+	/white			{ 1 1 1 } def
+	/black			{ 0 0 0 } def
+end def
+
+/setcolor {
+	counttomark 1 eq {
+		dup colordict exch known not {pop /black} if
+		colordict exch get exec setrgbcolor
+	} if
+	counttomark 2 eq {
+		/backcolor exch def
+		/textcolor exch def
+		colordict backcolor known not colordict textcolor known not or {
+			/backcolor colordict /black get def
+			/textcolor colordict /white get def
+		} if
+		/backcolor colordict backcolor get def
+		/textcolor colordict textcolor get def
+		/dY1 0 def
+		/dY2 0 def
+		textcolor exec setrgbcolor
+	} if
+} bind def
+
+/drawrvbox {
+	/x2 exch def
+	/x1 exch def
+
+	currentpoint dup
+	/y1 exch def
+	/y2 exch def pop
+
+	dY1 0 eq dY2 0 eq and {
+		currentfont /FontBBox get aload pop
+		currentfont /FontMatrix get dtransform /dY2 exch def pop
+		currentfont /FontMatrix get dtransform /dY1 exch def pop
+	} if
+
+	/y1 y1 dY1 add def
+	/y2 y2 dY2 add def
+
+	backcolor exec setrgbcolor
+	newpath
+	x1 y1 moveto
+	x2 y1 lineto
+	x2 y2 lineto
+	x1 y2 lineto
+	closepath fill
+	textcolor exec setrgbcolor
+} bind def
+%%EndGlobal
+/saveobj save def
+mark
+gsave
+newpath
+2610 5060 m
+/inpath true def
+ 0.3 setgray
+10 R f
+2610 4700 2610 5060 Dl
+3150 4700 2610 4700 Dl
+3150 5060 3150 4700 Dl
+2610 5060 3150 5060 Dl
+ gsave eofill grestore 0 setgray stroke
+grestore
+/inpath false def
+10 R f
+2745 4790 2745 4970 Dl
+3015 4790 2745 4790 Dl
+3014 4970 3014 4790 Dl
+2744 4970 3014 4970 Dl
+(hello)2780 4900 w
+10 CW f
+(fill)720 5240 w
+10 R f
+(currently only applies to boxes, circles, and ellipses.)7 2086 1 985 5240 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 4.  , HEADING = CONTROLLING POSITIONS]
+10 B f
+( POSITIONS)1 571(4. CONTROLLING)1 887 2 720 5480 t
+10 R f
+( anywhere you want;)3 840(You can place things)3 843 2 720 5660 t
+10 I f
+(pic)2430 5660 w
+10 R f
+(provides a variety of ways to talk about positions.)8 2006 1 2579 5660 t
+10 I f
+(Pic)4637 5660 w
+10 R f
+(uses a)1 243 1 4797 5660 t
+(standard Cartesian coordinate system with)4 1720 1 720 5780 t
+10 I f
+(x)2472 5780 w
+10 R f
+(increasing rightwards and)2 1045 1 2548 5780 t
+10 I f
+(y)3625 5780 w
+10 R f
+( point)1 237(increasing upwards, so any)3 1102 2 3701 5780 t
+(or object has an)3 635 1 720 5900 t
+10 I f
+(x)1382 5900 w
+10 R f
+(and)1453 5900 w
+10 I f
+(y)1624 5900 w
+10 R f
+( placed with its start at position 0,0)7 1421( \256rst object is)3 548( The)1 207(position, measured in inches.)3 1169 4 1695 5900 t
+( The)1 207(by default.)1 429 2 720 6020 t
+10 I f
+(x,y)1383 6020 w
+10 R f
+( center; the position of a line or spline)8 1523(position of a box, circle or ellipse is its geometric)9 1994 2 1523 6020 t
+(or motion is its beginning; the position of an arc is the center of the corresponding circle.)16 3554 1 720 6140 t
+(Position modi\256ers like)2 925 1 720 6320 t
+10 CW f
+(from)1679 6320 w
+10 R f
+(,)1919 6320 w
+10 CW f
+(to)1979 6320 w
+10 R f
+(,)2099 6320 w
+10 CW f
+(by)2159 6320 w
+10 R f
+(and)2314 6320 w
+10 CW f
+(at)2493 6320 w
+10 R f
+(are followed by an)3 775 1 2648 6320 t
+10 I f
+(x,y)3458 6320 w
+10 R f
+(pair, and can be attached to boxes,)6 1434 1 3606 6320 t
+(circles, lines, motions, and so on, to specify or modify a position.)11 2610 1 720 6440 t
+(You can also use)3 679 1 720 6620 t
+10 CW f
+(up)1424 6620 w
+10 R f
+(,)1544 6620 w
+10 CW f
+(down)1594 6620 w
+10 R f
+(,)1834 6620 w
+10 CW f
+(right)1884 6620 w
+10 R f
+(, and)1 194 1 2184 6620 t
+10 CW f
+(left)2403 6620 w
+10 R f
+(with)2668 6620 w
+10 CW f
+(line)2871 6620 w
+10 R f
+(and)3136 6620 w
+10 CW f
+(move)3305 6620 w
+10 R f
+(:)3545 6620 w
+9 CW f
+(box ht 0.2 wid 0.2 at 0,0 "1")7 1566 1 870 6790 t
+( or "move to 0.5,0")4 1026( #)1 1098(move right 0.5)2 756 3 870 6900 t
+(box ht 0.2 wid 0.2 "2")5 1188 1 870 7010 t
+( or "move 0.5" or "move same")6 1566( #)1 1098(move right 0.5)2 756 3 870 7120 t
+(box ht 0.2 wid 0.2 "3")5 1188 1 870 7230 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+10 HB f
+(8 PIC)1 4320 1 720 600 t
+2160 960 2160 1140 Dl
+2340 960 2160 960 Dl
+2340 1140 2340 960 Dl
+2160 1140 2340 1140 Dl
+10 R f
+(1)2225 1070 w
+2790 960 2790 1140 Dl
+2970 960 2790 960 Dl
+2970 1140 2970 960 Dl
+2790 1140 2970 1140 Dl
+(2)2855 1070 w
+3420 960 3420 1140 Dl
+3600 960 3420 960 Dl
+3600 1140 3600 960 Dl
+3420 1140 3600 1140 Dl
+(3)3485 1070 w
+(Comments can be used in pictures; they begin with a)9 2112 1 720 1320 t
+10 CW f
+(#)2857 1320 w
+10 R f
+(and end at the end of the line.)7 1181 1 2942 1320 t
+(Attributes like)1 575 1 720 1500 t
+10 CW f
+(ht)1320 1500 w
+10 R f
+(and)1465 1500 w
+10 CW f
+(wid)1634 1500 w
+10 R f
+(and positions like)2 706 1 1839 1500 t
+10 CW f
+(at)2570 1500 w
+10 R f
+( So)1 156(can be written out in any order.)6 1250 2 2715 1500 t
+9 CW f
+(box ht 0.2 wid 0.2 at 0,0)6 1350 1 870 1670 t
+(box at 0,0 wid 0.2 ht 0.2)6 1350 1 870 1780 t
+(box ht 0.2 at 0,0 wid 0.2)6 1350 1 870 1890 t
+10 R f
+(are all equivalent, though the last is harder to read and thus less desirable.)13 2942 1 720 2070 t
+(The)720 2250 w
+10 CW f
+(from)902 2250 w
+10 R f
+(and)1169 2250 w
+10 CW f
+(to)1341 2250 w
+10 R f
+( default, arcs are)3 667( By)1 170(attributes are particularly useful with arcs, to specify the endpoints.)9 2714 3 1489 2250 t
+(drawn counterclockwise,)1 997 1 720 2370 t
+9 CW f
+("+" at 0,0)2 540 1 870 2540 t
+(arc -> from 0.5,0 to 0,0.5)5 1404 1 870 2650 t
+(arc -> cw from 0,0 to 1,0.5)6 1458 1 870 2760 t
+10 R f
+(+)2492 3325 w
+2880 3305 -360 0 0 -360 Da
+2520 2945 2593 2935 Dl
+2520 2945 2589 2970 Dl
+3239 2946 3166 2958 Dl
+3239 2946 3169 2923 Dl
+3240 2945 -92 714 -627 -354 Da
+(The radius can be made large to provide \257at arcs:)9 1970 1 720 3485 t
+9 CW f
+(arc -> cw from 0,0 to 2,0 rad 15)8 1728 1 870 3655 t
+10 R f
+3599 3859 3527 3872 Dl
+3599 3858 3529 3836 Dl
+3600 3858 -720 10776 -720 -10776 Da
+( is under-speci\256ed,)2 767(If the circle)2 467 2 720 4038 t
+10 I f
+(pic)1984 4038 w
+10 R f
+(guesses a radius and/or center; you will have to provide them explicitly)11 2904 1 2136 4038 t
+(if the guess is wrong.)4 852 1 720 4158 t
+( truth is)2 308( The)1 206( is an over-simpli\256cation.)3 1025( This)1 229( normally connected left to right.)5 1320(We said earlier that objects are)5 1232 6 720 4338 t
+( speci\256ed by the most recent)5 1140(that objects are connected together in the direction)7 2022 2 720 4458 t
+10 CW f
+(up)3907 4458 w
+10 R f
+(,)4027 4458 w
+10 CW f
+(down)4077 4458 w
+10 R f
+(,)4317 4458 w
+10 CW f
+(left)4367 4458 w
+10 R f
+(or)4632 4458 w
+10 CW f
+(right)4740 4458 w
+10 R f
+( in)1 103( Thus,)1 275(\(either alone or as part of some object\).)7 1568 3 720 4578 t
+9 CW f
+(arrow left; box; arrow; circle; arrow)5 1998 1 870 4748 t
+10 R f
+(the)720 4928 w
+10 CW f
+(left)867 4928 w
+10 R f
+(implies connection towards the left:)4 1432 1 1132 4928 t
+3690 5288 4050 5288 Dl
+3690 5288 3762 5270 Dl
+3690 5288 3762 5306 Dl
+3150 5108 3150 5468 Dl
+3690 5108 3150 5108 Dl
+3690 5468 3690 5108 Dl
+3150 5468 3690 5468 Dl
+2790 5288 3150 5288 Dl
+2790 5288 2862 5270 Dl
+2790 5288 2862 5306 Dl
+2430 5288 360 360 De
+2070 5288 2430 5288 Dl
+2070 5288 2142 5270 Dl
+2070 5288 2142 5306 Dl
+(This could also be written as)5 1146 1 720 5648 t
+9 CW f
+(left; arrow; box; arrow; circle; arrow)5 2052 1 870 5818 t
+10 R f
+( the direction determined by the last)6 1449(Objects are joined in)3 832 2 720 5998 t
+10 CW f
+(up)3028 5998 w
+10 R f
+(,)3148 5998 w
+10 CW f
+(down)3200 5998 w
+10 R f
+(, etc., with the entry point of the second)8 1600 1 3440 5998 t
+( and exit points for)4 779( Entry)1 278( the time of entry\).)4 770(object attached to the exit point of the \256rst \(which is \256xed at)12 2493 4 720 6118 t
+( automatic connection and direction selection works)6 2122( This)1 234(boxes, circles and ellipses are on opposite sides.)7 1964 3 720 6238 t
+(well if the direction doesn't change but it will occasionally surprise you:)11 2894 1 720 6358 t
+9 CW f
+(arrow; circle; down; arrow)3 1404 1 870 6528 t
+10 R f
+2880 6888 2520 6888 Dl
+2880 6888 2808 6906 Dl
+2880 6888 2808 6870 Dl
+2880 6888 360 360 De
+3240 7248 3240 6888 Dl
+3240 7248 3222 7176 Dl
+3240 7248 3258 7176 Dl
+(The arrow comes out of the right side of the circle, not the bottom, as might be expected.)17 3550 1 720 7428 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Page: 9 9
+/saveobj save def
+mark
+9 pagesetup
+10 HB f
+(PIC 9)1 4320 1 720 600 t
+10 R f
+( braces)1 291(If a set of commands is enclosed in)7 1483 2 720 960 t
+10 CW f
+({)2531 960 w
+10 S f
+(\274)2591 960 w
+10 CW f
+(})2691 960 w
+10 R f
+(, the current position and direction of motion when the)9 2289 1 2751 960 t
+( is also a more)4 585( There)1 284( else is restored.)3 649( Nothing)1 380( entered.)1 345(group is \256nished will be exactly where it was when)9 2077 6 720 1080 t
+(general way to group objects, using)5 1420 1 720 1200 t
+10 CW f
+([)2165 1200 w
+10 R f
+(and)2250 1200 w
+10 CW f
+(])2419 1200 w
+10 R f
+(, which is discussed in \2479.)5 1047 1 2479 1200 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 5.  , HEADING = LABELS AND CORNERS]
+10 B f
+( AND CORNERS)2 755(5. LABELS)1 521 2 720 1440 t
+10 R f
+( example,)1 388( For)1 189(Objects can be labelled or named so that you can talk about them later.)13 2828 3 720 1620 t
+9 CW f
+(Box1: box)1 522 1 870 1790 t
+(#)1230 1900 w
+9 S f
+(\274)1338 1900 w
+9 CW f
+(other stuff)1 594 1 1482 1900 t
+9 S f
+(\274)2130 1900 w
+9 CW f
+(move to Box1)2 648 1 1230 2010 t
+10 R f
+(Place names)1 505 1 720 2190 t
+10 I f
+(must)1259 2190 w
+10 R f
+( distinguish them from variable names, which begin)7 2146(begin with an upper case letter \(to)6 1412 2 1482 2190 t
+( name refers to the ``center'' of the object, which is the geometric center for)14 3130( The)1 213(with lower case letters\).)3 977 3 720 2310 t
+(most things.)1 490 1 720 2430 t
+(Other combinations also work:)3 1235 1 720 2610 t
+9 CW f
+(line from Box1 to Box2)4 1188 1 870 2780 t
+(move to Box1 up 0.1 right 0.2)6 1566 1 870 2890 t
+( same as previous)3 918( #)1 576(move to Box1 + 0.2,0.1)4 1188 3 870 3000 t
+(line to Box1 - 0.5,0)4 1080 1 870 3110 t
+10 R f
+(The reserved name)2 758 1 720 3290 t
+10 CW f
+(Here)1503 3290 w
+10 R f
+(may be used to refer to the current position.)8 1744 1 1768 3290 t
+(Labels can be reset several times in a single picture, so a statement like)13 2839 1 720 3470 t
+9 CW f
+( + 1,1)2 324(Box1: Box1)1 594 2 870 3640 t
+10 R f
+(is perfectly legal.)2 690 1 720 3820 t
+(You can also refer to previously drawn objects of each type, using the word)13 3047 1 720 4000 t
+10 CW f
+(last)3794 4000 w
+10 R f
+( given the)2 400( example,)1 390(. For)1 216 3 4034 4000 t
+(input)720 4120 w
+9 CW f
+(box "A"; circle "B"; box "C")5 1512 1 870 4290 t
+10 R f
+(then `)1 235 1 720 4470 t
+10 CW f
+(last box)1 450 1 955 4470 t
+10 R f
+(' refers to box)3 577 1 1405 4470 t
+10 CW f
+(C)2012 4470 w
+10 R f
+(, `)1 89 1 2072 4470 t
+10 CW f
+(last circle)1 631 1 2161 4470 t
+10 R f
+(' refers to circle)3 651 1 2792 4470 t
+10 CW f
+(B)3474 4470 w
+10 R f
+(, and `)2 264 1 3534 4470 t
+10 CW f
+(2nd last box)2 662 1 3798 4470 t
+10 R f
+(' refers to box)3 580 1 4460 4470 t
+10 CW f
+(A)720 4590 w
+10 R f
+( boxes)1 261( of objects can also be done from the beginning, so)10 2073(. Numbering)1 534 3 780 4590 t
+10 CW f
+(A)3676 4590 w
+10 R f
+(and)3764 4590 w
+10 CW f
+(C)3936 4590 w
+10 R f
+(are `)1 182 1 4024 4590 t
+10 CW f
+(1st box)1 388 1 4206 4590 t
+10 R f
+(' and `)2 266 1 4594 4590 t
+10 CW f
+(2nd)4860 4590 w
+(box)720 4710 w
+10 R f
+(' respectively.)1 565 1 900 4710 t
+(To cut down the need for explicit coordinates, objects have ``corners'' named by compass points:)14 3895 1 720 4890 t
+9 CW f
+( ht 1 wid 1.5)4 702( "B.c")1 306(B: box)1 324 3 870 5060 t
+(" B.e" at B.e ljust)4 1026 1 1230 5170 t
+(" B.ne" at B.ne ljust)4 1134 1 1230 5280 t
+(" B.se" at B.se ljust)4 1134 1 1230 5390 t
+("B.s" at B.s below)3 972 1 1230 5500 t
+("B.n" at B.n above)3 972 1 1230 5610 t
+("B.sw " at B.sw rjust)4 1134 1 1230 5720 t
+("B.w " at B.w rjust)4 1026 1 1230 5830 t
+("B.nw " at B.nw rjust)4 1134 1 1230 5940 t
+10 R f
+2234 6240 2234 6960 Dl
+3314 6240 2234 6240 Dl
+3314 6960 3314 6240 Dl
+2234 6960 3314 6960 Dl
+(B.c B.e)1 769 1 2706 6620 t
+(B.ne)3339 6260 w
+(B.se)3339 6980 w
+(B.s)2709 7040 w
+(B.n)2703 6200 w
+(B.sw)2006 6980 w
+(B.w)2045 6620 w
+(B.nw)1995 6260 w
+(Note the use of)3 613 1 720 7200 t
+10 CW f
+(ljust)1360 7200 w
+10 R f
+(,)1660 7200 w
+10 CW f
+(rjust)1712 7200 w
+10 R f
+(,)2012 7200 w
+10 CW f
+(above)2064 7200 w
+10 R f
+(, and)1 196 1 2364 7200 t
+10 CW f
+(below)2587 7200 w
+10 R f
+(to alter the default positioning of text, and of a blank)10 2126 1 2914 7200 t
+(within some strings to help space them away from a vertical line.)11 2602 1 720 7320 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 9 9
+%%Page: 10 10
+/saveobj save def
+mark
+10 pagesetup
+10 HB f
+(10 PIC)1 4320 1 720 600 t
+10 R f
+(Lines and arrows have a)4 993 1 720 960 t
+10 CW f
+(start)1744 960 w
+10 R f
+(, an)1 150 1 2044 960 t
+10 CW f
+(end)2225 960 w
+10 R f
+(and a)1 219 1 2436 960 t
+10 CW f
+(center)2686 960 w
+10 R f
+( and ellipses have)3 728( Circles)1 340(in addition to corners.)3 895 3 3077 960 t
+( words)1 271( The)1 208(corners too; an arc has the same corners as the circle of which it is a part.)16 2965 3 720 1080 t
+10 CW f
+(left)4191 1080 w
+10 R f
+(,)4431 1080 w
+10 CW f
+(right)4483 1080 w
+10 R f
+(,)4783 1080 w
+10 CW f
+(top)4835 1080 w
+10 R f
+(,)5015 1080 w
+(and)720 1200 w
+10 CW f
+(bottom)889 1200 w
+10 R f
+(are synonyms for)2 693 1 1274 1200 t
+10 CW f
+(west)1992 1200 w
+10 R f
+(,)2232 1200 w
+10 CW f
+(east)2282 1200 w
+10 R f
+(,)2522 1200 w
+10 CW f
+(north)2572 1200 w
+10 R f
+(and)2897 1200 w
+10 CW f
+(south)3066 1200 w
+10 R f
+(.)3366 1200 w
+( part of another, for example)5 1176(It is often easiest to position objects by positioning some part of one at some)14 3144 2 720 1380 t
+( The)1 217( of one at the southeast corner of another.)8 1750(the southwest corner)2 852 3 720 1500 t
+10 CW f
+(with)3576 1500 w
+10 R f
+(attribute permits this kind of)4 1187 1 3853 1500 t
+(positioning:)720 1620 w
+9 CW f
+(box ht 0.75 wid 0.75)4 1080 1 870 1790 t
+(box ht 0.5 wid 0.5 with .sw at last box.se)9 2268 1 870 1900 t
+10 R f
+2430 2080 2430 2620 Dl
+2970 2080 2430 2080 Dl
+2970 2620 2970 2080 Dl
+2430 2620 2970 2620 Dl
+2970 2260 2970 2620 Dl
+3330 2260 2970 2260 Dl
+3330 2620 3330 2260 Dl
+2970 2620 3330 2620 Dl
+(Notice that the corner after)4 1074 1 720 2800 t
+10 CW f
+(with)1819 2800 w
+10 R f
+(is written)1 375 1 2084 2800 t
+10 CW f
+(.sw)2484 2800 w
+10 R f
+(.)2664 2800 w
+(As another example, consider)3 1186 1 720 2980 t
+9 CW f
+(ellipse)870 3150 w
+(ellipse ht .2 wid .3 with .se at 1st ellipse.nw)9 2538 1 870 3260 t
+(ellipse ht .2 wid .3 with .sw at 1st ellipse.ne)9 2538 1 870 3370 t
+10 R f
+2610 3799 540 360 De
+2505 3622 216 144 De
+3039 3622 216 144 De
+( the eight compass)3 765(Sometimes it is desirable to have a line intersect a circle at a point which is not one of)18 3555 2 720 4159 t
+(points that)1 427 1 720 4279 t
+10 I f
+(pic)1179 4279 w
+10 R f
+( the attribute)2 517( such cases, the proper visual effect can be obtained by using)11 2510( In)1 140(knows about.)1 540 4 1333 4279 t
+10 CW f
+(chop)720 4399 w
+10 R f
+(to chop off part of the line:)6 1076 1 985 4399 t
+9 CW f
+(circlerad = 0.15; arrowhead = 7)5 1674 1 870 4569 t
+(circle "a")1 540 1 870 4679 t
+(circle "b" at 1st circle - \(0.4, 0.6\))7 1998 1 870 4789 t
+(circle "c" at 1st circle + \(0.4, -0.6\))7 2052 1 870 4899 t
+(arrow from 1st circle to 2nd circle chop)7 2160 1 870 5009 t
+(arrow from 1st circle to 3rd circle chop)7 2160 1 870 5119 t
+10 R f
+2772 5407 216 216 De
+(a)2858 5427 w
+2484 5839 216 216 De
+(b)2567 5859 w
+3060 5839 216 216 De
+(c)3146 5859 w
+2652 5749 2820 5497 Dl
+2651 5748 2676 5679 Dl
+2652 5748 2682 5681 Dl
+2651 5748 2687 5684 Dl
+2651 5748 2692 5687 Dl
+2651 5748 2697 5690 Dl
+2652 5749 2702 5695 Dl
+2652 5748 2706 5699 Dl
+3107 5749 2939 5497 Dl
+3107 5748 3053 5699 Dl
+3107 5749 3057 5695 Dl
+3108 5748 3062 5690 Dl
+3108 5748 3067 5687 Dl
+3108 5748 3072 5684 Dl
+3107 5748 3077 5681 Dl
+3108 5748 3083 5679 Dl
+(By default the line is chopped by)6 1321 1 720 6127 t
+10 CW f
+(circlerad)2066 6127 w
+10 R f
+( may be changed:)3 701( This)1 228(at each end.)2 473 3 2631 6127 t
+9 CW f
+(line)870 6297 w
+9 S f
+(\274)1140 6297 w
+9 CW f
+(chop)1284 6297 w
+9 I f
+(r)1554 6297 w
+10 R f
+(chops both ends by)3 769 1 720 6477 t
+10 I f
+(r)1514 6477 w
+10 R f
+(, and)1 194 1 1553 6477 t
+9 CW f
+(line)870 6647 w
+9 S f
+(\274)1140 6647 w
+9 CW f
+(chop)1284 6647 w
+9 I f
+(r1)1554 6647 w
+9 CW f
+(chop)1688 6647 w
+9 I f
+(r2)1958 6647 w
+10 R f
+(chops the beginning by)3 957 1 720 6827 t
+10 I f
+(r1)1711 6827 w
+10 R f
+(and the end by)3 612 1 1834 6827 t
+10 I f
+(r2)2480 6827 w
+10 R f
+( intersections can be computed with the)6 1641( complicated)1 522(. More)1 300 3 2577 6827 t
+(built-in trigonometric functions listed in the next section.)7 2283 1 720 6947 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 10 10
+%%Page: 11 11
+/saveobj save def
+mark
+11 pagesetup
+10 HB f
+(PIC 11)1 4320 1 720 600 t
+10 R f
+( some fraction of the way)5 1032(There is one other form of positioning that is sometimes useful, to refer to a point)15 3288 2 720 960 t
+( can be expressed in)4 803( This)1 228(between two other points.)3 1032 3 720 1080 t
+10 I f
+(pic)2808 1080 w
+10 R f
+(as)2955 1080 w
+9 I f
+(fraction)870 1250 w
+9 CW f
+(of the way between)3 972 1 1209 1250 t
+9 I f
+(position1)2235 1250 w
+9 CW f
+(and)2624 1250 w
+9 I f
+(position2)2840 1250 w
+10 R f
+(where)720 1430 w
+10 I f
+(fraction)997 1430 w
+10 R f
+(is any expression, and)3 909 1 1348 1430 t
+10 I f
+(position1)2291 1430 w
+10 R f
+(and)2698 1430 w
+10 I f
+(position2)2876 1430 w
+10 R f
+( can abbreviate this)3 803( You)1 232(are any positions.)2 722 3 3283 1430 t
+(rather windy phrase; ``)3 911 1 720 1550 t
+10 CW f
+(of the way)2 600 1 1631 1550 t
+10 R f
+('' is optional, and the whole thing can be written instead as)11 2358 1 2231 1550 t
+9 I f
+(fraction)870 1720 w
+9 CW f
+(<)1209 1720 w
+9 I f
+(position1)1317 1720 w
+9 CW f
+(,)1706 1720 w
+9 I f
+(position2)1814 1720 w
+9 CW f
+(>)2203 1720 w
+10 R f
+(As a pair of examples:)4 898 1 720 1900 t
+9 CW f
+(box)870 2070 w
+(arrow right from 1/3 of the way between last box.ne and last box.se)12 3618 1 870 2180 t
+(arrow right from 2/3 <last box.ne, last box.se>)7 2538 1 870 2290 t
+10 R f
+2430 2470 2430 2830 Dl
+2970 2470 2430 2470 Dl
+2970 2830 2970 2470 Dl
+2430 2830 2970 2830 Dl
+3330 2590 2970 2590 Dl
+3330 2590 3258 2608 Dl
+3330 2590 3258 2572 Dl
+3330 2709 2970 2709 Dl
+3330 2709 3258 2727 Dl
+3330 2709 3258 2691 Dl
+9 CW f
+(A: ellipse)1 594 1 870 3000 t
+(ellipse ht .2 wid .3 with .se at 1st ellipse.nw)9 2538 1 1086 3110 t
+(ellipse ht .2 wid .3 with .sw at 1st ellipse.ne)9 2538 1 1086 3220 t
+(circle rad .05 at 0.5 <A.nw,A.c>)5 1728 1 1086 3330 t
+(circle rad .05 at 0.5 <A.ne,A.c>)5 1728 1 1086 3440 t
+(arc from 0.25 <A.w,A.e> to 0.75 <A.w,A.e>)6 2214 1 1086 3550 t
+10 R f
+2610 3979 540 360 De
+2505 3802 216 144 De
+3039 3802 216 144 De
+2749 3916 72 72 De
+2939 3916 72 72 De
+2745 3979 135 -118 135 118 Da
+(Naturally, the distance given by)4 1273 1 720 4339 t
+10 I f
+(fraction)2018 4339 w
+10 R f
+(can be greater than 1 or less than 0.)8 1410 1 2360 4339 t
+( by placing them relative to previous)6 1477( suggests that the easiest way to position objects is)9 2028(Advice: Experience)1 815 3 720 4519 t
+(objects and places, using)3 1047 1 720 4639 t
+10 CW f
+(with)1810 4639 w
+10 R f
+(,)2050 4639 w
+10 CW f
+(at)2118 4639 w
+10 R f
+( is better than using)4 855( This)1 246(, etc.)1 209 3 2238 4639 t
+10 CW f
+(move)3591 4639 w
+10 R f
+( avoid)1 264(; you should generally)3 945 2 3831 4639 t
+10 CW f
+(move)720 4759 w
+10 R f
+(.)960 4759 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 6.  , HEADING = VARIABLES, EXPRESSIONS AND BUILT-IN FUNCTIONS]
+10 B f
+( EXPRESSIONS AND BUILT-IN FUNCTIONS)4 2057(6. VARIABLES,)1 734 2 720 4999 t
+10 R f
+( in absolute coordinates if you are likely to change things.)10 2361(It's generally a bad idea to write everything)7 1771 2 720 5179 t
+10 I f
+(Pic)4907 5179 w
+10 R f
+(variables let you parameterize your picture:)5 1737 1 720 5299 t
+9 CW f
+( = 1)2 216( b)1 162(a = 0.5;)2 432 3 870 5469 t
+(box wid a ht b)4 756 1 870 5689 t
+(ellipse wid a/2 ht 1.5*b)4 1296 1 870 5799 t
+( - \(a/2, b/2\))3 702(Box2: Box1)1 594 2 870 5909 t
+10 R f
+(Expressions may use the standard operators)5 1744 1 720 6089 t
+10 CW f
+(+)2489 6089 w
+10 R f
+(,)2549 6089 w
+10 CW f
+(-)2599 6089 w
+10 R f
+(,)2659 6089 w
+10 CW f
+(*)2709 6089 w
+10 R f
+(,)2769 6089 w
+10 CW f
+(/)2819 6089 w
+10 R f
+(,)2879 6089 w
+10 CW f
+(%)2929 6089 w
+10 R f
+(,)2989 6089 w
+10 CW f
+(\303)3039 6089 w
+10 R f
+(\(exponentiation\), and parentheses for grouping.)4 1896 1 3124 6089 t
+( the prede\256ned ones for controlling the default sizes of objects, listed in)12 2968(The most important variables are)4 1352 2 720 6269 t
+( may be set at any time in any picture, and retain their values from picture to picture until reset.)19 3802(\2473. These)1 413 2 720 6389 t
+(You can use the height, width, radius, and)7 1681 1 720 6569 t
+10 I f
+(x)2426 6569 w
+10 R f
+(and)2495 6569 w
+10 I f
+(y)2664 6569 w
+10 R f
+(coordinates of any object or corner in an expression:)8 2095 1 2733 6569 t
+9 CW f
+( the)1 216(Box1.x #)1 1314 2 870 6739 t
+9 I f
+(x)2454 6739 w
+9 CW f
+(coordinate of the center of Box1)5 1728 1 2548 6739 t
+( the)1 216(Box1.ne.y #)1 1314 2 870 6849 t
+9 I f
+(y)2454 6849 w
+9 CW f
+(coordinate of the northeast corner of Box1)6 2268 1 2548 6849 t
+( the width of Box1)4 972(Box1.wid #)1 1314 2 870 6959 t
+( and its height)3 810(Box1.ht #)1 1314 2 870 7069 t
+( the radius of the 2nd last circle)7 1836( #)1 288(2nd last circle.rad)2 1026 3 870 7179 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 11 11
+%%Page: 12 12
+/saveobj save def
+mark
+12 pagesetup
+10 HB f
+(12 PIC)1 4320 1 720 600 t
+10 R f
+( a position; furthermore such positions can be added)8 2094(Any pair of expressions enclosed in parentheses de\256nes)7 2226 2 720 960 t
+(or subtracted to yield new positions:)5 1452 1 720 1080 t
+9 CW f
+(\()870 1250 w
+9 I f
+(x)924 1250 w
+9 CW f
+(,)986 1250 w
+9 I f
+(y)1062 1250 w
+9 CW f
+(\))1102 1250 w
+(\()870 1360 w
+9 I f
+(x)924 1360 w
+6 R f
+(1)974 1378 w
+9 CW f
+(,)1033 1360 w
+9 I f
+(y)1109 1360 w
+6 R f
+(1)1159 1378 w
+9 CW f
+(\) + \()2 270 1 1196 1360 t
+9 I f
+(x)1466 1360 w
+6 R f
+(2)1516 1378 w
+9 CW f
+(,)1575 1360 w
+9 I f
+(y)1651 1360 w
+6 R f
+(2)1701 1378 w
+9 CW f
+(\))1738 1360 w
+10 R f
+(If)720 1540 w
+10 I f
+(p)811 1540 w
+7 R f
+(1)872 1560 w
+10 R f
+(and)940 1540 w
+10 I f
+(p)1109 1540 w
+7 R f
+(2)1170 1560 w
+10 R f
+(are positions, then)2 730 1 1238 1540 t
+10 CW f
+(\()2001 1540 w
+10 I f
+(p)2069 1540 w
+7 R f
+(1)2130 1560 w
+10 CW f
+(,)2189 1540 w
+10 I f
+(p)2257 1540 w
+7 R f
+(2)2318 1560 w
+10 CW f
+(\))2377 1540 w
+10 R f
+(refers to the point)3 707 1 2462 1540 t
+10 CW f
+(\()3202 1540 w
+10 I f
+(p)3270 1540 w
+7 R f
+(1)3331 1560 w
+10 CW f
+( ,)1 100(. x)1 128 2 3390 1540 t
+10 I f
+(p)3650 1540 w
+7 R f
+(2)3711 1560 w
+10 CW f
+(. y \))2 196 1 3770 1540 t
+10 R f
+(.)3966 1540 w
+10 I f
+(Pic)720 1720 w
+10 R f
+(provides a small collection of standard functions:)6 1970 1 878 1720 t
+10 CW f
+(sin\()870 1900 w
+10 I f
+(expr)1110 1900 w
+10 CW f
+(\))1287 1900 w
+10 R f
+(,)1347 1900 w
+10 CW f
+(cos\()1432 1900 w
+10 I f
+(expr)1672 1900 w
+10 CW f
+(\))1849 1900 w
+10 R f
+(,)1909 1900 w
+10 CW f
+(atan2\()1994 1900 w
+10 I f
+(y)2354 1900 w
+10 CW f
+(,)2398 1900 w
+10 I f
+(x)2458 1900 w
+10 CW f
+(\))2502 1900 w
+10 R f
+(\(angle in radians\))2 698 1 2839 1900 t
+10 CW f
+(log\()870 2020 w
+10 I f
+(expr)1110 2020 w
+10 CW f
+(\))1287 2020 w
+10 R f
+(,)1347 2020 w
+10 CW f
+(exp\()1432 2020 w
+10 I f
+(expr)1672 2020 w
+10 CW f
+(\))1849 2020 w
+10 R f
+(\(Beware: both base 10\))3 928 1 2839 2020 t
+10 CW f
+(sqrt\()870 2140 w
+10 I f
+(expr)1170 2140 w
+10 CW f
+(\))1347 2140 w
+10 R f
+(,)1407 2140 w
+10 CW f
+(max\()1492 2140 w
+10 I f
+(e)1732 2140 w
+7 R f
+(1)1787 2160 w
+10 CW f
+(,)1830 2140 w
+10 I f
+(e)1890 2140 w
+7 R f
+(2)1945 2160 w
+10 CW f
+(\))1988 2140 w
+10 R f
+(,)2048 2140 w
+10 CW f
+(min\()2133 2140 w
+10 I f
+(e)2373 2140 w
+7 R f
+(1)2428 2160 w
+10 CW f
+(,)2471 2140 w
+10 I f
+(e)2531 2140 w
+7 R f
+(2)2586 2160 w
+10 CW f
+(\))2629 2140 w
+(int\()870 2260 w
+10 I f
+(expr)1110 2260 w
+10 CW f
+(\))1287 2260 w
+10 R f
+(\(integer part of)2 598 1 2839 2260 t
+10 I f
+(expr)3462 2260 w
+10 R f
+(\))3639 2260 w
+10 CW f
+(rand\(\))870 2380 w
+10 R f
+(\(random number between 0 and 1\))5 1377 1 2839 2380 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 7.  , HEADING = MORE ON TEXT]
+10 B f
+( ON TEXT)2 473(7. MORE)1 436 2 720 2620 t
+10 R f
+( attribute)1 364( The)1 211( at the geometric center of the object it is associated with.)11 2362(Normally, text is centered)3 1052 4 720 2800 t
+10 CW f
+(ljust)4740 2800 w
+10 R f
+( speci\256ed)1 387(causes the left end to be at the speci\256ed point \(which means that the text lies to the right of the)20 3933 2 720 2920 t
+(place!\), and)1 475 1 720 3040 t
+10 CW f
+(rjust)1225 3040 w
+10 R f
+(puts the right end at the place.)6 1231 1 1555 3040 t
+10 CW f
+(above)2841 3040 w
+10 R f
+(and)3171 3040 w
+10 CW f
+(below)3345 3040 w
+10 R f
+(center the text one half line space)6 1365 1 3675 3040 t
+(in the given direction.)3 877 1 720 3160 t
+(Text attributes can be compounded:)4 1431 1 720 3340 t
+9 CW f
+(arrow 1 "ljust above" ljust above)5 1782 1 870 3510 t
+10 R f
+(ljust above)1 436 1 2842 3650 t
+3202 3690 2482 3690 Dl
+3202 3690 3130 3708 Dl
+3202 3690 3130 3672 Dl
+(Text is most often an attribute of some other object, but you can also have self-standing text:)16 3704 1 720 3870 t
+9 CW f
+("origin" "\(0,0\)" at 0,0)3 1242 1 870 4040 t
+("this is" "\(1,1\)" at 1,1)4 1296 1 870 4150 t
+(box ht 1 wid 1 dotted with .sw at 0,0)9 1998 1 870 4260 t
+10 R f
+(origin)2341 5120 w
+(\(0,0\))2365 5240 w
+(this is)1 237 1 3062 4400 t
+(\(1,1\))3085 4520 w
+7 R f
+( .)1 0(. . . . . . . . . . . . . . . . . . . . .)20 738 2 2450 5163 t
+(.)3170 5127 w
+(.)3170 5091 w
+(.)3170 5055 w
+(.)3170 5019 w
+(.)3170 4983 w
+(.)3170 4947 w
+(.)3170 4911 w
+(.)3170 4875 w
+(.)3170 4839 w
+(.)3170 4803 w
+(.)3170 4767 w
+(.)3170 4731 w
+(.)3170 4695 w
+(.)3170 4659 w
+(.)3170 4623 w
+(.)3170 4587 w
+(.)3170 4551 w
+(.)3170 4515 w
+(.)3170 4479 w
+( .)1 0( . . . . . . . . . . . . . . . . . . . .)20 -720(. .)1 18 3 3170 4443 t
+(.)2450 4479 w
+(.)2450 4515 w
+(.)2450 4551 w
+(.)2450 4587 w
+(.)2450 4623 w
+(.)2450 4659 w
+(.)2450 4695 w
+(.)2450 4731 w
+(.)2450 4767 w
+(.)2450 4803 w
+(.)2450 4839 w
+(.)2450 4875 w
+(.)2450 4911 w
+(.)2450 4947 w
+(.)2450 4983 w
+(.)2450 5019 w
+(.)2450 5055 w
+(.)2450 5091 w
+(.)2450 5127 w
+(.)2450 5163 w
+10 R f
+(In effect,)1 362 1 720 5400 t
+10 I f
+(n)1110 5400 w
+10 R f
+(text strings are contained in an invisible box of width)9 2165 1 1188 5400 t
+10 CW f
+(textwid)3382 5400 w
+10 R f
+(and height)1 423 1 3831 5400 t
+10 I f
+(n)4283 5400 w
+10 S f
+(\264)4362 5400 w
+10 CW f
+(textht)4446 5400 w
+10 R f
+(. The)1 234 1 4806 5400 t
+(variables)720 5520 w
+10 CW f
+(textwid)1105 5520 w
+10 R f
+(and)1550 5520 w
+10 CW f
+(textht)1719 5520 w
+10 R f
+(may be set to any values; they are normally zero.)9 1957 1 2104 5520 t
+( can be converted to a formatted string with the)9 1933(A list of numeric expressions)4 1187 2 720 5700 t
+10 CW f
+(sprintf)3870 5700 w
+10 R f
+(function and used)2 720 1 4320 5700 t
+(anywhere a quoted string can be:)5 1316 1 720 5820 t
+9 CW f
+(B: box wid log\(20\))3 972 1 870 5990 t
+(sprintf\("width = %g, height = %g ", B.wid, B.ht\) rjust at B.w)11 3294 1 1032 6100 t
+10 R f
+2412 6280 2412 6640 Dl
+3348 6280 2412 6280 Dl
+3348 6640 3348 6280 Dl
+2412 6640 3348 6640 Dl
+(width = 1.30103, height = 0.5)5 1190 1 1197 6480 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 12 12
+%%Page: 13 13
+/saveobj save def
+mark
+13 pagesetup
+10 HB f
+(PIC 13)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 8.  , HEADING = LINES AND SPLINES]
+10 B f
+( AND SPLINES)2 684(8. LINES)1 426 2 720 960 t
+10 R f
+(A ``line'' may actually be a path, that is, it may consist of connected segments:)14 3162 1 720 1140 t
+9 CW f
+(line right 1 then down .5 left 1 then right 1)10 2430 1 870 1310 t
+10 R f
+3240 1490 2520 1490 Dl
+2520 1850 3240 1490 Dl
+3240 1850 2520 1850 Dl
+(The word)1 385 1 720 2030 t
+10 CW f
+(then)1130 2030 w
+10 R f
+(separates components of the path.)4 1350 1 1395 2030 t
+( at the same)3 498( begins)1 293( It)1 118(A spline is a smooth curve guided by a set of straight lines just like the line above.)17 3411 4 720 2210 t
+( syntax)1 291( The)1 210( at the same place, and in between is tangent to the mid-point of each guiding line.)16 3370(place, ends)1 449 4 720 2330 t
+(for a spline is identical to a \(path\) line except for using)11 2188 1 720 2450 t
+10 CW f
+(spline)2933 2450 w
+10 R f
+(instead of)1 391 1 3318 2450 t
+10 CW f
+(line)3734 2450 w
+10 R f
+(:)3974 2450 w
+9 CW f
+(line dashed right 1 then down .5 left 1 then right 1)11 2808 1 870 2620 t
+(spline from start of last line \\)6 1728 1 870 2730 t
+(right 1 then down .5 left 1 then right 1)9 2160 1 978 2840 t
+10 R f
+2556 3020 2520 3020 Dl
+2632 3020 2596 3020 Dl
+2707 3020 2671 3020 Dl
+2784 3020 2748 3020 Dl
+2859 3020 2823 3020 Dl
+2936 3020 2900 3020 Dl
+3011 3020 2975 3020 Dl
+3088 3020 3052 3020 Dl
+3163 3020 3127 3020 Dl
+3240 3020 3204 3020 Dl
+3208 3035 3240 3020 Dl
+3145 3065 3177 3050 Dl
+3082 3097 3114 3082 Dl
+3020 3128 3052 3113 Dl
+2958 3160 2990 3145 Dl
+2895 3191 2927 3176 Dl
+2832 3222 2864 3207 Dl
+2770 3253 2802 3238 Dl
+2707 3284 2739 3269 Dl
+2644 3316 2676 3301 Dl
+2583 3347 2615 3332 Dl
+2520 3379 2552 3364 Dl
+2556 3380 2520 3380 Dl
+2632 3380 2596 3380 Dl
+2707 3380 2671 3380 Dl
+2784 3380 2748 3380 Dl
+2859 3380 2823 3380 Dl
+2936 3380 2900 3380 Dl
+3011 3380 2975 3380 Dl
+3088 3380 3052 3380 Dl
+3163 3380 3127 3380 Dl
+3240 3380 3204 3380 Dl
+2520 3020 2520 3020 3240 3020 Ds
+2520 3020 3240 3020 2520 3380 Ds
+3240 3020 2520 3380 3240 3380 Ds
+2520 3380 3240 3380 3240 3380 Ds
+(\(Long input lines can be split by ending each piece with a backslash.\))12 2776 1 720 3560 t
+( terms or)2 361(The elements of a path, whether line or spline, are speci\256ed as a series of points, either in absolute)18 3959 2 720 3740 t
+(by)720 3860 w
+10 CW f
+(up)845 3860 w
+10 R f
+(,)965 3860 w
+10 CW f
+(down)1015 3860 w
+10 R f
+(, etc.)1 191 1 1255 3860 t
+9 CW f
+(spline right then up then left then down ->)8 2322 1 870 4030 t
+10 R f
+2879 4525 2879 4525 3239 4525 Ds
+2879 4525 3239 4525 3239 4165 Ds
+3239 4525 3239 4165 2879 4165 Ds
+3239 4165 2879 4165 2879 4525 Ds
+2879 4165 2879 4525 2879 4525 Ds
+2879 4524 2861 4452 Dl
+2879 4524 2897 4452 Dl
+9 CW f
+(spline right then up left then down ->)7 2052 1 870 4695 t
+10 R f
+2879 5145 2879 5145 3239 5145 Ds
+2879 5145 3239 5145 2879 4785 Ds
+3239 5145 2879 4785 2879 5145 Ds
+2879 4785 2879 5145 2879 5145 Ds
+2879 5145 2861 5073 Dl
+2879 5145 2897 5073 Dl
+(Notice that arrowheads may be put on the ends of a line or spline.)13 2623 1 720 5325 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 9.  , HEADING = BLOCKS]
+10 B f
+(9. BLOCKS)1 543 1 720 5565 t
+10 R f
+(Any sequence of)2 684 1 720 5745 t
+10 I f
+(pic)1436 5745 w
+10 R f
+(statements may be enclosed in brackets)5 1612 1 1590 5745 t
+10 CW f
+([)3235 5745 w
+10 R f
+(and)3328 5745 w
+10 CW f
+(])3505 5745 w
+10 R f
+(to form a block, which can then be)7 1442 1 3598 5745 t
+(treated as a single object, and manipulated rather like an ordinary box:)11 2811 1 720 5865 t
+9 CW f
+(box "1")1 378 1 870 6035 t
+([ box "2"; arrow "3" above; box "4" ] with .n at last box.s - \(0,0.1\))15 3726 1 870 6145 t
+("Thing 2: " rjust at last [].w)6 1620 1 870 6255 t
+10 R f
+2610 6435 2610 6795 Dl
+3150 6435 2610 6435 Dl
+3150 6795 3150 6435 Dl
+2610 6795 3150 6795 Dl
+(1)2855 6635 w
+2160 6867 2160 7227 Dl
+2700 6867 2160 6867 Dl
+2700 7227 2700 6867 Dl
+2160 7227 2700 7227 Dl
+(2)2405 7067 w
+(3)2855 7007 w
+3060 7047 2700 7047 Dl
+3060 7047 2988 7065 Dl
+3060 7047 2988 7029 Dl
+3060 6867 3060 7227 Dl
+3600 6867 3060 6867 Dl
+3600 7227 3600 6867 Dl
+3060 7227 3600 7227 Dl
+( 2:)1 103(4 Thing)1 -1273 2 3305 7067 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 13 13
+%%Page: 14 14
+/saveobj save def
+mark
+14 pagesetup
+10 HB f
+(14 PIC)1 4320 1 720 600 t
+10 R f
+( ``last''-type constructs treat blocks as a unit and don't look inside for objects: ``)14 3245(Notice that)1 442 2 720 960 t
+10 CW f
+(last box.s)1 567 1 4407 960 t
+10 R f
+('')4974 960 w
+( can use)2 321( You)1 222(refers to box 1, not box 2 or 4.)8 1215 3 720 1080 t
+10 CW f
+(last [])1 420 1 2503 1080 t
+10 R f
+(, etc., just like)3 561 1 2923 1080 t
+10 CW f
+(last box)1 480 1 3509 1080 t
+10 R f
+(.)3989 1080 w
+( also possible to)3 669( is)1 100( It)1 119(Blocks have the same compass corners as boxes \(determined by the bounding box\).)12 3432 4 720 1260 t
+( block by placing either an absolute coordinate \(like)8 2154(position a)1 403 2 720 1380 t
+10 CW f
+(0,0)3312 1380 w
+10 R f
+(\) or an internal label \(like)5 1067 1 3492 1380 t
+10 CW f
+(A)4594 1380 w
+10 R f
+(\) at some)2 386 1 4654 1380 t
+(external point, as in)3 788 1 720 1500 t
+9 CW f
+([)870 1670 w
+9 S f
+(\274)978 1670 w
+9 CW f
+(; A:)1 216 1 1068 1670 t
+9 S f
+(\274)1338 1670 w
+9 CW f
+(;)1428 1670 w
+9 S f
+(\274)1536 1670 w
+9 CW f
+(] with .A at)3 648 1 1680 1670 t
+9 S f
+(\274)2382 1670 w
+10 R f
+(By default, blocks join with other things as boxes do, at the center of the appropriate side.)16 3587 1 720 1850 t
+( variables and places within a block are local to that block, and thus do not affect variables and)18 3928(Names of)1 392 2 720 2030 t
+( particular, that includes the built-in variables like)7 2062( \(In)1 176(places of the same name outside.)5 1364 3 720 2150 t
+10 CW f
+(boxwid)4357 2150 w
+10 R f
+(, etc.; if)2 323 1 4717 2150 t
+( can get at the)4 582( You)1 229( a block, they revert to their original values when the block is left.\))13 2756(they are set within)3 753 4 720 2270 t
+(internal place names with constructs like)5 1628 1 720 2390 t
+9 CW f
+(last [].A)1 486 1 870 2560 t
+10 R f
+(or)720 2740 w
+9 CW f
+(B.A)870 2910 w
+10 R f
+(where)720 3090 w
+10 CW f
+(B)988 3090 w
+10 R f
+(is a name attached to a block:)6 1181 1 1073 3090 t
+9 CW f
+(B: [)1 270 1 870 3260 t
+9 S f
+(\274)1194 3260 w
+9 CW f
+(; A:)1 270 1 1338 3260 t
+9 S f
+(\274)1662 3260 w
+9 CW f
+(; ])1 216 1 1752 3260 t
+10 R f
+(When combined with)2 900 1 720 3440 t
+10 CW f
+(define)1666 3440 w
+10 R f
+(statements \(next section\), blocks provide a reasonable simulation of a)9 2968 1 2072 3440 t
+(procedure mechanism.)1 903 1 720 3560 t
+( to look only one level deep with constructs like)9 1927(Although blocks nest, it is currently possible)6 1786 2 720 3740 t
+10 CW f
+(B.A)4459 3740 w
+10 R f
+(, although)1 401 1 4639 3740 t
+10 CW f
+(A)720 3860 w
+10 R f
+(may be further quali\256ed by a corner name \(i.e.,)8 1881 1 805 3860 t
+10 CW f
+(B.A.sw)2711 3860 w
+10 R f
+(or)3096 3860 w
+10 CW f
+(top of B.A)2 530 1 3204 3860 t
+10 R f
+(are legal\).)1 398 1 3759 3860 t
+(The following example illustrates most of the points made above about how blocks work:)13 3583 1 720 4040 t
+9 CW f
+( = .1)2 270( dw)1 216( = .02;)2 378( dh)1 216(h = .5;)2 378 5 870 4210 t
+([)870 4320 w
+(Ptr: [)1 324 1 1230 4430 t
+(boxht = h; boxwid = dw)5 1188 1 1590 4540 t
+(A: box)1 324 1 1590 4650 t
+(B: box)1 324 1 1590 4760 t
+(C: box)1 324 1 1590 4870 t
+(box wid 2*boxwid "...")3 1188 1 1590 4980 t
+(D: box)1 324 1 1590 5090 t
+(])1230 5200 w
+(Block: [)1 432 1 1230 5310 t
+(boxht = 2*dw; boxwid = 2*dw)5 1458 1 1590 5420 t
+(movewid = 2*dh)2 756 1 1590 5530 t
+(A: box; move)2 648 1 1590 5640 t
+(B: box; move)2 648 1 1590 5750 t
+(C: box; move)2 648 1 1590 5860 t
+(box invis "..." wid 2*boxwid; move)5 1836 1 1590 5970 t
+(D: box)1 324 1 1590 6080 t
+(] with .t at Ptr.s - \(0,h/2\))6 1512 1 1230 6190 t
+(arrow from Ptr.A to Block.A.nw + \(dh,0\))6 2106 1 1230 6300 t
+(arrow from Ptr.B to Block.B.nw + \(dh,0\))6 2106 1 1230 6410 t
+(arrow from Ptr.C to Block.C.nw + \(dh,0\))6 2106 1 1230 6520 t
+(arrow from Ptr.D to Block.D.nw + \(dh,0\))6 2106 1 1230 6630 t
+(])870 6740 w
+(box dashed ht last [].ht+dw wid last [].wid+dw at last [])10 3078 1 870 6850 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 14 14
+%%Page: 15 15
+/saveobj save def
+mark
+15 pagesetup
+10 HB f
+(PIC 15)1 4320 1 720 600 t
+10 R f
+(This produces)1 563 1 720 960 t
+2663 1176 2663 1536 Dl
+2735 1176 2663 1176 Dl
+2735 1536 2735 1176 Dl
+2663 1536 2735 1536 Dl
+2735 1176 2735 1536 Dl
+2807 1176 2735 1176 Dl
+2807 1536 2807 1176 Dl
+2735 1536 2807 1536 Dl
+2807 1176 2807 1536 Dl
+2879 1176 2807 1176 Dl
+2879 1536 2879 1176 Dl
+2807 1536 2879 1536 Dl
+2879 1176 2879 1536 Dl
+3023 1176 2879 1176 Dl
+3023 1536 3023 1176 Dl
+2879 1536 3023 1536 Dl
+(...)2914 1376 w
+3023 1176 3023 1536 Dl
+3095 1176 3023 1176 Dl
+3095 1536 3095 1176 Dl
+3023 1536 3095 1536 Dl
+2390 1716 2390 1860 Dl
+2534 1716 2390 1716 Dl
+2534 1860 2534 1716 Dl
+2390 1860 2534 1860 Dl
+2562 1716 2562 1860 Dl
+2706 1716 2562 1716 Dl
+2706 1860 2706 1716 Dl
+2562 1860 2706 1860 Dl
+2735 1716 2735 1860 Dl
+2879 1716 2735 1716 Dl
+2879 1860 2879 1716 Dl
+2735 1860 2879 1860 Dl
+(...)3015 1808 w
+3225 1716 3225 1860 Dl
+3369 1716 3225 1716 Dl
+3369 1860 3369 1716 Dl
+3225 1860 3369 1860 Dl
+2404 1716 2699 1356 Dl
+2405 1715 2436 1649 Dl
+2405 1715 2464 1672 Dl
+2577 1716 2771 1356 Dl
+2577 1716 2595 1644 Dl
+2577 1715 2627 1661 Dl
+2750 1716 2843 1356 Dl
+2750 1715 2750 1641 Dl
+2750 1715 2785 1651 Dl
+3239 1716 3059 1356 Dl
+3239 1715 3191 1659 Dl
+3238 1715 3223 1643 Dl
+2390 1896 2354 1896 Dl
+2462 1896 2426 1896 Dl
+2534 1896 2498 1896 Dl
+2607 1896 2571 1896 Dl
+2680 1896 2644 1896 Dl
+2752 1896 2716 1896 Dl
+2824 1896 2788 1896 Dl
+2897 1896 2861 1896 Dl
+2970 1896 2934 1896 Dl
+3042 1896 3006 1896 Dl
+3115 1896 3079 1896 Dl
+3187 1896 3151 1896 Dl
+3260 1896 3224 1896 Dl
+3332 1896 3296 1896 Dl
+3405 1896 3369 1896 Dl
+3405 1860 3405 1896 Dl
+3405 1788 3405 1824 Dl
+3405 1716 3405 1752 Dl
+3405 1644 3405 1680 Dl
+3405 1572 3405 1608 Dl
+3405 1500 3405 1536 Dl
+3405 1428 3405 1464 Dl
+3405 1356 3405 1392 Dl
+3405 1284 3405 1320 Dl
+3405 1212 3405 1248 Dl
+3405 1140 3405 1176 Dl
+3369 1140 3405 1140 Dl
+3296 1140 3332 1140 Dl
+3224 1140 3260 1140 Dl
+3151 1140 3187 1140 Dl
+3079 1140 3115 1140 Dl
+3006 1140 3042 1140 Dl
+2934 1140 2970 1140 Dl
+2861 1140 2897 1140 Dl
+2788 1140 2824 1140 Dl
+2716 1140 2752 1140 Dl
+2644 1140 2680 1140 Dl
+2571 1140 2607 1140 Dl
+2498 1140 2534 1140 Dl
+2426 1140 2462 1140 Dl
+2354 1140 2390 1140 Dl
+2354 1176 2354 1140 Dl
+2354 1248 2354 1212 Dl
+2354 1320 2354 1284 Dl
+2354 1392 2354 1356 Dl
+2354 1464 2354 1428 Dl
+2354 1536 2354 1500 Dl
+2354 1608 2354 1572 Dl
+2354 1680 2354 1644 Dl
+2354 1752 2354 1716 Dl
+2354 1824 2354 1788 Dl
+2354 1896 2354 1860 Dl
+%INFO[SECTION: LEVEL = 1, NUMBER = 10.  , HEADING = MACROS]
+10 B f
+(10. MACROS)1 619 1 720 2136 t
+10 I f
+(Pic)720 2316 w
+10 R f
+( the simplest form,)3 750( In)1 133(provides a basic macro facility.)4 1250 3 878 2316 t
+9 CW f
+(define)870 2486 w
+9 I f
+(name)1302 2486 w
+9 CW f
+({)1605 2486 w
+9 I f
+(replacement text)1 598 1 1713 2486 t
+9 CW f
+(})2365 2486 w
+10 R f
+(de\256nes)720 2666 w
+10 I f
+(name)1055 2666 w
+10 R f
+(to be the)2 400 1 1324 2666 t
+10 I f
+(replacement text)1 690 1 1777 2666 t
+10 R f
+( subsequent occurrence of)3 1122(. Any)1 275 2 2475 2666 t
+10 I f
+(name)3925 2666 w
+10 R f
+(will be replaced by)3 846 1 4194 2666 t
+10 I f
+(replacement text)1 662 1 720 2786 t
+10 R f
+(.)1390 2786 w
+( the replacement text of a macro de\256nition contains occurrences of)10 2680( If)1 118(Macros may have arguments.)3 1178 3 720 2966 t
+10 CW f
+($1)4723 2966 w
+10 R f
+(,)4843 2966 w
+10 CW f
+($2)4895 2966 w
+10 R f
+(,)5015 2966 w
+( The)1 228(etc., these will be replaced by the corresponding actual arguments when the macro is invoked.)14 4092 2 720 3086 t
+(invocation for a macro with arguments is)6 1642 1 720 3206 t
+9 CW f
+(name\(arg1, arg2,)1 864 1 870 3376 t
+9 S f
+(\274)1788 3376 w
+9 CW f
+(\))1878 3376 w
+10 R f
+( de\256nitions last from picture to picture; a macro)8 1917( Macro)1 311( replaced by null strings.)4 989(Non-existent arguments are)2 1103 4 720 3556 t
+(de\256nition can be removed by)4 1165 1 720 3676 t
+9 CW f
+(undef)870 3846 w
+9 I f
+(macro-name)1194 3846 w
+10 R f
+(As an example, one might de\256ne a)6 1384 1 720 4026 t
+10 CW f
+(square)2129 4026 w
+10 R f
+(by)2514 4026 w
+9 CW f
+( })1 108( $2)1 216(define square { box ht $1 wid $1)7 1728 3 870 4196 t
+10 R f
+(and use it as)3 491 1 720 4376 t
+9 CW f
+(square\(1, "one" "inch"\))2 1242 1 870 4546 t
+(square\(0.5\))870 4656 w
+(square\(0.25, "\\s-4tiny\\s+4" dashed\))2 1890 1 870 4766 t
+10 R f
+2250 4946 2250 5666 Dl
+2970 4946 2250 4946 Dl
+2970 5666 2970 4946 Dl
+2250 5666 2970 5666 Dl
+(one)2538 5266 w
+(inch)2524 5386 w
+2970 5126 2970 5486 Dl
+3330 5126 2970 5126 Dl
+3330 5486 3330 5126 Dl
+2970 5486 3330 5486 Dl
+3366 5396 3330 5396 Dl
+3438 5396 3402 5396 Dl
+3510 5396 3474 5396 Dl
+3510 5360 3510 5396 Dl
+3510 5288 3510 5324 Dl
+3510 5216 3510 5252 Dl
+3474 5216 3510 5216 Dl
+3402 5216 3438 5216 Dl
+3330 5216 3366 5216 Dl
+3330 5252 3330 5216 Dl
+3330 5324 3330 5288 Dl
+3330 5396 3330 5360 Dl
+6 R f
+(tiny)3373 5326 w
+10 R f
+(Notice how the second argument may be used to pass in arbitrary contents.)12 2992 1 720 5846 t
+(Coordinates like)1 678 1 720 6026 t
+10 I f
+(x,y)1443 6026 w
+10 R f
+(may be enclosed in parentheses, as in \()7 1692 1 1601 6026 t
+10 I f
+(x,y)3293 6026 w
+10 R f
+(\), so they can be included in a macro)8 1626 1 3414 6026 t
+(argument.)720 6146 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 11.  , HEADING = FILE COPY]
+10 B f
+( COPY)1 308(11. FILE)1 409 2 720 6386 t
+10 R f
+(The statement)1 563 1 720 6566 t
+9 CW f
+(copy ")1 324 1 870 6736 t
+9 I f
+(\256lename)1194 6736 w
+9 CW f
+(")1499 6736 w
+10 R f
+( Any)1 230( the named \256le at that point in the input.)9 1672(inserts the contents of)3 895 3 720 6916 t
+10 CW f
+(.PS)3550 6916 w
+10 R f
+(or)3763 6916 w
+10 CW f
+(.PE)3879 6916 w
+10 R f
+(lines within the \256le are)4 948 1 4092 6916 t
+(ignored, so previously prepared pictures can be used as parts of larger ones without editing.)14 3654 1 720 7036 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 15 15
+%%Page: 16 16
+/saveobj save def
+mark
+16 pagesetup
+10 HB f
+(16 PIC)1 4320 1 720 600 t
+10 I f
+(Pic)720 960 w
+10 R f
+(also provides the)2 677 1 878 960 t
+10 CW f
+(copy thru)1 505 1 1580 960 t
+10 R f
+(mechanism found in)2 816 1 2110 960 t
+10 I f
+(grap)2951 960 w
+10 R f
+(:)3148 960 w
+9 CW f
+(copy ")1 324 1 870 1130 t
+9 I f
+(\256le)1194 1130 w
+9 CW f
+(" thru)1 324 1 1304 1130 t
+9 I f
+(macro-name)1682 1130 w
+10 R f
+(copies)720 1310 w
+10 I f
+(\256le)1001 1310 w
+10 R f
+( literal)1 260( A)1 124( invocation of the named macro \(each \256eld being an argument\).)10 2556(, treating each line as an)5 969 4 1131 1310 t
+(macro may be used instead of a name:)7 1527 1 720 1430 t
+9 CW f
+(copy ")1 324 1 870 1600 t
+9 I f
+(\256le)1194 1600 w
+9 CW f
+(" thru {)2 432 1 1304 1600 t
+9 I f
+(macro replacement text)2 851 1 1790 1600 t
+9 CW f
+(})2695 1600 w
+10 R f
+(and if no \256le name is given, the remainder of the input until the next)14 2742 1 720 1780 t
+10 CW f
+(.PE)3488 1780 w
+10 R f
+( to plot a set of circles)6 888( So)1 157(is used.)1 301 3 3694 1780 t
+(at points whose coordinates and radii are included in-line:)8 2313 1 720 1900 t
+9 CW f
+(copy thru { circle rad $3 at $1,$2 })8 1944 1 870 2070 t
+(0 0 .05)2 378 1 870 2180 t
+(1 1 .1)2 324 1 870 2290 t
+9 S f
+(\274)870 2400 w
+10 R f
+2466 3372 72 72 De
+3150 2652 144 144 De
+2624 3156 43 43 De
+2754 2868 72 72 De
+2502 2796 144 144 De
+2775 2724 28 28 De
+2898 3012 216 216 De
+3193 3084 57 57 De
+3024 3372 108 108 De
+2840 3192 43 43 De
+(The)720 3606 w
+10 CW f
+(sh)900 3606 w
+10 R f
+(command executes an arbitrary command line:)5 1871 1 1045 3606 t
+9 CW f
+(sh {)1 216 1 870 3776 t
+9 I f
+(anything)1140 3776 w
+9 CW f
+(})1509 3776 w
+10 R f
+(Macros within)1 580 1 720 3956 t
+10 I f
+(anything)1325 3956 w
+10 R f
+(are expanded \256rst.)2 734 1 1700 3956 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 12.  , HEADING = LOOPS AND CONDITIONALS]
+10 B f
+( AND CONDITIONALS)2 1050(12. LOOPS)1 515 2 720 4196 t
+10 I f
+(Pic)720 4376 w
+10 R f
+(provides an)1 463 1 878 4376 t
+10 CW f
+(if)1366 4376 w
+10 R f
+(statement and a)2 621 1 1511 4376 t
+10 CW f
+(for)2157 4376 w
+10 R f
+(loop.)2362 4376 w
+9 CW f
+(pi = atan2\(0,-1\))2 864 1 870 4546 t
+(for i = 0 to 2 * pi by 0.1 do {)11 1674 1 870 4656 t
+("\261" at i/2, 0)3 702 1 1302 4766 t
+("s" at i/2, sin\(i\)/2)3 1080 1 1302 4876 t
+("c" at i/2, cos\(i\)/2)3 1080 1 1302 4986 t
+(})870 5096 w
+8 R f
+(\261 s)1 36 1 1734 5652 t
+(c)1737 5292 w
+(\261)1770 5652 w
+(s)1775 5616 w
+(c)1773 5293 w
+(\261)1806 5652 w
+(s)1811 5580 w
+(c)1809 5299 w
+(\261)1842 5652 w
+(s)1847 5545 w
+(c)1845 5307 w
+(\261)1878 5652 w
+(s)1883 5511 w
+(c)1881 5320 w
+(\261)1914 5652 w
+(s)1919 5479 w
+(c)1917 5335 w
+(\261)1950 5652 w
+(s)1955 5448 w
+(c)1953 5354 w
+(\261)1986 5652 w
+(s)1991 5420 w
+(c)1989 5376 w
+(\261)2022 5652 w
+(s)2027 5393 w
+(c)2025 5401 w
+(\261)2058 5652 w
+(s)2063 5369 w
+(c)2061 5428 w
+(\261)2094 5652 w
+(s)2099 5348 w
+(c)2097 5457 w
+(\261)2130 5652 w
+(s)2135 5330 w
+(c)2133 5488 w
+(\261)2166 5652 w
+(s)2171 5316 w
+(c)2169 5521 w
+(\261)2202 5652 w
+(s)2207 5304 w
+(c)2205 5555 w
+(\261)2238 5652 w
+(s)2243 5297 w
+(c)2241 5590 w
+(\261)2274 5652 w
+(s)2279 5292 w
+(c)2277 5626 w
+(\261)2310 5652 w
+(s)2315 5292 w
+(c)2313 5662 w
+(\261)2346 5652 w
+(s)2351 5294 w
+(c)2349 5698 w
+(\261)2382 5652 w
+(s)2387 5301 w
+(c)2385 5734 w
+(\261)2418 5652 w
+(s)2423 5311 w
+(c)2421 5768 w
+(\261)2454 5652 w
+(s)2459 5324 w
+(c)2457 5801 w
+(\261)2490 5652 w
+(s)2495 5340 w
+(c)2493 5833 w
+(\261)2526 5652 w
+(s)2531 5361 w
+(c)2529 5863 w
+(\261)2562 5652 w
+(s)2567 5383 w
+(c)2565 5891 w
+(\261)2598 5652 w
+(s)2603 5408 w
+(c)2601 5917 w
+(\261)2634 5652 w
+(s)2639 5436 w
+(c)2637 5940 w
+(\261)2670 5652 w
+(s)2675 5466 w
+(c)2673 5960 w
+(\261)2706 5652 w
+(s)2711 5497 w
+(c)2709 5977 w
+(\261)2742 5652 w
+(s)2747 5531 w
+(c)2745 5991 w
+(\261)2778 5652 w
+(s)2783 5565 w
+(c)2781 6001 w
+(\261)2814 5652 w
+(s)2819 5600 w
+(c)2817 6008 w
+(\261)2850 5652 w
+(s)2855 5636 w
+(c)2853 6012 w
+(\261)2886 5652 w
+(s)2891 5672 w
+(c)2889 6011 w
+(\261)2922 5652 w
+(s)2927 5708 w
+(c)2925 6007 w
+(\261)2958 5652 w
+(s)2963 5744 w
+(c)2961 5999 w
+(\261)2994 5652 w
+(s)2999 5778 w
+(c)2997 5988 w
+(\261)3030 5652 w
+(s)3035 5811 w
+(c)3033 5974 w
+(\261)3066 5652 w
+(s)3071 5842 w
+(c)3069 5957 w
+(\261)3102 5652 w
+(s)3107 5872 w
+(c)3105 5936 w
+(\261)3138 5652 w
+(s)3143 5899 w
+(c)3141 5913 w
+(\261)3174 5652 w
+(s)3179 5924 w
+(c)3177 5887 w
+(\261)3210 5652 w
+(s)3215 5946 w
+(c)3213 5858 w
+(\261)3246 5652 w
+(s)3251 5965 w
+(c)3249 5828 w
+(\261)3282 5652 w
+(s)3287 5981 w
+(c)3285 5796 w
+(\261)3318 5652 w
+(s)3323 5994 w
+(c)3321 5762 w
+(\261)3354 5652 w
+(s)3359 6004 w
+(c)3357 5727 w
+(\261)3390 5652 w
+(s)3395 6009 w
+(c)3393 5692 w
+(\261)3426 5652 w
+(s)3431 6012 w
+(c)3429 5656 w
+(\261)3462 5652 w
+(s)3467 6010 w
+(c)3465 5620 w
+(\261)3498 5652 w
+(s)3503 6005 w
+(c)3501 5585 w
+(\261)3534 5652 w
+(s)3539 5996 w
+(c)3537 5549 w
+(\261)3570 5652 w
+(s)3575 5985 w
+(c)3573 5515 w
+(\261)3606 5652 w
+(s)3611 5970 w
+(c)3609 5483 w
+(\261)3642 5652 w
+(s)3647 5951 w
+(c)3645 5452 w
+(\261)3678 5652 w
+(s)3683 5929 w
+(c)3681 5423 w
+(\261)3714 5652 w
+(s)3719 5906 w
+(c)3717 5397 w
+(\261)3750 5652 w
+(s)3755 5879 w
+(c)3753 5372 w
+(\261)3786 5652 w
+(s)3791 5850 w
+(c)3789 5351 w
+(\261)3822 5652 w
+(s)3827 5819 w
+(c)3825 5333 w
+(\261)3858 5652 w
+(s)3863 5786 w
+(c)3861 5317 w
+(\261)3894 5652 w
+(s)3899 5752 w
+(c)3897 5306 w
+(\261)3930 5652 w
+(s)3935 5717 w
+(c)3933 5297 w
+(\261)3966 5652 w
+(s)3971 5682 w
+(c)3969 5293 w
+10 R f
+(The)720 6176 w
+10 CW f
+(by)908 6176 w
+10 R f
+( value is preceded by a)5 956(clause is optional; if the)4 987 2 1061 6176 t
+10 CW f
+(*)3038 6176 w
+10 R f
+( The)1 214(, the steps are multiplicative, not additive.)6 1728 2 3098 6176 t
+(body of the loop is delimited by braces, which are also used for de\256nitions,)13 3005 1 720 6296 t
+10 CW f
+(copy)3750 6296 w
+10 R f
+(,)3990 6296 w
+10 CW f
+(sh)4040 6296 w
+10 R f
+(and)4185 6296 w
+10 CW f
+(if)4354 6296 w
+10 R f
+(statements.)4499 6296 w
+(The)720 6476 w
+10 CW f
+(if)900 6476 w
+10 R f
+(statement is)1 475 1 1045 6476 t
+9 CW f
+(if)870 6646 w
+9 I f
+(expression)1032 6646 w
+9 CW f
+(then {)1 324 1 1471 6646 t
+9 I f
+(anything)1849 6646 w
+9 CW f
+(} else {)2 432 1 2218 6646 t
+9 I f
+(anything)2704 6646 w
+9 CW f
+(})3073 6646 w
+10 R f
+(where the)1 394 1 720 6826 t
+10 CW f
+(else)1143 6826 w
+10 R f
+( The)1 210(clause is optional.)2 727 2 1412 6826 t
+10 I f
+(expression)2379 6826 w
+10 R f
+(may use the usual relational operators:)5 1564 1 2836 6826 t
+10 CW f
+(==)4430 6826 w
+10 R f
+(,)4550 6826 w
+10 CW f
+(!=)4605 6826 w
+10 R f
+(,)4725 6826 w
+10 CW f
+(>)4780 6826 w
+10 R f
+(,)4840 6826 w
+10 CW f
+(>=)4895 6826 w
+10 R f
+(,)5015 6826 w
+10 CW f
+(<)720 6946 w
+10 R f
+(,)780 6946 w
+10 CW f
+(<=)830 6946 w
+10 R f
+(,)950 6946 w
+10 CW f
+(&&)1000 6946 w
+10 R f
+(, and)1 194 1 1120 6946 t
+10 CW f
+(||)1339 6946 w
+10 R f
+(.)1459 6946 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 16 16
+%%Page: 17 17
+/saveobj save def
+mark
+17 pagesetup
+10 HB f
+(PIC 17)1 4320 1 720 600 t
+9 CW f
+(pi = atan2\(0,-1\))2 864 1 870 950 t
+(for i = 0 to pi by 0.1 do {)9 1458 1 870 1060 t
+(if \(s = sin\(i\)\) > 0.8 then { s = 0.8 })11 2052 1 1302 1170 t
+("x" at i/2, s/2)3 810 1 1302 1280 t
+(})870 1390 w
+8 R f
+(x)2292 1874 w
+(x)2328 1838 w
+(x)2364 1802 w
+(x)2400 1767 w
+(x)2436 1733 w
+(x)2472 1701 w
+(x)2508 1670 w
+(x)2544 1642 w
+(x)2580 1615 w
+(x)2616 1591 w
+(x x x x x x x x x x x x x)12 472 1 2652 1586 t
+(x)3120 1605 w
+(x)3156 1630 w
+(x)3192 1658 w
+(x)3228 1688 w
+(x)3264 1719 w
+(x)3300 1753 w
+(x)3336 1787 w
+(x)3372 1822 w
+(x)3408 1858 w
+10 R f
+(A string comparison using)3 1058 1 720 2038 t
+10 CW f
+(==)1803 2038 w
+10 R f
+(or)1948 2038 w
+10 CW f
+(!=)2056 2038 w
+10 R f
+(is also permitted, to compare quoted strings:)6 1774 1 2201 2038 t
+9 CW f
+(if ")1 216 1 870 2208 t
+9 I f
+(string1)1086 2208 w
+9 CW f
+(" == ")2 324 1 1341 2208 t
+9 I f
+(string2)1665 2208 w
+9 CW f
+(" then ...)2 540 1 1920 2208 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 13.  , HEADING = Troff INTERFACE]
+10 B f
+(13.)720 2448 w
+10 BI f
+(Troff)895 2448 w
+10 B f
+(INTERFACE)1161 2448 w
+10 I f
+(Pic)720 2628 w
+10 R f
+(is usually run as a)4 716 1 878 2628 t
+10 I f
+(troff)1619 2628 w
+10 R f
+(preprocessor:)1817 2628 w
+9 CW f
+(pic file | troff -ms)4 1080 1 870 2798 t
+9 R f
+(\(or)2814 2798 w
+9 CW f
+(-mm)2942 2798 w
+9 R f
+(\))3104 2798 w
+10 R f
+(Run it before)2 527 1 720 2978 t
+10 I f
+(eqn)1272 2978 w
+10 R f
+(if it is also present.)4 758 1 1441 2978 t
+(If the)1 213 1 720 3158 t
+10 CW f
+(.PS)958 3158 w
+10 R f
+(line looks like)2 567 1 1163 3158 t
+9 CW f
+(.PS <file)1 486 1 870 3328 t
+10 R f
+(then the contents of)3 815 1 720 3508 t
+10 CW f
+(file)1570 3508 w
+10 R f
+(are inserted in place of the)5 1105 1 1845 3508 t
+10 CW f
+(.PS)2985 3508 w
+10 R f
+( or not the \256le contains)5 974(line, whether)1 531 2 3200 3508 t
+10 CW f
+(.PS)4741 3508 w
+10 R f
+(or)4957 3508 w
+10 CW f
+(.PE)720 3628 w
+10 R f
+( feature is deprecated in favor of the)7 1442(. \(This)1 286 2 900 3628 t
+10 CW f
+(copy)2653 3628 w
+10 R f
+(statement.\))2918 3628 w
+10 I f
+(Pic)720 3808 w
+10 R f
+(copies the)1 410 1 886 3808 t
+10 CW f
+(.PS)1329 3808 w
+10 R f
+(and)1542 3808 w
+10 CW f
+(.PE)1719 3808 w
+10 R f
+( two things on the same)5 992(lines from input to output intact, except that it adds)9 2116 2 1932 3808 t
+(line as the)2 405 1 720 3928 t
+10 CW f
+(.PS)1150 3928 w
+10 R f
+(:)1330 3928 w
+9 CW f
+(.PS h w)2 378 1 870 4098 t
+10 CW f
+(h)720 4278 w
+10 R f
+(and)812 4278 w
+10 CW f
+(w)988 4278 w
+10 R f
+( bizarre historical accident, exactly)4 1425( is, through a)3 543( \(This)1 268(are the picture height and width in inches.)7 1724 4 1080 4278 t
+(opposite to the)2 605 1 720 4398 t
+10 I f
+(pic)1358 4398 w
+10 R f
+( The)1 212(input argument order.\))2 915 2 1512 4398 t
+10 CW f
+(-ms)2671 4398 w
+10 R f
+(macro package has de\256nitions for)4 1375 1 2883 4398 t
+10 CW f
+(.PS)4290 4398 w
+10 R f
+(and)4502 4398 w
+10 CW f
+(.PE)4678 4398 w
+10 R f
+(that)4890 4398 w
+( the)1 163( With)1 266( and offset a bit from surrounding text \(see the appendix\).)10 2464(cause pictures to be centered)4 1206 4 720 4518 t
+10 CW f
+(-mm)4860 4518 w
+10 R f
+(macro package, the picture must be enclosed within a display.)9 2476 1 720 4638 t
+(If ``)1 161 1 720 4818 t
+10 CW f
+(.PF)881 4818 w
+10 R f
+('' is used instead of)4 798 1 1061 4818 t
+10 CW f
+(.PE)1888 4818 w
+10 R f
+( before the picture)3 743(,* the position after printing is restored to where it was)10 2229 2 2068 4818 t
+( \(``)1 149(started, instead of being at the bottom.)6 1532 2 720 4938 t
+10 CW f
+(F)2401 4938 w
+10 R f
+('' is for ``\257yback.''\))3 808 1 2461 4938 t
+( a)1 72(Any input line that begins with a period is assumed to be)11 2296 2 720 5118 t
+10 I f
+(troff)3116 5118 w
+10 R f
+(command that makes sense at that point; it)7 1723 1 3317 5118 t
+( is asking for trouble to add vertical space or in any)11 2082( It)1 114( the document.)2 597(is copied to the output at that point in)8 1527 4 720 5238 t
+(way \256ddle with the line spacing here, but point size and font changes are generally harmless:)15 3710 1 720 5358 t
+9 CW f
+(.ps 24)1 324 1 870 5528 t
+(circle radius .4 at 0,0)4 1242 1 870 5638 t
+(.ps 12)1 324 1 870 5748 t
+(circle radius .2 at 0,0)4 1242 1 870 5858 t
+(.ps 8)1 270 1 870 5968 t
+(circle radius .1 at 0,0)4 1242 1 870 6078 t
+(.ps 6)1 270 1 870 6188 t
+(circle radius .05 at 0,0)4 1296 1 870 6298 t
+( don't forget to restore size)5 1566( \\")1 504(.ps 10)1 324 3 870 6408 t
+8 S1 f
+(__________________)720 6839 w
+8 R f
+( the)1 118(* Unfortunately,)1 586 2 720 6959 t
+8 CW f
+(-mm)1445 6959 w
+8 R f
+(macro package de\256nes the)3 844 1 1610 6959 t
+8 CW f
+(.PF)2475 6959 w
+8 R f
+( is)1 75( the ``picture \257yback'' feature)4 959( If)1 93(macro to assign text for the page footer.)7 1273 4 2640 6959 t
+(used with)1 308 1 840 7049 t
+7 R f
+(MM)1166 7049 w
+8 R f
+(, any page footer previously set with)6 1160 1 1290 7049 t
+8 CW f
+(.PF)2470 7049 w
+8 R f
+(will disappear.)1 468 1 2634 7049 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 17 17
+%%Page: 18 18
+/saveobj save def
+mark
+18 pagesetup
+10 HB f
+(18 PIC)1 4320 1 720 600 t
+24 R f
+2592 1248 576 576 De
+12 R f
+2736 1248 288 288 De
+8 R f
+2808 1248 144 144 De
+6 R f
+2844 1248 72 72 De
+10 I f
+(Pic)720 1716 w
+10 R f
+(does preserve the state of)4 1008 1 878 1716 t
+10 I f
+(troff)1911 1716 w
+10 R f
+('s \256ll mode across pictures.)4 1096 1 2092 1716 t
+( sizes, fonts and local motions within quoted strings \()9 2268(It is also safe to include)5 1016 2 720 1896 t
+10 CW f
+(")4004 1896 w
+10 S f
+(\274)4064 1896 w
+10 CW f
+(")4164 1896 w
+10 R f
+(\) in)1 151 1 4224 1896 t
+10 I f
+(pic)4415 1896 w
+10 R f
+(, so long as)3 495 1 4545 1896 t
+( example, to print text in Helvetica)6 1444( For)1 198( before exiting the string.)4 1043(whatever changes are made are unmade)5 1635 4 720 2016 t
+(Bold 2 points larger:)3 825 1 720 2136 t
+9 CW f
+(ellipse "\\s+2\\f\(HBSmile!\\fP\\s-2")1 1728 1 870 2306 t
+10 R f
+2610 2666 540 360 De
+12 HB f
+(Smile!)2699 2686 w
+10 R f
+(This is essentially the same rule as applies in)8 1793 1 720 3026 t
+10 I f
+(eqn)2538 3026 w
+10 R f
+(.)2690 3026 w
+(There is a subtle problem with complicated equations inside)8 2411 1 720 3206 t
+10 I f
+(pic)3157 3206 w
+10 R f
+(pictures \320 they come out wrong if)6 1404 1 3305 3206 t
+10 I f
+(eqn)4736 3206 w
+10 R f
+(has)4907 3206 w
+( your equation involves more than subscripts and)7 2172( If)1 146( space for the equation.)4 1048(to leave extra vertical)3 954 4 720 3326 t
+(superscripts, you must add to the beginning of each equation the extra information)12 3293 1 720 3446 t
+10 CW f
+(space 0)1 420 1 4038 3446 t
+10 R f
+(:)4458 3446 w
+9 CW f
+(arrow)870 3616 w
+(box "$space 0 {H\( omega \)} over {1 - H\( omega \)}$")11 2700 1 870 3726 t
+(arrow)870 3836 w
+10 R f
+2610 4196 2250 4196 Dl
+2610 4196 2538 4214 Dl
+2610 4196 2538 4178 Dl
+2610 4016 2610 4376 Dl
+3150 4016 2610 4016 Dl
+3150 4376 3150 4016 Dl
+2610 4376 3150 4376 Dl
+(1)2696 4286 w
+10 S f
+(-)2762 4286 w
+10 I f
+(H)2833 4286 w
+10 R f
+(\()2913 4286 w
+10 S f
+(w)2954 4286 w
+10 R f
+(\))3031 4286 w
+10 I f
+(H)2765 4156 w
+10 R f
+(\()2845 4156 w
+10 S f
+(w)2886 4156 w
+10 R f
+(\))2963 4156 w
+10 S1 f
+(________)2682 4186 w
+3510 4196 3150 4196 Dl
+3510 4196 3438 4214 Dl
+3510 4196 3438 4178 Dl
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 18 18
+%%Page: 19 19
+/saveobj save def
+mark
+19 pagesetup
+10 HB f
+(PIC 19)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 14.  , HEADING = SOME EXAMPLES]
+10 B f
+( EXAMPLES)1 581(14. SOME)1 470 2 720 960 t
+10 R f
+(Here are a handful of larger examples:)6 1533 1 720 1140 t
+8 CW f
+1836 1728 1836 1872 Dl
+2052 1728 1836 1728 Dl
+2052 1872 2052 1728 Dl
+1836 1872 2052 1872 Dl
+1836 1872 1836 2016 Dl
+2052 1872 1836 1872 Dl
+2052 2016 2052 1872 Dl
+1836 2016 2052 2016 Dl
+1836 2016 1836 2160 Dl
+2052 2016 1836 2016 Dl
+2052 2160 2052 2016 Dl
+1836 2160 2052 2160 Dl
+1836 2160 1836 2592 Dl
+2052 2160 1836 2160 Dl
+2052 2592 2052 2160 Dl
+1836 2592 2052 2592 Dl
+(.)1920 2272 w
+(.)1920 2392 w
+(.)1920 2512 w
+1836 2592 1836 2736 Dl
+2052 2592 1836 2592 Dl
+2052 2736 2052 2592 Dl
+1836 2736 2052 2736 Dl
+1836 2736 1836 2880 Dl
+2052 2736 1836 2736 Dl
+2052 2880 2052 2736 Dl
+1836 2880 2052 2880 Dl
+(hashtab:)1428 1816 w
+2340 1440 2340 1584 Dl
+2700 1440 2340 1440 Dl
+2700 1584 2700 1440 Dl
+2340 1584 2700 1584 Dl
+(...)2448 1528 w
+2700 1440 2700 1584 Dl
+2844 1440 2700 1440 Dl
+2844 1584 2844 1440 Dl
+2700 1584 2844 1584 Dl
+(n1)2724 1528 w
+2844 1440 2844 1584 Dl
+3060 1440 2844 1440 Dl
+3060 1584 3060 1440 Dl
+2844 1584 3060 1584 Dl
+(d1)2904 1528 w
+3060 1440 3060 1584 Dl
+3348 1440 3060 1440 Dl
+3348 1584 3348 1440 Dl
+3060 1584 3348 1584 Dl
+(n3)3156 1528 w
+3348 1440 3348 1584 Dl
+3564 1440 3348 1440 Dl
+3564 1584 3564 1440 Dl
+3348 1584 3564 1584 Dl
+(d3)3408 1528 w
+3564 1440 3564 1584 Dl
+3852 1440 3564 1440 Dl
+3852 1584 3852 1440 Dl
+3564 1584 3852 1584 Dl
+(...)3636 1528 w
+3852 1440 3852 1584 Dl
+4212 1440 3852 1440 Dl
+4212 1584 4212 1440 Dl
+3852 1584 4212 1584 Dl
+(n2)3984 1528 w
+4212 1440 4212 1584 Dl
+4356 1440 4212 1440 Dl
+4356 1584 4356 1440 Dl
+4212 1584 4356 1584 Dl
+(d2)4236 1528 w
+2304 1944 1944 1944 Dl
+2304 1944 2232 1962 Dl
+2304 1944 2232 1926 Dl
+2304 1908 2304 1980 Dl
+2412 1908 2304 1908 Dl
+2412 1980 2412 1908 Dl
+2304 1980 2412 1980 Dl
+2304 1980 2304 2052 Dl
+2412 1980 2304 1980 Dl
+2412 2052 2412 1980 Dl
+2304 2052 2412 2052 Dl
+2304 2052 2304 2124 Dl
+2412 2052 2304 2052 Dl
+2412 2124 2412 2052 Dl
+2304 2124 2412 2124 Dl
+2358 1944 2358 1944 2502 1944 Ds
+2358 1944 2502 1944 2736 1584 Ds
+2502 1944 2736 1584 2736 1584 Ds
+2735 1584 2711 1653 Dl
+2736 1584 2682 1634 Dl
+2358 2016 2358 2016 2574 2016 Ds
+2358 2016 2574 2016 2880 1584 Ds
+2574 2016 2880 1584 2880 1584 Ds
+2879 1584 2853 1653 Dl
+2879 1584 2823 1632 Dl
+2718 2088 2358 2088 Dl
+2718 2088 2646 2106 Dl
+2718 2088 2646 2070 Dl
+2718 2052 2718 2124 Dl
+2826 2052 2718 2052 Dl
+2826 2124 2826 2052 Dl
+2718 2124 2826 2124 Dl
+2718 2124 2718 2196 Dl
+2826 2124 2718 2124 Dl
+2826 2196 2826 2124 Dl
+2718 2196 2826 2196 Dl
+2718 2196 2718 2268 Dl
+2826 2196 2718 2196 Dl
+2826 2268 2826 2196 Dl
+2718 2268 2826 2268 Dl
+2772 2088 2772 2088 2916 2088 Ds
+2772 2088 2916 2088 3816 1728 Ds
+2916 2088 3816 1728 3888 1584 Ds
+3816 1728 3888 1584 3888 1584 Ds
+3887 1584 3872 1656 Dl
+3887 1584 3839 1640 Dl
+2772 2160 2772 2160 2988 2160 Ds
+2772 2160 2988 2160 4176 1728 Ds
+2988 2160 4176 1728 4248 1584 Ds
+4176 1728 4248 1584 4248 1584 Ds
+4247 1584 4232 1656 Dl
+4247 1584 4199 1640 Dl
+2664 2664 1944 2664 Dl
+2664 2664 2592 2682 Dl
+2664 2664 2592 2646 Dl
+2664 2628 2664 2700 Dl
+2772 2628 2664 2628 Dl
+2772 2700 2772 2628 Dl
+2664 2700 2772 2700 Dl
+2664 2700 2664 2772 Dl
+2772 2700 2664 2700 Dl
+2772 2772 2772 2700 Dl
+2664 2772 2772 2772 Dl
+2664 2772 2664 2844 Dl
+2772 2772 2664 2772 Dl
+2772 2844 2772 2772 Dl
+2664 2844 2772 2844 Dl
+2718 2664 2718 2664 2862 2664 Ds
+2718 2664 2862 2664 3096 1584 Ds
+2862 2664 3096 1584 3096 1584 Ds
+3096 1584 3098 1658 Dl
+3095 1584 3062 1650 Dl
+2718 2736 2718 2736 2934 2736 Ds
+2718 2736 2934 2736 3384 1584 Ds
+2934 2736 3384 1584 3384 1584 Ds
+3383 1584 3374 1657 Dl
+3383 1584 3340 1644 Dl
+(ndblock)3468 2680 w
+3385 2671 3420 2664 Dl
+3309 2686 3344 2679 Dl
+3233 2701 3268 2694 Dl
+3157 2717 3192 2710 Dl
+3081 2732 3116 2725 Dl
+3005 2748 3040 2741 Dl
+2929 2764 2964 2757 Dl
+2930 2764 2996 2732 Dl
+2929 2765 3003 2767 Dl
+(ndtable:)1932 1528 w
+9 CW f
+(define ndblock {)2 864 1 870 3230 t
+(box wid boxwid/2 ht boxht/2)4 1458 1 1230 3340 t
+( same)1 270( box)1 324( same with .t at bottom of last box;)8 1944(down; box)1 540 4 1230 3450 t
+(})870 3560 w
+(boxht = .2; boxwid = .3; circlerad = .3; dx = 0.05)11 2700 1 870 3670 t
+(down; box; box; box; box ht 3*boxht "." "." ".")9 2538 1 870 3780 t
+(L: box; box; box invis wid 2*boxwid "hashtab:" with .e at 1st box .w)13 3672 1 870 3890 t
+(right)870 4000 w
+(Start: box wid .5 with .sw at 1st box.ne + \(.4,.2\) "...")11 3024 1 870 4110 t
+( box wid .3 "d1")4 864( D1:)1 270(N1: box wid .2 "n1";)4 1080 3 870 4220 t
+( box wid .3 "d3")4 864( D3:)1 270(N3: box wid .4 "n3";)4 1080 3 870 4330 t
+(box wid .4 "...")3 864 1 870 4440 t
+( box wid .2 "d2")4 864( D2:)1 270(N2: box wid .5 "n2";)4 1080 3 870 4550 t
+(arrow right from 2nd box)4 1296 1 870 4660 t
+(ndblock)870 4770 w
+(spline -> right .2 from 3rd last box then to N1.sw + \(dx,0\))12 3186 1 870 4880 t
+(spline -> right .3 from 2nd last box then to D1.sw + \(dx,0\))12 3186 1 870 4990 t
+(arrow right from last box)4 1350 1 870 5100 t
+(ndblock)870 5210 w
+(spline -> right .2 from 3rd last box to N2.sw-\(dx,.2\) to N2.sw+\(dx,0\))11 3726 1 870 5320 t
+(spline -> right .3 from 2nd last box to D2.sw-\(dx,.2\) to D2.sw+\(dx,0\))11 3726 1 870 5430 t
+(arrow right 2*linewid from L)4 1512 1 870 5540 t
+(ndblock)870 5650 w
+(spline -> right .2 from 3rd last box to N3.sw + \(dx,0\))11 2916 1 870 5760 t
+(spline -> right .3 from 2nd last box to D3.sw + \(dx,0\))11 2916 1 870 5870 t
+(circlerad = .3)2 756 1 870 5980 t
+( last box.e + \(1.2,.2\))4 1188( at)1 216(circle invis "ndblock")2 1188 3 870 6090 t
+(arrow dashed from last circle.w to last box chop 0 chop .3)11 3132 1 870 6200 t
+(box invis wid 2*boxwid "ndtable:" with .e at Start.w)8 2808 1 870 6310 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 19 19
+%%Page: 20 20
+/saveobj save def
+mark
+20 pagesetup
+10 HB f
+(20 PIC)1 4320 1 720 600 t
+8 R f
+(source)1188 2821 w
+(code)1216 2941 w
+1503 2865 1080 2865 Dl
+1503 2866 1419 2886 Dl
+1503 2864 1419 2844 Dl
+1503 2654 1503 3077 Dl
+2138 2654 1503 2654 Dl
+2139 3077 2139 2654 Dl
+1504 3077 2139 3077 Dl
+(lexical)1715 2821 w
+(analyzer)1686 2941 w
+(tokens)2246 2821 w
+2562 2865 2139 2865 Dl
+2561 2866 2477 2886 Dl
+2561 2864 2477 2844 Dl
+2562 2654 2562 3077 Dl
+3197 2654 2562 2654 Dl
+3197 3077 3197 2654 Dl
+2562 3077 3197 3077 Dl
+(parser)2784 2881 w
+(intermediate)3211 2821 w
+(code)3334 2941 w
+3620 2865 3197 2865 Dl
+3620 2866 3536 2886 Dl
+3620 2864 3536 2844 Dl
+3620 2654 3620 3077 Dl
+4255 2654 3620 2654 Dl
+4256 3077 4256 2654 Dl
+3621 3077 4256 3077 Dl
+(semantic)3798 2821 w
+(checker)3816 2941 w
+4679 2865 4256 2865 Dl
+4679 2866 4595 2886 Dl
+4679 2864 4595 2844 Dl
+1820 2653 1800 2569 Dl
+1822 2653 1842 2569 Dl
+1820 2231 1820 2654 Dl
+1822 2231 1842 2315 Dl
+1820 2231 1800 2315 Dl
+1503 1807 1503 2230 Dl
+2138 1806 1503 1806 Dl
+2139 2229 2139 1806 Dl
+1504 2230 2139 2230 Dl
+(lexical)1715 1975 w
+(corrector)1678 2095 w
+2879 2653 2859 2569 Dl
+2880 2653 2900 2569 Dl
+2880 2231 2880 2654 Dl
+2880 2231 2900 2315 Dl
+2879 2231 2859 2315 Dl
+2562 1807 2562 2230 Dl
+3197 1806 2562 1806 Dl
+3197 2229 3197 1806 Dl
+2562 2230 3197 2230 Dl
+(syntactic)2739 1975 w
+(corrector)2738 2095 w
+2880 1383 2880 1806 Dl
+2880 1384 2900 1468 Dl
+2879 1384 2859 1468 Dl
+2562 960 2562 1383 Dl
+3197 960 2562 960 Dl
+3197 1383 3197 960 Dl
+2562 1383 3197 1383 Dl
+(diagnostic)2717 1067 w
+(message)2746 1187 w
+(printer)2775 1307 w
+3198 1170 3282 1150 Dl
+3198 1173 3282 1193 Dl
+3620 1171 3197 1171 Dl
+3620 1173 3536 1193 Dl
+3620 1170 3536 1150 Dl
+3620 960 3620 1383 Dl
+4255 960 3620 960 Dl
+4256 1383 4256 960 Dl
+3621 1383 4256 1383 Dl
+(symbol)3822 1127 w
+(table)3862 1247 w
+2562 1383 2139 1806 Dl
+2561 1384 2517 1458 Dl
+2561 1384 2487 1428 Dl
+3197 1384 3620 2654 Dl
+3198 1384 3244 1457 Dl
+3198 1383 3204 1470 Dl
+3937 2653 3917 2569 Dl
+3940 2653 3960 2569 Dl
+3939 1384 3939 2654 Dl
+3940 1384 3960 1468 Dl
+3937 1384 3917 1468 Dl
+9 CW f
+(.PS 5)1 270 1 870 3427 t
+(.ps 8)1 270 1 870 3537 t
+(arrow "source" "code")2 1134 1 1230 3647 t
+( "lexical" "analyzer")2 1134(LA: box)1 522 2 870 3757 t
+(arrow "tokens" above)2 1080 1 1230 3867 t
+( "parser")1 486(P: box)1 522 2 870 3977 t
+(arrow "intermediate" "code")2 1458 1 1230 4087 t
+( "semantic" "checker")2 1134(Sem: box)1 522 2 870 4197 t
+(arrow)1230 4307 w
+(arrow <-> up from top of LA)6 1458 1 1230 4527 t
+( "lexical" "corrector")2 1188(LC: box)1 522 2 870 4637 t
+(arrow <-> up from top of P)6 1404 1 1230 4747 t
+( "syntactic" "corrector")2 1296(Syn: box)1 522 2 870 4857 t
+(arrow up)1 432 1 1230 4967 t
+( "diagnostic" "message" "printer")3 1782(DMP: box)1 522 2 870 5077 t
+( right of DMP)3 702( from)1 324(arrow <-> right)2 810 3 1230 5187 t
+( "symbol" "table")2 918(ST: box)1 522 2 870 5297 t
+(arrow from LC.ne to DMP.sw)4 1404 1 1230 5407 t
+(arrow from Sem.nw to DMP.se)4 1458 1 1230 5517 t
+(arrow <-> from Sem.top to ST.bot)5 1728 1 1230 5627 t
+(.PE)870 5737 w
+10 R f
+( and arrows\) in the picture, and one line of)9 1741(There are eighteen objects \(boxes)4 1356 2 720 5917 t
+10 I f
+(pic)3847 5917 w
+10 R f
+(input for each; this seems)4 1041 1 3999 5917 t
+(like an acceptable level of verbosity.)5 1463 1 720 6037 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 20 20
+%%Page: 21 21
+/saveobj save def
+mark
+21 pagesetup
+10 HB f
+(PIC 21)1 4320 1 720 600 t
+8 R f
+1525 1500 360 360 De
+(DISK)1612 1516 w
+(character)1921 1456 w
+(defns)1979 1576 w
+2245 1500 1885 1500 Dl
+2245 1500 2173 1518 Dl
+2245 1500 2173 1482 Dl
+2245 1320 2245 1680 Dl
+2785 1320 2245 1320 Dl
+2785 1680 2785 1320 Dl
+2245 1680 2785 1680 Dl
+(CPU)2437 1456 w
+(\(16-bit mini\))1 408 1 2311 1576 t
+(input)2331 1156 w
+2515 1320 2497 1248 Dl
+2515 1320 2533 1248 Dl
+2515 960 2515 1320 Dl
+3145 1500 2785 1500 Dl
+3145 1500 3073 1518 Dl
+3145 1500 3073 1482 Dl
+(CRT)3205 1516 w
+3145 1446 3145 1554 Dl
+3505 1446 3145 1446 Dl
+3865 1266 3505 1446 Dl
+3865 1734 3865 1266 Dl
+3505 1554 3865 1734 Dl
+3145 1554 3505 1554 Dl
+3901 960 3919 1032 Dl
+3901 960 3883 1032 Dl
+3901 2040 3901 960 Dl
+(... paper)1 276 1 3921 1876 t
+3825 1140 72 72 De
+3904 1140 72 72 De
+(rollers)4033 1156 w
+10 R f
+(Basic Digital Typesetter)2 971 1 3199 2160 t
+9 CW f
+(.PS)870 2510 w
+(.ps -2)1 324 1 870 2620 t
+(circle "DISK")1 702 1 1230 2730 t
+(arrow "character" "defns")2 1350 1 1230 2840 t
+( "CPU" "\(16-bit mini\)")3 1188(CPU: box)1 522 2 870 2950 t
+({ arrow <- from top of CPU up "input " rjust })11 2484 1 1230 3060 t
+(arrow)1230 3170 w
+( ljust)1 324( CRT")1 378(CRT: ")1 414 3 870 3280 t
+(line from CRT - 0,0.075 up 0.15 \\)7 1782 1 1230 3390 t
+(then right 0.5 \\)3 864 1 1590 3500 t
+(then right 0.5 up 0.25 \\)5 1296 1 1590 3610 t
+(then down 0.5+0.15 \\)3 1080 1 1590 3720 t
+(then left 0.5 up 0.25 \\)5 1242 1 1590 3830 t
+(then left 0.5)2 702 1 1590 3940 t
+( + 1.05,0.75)2 648(Paper: CRT)1 522 2 870 4050 t
+(arrow <- from Paper down 1.5)5 1512 1 1230 4160 t
+( ljust at end of last arrow + 0, 0.25)9 1998( paper")1 432(" ...)1 270 3 1230 4270 t
+(circle rad 0.05 at Paper + \(-0.055, -0.25\))7 2268 1 1230 4380 t
+(circle rad 0.05 at Paper + \(0.055, -0.25\))7 2214 1 1230 4490 t
+( ljust at Paper + \(0.1, -0.25\))6 1620(" rollers")1 648 2 1230 4600 t
+(.ps +2)1 324 1 870 4710 t
+(.PE)870 4820 w
+(.ce)870 4930 w
+(Basic Digital Typesetter)2 1296 1 870 5040 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 21 21
+%%Trailer
+done
+%%Pages: 21
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-BoldItalic Times-Roman Symbol Courier Times-Roman

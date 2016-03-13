@@ -1,0 +1,7928 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(TROFF User's Manual)2 1874 1 540 1040 t
+36 S1 f
+(__________________________)540 1240 w
+14 HB f
+(Reference Manual)1 1197 1 540 1440 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = GENERAL INFORMATION]
+10 B f
+( INFORMATION)1 769(1. GENERAL)1 620 2 540 1980 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.1  , HEADING = Form of Input]
+( of Input)2 373(1.1 Form)1 413 2 540 2160 t
+10 R f
+(Input consists of)2 665 1 540 2340 t
+10 I f
+(text lines)1 360 1 1232 2340 t
+10 R f
+( printed, interspersed with)3 1052(, which are destined to be)5 1030 2 1592 2340 t
+10 I f
+(control lines)1 506 1 3702 2340 t
+10 R f
+(, which set parameters or)4 1012 1 4208 2340 t
+( lines begin with a)4 757( Control)1 362(otherwise control subsequent processing.)3 1660 3 540 2460 t
+10 I f
+(control character)1 708 1 3350 2460 t
+10 R f
+(\320 normally)1 477 1 4074 2460 t
+10 CW f
+(.)4581 2460 w
+10 R f
+(\(period\) or)1 434 1 4696 2460 t
+10 CW f
+(')5160 2460 w
+10 R f
+( one or two character name that speci\256es a basic)9 1952( by a)2 198( \320 followed)2 487(\(single quote\))1 554 4 540 2580 t
+10 I f
+(request)3759 2580 w
+10 R f
+(or the substitution of a user-)5 1139 1 4081 2580 t
+(de\256ned)540 2700 w
+10 I f
+(macro)877 2700 w
+10 R f
+( control character)2 731( The)1 222( the control line.)3 706(in place of)2 457 4 1175 2700 t
+10 CW f
+(')3333 2700 w
+10 R f
+(suppresses the)1 591 1 3435 2700 t
+10 I f
+(break)4068 2700 w
+10 R f
+( forced)1 296(function \320 the)2 587 2 4337 2700 t
+( control character may be separated from the)7 1913( The)1 224( requests.)1 396( by certain)2 457( \320 caused)2 403(output of a partially \256lled line)5 1287 6 540 2820 t
+( should be followed by either)5 1193( Names)1 332(request/macro name by white space \(spaces and/or tabs\) for aesthetic reasons.)10 3155 3 540 2940 t
+( lines with unrecognized names are ignored.)6 1760( Control)1 356(space or newline.)2 695 3 540 3060 t
+( introduced anywhere in the input by means of an)9 2067(Various special functions may be)4 1367 2 540 3240 t
+10 I f
+(escape)4009 3240 w
+10 R f
+(character, normally)1 785 1 4315 3240 t
+10 CW f
+(\\)5135 3240 w
+10 R f
+(.)5195 3240 w
+(For example, the function)3 1035 1 540 3360 t
+10 CW f
+(\\n)1601 3360 w
+10 I f
+(R)1729 3360 w
+10 R f
+(causes the interpolation of the contents of the)7 1818 1 1816 3360 t
+10 I f
+(number register R)2 729 1 3660 3360 t
+10 R f
+( the func-)2 382(in place of)2 423 2 4415 3360 t
+(tion; here)1 383 1 540 3480 t
+10 I f
+(R)951 3480 w
+10 R f
+(is either a single character name as in)7 1514 1 1040 3480 t
+10 CW f
+(\\n)2582 3480 w
+10 I f
+(x)2710 3480 w
+10 R f
+( introduced by a left-parenthesis, as)5 1439(, or a two-character name)4 1027 2 2754 3480 t
+(in)540 3600 w
+10 CW f
+(\\n\()643 3600 w
+10 I f
+(xx)823 3600 w
+10 R f
+(.)911 3600 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.2  , HEADING = Formatter and Device Resolution]
+10 B f
+( and Device Resolution)3 975(1.2 Formatter)1 617 2 540 3780 t
+10 I f
+(Troff)540 3960 w
+10 R f
+( processes dimensions in units that correspond to the particular device for which output is)14 3635(internally stores and)2 816 2 769 3960 t
+( to 1200 per inch are typical \(see \24723\).)8 1546(being prepared; values from 300)4 1305 2 540 4080 t
+10 I f
+(Nroff)3442 4080 w
+10 R f
+(internally uses 240 units per inch, cor-)6 1540 1 3680 4080 t
+( output)1 287(responding to the least common multiple of the horizontal and vertical resolutions of various typewriter-like)14 4393 2 540 4200 t
+(devices.)540 4320 w
+10 I f
+(Troff)916 4320 w
+10 R f
+( numerical parameter input to the actual horizontal/vertical resolution of the)10 3038( /vertical)1 335(rounds horizontal)1 703 3 1144 4320 t
+(output device indicated by the)4 1216 1 540 4440 t
+10 CW f
+(-T)1784 4440 w
+10 R f
+(option \(default)1 594 1 1932 4440 t
+10 CW f
+(post)2554 4440 w
+10 R f
+(\).)2794 4440 w
+10 I f
+(Nroff)2906 4440 w
+10 R f
+(similarly rounds numerical input to the actual reso-)7 2073 1 3147 4440 t
+(lution of its output device \(default Model 37 Teletype\).)8 2206 1 540 4560 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.3  , HEADING = Numerical Parameter Input]
+10 B f
+( Parameter Input)2 743(1.3 Numerical)1 624 2 540 4740 t
+10 R f
+(Both)540 4920 w
+10 I f
+(nroff)761 4920 w
+10 R f
+(and)982 4920 w
+10 I f
+(troff)1152 4920 w
+10 R f
+( scale indicators shown in the following table, where)8 2121(accept numerical input with the appended)5 1671 2 1351 4920 t
+10 I f
+(S)5170 4920 w
+10 R f
+(is the current type size in points and)7 1440 1 540 5040 t
+10 I f
+(V)2005 5040 w
+10 R f
+(is the current vertical line spacing in basic units.)8 1928 1 2091 5040 t
+10 S f
+(_ ____________________________)1 1438 1 2161 5120 t
+10 R f
+(Scale)2283 5240 w
+(Indicator)2211 5360 w
+(Meaning)2957 5300 w
+10 S f
+(_ ____________________________)1 1438 1 2161 5380 t
+10 CW f
+(i)2361 5520 w
+10 R f
+(Inch)2721 5520 w
+10 CW f
+(c)2361 5640 w
+10 R f
+(Centimeter)2721 5640 w
+10 CW f
+(P)2361 5760 w
+10 R f
+(Pica = 1/6 inch)3 603 1 2721 5760 t
+10 CW f
+(m)2361 5880 w
+10 R f
+(Em =)1 220 1 2721 5880 t
+10 I f
+(S)2966 5880 w
+10 R f
+(points)3041 5880 w
+10 CW f
+(n)2361 6000 w
+10 R f
+( 2)1 58(En = Em/)2 384 2 2721 6000 t
+10 CW f
+(p)2361 6120 w
+10 R f
+( inch)1 197( 72)1 108(Point = 1/)2 396 3 2721 6120 t
+10 CW f
+(u)2361 6240 w
+10 R f
+(Basic unit)1 403 1 2721 6240 t
+10 CW f
+(v)2361 6360 w
+10 R f
+(Vertical line space)2 742 1 2721 6360 t
+10 I f
+(V)3488 6360 w
+10 R f
+( see below)2 421(none Default,)1 751 2 2294 6480 t
+10 S f
+( \347)1 -1438(_ ____________________________)1 1438 2 2161 6500 t
+(\347)2161 6420 w
+(\347)2161 6320 w
+(\347)2161 6220 w
+(\347)2161 6120 w
+(\347)2161 6020 w
+(\347)2161 5920 w
+(\347)2161 5820 w
+(\347)2161 5720 w
+(\347)2161 5620 w
+(\347)2161 5520 w
+(\347)2161 5420 w
+(\347)2161 5320 w
+(\347)2161 5220 w
+(\347)3599 6500 w
+(\347)3599 6420 w
+(\347)3599 6320 w
+(\347)3599 6220 w
+(\347)3599 6120 w
+(\347)3599 6020 w
+(\347)3599 5920 w
+(\347)3599 5820 w
+(\347)3599 5720 w
+(\347)3599 5620 w
+(\347)3599 5520 w
+(\347)3599 5420 w
+(\347)3599 5320 w
+(\347)3599 5220 w
+10 R f
+(In)540 6680 w
+10 I f
+(nroff)666 6680 w
+10 R f
+( character width, which is output-device)5 1697(, both the em and the en are taken to be equal to the nominal)14 2662 2 861 6680 t
+( character widths in)3 811( Actual)1 325(dependent; common values are 1/10 and 1/12 inch.)7 2099 3 540 6800 t
+10 I f
+(nroff)3809 6800 w
+10 R f
+( the same and)3 570(need not be all)3 612 2 4038 6800 t
+(constructed characters such as \261)4 1315 1 540 6920 t
+10 S f
+(>)1855 6920 w
+10 R f
+(\()1944 6920 w
+10 S f
+(\256)1977 6920 w
+10 R f
+( default scaling is)3 732( The)1 215( often extra wide.)3 728(\) are)1 188 4 2076 6920 t
+10 CW f
+(m)3974 6920 w
+10 R f
+(for the horizontally-oriented)2 1151 1 4069 6920 t
+(requests and functions)2 903 1 540 7040 t
+10 CW f
+(ll)1473 7040 w
+10 R f
+(,)1593 7040 w
+10 CW f
+(in)1648 7040 w
+10 R f
+(,)1768 7040 w
+10 CW f
+(ti)1822 7040 w
+10 R f
+(,)1942 7040 w
+10 CW f
+(ta)1996 7040 w
+10 R f
+(,)2116 7040 w
+10 CW f
+(lt)2170 7040 w
+10 R f
+(,)2290 7040 w
+10 CW f
+(po)2344 7040 w
+10 R f
+(,)2464 7040 w
+10 CW f
+(mc)2518 7040 w
+10 R f
+(,)2638 7040 w
+10 CW f
+(\\h)2692 7040 w
+10 R f
+(,)2812 7040 w
+10 CW f
+(\\l)2866 7040 w
+10 R f
+(, and horizontal coordinates of)4 1233 1 2986 7040 t
+10 CW f
+(\\D)4248 7040 w
+10 R f
+(;)4368 7040 w
+10 CW f
+(v)4425 7040 w
+10 R f
+(for the vertically-)2 706 1 4514 7040 t
+(oriented requests and functions)3 1254 1 540 7160 t
+10 CW f
+(pl)1822 7160 w
+10 R f
+(,)1942 7160 w
+10 CW f
+(wh)1996 7160 w
+10 R f
+(,)2116 7160 w
+10 CW f
+(ch)2170 7160 w
+10 R f
+(,)2290 7160 w
+10 CW f
+(dt)2344 7160 w
+10 R f
+(,)2464 7160 w
+10 CW f
+(sp)2518 7160 w
+10 R f
+(,)2638 7160 w
+10 CW f
+(sv)2692 7160 w
+10 R f
+(,)2812 7160 w
+10 CW f
+(ne)2866 7160 w
+10 R f
+(,)2986 7160 w
+10 CW f
+(rt)3040 7160 w
+10 R f
+(,)3160 7160 w
+10 CW f
+(\\v)3214 7160 w
+10 R f
+(,)3334 7160 w
+10 CW f
+(\\x)3388 7160 w
+10 R f
+(,)3508 7160 w
+10 CW f
+(\\L)3562 7160 w
+10 R f
+(, and vertical coordinates of)4 1127 1 3682 7160 t
+10 CW f
+(\\D)4838 7160 w
+10 R f
+(;)4958 7160 w
+10 CW f
+(p)5015 7160 w
+10 R f
+(for)5104 7160 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(2)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+10 R f
+(the)540 960 w
+10 CW f
+(vs)689 960 w
+10 R f
+(request; and)1 487 1 836 960 t
+10 CW f
+(u)1350 960 w
+10 R f
+(for the requests)2 619 1 1437 960 t
+10 CW f
+(nr)2083 960 w
+10 R f
+(,)2203 960 w
+10 CW f
+(if)2255 960 w
+10 R f
+(, and)1 196 1 2375 960 t
+10 CW f
+(ie)2598 960 w
+10 R f
+(.)2718 960 w
+10 I f
+(All)2795 960 w
+10 R f
+( a num-)2 307( When)1 290(other requests ignore any scale indicators.)5 1684 3 2939 960 t
+( containing an already appropriately scaled number is interpolated to provide numerical input, the unit)14 4220(ber register)1 460 2 540 1080 t
+(scale indicator)1 588 1 540 1200 t
+10 CW f
+(u)1161 1200 w
+10 R f
+( number,)1 363( The)1 213(may need to be appended to prevent an additional inappropriate default scaling.)11 3265 3 1254 1200 t
+10 I f
+(N)5128 1200 w
+10 R f
+(,)5195 1200 w
+( integer number of basic)4 994(may be speci\256ed in decimal-fraction form but the parameter \256nally stored is rounded to an)14 3686 2 540 1320 t
+( computations are performed in integer arithmetic.)6 2010(units. Internal)1 580 2 540 1440 t
+(The)540 1620 w
+10 I f
+(absolute position)1 705 1 738 1620 t
+10 R f
+(indicator)1486 1620 w
+10 CW f
+(|)1884 1620 w
+10 R f
+( number)1 349(may be prepended to a)4 975 2 1987 1620 t
+10 I f
+(N)3355 1620 w
+10 R f
+(to generate the distance to the vertical or)7 1754 1 3466 1620 t
+(horizontal place)1 646 1 540 1740 t
+10 I f
+(N)1217 1740 w
+10 R f
+( and functions,)2 601( vertically-oriented requests)2 1126(. For)1 220 3 1284 1740 t
+10 CW f
+(|)3261 1740 w
+10 I f
+(N)3321 1740 w
+10 R f
+(becomes the distance in basic units from the)7 1802 1 3418 1740 t
+(current vertical place on the page or in a)8 1670 1 540 1860 t
+10 I f
+(diversion)2243 1860 w
+10 R f
+(\(\2477.4\) to the vertical place)4 1086 1 2648 1860 t
+10 I f
+(N)3768 1860 w
+10 R f
+(. For)1 223 1 3835 1860 t
+10 I f
+(all)4092 1860 w
+10 R f
+(other requests and func-)3 988 1 4232 1860 t
+(tions,)540 1980 w
+10 CW f
+(|)796 1980 w
+10 I f
+(N)856 1980 w
+10 R f
+( place on the)3 537(becomes the distance from the current horizontal)6 2017 2 959 1980 t
+10 I f
+(input)3548 1980 w
+10 R f
+(line to the horizontal place)4 1105 1 3789 1980 t
+10 I f
+(N)4929 1980 w
+10 R f
+(. For)1 224 1 4996 1980 t
+(example,)540 2100 w
+10 CW f
+(.sp |3.2c)1 540 1 690 2280 t
+10 R f
+(will space in the required direction to 3.2 centimeters from the top of the page.)14 3139 1 540 2460 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.4  , HEADING = Numerical Expressions]
+10 B f
+( Expressions)1 537(1.4 Numerical)1 624 2 540 2640 t
+10 R f
+(Wherever numerical input is expected an expression involving parentheses, the arithmetic operators)11 4107 1 540 2820 t
+10 CW f
+(+)4683 2820 w
+10 R f
+(,)4743 2820 w
+10 CW f
+(-)4804 2820 w
+10 R f
+(,)4864 2820 w
+10 CW f
+(/)4926 2820 w
+10 R f
+(,)4986 2820 w
+10 S f
+(*)5048 2820 w
+10 R f
+(,)5098 2820 w
+10 CW f
+(%)5160 2820 w
+10 R f
+(\(mod\), and the logical operators)4 1298 1 540 2940 t
+10 CW f
+(<)1868 2940 w
+10 R f
+(,)1928 2940 w
+10 CW f
+(>)1983 2940 w
+10 R f
+(,)2043 2940 w
+10 CW f
+(<=)2098 2940 w
+10 R f
+(,)2218 2940 w
+10 CW f
+(>=)2273 2940 w
+10 R f
+(,)2393 2940 w
+10 CW f
+(=)2448 2940 w
+10 R f
+(\(or)2538 2940 w
+10 CW f
+(==)2684 2940 w
+10 R f
+(\),)2804 2940 w
+10 CW f
+(&)2892 2940 w
+10 R f
+(\(and\),)2982 2940 w
+10 CW f
+(:)3247 2940 w
+10 R f
+( where controlled by)3 838( Except)1 332(\(or\) may be used.)3 713 3 3337 2940 t
+( the case of certain)4 847( In)1 157(parentheses, evaluation of expressions is left-to-right; there is no operator precedence.)10 3676 3 540 3060 t
+(requests, an initial)2 754 1 540 3180 t
+10 CW f
+(+)1331 3180 w
+10 R f
+(or)1428 3180 w
+10 CW f
+(-)1548 3180 w
+10 R f
+( the)1 159( In)1 145(is stripped and interpreted as an increment or decrement indicator respectively.)10 3271 3 1645 3180 t
+(presence of default scaling, the desired scale indicator must be attached to)11 2998 1 540 3300 t
+10 I f
+(every)3567 3300 w
+10 R f
+(number in an expression for which)5 1409 1 3811 3300 t
+( if the number register)4 903( example,)1 393( For)1 194(the desired and default scaling differ.)5 1510 4 540 3420 t
+10 CW f
+(x)3569 3420 w
+10 R f
+(contains 2 and the current point size is)7 1562 1 3658 3420 t
+(10, then)1 322 1 540 3540 t
+10 CW f
+(.ll \(4.25i+\\nxP+3\)/2u)1 1260 1 690 3720 t
+10 R f
+(will set the line length to 1/2 the sum of 4.25 inches + 2 picas + 3 ems.)17 2825 1 540 3900 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.5  , HEADING = Notation]
+10 B f
+(1.5 Notation)1 547 1 540 4080 t
+10 R f
+(Numerical parameters are indicated in this manual in two ways.)9 2563 1 540 4260 t
+10 S f
+(\261)3155 4260 w
+10 I f
+(N)3218 4260 w
+10 R f
+( the forms)2 411(means that the argument may take)5 1377 2 3312 4260 t
+10 I f
+(N)5128 4260 w
+10 R f
+(,)5195 4260 w
+10 S f
+(+)540 4380 w
+10 I f
+(N)611 4380 w
+10 R f
+(, or)1 137 1 678 4380 t
+10 S f
+(-)844 4380 w
+10 I f
+(N)915 4380 w
+10 R f
+( to set the parameter to)5 927(and that the corresponding effect is)5 1425 2 1011 4380 t
+10 I f
+(N)3391 4380 w
+10 R f
+(, to increment it by)4 770 1 3458 4380 t
+10 I f
+(N)4256 4380 w
+10 R f
+(, or to decrement it by)5 897 1 4323 4380 t
+10 I f
+(N)540 4500 w
+10 R f
+(respectively. Plain)1 768 1 637 4500 t
+10 I f
+(N)1435 4500 w
+10 R f
+(means that an initial algebraic sign is)6 1512 1 1532 4500 t
+10 I f
+(not)3074 4500 w
+10 R f
+( but merely the sign of)5 932(an increment indicator,)2 933 2 3232 4500 t
+10 I f
+(N)5128 4500 w
+10 R f
+(.)5195 4500 w
+( example, most)2 632( For)1 201(Generally, unreasonable numerical input is either ignored or truncated to a reasonable value.)12 3847 3 540 4620 t
+( values; exceptions are)3 918(requests expect to set parameters to non-negative)6 1980 2 540 4740 t
+10 CW f
+(sp)3467 4740 w
+10 R f
+(,)3587 4740 w
+10 CW f
+(wh)3641 4740 w
+10 R f
+(,)3761 4740 w
+10 CW f
+(ch)3815 4740 w
+10 R f
+(,)3935 4740 w
+10 CW f
+(nr)3989 4740 w
+10 R f
+(, and)1 198 1 4109 4740 t
+10 CW f
+(if)4336 4740 w
+10 R f
+( requests)1 356(. The)1 234 2 4456 4740 t
+10 CW f
+(ps)5075 4740 w
+10 R f
+(,)5195 4740 w
+10 CW f
+(ft)540 4860 w
+10 R f
+(,)660 4860 w
+10 CW f
+(po)710 4860 w
+10 R f
+(,)830 4860 w
+10 CW f
+(vs)880 4860 w
+10 R f
+(,)1000 4860 w
+10 CW f
+(ls)1050 4860 w
+10 R f
+(,)1170 4860 w
+10 CW f
+(ll)1220 4860 w
+10 R f
+(,)1340 4860 w
+10 CW f
+(in)1390 4860 w
+10 R f
+(, and)1 194 1 1510 4860 t
+10 CW f
+(lt)1729 4860 w
+10 R f
+(restore the previous parameter value in the absence of an argument.)10 2695 1 1874 4860 t
+( case letters and one/two character arguments are indicated)8 2388(Single character arguments are indicated by single lower)7 2292 2 540 5040 t
+( string arguments are indicated by multi-character mnemonics.)7 2501( Character)1 437(by a pair of lower case letters.)6 1199 3 540 5160 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 2.  , HEADING = FONT AND CHARACTER SIZE CONTROL]
+10 B f
+( AND CHARACTER SIZE CONTROL)4 1695(2. FONT)1 403 2 540 5400 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 2.1  , HEADING = Character Set]
+( Set)1 158(2.1 Character)1 612 2 540 5580 t
+10 R f
+(The)540 5760 w
+10 I f
+(troff)725 5760 w
+10 R f
+( are normally sev-)3 741( There)1 287(character set is de\256ned by a description \256le speci\256c to each output device \(\24723\).)13 3264 3 928 5760 t
+( input as themselves \()4 866( are)1 147( Characters)1 477(eral regular fonts and one or more special fonts.)8 1917 4 540 5880 t
+9 R f
+(ASCII)3947 5880 w
+10 R f
+(\), as)1 166 1 4182 5880 t
+10 CW f
+(\\\()4373 5880 w
+10 I f
+(xx)4493 5880 w
+10 R f
+(, as)1 133 1 4581 5880 t
+10 CW f
+(\\C')4739 5880 w
+10 I f
+(name)4919 5880 w
+10 CW f
+(')5135 5880 w
+10 R f
+(,)5195 5880 w
+(or as)1 191 1 540 6000 t
+10 CW f
+(\\N')756 6000 w
+10 I f
+(n)936 6000 w
+10 CW f
+(')986 6000 w
+10 R f
+( form)1 219(. The)1 230 2 1046 6000 t
+10 CW f
+(\\C')1520 6000 w
+10 I f
+(name)1700 6000 w
+10 CW f
+(')1916 6000 w
+10 R f
+(permits a name of any length; the form)7 1556 1 2001 6000 t
+10 CW f
+(\\N')3582 6000 w
+10 I f
+(n)3762 6000 w
+10 CW f
+(')3812 6000 w
+10 R f
+(refers to the)2 476 1 3897 6000 t
+10 I f
+(n)4398 6000 w
+10 R f
+(-th character on the)3 772 1 4448 6000 t
+(current font, whether named or not.)5 1416 1 540 6120 t
+(Normally the input characters)3 1198 1 540 6300 t
+10 CW f
+(')1766 6300 w
+10 R f
+(,)1826 6300 w
+10 CW f
+(`)1880 6300 w
+10 R f
+(, and)1 198 1 1940 6300 t
+10 CW f
+(-)2167 6300 w
+10 R f
+(are printed as ', `, and - respectively;)7 1493 1 2256 6300 t
+10 CW f
+(\\')3778 6300 w
+10 R f
+(,)3898 6300 w
+10 CW f
+(\\`)3952 6300 w
+10 R f
+(, and)1 198 1 4072 6300 t
+10 CW f
+(\\-)4299 6300 w
+10 R f
+(produce \302, \301, and \261.)4 772 1 4448 6300 t
+(Non-existent characters are printed as a 1-em space.)7 2076 1 540 6420 t
+10 I f
+(Nroff)540 6600 w
+10 R f
+( default all)2 433( By)1 170( to print them.)3 576(has an analogous, but different, mechanism for de\256ning legal characters and how)11 3262 4 779 6600 t
+9 R f
+(ASCII)540 6720 w
+10 R f
+( such additional characters as may be available on the output device, such char-)13 3183( are)1 148( There)1 284(characters are valid.)2 803 4 802 6720 t
+( be able to be constructed by overstriking or other combination, and those that can reasonably be)16 4113(acters as may)2 567 2 540 6840 t
+( exact behavior is determined by a driving table prepared for each)11 2821( The)1 223(mapped into other printable characters.)4 1636 3 540 6960 t
+(device.)540 7080 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(3)5164 600 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 2.2  , HEADING = Fonts]
+10 B f
+(2.2 Fonts)1 414 1 540 960 t
+10 I f
+(Troff)540 1140 w
+10 R f
+( said to be)3 417(begins execution by reading information for a set of default fonts,)10 2646 2 768 1140 t
+10 I f
+(mounted)3859 1140 w
+10 R f
+(; conventionally, the \256rst)3 1009 1 4211 1140 t
+(four are Times Roman \()4 987 1 540 1260 t
+10 CW f
+(R)1527 1260 w
+10 R f
+(\),)1587 1260 w
+10 I f
+(Times Italic)1 482 1 1677 1260 t
+10 R f
+(\()2191 1260 w
+10 CW f
+(I)2224 1260 w
+10 R f
+(\),)2284 1260 w
+10 B f
+(Times Bold)1 494 1 2374 1260 t
+10 R f
+(\()2900 1260 w
+10 CW f
+(B)2933 1260 w
+10 R f
+(\), and)1 234 1 2993 1260 t
+10 BI f
+(Times Bold Italic)2 724 1 3258 1260 t
+10 R f
+(\()4013 1260 w
+10 CW f
+(BI)4046 1260 w
+10 R f
+(\), and the last is a Special)6 1054 1 4166 1260 t
+(font \()1 222 1 540 1380 t
+10 CW f
+(S)762 1380 w
+10 R f
+( set of fonts and positions)5 1045( The)1 209( fonts are used in this document.)6 1320( These)1 291(\) containing miscellaneous characters.)3 1533 5 822 1380 t
+(is determined by the device description \256le, described in \24723.)9 2455 1 540 1500 t
+(The current font, initially Roman, may be changed by use of the)11 2626 1 540 1680 t
+10 CW f
+(ft)3197 1680 w
+10 R f
+( embedding at any desired point)5 1314(request, or by)2 558 2 3348 1680 t
+(either)540 1800 w
+10 CW f
+(\\f)792 1800 w
+10 I f
+(x)912 1800 w
+10 R f
+(,)956 1800 w
+10 CW f
+(\\f\()1006 1800 w
+10 I f
+(xx)1186 1800 w
+10 R f
+(, or)1 133 1 1274 1800 t
+10 CW f
+(\\f)1432 1800 w
+10 I f
+(N)1552 1800 w
+10 R f
+(, where)1 293 1 1619 1800 t
+10 I f
+(x)1937 1800 w
+10 R f
+(and)2006 1800 w
+10 I f
+(xx)2175 1800 w
+10 R f
+(are the name of a font and)6 1041 1 2288 1800 t
+10 I f
+(N)3354 1800 w
+10 R f
+(is a numerical font position.)4 1119 1 3446 1800 t
+( on that font are automatically handled as if they were)10 2251(It is not necessary to change to the Special font; characters)10 2429 2 540 1980 t
+( Special font may actually be several fonts; the name)9 2200( The)1 215( of the current font.)4 813(physically part)1 602 4 540 2100 t
+10 CW f
+(S)4405 2100 w
+10 R f
+(is reserved and is)3 720 1 4500 2100 t
+( special fonts must be mounted after regular fonts.)8 2005( All)1 178(generally used for one of these.)5 1252 3 540 2220 t
+10 I f
+(Troff)540 2400 w
+10 R f
+(can be informed that any particular font is mounted by use of the)12 2602 1 767 2400 t
+10 CW f
+(fp)3396 2400 w
+10 R f
+( list of known fonts is instal-)6 1157(request. The)1 520 2 3543 2400 t
+( subsequent discussion of font-related requests,)5 1921( the)1 155( In)1 141(lation dependent.)1 696 4 540 2520 t
+10 I f
+(F)3485 2520 w
+10 R f
+(represents either a one- or two-character)5 1642 1 3578 2520 t
+( current font is available \(as a numerical position\) in the read-only)11 2763( The)1 216( position.)1 384(font name or the numerical font)5 1317 4 540 2640 t
+(number register)1 629 1 540 2760 t
+10 CW f
+(.f)1194 2760 w
+10 R f
+(.)1314 2760 w
+( this way, there)3 622( In)1 137( is honored if the font description information exists.)8 2139(A request for a named but not-mounted font)7 1782 4 540 2940 t
+( may be handled)3 678( fonts)1 233( Mounted)1 419(is no limit on the number of fonts that may be printed in any part of a document.)17 3350 4 540 3060 t
+(more ef\256ciently, and they may be referred to by their mount positions, but there is no other difference.)17 4087 1 540 3180 t
+(The function)1 513 1 540 3360 t
+10 CW f
+(\\S')1078 3360 w
+10 S f
+(\261)1258 3360 w
+10 I f
+(N)1321 3360 w
+10 CW f
+(')1388 3360 w
+10 R f
+(causes the current font to be slanted by)7 1555 1 1473 3360 t
+10 S f
+(\261)3053 3360 w
+10 I f
+(N)3116 3360 w
+10 R f
+( all devices support slanting.)4 1141(degrees. Not)1 529 2 3208 3360 t
+10 I f
+(Nroff)540 3540 w
+10 R f
+(understands font control and normally underlines italic characters \(see \24710.5\).)9 3113 1 777 3540 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 2.3  , HEADING = Character Size]
+10 B f
+( Size)1 197(2.3 Character)1 612 2 540 3720 t
+10 R f
+( 6, 7, 8, 9,)4 424(Character point sizes available depend on the speci\256c output device; a typical \(historical\) set of values is)16 4256 2 540 3900 t
+( The)1 212( is a range of 1/12 inch to 1/2 inch.)9 1456( This)1 235( 36.)1 157(10, 11, 12, 14, 16, 18, 20, 22, 24, 28, and)10 1724 5 540 4020 t
+10 CW f
+(ps)4356 4020 w
+10 R f
+(request is used to)3 712 1 4508 4020 t
+( changed between any two characters by embed-)7 1949( the point size may be)5 879( Alternatively)1 578(change or restore the point size.)5 1274 4 540 4140 t
+(ding a)1 248 1 540 4260 t
+10 CW f
+(\\s)814 4260 w
+10 I f
+(N)934 4260 w
+10 R f
+( the size to)3 430(at the desired point to set)5 1007 2 1027 4260 t
+10 I f
+(N)2489 4260 w
+10 R f
+(, or a)2 202 1 2556 4260 t
+10 CW f
+(\\s)2783 4260 w
+10 S f
+(\261)2903 4260 w
+10 I f
+(N)2966 4260 w
+10 R f
+(\(1)3058 4260 w
+10 S f
+(\243)3157 4260 w
+10 I f
+(N)3228 4260 w
+10 S f
+(\243)3319 4260 w
+10 R f
+(9\) to increment/decrement the size by)5 1505 1 3390 4260 t
+10 I f
+(N)4920 4260 w
+10 R f
+(;)4987 4260 w
+10 CW f
+(\\s0)5040 4260 w
+10 R f
+( point size values that are between two valid sizes yield the larger of the two.)15 3072( Requested)1 466(restores the previous size.)3 1031 3 540 4380 t
+(Note that through an accident of history, a construction like)9 2389 1 540 4560 t
+10 CW f
+(\\s39)2956 4560 w
+10 R f
+(is parsed as size 39, and thus converted to size 36)10 1997 1 3223 4560 t
+(\(given the sizes above\), while)4 1225 1 540 4680 t
+10 CW f
+(\\s40)1799 4680 w
+10 R f
+(is parsed as size 4 followed by)6 1274 1 2073 4680 t
+10 CW f
+(0)3381 4680 w
+10 R f
+( syntax)1 294(. The)1 238 2 3441 4680 t
+10 CW f
+(\\s\()4014 4680 w
+10 I f
+(nn)4202 4680 w
+10 R f
+(and)4335 4680 w
+10 CW f
+(\\s)4520 4680 w
+10 S f
+(\261)4648 4680 w
+10 CW f
+(\()4719 4680 w
+10 I f
+(nn)4787 4680 w
+10 R f
+(permits)4920 4680 w
+(speci\256cation of sizes that would otherwise be ambiguous.)7 2303 1 540 4800 t
+(The current size is available in the)6 1369 1 540 4980 t
+10 CW f
+(.s)1934 4980 w
+10 R f
+(register.)2079 4980 w
+10 I f
+(Nroff)2453 4980 w
+10 R f
+(ignores type size requests.)3 1048 1 2690 4980 t
+(The function)1 520 1 540 5160 t
+10 CW f
+(\\H')1092 5160 w
+10 S f
+(\261)1272 5160 w
+10 I f
+(N)1335 5160 w
+10 CW f
+(')1402 5160 w
+10 R f
+(sets)1494 5160 w
+10 R f
+0 12 changefont
+(the height of the current font)5 1185 1 1676 5160 t
+10 R f
+(to)2894 5160 w
+10 I f
+(N)3005 5160 w
+10 R f
+(, or increments it by)4 834 1 3072 5160 t
+10 S f
+(+)3939 5160 w
+10 I f
+(N)4010 5160 w
+10 R f
+(, or decrements it by)4 850 1 4077 5160 t
+10 S f
+(-)4960 5160 w
+10 I f
+(N)5031 5160 w
+10 R f
+(; if)1 122 1 5098 5160 t
+10 I f
+(N)540 5280 w
+10 S f
+(=)631 5280 w
+10 R f
+( all devices support)3 786( Not)1 204( each case, the width is unchanged.)6 1426( In)1 137( height is restored to the current point size.)8 1738(0, the)1 227 6 702 5280 t
+(independent height and width for characters.)5 1779 1 540 5400 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 5580 t
+8 BI f
+(*)3450 5580 w
+10 CW f
+(.ps)540 5760 w
+10 S f
+(\261)770 5760 w
+10 I f
+(N)833 5760 w
+10 R f
+( E)1 617( previous)1 922(10 point)1 322 3 1440 5760 t
+(Point size set to)3 643 1 1116 5904 t
+10 S f
+(\261)1788 5904 w
+10 I f
+(N)1851 5904 w
+10 R f
+( embed)1 295(. Alternatively)1 606 2 1918 5904 t
+10 CW f
+(\\s)2848 5904 w
+10 I f
+(N)2968 5904 w
+10 R f
+(or)3064 5904 w
+10 CW f
+(\\s)3176 5904 w
+10 S f
+(\261)3296 5904 w
+10 I f
+(N)3359 5904 w
+10 R f
+( size value may be requested;)5 1197( positive)1 346(. Any)1 251 3 3426 5904 t
+( paired)1 284( A)1 132( the next larger valid size will result, with a maximum of the largest valid size.)15 3288(if invalid,)1 400 4 1116 6024 t
+(sequence)1116 6144 w
+10 S f
+(+)1519 6144 w
+10 I f
+(N)1590 6144 w
+10 R f
+(,)1657 6144 w
+10 S f
+(-)1720 6144 w
+10 I f
+(N)1791 6144 w
+10 R f
+( in)1 117( Ignored)1 374(will work because the previous requested value is also remembered.)9 2833 3 1896 6144 t
+10 I f
+(nroff)1116 6264 w
+10 R f
+(.)1311 6264 w
+10 CW f
+(.ss)540 6444 w
+10 I f
+(N)770 6444 w
+10 R f
+( E)1 656( ignored)1 839(12/36 em)1 366 3 1440 6444 t
+(Space-character size \(i.e., inter-word gap\) is set to)7 2020 1 1116 6588 t
+10 I f
+(N)3164 6588 w
+10 R f
+( the minimum word spacing)4 1138( size is)2 278( This)1 231(/36 ems.)1 342 4 3231 6588 t
+( in)1 103( Ignored)1 360(in adjusted text.)2 636 3 1116 6708 t
+10 I f
+(nroff)2240 6708 w
+10 R f
+(.)2435 6708 w
+8 S1 f
+(__________________)540 6929 w
+8 R f
+( \256elds have the same meaning as described earlier in the summary of requests.)13 2489(* The)1 244 2 540 7049 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(4)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 960 t
+10 CW f
+(.cs)540 1140 w
+10 I f
+(F N M)2 311 1 770 1140 t
+10 R f
+( P)1 906(off \261)1 950 2 1440 1140 t
+( \(width\) mode is set on for font)7 1281(Constant character space)2 999 2 1116 1284 t
+10 I f
+(F)3426 1284 w
+10 R f
+(\(if mounted\); the width of every character)6 1703 1 3517 1284 t
+(will be taken to be)4 746 1 1116 1404 t
+10 I f
+(N)1889 1404 w
+10 R f
+( If)1 118(/36 ems.)1 341 2 1956 1404 t
+10 I f
+(M)2442 1404 w
+10 R f
+( point size; if)3 528(is absent, the em is that of the character's)8 1665 2 2552 1404 t
+10 I f
+(M)4771 1404 w
+10 R f
+(is given,)1 340 1 4880 1404 t
+(the em is)2 373 1 1116 1524 t
+10 I f
+(M)1520 1524 w
+10 R f
+( characters are centered in this space, including those with an actual)11 2781( affected)1 351(points. All)1 454 3 1634 1524 t
+( Font characters occurring while the current font is)8 2063( Special)1 349(width larger than this space.)4 1143 3 1116 1644 t
+10 I f
+(F)4701 1644 w
+10 R f
+(are also so)2 429 1 4791 1644 t
+(treated. If)1 420 1 1116 1764 t
+10 I f
+(N)1569 1764 w
+10 R f
+( mode must be in effect when the characters are)9 1983( The)1 214( turned off.)2 464(is absent, the mode is)4 890 4 1669 1764 t
+( in)1 103( Ignored)1 360(physically printed.)1 744 3 1116 1884 t
+10 I f
+(nroff)2348 1884 w
+10 R f
+(.)2543 1884 w
+10 CW f
+(.bd)540 2064 w
+10 I f
+(F N)1 178 1 770 2064 t
+10 R f
+( P)1 906(off \261)1 950 2 1440 2064 t
+(The characters in font)3 875 1 1116 2208 t
+10 I f
+(F)2017 2208 w
+10 R f
+( emboldened by printing each one twice, separated by)8 2164(will be arti\256cially)2 713 2 2104 2208 t
+10 I f
+(N)5008 2208 w
+10 S f
+(-)5099 2208 w
+10 R f
+(1)5170 2208 w
+( reasonable value for)3 854( A)1 129(basic units.)1 457 3 1116 2328 t
+10 I f
+(N)2588 2328 w
+10 R f
+( If)1 123(is 3 when the character size is near 10 points.)9 1870 2 2687 2328 t
+10 I f
+(N)4712 2328 w
+10 R f
+(is missing)1 410 1 4810 2328 t
+( emboldening value)2 788( The)1 205(the embolden mode is turned off.)5 1326 3 1116 2448 t
+10 I f
+(N)3460 2448 w
+10 R f
+(is in the)2 317 1 3552 2448 t
+10 CW f
+(.b)3894 2448 w
+10 R f
+(register.)4039 2448 w
+( h)1 2( it th)2 82( wi)1 30( w)1 109( d)1 2( ed)1 52( te)1 46( nt)1 30( in)1 52( ri)1 30( pr)1 35( p)1 87( s)1 2( is)1 41( i)1 65( ph h)2 54( ap)1 52( ra)1 46( gr)1 35( ag)1 52( ra)1 46( ar)1 35( pa)1 46( p)1 87( s)1 2( is)1 41( hi)1 30(T Th)1 113 28 1116 2628 t
+10 CW f
+(.bd R 3)2 420 1 2457 2628 t
+10 R f
+( e)1 2( re)1 46( ar)1 35( a)1 82( s)1 2( rs)1 41( er)1 35( te)1 46( ac ct)2 76( ra)1 46( ar)1 35( ha)1 46( ch)1 52( c)1 82( e)1 2( he)1 46( th)1 52( t)1 66( n)1 2( en)1 52( he)1 46( wh)1 52( w)1 110( t)1 2( ec ct)2 76( ff fe)2 81( ef)1 35( e)1 82( n)1 2( in)1 52( i)1 65( e)1 2( be)1 46( b)1 87( t)1 2( st)1 30( us)1 41( mu)1 52( m)1 115( e)1 2( od de)2 98( mo)1 52( m)1 115( e)1 2( he)1 46( Th)1 52( T)1 125(. .)1 27 48 2877 2628 t
+( n)1 2( in)1 52( i)1 55( d)1 2( ed)1 52( re)1 46( gn no or)3 139( Ig)1 52( I)1 87( .)1 2( d.)1 27( ed)1 52( te)1 46( nt)1 30( in)1 52( ri)1 30( pr)1 35( p)1 77( y)1 2( ll ly)2 82( ca al)2 76( ic)1 46( si)1 30(p ph hy ys)3 195 24 1116 2748 t
+10 I f
+(nroff)2412 2748 w
+10 R f
+(. .)1 27 1 2607 2748 t
+10 CW f
+(.bd S)1 300 1 540 2928 t
+10 I f
+(F N)1 178 1 890 2928 t
+10 R f
+( P)1 906(off \261)1 950 2 1440 2928 t
+( whenever the current font is)5 1154(The characters in the Special font will be emboldened)8 2159 2 1116 3072 t
+10 I f
+(F)4456 3072 w
+10 R f
+( mode must)2 471(. The)1 232 2 4517 3072 t
+( in)1 103( Ignored)1 360(be in effect when the characters are physically printed.)8 2179 3 1116 3192 t
+10 I f
+(nroff)3783 3192 w
+10 R f
+(.)3978 3192 w
+10 CW f
+(.ft)540 3372 w
+10 I f
+(F)770 3372 w
+10 R f
+( E)1 617(Roman previous)1 1244 2 1440 3372 t
+(Font changed to)2 668 1 1116 3516 t
+10 I f
+(F)1821 3516 w
+10 R f
+( embed)1 303(. Alternatively,)1 639 2 1882 3516 t
+10 CW f
+(\\f)2861 3516 w
+10 I f
+(F)2981 3516 w
+10 R f
+( font name)2 451(. The)1 242 2 3042 3516 t
+10 CW f
+(P)3772 3516 w
+10 R f
+( the previous)2 542(is reserved to mean)3 809 2 3869 3516 t
+(font, and the name)3 743 1 1116 3636 t
+10 CW f
+(S)1884 3636 w
+10 R f
+(for the special font.)3 776 1 1969 3636 t
+10 CW f
+(.fp)540 3816 w
+10 I f
+(N F L)2 284 1 770 3816 t
+10 R f
+(R,I,B,)1440 3816 w
+10 S f
+(\274)1682 3816 w
+10 R f
+( \261)1 645(,S ignored)1 863 2 1782 3816 t
+( statement that a font named)5 1144( is a)2 165( This)1 230(Font position.)1 559 4 1116 3960 t
+10 I f
+(F)3242 3960 w
+10 R f
+(is associated with position)3 1062 1 3331 3960 t
+10 I f
+(N)4421 3960 w
+10 R f
+( is a fatal error)4 593(. It)1 139 2 4488 3960 t
+(if)1116 4080 w
+10 I f
+(F)1207 4080 w
+10 R f
+( fonts with names longer than two characters,)7 1841( For)1 193(is not known.)2 550 3 1298 4080 t
+10 I f
+(L)3911 4080 w
+10 R f
+(refers to the long name, and)5 1134 1 3996 4080 t
+10 I f
+(F)5159 4080 w
+10 R f
+( is generally a limit of about 10 mounted fonts.)9 1877( There)1 282(becomes a synonym.)2 835 3 1116 4200 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 3.  , HEADING = PAGE CONTROL]
+10 B f
+( CONTROL)1 531(3. PAGE)1 403 2 540 4440 t
+10 R f
+(Top and bottom margins are not automatically provided; it is conventional to de\256ne two)13 3562 1 540 4620 t
+10 I f
+(macros)4130 4620 w
+10 R f
+(and to set)2 389 1 4452 4620 t
+10 I f
+(traps)4869 4620 w
+10 R f
+(for)5104 4620 w
+( \(top\) and)2 400(them at vertical positions 0)4 1111 2 540 4740 t
+10 S f
+(-)2082 4740 w
+10 I f
+(N)2153 4740 w
+10 R f
+(\(distance)2251 4740 w
+10 I f
+(N)2642 4740 w
+10 R f
+( A)1 128( \2477 and Tutorial Examples \247T2.)5 1301( See)1 200(up from the bottom\).)3 851 4 2740 4740 t
+(pseudo-page transition onto the \256rst page occurs either when the \256rst)10 2857 1 540 4860 t
+10 I f
+(break)3432 4860 w
+10 R f
+( when the \256rst)3 602(occurs or)1 378 2 3694 4860 t
+10 I f
+(non-diverted)4710 4860 w
+10 R f
+( this)1 176( for a trap to occur at the top of the \256rst page must be completed before)16 2956( Arrangements)1 622(text processing occurs.)2 926 4 540 4980 t
+( the following, references to the)5 1334(transition. In)1 549 2 540 5100 t
+10 I f
+(current diversion)1 704 1 2461 5100 t
+10 R f
+( described)1 421(\(\2477.4\) mean that the mechanism being)5 1596 2 3203 5100 t
+(works during both ordinary and diverted output \(the former considered as the top diversion level\).)14 3913 1 540 5220 t
+(The limitations on)2 734 1 540 5400 t
+10 I f
+(troff)1299 5400 w
+10 R f
+(and)1497 5400 w
+10 I f
+(nroff)1666 5400 w
+10 R f
+(output dimensions are device dependent.)4 1628 1 1886 5400 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 5580 t
+10 CW f
+(.pl)540 5760 w
+10 S f
+(\261)770 5760 w
+10 I f
+(N)833 5760 w
+10 R f
+( in)1 94( 11)1 806(11 in)1 194 3 1440 5760 t
+10 B f
+(v)3240 5760 w
+10 R f
+(Page length set to)3 708 1 1116 5904 t
+10 S f
+(\261)1849 5904 w
+10 I f
+(N)1912 5904 w
+10 R f
+( current page length is available in the)7 1522(. The)1 230 2 1979 5904 t
+10 CW f
+(.p)3756 5904 w
+10 R f
+(register.)3901 5904 w
+10 CW f
+(.bp)540 6084 w
+10 S f
+(\261)770 6084 w
+10 I f
+(N N)1 674 1 833 6084 t
+10 S f
+(=)1531 6084 w
+10 R f
+( B,)1 942(1 \261)1 788 2 1602 6084 t
+10 B f
+(v)3332 6084 w
+10 R f
+( If)1 119( a new page is begun.)5 874( current page is ejected and)5 1098( The)1 207(Begin page.)1 479 5 1116 6228 t
+10 S f
+(\261)3921 6228 w
+10 I f
+(N)3984 6228 w
+10 R f
+(is given, the new page num-)5 1141 1 4079 6228 t
+(ber will be)2 427 1 1116 6348 t
+10 S f
+(\261)1568 6348 w
+10 I f
+(N)1631 6348 w
+10 R f
+( see request)2 465(. Also)1 264 2 1698 6348 t
+10 CW f
+(ns)2452 6348 w
+10 R f
+(.)2572 6348 w
+10 CW f
+(.pn)540 6528 w
+10 S f
+(\261)770 6528 w
+10 I f
+(N N)1 674 1 833 6528 t
+10 S f
+(=)1531 6528 w
+10 R f
+( \261)1 645(1 ignored)1 1043 2 1602 6528 t
+( next page \(when it occurs\) will have the page number)10 2327( The)1 220(Page number.)1 564 3 1116 6672 t
+10 S f
+(\261)4268 6672 w
+10 I f
+(N)4331 6672 w
+10 R f
+(. A)1 163 1 4398 6672 t
+10 CW f
+(pn)4602 6672 w
+10 R f
+(must occur)1 457 1 4763 6672 t
+( current page)2 528( The)1 209( affect the page number of the \256rst page.)8 1647(before the initial pseudo-page transition to)5 1720 4 1116 6792 t
+(number is in the)3 647 1 1116 6912 t
+10 CW f
+(%)1788 6912 w
+10 R f
+(register.)1873 6912 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(5)5164 600 w
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 960 t
+10 CW f
+(.po)540 1140 w
+10 S f
+(\261)770 1140 w
+10 I f
+(N)833 1140 w
+10 R f
+( previous)1 997( 0)1 75(1 in;)1 172 3 1440 1140 t
+10 B f
+(v)3240 1140 w
+10 R f
+( current)1 308( The)1 206(Page offset.)1 472 3 1116 1284 t
+10 I f
+(left margin)1 443 1 2128 1284 t
+10 R f
+(is set to)2 310 1 2597 1284 t
+10 S f
+(\261)2934 1284 w
+10 I f
+(N)2997 1284 w
+10 R f
+(. The)1 232 1 3064 1284 t
+10 I f
+(troff)3323 1284 w
+10 R f
+(initial value provides 1 inch of paper mar-)7 1697 1 3523 1284 t
+( current page offset is available in the)7 1499( The)1 205(gin on a typical device.)4 929 3 1116 1404 t
+10 CW f
+(.o)3774 1404 w
+10 R f
+(register.)3919 1404 w
+10 CW f
+(.ne)540 1584 w
+10 I f
+(N)770 1584 w
+10 R f
+(\261)1440 1584 w
+10 I f
+(N)2340 1584 w
+10 S f
+(=)2431 1584 w
+10 R f
+(1)2502 1584 w
+10 I f
+(V)2560 1584 w
+10 R f
+(D,)3240 1584 w
+10 B f
+(v)3337 1584 w
+10 R f
+(Need)1116 1728 w
+10 I f
+(N)1356 1728 w
+10 R f
+( the distance)2 509( If)1 121(vertical space.)1 575 3 1453 1728 t
+10 I f
+(D)2688 1728 w
+10 R f
+(to the next trap position \(see \2477.5\) is less than)9 1886 1 2790 1728 t
+10 I f
+(N)4707 1728 w
+10 R f
+(, a forward)2 446 1 4774 1728 t
+(vertical space of size)3 836 1 1116 1848 t
+10 I f
+(D)1978 1848 w
+10 R f
+( the page,)2 385( there are no remaining traps on)6 1275( If)1 117(occurs, which will spring the trap.)5 1367 4 2076 1848 t
+10 I f
+(D)1116 1968 w
+10 R f
+( If)1 120(is the distance to the bottom of the page.)8 1650 2 1217 1968 t
+10 I f
+(D)3016 1968 w
+10 S f
+(<)3112 1968 w
+10 I f
+(V)3183 1968 w
+10 R f
+( spring the)2 432(, another line could still be output and)7 1544 2 3244 1968 t
+( a diversion,)2 491(trap. In)1 313 2 1116 2088 t
+10 I f
+(D)1945 2088 w
+10 R f
+(is the distance to the)4 816 1 2042 2088 t
+10 I f
+(diversion trap)1 564 1 2883 2088 t
+10 R f
+(, if any, or is very large.)6 956 1 3447 2088 t
+10 CW f
+(.mk)540 2268 w
+10 I f
+(R)770 2268 w
+10 R f
+( D)1 667(none internal)1 1205 2 1440 2268 t
+( internal register \(both associated with the current diversion)8 2539(Mark the current vertical place in an)6 1565 2 1116 2412 t
+(level\), or in register)3 787 1 1116 2532 t
+10 I f
+(R)1928 2532 w
+10 R f
+( See)1 194(, if given.)2 383 2 1989 2532 t
+10 CW f
+(rt)2591 2532 w
+10 R f
+(request.)2736 2532 w
+10 CW f
+(.rt)540 2712 w
+10 S f
+(\261)770 2712 w
+10 I f
+(N)833 2712 w
+10 R f
+( D,)1 692(none internal)1 1205 2 1440 2712 t
+10 B f
+(v)3337 2712 w
+10 R f
+(Return)1116 2856 w
+10 I f
+(upward only)1 505 1 1415 2856 t
+10 R f
+( If)1 119( vertical place in the current diversion.)6 1556(to a marked)2 475 3 1947 2856 t
+10 S f
+(\261)4125 2856 w
+10 I f
+(N)4188 2856 w
+10 R f
+(\(with respect to current)3 937 1 4283 2856 t
+(place\) is given, the place is)5 1141 1 1116 2976 t
+10 S f
+(\261)2294 2976 w
+10 I f
+(N)2357 2976 w
+10 R f
+(from the top of the page or diversion or, if)9 1794 1 2461 2976 t
+10 I f
+(N)4292 2976 w
+10 R f
+( to a place)3 440(is absent,)1 384 2 4396 2976 t
+(marked by a previous)3 865 1 1116 3096 t
+10 CW f
+(mk)2008 3096 w
+10 R f
+(. The)1 232 1 2128 3096 t
+10 CW f
+(sp)2387 3096 w
+10 R f
+(request \(\2475.3\) may be used in all cases instead of)9 1975 1 2534 3096 t
+10 CW f
+(rt)4536 3096 w
+10 R f
+(by spacing to)2 537 1 4683 3096 t
+(the absolute place stored in a explicit register, e.g., using the sequence)11 2902 1 1116 3216 t
+10 CW f
+(.mk)4052 3216 w
+10 I f
+(R)4265 3216 w
+10 S f
+(\274)4359 3216 w
+10 CW f
+(.sp |\\n)1 393 1 4492 3216 t
+10 I f
+(R)4893 3216 w
+10 CW f
+(u)4954 3216 w
+10 R f
+(; this)1 206 1 5014 3216 t
+(also works when the motion is downwards.)6 1729 1 1116 3336 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 4.  , HEADING = TEXT FILLING, ADJUSTING, AND CENTERING]
+10 B f
+( FILLING, ADJUSTING, AND CENTERING)4 1973(4. TEXT)1 398 2 540 3576 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.1  , HEADING = Filling and Adjusting]
+( and Adjusting)2 635(4.1 Filling)1 454 2 540 3756 t
+10 R f
+( assembled into a output text line until some word does not)11 2424(Normally, words are collected from input text lines and)8 2256 2 540 3936 t
+( spaces between the)3 816( The)1 214( then made to hyphenate the word to put part of it into the output line.)15 2922( attempt is)2 437(\256t. An)1 291 5 540 4056 t
+(words on the output line are then increased to spread out the line to the current)15 3166 1 540 4176 t
+10 I f
+(line length)1 428 1 3734 4176 t
+10 R f
+(minus any current)2 727 1 4190 4176 t
+10 I f
+(indent)4945 4176 w
+10 R f
+(.)5195 4176 w
+(A)540 4296 w
+10 I f
+(word)651 4296 w
+10 R f
+( of characters delimited by the)5 1276(is any string)2 517 2 896 4296 t
+10 I f
+(space)2727 4296 w
+10 R f
+( Any)1 235(character or the beginning/end of the input line.)7 1993 2 2992 4296 t
+( lines nor spread apart in the adjustment)7 1616(adjacent pair of words that must be kept together \(neither split across output)12 3064 2 540 4416 t
+(process\) can be tied together by separating them with the)9 2294 1 540 4536 t
+10 I f
+(unpaddable space)1 726 1 2861 4536 t
+10 R f
+(character ``)1 456 1 3613 4536 t
+10 CW f
+(\\)4069 4536 w
+10 R f
+( The)1 206('' \(backslash-space\).)1 825 2 4189 4536 t
+(adjusted word spacings are uniform in)5 1608 1 540 4656 t
+10 I f
+(troff)2189 4656 w
+10 R f
+(and the minimum interword spacing can be controlled with the)9 2655 1 2403 4656 t
+10 CW f
+(ss)5100 4656 w
+10 R f
+( In)1 138(request \(\2472\).)1 509 2 540 4776 t
+10 I f
+(nroff)1217 4776 w
+10 R f
+( spaces; however, the)3 865(, they are normally nonuniform because of quantization to character-size)9 2943 2 1412 4776 t
+(command line option)2 898 1 540 4896 t
+10 CW f
+(-e)1487 4896 w
+10 R f
+( adjustment, and)2 708( Filling,)1 368(causes uniform spacing with full output device resolution.)7 2488 3 1656 4896 t
+( the)1 153( text length on the last line output is available in)10 1992( The)1 212(hyphenation \(\24713\) can all be prevented or controlled.)7 2172 4 540 5016 t
+10 CW f
+(.n)5100 5016 w
+10 R f
+(register, and text baseline position on the page for this line is in the)13 2733 1 540 5136 t
+10 CW f
+(nl)3302 5136 w
+10 R f
+( text baseline high-water mark)4 1234(register. The)1 534 2 3452 5136 t
+(\(lowest place\) on the current page is in the)8 1696 1 540 5256 t
+10 CW f
+(.h)2261 5256 w
+10 R f
+( current horizontal output position is in the)7 1708(register. The)1 529 2 2406 5256 t
+10 CW f
+(.k)4668 5256 w
+10 R f
+(register.)4813 5256 w
+(An input text line ending with)5 1208 1 540 5436 t
+10 CW f
+(.)1774 5436 w
+10 R f
+(,)1842 5436 w
+10 CW f
+(?)1893 5436 w
+10 R f
+(, or)1 134 1 1953 5436 t
+10 CW f
+(!)2113 5436 w
+10 R f
+(, optionally followed by any number of)6 1574 1 2173 5436 t
+10 CW f
+(")3773 5436 w
+10 R f
+(,)3833 5436 w
+10 CW f
+(')3884 5436 w
+10 R f
+(,)3944 5436 w
+10 CW f
+(\))3995 5436 w
+10 R f
+(,)4055 5436 w
+10 CW f
+(])4106 5436 w
+10 R f
+(,)4166 5436 w
+10 CW f
+(*)4217 5436 w
+10 R f
+( the)1 149(, or \262, is taken to be)6 794 2 4277 5436 t
+( prevent this, add)3 688( To)1 161( character is automatically provided during \256lling.)6 2006(end of a sentence, and an additional space)7 1680 4 540 5556 t
+10 CW f
+(\\&)5100 5556 w
+10 R f
+( inter-word space characters found in the input are retained, except for trailing)12 3176( Multiple)1 400(to the end of the input line.)6 1104 3 540 5676 t
+(spaces; initial spaces also cause a break.)6 1604 1 540 5796 t
+(When \256lling is in effect, a)5 1068 1 540 5976 t
+10 CW f
+(\\p)1638 5976 w
+10 R f
+(may be embedded or attached to a word to cause a break at the end of the word and)18 3432 1 1788 5976 t
+(have the resulting output line spread out to \256ll the current line length.)12 2773 1 540 6096 t
+( to begin with a control character can be made not to look like a control line by)17 3425(A text input line that happens)5 1255 2 540 6276 t
+(pre\256xing it with the non-printing, zero-width \256ller character)7 2416 1 540 6396 t
+10 CW f
+(\\&)2983 6396 w
+10 R f
+( output translation of)3 839( another way is to specify)5 1033(. Still)1 245 3 3103 6396 t
+(some convenient character into the control character using)7 2330 1 540 6516 t
+10 CW f
+(tr)2895 6516 w
+10 R f
+(\(\24710.5\).)3040 6516 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(6)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.2  , HEADING = Interrupted Text]
+10 B f
+( Text)1 219(4.2 Interrupted)1 680 2 540 960 t
+10 R f
+( an input line in)4 664(The copying of)2 626 2 540 1140 t
+10 I f
+(no\256ll)1864 1140 w
+10 R f
+(\(non-\256ll\) mode can be interrupted by terminating the partial line with a)11 2937 1 2104 1140 t
+10 CW f
+(\\c)5075 1140 w
+10 R f
+(.)5195 1140 w
+( Similarly,)1 448( line of input text.)4 714(The next encountered input text line will be considered to be a continuation of the same)15 3518 3 540 1260 t
+(a word within)2 569 1 540 1380 t
+10 I f
+(\256lled)1141 1380 w
+10 R f
+( \(and line\) with)3 637(text may be interrupted by terminating the word)7 1966 2 1373 1380 t
+10 CW f
+(\\c)4009 1380 w
+10 R f
+(; the next encountered text)4 1091 1 4129 1380 t
+( cause a break, any partial line)6 1210( the intervening control lines)4 1153( If)1 117(will be taken as a continuation of the interrupted word.)9 2200 4 540 1500 t
+(will be forced out along with any partial word.)8 1861 1 540 1620 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 1800 t
+10 CW f
+(.br)540 1980 w
+10 R f
+(\261 \261 B)2 1867 1 1440 1980 t
+( is output without adjust-)4 1005( \256lling of the line currently being collected is stopped and the line)12 2631(Break. The)1 468 3 1116 2124 t
+( empty text lines \(blank lines\) also)6 1383( lines beginning with space characters \(but not tabs\) and)9 2261(ment. Text)1 460 3 1116 2244 t
+(cause a break.)2 561 1 1116 2364 t
+10 CW f
+(.fi)540 2544 w
+10 R f
+( B,E)1 1003( \261)1 713(\256ll on)1 237 3 1440 2544 t
+( register)1 324( The)1 205(Fill subsequent output lines.)3 1129 3 1116 2688 t
+10 CW f
+(.u)2799 2688 w
+10 R f
+(is 1 in \256ll mode and 0 in no\256ll mode.)9 1485 1 2944 2688 t
+10 CW f
+(.nf)540 2868 w
+10 R f
+( B,E)1 1003( \261)1 713(\256ll on)1 237 3 1440 2868 t
+( text lines are copied directly to)6 1301( Input)1 268( nor adjusted.)2 555( output lines are neither \256lled)5 1204(No\256ll. Subsequent)1 776 5 1116 3012 t
+(output lines without regard for the current line length.)8 2150 1 1116 3132 t
+10 CW f
+(.ad)540 3312 w
+10 I f
+(c)770 3312 w
+10 R f
+( E)1 722( adjust)1 672(adjust, both)1 467 3 1440 3312 t
+( be deferred until \256ll mode is back on.)8 1531( \256ll mode is not on, adjustment will)7 1424( If)1 116(Line adjustment is begun.)3 1033 4 1116 3456 t
+(If the type indicator)3 790 1 1116 3576 t
+10 I f
+(c)1931 3576 w
+10 R f
+(is present, the adjustment type is changed as shown in the following table.)12 2964 1 2000 3576 t
+10 S f
+(_ _______________________________)1 1574 1 2093 3656 t
+10 R f
+( Type)1 230(Indicator Adjust)1 1010 2 2143 3776 t
+10 S f
+(_ _______________________________)1 1574 1 2093 3796 t
+10 CW f
+(l)2293 3936 w
+10 R f
+(adjust left margin only)3 908 1 2653 3936 t
+10 CW f
+(r)2293 4056 w
+10 R f
+(adjust right margin only)3 964 1 2653 4056 t
+10 CW f
+(c)2293 4176 w
+10 R f
+(center)2653 4176 w
+10 CW f
+(b)2165 4296 w
+9 R f
+(or)2285 4296 w
+10 CW f
+(n)2420 4296 w
+10 R f
+(adjust both margins)2 789 1 2653 4296 t
+(absent unchanged)1 890 1 2195 4416 t
+10 S f
+( \347)1 -1574(_ _______________________________)1 1574 2 2093 4436 t
+(\347)2093 4356 w
+(\347)2093 4256 w
+(\347)2093 4156 w
+(\347)2093 4056 w
+(\347)2093 3956 w
+(\347)2093 3856 w
+(\347)2093 3756 w
+(\347)3667 4436 w
+(\347)3667 4356 w
+(\347)3667 4256 w
+(\347)3667 4156 w
+(\347)3667 4056 w
+(\347)3667 3956 w
+(\347)3667 3856 w
+(\347)3667 3756 w
+10 R f
+(The number register)2 831 1 1116 4616 t
+10 CW f
+(.j)1983 4616 w
+10 R f
+(contains the current value of the)5 1338 1 2139 4616 t
+10 CW f
+(ad)3513 4616 w
+10 R f
+( value can be recorded and)5 1125(setting; its)1 426 2 3669 4616 t
+(used subsequently to set adjustment.)4 1458 1 1116 4736 t
+10 CW f
+(.na)540 4916 w
+10 R f
+( E)1 911(adjust \261)1 950 2 1440 4916 t
+( adjustment type for)3 820( The)1 211( is turned off; the right margin will be ragged.)9 1885( Adjustment)1 523(No adjust.)1 416 5 1116 5060 t
+10 CW f
+(ad)5002 5060 w
+10 R f
+(is)5153 5060 w
+( line \256lling still occurs if \256ll mode is on.)9 1613( Output)1 328(not changed.)1 510 3 1116 5180 t
+10 CW f
+(.ce)540 5360 w
+10 I f
+(N)770 5360 w
+10 R f
+(off)1440 5360 w
+10 I f
+(N)2340 5360 w
+10 S f
+(=)2431 5360 w
+10 R f
+(1 B,E)1 891 1 2502 5360 t
+(Center the next)2 642 1 1116 5504 t
+10 I f
+(N)1799 5504 w
+10 R f
+( minus)1 287(input text lines within the current available horizontal space \(line-length)9 3026 2 1907 5504 t
+(indent\). If)1 429 1 1116 5624 t
+10 I f
+(N)1575 5624 w
+10 S f
+(=)1666 5624 w
+10 R f
+( occurs after each of the)5 974( break)1 251( A)1 127(0, any residual count is cleared.)5 1286 4 1737 5624 t
+10 I f
+(N)4404 5624 w
+10 R f
+( the)1 151( If)1 120(input lines.)1 449 3 4500 5624 t
+(input line is too long, it will be left adjusted.)9 1776 1 1116 5744 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 5.  , HEADING = VERTICAL SPACING]
+10 B f
+( SPACING)1 475(5. VERTICAL)1 653 2 540 5984 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 5.1  , HEADING = Baseline Spacing]
+( Spacing)1 365(5.1 Baseline)1 531 2 540 6164 t
+10 R f
+(The vertical spacing \()3 876 1 540 6344 t
+10 I f
+(V)1424 6344 w
+10 R f
+( can be set using the)5 827(\) between the baselines of successive output lines)7 1998 2 1493 6344 t
+10 CW f
+(vs)4347 6344 w
+10 R f
+(request.)4496 6344 w
+10 I f
+(V)4863 6344 w
+10 R f
+(should)4953 6344 w
+( the common type sizes \(9-12)5 1204( For)1 194( lines.)1 244(be large enough to accommodate the character sizes on the affected output)11 3038 4 540 6464 t
+( is to set)3 337(points\), usual typesetting practice)3 1346 2 540 6584 t
+10 I f
+(V)2250 6584 w
+10 R f
+(to 2 points greater than the point size;)7 1521 1 2338 6584 t
+10 I f
+(troff)3886 6584 w
+10 R f
+(default is 10-point type on a)5 1134 1 4086 6584 t
+( current)1 318( The)1 216(12-point spacing \(as in this document\).)5 1615 3 540 6704 t
+10 I f
+(V)2725 6704 w
+10 R f
+(is available in the)3 735 1 2822 6704 t
+10 CW f
+(.v)3593 6704 w
+10 R f
+(register. Multiple-)1 763 1 3749 6704 t
+10 I f
+(V)4512 6704 w
+10 R f
+(line separation)1 595 1 4625 6704 t
+(\(e.g., double spacing\) may be requested with)6 1860 1 540 6824 t
+10 CW f
+(ls)2437 6824 w
+10 R f
+(, but it is better to use a large)8 1261 1 2557 6824 t
+10 CW f
+(vs)3856 6824 w
+10 R f
+(instead; certain preprocessors)2 1206 1 4014 6824 t
+( current line spacing is available in the)7 1539( The)1 205(assume single spacing.)2 913 3 540 6944 t
+10 CW f
+(.L)3222 6944 w
+10 R f
+(register.)3367 6944 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(7)5164 600 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 5.2  , HEADING = Extra Line-space]
+10 B f
+( Line-space)1 486(5.2 Extra)1 419 2 540 960 t
+10 R f
+( requiring the output line containing it to have extra vertical space before)12 2935(If a word contains a vertically tall construct)7 1745 2 540 1140 t
+( it, the)2 263(and/or after)1 468 2 540 1260 t
+10 I f
+(extra-line-space)1301 1260 w
+10 R f
+(function)1979 1260 w
+10 CW f
+(\\x')2342 1260 w
+10 I f
+(N)2522 1260 w
+10 CW f
+(')2589 1260 w
+10 R f
+( If)1 121(can be embedded in or attached to that word.)8 1833 2 2679 1260 t
+10 I f
+(N)4663 1260 w
+10 R f
+(is negative,)1 460 1 4760 1260 t
+(the output line containing the word will be preceded by)9 2256 1 540 1380 t
+10 I f
+(N)2826 1380 w
+10 R f
+( if)1 92(extra vertical space;)2 807 2 2923 1380 t
+10 I f
+(N)3853 1380 w
+10 R f
+(is positive, the output line con-)5 1269 1 3951 1380 t
+(taining the word will be followed by)6 1478 1 540 1500 t
+10 I f
+(N)2046 1500 w
+10 R f
+( to the same)3 486( successive requests for extra space apply)6 1674( If)1 119(extra vertical space.)2 800 4 2141 1500 t
+( most recently utilized post-line extra line-space is available in the)10 2806( The)1 221(line, the maximum values are used.)5 1492 3 540 1620 t
+10 CW f
+(.a)5100 1620 w
+10 R f
+(register.)540 1740 w
+(In)540 1920 w
+10 CW f
+(\\x')655 1920 w
+10 S f
+(\274)835 1920 w
+10 CW f
+(')935 1920 w
+10 R f
+(and other functions having a pair of delimiters around their parameter, the delimiter choice \(here)14 3967 1 1027 1920 t
+10 CW f
+(')5027 1920 w
+10 R f
+(\) is)1 133 1 5087 1920 t
+(arbitrary, except that it can not look like the continuation of a number expression for)14 3375 1 540 2040 t
+10 I f
+(N)3940 2040 w
+10 R f
+(.)4007 2040 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 5.3  , HEADING = Blocks of Vertical Space]
+10 B f
+( of Vertical Space)3 751(5.3 Blocks)1 459 2 540 2220 t
+10 R f
+( using)1 254(A block of vertical space is ordinarily requested)7 1992 2 540 2400 t
+10 CW f
+(sp)2823 2400 w
+10 R f
+(, which honors the)3 774 1 2943 2400 t
+10 I f
+(no-space)3754 2400 w
+10 R f
+(mode and which does not)4 1069 1 4151 2400 t
+( contiguous block of vertical space may be reserved using)9 2309( A)1 122(space past a trap.)3 681 3 540 2520 t
+10 CW f
+(sv)3677 2520 w
+10 R f
+(.)3797 2520 w
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 2700 t
+10 CW f
+(.vs)540 2880 w
+10 I f
+(N)770 2880 w
+10 R f
+( E,)1 642( previous)1 736( in)1 94( 1/6)1 153(12 pts;)1 261 5 1440 2880 t
+10 B f
+(p)3326 2880 w
+10 R f
+(Set vertical baseline spacing size)4 1386 1 1116 3024 t
+10 I f
+(V)2545 3024 w
+10 R f
+( extra vertical space is available with)6 1588(. Transient)1 471 2 2606 3024 t
+10 CW f
+(\\x')4709 3024 w
+10 I f
+(N)4889 3024 w
+10 CW f
+(')4956 3024 w
+10 R f
+(\(see)5060 3024 w
+(above\).)1116 3144 w
+10 CW f
+(.ls)540 3324 w
+10 I f
+(N N)1 737 1 770 3324 t
+10 S f
+(=)1531 3324 w
+10 R f
+( E)1 617(1 previous)1 1082 2 1602 3324 t
+10 I f
+(Line)1116 3468 w
+10 R f
+(spacing set to)2 548 1 1321 3468 t
+10 S f
+(\261)1896 3468 w
+10 I f
+(N)1959 3468 w
+10 R f
+(.)2026 3468 w
+10 I f
+(N)2103 3468 w
+10 S f
+(-)2194 3468 w
+10 R f
+(1)2265 3468 w
+10 I f
+(V)2331 3468 w
+10 R f
+( blank)1 250( Appended)1 463( each output text line.)4 875(s \(blank lines\) are appended to)5 1232 4 2400 3468 t
+(lines are omitted, if the text or previous appended blank line reached a trap position.)14 3361 1 1116 3588 t
+10 CW f
+(.sp)540 3768 w
+10 I f
+(N)770 3768 w
+10 R f
+(\261)1440 3768 w
+10 I f
+(N)2340 3768 w
+10 S f
+(=)2431 3768 w
+10 R f
+(1)2502 3768 w
+10 I f
+(V)2584 3768 w
+10 R f
+(B,)3240 3768 w
+10 B f
+(v)3332 3768 w
+10 R f
+( If)1 122(Space vertically in either direction.)4 1424 2 1116 3912 t
+10 I f
+(N)2693 3912 w
+10 R f
+(is negative, the motion is backward \(upward\) and is limited)9 2429 1 2791 3912 t
+( motion is truncated to the distance to the)8 1681( \(downward\))1 517( Forward)1 393(to the distance to the top of the page.)8 1513 4 1116 4032 t
+( the no-space mode is on, no spacing occurs \(see)9 1940( If)1 116(nearest trap.)1 487 3 1116 4152 t
+10 CW f
+(ns)3684 4152 w
+10 R f
+(, and)1 194 1 3804 4152 t
+10 CW f
+(rs)4023 4152 w
+10 R f
+(below\).)4168 4152 w
+10 CW f
+(.sv)540 4332 w
+10 I f
+(N)770 4332 w
+10 R f
+(\261)1440 4332 w
+10 I f
+(N)2340 4332 w
+10 S f
+(=)2431 4332 w
+10 R f
+(1)2502 4332 w
+10 I f
+(V)2584 4332 w
+10 B f
+(v)3240 4332 w
+10 R f
+( of size)2 292(Save a contiguous vertical block)4 1302 2 1116 4476 t
+10 I f
+(N)2737 4476 w
+10 R f
+( the distance to the next trap is greater than)9 1734(. If)1 143 2 2804 4476 t
+10 I f
+(N)4708 4476 w
+10 R f
+(,)4775 4476 w
+10 I f
+(N)4827 4476 w
+10 R f
+(vertical)4921 4476 w
+( this distance is less than)5 1056( If)1 130( mode has no effect.)4 862( No-space)1 440(space is output.)2 647 5 1116 4596 t
+10 I f
+(N)4289 4596 w
+10 R f
+(, no vertical space is)4 864 1 4356 4596 t
+(immediately output, but)2 959 1 1116 4716 t
+10 I f
+(N)2100 4716 w
+10 R f
+(is remembered for later output \(see)5 1399 1 2192 4716 t
+10 CW f
+(os)3616 4716 w
+10 R f
+(\). Subsequent)1 569 1 3736 4716 t
+10 CW f
+(sv)4330 4716 w
+10 R f
+(requests will over-)2 745 1 4475 4716 t
+(write any still remembered)3 1073 1 1116 4836 t
+10 I f
+(N)2214 4836 w
+10 R f
+(.)2281 4836 w
+10 CW f
+(.os)540 5016 w
+10 R f
+(\261 \261 \261)2 1850 1 1440 5016 t
+( to \256nally output a block of vertical)7 1448( Used)1 260( mode has no effect.)4 826( No-space)1 431( vertical space.)2 605(Output saved)1 534 6 1116 5160 t
+(space requested by an earlier)4 1151 1 1116 5280 t
+10 CW f
+(sv)2292 5280 w
+10 R f
+(request.)2437 5280 w
+10 CW f
+(.ns)540 5460 w
+10 R f
+( D)1 922(space \261)1 950 2 1440 5460 t
+( on, no-space mode inhibits)4 1130( When)1 295( on.)1 157(No-space mode turned)2 915 4 1116 5604 t
+10 CW f
+(sp)3645 5604 w
+10 R f
+(requests and)1 503 1 3797 5604 t
+10 CW f
+(bp)4332 5604 w
+10 R f
+(requests)4484 5604 w
+10 I f
+(without)4843 5604 w
+10 R f
+(a)5176 5604 w
+( mode is turned off when a line of output occurs, or with)12 2255( No-space)1 426(next page number.)2 740 3 1116 5724 t
+10 CW f
+(rs)4562 5724 w
+10 R f
+(.)4682 5724 w
+10 CW f
+(.rs)540 5904 w
+10 R f
+( D)1 922(space \261)1 950 2 1440 5904 t
+( no-space mode is turned off.)5 1164( The)1 205(Restore spacing.)1 660 3 1116 6048 t
+( B)1 917( \261)1 1236(Blank text line.)2 614 3 540 6228 t
+(Causes a break and output of a blank line exactly like)10 2135 1 1116 6372 t
+10 CW f
+(sp 1)1 240 1 3276 6372 t
+10 R f
+(.)3516 6372 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 6.  , HEADING = LINE LENGTH AND INDENTING]
+10 B f
+( LENGTH AND INDENTING)3 1298(6. LINE)1 370 2 540 6612 t
+10 R f
+(The maximum line length for \256ll mode may be set with)10 2236 1 540 6792 t
+10 CW f
+(ll)2803 6792 w
+10 R f
+( indent may be set with)5 945(. The)1 232 2 2923 6792 t
+10 CW f
+(in)4128 6792 w
+10 R f
+(; an indent applicable to)4 972 1 4248 6792 t
+(only the next output line may be set with)8 1673 1 540 6912 t
+10 CW f
+(ti)2243 6912 w
+10 R f
+( The)1 209( includes indent space but not page offset space.)8 1953( line length)2 460(. The)1 235 4 2363 6912 t
+( the indent is the basis for centering with)8 1650(line length minus)2 699 2 540 7032 t
+10 CW f
+(ce)2917 7032 w
+10 R f
+( effect of)2 365(. The)1 233 2 3037 7032 t
+10 CW f
+(ll)3663 7032 w
+10 R f
+(,)3783 7032 w
+10 CW f
+(in)3836 7032 w
+10 R f
+(, or)1 136 1 3956 7032 t
+10 CW f
+(ti)4120 7032 w
+10 R f
+(is delayed, if a partially)4 952 1 4268 7032 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(8)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+10 R f
+( \256ll mode the length of text on an output line is less than or)14 2487( In)1 142( until after that line is output.)6 1218(collected line exists,)2 833 4 540 960 t
+( in registers)2 486( current line length and indent are available)7 1795( The)1 214(equal to the line length minus the indent.)7 1696 4 540 1080 t
+10 CW f
+(.l)4766 1080 w
+10 R f
+(and)4921 1080 w
+10 CW f
+(.i)5100 1080 w
+10 R f
+( length of)2 383(respectively. The)1 712 2 540 1200 t
+10 I f
+(three-part titles)1 625 1 1660 1200 t
+10 R f
+(produced by)1 496 1 2310 1200 t
+10 CW f
+(tl)2831 1200 w
+10 R f
+(\(see \24714\) is independently set by)5 1312 1 2976 1200 t
+10 CW f
+(lt)4313 1200 w
+10 R f
+(.)4433 1200 w
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 1380 t
+10 CW f
+(.ll)540 1560 w
+10 S f
+(\261)770 1560 w
+10 I f
+(N)833 1560 w
+10 R f
+( E,)1 642( previous)1 1025(6.5 in)1 219 3 1440 1560 t
+10 B f
+(m)3326 1560 w
+10 R f
+(Line length is set to)4 789 1 1116 1704 t
+10 S f
+(\261)1930 1704 w
+10 I f
+(N)1993 1704 w
+10 R f
+(.)2060 1704 w
+10 CW f
+(.in)540 1884 w
+10 S f
+(\261)770 1884 w
+10 I f
+(N N)1 674 1 833 1884 t
+10 S f
+(=)1531 1884 w
+10 R f
+( B,E,)1 734(0 previous)1 1082 2 1602 1884 t
+10 B f
+(m)3418 1884 w
+10 R f
+(Indent is set to)3 586 1 1116 2028 t
+10 S f
+(\261)1727 2028 w
+10 I f
+(N)1790 2028 w
+10 R f
+( indent is prepended to each output line.)7 1598(. The)1 230 2 1857 2028 t
+10 CW f
+(.ti)540 2208 w
+10 S f
+(\261)770 2208 w
+10 I f
+(N)833 2208 w
+10 R f
+( B,E,)1 773(\261 ignored)1 1205 2 1440 2208 t
+10 B f
+(m)3418 2208 w
+10 R f
+( next output text line will be indented a distance)9 1927( The)1 206(Temporary indent.)1 743 3 1116 2352 t
+10 S f
+(\261)4018 2352 w
+10 I f
+(N)4081 2352 w
+10 R f
+(with respect to the current)4 1046 1 4174 2352 t
+( current indent is not changed.)5 1209( The)1 205( resulting total indent may not be negative.)7 1710(indent. The)1 480 4 1116 2472 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 7.  , HEADING = MACROS, STRINGS, DIVERSIONS, AND POSITION TRAPS]
+10 B f
+( STRINGS, DIVERSIONS, AND POSITION TRAPS)5 2272(7. MACROS,)1 594 2 540 2712 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.1  , HEADING = Macros and Strings]
+( and Strings)2 518(7.1 Macros)1 496 2 540 2892 t
+10 R f
+(A)540 3072 w
+10 I f
+(macro)639 3072 w
+10 R f
+(is a named set of arbitrary)5 1049 1 921 3072 t
+10 I f
+(lines)1997 3072 w
+10 R f
+(that may be invoked by name or with a)8 1575 1 2213 3072 t
+10 I f
+(trap)3815 3072 w
+10 R f
+(. A)1 149 1 3982 3072 t
+10 I f
+(string)4158 3072 w
+10 R f
+(is a named string of)4 800 1 4420 3072 t
+10 I f
+(characters)540 3192 w
+10 R f
+( macro, and)2 480( Request,)1 403(, not including a newline character, that may be interpolated by name at any point.)14 3370 3 967 3192 t
+( may usurp)2 458( and string names may be one or two characters long and)11 2336( Macro)1 316(string names share the same name list.)6 1570 4 540 3312 t
+( operations may be \(irrevocably\))4 1398(previously de\256ned request, macro, or string names; this implies that built-in)10 3282 2 540 3432 t
+( of these entities may be renamed with)7 1539(rede\256ned. Any)1 618 2 540 3552 t
+10 CW f
+(rn)2722 3552 w
+10 R f
+(or removed with)2 660 1 2867 3552 t
+10 CW f
+(rm)3552 3552 w
+10 R f
+(.)3672 3552 w
+(Macros are created by)3 888 1 540 3732 t
+10 CW f
+(de)1455 3732 w
+10 R f
+(and)1602 3732 w
+10 CW f
+(di)1773 3732 w
+10 R f
+(, and appended to by)4 841 1 1893 3732 t
+10 CW f
+(am)2762 3732 w
+10 R f
+(and)2910 3732 w
+10 CW f
+(da)3082 3732 w
+10 R f
+(;)3202 3732 w
+10 CW f
+(di)3258 3732 w
+10 R f
+(and)3406 3732 w
+10 CW f
+(da)3578 3732 w
+10 R f
+(cause normal output to be stored in a)7 1494 1 3726 3732 t
+( beginning)1 429( macro is invoked in the same way as a request; a control line)13 2519(macro. A)1 401 3 540 3852 t
+10 CW f
+(.)3918 3852 w
+10 I f
+(xx)3978 3852 w
+10 R f
+(will interpolate the contents)3 1125 1 4095 3852 t
+(of macro)1 357 1 540 3972 t
+10 I f
+(xx)922 3972 w
+10 R f
+( remainder of the line may contain up to nine)9 1800(. The)1 230 2 1010 3972 t
+10 I f
+(arguments)3065 3972 w
+10 R f
+(.)3487 3972 w
+(Strings are created by)3 867 1 540 4152 t
+10 CW f
+(ds)1432 4152 w
+10 R f
+(and appended to by)3 779 1 1577 4152 t
+10 CW f
+(as)2381 4152 w
+10 R f
+( strings)1 292(. The)1 230 2 2501 4152 t
+10 I f
+(x)3048 4152 w
+10 R f
+(and)3117 4152 w
+10 I f
+(xx)3286 4152 w
+10 R f
+( at any desired point with)5 1018(are interpolated)1 623 2 3399 4152 t
+10 CW f
+(\\)5066 4152 w
+10 S f
+(*)5126 4152 w
+10 I f
+(x)5176 4152 w
+10 R f
+(and)540 4272 w
+10 CW f
+(\\)709 4272 w
+10 S f
+(*)769 4272 w
+10 CW f
+(\()819 4272 w
+10 I f
+(xx)879 4272 w
+10 R f
+( references and macro invocations may be nested.)7 1983(respectively. String)1 802 2 992 4272 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.2  , HEADING = Copy Mode Input Interpretation]
+10 B f
+( Mode Input Interpretation)3 1169(7.2 Copy)1 403 2 540 4452 t
+10 R f
+(During the de\256nition and extension of strings and macros \(not by diversion\) the input is read in)16 3840 1 540 4632 t
+10 I f
+(copy mode)1 431 1 4407 4632 t
+10 R f
+( copy)1 222(. In)1 160 2 4838 4632 t
+(mode, input is copied without interpretation except that:)7 2243 1 540 4752 t
+8 S f
+(\267)783 4932 w
+10 R f
+(The contents of number registers indicated by)6 1830 1 870 4932 t
+10 CW f
+(\\n)2725 4932 w
+10 R f
+(are interpolated.)1 648 1 2870 4932 t
+8 S f
+(\267)783 5052 w
+10 R f
+(Strings indicated by)2 800 1 870 5052 t
+10 CW f
+(\\)1695 5052 w
+10 S f
+(*)1755 5052 w
+10 R f
+(are interpolated.)1 648 1 1830 5052 t
+8 S f
+(\267)783 5172 w
+10 R f
+(Arguments indicated by)2 960 1 870 5172 t
+10 CW f
+(\\$)1855 5172 w
+10 R f
+(are interpolated.)1 648 1 2000 5172 t
+8 S f
+(\267)783 5292 w
+10 R f
+(Concealed newlines indicated by)3 1317 1 870 5292 t
+10 CW f
+(\\)2212 5292 w
+10 I f
+(newline)2272 5292 w
+10 R f
+(are eliminated.)1 593 1 2608 5292 t
+8 S f
+(\267)783 5412 w
+10 R f
+(Comments indicated by)2 950 1 870 5412 t
+10 CW f
+(\\")1845 5412 w
+10 R f
+(are eliminated.)1 593 1 1990 5412 t
+8 S f
+(\267)783 5532 w
+10 CW f
+(\\t)870 5532 w
+10 R f
+(and)1015 5532 w
+10 CW f
+(\\a)1184 5532 w
+10 R f
+(are interpreted as)2 686 1 1329 5532 t
+9 R f
+(ASCII)2038 5532 w
+10 R f
+(horizontal tab and)2 721 1 2298 5532 t
+9 R f
+(SOH)3042 5532 w
+10 R f
+(respectively \(\2479\).)1 698 1 3247 5532 t
+8 S f
+(\267)783 5652 w
+10 CW f
+(\\\\)870 5652 w
+10 R f
+(is interpreted as ``)3 723 1 1015 5652 t
+10 CW f
+(\\)1738 5652 w
+10 R f
+(''.)1798 5652 w
+8 S f
+(\267)783 5772 w
+10 CW f
+(\\.)870 5772 w
+10 R f
+(is interpreted as ``)3 723 1 1040 5772 t
+10 CW f
+(.)1763 5772 w
+10 R f
+(''.)1823 5772 w
+( by prepending a)3 677(These interpretations can be suppressed)4 1593 2 540 5952 t
+10 CW f
+(\\)2838 5952 w
+10 R f
+( example, since)2 624(. For)1 217 2 2898 5952 t
+10 CW f
+(\\\\)3767 5952 w
+10 R f
+(maps into a)2 467 1 3915 5952 t
+10 CW f
+(\\)4410 5952 w
+10 R f
+(,)4470 5952 w
+10 CW f
+(\\\\n)4523 5952 w
+10 R f
+(will copy as)2 489 1 4731 5952 t
+10 CW f
+(\\n)540 6072 w
+10 R f
+(, which will be interpreted as a number register indicator when the macro or string is reread.)16 3675 1 660 6072 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.3  , HEADING = Arguments]
+10 B f
+(7.3 Arguments)1 652 1 540 6252 t
+10 R f
+( argument)1 403( The)1 206( is taken to contain up to nine arguments.)8 1654(When a macro is invoked by name, the remainder of the line)11 2417 4 540 6432 t
+( embedded)1 441(separator is the space character \(not tab\), and arguments may be surrounded by double quotes to permit)16 4239 2 540 6552 t
+( double quotes may be embedded in double-quoted arguments to represent a single)12 3582( of)1 130( Pairs)1 272(space characters.)1 696 4 540 6672 t
+( argument)1 403( The)1 206(double-quote character.)1 942 3 540 6792 t
+10 CW f
+("")2117 6792 w
+10 R f
+( a concealed)2 492( the desired arguments won't \256t on a line,)8 1670( If)1 117(is explicitly null.)2 678 4 2263 6792 t
+( trailing double quote may be omitted.)6 1530( A)1 122(newline may be used to continue on the next line.)9 1981 3 540 6912 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Page: 9 9
+/saveobj save def
+mark
+9 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(9)5164 600 w
+10 R f
+(When a macro is invoked the)5 1192 1 540 960 t
+10 I f
+(input level)1 424 1 1762 960 t
+10 R f
+(is)2216 960 w
+10 I f
+(pushed down)1 530 1 2313 960 t
+10 R f
+( become)1 341(and any arguments available at the previous level)7 2006 2 2873 960 t
+( macro's own arguments can be)5 1286( A)1 126( and the previous level is restored.)6 1391(unavailable until the macro is completely read)6 1877 4 540 1080 t
+(interpolated at any point within the macro with)7 1914 1 540 1200 t
+10 CW f
+(\\$)2484 1200 w
+10 I f
+(N)2604 1200 w
+10 R f
+(, which interpolates the)3 947 1 2671 1200 t
+10 I f
+(N)3648 1200 w
+10 R f
+(th argument \(1)2 598 1 3723 1200 t
+10 S f
+(\243)4321 1200 w
+10 I f
+(N)4384 1200 w
+10 S f
+(\243)4459 1200 w
+10 R f
+( invoked)1 353( an)1 124(9\). If)1 229 3 4514 1200 t
+( example, the macro)3 809( For)1 189(argument does not exist, a null string results.)7 1791 3 540 1320 t
+10 I f
+(xx)3354 1320 w
+10 R f
+(may be de\256ned by)3 735 1 3467 1320 t
+10 CW f
+( begin definition)2 1020( \\")1 600(.de xx)1 360 3 690 1500 t
+(Today is \\\\$1 the \\\\$2.)4 1380 1 690 1620 t
+( end definition)2 900(.. \\")1 960 2 690 1740 t
+10 R f
+(and called by)2 532 1 540 1920 t
+10 CW f
+(.xx Monday 14th)2 900 1 690 2100 t
+10 R f
+(to produce the text)3 746 1 540 2280 t
+(Today is Monday the 14th.)4 1080 1 690 2460 t
+(Note that each)2 606 1 540 2640 t
+10 CW f
+(\\$)1186 2640 w
+10 R f
+(was concealed in the de\256nition with a prepended)7 2054 1 1346 2640 t
+10 CW f
+(\\)3440 2640 w
+10 R f
+( is in the)3 390( number of arguments)3 924(. The)1 245 3 3500 2640 t
+10 CW f
+(.$)5100 2640 w
+10 R f
+(register.)540 2760 w
+(No arguments are available at the top \(non-macro\) level, within a string, or within a trap-invoked macro.)16 4178 1 540 2940 t
+( to conceal)2 448( is advisable)2 508( It)1 118(Arguments are copied in copy mode onto a stack where they are available for reference.)14 3606 4 540 3120 t
+(string references \(with an extra)4 1240 1 540 3240 t
+10 CW f
+(\\)1805 3240 w
+10 R f
+(\) to delay interpolation until argument reference time.)7 2146 1 1881 3240 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.4  , HEADING = Diversions]
+10 B f
+(7.4 Diversions)1 625 1 540 3420 t
+10 R f
+( Tutorial Examples)2 794(Processed output may be diverted into a macro for purposes such as footnote processing \(see)14 3886 2 540 3600 t
+( A)1 128( of some text for conditional changing of pages or columns.)10 2443(\247T5\) or determining the horizontal and vertical size)7 2109 3 540 3720 t
+( number registers)2 705( The)1 211( at a speci\256ed vertical position.)5 1273(single diversion trap may be set)5 1293 4 540 3840 t
+10 CW f
+(dn)4053 3840 w
+10 R f
+(and)4204 3840 w
+10 CW f
+(dl)4379 3840 w
+10 R f
+(respectively con-)1 690 1 4530 3840 t
+( text that is diverted into a macro)7 1318( Processed)1 449( most recently ended diversion.)4 1251(tain the vertical and horizontal size of the)7 1662 4 540 3960 t
+(retains the vertical size of each of its lines when reread in)11 2346 1 540 4080 t
+10 I f
+(no\256ll)2916 4080 w
+10 R f
+( the current)2 466(mode regardless of)2 769 2 3152 4080 t
+10 I f
+(V)4418 4080 w
+10 R f
+(. Constant-spaced)1 741 1 4479 4080 t
+(\()540 4200 w
+10 CW f
+(cs)573 4200 w
+10 R f
+(\) or emboldened \()3 715 1 693 4200 t
+10 CW f
+(bd)1408 4200 w
+10 R f
+( can be reread correctly only if these modes are again or still in effect at)15 2861(\) text that is diverted)4 831 2 1528 4200 t
+( way to do this is to embed in the diversion the appropriate)12 2372( One)1 218(reread time.)1 478 3 540 4320 t
+10 CW f
+(cs)3635 4320 w
+10 R f
+(or)3783 4320 w
+10 CW f
+(bd)3894 4320 w
+10 R f
+(requests with the)2 683 1 4042 4320 t
+10 I f
+(transparent)4753 4320 w
+10 R f
+(mechanism described in \24710.6.)3 1240 1 540 4440 t
+( current diversion level \(the top)5 1261(Diversions may be nested and certain parameters and registers are associated with the)12 3419 2 540 4620 t
+( are the diversion trap and associated macro,)7 1773( These)1 288( diversion level\).)2 674(non-diversion level may be thought of as the 0th)8 1945 4 540 4740 t
+(no-space mode, the internally-saved marked place \(see)6 2209 1 540 4860 t
+10 CW f
+(mk)2778 4860 w
+10 R f
+(and)2927 4860 w
+10 CW f
+(rt)3100 4860 w
+10 R f
+( place \()2 303(\), the current vertical)3 848 2 3220 4860 t
+10 CW f
+(.d)4371 4860 w
+10 R f
+(register\), the cur-)2 699 1 4521 4860 t
+(rent high-water text baseline \()4 1197 1 540 4980 t
+10 CW f
+(.h)1737 4980 w
+10 R f
+(register\), and the current diversion name \()6 1676 1 1882 4980 t
+10 CW f
+(.z)3558 4980 w
+10 R f
+(register\).)3703 4980 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 7.5  , HEADING = Traps]
+10 B f
+(7.5 Traps)1 431 1 540 5160 t
+10 R f
+( Macro-)1 352( traps, a diversion trap, and an input-line-count trap.)8 2149( \320 page)2 320( of trap mechanisms are available)5 1383(Three types)1 476 5 540 5340 t
+(invocation traps may be planted using)5 1528 1 540 5460 t
+10 CW f
+(wh)2095 5460 w
+10 R f
+( trap position may be changed)5 1206( This)1 230(at any page position including the top.)6 1542 3 2242 5460 t
+(using)540 5580 w
+10 CW f
+(ch)784 5580 w
+10 R f
+( to within the page)4 756( positions at or below the bottom of the page have no effect unless or until moved)16 3295(. Trap)1 265 3 904 5580 t
+( traps may be planted at the same position only by \256rst)11 2306( Two)1 244( by an increase in page length.)6 1277(or rendered effective)2 853 4 540 5700 t
+( \256rst planted trap will conceal the second)7 1688(planting them at different positions and then moving one of the traps; the)12 2992 2 540 5820 t
+( it again conceals the)4 849( the \256rst one is moved back,)6 1148( If)1 120(unless and until the \256rst one is moved \(see Tutorial Examples\).)10 2563 4 540 5940 t
+( text is output whose ver-)5 1018( macro associated with a page trap is automatically invoked when a line of)13 2975( The)1 205(second trap.)1 482 4 540 6060 t
+( a page springs the top-of-page trap, if)7 1587( the bottom of)3 594( Reaching)1 437(tical size reaches or sweeps past the trap position.)8 2062 4 540 6180 t
+( trap position is available in the)6 1285( distance to the next)4 815( The)1 209(any, provided there is a next page.)6 1393 4 540 6300 t
+10 CW f
+(.t)4272 6300 w
+10 R f
+(register; if there are)3 798 1 4422 6300 t
+( is the distance to the page)6 1102(no traps between the current position and the bottom of the page, the distance returned)14 3578 2 540 6420 t
+(bottom.)540 6540 w
+( diversion may be planted using)5 1334(A macro-invocation trap effective in the current)6 1977 2 540 6720 t
+10 CW f
+(dt)3888 6720 w
+10 R f
+(. The)1 242 1 4008 6720 t
+10 CW f
+(.t)4287 6720 w
+10 R f
+(register works in a)3 776 1 4444 6720 t
+( description of input-line-count traps, see)5 1662( a)1 74( For)1 194(diversion; if there is no subsequent trap a large distance is returned.)11 2750 4 540 6840 t
+10 CW f
+(it)540 6960 w
+10 R f
+(below.)685 6960 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 9 9
+%%Page: 10 10
+/saveobj save def
+mark
+10 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(10)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 960 t
+10 CW f
+(.de)540 1140 w
+10 I f
+(xx yy)1 226 1 770 1140 t
+10 R f
+(\261)1440 1140 w
+10 I f
+(.yy =)1 197 1 2340 1140 t
+10 CW f
+(..)2553 1140 w
+10 R f
+(\261)3240 1140 w
+(De\256ne or rede\256ne the macro)4 1165 1 1116 1284 t
+10 I f
+(xx)2312 1284 w
+10 R f
+( lines)1 221( Input)1 268( line.)1 207( contents of the macro begin on the next input)9 1888(. The)1 236 5 2400 1284 t
+(are copied in)2 517 1 1116 1404 t
+10 I f
+(copy mode)1 430 1 1659 1404 t
+10 R f
+(until the de\256nition is terminated by a line beginning with)9 2290 1 2115 1404 t
+10 CW f
+(.)4431 1404 w
+10 I f
+(yy)4491 1404 w
+10 R f
+( the)1 147(, whereupon)1 494 2 4579 1404 t
+(macro)1116 1524 w
+10 I f
+(yy)1395 1524 w
+10 R f
+( the absence of)3 610( In)1 138(is called.)1 360 3 1513 1524 t
+10 I f
+(yy)2651 1524 w
+10 R f
+( terminated by a line beginning with ``)7 1582(, the de\256nition is)3 688 2 2739 1524 t
+10 CW f
+(..)5009 1524 w
+10 R f
+(''.)5129 1524 w
+(A macro may contain)3 883 1 1116 1644 t
+10 CW f
+(de)2031 1644 w
+10 R f
+( contained de\256nition)2 834(requests provided the terminating macros differ or the)7 2203 2 2183 1644 t
+( ``)1 118(terminator is concealed.)2 960 2 1116 1764 t
+10 CW f
+(..)2194 1764 w
+10 R f
+( be concealed as)3 656('' can)1 256 2 2314 1764 t
+10 CW f
+(\\\\..)3253 1764 w
+10 R f
+(which will copy as)3 761 1 3545 1764 t
+10 CW f
+(\\..)4334 1764 w
+10 R f
+(and be reread as)3 653 1 4567 1764 t
+(``)1116 1884 w
+10 CW f
+(..)1182 1884 w
+10 R f
+(''.)1302 1884 w
+10 CW f
+(.am)540 2064 w
+10 I f
+(xx yy)1 226 1 770 2064 t
+10 R f
+(\261)1440 2064 w
+10 I f
+(.yy =)1 197 1 2340 2064 t
+10 CW f
+(..)2553 2064 w
+10 R f
+(\261)3240 2064 w
+(Append to macro)2 693 1 1116 2208 t
+10 I f
+(xx)1834 2208 w
+10 R f
+(\(append version of)2 748 1 1947 2208 t
+10 CW f
+(de)2720 2208 w
+10 R f
+(\).)2840 2208 w
+10 CW f
+(.ds)540 2388 w
+10 I f
+(xx string)1 372 1 770 2388 t
+10 R f
+( \261)1 645(\261 ignored)1 1205 2 1440 2388 t
+(De\256ne a string)2 594 1 1116 2532 t
+10 I f
+(xx)1738 2532 w
+10 R f
+(containing)1854 2532 w
+10 I f
+(string)2304 2532 w
+10 R f
+( initial double quote in)4 918(. Any)1 250 2 2538 2532 t
+10 I f
+(string)3734 2532 w
+10 R f
+(is stripped off to permit initial)5 1223 1 3997 2532 t
+(blanks.)1116 2652 w
+10 CW f
+(.as)540 2832 w
+10 I f
+(xx string)1 372 1 770 2832 t
+10 R f
+( \261)1 645(\261 ignored)1 1205 2 1440 2832 t
+(Append)1116 2976 w
+10 I f
+(string)1457 2976 w
+10 R f
+(to string)1 331 1 1716 2976 t
+10 I f
+(xx)2072 2976 w
+10 R f
+(\(append version of)2 748 1 2185 2976 t
+10 CW f
+(ds)2958 2976 w
+10 R f
+(\).)3078 2976 w
+10 CW f
+(.rm)540 3156 w
+10 I f
+(xx)770 3156 w
+10 R f
+( \261)1 645(\261 ignored)1 1205 2 1440 3156 t
+( name)1 242( The)1 206(Remove request, macro, or string.)4 1360 3 1116 3300 t
+10 I f
+(xx)2950 3300 w
+10 R f
+( and any related storage)4 955(is removed from the name list)5 1201 2 3064 3300 t
+( many macros and strings are being cre-)7 1628( If)1 122( references will have no effect.)5 1258( Subsequent)1 517(space is freed.)2 579 5 1116 3420 t
+( become necessary to remove unused ones to recapture internal storage space)11 3110(ated dynamically, it may)3 994 2 1116 3540 t
+(for newer macros and strings.)4 1183 1 1116 3660 t
+10 CW f
+(.rn)540 3840 w
+10 I f
+(xx yy)1 226 1 770 3840 t
+10 R f
+( \261)1 645(\261 ignored)1 1205 2 1440 3840 t
+(Rename request, macro, or string)4 1325 1 1116 3984 t
+10 I f
+(xx)2466 3984 w
+10 R f
+(to)2579 3984 w
+10 I f
+(yy)2682 3984 w
+10 R f
+(. If)1 141 1 2770 3984 t
+10 I f
+(yy)2936 3984 w
+10 R f
+(exists, it is \256rst removed.)4 1006 1 3049 3984 t
+10 CW f
+(.di)540 4164 w
+10 I f
+(xx)770 4164 w
+10 R f
+( D)1 828(\261 end)1 1044 2 1440 4164 t
+(Divert output to macro)3 916 1 1116 4308 t
+10 I f
+(xx)2058 4308 w
+10 R f
+( processing occurs during diversion except that page offsetting)8 2517( text)1 176(. Normal)1 381 3 2146 4308 t
+( request)1 328( diversion ends when the)4 1057( The)1 221(is not done.)2 496 4 1116 4428 t
+10 CW f
+(di)3258 4428 w
+10 R f
+(or)3418 4428 w
+10 CW f
+(da)3541 4428 w
+10 R f
+(is encountered without an argument;)4 1519 1 3701 4428 t
+(extraneous requests of this type should not appear when nested diversions are being used.)13 3577 1 1116 4548 t
+10 CW f
+(.da)540 4728 w
+10 I f
+(xx)770 4728 w
+10 R f
+( D)1 828(\261 end)1 1044 2 1440 4728 t
+(Divert, appending to macro)3 1098 1 1116 4872 t
+10 I f
+(xx)2239 4872 w
+10 R f
+(\(append version of)2 748 1 2352 4872 t
+10 CW f
+(di)3125 4872 w
+10 R f
+(\).)3245 4872 w
+10 CW f
+(.wh)540 5052 w
+10 I f
+(N xx)1 205 1 770 5052 t
+10 R f
+(\261 \261)1 950 1 1440 5052 t
+10 B f
+(v)3240 5052 w
+10 R f
+(Install a trap to invoke)4 923 1 1116 5196 t
+10 I f
+(xx)2070 5196 w
+10 R f
+( position)1 355(at page)1 291 2 2189 5196 t
+10 I f
+(N)2867 5196 w
+10 R f
+(; a negative N will be interpreted as a distance from the)11 2286 1 2934 5196 t
+( macro previously planted at)4 1173( Any)1 231(page bottom.)1 531 3 1116 5316 t
+10 I f
+(N)3085 5316 w
+10 R f
+(is replaced by)2 572 1 3186 5316 t
+10 I f
+(xx)3792 5316 w
+10 R f
+( zero)1 205(. A)1 156 2 3880 5316 t
+10 I f
+(N)4274 5316 w
+10 R f
+(refers to the top of a)5 846 1 4374 5316 t
+( the absence of)3 595(page. In)1 346 2 1116 5436 t
+10 I f
+(xx)2082 5436 w
+10 R f
+(, the \256rst trap found at)5 888 1 2170 5436 t
+10 I f
+(N)3083 5436 w
+10 R f
+(, if any, is removed.)4 796 1 3150 5436 t
+10 CW f
+(.ch)540 5616 w
+10 I f
+(xx N)1 205 1 770 5616 t
+10 R f
+(\261 \261)1 950 1 1440 5616 t
+10 B f
+(v)3240 5616 w
+10 R f
+(Change the trap position for macro)5 1395 1 1116 5760 t
+10 I f
+(xx)2536 5760 w
+10 R f
+(to be)1 197 1 2649 5760 t
+10 I f
+(N)2871 5760 w
+10 R f
+( the absence of)3 595(. In)1 158 2 2938 5760 t
+10 I f
+(N)3716 5760 w
+10 R f
+(, the trap, if any, is removed.)6 1148 1 3783 5760 t
+10 CW f
+(.dt)540 5940 w
+10 I f
+(N xx)1 205 1 770 5940 t
+10 R f
+( D,)1 881(\261 off)1 1016 2 1440 5940 t
+10 B f
+(v)3337 5940 w
+10 R f
+(Install a diversion trap at position)5 1396 1 1116 6084 t
+10 I f
+(N)2548 6084 w
+10 R f
+(in the)1 236 1 2651 6084 t
+10 I f
+(current)2923 6084 w
+10 R f
+(diversion to invoke macro)3 1079 1 3253 6084 t
+10 I f
+(xx)4368 6084 w
+10 R f
+(. Another)1 414 1 4456 6084 t
+10 CW f
+(dt)4907 6084 w
+10 R f
+(will)5064 6084 w
+( no arguments are given, the diversion trap is removed.)9 2199( If)1 116(rede\256ne the diversion trap.)3 1070 3 1116 6204 t
+10 CW f
+(.it)540 6384 w
+10 I f
+(N xx)1 205 1 770 6384 t
+10 R f
+( E)1 845(\261 off)1 1016 2 1440 6384 t
+(Set an input-line-count trap to invoke the macro)7 1952 1 1116 6528 t
+10 I f
+(xx)3098 6528 w
+10 R f
+(after)3216 6528 w
+10 I f
+(N)3428 6528 w
+10 R f
+(lines of)1 302 1 3525 6528 t
+10 I f
+(text)3857 6528 w
+10 R f
+(input have been read \(control)4 1189 1 4031 6528 t
+( inline or trap-)3 622( text may be inline text or text interpolated by)9 1982( The)1 222(or request lines do not count\).)5 1278 4 1116 6648 t
+(invoked macros.)1 660 1 1116 6768 t
+10 CW f
+(.em)540 6948 w
+10 I f
+(xx)770 6948 w
+10 R f
+(none none \261)2 1850 1 1440 6948 t
+(The macro)1 434 1 1116 7092 t
+10 I f
+(xx)1580 7092 w
+10 R f
+( effect is almost as if the contents of)8 1490( The)1 211( has ended.)2 458(will be invoked when all input)5 1244 4 1698 7092 t
+10 I f
+(xx)5132 7092 w
+10 R f
+(had been at the end of the last \256le processed, but all processing ceases at the next page eject.)18 3686 1 1116 7212 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 10 10
+%%Page: 11 11
+/saveobj save def
+mark
+11 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(11)5108 600 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 8.  , HEADING = NUMBER REGISTERS]
+10 B f
+( REGISTERS)1 599(8. NUMBER)1 569 2 540 960 t
+10 R f
+(A variety of parameters are available to the user as prede\256ned)10 2530 1 540 1140 t
+10 I f
+(number registers)1 686 1 3101 1140 t
+10 R f
+( addition, users)2 622( In)1 140(\(see Summary\).)1 639 3 3819 1140 t
+( one or two characters long and do not con\257ict with request,)11 2539( names are)2 454( Register)1 397(may de\256ne their own registers.)4 1290 4 540 1260 t
+( for certain prede\256ned read-only registers, a number register can be read, written,)12 3369( Except)1 338(macro, or string names.)3 973 3 540 1380 t
+( common use)2 537( One)1 218( and interpolated into the input in a variety of formats.)10 2187(automatically incremented or decremented,)3 1738 4 540 1500 t
+( number register may be used)5 1198( A)1 126( sections, paragraphs, lines, etc.)4 1280(of user-de\256ned registers is to automatically number)6 2076 4 540 1620 t
+(any time numerical input is expected or desired and may be used in numerical)13 3114 1 540 1740 t
+10 I f
+(expressions)3679 1740 w
+10 R f
+(\(\2471.4\).)4170 1740 w
+( using)1 260(Number registers are created and modi\256ed)5 1783 2 540 1920 t
+10 CW f
+(nr)2626 1920 w
+10 R f
+(, which speci\256es the name, numerical value, and the auto-)9 2474 1 2746 1920 t
+( the registers)2 522( If)1 122( also modi\256ed, if accessed with an auto-incrementing sequence.)8 2593( are)1 153( Registers)1 429(increment size.)1 611 6 540 2040 t
+10 I f
+(x)5001 2040 w
+10 R f
+(and)5076 2040 w
+10 I f
+(xx)540 2160 w
+10 R f
+(both contain)1 497 1 653 2160 t
+10 I f
+(N)1175 2160 w
+10 R f
+(and have the auto-increment size)4 1313 1 1267 2160 t
+10 I f
+(M)2605 2160 w
+10 R f
+(, the following access sequences have the effect shown:)8 2219 1 2688 2160 t
+10 S f
+(_ __________________________________________)1 2119 1 1820 2240 t
+10 R f
+(Value)3529 2360 w
+( on Register)2 483(Sequence Effect)1 839 2 1870 2420 t
+(Interpolated)3407 2480 w
+10 S f
+(_ __________________________________________)1 2119 1 1820 2500 t
+10 CW f
+(\\n)1870 2640 w
+10 I f
+(x)1990 2640 w
+10 R f
+(none)2732 2640 w
+10 I f
+(N)3614 2640 w
+10 CW f
+(\\n\()1870 2760 w
+10 I f
+(xx)2050 2760 w
+10 R f
+(none)2732 2760 w
+10 I f
+(N)3614 2760 w
+10 CW f
+(\\n+)1870 2880 w
+10 I f
+(x x)1 426 1 2050 2880 t
+10 R f
+(incremented by)1 618 1 2501 2880 t
+10 I f
+(M N+M)1 613 1 3144 2880 t
+10 CW f
+(\\n\261)1870 3000 w
+10 I f
+(x x)1 418 1 2050 3000 t
+10 R f
+(decremented by)1 634 1 2493 3000 t
+10 I f
+(M N\261M)1 596 1 3152 3000 t
+10 CW f
+(\\n+\()1870 3120 w
+10 I f
+(xx xx)1 388 1 2110 3120 t
+10 R f
+(incremented by)1 618 1 2523 3120 t
+10 I f
+(M N+M)1 591 1 3166 3120 t
+10 CW f
+(\\n\261\()1870 3240 w
+10 I f
+(xx xx)1 380 1 2110 3240 t
+10 R f
+(decremented by)1 634 1 2515 3240 t
+10 I f
+(M N\261M)1 574 1 3174 3240 t
+10 S f
+( \347)1 -2119(_ __________________________________________)1 2119 2 1820 3260 t
+(\347)1820 3240 w
+(\347)1820 3140 w
+(\347)1820 3040 w
+(\347)1820 2940 w
+(\347)1820 2840 w
+(\347)1820 2740 w
+(\347)1820 2640 w
+(\347)1820 2540 w
+(\347)1820 2440 w
+(\347)1820 2340 w
+(\347)3939 3260 w
+(\347)3939 3240 w
+(\347)3939 3140 w
+(\347)3939 3040 w
+(\347)3939 2940 w
+(\347)3939 2840 w
+(\347)3939 2740 w
+(\347)3939 2640 w
+(\347)3939 2540 w
+(\347)3939 2440 w
+(\347)3939 2340 w
+10 R f
+(When interpolated, a number register is converted to decimal \(default\), decimal with leading zeros, lower-case)14 4680 1 540 3440 t
+( alphabetic according to the)4 1143(Roman, upper-case Roman, lower-case sequential alphabetic, or upper-case sequential)8 3537 2 540 3560 t
+(format speci\256ed by)2 771 1 540 3680 t
+10 CW f
+(af)1336 3680 w
+10 R f
+(.)1456 3680 w
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 3860 t
+10 CW f
+(.nr)540 4040 w
+10 I f
+(R)770 4040 w
+10 S f
+(\261)881 4040 w
+10 I f
+( N)1 363(N M)1 200 2 944 4040 t
+10 S f
+(=)1531 4040 w
+10 R f
+(0 \261)1 788 1 1602 4040 t
+10 B f
+(u)3240 4040 w
+10 R f
+(The number register)2 815 1 1116 4184 t
+10 I f
+(R)1959 4184 w
+10 R f
+(is assigned the value)3 836 1 2048 4184 t
+10 S f
+(\261)2913 4184 w
+10 I f
+(N)2976 4184 w
+10 R f
+( incre-)1 261( The)1 209(with respect to the previous value, if any.)7 1678 3 3072 4184 t
+(ment for auto-incrementing is set to)5 1429 1 1116 4304 t
+10 I f
+(M)2570 4304 w
+10 R f
+(.)2653 4304 w
+10 CW f
+(.af)540 4484 w
+10 I f
+(R c)1 155 1 770 4484 t
+10 R f
+( \261)1 900(arabic \261)1 950 2 1440 4484 t
+(Assign format)1 569 1 1116 4628 t
+10 I f
+(c)1710 4628 w
+10 R f
+(to register)1 402 1 1779 4628 t
+10 I f
+(R)2206 4628 w
+10 R f
+( available formats are:)3 889(. The)1 230 2 2267 4628 t
+10 S f
+(_ ______________________________________________)1 2327 1 1716 4708 t
+10 R f
+( Sequence)1 407(Format Numbering)1 1357 2 1766 4828 t
+10 S f
+(_ ______________________________________________)1 2327 1 1716 4848 t
+10 CW f
+(1)1880 4988 w
+10 R f
+(0, 1, 2, 3, 4, 5,)5 575 1 2205 4988 t
+10 S f
+(\274)2805 4988 w
+10 CW f
+(001)1820 5108 w
+10 R f
+(000, 001, 002, 003, 004, 005,)5 1175 1 2205 5108 t
+10 S f
+(\274)3405 5108 w
+10 CW f
+(i)1880 5228 w
+10 R f
+(0, i, ii, iii, iv, v,)5 621 1 2205 5228 t
+10 S f
+(\274)2851 5228 w
+10 CW f
+(I)1880 5348 w
+10 R f
+(0, I, II, III, IV, V,)5 700 1 2205 5348 t
+10 S f
+(\274)2930 5348 w
+10 CW f
+(a)1880 5468 w
+10 R f
+(0, a, b, c,)3 363 1 2205 5468 t
+10 S f
+(\274)2593 5468 w
+10 R f
+(, z, aa, ab,)3 401 1 2693 5468 t
+10 S f
+(\274)3119 5468 w
+10 R f
+(, zz, aaa,)2 345 1 3219 5468 t
+10 S f
+(\274)3589 5468 w
+10 CW f
+(A)1880 5588 w
+10 R f
+(0, A, B, C,)3 431 1 2205 5588 t
+10 S f
+(\274)2661 5588 w
+10 R f
+(, Z, AA, AB,)3 519 1 2761 5588 t
+10 S f
+(\274)3305 5588 w
+10 R f
+(, ZZ, AAA,)2 463 1 3405 5588 t
+10 S f
+(\274)3893 5588 w
+( \347)1 -2327(_ ______________________________________________)1 2327 2 1716 5608 t
+(\347)1716 5508 w
+(\347)1716 5408 w
+(\347)1716 5308 w
+(\347)1716 5208 w
+(\347)1716 5108 w
+(\347)1716 5008 w
+(\347)1716 4908 w
+(\347)1716 4808 w
+(\347)4043 5608 w
+(\347)4043 5508 w
+(\347)4043 5408 w
+(\347)4043 5308 w
+(\347)4043 5208 w
+(\347)4043 5108 w
+(\347)4043 5008 w
+(\347)4043 4908 w
+(\347)4043 4808 w
+10 R f
+(An arabic format having)3 984 1 1116 5788 t
+10 I f
+(N)2127 5788 w
+10 R f
+(digits speci\256es a \256eld width of)5 1235 1 2221 5788 t
+10 I f
+(N)3483 5788 w
+10 R f
+( read-only)1 410( The)1 208(digits \(example 2 above\).)3 1024 3 3578 5788 t
+( width function)2 645(registers and the)2 690 2 1116 5908 t
+10 CW f
+(\\w)2493 5908 w
+10 R f
+( value of a number)4 816( Warning: The)2 666(\(\24711.2\) are always arabic.)3 1083 3 2655 5908 t
+( not numeric, and will not produce the expected results in expres-)11 2744(register in a non-arabic format is)5 1360 2 1116 6028 t
+(sions.)1116 6148 w
+(The function)1 513 1 1116 6328 t
+10 CW f
+(\\g)1654 6328 w
+10 I f
+(x)1774 6328 w
+10 R f
+(or)1843 6328 w
+10 CW f
+(\\g\()1951 6328 w
+10 I f
+(xx)2131 6328 w
+10 R f
+( form suitable for)3 699(returns the format of a number register in a)8 1718 2 2244 6328 t
+10 CW f
+(af)4687 6328 w
+10 R f
+(; it returns)2 413 1 4807 6328 t
+(nothing if the register has not been used.)7 1620 1 1116 6448 t
+10 CW f
+(.rr)540 6628 w
+10 I f
+(R)770 6628 w
+10 R f
+( \261)1 645(\261 ignored)1 1205 2 1440 6628 t
+(Remove number register)2 987 1 1116 6772 t
+10 I f
+(R)2128 6772 w
+10 R f
+( created dynamically, it may become necessary)6 1887( many registers are being)4 1003(. If)1 141 3 2189 6772 t
+( register)1 336( The)1 217( internal storage space for newer registers.)6 1758(to remove unused registers to recapture)5 1636 4 1116 6892 t
+10 CW f
+(.R)5100 6892 w
+10 R f
+(contains the number of number registers still available.)7 2197 1 1116 7012 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 11 11
+%%Page: 12 12
+/saveobj save def
+mark
+12 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(12)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 9.  , HEADING = TABS, LEADERS, AND FIELDS]
+10 B f
+( LEADERS, AND FIELDS)3 1151(9. TABS,)1 412 2 540 960 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 9.1  , HEADING = Tabs and Leaders]
+( and Leaders)2 556(9.1 Tabs)1 387 2 540 1140 t
+10 R f
+(The)540 1320 w
+9 R f
+(ASCII)722 1320 w
+10 R f
+(horizontal tab character and the)4 1273 1 986 1320 t
+9 R f
+(ASCII SOH)1 443 1 2286 1320 t
+10 R f
+(\(control-A, hereafter called the)3 1249 1 2759 1320 t
+10 I f
+(leader)4038 1320 w
+10 R f
+(character\) can both be)3 897 1 4323 1320 t
+( entity is)2 365( length of the generated)4 986( The)1 216(used to generate either horizontal motion or a string of repeated characters.)11 3113 4 540 1440 t
+(governed by internal)2 838 1 540 1560 t
+10 I f
+(tab stops)1 365 1 1409 1560 t
+10 R f
+(speci\256able with)1 636 1 1805 1560 t
+10 CW f
+(ta)2472 1560 w
+10 R f
+( difference is that tabs generate motion and leaders)8 2084( default)1 308(. The)1 236 3 2592 1560 t
+(generate a string of periods;)4 1146 1 540 1680 t
+10 CW f
+(tc)1719 1680 w
+10 R f
+(and)1872 1680 w
+10 CW f
+(lc)2049 1680 w
+10 R f
+( are three types of)4 746( There)1 290(offer the choice of repeated character or motion.)7 1982 3 2202 1680 t
+( \320)1 116(internal tab stops)2 693 2 540 1800 t
+10 I f
+(left)1365 1800 w
+10 R f
+(adjusting,)1523 1800 w
+10 I f
+(right)1945 1800 w
+10 R f
+(adjusting, and)1 566 1 2170 1800 t
+10 I f
+(centering)2766 1800 w
+10 R f
+( the following table,)3 823(. In)1 164 2 3143 1800 t
+10 I f
+(D)4161 1800 w
+10 R f
+(is the distance from the)4 956 1 4264 1800 t
+(current position on the)3 923 1 540 1920 t
+10 I f
+(input)1495 1920 w
+10 R f
+( stop,)1 223(line \(where a tab or leader was found\) to the next tab)11 2185 2 1733 1920 t
+10 I f
+(next-string)4172 1920 w
+10 R f
+(consists of the)2 584 1 4636 1920 t
+( tab \(or leader\) up to the next tab \(or leader\) or end of line, and)15 2684(input characters following the)3 1228 2 540 2040 t
+10 I f
+(W)4489 2040 w
+10 R f
+(is the width of)3 611 1 4609 2040 t
+10 I f
+(next-string)540 2160 w
+10 R f
+(.)973 2160 w
+10 S f
+(_ _____________________________________________________)1 2666 1 1547 2240 t
+10 R f
+(Length of motion or)3 808 1 2132 2360 t
+(Tab Type)1 385 1 1597 2420 t
+(repeated characters)1 765 1 2153 2480 t
+(Location of)1 463 1 3166 2420 t
+10 I f
+(next-string)3654 2420 w
+10 S f
+(_ _____________________________________________________)1 2666 1 1547 2500 t
+10 R f
+(Left)1706 2640 w
+10 I f
+(D)2500 2640 w
+10 R f
+(Following)3090 2640 w
+10 I f
+(D)3527 2640 w
+10 R f
+(Right)1678 2760 w
+10 I f
+(D\261W)2433 2760 w
+10 R f
+(Right adjusted within)2 862 1 3090 2760 t
+10 I f
+(D)3977 2760 w
+10 R f
+(Centered)1609 2880 w
+10 I f
+(D\261W/)2394 2880 w
+10 R f
+( on right end of)4 616(2 Centered)1 823 2 2627 2880 t
+10 I f
+(D)4091 2880 w
+10 S f
+( \347)1 -2666(_ _____________________________________________________)1 2666 2 1547 2900 t
+(\347)1547 2840 w
+(\347)1547 2740 w
+(\347)1547 2640 w
+(\347)1547 2540 w
+(\347)1547 2440 w
+(\347)1547 2340 w
+(\347)4213 2900 w
+(\347)4213 2840 w
+(\347)4213 2740 w
+(\347)4213 2640 w
+(\347)4213 2540 w
+(\347)4213 2440 w
+(\347)4213 2340 w
+10 R f
+( Repeated)1 422( to be negative, but that of a repeated character string cannot be.)12 2566(The length of generated motion is allowed)6 1692 3 540 3080 t
+( or)1 110( Tabs)1 246( an integer number of characters, and any residual distance is prepended as motion.)13 3343(character strings contain)2 981 4 540 3200 t
+(leaders found after the last tab stop are ignored, but may be used as)13 2683 1 540 3320 t
+10 I f
+(next-string)3248 3320 w
+10 R f
+(terminators.)3706 3320 w
+(Tabs and leaders are not interpreted in copy mode.)8 2116 1 540 3500 t
+10 CW f
+(\\t)2718 3500 w
+10 R f
+(and)2875 3500 w
+10 CW f
+(\\a)3056 3500 w
+10 R f
+( tab and leader)3 623(always generate a non-interpreted)3 1384 2 3213 3500 t
+(respectively, and are equivalent to actual tabs and leaders in copy mode.)11 2885 1 540 3620 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 9.2  , HEADING = Fields]
+10 B f
+(9.2 Fields)1 431 1 540 3800 t
+10 R f
+(A)540 3980 w
+10 I f
+(\256eld)648 3980 w
+10 R f
+(is contained between a pair of)5 1249 1 856 3980 t
+10 I f
+(\256eld delimiter)1 569 1 2141 3980 t
+10 R f
+(characters, and consists of sub-strings separated by)6 2109 1 2746 3980 t
+10 I f
+(padding)4892 3980 w
+10 R f
+( \256eld length is the distance on the)7 1362( The)1 208(indicator characters.)1 811 3 540 4100 t
+10 I f
+(input)2949 4100 w
+10 R f
+( the position where the \256eld begins to the)8 1665(line from)1 372 2 3183 4100 t
+( all the sub-strings and the \256eld length is incorporated as)10 2349( difference between the total length of)6 1566( The)1 213(next tab stop.)2 552 4 540 4220 t
+( incorporated padding is allowed)4 1333( The)1 211( among the indicated padding places.)5 1511(horizontal padding space that is divided)5 1625 4 540 4340 t
+( example, if the \256eld delimiter is)6 1374( For)1 201(to be negative.)2 609 3 540 4460 t
+10 CW f
+(#)2761 4460 w
+10 R f
+(and the padding indicator is)4 1158 1 2858 4460 t
+10 CW f
+(\303)4053 4460 w
+10 R f
+(,)4113 4460 w
+10 CW f
+(#\303)4175 4460 w
+10 I f
+(xxx)4295 4460 w
+10 CW f
+(\303)4427 4460 w
+10 I f
+(right)4487 4460 w
+10 CW f
+(#)4698 4460 w
+10 R f
+(speci\256es a)1 425 1 4795 4460 t
+(right-adjusted string with the string)4 1411 1 540 4580 t
+10 I f
+(xxx)1976 4580 w
+10 R f
+(centered in the remaining space.)4 1288 1 2133 4580 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 4760 t
+10 CW f
+(.ta)540 4940 w
+10 I f
+(Nt)770 4940 w
+10 S f
+(\274)915 4940 w
+10 R f
+( E,)1 792( none)1 603( in)1 94( 0.8)1 150(0.5 in;)1 247 5 1440 4940 t
+10 B f
+(m)3326 4940 w
+10 R f
+( stops and types.)3 682(Set tab)1 281 2 1116 5084 t
+10 I f
+(t=)2136 5084 w
+10 CW f
+(R)2232 5084 w
+10 R f
+(, right adjusting;)2 673 1 2292 5084 t
+10 I f
+(t=)2997 5084 w
+10 CW f
+(C)3093 5084 w
+10 R f
+(, centering;)1 456 1 3153 5084 t
+10 I f
+(t)3641 5084 w
+10 R f
+(absent, left adjusting.)2 869 1 3701 5084 t
+10 I f
+(Troff)4627 5084 w
+10 R f
+(tab stops)1 360 1 4860 5084 t
+( inch,)1 213(are preset every 0.5)3 807 2 1116 5204 t
+10 I f
+(nroff)2170 5204 w
+10 R f
+( stop values are separated by spaces, and a value)9 2014( The)1 214( inch.)1 213(every 0.8)1 380 4 2399 5204 t
+(preceded by)1 484 1 1116 5324 t
+10 CW f
+(+)1625 5324 w
+10 R f
+(is treated as an increment to the previous stop value.)9 2091 1 1710 5324 t
+10 CW f
+(.tc)540 5504 w
+10 I f
+(c)770 5504 w
+10 R f
+(none none E)2 1861 1 1440 5504 t
+(The tab repetition character becomes)4 1473 1 1116 5648 t
+10 I f
+(c)2614 5648 w
+10 R f
+(, or is removed, thus specifying motion.)6 1591 1 2658 5648 t
+10 CW f
+(.lc)540 5828 w
+10 I f
+(c)770 5828 w
+10 CW f
+(.)1440 5828 w
+10 R f
+(none E)1 961 1 2340 5828 t
+(The leader repetition character becomes)4 1594 1 1116 5972 t
+10 I f
+(c)2735 5972 w
+10 R f
+(, or is removed, thus specifying motion.)6 1591 1 2779 5972 t
+10 CW f
+(.fc)540 6152 w
+10 I f
+(a b)1 150 1 770 6152 t
+10 R f
+(off off \261)2 1850 1 1440 6152 t
+(The \256eld delimiter is set to)5 1105 1 1116 6296 t
+10 I f
+(a)2252 6296 w
+10 R f
+( set to the space character or to)7 1281(; the padding indicator is)4 1018 2 2302 6296 t
+10 I f
+(b)4633 6296 w
+10 R f
+( In)1 140(, if given.)2 397 2 4683 6296 t
+(the absence of arguments the \256eld mechanism is turned off.)9 2379 1 1116 6416 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 12 12
+%%Page: 13 13
+/saveobj save def
+mark
+13 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(13)5108 600 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 10.  , HEADING = INPUT AND OUTPUT CONVENTIONS AND CHARACTER TRANSLATIONS]
+10 B f
+( AND OUTPUT CONVENTIONS AND CHARACTER TRANSLATIONS)6 3178(10. INPUT)1 486 2 540 960 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 10.1  , HEADING = Input Character Translations]
+( Character Translations)2 1027(10.1 Input)1 465 2 540 1140 t
+10 R f
+( The)1 207(Ways of inputting the valid character set were discussed in \2472.1.)10 2593 2 540 1320 t
+9 R f
+(ASCII)3366 1320 w
+10 R f
+(control characters horizontal tab \(\2479.1\),)4 1591 1 3629 1320 t
+9 R f
+(SOH)540 1440 w
+10 R f
+( addition,)1 391( In)1 146( newline delimits input lines.)4 1211( The)1 218(\(\2479.1\), and backspace \(\24710.3\) are discussed elsewhere.)6 2265 5 758 1440 t
+9 R f
+(STX)5025 1440 w
+10 R f
+(,)5195 1440 w
+9 R f
+(ETX)540 1560 w
+10 R f
+(,)715 1560 w
+9 R f
+(ENQ)767 1560 w
+10 R f
+(,)952 1560 w
+9 R f
+(ACK)1004 1560 w
+10 R f
+(, and)1 198 1 1194 1560 t
+9 R f
+(BEL)1419 1560 w
+10 R f
+( may be used as delimiters or translated into a graphic with)11 2410(are accepted, and)2 696 2 1618 1560 t
+10 CW f
+(tr)4754 1560 w
+10 R f
+(\(\24710.5\).)4904 1560 w
+(All others are ignored.)3 898 1 540 1680 t
+(The)540 1860 w
+10 I f
+(escape)721 1860 w
+10 R f
+(character)1018 1860 w
+10 CW f
+(\\)1408 1860 w
+10 R f
+(introduces)1494 1860 w
+10 I f
+(escape sequences)1 701 1 1936 1860 t
+10 R f
+( another character,)2 742(, which cause the following character to mean)7 1841 2 2637 1860 t
+( character)1 395( escape)1 297( The)1 212( complete list of such sequences is given in the Summary.)10 2382( A)1 129(or to indicate some function.)4 1174 6 540 1980 t
+10 CW f
+(\\)5160 1980 w
+10 R f
+( with the)2 352(should not be confused)3 924 2 540 2100 t
+9 R f
+(ASCII)1840 2100 w
+10 R f
+(control character)1 673 1 2101 2100 t
+9 R f
+(ESC)2798 2100 w
+10 R f
+( escape character)2 681(. The)1 231 2 2963 2100 t
+10 CW f
+(\\)3901 2100 w
+10 R f
+(can be input with the sequence)5 1233 1 3987 2100 t
+10 CW f
+(\\\\)540 2220 w
+10 R f
+( escape character can be changed with)6 1563(. The)1 237 2 660 2220 t
+10 CW f
+(ec)2492 2220 w
+10 R f
+( has been said about the default)6 1289(, and all that)3 515 2 2612 2220 t
+10 CW f
+(\\)4447 2220 w
+10 R f
+(becomes true for)2 682 1 4538 2220 t
+( escape character.)2 712(the new)1 316 2 540 2340 t
+10 CW f
+(\\e)1622 2340 w
+10 R f
+( escape mechanism)2 778( The)1 209(can be used to print whatever the current escape character is.)10 2462 3 1771 2340 t
+(may be turned off with)4 915 1 540 2460 t
+10 CW f
+(eo)1480 2460 w
+10 R f
+(, and restored with)3 743 1 1600 2460 t
+10 CW f
+(ec)2368 2460 w
+10 R f
+(.)2488 2460 w
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 2640 t
+10 CW f
+(.ec)540 2820 w
+10 I f
+(c)770 2820 w
+10 CW f
+(\\ \\)1 960 1 1440 2820 t
+10 R f
+(\261)3240 2820 w
+(Set escape character to)3 910 1 1116 2964 t
+10 CW f
+(\\)2051 2964 w
+10 R f
+(, or to)2 236 1 2111 2964 t
+10 I f
+(c)2372 2964 w
+10 R f
+(, if given.)2 383 1 2416 2964 t
+10 CW f
+(.eo)540 3144 w
+10 R f
+( \261)1 900(on \261)1 950 2 1440 3144 t
+(Turn escape mechanism off.)3 1130 1 1116 3288 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 10.2  , HEADING = Ligatures]
+10 B f
+(10.2 Ligatures)1 636 1 540 3468 t
+10 R f
+(The set of available ligatures is device and font dependent, but is often a subset of \256, \257,)17 3535 1 540 3648 t
+10 S1 f
+()4103 3648 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_ff {
+    pop
+    size .05 mul neg 0 (ff) ashow
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+4103 3648 m
+60 build_ff
+4163 3648 m
+10 R f
+(,)4163 3648 w
+10 S1 f
+()4217 3648 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_Fi {
+    pop
+    size .05 mul neg 0 (ffi) ashow
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+4217 3648 m
+84 build_Fi
+4301 3648 m
+10 R f
+(, and)1 198 1 4301 3648 t
+10 S1 f
+()4528 3648 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_Fl {
+    pop
+    size .05 mul neg 0 (ffl) ashow
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+4528 3648 m
+84 build_Fl
+4612 3648 m
+10 R f
+( may be)2 324(. They)1 284 2 4612 3648 t
+(input by)1 338 1 540 3768 t
+10 CW f
+(\\\(fi)910 3768 w
+10 R f
+(,)1150 3768 w
+10 CW f
+(\\\(fl)1207 3768 w
+10 R f
+(,)1447 3768 w
+10 CW f
+(\\\(ff)1504 3768 w
+10 R f
+(,)1744 3768 w
+10 CW f
+(\\\(Fi)1801 3768 w
+10 R f
+(, and)1 200 1 2041 3768 t
+10 CW f
+(\\\(Fl)2272 3768 w
+10 R f
+( ligature mode is normally on in)6 1319(respectively. The)1 718 2 2543 3768 t
+10 I f
+(troff)4611 3768 w
+10 R f
+(, and auto-)2 436 1 4784 3768 t
+(matically invokes ligatures during input.)4 1619 1 540 3888 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 4068 t
+10 CW f
+(.lg)540 4248 w
+10 I f
+(N)770 4248 w
+10 R f
+( \261)1 850( on)1 731(on; off)1 269 3 1440 4248 t
+(Ligature mode is turned on if)5 1188 1 1116 4392 t
+10 I f
+(N)2333 4392 w
+10 R f
+(is absent or non-zero, and turned off if)7 1563 1 2429 4392 t
+10 I f
+(N)4022 4392 w
+10 S f
+(=)4113 4392 w
+10 R f
+(0. If)1 196 1 4184 4392 t
+10 I f
+(N)4410 4392 w
+10 S f
+(=)4501 4392 w
+10 R f
+(2, only the two-)3 648 1 4572 4392 t
+( mode is inhibited for request, macro, string,)7 1846( Ligature)1 398(character ligatures are automatically invoked.)4 1860 3 1116 4512 t
+( effect in)2 354( No)1 172(register, or \256le names, and in copy mode.)7 1653 3 1116 4632 t
+10 I f
+(nroff)3320 4632 w
+10 R f
+(.)3515 4632 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 10.3  , HEADING = Backspacing, Underlining, Overstriking, Etc.]
+10 B f
+( Underlining, Overstriking, Etc.)3 1362(10.3 Backspacing,)1 790 2 540 4812 t
+10 R f
+(Unless in copy mode, the)4 1033 1 540 4992 t
+9 R f
+(ASCII)1601 4992 w
+10 R f
+( horizontal motion having the width)5 1466(backspace character is replaced by a backward)6 1888 2 1866 4992 t
+( generalized overstriking)2 1020( A)1 136( as a form of line-drawing is discussed in \24712.4.)9 2043( Underlining)1 547( character.)1 428(of the space)2 506 6 540 5112 t
+(function is described in \24712.1.)4 1210 1 540 5232 t
+10 I f
+(Nroff)540 5412 w
+10 R f
+(automatically underlines characters in the)4 1667 1 778 5412 t
+10 I f
+(underline)2471 5412 w
+10 R f
+(font, speci\256able with)2 843 1 2880 5412 t
+10 CW f
+(uf)3749 5412 w
+10 R f
+(, normally that on font position 2.)6 1351 1 3869 5412 t
+(In addition to)2 543 1 540 5532 t
+10 CW f
+(ft)1110 5532 w
+10 R f
+(and)1257 5532 w
+10 CW f
+(\\f)1428 5532 w
+10 I f
+(F)1548 5532 w
+10 R f
+(, the underline font may be selected by)7 1561 1 1609 5532 t
+10 CW f
+(ul)3196 5532 w
+10 R f
+(and)3342 5532 w
+10 CW f
+(cu)3512 5532 w
+10 R f
+( is restricted to an output-)5 1029(. Underlining)1 559 2 3632 5532 t
+(device-dependent subset of reasonable characters.)4 1990 1 540 5652 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 5832 t
+10 CW f
+(.ul)540 6012 w
+10 I f
+(N)770 6012 w
+10 R f
+(off)1440 6012 w
+10 I f
+(N)2340 6012 w
+10 S f
+(=)2431 6012 w
+10 R f
+(1 E)1 799 1 2502 6012 t
+(Italicize in)1 435 1 1116 6156 t
+10 I f
+(troff)1587 6156 w
+10 R f
+(\(underline in)1 524 1 1796 6156 t
+10 I f
+(nroff)2356 6156 w
+10 R f
+(\) the next)2 399 1 2559 6156 t
+10 I f
+(N)2994 6156 w
+10 R f
+( switch to underline font,)4 1050( Actually,)1 431(input text lines.)2 642 3 3097 6156 t
+( of a)2 177(saving the current font for later restoration; other font changes within the span)12 3134 2 1116 6276 t
+10 CW f
+(ul)4452 6276 w
+10 R f
+(will take effect,)2 623 1 4597 6276 t
+( generated by)2 559( Output)1 339( last change.)2 518(but the restoration will undo the)5 1330 4 1116 6396 t
+10 CW f
+(tl)3898 6396 w
+10 R f
+(\(\24714\) is affected by the font)5 1166 1 4054 6396 t
+(change, but does not decrement)4 1289 1 1116 6516 t
+10 I f
+(N)2437 6516 w
+10 R f
+(. If)1 148 1 2504 6516 t
+10 I f
+(N)2684 6516 w
+10 S f
+(>)2775 6516 w
+10 R f
+( interpolated macro may pro-)4 1188(1, there is the risk that a trap)7 1186 2 2846 6516 t
+(vide text lines within the span; environment switching can prevent this.)10 2851 1 1116 6636 t
+10 CW f
+(.cu)540 6816 w
+10 I f
+(N)770 6816 w
+10 R f
+(off)1440 6816 w
+10 I f
+(N)2340 6816 w
+10 S f
+(=)2431 6816 w
+10 R f
+(1 E)1 799 1 2502 6816 t
+( variant of)2 414( A)1 123(Continuous underline.)1 890 3 1116 6960 t
+10 CW f
+(ul)2570 6960 w
+10 R f
+(that causes)1 437 1 2717 6960 t
+10 I f
+(every)3181 6960 w
+10 R f
+(character to be underlined in)4 1149 1 3423 6960 t
+10 I f
+(nroff)4599 6960 w
+10 R f
+(. Identical)1 426 1 4794 6960 t
+(to)1116 7080 w
+10 CW f
+(ul)1219 7080 w
+10 R f
+(in)1364 7080 w
+10 I f
+(troff)1467 7080 w
+10 R f
+(.)1640 7080 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 13 13
+%%Page: 14 14
+/saveobj save def
+mark
+14 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(14)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 960 t
+10 CW f
+(.uf)540 1140 w
+10 I f
+(F)770 1140 w
+10 R f
+(Italic Italic \261)2 1850 1 1440 1140 t
+(Underline font set to)3 824 1 1116 1284 t
+10 I f
+(F)1965 1284 w
+10 R f
+(. In)1 158 1 2026 1284 t
+10 I f
+(nroff)2209 1284 w
+10 R f
+(,)2404 1284 w
+10 I f
+(F)2454 1284 w
+10 R f
+(may not be on position 1.)5 1017 1 2540 1284 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 10.4  , HEADING = Control Characters]
+10 B f
+( Characters)1 501(10.4 Control)1 558 2 540 1464 t
+10 R f
+(Both the control character)3 1042 1 540 1644 t
+10 CW f
+(.)1608 1644 w
+10 R f
+(and the)1 293 1 1719 1644 t
+10 I f
+(no-break)2039 1644 w
+10 R f
+(control character)1 674 1 2426 1644 t
+10 CW f
+(')3127 1644 w
+10 R f
+( a change must be compat-)5 1077( Such)1 252(may be changed.)2 677 3 3214 1644 t
+(ible with the design of any macros used in the span of the change, and particularly of any trap-invoked macros.)19 4433 1 540 1764 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 1944 t
+10 CW f
+(.cc)540 2124 w
+10 I f
+(c)770 2124 w
+10 CW f
+(. .)1 960 1 1440 2124 t
+10 R f
+(E)3240 2124 w
+(The basic control character is set to)6 1413 1 1116 2268 t
+10 I f
+(c)2554 2268 w
+10 R f
+(, or reset to ``)4 540 1 2598 2268 t
+10 CW f
+(.)3138 2268 w
+10 R f
+(''.)3198 2268 w
+10 CW f
+(.c2)540 2448 w
+10 I f
+(c)770 2448 w
+10 CW f
+(' ')1 960 1 1440 2448 t
+10 R f
+(E)3240 2448 w
+(The)1116 2592 w
+10 I f
+(no-break)1296 2592 w
+10 R f
+(control character is set to)4 1003 1 1681 2592 t
+10 I f
+(c)2709 2592 w
+10 R f
+(, or reset to ``)4 540 1 2753 2592 t
+10 CW f
+(')3293 2592 w
+10 R f
+(''.)3353 2592 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 10.5  , HEADING = Output Translation]
+10 B f
+( Translation)1 526(10.5 Output)1 537 2 540 2772 t
+10 R f
+( stand-in for another character using)5 1478(One character can be made a)5 1177 2 540 2952 t
+10 CW f
+(tr)3227 2952 w
+10 R f
+( text processing \(e.g., character compari-)5 1663(. All)1 210 2 3347 2952 t
+( The)1 217( the \256nal character.)3 800(sons\) takes place with the input \(stand-in\) character which appears to have the width of)14 3663 3 540 3072 t
+(graphic translation occurs at the moment of output \(including diversion\).)9 2908 1 540 3192 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 3372 t
+10 CW f
+(.tr)540 3552 w
+10 I f
+(abcd)770 3552 w
+10 S f
+(\274)972 3552 w
+10 R f
+( O)1 922(none \261)1 950 2 1440 3552 t
+(Translate)1116 3696 w
+10 I f
+(a)1516 3696 w
+10 R f
+(into)1595 3696 w
+10 I f
+(b)1780 3696 w
+10 R f
+(,)1830 3696 w
+10 I f
+(c)1884 3696 w
+10 R f
+(into)1957 3696 w
+10 I f
+(d)2143 3696 w
+10 R f
+( an odd number of characters is given, the last one will be mapped)13 2710( If)1 121(, etc.)1 196 3 2193 3696 t
+( be consistent, a particular translation must stay in effect from)10 2581( To)1 172(into the space character.)3 996 3 1116 3816 t
+10 I f
+(input)4901 3816 w
+10 R f
+(to)5142 3816 w
+10 I f
+(output)1116 3936 w
+10 R f
+(time.)1397 3936 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 10.6  , HEADING = Transparent Throughput]
+10 B f
+( Throughput)1 549(10.6 Transparent)1 764 2 540 4116 t
+10 R f
+( a)1 75(An input line beginning with)4 1176 2 540 4296 t
+10 CW f
+(\\!)1822 4296 w
+10 R f
+(is read in copy mode and)5 1031 1 1998 4296 t
+10 I f
+(transparently)3060 4296 w
+10 R f
+(output \(without the initial)3 1044 1 3630 4296 t
+10 CW f
+(\\!)4705 4296 w
+10 R f
+(\); the text)2 395 1 4825 4296 t
+( mechanism may be used to pass control information to a)10 2291( This)1 229( the line's presence.)3 795(processor is otherwise unaware of)4 1365 4 540 4416 t
+(post-processor or to embed control lines in a macro created by a diversion.)12 2980 1 540 4536 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 10.7  , HEADING = Transparent Output]
+10 B f
+( Output)1 337(10.7 Transparent)1 764 2 540 4716 t
+10 R f
+(The sequence)1 554 1 540 4896 t
+10 CW f
+(\\X')1128 4896 w
+10 I f
+(anything)1308 4896 w
+10 CW f
+(')1658 4896 w
+10 R f
+(copies)1752 4896 w
+10 I f
+(anything)2041 4896 w
+10 R f
+(to the output, as a device control function of the form)10 2223 1 2425 4896 t
+10 CW f
+(x X)1 154 1 4682 4896 t
+10 I f
+(anything)4870 4896 w
+10 R f
+( sequences in)2 532(\(\24722\). Escape)1 573 2 540 5016 t
+10 I f
+(anything)1670 5016 w
+10 R f
+(are processed.)1 564 1 2045 5016 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 10.8  , HEADING = Comments and Concealed Newlines]
+10 B f
+( and Concealed Newlines)3 1064(10.8 Comments)1 685 2 540 5196 t
+10 R f
+(An uncomfortably long input line that must stay one line \(e.g., a string de\256nition, or no\256lled text\) can be split into)20 4680 1 540 5376 t
+( all but the last one with the escape)8 1462(several physical lines by ending)4 1312 2 540 5496 t
+10 CW f
+(\\)3347 5496 w
+10 R f
+( sequence)1 398(. The)1 238 2 3407 5496 t
+10 CW f
+(\\)4076 5496 w
+10 I f
+(newline)4136 5496 w
+10 R f
+(is always ignored,)2 740 1 4480 5496 t
+( may be embedded at the end of any line by prefacing them with)13 2609( Comments)1 486(except in a comment.)3 860 3 540 5616 t
+10 CW f
+(\\")4523 5616 w
+10 R f
+( newline)1 344(. The)1 233 2 4643 5616 t
+( line beginning with)3 812( A)1 125( a comment cannot be concealed.)5 1339(at the end of)3 508 4 540 5736 t
+10 CW f
+(\\")3352 5736 w
+10 R f
+(will appear as a blank line and behave like)8 1720 1 3500 5736 t
+10 CW f
+(.sp 1)1 300 1 540 5856 t
+10 R f
+(; a comment can be on a line by itself by beginning the line with)14 2570 1 840 5856 t
+10 CW f
+(.\\")3435 5856 w
+10 R f
+(.)3615 5856 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 11.  , HEADING = LOCAL HORIZONTAL AND VERTICAL MOTIONS, AND THE WIDTH FUNCTION]
+10 B f
+( HORIZONTAL AND VERTICAL MOTIONS, AND THE WIDTH FUNCTION)8 3460(11. LOCAL)1 531 2 540 6096 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 11.1  , HEADING = Local Motions]
+( Motions)1 375(11.1 Local)1 464 2 540 6276 t
+10 R f
+(The functions)1 553 1 540 6456 t
+10 CW f
+(\\v')1119 6456 w
+10 I f
+(N)1299 6456 w
+10 CW f
+(')1366 6456 w
+10 R f
+(and)1452 6456 w
+10 CW f
+(\\h')1622 6456 w
+10 I f
+(N)1802 6456 w
+10 CW f
+(')1869 6456 w
+10 R f
+(can be used for)3 609 1 1955 6456 t
+10 I f
+(local)2591 6456 w
+10 R f
+( distance)1 354( The)1 207(vertical and horizontal motion respectively.)4 1747 3 2818 6456 t
+10 I f
+(N)5153 6456 w
+10 R f
+( line.)1 200( local motion is one contained within a)7 1559( A)1 123(may be negative; the positive directions are rightward and downward.)9 2798 4 540 6576 t
+( net vertical local motion within a word in \256lled)9 2003(To avoid unexpected vertical dislocations, it is necessary that the)9 2677 2 540 6696 t
+( above and certain other escape sequences providing local)8 2430( The)1 220(text and otherwise within a line balance to zero.)8 2030 3 540 6816 t
+(motion are summarized in the following table.)6 1851 1 540 6936 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 14 14
+%%Page: 15 15
+/saveobj save def
+mark
+15 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(15)5108 600 w
+10 S f
+(_ ______________________________________________________________________________)1 3922 1 919 860 t
+10 R f
+( in)1 103( Effect)1 861( Horizontal)1 1022( in)1 103(Vertical Effect)1 1212 5 1082 980 t
+(Local Motion)1 547 1 969 1100 t
+10 I f
+(troff nroff)1 817 1 1814 1100 t
+10 R f
+(Local Motion)1 547 1 2932 1100 t
+10 I f
+(troff nroff)1 840 1 3828 1100 t
+10 S f
+(_ ______________________________________________________________________________)1 3922 1 919 1120 t
+10 CW f
+(\\v')1137 1260 w
+10 I f
+(N)1317 1260 w
+10 CW f
+(')1384 1260 w
+10 R f
+(Move distance)1 585 1 1666 1260 t
+10 I f
+(N)2276 1260 w
+10 CW f
+(\\h')3078 1260 w
+10 I f
+(N)3258 1260 w
+10 CW f
+(')3325 1260 w
+10 R f
+(Move distance)1 585 1 3629 1260 t
+10 I f
+(N)4239 1260 w
+10 S f
+(_ ______________________________________)1 1928 1 919 1330 t
+10 CW f
+(\\)3078 1380 w
+10 I f
+(space)3138 1380 w
+10 R f
+(Unpaddable space-size space)2 1162 1 3629 1380 t
+10 CW f
+(\\u)1137 1500 w
+10 S1 f
+()1666 1500 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_12 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (2) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+1666 1500 m
+75 build_12
+1741 1500 m
+10 R f
+(em up)1 247 1 1766 1500 t
+10 S1 f
+()2285 1500 w
+2285 1500 m
+75 build_12
+2360 1500 m
+10 R f
+(line up)1 275 1 2385 1500 t
+10 CW f
+(\\0)3078 1500 w
+10 R f
+(Digit-size space)1 640 1 3629 1500 t
+10 CW f
+(\\d)1137 1620 w
+10 S1 f
+()1666 1620 w
+1666 1620 m
+75 build_12
+1741 1620 m
+10 R f
+(em down)1 369 1 1766 1620 t
+10 S1 f
+()2285 1620 w
+2285 1620 m
+75 build_12
+2360 1620 m
+10 R f
+(line down)1 397 1 2385 1620 t
+10 S f
+(_ _______________________________________)1 1974 1 2867 1570 t
+10 CW f
+(\\r)1137 1740 w
+10 R f
+( line up)2 300( 1)1 347(1 em up)2 322 3 1666 1740 t
+10 CW f
+(\\|)3078 1740 w
+10 R f
+( ignored)1 505(1/6 em space)2 521 2 3629 1740 t
+10 CW f
+(\\\303)3078 1860 w
+10 R f
+( ignored)1 455(1/12 em space)2 571 2 3629 1860 t
+10 S f
+( \347)1 -3922(_ ______________________________________________________________________________)1 3922 2 919 1880 t
+(\347)919 1860 w
+(\347)919 1760 w
+(\347)919 1660 w
+(\347)919 1560 w
+(\347)919 1460 w
+(\347)919 1360 w
+(\347)919 1260 w
+(\347)919 1160 w
+(\347)919 1060 w
+(\347)919 960 w
+(\347)1591 1880 w
+(\347)1591 1860 w
+(\347)1591 1760 w
+(\347)1591 1660 w
+(\347)1591 1560 w
+(\347)1591 1460 w
+(\347)1591 1360 w
+(\347)1591 1260 w
+(\347)1591 1160 w
+(\347)1591 1060 w
+(\347)1591 960 w
+(\347)2210 1880 w
+(\347)2210 1830 w
+(\347)2210 1730 w
+(\347)2210 1630 w
+(\347)2210 1530 w
+(\347)2210 1430 w
+(\347)2847 1880 w
+(\347)2847 1860 w
+(\347)2847 1760 w
+(\347)2847 1660 w
+(\347)2847 1560 w
+(\347)2847 1460 w
+(\347)2847 1360 w
+(\347)2847 1260 w
+(\347)2847 1160 w
+(\347)2847 1060 w
+(\347)2847 960 w
+(\347)2867 1880 w
+(\347)2867 1860 w
+(\347)2867 1760 w
+(\347)2867 1660 w
+(\347)2867 1560 w
+(\347)2867 1460 w
+(\347)2867 1360 w
+(\347)2867 1260 w
+(\347)2867 1160 w
+(\347)2867 1060 w
+(\347)2867 960 w
+(\347)3554 1880 w
+(\347)3554 1860 w
+(\347)3554 1760 w
+(\347)3554 1660 w
+(\347)3554 1560 w
+(\347)3554 1460 w
+(\347)3554 1360 w
+(\347)3554 1260 w
+(\347)3554 1160 w
+(\347)3554 1060 w
+(\347)3554 960 w
+(\347)4275 1880 w
+(\347)4275 1870 w
+(\347)4275 1770 w
+(\347)4275 1670 w
+(\347)4841 1880 w
+(\347)4841 1860 w
+(\347)4841 1760 w
+(\347)4841 1660 w
+(\347)4841 1560 w
+(\347)4841 1460 w
+(\347)4841 1360 w
+(\347)4841 1260 w
+(\347)4841 1160 w
+(\347)4841 1060 w
+(\347)4841 960 w
+10 R f
+(As an example,)2 618 1 540 2060 t
+10 CW f
+(E)1183 2060 w
+8 CW f
+(2)1243 2028 w
+10 R f
+(could be generated by the sequence)5 1415 1 1316 2060 t
+10 CW f
+(E\\s\2612\\v'\2610.4m'2\\v'0.4m'\\s+2)2756 2060 w
+10 R f
+(; note that the 0.4 em)5 844 1 4376 2060 t
+(vertical motions are at the smaller size.)6 1561 1 540 2180 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 11.2  , HEADING = Width Function]
+10 B f
+( Function)1 409(11.2 Width)1 498 2 540 2360 t
+10 R f
+(The)540 2540 w
+10 I f
+(width)723 2540 w
+10 R f
+(function)974 2540 w
+10 CW f
+(\\w')1335 2540 w
+10 I f
+(string)1515 2540 w
+10 CW f
+(')1749 2540 w
+10 R f
+(generates the numerical width of)4 1324 1 1837 2540 t
+10 I f
+(string)3190 2540 w
+10 R f
+( and font changes may)4 914( Size)1 226(\(in basic units\).)2 627 3 3453 2540 t
+(be embedded in)2 642 1 540 2660 t
+10 I f
+(string)1212 2660 w
+10 R f
+( example,)1 393( For)1 194(, and will not affect the current environment.)7 1823 3 1446 2660 t
+10 CW f
+(.ti \261\\w'\\fB1. 'u)2 960 1 3886 2660 t
+10 R f
+(could be)1 345 1 4875 2660 t
+(used to temporarily indent leftward a distance equal to the size of the string ``)14 3100 1 540 2780 t
+10 CW f
+(1.)3640 2780 w
+10 R f
+('' in font)2 355 1 3820 2780 t
+10 CW f
+(B)4200 2780 w
+10 R f
+(.)4260 2780 w
+( registers)1 366( The)1 208(The width function also sets three number registers.)7 2090 3 540 2960 t
+10 CW f
+(st)3232 2960 w
+10 R f
+(and)3380 2960 w
+10 CW f
+(sb)3552 2960 w
+10 R f
+( respectively to the highest and)5 1260(are set)1 260 2 3700 2960 t
+(lowest extent of)2 642 1 540 3080 t
+10 I f
+(string)1209 3080 w
+10 R f
+( the baseline; then, for example, the total height of the string is)12 2515(relative to)1 404 2 1470 3080 t
+10 CW f
+(\\n\(stu\261\\n\(sbu)4415 3080 w
+10 R f
+(.)5195 3080 w
+(In)540 3200 w
+10 I f
+(troff)657 3200 w
+10 R f
+(the number register)2 794 1 864 3200 t
+10 CW f
+(ct)1692 3200 w
+10 R f
+( 0 means that all of the characters in)8 1521( value)1 250( The)1 214(is set to a value between 0 and 3.)8 1389 4 1846 3200 t
+10 I f
+(string)540 3320 w
+10 R f
+(were short lower case characters without descenders \(like)7 2435 1 819 3320 t
+10 CW f
+(e)3299 3320 w
+10 R f
+(\); 1 means that at least one character has a)9 1861 1 3359 3320 t
+(descender \(like)1 608 1 540 3440 t
+10 CW f
+(y)1175 3440 w
+10 R f
+( \(like)1 211(\); 2 means that at least one character is tall)9 1717 2 1235 3440 t
+10 CW f
+(H)3191 3440 w
+10 R f
+(\); and 3 means that both tall characters and char-)9 1969 1 3251 3440 t
+(acters with descenders are present.)4 1381 1 540 3560 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 11.3  , HEADING = Mark Horizontal Place]
+10 B f
+( Horizontal Place)2 738(11.3 Mark)1 469 2 540 3740 t
+10 R f
+(The function)1 516 1 540 3920 t
+10 CW f
+(\\k)1084 3920 w
+10 I f
+(x)1204 3920 w
+10 R f
+(causes the current horizontal position in the)6 1760 1 1276 3920 t
+10 I f
+(input line)1 384 1 3064 3920 t
+10 R f
+(to be stored in register)4 909 1 3477 3920 t
+10 I f
+(x)4415 3920 w
+10 R f
+( example, the)2 543(. For)1 218 2 4459 3920 t
+(construction)540 4040 w
+10 CW f
+(\\kx)1066 4040 w
+10 I f
+(word)1246 4040 w
+10 CW f
+(\\h'|\\nxu+3u')1452 4040 w
+10 I f
+(word)2172 4040 w
+10 R f
+(will embolden)1 582 1 2410 4040 t
+10 I f
+(word)3024 4040 w
+10 R f
+(by backing up to almost its beginning and over-)8 1958 1 3262 4040 t
+(printing it, resulting in)3 901 1 540 4160 t
+10 I f
+(word word)1 209 1 1466 4160 t
+10 R f
+(.)1675 4160 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 12.  , HEADING = OVERSTRIKE, BRACKET, LINE-DRAWING, GRAPHICS, AND ZERO-WIDTH FUNCTIONS]
+10 B f
+( BRACKET, LINE-DRAWING, GRAPHICS, AND ZERO-WIDTH FUNCTIONS)6 3509(12. OVERSTRIKE,)1 868 2 540 4400 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 12.1  , HEADING = Overstriking]
+(12.1 Overstriking)1 775 1 540 4580 t
+10 R f
+( provided by the)3 658(Automatically centered overstriking of up to nine characters is)8 2503 2 540 4760 t
+10 I f
+(overstrike)3728 4760 w
+10 R f
+(function)4154 4760 w
+10 CW f
+(\\o')4514 4760 w
+10 I f
+(string)4694 4760 w
+10 CW f
+(')4928 4760 w
+10 R f
+(. The)1 232 1 4988 4760 t
+(characters in)1 513 1 540 4880 t
+10 I f
+(string)1085 4880 w
+10 R f
+( the widest character.)3 865(are overprinted with centers aligned; the total width is that of)10 2511 2 1351 4880 t
+10 I f
+(string)4783 4880 w
+10 R f
+(may)5048 4880 w
+( examples,)1 427( As)1 161(not contain local vertical motion.)4 1324 3 540 5000 t
+10 CW f
+(\\o'e\\'')2477 5000 w
+10 R f
+( and)1 169( ,)1 31( \302)1 -5(produces e)1 429 4 2922 5000 t
+10 CW f
+(\\o'\\\(mo\\\(sl')3571 5000 w
+10 R f
+(produces)4316 5000 w
+10 S f
+(\316 /)1 50 1 4701 5000 t
+10 R f
+(.)4772 5000 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 12.2  , HEADING = Zero-width Characters]
+10 B f
+( Characters)1 501(12.2 Zero-width)1 708 2 540 5180 t
+10 R f
+(The function)1 515 1 540 5360 t
+10 CW f
+(\\z)1082 5360 w
+10 I f
+(c)1202 5360 w
+10 R f
+(will output)1 439 1 1273 5360 t
+10 I f
+(c)1739 5360 w
+10 R f
+( combina-)1 405(without spacing over it, and can be used to produce left-aligned overstruck)11 3005 2 1810 5360 t
+( examples,)1 427(tions. As)1 381 2 540 5480 t
+10 CW f
+(\\z\\\(sl\\\(ru)1373 5480 w
+10 R f
+(produces)1998 5480 w
+10 S f
+(/)2383 5480 w
+10 S1 f
+(_)2383 5480 w
+10 R f
+(, and)1 194 1 2433 5480 t
+10 CW f
+(\\z\\\(ua\\\(da)2652 5480 w
+10 R f
+(produces)3277 5480 w
+10 S f
+(\255 \257)1 60 1 3662 5480 t
+10 R f
+(.)3738 5480 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 12.3  , HEADING = Large Brackets]
+10 B f
+( Brackets)1 402(12.3 Large)1 480 2 540 5660 t
+10 R f
+(The Special Font usually contains a number of bracket construction pieces)10 3033 1 540 5840 t
+10 S f
+(\354 \356 \374 \376 \355 \375 \357 \353 \373 \351 \371)10 839 1 3636 5840 t
+10 R f
+( be com-)2 363(that can)1 319 2 4538 5840 t
+( function)1 360( The)1 207(bined into various bracket styles.)4 1326 3 540 5960 t
+10 CW f
+(\\b')2460 5960 w
+10 I f
+(string)2640 5960 w
+10 CW f
+(')2874 5960 w
+10 R f
+( in)1 104(may be used to pile up vertically the characters)8 1895 2 2961 5960 t
+10 I f
+(string)4986 5960 w
+10 R f
+( and the last at the bottom\); the characters are vertically separated by 1 em and the total pile)18 3677(\(the \256rst character on top)4 1003 2 540 6080 t
+(is centered)1 429 1 540 6200 t
+10 S1 f
+()994 6200 w
+994 6200 m
+75 build_12
+1069 6200 m
+10 R f
+(em above the current baseline \()5 1249 1 1094 6200 t
+10 S1 f
+()2343 6200 w
+2343 6200 m
+75 build_12
+2418 6200 m
+10 R f
+(line in)1 253 1 2443 6200 t
+10 I f
+(nroff)2721 6200 w
+10 R f
+( example,)1 388(\). For)1 247 2 2916 6200 t
+10 CW f
+(\\b'\\\(lc\\\(lf'E\\b'\\\(rc\\\(rf'\\x'\2610.5m'\\x'0.5m')690 6380 w
+10 R f
+(produces)540 6610 w
+10 S f
+(\351)925 6560 w
+(\353)925 6660 w
+10 R f
+(E)975 6610 w
+10 S f
+(\371)1036 6560 w
+(\373)1036 6660 w
+10 R f
+(.)1074 6610 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 15 15
+%%Page: 16 16
+/saveobj save def
+mark
+16 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(16)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 12.4  , HEADING = Line Drawing]
+10 B f
+( Drawing)1 397(12.4 Line)1 420 2 540 960 t
+10 R f
+(The function)1 513 1 540 1140 t
+10 CW f
+(\\l')1078 1140 w
+10 I f
+(Nc)1258 1140 w
+10 CW f
+(')1369 1140 w
+10 R f
+(\(backslash-ell\) draws a string of repeated)5 1642 1 1454 1140 t
+10 I f
+(c)3121 1140 w
+10 R f
+('s towards the right for a distance)6 1336 1 3165 1140 t
+10 I f
+(N)4526 1140 w
+10 R f
+(. If)1 141 1 4593 1140 t
+10 I f
+(c)4759 1140 w
+10 R f
+(looks like)1 392 1 4828 1140 t
+(a continuation of an expression for)5 1434 1 540 1260 t
+10 I f
+(N)2008 1260 w
+10 R f
+(, it may be insulated from)5 1072 1 2075 1260 t
+10 I f
+(N)3181 1260 w
+10 R f
+(with a)1 255 1 3281 1260 t
+10 CW f
+(\\&)3569 1260 w
+10 R f
+(. If)1 149 1 3689 1260 t
+10 I f
+(c)3871 1260 w
+10 R f
+(is not speci\256ed, the)3 796 1 3948 1260 t
+10 S1 f
+(_)4777 1260 w
+10 R f
+(\(baseline)4860 1260 w
+(rule\) is used \(underline character in)5 1435 1 540 1380 t
+10 I f
+(nroff)2004 1380 w
+10 R f
+(\). If)1 178 1 2199 1380 t
+10 I f
+(N)2406 1380 w
+10 R f
+( motion of size)3 612(is negative, a backward horizontal)4 1382 2 2502 1380 t
+10 I f
+(N)4526 1380 w
+10 R f
+(is made before)2 597 1 4623 1380 t
+( space resulting from)3 861( Any)1 229(drawing the string.)2 766 3 540 1500 t
+10 I f
+(N)2428 1500 w
+10 R f
+(/\(size of)1 331 1 2495 1500 t
+10 I f
+(c)2858 1500 w
+10 R f
+( end\) of)2 322(\) having a remainder is put at the beginning \(left)9 1996 2 2902 1500 t
+( If)1 121(the string.)1 405 2 540 1620 t
+10 I f
+(N)1097 1620 w
+10 R f
+(is less than the width of)5 977 1 1195 1620 t
+10 I f
+(c)2203 1620 w
+10 R f
+(, a single)2 370 1 2247 1620 t
+10 I f
+(c)2648 1620 w
+10 R f
+(is centered on a distance)4 999 1 2723 1620 t
+10 I f
+(N)3753 1620 w
+10 R f
+( the case of characters that are)6 1236(. In)1 164 2 3820 1620 t
+(designed to be connected, such as baseline-rule)6 1947 1 540 1740 t
+10 S1 f
+(_)2512 1740 w
+10 R f
+(, under-rule)1 475 1 2578 1740 t
+10 S f
+(_)3078 1740 w
+10 R f
+(, and root-en)2 527 1 3144 1740 t
+10 S f
+(`)3696 1740 w
+10 R f
+(, the remainder space is covered by)6 1458 1 3762 1740 t
+( an example, a macro to underscore a string can be written)11 2327(overlapping. As)1 663 2 540 1860 t
+10 CW f
+(.de us)1 360 1 690 2040 t
+(\\\\$1\\ l '|0\\\(ul')2 872 1 690 2160 t
+(..)690 2280 w
+10 R f
+(or one to draw a box around a string)8 1447 1 540 2460 t
+10 CW f
+(.de bx)1 360 1 690 2640 t
+(\\\(br\\|\\\\$1\\|\\\(br\\v'-\\\\n\(.sp'\\l'|0\\\(ul'\\v'\\\\n\(.sp'\\l'|0\\\(ul')690 2760 w
+(..)690 2880 w
+10 R f
+(such that)1 358 1 540 3060 t
+10 CW f
+(.us "underlined words")2 1320 1 690 3240 t
+10 R f
+(and)540 3420 w
+10 CW f
+(.bx "words in a box")4 1200 1 690 3600 t
+10 R f
+(yield underlined words)2 921 1 540 3780 t
+10 S f
+(_ _____________)1 696 1 765 3780 t
+10 R f
+(and)1486 3780 w
+10 S f
+(\347)1655 3780 w
+10 R f
+(words in a box)3 591 1 1671 3780 t
+10 S f
+(\347)2278 3780 w
+(_ ____________)1 623 1 1655 3680 t
+(_ ____________)1 623 1 1655 3780 t
+10 R f
+(.)2303 3780 w
+(The function)1 527 1 540 3960 t
+10 CW f
+(\\L')1106 3960 w
+10 I f
+(Nc)1286 3960 w
+10 CW f
+(')1397 3960 w
+10 R f
+( consisting of the \(optional\) character)5 1569(draws a vertical line)3 848 2 1496 3960 t
+10 I f
+(c)3953 3960 w
+10 R f
+( em)1 138(stacked vertically apart 1)3 1045 2 4037 3960 t
+( in)1 105(\(1 line)1 249 2 540 4080 t
+10 I f
+(nroff)921 4080 w
+10 R f
+( default charac-)2 621( The)1 206( the \256rst two characters overlapped, if necessary, to form a continuous line.)12 3014(\), with)1 263 4 1116 4080 t
+(ter is the)2 358 1 540 4200 t
+10 I f
+(box rule)1 337 1 930 4200 t
+10 S f
+(\347)1315 4200 w
+10 R f
+(\()1363 4200 w
+10 CW f
+(\\\(br)1396 4200 w
+10 R f
+( the)1 155(\); the other suitable character is)5 1290 2 1636 4200 t
+10 I f
+(bold vertical)1 516 1 3114 4200 t
+10 S f
+(\357)3679 4200 w
+10 R f
+(\()3777 4200 w
+10 CW f
+(\\\(bv)3810 4200 w
+10 R f
+( line is begun without)4 899(\). The)1 271 2 4050 4200 t
+( positive)1 349( A)1 129(any initial motion relative to the current baseline.)7 2019 3 540 4320 t
+10 I f
+(N)3069 4320 w
+10 R f
+( downward and a negative)4 1071(speci\256es a line drawn)3 883 2 3168 4320 t
+10 I f
+(N)5153 4320 w
+10 R f
+( the line is drawn no compensating motions are made; the instantaneous base-)12 3179( After)1 266(speci\256es a line drawn upward.)4 1235 3 540 4440 t
+(line is at the end of the line.)7 1110 1 540 4560 t
+( zero-)1 237( The)1 213(The horizontal and vertical line drawing functions may be used in combination to produce large boxes.)15 4230 3 540 4740 t
+(width)540 4860 w
+10 I f
+(box-rule)805 4860 w
+10 R f
+(and the)1 302 1 1180 4860 t
+10 S1 f
+()1518 4860 w
+1518 4860 m
+75 build_12
+1593 4860 m
+10 R f
+(-em wide)1 385 1 1593 4860 t
+10 I f
+(under-rule)2014 4860 w
+10 R f
+(were designed to form corners when using 1-em vertical spacings.)9 2743 1 2477 4860 t
+(For example the macro)3 923 1 540 4980 t
+9 CW f
+(.de eb)1 324 1 675 5150 t
+( for next automatic baseline spacing)5 1944( \\"compensate)1 864(.sp \2611)1 324 3 675 5260 t
+( possibly overflowing word buffer)4 1782(.nf \\"avoid)1 918 2 675 5370 t
+( box)1 216(\\h'-.5n'\\L'|\\\\nau\2611'\\l'\\\\n\(.lu+1n\\\(ul'\\L'-|\\\\nau+1'\\l'|0u-.5n\\\(ul' \\"draw)1 3996 2 675 5480 t
+(.fi)675 5590 w
+(..)675 5700 w
+10 R f
+( register)1 344(will draw a box around some text whose beginning vertical place was saved in number)14 3732 2 540 5880 t
+10 I f
+(a)4661 5880 w
+10 R f
+(\(e.g., using)1 464 1 4756 5880 t
+10 CW f
+(.mk a)1 300 1 540 6000 t
+10 R f
+(\) as was done for this paragraph.)6 1299 1 840 6000 t
+10 S f
+(\347)515 6020 w
+(\347)515 5921 w
+(\347)515 5821 w
+(\347)515 5721 w
+(\347)515 5621 w
+(\347)515 5521 w
+(\347)515 5421 w
+(\347)515 5321 w
+(\347)515 5221 w
+(\347)515 5121 w
+(\347)515 5021 w
+(\347)515 4921 w
+(\347)515 4821 w
+(\347)515 4721 w
+(_ ______________________________________________________________________________________________)1 4730 1 515 4621 t
+(\347)5245 4721 w
+(\347)5245 4820 w
+(\347)5245 4920 w
+(\347)5245 5020 w
+(\347)5245 5120 w
+(\347)5245 5220 w
+(\347)5245 5320 w
+(\347)5245 5420 w
+(\347)5245 5520 w
+(\347)5245 5620 w
+(\347)5245 5720 w
+(\347)5245 5820 w
+(\347)5245 5920 w
+( ______________________________________________________________________________________________)1 4680(\347 _)1 -4680 2 5245 6020 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 16 16
+%%Page: 17 17
+/saveobj save def
+mark
+17 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(17)5108 600 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 12.5  , HEADING = Graphics]
+10 B f
+(12.5 Graphics)1 620 1 540 960 t
+10 R f
+(The function)1 517 1 540 1140 t
+10 CW f
+(\\D')1086 1140 w
+10 I f
+(c)1266 1140 w
+10 S f
+(\274)1310 1140 w
+10 CW f
+(')1410 1140 w
+10 R f
+(draws a graphic object of type)5 1225 1 1499 1140 t
+10 I f
+(c)2753 1140 w
+10 R f
+( generally)1 401(according to a sequence of parameters, which are)7 1993 2 2826 1140 t
+(pairs of numbers.)2 696 1 540 1260 t
+10 CW f
+(\\D'l)690 1440 w
+10 I f
+(dh dv)1 270 1 990 1440 t
+10 CW f
+(')1260 1440 w
+10 R f
+(draw line from current position by)5 1373 1 2032 1440 t
+10 I f
+(dh)3430 1440 w
+10 R f
+(,)3538 1440 w
+10 I f
+(dv)3604 1440 w
+10 CW f
+(\\D'c)690 1560 w
+10 I f
+(d)990 1560 w
+10 CW f
+(')1040 1560 w
+10 R f
+(draw circle of diameter)3 927 1 2032 1560 t
+10 I f
+(d)2984 1560 w
+10 R f
+(with left side at current position)5 1274 1 3059 1560 t
+10 CW f
+(\\D'e)690 1680 w
+10 I f
+(d)990 1680 w
+7 R f
+(1)1051 1700 w
+10 I f
+(d)1102 1680 w
+7 R f
+(2)1163 1700 w
+10 CW f
+(')1206 1680 w
+10 R f
+(draw ellipse of diameters)3 1006 1 2032 1680 t
+10 I f
+(d)3063 1680 w
+7 R f
+(1)3124 1700 w
+10 R f
+(and)3192 1680 w
+10 I f
+(d)3361 1680 w
+7 R f
+(2)3422 1700 w
+10 CW f
+(\\D'a)690 1800 w
+10 I f
+(dh)990 1800 w
+7 R f
+(1)1101 1820 w
+10 I f
+(dv)1220 1800 w
+7 R f
+(1)1325 1820 w
+10 I f
+(dh)1444 1800 w
+7 R f
+(2)1555 1820 w
+10 I f
+(dv)1674 1800 w
+7 R f
+(2)1779 1820 w
+10 CW f
+(')1822 1800 w
+10 R f
+(draw arc from current position to)5 1322 1 2032 1800 t
+10 I f
+(dh)3379 1800 w
+7 R f
+(1)3490 1820 w
+10 S f
+(+)3549 1800 w
+10 I f
+(dh)3620 1800 w
+7 R f
+(2)3731 1820 w
+10 R f
+(,)3774 1800 w
+10 I f
+(dv)3824 1800 w
+7 R f
+(1)3929 1820 w
+10 S f
+(+)3988 1800 w
+10 I f
+(dv)4059 1800 w
+7 R f
+(2)4164 1820 w
+10 R f
+(,)4207 1800 w
+(with center at)2 543 1 2107 1920 t
+10 I f
+(dh)2675 1920 w
+7 R f
+(1)2786 1940 w
+10 R f
+(,)2837 1920 w
+10 I f
+(dv)2903 1920 w
+7 R f
+(1)3008 1940 w
+10 R f
+(from current position)2 849 1 3076 1920 t
+10 CW f
+(\\D'\304)690 2040 w
+10 I f
+(dh)990 2040 w
+7 R f
+(1)1101 2060 w
+10 I f
+(dv)1152 2040 w
+7 R f
+(1)1257 2060 w
+10 I f
+(dh)1308 2040 w
+7 R f
+(2)1419 2060 w
+10 I f
+(dv)1470 2040 w
+7 R f
+(2)1575 2060 w
+10 S f
+(\274)1618 2040 w
+10 CW f
+(')1718 2040 w
+10 R f
+(draw B-spline from current position by)5 1562 1 2032 2040 t
+10 I f
+(dh)3619 2040 w
+7 R f
+(1 ,)1 58 1 3730 2060 t
+10 I f
+(dv)3804 2040 w
+7 R f
+(1)3909 2060 w
+10 R f
+(,)3952 2040 w
+(then by)1 297 1 2107 2160 t
+10 I f
+(dh)2429 2160 w
+7 R f
+(2)2540 2180 w
+10 R f
+(,)2591 2160 w
+10 I f
+(dv)2624 2160 w
+7 R f
+(2)2729 2180 w
+10 R f
+(, then by)2 347 1 2772 2160 t
+10 I f
+(dh)3144 2160 w
+7 R f
+(2)3255 2180 w
+10 R f
+(,)3306 2160 w
+10 I f
+(dv)3339 2160 w
+7 R f
+(2)3444 2180 w
+10 R f
+(, then)1 222 1 3487 2160 t
+10 S f
+(\274)3734 2160 w
+10 R f
+(For example,)1 534 1 540 2340 t
+10 CW f
+(\\D'e0.2i 0.1i')1 840 1 1106 2340 t
+10 R f
+( ellipse)1 294(draws the)1 392 2 1978 2340 t
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% Version 3.3.2 drawing procedures for dpost. Automatically pulled in when
+% needed.
+%
+
+/inpath false def
+/savematrix matrix def
+
+/Dl {
+	inpath
+		{pop pop neg lineto}
+		{newpath neg moveto neg lineto stroke}
+	ifelse
+} bind def
+
+/De {
+	/y1 exch 2 div def
+	/x1 exch 2 div def
+	/savematrix savematrix currentmatrix def
+	neg exch x1 add exch translate
+	x1 y1 scale
+	0 0 1 0 360
+	inpath
+		{1 0 moveto arc savematrix setmatrix}
+		{newpath arc savematrix setmatrix stroke}
+	ifelse
+} bind def
+
+/Da {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arc}
+		{newpath arc stroke}
+	ifelse
+} bind def
+
+/DA {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arcn}
+		{newpath arcn stroke}
+	ifelse
+} bind def
+
+/Ds {
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	/y0 exch def
+	/x0 exch def
+	x0 5 x1 mul add 6 div
+	y0 5 y1 mul add -6 div
+	x2 5 x1 mul add 6 div
+	y2 5 y1 mul add -6 div
+	x1 x2 add 2 div
+	y1 y2 add -2 div
+	inpath
+		{curveto}
+		{newpath x0 x1 add 2 div y0 y1 add -2 div moveto curveto stroke}
+	ifelse
+} bind def
+%%EndGlobal
+/saveobj save def
+mark
+10 R f
+2697 2340 144 72 De
+(, and)1 202 1 2857 2340 t
+10 CW f
+(\\D'l.2i -.1i'\\D'l.1i .1i')2 1500 1 3092 2340 t
+10 R f
+(the line)1 305 1 4625 2340 t
+5107 2268 4963 2340 Dl
+5179 2340 5107 2268 Dl
+(.)5195 2340 w
+(A)540 2460 w
+10 CW f
+(\\D)637 2460 w
+10 R f
+(with an unknown)2 694 1 782 2460 t
+10 I f
+(c)1501 2460 w
+10 R f
+(is processed and copied through to the output for unspeci\256ed interpretation.)10 3021 1 1570 2460 t
+( of ems; vertical numbers \(second, fourth, etc.\))7 1945(Numbers taken as horizontal \(\256rst, third, etc.\) have default scaling)9 2735 2 540 2640 t
+(have default scaling of)3 921 1 540 2760 t
+10 I f
+(V)1491 2760 w
+10 R f
+( object has been drawn is at its end; for circles and)11 2059( position after a graphical)4 1040( The)1 210(s \(\2471.3\).)1 335 4 1576 2760 t
+(ellipses, the ``end'' is at the right side.)7 1534 1 540 2880 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 13.  , HEADING = HYPHENATION]
+10 B f
+(13. HYPHENATION)1 931 1 540 3120 t
+10 R f
+( with)1 213( switched on)2 523( When)1 297(Automatic hyphenation may be switched off and on.)7 2160 4 540 3300 t
+10 CW f
+(hy)3768 3300 w
+10 R f
+( A)1 132(, several variants may be set.)5 1200 2 3888 3300 t
+10 I f
+(hyphenation indicator)1 904 1 540 3420 t
+10 R f
+( or may be)3 475(character may be embedded in a word to specify desired hyphenation points,)11 3258 2 1487 3420 t
+( addition, the user may specify a small list of exception words.)11 2500( In)1 133(prepended to suppress hyphenation.)3 1431 3 540 3540 t
+( are candi-)2 432(Only words that consist of a central alphabetic string surrounded by \(usually null\) non-alphabetic strings)14 4248 2 540 3720 t
+( \(minus\), em-dashes \()3 871( that contain hyphens)3 861( Words)1 319(dates for automatic hyphenation.)3 1318 4 540 3840 t
+10 CW f
+(\\\(em)3909 3840 w
+10 R f
+(\), or hyphenation indicator)3 1071 1 4149 3840 t
+(characters are always subject to splitting after those characters, whether automatic hyphenation is on or off.)15 4287 1 540 3960 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 4140 t
+10 CW f
+(.nh)540 4320 w
+10 R f
+( E)1 911(hyphenate \261)1 950 2 1440 4320 t
+(Automatic hyphenation is turned off.)4 1479 1 1116 4464 t
+10 CW f
+(.hy)540 4644 w
+10 I f
+(N)770 4644 w
+10 R f
+(on,)1440 4644 w
+10 I f
+(N)1590 4644 w
+10 S f
+(=)1681 4644 w
+10 R f
+(1 on,)1 713 1 1752 4644 t
+10 I f
+(N)2490 4644 w
+10 S f
+(=)2581 4644 w
+10 R f
+(1 E)1 649 1 2652 4644 t
+(Automatic hyphenation is turned on for)5 1579 1 1116 4788 t
+10 I f
+(N)2720 4788 w
+10 S f
+(\263)2811 4788 w
+10 R f
+(1, or off for)3 468 1 2882 4788 t
+10 I f
+(N)3376 4788 w
+10 S f
+(=)3467 4788 w
+10 R f
+(0. If)1 192 1 3538 4788 t
+10 I f
+(N)3756 4788 w
+10 S f
+(=)3847 4788 w
+10 R f
+(2, last lines \(ones that will cause)6 1302 1 3918 4788 t
+( For)1 190(a trap\) are not hyphenated.)4 1070 2 1116 4908 t
+10 I f
+(N)2402 4908 w
+10 S f
+(=)2493 4908 w
+10 R f
+(4 and 8, the last and \256rst two characters respectively of a word are)13 2656 1 2564 4908 t
+( values are additive; i.e.,)4 973( These)1 288(not split off.)2 492 3 1116 5028 t
+10 I f
+(N)2894 5028 w
+10 S f
+(=)2985 5028 w
+10 R f
+(14 will invoke all three restrictions.)5 1421 1 3056 5028 t
+10 CW f
+(.hc)540 5208 w
+10 I f
+(c)770 5208 w
+10 CW f
+(\\% \\%)1 1020 1 1440 5208 t
+10 R f
+(E)3240 5208 w
+(Hyphenation indicator character is set to)5 1641 1 1116 5352 t
+10 I f
+(c)2788 5352 w
+10 R f
+(or to the default)3 653 1 2863 5352 t
+10 CW f
+(\\%)3547 5352 w
+10 R f
+( indicator does not appear in the)6 1317(. The)1 236 2 3667 5352 t
+(output.)1116 5472 w
+10 CW f
+(.hw)540 5652 w
+10 I f
+(word)770 5652 w
+10 S f
+(\274)1026 5652 w
+10 R f
+(ignored \261)1 950 1 2340 5652 t
+( of a word with terminal)5 983( Versions)1 408(Specify hyphenation points in words with embedded minus signs.)8 2646 3 1116 5796 t
+10 I f
+(s)5181 5796 w
+10 R f
+(are implied, i.e.,)2 683 1 1116 5916 t
+10 CW f
+(dig-it)1840 5916 w
+10 R f
+(implies)2241 5916 w
+10 CW f
+(dig-its)2577 5916 w
+10 R f
+( list is examined initially and after each suf\256x)8 1954(. This)1 269 2 2997 5916 t
+( 128 characters.)2 628( \320 about)2 354( space available is small)4 965(stripping. The)1 586 4 1116 6036 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 14.  , HEADING = THREE-PART TITLES]
+10 B f
+( TITLES)1 388(14. THREE-PART)1 831 2 540 6276 t
+10 R f
+(The titling function)2 786 1 540 6456 t
+10 CW f
+(tl)1355 6456 w
+10 R f
+( center, and right of a line with a)8 1340(provides for automatic placement of three \256elds at the left,)9 2376 2 1504 6456 t
+(title length speci\256able with)3 1089 1 540 6576 t
+10 CW f
+(lt)1655 6576 w
+10 R f
+(.)1775 6576 w
+10 CW f
+(tl)1851 6576 w
+10 R f
+( the normal text collecting process.)5 1398(may be used anywhere, and is independent of)7 1825 2 1997 6576 t
+(A common use is in header and footer macros.)8 1860 1 540 6696 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 17 17
+%%Page: 18 18
+/saveobj save def
+mark
+18 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(18)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 960 t
+10 CW f
+(.tl ')1 300 1 540 1140 t
+10 I f
+(left)840 1140 w
+10 CW f
+(')968 1140 w
+10 I f
+(center)1028 1140 w
+10 CW f
+(')1277 1140 w
+10 I f
+(right)1337 1140 w
+10 CW f
+(')1532 1140 w
+10 R f
+(\261 \261)1 950 1 2340 1140 t
+(The strings)1 448 1 1116 1284 t
+10 I f
+(left)1590 1284 w
+10 R f
+(,)1718 1284 w
+10 I f
+(center)1769 1284 w
+10 R f
+(, and)1 195 1 2018 1284 t
+10 I f
+(right)2239 1284 w
+10 R f
+( right-adjusted in the cur-)4 1023(are respectively left-adjusted, centered, and)4 1737 2 2460 1284 t
+( the page-number)2 706( If)1 120( and overlapping is permitted.)4 1212( of the strings may be empty,)6 1193( Any)1 227(rent title length.)2 646 6 1116 1404 t
+(character \(initially)1 736 1 1116 1524 t
+10 CW f
+(%)1879 1524 w
+10 R f
+( it is replaced by the current page number in the)10 1937(\) is found within any of the \256elds)7 1344 2 1939 1524 t
+(format assigned to register)3 1062 1 1116 1644 t
+10 CW f
+(%)2203 1644 w
+10 R f
+( character may be used in place of)7 1359(. Any)1 247 2 2263 1644 t
+10 CW f
+(')3894 1644 w
+10 R f
+(as the string delimiter.)3 894 1 3979 1644 t
+10 CW f
+(.pc)540 1824 w
+10 I f
+(c)770 1824 w
+10 CW f
+(%)1440 1824 w
+10 R f
+(off \261)1 950 1 2340 1824 t
+(The page number character is set to)6 1418 1 1116 1968 t
+10 I f
+(c)2559 1968 w
+10 R f
+( page number register remains)4 1208( The)1 205(, or removed.)2 532 3 2603 1968 t
+10 CW f
+(%)4573 1968 w
+10 R f
+(.)4633 1968 w
+10 CW f
+(.lt)540 2148 w
+10 S f
+(\261)770 2148 w
+10 I f
+(N)833 2148 w
+10 R f
+( E,)1 642( previous)1 1025(6.5 in)1 219 3 1440 2148 t
+10 B f
+(m)3326 2148 w
+10 R f
+(Length of title is set to)5 913 1 1116 2292 t
+10 S f
+(\261)2056 2292 w
+10 I f
+(N)2119 2292 w
+10 R f
+( do not apply)3 534( Indents)1 346( line length and the title length are independent.)8 1922(. The)1 232 4 2186 2292 t
+(to titles; page offsets do.)4 980 1 1116 2412 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 15.  , HEADING = OUTPUT LINE NUMBERING]
+10 B f
+( LINE NUMBERING)2 928(15. OUTPUT)1 592 2 540 2652 t
+10 R f
+( requested with)2 616(Automatic sequence numbering of output lines may be)7 2203 2 740 2832 t
+10 CW f
+(nm)3587 2832 w
+10 R f
+( in effect, a three-digit, arabic)5 1197(. When)1 316 2 3707 2832 t
+( text lines are thus offset by four digit-spaces,)8 1862( The)1 210( prepended to output text lines.)5 1263(number plus a digit-space is)4 1145 4 740 2952 t
+( may be desired to keep the right margin aligned)9 1951( otherwise retain their line length; a reduction in line length)10 2385(3 and)1 244 3 640 3072 t
+( lines, other vertical spaces, and lines generated by)8 2063( Blank)1 294(with an earlier margin.)3 924 3 740 3192 t
+10 CW f
+(tl)4051 3192 w
+10 R f
+( Num-)1 287( numbered.)1 453(are not)1 279 3 4201 3192 t
+(bering can be temporarily suspended with)5 1687 1 740 3312 t
+10 CW f
+(nn)2455 3312 w
+10 R f
+(, or with an)3 464 1 2575 3312 t
+10 CW f
+(.nm)3067 3312 w
+10 R f
+(followed by a later)3 760 1 3275 3312 t
+10 CW f
+(.nm +0)1 360 1 4064 3312 t
+10 R f
+( addition, a line)3 634(. In)1 162 2 4424 3312 t
+( indent)1 278(6 number)1 405 2 640 3432 t
+10 I f
+(I)1351 3432 w
+10 R f
+(, and the number-text separation)4 1301 1 1384 3432 t
+10 I f
+(S)2712 3432 w
+10 R f
+( it can be speci\256ed)4 751( Further,)1 371(may be speci\256ed in digit-spaces.)4 1309 3 2789 3432 t
+(that only those line numbers that are multiples of some number)10 2596 1 740 3552 t
+10 I f
+(M)3368 3552 w
+10 R f
+( appear as)2 414(are to be printed \(the others will)6 1323 2 3483 3552 t
+(blank number \256elds\).)2 852 1 740 3672 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 3852 t
+10 CW f
+(.nm)540 4032 w
+10 S f
+(\261)770 4032 w
+10 I f
+(N M S I)3 383 1 833 4032 t
+10 R f
+(off E)1 961 1 2340 4032 t
+( If)1 118(Line number mode.)2 789 2 1116 4176 t
+10 S f
+(\261)2050 4176 w
+10 I f
+(N)2113 4176 w
+10 R f
+( on, and the next output line numbered is)8 1659(is given, line numbering is turned)5 1354 2 2207 4176 t
+(numbered)1116 4296 w
+10 S f
+(\261)1546 4296 w
+10 I f
+(N)1609 4296 w
+10 R f
+( values are)2 436(. Default)1 379 2 1676 4296 t
+10 I f
+(M)2521 4296 w
+10 S f
+(=)2628 4296 w
+10 R f
+(1,)2699 4296 w
+10 I f
+(S)2804 4296 w
+10 S f
+(=)2878 4296 w
+10 R f
+(1, and)1 249 1 2949 4296 t
+10 I f
+(I)3228 4296 w
+10 S f
+(=)3285 4296 w
+10 R f
+( corresponding to missing argu-)4 1291(0. Parameters)1 573 2 3356 4296 t
+( the absence of all arguments,)5 1191( In)1 134( argument is considered missing.)4 1317(ments are unaffected; a non-numeric)4 1462 4 1116 4416 t
+( preserved for possible further use in number register)8 2149(numbering is turned off; the next line number is)8 1955 2 1116 4536 t
+10 CW f
+(ln)1116 4656 w
+10 R f
+(.)1236 4656 w
+10 CW f
+(.nn)540 4836 w
+10 I f
+(N)770 4836 w
+10 R f
+(\261)1440 4836 w
+10 I f
+(N)2340 4836 w
+10 S f
+(=)2431 4836 w
+10 R f
+(1 E)1 799 1 2502 4836 t
+(The next)1 352 1 1116 4980 t
+10 I f
+(N)1493 4980 w
+10 R f
+(text output lines are not numbered.)5 1393 1 1585 4980 t
+( an example, the paragraph portions of this section are numbered with)11 2888(9 As)1 211 2 640 5160 t
+10 I f
+(M=)3773 5160 w
+10 R f
+(3:)3940 5160 w
+10 CW f
+(.nm 1 3)2 420 1 4052 5160 t
+10 R f
+(was placed at the)3 714 1 4506 5160 t
+(beginning;)740 5280 w
+10 CW f
+(.nm)1194 5280 w
+10 R f
+(was placed at the end of the \256rst paragraph; and)9 1918 1 1400 5280 t
+10 CW f
+(.nm +0)1 360 1 3344 5280 t
+10 R f
+(was placed in front of this paragraph;)6 1491 1 3729 5280 t
+(and)740 5400 w
+10 CW f
+(.nm)920 5400 w
+10 R f
+( lengths were also changed \(by)5 1288( Line)1 244(\256nally placed at the end.)4 1023 3 1136 5400 t
+10 CW f
+(\\w'0000'u)3727 5400 w
+10 R f
+( right side)2 424(\) to keep the)3 529 2 4267 5400 t
+( example is)2 455(12 aligned. Another)2 846 2 590 5520 t
+10 CW f
+(.nm +5 5 x 3)4 720 1 1916 5520 t
+10 R f
+(, which turns on numbering with the line number of the next line)12 2584 1 2636 5520 t
+(to be 5 greater than the last numbered line, with)9 1908 1 740 5640 t
+10 I f
+(M)2673 5640 w
+10 S f
+(=)2780 5640 w
+10 R f
+(5, with spacing)2 608 1 2851 5640 t
+10 I f
+(S)3484 5640 w
+10 R f
+(untouched, and with the indent)4 1235 1 3559 5640 t
+10 I f
+(I)4819 5640 w
+10 R f
+(set to 3.)2 314 1 4877 5640 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 16.  , HEADING = CONDITIONAL ACCEPTANCE OF INPUT]
+10 B f
+( ACCEPTANCE OF INPUT)3 1219(16. CONDITIONAL)1 903 2 540 5880 t
+10 R f
+(In the following,)2 681 1 540 6060 t
+10 I f
+(c)1252 6060 w
+10 R f
+(is a one-character built-in)3 1040 1 1327 6060 t
+10 I f
+(condition)2398 6060 w
+10 R f
+(name,)2807 6060 w
+10 CW f
+(!)3079 6060 w
+10 R f
+(signi\256es)3196 6060 w
+10 I f
+(not)3562 6060 w
+10 R f
+(,)3690 6060 w
+10 I f
+(N)3747 6060 w
+10 R f
+(is a numerical expression,)3 1058 1 3846 6060 t
+10 I f
+(string1)4936 6060 w
+10 R f
+(and)540 6180 w
+10 I f
+(string2)711 6180 w
+10 R f
+( by any non-blank, non-numeric character not in the strings, and)10 2572(are strings delimited)2 820 2 1022 6180 t
+10 I f
+(anything)4440 6180 w
+10 R f
+(represents)4816 6180 w
+(what is conditionally accepted.)3 1237 1 540 6300 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 6480 t
+10 CW f
+(.if)540 6660 w
+10 I f
+(c anything)1 444 1 770 6660 t
+10 R f
+(\261 \261)1 950 1 2340 6660 t
+(If condition)1 469 1 1116 6804 t
+10 I f
+(c)1610 6804 w
+10 R f
+(true, accept)1 459 1 1679 6804 t
+10 I f
+(anything)2163 6804 w
+10 R f
+(as input; in multi-line case use)5 1219 1 2538 6804 t
+10 CW f
+(\\{)3782 6804 w
+10 I f
+(anything)3902 6804 w
+10 CW f
+(\\})4268 6804 w
+10 R f
+(.)4388 6804 w
+10 CW f
+(.if !)1 300 1 540 6984 t
+10 I f
+(c anything)1 444 1 840 6984 t
+10 R f
+(\261 \261)1 950 1 2340 6984 t
+(If condition)1 469 1 1116 7128 t
+10 I f
+(c)1610 7128 w
+10 R f
+(false, accept)1 492 1 1679 7128 t
+10 I f
+(anything)2196 7128 w
+10 R f
+(.)2546 7128 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 18 18
+%%Page: 19 19
+/saveobj save def
+mark
+19 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(19)5108 600 w
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 960 t
+10 CW f
+(.if)540 1140 w
+10 I f
+(N anything)1 467 1 770 1140 t
+10 R f
+(\261)2340 1140 w
+10 B f
+(u)3240 1140 w
+10 R f
+(If expression)1 518 1 1116 1284 t
+10 I f
+(N)1659 1284 w
+10 S f
+(>)1751 1284 w
+10 R f
+(0, accept)1 354 1 1831 1284 t
+10 I f
+(anything)2210 1284 w
+10 R f
+(.)2560 1284 w
+10 CW f
+(.if !)1 300 1 540 1464 t
+10 I f
+(N anything)1 467 1 840 1464 t
+10 R f
+(\261)2340 1464 w
+10 B f
+(u)3240 1464 w
+10 R f
+(If expression)1 518 1 1116 1608 t
+10 I f
+(N)1659 1608 w
+10 S f
+(\243)1751 1608 w
+10 R f
+(0, accept)1 354 1 1831 1608 t
+10 I f
+(anything)2210 1608 w
+10 R f
+(.)2560 1608 w
+10 CW f
+(.if ')1 300 1 540 1788 t
+10 I f
+(string1)840 1788 w
+10 CW f
+(')1124 1788 w
+10 I f
+(string2)1184 1788 w
+10 CW f
+(')1468 1788 w
+10 I f
+(anything)1578 1788 w
+10 R f
+(\261 \261)1 950 1 2340 1788 t
+(If)1116 1932 w
+10 I f
+(string1)1207 1932 w
+10 R f
+(identical to)1 447 1 1516 1932 t
+10 I f
+(string2)1988 1932 w
+10 R f
+(, accept)1 304 1 2272 1932 t
+10 I f
+(anything)2601 1932 w
+10 R f
+(.)2951 1932 w
+10 CW f
+(.if !')1 360 1 540 2112 t
+10 I f
+(string1)900 2112 w
+10 CW f
+(')1184 2112 w
+10 I f
+(string2)1244 2112 w
+10 CW f
+(')1528 2112 w
+10 I f
+(anything)1638 2112 w
+10 R f
+(\261 \261)1 950 1 2340 2112 t
+(If)1116 2256 w
+10 I f
+(string1)1207 2256 w
+10 R f
+(not identical to)2 600 1 1516 2256 t
+10 I f
+(string2)2141 2256 w
+10 R f
+(, accept)1 304 1 2425 2256 t
+10 I f
+(anything)2754 2256 w
+10 R f
+(.)3104 2256 w
+10 CW f
+(.ie)540 2436 w
+10 I f
+(c anything)1 444 1 770 2436 t
+10 R f
+(\261)2340 2436 w
+10 B f
+(u)3240 2436 w
+10 R f
+(If portion of if-else; all of the forms for)8 1569 1 1116 2580 t
+10 CW f
+(if)2710 2580 w
+10 R f
+(above are valid.)2 634 1 2855 2580 t
+10 CW f
+(.el)540 2760 w
+10 I f
+(anything)770 2760 w
+10 R f
+(\261 \261)1 950 1 2340 2760 t
+(Else portion of if-else.)3 893 1 1116 2904 t
+(The built-in condition names are:)4 1332 1 540 3084 t
+10 S f
+(_ ____________________________________)1 1804 1 1978 3164 t
+10 R f
+(Condition)2028 3284 w
+(Name)2109 3404 w
+(True If)1 279 1 3016 3344 t
+10 S f
+(_ ____________________________________)1 1804 1 1978 3424 t
+10 CW f
+(o)2198 3564 w
+10 R f
+(Current page number is odd)4 1115 1 2579 3564 t
+10 CW f
+(e)2198 3684 w
+10 R f
+(Current page number is even)4 1153 1 2579 3684 t
+10 CW f
+(t)2198 3804 w
+10 R f
+(Formatter is)1 486 1 2579 3804 t
+10 I f
+(troff)3090 3804 w
+10 CW f
+(n)2198 3924 w
+10 R f
+(Formatter is)1 486 1 2579 3924 t
+10 I f
+(nroff)3090 3924 w
+10 S f
+( \347)1 -1804(_ ____________________________________)1 1804 2 1978 3944 t
+(\347)1978 3864 w
+(\347)1978 3764 w
+(\347)1978 3664 w
+(\347)1978 3564 w
+(\347)1978 3464 w
+(\347)1978 3364 w
+(\347)1978 3264 w
+(\347)3782 3944 w
+(\347)3782 3864 w
+(\347)3782 3764 w
+(\347)3782 3664 w
+(\347)3782 3564 w
+(\347)3782 3464 w
+(\347)3782 3364 w
+(\347)3782 3264 w
+10 R f
+(If the condition)2 638 1 540 4124 t
+10 I f
+(c)1214 4124 w
+10 R f
+(is true, or if the number)5 998 1 1294 4124 t
+10 I f
+(N)2328 4124 w
+10 R f
+( than zero, or if the strings compare identically \(including)9 2410(is greater)1 379 2 2431 4124 t
+(motions and character size and font\),)5 1489 1 540 4244 t
+10 I f
+(anything)2056 4244 w
+10 R f
+( a)1 71( If)1 118(is accepted as input.)3 810 3 2433 4244 t
+10 CW f
+(!)3459 4244 w
+10 R f
+(precedes the condition, number, or string)5 1649 1 3571 4244 t
+(comparison, the sense of the acceptance is reversed.)7 2074 1 540 4364 t
+(Any spaces between the condition and the beginning of)8 2221 1 540 4544 t
+10 I f
+(anything)2787 4544 w
+10 R f
+( The)1 206(are skipped over.)2 686 2 3163 4544 t
+10 I f
+(anything)4082 4544 w
+10 R f
+(can be either a sin-)4 761 1 4459 4544 t
+( the multi-line case, the \256rst line must begin)8 1798( In)1 138( number of input lines.)4 928(gle input line \(text, macro, or whatever\) or a)8 1816 4 540 4664 t
+(with a left delimiter)3 791 1 540 4784 t
+10 CW f
+(\\{)1356 4784 w
+10 R f
+(and the last line must end with a right delimiter)9 1891 1 1501 4784 t
+10 CW f
+(\\})3417 4784 w
+10 R f
+(.)3537 4784 w
+(The request)1 470 1 540 4964 t
+10 CW f
+(ie)1037 4964 w
+10 R f
+(\(if-else\) is identical to)3 885 1 1184 4964 t
+10 CW f
+(if)2096 4964 w
+10 R f
+( subsequent and match-)3 949( A)1 125(except that the acceptance state is remembered.)6 1903 3 2243 4964 t
+(ing)540 5084 w
+10 CW f
+(el)693 5084 w
+10 R f
+(\(else\) request then uses the reverse sense of that state.)9 2144 1 838 5084 t
+10 CW f
+(ie)3032 5084 w
+10 R f
+(-)3152 5084 w
+10 CW f
+(el)3185 5084 w
+10 R f
+(pairs may be nested.)3 815 1 3330 5084 t
+(Some examples are:)2 804 1 540 5264 t
+10 CW f
+(.if e .tl 'Even Page %''')5 1500 1 690 5444 t
+10 R f
+(which outputs a title if the page number is even; and)10 2092 1 540 5624 t
+10 CW f
+(.ie \\n%>1 \\{\\)2 780 1 690 5804 t
+( 0.5i)1 300(' sp)1 408 2 690 5924 t
+( 'Page %''')2 660(. tl)1 408 2 690 6044 t
+( |1.2i \\})2 540(' sp)1 408 2 690 6164 t
+(.el .sp |2.5i)2 780 1 690 6284 t
+10 R f
+(which treats page 1 differently from other pages.)7 1945 1 540 6464 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 19 19
+%%Page: 20 20
+/saveobj save def
+mark
+20 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(20)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 17.  , HEADING = ENVIRONMENT SWITCHING]
+10 B f
+( SWITCHING)1 626(17. ENVIRONMENT)1 947 2 540 960 t
+10 R f
+(A number of the parameters that control the text processing are gathered together into an)14 3570 1 540 1140 t
+10 I f
+(environment)4137 1140 w
+10 R f
+( can be)2 288(, which)1 296 2 4636 1140 t
+( environment parameters are those associated with requests noting E in their)11 3141( The)1 215(switched by the user.)3 873 3 540 1260 t
+10 I f
+(Notes)4803 1260 w
+10 R f
+(col-)5065 1260 w
+( else is global; examples are)5 1133( Everything)1 496( lines and words are in the environment.)7 1617(umn; in addition, partially collected)4 1434 4 540 1380 t
+( All)1 193( parameters, number registers, and macro and string de\256nitions.)8 2663(page-oriented parameters, diversion-oriented)2 1824 3 540 1500 t
+(environments are initialized with default parameter values.)6 2348 1 540 1620 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 1800 t
+10 CW f
+(.ev)540 1980 w
+10 I f
+(N N)1 737 1 770 1980 t
+10 S f
+(=)1531 1980 w
+10 R f
+( \261)1 606(0 previous)1 1082 2 1602 1980 t
+(Environment switched to environment 0)4 1682 1 1116 2124 t
+10 S f
+(\243)2814 2124 w
+10 I f
+(N)2885 2124 w
+10 S f
+(\243)2976 2124 w
+10 R f
+( is done in push-down fashion so that)7 1624(2. Switching)1 549 2 3047 2124 t
+(restoring a previous environment)3 1368 1 1116 2244 t
+10 I f
+(must)2523 2244 w
+10 R f
+(be done with)2 544 1 2751 2244 t
+10 CW f
+(.ev)3334 2244 w
+10 R f
+( that)1 189( Note)1 258(rather than speci\256c reference.)3 1220 3 3553 2244 t
+(what is pushed down and restored is the environment)8 2125 1 1116 2364 t
+10 I f
+(number,)3266 2364 w
+10 R f
+(not its contents.)2 631 1 3621 2364 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 18.  , HEADING = INSERTIONS FROM THE STANDARD INPUT]
+10 B f
+( FROM THE STANDARD INPUT)4 1483(18. INSERTIONS)1 793 2 540 2604 t
+10 R f
+( temporarily switched to the system standard input with)8 2245(The input can be)3 674 2 540 2784 t
+10 CW f
+(rd)3487 2784 w
+10 R f
+(, which will switch back when two con-)7 1613 1 3607 2784 t
+( mechanism is intended for insertions in form-)7 1907( This)1 236( used\).)1 274(secutive newlines are found \(the extra blank line is not)9 2263 4 540 2904 t
+( On)1 172(letter-like documentation.)1 1032 2 540 3024 t
+9 R f
+(UNIX)1767 3024 w
+10 R f
+(, the standard input can be the user's keyboard, a pipe, or a \256le.)13 2525 1 1992 3024 t
+10 CW f
+(.rd)540 3204 w
+10 I f
+(prompt)770 3204 w
+10 R f
+(\261)1440 3204 w
+10 I f
+(prompt=)2340 3204 w
+9 R f
+(BEL)2697 3204 w
+10 R f
+(\261)3240 3204 w
+( the standard input is)4 849( If)1 120( the standard input until two newlines in a row are found.)11 2330(Read insertion from)2 805 4 1116 3348 t
+(the user's keyboard,)2 816 1 1116 3468 t
+10 I f
+(prompt)1961 3468 w
+10 R f
+(\(or a)1 189 1 2279 3468 t
+9 R f
+(BEL)2495 3468 w
+10 R f
+(\) is written onto the standard output.)6 1476 1 2665 3468 t
+10 CW f
+(rd)4195 3468 w
+10 R f
+(behaves like a macro,)3 876 1 4344 3468 t
+(and arguments may be placed after)5 1393 1 1116 3588 t
+10 I f
+(prompt)2534 3588 w
+10 R f
+(.)2823 3588 w
+10 CW f
+(.ex)540 3768 w
+10 R f
+(\261 \261 \261)2 1850 1 1440 3768 t
+(Exit from)1 386 1 1116 3912 t
+10 I f
+(troff)1527 3912 w
+10 R f
+(and)1725 3912 w
+10 I f
+(nroff)1894 3912 w
+10 R f
+( processing is terminated exactly as if all input had ended.)10 2316(. Text)1 258 2 2097 3912 t
+( are to be taken from the terminal keyboard while output is being printed on the terminal, the command)18 4197(If insertions)1 483 2 540 4092 t
+(line option)1 437 1 540 4212 t
+10 CW f
+(\261q)1008 4212 w
+10 R f
+(will turn off the echoing of keyboard input and prompt only with)11 2650 1 1158 4212 t
+9 R f
+(BEL)3836 4212 w
+10 R f
+( regular input and inser-)4 979(. The)1 235 2 4006 4212 t
+(tion input cannot simultaneously come from the standard input.)8 2535 1 540 4332 t
+(As an example, multiple copies of a form letter may be prepared by entering the insertions for all the copies in one)21 4680 1 540 4512 t
+( the letter to reinvoke itself with)6 1324(\256le to be used as the standard input, and causing the \256le containing)12 2774 2 540 4632 t
+10 CW f
+(nx)4670 4632 w
+10 R f
+(\(\24719\); the)1 398 1 4822 4632 t
+(process would ultimately be ended by an)6 1631 1 540 4752 t
+10 CW f
+(ex)2196 4752 w
+10 R f
+(in the insertion \256le.)3 778 1 2341 4752 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 19.  , HEADING = INPUT/OUTPUT FILE SWITCHING]
+10 B f
+( FILE SWITCHING)2 885(19. INPUT/OUTPUT)1 931 2 540 4992 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 5232 t
+10 CW f
+(.so)540 5412 w
+10 I f
+(\256lename)770 5412 w
+10 R f
+(\261 \261)1 950 1 2340 5412 t
+( top input \(\256le reading\) level is switched to)8 1737( The)1 207(Switch source \256le.)2 745 3 1116 5556 t
+10 I f
+(\256lename)3832 5556 w
+10 R f
+( new \256le ends,)3 586( the)1 149(. When)1 315 3 4170 5556 t
+(input is again taken from the original \256le.)7 1660 1 1116 5676 t
+10 CW f
+(so)2826 5676 w
+10 R f
+('s may be nested.)3 693 1 2946 5676 t
+10 CW f
+(.nx)540 5856 w
+10 I f
+(\256lename)770 5856 w
+10 R f
+(end-of-\256le \261)1 950 1 2340 5856 t
+(Next \256le is)2 455 1 1116 6000 t
+10 I f
+(\256lename)1604 6000 w
+10 R f
+( current \256le is considered ended, and the input is immediately switched to)12 3040(. The)1 238 2 1942 6000 t
+10 I f
+(\256lename)1116 6120 w
+10 R f
+(.)1454 6120 w
+10 CW f
+(.sy)540 6300 w
+10 I f
+(string)770 6300 w
+10 R f
+(\261 \261)1 950 1 2340 6300 t
+(Execute program from)2 905 1 1116 6444 t
+10 I f
+(string)2047 6444 w
+10 R f
+( output is not collected automati-)5 1329( The)1 207( is the rest of the input line.)7 1108(, which)1 295 4 2281 6444 t
+( number register)2 674(cally. The)1 434 2 1116 6564 t
+10 CW f
+($$)2259 6564 w
+10 R f
+(, which contains the process id of the)7 1551 1 2379 6564 t
+10 I f
+(troff)3965 6564 w
+10 R f
+(process, may be useful in)4 1048 1 4172 6564 t
+( character sequence)2 793( There)1 288(generating unique \256lenames for output.)4 1597 3 1116 6684 t
+10 CW f
+(\\})3826 6684 w
+10 R f
+(in)3978 6684 w
+10 I f
+(string)4088 6684 w
+10 R f
+(is assumed to be part)4 866 1 4354 6684 t
+(of the argument of)3 740 1 1116 6804 t
+10 CW f
+(.sy)1881 6804 w
+10 R f
+(.)2061 6804 w
+10 CW f
+(.pi)540 6984 w
+10 I f
+(string)770 6984 w
+10 R f
+(\261 \261)1 950 1 2340 6984 t
+(Pipe output to)2 572 1 1116 7128 t
+10 I f
+(string)1718 7128 w
+10 R f
+( request must occur before any printing)6 1605( This)1 234( line.)1 206(, which is the rest of the input)7 1223 4 1952 7128 t
+( character sequence)2 779(occurs. There)1 567 2 1116 7248 t
+10 CW f
+(\\})2487 7248 w
+10 R f
+(in)2632 7248 w
+10 I f
+(string)2735 7248 w
+10 R f
+(is assumed to be part of the argument of)8 1603 1 2994 7248 t
+10 CW f
+(.pi)4622 7248 w
+10 R f
+(.)4802 7248 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 20 20
+%%Page: 21 21
+/saveobj save def
+mark
+21 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(21)5108 600 w
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 960 t
+10 CW f
+(.cf)540 1140 w
+10 I f
+(\256lename)770 1140 w
+10 R f
+(\261 \261)1 950 1 2340 1140 t
+(Copy contents of \256le)3 887 1 1116 1284 t
+10 I f
+(\256lename)2045 1284 w
+10 R f
+( \256le is assumed to contain)5 1126( The)1 222(to output, completely unprocessed.)3 1447 3 2425 1284 t
+(something meaningful to subsequent processes.)4 1901 1 1116 1404 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 20.  , HEADING = MISCELLANEOUS]
+10 B f
+(20. MISCELLANEOUS)1 1054 1 540 1644 t
+9 BI f
+( Notes)1 514( No Argument)2 531( If)1 492( Value)1 243( Initial)1 602(Request Form)1 528 6 540 1884 t
+10 CW f
+(.mc)540 2064 w
+10 I f
+(c N)1 161 1 770 2064 t
+10 R f
+( E,)1 870(\261 off)1 1016 2 1440 2064 t
+10 B f
+(m)3326 2064 w
+10 R f
+(Speci\256es that a)2 611 1 1116 2208 t
+10 I f
+(margin)1755 2208 w
+10 R f
+(character)2072 2208 w
+10 I f
+(c)2464 2208 w
+10 R f
+(appear a distance)2 692 1 2536 2208 t
+10 I f
+(N)3256 2208 w
+10 R f
+( margin after each non-)4 946(to the right of the right)5 923 2 3351 2208 t
+12 S f
+(\347)5320 2208 w
+10 R f
+(empty text line \(except those produced by)6 1711 1 1116 2328 t
+10 CW f
+(tl)2858 2328 w
+10 R f
+( the output line is too long \(as can happen in no\256ll)11 2063(\). If)1 179 2 2978 2328 t
+12 S f
+(\347)5320 2328 w
+10 R f
+( If)1 120(mode\) the character will be appended to the line.)8 1980 2 1116 2448 t
+10 I f
+(N)3245 2448 w
+10 R f
+(is not given, the previous)4 1028 1 3341 2448 t
+10 I f
+(N)4399 2448 w
+10 R f
+(is used; the initial)3 724 1 4496 2448 t
+12 S f
+(\347)5320 2448 w
+10 I f
+(N)1116 2568 w
+10 R f
+(is 0.2 inches in)3 651 1 1225 2568 t
+10 I f
+(nroff)1918 2568 w
+10 R f
+(and 1 em in)3 520 1 2155 2568 t
+10 I f
+(troff)2717 2568 w
+10 R f
+( paragraph was a)3 720( margin character used with this)5 1363(. The)1 247 3 2890 2568 t
+12 S f
+(\347)5320 2568 w
+10 R f
+(12-point box-rule.)1 727 1 1116 2688 t
+12 S f
+(\347)5320 2688 w
+10 CW f
+(.tm)540 2868 w
+10 I f
+(string)770 2868 w
+10 R f
+( \261)1 634(\261 newline)1 1216 2 1440 2868 t
+(After skipping initial blanks,)3 1159 1 1116 3012 t
+10 I f
+(string)2303 3012 w
+10 R f
+( copy mode and written on the standard)7 1606(\(rest of the line\) is read in)6 1049 2 2565 3012 t
+(error.)1116 3132 w
+10 CW f
+(.ab)540 3312 w
+10 I f
+(string)770 3312 w
+10 R f
+( \261)1 634(\261 newline)1 1216 2 1440 3312 t
+(After skipping initial blanks,)3 1159 1 1116 3456 t
+10 I f
+(string)2303 3456 w
+10 R f
+( copy mode and written on the standard)7 1606(\(rest of the line\) is read in)6 1049 2 2565 3456 t
+(error.)1116 3576 w
+10 I f
+(Troff)1384 3576 w
+10 R f
+(or)1610 3576 w
+10 I f
+(nroff)1718 3576 w
+10 R f
+(then exits.)1 411 1 1938 3576 t
+10 CW f
+(.ig)540 3756 w
+10 I f
+(yy)770 3756 w
+10 R f
+(\261)1440 3756 w
+10 I f
+(.yy =)1 197 1 2340 3756 t
+10 CW f
+(..)2553 3756 w
+10 R f
+(\261)3240 3756 w
+(Ignore input lines.)2 746 1 1116 3900 t
+10 CW f
+(ig)1920 3900 w
+10 R f
+(behaves exactly like)2 825 1 2073 3900 t
+10 CW f
+(de)2931 3900 w
+10 R f
+( input is)2 341( The)1 214( that the input is discarded.)5 1122(\(\2477\) except)1 459 4 3084 3900 t
+(read in copy mode, and any auto-incremented registers will be affected.)10 2859 1 1116 4020 t
+10 CW f
+(.lf)540 4200 w
+10 I f
+(N \256lename)1 455 1 770 4200 t
+10 R f
+(\261 \261)1 950 1 2340 4200 t
+( to)1 113(Set line number)2 651 2 1116 4344 t
+10 I f
+(N)1915 4344 w
+10 R f
+(and \256lename to)2 636 1 2017 4344 t
+10 I f
+(\256lename)2688 4344 w
+10 R f
+( The)1 215(for purposes of subsequent error messages, etc.)6 1944 2 3061 4344 t
+(number register [sic])2 835 1 1116 4464 t
+10 CW f
+(.F)1978 4464 w
+10 R f
+(contains the name of the current input \256le, as set by command line argument,)13 3095 1 2125 4464 t
+10 CW f
+(so)1116 4584 w
+10 R f
+(,)1236 4584 w
+10 CW f
+(nx)1290 4584 w
+10 R f
+(, or)1 137 1 1410 4584 t
+10 CW f
+(lf)1576 4584 w
+10 R f
+( number register)2 662(. The)1 234 2 1696 4584 t
+10 CW f
+(.c)2621 4584 w
+10 R f
+(contains the number of input lines read from the current \256le,)10 2450 1 2770 4584 t
+(again perhaps as modi\256ed by)4 1165 1 1116 4704 t
+10 CW f
+(lf)2306 4704 w
+10 R f
+(.)2426 4704 w
+10 CW f
+(.pm)540 4884 w
+10 I f
+(t)770 4884 w
+10 R f
+( \261)1 850(\261 all)1 1000 2 1440 4884 t
+( the de\256ned macros and strings are printed on the standard)10 2349( names and sizes of all of)6 1015( The)1 206(Print macros.)1 534 4 1116 5028 t
+(error; if)1 307 1 1116 5148 t
+10 I f
+(t)1448 5148 w
+10 R f
+( sizes is given in blocks of 128 characters.)8 1683( The)1 205(is given, only the total of the sizes is printed.)9 1791 3 1501 5148 t
+10 CW f
+(.fl)540 5328 w
+10 R f
+(\261 \261 B)2 1867 1 1440 5328 t
+( output, including any pending position information.)6 2095( Force)1 277(Flush output buffer.)2 797 3 1116 5472 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 21.  , HEADING = OUTPUT AND ERROR MESSAGES]
+10 B f
+( AND ERROR MESSAGES)3 1198(21. OUTPUT)1 592 2 540 5712 t
+10 R f
+(The output from)2 669 1 540 5892 t
+10 CW f
+(tm)1241 5892 w
+10 R f
+(,)1361 5892 w
+10 CW f
+(pm)1418 5892 w
+10 R f
+(, and the prompt from)4 902 1 1538 5892 t
+10 CW f
+(rd)2472 5892 w
+10 R f
+( error messages are written onto the standard)7 1843(, as well as various)4 785 2 2592 5892 t
+( onto)1 207( default, both are written)4 1004( By)1 172( latter is different from the standard output, where formatted text goes.)11 2869(error. The)1 428 5 540 6012 t
+(the user's terminal, but they can be independently redirected.)8 2439 1 540 6132 t
+( the operation of)3 678(Various error conditions may occur during)5 1735 2 540 6312 t
+10 I f
+(troff)2985 6312 w
+10 R f
+(and)3190 6312 w
+10 I f
+(nroff)3366 6312 w
+10 R f
+( less serious errors having only)5 1275(. Certain)1 376 2 3569 6312 t
+( examples are)2 562( Two)1 240( processing to terminate.)3 1003(local impact do not cause)4 1047 4 540 6432 t
+10 I f
+(word over\257ow)1 582 1 3424 6432 t
+10 R f
+(, caused by a word that is too)7 1214 1 4006 6432 t
+( mode\), and)2 478(large to \256t into the word buffer \(in \256ll)8 1518 2 540 6552 t
+10 I f
+(line over\257ow)1 521 1 2563 6552 t
+10 R f
+(, caused by an output line that grew too large to \256t in)12 2136 1 3084 6552 t
+( both cases, a message is printed, the offending excess is discarded, and the affected word or line is)18 3955( In)1 133(the line buffer.)2 592 3 540 6672 t
+(marked at the point of truncation with a)7 1591 1 540 6792 t
+10 S f
+(*)2157 6792 w
+10 R f
+(in)2233 6792 w
+10 I f
+(nroff)2338 6792 w
+10 R f
+(and a)1 215 1 2560 6792 t
+10 S1 f
+()2802 6792 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_lh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+16 177 moveto
+16 188 lineto
+21 193 lineto
+30 193 lineto
+34 189 lineto
+36 183 lineto
+36 180 lineto
+34 174 lineto
+27 170 lineto
+19 172 lineto
+16 177 lineto
+stroke
+
+38 194 moveto
+38 196 lineto
+53 199 lineto
+68 201 lineto
+83 202 lineto
+98 203 lineto
+113 204 lineto
+128 204 lineto
+143 205 lineto
+158 205 lineto
+173 205 lineto
+188 204 lineto
+203 203 lineto
+218 202 lineto
+233 200 lineto
+248 198 lineto
+263 196 lineto
+278 194 lineto
+293 190 lineto
+308 186 lineto
+323 181 lineto
+338 176 lineto
+353 168 lineto
+361 162 lineto
+364 153 lineto
+366 138 lineto
+367 126 lineto
+368 106 lineto
+369 80 lineto
+369 74 lineto
+368 60 lineto
+367 54 lineto
+362 43 lineto
+348 34 lineto
+333 28 lineto
+318 25 lineto
+303 26 lineto
+288 29 lineto
+273 31 lineto
+258 32 lineto
+243 32 lineto
+228 30 lineto
+213 27 lineto
+198 24 lineto
+183 23 lineto
+168 23 lineto
+153 27 lineto
+148 34 lineto
+148 47 lineto
+153 54 lineto
+168 58 lineto
+183 58 lineto
+198 58 lineto
+213 59 lineto
+226 60 lineto
+228 62 lineto
+228 67 lineto
+223 71 lineto
+208 71 lineto
+193 70 lineto
+178 70 lineto
+163 70 lineto
+148 70 lineto
+133 71 lineto
+123 76 lineto
+120 84 lineto
+120 91 lineto
+122 98 lineto
+129 104 lineto
+144 106 lineto
+159 107 lineto
+174 107 lineto
+189 107 lineto
+202 108 lineto
+204 110 lineto
+204 117 lineto
+201 119 lineto
+186 119 lineto
+171 119 lineto
+156 119 lineto
+141 119 lineto
+126 119 lineto
+111 121 lineto
+103 128 lineto
+101 137 lineto
+101 142 lineto
+103 150 lineto
+111 158 lineto
+126 161 lineto
+141 161 lineto
+156 162 lineto
+171 163 lineto
+186 163 lineto
+191 165 lineto
+192 167 lineto
+192 171 lineto
+190 174 lineto
+176 175 lineto
+161 175 lineto
+146 175 lineto
+131 174 lineto
+116 174 lineto
+101 174 lineto
+86 173 lineto
+71 172 lineto
+56 171 lineto
+41 171 lineto
+41 174 lineto
+43 178 lineto
+43 187 lineto
+38 194 lineto
+stroke
+
+373 169 moveto
+373 176 lineto
+375 182 lineto
+386 190 lineto
+401 193 lineto
+408 191 lineto
+411 185 lineto
+412 181 lineto
+414 167 lineto
+415 158 lineto
+416 144 lineto
+417 128 lineto
+418 110 lineto
+418 60 lineto
+417 45 lineto
+415 37 lineto
+409 34 lineto
+394 31 lineto
+381 35 lineto
+379 42 lineto
+379 52 lineto
+380 67 lineto
+380 77 lineto
+379 77 lineto
+378 106 lineto
+377 121 lineto
+376 133 lineto
+375 147 lineto
+374 158 lineto
+373 169 lineto
+
+stroke
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+2802 6792 m
+100 build_lh
+2902 6792 m
+10 R f
+(in)2929 6792 w
+10 I f
+(troff)3034 6792 w
+10 R f
+( continues if possible, on the grounds)6 1503(. Processing)1 510 2 3207 6792 t
+( a serious error occurs, processing terminates, and a message is)10 2526( If)1 117( be produced.)2 542(that output useful for debugging may)5 1495 4 540 6912 t
+( of serious errors include the inability to)7 1671( Examples)1 454( a list of the macro names currently active.)8 1779(printed, along with)2 776 4 540 7032 t
+(create, read, or write \256les, and the exceeding of certain internal limits that make future output unlikely to be useful.)19 4600 1 540 7152 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 21 21
+%%Page: 22 22
+/saveobj save def
+mark
+22 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(22)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 22.  , HEADING = OUTPUT LANGUAGE]
+10 B f
+( LANGUAGE)1 603(22. OUTPUT)1 592 2 540 960 t
+10 I f
+(Troff)540 1140 w
+10 R f
+( the numbers in)3 634(produces its output in a language that is independent of any speci\256c output device, except that)15 3816 2 770 1140 t
+(it have been computed on the basis of the resolution of the device, and the sizes, fonts, and characters that that)20 4680 1 540 1260 t
+( it is quite possible to interpret that output on a different device, within the latter's)15 3425( Nevertheless)1 575(device can print.)2 680 3 540 1380 t
+(capabilities.)540 1500 w
+10 CW f
+(s)698 1680 w
+10 I f
+(n)766 1680 w
+10 R f
+(set point size to)3 625 1 1171 1680 t
+10 I f
+(n)1821 1680 w
+10 CW f
+(f)698 1800 w
+10 I f
+(n)766 1800 w
+10 R f
+(set font to)2 400 1 1171 1800 t
+10 I f
+(n)1596 1800 w
+10 CW f
+(c)698 1920 w
+10 I f
+(c)766 1920 w
+10 R f
+(print)1171 1920 w
+9 R f
+(ASCII)1385 1920 w
+10 R f
+(character)1645 1920 w
+10 I f
+(c)2034 1920 w
+10 CW f
+(C)698 2040 w
+10 I f
+(xx)766 2040 w
+10 R f
+(print character)1 578 1 1171 2040 t
+10 I f
+(xx)1774 2040 w
+10 R f
+(; terminate)1 430 1 1862 2040 t
+10 I f
+(xx)2317 2040 w
+10 R f
+(by white space)2 593 1 2430 2040 t
+10 CW f
+(N)698 2160 w
+10 I f
+(n)766 2160 w
+10 R f
+(print character)1 578 1 1171 2160 t
+10 I f
+(n)1774 2160 w
+10 R f
+(on current font)2 593 1 1849 2160 t
+10 CW f
+(H)698 2280 w
+10 I f
+(n)766 2280 w
+10 R f
+(go to absolute horizontal position)4 1339 1 1171 2280 t
+10 I f
+(n)2535 2280 w
+10 R f
+(\()2610 2280 w
+10 I f
+(n)2643 2280 w
+10 S f
+(\263)2717 2280 w
+10 R f
+(0\))2788 2280 w
+10 CW f
+(V)698 2400 w
+10 I f
+(n)766 2400 w
+10 R f
+(go to absolute vertical position)4 1233 1 1171 2400 t
+10 I f
+(n)2429 2400 w
+10 R f
+(\()2504 2400 w
+10 I f
+(n)2537 2400 w
+10 S f
+(\263)2611 2400 w
+10 R f
+(0, down is positive\))3 789 1 2682 2400 t
+10 CW f
+(h)698 2520 w
+10 I f
+(n)766 2520 w
+10 R f
+(go)1171 2520 w
+10 I f
+(n)1296 2520 w
+10 R f
+(units horizontally;)1 731 1 1371 2520 t
+10 I f
+(n)2127 2520 w
+10 S f
+(<)2201 2520 w
+10 R f
+(0 is to the left)4 550 1 2272 2520 t
+10 CW f
+(v)698 2640 w
+10 I f
+(n)766 2640 w
+10 R f
+(go)1171 2640 w
+10 I f
+(n)1296 2640 w
+10 R f
+(units vertically;)1 625 1 1371 2640 t
+10 I f
+(n)2021 2640 w
+10 S f
+(<)2095 2640 w
+10 R f
+(0 is up)2 267 1 2166 2640 t
+10 I f
+(nnc)690 2760 w
+10 R f
+(move right)1 436 1 1171 2760 t
+10 I f
+(nn)1632 2760 w
+10 R f
+(, then print)2 436 1 1732 2760 t
+9 R f
+(ASCII)2193 2760 w
+10 R f
+(character)2453 2760 w
+10 I f
+(c)2842 2760 w
+10 R f
+(;)2886 2760 w
+10 I f
+(nn)2939 2760 w
+10 R f
+(must be exactly 2 digits)4 950 1 3064 2760 t
+10 CW f
+(p)698 2880 w
+10 I f
+(n)766 2880 w
+10 R f
+(new page)1 379 1 1171 2880 t
+10 I f
+(n)1575 2880 w
+10 R f
+( vertical position to 0)4 850(begins \320 set)2 504 2 1650 2880 t
+10 CW f
+(n)698 3000 w
+10 I f
+(b a)1 141 1 766 3000 t
+10 R f
+( action\);)1 330( \320 no)2 232(end of line \(information only)4 1160 3 1171 3000 t
+10 I f
+(b)2918 3000 w
+10 R f
+(= space before line,)3 781 1 2993 3000 t
+10 I f
+(a)3799 3000 w
+10 R f
+(= after)1 263 1 3874 3000 t
+10 CW f
+(w)698 3120 w
+10 R f
+( action\))1 302( \320 no)2 232(paddable word space \(information only)4 1569 3 1171 3120 t
+10 CW f
+(D)698 3240 w
+10 I f
+(c)766 3240 w
+10 S f
+(\274)835 3240 w
+10 R f
+( function)1 358( graphics)1 488(\\ n)1 86 3 935 3240 t
+10 I f
+(c)1892 3240 w
+10 R f
+(; see below)2 449 1 1936 3240 t
+10 CW f
+(x)698 3360 w
+10 R f
+( control functions; see below)4 1154( device)1 487(...\\ n)1 161 3 783 3360 t
+10 CW f
+(#)698 3480 w
+10 R f
+( comment)1 599(...\\ n)1 161 2 783 3480 t
+( and new-)2 395( tabs)1 186( Blanks,)1 353( that end in digits must be followed by a non-digit.)10 2025( Sequences)1 471(All position values are in units.)5 1250 6 540 3660 t
+( input, and are mandatory to separate constructions that would otherwise be con-)12 3243(lines may occur as separators in the)6 1437 2 540 3780 t
+( functions, device control functions, and comments extend to the end of the line they occur on.)16 3775(fused. Graphics)1 651 2 540 3900 t
+( The)1 217( families, to be expanded as needed.)6 1513(The device control and graphics commands are intended as open-ended)9 2950 3 540 4080 t
+(graphics functions coincide directly with the)5 1778 1 540 4200 t
+10 CW f
+(\\D)2343 4200 w
+10 R f
+(sequences:)2488 4200 w
+10 CW f
+(Dl)698 4380 w
+10 I f
+(dh dv)1 219 1 843 4380 t
+10 R f
+(draw line from current position by)5 1373 1 1861 4380 t
+10 I f
+(dh)3259 4380 w
+10 R f
+(,)3367 4380 w
+10 I f
+(dv)3433 4380 w
+10 CW f
+(Dc)698 4500 w
+10 I f
+(d)843 4500 w
+10 R f
+(draw circle of diameter)3 927 1 1861 4500 t
+10 I f
+(d)2813 4500 w
+10 R f
+(with left side here)3 718 1 2888 4500 t
+10 CW f
+(De)698 4620 w
+10 I f
+(dh)843 4620 w
+7 R f
+(1)954 4640 w
+10 I f
+(dv)1038 4620 w
+7 R f
+(2)1143 4640 w
+10 R f
+(draw ellipse of diameters)3 1006 1 1861 4620 t
+10 I f
+(dh)2892 4620 w
+7 R f
+(1)3003 4640 w
+10 R f
+(and)3071 4620 w
+10 I f
+(dv)3240 4620 w
+7 R f
+(2)3345 4640 w
+10 CW f
+(Da)698 4740 w
+10 I f
+(dh)859 4740 w
+7 R f
+(1)970 4760 w
+10 I f
+(dv)1054 4740 w
+7 R f
+(1)1159 4760 w
+10 I f
+(dh)1243 4740 w
+7 R f
+(2)1354 4760 w
+10 I f
+(dv)1438 4740 w
+7 R f
+(2)1543 4760 w
+10 R f
+(draw arc from current position to)5 1322 1 1861 4740 t
+10 I f
+(dh)3208 4740 w
+7 R f
+(1)3319 4760 w
+10 S f
+(+)3378 4740 w
+10 I f
+(dh)3449 4740 w
+7 R f
+(2)3560 4760 w
+10 R f
+(,)3611 4740 w
+10 I f
+(dv)3677 4740 w
+7 R f
+(1)3782 4760 w
+10 S f
+(+)3841 4740 w
+10 I f
+(dv)3912 4740 w
+7 R f
+(2)4017 4760 w
+10 R f
+(,)4060 4740 w
+(center at)1 340 1 1936 4860 t
+10 I f
+(dh)2301 4860 w
+7 R f
+(1)2412 4880 w
+10 R f
+(,)2463 4860 w
+10 I f
+(dv)2529 4860 w
+7 R f
+(1)2634 4880 w
+10 R f
+(from current position)2 849 1 2702 4860 t
+10 CW f
+(D\304)698 4980 w
+10 I f
+(dh)859 4980 w
+7 R f
+(1)970 5000 w
+10 I f
+(dv)1054 4980 w
+7 R f
+(1)1159 5000 w
+10 I f
+(dh)1243 4980 w
+7 R f
+(2)1354 5000 w
+10 I f
+(dv)1438 4980 w
+7 R f
+(2)1543 5000 w
+10 S f
+(\274)1611 4980 w
+10 R f
+(draw B-spline from current position to)5 1540 1 1861 4980 t
+10 I f
+(dh)3426 4980 w
+7 R f
+(1)3537 5000 w
+10 R f
+(,)3588 4980 w
+10 I f
+(dv)3654 4980 w
+7 R f
+(1)3759 5000 w
+10 R f
+(,)3802 4980 w
+(then to)1 275 1 1936 5100 t
+10 I f
+(dh)2236 5100 w
+7 R f
+(2)2347 5120 w
+10 R f
+(,)2398 5100 w
+10 I f
+(dv)2464 5100 w
+7 R f
+(2)2569 5120 w
+10 R f
+(, then to ...)3 425 1 2612 5100 t
+10 CW f
+(D)698 5220 w
+10 I f
+(z dh)1 180 1 766 5220 t
+7 R f
+(1)957 5240 w
+10 I f
+(dv)1041 5220 w
+7 R f
+(1)1146 5240 w
+10 I f
+(dh)1230 5220 w
+7 R f
+(2)1341 5240 w
+10 I f
+(dv)1425 5220 w
+7 R f
+(2)1530 5240 w
+10 S f
+(\274)1598 5220 w
+10 R f
+(for any other)2 515 1 1861 5220 t
+10 I f
+(z)2401 5220 w
+10 R f
+(is uninterpreted)1 624 1 2465 5220 t
+(In all of these,)3 586 1 540 5400 t
+10 I f
+(dh)1156 5400 w
+10 R f
+(,)1264 5400 w
+10 I f
+(dv)1330 5400 w
+10 R f
+( the current horizontal and vertical position, with down and right positive.)11 3016(is an increment on)3 750 2 1454 5400 t
+(All distances and dimensions are in units.)6 1663 1 540 5520 t
+(The device control functions begin with)5 1595 1 540 5700 t
+10 CW f
+(x)2160 5700 w
+10 R f
+(, then a command, then other parameters.)6 1649 1 2220 5700 t
+10 CW f
+(x T)1 180 1 690 5880 t
+10 I f
+(s)930 5880 w
+10 R f
+(name of typesetter is)3 829 1 1274 5880 t
+10 I f
+(s)2128 5880 w
+10 CW f
+(x r)1 180 1 690 6000 t
+10 I f
+(n h v)2 194 1 930 6000 t
+10 R f
+(resolution is)1 492 1 1274 6000 t
+10 I f
+(n)1791 6000 w
+10 R f
+(units per inch;)2 572 1 1866 6000 t
+10 I f
+(h)2463 6000 w
+10 R f
+(= minimum horizontal motion,)3 1235 1 2538 6000 t
+10 I f
+(v)3798 6000 w
+10 R f
+(= minimum vertical)2 795 1 3867 6000 t
+10 CW f
+(x i)1 180 1 690 6120 t
+10 R f
+(initialize)1274 6120 w
+10 CW f
+(x f)1 180 1 690 6240 t
+10 I f
+(n s)1 114 1 930 6240 t
+10 R f
+(mount font)1 442 1 1274 6240 t
+10 I f
+(s)1741 6240 w
+10 R f
+(on font position)2 634 1 1805 6240 t
+10 I f
+(n)2464 6240 w
+10 CW f
+(x p)1 180 1 690 6360 t
+10 R f
+( restart)1 274(pause \320 can)2 497 2 1274 6360 t
+10 CW f
+(x s)1 180 1 690 6480 t
+10 R f
+( forever)1 312(stop \320 done)2 493 2 1274 6480 t
+10 CW f
+(x t)1 180 1 690 6600 t
+10 R f
+(generate trailer information, if any)4 1377 1 1274 6600 t
+10 CW f
+(x H)1 180 1 690 6720 t
+10 I f
+(n)930 6720 w
+10 R f
+(set character height to)3 878 1 1274 6720 t
+10 I f
+(n)2177 6720 w
+10 CW f
+(x S)1 180 1 690 6840 t
+10 I f
+(n)930 6840 w
+10 R f
+(set slant to)2 428 1 1274 6840 t
+10 I f
+(n)1727 6840 w
+10 CW f
+(x X)1 180 1 690 6960 t
+10 I f
+(any)930 6960 w
+10 R f
+(generated by the)2 659 1 1274 6960 t
+10 CW f
+(\\X)1958 6960 w
+10 R f
+(function)2103 6960 w
+10 CW f
+(x)690 7080 w
+10 I f
+(any)810 7080 w
+10 R f
+(to be ignored if not recognized)5 1228 1 1274 7080 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 22 22
+%%Page: 23 23
+/saveobj save def
+mark
+23 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(23)5108 600 w
+10 R f
+(Subcommands like ``)2 855 1 540 960 t
+10 CW f
+(i)1395 960 w
+10 R f
+('' may be spelled out like ``)6 1109 1 1455 960 t
+10 CW f
+(init)2564 960 w
+10 R f
+(''.)2804 960 w
+(The commands)1 626 1 540 1140 t
+10 CW f
+(x T)1 180 1 1204 1140 t
+10 R f
+(,)1384 1140 w
+10 CW f
+(x r)1 180 1 1447 1140 t
+10 S f
+(\274)1700 1140 w
+10 R f
+(, and)1 207 1 1800 1140 t
+10 CW f
+(x i)1 180 1 2045 1140 t
+10 R f
+(must occur \256rst; fonts must be mounted before they can be used;)11 2737 1 2264 1140 t
+10 CW f
+(x s)1 180 1 5040 1140 t
+10 R f
+( are no other order requirements.)5 1307( There)1 282(comes last.)1 444 3 540 1260 t
+(The following is the output from ``)6 1399 1 540 1440 t
+10 CW f
+(hello, world)1 720 1 1939 1440 t
+10 R f
+('' for a typical Postscript printer, as described in \24723:)9 2130 1 2659 1440 t
+10 CW f
+(x T post)2 480 1 690 1620 t
+(x res 720 1 1)4 780 1 690 1740 t
+(x init)1 360 1 690 1860 t
+(V0)690 1980 w
+(p1)690 2100 w
+(x font 1 R)3 600 1 690 2220 t
+(x font 2 I)3 600 1 690 2340 t
+(x font 3 B)3 600 1 690 2460 t
+(x font 4 BI)3 660 1 690 2580 t
+(x font 5 CW)3 660 1 690 2700 t
+(x font 6 H)3 600 1 690 2820 t
+(x font 7 HB)3 660 1 690 2940 t
+(x font 8 HX)3 660 1 690 3060 t
+(x font 9 S1)3 660 1 690 3180 t
+(x font 10 S)3 660 1 690 3300 t
+(s10)690 3420 w
+(f1)690 3540 w
+(H0)690 3660 w
+(s10)690 3780 w
+(f1)690 3900 w
+(V0)690 4020 w
+(H720)690 4140 w
+(V120)690 4260 w
+(ch)690 4380 w
+(50e44l28l28o50,w58w72o50r33l28dn120 0)1 2220 1 690 4500 t
+(x trailer)1 540 1 690 4620 t
+(V7920)690 4740 w
+(x stop)1 360 1 690 4860 t
+10 I f
+(Troff)540 5040 w
+10 R f
+( information are not included unless)5 1530(output is normally not redundant; size and font changes and position)10 2907 2 783 5040 t
+( re-order pages or process)4 1065( each page is self-contained, for the bene\256t of postprocessors that)10 2708(needed. Nevertheless,)1 907 3 540 5160 t
+(only a subset.)2 547 1 540 5280 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 23.  , HEADING = DEVICE AND FONT DESCRIPTION FILES]
+10 B f
+( AND FONT DESCRIPTION FILES)4 1579(23. DEVICE)1 564 2 540 5520 t
+10 R f
+( that describe a output device)5 1192(The parameters)1 621 2 540 5700 t
+10 I f
+(name)2383 5700 w
+10 R f
+(are read from the directory)4 1088 1 2629 5700 t
+10 CW f
+(/usr/lib/font/dev)3747 5700 w
+10 I f
+(name)4767 5700 w
+10 R f
+(, each)1 237 1 4983 5700 t
+(time)540 5820 w
+10 I f
+(troff)748 5820 w
+10 R f
+( variable)1 350( device name is provided by default, by the environment)9 2297( The)1 210(is invoked.)1 444 4 951 5820 t
+10 CW f
+(TYPESETTER)4281 5820 w
+10 R f
+(, or by a)3 339 1 4881 5820 t
+(command-line argument)1 981 1 540 5940 t
+10 CW f
+(-T)1548 5940 w
+10 I f
+(name)1668 5940 w
+10 R f
+( default device name is)4 928(. The)1 232 2 1884 5940 t
+10 CW f
+(post)3071 5940 w
+10 R f
+( pre-de\256ned string)2 736( The)1 207(, for Postscript.)2 615 3 3311 5940 t
+10 CW f
+(.T)4896 5940 w
+10 R f
+(con-)5043 5940 w
+( The)1 205(tains the name of the device.)5 1142 2 540 6060 t
+10 CW f
+(-F)1912 6060 w
+10 R f
+(command-line option may be used to change the default directory.)9 2651 1 2057 6060 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 23.1  , HEADING = Device Description File]
+10 B f
+( Description File)2 705(23.1 Device)1 507 2 540 6240 t
+10 R f
+(The \256le)1 330 1 540 6420 t
+10 CW f
+(DESC)917 6420 w
+10 R f
+(in)1204 6420 w
+10 CW f
+(/usr/lib/font/dev)1330 6420 w
+10 I f
+(name)2350 6420 w
+10 R f
+(contains general parameters of the device, one per line, as a)10 2606 1 2614 6420 t
+(sequence of names and values.)4 1267 1 540 6540 t
+10 I f
+(Troff)1867 6540 w
+10 R f
+( any others that may be present for)7 1446(recognizes these parameters, and ignores)4 1671 2 2103 6540 t
+(speci\256c drivers:)1 635 1 540 6660 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 23 23
+%%Page: 24 24
+/saveobj save def
+mark
+24 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(24)540 600 w
+9 HB f
+(Reference Manual)1 770 1 4450 600 t
+10 CW f
+(fonts)690 960 w
+10 I f
+(n F)1 187 1 1050 960 t
+7 R f
+(1)1248 980 w
+10 I f
+(F)1367 960 w
+7 R f
+(2)1439 980 w
+10 S f
+(\274)1542 960 w
+10 I f
+(F)1702 960 w
+7 I f
+(n)1774 980 w
+10 CW f
+(sizes)690 1080 w
+10 I f
+(s)1050 1080 w
+7 R f
+(1)1100 1100 w
+10 I f
+(s)1219 1080 w
+7 R f
+(2)1269 1100 w
+10 S f
+(\274)1372 1080 w
+10 CW f
+(0)1532 1080 w
+(res)690 1200 w
+10 I f
+(n)930 1200 w
+10 CW f
+(hor)690 1320 w
+10 I f
+(n)930 1320 w
+10 CW f
+(vert)690 1440 w
+10 I f
+(n)990 1440 w
+10 CW f
+(unitwidth)690 1560 w
+10 I f
+(n)1290 1560 w
+10 CW f
+(charset)690 1680 w
+10 I f
+(list of multi-character character names \(optional\))5 1996 1 690 1800 t
+10 R f
+(The)540 1980 w
+10 I f
+(F)727 1980 w
+7 I f
+(i)799 2000 w
+10 R f
+( list of sizes is a set of integers representing some or all of the)14 2561( The)1 212(are font names to be initially mounted.)6 1588 3 859 1980 t
+( The)1 209(legal sizes the device can produce, terminated by a zero.)9 2282 2 540 2100 t
+10 CW f
+(res)3060 2100 w
+10 R f
+( of the machine in)4 733(parameter gives the resolution)3 1218 2 3269 2100 t
+(units per inch;)2 572 1 540 2220 t
+10 CW f
+(hor)1137 2220 w
+10 R f
+(and)1342 2220 w
+10 CW f
+(vert)1511 2220 w
+10 R f
+(give the minimum number of units that can be moved horizontally and vertically.)12 3250 1 1776 2220 t
+( machine units at point size)5 1096(Character widths for each font are assumed to be given in)10 2300 2 540 2400 t
+10 CW f
+(unitwidth)3962 2400 w
+10 R f
+( other words,)2 526(. \(In)1 192 2 4502 2400 t
+(a character with a width of)5 1066 1 540 2520 t
+10 I f
+(n)1631 2520 w
+10 R f
+(is)1706 2520 w
+10 I f
+(n)1798 2520 w
+10 R f
+(units wide at size)3 691 1 1873 2520 t
+10 CW f
+(unitwidth)2589 2520 w
+10 R f
+(.\))3129 2520 w
+(A list of valid character names may be introduced by)9 2115 1 540 2700 t
+10 CW f
+(charset)2680 2700 w
+10 R f
+(; the list of names is optional.)6 1181 1 3100 2700 t
+(A line whose \256rst non-blank character is)6 1661 1 540 2880 t
+10 CW f
+(#)2233 2880 w
+10 R f
+( that)1 182( Except)1 334(is a comment.)2 572 3 2325 2880 t
+10 CW f
+(charset)3446 2880 w
+10 R f
+(must occur last, parameters may)4 1321 1 3899 2880 t
+(appear in any order.)3 797 1 540 3000 t
+(Here is a subset of the)5 884 1 540 3180 t
+10 CW f
+(DESC)1449 3180 w
+10 R f
+(\256le for a typical Postscript printer:)5 1374 1 1714 3180 t
+10 CW f
+(# Description file for Postscript printers.)5 2580 1 690 3360 t
+(fonts 10 R I B BI CW H HB HX S1 S)11 1980 1 690 3600 t
+(sizes 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23)20 3540 1 690 3720 t
+(24 25 26 27 28 29 30 31 32 33 34 35 36 38 40 44 48 54 60 72 0)20 3660 1 870 3840 t
+(res 720)1 420 1 690 3960 t
+(hor 1)1 300 1 690 4080 t
+(vert 1)1 360 1 690 4200 t
+(unitwidth 10)1 720 1 690 4320 t
+(charset)690 4440 w
+(hy ct fi fl ff Fi Fl dg em 14 34 12 en aa)13 2460 1 690 4560 t
+(ga ru sc dd -> br Sl ps cs cy as os =. ld)13 2460 1 690 4680 t
+(rd le ge pp -+ ob vr)6 1200 1 690 4800 t
+(sq bx ci fa te ** pl mi eq \304= *A *B *X *D)13 2460 1 690 4920 t
+(*E *F *G *Y *I *K *L *M *N *O *P *R *H *S *T *U *W)16 3000 1 690 5040 t
+(*C *Q *Z ul rn *a *b *x *d *e *f *g *y *i *k)14 2640 1 690 5160 t
+(*l *m *n *o *p *h *r *s *t *u *w *c *q *z)13 2460 1 690 5280 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 23.2  , HEADING = Font Description Files]
+10 B f
+( Description Files)2 744(23.2 Font)1 425 2 540 5460 t
+10 R f
+( one per line, fol-)4 714(Each font is described by an analogous description \256le, which begins with parameters of the font,)15 3966 2 540 5640 t
+( \256le for font)3 480( The)1 205(lowed by a list of characters and widths.)7 1608 3 540 5760 t
+10 I f
+(f)2858 5760 w
+10 R f
+(is)2911 5760 w
+10 CW f
+(/usr/lib/font/dev)3003 5760 w
+10 I f
+(name)4023 5760 w
+10 CW f
+(/)4239 5760 w
+10 I f
+(f.)4299 5760 w
+10 CW f
+(name)690 5940 w
+10 I f
+(str)990 5940 w
+10 R f
+(name of font is)3 602 1 1860 5940 t
+10 I f
+(str)2487 5940 w
+10 CW f
+(ligatures)690 6060 w
+10 S f
+(\274)1290 6060 w
+10 CW f
+(0)1450 6060 w
+10 R f
+(list of ligatures)2 600 1 1860 6060 t
+10 CW f
+(spacewidth)690 6180 w
+10 I f
+(n)1350 6180 w
+10 R f
+(width of a space on this font)6 1132 1 1860 6180 t
+10 CW f
+(special)690 6300 w
+10 R f
+(this is a special font)4 794 1 1860 6300 t
+10 CW f
+(charset)690 6420 w
+10 I f
+(list of character name, width, ascender/descender, code)6 2233 1 690 6540 t
+10 R f
+(The)540 6720 w
+10 CW f
+(name)736 6720 w
+10 R f
+(and)1017 6720 w
+10 CW f
+(charset)1202 6720 w
+10 R f
+(\256elds are mandatory;)2 875 1 1663 6720 t
+10 CW f
+(charset)2579 6720 w
+10 R f
+( are other)2 410( are permitted, as)3 735( Comments)1 500(must be last.)2 535 4 3040 6720 t
+(unrecognized parameters.)1 1024 1 540 6840 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 24 24
+%%Page: 25 25
+/saveobj save def
+mark
+25 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 540 480 t
+9 HB f
+(Reference Manual)1 770 1 540 600 t
+10 HB f
+(25)5108 600 w
+10 R f
+(Each line following)2 864 1 540 960 t
+10 CW f
+(charset)1467 960 w
+10 R f
+( character: its name, its width in units as described above,)10 2692(describes one)1 578 2 1950 960 t
+( knows it \(the)3 550(ascender/descender information, and a decimal, octal or hexadecimal value by which the output device)13 4130 2 540 1080 t
+10 CW f
+(\\N)540 1200 w
+10 R f
+( character name is arbitrary, except that)6 1581( The)1 205(``number'' of the character\).)3 1139 3 685 1200 t
+10 CW f
+(---)3636 1200 w
+10 R f
+( If)1 117(signi\256es an unnamed character.)3 1261 2 3842 1200 t
+(the width \256eld contains)3 939 1 540 1320 t
+10 CW f
+(")1505 1320 w
+10 R f
+( \256eld is 1 if the)5 603( ascender/descender)1 800( The)1 206(, the name is a synonym for the previous character.)9 2046 4 1565 1320 t
+(character has a descender \(hangs below the baseline, like)8 2273 1 540 1440 t
+10 CW f
+(y)2838 1440 w
+10 R f
+( \(is tall, like)3 481(\), is 2 if it has an ascender)7 1042 2 2898 1440 t
+10 CW f
+(Y)4447 1440 w
+10 R f
+(\), is 3 if both, and)5 713 1 4507 1440 t
+( value is returned in the)5 940( The)1 205(is 0 if neither.)3 555 3 540 1560 t
+10 CW f
+(ct)2265 1560 w
+10 R f
+(register, as computed by the)4 1123 1 2410 1560 t
+10 CW f
+(\\w)3558 1560 w
+10 R f
+(function \(\24711.2\).)1 674 1 3703 1560 t
+(Here are excerpts from a typical font description \256le for the same Postscript printer.)13 3343 1 540 1740 t
+10 CW f
+( \\\(hy)1 300( hyphen)1 672( 45)1 492(hy 33 0)2 924 4 690 1920 t
+( is a synonym for \\\(hy)5 1320( -)1 1296(- ")1 492 3 690 2040 t
+( 81)1 492( 3)1 372(Q 72)1 552 3 690 2196 t
+( 97)1 492( 0)1 372(a 44)1 552 3 690 2352 t
+( 98)1 492( 2)1 372(b 50)1 552 3 690 2472 t
+( 99)1 492( 0)1 372(c 44)1 552 3 690 2592 t
+( 100)1 552( 2)1 372(d 50)1 552 3 690 2712 t
+( 121)1 552( 1)1 372(y 50)1 552 3 690 2832 t
+( 208)1 552( 0)1 312(em 100)1 612 3 690 2988 t
+( pound currency symbol \\N'220')4 1800( English)1 672( 220)1 552( 2)1 372(--- 44)1 552 5 690 3108 t
+( dot \\N'221')2 720( centered)1 732( 221)1 552( 0)1 372(--- 36)1 552 5 690 3228 t
+10 R f
+(This says, for example, that the width of the letter)9 2052 1 540 3408 t
+10 CW f
+(a)2624 3408 w
+10 R f
+( at point size 10, the value of)7 1210(is 44 units)2 426 2 2716 3408 t
+10 CW f
+(unitwidth)4385 3408 w
+10 R f
+(. Point)1 295 1 4925 3408 t
+(sizes are scaled linearly and rounded, so the width of)9 2112 1 540 3528 t
+10 CW f
+(a)2677 3528 w
+10 R f
+(will be 44 at size 10, 40 at size 9, 35 at size 8, and so on.)16 2264 1 2762 3528 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 25 25
+%%Trailer
+done
+%%Pages: 25
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-BoldItalic Times-Roman Symbol Courier Times-Roman

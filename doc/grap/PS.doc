@@ -1,0 +1,7636 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+17 HB f
+(GRAP)720 1040 w
+18 HB f
+(\320 A Language for Typesetting Graphs)5 3296 1 1261 1040 t
+36 S1 f
+(________________________)720 1240 w
+9 HB f
+(ABSTRACT)720 1720 w
+10 I f
+(Grap)1365 1720 w
+10 R f
+( graph of the 1984 age distribution in)7 1520( This)1 233(is a language for describing plots of data.)7 1682 3 1605 1720 t
+(the United States)2 683 1 1365 1840 t
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% Version 3.3.2 drawing procedures for dpost. Automatically pulled in when
+% needed.
+%
+
+/inpath false def
+/savematrix matrix def
+
+/Dl {
+	inpath
+		{pop pop neg lineto}
+		{newpath neg moveto neg lineto stroke}
+	ifelse
+} bind def
+
+/De {
+	/y1 exch 2 div def
+	/x1 exch 2 div def
+	/savematrix savematrix currentmatrix def
+	neg exch x1 add exch translate
+	x1 y1 scale
+	0 0 1 0 360
+	inpath
+		{1 0 moveto arc savematrix setmatrix}
+		{newpath arc savematrix setmatrix stroke}
+	ifelse
+} bind def
+
+/Da {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arc}
+		{newpath arc stroke}
+	ifelse
+} bind def
+
+/DA {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arcn}
+		{newpath arcn stroke}
+	ifelse
+} bind def
+
+/Ds {
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	/y0 exch def
+	/x0 exch def
+	x0 5 x1 mul add 6 div
+	y0 5 y1 mul add -6 div
+	x2 5 x1 mul add 6 div
+	y2 5 y1 mul add -6 div
+	x1 x2 add 2 div
+	y1 y2 add -2 div
+	inpath
+		{curveto}
+		{newpath x0 x1 add 2 div y0 y1 add -2 div moveto curveto stroke}
+	ifelse
+} bind def
+%%EndGlobal
+/saveobj save def
+mark
+10 R f
+2184 2020 2184 3460 Dl
+4344 2020 2184 2020 Dl
+4344 3460 4344 2020 Dl
+2184 3460 4344 3460 Dl
+2184 3532 2184 3460 Dl
+(-0)2143 3642 w
+2669 3532 2669 3460 Dl
+(20)2619 3642 w
+3154 3532 3154 3460 Dl
+(40)3104 3642 w
+3640 3532 3640 3460 Dl
+(60)3590 3642 w
+4125 3532 4125 3460 Dl
+(80)4075 3642 w
+2112 3460 2184 3460 Dl
+(-0)2004 3480 w
+2112 3172 2184 3172 Dl
+(1)2037 3192 w
+2112 2884 2184 2884 Dl
+(2)2037 2904 w
+2112 2596 2184 2596 Dl
+(3)2037 2616 w
+2112 2308 2184 2308 Dl
+(4)2037 2328 w
+2112 2020 2184 2020 Dl
+(5)2037 2040 w
+(Population)1510 2700 w
+(\(in millions\))1 498 1 1478 2820 t
+(1984 Age)1 391 1 3069 3780 t
+2208 2393 2184 2418 Dl
+2232 2413 2208 2392 Dl
+2256 2441 2232 2414 Dl
+2280 2518 2256 2442 Dl
+2304 2530 2280 2518 Dl
+2329 2543 2305 2531 Dl
+2353 2554 2329 2544 Dl
+2378 2550 2354 2555 Dl
+2401 2564 2377 2549 Dl
+2426 2517 2402 2564 Dl
+2450 2483 2426 2517 Dl
+2474 2377 2450 2482 Dl
+2499 2389 2475 2377 Dl
+2523 2428 2499 2390 Dl
+2548 2446 2524 2428 Dl
+2571 2410 2547 2446 Dl
+2596 2370 2572 2410 Dl
+2620 2291 2596 2370 Dl
+2644 2256 2620 2290 Dl
+2669 2244 2645 2256 Dl
+2693 2236 2669 2243 Dl
+2718 2179 2694 2236 Dl
+2741 2196 2717 2178 Dl
+2766 2225 2742 2196 Dl
+2790 2225 2766 2225 Dl
+2814 2249 2790 2225 Dl
+2838 2260 2814 2250 Dl
+2863 2273 2839 2261 Dl
+2887 2314 2863 2274 Dl
+2911 2326 2887 2314 Dl
+2936 2392 2912 2328 Dl
+2960 2370 2936 2392 Dl
+2984 2386 2960 2369 Dl
+3008 2421 2984 2387 Dl
+3033 2391 3009 2421 Dl
+3057 2407 3033 2390 Dl
+3081 2636 3057 2408 Dl
+3106 2624 3082 2636 Dl
+3130 2617 3106 2624 Dl
+3154 2601 3130 2616 Dl
+3178 2711 3154 2601 Dl
+3227 2748 3179 2711 Dl
+3251 2775 3227 2749 Dl
+3276 2790 3252 2776 Dl
+3300 2815 3276 2790 Dl
+3324 2808 3300 2815 Dl
+3348 2813 3324 2808 Dl
+3373 2843 3349 2814 Dl
+3396 2820 3372 2843 Dl
+3421 2836 3397 2819 Dl
+3445 2792 3421 2837 Dl
+3469 2784 3445 2791 Dl
+3494 2798 3470 2783 Dl
+3518 2780 3494 2799 Dl
+3543 2786 3519 2779 Dl
+3566 2778 3542 2786 Dl
+3591 2772 3567 2778 Dl
+3615 2788 3591 2771 Dl
+3639 2793 3615 2788 Dl
+3664 2789 3640 2794 Dl
+3688 2811 3664 2788 Dl
+3713 2837 3689 2812 Dl
+3736 2862 3712 2837 Dl
+3761 2881 3737 2863 Dl
+3785 2903 3761 2881 Dl
+3809 2909 3785 2904 Dl
+3834 2911 3810 2909 Dl
+3858 2936 3834 2911 Dl
+3882 2952 3858 2938 Dl
+3906 2976 3882 2952 Dl
+3931 2992 3907 2976 Dl
+3955 3023 3931 2993 Dl
+3979 3045 3955 3023 Dl
+4003 3064 3979 3045 Dl
+4028 3096 4004 3065 Dl
+4052 3112 4028 3097 Dl
+4076 3140 4052 3112 Dl
+4101 3163 4077 3140 Dl
+4125 3186 4101 3164 Dl
+4149 3221 4125 3186 Dl
+4173 3209 4149 3221 Dl
+4198 3251 4174 3208 Dl
+4222 3274 4198 3251 Dl
+4246 3296 4222 3275 Dl
+4271 3308 4247 3297 Dl
+4295 3322 4271 3308 Dl
+4319 3340 4295 3322 Dl
+4343 3359 4319 3341 Dl
+(is produced by the)3 735 1 1365 4000 t
+10 I f
+(grap)2125 4000 w
+10 R f
+(commands)2339 4000 w
+9 CW f
+(coord x 0,89 y 0,5)4 972 1 1515 4170 t
+(label left "Population" "\(in millions\)")4 2106 1 1515 4280 t
+(label bottom "1984 Age")3 1242 1 1515 4390 t
+(draw solid)1 540 1 1515 4500 t
+(copy "agepop.d")1 810 1 1515 4610 t
+10 R f
+(\(Each line in the data \256le)5 1011 1 1365 4790 t
+10 CW f
+(agepop.d)2403 4790 w
+10 R f
+( Americans of that)3 749(contains an age and the number of)6 1381 2 2910 4790 t
+(age alive in 1984; the \256le is sorted by age.\))9 1720 1 1365 4910 t
+(The)1365 5090 w
+10 I f
+(grap)1567 5090 w
+10 R f
+( with)1 226(preprocessor works)1 800 2 1803 5090 t
+10 I f
+(pic)2877 5090 w
+10 R f
+(and)3047 5090 w
+10 I f
+(troff)3239 5090 w
+10 R f
+( of its input is passed through)6 1316(. Most)1 304 2 3420 5090 t
+(untouched, but statements between)3 1443 1 1365 5210 t
+10 CW f
+(.G1)2848 5210 w
+10 R f
+(and)3068 5210 w
+10 CW f
+(.G2)3252 5210 w
+10 R f
+(are translated into)2 745 1 3472 5210 t
+10 I f
+(pic)4257 5210 w
+10 R f
+(commands that)1 622 1 4418 5210 t
+(draw graphs.)1 515 1 1365 5330 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = INTRODUCTION]
+10 B f
+(1. INTRODUCTION)1 925 1 720 5750 t
+10 I f
+(Grap)720 5930 w
+10 R f
+( provides such services as automatic scaling)6 1776( It)1 114(is a language for describing graphical displays of data.)8 2192 3 958 5930 t
+(and labeling of axes, and)4 1043 1 720 6050 t
+10 CW f
+(for)1800 6050 w
+10 R f
+(statements,)2016 6050 w
+10 CW f
+(if)2499 6050 w
+10 R f
+(statements, and macros to facilitate user programmability.)6 2385 1 2655 6050 t
+10 I f
+(Grap)720 6170 w
+10 R f
+(is intended primarily for including graphs in documents prepared on the)10 2884 1 957 6170 t
+9 R f
+(UNIX)3865 6170 w
+6 S f
+(\322)4090 6130 w
+10 R f
+( and)1 171(operating system,)1 706 2 4163 6170 t
+(is only marginally useful for elementary tasks in data analysis.)9 2497 1 720 6290 t
+(Section 2 of this document is a tutorial introduction to)9 2236 1 720 6470 t
+10 I f
+(grap)2989 6470 w
+10 R f
+( wish to)2 335(; readers who \256nd it slow going may)7 1519 2 3186 6470 t
+( examples in Section 3 illustrate the various kinds of graphs that)11 2683( The)1 216(skim ahead.)1 488 3 720 6590 t
+10 I f
+(grap)4143 6590 w
+10 R f
+(can produce and)2 673 1 4367 6590 t
+(some common)1 594 1 720 6710 t
+10 I f
+(grap)1348 6710 w
+10 R f
+( matters about using)3 835(idioms. Mundane)1 734 2 1571 6710 t
+10 I f
+(grap)3174 6710 w
+10 R f
+( A)1 97( Appendix)1 453(are discussed in Section 4.)4 1093 3 3397 6710 t
+(contains a brief reference manual and Appendix B contains a summary of)11 2940 1 720 6830 t
+10 I f
+(grap)3685 6830 w
+10 R f
+(commands.)3899 6830 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(2 GRAP)1 4320 1 720 600 t
+10 R f
+( In)1 143( graphs we present.)3 800(We have tried to illustrate good principles of statistics and graphical design in the)13 3377 3 720 960 t
+( good taste has lost to the necessity of illustrating)9 2194(several places, though,)2 961 2 720 1080 t
+10 I f
+(grap)3925 1080 w
+10 R f
+(capabilities. Readers)1 876 1 4164 1080 t
+(interested in statistical integrity and taste should consult the literature.\262)9 2848 1 720 1200 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 2.  , HEADING = TUTORIAL]
+10 B f
+(2. TUTORIAL)1 659 1 720 1440 t
+10 R f
+(The following is a simple)4 1022 1 720 1620 t
+10 I f
+(grap)1767 1620 w
+10 R f
+(program\263)1981 1620 w
+9 CW f
+(.G1)870 1790 w
+(54.2)870 1900 w
+(49.4)870 2010 w
+(49.2)870 2120 w
+(50.0)870 2230 w
+(48.2)870 2340 w
+(x)870 2450 w
+(44.60)870 2560 w
+(.G2)870 2670 w
+10 R f
+( in seconds for the men's 400 meter run, from the \256rst)11 2224(The single number on each line is the winning time)9 2096 2 720 2850 t
+( the \256le)2 302( If)1 117(modern Olympic Games \(1896\) to the nineteenth \(1980\).)7 2287 3 720 2970 t
+10 CW f
+(olymp.g)3452 2970 w
+10 R f
+( above, then)2 485(contains the text)2 657 2 3898 2970 t
+(typing the command)2 822 1 720 3090 t
+9 CW f
+(grap olymp.g | pic | troff >junk)6 1728 1 870 3260 t
+10 R f
+(creates a)1 345 1 720 3440 t
+10 I f
+(troff)1090 3440 w
+10 R f
+(output \256le)1 409 1 1288 3440 t
+10 CW f
+(junk)1722 3440 w
+10 R f
+(that contains the picture)3 957 1 1987 3440 t
+1891 3620 1891 5060 Dl
+4051 3620 1891 3620 Dl
+4051 5060 4051 3620 Dl
+1891 5060 4051 5060 Dl
+1918 5132 1918 5060 Dl
+(-0)1877 5242 w
+2444 5132 2444 5060 Dl
+(5)2419 5242 w
+2971 5132 2971 5060 Dl
+(10)2921 5242 w
+3497 5132 3497 5060 Dl
+(15)3447 5242 w
+4023 5132 4023 5060 Dl
+(20)3973 5242 w
+1819 4826 1891 4826 Dl
+(45)1694 4846 w
+1819 4218 1891 4218 Dl
+(50)1694 4238 w
+10 S f
+(\267)2000 3728 w
+(\267)2105 4311 w
+(\267)2211 4335 w
+(\267)2316 4238 w
+(\267)2421 4457 w
+(\267)2527 4287 w
+(\267)2632 4529 w
+(\267)2737 4505 w
+(\267)2843 4699 w
+(\267)2948 4663 w
+(\267)3053 4699 w
+(\267)3158 4736 w
+(\267)3264 4639 w
+(\267)3369 4858 w
+(\267)3474 4833 w
+(\267)3579 4991 w
+(\267)3684 4887 w
+(\267)3790 4936 w
+(\267)3895 4894 w
+10 R f
+( the times are)3 589( If)1 134( to 44.60 seconds.)3 773(The graph shows the decrease in winning times from 54.2 seconds)10 2824 4 720 5492 t
+(contained in the \256le)3 791 1 720 5612 t
+10 CW f
+(400mtimes.d)1536 5612 w
+10 R f
+(, we could produce the same graph with the shorter program)10 2403 1 2196 5612 t
+9 CW f
+(copy "400mtimes.d")1 972 1 870 5782 t
+10 R f
+(Writing)720 5962 w
+10 CW f
+(copy ")1 360 1 1070 5962 t
+10 I f
+(fname)1430 5962 w
+10 CW f
+(")1674 5962 w
+10 R f
+(in a)1 161 1 1773 5962 t
+10 I f
+(grap)1973 5962 w
+10 R f
+(program is equivalent to including the contents of \256le)8 2255 1 2201 5962 t
+10 I f
+(fname)4495 5962 w
+10 R f
+(at that)1 262 1 4778 5962 t
+( the interests of compatibility with other programs,)7 2032( \(In)1 166(point in the \256le.)3 634 3 720 6082 t
+10 CW f
+(include)3577 6082 w
+10 R f
+(is a synonym for)3 669 1 4022 6082 t
+10 CW f
+(copy)4716 6082 w
+10 R f
+(.\))4956 6082 w
+(Each line in the \256le)4 777 1 720 6262 t
+10 CW f
+(400mpairs.d)1522 6262 w
+10 R f
+(contains two numbers, the year of the Olympics and the winning time:)11 2814 1 2207 6262 t
+8 S1 f
+(__________________)720 6719 w
+8 R f
+( instance,)1 321( for)1 132(\262 See,)1 255 3 720 6839 t
+8 I f
+(Graphical Methods in Data Analysis)4 1258 1 1469 6839 t
+8 R f
+(by Chambers, Cleveland, Kleiner and Tukey or)6 1635 1 2768 6839 t
+8 I f
+(Visual Display of)2 596 1 4444 6839 t
+(Quantitative Information)1 799 1 840 6929 t
+8 R f
+(by Tufte.)1 292 1 1659 6929 t
+( this document we will show only the \256rst \256ve lines and the last line of data \256les; omitted lines are indicated by ``)23 3614(\263 Throughout)1 497 2 720 7049 t
+8 S f
+(\274)4831 7049 w
+8 R f
+(''.)4911 7049 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(GRAP 3)1 4320 1 720 600 t
+9 CW f
+(1896 54.2)1 486 1 870 950 t
+(1900 49.4)1 486 1 870 1060 t
+(1904 49.2)1 486 1 870 1170 t
+(1908 50.0)1 486 1 870 1280 t
+(1912 48.2)1 486 1 870 1390 t
+(x)870 1500 w
+(1980 44.60)1 540 1 870 1610 t
+10 R f
+(If we plot this data with the program)7 1462 1 720 1790 t
+9 CW f
+(copy "400mpairs.d")1 972 1 870 1960 t
+10 R f
+(the bottom \()2 489 1 720 2140 t
+10 I f
+(x)1209 2140 w
+10 R f
+(\) axis represents the year of the Olympics.)7 1685 1 1253 2140 t
+1902 2320 1902 3760 Dl
+4062 2320 1902 2320 Dl
+4062 3760 4062 2320 Dl
+1902 3760 4062 3760 Dl
+2125 3832 2125 3760 Dl
+(1900)2025 3942 w
+2576 3832 2576 3760 Dl
+(1920)2476 3942 w
+3027 3832 3027 3760 Dl
+(1940)2927 3942 w
+3478 3832 3478 3760 Dl
+(1960)3378 3942 w
+3929 3832 3929 3760 Dl
+(1980)3829 3942 w
+1830 3526 1902 3526 Dl
+(45)1705 3546 w
+1830 2918 1902 2918 Dl
+(50)1705 2938 w
+10 S f
+(\267)2011 2428 w
+(\267)2102 3011 w
+(\267)2192 3035 w
+(\267)2282 2938 w
+(\267)2372 3157 w
+(\267)2553 2987 w
+(\267)2643 3229 w
+(\267)2733 3205 w
+(\267)2823 3399 w
+(\267)2913 3363 w
+(\267)3184 3399 w
+(\267)3275 3436 w
+(\267)3365 3339 w
+(\267)3455 3558 w
+(\267)3546 3533 w
+(\267)3636 3691 w
+(\267)3726 3587 w
+(\267)3816 3636 w
+(\267)3906 3594 w
+10 R f
+(The ``holes'' in)2 628 1 720 4192 t
+10 I f
+(x)1374 4192 w
+10 R f
+( cancelled due to war.)4 880(-values re\257ect the fact that the 1916, 1940, and 1944 Olympics were)11 2742 2 1418 4192 t
+(Because the previous data \(in)4 1219 1 720 4312 t
+10 CW f
+(400mtimes.d)1975 4312 w
+10 R f
+(\) had just one number per line,)6 1289 1 2635 4312 t
+10 I f
+(grap)3960 4312 w
+10 R f
+(viewed it as a ``time)4 855 1 4185 4312 t
+(series'' and supplied)2 832 1 720 4432 t
+10 I f
+(x)1580 4432 w
+10 R f
+( ,)1 33( 3)1 91( ,)1 33( 2)1 91( ,)1 33(-values of 1)2 477 6 1624 4432 t
+(. . .)2 125 1 2415 4407 t
+(before plotting the data as)4 1053 1 2593 4432 t
+10 I f
+(y)3675 4432 w
+10 R f
+( input to the second)4 799(-values. The)1 522 2 3719 4432 t
+(program has two values per line, so they are interpreted as \()11 2383 1 720 4552 t
+10 I f
+(x)3111 4552 w
+10 R f
+(,)3163 4552 w
+10 I f
+(y)3196 4552 w
+10 R f
+(\) pairs.)1 277 1 3248 4552 t
+( The)1 206( prefer to see the winning times connected by a solid line.)11 2313(Rather than a scatter plot of points, we might)8 1801 3 720 4732 t
+(program)720 4852 w
+9 CW f
+(draw solid)1 540 1 870 5022 t
+(copy "400mpairs.d")1 972 1 870 5132 t
+10 R f
+(produces the graph)2 759 1 720 5312 t
+1902 5492 1902 6932 Dl
+4062 5492 1902 5492 Dl
+4062 6932 4062 5492 Dl
+1902 6932 4062 6932 Dl
+2125 7004 2125 6932 Dl
+(1900)2025 7114 w
+2576 7004 2576 6932 Dl
+(1920)2476 7114 w
+3027 7004 3027 6932 Dl
+(1940)2927 7114 w
+3478 7004 3478 6932 Dl
+(1960)3378 7114 w
+3929 7004 3929 6932 Dl
+(1980)3829 7114 w
+1830 6698 1902 6698 Dl
+(45)1705 6718 w
+1830 6090 1902 6090 Dl
+(50)1705 6110 w
+2124 6163 2034 5580 Dl
+2215 6187 2125 6163 Dl
+2305 6090 2215 6187 Dl
+2395 6308 2305 6090 Dl
+2575 6140 2395 6309 Dl
+2666 6381 2576 6139 Dl
+2756 6357 2666 6381 Dl
+2846 6551 2756 6357 Dl
+2936 6515 2846 6551 Dl
+3206 6551 2936 6515 Dl
+3297 6587 3207 6551 Dl
+3388 6491 3298 6588 Dl
+3478 6709 3388 6491 Dl
+3568 6686 3478 6710 Dl
+3659 6842 3569 6685 Dl
+3749 6739 3659 6843 Dl
+3839 6787 3749 6739 Dl
+3929 6747 3839 6788 Dl
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(4 GRAP)1 4320 1 720 600 t
+10 R f
+( \(Remember)1 524( 1924 with a time of 47.6 seconds.)7 1395(Eric Liddell of Great Britain won his gold medal in Paris in)11 2401 3 720 960 t
+(``Chariots of Fire''?\))2 842 1 720 1080 t
+(We can make the graph more attractive by modifying its frame and adding labels.)13 3260 1 720 1260 t
+9 CW f
+(frame invis ht 2 wid 3 left solid bot solid)9 2322 1 870 1430 t
+(label left "Time" "\(in seconds\)")4 1728 1 870 1540 t
+(label bot "Olympic 400 Meter Run: Winning Times")7 2592 1 870 1650 t
+(draw solid)1 540 1 870 1760 t
+(copy "400mpairs.d")1 972 1 870 1870 t
+10 R f
+(The)720 2050 w
+10 CW f
+(frame)916 2050 w
+10 R f
+( is)1 109(command describes the graph's bounding box: the overall frame \(which has four sides\))12 3674 2 1257 2050 t
+( the)1 152(invisible, it is 2 inches high and 3 inches wide \(which happen to be the default height and width\), and)19 4168 2 720 2170 t
+( labels appear on the)4 852( The)1 213( \(they could have been dashed or dotted instead\).)8 2018(left and bottom sides are solid)5 1237 4 720 2290 t
+(left and bottom, as requested.)4 1176 1 720 2410 t
+4320 4030 2160 4030 Dl
+2160 2590 2160 4030 Dl
+2383 4102 2383 4030 Dl
+(1900)2283 4212 w
+2833 4102 2833 4030 Dl
+(1920)2733 4212 w
+3285 4102 3285 4030 Dl
+(1940)3185 4212 w
+3736 4102 3736 4030 Dl
+(1960)3636 4212 w
+4187 4102 4187 4030 Dl
+(1980)4087 4212 w
+2088 3796 2160 3796 Dl
+(45)1963 3816 w
+2088 3188 2160 3188 Dl
+(50)1963 3208 w
+(Time)1623 3270 w
+(\(in seconds\))1 485 1 1486 3390 t
+(Olympic 400 Meter Run: Winning Times)5 1658 1 2411 4350 t
+2382 3261 2292 2678 Dl
+2473 3285 2383 3261 Dl
+2563 3188 2473 3285 Dl
+2653 3406 2563 3188 Dl
+2833 3238 2653 3407 Dl
+2923 3479 2833 3237 Dl
+3013 3455 2923 3479 Dl
+3104 3649 3014 3455 Dl
+3194 3613 3104 3649 Dl
+3464 3649 3194 3613 Dl
+3555 3685 3465 3649 Dl
+3646 3589 3556 3686 Dl
+3736 3807 3646 3589 Dl
+3826 3784 3736 3808 Dl
+3916 3940 3826 3783 Dl
+4006 3837 3916 3941 Dl
+4096 3885 4006 3837 Dl
+4186 3845 4096 3886 Dl
+(To set the range of each axis,)6 1208 1 720 4570 t
+10 I f
+(grap)1960 4570 w
+10 R f
+( both dimensions by seven percent at each)7 1739(examines the data and pads)4 1120 2 2181 4570 t
+(end. The)1 376 1 720 4690 t
+10 CW f
+(coord)1123 4690 w
+10 R f
+( or both axes explicitly;)4 948(\(``coordinates''\) command allows you to specify the range of one)9 2642 2 1450 4690 t
+(it also turns off automatic padding.)5 1399 1 720 4810 t
+9 CW f
+(frame invis ht 2 wid 3 left solid bot solid)9 2322 1 870 4980 t
+(label left "Time" "\(in seconds\)")4 1728 1 870 5090 t
+(label bot "Olympic 400 Meter Run: Winning Times")7 2592 1 870 5200 t
+(coord x 1894,1982 y 42, 56)5 1404 1 870 5310 t
+(draw solid)1 540 1 870 5420 t
+(copy "400mpairs.d")1 972 1 870 5530 t
+10 R f
+(The)720 5710 w
+10 I f
+(y)904 5710 w
+10 R f
+(-axis now ranges from 42 to 56 seconds \(a little more than before\), and the)14 3036 1 948 5710 t
+10 I f
+(x)4013 5710 w
+10 R f
+( 1982)1 230(-axis from 1894 to)3 753 2 4057 5710 t
+(\(a little less\).)2 519 1 720 5830 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(GRAP 5)1 4320 1 720 600 t
+4294 2400 2134 2400 Dl
+2134 960 2134 2400 Dl
+2281 2472 2281 2400 Dl
+10 R f
+(1900)2181 2582 w
+2771 2472 2771 2400 Dl
+(1920)2671 2582 w
+3262 2472 3262 2400 Dl
+(1940)3162 2582 w
+3754 2472 3754 2400 Dl
+(1960)3654 2582 w
+4245 2472 4245 2400 Dl
+(1980)4145 2582 w
+2062 2091 2134 2091 Dl
+(45)1937 2111 w
+2062 1577 2134 1577 Dl
+(50)1937 1597 w
+2062 1062 2134 1062 Dl
+(55)1937 1082 w
+(Time)1597 1640 w
+(\(in seconds\))1 485 1 1460 1760 t
+(Olympic 400 Meter Run: Winning Times)5 1658 1 2385 2720 t
+2279 1638 2182 1145 Dl
+2378 1658 2281 1638 Dl
+2476 1577 2379 1659 Dl
+2574 1762 2477 1577 Dl
+2772 1618 2576 1762 Dl
+2868 1823 2771 1618 Dl
+2967 1804 2870 1824 Dl
+3065 1967 2968 1803 Dl
+3163 1938 3066 1968 Dl
+3459 1967 3165 1937 Dl
+3556 1998 3459 1968 Dl
+3654 1916 3557 1998 Dl
+3753 2101 3656 1916 Dl
+3851 2081 3754 2101 Dl
+3948 2214 3851 2081 Dl
+4047 2126 3950 2214 Dl
+4145 2167 4048 2126 Dl
+4243 2132 4146 2167 Dl
+(The ticks in the preceding graphs were generated by)8 2195 1 720 2940 t
+10 I f
+(grap)2954 2940 w
+10 R f
+( you would)2 480( If)1 131( reasonable values.)2 786(guessing at)1 461 4 3182 2940 t
+(rather provide your own, you may use the)7 1669 1 720 3060 t
+10 CW f
+(ticks)2414 3060 w
+10 R f
+(command, which comes in the \257avors illustrated below.)7 2234 1 2739 3060 t
+9 CW f
+(frame invis ht 2 wid 3 left solid bot solid)9 2322 1 870 3230 t
+(label left "Time" "\(in seconds\)" left .2)6 2160 1 870 3340 t
+(label bot "Olympic 400 Meter Run: Winning Times")7 2592 1 870 3450 t
+(coord x 1894,1982 y 42, 56)5 1404 1 870 3560 t
+(ticks left out at 44 "44", 46, 48 "48", 50, 52 "52", 54)12 2970 1 870 3670 t
+(ticks bot in from 1900 to 1980 by 20)8 1944 1 870 3780 t
+(draw solid)1 540 1 870 3890 t
+(copy "400mpairs.d")1 972 1 870 4000 t
+10 R f
+(The \256rst)1 345 1 720 4180 t
+10 CW f
+(ticks)1099 4180 w
+10 R f
+( puts the ticks facing out at the numbers in the list.)11 2126(command deals with the left axis: it)6 1481 2 1433 4180 t
+10 I f
+(grap)720 4300 w
+10 R f
+( that when no labels at all are given, each number serves)11 2272(puts labels only at values with strings, except)7 1831 2 937 4300 t
+( label, as in the second)5 919(as its own)2 404 2 720 4420 t
+10 CW f
+(ticks)2071 4420 w
+10 R f
+( command is for the bottom axis: it puts the ticks)10 1986(command. That)1 655 2 2399 4420 t
+( command)1 424( The)1 210( 1980.)1 255(facing in at steps of 20 from 1900 to)8 1502 4 720 4540 t
+10 CW f
+(ticks off)1 545 1 3141 4540 t
+10 R f
+(turns off all ticks.)3 720 1 3716 4540 t
+10 I f
+(Grap)4491 4540 w
+10 R f
+(does its)1 308 1 4732 4540 t
+( place labels appropriately, but it sometimes needs your help: the)10 2684(best to)1 272 2 720 4660 t
+10 CW f
+(left .2)1 429 1 3710 4660 t
+10 R f
+(clause moves the left)3 867 1 4173 4660 t
+(label 0.2 inches further left to avoid the new ticks.)9 2005 1 720 4780 t
+4366 6400 2206 6400 Dl
+2206 4960 2206 6400 Dl
+(Time)1525 5640 w
+(\(in seconds\))1 485 1 1388 5760 t
+(Olympic 400 Meter Run: Winning Times)5 1658 1 2457 6720 t
+2134 6194 2206 6194 Dl
+(44)2009 6214 w
+2134 5988 2206 5988 Dl
+2134 5782 2206 5782 Dl
+(48)2009 5802 w
+2134 5577 2206 5577 Dl
+2134 5371 2206 5371 Dl
+(52)2009 5391 w
+2134 5165 2206 5165 Dl
+2353 6328 2353 6400 Dl
+(1900)2253 6510 w
+2843 6328 2843 6400 Dl
+(1920)2743 6510 w
+3334 6328 3334 6400 Dl
+(1940)3234 6510 w
+3826 6328 3826 6400 Dl
+(1960)3726 6510 w
+4317 6328 4317 6400 Dl
+(1980)4217 6510 w
+2351 5638 2254 5145 Dl
+2450 5658 2353 5638 Dl
+2548 5577 2451 5659 Dl
+2646 5762 2549 5577 Dl
+2844 5618 2648 5762 Dl
+2940 5823 2843 5618 Dl
+3039 5804 2942 5824 Dl
+3137 5967 3040 5803 Dl
+3235 5938 3138 5968 Dl
+3531 5967 3237 5937 Dl
+3628 5998 3531 5968 Dl
+3726 5916 3629 5998 Dl
+3825 6101 3728 5916 Dl
+3923 6081 3826 6101 Dl
+4020 6214 3923 6081 Dl
+4119 6126 4022 6214 Dl
+4217 6167 4120 6126 Dl
+4315 6132 4218 6167 Dl
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+(6 GRAP)1 4320 1 720 600 t
+10 R f
+(The \256le)1 309 1 720 960 t
+10 CW f
+(400wpairs.d)1055 960 w
+10 R f
+( the women's 400 meter race, which has been run only since)11 2433(contains the times for)3 866 2 1741 960 t
+(1964.)720 1080 w
+9 CW f
+(1964 52)1 378 1 870 1250 t
+(1968 52)1 378 1 870 1360 t
+(1972 51.08)1 540 1 870 1470 t
+(1976 49.29)1 540 1 870 1580 t
+(1980 48.88)1 540 1 870 1690 t
+10 R f
+(To add these times to the graph, we use)8 1578 1 720 1870 t
+9 CW f
+(frame invis ht 2 wid 3 left solid bot solid)9 2322 1 870 2040 t
+(label left "Time" "\(in seconds\)" left .2)6 2160 1 870 2150 t
+(label bot "Olympic 400 Meter Run: Winning Times")7 2592 1 870 2260 t
+(coord x 1894,1982 y 42, 56)5 1404 1 870 2370 t
+(ticks left out at 44 "44", 46, 48 "48", 50, 52 "52", 54)12 2970 1 870 2480 t
+(ticks bot in from 1900 to 1980 by 20)8 1944 1 870 2590 t
+(draw solid)1 540 1 870 2700 t
+(copy "400mpairs.d")1 972 1 870 2810 t
+(new dotted)1 540 1 870 2920 t
+(copy "400wpairs.d")1 972 1 870 3030 t
+("Women" size -3 at 1958,52)4 1404 1 870 3140 t
+("Men" size -3 at 1910,47)4 1296 1 870 3250 t
+10 R f
+(The)720 3430 w
+10 CW f
+(new)912 3430 w
+10 R f
+(command tells)1 599 1 1129 3430 t
+10 I f
+(grap)1766 3430 w
+10 R f
+(to end the old curve and to start a new curve \(which in this case will be)16 3047 1 1993 3430 t
+( is placed on the graph by commands of the form)10 1958( Text)1 233(drawn with a dotted line\).)4 1029 3 720 3550 t
+9 CW f
+(")870 3720 w
+10 I f
+(string)924 3720 w
+9 CW f
+(" at)1 216 1 1158 3720 t
+10 I f
+(xvalue)1428 3720 w
+9 CW f
+(,)1688 3720 w
+10 I f
+(yvalue)1742 3720 w
+10 R f
+(The)720 3900 w
+10 CW f
+(size)906 3900 w
+10 R f
+( strings tell)2 459(clauses following the quoted)3 1164 2 1177 3900 t
+10 I f
+(grap)2832 3900 w
+10 R f
+(to shrink the characters by three points \(absolute)7 1987 1 3053 3900 t
+( at the speci\256ed position, but can be adjusted)8 1790( are usually centered)3 825( Strings)1 335(point sizes may also be speci\256ed\).)5 1370 4 720 4020 t
+(by clauses to be illustrated shortly.)5 1388 1 720 4140 t
+4366 5760 2206 5760 Dl
+2206 4320 2206 5760 Dl
+(Time)1525 5000 w
+(\(in seconds\))1 485 1 1388 5120 t
+(Olympic 400 Meter Run: Winning Times)5 1658 1 2457 6080 t
+2134 5554 2206 5554 Dl
+(44)2009 5574 w
+2134 5348 2206 5348 Dl
+2134 5142 2206 5142 Dl
+(48)2009 5162 w
+2134 4937 2206 4937 Dl
+2134 4731 2206 4731 Dl
+(52)2009 4751 w
+2134 4525 2206 4525 Dl
+2353 5688 2353 5760 Dl
+(1900)2253 5870 w
+2843 5688 2843 5760 Dl
+(1920)2743 5870 w
+3334 5688 3334 5760 Dl
+(1940)3234 5870 w
+3826 5688 3826 5760 Dl
+(1960)3726 5870 w
+4317 5688 4317 5760 Dl
+(1980)4217 5870 w
+2351 4998 2254 4505 Dl
+2450 5018 2353 4998 Dl
+2548 4937 2451 5019 Dl
+2646 5122 2549 4937 Dl
+2844 4978 2648 5122 Dl
+2940 5183 2843 4978 Dl
+3039 5164 2942 5184 Dl
+3137 5327 3040 5163 Dl
+3235 5298 3138 5328 Dl
+3531 5327 3237 5297 Dl
+3628 5358 3531 5328 Dl
+3726 5276 3629 5358 Dl
+3825 5461 3728 5276 Dl
+3923 5441 3826 5461 Dl
+4020 5574 3923 5441 Dl
+4119 5486 4022 5574 Dl
+4217 5527 4120 5486 Dl
+4315 5492 4218 5527 Dl
+7 R f
+( .)1 0( .)1 33( .)1 32(. .)1 52 4 3913 4734 t
+(.)4037 4757 w
+(.)4061 4781 w
+(.)4086 4805 w
+(. .)1 18 1 4110 4829 t
+(.)4127 4859 w
+(.)4143 4890 w
+(.)4159 4921 w
+(.)4176 4951 w
+(.)4192 4982 w
+(. .)1 18 1 4208 5013 t
+(.)4241 5027 w
+(.)4273 5041 w
+(.)4307 5055 w
+(Women)3666 4751 w
+(Men)2534 5265 w
+10 R f
+(The \256le)1 308 1 720 6300 t
+10 CW f
+(phone.d)1053 6300 w
+10 R f
+(records the number of telephones in the United States from 1900 to 1970.)12 2938 1 1498 6300 t
+9 CW f
+(00 1.3)1 324 1 870 6470 t
+(01 1.8)1 324 1 870 6580 t
+(02 2.3)1 324 1 870 6690 t
+(03 2.8)1 324 1 870 6800 t
+(04 3.3)1 324 1 870 6910 t
+(x)870 7020 w
+(70 120.2)1 432 1 870 7130 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+10 HB f
+(GRAP 7)1 4320 1 720 600 t
+10 R f
+( truncated to the)3 697(Each line gives a year and the number of telephones present in that year \(in millions,)15 3623 2 720 960 t
+( simple)1 292( The)1 205(nearest hundred thousand\).)2 1078 3 720 1080 t
+10 I f
+(grap)2320 1080 w
+10 R f
+(program)2534 1080 w
+9 CW f
+(copy "phone.d")1 756 1 870 1250 t
+10 R f
+(produces the simple graph)3 1051 1 720 1430 t
+1926 1610 1926 3050 Dl
+4086 1610 1926 1610 Dl
+4086 3050 4086 1610 Dl
+1926 3050 4086 3050 Dl
+2058 3122 2058 3050 Dl
+(-0)2017 3232 w
+2599 3122 2599 3050 Dl
+(20)2549 3232 w
+3141 3122 3141 3050 Dl
+(40)3091 3232 w
+3682 3122 3682 3050 Dl
+(60)3632 3232 w
+1854 2975 1926 2975 Dl
+(-0)1746 2995 w
+1854 2444 1926 2444 Dl
+(50)1729 2464 w
+1854 1913 1926 1913 Dl
+(100)1679 1933 w
+10 S f
+(\267)2035 2981 w
+(\267)2062 2976 w
+(\267)2089 2970 w
+(\267)2116 2965 w
+(\267)2144 2960 w
+(\267)2170 2951 w
+(\267)2198 2943 w
+(\267)2224 2930 w
+(\267)2252 2927 w
+(\267)2279 2922 w
+(\267)2306 2914 w
+(\267)2333 2907 w
+(\267)2360 2902 w
+(\267)2387 2894 w
+(\267)2414 2889 w
+(\267)2441 2883 w
+(\267)2468 2876 w
+(\267)2495 2871 w
+(\267)2522 2867 w
+(\267)2549 2861 w
+(\267)2576 2855 w
+(\267)2604 2848 w
+(\267)2630 2844 w
+(\267)2658 2833 w
+(\267)2684 2825 w
+(\267)2712 2816 w
+(\267)2739 2808 w
+(\267)2766 2800 w
+(\267)2793 2791 w
+(\267)2820 2784 w
+(\267)2847 2782 w
+(\267)2875 2787 w
+(\267)2901 2811 w
+(\267)2929 2818 w
+(\267)2955 2816 w
+(\267)2983 2810 w
+(\267)3010 2800 w
+(\267)3037 2789 w
+(\267)3064 2784 w
+(\267)3091 2774 w
+(\267)3118 2762 w
+(\267)3145 2746 w
+(\267)3172 2730 w
+(\267)3199 2715 w
+(\267)3226 2710 w
+(\267)3253 2699 w
+(\267)3281 2659 w
+(\267)3307 2625 w
+(\267)3335 2589 w
+(\267)3361 2563 w
+(\267)3389 2538 w
+(\267)3416 2511 w
+(\267)3443 2485 w
+(\267)3470 2460 w
+(\267)3497 2434 w
+(\267)3524 2398 w
+(\267)3551 2357 w
+(\267)3578 2319 w
+(\267)3605 2288 w
+(\267)3632 2243 w
+(\267)3659 2206 w
+(\267)3686 2172 w
+(\267)3713 2136 w
+(\267)3741 2098 w
+(\267)3767 2053 w
+(\267)3795 2000 w
+(\267)3821 1946 w
+(\267)3849 1893 w
+(\267)3876 1835 w
+(\267)3903 1771 w
+(\267)3930 1718 w
+10 R f
+( study that we will plot the data with a)9 1737(The number of telephones appears to grow exponentially; to)8 2583 2 720 3482 t
+(logarithmic)720 3602 w
+10 I f
+(y)1208 3602 w
+10 R f
+(-axis by adding)2 620 1 1252 3602 t
+10 CW f
+(log y)1 267 1 1899 3602 t
+10 R f
+(to the)1 227 1 2193 3602 t
+10 CW f
+(coord)2446 3602 w
+10 R f
+( will also add cosmetic changes of labels,)7 1660(command. We)1 608 2 2772 3602 t
+(more ticks, and a solid line to replace the unconnected dots.)10 2385 1 720 3722 t
+9 CW f
+(label left "Millions of" "Telephones" "\(log scale\)" left .5)8 3186 1 870 3892 t
+(coord x 0,70 y 1,130 log y)6 1404 1 870 4002 t
+(ticks left out at 1, 2, 5, 10, 20, 50, 100)10 2268 1 870 4112 t
+(ticks bot out at 0 "1900", 70 "1970")7 1944 1 870 4222 t
+(ticks bot out from 10 to 60 by 10 "'%g")9 2106 1 870 4332 t
+(draw solid)1 540 1 870 4442 t
+(copy "phone.d")1 756 1 870 4552 t
+10 R f
+(The third)1 385 1 720 4732 t
+10 CW f
+(ticks)1146 4732 w
+10 R f
+(command provides a string that is used to print the tick labels.)11 2658 1 1487 4732 t
+9 R f
+(C)4208 4732 w
+10 R f
+(programmers will)1 730 1 4310 4732 t
+(recognize it as a)3 681 1 720 4852 t
+10 CW f
+(printf)1438 4852 w
+10 R f
+( view the ``)3 490(format string; others may)3 1049 2 1835 4852 t
+10 CW f
+(%g)3374 4852 w
+10 R f
+('' as the place to put the number and)8 1546 1 3494 4852 t
+( suppress labels, use)3 822( To)1 165( appear in the labels.)4 839(anything else \(in this case just an apostrophe\) as literal text to)11 2494 4 720 4972 t
+(the empty format string \()4 999 1 720 5092 t
+10 CW f
+("")1719 5092 w
+10 R f
+( program produces)2 748(\). The)1 263 2 1839 5092 t
+2265 5272 2265 6712 Dl
+4425 5272 2265 5272 Dl
+4425 6712 4425 5272 Dl
+2265 6712 4425 6712 Dl
+(Millions of)1 448 1 1274 5892 t
+(Telephones)1268 6012 w
+(\(log scale\))1 418 1 1289 6132 t
+2193 6712 2265 6712 Dl
+(1)2118 6732 w
+2193 6506 2265 6506 Dl
+(2)2118 6526 w
+2193 6236 2265 6236 Dl
+(5)2118 6256 w
+2193 6030 2265 6030 Dl
+(10)2068 6050 w
+2193 5825 2265 5825 Dl
+(20)2068 5845 w
+2193 5554 2265 5554 Dl
+(50)2068 5574 w
+2193 5349 2265 5349 Dl
+(100)2018 5369 w
+2265 6784 2265 6712 Dl
+(1900)2165 6894 w
+4425 6784 4425 6712 Dl
+(1970)4325 6894 w
+2574 6784 2574 6712 Dl
+('10)2508 6894 w
+2882 6784 2882 6712 Dl
+('20)2816 6894 w
+3191 6784 3191 6712 Dl
+('30)3125 6894 w
+3500 6784 3500 6712 Dl
+('40)3434 6894 w
+3808 6784 3808 6712 Dl
+('50)3742 6894 w
+4117 6784 4117 6712 Dl
+('60)4051 6894 w
+2295 6538 2265 6634 Dl
+2326 6465 2296 6537 Dl
+2357 6407 2327 6465 Dl
+2388 6359 2358 6407 Dl
+2419 6294 2389 6358 Dl
+2450 6242 2420 6294 Dl
+2480 6177 2450 6241 Dl
+2511 6163 2481 6177 Dl
+2542 6140 2512 6162 Dl
+2573 6112 2543 6140 Dl
+2604 6087 2574 6112 Dl
+2635 6072 2605 6085 Dl
+2666 6046 2636 6071 Dl
+2696 6031 2666 6046 Dl
+2727 6016 2697 6030 Dl
+2758 5997 2728 6016 Dl
+2789 5985 2759 5997 Dl
+2820 5977 2790 5984 Dl
+2851 5962 2821 5976 Dl
+2882 5949 2852 5962 Dl
+2912 5936 2882 5948 Dl
+2943 5927 2913 5935 Dl
+2974 5905 2944 5927 Dl
+3005 5892 2975 5904 Dl
+3036 5877 3006 5891 Dl
+3067 5864 3037 5877 Dl
+3098 5851 3068 5863 Dl
+3128 5838 3098 5850 Dl
+3159 5827 3129 5837 Dl
+3190 5825 3160 5827 Dl
+3221 5831 3191 5824 Dl
+3252 5867 3222 5831 Dl
+3283 5880 3253 5868 Dl
+3314 5878 3284 5881 Dl
+3344 5867 3314 5877 Dl
+3375 5850 3345 5866 Dl
+3406 5835 3376 5850 Dl
+3437 5828 3407 5835 Dl
+3468 5815 3438 5827 Dl
+3499 5799 3469 5814 Dl
+3530 5779 3500 5799 Dl
+3560 5761 3530 5778 Dl
+3591 5745 3561 5760 Dl
+3622 5740 3592 5745 Dl
+3653 5729 3623 5739 Dl
+3684 5690 3654 5728 Dl
+3715 5662 3685 5690 Dl
+3746 5635 3716 5662 Dl
+3776 5616 3746 5634 Dl
+3807 5599 3777 5615 Dl
+3838 5582 3808 5599 Dl
+3869 5566 3839 5581 Dl
+3900 5553 3870 5566 Dl
+3931 5538 3901 5552 Dl
+3962 5520 3932 5538 Dl
+3992 5500 3962 5520 Dl
+4023 5484 3993 5500 Dl
+4054 5470 4024 5483 Dl
+4085 5452 4055 5470 Dl
+4116 5438 4086 5452 Dl
+4147 5425 4117 5437 Dl
+4178 5413 4148 5425 Dl
+4208 5400 4178 5412 Dl
+4239 5385 4209 5399 Dl
+4270 5370 4240 5385 Dl
+4301 5354 4271 5369 Dl
+4332 5339 4302 5353 Dl
+4363 5323 4333 5338 Dl
+4394 5308 4364 5323 Dl
+4424 5296 4394 5308 Dl
+( \256rst decade of this century, and then settled down to an)11 2395(The number of telephones grew rapidly in the)7 1925 2 720 7144 t
+( rate upset only by a decrease in the Great Depression and a post-war growth spurt to)16 3536(exponential growth)1 784 2 720 7264 t
+(return the curve to its pre-Depression line.)6 1688 1 720 7384 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+10 HB f
+(8 GRAP)1 4320 1 720 600 t
+10 R f
+(Our presentation so far has been to start with a simple)10 2162 1 720 960 t
+10 I f
+(grap)2908 960 w
+10 R f
+( then re\256ne)2 453(program that illustrates the data, and)5 1464 2 3123 960 t
+( design phase, and present rather complex graphs in their \256nal)10 2506( in this document we will ignore the)7 1469(it. Later)1 345 3 720 1080 t
+(form. Beware.)1 598 1 720 1200 t
+(All the examples so far have placed data on the graph implicitly by)12 2799 1 720 1380 t
+10 CW f
+(copy)3554 1380 w
+10 R f
+( \256le of numbers \(either a)5 1039(ing a)1 207 2 3794 1380 t
+( is also possible to draw points and lines)8 1723( It)1 126(time series with one number per line or pairs of numbers\).)10 2471 3 720 1500 t
+(explicitly. The)1 608 1 720 1620 t
+10 I f
+(grap)1353 1620 w
+10 R f
+(commands to draw on a graph are illustrated in the following fragment.)11 2851 1 1567 1620 t
+9 CW f
+(frame ht 2 wid 2)4 864 1 870 1790 t
+(coord x 0,100 y 0,100)4 1134 1 870 1900 t
+(grid dotted bot from 20 to 80 by 20)8 1890 1 870 2010 t
+(grid dotted left from 20 to 80 by 20)8 1944 1 870 2120 t
+( at 50,50)2 486( above)1 432("Text above")1 648 3 870 2340 t
+( rjust at 50,50)3 810( ")1 162("Text rjust)1 594 3 870 2450 t
+(bullet at 80,90)2 810 1 870 2560 t
+( 80,80)1 324(vtick at)1 486 2 870 2670 t
+( \(80,70\))1 432(box at)1 486 2 870 2780 t
+( 80, 60)2 378(times at)1 486 2 870 2890 t
+(circle at 50,50)2 810 1 870 3110 t
+(circle at 50,80 radius .25)4 1404 1 870 3220 t
+(line dashed from 10,90 to 30,90)5 1674 1 870 3330 t
+(arrow from 10,70 to 30,90)4 1350 1 870 3440 t
+(draw A solid)2 648 1 870 3660 t
+(draw B dashed delta)3 1026 1 870 3770 t
+(next A at 10,10)3 810 1 870 3880 t
+(next B at 10,20)3 810 1 870 3990 t
+(next A at 50,20)3 810 1 870 4100 t
+(next A at 90,10)3 810 1 870 4210 t
+(next B at 50,30)3 810 1 870 4320 t
+(next B at 90,30)3 810 1 870 4430 t
+10 R f
+(The)720 4610 w
+10 CW f
+(grid)900 4610 w
+10 R f
+(command is similar to the)4 1039 1 1165 4610 t
+10 CW f
+(ticks)2229 4610 w
+10 R f
+( The)1 206( that grid lines extend across the frame.)7 1576(command, except)1 704 3 2554 4610 t
+( \(such as)2 403( plotting characters)2 821( The)1 233(next few commands plot text at speci\256ed positions.)7 2245 4 720 4730 t
+10 CW f
+(bullet)4474 4730 w
+10 R f
+(\) are)1 206 1 4834 4730 t
+( arbitrary characters, the visual centers)5 1584( Unlike)1 331( on that shortly.)3 655( \320 more)2 337(implemented as prede\256ned macros)3 1413 5 720 4850 t
+( The)1 226(of the markers are near their plotting centers.)7 1942 2 720 4970 t
+10 CW f
+(circle)2934 4970 w
+10 R f
+( circle centered at the)4 932(command draws a)2 768 2 3340 4970 t
+( the circle will be the)5 900( radius in inches may be speci\256ed; if no radius is given, then)12 2549( A)1 133(speci\256ed location.)1 738 4 720 5090 t
+( The)1 210(small circle shown at the center of the graph.)8 1833 2 720 5210 t
+10 CW f
+(line)2793 5210 w
+10 R f
+(and)3063 5210 w
+10 CW f
+(arrow)3237 5210 w
+10 R f
+( objects)1 312(commands draw the obvious)3 1161 2 3567 5210 t
+(shown at the upper left.)4 940 1 720 5330 t
+2204 5510 2204 6950 Dl
+3644 5510 2204 5510 Dl
+3644 6950 3644 5510 Dl
+2204 6950 3644 6950 Dl
+7 R f
+(.)2482 6953 w
+(.)2482 6917 w
+(.)2482 6881 w
+(.)2482 6845 w
+(.)2482 6809 w
+(.)2482 6773 w
+(.)2482 6737 w
+(.)2482 6701 w
+(.)2482 6665 w
+(.)2482 6629 w
+(.)2482 6593 w
+(.)2482 6557 w
+(.)2482 6521 w
+(.)2482 6485 w
+(.)2482 6449 w
+(.)2482 6413 w
+(.)2482 6377 w
+(.)2482 6341 w
+(.)2482 6305 w
+(.)2482 6269 w
+(.)2482 6233 w
+(.)2482 6197 w
+(.)2482 6161 w
+(.)2482 6125 w
+(.)2482 6089 w
+(.)2482 6053 w
+(.)2482 6017 w
+(.)2482 5981 w
+(.)2482 5945 w
+(.)2482 5909 w
+(.)2482 5873 w
+(.)2482 5837 w
+(.)2482 5801 w
+(.)2482 5765 w
+(.)2482 5729 w
+(.)2482 5693 w
+(.)2482 5657 w
+(.)2482 5621 w
+(.)2482 5585 w
+(.)2482 5549 w
+(.)2482 5513 w
+10 R f
+(20)2442 7060 w
+7 R f
+(.)2770 6953 w
+(.)2770 6917 w
+(.)2770 6881 w
+(.)2770 6845 w
+(.)2770 6809 w
+(.)2770 6773 w
+(.)2770 6737 w
+(.)2770 6701 w
+(.)2770 6665 w
+(.)2770 6629 w
+(.)2770 6593 w
+(.)2770 6557 w
+(.)2770 6521 w
+(.)2770 6485 w
+(.)2770 6449 w
+(.)2770 6413 w
+(.)2770 6377 w
+(.)2770 6341 w
+(.)2770 6305 w
+(.)2770 6269 w
+(.)2770 6233 w
+(.)2770 6197 w
+(.)2770 6161 w
+(.)2770 6125 w
+(.)2770 6089 w
+(.)2770 6053 w
+(.)2770 6017 w
+(.)2770 5981 w
+(.)2770 5945 w
+(.)2770 5909 w
+(.)2770 5873 w
+(.)2770 5837 w
+(.)2770 5801 w
+(.)2770 5765 w
+(.)2770 5729 w
+(.)2770 5693 w
+(.)2770 5657 w
+(.)2770 5621 w
+(.)2770 5585 w
+(.)2770 5549 w
+(.)2770 5513 w
+10 R f
+(40)2730 7060 w
+7 R f
+(.)3058 6953 w
+(.)3058 6917 w
+(.)3058 6881 w
+(.)3058 6845 w
+(.)3058 6809 w
+(.)3058 6773 w
+(.)3058 6737 w
+(.)3058 6701 w
+(.)3058 6665 w
+(.)3058 6629 w
+(.)3058 6593 w
+(.)3058 6557 w
+(.)3058 6521 w
+(.)3058 6485 w
+(.)3058 6449 w
+(.)3058 6413 w
+(.)3058 6377 w
+(.)3058 6341 w
+(.)3058 6305 w
+(.)3058 6269 w
+(.)3058 6233 w
+(.)3058 6197 w
+(.)3058 6161 w
+(.)3058 6125 w
+(.)3058 6089 w
+(.)3058 6053 w
+(.)3058 6017 w
+(.)3058 5981 w
+(.)3058 5945 w
+(.)3058 5909 w
+(.)3058 5873 w
+(.)3058 5837 w
+(.)3058 5801 w
+(.)3058 5765 w
+(.)3058 5729 w
+(.)3058 5693 w
+(.)3058 5657 w
+(.)3058 5621 w
+(.)3058 5585 w
+(.)3058 5549 w
+(.)3058 5513 w
+10 R f
+(60)3018 7060 w
+7 R f
+(.)3346 6953 w
+(.)3346 6917 w
+(.)3346 6881 w
+(.)3346 6845 w
+(.)3346 6809 w
+(.)3346 6773 w
+(.)3346 6737 w
+(.)3346 6701 w
+(.)3346 6665 w
+(.)3346 6629 w
+(.)3346 6593 w
+(.)3346 6557 w
+(.)3346 6521 w
+(.)3346 6485 w
+(.)3346 6449 w
+(.)3346 6413 w
+(.)3346 6377 w
+(.)3346 6341 w
+(.)3346 6305 w
+(.)3346 6269 w
+(.)3346 6233 w
+(.)3346 6197 w
+(.)3346 6161 w
+(.)3346 6125 w
+(.)3346 6089 w
+(.)3346 6053 w
+(.)3346 6017 w
+(.)3346 5981 w
+(.)3346 5945 w
+(.)3346 5909 w
+(.)3346 5873 w
+(.)3346 5837 w
+(.)3346 5801 w
+(.)3346 5765 w
+(.)3346 5729 w
+(.)3346 5693 w
+(.)3346 5657 w
+(.)3346 5621 w
+(.)3346 5585 w
+(.)3346 5549 w
+(.)3346 5513 w
+10 R f
+(80)3306 7060 w
+7 R f
+(. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .)40 1458 1 2194 6665 t
+10 R f
+(20)2079 6682 w
+7 R f
+(. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .)40 1458 1 2194 6377 t
+10 R f
+(40)2079 6394 w
+7 R f
+(. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .)40 1458 1 2194 6089 t
+10 R f
+(60)2079 6106 w
+7 R f
+(. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .)40 1458 1 2194 5801 t
+10 R f
+(80)2079 5818 w
+(Text above)1 446 1 2701 6190 t
+(Text rjust)1 386 1 2488 6250 t
+5 S f
+(\267)3345 5674 w
+10 S f
+(|)3346 5818 w
+6 S1 f
+()3341 5962 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_bx {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    fill
+} def
+%%EndGlobal
+/saveobj save def
+mark
+6 S1 f
+3341 5962 m
+30 build_bx
+3371 5962 m
+7 S f
+(\264)3337 6106 w
+7 S1 f
+()2911 6250 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_ob {
+    pop
+    size 3 mul 16 div /rad exch def
+    currentpoint
+    newpath
+    rad add exch rad add exch rad 0 360 arc
+    stroke
+} def
+%%EndGlobal
+/saveobj save def
+mark
+7 S1 f
+2911 6250 m
+27 build_ob
+2938 6250 m
+10 R f
+2744 5798 360 360 De
+2384 5654 2348 5654 Dl
+2446 5654 2410 5654 Dl
+2510 5654 2474 5654 Dl
+2573 5654 2537 5654 Dl
+2636 5654 2600 5654 Dl
+2636 5654 2348 5942 Dl
+2636 5654 2598 5717 Dl
+2635 5654 2572 5692 Dl
+7 S f
+(D)2327 6682 w
+10 R f
+2924 6662 2348 6806 Dl
+3500 6806 2924 6662 Dl
+2383 6654 2348 6662 Dl
+2450 6637 2415 6645 Dl
+2518 6620 2483 6628 Dl
+2586 6603 2551 6611 Dl
+2653 6586 2618 6594 Dl
+2721 6569 2686 6577 Dl
+2789 6552 2754 6560 Dl
+2856 6535 2821 6543 Dl
+2923 6518 2888 6526 Dl
+7 S f
+(D)2903 6538 w
+10 R f
+2960 6518 2924 6518 Dl
+3037 6518 3001 6518 Dl
+3114 6518 3078 6518 Dl
+3191 6518 3155 6518 Dl
+3269 6518 3233 6518 Dl
+3346 6518 3310 6518 Dl
+3423 6518 3387 6518 Dl
+3500 6518 3464 6518 Dl
+7 S f
+(D)3479 6538 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Page: 9 9
+/saveobj save def
+mark
+9 pagesetup
+10 HB f
+(GRAP 9)1 4320 1 720 600 t
+10 R f
+(This \256gure also illustrates the combined use of the)8 2071 1 720 960 t
+10 CW f
+(draw)2824 960 w
+10 R f
+(and)3097 960 w
+10 CW f
+(next)3274 960 w
+10 R f
+(commands. Saying)1 794 1 3547 960 t
+10 CW f
+(draw A solid)2 666 1 4374 960 t
+10 R f
+( a connected sequence of line fragments to be called)9 2080(de\256nes the style for)3 788 2 720 1080 t
+10 CW f
+(A)3613 1080 w
+10 R f
+( commands of)2 566(. Subsequent)1 536 2 3673 1080 t
+10 CW f
+(next)4800 1080 w
+(A at)1 206 1 720 1200 t
+10 I f
+(point)952 1200 w
+10 R f
+(add)1184 1200 w
+10 I f
+(point)1354 1200 w
+10 R f
+(to the end of)3 505 1 1586 1200 t
+10 CW f
+(A)2117 1200 w
+10 R f
+( are two such sequences active in the above example \()10 2175(. There)1 309 2 2177 1200 t
+10 CW f
+(A)4661 1200 w
+10 R f
+(and)4748 1200 w
+10 CW f
+(B)4919 1200 w
+10 R f
+(\);)4979 1200 w
+(note that their)2 615 1 720 1320 t
+10 CW f
+(next)1390 1320 w
+10 R f
+( the prede\256ned string)3 936( Because)1 412(commands are intermixed.)2 1122 3 1685 1320 t
+10 CW f
+(delta)4210 1320 w
+10 R f
+(follows the)1 476 1 4564 1320 t
+(speci\256cation of)1 613 1 720 1440 t
+10 CW f
+(B)1358 1440 w
+10 R f
+(, that string is plotted at each point in the sequence.)10 2048 1 1418 1440 t
+10 I f
+(Grap)720 1620 w
+10 R f
+( the usual)2 437(has numeric variables \(implemented as double-precision \257oating point numbers\) and)9 3621 2 982 1620 t
+( mathematical functions; see the reference section in Appendix A for)10 2799(collection of arithmetic operators and)4 1521 2 720 1740 t
+(details.)720 1860 w
+10 I f
+(Grap)720 2040 w
+10 R f
+(provides the same rudimentary macro facility that)6 1991 1 956 2040 t
+10 I f
+(pic)2972 2040 w
+10 R f
+(does:)3119 2040 w
+9 CW f
+(define)870 2210 w
+10 I f
+(name)1248 2210 w
+9 CW f
+(X)1518 2210 w
+10 I f
+(replacement text)1 662 1 1626 2210 t
+9 CW f
+(X)2342 2210 w
+10 R f
+(de\256nes)720 2390 w
+10 I f
+(name)1034 2390 w
+10 R f
+(to be the)2 356 1 1281 2390 t
+10 I f
+(replacement text)1 668 1 1668 2390 t
+10 R f
+(.)2336 2390 w
+10 CW f
+(X)2418 2390 w
+10 R f
+(is any character that does not appear in the replacement; open)10 2530 1 2510 2390 t
+(and closing braces)2 777 1 720 2510 t
+10 CW f
+({ })1 180 1 1542 2510 t
+10 R f
+( subsequent occurrence of)3 1095( Any)1 241( be used as delimiters.)4 961(may also)1 378 4 1767 2510 t
+10 I f
+(name)4486 2510 w
+10 R f
+(will be)1 294 1 4746 2510 t
+(replaced by)1 462 1 720 2630 t
+10 I f
+(replacement text)1 662 1 1207 2630 t
+10 R f
+(.)1869 2630 w
+(The replacement text of a macro de\256nition may contain occurrences of)10 2866 1 720 2810 t
+10 CW f
+($1)3615 2810 w
+10 R f
+(,)3735 2810 w
+10 CW f
+($2)3789 2810 w
+10 R f
+(, etc.; these will be replaced)5 1131 1 3909 2810 t
+( invocation for a macro with)5 1234( The)1 225( invoked.)1 392(by the corresponding actual arguments when the macro is)8 2469 4 720 2930 t
+(arguments is)1 508 1 720 3050 t
+10 I f
+(name)870 3220 w
+9 CW f
+(\()1086 3220 w
+10 I f
+(arg1)1140 3220 w
+9 CW f
+(,)1329 3220 w
+10 I f
+(arg2)1437 3220 w
+9 CW f
+(,)1626 3220 w
+9 S f
+(\274)1734 3220 w
+9 CW f
+(\))1824 3220 w
+10 R f
+(Non-existent arguments are replaced by null strings.)6 2088 1 720 3400 t
+(The following)1 581 1 720 3580 t
+10 I f
+(grap)1338 3580 w
+10 R f
+( to the square and)4 756(program uses macros and arithmetic to plot crude approximations)8 2720 2 1564 3580 t
+(square root functions.)2 868 1 720 3700 t
+9 CW f
+(frame ht 1.5 wid 1.5)4 1080 1 870 3870 t
+(define square X \($1\)*\($1\) X)4 1458 1 870 3980 t
+(define root { exp\(log\($1\)/2\) })4 1620 1 870 4090 t
+(define P !)2 540 1 870 4200 t
+(times at i, square\(i\); i=i+1)4 1512 1 1086 4310 t
+(circle at j, root\(j\); j=j+5)4 1458 1 1086 4420 t
+(!)870 4530 w
+(i=1; j=5)1 432 1 870 4640 t
+(P; P; P; P; P)4 702 1 870 4750 t
+10 R f
+(Because)720 4930 w
+10 I f
+(grap)1077 4930 w
+10 R f
+(has the square root function)4 1109 1 1291 4930 t
+10 CW f
+(sqrt)2425 4930 w
+10 R f
+(, the macro)2 446 1 2665 4930 t
+10 CW f
+(root)3136 4930 w
+10 R f
+( program produces)2 748( The)1 205(is super\257uous.)1 578 3 3401 4930 t
+2442 5110 2442 6190 Dl
+3522 5110 2442 5110 Dl
+3522 6190 3522 5110 Dl
+2442 6190 3522 6190 Dl
+2468 6262 2468 6190 Dl
+(-0)2427 6372 w
+2666 6262 2666 6190 Dl
+(5)2641 6372 w
+2864 6262 2864 6190 Dl
+(10)2814 6372 w
+3061 6262 3061 6190 Dl
+(15)3011 6372 w
+3258 6262 3258 6190 Dl
+(20)3208 6372 w
+3455 6262 3455 6190 Dl
+(25)3405 6372 w
+2370 6163 2442 6163 Dl
+(-0)2262 6183 w
+2370 5966 2442 5966 Dl
+(5)2295 5986 w
+2370 5768 2442 5768 Dl
+(10)2245 5788 w
+2370 5570 2442 5570 Dl
+(15)2245 5590 w
+2370 5373 2442 5373 Dl
+(20)2245 5393 w
+2370 5176 2442 5176 Dl
+(25)2245 5196 w
+7 S f
+(\264)2489 6143 w
+7 S1 f
+()2653 6094 w
+2653 6094 m
+27 build_ob
+2680 6094 m
+7 S f
+(\264)2529 6024 w
+7 S1 f
+()2851 6058 w
+2851 6058 m
+27 build_ob
+2878 6058 m
+7 S f
+(\264)2568 5827 w
+7 S1 f
+()3048 6030 w
+3048 6030 m
+27 build_ob
+3075 6030 m
+7 S f
+(\264)2608 5551 w
+7 S1 f
+()3245 6006 w
+3245 6006 m
+27 build_ob
+3272 6006 m
+7 S f
+(\264)2647 5196 w
+7 S1 f
+()3442 5986 w
+3442 5986 m
+27 build_ob
+3469 5986 m
+10 R f
+(The)720 6622 w
+10 CW f
+(copy)904 6622 w
+10 R f
+(command has a)2 629 1 1173 6622 t
+10 CW f
+(thru)1831 6622 w
+10 R f
+( line of a \256le to be treated as though it were a)12 1862(parameter that allows each)3 1078 2 2100 6622 t
+( is the typical)3 545( This)1 231(macro call, with the \256rst \256eld serving as the \256rst argument, and so on.)13 2844 3 720 6742 t
+10 I f
+(grap)4368 6742 w
+10 R f
+(mechanism)4585 6742 w
+( stored as time series or as \()7 1183(for plotting \256les that are not)5 1169 2 720 6862 t
+10 I f
+(x)3080 6862 w
+10 R f
+(,)3132 6862 w
+10 I f
+(y)3165 6862 w
+10 R f
+( will illustrate its use on the \256le)7 1336( We)1 199(\) pairs.)1 288 3 3217 6862 t
+10 CW f
+(states.d)720 6982 w
+10 R f
+(, which contains data on the \256fty states.)7 1579 1 1200 6982 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 9 9
+%%Page: 10 10
+/saveobj save def
+mark
+10 pagesetup
+10 HB f
+(10 GRAP)1 4320 1 720 600 t
+9 CW f
+( 401851)1 702(AK 1)1 486 2 870 950 t
+( 469557)1 702(WY 1)1 486 2 870 1060 t
+( 511456)1 702(VT 1)1 486 2 870 1170 t
+( 594338)1 702(DE 1)1 486 2 870 1280 t
+( 652717)1 702(ND 1)1 486 2 870 1390 t
+(x)870 1500 w
+(CA 45 23667902)2 1296 1 870 1610 t
+10 R f
+(The \256rst \256eld is the postal abbreviation of the state's name \(Alaska, Wyoming, Vermont,)13 3661 1 720 1790 t
+10 S f
+(\274)4415 1790 w
+10 R f
+(\), the second)2 525 1 4515 1790 t
+( the number of Representatives to Congress from the state after the 1981 reapportionment, and the)15 4041(\256eld is)1 279 2 720 1910 t
+( in increasing)2 558( states appear)2 555( The)1 214(third \256eld is the population of the state as measured in the 1980 Census.)13 2993 4 720 2030 t
+(order of population.)2 796 1 720 2150 t
+( the)1 159( \(In)1 178( as population, representative pairs.)4 1462(We will \256rst plot this data)5 1097 4 720 2330 t
+10 CW f
+(coord)3653 2330 w
+10 R f
+(statement,)3990 2330 w
+10 CW f
+(log log)1 420 1 4435 2330 t
+10 R f
+(is a)1 148 1 4892 2330 t
+(synonym for)1 508 1 720 2450 t
+10 CW f
+(log x log y)3 660 1 1253 2450 t
+10 R f
+(.\))1913 2450 w
+9 CW f
+(label left "Representatives" "to Congress" left .3)6 2700 1 870 2620 t
+(label bot "Population \(Millions\)")3 1782 1 870 2730 t
+(coord x .3,30 y .8,50 log log)6 1566 1 870 2840 t
+(define PlotState X circle at \($3/1e6,$2\) X)6 2268 1 870 2950 t
+(copy "states.d" thru PlotState)3 1620 1 870 3060 t
+10 R f
+(Although the population is given in persons, the)7 1992 1 720 3240 t
+10 CW f
+(PlotState)2747 3240 w
+10 R f
+(macro plots the population in millions by)6 1717 1 3323 3240 t
+(dividing the third input \256eld by one million \(written in exponential notation as)12 3134 1 720 3360 t
+10 CW f
+(1e6)3879 3360 w
+10 R f
+(, for 1)2 241 1 4059 3360 t
+10 S f
+(\264)4308 3360 w
+10 R f
+(10)4371 3360 w
+7 R f
+(6)4476 3320 w
+10 R f
+(\).)4519 3360 w
+2340 3563 2340 5003 Dl
+4500 3563 2340 3563 Dl
+4500 5003 4500 3563 Dl
+2340 5003 4500 5003 Dl
+2904 5075 2904 5003 Dl
+(1)2879 5185 w
+3984 5075 3984 5003 Dl
+(10)3934 5185 w
+2268 4925 2340 4925 Dl
+(1)2193 4945 w
+2268 4684 2340 4684 Dl
+(2)2193 4704 w
+2268 4365 2340 4365 Dl
+(5)2193 4385 w
+2268 4123 2340 4123 Dl
+(10)2143 4143 w
+2268 3882 2340 3882 Dl
+(20)2143 3902 w
+(Representatives)1304 4243 w
+(to Congress)1 475 1 1383 4363 t
+(Population \(Millions\))1 865 1 2988 5323 t
+7 S1 f
+()2463 4945 w
+2463 4945 m
+27 build_ob
+2490 4945 m
+()2537 4945 w
+2537 4945 m
+27 build_ob
+2564 4945 m
+()2577 4945 w
+2577 4945 m
+27 build_ob
+2604 4945 m
+()2647 4945 w
+2647 4945 m
+27 build_ob
+2674 4945 m
+()2691 4945 w
+2691 4945 m
+27 build_ob
+2718 4945 m
+()2717 4945 w
+2717 4945 m
+27 build_ob
+2744 4945 m
+()2779 4704 w
+2779 4704 m
+27 build_ob
+2806 4704 m
+()2787 4704 w
+2787 4704 m
+27 build_ob
+2814 4704 m
+()2852 4704 w
+2852 4704 m
+27 build_ob
+2879 4704 m
+()2864 4704 w
+2864 4704 m
+27 build_ob
+2891 4704 m
+()2866 4704 w
+2866 4704 m
+27 build_ob
+2893 4704 m
+()2874 4704 w
+2874 4704 m
+27 build_ob
+2901 4704 m
+()2946 4704 w
+2946 4704 m
+27 build_ob
+2973 4704 m
+()3016 4562 w
+3016 4562 m
+27 build_ob
+3043 4562 m
+()3069 4562 w
+3069 4562 m
+27 build_ob
+3096 4562 m
+()3103 4562 w
+3103 4562 m
+27 build_ob
+3130 4562 m
+()3204 4462 w
+3204 4462 m
+27 build_ob
+3231 4462 m
+()3279 4462 w
+3279 4462 m
+27 build_ob
+3306 4462 m
+()3295 4385 w
+3295 4385 m
+27 build_ob
+3322 4385 m
+()3325 4385 w
+3325 4385 m
+27 build_ob
+3352 4385 m
+()3345 4385 w
+3345 4385 m
+27 build_ob
+3372 4385 m
+()3360 4385 w
+3360 4385 m
+27 build_ob
+3387 4385 m
+()3389 4321 w
+3389 4321 m
+27 build_ob
+3416 4321 m
+()3393 4321 w
+3393 4321 m
+27 build_ob
+3420 4321 m
+()3410 4321 w
+3410 4321 m
+27 build_ob
+3437 4321 m
+()3423 4321 w
+3423 4321 m
+27 build_ob
+3450 4321 m
+()3425 4321 w
+3425 4321 m
+27 build_ob
+3452 4321 m
+()3500 4267 w
+3500 4267 m
+27 build_ob
+3527 4267 m
+()3529 4267 w
+3529 4267 m
+27 build_ob
+3556 4267 m
+()3551 4221 w
+3551 4221 m
+27 build_ob
+3578 4221 m
+()3557 4221 w
+3557 4221 m
+27 build_ob
+3584 4221 m
+()3565 4221 w
+3565 4221 m
+27 build_ob
+3592 4221 m
+()3566 4221 w
+3566 4221 m
+27 build_ob
+3593 4221 m
+()3606 4180 w
+3606 4180 m
+27 build_ob
+3633 4180 m
+()3617 4180 w
+3617 4180 m
+27 build_ob
+3644 4180 m
+()3638 4180 w
+3638 4180 m
+27 build_ob
+3665 4180 m
+()3677 4143 w
+3677 4143 m
+27 build_ob
+3704 4143 m
+()3687 4143 w
+3687 4143 m
+27 build_ob
+3714 4143 m
+()3690 4143 w
+3690 4143 m
+27 build_ob
+3717 4143 m
+()3710 4110 w
+3710 4110 m
+27 build_ob
+3737 4110 m
+()3723 4110 w
+3723 4110 m
+27 build_ob
+3750 4110 m
+()3828 4026 w
+3828 4026 m
+27 build_ob
+3855 4026 m
+()3935 3939 w
+3935 3939 m
+27 build_ob
+3962 3939 m
+()3959 3920 w
+3959 3920 m
+27 build_ob
+3986 3920 m
+()4007 3885 w
+4007 3885 m
+27 build_ob
+4034 3885 m
+()4034 3868 w
+4034 3868 m
+27 build_ob
+4061 3868 m
+()4052 3853 w
+4052 3853 m
+27 build_ob
+4079 3853 m
+()4137 3797 w
+4137 3797 m
+27 build_ob
+4164 3797 m
+()4235 3717 w
+4235 3717 m
+27 build_ob
+4262 3717 m
+()4376 3619 w
+4376 3619 m
+27 build_ob
+4403 3619 m
+10 R f
+(Using)720 5543 w
+10 CW f
+(circle)987 5543 w
+10 R f
+( points that are obscured when the data is plotted)9 1986(as a plotting symbol displays overlapping)5 1679 2 1375 5543 t
+( representation of a state is roughly proportional to its population, except in the very small)15 3617( The)1 206(with bullets.)1 497 3 720 5663 t
+(states.)720 5783 w
+( as the)2 279(Our next plot will use the state's rank in population)9 2156 2 720 5963 t
+10 I f
+(x)3192 5963 w
+10 R f
+(-coordinate and two different)3 1202 1 3236 5963 t
+10 I f
+(y)4475 5963 w
+10 R f
+(-coordinates:)4519 5963 w
+( will use two)3 517( We)1 189(population and number of representatives.)4 1687 3 720 6083 t
+10 CW f
+(coord)3139 6083 w
+10 R f
+( the two coordinate)3 768(commands to de\256ne)2 807 2 3465 6083 t
+(systems)720 6203 w
+10 CW f
+(pop)1063 6203 w
+10 R f
+(and)1269 6203 w
+10 CW f
+(rep)1439 6203 w
+10 R f
+( in)1 105( then explicitly give the coordinate system whenever we refer to a point, both)13 3102(. We)1 214 3 1619 6203 t
+(constructing axes and plotting data.)4 1418 1 720 6323 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 10 10
+%%Page: 11 11
+/saveobj save def
+mark
+11 pagesetup
+10 HB f
+(GRAP 11)1 4320 1 720 600 t
+9 CW f
+(frame ht 3 wid 3.5)4 972 1 870 950 t
+(label left "Population" "in Millions" "\(Plotted as \\\(bu\)")7 3078 1 870 1060 t
+(label bot "Rank In Population" up .2)6 1944 1 870 1170 t
+(label right "Representatives" "\(Plotted as \\\(sq\)")5 2646 1 870 1280 t
+(coord pop x 0,51 y .2,30 log y)7 1620 1 870 1390 t
+(coord rep x 0,51 y .3,100 log y)7 1674 1 870 1500 t
+(ticks left out at pop .3, 1, 3, 10, 30)9 2052 1 870 1610 t
+(ticks bot out at pop 1, 50)6 1404 1 870 1720 t
+(ticks right out at rep 1, 3, 10, 30, 100)9 2160 1 870 1830 t
+(thisrank=50)870 1940 w
+(copy "states.d" thru X)3 1188 1 870 2050 t
+(bullet at pop thisrank,$3/1e6)3 1566 1 978 2160 t
+(square at rep thisrank,$2)3 1350 1 978 2270 t
+(thisrank=thisrank-1)978 2380 w
+(X)870 2490 w
+10 R f
+(The)720 2670 w
+10 CW f
+(copy)909 2670 w
+10 R f
+(statement in the program uses an)5 1357 1 1183 2670 t
+10 I f
+(immediate macro)1 705 1 2574 2670 t
+10 R f
+(enclosed in)1 462 1 3314 2670 t
+10 CW f
+(X)3811 2670 w
+10 R f
+('s and thus avoids having to)5 1169 1 3871 2670 t
+( order of)2 355( the program assumes that the states are sorted in increasing)10 2460( Because)1 389(name a macro for this task.)5 1116 4 720 2790 t
+(population, it generates)2 935 1 720 2910 t
+10 CW f
+(thisrank)1680 2910 w
+10 R f
+(internally as a)2 560 1 2185 2910 t
+10 I f
+(grap)2770 2910 w
+10 R f
+( program produces)2 748(variable. The)1 551 2 2984 2910 t
+1679 3149 1679 5309 Dl
+4199 3149 1679 3149 Dl
+4199 5309 4199 3149 Dl
+1679 5309 4199 5309 Dl
+(Population)911 4129 w
+(in Millions)1 443 1 907 4249 t
+(\(Plotted as)1 425 1 864 4369 t
+10 S f
+(\267)1314 4369 w
+10 R f
+(\))1360 4369 w
+(Rank In Population)2 778 1 2550 5486 t
+(Representatives)4436 4189 w
+(\(Plotted as)1 425 1 4486 4309 t
+10 S1 f
+()4936 4309 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_sq {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    font B eq {fill} {stroke} ifelse
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+4936 4309 m
+50 build_sq
+4986 4309 m
+10 R f
+(\))4986 4309 w
+1607 5135 1679 5135 Dl
+(0.3)1457 5155 w
+1607 4616 1679 4616 Dl
+(1)1532 4636 w
+1607 4142 1679 4142 Dl
+(3)1532 4162 w
+1607 3623 1679 3623 Dl
+(10)1482 3643 w
+1607 3149 1679 3149 Dl
+(30)1482 3169 w
+1729 5381 1729 5309 Dl
+(1)1704 5491 w
+4150 5381 4150 5309 Dl
+(50)4100 5491 w
+4271 4862 4199 4862 Dl
+(1)4296 4882 w
+4271 4453 4199 4453 Dl
+(3)4296 4473 w
+4271 4005 4199 4005 Dl
+(10)4296 4025 w
+4271 3597 4199 3597 Dl
+(30)4296 3617 w
+4271 3149 4199 3149 Dl
+(100)4296 3169 w
+5 S f
+(\267)4139 5029 w
+7 S1 f
+()4133 4882 w
+4133 4882 m
+35 build_sq
+4168 4882 m
+5 S f
+(\267)4090 4961 w
+7 S1 f
+()4084 4882 w
+4084 4882 m
+35 build_sq
+4119 4882 m
+5 S f
+(\267)4040 4925 w
+7 S1 f
+()4034 4882 w
+4034 4882 m
+35 build_sq
+4069 4882 m
+5 S f
+(\267)3991 4860 w
+7 S1 f
+()3985 4882 w
+3985 4882 m
+35 build_sq
+4020 4882 m
+5 S f
+(\267)3941 4820 w
+7 S1 f
+()3935 4882 w
+3935 4882 m
+35 build_sq
+3970 4882 m
+5 S f
+(\267)3892 4795 w
+7 S1 f
+()3886 4882 w
+3886 4882 m
+35 build_sq
+3921 4882 m
+5 S f
+(\267)3843 4739 w
+7 S1 f
+()3837 4624 w
+3837 4624 m
+35 build_sq
+3872 4624 m
+5 S f
+(\267)3793 4732 w
+7 S1 f
+()3787 4624 w
+3787 4624 m
+35 build_sq
+3822 4624 m
+5 S f
+(\267)3744 4671 w
+7 S1 f
+()3738 4624 w
+3738 4624 m
+35 build_sq
+3773 4624 m
+5 S f
+(\267)3694 4660 w
+7 S1 f
+()3688 4624 w
+3688 4624 m
+35 build_sq
+3723 4624 m
+5 S f
+(\267)3645 4659 w
+7 S1 f
+()3639 4624 w
+3639 4624 m
+35 build_sq
+3674 4624 m
+5 S f
+(\267)3596 4651 w
+7 S1 f
+()3590 4624 w
+3590 4624 m
+35 build_sq
+3625 4624 m
+5 S f
+(\267)3546 4585 w
+7 S1 f
+()3540 4624 w
+3540 4624 m
+35 build_sq
+3575 4624 m
+5 S f
+(\267)3497 4521 w
+7 S1 f
+()3491 4473 w
+3491 4473 m
+35 build_sq
+3526 4473 m
+5 S f
+(\267)3447 4472 w
+7 S1 f
+()3441 4473 w
+3441 4473 m
+35 build_sq
+3476 4473 m
+5 S f
+(\267)3398 4442 w
+7 S1 f
+()3392 4473 w
+3392 4473 m
+35 build_sq
+3427 4473 m
+5 S f
+(\267)3349 4348 w
+7 S1 f
+()3343 4367 w
+3343 4367 m
+35 build_sq
+3378 4367 m
+5 S f
+(\267)3299 4280 w
+7 S1 f
+()3293 4367 w
+3293 4367 m
+35 build_sq
+3328 4367 m
+5 S f
+(\267)3249 4265 w
+7 S1 f
+()3243 4283 w
+3243 4283 m
+35 build_sq
+3278 4283 m
+5 S f
+(\267)3200 4237 w
+7 S1 f
+()3194 4283 w
+3194 4283 m
+35 build_sq
+3229 4283 m
+5 S f
+(\267)3151 4218 w
+7 S1 f
+()3145 4283 w
+3145 4283 m
+35 build_sq
+3180 4283 m
+5 S f
+(\267)3102 4205 w
+7 S1 f
+()3096 4283 w
+3096 4283 m
+35 build_sq
+3131 4283 m
+5 S f
+(\267)3052 4178 w
+7 S1 f
+()3046 4215 w
+3046 4215 m
+35 build_sq
+3081 4215 m
+5 S f
+(\267)3002 4174 w
+7 S1 f
+()2996 4215 w
+2996 4215 m
+35 build_sq
+3031 4215 m
+5 S f
+(\267)2953 4159 w
+7 S1 f
+()2947 4215 w
+2947 4215 m
+35 build_sq
+2982 4215 m
+5 S f
+(\267)2904 4147 w
+7 S1 f
+()2898 4215 w
+2898 4215 m
+35 build_sq
+2933 4215 m
+5 S f
+(\267)2854 4145 w
+7 S1 f
+()2848 4215 w
+2848 4215 m
+35 build_sq
+2883 4215 m
+5 S f
+(\267)2805 4076 w
+7 S1 f
+()2799 4159 w
+2799 4159 m
+35 build_sq
+2834 4159 m
+5 S f
+(\267)2755 4050 w
+7 S1 f
+()2749 4159 w
+2749 4159 m
+35 build_sq
+2784 4159 m
+5 S f
+(\267)2707 4030 w
+7 S1 f
+()2701 4109 w
+2701 4109 m
+35 build_sq
+2736 4109 m
+5 S f
+(\267)2657 4024 w
+7 S1 f
+()2651 4109 w
+2651 4109 m
+35 build_sq
+2686 4109 m
+5 S f
+(\267)2607 4017 w
+7 S1 f
+()2601 4109 w
+2601 4109 m
+35 build_sq
+2636 4109 m
+5 S f
+(\267)2558 4015 w
+7 S1 f
+()2552 4109 w
+2552 4109 m
+35 build_sq
+2587 4109 m
+5 S f
+(\267)2509 3979 w
+7 S1 f
+()2503 4065 w
+2503 4065 m
+35 build_sq
+2538 4065 m
+5 S f
+(\267)2459 3968 w
+7 S1 f
+()2453 4065 w
+2453 4065 m
+35 build_sq
+2488 4065 m
+5 S f
+(\267)2410 3949 w
+7 S1 f
+()2404 4065 w
+2404 4065 m
+35 build_sq
+2439 4065 m
+5 S f
+(\267)2360 3913 w
+7 S1 f
+()2354 4025 w
+2354 4025 m
+35 build_sq
+2389 4025 m
+5 S f
+(\267)2311 3904 w
+7 S1 f
+()2305 4025 w
+2305 4025 m
+35 build_sq
+2340 4025 m
+5 S f
+(\267)2262 3902 w
+7 S1 f
+()2256 4025 w
+2256 4025 m
+35 build_sq
+2291 4025 m
+5 S f
+(\267)2212 3883 w
+7 S1 f
+()2206 3990 w
+2206 3990 m
+35 build_sq
+2241 3990 m
+5 S f
+(\267)2163 3872 w
+7 S1 f
+()2157 3990 w
+2157 3990 m
+35 build_sq
+2192 3990 m
+5 S f
+(\267)2113 3775 w
+7 S1 f
+()2107 3901 w
+2107 3901 m
+35 build_sq
+2142 3901 m
+5 S f
+(\267)2064 3676 w
+7 S1 f
+()2058 3807 w
+2058 3807 m
+35 build_sq
+2093 3807 m
+5 S f
+(\267)2015 3654 w
+7 S1 f
+()2009 3787 w
+2009 3787 m
+35 build_sq
+2044 3787 m
+5 S f
+(\267)1965 3610 w
+7 S1 f
+()1959 3750 w
+1959 3750 m
+35 build_sq
+1994 3750 m
+5 S f
+(\267)1915 3585 w
+7 S1 f
+()1909 3732 w
+1909 3732 m
+35 build_sq
+1944 3732 m
+5 S f
+(\267)1866 3570 w
+7 S1 f
+()1860 3716 w
+1860 3716 m
+35 build_sq
+1895 3716 m
+5 S f
+(\267)1817 3491 w
+7 S1 f
+()1811 3657 w
+1811 3657 m
+35 build_sq
+1846 3657 m
+5 S f
+(\267)1768 3400 w
+7 S1 f
+()1762 3570 w
+1762 3570 m
+35 build_sq
+1797 3570 m
+5 S f
+(\267)1718 3272 w
+7 S1 f
+()1712 3467 w
+1712 3467 m
+35 build_sq
+1747 3467 m
+10 R f
+( graph also indicates that)4 1033( This)1 238( were chosen for contrast in both shape and shading.)9 2180(The plotting symbols)2 869 4 720 5741 t
+( we see this graph, though, we should realize that we)10 2237( Once)1 273( proportional to population.)3 1139(representation is)1 671 4 720 5861 t
+( \320)1 116( population of the U.S.)4 943(don't really need two coordinate systems: we can relate the two by dividing the)13 3261 3 720 5981 t
+( see that each representative should)5 1515( \320 435 \320 to)4 492( the number of representatives)4 1296( \320 by)2 232(about 226,000,000)1 769 5 736 6101 t
+( the purpose of this graph were to tell a story about American politics rather)14 3168( If)1 126(count as 520,000 people.)3 1026 3 720 6221 t
+(than to illustrate multiple coordinate systems, it should be redrawn with a single coordinate system.)14 3975 1 720 6341 t
+( are many)2 399( There)1 285( function that \(theoretically\) describes the data.)6 1900(Many graphs plot both observed data and a)7 1736 4 720 6521 t
+(ways to draw a function in)5 1067 1 720 6641 t
+10 I f
+(grap)1813 6641 w
+10 R f
+(: a series of)3 460 1 2010 6641 t
+10 CW f
+(next)2496 6641 w
+10 R f
+( tedious but works, as does writing a simple)8 1752(commands is)1 526 2 2762 6641 t
+( plotted by the)3 587(program to write a data \256le that is subsequently read and)10 2293 2 720 6761 t
+10 I f
+(grap)3629 6761 w
+10 R f
+(program. The)1 572 1 3847 6761 t
+10 CW f
+(for)4448 6761 w
+10 R f
+(statement)4657 6761 w
+( This)1 228(often provides a better solution.)4 1268 2 720 6881 t
+10 I f
+(grap)2241 6881 w
+10 R f
+(program)2455 6881 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 11 11
+%%Page: 12 12
+/saveobj save def
+mark
+12 pagesetup
+10 HB f
+(12 GRAP)1 4320 1 720 600 t
+9 CW f
+(frame ht 1 wid 3)4 864 1 870 950 t
+(draw solid)1 540 1 870 1060 t
+(pi=atan2\(0,-1\))870 1170 w
+(for i from 0 to 2*pi by .1 do { next at i, sin\(i\) })14 2754 1 870 1280 t
+10 R f
+(produces)720 1460 w
+1974 1640 1974 2360 Dl
+4134 1640 1974 1640 Dl
+4134 2360 4134 1640 Dl
+1974 2360 4134 2360 Dl
+2106 2432 2106 2360 Dl
+(-0)2065 2542 w
+2717 2432 2717 2360 Dl
+(2)2692 2542 w
+3329 2432 3329 2360 Dl
+(4)3304 2542 w
+3940 2432 3940 2360 Dl
+(6)3915 2542 w
+1902 2316 1974 2316 Dl
+(\2611)1777 2336 w
+1902 2157 1974 2157 Dl
+(\2610.5)1702 2177 w
+1902 2000 1974 2000 Dl
+(0)1827 2020 w
+1902 1842 1974 1842 Dl
+(0.5)1752 1862 w
+1902 1683 1974 1683 Dl
+(1)1827 1703 w
+2136 1969 2106 2000 Dl
+2167 1938 2137 1968 Dl
+2197 1907 2167 1937 Dl
+2228 1877 2198 1906 Dl
+2259 1848 2229 1876 Dl
+2289 1822 2259 1848 Dl
+2320 1796 2290 1821 Dl
+2350 1773 2320 1796 Dl
+2381 1753 2351 1773 Dl
+2411 1734 2381 1752 Dl
+2442 1719 2412 1734 Dl
+2472 1706 2442 1718 Dl
+2503 1695 2473 1705 Dl
+2534 1688 2504 1695 Dl
+2564 1685 2534 1688 Dl
+2595 1684 2565 1684 Dl
+2625 1685 2595 1683 Dl
+2656 1691 2626 1686 Dl
+2686 1700 2656 1692 Dl
+2717 1712 2687 1701 Dl
+2747 1726 2717 1712 Dl
+2778 1744 2748 1727 Dl
+2809 1764 2779 1744 Dl
+2839 1786 2809 1764 Dl
+2870 1810 2840 1786 Dl
+2900 1835 2870 1810 Dl
+2931 1865 2901 1837 Dl
+2961 1893 2931 1864 Dl
+2992 1924 2962 1894 Dl
+3023 1954 2993 1924 Dl
+3053 1986 3023 1955 Dl
+3084 2018 3054 1987 Dl
+3114 2049 3084 2018 Dl
+3145 2079 3115 2049 Dl
+3175 2110 3145 2080 Dl
+3206 2138 3176 2110 Dl
+3236 2166 3206 2139 Dl
+3267 2192 3237 2167 Dl
+3298 2215 3268 2192 Dl
+3329 2238 3299 2217 Dl
+3359 2258 3329 2239 Dl
+3389 2274 3359 2258 Dl
+3420 2289 3390 2275 Dl
+3450 2300 3420 2289 Dl
+3481 2307 3451 2300 Dl
+3511 2313 3481 2308 Dl
+3542 2315 3512 2313 Dl
+3573 2315 3543 2316 Dl
+3604 2310 3574 2314 Dl
+3634 2303 3604 2310 Dl
+3664 2293 3634 2303 Dl
+3695 2279 3665 2292 Dl
+3725 2264 3695 2279 Dl
+3756 2244 3726 2262 Dl
+3786 2224 3756 2244 Dl
+3817 2199 3787 2222 Dl
+3848 2174 3818 2199 Dl
+3879 2147 3849 2174 Dl
+3909 2118 3879 2146 Dl
+3939 2089 3909 2118 Dl
+3970 2058 3940 2088 Dl
+4000 2027 3970 2057 Dl
+(The)720 2792 w
+10 CW f
+(for)905 2792 w
+10 R f
+( as the)2 267(statement uses the same syntax)4 1263 2 1115 2792 t
+10 CW f
+(ticks)2676 2792 w
+10 R f
+(statement, but the)2 720 1 3007 2792 t
+10 CW f
+(from)3758 2792 w
+10 R f
+(keyword can be replaced)3 1011 1 4029 2792 t
+(by ``)1 206 1 720 2912 t
+10 CW f
+(=)926 2912 w
+10 R f
+( varies the index variable over the speci\256ed)7 1830( It)1 125( will look more familiar to programmers.)6 1724('', which)1 375 4 986 2912 t
+( same rules as)3 563(range and for each value executes all statements inside the delimiter characters, which use the)14 3757 2 720 3032 t
+( is, of course, useful for many tasks beyond plotting functions.)10 2495( It)1 111(macro delimiters.)1 699 3 720 3152 t
+(The)720 3332 w
+10 CW f
+(if)908 3332 w
+10 R f
+( \256le contains data on both)5 1075( a)1 77( If)1 124(statement provides a simple mechanism for conditional execution.)7 2703 4 1061 3332 t
+( states have ``S'' in the \256rst \256eld\), it could be plotted by statements)13 2791(cities and states \(and lines describing)5 1529 2 720 3452 t
+(like)720 3572 w
+9 CW f
+(if "$1" == "S" then {)5 1134 1 870 3742 t
+(PlotState\($2,$3,$4\))1086 3852 w
+(} else {)2 432 1 870 3962 t
+(PlotCity\($2,$3,$4,$5,$6\))1086 4072 w
+(})870 4182 w
+10 R f
+(The)720 4362 w
+10 CW f
+(else)900 4362 w
+10 R f
+(clause is optional; delimiters use the same rules as macros and)10 2491 1 1165 4362 t
+10 CW f
+(for)3681 4362 w
+10 R f
+(statements.)3886 4362 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 3.  , HEADING = A COLLECTION OF EXAMPLES]
+10 B f
+( COLLECTION OF EXAMPLES)3 1449(3. A)1 197 2 720 4602 t
+10 R f
+(The previous section covered the)4 1359 1 720 4782 t
+10 I f
+(grap)2114 4782 w
+10 R f
+( this section we'll)3 741( In)1 144( graphs.)1 327(commands that are used in common)5 1490 4 2338 4782 t
+( examples are intended)3 938( These)1 295( of graphs.)2 438(spend less time on language features, and survey a wider variety)10 2649 4 720 4902 t
+( should be prepared to refer to the)7 1391( You)1 227(more for browsing and reference than for straight-through reading.)8 2702 3 720 5022 t
+(manual in Appendix A when you stumble over a new)9 2133 1 720 5142 t
+10 I f
+(grap)2878 5142 w
+10 R f
+(feature.)3092 5142 w
+(The \256le)1 330 1 720 5322 t
+10 CW f
+(cars.d)1097 5322 w
+10 R f
+(contains the mileage \(miles per gallon\) and the weight \(pounds\) for 74 models of)13 3536 1 1504 5322 t
+(automobiles sold in the United States in the 1979 model year.)10 2463 1 720 5442 t
+9 CW f
+(22 2930)1 432 1 924 5612 t
+(17 3350)1 432 1 924 5722 t
+(22 2640)1 432 1 924 5832 t
+(17 2830)1 432 1 924 5942 t
+(23 2070)1 432 1 924 6052 t
+(x)870 6162 w
+(17 3170)1 432 1 924 6272 t
+10 R f
+(The trivial)1 419 1 720 6452 t
+10 I f
+(grap)1164 6452 w
+10 R f
+(program)1378 6452 w
+9 CW f
+(copy "cars.d")1 702 1 870 6622 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 12 12
+%%Page: 13 13
+/saveobj save def
+mark
+13 pagesetup
+10 HB f
+(GRAP 13)1 4320 1 720 600 t
+10 R f
+(produces)720 960 w
+1949 1140 1949 2580 Dl
+4109 1140 1949 1140 Dl
+4109 2580 4109 1140 Dl
+1949 2580 4109 2580 Dl
+1951 2652 1951 2580 Dl
+(10)1901 2762 w
+2605 2652 2605 2580 Dl
+(20)2555 2762 w
+3258 2652 3258 2580 Dl
+(30)3208 2762 w
+3911 2652 3911 2580 Dl
+(40)3861 2762 w
+1877 2392 1949 2392 Dl
+(2000)1652 2412 w
+1877 1983 1949 1983 Dl
+(3000)1652 2003 w
+1877 1572 1949 1572 Dl
+(4000)1652 1592 w
+1877 1163 1949 1163 Dl
+(5000)1652 1183 w
+10 S f
+(\267)2713 2031 w
+(\267)2386 1859 w
+(\267)2713 2150 w
+(\267)2386 2072 w
+(\267)2777 2384 w
+(\267)2908 2146 w
+(\267)2582 1900 w
+(\267)2255 1560 w
+(\267)2451 1728 w
+(\267)2974 2318 w
+(\267)2582 1887 w
+(\267)2320 1642 w
+(\267)2516 1838 w
+(\267)2190 1457 w
+(\267)2190 1633 w
+(\267)2647 1473 w
+(\267)3170 2368 w
+(\267)2320 1720 w
+(\267)2713 1928 w
+(\267)2713 1913 w
+(\267)2843 2105 w
+(\267)2516 1826 w
+(\267)2777 2261 w
+(\267)3561 2404 w
+(\267)2843 2298 w
+(\267)2647 2105 w
+(\267)3235 2363 w
+(\267)2451 1756 w
+(\267)2320 1646 w
+(\267)2386 1699 w
+(\267)2647 2359 w
+(\267)3104 2494 w
+(\267)2647 2146 w
+(\267)2908 2314 w
+(\267)3104 2511 w
+(\267)2059 1248 w
+(\267)2059 1297 w
+(\267)2190 1662 w
+(\267)3235 2421 w
+(\267)2713 2175 w
+(\267)2190 1568 w
+(\267)2190 1539 w
+(\267)2255 1707 w
+(\267)2451 1851 w
+(\267)2582 2072 w
+(\267)2647 1568 w
+(\267)2516 1880 w
+(\267)2516 1875 w
+(\267)2451 1720 w
+(\267)2516 1851 w
+(\267)2843 2117 w
+(\267)2320 1580 w
+(\267)2190 1831 w
+(\267)3104 2265 w
+(\267)3497 2494 w
+(\267)2908 2331 w
+(\267)2974 2199 w
+(\267)2451 1867 w
+(\267)2451 1715 w
+(\267)2451 1810 w
+(\267)2516 1916 w
+(\267)2516 1921 w
+(\267)2516 1831 w
+(\267)2843 2129 w
+(\267)2974 2482 w
+(\267)3561 2392 w
+(\267)2451 2245 w
+(\267)3300 2331 w
+(\267)2451 2138 w
+(\267)2908 2441 w
+(\267)3954 2396 w
+(\267)2908 2417 w
+(\267)2777 2347 w
+(\267)2386 1933 w
+10 R f
+( cars get worse)3 625(This graph shows that weights bottom out somewhat below 2000 pounds and that heavier)13 3695 2 720 3012 t
+(mileage; it is hard to say much more about the relationship between weight and mileage.)14 3537 1 720 3132 t
+( hidden in the clouds of bullets, and re-expresses)8 1968(The next graph provides labels, uses circles to expose data)9 2352 2 720 3312 t
+(the)720 3432 w
+10 I f
+(x)875 3432 w
+10 R f
+( point size and vertical spacing to a size appropriate for)10 2276( also changes the)3 703( It)1 119(-axis in gallons per mile.)4 1023 4 919 3432 t
+( articles and books; the size changes should be made outside the)11 2637(camera-ready journal)1 855 2 720 3552 t
+10 I f
+(grap)4244 3552 w
+10 R f
+(program. The)1 575 1 4465 3552 t
+10 CW f
+(.ft)720 3672 w
+10 R f
+(command changes to a Helvetica font, which some people prefer for graphs.)11 3045 1 925 3672 t
+9 CW f
+(.ft H)1 270 1 870 3842 t
+(.ps -2)1 324 1 870 3952 t
+(.vs -2)1 324 1 870 4062 t
+(frame ht 2.5 wid 2.5)4 1080 1 870 4172 t
+(label left "Weight" "\(Pounds\)" left .3)5 2052 1 870 4282 t
+(label bot "Gallons per Mile")4 1512 1 870 4392 t
+(coord x 0,.10 y 0,5000)4 1188 1 870 4502 t
+(ticks left from 0 to 5000 by 1000)7 1782 1 870 4612 t
+(ticks bot from 0 to .10 by .02)7 1620 1 870 4722 t
+(copy "cars.d" thru X circle at 1/$1, $2 X)8 2214 1 870 4832 t
+(.vs +2)1 324 1 870 4942 t
+(.ps +2)1 324 1 870 5052 t
+(.ft)870 5162 w
+10 I f
+(Grap)720 5342 w
+10 R f
+( the)1 158(supports logarithmic re-expression of data with)5 1939 2 966 5342 t
+10 CW f
+(log)3099 5342 w
+10 R f
+(clause in the)2 521 1 3315 5342 t
+10 CW f
+(coord)3872 5342 w
+10 R f
+(statement; any other)2 832 1 4208 5342 t
+(re-expression of data must be done with)6 1597 1 720 5462 t
+10 I f
+(grap)2342 5462 w
+10 R f
+(arithmetic, as above.)2 826 1 2556 5462 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 13 13
+%%Page: 14 14
+/saveobj save def
+mark
+14 pagesetup
+10 HB f
+(14 GRAP)1 4320 1 720 600 t
+8 H f
+2323 999 2323 2799 Dl
+4123 999 2323 999 Dl
+4123 2799 4123 999 Dl
+2323 2799 4123 2799 Dl
+(Weight)1647 1865 w
+(\(Pounds\))1609 1965 w
+(Gallons per Mile)2 580 1 2933 3116 t
+2251 2799 2323 2799 Dl
+(0)2184 2815 w
+2251 2439 2323 2439 Dl
+(1000)2049 2455 w
+2251 2079 2323 2079 Dl
+(2000)2049 2095 w
+2251 1719 2323 1719 Dl
+(3000)2049 1735 w
+2251 1359 2323 1359 Dl
+(4000)2049 1375 w
+2251 999 2323 999 Dl
+(5000)2049 1015 w
+2323 2871 2323 2799 Dl
+(0)2301 2977 w
+2683 2871 2683 2799 Dl
+(0.02)2605 2977 w
+3043 2871 3043 2799 Dl
+(0.04)2965 2977 w
+3403 2871 3403 2799 Dl
+(0.06)3325 2977 w
+3763 2871 3763 2799 Dl
+(0.08)3685 2977 w
+4123 2871 4123 2799 Dl
+(0.1)4067 2977 w
+5 S1 f
+()3133 1760 w
+3133 1760 m
+19 build_ob
+3152 1760 m
+()3373 1609 w
+3373 1609 m
+19 build_ob
+3392 1609 m
+()3133 1865 w
+3133 1865 m
+19 build_ob
+3152 1865 m
+()3373 1796 w
+3373 1796 m
+19 build_ob
+3392 1796 m
+()3097 2070 w
+3097 2070 m
+19 build_ob
+3116 2070 m
+()3034 1861 w
+3034 1861 m
+19 build_ob
+3053 1861 m
+()3214 1645 w
+3214 1645 m
+19 build_ob
+3233 1645 m
+()3515 1346 w
+3515 1346 m
+19 build_ob
+3534 1346 m
+()3314 1494 w
+3314 1494 m
+19 build_ob
+3333 1494 m
+()3007 2012 w
+3007 2012 m
+19 build_ob
+3026 2012 m
+()3214 1634 w
+3214 1634 m
+19 build_ob
+3233 1634 m
+()3440 1418 w
+3440 1418 m
+19 build_ob
+3459 1418 m
+()3262 1591 w
+3262 1591 m
+19 build_ob
+3281 1591 m
+()3600 1256 w
+3600 1256 m
+19 build_ob
+3619 1256 m
+()3600 1411 w
+3600 1411 m
+19 build_ob
+3619 1411 m
+()3172 1271 w
+3172 1271 m
+19 build_ob
+3191 1271 m
+()2935 2056 w
+2935 2056 m
+19 build_ob
+2954 2056 m
+()3440 1487 w
+3440 1487 m
+19 build_ob
+3459 1487 m
+()3133 1670 w
+3133 1670 m
+19 build_ob
+3152 1670 m
+()3133 1656 w
+3133 1656 m
+19 build_ob
+3152 1656 m
+()3065 1825 w
+3065 1825 m
+19 build_ob
+3084 1825 m
+()3262 1580 w
+3262 1580 m
+19 build_ob
+3281 1580 m
+()3097 1962 w
+3097 1962 m
+19 build_ob
+3116 1962 m
+()2829 2088 w
+2829 2088 m
+19 build_ob
+2848 2088 m
+()3065 1994 w
+3065 1994 m
+19 build_ob
+3084 1994 m
+()3172 1825 w
+3172 1825 m
+19 build_ob
+3191 1825 m
+()2915 2052 w
+2915 2052 m
+19 build_ob
+2934 2052 m
+()3314 1519 w
+3314 1519 m
+19 build_ob
+3333 1519 m
+()3440 1422 w
+3440 1422 m
+19 build_ob
+3459 1422 m
+()3373 1469 w
+3373 1469 m
+19 build_ob
+3392 1469 m
+()3172 2048 w
+3172 2048 m
+19 build_ob
+3191 2048 m
+()2957 2167 w
+2957 2167 m
+19 build_ob
+2976 2167 m
+()3172 1861 w
+3172 1861 m
+19 build_ob
+3191 1861 m
+()3034 2009 w
+3034 2009 m
+19 build_ob
+3053 2009 m
+()2957 2182 w
+2957 2182 m
+19 build_ob
+2976 2182 m
+()3815 1073 w
+3815 1073 m
+19 build_ob
+3834 1073 m
+()3815 1116 w
+3815 1116 m
+19 build_ob
+3834 1116 m
+()3600 1436 w
+3600 1436 m
+19 build_ob
+3619 1436 m
+()2915 2102 w
+2915 2102 m
+19 build_ob
+2934 2102 m
+()3133 1886 w
+3133 1886 m
+19 build_ob
+3152 1886 m
+()3600 1354 w
+3600 1354 m
+19 build_ob
+3619 1354 m
+()3600 1328 w
+3600 1328 m
+19 build_ob
+3619 1328 m
+()3515 1476 w
+3515 1476 m
+19 build_ob
+3534 1476 m
+()3314 1602 w
+3314 1602 m
+19 build_ob
+3333 1602 m
+()3214 1796 w
+3214 1796 m
+19 build_ob
+3233 1796 m
+()3172 1354 w
+3172 1354 m
+19 build_ob
+3191 1354 m
+()3262 1627 w
+3262 1627 m
+19 build_ob
+3281 1627 m
+()3262 1624 w
+3262 1624 m
+19 build_ob
+3281 1624 m
+()3314 1487 w
+3314 1487 m
+19 build_ob
+3333 1487 m
+()3262 1602 w
+3262 1602 m
+19 build_ob
+3281 1602 m
+()3065 1836 w
+3065 1836 m
+19 build_ob
+3084 1836 m
+()3440 1364 w
+3440 1364 m
+19 build_ob
+3459 1364 m
+()3600 1584 w
+3600 1584 m
+19 build_ob
+3619 1584 m
+()2957 1966 w
+2957 1966 m
+19 build_ob
+2976 1966 m
+()2844 2167 w
+2844 2167 m
+19 build_ob
+2863 2167 m
+()3034 2023 w
+3034 2023 m
+19 build_ob
+3053 2023 m
+()3007 1908 w
+3007 1908 m
+19 build_ob
+3026 1908 m
+()3314 1616 w
+3314 1616 m
+19 build_ob
+3333 1616 m
+()3314 1483 w
+3314 1483 m
+19 build_ob
+3333 1483 m
+()3314 1566 w
+3314 1566 m
+19 build_ob
+3333 1566 m
+()3262 1660 w
+3262 1660 m
+19 build_ob
+3281 1660 m
+()3262 1663 w
+3262 1663 m
+19 build_ob
+3281 1663 m
+()3262 1584 w
+3262 1584 m
+19 build_ob
+3281 1584 m
+()3065 1847 w
+3065 1847 m
+19 build_ob
+3084 1847 m
+()3007 2156 w
+3007 2156 m
+19 build_ob
+3026 2156 m
+()2829 2077 w
+2829 2077 m
+19 build_ob
+2848 2077 m
+()3314 1948 w
+3314 1948 m
+19 build_ob
+3333 1948 m
+()2895 2023 w
+2895 2023 m
+19 build_ob
+2914 2023 m
+()3314 1854 w
+3314 1854 m
+19 build_ob
+3333 1854 m
+()3034 2120 w
+3034 2120 m
+19 build_ob
+3053 2120 m
+()2753 2081 w
+2753 2081 m
+19 build_ob
+2772 2081 m
+()3034 2099 w
+3034 2099 m
+19 build_ob
+3053 2099 m
+()3097 2038 w
+3097 2038 m
+19 build_ob
+3116 2038 m
+()3373 1674 w
+3373 1674 m
+19 build_ob
+3392 1674 m
+10 R f
+( two outliers near 4000)4 981( \(The)1 253(This graph shows that gallons per mile is roughly proportional to weight.)11 3086 3 720 3339 t
+(pounds are the Cadillac Seville and the Oldsmobile 98.\))8 2234 1 720 3459 t
+(In)720 3639 w
+10 I f
+( Quantitative Information)2 1090(Visual Display of)2 755 2 858 3639 t
+10 R f
+(, Tufte proposes the ``dot-dash-plot'' as a means for)8 2329 1 2711 3639 t
+( marginal)1 398(maximizing data ink \(showing the two-dimensional distribution and the two one-dimensional)10 3922 2 720 3759 t
+( wasted on borders and non-data labels.)6 1631( \320 ink)2 260(distributions\) while minimizing what he calls ``chart junk'')7 2429 3 720 3879 t
+(His preference is easy to express in)6 1407 1 720 3999 t
+10 I f
+(grap)2152 3999 w
+10 R f
+(:)2349 3999 w
+9 CW f
+(frame invis ht 3 wid 3)5 1188 1 870 4169 t
+(coord x 0,.10 y 0,5000)4 1188 1 870 4279 t
+(copy "cars.d" thru X)3 1080 1 870 4389 t
+(tx=1/$1; ty=$2)1 756 1 978 4499 t
+(bullet at tx,ty)2 810 1 978 4609 t
+(tick bot at tx "")4 918 1 978 4719 t
+(tick left at ty "")4 972 1 978 4829 t
+(X)870 4939 w
+10 R f
+(Although visually attractive, we do not \256nd the resulting graph as useful for interpreting the data.)15 3887 1 720 5119 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 14 14
+%%Page: 15 15
+/saveobj save def
+mark
+15 pagesetup
+10 HB f
+(GRAP 15)1 4320 1 720 600 t
+5 S f
+(\267)2999 1874 w
+10 R f
+3010 3192 3010 3120 Dl
+1956 1854 2028 1854 Dl
+5 S f
+(\267)3287 1692 w
+10 R f
+3298 3192 3298 3120 Dl
+1956 1672 2028 1672 Dl
+5 S f
+(\267)2999 1999 w
+10 R f
+3010 3192 3010 3120 Dl
+1956 1979 2028 1979 Dl
+5 S f
+(\267)3287 1917 w
+10 R f
+3298 3192 3298 3120 Dl
+1956 1897 2028 1897 Dl
+5 S f
+(\267)2955 2245 w
+10 R f
+2966 3192 2966 3120 Dl
+1956 2225 2028 2225 Dl
+5 S f
+(\267)2881 1995 w
+10 R f
+2892 3192 2892 3120 Dl
+1956 1975 2028 1975 Dl
+5 S f
+(\267)3097 1736 w
+10 R f
+3108 3192 3108 3120 Dl
+1956 1716 2028 1716 Dl
+5 S f
+(\267)3457 1377 w
+10 R f
+3468 3192 3468 3120 Dl
+1956 1357 2028 1357 Dl
+5 S f
+(\267)3217 1554 w
+10 R f
+3228 3192 3228 3120 Dl
+1956 1534 2028 1534 Dl
+5 S f
+(\267)2847 2176 w
+10 R f
+2858 3192 2858 3120 Dl
+1956 2156 2028 2156 Dl
+5 S f
+(\267)3097 1723 w
+10 R f
+3108 3192 3108 3120 Dl
+1956 1703 2028 1703 Dl
+5 S f
+(\267)3367 1463 w
+10 R f
+3378 3192 3378 3120 Dl
+1956 1443 2028 1443 Dl
+5 S f
+(\267)3153 1671 w
+10 R f
+3164 3192 3164 3120 Dl
+1956 1651 2028 1651 Dl
+5 S f
+(\267)3559 1269 w
+10 R f
+3570 3192 3570 3120 Dl
+1956 1249 2028 1249 Dl
+5 S f
+(\267)3559 1455 w
+10 R f
+3570 3192 3570 3120 Dl
+1956 1435 2028 1435 Dl
+5 S f
+(\267)3045 1286 w
+10 R f
+3056 3192 3056 3120 Dl
+1956 1266 2028 1266 Dl
+5 S f
+(\267)2761 2228 w
+10 R f
+2772 3192 2772 3120 Dl
+1956 2208 2028 2208 Dl
+5 S f
+(\267)3367 1545 w
+10 R f
+3378 3192 3378 3120 Dl
+1956 1525 2028 1525 Dl
+5 S f
+(\267)2999 1766 w
+10 R f
+3010 3192 3010 3120 Dl
+1956 1746 2028 1746 Dl
+5 S f
+(\267)2999 1748 w
+10 R f
+3010 3192 3010 3120 Dl
+1956 1728 2028 1728 Dl
+5 S f
+(\267)2917 1952 w
+10 R f
+2928 3192 2928 3120 Dl
+1956 1932 2028 1932 Dl
+5 S f
+(\267)3153 1658 w
+10 R f
+3164 3192 3164 3120 Dl
+1956 1638 2028 1638 Dl
+5 S f
+(\267)2955 2116 w
+10 R f
+2966 3192 2966 3120 Dl
+1956 2096 2028 2096 Dl
+5 S f
+(\267)2634 2267 w
+10 R f
+2645 3192 2645 3120 Dl
+1956 2247 2028 2247 Dl
+5 S f
+(\267)2917 2155 w
+10 R f
+2928 3192 2928 3120 Dl
+1956 2135 2028 2135 Dl
+5 S f
+(\267)3045 1952 w
+10 R f
+3056 3192 3056 3120 Dl
+1956 1932 2028 1932 Dl
+5 S f
+(\267)2737 2224 w
+10 R f
+2748 3192 2748 3120 Dl
+1956 2204 2028 2204 Dl
+5 S f
+(\267)3217 1584 w
+10 R f
+3228 3192 3228 3120 Dl
+1956 1564 2028 1564 Dl
+5 S f
+(\267)3367 1468 w
+10 R f
+3378 3192 3378 3120 Dl
+1956 1448 2028 1448 Dl
+5 S f
+(\267)3287 1524 w
+10 R f
+3298 3192 3298 3120 Dl
+1956 1504 2028 1504 Dl
+5 S f
+(\267)3045 2219 w
+10 R f
+3056 3192 3056 3120 Dl
+1956 2199 2028 2199 Dl
+5 S f
+(\267)2788 2362 w
+10 R f
+2799 3192 2799 3120 Dl
+1956 2342 2028 2342 Dl
+5 S f
+(\267)3045 1995 w
+10 R f
+3056 3192 3056 3120 Dl
+1956 1975 2028 1975 Dl
+5 S f
+(\267)2881 2172 w
+10 R f
+2892 3192 2892 3120 Dl
+1956 2152 2028 2152 Dl
+5 S f
+(\267)2788 2379 w
+10 R f
+2799 3192 2799 3120 Dl
+1956 2359 2028 2359 Dl
+5 S f
+(\267)3817 1049 w
+10 R f
+3828 3192 3828 3120 Dl
+1956 1029 2028 1029 Dl
+5 S f
+(\267)3817 1100 w
+10 R f
+3828 3192 3828 3120 Dl
+1956 1080 2028 1080 Dl
+5 S f
+(\267)3559 1485 w
+10 R f
+3570 3192 3570 3120 Dl
+1956 1465 2028 1465 Dl
+5 S f
+(\267)2737 2284 w
+10 R f
+2748 3192 2748 3120 Dl
+1956 2264 2028 2264 Dl
+5 S f
+(\267)2999 2025 w
+10 R f
+3010 3192 3010 3120 Dl
+1956 2005 2028 2005 Dl
+5 S f
+(\267)3559 1386 w
+10 R f
+3570 3192 3570 3120 Dl
+1956 1366 2028 1366 Dl
+5 S f
+(\267)3559 1355 w
+10 R f
+3570 3192 3570 3120 Dl
+1956 1335 2028 1335 Dl
+5 S f
+(\267)3457 1532 w
+10 R f
+3468 3192 3468 3120 Dl
+1956 1512 2028 1512 Dl
+5 S f
+(\267)3217 1684 w
+10 R f
+3228 3192 3228 3120 Dl
+1956 1664 2028 1664 Dl
+5 S f
+(\267)3097 1917 w
+10 R f
+3108 3192 3108 3120 Dl
+1956 1897 2028 1897 Dl
+5 S f
+(\267)3045 1386 w
+10 R f
+3056 3192 3056 3120 Dl
+1956 1366 2028 1366 Dl
+5 S f
+(\267)3153 1714 w
+10 R f
+3164 3192 3164 3120 Dl
+1956 1694 2028 1694 Dl
+5 S f
+(\267)3153 1710 w
+10 R f
+3164 3192 3164 3120 Dl
+1956 1690 2028 1690 Dl
+5 S f
+(\267)3217 1545 w
+10 R f
+3228 3192 3228 3120 Dl
+1956 1525 2028 1525 Dl
+5 S f
+(\267)3153 1684 w
+10 R f
+3164 3192 3164 3120 Dl
+1956 1664 2028 1664 Dl
+5 S f
+(\267)2917 1964 w
+10 R f
+2928 3192 2928 3120 Dl
+1956 1944 2028 1944 Dl
+5 S f
+(\267)3367 1399 w
+10 R f
+3378 3192 3378 3120 Dl
+1956 1379 2028 1379 Dl
+5 S f
+(\267)3559 1662 w
+10 R f
+3570 3192 3570 3120 Dl
+1956 1642 2028 1642 Dl
+5 S f
+(\267)2788 2120 w
+10 R f
+2799 3192 2799 3120 Dl
+1956 2100 2028 2100 Dl
+5 S f
+(\267)2652 2362 w
+10 R f
+2663 3192 2663 3120 Dl
+1956 2342 2028 2342 Dl
+5 S f
+(\267)2881 2189 w
+10 R f
+2892 3192 2892 3120 Dl
+1956 2169 2028 2169 Dl
+5 S f
+(\267)2847 2051 w
+10 R f
+2858 3192 2858 3120 Dl
+1956 2031 2028 2031 Dl
+5 S f
+(\267)3217 1701 w
+10 R f
+3228 3192 3228 3120 Dl
+1956 1681 2028 1681 Dl
+5 S f
+(\267)3217 1541 w
+10 R f
+3228 3192 3228 3120 Dl
+1956 1521 2028 1521 Dl
+5 S f
+(\267)3217 1640 w
+10 R f
+3228 3192 3228 3120 Dl
+1956 1620 2028 1620 Dl
+5 S f
+(\267)3153 1753 w
+10 R f
+3164 3192 3164 3120 Dl
+1956 1733 2028 1733 Dl
+5 S f
+(\267)3153 1757 w
+10 R f
+3164 3192 3164 3120 Dl
+1956 1737 2028 1737 Dl
+5 S f
+(\267)3153 1662 w
+10 R f
+3164 3192 3164 3120 Dl
+1956 1642 2028 1642 Dl
+5 S f
+(\267)2917 1977 w
+10 R f
+2928 3192 2928 3120 Dl
+1956 1957 2028 1957 Dl
+5 S f
+(\267)2847 2349 w
+10 R f
+2858 3192 2858 3120 Dl
+1956 2329 2028 2329 Dl
+5 S f
+(\267)2634 2254 w
+10 R f
+2645 3192 2645 3120 Dl
+1956 2234 2028 2234 Dl
+5 S f
+(\267)3217 2098 w
+10 R f
+3228 3192 3228 3120 Dl
+1956 2078 2028 2078 Dl
+5 S f
+(\267)2713 2189 w
+10 R f
+2724 3192 2724 3120 Dl
+1956 2169 2028 2169 Dl
+5 S f
+(\267)3217 1986 w
+10 R f
+3228 3192 3228 3120 Dl
+1956 1966 2028 1966 Dl
+5 S f
+(\267)2881 2306 w
+10 R f
+2892 3192 2892 3120 Dl
+1956 2286 2028 2286 Dl
+5 S f
+(\267)2544 2258 w
+10 R f
+2555 3192 2555 3120 Dl
+1956 2238 2028 2238 Dl
+5 S f
+(\267)2881 2280 w
+10 R f
+2892 3192 2892 3120 Dl
+1956 2260 2028 2260 Dl
+5 S f
+(\267)2955 2206 w
+10 R f
+2966 3192 2966 3120 Dl
+1956 2186 2028 2186 Dl
+5 S f
+(\267)3287 1770 w
+10 R f
+3298 3192 3298 3120 Dl
+1956 1750 2028 1750 Dl
+( gap in car)3 457(Tufte's graph does point out two facts that are not obvious in the previous graphs: there is a)17 3863 2 720 3552 t
+( \(exhibited by the hole in the)6 1257(weights near 3000 pounds)3 1103 2 720 3672 t
+10 I f
+(y)3123 3672 w
+10 R f
+(-axis ticks\), and the gallons per mile axis is)8 1873 1 3167 3672 t
+( reader may)2 476( The)1 208( the reciprocals of an almost dense sequence of integers\).)9 2304(regularly structured \(the ticks are)4 1332 4 720 3792 t
+(decide whether those insights are worth the decrease in clarity.)9 2505 1 720 3912 t
+( cars and people have gotten faster; let's study those)9 2478(Throughout the twentieth century, horses,)4 1842 2 720 4092 t
+( the winning times of the Kentucky Derby from 1909 to 1983, in)12 2620( horses, we'll consider)3 910(improvements. For)1 790 3 720 4212 t
+(the \256le)1 275 1 720 4332 t
+10 CW f
+(speedhorse.d)1020 4332 w
+10 R f
+(:)1740 4332 w
+9 CW f
+(126.2)870 4502 w
+(126.4)870 4612 w
+(125.0)870 4722 w
+(129.4)870 4832 w
+(124.8)870 4942 w
+(x)870 5052 w
+(122.2)870 5162 w
+10 R f
+(The program)1 518 1 720 5342 t
+9 CW f
+(label left "Winning Time" "\(seconds\)" left .3)6 2430 1 870 5512 t
+(label bot "Kentucky Derby, 1909 to 1983")6 2160 1 870 5622 t
+( Greater than first time)4 1296(bestsofar=1000 #)1 918 2 870 5732 t
+(year=09)870 5842 w
+(copy "speedhorse.d" thru X)3 1404 1 870 5952 t
+(bullet at year,$1)2 918 1 978 6062 t
+(bestsofar=min\(bestsofar,$1\))978 6172 w
+(line from year,bestsofar to year+1,bestsofar)4 2376 1 978 6282 t
+(year=year+1)978 6392 w
+(X)870 6502 w
+10 R f
+(produces the graph)2 759 1 720 6682 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 15 15
+%%Page: 16 16
+/saveobj save def
+mark
+16 pagesetup
+10 HB f
+(16 GRAP)1 4320 1 720 600 t
+2268 960 2268 2400 Dl
+4428 960 2268 960 Dl
+4428 2400 4428 960 Dl
+2268 2400 4428 2400 Dl
+2678 2472 2678 2400 Dl
+10 R f
+(20)2628 2582 w
+3183 2472 3183 2400 Dl
+(40)3133 2582 w
+3689 2472 3689 2400 Dl
+(60)3639 2582 w
+4194 2472 4194 2400 Dl
+(80)4144 2582 w
+2196 2245 2268 2245 Dl
+(120)2021 2265 w
+2196 1690 2268 1690 Dl
+(125)2021 1710 w
+2196 1137 2268 1137 Dl
+(130)2021 1157 w
+(Winning Time)1 586 1 1327 1640 t
+(\(seconds\))1429 1760 w
+(Kentucky Derby, 1909 to 1983)4 1240 1 2728 2720 t
+5 S f
+(\267)2389 1578 w
+10 R f
+2425 1558 2400 1558 Dl
+5 S f
+(\267)2414 1556 w
+10 R f
+2450 1558 2425 1558 Dl
+5 S f
+(\267)2439 1710 w
+10 R f
+2475 1690 2450 1690 Dl
+5 S f
+(\267)2465 1223 w
+10 R f
+2501 1690 2476 1690 Dl
+5 S f
+(\267)2491 1733 w
+10 R f
+2527 1713 2502 1713 Dl
+5 S f
+(\267)2516 1888 w
+10 R f
+2552 1868 2527 1868 Dl
+5 S f
+(\267)2541 1666 w
+10 R f
+2577 1868 2552 1868 Dl
+5 S f
+(\267)2566 1755 w
+10 R f
+2602 1868 2577 1868 Dl
+5 S f
+(\267)2591 1821 w
+10 R f
+2627 1868 2602 1868 Dl
+5 S f
+(\267)2617 1068 w
+10 R f
+2653 1868 2628 1868 Dl
+5 S f
+(\267)2642 1179 w
+10 R f
+2678 1868 2653 1868 Dl
+5 S f
+(\267)2667 1268 w
+10 R f
+2703 1868 2678 1868 Dl
+5 S f
+(\267)2692 1800 w
+10 R f
+2728 1868 2703 1868 Dl
+5 S f
+(\267)2717 1755 w
+10 R f
+2753 1868 2728 1868 Dl
+5 S f
+(\267)2743 1666 w
+10 R f
+2779 1868 2754 1868 Dl
+5 S f
+(\267)2768 1666 w
+10 R f
+2804 1868 2779 1868 Dl
+5 S f
+(\267)2794 1422 w
+10 R f
+2830 1868 2805 1868 Dl
+5 S f
+(\267)2819 1844 w
+10 R f
+2855 1868 2830 1868 Dl
+5 S f
+(\267)2844 1599 w
+10 R f
+2880 1868 2855 1868 Dl
+5 S f
+(\267)2869 1112 w
+10 R f
+2905 1868 2880 1868 Dl
+5 S f
+(\267)2894 1068 w
+10 R f
+2930 1868 2905 1868 Dl
+5 S f
+(\267)2920 1422 w
+10 R f
+2956 1868 2931 1868 Dl
+5 S f
+(\267)2945 2065 w
+10 R f
+2981 2045 2956 2045 Dl
+5 S f
+(\267)2970 1689 w
+10 R f
+3006 2045 2981 2045 Dl
+5 S f
+(\267)2995 1511 w
+10 R f
+3031 2045 3006 2045 Dl
+5 S f
+(\267)3020 1821 w
+10 R f
+3056 2045 3031 2045 Dl
+5 S f
+(\267)3046 1710 w
+10 R f
+3082 2045 3057 2045 Dl
+5 S f
+(\267)3072 1866 w
+10 R f
+3108 2045 3083 2045 Dl
+5 S f
+(\267)3097 1910 w
+10 R f
+3133 2045 3108 2045 Dl
+5 S f
+(\267)3122 1733 w
+10 R f
+3158 2045 3133 2045 Dl
+5 S f
+(\267)3147 1888 w
+10 R f
+3183 2045 3158 2045 Dl
+5 S f
+(\267)3172 1710 w
+10 R f
+3208 2045 3183 2045 Dl
+5 S f
+(\267)3198 2109 w
+10 R f
+3234 2089 3209 2089 Dl
+5 S f
+(\267)3223 1777 w
+10 R f
+3259 2089 3234 2089 Dl
+5 S f
+(\267)3248 1821 w
+10 R f
+3284 2089 3259 2089 Dl
+5 S f
+(\267)3273 1800 w
+10 R f
+3309 2089 3284 2089 Dl
+5 S f
+(\267)3298 1489 w
+10 R f
+3334 2089 3309 2089 Dl
+5 S f
+(\267)3324 1533 w
+10 R f
+3360 2089 3335 2089 Dl
+5 S f
+(\267)3349 1533 w
+10 R f
+3385 2089 3360 2089 Dl
+5 S f
+(\267)3375 1666 w
+10 R f
+3411 2089 3386 2089 Dl
+5 S f
+(\267)3400 1800 w
+10 R f
+3436 2089 3411 2089 Dl
+5 S f
+(\267)3425 2088 w
+10 R f
+3461 2089 3436 2089 Dl
+5 S f
+(\267)3450 1977 w
+10 R f
+3486 2089 3461 2089 Dl
+5 S f
+(\267)3475 2088 w
+10 R f
+3511 2089 3486 2089 Dl
+5 S f
+(\267)3501 2043 w
+10 R f
+3537 2089 3512 2089 Dl
+5 S f
+(\267)3526 1932 w
+10 R f
+3562 2089 3537 2089 Dl
+5 S f
+(\267)3551 2065 w
+10 R f
+3587 2089 3562 2089 Dl
+5 S f
+(\267)3576 1888 w
+10 R f
+3612 2089 3587 2089 Dl
+5 S f
+(\267)3601 2021 w
+10 R f
+3637 2089 3612 2089 Dl
+5 S f
+(\267)3627 1710 w
+10 R f
+3663 2089 3638 2089 Dl
+5 S f
+(\267)3653 2021 w
+10 R f
+3689 2089 3664 2089 Dl
+5 S f
+(\267)3678 1999 w
+10 R f
+3714 2089 3689 2089 Dl
+5 S f
+(\267)3703 1821 w
+10 R f
+3739 2089 3714 2089 Dl
+5 S f
+(\267)3728 2220 w
+10 R f
+3764 2200 3739 2200 Dl
+5 S f
+(\267)3753 2065 w
+10 R f
+3789 2200 3764 2200 Dl
+5 S f
+(\267)3779 2265 w
+10 R f
+3815 2245 3790 2245 Dl
+5 S f
+(\267)3804 2132 w
+10 R f
+3840 2245 3815 2245 Dl
+5 S f
+(\267)3829 2043 w
+10 R f
+3865 2245 3840 2245 Dl
+5 S f
+(\267)3854 2198 w
+10 R f
+3890 2245 3865 2245 Dl
+5 S f
+(\267)3879 2021 w
+10 R f
+3915 2245 3890 2245 Dl
+5 S f
+(\267)3905 2065 w
+10 R f
+3941 2245 3916 2245 Dl
+5 S f
+(\267)3931 1888 w
+10 R f
+3967 2245 3942 2245 Dl
+5 S f
+(\267)3956 1910 w
+10 R f
+3992 2245 3967 2245 Dl
+5 S f
+(\267)3981 2065 w
+10 R f
+4017 2245 3992 2245 Dl
+5 S f
+(\267)4006 2331 w
+10 R f
+4042 2311 4017 2311 Dl
+5 S f
+(\267)4031 1821 w
+10 R f
+4067 2311 4042 2311 Dl
+5 S f
+(\267)4057 2043 w
+10 R f
+4093 2311 4068 2311 Dl
+5 S f
+(\267)4082 2088 w
+10 R f
+4118 2311 4093 2311 Dl
+5 S f
+(\267)4107 2021 w
+10 R f
+4143 2311 4118 2311 Dl
+5 S f
+(\267)4132 2132 w
+10 R f
+4168 2311 4143 2311 Dl
+5 S f
+(\267)4157 1999 w
+10 R f
+4193 2311 4168 2311 Dl
+5 S f
+(\267)4183 2043 w
+10 R f
+4219 2311 4194 2311 Dl
+5 S f
+(\267)4208 2043 w
+10 R f
+4244 2311 4219 2311 Dl
+5 S f
+(\267)4234 1999 w
+10 R f
+4270 2311 4245 2311 Dl
+5 S f
+(\267)4259 2021 w
+10 R f
+4295 2311 4270 2311 Dl
+( is the only)3 454( Secretariat)1 480( with a bullet and record times are marked by horizontal lines.)11 2523(Each race is recorded)3 863 4 720 2940 t
+(horse to have run the one-and-a-quarter-mile race in under two minutes; he won in 1973 in 1:59.4.)16 3926 1 720 3060 t
+( \(even though those vehicles are by now just)8 1871(For automobiles we will study the world land speed record)9 2449 2 720 3240 t
+( \256le)1 155( The)1 207(low-\257ying airplanes\).)1 862 3 720 3360 t
+10 CW f
+(speedcar.d)1971 3360 w
+10 R f
+( and the record set)4 735(lists years in which speed records were set)7 1707 2 2598 3360 t
+(in that year, in miles per hour averaged over a one-mile course.)11 2524 1 720 3480 t
+9 CW f
+(06 127)1 594 1 870 3650 t
+(10 131)1 594 1 870 3760 t
+(11 141)1 594 1 870 3870 t
+(19 149)1 594 1 870 3980 t
+(20 155)1 594 1 870 4090 t
+(x)870 4200 w
+(83 633)1 594 1 870 4310 t
+10 R f
+(We will plot the data with the following)7 1700 1 720 4490 t
+10 I f
+(grap)2459 4490 w
+10 R f
+(program, which uses nested braces in the)6 1728 1 2688 4490 t
+10 CW f
+(copy)4456 4490 w
+10 R f
+(and)4736 4490 w
+10 CW f
+(if)4920 4490 w
+10 R f
+(statements.)720 4610 w
+9 CW f
+(label bot "World Land Speed Record")5 1890 1 870 4780 t
+(label left "Miles" "per" "Hour" left .4)6 2106 1 870 4890 t
+(ticks bot out from 10 to 70 by 10 "")9 1944 1 870 5000 t
+(ticks bot out at 0 "1900", 40 "1940", 80 "1980")9 2538 1 870 5110 t
+(firstrecord=1)870 5220 w
+(copy "speedcar.d" thru {)3 1296 1 870 5330 t
+(if firstrecord==1 then {)3 1296 1 978 5440 t
+(firstrecord=0)1086 5550 w
+(} else {)2 432 1 978 5660 t
+(line from lastyear,lastrec to $1,lastrec)4 2160 1 1086 5770 t
+(})978 5880 w
+(lastyear=$1; lastrec=$2)1 1242 1 978 5990 t
+(})870 6100 w
+(line from lastyear,lastrec to 84,lastrec)4 2160 1 870 6210 t
+10 R f
+(Each record line is drawn after the)6 1373 1 720 6390 t
+10 I f
+(next)2118 6390 w
+10 R f
+(record is read, because the program must know when the record was)11 2731 1 2309 6390 t
+( The)1 212( line.)1 207(broken to draw its)3 748 3 720 6510 t
+10 CW f
+(if)1919 6510 w
+10 R f
+(statement handles the \256rst record, and the extra)7 1934 1 2071 6510 t
+10 CW f
+(line)4037 6510 w
+10 R f
+(command extends)1 731 1 4309 6510 t
+(the last record out to the current date.)7 1491 1 720 6630 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 16 16
+%%Page: 17 17
+/saveobj save def
+mark
+17 pagesetup
+10 HB f
+(GRAP 17)1 4320 1 720 600 t
+2135 960 2135 2400 Dl
+4295 960 2135 960 Dl
+4295 2400 4295 960 Dl
+2135 2400 4295 2400 Dl
+2063 2379 2135 2379 Dl
+10 R f
+(100)1888 2399 w
+2063 2129 2135 2129 Dl
+(200)1888 2149 w
+2063 1879 2135 1879 Dl
+(300)1888 1899 w
+2063 1630 2135 1630 Dl
+(400)1888 1650 w
+2063 1380 2135 1380 Dl
+(500)1888 1400 w
+2063 1130 2135 1130 Dl
+(600)1888 1150 w
+(World Land Speed Record)3 1067 1 2682 2720 t
+(Miles)1470 1580 w
+(per)1521 1700 w
+(Hour)1482 1820 w
+2494 2472 2494 2400 Dl
+2719 2472 2719 2400 Dl
+2945 2472 2945 2400 Dl
+3171 2472 3171 2400 Dl
+3396 2472 3396 2400 Dl
+3621 2472 3621 2400 Dl
+3847 2472 3847 2400 Dl
+2268 2472 2268 2400 Dl
+(1900)2168 2582 w
+3171 2472 3171 2400 Dl
+(1940)3071 2582 w
+4073 2472 4073 2400 Dl
+(1980)3973 2582 w
+2494 2311 2404 2311 Dl
+2516 2301 2494 2301 Dl
+2696 2276 2516 2276 Dl
+2719 2256 2697 2256 Dl
+2854 2241 2719 2241 Dl
+2877 2204 2855 2204 Dl
+2899 2122 2877 2122 Dl
+2922 2112 2900 2112 Dl
+2967 2052 2922 2052 Dl
+2990 2014 2968 2014 Dl
+3012 1996 2990 1996 Dl
+3057 1949 3012 1949 Dl
+3103 1877 3058 1877 Dl
+3125 1852 3103 1852 Dl
+3147 1737 3125 1737 Dl
+3328 1710 3148 1710 Dl
+3688 1644 3328 1644 Dl
+3711 1612 3689 1612 Dl
+3734 1290 3712 1290 Dl
+3847 1130 3734 1130 Dl
+4140 1075 3847 1075 Dl
+4162 1048 4140 1048 Dl
+( records could)2 579( The)1 211(The horizontal lines re\257ect the nature of world records: they last until they are broken.)14 3530 3 720 2940 t
+( each point represents the setting of a record, but it would be)12 2415(also have been plotted by a scatterplot in which)8 1905 2 720 3060 t
+( segments \(which is what we inappropriately did in the)9 2342(misleading to connect adjacent points with line)6 1978 2 720 3180 t
+(graphs of the Olympic 400 meter run\).)6 1539 1 720 3300 t
+( for the one mile run; because its)7 1390(The following graph shows the world record times)7 2099 2 720 3480 t
+10 I f
+(grap)4246 3480 w
+10 R f
+(program is so)2 568 1 4472 3480 t
+(similar to its automotive counterpart, we won't show the program or data.)11 2949 1 720 3600 t
+2232 3780 2232 5220 Dl
+4392 3780 2232 3780 Dl
+4392 5220 4392 3780 Dl
+2232 5220 4392 5220 Dl
+2160 5011 2232 5011 Dl
+(230)1985 5031 w
+2160 4561 2232 4561 Dl
+(240)1985 4581 w
+2160 4111 2232 4111 Dl
+(250)1985 4131 w
+2589 5292 2589 5220 Dl
+2815 5292 2815 5220 Dl
+3041 5292 3041 5220 Dl
+3266 5292 3266 5220 Dl
+3492 5292 3492 5220 Dl
+3718 5292 3718 5220 Dl
+3943 5292 3943 5220 Dl
+2364 5292 2364 5220 Dl
+(1900)2264 5402 w
+3266 5292 3266 5220 Dl
+(1940)3166 5402 w
+4168 5292 4168 5220 Dl
+(1980)4068 5402 w
+(World Record One Mile Run)4 1165 1 2730 5540 t
+(Time)1479 4460 w
+(\(seconds\))1393 4580 w
+2612 3868 1 1 De
+2657 3868 2612 3868 Dl
+2702 3904 2657 3904 Dl
+2882 3994 2702 3994 Dl
+3063 4093 2883 4093 Dl
+3108 4147 3063 4147 Dl
+3130 4219 3108 4219 Dl
+3198 4255 3131 4255 Dl
+3311 4273 3198 4273 Dl
+3334 4354 3312 4354 Dl
+3356 4444 3334 4444 Dl
+3379 4489 3357 4489 Dl
+3582 4498 3379 4498 Dl
+3649 4651 3582 4651 Dl
+3672 4687 3650 4687 Dl
+3762 4808 3672 4808 Dl
+3808 4813 3763 4813 Dl
+3830 4826 3808 4826 Dl
+3853 4849 3831 4849 Dl
+3875 4952 3853 4952 Dl
+4055 4962 3875 4962 Dl
+4146 5038 4056 5038 Dl
+4168 5056 4146 5056 Dl
+4190 5065 4168 5065 Dl
+4258 5131 4191 5131 Dl
+( they appear to)3 608( horses are getting faster,)4 1020( Although)1 433(The three graphs show three different kinds of changes.)8 2259 4 720 5760 t
+( new technologies are introduced)4 1375( show great jumps as)4 898( Cars)1 248(be approaching a barrier near two minutes.)6 1799 4 720 5880 t
+( consistent linear)2 687( have shown a fairly)4 825( Milers)1 315(followed by a plateau as limits of the technology are reached.)10 2493 4 720 6000 t
+(improvement over this century, but there must be an asymptote down there somewhere.)12 3500 1 720 6120 t
+( \256le gives the median heights of boys in the United States aged 2 to 18, together with the \256fth and)20 3966(The next)1 354 2 720 6300 t
+(ninety-\256fth percentiles.)1 932 1 720 6420 t
+9 CW f
+(2 82.5 86.8 94.4)3 1026 1 924 6590 t
+( 102.0)1 324(3 89.0 94.9)2 702 2 924 6700 t
+( 102.9 109.9)2 648(4 95.8)1 378 2 924 6810 t
+(5 102.0 109.9 117.0)3 1026 1 924 6920 t
+(6 107.7 116.1 123.5)3 1026 1 924 7030 t
+(x)870 7140 w
+(18 165.7 176.8 187.6)3 1080 1 870 7250 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 17 17
+%%Page: 18 18
+/saveobj save def
+mark
+18 pagesetup
+10 HB f
+(18 GRAP)1 4320 1 720 600 t
+10 R f
+( trivial program)2 627( The)1 205(The heights are given in centimeters \(1 foot = 30.48 centimeters\).)10 2618 3 720 960 t
+9 CW f
+(copy "boyhts.d")1 810 1 870 1130 t
+10 R f
+(displays the data as)3 774 1 720 1310 t
+1926 1490 1926 2930 Dl
+4086 1490 1926 1490 Dl
+4086 2930 4086 1490 Dl
+1926 2930 4086 2930 Dl
+2414 3002 2414 2930 Dl
+(5)2389 3112 w
+3006 3002 3006 2930 Dl
+(10)2956 3112 w
+3597 3002 3597 2930 Dl
+(15)3547 3112 w
+1854 2631 1926 2631 Dl
+(100)1679 2651 w
+1854 2030 1926 2030 Dl
+(150)1679 2050 w
+10 S f
+(\267)2035 2861 w
+(\267)2035 2809 w
+(\267)2035 2718 w
+(\267)2154 2783 w
+(\267)2154 2712 w
+(\267)2154 2627 w
+(\267)2272 2701 w
+(\267)2272 2616 w
+(\267)2272 2532 w
+(\267)2391 2627 w
+(\267)2391 2532 w
+(\267)2391 2446 w
+(\267)2509 2559 w
+(\267)2509 2457 w
+(\267)2509 2368 w
+(\267)2628 2494 w
+(\267)2628 2390 w
+(\267)2628 2294 w
+(\267)2746 2433 w
+(\267)2746 2326 w
+(\267)2746 2222 w
+(\267)2864 2376 w
+(\267)2864 2264 w
+(\267)2864 2148 w
+(\267)2983 2318 w
+(\267)2983 2200 w
+(\267)2983 2073 w
+(\267)3101 2259 w
+(\267)3101 2130 w
+(\267)3101 1991 w
+(\267)3219 2199 w
+(\267)3219 2053 w
+(\267)3219 1902 w
+(\267)3337 2135 w
+(\267)3337 1972 w
+(\267)3337 1812 w
+(\267)3456 2064 w
+(\267)3456 1893 w
+(\267)3456 1729 w
+(\267)3574 1988 w
+(\267)3574 1821 w
+(\267)3574 1666 w
+(\267)3693 1916 w
+(\267)3693 1767 w
+(\267)3693 1625 w
+(\267)3811 1871 w
+(\267)3811 1735 w
+(\267)3811 1602 w
+(\267)3930 1861 w
+(\267)3930 1728 w
+(\267)3930 1598 w
+10 R f
+(Because there are four numbers on each input line, the \256rst is taken as an)14 2997 1 720 3362 t
+10 I f
+(x)3749 3362 w
+10 R f
+(-value and the remaining three)4 1247 1 3793 3362 t
+(are plotted as)2 532 1 720 3482 t
+10 I f
+(y)1277 3482 w
+10 R f
+(-values.)1321 3482 w
+( to be roughly straight \(at least up to age 16\), so it makes sense to \256t a line through)19 3360(The three curves appear)3 960 2 720 3662 t
+( will use the standard least squares regression in which)9 2188(them. We)1 413 2 720 3782 t
+10 I f
+(slope)2364 4002 w
+10 S f
+(=)2624 4002 w
+10 I f
+(n)2753 4082 w
+10 S f
+(S)2811 4082 w
+10 I f
+(x)2878 4082 w
+7 R f
+(2)2933 4042 w
+10 S f
+(-)3025 4082 w
+10 R f
+(\()3129 4082 w
+10 S f
+(S)3170 4082 w
+10 I f
+(x)3237 4082 w
+10 R f
+(\))3289 4082 w
+7 R f
+(2)3327 4042 w
+10 I f
+(n)2764 3942 w
+10 S f
+(S)2822 3942 w
+10 I f
+(xy)2889 3942 w
+10 S f
+(- S)1 163 1 3026 3942 t
+10 I f
+(x)3197 3942 w
+10 S f
+(S)3249 3942 w
+10 I f
+(y)3316 3942 w
+10 S1 f
+(_ ____________)1 647 1 2739 3972 t
+10 R f
+(\(where the summations range over all)5 1505 1 720 4242 t
+10 I f
+(n x)1 119 1 2250 4242 t
+10 R f
+(and)2394 4242 w
+10 I f
+(y)2563 4242 w
+10 R f
+(values in the data set\) and the)6 1181 1 2632 4242 t
+10 I f
+(y)3838 4242 w
+10 R f
+(-intercept is)1 474 1 3882 4242 t
+10 I f
+(n)2854 4532 w
+10 S f
+(S)2551 4402 w
+10 I f
+(y)2618 4402 w
+10 S f
+(-)2711 4402 w
+10 I f
+(slope)2815 4402 w
+10 S f
+(\264 S)1 122 1 3034 4402 t
+10 I f
+(x)3164 4402 w
+10 S1 f
+(_ _____________)1 687 1 2536 4432 t
+10 R f
+(The following)1 569 1 720 4692 t
+10 I f
+(grap)1314 4692 w
+10 R f
+(program boldly \(and rather foolishly\) implements that formula.)7 2525 1 1528 4692 t
+9 CW f
+(label left "Heights in Feet" "\(Median and" "fifth percentiles\)")8 3402 1 870 4862 t
+(label bot "Heights of Boys in U.S., ages 2 to 18")10 2646 1 870 4972 t
+( Centimeters per foot)3 1134( #)1 162(cmpft = 30.48)2 702 3 870 5082 t
+(minx = 1e12; maxx = -1e12)5 1350 1 870 5192 t
+(n = sigx = sigx2 = sigy = sigxy = 0)10 1890 1 870 5302 t
+(copy "boyhts.d" thru X)3 1188 1 870 5412 t
+(line from $1,$2/cmpft to $1,$4/cmpft)4 1944 1 978 5522 t
+(ty = $3/cmpft)2 702 1 978 5632 t
+(bullet at $1,ty)2 810 1 978 5742 t
+(n = n+1)2 378 1 978 5852 t
+(sigx = sigx+$1; sigx2 = sigx2+$1*$1)5 1890 1 978 5962 t
+(sigy = sigy+ty; sigxy = sigxy+$1*ty)5 1890 1 978 6072 t
+(minx = min\(minx,$1\); maxx = max\(maxx,$1\))5 2160 1 978 6182 t
+(X)870 6292 w
+(# Calculate least squares fit and draw it)7 2214 1 870 6402 t
+(slope = \(n*sigxy - sigx*sigy\) / \(n*sigx2 - sigx*sigx\))8 2862 1 978 6512 t
+(inter = \(sigy - slope*sigx\) / n)6 1674 1 978 6622 t
+(# print slope; print inter)4 1404 1 978 6732 t
+(line from minx,slope*minx+inter to maxx,slope*maxx+inter)4 3024 1 978 6842 t
+10 R f
+( heights)1 321( All)1 185( \256fth percentiles as a bar through the median, which is plotted as a bullet.)14 3022(It plots the extreme)3 792 4 720 7022 t
+(are converted to feet before plotting and calculating the regression line.)10 2846 1 720 7142 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 18 18
+%%Page: 19 19
+/saveobj save def
+mark
+19 pagesetup
+10 HB f
+(GRAP 19)1 4320 1 720 600 t
+2304 960 2304 2400 Dl
+4464 960 2304 960 Dl
+4464 2400 4464 960 Dl
+2304 2400 4464 2400 Dl
+2792 2472 2792 2400 Dl
+10 R f
+(5)2767 2582 w
+3384 2472 3384 2400 Dl
+(10)3334 2582 w
+3975 2472 3975 2400 Dl
+(15)3925 2582 w
+2232 2204 2304 2204 Dl
+(3)2157 2224 w
+2232 1837 2304 1837 Dl
+(4)2157 1857 w
+2232 1471 2304 1471 Dl
+(5)2157 1491 w
+2232 1105 2304 1105 Dl
+(6)2157 1125 w
+(Heights in Feet)2 611 1 1423 1580 t
+(\(Median and)1 507 1 1475 1700 t
+(\256fth percentiles\))1 657 1 1400 1820 t
+(Heights of Boys in U.S., ages 2 to 18)8 1486 1 2641 2720 t
+2436 2168 2436 2311 Dl
+5 S f
+(\267)2425 2279 w
+10 R f
+2555 2077 2555 2233 Dl
+5 S f
+(\267)2544 2182 w
+10 R f
+2673 1982 2673 2151 Dl
+5 S f
+(\267)2662 2086 w
+10 R f
+2792 1897 2792 2077 Dl
+5 S f
+(\267)2781 2002 w
+10 R f
+2910 1819 2910 2009 Dl
+5 S f
+(\267)2899 1927 w
+10 R f
+3029 1744 3029 1944 Dl
+5 S f
+(\267)3018 1860 w
+10 R f
+3147 1672 3147 1883 Dl
+5 S f
+(\267)3136 1796 w
+10 R f
+3265 1600 3265 1826 Dl
+5 S f
+(\267)3254 1734 w
+10 R f
+3384 1523 3384 1768 Dl
+5 S f
+(\267)3373 1670 w
+10 R f
+3502 1442 3502 1709 Dl
+5 S f
+(\267)3491 1600 w
+10 R f
+3620 1353 3620 1649 Dl
+5 S f
+(\267)3609 1523 w
+10 R f
+3738 1262 3738 1585 Dl
+5 S f
+(\267)3727 1442 w
+10 R f
+3857 1179 3857 1514 Dl
+5 S f
+(\267)3846 1363 w
+10 R f
+3975 1117 3975 1438 Dl
+5 S f
+(\267)3964 1291 w
+10 R f
+4094 1074 4094 1366 Dl
+5 S f
+(\267)4083 1237 w
+10 R f
+4212 1052 4212 1321 Dl
+5 S f
+(\267)4201 1205 w
+10 R f
+4331 1048 4331 1311 Dl
+5 S f
+(\267)4320 1198 w
+10 R f
+4331 1096 2436 2206 Dl
+10 I f
+(Grap)720 2940 w
+10 CW f
+(print)968 2940 w
+10 R f
+(statements write on)2 801 1 1305 2940 t
+10 CW f
+(stderr)2143 2940 w
+10 R f
+(as they are processed by)4 1017 1 2540 2940 t
+10 I f
+(grap)3594 2940 w
+10 R f
+(; their single argument can be)5 1249 1 3791 2940 t
+( The)1 222(either an expression or a string.)5 1338 2 720 3060 t
+10 CW f
+(print)2322 3060 w
+10 R f
+(statements \(which are commented out in the above)7 2146 1 2664 3060 t
+10 I f
+(grap)4851 3060 w
+10 R f
+(program\) at one time showed that the regression line is)9 2194 1 720 3180 t
+10 I f
+(Height in Feet)2 609 1 2151 3360 t
+10 S f
+(=)2809 3360 w
+10 R f
+(2. 61)1 183 1 2913 3360 t
+10 S f
+(+)3145 3360 w
+10 I f
+(.)3249 3360 w
+10 R f
+(19)3282 3360 w
+10 S f
+(\264)3390 3360 w
+10 I f
+(Age)3453 3360 w
+10 R f
+( out life at 2 feet 7)6 744(Thus for most American boys between 3 and 16, you may safely assume that they started)15 3576 2 720 3540 t
+(inches and grew at the rate of two and a quarter inches per year.)13 2547 1 720 3660 t
+(This program probably misapplies)3 1407 1 720 3840 t
+10 I f
+(grap)2163 3840 w
+10 R f
+( regressions on data,)3 851(; if you really want to perform least squares)8 1829 2 2360 3840 t
+(you should usually use a simple)5 1275 1 720 3960 t
+10 I f
+(awk)2020 3960 w
+10 R f
+(program like)1 513 1 2206 3960 t
+9 CW f
+(awk ')1 270 1 870 4130 t
+({ x+=$1; x2+=$1*$1; y+=$2; xy+=$1*$2 })5 2052 1 1302 4240 t
+( slope=\(NR*xy-x*y\)/\(NR*x2-x*x\); print \(y-slope*x\)/NR, slope })5 3294(END {)1 486 2 870 4350 t
+(' $*)1 216 1 870 4460 t
+10 R f
+(\(Be warned, though, that this program is not numerically robust.\))9 2603 1 720 4640 t
+( W. Tukey's)2 496( three graphs from J.)4 867(While we're on the subject of \256tting straight lines to data, we'll redraw)12 2957 3 720 4820 t
+10 I f
+(Exploratory Data Analysis)2 1082 1 720 4940 t
+10 R f
+( \256le)1 158(. The)1 235 2 1810 4940 t
+10 CW f
+(usapop.d)2232 4940 w
+10 R f
+(records the population of the United States in millions at)9 2299 1 2741 4940 t
+(ten-year intervals.)1 720 1 720 5060 t
+9 CW f
+(1790 3.93)1 594 1 870 5230 t
+(1800 5.31)1 594 1 870 5340 t
+(1810 7.24)1 594 1 870 5450 t
+(1820 9.64)1 594 1 870 5560 t
+(1830 12.87)1 594 1 870 5670 t
+(x)870 5780 w
+(1950 150.7)1 540 1 870 5890 t
+10 R f
+( linear while the early growth was)6 1430(Tukey's \256rst two graphs indicate that the later population growth was)10 2890 2 720 6070 t
+( following)1 417(exponential. The)1 699 2 720 6190 t
+10 I f
+(grap)1864 6190 w
+10 R f
+( them as a pair, using)5 859(program plots)1 561 2 2081 6190 t
+10 CW f
+(graph)3528 6190 w
+10 R f
+(commands to place internally)3 1185 1 3855 6190 t
+(unrelated graphs adjacent to one another.)5 1640 1 720 6310 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 19 19
+%%Page: 20 20
+/saveobj save def
+mark
+20 pagesetup
+10 HB f
+(20 GRAP)1 4320 1 720 600 t
+9 CW f
+(graph Linear)1 648 1 870 950 t
+(coord x 1785,1955 y 0,160)4 1350 1 1302 1060 t
+(label left "Population" "in Millions" left .2)6 2430 1 1302 1170 t
+(label right "Linear Scale," "Linear Fit")5 2160 1 1302 1280 t
+(ticks bot off)2 702 1 1302 1390 t
+(copy "usapop.d")1 810 1 1302 1500 t
+(define fit X 35 + 1.4*\($1-1870\) X)6 1782 1 1302 1610 t
+(line from 1850,fit\(1850\) to 1950,fit\(1950\))4 2268 1 1302 1720 t
+(graph Exponential with .Frame.n at Linear.Frame.s -\(0,.05\))6 3132 1 870 1830 t
+(coord x 1785,1955 y 3,160 log y)6 1674 1 1302 1940 t
+(label left "Population" "in Millions" left .2)6 2430 1 1302 2050 t
+(label right "Logarithmic Scale," "Exponential Fit")5 2700 1 1302 2160 t
+(copy "usapop.d")1 810 1 1302 2270 t
+(define fit X exp\(0.75 + .012*\($1-1800\)\) X)6 2214 1 1302 2380 t
+(line from 1790,fit\(1790\) to 1920,fit\(1920\))4 2268 1 1302 2490 t
+10 R f
+( second graph has the northern point of its)8 1713( The)1 208(The statements de\256ning each graph are indented for clarity.)8 2399 3 720 2670 t
+( the \256rst graph; the)4 763(frame 0.05 inch below the southern point of the frame of)10 2295 2 720 2790 t
+10 CW f
+(with)3805 2790 w
+10 R f
+(clause is passed directly)3 968 1 4072 2790 t
+(through to)1 423 1 720 2910 t
+10 I f
+(pic)1178 2910 w
+10 R f
+( names of both graphs begin with)6 1392( The)1 215(without being evaluated for macros or expressions.)6 2098 3 1335 2910 t
+(capital letters to conform to)4 1104 1 720 3030 t
+10 I f
+(pic)1849 3030 w
+10 R f
+(syntax for labels.)2 685 1 1996 3030 t
+1729 3210 1729 4650 Dl
+3889 3210 1729 3210 Dl
+3889 4650 3889 3210 Dl
+1729 4650 3889 4650 Dl
+1657 4650 1729 4650 Dl
+(-0)1549 4670 w
+1657 4200 1729 4200 Dl
+(50)1532 4220 w
+1657 3750 1729 3750 Dl
+(100)1482 3770 w
+1657 3300 1729 3300 Dl
+(150)1482 3320 w
+(Population)961 3890 w
+(in Millions)1 443 1 957 4010 t
+(Linear Scale,)1 526 1 4083 3890 t
+(Linear Fit)1 397 1 4148 4010 t
+10 S f
+(\267)1770 4634 w
+(\267)1897 4622 w
+(\267)2025 4605 w
+(\267)2151 4583 w
+(\267)2278 4554 w
+(\267)2405 4516 w
+(\267)2532 4461 w
+(\267)2660 4387 w
+(\267)2786 4322 w
+(\267)2914 4218 w
+(\267)3040 4103 w
+(\267)3168 3986 w
+(\267)3295 3842 w
+(\267)3422 3718 w
+(\267)3549 3564 w
+(\267)3676 3479 w
+(\267)3803 3313 w
+3825 3327 2555 4587 Dl
+1729 4686 1729 6126 Dl
+3889 4686 1729 4686 Dl
+3889 6126 3889 4686 Dl
+1729 6126 3889 6126 Dl
+1920 6198 1920 6126 Dl
+10 R f
+(1800)1820 6308 w
+2555 6198 2555 6126 Dl
+(1850)2455 6308 w
+3191 6198 3191 6126 Dl
+(1900)3091 6308 w
+3826 6198 3826 6126 Dl
+(1950)3726 6308 w
+1657 5940 1729 5940 Dl
+(5)1582 5960 w
+1657 5689 1729 5689 Dl
+(10)1532 5709 w
+1657 5439 1729 5439 Dl
+(20)1532 5459 w
+1657 5107 1729 5107 Dl
+(50)1532 5127 w
+1657 4855 1729 4855 Dl
+(100)1482 4875 w
+(Population)961 5366 w
+(in Millions)1 443 1 957 5486 t
+(Logarithmic Scale,)1 760 1 4085 5366 t
+(Exponential Fit)1 620 1 4155 5486 t
+10 S f
+(\267)1770 6048 w
+(\267)1897 5939 w
+(\267)2025 5827 w
+(\267)2151 5723 w
+(\267)2278 5618 w
+(\267)2405 5516 w
+(\267)2532 5405 w
+(\267)2660 5294 w
+(\267)2786 5220 w
+(\267)2914 5125 w
+(\267)3040 5043 w
+(\267)3168 4975 w
+(\267)3295 4906 w
+(\267)3422 4856 w
+(\267)3549 4801 w
+(\267)3676 4775 w
+(\267)3803 4727 w
+3444 4697 1793 5998 Dl
+10 R f
+( exponential functions; Tukey shows how a seventh-degree)7 2393(Polynomial functions lie between the linear and)6 1927 2 720 6558 t
+(polynomial provides a better \(and longer\) \256t to the early population growth.)11 3030 1 720 6678 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 20 20
+%%Page: 21 21
+/saveobj save def
+mark
+21 pagesetup
+10 HB f
+(GRAP 21)1 4320 1 720 600 t
+9 CW f
+(label left "Population" "in Millions" left .2)6 2430 1 870 950 t
+(label right "$x$ re-expressed as" "" \\)6 2052 1 870 1060 t
+("$space 0 left \( {date - 1600} over 100 right \) sup 7$" left 1.2)14 3456 1 1302 1170 t
+(define newx X exp\(7*\(log\(\($1-1600\)/100\)\)\) X)4 2322 1 870 1280 t
+(ticks bot out at newx\(1800\) "1800", newx\(1850\) "1850",\\)7 2970 1 870 1390 t
+(newx\(1900\) "1900")1 918 1 1788 1500 t
+(copy "usapop.d" thru X)3 1188 1 870 1610 t
+(if $1<=1900 then { bullet at newx\($1\),$2 })7 2268 1 978 1720 t
+(X)870 1830 w
+10 R f
+(This program re-expresses the)3 1226 1 720 2010 t
+10 I f
+(x)1978 2010 w
+10 R f
+(-axis with)1 404 1 2022 2010 t
+10 I f
+(grap)2458 2010 w
+10 R f
+(arithmetic and uses an)3 911 1 2679 2010 t
+10 CW f
+(if)3622 2010 w
+10 R f
+( part of)2 304(statement to graph only)3 962 2 3774 2010 t
+( produces)1 385( It)1 111(the data \256le.)2 491 3 720 2130 t
+1761 2310 1761 3750 Dl
+3921 2310 1761 2310 Dl
+3921 3750 3921 2310 Dl
+1761 3750 3921 3750 Dl
+1689 3730 1761 3730 Dl
+(-0)1581 3750 w
+1689 3379 1761 3379 Dl
+(20)1564 3399 w
+1689 3029 1761 3029 Dl
+(40)1564 3049 w
+1689 2678 1761 2678 Dl
+(60)1564 2698 w
+1689 2328 1761 2328 Dl
+(80)1564 2348 w
+(Population)993 2990 w
+(in Millions)1 443 1 989 3110 t
+10 I f
+(x)4134 2930 w
+10 R f
+(re-expressed as)1 611 1 4203 2930 t
+10 S f
+(\354)4147 3083 w
+(\357)4147 3183 w
+(\356)4147 3283 w
+10 R f
+(100)4379 3240 w
+10 I f
+(date)4221 3110 w
+10 S f
+(-)4417 3110 w
+10 R f
+(1600)4488 3110 w
+10 S1 f
+(_ _________)1 497 1 4206 3140 t
+10 S f
+(\374)4713 3083 w
+(\357)4713 3183 w
+(\376)4713 3283 w
+7 R f
+(7)4767 3021 w
+10 R f
+1929 3822 1929 3750 Dl
+(1800)1829 3932 w
+2365 3822 2365 3750 Dl
+(1850)2265 3932 w
+3789 3822 3789 3750 Dl
+(1900)3689 3932 w
+5 S f
+(\267)1883 3681 w
+(\267)1918 3657 w
+(\267)1965 3623 w
+(\267)2027 3581 w
+(\267)2110 3525 w
+(\267)2217 3451 w
+(\267)2354 3343 w
+(\267)2528 3199 w
+(\267)2747 3074 w
+(\267)3021 2871 w
+(\267)3361 2646 w
+(\267)3778 2418 w
+10 R f
+(The)720 4182 w
+10 I f
+(eqn)917 4182 w
+10 CW f
+(space 0)1 420 1 1104 4182 t
+10 R f
+(clause is necessary to keep)4 1141 1 1567 4182 t
+10 I f
+(eqn)2751 4182 w
+10 R f
+(from adding extra space that would interfere with)7 2102 1 2938 4182 t
+(positions computed by)2 906 1 720 4302 t
+10 I f
+(grap)1651 4302 w
+10 R f
+(\(see \2474\).)1 343 1 1865 4302 t
+(The \256le)1 308 1 720 4482 t
+10 CW f
+(army.d)1053 4482 w
+10 R f
+(contains four related time series describing the United States Army.)9 2707 1 1438 4482 t
+9 CW f
+( 249 1)2 432( .9)1 162(40 16)1 324 3 870 4652 t
+( 1)1 162(42 190 12 2867)3 756 2 870 4762 t
+(43 521 36 6358 55)4 918 1 870 4872 t
+(44 692 47 7144 71)4 918 1 870 4982 t
+(45 772 62 7283 90)4 918 1 870 5092 t
+(x)870 5202 w
+( 67)1 162(83 80 9 606)3 756 2 870 5312 t
+10 R f
+( next four \256elds give the number of male of\256cers, female of\256cers, enlisted)12 3105(The \256rst \256eld is the year; the)6 1215 2 720 5492 t
+( in the)2 268( there were no female enlisted personnel)6 1672( \(Actually,)1 462(males and enlisted females, each in thousands.)6 1918 4 720 5612 t
+( 1943; the value 1 in 1940 and 1942 is just a placeholder, since)13 2683(Army until)1 454 2 720 5732 t
+10 I f
+(grap)3895 5732 w
+10 R f
+(has no mechanism for)3 918 1 4122 5732 t
+( following)1 416( The)1 207(handling missing data.\))2 940 3 720 5852 t
+10 I f
+(grap)2310 5852 w
+10 R f
+( series with four different sets of)6 1303(program draws the four)3 945 2 2526 5852 t
+10 CW f
+(draw)4800 5852 w
+10 R f
+(and)720 5972 w
+10 CW f
+(next)889 5972 w
+10 R f
+(commands.)1154 5972 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 21 21
+%%Page: 22 22
+/saveobj save def
+mark
+22 pagesetup
+10 HB f
+(22 GRAP)1 4320 1 720 600 t
+9 CW f
+(coord x 38,85 y .8,10000 log y)6 1620 1 870 950 t
+(label bot "U.S. Army Personnel")4 1674 1 870 1060 t
+(label left "Thousands" left .3)4 1620 1 870 1170 t
+( Officers Female)2 864( #)1 216(draw of solid)2 702 3 870 1280 t
+( Enlisted Female)2 864( #)1 162(draw ef dashed)2 756 3 870 1390 t
+( Officers Male)2 756( #)1 162(draw om dotted)2 756 3 870 1500 t
+( Enlisted Male)2 756( #)1 216(draw em solid)2 702 3 870 1610 t
+(copy "army.d" thru X)3 1080 1 870 1720 t
+(next of at $1,$3)3 864 1 978 1830 t
+(next ef at $1,$5)3 864 1 978 1940 t
+(next om at $1,$2)3 864 1 978 2050 t
+(next em at $1,$4)3 864 1 978 2160 t
+(X)870 2270 w
+(copy thru % "$1 $2" size -3 at 60,$3 % until "XXX")11 2700 1 870 2380 t
+(Enlisted Men 1200)2 918 1 870 2490 t
+(Male Officers 140)2 918 1 870 2600 t
+(Enlisted Women 12)2 918 1 870 2710 t
+(Female Officers 2.5)2 1026 1 870 2820 t
+(XXX)870 2930 w
+10 R f
+(The program labels the lines by)5 1327 1 720 3110 t
+10 CW f
+(copy)2085 3110 w
+10 R f
+( and)1 183(ing immediate data; the program is therefore shorter to write)9 2532 2 2325 3110 t
+( delimiter string)2 659( The)1 215(easier to change.)2 687 3 720 3230 t
+10 CW f
+(XXX)2316 3230 w
+10 R f
+(in the)1 235 1 2531 3230 t
+10 CW f
+(until)2801 3230 w
+10 R f
+(clause could be deleted in this graph: the)7 1691 1 3135 3230 t
+10 CW f
+(.G2)4860 3230 w
+10 R f
+( though that string is enclosed in quotes, it may not contain spaces.)12 2731( Even)1 259(line also denotes the end of data.)6 1330 3 720 3350 t
+(The)720 3470 w
+10 I f
+(y)900 3470 w
+10 R f
+(-positions of the labels are the result of several iterations.)9 2285 1 944 3470 t
+2196 3650 2196 5090 Dl
+4356 3650 2196 3650 Dl
+4356 5090 4356 3650 Dl
+2196 5090 4356 5090 Dl
+2288 5162 2288 5090 Dl
+(40)2238 5272 w
+2747 5162 2747 5090 Dl
+(50)2697 5272 w
+3206 5162 3206 5090 Dl
+(60)3156 5272 w
+3666 5162 3666 5090 Dl
+(70)3616 5272 w
+4126 5162 4126 5090 Dl
+(80)4076 5272 w
+2124 5056 2196 5056 Dl
+(1)2049 5076 w
+2124 4704 2196 4704 Dl
+(10)1999 4724 w
+2124 4352 2196 4352 Dl
+(100)1949 4372 w
+2124 4001 2196 4001 Dl
+(1000)1899 4021 w
+(U.S. Army Personnel)2 855 1 2849 5410 t
+(Thousands)1404 4390 w
+2380 4677 2288 5072 Dl
+2324 5056 2288 5056 Dl
+2379 5056 2343 5056 Dl
+7 R f
+(.)2278 4635 w
+(.)2286 4601 w
+(.)2294 4566 w
+(.)2302 4532 w
+(.)2311 4498 w
+(.)2319 4463 w
+(.)2327 4429 w
+(.)2336 4395 w
+(.)2345 4360 w
+(.)2353 4326 w
+(.)2361 4292 w
+(.)2369 4257 w
+10 R f
+2380 3841 2288 4213 Dl
+2425 4509 2379 4676 Dl
+2381 5020 2379 5056 Dl
+2387 4948 2385 4984 Dl
+2392 4876 2390 4912 Dl
+2398 4804 2396 4840 Dl
+2403 4732 2401 4768 Dl
+2408 4660 2406 4696 Dl
+2414 4588 2412 4624 Dl
+2419 4516 2417 4552 Dl
+2424 4444 2422 4480 Dl
+7 R f
+(.)2369 4257 w
+(.)2381 4219 w
+(.)2392 4180 w
+(.)2404 4142 w
+(.)2415 4103 w
+10 R f
+2425 3719 2379 3840 Dl
+2471 4467 2425 4508 Dl
+2471 4406 2425 4444 Dl
+7 R f
+(.)2415 4103 w
+(.)2438 4082 w
+(.)2461 4060 w
+10 R f
+2471 3701 2425 3719 Dl
+2517 4425 2471 4467 Dl
+2517 4369 2471 4405 Dl
+7 R f
+(.)2461 4060 w
+(.)2507 4043 w
+10 R f
+2517 3699 2471 3701 Dl
+2563 4632 2517 4426 Dl
+2523 4404 2517 4369 Dl
+2536 4479 2530 4444 Dl
+2550 4556 2544 4521 Dl
+2563 4632 2557 4597 Dl
+7 R f
+(.)2507 4043 w
+(.)2517 4079 w
+(.)2525 4115 w
+(.)2535 4151 w
+(.)2544 4186 w
+(.)2553 4222 w
+10 R f
+2563 3929 2517 3698 Dl
+2746 4829 2563 4632 Dl
+2591 4653 2563 4632 Dl
+2643 4692 2615 4671 Dl
+2694 4730 2666 4709 Dl
+2746 4769 2718 4748 Dl
+7 R f
+(.)2553 4222 w
+(.)2576 4247 w
+(.)2599 4273 w
+(.)2622 4298 w
+(.)2645 4324 w
+(.)2668 4349 w
+(.)2691 4375 w
+(.)2714 4401 w
+(.)2737 4426 w
+10 R f
+2746 4103 2563 3929 Dl
+2976 4808 2747 4830 Dl
+2783 4766 2747 4770 Dl
+2848 4759 2812 4763 Dl
+2913 4751 2877 4755 Dl
+2977 4744 2941 4748 Dl
+7 R f
+(.)2737 4426 w
+(.)2770 4415 w
+(.)2803 4403 w
+(.)2836 4392 w
+(.)2868 4380 w
+(.)2901 4370 w
+(.)2934 4358 w
+(.)2967 4347 w
+10 R f
+2976 4005 2747 4103 Dl
+3206 4836 2977 4807 Dl
+3013 4743 2977 4744 Dl
+3078 4740 3042 4741 Dl
+3142 4737 3106 4738 Dl
+3206 4735 3170 4736 Dl
+7 R f
+(.)2967 4347 w
+(.)3005 4352 w
+(.)3043 4357 w
+(.)3082 4362 w
+(.)3120 4368 w
+(.)3158 4373 w
+(.)3196 4378 w
+10 R f
+3206 4042 2977 4004 Dl
+3435 4855 3206 4836 Dl
+3242 4735 3206 4735 Dl
+3307 4732 3271 4732 Dl
+3372 4731 3336 4731 Dl
+3436 4730 3400 4730 Dl
+7 R f
+(.)3196 4378 w
+(.)3235 4375 w
+(.)3273 4372 w
+(.)3312 4368 w
+(.)3350 4365 w
+(.)3388 4362 w
+(.)3426 4359 w
+10 R f
+3435 4028 3206 4043 Dl
+3665 4805 3436 4856 Dl
+3471 4724 3436 4729 Dl
+3536 4713 3501 4718 Dl
+3601 4701 3566 4706 Dl
+3665 4691 3630 4696 Dl
+7 R f
+(.)3426 4359 w
+(.)3459 4351 w
+(.)3492 4344 w
+(.)3525 4337 w
+(.)3558 4329 w
+(.)3590 4321 w
+(.)3623 4313 w
+(.)3656 4306 w
+10 R f
+3665 3982 3436 4027 Dl
+3895 4826 3666 4804 Dl
+3694 4667 3666 4689 Dl
+3745 4627 3717 4649 Dl
+3795 4586 3767 4608 Dl
+3846 4546 3818 4568 Dl
+3896 4505 3868 4527 Dl
+7 R f
+(.)3656 4306 w
+(.)3689 4317 w
+(.)3722 4327 w
+(.)3754 4338 w
+(.)3788 4349 w
+(.)3821 4359 w
+(.)3853 4370 w
+(.)3886 4380 w
+10 R f
+3895 4069 3666 3981 Dl
+4125 4763 3896 4826 Dl
+3930 4494 3896 4504 Dl
+3995 4475 3961 4485 Dl
+4060 4455 4026 4465 Dl
+4125 4436 4091 4446 Dl
+7 R f
+(.)3886 4380 w
+(.)3924 4383 w
+(.)3962 4386 w
+(.)4001 4389 w
+(.)4039 4392 w
+(.)4078 4395 w
+(.)4116 4398 w
+10 R f
+4125 4076 3896 4069 Dl
+4263 4721 4126 4763 Dl
+4161 4431 4126 4436 Dl
+4263 4414 4228 4419 Dl
+7 R f
+(.)4116 4398 w
+(.)4150 4396 w
+(.)4185 4393 w
+(.)4219 4391 w
+(.)4253 4390 w
+10 R f
+4263 4077 4126 4077 Dl
+7 R f
+(Enlisted Men)1 377 1 3018 3994 t
+(Male Of\256cers)1 386 1 3013 4321 t
+(Enlisted Women)1 471 1 2971 4696 t
+(Female Of\256cers)1 449 1 2982 4935 t
+10 R f
+( World War is obvious, as is the exodus after)9 1824(This data can tell many stories: the buildup during the Second)10 2496 2 720 5630 t
+( a different story: the ratio)5 1045( will consider)2 546( We)1 189(the war; increases during Korea and Vietnam are also apparent.)9 2540 4 720 5750 t
+( are several ways to plot this data \(the most)9 1800( There)1 289(of enlisted men to the three other classes of personnel.)9 2231 3 720 5870 t
+( the ratios change over time, and is left as an exercise for)12 2293(obvious graph uses three time series showing how)7 2027 2 720 5990 t
+(the reader\).)1 453 1 720 6110 t
+( but illustrates a general method that)6 1472(We will instead construct a graph that gives little insight into this data,)12 2848 2 720 6290 t
+(is quite useful in conjunction with)5 1389 1 720 6410 t
+10 I f
+(grap)2139 6410 w
+10 R f
+( how one variable)3 724( graph is a ``scatterplot vector'' that shows)7 1745(. The)1 235 3 2336 6410 t
+( with tradition, we \256rst show)5 1170( Breaking)1 420( the other three.)3 638(\(the number of enlisted men\) varies as a function of)9 2092 4 720 6530 t
+(the \256nal graphs, all of which have logarithmic scales.)8 2130 1 720 6650 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 22 22
+%%Page: 23 23
+/saveobj save def
+mark
+23 pagesetup
+10 HB f
+(GRAP 23)1 4320 1 720 600 t
+1440 960 1440 2160 Dl
+2640 960 1440 960 Dl
+2640 2160 2640 960 Dl
+1440 2160 2640 2160 Dl
+10 R f
+(Male)1751 2479 w
+10 S f
+(_)1956 2479 w
+10 R f
+(Of\256cers)2006 2479 w
+(Enlisted)728 1579 w
+10 S f
+(_)1056 1579 w
+10 R f
+(Men)1106 1579 w
+7 R f
+(40)1478 2106 w
+(42)2150 1344 w
+(43)2424 1095 w
+(44)2501 1059 w
+(45)2531 1053 w
+(46)2214 1525 w
+(50)1850 1881 w
+(55)1991 1679 w
+(60)1935 1758 w
+(65)1970 1725 w
+(70)2063 1631 w
+(75)1932 1812 w
+(80 83)1 84 1 1901 1828 t
+10 R f
+2712 960 2712 2160 Dl
+3912 960 2712 960 Dl
+3911 2160 3911 960 Dl
+2711 2160 3911 2160 Dl
+(Female)2980 2479 w
+10 S f
+(_)3274 2479 w
+10 R f
+(Of\256cers)3324 2479 w
+7 R f
+(40)2750 2106 w
+(42)3395 1344 w
+(43)3667 1095 w
+(44)3734 1059 w
+(45)3803 1053 w
+(46)3466 1525 w
+(50)3145 1881 w
+(55)3181 1679 w
+(60)3133 1758 w
+(65)3102 1725 w
+(70)3187 1631 w
+(75)3151 1812 w
+(8083)3253 1828 w
+10 R f
+3983 960 3983 2160 Dl
+5183 960 3983 960 Dl
+5184 2160 5184 960 Dl
+3984 2160 5184 2160 Dl
+(Enlisted)4237 2479 w
+10 S f
+(_)4565 2479 w
+10 R f
+(Women)4615 2479 w
+7 R f
+(40)4022 2106 w
+(42)4022 1344 w
+(43)4960 1095 w
+(44)5020 1059 w
+(45)5075 1053 w
+(46)4670 1525 w
+(50)4460 1881 w
+(55)4500 1679 w
+(60)4514 1758 w
+(65)4523 1725 w
+(70)4583 1631 w
+(75)4867 1812 w
+(80 83)1 104 1 4972 1828 t
+10 R f
+( related to the number of male of\256cers, it is somewhat related)11 2473(The number of enlisted men is almost linearly)7 1847 2 720 2700 t
+(to the number of female of\256cers, and it varies widely as a function of the number of enlisted women.)18 4026 1 720 2820 t
+( wrote a miniature)3 765( We)1 200( produce it.)2 476(Much more interesting than the graph itself is the method we used to)12 2879 4 720 3000 t
+( of a scatterplot vector and produces as)7 1652(``compiler'' that accepts as its ``source language'' a description)8 2668 2 720 3120 t
+(``object code'' a)2 658 1 720 3240 t
+10 I f
+(grap)1403 3240 w
+10 R f
+( source program for the above example is)7 1654( The)1 205(program to draw the graph.)4 1089 3 1617 3240 t
+9 CW f
+(file "army.d")1 702 1 870 3410 t
+(log x log y)3 594 1 870 3520 t
+(symbol "\\s-3$1\\s+3")1 1026 1 870 3630 t
+(y $4 Enlisted_Men)2 918 1 870 3740 t
+(x $2 Male_Officers)2 972 1 870 3850 t
+(x $3 Female_Officers)2 1080 1 870 3960 t
+(x $5 Enlisted_Women)2 1026 1 870 4070 t
+10 R f
+(The program lists several global attributes of the graph, the)9 2552 1 720 4250 t
+10 I f
+(y)3318 4250 w
+10 R f
+(-variable to be plotted, and as many)6 1554 1 3362 4250 t
+10 I f
+(x)4963 4250 w
+10 R f
+(-)5007 4250 w
+( language is)2 489( The)1 211(variables as are desired; with each variable is its \256eld in the \256le and a descriptive string.)16 3620 3 720 4370 t
+(``compiled'' by the following)3 1190 1 720 4490 t
+10 I f
+(awk)1935 4490 w
+10 R f
+(program.)2121 4490 w
+9 CW f
+(awk ')1 270 1 870 4660 t
+(# Parse all commands)3 1080 1 870 4770 t
+( fname=$2 })2 594($1=="file" {)1 918 2 870 4880 t
+( logtext=$0 })2 702($1=="log" {)1 918 2 870 4990 t
+( symtext=$2 })2 702($1=="symbol" {)1 918 2 870 5100 t
+( yfield=$2; ylabel=$3 })3 1242($1=="y" {)1 918 2 870 5210 t
+( n++; xfield[n]=$2; xlabel[n]=$3 })4 1836($1=="x" {)1 918 2 870 5320 t
+(# Generate n graphs)3 1026 1 870 5430 t
+(END {)1 270 1 870 5540 t
+(print ".G1")1 594 1 870 5650 t
+(for \(i=1; i<=n; i++\) {)4 1188 1 870 5760 t
+(if \(s!=""\) print "#")3 1080 1 1086 5870 t
+(print "graph A" s)3 918 1 1086 5980 t
+(s=" with .Frame.w at A.Frame.e +\(.1,0\)")5 2106 1 1086 6090 t
+(print "frame ht " 5/n " wid " 5/n)8 1782 1 1086 6200 t
+(print "label bot \\"" xlabel[i] "\\"")5 1890 1 1086 6310 t
+(if \(i==1\) print "label left \\"" ylabel "\\"")7 2322 1 1086 6420 t
+(if \(logtext!=""\) print "coord " logtext)5 2106 1 1086 6530 t
+(print "ticks off")2 918 1 1086 6640 t
+(print "copy " fname " thru X " symtext\\)8 2106 1 1086 6750 t
+(" at " xfield[i] "," yfield " X")7 1728 1 1302 6860 t
+(})870 6970 w
+(print ".G2")1 594 1 870 7080 t
+(}' $1)1 270 1 870 7190 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 23 23
+%%Page: 24 24
+/saveobj save def
+mark
+24 pagesetup
+10 HB f
+(24 GRAP)1 4320 1 720 600 t
+10 R f
+( the following output, which is typically piped)7 1955(Running this program on the above description produces)7 2365 2 720 960 t
+(directly to)1 408 1 720 1080 t
+10 I f
+(grap)1153 1080 w
+10 R f
+(.)1350 1080 w
+9 CW f
+(graph A)1 378 1 870 1250 t
+(frame ht 1.66667 wid 1.66667)4 1512 1 870 1360 t
+(label bot "Male_Officers")2 1350 1 870 1470 t
+(label left "Enlisted_Men")2 1350 1 870 1580 t
+(coord log x log y)4 918 1 870 1690 t
+(ticks off)1 486 1 870 1800 t
+(copy "army.d" thru X "\\s-3$1\\s+3" at $2,$4 X)7 2376 1 870 1910 t
+(#)870 2020 w
+(graph A with .Frame.w at A.Frame.e +\(.1,0\))6 2268 1 870 2130 t
+(frame ht 1.66667 wid 1.66667)4 1512 1 870 2240 t
+(label bot "Female_Officers")2 1458 1 870 2350 t
+(coord log x log y)4 918 1 870 2460 t
+(ticks off)1 486 1 870 2570 t
+(copy "army.d" thru X "\\s-3$1\\s+3" at $3,$4 X)7 2376 1 870 2680 t
+(#)870 2790 w
+(graph A with .Frame.w at A.Frame.e +\(.1,0\))6 2268 1 870 2900 t
+(frame ht 1.66667 wid 1.66667)4 1512 1 870 3010 t
+(label bot "Enlisted_Women")2 1404 1 870 3120 t
+(coord log x log y)4 918 1 870 3230 t
+(ticks off)1 486 1 870 3340 t
+(copy "army.d" thru X "\\s-3$1\\s+3" at $5,$4 X)7 2376 1 870 3450 t
+10 R f
+(The generated program uses the)4 1274 1 720 3630 t
+10 I f
+(pic)2019 3630 w
+10 R f
+(trick of re-using the same name \()6 1319 1 2166 3630 t
+10 CW f
+(A)3485 3630 w
+10 R f
+(\) for several objects.)3 814 1 3545 3630 t
+( above is merely a toy, ``minicompilers'' can produce useful preprocessors for)11 3175(Although the program)2 894 2 720 3810 t
+10 I f
+(grap)4818 3810 w
+10 R f
+(.)5015 3810 w
+(The)720 3930 w
+10 CW f
+(scatmat)915 3930 w
+10 R f
+(program, for instance, is a 90-line)5 1425 1 1375 3930 t
+10 I f
+(awk)2840 3930 w
+10 R f
+(program that reads a simple input language and)7 1999 1 3041 3930 t
+(produces as output a)3 818 1 720 4050 t
+10 I f
+(grap)1563 4050 w
+10 R f
+( device for)2 428(program to produce a ``scatterplot matrix'', which is a handy graphical)10 2835 2 1777 4050 t
+( If)1 117(spotting pairwise interactions among several variables.)5 2196 2 720 4170 t
+10 I f
+(grap)3059 4170 w
+10 R f
+(lacks a feature you desire, consider building)6 1766 1 3274 4170 t
+( task; which approach is best)5 1176( alternative is to de\256ne macros for the)7 1539( An)1 176(a simple preprocessor to provide it.)5 1429 4 720 4290 t
+(depends strongly on the job you wish to accomplish.)8 2102 1 720 4410 t
+( its ``data'' is a)4 656( Rather,)1 354( uses iterators to make a graph without reading data from a \256le.)12 2682(The next graph)2 628 4 720 4590 t
+( and a function of one variable that describes one)9 2004(function of two variables that describes a derivative \256eld)8 2316 2 720 4710 t
+(solution to the differential equation.)4 1435 1 720 4830 t
+9 CW f
+(frame ht 2.5 wid 2.5)4 1080 1 870 5000 t
+(coord x 0,1 y 0,1)4 918 1 870 5110 t
+(label bot "Direction field is $y sup prime = x sup 2 / y$")13 3132 1 870 5220 t
+(label left "$y= sqrt {\(2x sup 3 +1\)/3}$" right .3)9 2646 1 870 5330 t
+(ticks left in 0 at 0,1)5 1188 1 870 5440 t
+(ticks bot in 0 at 0,1)5 1134 1 870 5550 t
+(len=.04)870 5660 w
+(for tx from .01 to .91 by .1 do {)9 1782 1 870 5770 t
+(for ty from .01 to .91 by .1 do {)9 1782 1 978 5880 t
+(deriv=tx*tx/ty)1086 5990 w
+(scale=len/sqrt\(1+deriv*deriv\))1086 6100 w
+(line from tx,ty to tx+scale,ty+scale*deriv)4 2268 1 1086 6210 t
+(})978 6320 w
+(})870 6430 w
+(draw solid)1 540 1 870 6540 t
+(for tx = 0 to 1 by .05 do {)9 1458 1 870 6650 t
+(next at tx, sqrt\(\(2*tx*tx*tx+1\)/3\))3 1836 1 978 6760 t
+(})870 6870 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 24 24
+%%Page: 25 25
+/saveobj save def
+mark
+25 pagesetup
+10 HB f
+(GRAP 25)1 4320 1 720 600 t
+10 R f
+(The left label uses)3 759 1 720 960 t
+10 I f
+(eqn)1514 960 w
+10 R f
+(text between the)2 674 1 1693 960 t
+10 CW f
+($$)2402 960 w
+10 R f
+( variable)1 356(delimiters. The)1 640 2 2557 960 t
+10 CW f
+(scale)3588 960 w
+10 R f
+( all lines in the)4 633(ensures that)1 484 2 3923 960 t
+( The)1 215(direction \256eld are the same length.)5 1431 2 720 1080 t
+10 CW f
+(in)2401 1080 w
+10 R f
+(clauses in the)2 558 1 2556 1080 t
+10 CW f
+(ticks)3149 1080 w
+10 R f
+( ticks go in)3 469(statements specify that the)3 1087 2 3484 1080 t
+( variables)1 395( The)1 215(zero inches to avoid overprinting.)4 1385 3 720 1200 t
+10 CW f
+(tx)2750 1200 w
+10 R f
+(and)2905 1200 w
+10 CW f
+(ty)3084 1200 w
+10 R f
+(are so named because)3 899 1 3239 1200 t
+10 CW f
+(x)4174 1200 w
+10 R f
+(and)4270 1200 w
+10 CW f
+(y)4450 1200 w
+10 R f
+(are reserved)1 494 1 4546 1200 t
+(words for the)2 532 1 720 1320 t
+10 CW f
+(coord)1277 1320 w
+10 R f
+(statement.)1602 1320 w
+2579 1559 2579 3359 Dl
+4379 1559 2579 1559 Dl
+4379 3359 4379 1559 Dl
+2579 3359 4379 3359 Dl
+(Direction \256eld is)2 672 1 2950 3680 t
+10 I f
+(y)3647 3680 w
+10 S f
+(\242)3702 3675 w
+(=)3751 3680 w
+10 I f
+(x)3822 3680 w
+7 R f
+(2)3877 3640 w
+10 I f
+(/ y)1 80 1 3928 3680 t
+(y)1654 2497 w
+10 S f
+(=)1722 2497 w
+12 S f
+(\326` ````````)1 551 1 1793 2497 t
+10 R f
+(\( 2)1 91 1 1867 2497 t
+10 I f
+(x)1966 2497 w
+7 R f
+(3)2021 2457 w
+10 S f
+(+)2080 2497 w
+10 R f
+(1 \))1 91 1 2151 2497 t
+10 I f
+(/)2250 2497 w
+10 R f
+(3)2286 2497 w
+2579 3377 1 1 De
+(0)2504 3397 w
+2579 1577 1 1 De
+(1)2504 1597 w
+2579 3377 1 1 De
+(0)2554 3487 w
+4379 3377 1 1 De
+(1)4354 3487 w
+2669 3359 2597 3359 Dl
+2669 3179 2597 3179 Dl
+2669 2999 2597 2999 Dl
+2669 2819 2597 2819 Dl
+2669 2639 2597 2639 Dl
+2669 2459 2597 2459 Dl
+2669 2279 2597 2279 Dl
+2669 2099 2597 2099 Dl
+2669 1919 2597 1919 Dl
+2669 1739 2597 1739 Dl
+2823 3304 2777 3359 Dl
+2848 3172 2777 3179 Dl
+2849 2995 2777 2999 Dl
+2849 2817 2777 2819 Dl
+2849 2637 2777 2639 Dl
+2849 2458 2777 2459 Dl
+2849 2278 2777 2279 Dl
+2849 2098 2777 2099 Dl
+2849 1919 2777 1919 Dl
+2849 1739 2777 1739 Dl
+2972 3289 2957 3359 Dl
+3023 3153 2957 3179 Dl
+3027 2984 2957 2999 Dl
+3028 2809 2957 2819 Dl
+3028 2632 2957 2639 Dl
+3029 2453 2957 2459 Dl
+3029 2274 2957 2279 Dl
+3029 2095 2957 2099 Dl
+3029 1916 2957 1919 Dl
+3029 1736 2957 1739 Dl
+3144 3288 3137 3359 Dl
+3191 3132 3137 3179 Dl
+3202 2969 3137 2999 Dl
+3206 2798 3137 2819 Dl
+3206 2623 3137 2639 Dl
+3207 2446 3137 2459 Dl
+3208 2268 3137 2279 Dl
+3208 2090 3137 2099 Dl
+3208 1911 3137 1919 Dl
+3208 1732 3137 1739 Dl
+3321 3287 3317 3359 Dl
+3356 3119 3317 3179 Dl
+3373 2955 3317 2999 Dl
+3380 2785 3317 2819 Dl
+3383 2612 3317 2639 Dl
+3385 2437 3317 2459 Dl
+3386 2260 3317 2279 Dl
+3386 2083 3317 2099 Dl
+3387 1905 3317 1919 Dl
+3387 1727 3317 1739 Dl
+3499 3287 3497 3359 Dl
+3525 3113 3497 3179 Dl
+3542 2943 3497 2999 Dl
+3552 2773 3497 2819 Dl
+3557 2601 3497 2639 Dl
+3561 2427 3497 2459 Dl
+3563 2251 3497 2279 Dl
+3564 2075 3497 2099 Dl
+3565 1897 3497 1919 Dl
+3566 1720 3497 1739 Dl
+3679 3287 3677 3359 Dl
+3697 3110 3677 3179 Dl
+3712 2937 3677 2999 Dl
+3723 2764 3677 2819 Dl
+3730 2591 3677 2639 Dl
+3735 2417 3677 2459 Dl
+3738 2242 3677 2279 Dl
+3741 2066 3677 2099 Dl
+3742 1889 3677 1919 Dl
+3743 1712 3677 1739 Dl
+3858 3287 3857 3359 Dl
+3872 3109 3857 3179 Dl
+3884 2933 3857 2999 Dl
+3894 2758 3857 2819 Dl
+3902 2583 3857 2639 Dl
+3908 2409 3857 2459 Dl
+3912 2233 3857 2279 Dl
+3916 2058 3857 2099 Dl
+3918 1881 3857 1919 Dl
+3919 1705 3857 1739 Dl
+4038 3287 4037 3359 Dl
+4049 3108 4037 3179 Dl
+4058 2931 4037 2999 Dl
+4067 2755 4037 2819 Dl
+4075 2578 4037 2639 Dl
+4080 2403 4037 2459 Dl
+4085 2227 4037 2279 Dl
+4089 2051 4037 2099 Dl
+4093 1874 4037 1919 Dl
+4095 1698 4037 1739 Dl
+4217 3287 4217 3359 Dl
+4226 3108 4217 3179 Dl
+4235 2930 4217 2999 Dl
+4242 2752 4217 2819 Dl
+4248 2575 4217 2639 Dl
+4254 2398 4217 2459 Dl
+4259 2221 4217 2279 Dl
+4263 2045 4217 2099 Dl
+4267 1868 4217 1919 Dl
+4270 1691 4217 1739 Dl
+2669 2338 2579 2338 Dl
+2759 2338 2669 2338 Dl
+2849 2336 2759 2338 Dl
+2939 2330 2849 2335 Dl
+3029 2323 2939 2330 Dl
+3119 2311 3029 2322 Dl
+3209 2295 3119 2310 Dl
+3299 2274 3209 2294 Dl
+3389 2249 3299 2274 Dl
+3479 2217 3389 2248 Dl
+3569 2178 3479 2216 Dl
+3659 2135 3569 2178 Dl
+3749 2085 3659 2134 Dl
+3839 2028 3749 2084 Dl
+3929 1967 3839 2028 Dl
+4019 1899 3929 1966 Dl
+4109 1827 4019 1899 Dl
+4199 1749 4109 1826 Dl
+4289 1666 4199 1748 Dl
+4379 1578 4289 1665 Dl
+( above graph is correct.)4 1017(Programmers familiar with \257oating point arithmetic may be surprised that the)10 3303 2 720 3917 t
+( iteration ``)2 497(Because of roundoff error,)3 1132 2 720 4037 t
+10 CW f
+(from 0 to 1 by .05)5 1080 1 2349 4037 t
+10 R f
+('' usually produces the values 0, .05,)6 1611 1 3429 4037 t
+(.10,)720 4157 w
+10 S f
+(\274)895 4157 w
+10 R f
+(, .95.)1 200 1 995 4157 t
+10 I f
+(Grap)1259 4157 w
+10 R f
+( in the)2 280(uses a ``fuzzy test'')3 825 2 1509 4157 t
+10 CW f
+(for)2654 4157 w
+10 R f
+(statement to avoid that problem, which may in turn)8 2166 1 2874 4157 t
+( may be avoided by iterating over an integer range and)10 2508( problems)1 431( Such)1 284(introduce other problems.)2 1097 4 720 4277 t
+(incrementing a non-integer value within the loop.)6 1978 1 720 4397 t
+( an example of one-)4 852( As)1 175(Most of the data we have seen so far is inherently two \(or more\) dimensional.)14 3293 3 720 4577 t
+( the third \256eld in the \256le)6 1039(dimensional data, we will return to the populations of the \256fty states, which is)13 3281 2 720 4697 t
+10 CW f
+(states.d)720 4817 w
+10 R f
+( \256rst graph takes)3 675( Our)1 209( increasing order of population.)4 1272(introduced on page 9; the \256le is sorted in)8 1656 4 1228 4817 t
+(the most space, but it also gives the most information.)9 2158 1 720 4937 t
+9 CW f
+(frame ht 4 wid 5)4 864 1 870 5107 t
+(label left "Rank in" "Population")4 1782 1 870 5217 t
+(label bot "Population \(Millions\)")3 1782 1 870 5327 t
+(label top "$log sub 2$ \(Population\)")5 1944 1 870 5437 t
+(coord x .3,30 y 0,51 log x)6 1404 1 870 5547 t
+(define L % exp\($1*log\(2\)\)/1e6 "$1" %)5 1944 1 870 5657 t
+(ticks bot out at .5, 1, 2, 5, 10, 20)9 1944 1 870 5767 t
+(ticks left out from 10 to 50 by 10)8 1836 1 870 5877 t
+(ticks top out at L\(19\), L\(20\), L\(21\), L\(22\), L\(23\), L\(24\))9 3078 1 870 5987 t
+(thisy=50)870 6097 w
+(copy "states.d" thru X)3 1188 1 870 6207 t
+("$1" size -4 at \($3/1e6, thisy\))5 1674 1 978 6317 t
+(thisy=thisy-1)978 6427 w
+(X)870 6537 w
+(line dotted from 15.3,1 to .515,50)5 1836 1 870 6647 t
+10 R f
+(The)720 6827 w
+10 CW f
+(L)910 6827 w
+10 R f
+(macro \(for Label\) with input parameter)5 1615 1 1005 6827 t
+10 I f
+(X)2656 6827 w
+10 R f
+(evaluates to the number 2)4 1070 1 2753 6827 t
+7 I f
+(X)3828 6787 w
+10 I f
+(/)3887 6827 w
+10 R f
+( followed by the)3 685(1 , 000 , 000)4 432 2 3923 6827 t
+(string)720 6947 w
+10 CW f
+(")973 6947 w
+10 I f
+(X)1033 6947 w
+10 CW f
+(")1094 6947 w
+10 R f
+(\(the)1179 6947 w
+10 CW f
+(ticks)1359 6947 w
+10 R f
+(command expects a number followed by a string label\).)8 2221 1 1684 6947 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 25 25
+%%Page: 26 26
+/saveobj save def
+mark
+26 pagesetup
+10 HB f
+(26 GRAP)1 4320 1 720 600 t
+1392 1320 1392 4200 Dl
+4992 1320 1392 1320 Dl
+4992 4200 4992 1320 Dl
+1392 4200 4992 4200 Dl
+10 R f
+(Rank in)1 314 1 850 2720 t
+(Population)790 2840 w
+(Population \(Millions\))1 865 1 2760 4520 t
+(log)2839 1039 w
+7 R f
+(2)2978 1059 w
+10 R f
+(\(Population\))3046 1039 w
+1791 4272 1791 4200 Dl
+(0.5)1729 4382 w
+2333 4272 2333 4200 Dl
+(1)2308 4382 w
+2874 4272 2874 4200 Dl
+(2)2849 4382 w
+3591 4272 3591 4200 Dl
+(5)3566 4382 w
+4133 4272 4133 4200 Dl
+(10)4083 4382 w
+4674 4272 4674 4200 Dl
+(20)4624 4382 w
+1320 3635 1392 3635 Dl
+(10)1195 3655 w
+1320 3070 1392 3070 Dl
+(20)1195 3090 w
+1320 2505 1392 2505 Dl
+(30)1195 2525 w
+1320 1941 1392 1941 Dl
+(40)1195 1961 w
+1320 1376 1392 1376 Dl
+(50)1195 1396 w
+1828 1248 1828 1320 Dl
+(19)1778 1196 w
+2370 1248 2370 1320 Dl
+(20)2320 1196 w
+2912 1248 2912 1320 Dl
+(21)2862 1196 w
+3454 1248 3454 1320 Dl
+(22)3404 1196 w
+3995 1248 3995 1320 Dl
+(23)3945 1196 w
+4537 1248 4537 1320 Dl
+(24)4487 1196 w
+6 R f
+(AK)1577 1396 w
+(WY)1693 1453 w
+(VT)1769 1509 w
+(DE)1886 1566 w
+(ND)1956 1622 w
+(SD)2005 1679 w
+(MT)2100 1735 w
+(NV)2116 1791 w
+(NH)2225 1848 w
+(ID)2256 1904 w
+(RI)2260 1961 w
+(HI)2274 2017 w
+(ME)2379 2074 w
+(NM)2491 2130 w
+(UT)2589 2186 w
+(NE)2645 2243 w
+(WV)2806 2299 w
+(AR)2938 2356 w
+(KS)2967 2412 w
+(MS)3013 2469 w
+(OR)3049 2525 w
+(AZ)3075 2582 w
+(CO)3121 2638 w
+(IA)3138 2695 w
+(OK)3155 2751 w
+(CT)3181 2808 w
+(SC)3186 2864 w
+(KY)3304 2921 w
+(AL)3356 2978 w
+(MN)3383 3034 w
+(WA)3393 3090 w
+(LA)3416 3147 w
+(MD)3409 3203 w
+(TN)3484 3260 w
+(WI)3505 3316 w
+(MO)3530 3373 w
+(VA)3600 3429 w
+(GA)3617 3485 w
+(IN)3633 3542 w
+(MA)3651 3598 w
+(NC)3677 3655 w
+(NJ)3861 3711 w
+(MI)4037 3768 w
+(FL)4078 3824 w
+(OH)4150 3880 w
+(IL)4209 3937 w
+(PA)4228 3993 w
+(TX)4369 4050 w
+(NY)4530 4106 w
+(CA)4765 4163 w
+7 R f
+(.)4455 4146 w
+(.)4430 4120 w
+(.)4405 4094 w
+(.)4380 4068 w
+(.)4355 4042 w
+(.)4330 4015 w
+(.)4305 3989 w
+(.)4280 3963 w
+(.)4255 3938 w
+(.)4230 3911 w
+(.)4205 3885 w
+(.)4180 3859 w
+(.)4155 3832 w
+(.)4130 3807 w
+(.)4105 3781 w
+(.)4080 3755 w
+(.)4055 3728 w
+(.)4030 3702 w
+(.)4005 3676 w
+(.)3980 3650 w
+(.)3955 3624 w
+(.)3930 3598 w
+(.)3905 3572 w
+(.)3880 3546 w
+(.)3855 3519 w
+(.)3830 3493 w
+(.)3805 3467 w
+(.)3780 3441 w
+(.)3755 3415 w
+(.)3730 3389 w
+(.)3704 3363 w
+(.)3680 3337 w
+(.)3655 3310 w
+(.)3630 3285 w
+(.)3605 3259 w
+(.)3580 3233 w
+(.)3555 3206 w
+(.)3530 3180 w
+(.)3505 3154 w
+(.)3480 3128 w
+(.)3455 3102 w
+(.)3429 3076 w
+(.)3405 3050 w
+(.)3380 3024 w
+(.)3355 2997 w
+(.)3329 2971 w
+(.)3305 2945 w
+(.)3280 2919 w
+(.)3254 2893 w
+(.)3229 2867 w
+(.)3205 2841 w
+(.)3180 2815 w
+(.)3154 2788 w
+(.)3129 2763 w
+(.)3105 2737 w
+(.)3080 2710 w
+(.)3054 2684 w
+(.)3030 2658 w
+(.)3005 2632 w
+(.)2979 2606 w
+(.)2954 2580 w
+(.)2930 2554 w
+(.)2905 2528 w
+(.)2879 2501 w
+(.)2854 2475 w
+(.)2830 2449 w
+(.)2804 2423 w
+(.)2779 2397 w
+(.)2754 2371 w
+(.)2730 2345 w
+(.)2704 2319 w
+(.)2679 2292 w
+(.)2654 2266 w
+(.)2630 2241 w
+(.)2604 2215 w
+(.)2579 2188 w
+(.)2555 2162 w
+(.)2529 2136 w
+(.)2504 2110 w
+(.)2479 2084 w
+(.)2455 2058 w
+(.)2429 2032 w
+(.)2404 2006 w
+(.)2379 1979 w
+(.)2354 1953 w
+(.)2329 1927 w
+(.)2304 1901 w
+(.)2279 1875 w
+(.)2254 1849 w
+(.)2229 1823 w
+(.)2204 1797 w
+(.)2179 1770 w
+(.)2154 1744 w
+(.)2129 1719 w
+(.)2104 1693 w
+(.)2079 1666 w
+(.)2054 1640 w
+(.)2029 1614 w
+(.)2004 1587 w
+(.)1979 1562 w
+(.)1954 1536 w
+(.)1929 1510 w
+(.)1904 1483 w
+(.)1879 1457 w
+(.)1854 1431 w
+(.)1829 1405 w
+(.)1804 1379 w
+10 R f
+(The dotted line is the least squares regression)7 1811 1 720 4740 t
+(log)2054 4920 w
+7 R f
+(10)2193 4940 w
+10 I f
+(Population)2312 4920 w
+10 S f
+(=)2806 4920 w
+10 R f
+(7. 214)1 233 1 2910 4920 t
+10 S f
+(-)3192 4920 w
+10 I f
+(.)3296 4920 w
+10 R f
+(03)3329 4920 w
+10 S f
+(\264)3437 4920 w
+10 I f
+(Rank)3500 4920 w
+10 R f
+(which gives 15.3 million as the population of the largest state and .515 million as the population of the)18 4320 1 720 5100 t
+( that population drops by a factor of two every ten states \(compare the top and left)16 3421( says)1 207( It)1 121(smallest state.)1 571 4 720 5220 t
+( much better \256t to this data than a Zipf's Law)10 1919( sloppy as the exponential \256t is, though, it is a)10 1934(scales\). As)1 467 3 720 5340 t
+(curve is \(drawing that curve is left as an exercise for the reader\).)12 2566 1 720 5460 t
+(The next graph is a more standard representation of one-dimensional data.)10 2963 1 720 5640 t
+9 CW f
+(frame invis ht .3 wid 5 bottom solid)7 1944 1 870 5810 t
+(label bot "Populations \(in Millions\) of the 50 States")8 2916 1 870 5920 t
+(coord x .3,30 y 0, 1 log x)7 1404 1 870 6030 t
+(ticks bot out at .5, 1, 2, 5, 10, 20)9 1944 1 870 6140 t
+(ticks left off)2 756 1 870 6250 t
+(copy "states.d" thru X vtick at \($3/1e6,.5\) X)7 2430 1 870 6360 t
+10 R f
+(The markers were chosen to be)5 1243 1 720 6540 t
+10 CW f
+(vticks)1988 6540 w
+10 R f
+(because they denote only an)4 1125 1 2373 6540 t
+10 I f
+(x)3523 6540 w
+10 R f
+(-value.)3567 6540 w
+4680 6936 1080 6936 Dl
+(Populations \(in Millions\) of the 50 States)6 1651 1 2055 7256 t
+1479 7008 1479 6936 Dl
+(0.5)1417 7118 w
+2021 7008 2021 6936 Dl
+(1)1996 7118 w
+2563 7008 2563 6936 Dl
+(2)2538 7118 w
+3279 7008 3279 6936 Dl
+(5)3254 7118 w
+3821 7008 3821 6936 Dl
+(10)3771 7118 w
+4363 7008 4363 6936 Dl
+(20)4313 7118 w
+10 S f
+( |)1 234( |)1 164( |)1 142( |)1 29( |)1 44( |)1 81( |)1 39( |)1 179( |)1 176( ||)1 54( |)1 4( |)1 17( |)1 66( |)1 33( ||)1 86( |)1 2( |)1 14( |)1 11( |)1 36( |)1 48( |)1 125( |)1 4( ||)1 50( |)1 6( |)1 48( |)1 25( |)1 34( |)1 50( |)1 26( |)1 124( |)1 170( |)1 56( |)1 90( |)1 114( |)1 121( |)1 14( |)1 2( ||)1 129( |)1 14( |)1 101( |)1 45( |)1 73( |)1 118( |)1 67(| |)1 141 45 1298 6848 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 26 26
+%%Page: 27 27
+/saveobj save def
+mark
+27 pagesetup
+10 HB f
+(GRAP 27)1 4320 1 720 600 t
+10 R f
+( graph is)2 370(The next one-dimensional graph uses the state's name as its marker; to reduce overprinting the)14 3950 2 720 960 t
+(``jittered'' by using a random number as a)7 1688 1 720 1080 t
+10 I f
+(y)2433 1080 w
+10 R f
+(-value.)2477 1080 w
+9 CW f
+(frame invis ht 1 wid 5 bottom solid)7 1890 1 870 1250 t
+(label bot "Populations \(in Millions\) of the 50 States")8 2916 1 870 1360 t
+(coord x .3,30 y 0,1000 log x)6 1512 1 870 1470 t
+(ticks bot out at .5, 1, 2, 5, 10, 20)9 1944 1 870 1580 t
+(ticks left off)2 756 1 870 1690 t
+(copy "states.d" thru X "$1" size -4 at \($3/1e6,100+900*rand\(\)\) X)9 3456 1 870 1800 t
+10 R f
+(The function)1 513 1 720 1980 t
+10 CW f
+(rand\(\))1258 1980 w
+10 R f
+(returns a pseudo-random real number chosen uniformly over the interval [0,1\).)10 3143 1 1643 1980 t
+4680 2939 1080 2939 Dl
+(Populations \(in Millions\) of the 50 States)6 1651 1 2055 3259 t
+1479 3011 1479 2939 Dl
+(0.5)1417 3121 w
+2021 3011 2021 2939 Dl
+(1)1996 3121 w
+2563 3011 2563 2939 Dl
+(2)2538 3121 w
+3279 3011 3279 2939 Dl
+(5)3254 3121 w
+3821 3011 3821 2939 Dl
+(10)3771 3121 w
+4363 3011 4363 2939 Dl
+(20)4313 3121 w
+6 R f
+(AK)1265 2342 w
+(WY)1380 2631 w
+(VT)1456 2380 w
+(DE)1574 2370 w
+(ND)1644 2296 w
+(SD)1694 2759 w
+(MT)1788 2670 w
+(NV)1804 2389 w
+(NH)1913 2707 w
+(ID)1945 2528 w
+(RI)1948 2578 w
+(HI)1961 2479 w
+(ME)2068 2650 w
+(NM)2179 2554 w
+(UT)2277 2270 w
+(NE)2333 2293 w
+(WV)2494 2475 w
+(AR)2626 2422 w
+(KS)2655 2795 w
+(MS)2700 2493 w
+(OR)2736 2876 w
+(AZ)2762 2730 w
+(CO)2809 2798 w
+(IA)2825 2366 w
+(OK)2843 2785 w
+(CT)2869 2627 w
+(SC)2873 2803 w
+(KY)2992 2816 w
+(AL)3043 2239 w
+(MN)3071 2745 w
+(WA)3081 2555 w
+(LA)3104 2343 w
+(MD)3098 2490 w
+(TN)3172 2695 w
+(WI)3194 2474 w
+(MO)3217 2547 w
+(VA)3288 2567 w
+(GA)3305 2257 w
+(IN)3321 2697 w
+(MA)3338 2387 w
+(NC)3365 2545 w
+(NJ)3549 2388 w
+(MI)3725 2627 w
+(FL)3765 2309 w
+(OH)3838 2703 w
+(IL)3897 2658 w
+(PA)3916 2363 w
+(TX)4056 2291 w
+(NY)4217 2842 w
+(CA)4453 2272 w
+10 R f
+( is too cluttered; circles would have been a better choice as a plotting symbol \(bullets, once)16 3876(This graph)1 444 2 720 3479 t
+(again, would hide data\).)3 962 1 720 3599 t
+( step)1 190( \256rst)1 184( Our)1 208(Histograms are a standard way of presenting one-dimensional data in two-dimensional form.)11 3738 4 720 3779 t
+(in building a histogram of the population data is the following)10 2493 1 720 3899 t
+10 I f
+(awk)3239 3899 w
+10 R f
+(program, which counts how many states)5 1614 1 3426 3899 t
+(are in each ``bin'' of a million people.)7 1524 1 720 4019 t
+9 CW f
+(awk ')1 270 1 870 4189 t
+( bin zero start; bin width)5 1404( #)1 162( bzs=0; bw=1e6 })3 864(BEGIN {)1 486 4 870 4299 t
+({ count[int\(\($3-bzs\)/bw\)]++ })2 1566 1 1302 4409 t
+( for \(i in count\) print i, count[i] })8 1998(END {)1 486 2 870 4519 t
+(' <states.d | sort -n >states2.d)5 1728 1 870 4629 t
+10 R f
+(The variable)1 504 1 720 4809 t
+10 CW f
+(bzs)1252 4809 w
+10 R f
+( in a histogram)3 609(tells where bin zero starts; although it is zero in this graph, it might be 95)15 2971 2 1460 4809 t
+( program produces the following output in)6 1861( The)1 233( degrees Fahrenheit.)2 862(of human body temperatures in)4 1364 4 720 4929 t
+10 CW f
+(states2.d)720 5049 w
+10 R f
+(:)1260 5049 w
+9 CW f
+(0 12)1 216 1 870 5219 t
+(1 5)1 162 1 870 5329 t
+(2 7)1 162 1 870 5439 t
+(3 5)1 162 1 870 5549 t
+(4 7)1 162 1 870 5659 t
+(x)870 5769 w
+(23 1)1 216 1 870 5879 t
+10 R f
+( and 999,999, 5 states with population between 1,000,000 and)9 2482(There are 12 states with population between 0)7 1838 2 720 6059 t
+(1,999,999, and so on.)3 858 1 720 6179 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 27 27
+%%Page: 28 28
+/saveobj save def
+mark
+28 pagesetup
+10 HB f
+(28 GRAP)1 4320 1 720 600 t
+10 R f
+(This)720 960 w
+10 I f
+(grap)923 960 w
+10 R f
+(program uses three)2 759 1 1137 960 t
+10 CW f
+(line)1921 960 w
+10 R f
+(commands to plot each rectangle in the histogram.)7 2014 1 2186 960 t
+9 CW f
+(frame invis bot solid)3 1134 1 870 1130 t
+(label bot "Populations \(in Millions\) of the 50 States")8 2916 1 870 1240 t
+(label left "Number" "of" "States" left .3)6 2214 1 870 1350 t
+(ticks bot out from 0 to 25 by 5)8 1674 1 870 1460 t
+(coord x 0,25 y 0,13)4 1026 1 870 1570 t
+(copy "states2.d" thru X)3 1242 1 870 1680 t
+(line from $1,0 to $1,$2)4 1242 1 978 1790 t
+(line from $1,$2 to $1+1,$2)4 1404 1 978 1900 t
+(line from $1+1,$2 to $1+1,0)4 1458 1 978 2010 t
+(X)870 2120 w
+10 R f
+(It produces)1 446 1 720 2300 t
+4259 3920 2099 3920 Dl
+2027 3920 2099 3920 Dl
+(-0)1919 3940 w
+2027 3366 2099 3366 Dl
+(5)1952 3386 w
+2027 2812 2099 2812 Dl
+(10)1902 2832 w
+(Populations \(in Millions\) of the 50 States)6 1651 1 2354 4240 t
+(Number)1432 3100 w
+(of)1554 3220 w
+(States)1476 3340 w
+2099 3992 2099 3920 Dl
+(0)2074 4102 w
+2531 3992 2531 3920 Dl
+(5)2506 4102 w
+2963 3992 2963 3920 Dl
+(10)2913 4102 w
+3395 3992 3395 3920 Dl
+(15)3345 4102 w
+3827 3992 3827 3920 Dl
+(20)3777 4102 w
+4259 3992 4259 3920 Dl
+(25)4209 4102 w
+2099 2591 2099 3920 Dl
+2185 2590 2099 2590 Dl
+2185 3919 2185 2590 Dl
+2185 3367 2185 3920 Dl
+2271 3366 2185 3366 Dl
+2271 3919 2271 3366 Dl
+2271 3145 2271 3920 Dl
+2357 3144 2271 3144 Dl
+2358 3919 2358 3144 Dl
+2358 3367 2358 3920 Dl
+2444 3366 2358 3366 Dl
+2444 3919 2444 3366 Dl
+2444 3145 2444 3920 Dl
+2530 3144 2444 3144 Dl
+2531 3919 2531 3144 Dl
+2531 3367 2531 3920 Dl
+2617 3366 2531 3366 Dl
+2617 3919 2617 3366 Dl
+2703 3810 2703 3920 Dl
+2789 3809 2703 3809 Dl
+2790 3919 2790 3809 Dl
+2876 3699 2876 3920 Dl
+2962 3698 2876 3698 Dl
+2963 3919 2963 3698 Dl
+2963 3810 2963 3920 Dl
+3049 3809 2963 3809 Dl
+3049 3919 3049 3809 Dl
+3049 3699 3049 3920 Dl
+3135 3698 3049 3698 Dl
+3135 3919 3135 3698 Dl
+3308 3810 3308 3920 Dl
+3394 3809 3308 3809 Dl
+3395 3919 3395 3809 Dl
+3567 3810 3567 3920 Dl
+3653 3809 3567 3809 Dl
+3654 3919 3654 3809 Dl
+4086 3810 4086 3920 Dl
+4172 3809 4086 3809 Dl
+4172 3919 4172 3809 Dl
+(The same \256le can be plotted in a more attractive \(and more useful\) form by)14 2999 1 720 4460 t
+9 CW f
+(frame invis bot solid left solid)5 1728 1 870 4630 t
+(label bot "Populations \(in Millions\) of the 50 States")8 2916 1 870 4740 t
+(label left "Number" "of" "States" left .3)6 2214 1 870 4850 t
+(ticks bot out from 0 to 25 by 5)8 1674 1 870 4960 t
+(coord x 0,25 y 0,13)4 1026 1 870 5070 t
+(copy "states2.d" thru X)3 1242 1 870 5180 t
+(line dotted from $1+.5,0 to $1+.5,$2)5 1944 1 978 5290 t
+("\\\(bu" size -3 at $1+.5,$2)4 1404 1 978 5400 t
+(X)870 5510 w
+10 R f
+(which produces one of Bill Cleveland's ``dot charts'' or ``lolliplots'':)9 2782 1 720 5690 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 28 28
+%%Page: 29 29
+/saveobj save def
+mark
+29 pagesetup
+10 HB f
+(GRAP 29)1 4320 1 720 600 t
+4259 2400 2099 2400 Dl
+2099 960 2099 2400 Dl
+2027 2400 2099 2400 Dl
+10 R f
+(-0)1919 2420 w
+2027 1846 2099 1846 Dl
+(5)1952 1866 w
+2027 1292 2099 1292 Dl
+(10)1902 1312 w
+(Populations \(in Millions\) of the 50 States)6 1651 1 2354 2720 t
+(Number)1432 1580 w
+(of)1554 1700 w
+(States)1476 1820 w
+2099 2472 2099 2400 Dl
+(0)2074 2582 w
+2531 2472 2531 2400 Dl
+(5)2506 2582 w
+2963 2472 2963 2400 Dl
+(10)2913 2582 w
+3395 2472 3395 2400 Dl
+(15)3345 2582 w
+3827 2472 3827 2400 Dl
+(20)3777 2582 w
+4259 2472 4259 2400 Dl
+(25)4209 2582 w
+7 R f
+(.)2132 2403 w
+(.)2132 2367 w
+(.)2132 2331 w
+(.)2132 2295 w
+(.)2132 2259 w
+(.)2132 2223 w
+(.)2132 2187 w
+(.)2132 2151 w
+(.)2132 2115 w
+(.)2132 2079 w
+(.)2132 2043 w
+(.)2132 2007 w
+(.)2132 1971 w
+(.)2132 1935 w
+(.)2132 1899 w
+(.)2132 1864 w
+(.)2132 1828 w
+(.)2132 1792 w
+(.)2132 1756 w
+(.)2132 1720 w
+(.)2132 1684 w
+(.)2132 1648 w
+(.)2132 1612 w
+(.)2132 1576 w
+(.)2132 1540 w
+(.)2132 1505 w
+(.)2132 1469 w
+(.)2132 1433 w
+(.)2132 1397 w
+(.)2132 1361 w
+(.)2132 1325 w
+(.)2132 1289 w
+(.)2132 1253 w
+(.)2132 1217 w
+(.)2132 1181 w
+(.)2132 1145 w
+(.)2132 1109 w
+(.)2132 1073 w
+7 S f
+(\267)2126 1090 w
+7 R f
+(.)2218 2403 w
+(.)2218 2366 w
+(.)2218 2328 w
+(.)2218 2292 w
+(.)2218 2255 w
+(.)2218 2218 w
+(.)2218 2181 w
+(.)2218 2144 w
+(.)2218 2107 w
+(.)2218 2070 w
+(.)2218 2033 w
+(.)2218 1996 w
+(.)2218 1960 w
+(.)2218 1922 w
+(.)2218 1886 w
+(.)2218 1849 w
+7 S f
+(\267)2212 1866 w
+7 R f
+(.)2305 2403 w
+(.)2305 2367 w
+(.)2305 2332 w
+(.)2305 2297 w
+(.)2305 2261 w
+(.)2305 2226 w
+(.)2305 2191 w
+(.)2305 2156 w
+(.)2305 2120 w
+(.)2305 2085 w
+(.)2305 2050 w
+(.)2305 2015 w
+(.)2305 1980 w
+(.)2305 1945 w
+(.)2305 1909 w
+(.)2305 1874 w
+(.)2305 1839 w
+(.)2305 1803 w
+(.)2305 1768 w
+(.)2305 1733 w
+(.)2305 1698 w
+(.)2305 1662 w
+(.)2305 1627 w
+7 S f
+(\267)2299 1644 w
+7 R f
+(.)2391 2403 w
+(.)2391 2366 w
+(.)2391 2328 w
+(.)2391 2292 w
+(.)2391 2255 w
+(.)2391 2218 w
+(.)2391 2181 w
+(.)2391 2144 w
+(.)2391 2107 w
+(.)2391 2070 w
+(.)2391 2033 w
+(.)2391 1996 w
+(.)2391 1960 w
+(.)2391 1922 w
+(.)2391 1886 w
+(.)2391 1849 w
+7 S f
+(\267)2385 1866 w
+7 R f
+(.)2477 2403 w
+(.)2477 2367 w
+(.)2477 2332 w
+(.)2477 2297 w
+(.)2477 2261 w
+(.)2477 2226 w
+(.)2477 2191 w
+(.)2477 2156 w
+(.)2477 2120 w
+(.)2477 2085 w
+(.)2477 2050 w
+(.)2477 2015 w
+(.)2477 1980 w
+(.)2477 1945 w
+(.)2477 1909 w
+(.)2477 1874 w
+(.)2477 1839 w
+(.)2477 1803 w
+(.)2477 1768 w
+(.)2477 1733 w
+(.)2477 1698 w
+(.)2477 1662 w
+(.)2477 1627 w
+7 S f
+(\267)2471 1644 w
+7 R f
+(.)2564 2403 w
+(.)2564 2366 w
+(.)2564 2328 w
+(.)2564 2292 w
+(.)2564 2255 w
+(.)2564 2218 w
+(.)2564 2181 w
+(.)2564 2144 w
+(.)2564 2107 w
+(.)2564 2070 w
+(.)2564 2033 w
+(.)2564 1996 w
+(.)2564 1960 w
+(.)2564 1922 w
+(.)2564 1886 w
+(.)2564 1849 w
+7 S f
+(\267)2558 1866 w
+7 R f
+(.)2737 2403 w
+(.)2737 2366 w
+(.)2737 2328 w
+(.)2737 2292 w
+7 S f
+(\267)2731 2309 w
+7 R f
+(.)2909 2403 w
+(.)2909 2366 w
+(.)2909 2328 w
+(.)2909 2292 w
+(.)2909 2255 w
+(.)2909 2218 w
+(.)2909 2181 w
+7 S f
+(\267)2903 2198 w
+7 R f
+(.)2996 2403 w
+(.)2996 2366 w
+(.)2996 2328 w
+(.)2996 2292 w
+7 S f
+(\267)2990 2309 w
+7 R f
+(.)3082 2403 w
+(.)3082 2366 w
+(.)3082 2328 w
+(.)3082 2292 w
+(.)3082 2255 w
+(.)3082 2218 w
+(.)3082 2181 w
+7 S f
+(\267)3076 2198 w
+7 R f
+(.)3341 2403 w
+(.)3341 2366 w
+(.)3341 2328 w
+(.)3341 2292 w
+7 S f
+(\267)3335 2309 w
+7 R f
+(.)3601 2403 w
+(.)3601 2366 w
+(.)3601 2328 w
+(.)3601 2292 w
+7 S f
+(\267)3595 2309 w
+7 R f
+(.)4119 2403 w
+(.)4119 2366 w
+(.)4119 2328 w
+(.)4119 2292 w
+7 S f
+(\267)4113 2309 w
+10 R f
+(\(We use)1 329 1 720 2940 t
+10 CW f
+(\\\(bu)1074 2940 w
+10 R f
+(, the)1 172 1 1314 2940 t
+10 I f
+(troff)1511 2940 w
+10 R f
+(character for a bullet, rather than the built-in string to get a larger size.\))13 2840 1 1709 2940 t
+( following)1 414( The)1 205(Other histograms are possible.)3 1215 3 720 3120 t
+10 I f
+(awk)2579 3120 w
+10 R f
+(program)2765 3120 w
+9 CW f
+(awk ')1 270 1 870 3290 t
+( bin zero start; bin width)5 1404( #)1 162( bzs=0; bw=1e6 })3 864(BEGIN {)1 486 4 870 3400 t
+({ thisbin=int\(\($3-bzs\)/bw\); print $1, thisbin, count[thisbin]++ })6 3510 1 1302 3510 t
+(' <states.d >states3.d)2 1188 1 870 3620 t
+10 R f
+(produces the \256le)2 660 1 720 3800 t
+10 CW f
+(states3.d)1405 3800 w
+9 CW f
+(AK 0 0)2 324 1 870 3970 t
+(WY 0 1)2 324 1 870 4080 t
+(VT 0 2)2 324 1 870 4190 t
+(DE 0 3)2 324 1 870 4300 t
+(ND 0 4)2 324 1 870 4410 t
+(x)870 4520 w
+(CA 23 0)2 378 1 870 4630 t
+10 R f
+( The)1 205(which lists the state's abbreviation, bin number, and height within the bin.)11 2965 2 720 4810 t
+10 I f
+(grap)3915 4810 w
+10 R f
+(program)4129 4810 w
+9 CW f
+(frame invis wid 4 ht 2.5 bot solid)7 1836 1 870 4980 t
+(ticks bot out from 0 to 25 by 5)8 1674 1 870 5090 t
+(ticks left off)2 756 1 870 5200 t
+(label bot "Populations \(in Millions\) of the 50 States")8 2916 1 870 5310 t
+(coord x 0,25 y 0,13)4 1026 1 870 5420 t
+(copy "states3.d" thru X "$1" size -4 at $2+.5, $3+.5 X)10 2916 1 870 5530 t
+10 R f
+( display the heights of)4 903(reads that \256le to make the following histogram, in which the state names are used to)15 3417 2 720 5710 t
+( each bin, the states occur in increasing order of population from bottom to top.)14 3168( In)1 133(the bins.)1 339 3 720 5830 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 29 29
+%%Page: 30 30
+/saveobj save def
+mark
+30 pagesetup
+10 HB f
+(30 GRAP)1 4320 1 720 600 t
+4295 2760 1415 2760 Dl
+1415 2832 1415 2760 Dl
+10 R f
+(0)1390 2942 w
+1991 2832 1991 2760 Dl
+(5)1966 2942 w
+2567 2832 2567 2760 Dl
+(10)2517 2942 w
+3143 2832 3143 2760 Dl
+(15)3093 2942 w
+3719 2832 3719 2760 Dl
+(20)3669 2942 w
+4295 2832 4295 2760 Dl
+(25)4245 2942 w
+(Populations \(in Millions\) of the 50 States)6 1651 1 2030 3080 t
+6 R f
+(AK)1429 2710 w
+(WY)1423 2572 w
+(VT)1432 2433 w
+(DE)1432 2295 w
+(ND)1429 2157 w
+(SD)1434 2018 w
+(MT)1427 1880 w
+(NV)1429 1741 w
+(NH)1429 1602 w
+(ID)1441 1464 w
+(RI)1442 1326 w
+(HI)1441 1187 w
+(ME)1542 2710 w
+(NM)1539 2572 w
+(UT)1547 2433 w
+(NE)1547 2295 w
+(WV)1538 2157 w
+(AR)1662 2710 w
+(KS)1665 2572 w
+(MS)1660 2433 w
+(OR)1662 2295 w
+(AZ)1663 2157 w
+(CO)1662 2018 w
+(IA)1672 1880 w
+(OK)1775 2710 w
+(CT)1780 2572 w
+(SC)1781 2433 w
+(KY)1775 2295 w
+(AL)1778 2157 w
+(MN)1885 2710 w
+(WA)1884 2572 w
+(LA)1893 2433 w
+(MD)1885 2295 w
+(TN)1893 2157 w
+(WI)1895 2018 w
+(MO)1885 1880 w
+(VA)2005 2710 w
+(GA)2005 2572 w
+(IN)2017 2433 w
+(MA)2000 2295 w
+(NC)2007 2157 w
+(NJ MI)1 300 1 2246 2710 t
+(FL)2474 2572 w
+(OH IL)1 187 1 2581 2710 t
+(PA)2701 2572 w
+( CA)1 690(TX NY)1 429 2 3045 2710 t
+10 R f
+(The next data set is a run-time pro\256le of an early version of)12 2445 1 720 3300 t
+10 I f
+(grap)3196 3300 w
+10 R f
+( by compiling the program with)5 1304(, created)1 343 2 3393 3300 t
+(the)720 3420 w
+10 CW f
+(-p)867 3420 w
+10 R f
+(option and running)2 761 1 1012 3420 t
+10 CW f
+(prof)1798 3420 w
+10 R f
+(after the program executed.)3 1096 1 2063 3420 t
+9 CW f
+(%time cumsecs #call ms/call name)4 1944 1 924 3590 t
+( _yylook)1 486( 0.41)1 486( 26834)1 378(21.1 11.02)1 702 4 978 3700 t
+( _yyparse)1 540( 195.60)1 486( 30)1 378(11.2 16.89)1 702 4 978 3810 t
+( __doprnt)1 1404(9.3 21.75)1 648 2 1032 3920 t
+( _write)1 1296(9.1 26.52)1 648 2 1032 4030 t
+(x)870 4140 w
+( _tickside)1 594( 0.00)1 486(0.0 52.19 170)2 1026 3 1032 4250 t
+10 R f
+( more)1 235(Although there were more than \256fty procedures in the program, the top four time-hogs accounted for)15 4085 2 720 4430 t
+( \256le is dif\256cult for)4 728( This)1 228( the run time.)3 533(than half of)2 462 4 720 4550 t
+10 I f
+(grap)2696 4550 w
+10 R f
+(to deal with: even though)4 1016 1 2910 4550 t
+10 CW f
+(if)3951 4550 w
+10 R f
+(statements would allow)2 944 1 4096 4550 t
+( remove the leading ``)4 913(us to extract lines 2 through 11 of the \256le, we could not)12 2296 2 720 4670 t
+10 CW f
+(_)3929 4670 w
+10 R f
+('' from a routine name or)5 1051 1 3989 4670 t
+( will therefore process it with the following)7 1734( We)1 188(access the last \256eld in a record.)6 1244 3 720 4790 t
+10 I f
+(awk)3911 4790 w
+10 R f
+(program.)4097 4790 w
+9 CW f
+(awk ')1 270 1 870 4960 t
+(NR==2, NR==11 { print $1, substr\($NF,2\) })6 2214 1 870 5070 t
+(' <prof1.d >prof2.d)2 1026 1 870 5180 t
+10 R f
+(The program produces)2 903 1 720 5360 t
+9 CW f
+(21.1 yylook)1 594 1 870 5530 t
+(11.2 yyparse)1 648 1 870 5640 t
+(9.3 _doprnt)1 594 1 870 5750 t
+(9.1 write)1 486 1 870 5860 t
+(5.9 input)1 486 1 870 5970 t
+(x)870 6080 w
+(2.0 nextchar)1 648 1 870 6190 t
+10 R f
+( the)1 160(We could even use)3 792 2 720 6370 t
+10 CW f
+(sh)1710 6370 w
+10 R f
+(statement to execute the)3 1001 1 1868 6370 t
+10 I f
+(awk)2907 6370 w
+10 R f
+(program from within the)3 1024 1 3106 6370 t
+10 I f
+(grap)4168 6370 w
+10 R f
+(program, which)1 645 1 4395 6370 t
+(would make the latter entirely self-contained \(see the reference manual in Appendix A for details\).)14 3937 1 720 6490 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 30 30
+%%Page: 31 31
+/saveobj save def
+mark
+31 pagesetup
+10 HB f
+(GRAP 31)1 4320 1 720 600 t
+10 R f
+(We will display the data with this program.)7 1732 1 720 960 t
+9 CW f
+(ticks left off)2 756 1 870 1130 t
+(cury=0)870 1240 w
+(barht=.7)870 1350 w
+(copy "prof2.d" thru X)3 1134 1 870 1460 t
+(line from 0,cury to $1,cury)4 1458 1 978 1570 t
+(line from $1,cury to $1,cury-barht)4 1836 1 978 1680 t
+(line from 0,cury-barht to $1,cury-barht)4 2106 1 978 1790 t
+( ljust at 0,cury-barht/2)3 1296(" $2")1 324 2 978 1900 t
+(cury=cury-1)978 2010 w
+(X)870 2120 w
+(line from 0,0 to 0,cury+1-barht)4 1674 1 870 2230 t
+(bars=-cury)870 2340 w
+(frame invis ht bars/3 wid 3)5 1458 1 870 2450 t
+10 R f
+( uses default ticks and a)5 1006( It)1 122( data.)1 227(Observe that the program knows nothing about the range of the)10 2629 4 720 2630 t
+10 CW f
+(frame)4740 2630 w
+10 R f
+(statement with a computed height to achieve total data independence.)9 2773 1 720 2750 t
+1998 5401 1998 5329 Dl
+(-0)1957 5511 w
+2447 5401 2447 5329 Dl
+(5)2422 5511 w
+2896 5401 2896 5329 Dl
+(10)2846 5511 w
+3345 5401 3345 5329 Dl
+(15)3295 5511 w
+3794 5401 3794 5329 Dl
+(20)3744 5511 w
+3893 3077 1998 3077 Dl
+3893 3228 3893 3077 Dl
+3893 3229 1998 3229 Dl
+(yylook)2048 3173 w
+3003 3294 1998 3294 Dl
+3004 3445 3004 3294 Dl
+3003 3446 1998 3446 Dl
+(yyparse)2048 3390 w
+2833 3511 1998 3511 Dl
+2833 3662 2833 3511 Dl
+2833 3663 1998 3663 Dl
+10 S f
+(_)2048 3607 w
+10 R f
+(doprnt)2098 3607 w
+2815 3728 1998 3728 Dl
+2815 3879 2815 3728 Dl
+2815 3880 1998 3880 Dl
+(write)2048 3824 w
+2527 3945 1998 3945 Dl
+2528 4096 2528 3945 Dl
+2527 4097 1998 4097 Dl
+(input)2048 4041 w
+2527 4162 1998 4162 Dl
+2528 4313 2528 4162 Dl
+2527 4314 1998 4314 Dl
+(print)2048 4258 w
+2509 4379 1998 4379 Dl
+2510 4530 2510 4379 Dl
+2509 4531 1998 4531 Dl
+(sprintf)2048 4475 w
+2357 4596 1998 4596 Dl
+2357 4747 2357 4596 Dl
+2357 4748 1998 4748 Dl
+(unput)2048 4692 w
+2357 4813 1998 4813 Dl
+2357 4964 2357 4813 Dl
+2357 4965 1998 4965 Dl
+(yylex)2048 4909 w
+2177 5030 1998 5030 Dl
+2178 5181 2178 5030 Dl
+2177 5182 1998 5182 Dl
+(nextchar)2048 5126 w
+1998 5182 1998 3077 Dl
+(This bar chart highlights the fact that most of the time spent by)12 2515 1 720 5761 t
+10 I f
+(grap)3260 5761 w
+10 R f
+(is devoted to input and output.)5 1217 1 3474 5761 t
+( the median, quartiles, and extremes of a one-dimensional)8 2395(J. W. Tukey's box and whisker plots represent)7 1925 2 720 5941 t
+( following)1 421(distribution. The)1 699 2 720 6061 t
+10 I f
+(grap)1872 6061 w
+10 R f
+( draw a box plot, and then uses that shape to)10 1827(program de\256nes a macro to)4 1120 2 2093 6061 t
+(compare the distribution of heights of volcanoes with the distribution of heights of States of the Union.)16 4117 1 720 6181 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 31 31
+%%Page: 32 32
+/saveobj save def
+mark
+32 pagesetup
+10 HB f
+(32 GRAP)1 4320 1 720 600 t
+9 CW f
+(frame invis ht 4 wid 3 bot solid)7 1728 1 870 950 t
+(ticks off)1 486 1 870 1060 t
+(coord x .5,3.5 y 0,25)4 1134 1 870 1170 t
+(define Ht X "- $1,000 -" size -3 at 2,$1 X)10 2268 1 870 1280 t
+(Ht\(5\); Ht\(10\); Ht\(15\); Ht\(20\))3 1566 1 870 1390 t
+("Highest Point" "in 50 States" at 1,23)6 2052 1 870 1500 t
+("Heights of" "219 Volcanoes" at 3,23)5 1944 1 870 1610 t
+("Feet" at 2,21.5; arrow from 2,22.5 to 2,24)7 2322 1 870 1720 t
+(define box X #\(x,min,25%,median,75%,max,minname,maxname\))3 3024 1 870 1830 t
+(xc=$1; xl=xc-boxwidth/2; xh=xc+boxwidth/2)2 2214 1 978 1940 t
+(y1=$2; y2=$3; y3=$4; y4=$5; y5=$6)4 1782 1 978 2050 t
+(bullet at xc,y1)2 810 1 978 2160 t
+( size -3 ljust at \(xc,y1\))5 1350(" $7")1 324 2 978 2270 t
+( lo whisker)2 594( #)1 162(line from \(xc,y1\) to \(xc,y2\))4 1512 3 978 2380 t
+( box bot)2 432( #)1 162(line from \(xl,y2\) to \(xh,y2\))4 1512 3 978 2490 t
+( box mid)2 432( #)1 162(line from \(xl,y3\) to \(xh,y3\))4 1512 3 978 2600 t
+( box top)2 432( #)1 162(line from \(xl,y4\) to \(xh,y4\))4 1512 3 978 2710 t
+( box left)2 486( #)1 162(line from \(xl,y2\) to \(xl,y4\))4 1512 3 978 2820 t
+( box right)2 540( #)1 162(line from \(xh,y2\) to \(xh,y4\))4 1512 3 978 2930 t
+( hi whisker)2 594( #)1 162(line from \(xc,y4\) to \(xc,y5\))4 1512 3 978 3040 t
+(bullet at xc,y5)2 810 1 978 3150 t
+( size -3 ljust at \(xc,y5\))5 1350(" $8")1 324 2 978 3260 t
+(X)870 3370 w
+(boxwidth=.3)870 3480 w
+(box\(1, .3, 2.0, 4.6, 11.2, 20.3, Florida, Alaska\))7 2646 1 870 3590 t
+( 19.9, Ilhanova, Guallatiri\))3 1512( 9.5,)1 324(box\(3, .2, 3.7, 6.5,)3 1080 3 870 3700 t
+10 R f
+( you use such)3 562( If)1 123( many shapes used for the graphical representation of several quantities.)10 2944(Boxes are one of)3 691 4 720 3880 t
+( make a library \256le of their macros to)8 1566(shapes frequently then you should)4 1409 2 720 4000 t
+10 CW f
+(copy)3730 4000 w
+10 R f
+(into your)1 374 1 4005 4000 t
+10 I f
+(grap)4414 4000 w
+10 R f
+(programs.)4638 4000 w
+(The above program produces)3 1166 1 720 4120 t
+3960 7180 1800 7180 Dl
+7 R f
+(- 5,000 -)2 240 1 2760 6624 t
+(- 10,000 -)2 275 1 2743 6048 t
+(- 15,000 -)2 275 1 2743 5472 t
+(- 20,000 -)2 275 1 2743 4896 t
+10 R f
+(Highest Point)1 548 1 1886 4490 t
+(in 50 States)2 467 1 1927 4610 t
+(Heights of)1 419 1 3391 4490 t
+(219 Volcanoes)1 596 1 3302 4610 t
+(Feet)2794 4723 w
+2880 4416 2880 4588 Dl
+2880 4415 2898 4487 Dl
+2880 4415 2862 4487 Dl
+5 S f
+(\267)2149 7165 w
+7 R f
+(Florida)2214 7165 w
+10 R f
+2160 6950 2160 7145 Dl
+2268 6949 2052 6949 Dl
+2268 6650 2052 6650 Dl
+2268 5889 2052 5889 Dl
+2052 5890 2052 6949 Dl
+2268 5890 2268 6949 Dl
+2160 4841 2160 5889 Dl
+5 S f
+(\267)2149 4861 w
+7 R f
+(Alaska)2214 4861 w
+5 S f
+(\267)3589 7176 w
+7 R f
+(Ilhanova)3654 7176 w
+10 R f
+3600 6753 3600 7156 Dl
+3708 6753 3492 6753 Dl
+3708 6431 3492 6431 Dl
+3708 6085 3492 6085 Dl
+3492 6085 3492 6753 Dl
+3708 6085 3708 6753 Dl
+3600 4887 3600 6085 Dl
+5 S f
+(\267)3589 4907 w
+7 R f
+(Guallatiri)3654 4907 w
+10 R f
+(Even though the extreme heights are the same, state heights have a lower median and a greater spread.)17 4087 1 720 7360 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 32 32
+%%Page: 33 33
+/saveobj save def
+mark
+33 pagesetup
+10 HB f
+(GRAP 33)1 4320 1 720 600 t
+10 R f
+(Someday you may use)3 914 1 720 960 t
+10 I f
+(grap)1663 960 w
+10 R f
+( everything comes out too)4 1058(to prepare overhead transparencies, only to \256nd that)7 2101 2 1881 960 t
+( following program illustrates some ways to get larger graphs.)9 2480(small. The)1 447 2 720 1080 t
+9 CW f
+(.ps 14)1 324 1 870 1250 t
+(.vs 18)1 324 1 870 1360 t
+(frame ht 2 wid 2)4 864 1 870 1470 t
+(label left "Response" "Variable" left .5)5 2160 1 870 1580 t
+(label bot "Factor Variable")3 1458 1 870 1690 t
+(line from 0,0 to 1,1)4 1080 1 870 1800 t
+(line dotted from .5,0 to .5,1)5 1566 1 870 1910 t
+(define blob X "\\v'.2m'\\\(bu\\v'-.2m'" X)4 1998 1 870 2020 t
+(blob at 0,.5; blob at .5,.5; blob at 1,.5)8 2214 1 870 2130 t
+(.ps)870 2240 w
+(.vs)870 2350 w
+10 R f
+(The)720 2530 w
+10 CW f
+(ps)904 2530 w
+10 R f
+(and)1053 2530 w
+10 CW f
+(vs)1226 2530 w
+10 R f
+(commands preceding the graph set the text size to 14 points and the vertical spacing to 18)16 3664 1 1376 2530 t
+( are reset by the commands following the)7 1650(points; the two quantities)3 1012 2 720 2650 t
+10 CW f
+(.G2)3407 2650 w
+10 R f
+( size changes should be made)5 1178(. Such)1 275 2 3587 2650 t
+(outside the)1 446 1 720 2770 t
+10 I f
+(grap)1201 2770 w
+10 R f
+( The)1 215(program, as mentioned earlier.)3 1252 2 1425 2770 t
+10 CW f
+(4)2928 2770 w
+10 R f
+(following the)1 547 1 3024 2770 t
+10 CW f
+(.G1)3607 2770 w
+10 R f
+(stretches the graph \(including)3 1217 1 3823 2770 t
+10 I f
+(grap)720 2890 w
+10 R f
+( text\) to be four inches wide; it is an alternative to altering the)13 2492('s estimate of the accompanying)4 1304 2 917 2890 t
+10 CW f
+(frame)4740 2890 w
+10 R f
+( macro)1 286(command. The)1 636 2 720 3010 t
+10 CW f
+(blob)1679 3010 w
+10 R f
+( symbol that is much larger than)6 1366(is a plotting)2 497 2 1956 3010 t
+10 CW f
+(bullet)3857 3010 w
+10 R f
+(; the different name)3 823 1 4217 3010 t
+(ensures that later references to)4 1228 1 720 3130 t
+10 CW f
+(bullet)1977 3130 w
+10 R f
+( The)1 209(are unaffected.)1 595 2 2366 3130 t
+10 I f
+(troff)3198 3130 w
+10 R f
+(commands within the)2 867 1 3399 3130 t
+10 CW f
+(blob)4294 3130 w
+10 R f
+(string move)1 478 1 4562 3130 t
+( position \(determined experimentally\) and then)5 1893(the character down two-tenths of an em to center its plotting)10 2427 2 720 3250 t
+( program produces this trivial \(but large\) graph.)7 1902( The)1 205(reset the vertical position.)3 1032 3 720 3370 t
+14 R f
+2538 3610 2538 5391 Dl
+4319 3610 2538 3610 Dl
+4320 5391 4320 3610 Dl
+2539 5391 4320 5391 Dl
+2648 5480 2648 5391 Dl
+(-0)2590 5620 w
+3429 5480 3429 5391 Dl
+(0.5)3342 5620 w
+4210 5480 4210 5391 Dl
+(1)4175 5620 w
+2449 5281 2538 5281 Dl
+(-0)2298 5309 w
+2449 4500 2538 4500 Dl
+(0.5)2239 4528 w
+2449 3719 2538 3719 Dl
+(1)2344 3747 w
+(Response)1408 4438 w
+(Variable)1437 4618 w
+(Factor Variable)1 873 1 2993 5790 t
+4210 3719 2648 5281 Dl
+11 R f
+(.)3415 5285 w
+(.)3415 5241 w
+(.)3415 5196 w
+(.)3415 5151 w
+(.)3415 5107 w
+(.)3415 5062 w
+(.)3415 5018 w
+(.)3415 4973 w
+(.)3415 4928 w
+(.)3415 4884 w
+(.)3415 4839 w
+(.)3415 4794 w
+(.)3415 4750 w
+(.)3415 4705 w
+(.)3415 4660 w
+(.)3415 4616 w
+(.)3415 4571 w
+(.)3415 4526 w
+(.)3415 4482 w
+(.)3415 4437 w
+(.)3415 4393 w
+(.)3415 4348 w
+(.)3415 4303 w
+(.)3415 4259 w
+(.)3415 4214 w
+(.)3415 4169 w
+(.)3415 4125 w
+(.)3415 4080 w
+(.)3415 4035 w
+(.)3415 3991 w
+(.)3415 3946 w
+(.)3415 3902 w
+(.)3415 3857 w
+(.)3415 3812 w
+(.)3415 3768 w
+(.)3415 3723 w
+14 S f
+(\267 \267 \267)2 1626 1 2616 4556 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 33 33
+%%Page: 34 34
+/saveobj save def
+mark
+34 pagesetup
+10 HB f
+(34 GRAP)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 4.  , HEADING = USING grap]
+10 B f
+(4. USING)1 442 1 720 960 t
+10 BI f
+(grap)1187 960 w
+10 R f
+(Following are a few day-to-day matters about using)7 2066 1 720 1140 t
+10 I f
+(grap)2811 1140 w
+10 R f
+(.)3008 1140 w
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Errors:]
+10 B f
+(Errors:)720 1320 w
+10 I f
+(Grap)720 1500 w
+10 R f
+(attempts to pinpoint input errors; for example, the input)8 2224 1 956 1500 t
+9 CW f
+(.G1)870 1670 w
+(i = i + 1)4 486 1 870 1780 t
+10 R f
+(results in this message on)4 1022 1 720 1960 t
+10 CW f
+(stderr)1767 1960 w
+10 R f
+(:)2127 1960 w
+9 CW f
+(grap: syntax error near line 1, file -)7 2052 1 870 2130 t
+(context is)1 540 1 924 2240 t
+( 1)1 162( <<<)1 216( +)1 162(i = i >>>)3 486 4 1302 2350 t
+10 R f
+(The error was noticed at the)5 1151 1 720 2530 t
+10 CW f
+(+)1903 2530 w
+10 R f
+( is not the same as explaining: the real error is)10 1916( pinpointing)1 494(. Unfortunately,)1 667 3 1963 2530 t
+(that the variable)2 643 1 720 2650 t
+10 CW f
+(i)1388 2650 w
+10 R f
+(was not initialized.)2 758 1 1473 2650 t
+(The ``words'')1 559 1 720 2830 t
+10 CW f
+(x)1307 2830 w
+10 R f
+(and)1395 2830 w
+10 CW f
+(y)1567 2830 w
+10 R f
+( \(for the)2 329(are reserved)1 486 2 1655 2830 t
+10 CW f
+(coord)2499 2830 w
+10 R f
+(statement\); you will get an equally inexplicable syntax)7 2212 1 2828 2830 t
+(error message if you use them as variable names.)8 1959 1 720 2950 t
+10 I f
+(Grap)720 3130 w
+10 R f
+( a \256le of standard macro de\256nitions \()7 1627(tries to load)2 514 2 977 3130 t
+10 CW f
+(/usr/lib/grap.defines)3118 3130 w
+10 R f
+(\) for terms like)3 662 1 4378 3130 t
+10 CW f
+(bullet)720 3250 w
+10 R f
+(,)1080 3250 w
+10 CW f
+(plus)1143 3250 w
+10 R f
+( words,)1 306( you later use one of these)6 1120( If)1 129(, etc., but doesn't complain if that \256le isn't found.)9 2102 4 1383 3250 t
+(however, you'll get a syntax error message.)6 1740 1 720 3370 t
+(Certain constructs suggested by analogy to)5 1732 1 720 3550 t
+10 I f
+(pic)2481 3550 w
+10 R f
+( example,)1 392( For)1 193(do not work.)2 516 3 2632 3550 t
+10 CW f
+(.GS)3762 3550 w
+10 R f
+(and)3971 3550 w
+10 CW f
+(.GE)4144 3550 w
+10 R f
+(would have been)2 686 1 4354 3550 t
+(nicer than)1 396 1 720 3670 t
+10 CW f
+(.G1)1141 3670 w
+10 R f
+(and)1346 3670 w
+10 CW f
+(.G2)1515 3670 w
+10 R f
+( The)1 205(, but they were already taken.)5 1177 2 1695 3670 t
+10 I f
+(pic)3102 3670 w
+10 R f
+(construct)3249 3670 w
+9 CW f
+(.PS <)1 270 1 870 3840 t
+10 I f
+(\256le)1156 3840 w
+10 R f
+(has been superseded by)3 939 1 720 4020 t
+10 I f
+(grap)1684 4020 w
+10 R f
+('s)1881 4020 w
+10 CW f
+(copy)1978 4020 w
+10 R f
+(command \(which in turn has been retro\256tted into)7 1956 1 2243 4020 t
+10 I f
+(pic)4224 4020 w
+10 R f
+(\).)4354 4020 w
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Troff  Issues:]
+10 BI f
+(Troff)720 4200 w
+10 B f
+(Issues:)977 4200 w
+10 R f
+( use)1 165(You may)1 375 2 720 4380 t
+10 I f
+(troff)1292 4380 w
+10 R f
+(commands like)1 615 1 1497 4380 t
+10 CW f
+(.ps)2144 4380 w
+10 R f
+(or)2356 4380 w
+10 CW f
+(.ft)2471 4380 w
+10 R f
+(to change text sizes and fonts within a graph, or balanced)10 2357 1 2683 4380 t
+10 CW f
+(\\s)720 4500 w
+10 R f
+(and)868 4500 w
+10 CW f
+(\\f)1040 4500 w
+10 R f
+( not, however, add space \()5 1054( Do)1 174( string.)1 280(commands within a)2 789 4 1188 4500 t
+10 CW f
+(.sp)3485 4500 w
+10 R f
+(\) or change the line spacing \()6 1170 1 3665 4500 t
+10 CW f
+(.vs)4835 4500 w
+10 R f
+(,)5015 4500 w
+10 CW f
+(.ls)720 4620 w
+10 R f
+( like)1 178( de\256ned terms)2 570( Some)1 280(\) within a graph.)3 666 4 900 4620 t
+10 CW f
+(bullet)2622 4620 w
+10 R f
+(contain embedded size changes; further qualifying)5 2030 1 3010 4620 t
+(them with)1 403 1 720 4740 t
+10 I f
+(grap)1148 4740 w
+10 CW f
+(size)1362 4740 w
+10 R f
+(commands may not always work.)4 1340 1 1627 4740 t
+(Because)720 4920 w
+10 I f
+(grap)1079 4920 w
+10 R f
+(is built on top of)4 670 1 1295 4920 t
+10 I f
+(pic)1992 4920 w
+10 R f
+(, the following quote from the)5 1214 1 2122 4920 t
+10 I f
+(pic)3364 4920 w
+10 R f
+(manual is relevant: ``There is a subtle)6 1526 1 3514 4920 t
+(problem with complicated equations inside)4 1765 1 720 5040 t
+10 I f
+(pic)2521 5040 w
+10 R f
+( wrong if)2 386( come out)2 416(pictures \320 they)2 620 3 2679 5040 t
+10 I f
+(eqn)4136 5040 w
+10 R f
+(has to leave extra)3 725 1 4315 5040 t
+( superscripts, you must)3 943( your equation involves more than subscripts and)7 2004( If)1 122(vertical space for the equation.)4 1251 4 720 5160 t
+(add to the beginning of each such equation the extra information)10 2629 1 720 5280 t
+10 CW f
+(space 0)1 420 1 3379 5280 t
+10 R f
+( feature was illustrated)3 918(''. This)1 323 2 3799 5280 t
+(on page 21.)2 463 1 720 5400 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Alternatives:]
+10 B f
+(Alternatives:)720 5580 w
+10 R f
+(Besides)720 5760 w
+10 I f
+(grap)1056 5760 w
+10 R f
+(and your local draftsperson, what other choices are there?)8 2301 1 1270 5760 t
+( of tools for statistical analysis, but somewhat fewer tools than)10 2675(The S system provides a host)5 1254 2 720 5940 t
+10 I f
+(grap)4692 5940 w
+10 R f
+(for)4924 5940 w
+( produces graphs on the screen of a 5620 or 630 terminal much more)13 2760( S)1 107(producing document-quality graphs.)2 1453 3 720 6060 t
+(quickly than)1 500 1 720 6180 t
+10 I f
+(grap)1248 6180 w
+10 R f
+( seconds rather than minutes\), but it takes somewhat longer to learn \(at least for)14 3231(\(often in)1 344 2 1465 6180 t
+( may)1 202( S)1 111( lot of interactive data analysis, then S is probably the right tool for you.)14 2951( you expect to do a)5 787(us\). If)1 269 5 720 6300 t
+(be used to generate)3 767 1 720 6420 t
+10 I f
+(pic)1512 6420 w
+10 R f
+(commands.)1659 6420 w
+(The standard)1 519 1 720 6600 t
+9 R f
+(UNIX)1263 6600 w
+10 R f
+(program)1514 6600 w
+10 I f
+(graph)1878 6600 w
+10 R f
+(provides many of the basic features of)6 1530 1 2143 6600 t
+10 I f
+(grap)3700 6600 w
+10 R f
+(, though with quite a bit less)6 1143 1 3897 6600 t
+( the)1 158( produces output only in)4 1020( It)1 123(control over details, particularly text.)4 1529 4 720 6720 t
+9 R f
+(UNIX)3584 6720 w
+10 R f
+(plot language, which may be)4 1195 1 3845 6720 t
+(processed by a variety of \256lters for a variety of output devices.)11 2500 1 720 6840 t
+(The original)1 498 1 720 7020 t
+9 R f
+(UNIX)1248 7020 w
+10 R f
+(typesetter graphics programs are)3 1320 1 1505 7020 t
+10 I f
+(pic)2857 7020 w
+10 R f
+(and)3011 7020 w
+10 I f
+(ideal)3187 7020 w
+10 R f
+( may be able to do as well without)8 1435(; you)1 210 2 3395 7020 t
+(using)720 7140 w
+10 I f
+(grap)981 7140 w
+10 R f
+( particular,)1 450( In)1 151( intermediary.)1 578(as an)1 221 4 1214 7140 t
+10 I f
+(ideal)2657 7140 w
+10 R f
+(provides shading and clipping, which are useful in)7 2140 1 2900 7140 t
+(presentation-quality bar charts and the like, but are well beyond the capabilities of)12 3280 1 720 7260 t
+10 I f
+(pic)4025 7260 w
+10 R f
+(.)4155 7260 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 34 34
+%%Trailer
+done
+%%Pages: 34
+%%DocumentFonts: Helvetica-Bold Times-Bold Helvetica Times-Italic Times-BoldItalic Times-Roman Symbol Courier
+%%+ Times-Roman

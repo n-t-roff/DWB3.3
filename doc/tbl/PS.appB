@@ -1,0 +1,549 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( of Input Commands)3 1161( List)1 350(APPENDIX B:)1 772 3 720 1050 t
+10 I f
+( Example\(s\))1 655( Section\(s\))1 1115( Description)1 1191(Input Command)1 647 4 886 1410 t
+10 S f
+(_ _______________________________________________________________________________)1 3987 1 886 1420 t
+(_ _______________________________________________________________________________)1 3987 1 886 1440 t
+10 B f
+(Macros)886 1586 w
+10 CW f
+(.TS)886 1730 w
+10 R f
+( all)1 650( 1)1 1106(Table start macro)2 698 3 1686 1730 t
+10 CW f
+(.TE)886 1850 w
+10 R f
+( all)1 650( 1)1 1134(Table end macro)2 670 3 1686 1850 t
+10 CW f
+(.T&)886 1970 w
+10 R f
+( 11, 12)2 275( 3,)1 550( 2.4)1 1071(Table change macro)2 808 4 1686 1970 t
+10 CW f
+(.TS H)1 300 1 886 2090 t
+10 R f
+( B)1 92( Appendix)1 869( 3.4)1 275(Table start macro with repeated heading)5 1604 4 1686 2090 t
+10 CW f
+(.TH)886 2210 w
+10 R f
+( B)1 92( Appendix)1 869( 3.4)1 761(Table repeat-heading macro)2 1118 4 1686 2210 t
+10 S f
+(_ _______________________________________________________________________________)1 3987 1 886 2242 t
+10 B f
+(Options)886 2398 w
+10 CW f
+(allbox)886 2542 w
+10 R f
+( 8)1 75( 2,)1 550( 2.1)1 814(Draw box around all items)4 1065 4 1686 2542 t
+10 CW f
+(box)886 2662 w
+10 R f
+( 3, 5-6, 10, 14)4 558( 1,)1 550( 2.1)1 962(Draw box around table)3 917 4 1686 2662 t
+10 CW f
+(center)886 2782 w
+10 R f
+( 12)1 125( 6-8,)1 633( 2.1)1 1078(Center table in page)3 801 4 1686 2782 t
+10 CW f
+(delim\()886 2902 w
+10 I f
+(xy)1246 2902 w
+10 CW f
+(\))1334 2902 w
+10 R f
+(De\256ne)1686 2902 w
+10 I f
+(eqn)1977 2902 w
+10 R f
+( 12)1 400( 3.2)1 150(delimiters 2.1,)1 1444 3 2146 2902 t
+10 CW f
+(doublebox)886 3022 w
+10 R f
+( 9)1 525( 2.1)1 665(Draw double box around table)4 1214 3 1686 3022 t
+10 CW f
+(expand)886 3142 w
+10 R f
+( 13)1 575( 2.1)1 841(Make table full line width)4 1038 3 1686 3142 t
+10 CW f
+(linesize\()886 3262 w
+10 I f
+(n)1426 3262 w
+10 CW f
+(\))1476 3262 w
+10 R f
+( 1)1 525( 2.1)1 1211(Set size for rules)3 668 3 1686 3262 t
+10 CW f
+(tab\()886 3382 w
+10 I f
+(x)1126 3382 w
+10 CW f
+(\))1170 3382 w
+10 R f
+( 10)1 125( 7,)1 550( 2.1)1 604(Change data separator character)3 1275 4 1686 3382 t
+10 S f
+(_ _______________________________________________________________________________)1 3987 1 886 3414 t
+10 B f
+(Key Letters)1 501 1 886 3570 t
+10 CW f
+(a)886 3714 w
+9 R f
+(or)1066 3714 w
+10 CW f
+(A)1261 3714 w
+10 R f
+( 11)1 500( 2.2.1)1 1052(Alphabetic subcolumn)1 902 3 1686 3714 t
+10 CW f
+(c)886 3834 w
+9 R f
+(or)1066 3834 w
+10 CW f
+(C)1261 3834 w
+10 R f
+( 6-14)1 208( 2-4,)1 558( 2.2.1)1 1269(Centered column)1 685 4 1686 3834 t
+10 CW f
+(l)886 3954 w
+9 R f
+(or)1066 3954 w
+10 CW f
+(L)1261 3954 w
+10 R f
+( 3, 5, 6, 8, 9, 11-14)6 758( 1,)1 475( 2.2.1)1 1105(Left adjusted column)2 849 4 1686 3954 t
+10 CW f
+(n)886 4074 w
+9 R f
+(or)1066 4074 w
+10 CW f
+(N)1261 4074 w
+10 R f
+( 6, 7, 10-13)3 458( 2-4,)1 558( 2.2.1)1 1208(Numerical column)1 746 4 1686 4074 t
+10 CW f
+(r)886 4194 w
+9 R f
+(or)1066 4194 w
+10 CW f
+(R)1261 4194 w
+10 R f
+( 11, 14)2 275( 10,)1 525( 2.2.1)1 1048(Right adjusted column)2 906 4 1686 4194 t
+10 CW f
+(s)886 4314 w
+9 R f
+(or)1066 4314 w
+10 CW f
+(S)1261 4314 w
+10 R f
+( 3, 6-8, 10-14)3 541( 2,)1 475( 2.2.1)1 1407(Spanned item)1 547 4 1686 4314 t
+10 CW f
+(\303)886 4434 w
+10 R f
+( 7)1 75( 6,)1 475( 2.2.1)1 1425(Vertical span)1 529 4 1686 4434 t
+10 S f
+(_ _______________________________________________________________________________)1 3987 1 886 4466 t
+10 B f
+(Modi\256ers)886 4622 w
+10 CW f
+(b)886 4766 w
+9 R f
+(or)1066 4766 w
+10 CW f
+(B)1261 4766 w
+10 R f
+( 9-12, 14)2 358( 5,)1 475( 2.2.6)1 1391(Boldface item)1 563 4 1686 4766 t
+10 CW f
+(e)886 4886 w
+9 R f
+(or)1066 4886 w
+10 CW f
+(E)1261 4886 w
+10 R f
+( 6, 10, 12)3 375( 2,)1 425( 2.2.10)1 1146(Equal-width columns)1 858 4 1686 4886 t
+10 CW f
+(f)886 5006 w
+9 R f
+(or)1066 5006 w
+10 CW f
+(F)1261 5006 w
+10 R f
+( 6, 8, 13)3 325( 2,)1 475( 2.2.6)1 1463(Font change)1 491 4 1686 5006 t
+10 CW f
+(i)886 5126 w
+9 R f
+(or)1066 5126 w
+10 CW f
+(I)1261 5126 w
+10 R f
+( 12, 14)2 275( 2,)1 475( 2.2.6)1 1546(Italic item)1 408 4 1686 5126 t
+10 CW f
+(p)886 5246 w
+9 R f
+(or)1066 5246 w
+10 CW f
+(P)1261 5246 w
+10 R f
+( 2, 4, 7, 8, 10-14)5 658( 1,)1 475( 2.2.7)1 1255(Point size change)2 699 4 1686 5246 t
+10 CW f
+(t)886 5366 w
+9 R f
+(or)1066 5366 w
+10 CW f
+(T)1261 5366 w
+10 R f
+( 14)1 500( 2.2.5)1 997(Vertical spanning at top)3 957 3 1686 5366 t
+10 CW f
+(u)886 5486 w
+9 R f
+(or)1066 5486 w
+10 CW f
+(U)1261 5486 w
+10 R f
+( 12)1 450( 2.2.11)1 1241(Staggered columns)1 763 3 1686 5486 t
+10 CW f
+(v)886 5606 w
+9 R f
+(or)1066 5606 w
+10 CW f
+(V)1261 5606 w
+10 R f
+( 12)1 125( 8,)1 475( 2.2.8)1 996(Vertical spacing change)2 958 4 1686 5606 t
+10 CW f
+(w)886 5726 w
+9 R f
+(or)1066 5726 w
+10 CW f
+(W)1261 5726 w
+10 R f
+( 14)1 125( 8,)1 475( 2.2.9)1 1059(Minimum width value)2 895 4 1686 5726 t
+10 CW f
+(z)886 5846 w
+9 R f
+(or)1066 5846 w
+10 CW f
+(Z)1261 5846 w
+10 R f
+( 11)1 450( 2.2.12)1 1352(Zero-width item)1 652 3 1686 5846 t
+10 I f
+(n)886 5966 w
+10 R f
+( 12, 14)2 275( 10,)1 525( 2.2.4)1 1196(Column separation)1 758 4 1686 5966 t
+10 CW f
+(|)886 6086 w
+10 R f
+( 10, 14)2 275( 3-6,)1 558( 2.2.3)1 1199(Single vertical line)2 755 4 1686 6086 t
+10 CW f
+(||)886 6206 w
+10 R f
+( 10)1 125( 7,)1 475( 2.2.3)1 1161(Double vertical line)2 793 4 1686 6206 t
+10 CW f
+(=)886 6326 w
+10 R f
+( 7)1 450( 2.2.2)1 1055(Double horizontal line)2 899 3 1686 6326 t
+10 CW f
+(_)886 6446 w
+8 R f
+(\(underline\))1066 6446 w
+10 CW f
+(-)886 6566 w
+8 R f
+(\(dash\))1066 6566 w
+10 R f
+( 5)1 75( 3,)1 475( 2.2.2)1 1093(Single horizontal line)2 861 4 1686 6506 t
+10 S f
+(_ _______________________________________________________________________________)1 3987 1 886 6598 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(B-2 TBL)1 4320 1 720 600 t
+10 I f
+( Example\(s\))1 655( Section\(s\))1 1115( Description)1 1191(Input Command)1 647 4 886 960 t
+10 S f
+(_ _______________________________________________________________________________)1 3987 1 886 970 t
+(_ _______________________________________________________________________________)1 3987 1 886 990 t
+10 B f
+(Data Entry)1 480 1 886 1136 t
+10 CW f
+(_)886 1280 w
+10 R f
+( 4, 6, 10, 12, 14)5 625( 3,)1 225( 2.3.3)1 225( 2.3.2,)1 1118(Single horizontal line)2 861 5 1686 1280 t
+10 CW f
+(=)886 1400 w
+10 R f
+( 10, 12)2 275( 3,)1 225( 2.3.3)1 225( 2.3.2,)1 1080(Double horizontal line)2 899 5 1686 1400 t
+10 CW f
+(\\_)886 1520 w
+10 R f
+( 12)1 500( 2.3.4)1 868(Short single horizontal line)3 1086 3 1686 1520 t
+10 CW f
+(\\=)886 1640 w
+10 R f
+( 12)1 500( 2.3.4)1 835(Short double horizontal line)3 1119 3 1686 1640 t
+10 CW f
+(\\\303)886 1760 w
+10 R f
+( 14)1 125( 3,)1 475( 2.3.6)1 1425(Vertical span)1 529 4 1686 1760 t
+10 CW f
+(\\R)886 1880 w
+10 I f
+(x)1006 1880 w
+10 R f
+( 6)1 450( 2.3.5)1 1288(Repeat character)1 666 3 1686 1880 t
+10 CW f
+(T{)886 2000 w
+10 S f
+(\274)1022 2000 w
+10 CW f
+(T})1138 2000 w
+10 R f
+( 12, 14)2 275( 8,)1 475( 2.3.7)1 1524(Text block)1 430 4 1686 2000 t
+10 CW f
+(.)886 2120 w
+10 I f
+(xx)946 2120 w
+10 R f
+(Included)1686 2120 w
+10 I f
+(troff)2060 2120 w
+10 R f
+( 11-14)1 258( 7-9,)1 558(request 2.3.1)1 1382 3 2258 2120 t
+10 CW f
+(\\)886 2240 w
+10 I f
+(E)946 2240 w
+9 R f
+(or)1127 2240 w
+10 CW f
+(\\\()1322 2240 w
+10 I f
+(xx)1442 2240 w
+10 R f
+(Included)1686 2240 w
+10 I f
+(troff)2060 2240 w
+10 R f
+( 11, 14)2 275( 10,)1 525( 2.3.1)1 727(escape sequence)1 655 4 2258 2240 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Trailer
+done
+%%Pages: 2
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

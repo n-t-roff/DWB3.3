@@ -1,0 +1,1686 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( Language)1 600( Formal)1 537(APPENDIX B:)1 772 3 720 1050 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Pictures]
+10 B f
+(Pictures)720 1350 w
+10 R f
+(The top-level object in)3 907 1 720 1530 t
+10 I f
+(Picasso)1652 1530 w
+10 R f
+(is the ``picture'':)2 676 1 1988 1530 t
+9 I f
+(picture)870 1700 w
+9 R f
+(:)1132 1700 w
+9 CW f
+(.PS)1230 1810 w
+9 I f
+(optional-height optional-width other-args)2 1557 1 1446 1810 t
+(element-list)1230 1920 w
+9 CW f
+(.PE)1230 2030 w
+10 R f
+(If)720 2210 w
+10 I f
+(optional-height)831 2210 w
+10 R f
+( to that many inches high; if)6 1248(is present, the picture is shrunk)5 1343 2 1493 2210 t
+10 I f
+(optional-width)4130 2210 w
+10 R f
+(is also)1 274 1 4766 2210 t
+( the picture is smaller in its)6 1107( If)1 120(present, the more constraining of the two sizes sets the overall picture scale.)12 3093 3 720 2330 t
+(internal measure than these optional sizes, it is)7 1971 1 720 2450 t
+10 I f
+(not)2732 2450 w
+10 R f
+( the arguments after)3 846( All)1 195( suit.)1 212(expanded to)1 501 4 2901 2450 t
+10 CW f
+(.PS)4697 2450 w
+10 R f
+(are)4919 2450 w
+(passed to a)2 454 1 720 2570 t
+9 R f
+(DWB 3.1)1 354 1 1205 2570 t
+10 CW f
+(.BP)1592 2570 w
+10 R f
+(picture inclusion macro when a picture is processed by)8 2254 1 1805 2570 t
+10 CW f
+(picasso \261t)1 607 1 4091 2570 t
+10 R f
+( this)1 177(. In)1 165 2 4698 2570 t
+(same context, if)2 641 1 720 2690 t
+10 CW f
+(.PF)1389 2690 w
+10 R f
+(is used instead of)3 700 1 1597 2690 t
+10 CW f
+(.PE)2325 2690 w
+10 R f
+(, text following the picture will be placed alongside the picture)10 2535 1 2505 2690 t
+( the picture concludes with)4 1076( If)1 116(\(if there is room\).)3 704 3 720 2810 t
+10 CW f
+(.PN)2641 2810 w
+10 R f
+(instead of)1 391 1 2846 2810 t
+10 CW f
+(.PE)3262 2810 w
+10 R f
+(, no PostScript output is produced.)5 1381 1 3442 2810 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Elements]
+10 B f
+(Elements)720 2990 w
+10 R f
+(An)720 3170 w
+10 I f
+(element-list)870 3170 w
+10 R f
+(is a list of)3 401 1 1364 3170 t
+10 I f
+(elements)1793 3170 w
+10 R f
+(separated by newlines or semicolons; a long element may be continued)10 2870 1 2170 3170 t
+( are introduced by a)4 792( Comments)1 484(by ending the line with a backslash.)6 1429 3 720 3290 t
+10 CW f
+(#)3450 3290 w
+10 R f
+(and terminated by a newline.)4 1156 1 3535 3290 t
+9 I f
+(element)870 3460 w
+9 R f
+(:)1157 3460 w
+9 I f
+(primitive attribute-list)1 798 1 1230 3570 t
+9 CW f
+([)1230 3680 w
+9 I f
+(element-list)1338 3680 w
+9 CW f
+(])1812 3680 w
+9 I f
+(attribute-list)1920 3680 w
+(placename)1230 3790 w
+9 CW f
+(:)1674 3790 w
+9 I f
+(element)1782 3790 w
+(placename)1230 3900 w
+9 CW f
+(:)1674 3900 w
+9 I f
+(position)1782 3900 w
+(var)1230 4010 w
+9 CW f
+(=)1404 4010 w
+9 I f
+(expr)1512 4010 w
+(var)1230 4120 w
+9 CW f
+(=)1404 4120 w
+9 I f
+(expr-list)1512 4120 w
+(direction)1230 4230 w
+9 CW f
+({)1230 4340 w
+9 I f
+(element-list)1338 4340 w
+9 CW f
+(})1812 4340 w
+(delete)1230 4450 w
+9 I f
+(object)1608 4450 w
+9 CW f
+(duplicate)1230 4560 w
+9 I f
+(object)1770 4560 w
+9 CW f
+(duplicate)1230 4670 w
+9 I f
+(object)1770 4670 w
+9 CW f
+(at)2044 4670 w
+9 I f
+(position)2206 4670 w
+(transformation)1230 4780 w
+9 CW f
+(for)1230 4890 w
+9 I f
+(var)1446 4890 w
+9 CW f
+(from)1620 4890 w
+9 I f
+(expr)1890 4890 w
+9 CW f
+(to)2104 4890 w
+9 I f
+(expr)2266 4890 w
+9 CW f
+(by)2480 4890 w
+9 I f
+(expr)2642 4890 w
+9 CW f
+(do X)1 216 1 2856 4890 t
+9 I f
+(anything)3126 4890 w
+9 CW f
+(X)3495 4890 w
+(if)1230 5000 w
+9 I f
+(expr)1392 5000 w
+9 CW f
+(then X)1 324 1 1606 5000 t
+9 I f
+(anything)1984 5000 w
+9 CW f
+(X else X)2 432 1 2353 5000 t
+9 I f
+(anything)2839 5000 w
+9 CW f
+(X)3208 5000 w
+(define)1230 5110 w
+9 I f
+(macro)1608 5110 w
+9 CW f
+(X)1892 5110 w
+9 I f
+(replacement text)1 598 1 2000 5110 t
+9 CW f
+(X)2652 5110 w
+(undef)1230 5220 w
+9 I f
+(macro)1554 5220 w
+9 CW f
+(copy)1230 5330 w
+9 I f
+(\256le)1500 5330 w
+9 CW f
+(copy thru)1 486 1 1230 5440 t
+9 I f
+(macro)1770 5440 w
+9 CW f
+(copy)1230 5550 w
+9 I f
+(\256le)1500 5550 w
+9 CW f
+(thru macro)1 540 1 1664 5550 t
+(sh X)1 216 1 1230 5660 t
+9 I f
+(commandline)1500 5660 w
+9 CW f
+(X)2039 5660 w
+(print)1230 5770 w
+9 I f
+(expr)1554 5770 w
+9 CW f
+(show)1230 5880 w
+9 I f
+(picture-part)1500 5880 w
+9 CW f
+(reset)1230 5990 w
+9 I f
+(optional-var-list)1554 5990 w
+(troff-command)1230 6100 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(B-2 Picasso)1 4320 1 720 600 t
+9 I f
+(primitive)870 950 w
+9 R f
+(:)1202 950 w
+9 CW f
+(arc)1230 1060 w
+(arrow)1230 1170 w
+(box)1230 1280 w
+(circle)1230 1390 w
+(ellipse)1230 1500 w
+(line)1230 1610 w
+(move)1230 1720 w
+(sector)1230 1830 w
+(spline)1230 1940 w
+9 I f
+(text-list)1230 2050 w
+10 R f
+( and variable)2 547( Place)1 282( a lower case letter; place names begin with upper case.)10 2373(Variable names begin with)3 1118 4 720 2230 t
+(names retain their values from one picture to the next.)9 2157 1 720 2350 t
+( motion are saved upon entry to a list of elements enclosed by)12 2565(The current position and direction of)5 1502 2 720 2530 t
+10 CW f
+({)4820 2530 w
+10 S f
+(\274)4880 2530 w
+10 CW f
+(})4980 2530 w
+10 R f
+(and restored upon exit.)3 915 1 720 2650 t
+(Elements within a block \()4 1079 1 720 2830 t
+10 CW f
+([)1799 2830 w
+10 I f
+(element-list)1919 2830 w
+10 CW f
+(])2445 2830 w
+10 R f
+(\) are treated as a unit; the dimensions are determined by the)11 2535 1 2505 2830 t
+( variables, and direction of motion within a block are local)10 2358( Names,)1 355(extreme points of the contained objects.)5 1607 3 720 2950 t
+(to that block, but the names may be referred to one level outside the block.)14 2984 1 720 3070 t
+(The)720 3250 w
+10 CW f
+(else)901 3250 w
+10 R f
+(clause is optional in the)4 948 1 1167 3250 t
+10 CW f
+(if)2141 3250 w
+10 R f
+(statement; the)1 560 1 2288 3250 t
+10 CW f
+(by)2875 3250 w
+10 R f
+(clause is optional in)3 803 1 3022 3250 t
+10 CW f
+(for)3852 3250 w
+10 R f
+(. The)1 232 1 4032 3250 t
+10 I f
+(expr)4291 3250 w
+10 R f
+(in an)1 199 1 4495 3250 t
+10 CW f
+(if)4721 3250 w
+10 R f
+(may)4868 3250 w
+(use the usual relational operators or the tests)7 1772 1 720 3370 t
+10 I f
+(str1)2517 3370 w
+10 CW f
+(==)2698 3370 w
+10 R f
+(\(or)2843 3370 w
+10 CW f
+(!=)2984 3370 w
+10 R f
+(\))3104 3370 w
+10 I f
+(str2)3162 3370 w
+10 R f
+(for two quoted strings.)3 905 1 3343 3370 t
+10 I f
+(troff-command)720 3550 w
+10 R f
+( any group of lines enclosed between line-initial)7 1943(is any line that begins with a period or)8 1548 2 1341 3550 t
+10 CW f
+(.EQ)4860 3550 w
+10 R f
+(and)720 3670 w
+10 CW f
+(.EN)894 3670 w
+10 R f
+( context in which they appear; input to)7 1568( lines are assumed to make sense in the)8 1604(. Such)1 280 3 1074 3670 t
+10 I f
+(eqn)4555 3670 w
+10 R f
+(is taken)1 312 1 4728 3670 t
+(to imply a certain amount of text at the current position.)10 2234 1 720 3790 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Attributes]
+10 B f
+(Attributes)720 3970 w
+10 R f
+(An)720 4150 w
+10 I f
+(attribute-list)881 4150 w
+10 R f
+( of zero or more attributes; each attribute consists of a keyword, perhaps)12 3065(is a sequence)2 554 2 1421 4150 t
+(followed by a value.)3 815 1 720 4270 t
+9 I f
+(attribute)870 4440 w
+9 R f
+(:)1187 4440 w
+9 CW f
+(h)1230 4550 w
+9 R f
+(\()1284 4550 w
+9 CW f
+(eigh)1314 4550 w
+9 R f
+(\))1530 4550 w
+9 CW f
+(t)1560 4550 w
+9 I f
+(expr)1668 4550 w
+9 CW f
+(wid)2490 4550 w
+9 R f
+(\()2652 4550 w
+9 CW f
+(th)2682 4550 w
+9 R f
+(\))2790 4550 w
+9 I f
+(expr)2874 4550 w
+9 CW f
+(rad)1230 4660 w
+9 R f
+(\()1392 4660 w
+9 CW f
+(ius)1422 4660 w
+9 R f
+(\))1584 4660 w
+9 I f
+(expr)1668 4660 w
+9 CW f
+(diam)2490 4660 w
+9 R f
+(\()2706 4660 w
+9 CW f
+(eter)2736 4660 w
+9 R f
+(\))2952 4660 w
+9 I f
+(expr)3036 4660 w
+9 CW f
+(up)1230 4770 w
+9 I f
+(opt-expr)1392 4770 w
+9 CW f
+(down)2490 4770 w
+9 I f
+(opt-expr)2760 4770 w
+9 CW f
+(left)1230 4880 w
+9 I f
+(opt-expr)1500 4880 w
+9 CW f
+(right)2490 4880 w
+9 I f
+(opt-expr)2814 4880 w
+9 CW f
+(from)1230 4990 w
+9 I f
+(position)1500 4990 w
+9 CW f
+(to)2490 4990 w
+9 I f
+(position)2652 4990 w
+9 CW f
+(at)1230 5100 w
+9 I f
+(position)1392 5100 w
+9 CW f
+(with)2490 5100 w
+9 I f
+(corner)2760 5100 w
+9 CW f
+(touch)1230 5210 w
+9 R f
+(\()1500 5210 w
+9 CW f
+(ing)1530 5210 w
+9 R f
+(\))1692 5210 w
+9 I f
+(var)1776 5210 w
+9 CW f
+(,)1896 5210 w
+9 I f
+(var)1950 5210 w
+9 CW f
+(by)2490 5210 w
+9 I f
+(expr)2652 5210 w
+9 CW f
+(,)2812 5210 w
+9 I f
+(expr)2866 5210 w
+9 CW f
+(chop)1230 5320 w
+9 I f
+(opt-expr)1500 5320 w
+9 CW f
+(then)2490 5320 w
+(clockwise ccw)1 1422 1 1230 5430 t
+(dashpat \()1 486 1 1230 5540 t
+9 I f
+(expr-list)1716 5540 w
+9 CW f
+(\) dash)1 690 1 2016 5540 t
+9 R f
+(\()2706 5540 w
+9 CW f
+(ed)2736 5540 w
+9 R f
+(\))2844 5540 w
+9 I f
+(opt-expr)2928 5540 w
+9 CW f
+(dot)1230 5650 w
+9 R f
+(\()1392 5650 w
+9 CW f
+(ted)1422 5650 w
+9 R f
+(\))1584 5650 w
+9 I f
+(opt-expr)1668 5650 w
+9 CW f
+(same)2490 5650 w
+(weight)1230 5760 w
+9 I f
+(expr)1608 5760 w
+9 CW f
+(layer)2490 5760 w
+9 I f
+(expr)2814 5760 w
+9 CW f
+( noedge)1 990(-> <- <->)2 594 2 1230 5870 t
+(edge)1230 5980 w
+9 R f
+(\()1446 5980 w
+9 CW f
+(d)1476 5980 w
+9 R f
+(\))1530 5980 w
+9 I f
+(color)1614 5980 w
+9 CW f
+(fill)2490 5980 w
+9 R f
+(\()2706 5980 w
+9 CW f
+(ed)2736 5980 w
+9 R f
+(\))2844 5980 w
+9 I f
+(color)2928 5980 w
+9 CW f
+(label)1230 6090 w
+9 R f
+(\()1500 6090 w
+9 CW f
+(ed)1530 6090 w
+9 R f
+(\))1638 6090 w
+9 I f
+(color)1722 6090 w
+9 CW f
+(font)2490 6090 w
+9 I f
+(fontexpr)2760 6090 w
+9 CW f
+(size)1230 6200 w
+9 I f
+(expr)1500 6200 w
+9 CW f
+(space)2490 6200 w
+9 I f
+(expr)2814 6200 w
+(text-list expr)1 1420 1 1230 6310 t
+10 R f
+( all attributes make sense for all primitives;)7 1799( Not)1 210( are \256lled in from defaults.)5 1115(Missing attributes and values)3 1196 4 720 6490 t
+( lines, splines and arcs,)4 965( For)1 200(irrelevant ones are silently ignored.)4 1455 3 720 6610 t
+10 CW f
+(height)3376 6610 w
+10 R f
+(and)3771 6610 w
+10 CW f
+(width)3950 6610 w
+10 R f
+(refer to arrowhead)2 755 1 4285 6610 t
+( bare)1 196(size. A)1 302 2 720 6730 t
+10 I f
+(expr)1243 6730 w
+10 R f
+(implies motion in the current direction.)5 1566 1 1445 6730 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(Picasso B-3)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Text]
+10 B f
+(Text)720 960 w
+10 R f
+(Text attributed to an object \()5 1195 1 720 1140 t
+10 I f
+(object-text)1915 1140 w
+10 R f
+( \()1 70(\) is part of the object, otherwise it is an independent entity)11 2446 2 2336 1140 t
+10 I f
+(free-)4852 1140 w
+(text)720 1260 w
+10 R f
+( of the object, but may be justi\256ed right or left,)10 1891( are placed by default at the geometrical center)8 1890(\). Strings)1 395 3 864 1260 t
+(or moved vertically one half line up or down.)8 1811 1 720 1380 t
+9 I f
+(text-item)870 1550 w
+9 R f
+(:)1192 1550 w
+9 CW f
+(")1230 1660 w
+9 S f
+(\274)1284 1660 w
+9 CW f
+(")1374 1660 w
+9 S f
+(\274)1482 1660 w
+9 I f
+(positioning)1626 1660 w
+9 CW f
+(sprintf\(")1230 1770 w
+9 I f
+(format)1716 1770 w
+9 CW f
+(",)1956 1770 w
+9 I f
+(expr)2064 1770 w
+9 CW f
+(,)2224 1770 w
+9 S f
+(\274)2278 1770 w
+9 CW f
+(\))2368 1770 w
+9 I f
+(positioning)2476 1770 w
+9 S f
+(\274)2904 1770 w
+9 I f
+(positioning)870 1920 w
+9 R f
+(:)1282 1920 w
+9 CW f
+(center ljust rjust above below)4 1620 1 1230 2030 t
+10 R f
+( vertically except as quali\256ed by)5 1390(Multiple text items in an object are output on separate lines centered)11 2930 2 720 2210 t
+10 I f
+(positioning)720 2330 w
+10 R f
+( items can contain)3 811(. Text)1 287 2 1171 2330 t
+10 I f
+(troff)2323 2330 w
+10 R f
+( An)1 200( changes.)1 399(commands for size and font)4 1225 3 2550 2330 t
+10 I f
+(sprintf)4427 2330 w
+10 R f
+(item is)1 298 1 4742 2330 t
+( of)1 108( Variants)1 388(equivalent to a quoted string in any context.)7 1754 3 720 2450 t
+10 CW f
+(%f)2995 2450 w
+10 R f
+(or)3140 2450 w
+10 CW f
+(%g)3248 2450 w
+10 R f
+(are the only sensible format conversions.)5 1636 1 3393 2450 t
+( transformations apply exactly as)4 1368( All)1 190( differently under transformation than object-text.)5 2045(Free-text behaves)1 717 4 720 2630 t
+( the translational component of transformations \(i.e.,)6 2124(speci\256ed to free-text, but object-text is subject only to)8 2196 2 720 2750 t
+(object-text doesn't rotate, re\257ect or scale with the object, but it does move with it\).)14 3304 1 720 2870 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Positions, Places and Objects]
+10 B f
+(Positions, Places and Objects)3 1239 1 720 3050 t
+10 R f
+(A position is ultimately an)4 1062 1 720 3230 t
+10 I f
+(x,y)1807 3230 w
+10 R f
+(coordinate pair, but it may be speci\256ed in other ways:)9 2147 1 1945 3230 t
+9 I f
+(position)870 3400 w
+9 R f
+(:)1167 3400 w
+9 I f
+(expr)1230 3510 w
+9 CW f
+(,)1390 3510 w
+9 I f
+(expr)1444 3510 w
+(place)1230 3620 w
+9 S f
+(\261)1448 3620 w
+9 I f
+(expr)1521 3620 w
+9 CW f
+(,)1681 3620 w
+9 I f
+(expr)1735 3620 w
+(place)1230 3730 w
+9 S f
+(\261)1448 3730 w
+9 CW f
+(\()1521 3730 w
+9 I f
+(expr)1598 3730 w
+9 CW f
+(,)1758 3730 w
+9 I f
+(expr)1812 3730 w
+9 CW f
+(\))1995 3730 w
+(\()1230 3840 w
+9 I f
+(position)1338 3840 w
+9 CW f
+(,)1628 3840 w
+9 I f
+(position)1682 3840 w
+9 CW f
+(\))1995 3840 w
+9 I f
+(expr [)1 218 1 1230 3950 t
+9 CW f
+(of the way)2 540 1 1502 3950 t
+9 I f
+(])2096 3950 w
+9 CW f
+(between)2185 3950 w
+9 I f
+(position)2617 3950 w
+9 CW f
+(and)2961 3950 w
+9 I f
+(position)3177 3950 w
+(expr)1230 4060 w
+9 CW f
+(<)1444 4060 w
+9 I f
+(position)1552 4060 w
+9 CW f
+(,)1896 4060 w
+9 I f
+(position)2004 4060 w
+9 CW f
+(>)2348 4060 w
+(\()1230 4170 w
+9 I f
+(position)1338 4170 w
+9 CW f
+(\))1682 4170 w
+9 I f
+(place)870 4320 w
+9 R f
+(:)1072 4320 w
+9 I f
+(placename optional-corner)1 983 1 1230 4430 t
+(corner)1230 4540 w
+9 CW f
+(of)1524 4540 w
+9 I f
+(placename)1686 4540 w
+(n)1230 4650 w
+9 CW f
+(th)1290 4650 w
+9 I f
+([)1421 4650 w
+9 CW f
+(last)1510 4650 w
+9 I f
+(] object optional-corner)2 917 1 1780 4650 t
+(corner)1230 4760 w
+9 CW f
+(of)1524 4760 w
+9 I f
+(n)1686 4760 w
+9 CW f
+(th)1746 4760 w
+9 I f
+([)1908 4760 w
+9 CW f
+(last)1997 4760 w
+9 I f
+(] object)1 301 1 2267 4760 t
+9 CW f
+(Here)1230 4870 w
+10 R f
+(An)720 5050 w
+10 I f
+(object)869 5050 w
+10 R f
+(is a)1 138 1 1140 5050 t
+10 I f
+(place)1305 5050 w
+10 R f
+( to a corner position on one of these or)9 1566(that actually refers to a primitive or a block, not)9 1926 2 1548 5050 t
+( An)1 186( arbitrary point in coordinate space.)5 1489(to an)1 212 3 720 5170 t
+10 I f
+(optional-corner)2646 5170 w
+10 R f
+(is one of the eight compass points or the)8 1722 1 3318 5170 t
+(center or the start or end of an object:)8 1496 1 720 5290 t
+9 I f
+(optional-corner)870 5460 w
+9 R f
+(:)1447 5460 w
+9 CW f
+(.e .ne .n .nw .w .sw .s .se .c .start .end .)11 2376 1 1230 5570 t
+9 I f
+(n)3606 5570 w
+9 CW f
+(th)3666 5570 w
+9 I f
+(corner)870 5720 w
+9 R f
+(:)1117 5720 w
+9 CW f
+(top bottom left center right start end)6 2376 1 1230 5830 t
+(northeast northwest southeast southwest)3 2268 1 1230 5940 t
+10 R f
+( to actual points)3 639( refer)1 212( To)1 161(The compass points label the appropriate points on the bounding box of the object.)13 3308 4 720 6120 t
+( or ellipses \(or on rotated or otherwise transformed objects\) corresponding to these compass)13 3915(on circles)1 405 2 720 6240 t
+(directions, the)1 574 1 720 6360 t
+10 CW f
+(.)1327 6360 w
+10 I f
+(n)1387 6360 w
+10 CW f
+(th)1437 6360 w
+10 R f
+( and ellipses starting with)4 1058(syntax assigns points to boxes, circles)5 1556 2 1590 6360 t
+10 CW f
+(.1st)4238 6360 w
+10 R f
+(equivalent to)1 528 1 4512 6360 t
+10 CW f
+(.e)720 6480 w
+10 R f
+(and with)1 348 1 867 6480 t
+10 CW f
+(.8th)1241 6480 w
+10 R f
+(in the direction \(before any transformations\) of)6 1885 1 1507 6480 t
+10 CW f
+(.se)3418 6480 w
+10 R f
+(; higher numbers are acceptable and)5 1442 1 3598 6480 t
+( other objects such as lines, the)6 1288( For)1 197(are recycled modulo 8.)3 938 3 720 6600 t
+10 CW f
+(.)3176 6600 w
+10 I f
+(n)3236 6600 w
+10 CW f
+(th)3286 6600 w
+10 R f
+( results)1 295(notation may also be used, with)5 1306 2 3439 6600 t
+(that are intended to be intuitive in each case.)8 1777 1 720 6720 t
+( to its particular type and globally among)7 1681(Each object in a picture has an ordinal number, both with respect)11 2639 2 720 6900 t
+( speci\256ying a)2 543( In)1 138(all objects.)1 438 3 720 7020 t
+10 I f
+(place)1869 7020 w
+10 R f
+(, one counts an)3 614 1 2085 7020 t
+10 I f
+(n)2729 7020 w
+10 CW f
+(th)2779 7020 w
+10 R f
+(object forward from the)3 962 1 2928 7020 t
+10 CW f
+(1st)3919 7020 w
+10 R f
+(or backwards from the)3 912 1 4128 7020 t
+10 CW f
+(last)720 7140 w
+10 R f
+( this counting operation, but not from the inside; a count)10 2372( block is opaque from the outside for)7 1550(. A)1 158 3 960 7140 t
+( to)1 104( References)1 493( is met.)2 294(started inside a block continues at higher levels until its total)10 2441 4 720 7260 t
+10 I f
+(n)4078 7260 w
+10 CW f
+(th)4128 7260 w
+10 R f
+(object count all the)3 766 1 4274 7260 t
+(types alike;)1 458 1 720 7380 t
+10 I f
+(n)1203 7380 w
+10 CW f
+(th text)1 420 1 1253 7380 t
+10 R f
+(refers only to)2 532 1 1698 7380 t
+10 I f
+(text-list)2255 7380 w
+10 R f
+(primitives;)2580 7380 w
+10 I f
+(n)3039 7380 w
+10 CW f
+(th [])1 300 1 3089 7380 t
+10 R f
+(or)3414 7380 w
+10 I f
+(n)3522 7380 w
+10 CW f
+(th block)1 480 1 3572 7380 t
+10 R f
+(to blocks.)1 389 1 4077 7380 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(B-4 Picasso)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Expressions]
+10 B f
+(Expressions)720 960 w
+10 I f
+(Picasso)720 1140 w
+10 R f
+( the exception)2 578( numbers representing dimensions, with)4 1628( All)1 186(evaluates expressions in \257oating point.)4 1584 4 1064 1140 t
+(of)720 1260 w
+10 CW f
+(textsize)841 1260 w
+10 R f
+(and)1359 1260 w
+10 CW f
+(textspace)1541 1260 w
+10 R f
+(, are in inches; the text variables \(and expressions given for)10 2500 1 2081 1260 t
+10 CW f
+(size)4619 1260 w
+10 R f
+(and)4896 1260 w
+10 CW f
+(space)720 1380 w
+10 R f
+(attributes\) are in points.)3 949 1 1045 1380 t
+9 I f
+(expr-list)870 1550 w
+9 R f
+(:)1177 1550 w
+9 I f
+(expr [)1 218 1 1230 1660 t
+9 CW f
+(,)1502 1660 w
+9 I f
+(expr)1556 1660 w
+9 S f
+(\274)1739 1660 w
+9 I f
+(])1852 1660 w
+(expr)870 1810 w
+9 R f
+(:)1037 1810 w
+9 I f
+(number)1230 1920 w
+(variable)1230 2030 w
+(variable.nth)1230 2140 w
+(expr op expr)2 456 1 1230 2250 t
+9 CW f
+(-)1230 2360 w
+9 I f
+(expr)1307 2360 w
+9 CW f
+(!)1230 2470 w
+9 I f
+(expr)1307 2470 w
+9 CW f
+(\()1230 2580 w
+9 I f
+(expr)1307 2580 w
+9 CW f
+(\))1490 2580 w
+9 I f
+(place)1230 2690 w
+9 CW f
+(.x)1448 2690 w
+9 I f
+(place)1230 2800 w
+9 CW f
+(.y)1448 2800 w
+9 I f
+(place)1230 2910 w
+9 CW f
+(.ht)1448 2910 w
+9 I f
+(place)1230 3020 w
+9 CW f
+(.wid)1448 3020 w
+9 I f
+(place)1230 3130 w
+9 CW f
+(.rad)1448 3130 w
+(setrgb\()1230 3240 w
+9 I f
+(expr-list)1608 3240 w
+9 CW f
+(\))1908 3240 w
+(setfont\(")1230 3350 w
+9 I f
+(name)1716 3350 w
+9 CW f
+("\))1911 3350 w
+(max\()1230 3460 w
+9 I f
+(expr-list)1446 3460 w
+9 CW f
+(\) min\()1 600 1 1746 3460 t
+9 I f
+(expr-list)2346 3460 w
+9 CW f
+(\))2646 3460 w
+(atan2\()1230 3570 w
+9 I f
+(expr)1554 3570 w
+9 CW f
+(,)1714 3570 w
+9 I f
+(expr)1768 3570 w
+9 CW f
+(\) pow\()1 418 1 1928 3570 t
+9 I f
+(expr)2346 3570 w
+9 CW f
+(,)2506 3570 w
+9 I f
+(expr)2560 3570 w
+9 CW f
+(\))2720 3570 w
+(abs\()1230 3680 w
+9 I f
+(expr)1446 3680 w
+9 CW f
+(\) cos\()1 378 1 1606 3680 t
+9 I f
+(expr)1984 3680 w
+9 CW f
+(\) exp\()1 378 1 2144 3680 t
+9 I f
+(expr)2522 3680 w
+9 CW f
+(\) int\()1 324 1 2682 3680 t
+9 I f
+(expr)3006 3680 w
+9 CW f
+(\) ln\()1 324 1 3166 3680 t
+9 I f
+(expr)3490 3680 w
+9 CW f
+(\))3650 3680 w
+(log\()1230 3790 w
+9 I f
+(expr)1446 3790 w
+9 CW f
+(\) rand\()1 432 1 1606 3790 t
+9 I f
+(expr)2038 3790 w
+9 CW f
+(\) sin\()1 324 1 2198 3790 t
+9 I f
+(expr)2522 3790 w
+9 CW f
+(\) sqrt\()1 378 1 2682 3790 t
+9 I f
+(expr)3060 3790 w
+9 CW f
+(\))3220 3790 w
+9 I f
+(op)870 3940 w
+9 R f
+(:)967 3940 w
+9 CW f
+( %)1 216( /)1 162( *)1 216(+ -)1 216 4 1230 4050 t
+(< <= > >= == != && ||)7 1512 1 1230 4160 t
+10 R f
+(A)720 4340 w
+10 I f
+(color)825 4340 w
+10 R f
+( and 1 \(white\) or an integer index returned from the)10 2146(is either a grayscale value between 0 \(black\))7 1825 2 1069 4340 t
+10 CW f
+(setrgb)720 4460 w
+10 R f
+(function. A)1 483 1 1108 4460 t
+10 I f
+(font-expr)1619 4460 w
+10 R f
+( \(e.g., "R" or "Times-Roman"\) or a)6 1410(is either a quoted string naming the font)7 1617 2 2013 4460 t
+(table index returned by the builtin function)6 1787 1 720 4580 t
+10 CW f
+(setfont)2544 4580 w
+10 R f
+(. The)1 242 1 2964 4580 t
+10 CW f
+(textfont)3243 4580 w
+10 R f
+( to store a)3 430(variable is presumed)2 850 2 3760 4580 t
+( invocation of)2 555(value returned by some)3 937 2 720 4700 t
+10 CW f
+(setfont)2237 4700 w
+10 R f
+( and font values are checked for validity before they)9 2080(. Color)1 303 2 2657 4700 t
+(are ascribed to objects.)3 914 1 720 4820 t
+( may be changed at)4 774( These)1 289( C.)1 117( Appendix)1 420(The full set of builtin variables, with their default values, is given in)12 2720 5 720 5000 t
+( or forced back to)4 719(any time, and the new values remain in force from picture to picture until changed again)15 3601 2 720 5120 t
+(the default values by a)4 914 1 720 5240 t
+10 CW f
+(reset)1663 5240 w
+10 R f
+( within)1 286( changed)1 361(statement. Variables)1 844 3 1992 5240 t
+10 CW f
+([)3513 5240 w
+10 R f
+(and)3603 5240 w
+10 CW f
+(])3777 5240 w
+10 R f
+(revert to their previous value)4 1173 1 3867 5240 t
+(upon exit from the block.)4 1013 1 720 5360 t
+( things have limited usage in)5 1192( Such)1 259( a list of expressions to a variable.)7 1422(It is possible to assign)4 916 4 720 5540 t
+10 I f
+(Picasso)4543 5540 w
+10 R f
+(; for)1 178 1 4862 5540 t
+( statement)1 425(example, objects can be replicated by the)6 1751 2 720 5660 t
+10 CW f
+(duplicate)2938 5660 w
+10 I f
+(object)3520 5660 w
+10 CW f
+(at \()1 257 1 3806 5660 t
+10 I f
+(xvar)4063 5660 w
+10 CW f
+(,)4240 5660 w
+10 I f
+(yvar)4300 5660 w
+10 CW f
+(\))4477 5660 w
+10 R f
+(. Individual)1 503 1 4537 5660 t
+(elements of such a list are referred to by)8 1601 1 720 5780 t
+10 I f
+(variable.nth)2346 5780 w
+10 R f
+(syntax.)2857 5780 w
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Input and Output]
+10 B f
+(Input and Output)2 764 1 720 5960 t
+10 R f
+(Final)720 6140 w
+10 CW f
+(.PE)959 6140 w
+10 R f
+(or)1172 6140 w
+10 CW f
+(.PF)1288 6140 w
+10 R f
+( of the picture to PostScript and output of this to)10 2018(imply translation of all layers)4 1209 2 1501 6140 t
+10 I f
+(stdout)4762 6140 w
+10 R f
+(.)5015 6140 w
+(The)720 6260 w
+10 CW f
+(show)900 6260 w
+10 R f
+(statement is followed by a)4 1049 1 1165 6260 t
+10 I f
+(picture-part)2239 6260 w
+10 R f
+(:)2722 6260 w
+9 I f
+(picture-part)870 6430 w
+9 R f
+(:)1312 6430 w
+9 I f
+(object)1230 6540 w
+(layer)1230 6650 w
+9 CW f
+(from)1230 6760 w
+9 I f
+(position)1500 6760 w
+9 CW f
+(to)1844 6760 w
+9 I f
+(position)2006 6760 w
+(layer)1230 6870 w
+9 CW f
+(from)1469 6870 w
+9 I f
+(position)1739 6870 w
+9 CW f
+(to)2083 6870 w
+9 I f
+(position)2245 6870 w
+10 R f
+( a)1 80(A single object may be shown, all objects in a given layer, all objects whose bounding boxes intersect)17 4240 2 720 7050 t
+( If)1 126( such objects in a given layer.)6 1244(rectangle given by a pair of diagonally opposite corner positions, or all)11 2950 3 720 7170 t
+10 I f
+(picture-part)720 7290 w
+10 R f
+(is omitted from a)3 701 1 1233 7290 t
+10 CW f
+(show)1964 7290 w
+10 R f
+( in the description is output.)5 1147(command, the entire picture to that point)6 1659 2 2234 7290 t
+(Normally, use of)2 674 1 720 7410 t
+10 CW f
+(show)1419 7410 w
+10 R f
+(implies ending the picture with)4 1244 1 1684 7410 t
+10 CW f
+(.PN)2953 7410 w
+10 R f
+(to suppress \256nal output of the whole picture.)7 1782 1 3158 7410 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(Picasso B-5)1 4320 1 720 600 t
+10 R f
+(The)720 960 w
+10 CW f
+(print)901 960 w
+10 R f
+(command writes to)2 768 1 1227 960 t
+10 I f
+(stderr)2021 960 w
+10 R f
+( an expression \(perhaps just a variable\) or a position or a)11 2281(the value of)2 473 2 2286 960 t
+(single text string; this is primarily used for debugging.)8 2175 1 720 1080 t
+(The)720 1260 w
+10 CW f
+(copy ")1 369 1 944 1260 t
+10 I f
+(\256le)1313 1260 w
+10 CW f
+(")1435 1260 w
+10 R f
+(command allows input of an arbitrary \256le at any point of a)11 2432 1 1529 1260 t
+10 I f
+(Picasso)3995 1260 w
+10 R f
+(picture; normally)1 700 1 4340 1260 t
+( \256le should contain ordinary)4 1127(such a)1 253 2 720 1380 t
+10 I f
+(Picasso)2125 1380 w
+10 R f
+( the \256le may be passed a line at a time to a)12 1692(statements. However,)1 887 2 2461 1380 t
+10 I f
+(macro)720 1500 w
+10 R f
+(, with each space-separated \256eld on the line becoming an argument to the macro.)13 3229 1 975 1500 t
+(Besides the special case of)4 1072 1 720 1680 t
+10 CW f
+(copy)1819 1680 w
+10 R f
+( from a previous de\256nition or an inline)7 1567(ing through a macro \(either a name)6 1414 2 2059 1680 t
+10 I f
+(replacement-text)720 1800 w
+10 R f
+( occurs on all input, with arguments in a macro invocation like)11 2558(\), macro expansion)2 774 2 1390 1800 t
+10 I f
+(macro-)4752 1800 w
+(name)720 1920 w
+10 CW f
+(\()936 1920 w
+10 I f
+(arg1)996 1920 w
+10 CW f
+(,)1185 1920 w
+10 I f
+(arg2)1282 1920 w
+10 CW f
+(,)1471 1920 w
+10 S f
+(\274)1568 1920 w
+10 CW f
+(\))1668 1920 w
+10 R f
+(referenced in the)2 693 1 1765 1920 t
+10 I f
+(replacement-text)2495 1920 w
+10 R f
+(by)3203 1920 w
+10 CW f
+($1)3341 1920 w
+10 R f
+(,)3461 1920 w
+10 CW f
+($2)3524 1920 w
+10 R f
+( arguments are)2 613( Non-existent)1 579(, etc.)1 204 3 3644 1920 t
+( The)1 208(replaced by null strings.)3 969 2 720 2040 t
+10 I f
+(replacement-text)1925 2040 w
+10 R f
+( de\256nitions remain)2 754( Macro)1 312(in a macro may contain newlines.)5 1352 3 2622 2040 t
+(in effect across pictures; they may be removed by the)9 2131 1 720 2160 t
+10 CW f
+(undef)2876 2160 w
+10 R f
+(statement.)3201 2160 w
+(Arbitrary)720 2340 w
+9 R f
+(UNIX)1129 2340 w
+10 R f
+(commands may be passed by the)5 1387 1 1394 2340 t
+10 CW f
+(sh)2822 2340 w
+10 R f
+( The)1 221(command to the system shell for execution.)6 1836 2 2983 2340 t
+(prede\256ned macro)1 700 1 720 2460 t
+10 CW f
+(pid)1450 2460 w
+10 R f
+(containing an)1 546 1 1660 2460 t
+9 R f
+(ASCII)2234 2460 w
+10 R f
+( the process id of the current)6 1160(representation of)1 678 2 2499 2460 t
+10 I f
+(Picasso)4366 2460 w
+10 R f
+(run may)1 334 1 4706 2460 t
+(be of use here in generating unique \256le names.)8 1860 1 720 2580 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Object Transformations]
+10 B f
+(Object Transformations)1 1035 1 720 2760 t
+10 R f
+(The primitive objects of)3 963 1 720 2940 t
+10 I f
+(Picasso)1708 2940 w
+10 R f
+(can be manipulated in various ways after their creation:)8 2217 1 2044 2940 t
+9 I f
+(replication)870 3110 w
+9 R f
+(:)1272 3110 w
+9 CW f
+(delete)1230 3220 w
+9 I f
+(object)1608 3220 w
+9 CW f
+(duplicate)1230 3330 w
+9 I f
+(object [)1 278 1 1770 3330 t
+9 CW f
+(at)2102 3330 w
+9 I f
+(position ])1 348 1 2264 3330 t
+9 CW f
+(duplicate)1230 3440 w
+9 I f
+(object)1770 3440 w
+9 CW f
+(at \()1 216 1 2044 3440 t
+9 I f
+(variable)2260 3440 w
+9 CW f
+(,)2560 3440 w
+9 I f
+(variable)2614 3440 w
+9 CW f
+(\))2914 3440 w
+9 I f
+(transformation)870 3590 w
+9 R f
+(:)1417 3590 w
+9 CW f
+(move)1230 3700 w
+9 I f
+([ place ])2 311 1 1500 3700 t
+9 CW f
+(to)1865 3700 w
+9 I f
+(position)2027 3700 w
+9 CW f
+(translate)1230 3810 w
+9 I f
+([ place ])2 311 1 1770 3810 t
+9 CW f
+(by)2135 3810 w
+9 I f
+(position)2297 3810 w
+9 CW f
+(scale)1230 3920 w
+9 I f
+([ place ])2 311 1 1554 3920 t
+9 CW f
+(by)1919 3920 w
+9 I f
+(expr-list [)1 358 1 2081 3920 t
+9 CW f
+(at)2493 3920 w
+9 I f
+(position ])1 348 1 2655 3920 t
+9 CW f
+(rotate)1230 4030 w
+9 I f
+([ place ])2 311 1 1608 4030 t
+9 CW f
+(by)1973 4030 w
+9 I f
+(expr [)1 218 1 2135 4030 t
+9 CW f
+(at)2407 4030 w
+9 I f
+(position ])1 348 1 2569 4030 t
+9 CW f
+(reflect)1230 4140 w
+9 I f
+([ place ] [)3 369 1 1662 4140 t
+9 CW f
+(at)2085 4140 w
+9 I f
+(position ])1 348 1 2247 4140 t
+9 CW f
+(transform)1230 4250 w
+9 I f
+([ place ])2 311 1 1770 4250 t
+9 CW f
+(by)2135 4250 w
+9 I f
+(expr-list)2297 4250 w
+10 R f
+(If)720 4430 w
+10 CW f
+(at)824 4430 w
+10 I f
+(position)982 4430 w
+10 R f
+( the center of the)4 726(is not speci\256ed,)2 651 2 1343 4430 t
+10 I f
+(place)2759 4430 w
+10 R f
+( transformation applies either to a)5 1415( A)1 136(is assumed.)1 475 3 3014 4430 t
+( default, the origin, if no)5 1149(single object or to a position in space \(by)8 1931 2 720 4550 t
+10 I f
+(place)3860 4550 w
+10 R f
+( Point)1 297(is mentioned\).)1 607 2 4136 4550 t
+(transformations that do not reference an object imply a global transformation of the coordinate system.)14 4107 1 720 4670 t
+(In the)1 230 1 720 4850 t
+10 CW f
+(duplicate)975 4850 w
+10 R f
+( list, multiple copies are made,)5 1229(command, if either of a pair of variable names refers to a)11 2271 2 1540 4850 t
+(with a shorter list in one variable recycled until the longer is exhausted.)12 2854 1 720 4970 t
+(In transformations, the)2 907 1 720 5150 t
+10 CW f
+(by)1652 5150 w
+10 R f
+( the)1 147( If)1 116(is optional syntactic noise.)3 1061 3 1797 5150 t
+10 I f
+(place)3146 5150 w
+10 R f
+( coordinate)1 447(is omitted, it is taken to be the)7 1206 2 3387 5150 t
+(origin)720 5270 w
+10 CW f
+(O)991 5270 w
+10 R f
+(.)1051 5270 w
+10 CW f
+(Scale)1133 5270 w
+10 R f
+(expects one or two parameters \(uniform scaling or different)8 2433 1 1465 5270 t
+10 I f
+(x)3930 5270 w
+10 R f
+(,)3982 5270 w
+10 I f
+(y)4039 5270 w
+10 R f
+( longer)1 286(scale factors\); a)2 639 2 4115 5270 t
+10 I f
+(expr-list)720 5390 w
+10 R f
+( The)1 217(is quietly truncated to two expressions.)5 1615 2 1089 5390 t
+10 I f
+(expr)2958 5390 w
+10 R f
+(parameter of)1 518 1 3172 5390 t
+10 CW f
+(rotate)3727 5390 w
+10 R f
+(is an angle in radians.)4 916 1 4124 5390 t
+10 CW f
+(Transform)720 5510 w
+10 R f
+(expects four or six parameters in its)6 1437 1 1287 5510 t
+10 I f
+(expr-list)2751 5510 w
+10 R f
+( may)1 198(and will assume zeros if it \256nds fewer; this)8 1731 2 3111 5510 t
+(lead to a complaint about a singular transformation.)7 2064 1 720 5630 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Trailer
+done
+%%Pages: 5
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

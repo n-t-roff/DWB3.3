@@ -1,0 +1,1927 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+17 HB f
+(TBL)720 1040 w
+18 HB f
+(\320 A Program to Format Tables)5 2654 1 1100 1040 t
+36 S1 f
+(________________________)720 1240 w
+9 HB f
+(ABSTRACT)720 1720 w
+10 I f
+(Tbl)1365 1720 w
+10 R f
+(is a)1 139 1 1527 1720 t
+9 R f
+(UNIX)1692 1720 w
+6 S f
+(\322)1917 1680 w
+10 R f
+(system document formatting preprocessor for)4 1831 1 1992 1720 t
+10 I f
+(troff)3851 1720 w
+10 R f
+( fairly)1 245(which makes even)2 743 2 4052 1720 t
+( are made up of columns which may be)8 1649( Tables)1 326( to specify and enter.)4 874(complex tables easy)2 826 4 1365 1840 t
+( aligned by decimal points.)4 1272(independently centered, right-adjusted, left-adjusted, or)4 2403 2 1365 1960 t
+( table entry may)3 688( A)1 136( be placed over single columns or groups of columns.)9 2262(Headings may)1 589 4 1365 2080 t
+( or vertical lines may)4 867( Horizontal)1 483( rows of text.)3 545(contain equations, or may consist of several)6 1780 4 1365 2200 t
+( For)1 196( or element may be enclosed in a box.)8 1567(be drawn as desired in the table, and any table)9 1912 3 1365 2320 t
+(example:)1365 2440 w
+10 S f
+(_ __________________________________________)1 2105 1 2150 2580 t
+10 B f
+(Readability of Text)2 822 1 2791 2700 t
+8 R f
+(Line Width and Leading for 10-Point Type)6 1372 1 2516 2820 t
+10 S f
+(_ __________________________________________)1 2105 1 2150 2830 t
+(_ __________________________________________)1 2105 1 2150 2850 t
+10 R f
+( 2-Point 4-Point)2 854( 1-Point)1 511(Line Set)1 567 3 2257 2960 t
+( Leading Leading)2 854( Leading)1 485(Width Solid)1 643 3 2223 3080 t
+10 S f
+(_ __________________________________________)1 2105 1 2150 3100 t
+10 R f
+( \2615.3 \2617.1)2 854( \2616.0)1 421( \2619.3)1 354(9 Pica)1 247 4 2250 3220 t
+( \2610.3 \2611.7)2 854( \2610.6)1 421( \2614.5)1 354(14 Pica)1 297 4 2200 3340 t
+( \2612.0)1 427( 0.0)1 427( \2615.1)1 421( \2615.0)1 354(19 Pica)1 297 5 2200 3460 t
+( \2612.4 \2613.6)2 854( \2613.8)1 421( \2613.7)1 354(31 Pica)1 297 4 2200 3580 t
+( \2615.9 \2618.8)2 854( \2619.0)1 421( \2619.1)1 354(43 Pica)1 297 4 2200 3700 t
+10 S f
+( \347)1 -2105(_ __________________________________________)1 2105 2 2150 3720 t
+(\347)2150 3680 w
+(\347)2150 3580 w
+(\347)2150 3480 w
+(\347)2150 3380 w
+(\347)2150 3280 w
+(\347)2150 3180 w
+(\347)2150 3080 w
+(\347)2150 2980 w
+(\347)2150 2880 w
+(\347)2150 2780 w
+(\347)2150 2680 w
+(\347)2537 3720 w
+(\347)2537 3650 w
+(\347)2537 3550 w
+(\347)2537 3450 w
+(\347)2537 3350 w
+(\347)2537 3250 w
+(\347)2537 3150 w
+(\347)2537 3050 w
+(\347)2537 2950 w
+(\347)2557 3720 w
+(\347)2557 3650 w
+(\347)2557 3550 w
+(\347)2557 3450 w
+(\347)2557 3350 w
+(\347)2557 3250 w
+(\347)2557 3150 w
+(\347)2557 3050 w
+(\347)2557 2950 w
+(\347)2974 3720 w
+(\347)2974 3650 w
+(\347)2974 3550 w
+(\347)2974 3450 w
+(\347)2974 3350 w
+(\347)2974 3250 w
+(\347)2974 3150 w
+(\347)2974 3050 w
+(\347)2974 2950 w
+(\347)3401 3720 w
+(\347)3401 3650 w
+(\347)3401 3550 w
+(\347)3401 3450 w
+(\347)3401 3350 w
+(\347)3401 3250 w
+(\347)3401 3150 w
+(\347)3401 3050 w
+(\347)3401 2950 w
+(\347)3828 3720 w
+(\347)3828 3650 w
+(\347)3828 3550 w
+(\347)3828 3450 w
+(\347)3828 3350 w
+(\347)3828 3250 w
+(\347)3828 3150 w
+(\347)3828 3050 w
+(\347)3828 2950 w
+(\347)4255 3720 w
+(\347)4255 3680 w
+(\347)4255 3580 w
+(\347)4255 3480 w
+(\347)4255 3380 w
+(\347)4255 3280 w
+(\347)4255 3180 w
+(\347)4255 3080 w
+(\347)4255 2980 w
+(\347)4255 2880 w
+(\347)4255 2780 w
+(\347)4255 2680 w
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = INTRODUCTION]
+10 B f
+(1. INTRODUCTION)1 925 1 720 4140 t
+10 I f
+(Tbl)720 4320 w
+10 R f
+( description of a table into a)6 1217(turns a simple)2 593 2 895 4320 t
+10 I f
+(troff)2747 4320 w
+10 R f
+( It)1 128(program \(list of requests\) that prints the table.)7 1950 2 2962 4320 t
+( other)1 246(attempts to isolate a portion of a job that it can successfully handle and leave the remainder for)17 4074 2 720 4440 t
+(programs. Thus)1 668 1 720 4560 t
+10 I f
+(tbl)1429 4560 w
+10 R f
+(may be used with the equation formatting program)7 2140 1 1576 4560 t
+10 I f
+(eqn)3757 4560 w
+10 R f
+(and/or various)1 591 1 3942 4560 t
+10 I f
+(troff)4575 4560 w
+10 R f
+(layout)4790 4560 w
+(macro packages, but does not duplicate their functions.)7 2199 1 720 4680 t
+(This document is divided into three parts: \(1\) the rules for preparing)11 2776 1 720 4860 t
+10 I f
+(tbl)3526 4860 w
+10 R f
+( discussed in the body of)5 1021(input are)1 357 2 3662 4860 t
+( \(2\) samples of)3 665(the document,)1 590 2 720 4980 t
+10 I f
+(tbl)2023 4980 w
+10 R f
+( and \(3\) a)3 448( A,)1 122(input and the resulting tables are shown in Appendix)8 2293 3 2177 4980 t
+(reference list of)2 627 1 720 5100 t
+10 I f
+(tbl)1373 5100 w
+10 R f
+( directives\) is given in)4 896(input commands \(macros, options, key letters, modi\256ers, and data)8 2639 2 1505 5100 t
+( to study)2 357( description of rules is precise but technical, and the beginning user may prefer)13 3240( The)1 212(Appendix B.)1 511 4 720 5220 t
+(the examples \256rst, as they show some common arrangements.)8 2469 1 720 5340 t
+(The input to)2 497 1 720 5520 t
+10 I f
+(tbl)1246 5520 w
+10 R f
+( preceded by a)3 593(is text for a document, with tables)6 1381 2 1381 5520 t
+10 CW f
+(.TS)3385 5520 w
+10 R f
+(\(table start\) command and followed)4 1445 1 3595 5520 t
+(by a)1 177 1 720 5640 t
+10 CW f
+(.TE)930 5640 w
+10 R f
+(\(table end\) command.)2 889 1 1143 5640 t
+10 I f
+(Tbl)2090 5640 w
+10 R f
+(processes the tables, generating)3 1282 1 2257 5640 t
+10 I f
+(troff)3572 5640 w
+10 R f
+(formatting requests, and leaves)3 1263 1 3777 5640 t
+( The)1 213(the remainder of the text unchanged.)5 1503 2 720 5760 t
+10 CW f
+(.TS)2469 5760 w
+10 R f
+(and)2682 5760 w
+10 CW f
+(.TE)2859 5760 w
+10 R f
+(lines are copied, too, so that)5 1158 1 3072 5760 t
+10 I f
+(troff)4263 5760 w
+10 R f
+(layout macros)1 571 1 4469 5760 t
+( delimit and place tables as they see \256t.)8 1578(\(such as the memorandum formatting macros\) can use these lines to)10 2742 2 720 5880 t
+( the)1 148(In particular, any arguments on)4 1250 2 720 6000 t
+10 CW f
+(.TS)2144 6000 w
+10 R f
+(or)2350 6000 w
+10 CW f
+(.TE)2459 6000 w
+10 R f
+(lines are copied but otherwise ignored, and may be used by)10 2375 1 2665 6000 t
+(document layout macro requests.)3 1320 1 720 6120 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(2 TBL)1 4320 1 720 600 t
+10 R f
+(The format of)2 554 1 720 960 t
+10 I f
+(tbl)1299 960 w
+10 R f
+(input is as follows:)3 759 1 1430 960 t
+(text)870 1140 w
+10 CW f
+(.TS)870 1260 w
+10 I f
+(table)870 1380 w
+10 CW f
+(.TE)870 1500 w
+10 R f
+(text)870 1620 w
+10 CW f
+(.TS)870 1740 w
+10 I f
+(table)870 1860 w
+10 CW f
+(.TE)870 1980 w
+10 R f
+(text)870 2100 w
+10 S f
+(\274)895 2220 w
+10 R f
+(where the structure of each table is as follows:)8 1851 1 720 2400 t
+10 CW f
+(.TS)870 2580 w
+10 I f
+(options)870 2700 w
+10 CW f
+(;)1181 2700 w
+10 I f
+(format)870 2820 w
+10 CW f
+(.)1153 2820 w
+10 I f
+(data)870 2940 w
+10 CW f
+(.TE)870 3060 w
+10 R f
+( the data to be entered in)6 1035(Each table is independent, and must contain formatting information followed by)10 3285 2 720 3240 t
+( may)1 202( formatting information, which describes the individual columns and rows of the table,)12 3535( The)1 211(the table.)1 372 4 720 3360 t
+(be preceded by a few options that affect the entire table.)10 2235 1 720 3480 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 2.  , HEADING = INPUT COMMANDS]
+10 B f
+( COMMANDS)1 635(2. INPUT)1 436 2 720 3720 t
+10 R f
+( global options, then a format section describing the layout of the table entries, and)14 3419(A table contains, \256rst,)3 901 2 720 3900 t
+( addition, a data)3 638( In)1 133( format and data are always required, but not the options.)10 2279( The)1 205(then the data to be printed.)5 1065 5 720 4020 t
+( the format speci\256cations for the data that)7 1787(section may be followed by additional commands to change)8 2533 2 720 4140 t
+(follows.)720 4260 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 2.1  , HEADING = Global Options]
+10 B f
+( Options)1 365(2.1 Global)1 465 2 720 4440 t
+10 R f
+( present, this line must follow the)6 1384( If)1 123(There may be a single line of options affecting the whole table.)11 2600 3 720 4620 t
+10 CW f
+(.TS)4860 4620 w
+10 R f
+( commas, and must be)4 923(line immediately, must contain a list of option names separated by spaces, tabs, or)13 3397 2 720 4740 t
+(terminated by a semicolon \()4 1115 1 720 4860 t
+10 CW f
+(;)1835 4860 w
+10 R f
+( allowable global options are:)4 1182(\). The)1 263 2 1895 4860 t
+10 CW f
+(center)870 5040 w
+10 R f
+(center the table \(default is left-adjust\);)5 1527 1 1670 5040 t
+10 CW f
+(expand)870 5220 w
+10 R f
+(make the table as wide as the current line length;)9 1949 1 1670 5220 t
+10 CW f
+(box)870 5400 w
+10 R f
+(enclose the table in a box;)5 1040 1 1670 5400 t
+10 CW f
+(allbox)870 5580 w
+10 R f
+(enclose each item in the table in a box;)8 1553 1 1670 5580 t
+10 CW f
+(doublebox)870 5760 w
+10 R f
+(enclose the table in two boxes;)5 1229 1 1670 5760 t
+10 CW f
+(tab\()870 5940 w
+10 I f
+(x)1110 5940 w
+10 CW f
+(\))1154 5940 w
+10 R f
+(use)1670 5940 w
+10 I f
+(x)1828 5940 w
+10 R f
+(instead of tab to separate data items;)6 1453 1 1897 5940 t
+10 CW f
+(linesize\()870 6120 w
+10 I f
+(n)1410 6120 w
+10 CW f
+(\))1460 6120 w
+10 R f
+(set lines or rules \(e.g., from)5 1098 1 1670 6120 t
+10 CW f
+(box)2793 6120 w
+10 R f
+(\) in)1 136 1 2973 6120 t
+10 I f
+(n)3134 6120 w
+10 R f
+(-point type;)1 464 1 3184 6120 t
+10 CW f
+(delim\()870 6300 w
+10 I f
+(xy)1230 6300 w
+10 CW f
+(\))1318 6300 w
+10 R f
+(recognize)1670 6300 w
+10 I f
+(x)2082 6300 w
+10 R f
+(and)2151 6300 w
+10 I f
+(y)2320 6300 w
+10 R f
+(as the)1 230 1 2389 6300 t
+10 I f
+(eqn)2644 6300 w
+10 R f
+(delimiters \(see \2473.2\).)2 843 1 2813 6300 t
+(The)720 6480 w
+10 I f
+(tbl)901 6480 w
+10 R f
+(program tries to keep boxed tables on one page by issuing appropriate)11 2809 1 1033 6480 t
+10 I f
+(troff)3868 6480 w
+10 R f
+(``need'' \()1 380 1 4068 6480 t
+10 CW f
+(.ne)4448 6480 w
+10 R f
+(\) requests.)1 412 1 4628 6480 t
+( in the tables, and if there are spacing requests)9 1993(These requests are calculated from the number of lines)8 2327 2 720 6600 t
+(embedded in the input, the)4 1075 1 720 6720 t
+10 CW f
+(.ne)1824 6720 w
+10 R f
+(requests may be inaccurate; in that case, use normal)8 2102 1 2033 6720 t
+10 I f
+(troff)4164 6720 w
+10 R f
+(procedures, such)1 674 1 4366 6720 t
+( should use macros designed)4 1159( user who must have a multiple-page boxed table)8 1998( The)1 210(as keep-release macros.)2 953 4 720 6840 t
+(for this purpose \(see \2473.4\).)4 1070 1 720 6960 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(TBL 3)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 2.2  , HEADING = Format Specifications]
+10 B f
+( Speci\256cations)1 609(2.2 Format)1 496 2 720 960 t
+10 R f
+( speci\256es the layout of the columns \(both horizontally and vertically\) as well)12 3087(The format section of the table)5 1233 2 720 1140 t
+( line in the format section contains a key)8 1636( general, each)2 556( In)1 136(as the appearance of data entries \(e.g., font, size\).)8 1992 4 720 1260 t
+( be accompanied by one or more modi\256ers to)8 1856( key letter may)3 611( A)1 127(letter to describe each column in the table.)7 1726 4 720 1380 t
+(further describe the appearance of the corresponding data entry.)8 2544 1 720 1500 t
+( line or row of the table, except that the last line)11 2150(Each line in the format section corresponds to one)8 2170 2 720 1680 t
+(\(terminated by a ``)3 784 1 720 1800 t
+10 CW f
+(.)1504 1800 w
+10 R f
+( all following lines of data up to the)8 1523( to)1 116(''\) corresponds)1 644 3 1564 1800 t
+10 CW f
+(.TE)3884 1800 w
+10 R f
+(\(or to the next)3 599 1 4101 1800 t
+10 CW f
+(.T&)4737 1800 w
+10 R f
+(, if)1 123 1 4917 1800 t
+( \2472.4\).)1 258(any \320 see)2 387 2 720 1920 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.1  , HEADING = Column Description Key Letters.]
+10 B f
+( Description Key Letters.)3 1148(2.2.1 Column)1 595 2 720 2100 t
+10 R f
+( describes the)2 597(Each column is assigned a key letter which)7 1904 2 2539 2100 t
+( addition, a data entry can be forced to span multiple columns or rows.)13 2828( In)1 134(alignment of the data in that \256eld.)6 1358 3 720 2220 t
+(Each column is described by one of the following key letters:)10 2452 1 720 2340 t
+10 CW f
+(L)870 2580 w
+9 R f
+(or)990 2580 w
+10 CW f
+(l)1125 2580 w
+10 R f
+(to indicate a left-adjusted entry;)4 1270 1 1370 2580 t
+10 CW f
+(R)870 2760 w
+9 R f
+(or)990 2760 w
+10 CW f
+(r)1125 2760 w
+10 R f
+(to indicate a right-adjusted entry;)4 1326 1 1370 2760 t
+10 CW f
+(C)870 2940 w
+9 R f
+(or)990 2940 w
+10 CW f
+(c)1125 2940 w
+10 R f
+(to indicate a centered entry;)4 1108 1 1370 2940 t
+10 CW f
+(N)870 3120 w
+9 R f
+(or)990 3120 w
+10 CW f
+(n)1125 3120 w
+10 R f
+( the units)2 389(to indicate a numeric entry, to be aligned with other numeric entries so that)13 3131 2 1370 3120 t
+(digits of numbers line up \(see below\);)6 1515 1 1370 3240 t
+10 CW f
+(A)870 3420 w
+9 R f
+(or)990 3420 w
+10 CW f
+(a)1125 3420 w
+10 R f
+( left, and)2 368(to indicate an alphabetic column; all corresponding entries are aligned on the)11 3152 2 1370 3420 t
+(positioned so that the widest is centered within the column;)9 2374 1 1370 3540 t
+10 CW f
+(S)870 3720 w
+9 R f
+(or)990 3720 w
+10 CW f
+(s)1125 3720 w
+10 R f
+( heading, i.e., the entry from the previous column continues across)10 2677(to indicate a spanned)3 843 2 1370 3720 t
+(this column \(not allowed for the \256rst column of the table\);)10 2326 1 1370 3840 t
+10 CW f
+(\303)870 4020 w
+10 R f
+( same column of the)4 898(to indicate a vertically spanned entry, i.e., the entry from the)10 2622 2 1370 4020 t
+(previous row continues down through this row \(not allowed for the \256rst row of the)14 3520 1 1370 4140 t
+(table\).)1370 4260 w
+10 I f
+(Numerical Alignment.)1 891 1 720 4440 t
+10 R f
+( for the decimal point is sought.)6 1323(When numerical alignment is speci\256ed, a location)6 2048 2 1669 4440 t
+(The rightmost dot \()3 787 1 720 4560 t
+10 CW f
+(.)1507 4560 w
+10 R f
+( if there is no dot adjoining a digit, the)9 1560( to a digit is used as a decimal point;)9 1494(\) adjacent)1 419 3 1567 4560 t
+( However,)1 444(rightmost digit is used as a units digit; if no digits are found, the item is centered in the column.)19 3876 2 720 4680 t
+(the special non-printing character string)4 1619 1 720 4800 t
+10 CW f
+(\\&)2371 4800 w
+10 R f
+(may be used to override unconditionally dots and digits, or to)10 2517 1 2523 4800 t
+( up where a decimal point would, and then disappears from the \256nal)12 2799(align alphabetic data; this string lines)5 1521 2 720 4920 t
+( shown at the left will be aligned \(in a numerical column\) as shown)13 2701( the example below, the items)5 1203(output. In)1 416 3 720 5040 t
+(on the right:)2 489 1 720 5160 t
+10 CW f
+(13)2265 5340 w
+10 R f
+(13)3170 5340 w
+10 CW f
+(4.2)2265 5460 w
+10 R f
+(4.2)3220 5460 w
+10 CW f
+(26.4.12)2265 5580 w
+10 R f
+(26.4.12)3095 5580 w
+10 CW f
+(abc)2265 5700 w
+10 R f
+(abc)3226 5700 w
+10 CW f
+(abc\\&)2265 5820 w
+10 R f
+(abc)3132 5820 w
+10 CW f
+(4\\&33.22)2265 5940 w
+10 R f
+(433.22)3220 5940 w
+10 CW f
+(749.12)2265 6060 w
+10 R f
+(749.12)3120 6060 w
+(If numerical data are used in the same column with wider)10 2355 1 720 6240 t
+10 CW f
+(L)3106 6240 w
+10 R f
+(- or)1 147 1 3166 6240 t
+10 CW f
+(R)3344 6240 w
+10 R f
+( entries, the widest)3 770(-type table)1 430 2 3404 6240 t
+10 I f
+(number)4636 6240 w
+10 R f
+(is)4973 6240 w
+(centered relative to the wider)4 1211 1 720 6360 t
+10 CW f
+(L)1967 6360 w
+10 R f
+(or)2063 6360 w
+10 CW f
+(R)2182 6360 w
+10 R f
+( is)1 103( This)1 239( within the numerical items is preserved.)6 1689(items. Alignment)1 731 4 2278 6360 t
+(similar to the behavior of)4 1022 1 720 6480 t
+10 CW f
+(A)1771 6480 w
+10 R f
+( alphabetic subcolumns \(requested by)4 1519( However,)1 444(-type data, as explained above.)4 1246 3 1831 6480 t
+(the)720 6600 w
+10 CW f
+(A)879 6600 w
+10 R f
+(or)976 6600 w
+10 CW f
+(a)1096 6600 w
+10 R f
+(key letter\) are always slightly indented relative to)7 2061 1 1193 6600 t
+10 CW f
+(L)3291 6600 w
+10 R f
+( necessary, the column width is)5 1309(items; if)1 343 2 3388 6600 t
+( is not true for)4 566( This)1 228(increased to force this.)3 903 3 720 6720 t
+10 CW f
+(N)2442 6720 w
+10 R f
+(-type entries.)1 521 1 2502 6720 t
+10 BI f
+(Note)720 6900 w
+10 B f
+(:)922 6900 w
+10 R f
+(The)1005 6900 w
+10 CW f
+(N)1185 6900 w
+10 R f
+(and)1270 6900 w
+10 CW f
+(A)1439 6900 w
+10 R f
+(items should not be used in the same column.)8 1819 1 1524 6900 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(4 TBL)1 4320 1 720 600 t
+10 R f
+( end of the)3 475( The)1 222( key letters describing each column should be separated by spaces.)10 2828(For readability, the)2 795 4 720 960 t
+( the key letters in the format section resembles the)9 2086( layout of)2 403( The)1 215(format section is indicated by a period.)6 1616 4 720 1080 t
+( a simple format might appear as:)6 1337( Thus)1 250(layout of the actual data in the table.)7 1453 3 720 1200 t
+10 CW f
+(c s s)2 300 1 870 1380 t
+(l n n.)2 360 1 870 1500 t
+10 R f
+( the table contains a heading centered across all)8 1959( \256rst line of)3 485( The)1 212(which speci\256es a table of three columns.)6 1664 4 720 1680 t
+( followed by two)3 743(three columns; each remaining line contains a left-adjusted item in the \256rst column)12 3577 2 720 1800 t
+( sample table in this format might be:)7 1497( A)1 122(columns of numerical data.)3 1087 3 720 1920 t
+(Overall Table Title)2 765 1 1094 2100 t
+( 9.1)1 325(Item-a 34.22)1 838 2 870 2220 t
+( .02)1 375(Item-b 12.65)1 838 2 870 2340 t
+( 5.8)1 450( 23)1 250(Items: c,d,e)1 463 3 870 2460 t
+( 14.92)1 375(Total 69.87)1 838 2 870 2580 t
+( descriptors missing)2 806( Column)1 375(The \256rst line in the format section de\256nes the number of columns in the table.)14 3139 3 720 2760 t
+( assumed to be)3 594(from the end of subsequent format lines are)7 1752 2 720 2880 t
+10 CW f
+(L)3092 2880 w
+10 R f
+( columns in the data section are ignored)7 1596(. Extra)1 292 2 3152 2880 t
+(silently.)720 3000 w
+10 I f
+(Tbl)720 3180 w
+10 R f
+( of listing the format of successive lines of)8 1714( Instead)1 340(allows an alternative notation for the format section.)7 2105 3 881 3180 t
+( formats may be given on the same line, separated)9 1996(a table on separate lines of the format section, several line)10 2324 2 720 3300 t
+( example, the format for the example above might have been written:)11 2761( For)1 189(by commas.)1 483 3 720 3420 t
+10 CW f
+(c s s , l n n .)7 900 1 870 3600 t
+10 R f
+( offers additional features \(called modi\256ers\) to draw horizontal and vertical lines and)12 3447(The key-letter system)2 873 2 720 3780 t
+( modi\256ers may be used in)5 1150( These)1 312(to control the appearance of a column and its corresponding data.)10 2858 3 720 3900 t
+(combination with or in place of the column description key letters, as noted in the subsections that follow.)17 4238 1 720 4020 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.2  , HEADING = Horizontal Lines.]
+10 B f
+( Lines.)1 291(2.2.2 Horizontal)1 711 2 720 4200 t
+10 R f
+(A key letter may be replaced by ``)7 1414 1 1779 4200 t
+10 CW f
+(_)3193 4200 w
+10 R f
+('' \(underscore\) or ``)3 814 1 3253 4200 t
+10 CW f
+(-)4067 4200 w
+10 R f
+('' \(dash \) to indicate a)5 913 1 4127 4200 t
+( column entry, or by ``)5 974(single horizontal line in place of the corresponding)7 2138 2 720 4320 t
+10 CW f
+(=)3832 4320 w
+10 R f
+('' \(equal sign\) to indicate a)5 1148 1 3892 4320 t
+( or if there are vertical lines)6 1234( an adjacent column contains a horizontal line,)7 2005( If)1 137(double horizontal line.)2 944 4 720 4440 t
+( any data entry is)4 766( If)1 137( lines.)1 260(adjoining this column, this horizontal line is extended to meet the nearby)11 3157 4 720 4560 t
+(provided for this column, it is ignored and a warning message is printed.)12 2897 1 720 4680 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.3  , HEADING = Vertical Lines.]
+10 B f
+( Lines.)1 298(2.2.3 Vertical)1 593 2 720 4860 t
+10 R f
+(A vertical bar \()3 648 1 1675 4860 t
+10 CW f
+(|)2323 4860 w
+10 R f
+( will cause a)3 538( This)1 242(\) may be placed between column key letters.)7 1877 3 2383 4860 t
+( vertical bar to the left of the \256rst key letter)10 1739( A)1 124( columns of the table.)4 871(vertical line between the corresponding)4 1586 4 720 4980 t
+( two vertical bars \()4 804( If)1 130( table.)1 258(or to the right of the last one produces a line at the edge of the)15 2671 4 720 5100 t
+10 CW f
+(||)4583 5100 w
+10 R f
+(\) appear)1 337 1 4703 5100 t
+(between key letters, a double vertical line is drawn.)8 2051 1 720 5220 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.4  , HEADING = Space Between Columns.]
+10 B f
+( Between Columns.)2 827(2.2.4 Space)1 500 2 720 5400 t
+10 R f
+( separation)1 440(A number may follow the key letter to indicate the amount of)11 2499 2 2101 5400 t
+( number normally speci\256es the separation in)6 1800( The)1 210(between this column and the next column.)6 1720 3 720 5520 t
+10 I f
+(ens)4480 5520 w
+10 R f
+( is)1 96(\(one en)1 301 2 4643 5520 t
+( the separation is)3 731( If)1 135( default column separation number is 3.)6 1698( The)1 224( letter ``n''\).*)2 583(about the width of the)4 949 6 720 5640 t
+( the)1 157( If)1 126(changed, the worst case \(largest space requested\) governs.)7 2393 3 720 5760 t
+10 CW f
+(expand)3430 5760 w
+10 R f
+(option is used, these numbers)4 1216 1 3824 5760 t
+(are multiplied by a constant such that the table is as wide as the current line length.)16 3315 1 720 5880 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.5  , HEADING = Vertical Spanning.]
+10 B f
+( Spanning.)1 461(2.2.5 Vertical)1 593 2 720 6060 t
+10 R f
+( items extending over several rows of the table are)9 2045(Normally, vertically spanned)2 1168 2 1827 6060 t
+( a key letter is followed by)6 1089( If)1 120( vertical range.)2 603(centered in their)2 658 4 720 6180 t
+10 CW f
+(t)3219 6180 w
+10 R f
+(or)3308 6180 w
+10 CW f
+(T)3420 6180 w
+10 R f
+(, any corresponding vertically spanned)4 1560 1 3480 6180 t
+(item will begin at the top line of its range.)9 1677 1 720 6300 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.6  , HEADING = Font Changes.]
+10 B f
+( Changes.)1 424(2.2.6 Font)1 450 2 720 6480 t
+10 R f
+(A key letter may be followed by the letter)8 1725 1 1651 6480 t
+10 CW f
+(f)3408 6480 w
+10 R f
+(or)3500 6480 w
+10 CW f
+(F)3615 6480 w
+10 R f
+( font name.)2 468(and a font number or)4 865 2 3707 6480 t
+( in a different font from the default font \(i.e., the one)11 2101(This indicates that the corresponding column should be)7 2219 2 720 6600 t
+( font name \(typically one or two)6 1311( font number \(a single digit\) or)6 1250( The)1 208(in effect at the beginning of the table\).)7 1551 4 720 6720 t
+( one-letter font name that is not enclosed in parentheses must be)11 2593( A)1 125( enclosed in parentheses.)3 1001(letters\) may be)2 601 4 720 6840 t
+8 S1 f
+(__________________)720 7020 w
+8 R f
+( precisely, an en is a number of points \(1 point = 1/72 inch\) equal to half the current type size.)20 2986(* More)1 292 2 720 7140 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(TBL 5)1 4320 1 720 600 t
+10 R f
+( single letters)2 547( The)1 212(separated from whatever follows by a space or a tab.)9 2153 3 720 960 t
+10 CW f
+(I)3664 960 w
+10 R f
+(and)3756 960 w
+10 CW f
+(i)3932 960 w
+10 R f
+(are shorter synonyms for)3 1016 1 4024 960 t
+10 CW f
+(f2)720 1080 w
+10 R f
+(\(i.e., the font mounted on position 2, usually Italic\); the single letters)11 2790 1 869 1080 t
+10 CW f
+(B)3688 1080 w
+10 R f
+(and)3776 1080 w
+10 CW f
+(b)3948 1080 w
+10 R f
+(are shorter synonyms for)3 1004 1 4036 1080 t
+10 CW f
+(f3)720 1200 w
+10 R f
+( requests given with the data entries)6 1485( Font-change)1 558( font mounted on position 3, usually Bold\).)7 1789(\(i.e., the)1 335 4 873 1200 t
+(override these speci\256cations.)2 1156 1 720 1320 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.7  , HEADING = Point Size Changes.]
+10 B f
+( Size Changes.)2 620(2.2.7 Point)1 478 2 720 1500 t
+10 R f
+( by the letter)3 514(A key letter may be followed)5 1182 2 1871 1500 t
+10 CW f
+(p)3596 1500 w
+10 R f
+(or)3685 1500 w
+10 CW f
+(P)3797 1500 w
+10 R f
+(and a number to indicate the)5 1154 1 3886 1500 t
+( number may be a signed digit, in which case it is taken as)13 2351( The)1 207(point size of the corresponding data entries.)6 1762 3 720 1620 t
+( both a point size and a column separation value)9 1976( If)1 122( or decrement from the current point size.)7 1699(an increment)1 523 4 720 1740 t
+(are given, one or more blanks must separate them.)8 2007 1 720 1860 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.8  , HEADING = Vertical Spacing Changes.]
+10 B f
+( Spacing Changes.)2 812(2.2.8 Vertical)1 593 2 720 2040 t
+10 R f
+(A key letter may be followed by the letter)8 1789 1 2190 2040 t
+10 CW f
+(v)4020 2040 w
+10 R f
+(or)4121 2040 w
+10 CW f
+(V)4245 2040 w
+10 R f
+(and a number to)3 694 1 4346 2040 t
+( number)1 338( The)1 213( multiple-line corresponding data entry.)4 1616(indicate the vertical line spacing to be used within a)9 2153 4 720 2160 t
+( in which case it is taken as an increment or decrement from the current vertical)15 3388(may be a signed digit,)4 932 2 720 2280 t
+( a column separation value are given, one or more blanks must)11 2677( both a vertical spacing and)5 1180(spacing. If)1 463 3 720 2400 t
+( modi\256er has no effect unless the corresponding data entry is a text block \(see \2472.3.7\).)15 3438( This)1 228(separate them.)1 576 3 720 2520 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.9  , HEADING = Column Width Indication.]
+10 B f
+( Width Indication.)2 798(2.2.9 Column)1 595 2 720 2700 t
+10 R f
+( the letter)2 389(A key letter may be followed by)6 1322 2 2168 2700 t
+10 CW f
+(w)3910 2700 w
+10 R f
+(or)4001 2700 w
+10 CW f
+(W)4115 2700 w
+10 R f
+(and a width value in)4 834 1 4206 2700 t
+( element in the column is not as)7 1276( the largest)2 442( If)1 118( width is used as a minimum column width.)8 1764(parentheses. This)1 720 5 720 2820 t
+(wide as the width value given after the)7 1621 1 720 2940 t
+10 CW f
+(w)2377 2940 w
+10 R f
+( the largest)2 462( If)1 128( largest element is assumed to be that wide.)8 1830(, the)1 183 4 2437 2940 t
+( also used as a)4 623( width is)2 373( The)1 219(element in the column is wider than the speci\256ed value, its width is used.)13 3105 4 720 3060 t
+(default line length for included text blocks.)6 1723 1 720 3180 t
+(Normal)720 3360 w
+10 I f
+(troff)1060 3360 w
+10 R f
+( the)1 158( If)1 127( default scale is ens.)4 845(units can be used to scale the width value; if none are used, the)13 2642 4 1268 3360 t
+( the width value is)4 769( If)1 125( is a unitless \(unscaled\) integer, the parentheses may be omitted.)10 2658(width speci\256cation)1 768 4 720 3480 t
+(changed in a column, the last value given controls the width.)10 2425 1 720 3600 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.10  , HEADING = Equal-width Columns.]
+10 B f
+( Columns.)1 440(2.2.10 Equal-width)1 835 2 720 3780 t
+10 R f
+( may be followed by the letter)6 1240(A key letter)2 483 2 2051 3780 t
+10 CW f
+(e)3806 3780 w
+10 R f
+(or)3898 3780 w
+10 CW f
+(E)4013 3780 w
+10 R f
+(to indicate equal-width)2 935 1 4105 3780 t
+( followed by)2 507( columns whose key letters are)5 1238(columns. All)1 544 3 720 3900 t
+10 CW f
+(e)3035 3900 w
+10 R f
+(or)3121 3900 w
+10 CW f
+(E)3230 3900 w
+10 R f
+( permits the)2 474( This)1 229(are made the same width.)4 1021 3 3316 3900 t
+(user to get a group of regularly spaced columns.)8 1921 1 720 4020 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.11  , HEADING = Staggered Columns.]
+10 B f
+( Columns.)1 457(2.2.11 Staggered)1 727 2 720 4200 t
+10 R f
+(A key letter may be followed by the letter)8 1853 1 1977 4200 t
+10 CW f
+(u)3878 4200 w
+10 R f
+(or)3986 4200 w
+10 CW f
+(U)4118 4200 w
+10 R f
+(to indicate that the)3 813 1 4227 4200 t
+( a)1 85( makes it easy, for example, to have)7 1552( This)1 245(corresponding data entry is to be moved up one-half line.)9 2438 4 720 4320 t
+( The)1 210(column of differences between numbers in an adjoining column.)8 2616 2 720 4440 t
+10 CW f
+(allbox)3576 4440 w
+10 R f
+(option does not work with)4 1074 1 3966 4440 t
+(staggered columns.)1 771 1 720 4560 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.2.12  , HEADING = Zero-width Item.]
+10 B f
+( Item.)1 279(2.2.12 Zero-width)1 783 2 720 4740 t
+10 R f
+(A key letter may be followed by the letter)8 1917 1 1862 4740 t
+10 CW f
+(z)3835 4740 w
+10 R f
+(or)3951 4740 w
+10 CW f
+(Z)4090 4740 w
+10 R f
+(to indicate that the)3 834 1 4206 4740 t
+( in)1 104( may be useful, for example,)5 1149( This)1 230(corresponding data item is to be ignored in calculating column widths.)10 2837 4 720 4860 t
+(allowing headings to run across adjacent columns where spanned headings would be inappropriate.)12 3962 1 720 4980 t
+10 BI f
+(Note)720 5160 w
+10 B f
+(:)922 5160 w
+10 R f
+( the above modi\256ers is immaterial; they need not be separated by spaces, except as)14 3498(The order of)2 524 2 1018 5160 t
+( a numerical column entry)4 1048( Thus)1 250( point size and font changes.)5 1137(indicated above to avoid ambiguities involving)5 1885 4 720 5280 t
+( separated by 6 ens from the next)7 1371(in Italic font and 12-point type with a minimum width of 2.5 inches and)13 2949 2 720 5400 t
+(column could be speci\256ed as)4 1154 1 720 5520 t
+10 CW f
+(np12w\(2.5i\)fI 6)1 900 1 870 5700 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 2.3  , HEADING = Data Entries]
+10 B f
+( Entries)1 336(2.3 Data)1 380 2 720 5880 t
+10 R f
+( the data for each line or row of the table)10 1633( Normally,)1 459( after the format section.)4 982(The data for the table are typed)6 1246 4 720 6060 t
+( line with ``)3 484( any)1 199( long input lines can be broken:)6 1290( Very)1 254(is typed as one input line.)5 1047 5 720 6180 t
+10 CW f
+(\\)3994 6180 w
+10 R f
+('' as the last character is)5 986 1 4054 6180 t
+(combined with the following line \(and the)6 1730 1 720 6300 t
+10 CW f
+(\\)2483 6300 w
+10 R f
+( for different columns \(the table entries\))6 1650( data)1 199(vanishes\). The)1 615 3 2576 6300 t
+( speci\256ed in the global)4 905(are separated by whatever character has been)6 1803 2 720 6420 t
+10 CW f
+(tab)3453 6420 w
+10 R f
+(option \(if not speci\256ed, the default)5 1382 1 3658 6420 t
+( cases are noted in the subsections that follow.)8 1850( Special)1 344(is the keyboard tab character\).)4 1204 3 720 6540 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.3.1  , HEADING = Using troff Within Tables.]
+10 B f
+(2.3.1 Using)1 495 1 720 6720 t
+10 BI f
+(troff)1249 6720 w
+10 B f
+(Within Tables.)1 644 1 1466 6720 t
+10 R f
+(Many)2169 6720 w
+10 I f
+(troff)2436 6720 w
+10 R f
+(commands can be used safely within the data portion of a)10 2396 1 2644 6720 t
+( input line beginning with ``)5 1200(table. An)1 407 2 720 6840 t
+10 CW f
+(.)2327 6840 w
+10 R f
+( by anything but a number is assumed to be a)10 1954('' followed)1 486 2 2387 6840 t
+10 I f
+(troff)4867 6840 w
+10 R f
+( example, space within)3 918( For)1 190( through unchanged, retaining its position in the input data.)9 2372(request and is passed)3 840 4 720 6960 t
+(a table may be produced by)5 1100 1 720 7080 t
+10 CW f
+(.sp)1845 7080 w
+10 R f
+(requests in the data.)3 793 1 2050 7080 t
+(Several)720 7260 w
+10 I f
+(troff)1051 7260 w
+10 R f
+( to print a symbol or to effect an in-line change of)11 2076(escape sequences may be used in the data)7 1708 2 1256 7260 t
+( \(\262\) to refer to a footnote may be obtained by using)11 2104( dagger)1 303( a)1 101( example:)1 398( For)1 196(font or size.)2 488 6 720 7380 t
+10 CW f
+(\\\(dg)4341 7380 w
+10 R f
+(in the data)2 428 1 4612 7380 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+(6 TBL)1 4320 1 720 600 t
+10 R f
+(entry; a string \(e.g., xyz\) may be italicized by using)9 2148 1 720 960 t
+10 CW f
+(\\fIxyz\\fP)2904 960 w
+10 R f
+(within a data entry; an acronym \(e.g.,)6 1560 1 3480 960 t
+(NSF\) may be down-sized one point size by using)8 2069 1 720 1080 t
+10 CW f
+(\\s-1NSF\\s0)2827 1080 w
+10 R f
+( \(The)1 251(within a data entry.)3 810 2 3465 1080 t
+10 I f
+(troff)4564 1080 w
+10 R f
+(escape)4775 1080 w
+(sequences)720 1200 w
+10 CW f
+(\\fP)1149 1200 w
+10 R f
+(and)1354 1200 w
+10 CW f
+(\\s0)1523 1200 w
+10 R f
+(revert back to the previous font and size, respectively.\))8 2189 1 1728 1200 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.3.2  , HEADING = Full-width Horizontal Lines.]
+10 B f
+( Horizontal Lines.)2 772(2.3.2 Full-width)1 701 2 720 1380 t
+10 R f
+(An input)1 354 1 2244 1380 t
+10 I f
+(line)2624 1380 w
+10 R f
+(containing only the character ``)4 1256 1 2800 1380 t
+10 CW f
+(_)4056 1380 w
+10 R f
+( or ``)2 203('' \(underscore\))1 595 2 4116 1380 t
+10 CW f
+(=)4914 1380 w
+10 R f
+('')4974 1380 w
+(\(equal sign\) produces a single or double line, respectively, extending the full width of the)14 3567 1 720 1500 t
+10 I f
+(table)4312 1500 w
+10 R f
+(.)4520 1500 w
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.3.3  , HEADING = Single-column Horizontal Lines.]
+10 B f
+( Horizontal Lines.)2 848(2.3.3 Single-column)1 862 2 720 1680 t
+10 R f
+(An input table)2 650 1 2519 1680 t
+10 I f
+(entry)3233 1680 w
+10 R f
+(containing only the character ``)4 1412 1 3502 1680 t
+10 CW f
+(_)4914 1680 w
+10 R f
+('')4974 1680 w
+(\(underscore\) or ``)2 708 1 720 1800 t
+10 CW f
+(=)1428 1800 w
+10 R f
+( of)1 110('' \(equal sign\) produces a single or double line, respectively, extending the full width)13 3442 2 1488 1800 t
+(the)720 1920 w
+10 I f
+(column)872 1920 w
+10 R f
+( obtain)1 281( To)1 167( lines are extended to meet horizontal or vertical lines adjoining this column.)12 3138(. Such)1 280 4 1174 1920 t
+( explicitly in a column, either precede them by the two-character sequence ``)12 3097(these characters)1 637 2 720 2040 t
+10 CW f
+(\\&)4454 2040 w
+10 R f
+('' or follow)2 466 1 4574 2040 t
+(them by a space before the usual tab or new-line.)9 1956 1 720 2160 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.3.4  , HEADING = Short Horizontal Lines.]
+10 B f
+( Horizontal Lines.)2 800(2.3.4 Short)1 489 2 720 2340 t
+10 R f
+(An input table)2 602 1 2074 2340 t
+10 I f
+(entry)2716 2340 w
+10 R f
+(containing only the two-character string ``)5 1768 1 2962 2340 t
+10 CW f
+(\\_)4730 2340 w
+10 R f
+('' or)1 190 1 4850 2340 t
+(``)720 2460 w
+10 CW f
+(\\=)786 2460 w
+10 R f
+( or double line, respectively, which is only as wide as the contents of the column)15 3326('' produces a single)3 808 2 906 2460 t
+(and is not extended to meet adjoining lines.)7 1738 1 720 2580 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.3.5  , HEADING = Repeated Characters.]
+10 B f
+( Characters.)1 543(2.3.5 Repeated)1 649 2 720 2760 t
+10 R f
+(An input table)2 606 1 1979 2760 t
+10 I f
+(entry)2627 2760 w
+10 R f
+( three-character string of the form)5 1438(containing only a)2 728 2 2874 2760 t
+(``)720 2880 w
+10 CW f
+(\\R)786 2880 w
+10 I f
+(x)914 2880 w
+10 R f
+('' \(where)1 372 1 958 2880 t
+10 I f
+(x)1360 2880 w
+10 R f
+( single character\) is replaced by repetitions of the character)9 2392(is any)1 241 2 1434 2880 t
+10 I f
+(x)4096 2880 w
+10 R f
+(as wide as the data in)5 871 1 4169 2880 t
+( sequence of)2 498( The)1 205(the column.)1 472 3 720 3000 t
+10 I f
+(x)1920 3000 w
+10 R f
+('s is not extended to meet adjoining columns.)7 1816 1 1964 3000 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.3.6  , HEADING = Vertically Spanned Items.]
+10 B f
+( Spanned Items.)2 721(2.3.6 Vertically)1 671 2 720 3180 t
+10 R f
+( entry containing only the two-character string ``)7 2069(An input table)2 606 2 2179 3180 t
+10 CW f
+(\\\303)4854 3180 w
+10 R f
+('')4974 3180 w
+( table)1 224( is equivalent to a)4 729( It)1 117(indicates that the table entry immediately above spans downward over this row.)11 3250 4 720 3300 t
+(format key letter of)3 773 1 720 3420 t
+10 CW f
+(\303)1518 3420 w
+10 R f
+(.)1578 3420 w
+%INFO[SECTION: LEVEL = 3, NUMBER = 2.3.7  , HEADING = Text Blocks.]
+10 B f
+( Blocks.)1 338(2.3.7 Text)1 444 2 720 3600 t
+10 R f
+(In order to include a block of text as a table entry, precede it by)14 2586 1 1556 3600 t
+10 CW f
+(T{)4171 3600 w
+10 R f
+(\(begin text block\))2 720 1 4320 3600 t
+(and follow it by)3 636 1 720 3720 t
+10 CW f
+(T})1381 3720 w
+10 R f
+( the sequence)2 537( Thus)1 250(\(end text block\).)2 657 3 1526 3720 t
+10 S f
+(\274)870 3900 w
+10 CW f
+(T{)1030 3900 w
+10 I f
+(one or more lines)3 702 1 870 4020 t
+(of text in this block)4 761 1 870 4140 t
+10 CW f
+(T})870 4260 w
+10 S f
+(\274)1050 4260 w
+10 R f
+( single entry in the table, something that cannot conveniently be typed as a simple)14 3356(is the way to enter, as a)6 964 2 720 4440 t
+( that the)2 350( Note)1 258(string between tabs.)2 824 3 720 4560 t
+10 CW f
+(T})2191 4560 w
+10 R f
+( columns of data may)4 912(end delimiter must begin a line; additional)6 1778 2 2350 4560 t
+( more than thirty or so text blocks are used in a table, various limits in)15 2813( If)1 117( on the same line.)4 706(follow after a tab)3 684 4 720 4680 t
+(the)720 4800 w
+10 I f
+(troff)870 4800 w
+10 R f
+( likely to be exceeded, producing diagnostics such as ``too many string/macro names'')12 3482(program are)1 487 2 1071 4800 t
+(or ``too many number registers.'')4 1333 1 720 4920 t
+( by)1 129(Text blocks are pulled out from the table, processed separately)9 2527 2 720 5100 t
+10 I f
+(troff)3405 5100 w
+10 R f
+(, and replaced in the table as a solid)8 1454 1 3586 5100 t
+( of text itself, or in the table format, the default is to use)13 2332( no line length is speci\256ed in the block)8 1616(block. If)1 372 3 720 5220 t
+10 I f
+(L)720 5340 w
+10 S f
+(\264)784 5340 w
+10 I f
+(C /)1 103 1 847 5340 t
+10 R f
+(\()958 5340 w
+10 I f
+(N)999 5340 w
+10 S f
+(+)1090 5340 w
+10 R f
+( where)1 271(1 \))1 91 2 1161 5340 t
+10 I f
+(L)1551 5340 w
+10 R f
+(is the current line length,)4 1012 1 1635 5340 t
+10 I f
+(C)2676 5340 w
+10 R f
+(is the number of table columns spanned by the text, and)10 2268 1 2772 5340 t
+10 I f
+(N)720 5460 w
+10 R f
+(is the total number of columns in the table.)8 1713 1 812 5460 t
+( to format the block of text are those in effect at the)12 2267(The other parameters \(point size, font, etc.\) used)7 2053 2 720 5640 t
+(beginning of the table \(including the effect of the)8 2019 1 720 5760 t
+10 CW f
+(.TS)2771 5760 w
+10 R f
+( format speci\256cations of size,)4 1197(macro\) and any table)3 860 2 2983 5760 t
+(spacing, and font, using the)4 1111 1 720 5880 t
+10 CW f
+(p)1859 5880 w
+10 R f
+(,)1919 5880 w
+10 CW f
+(v)1972 5880 w
+10 R f
+(and)2061 5880 w
+10 CW f
+(f)2234 5880 w
+10 R f
+( within the text block)4 866( Requests)1 415(modi\256ers to the column key letters.)5 1436 3 2323 5880 t
+( However,)1 449(itself are also recognized, of course.)5 1482 2 720 6000 t
+10 I f
+(troff)2685 6000 w
+10 R f
+( table data but not within the text)7 1375(requests within the)2 773 2 2892 6000 t
+(block do not affect that block.)5 1198 1 720 6120 t
+10 BI f
+(Warning)720 6300 w
+10 B f
+(:)1096 6300 w
+10 R f
+( of lines may be present in a table, only the \256rst 200 lines or so are used in)18 2984(Although any number)2 877 2 1179 6300 t
+( the table; a multiple-page table, of course, may be arranged as several single-page tables if this)16 3920(setting up)1 400 2 720 6420 t
+( dif\256culties with formatting may arise because, in the calculation of column)11 3079( Other)1 282( be a problem.)3 586(proves to)1 373 4 720 6540 t
+( entries are assumed to be in the font and size being used when the)14 2838(widths all table)2 639 2 720 6660 t
+10 CW f
+(.TS)4235 6660 w
+10 R f
+(command was)1 587 1 4453 6660 t
+( indicated in the table format section or within the table data)11 2471(encountered, except for font and size changes)6 1849 2 720 6780 t
+(\(as in the entry)3 608 1 720 6900 t
+10 CW f
+(\\s+3\\fIData\\fP\\s0)1357 6900 w
+10 R f
+( arbitrary)1 371( although)1 379(\). Therefore,)1 529 3 2377 6900 t
+10 I f
+(troff)3684 6900 w
+10 R f
+(requests may be sprinkled in)4 1155 1 3885 6900 t
+(a table, care must be taken to avoid confusing the width calculations; use requests such as)15 3583 1 720 7020 t
+10 CW f
+(.ps)4328 7020 w
+10 R f
+(with care.)1 393 1 4533 7020 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+10 HB f
+(TBL 7)1 4320 1 720 600 t
+10 R f
+( entry in the table when)5 970(A blank, null, or missing column entry in a line of input data will produce a blank)16 3350 2 720 960 t
+( example of this occurs in)5 1044( An)1 175( that normally requires data.)4 1135(the corresponding format item \(key letter\) is one)7 1966 4 720 1080 t
+( to provide data for the key letter)7 1542(Example 7 where a blank line is needed)7 1812 2 720 1200 t
+10 CW f
+(c)4132 1200 w
+10 R f
+(in the format line)3 790 1 4250 1200 t
+(``)720 1320 w
+10 CW f
+(c = s s s)4 540 1 786 1320 t
+10 R f
+( a)1 73( Conversely,)1 534( double line above the last four columns of the table.)10 2140('' that is used to draw a)6 967 4 1326 1320 t
+( appear if a data line does contain data in a column for which the corresponding)15 3419(warning message will)2 901 2 720 1440 t
+(format item is)2 561 1 720 1560 t
+10 CW f
+(\303)1306 1560 w
+10 R f
+(,)1366 1560 w
+10 CW f
+(_)1416 1560 w
+10 R f
+(,)1476 1560 w
+10 CW f
+(-)1526 1560 w
+10 R f
+(, or)1 133 1 1586 1560 t
+10 CW f
+(=)1744 1560 w
+10 R f
+(.)1804 1560 w
+(A blank line in the input data will produce a blank line or a row of blank column entries in the table \(see)22 4320 1 720 1740 t
+( lines in the format section are ignored.)7 1564( Blank)1 289(Example 9\).)1 488 3 720 1860 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 2.4  , HEADING = Additional Command Lines]
+10 B f
+( Command Lines)2 734(2.4 Additional)1 632 2 720 2040 t
+10 R f
+( the)1 152(If the format of a table must be changed after many similar lines,)12 2640 2 720 2220 t
+10 CW f
+(.T&)3542 2220 w
+10 R f
+(\(table change\) command can be)4 1288 1 3752 2220 t
+( outline of such a table input is:)7 1258( The)1 205(used to change column parameters.)4 1405 3 720 2340 t
+10 CW f
+(.TS)870 2520 w
+10 I f
+(options)870 2640 w
+10 CW f
+(;)1181 2640 w
+10 I f
+(format)870 2760 w
+10 CW f
+(.)1153 2760 w
+10 I f
+(data)870 2880 w
+10 CW f
+(.T&)870 3000 w
+10 I f
+(format)870 3120 w
+10 CW f
+(.)1153 3120 w
+10 I f
+(data)870 3240 w
+10 CW f
+(.T&)870 3360 w
+10 I f
+(format)870 3480 w
+10 CW f
+(.)1153 3480 w
+10 I f
+(data)870 3600 w
+10 CW f
+(.TE)870 3720 w
+10 R f
+(Using this procedure, each input line of data can be close to its corresponding format line.)15 3591 1 720 3900 t
+10 BI f
+(Warning)720 4080 w
+10 B f
+(:)1096 4080 w
+10 R f
+( global)1 292(It is not possible to change the number of columns, the space between columns, the)14 3553 2 1195 4080 t
+(options such as)2 657 1 720 4200 t
+10 CW f
+(box)1425 4200 w
+10 R f
+( Furthermore,)1 596( of columns to be made equal-width.)6 1594(, or the selection)3 729 3 1605 4200 t
+10 CW f
+(.T&)4571 4200 w
+10 R f
+(is not)1 242 1 4798 4200 t
+(recognized after the \256rst 200 lines of a table.)8 1782 1 720 4320 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 3.  , HEADING = USAGE]
+10 B f
+(3. USAGE)1 470 1 720 4560 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 3.1  , HEADING = Command Line]
+( Line)1 220(3.1 Command)1 625 2 720 4740 t
+10 R f
+(On the)1 269 1 720 4920 t
+9 R f
+(UNIX)1012 4920 w
+10 R f
+(system,)1262 4920 w
+10 I f
+(tbl)1590 4920 w
+10 R f
+(can be run on a simple table with the command)9 1889 1 1721 4920 t
+10 CW f
+(tbl)870 5100 w
+10 I f
+(\256le)1110 5100 w
+10 CW f
+(| troff |)2 540 1 1292 5100 t
+10 S f
+(\274)1892 5100 w
+10 R f
+( \256les and they contain equations and)6 1520(For more complicated use, where there are several input)8 2321 2 720 5280 t
+9 R f
+(MM)4595 5280 w
+10 R f
+(macro)4791 5280 w
+(requests as well as tables, the normal command would be)9 2291 1 720 5400 t
+10 CW f
+(tbl)870 5580 w
+10 I f
+(\256le1 \256le2)1 394 1 1110 5580 t
+10 S f
+(\274)1545 5580 w
+10 CW f
+(| eqn | troff -mm |)5 1140 1 1670 5580 t
+10 S f
+(\274)2870 5580 w
+10 R f
+(Of course, the usual options may be used on the)9 2076 1 720 5760 t
+10 I f
+(troff)2839 5760 w
+10 R f
+(and)3055 5760 w
+10 I f
+(eqn)3242 5760 w
+10 R f
+(commands. The)1 682 1 3430 5760 t
+10 CW f
+(-mm)4156 5760 w
+10 R f
+(option could be)2 660 1 4380 5760 t
+( other)1 235(replaced with some)2 788 2 720 5880 t
+10 CW f
+(-m)1773 5880 w
+10 I f
+(name)1909 5880 w
+10 R f
+(option \(e.g.,)1 488 1 2171 5880 t
+10 CW f
+(\261ms)2689 5880 w
+10 R f
+( a \256lename is)3 545( If)1 121(\) to select a different macro package.)6 1505 3 2869 5880 t
+(``)720 6000 w
+10 CW f
+(-)786 6000 w
+10 R f
+('', the standard input is read at that point.)8 1648 1 846 6000 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 3.2  , HEADING = Interactions with eqn]
+10 B f
+( with)1 214(3.2 Interactions)1 691 2 720 6180 t
+10 BI f
+(eqn)1650 6180 w
+10 R f
+(When)720 6360 w
+10 I f
+(eqn)995 6360 w
+10 R f
+(and)1176 6360 w
+10 I f
+(tbl)1357 6360 w
+10 R f
+( same \256le,)2 434(are used together on the)4 1001 2 1500 6360 t
+10 I f
+(tbl)2973 6360 w
+10 R f
+( there are no equations)4 955( If)1 129(should be used \256rst.)3 839 3 3117 6360 t
+( usually faster to run)4 829(within tables, either order works, but it is)7 1667 2 720 6480 t
+10 I f
+(tbl)3243 6480 w
+10 R f
+(\256rst since)1 388 1 3376 6480 t
+10 I f
+(eqn)3791 6480 w
+10 R f
+(normally produces a larger)3 1078 1 3962 6480 t
+(expansion of the input than)4 1136 1 720 6600 t
+10 I f
+(tbl)1893 6600 w
+10 R f
+( if there are in-line equations within tables \(using the)9 2219(. However,)1 477 2 2007 6600 t
+10 CW f
+(delim)4740 6600 w
+10 R f
+(mechanism in)1 558 1 720 6720 t
+10 I f
+(eqn)1303 6720 w
+10 R f
+(\),)1455 6720 w
+10 I f
+(tbl)1538 6720 w
+10 R f
+(must be \256rst or the output will be scrambled.)8 1791 1 1669 6720 t
+(Users must also beware of using equations in)7 1939 1 720 6900 t
+10 CW f
+(n)2703 6900 w
+10 R f
+( this is nearly always wrong, since)6 1493(-style columns;)1 633 2 2763 6900 t
+10 I f
+(tbl)4934 6900 w
+10 R f
+( user can)2 354( The)1 206(attempts to split numerical format items into two parts and this is not possible with equations.)15 3760 3 720 7020 t
+(defend against this by giving the)5 1357 1 720 7140 t
+10 CW f
+(delim\()2113 7140 w
+10 I f
+(xy)2473 7140 w
+10 CW f
+(\))2577 7140 w
+10 R f
+( splitting of numerical columns)4 1298(table option; this prevents)3 1069 2 2673 7140 t
+( example, if the)3 645( For)1 198(within the delimiters.)2 871 3 720 7260 t
+10 I f
+(eqn)2467 7260 w
+10 R f
+(delimiters are)1 554 1 2644 7260 t
+10 CW f
+($$)3231 7260 w
+10 R f
+(, giving)1 314 1 3351 7260 t
+10 CW f
+(delim\($$\))3698 7260 w
+10 R f
+(causes a numerical)2 769 1 4271 7260 t
+(column entry such as ``)4 937 1 720 7380 t
+10 CW f
+(1245$+- 16$)1 660 1 1657 7380 t
+10 R f
+('' to be aligned after 1245, not after 16.)8 1574 1 2317 7380 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+10 HB f
+(8 TBL)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 3.3  , HEADING = Internal troff Names and Registers]
+10 B f
+(3.3 Internal)1 525 1 720 960 t
+10 BI f
+(troff)1270 960 w
+10 B f
+(Names and Registers)2 893 1 1478 960 t
+10 I f
+(Tbl)720 1140 w
+10 R f
+( actual number that can be processed may be smaller, depending)10 2579(accepts up to about 35 columns, but the)7 1582 2 879 1140 t
+(on availability of)2 703 1 720 1260 t
+10 I f
+(troff)1458 1260 w
+10 R f
+( user must avoid number register names used by)8 2005( The)1 215(number registers.)1 703 3 1666 1260 t
+10 I f
+(tbl)4623 1260 w
+10 R f
+(, which)1 303 1 4737 1260 t
+( numbers from 31 to 99 and strings of the form)10 1906(include two-digit)1 688 2 720 1380 t
+10 CW f
+(4)3342 1380 w
+10 I f
+(x)3402 1380 w
+10 R f
+(,)3462 1380 w
+10 CW f
+(5)3515 1380 w
+10 I f
+(x)3575 1380 w
+10 R f
+(,)3635 1380 w
+10 CW f
+(#)3688 1380 w
+10 I f
+(x)3748 1380 w
+10 R f
+(,)3808 1380 w
+10 I f
+(x)3861 1380 w
+10 CW f
+(+)3921 1380 w
+10 R f
+(,)3981 1380 w
+10 I f
+(x)4034 1380 w
+10 CW f
+(|)4094 1380 w
+10 R f
+(,)4154 1380 w
+10 CW f
+(\303)4207 1380 w
+10 I f
+(x)4267 1380 w
+10 R f
+(, and)1 197 1 4327 1380 t
+10 I f
+(x)4552 1380 w
+10 CW f
+(-)4612 1380 w
+10 R f
+(, where)1 296 1 4672 1380 t
+10 I f
+(x)4996 1380 w
+10 R f
+( names)1 288( The)1 214(is any lower-case letter.)3 974 3 720 1500 t
+10 CW f
+(##)2229 1500 w
+10 R f
+(,)2349 1500 w
+10 CW f
+(#-)2407 1500 w
+10 R f
+(, and)1 202 1 2527 1500 t
+10 CW f
+(#\303)2762 1500 w
+10 R f
+( conserve)1 387( To)1 169(are also used in certain circumstances.)5 1569 3 2915 1500 t
+(register names, the)2 761 1 720 1620 t
+10 CW f
+(n)1511 1620 w
+10 R f
+(and)1601 1620 w
+10 CW f
+(a)1775 1620 w
+10 R f
+( hence the restriction that they may not be used in the)11 2199(formats share a register;)3 976 2 1865 1620 t
+(same column.)1 555 1 720 1740 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 3.4  , HEADING = Macro Package Extensions]
+10 B f
+( Package Extensions)2 867(3.4 Macro)1 457 2 720 1920 t
+10 R f
+(For aid in writing layout macros,)5 1326 1 720 2100 t
+10 I f
+(tbl)2073 2100 w
+10 R f
+(de\256nes a number register)3 1012 1 2206 2100 t
+10 CW f
+(TW)3245 2100 w
+10 R f
+( is de\256ned by)3 545( It)1 114( width.)1 281(which is the table)3 708 4 3392 2100 t
+(the time the)2 472 1 720 2220 t
+10 CW f
+(.TE)1217 2220 w
+10 R f
+(macro is invoked and may be used in the expansion of that macro.)12 2643 1 1422 2220 t
+(The macro)1 431 1 720 2400 t
+10 CW f
+(T#)1178 2400 w
+10 R f
+( produce the vertical and bottom horizontal lines of a boxed table.)11 2662(is de\256ned to)2 493 2 1325 2400 t
+10 I f
+(Tbl)4533 2400 w
+10 R f
+(uses this)1 345 1 4695 2400 t
+( assist in the layout of multiple-page boxed tables, this macro may be)12 2791( To)1 163(macro at the end of a boxed table.)7 1366 3 720 2520 t
+(used in the de\256nition of the page footer \(in a macro package such as)13 2823 1 720 2640 t
+9 R f
+(MM)3574 2640 w
+10 R f
+(or)3767 2640 w
+9 R f
+(MS)3881 2640 w
+10 R f
+( draw the lines of the)5 885(\) to)1 144 2 4011 2640 t
+(continuing boxed table at the end of the page.)8 1822 1 720 2760 t
+(Some macro packages \(such as)4 1261 1 720 2940 t
+9 R f
+(MM)2009 2940 w
+10 R f
+(and)2199 2940 w
+9 R f
+(MS)2371 2940 w
+10 R f
+( The)1 210(\) allow multiple-page tables with repeated headings.)6 2118 2 2501 2940 t
+10 CW f
+(.TS)4860 2940 w
+10 R f
+( argument)1 404(macro with the)2 605 2 720 3060 t
+10 CW f
+(H)1756 3060 w
+10 R f
+(marks the start of a table with a repeated heading, and the)11 2322 1 1843 3060 t
+10 CW f
+(.TH)4192 3060 w
+10 R f
+(macro separates)1 641 1 4399 3060 t
+( up to the)3 387( Material)1 392( the body of the table.)5 891(the data of the repeated heading from the data that makes up)11 2441 4 720 3180 t
+10 CW f
+(.TH)4860 3180 w
+10 R f
+( the table are placed on several pages as)8 1605(is placed at the top of each page of the table; the remaining lines in)14 2715 2 720 3300 t
+( example, the input)3 766(required. For)1 546 2 720 3420 t
+10 CW f
+(.TS H)1 300 1 870 3600 t
+(center;)870 3720 w
+( lfI lfI)2 480(lfI cfI)1 480 2 870 3840 t
+( l l.)2 540(lfCW l)1 360 2 870 3960 t
+(Input Command)1 780 1 870 4080 t
+7 ZD f
+(\344)1650 4080 w
+10 CW f
+(Description)1714 4080 w
+7 ZD f
+(\344)2374 4080 w
+10 CW f
+(Section\(s\))2438 4080 w
+7 ZD f
+(\344)3038 4080 w
+10 CW f
+(Example\(s\))3102 4080 w
+(=)870 4200 w
+(.sp 0.3v)1 480 1 870 4320 t
+(.TH)870 4440 w
+10 I f
+(data)870 4560 w
+10 R f
+(.)920 4630 w
+(.)920 4680 w
+(.)920 4730 w
+10 CW f
+(.TE)870 4860 w
+10 R f
+( symbol)1 339( \(The)1 257( B.)1 117( to produce the repeated headings in the multiple-page table in Appendix)11 3118(was used)1 381 5 720 5040 t
+7 ZD f
+(\344)4976 5040 w
+10 R f
+(represents a tab character.\))3 1067 1 720 5160 t
+10 BI f
+(Note)720 5340 w
+10 B f
+(:)922 5340 w
+10 R f
+(If the)1 214 1 1006 5340 t
+10 CW f
+(H)1246 5340 w
+10 R f
+(argument is given to)3 822 1 1332 5340 t
+10 CW f
+(.TS)2180 5340 w
+10 R f
+(, then)1 223 1 2360 5340 t
+10 CW f
+(.TH)2609 5340 w
+10 R f
+( given in the table after any table heading \(or at)10 1910(must be)1 315 2 2815 5340 t
+(the start, if none\).)3 707 1 720 5460 t
+10 BI f
+(Warning)720 5640 w
+10 B f
+(:)1096 5640 w
+10 R f
+(This is not a feature of)5 906 1 1180 5640 t
+10 I f
+(tbl)2112 5640 w
+10 R f
+(, but of the layout macros \(e.g.,)6 1254 1 2226 5640 t
+9 R f
+(MM)3504 5640 w
+10 R f
+(or)3690 5640 w
+9 R f
+(MS)3797 5640 w
+10 R f
+( some cases, there may)4 921(\). In)1 192 2 3927 5640 t
+(be a con\257ict between)3 863 1 720 5760 t
+10 I f
+(tbl)1614 5760 w
+10 R f
+( bottom of the page, resulting in)6 1310(and the macro package in determining the actual)7 1979 2 1751 5760 t
+( break apart the table)4 880( this case, the only alternative may be to)8 1686( In)1 143(strange and often undesirable behavior.)4 1611 4 720 5880 t
+(into separate tables for each page.)5 1351 1 720 6000 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Trailer
+done
+%%Pages: 8
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Italic Times-BoldItalic Times-Roman Symbol Courier ZapfDingbats
+%%+ Times-Roman

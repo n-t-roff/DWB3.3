@@ -1,0 +1,742 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(PostScript Character Set and Symbols)4 3300 1 540 1040 t
+36 S1 f
+(__________________________)540 1240 w
+14 HB f
+(Standard Text Font Character Set)4 2222 1 540 1440 t
+10 R f
+( of alphanumerics, punctuation and accent marks, brackets, and other)9 2868(The standard text font character set consists)6 1812 2 540 1860 t
+( standard text font offers a full set of)8 1474( Each)1 251(symbols to complement each type style.)5 1609 3 540 1980 t
+9 R f
+(ASCII)3899 1980 w
+10 R f
+(characters and a variety of)4 1059 1 4161 1980 t
+(non-)540 2100 w
+9 R f
+(ASCII)723 2100 w
+10 R f
+( more useful non-)3 776( The)1 228(special characters.)1 753 3 1006 2100 t
+9 R f
+(ASCII)2763 2100 w
+10 R f
+( input names; the remaining)4 1212(symbols have assigned)2 962 2 3046 2100 t
+(unnamed symbols are represented by character access codes.)7 2425 1 540 2220 t
+(The)540 2400 w
+9 R f
+(ASCII)724 2400 w
+10 R f
+(characters)990 2400 w
+10 S f
+(\357)1424 2400 w
+10 R f
+(,)1473 2400 w
+10 S f
+(_)1530 2400 w
+10 R f
+(,)1580 2400 w
+10 S f
+(<)1637 2400 w
+10 R f
+(and)1724 2400 w
+10 S f
+(>)1900 2400 w
+10 R f
+(, and the bullet \()4 680 1 1955 2400 t
+10 S f
+(\267)2635 2400 w
+10 R f
+(\) symbol are taken from the special Symbol font; the standard)10 2539 1 2681 2400 t
+( the case of the constant-width fonts \()7 1549( In)1 140( available by character access code.)5 1451(text font versions are)3 864 4 540 2520 t
+10 CW f
+(CO)4544 2520 w
+10 R f
+(,)4664 2520 w
+10 CW f
+(CW)4721 2520 w
+10 R f
+(,)4841 2520 w
+10 CW f
+(CI)4898 2520 w
+10 R f
+(,)5018 2520 w
+10 CW f
+(CB)5075 2520 w
+10 R f
+(,)5195 2520 w
+(and)540 2640 w
+10 CW f
+(CX)709 2640 w
+10 R f
+(\), the)1 205 1 829 2640 t
+9 R f
+(ASCII)1057 2640 w
+10 R f
+(characters)1317 2640 w
+10 CW f
+(|)1745 2640 w
+10 R f
+(,)1805 2640 w
+10 CW f
+(_)1855 2640 w
+10 R f
+(,)1915 2640 w
+10 CW f
+(<)1965 2640 w
+10 R f
+(and)2050 2640 w
+10 CW f
+(>)2219 2640 w
+10 R f
+(are taken from the respective font.)5 1368 1 2304 2640 t
+18 S1 f
+(____________________________________________________)540 2940 w
+11 HB f
+(ASCII)540 3100 w
+12 HB f
+(\(Keyboard\) Characters)1 1295 1 868 3100 t
+10 CW f
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)690 3400 w
+(abcdefghijklmnopqrstuvwxyz)690 3520 w
+(0123456789.,;:!?`'\303\304"\\)690 3640 w
+(@#$%&*+=-/\(\)[]{})690 3760 w
+18 S1 f
+(____________________________________________________)540 4120 w
+12 HB f
+(Non-)540 4280 w
+11 HB f
+(ASCII)812 4280 w
+12 HB f
+(Special Characters)1 1084 1 1140 4280 t
+10 R f
+(The following characters have assigned input names.)6 2115 1 540 4520 t
+(Input)1016 4760 w
+(Symbol Name Description)2 1318 1 540 4880 t
+10 S f
+(_ __________________________________________)1 2112 1 540 4900 t
+10 R f
+(-)679 5040 w
+10 CW f
+(\\\(hy)1002 5040 w
+10 R f
+(hyphen \(same as)2 665 1 1392 5040 t
+10 CW f
+(-)2082 5040 w
+10 R f
+(\))2142 5040 w
+(\261)671 5160 w
+10 CW f
+(\\\(en)1002 5160 w
+10 R f
+(en dash \(same as)3 673 1 1392 5160 t
+10 CW f
+(\\-)2090 5160 w
+10 R f
+(\))2210 5160 w
+(\320)646 5280 w
+10 CW f
+(\\\(em)1002 5280 w
+10 R f
+(em dash)1 330 1 1392 5280 t
+(\244)687 5400 w
+10 CW f
+(\\\(fr)1002 5400 w
+10 R f
+(fraction bar)1 462 1 1392 5400 t
+(\252)674 5520 w
+10 CW f
+(\\\(``)1002 5520 w
+10 R f
+(left double quote)2 677 1 1392 5520 t
+(\272)674 5640 w
+10 CW f
+(\\\('')1002 5640 w
+10 R f
+(right double quote)2 733 1 1392 5640 t
+(\262)671 5760 w
+10 CW f
+(\\\(dg)1002 5760 w
+10 R f
+(dagger)1392 5760 w
+(\263)671 5880 w
+10 CW f
+(\\\(dd)1002 5880 w
+10 R f
+(double dagger)1 568 1 1392 5880 t
+(\247)671 6000 w
+10 CW f
+(\\\(sc)1002 6000 w
+10 R f
+(section)1392 6000 w
+(\266)673 6120 w
+10 CW f
+(\\\(pg)1002 6120 w
+10 R f
+(paragraph)1392 6120 w
+(\242)671 6240 w
+10 CW f
+(\\\(ct)1002 6240 w
+10 R f
+(cent)1392 6240 w
+(\243)671 6360 w
+10 CW f
+(\\\(ps)1002 6360 w
+10 R f
+(pound sterling)1 575 1 1392 6360 t
+(\245)671 6480 w
+10 CW f
+(\\\(yn)1002 6480 w
+10 R f
+(yen)1392 6480 w
+(\250)671 6600 w
+10 CW f
+(\\\(cr)1002 6600 w
+10 R f
+(currency)1392 6600 w
+(\246)671 6720 w
+10 CW f
+(\\\(fn)1002 6720 w
+10 R f
+(\257orin)1392 6720 w
+(Input)3536 4760 w
+(Symbol Name Description)2 1318 1 3060 4880 t
+10 S f
+(_ __________________________________________)1 2133 1 3060 4900 t
+10 R f
+(\301)3199 5040 w
+10 CW f
+(\\\(ga)3522 5040 w
+10 R f
+( \(same as)2 371(Accent: grave)1 581 2 3912 5040 t
+10 CW f
+(\\`)4889 5040 w
+10 R f
+(\))5009 5040 w
+(\302)3199 5160 w
+10 CW f
+(\\\(aa)3522 5160 w
+10 R f
+( \(same as)2 371(Accent: acute)1 570 2 3912 5160 t
+10 CW f
+(\\')4878 5160 w
+10 R f
+(\))4998 5160 w
+(\303)3199 5280 w
+10 CW f
+(\\\(\303a)3522 5280 w
+10 R f
+( \(same as)2 371(Accent: circum\257ex)1 787 2 3912 5280 t
+10 CW f
+(\303)5095 5280 w
+10 R f
+(\))5155 5280 w
+(\304)3199 5400 w
+10 CW f
+(\\\(\304a)3522 5400 w
+10 R f
+( \(same as)2 371(Accent: tilde)1 538 2 3912 5400 t
+10 CW f
+(\304)4846 5400 w
+10 R f
+(\))4906 5400 w
+(\305)3199 5520 w
+10 CW f
+(\\\(-a)3522 5520 w
+10 R f
+(Accent: macron)1 659 1 3912 5520 t
+(\306)3199 5640 w
+10 CW f
+(\\\(Ua)3522 5640 w
+10 R f
+(Accent: breve)1 581 1 3912 5640 t
+(\307)3199 5760 w
+10 CW f
+(\\\(.a)3522 5760 w
+10 R f
+(Accent: dot)1 488 1 3912 5760 t
+(\310)3199 5880 w
+10 CW f
+(\\\(:a)3522 5880 w
+10 R f
+( \(umlaut\))1 369(Accent: dieresis)1 665 2 3912 5880 t
+(\312)3199 6000 w
+10 CW f
+(\\\(oa)3522 6000 w
+10 R f
+(Accent: ring)1 521 1 3912 6000 t
+(\313)3199 6120 w
+10 CW f
+(\\\(,a)3522 6120 w
+10 R f
+(Accent: cedilla)1 626 1 3912 6120 t
+(\315)3199 6240 w
+10 CW f
+(\\\("a)3522 6240 w
+10 R f
+(Accent: hungarumlaut)1 915 1 3912 6240 t
+(\316)3199 6360 w
+10 CW f
+(\\\(Ca)3522 6360 w
+10 R f
+(Accent: ogonek)1 654 1 3912 6360 t
+(\317)3199 6480 w
+10 CW f
+(\\\(va)3522 6480 w
+10 R f
+(Accent: caron)1 581 1 3912 6480 t
+(\256)3188 6600 w
+10 CW f
+(\\\(fi)3522 6600 w
+10 R f
+( ligature*)1 380(f i)1 69 2 3912 6600 t
+(\257)3188 6720 w
+10 CW f
+(\\\(fl)3522 6720 w
+10 R f
+( ligature*)1 380(f l)1 69 2 3912 6720 t
+8 S1 f
+(__________________)540 7035 w
+8 R f
+( ligature mode,)2 507(* In)1 186 2 540 7155 t
+8 I f
+(troff)1267 7155 w
+8 R f
+(replaces the character pairs)3 901 1 1438 7155 t
+8 CW f
+(fi)2373 7155 w
+8 R f
+(and)2503 7155 w
+8 CW f
+(fl)2652 7155 w
+8 R f
+( are not available for the)5 848( Ligatures)1 355( ligature symbol.)2 567(with the appropriate)2 668 4 2782 7155 t
+(character combinations)1 738 1 660 7245 t
+8 CW f
+(ff)1418 7245 w
+8 R f
+(,)1514 7245 w
+8 CW f
+(ffi)1554 7245 w
+8 R f
+(and)1718 7245 w
+8 CW f
+(ffl)1853 7245 w
+8 R f
+( ligatures are available for mono-spaced fonts \(like Courier\).)8 1924(. No)1 158 2 1997 7245 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+12 HB f
+(PostScript)4619 480 w
+(2)540 600 w
+11 HB f
+(Character Set)1 719 1 4501 600 t
+18 S1 f
+(____________________________________________________)540 960 w
+12 HB f
+(Other \(Unnamed\) Characters)2 1643 1 540 1120 t
+10 R f
+( codes \(the input format is)5 1081(The following characters are represented by character access)7 2462 2 540 1360 t
+10 CW f
+(\\N')4115 1360 w
+10 I f
+(code)4295 1360 w
+10 CW f
+(')4483 1360 w
+10 R f
+( select one)2 435(\). To)1 226 2 4559 1360 t
+(of these unnamed symbols, input the access code format with the appropriate number.)12 3433 1 540 1480 t
+(Access)1002 1720 w
+( Description)1 652(Symbol Code)1 708 2 540 1840 t
+10 S f
+(_ ___________________________________________)1 2154 1 540 1860 t
+10 R f
+(<)668 2000 w
+10 CW f
+(60)1113 2000 w
+10 R f
+(less than)1 347 1 1434 2000 t
+(>)668 2120 w
+10 CW f
+(62)1113 2120 w
+10 R f
+(greater than)1 473 1 1434 2120 t
+(^)672 2240 w
+10 CW f
+(94)1113 2240 w
+9 R f
+(ASCII)1434 2240 w
+10 R f
+(circum\257ex)1694 2240 w
+(_)671 2360 w
+10 CW f
+(95)1113 2360 w
+10 R f
+(underscore)1434 2360 w
+(|)686 2480 w
+10 CW f
+(124)1053 2480 w
+10 R f
+(vertical bar)1 451 1 1434 2480 t
+(~)669 2600 w
+10 CW f
+(126)1053 2600 w
+9 R f
+(ASCII)1434 2600 w
+10 R f
+(tilde)1694 2600 w
+(\241)679 2720 w
+10 CW f
+(161)1053 2720 w
+10 R f
+(inverted exclamation mark)2 1070 1 1434 2720 t
+(\251)687 2840 w
+10 CW f
+(169)1053 2840 w
+10 R f
+(single quote)1 486 1 1434 2840 t
+(\253)671 2960 w
+10 CW f
+(171)1053 2960 w
+10 R f
+(left double angle)2 671 1 1434 2960 t
+(\254)679 3080 w
+10 CW f
+(172)1053 3080 w
+10 R f
+(left single angle)2 638 1 1434 3080 t
+(\255)679 3200 w
+10 CW f
+(173)1053 3200 w
+10 R f
+(right single angle)2 694 1 1434 3200 t
+(\264)683 3320 w
+10 CW f
+(180)1053 3320 w
+10 R f
+(centered dot)1 490 1 1434 3320 t
+(\267)678 3440 w
+10 CW f
+(183)1053 3440 w
+10 R f
+(bullet)1434 3440 w
+(\270)679 3560 w
+10 CW f
+(184)1053 3560 w
+10 R f
+(base single quote)2 688 1 1434 3560 t
+(\271)674 3680 w
+10 CW f
+(185)1053 3680 w
+10 R f
+(base double quote)2 721 1 1434 3680 t
+(\273)671 3800 w
+10 CW f
+(187)1053 3800 w
+10 R f
+(right double angle)2 727 1 1434 3800 t
+(Access)3522 1720 w
+( Description)1 652(Symbol Code)1 708 2 3060 1840 t
+10 S f
+(_ ___________________________________________)1 2154 1 3060 1860 t
+10 R f
+(\274)3166 2000 w
+10 CW f
+(188)3573 2000 w
+10 R f
+(ellipsis)3954 2000 w
+(\275)3166 2120 w
+10 CW f
+(189)3573 2120 w
+10 R f
+(per thousand)1 513 1 3954 2120 t
+(\277)3194 2240 w
+10 CW f
+(191)3573 2240 w
+10 R f
+(inverted question mark)2 921 1 3954 2240 t
+(\341)3171 2360 w
+10 CW f
+(225)3573 2360 w
+10 R f
+(AE ligature)1 463 1 3954 2360 t
+(\343)3202 2480 w
+10 CW f
+(227)3573 2480 w
+10 R f
+(raised underscored ``a'')2 951 1 3954 2480 t
+(\350)3185 2600 w
+10 CW f
+(232)3573 2600 w
+10 R f
+(L slash)1 286 1 3954 2600 t
+(\351)3180 2720 w
+10 CW f
+(233)3573 2720 w
+10 R f
+(O slash)1 297 1 3954 2720 t
+(\352)3171 2840 w
+10 CW f
+(234)3573 2840 w
+10 R f
+(OE ligature)1 463 1 3954 2840 t
+(\353)3200 2960 w
+10 CW f
+(235)3573 2960 w
+10 R f
+(raised underscored ``o'')2 957 1 3954 2960 t
+(\361)3182 3080 w
+10 CW f
+(241)3573 3080 w
+10 R f
+(ae ligature)1 418 1 3954 3080 t
+(\365)3202 3200 w
+10 CW f
+(245)3573 3200 w
+10 R f
+(dotless i)1 331 1 3954 3200 t
+(\370)3202 3320 w
+10 CW f
+(248)3573 3320 w
+10 R f
+(l slash)1 253 1 3954 3320 t
+(\371)3191 3440 w
+10 CW f
+(249)3573 3440 w
+10 R f
+(o slash)1 275 1 3954 3440 t
+(\372)3180 3560 w
+10 CW f
+(250)3573 3560 w
+10 R f
+(oe ligature)1 424 1 3954 3560 t
+(\373)3191 3680 w
+10 CW f
+(251)3573 3680 w
+10 R f
+(german double s)2 660 1 3954 3680 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Trailer
+done
+%%Pages: 2
+%%DocumentFonts: Helvetica-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

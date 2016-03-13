@@ -1,0 +1,618 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(TROFF User's Manual)2 1874 1 540 1040 t
+36 S1 f
+(__________________________)540 1240 w
+14 HB f
+(Usage and Options)2 1273 1 540 1440 t
+10 I f
+(Troff)540 1920 w
+10 R f
+(or)766 1920 w
+10 I f
+(nroff)874 1920 w
+10 R f
+(is invoked as)2 522 1 1094 1920 t
+10 CW f
+(troff)690 2100 w
+10 I f
+(options \256les)1 506 1 1050 2100 t
+10 CW f
+(nroff)690 2220 w
+10 I f
+(options \256les)1 506 1 1050 2220 t
+10 R f
+(where)540 2400 w
+10 I f
+(options)819 2400 w
+10 R f
+( option arguments and)3 927(represents any of a number of)5 1243 2 1150 2400 t
+10 I f
+(\256les)3357 2400 w
+10 R f
+(represents the list of \256les containing the)6 1665 1 3555 2400 t
+( `)1 61( argument consisting of a single minus)6 1568( An)1 176(document to be formatted.)3 1066 4 540 2520 t
+10 CW f
+(-)3411 2520 w
+10 R f
+(' is taken to be a \256lename corresponding to)8 1749 1 3471 2520 t
+( options, which may appear)4 1113( The)1 207( no \256lenames are given input is taken from the standard input.)11 2497( If)1 118(the standard input.)2 745 5 540 2640 t
+(in any order so long as they appear before the \256les, are:)11 2211 1 540 2760 t
+10 CW f
+(-m)837 3000 w
+10 I f
+(name)965 3000 w
+10 R f
+(Read the macro \256le)3 779 1 1368 3000 t
+10 CW f
+(/ usr / lib / tmac.)5 880 1 2180 3000 t
+10 I f
+(name)3068 3000 w
+10 R f
+(before the input)2 632 1 3309 3000 t
+10 I f
+(\256les)3966 3000 w
+10 R f
+(.)4127 3000 w
+10 CW f
+(-T)837 3120 w
+10 I f
+(name)957 3120 w
+10 R f
+( devices are site-dependent.)3 1102( Speci\256c)1 372(Speci\256es the type of the output device.)6 1551 3 1368 3120 t
+(For)1368 3270 w
+10 I f
+(troff)1544 3270 w
+10 R f
+(, useful names include)3 929 1 1717 3270 t
+10 CW f
+(post)2684 3270 w
+10 R f
+(\(for PostScript)1 599 1 2962 3270 t
+6 S f
+(\322)3561 3230 w
+10 R f
+(, the default\),)2 558 1 3608 3270 t
+10 CW f
+(i300)4204 3270 w
+10 R f
+(\(for Imagen)1 486 1 4482 3270 t
+(8/300\), and)1 455 1 1368 3390 t
+10 CW f
+(pcl)1848 3390 w
+10 R f
+(\(for)2053 3390 w
+9 R f
+(HP)2225 3390 w
+10 R f
+(LaserJet\).)2365 3390 w
+(For)1368 3540 w
+10 I f
+(nroff)1544 3540 w
+10 R f
+(, useful names include)3 932 1 1739 3540 t
+10 CW f
+(37)2717 3540 w
+10 R f
+(for the \(default\) Model 37 Teletype)5 1481 1 2875 3540 t
+6 S f
+(\322)4356 3500 w
+10 R f
+(,)4403 3540 w
+10 CW f
+(450)4474 3540 w
+10 R f
+(for the)1 276 1 4692 3540 t
+9 R f
+(DASI)1368 3660 w
+10 R f
+(-450 \(Diablo Hyterm\),)2 911 1 1578 3660 t
+10 CW f
+(lp)2527 3660 w
+10 R f
+( half-line motions,)2 744(for ``dumb'' line printer terminals \(no)5 1547 2 2677 3660 t
+(no reverse motions\), and)3 987 1 1368 3780 t
+10 CW f
+(think)2388 3780 w
+10 R f
+(for the)1 263 1 2713 3780 t
+9 R f
+(HP)2999 3780 w
+10 R f
+(ThinkJet printer.)1 666 1 3139 3780 t
+10 CW f
+(-i)837 3900 w
+10 R f
+(Read standard input after the input \256les are exhausted.)8 2171 1 1368 3900 t
+10 CW f
+(-o)837 4020 w
+10 I f
+(list)957 4020 w
+10 R f
+(Print only pages whose page numbers appear in)7 1947 1 1368 4020 t
+10 I f
+(list)3346 4020 w
+10 R f
+( consists of comma-separated)3 1199(, which)1 300 2 3469 4020 t
+( form)1 230( number range has the)4 929( A)1 134(numbers and number ranges.)3 1189 4 1368 4140 t
+10 I f
+(N)3886 4140 w
+10 S f
+(-)3977 4140 w
+10 I f
+(M)4048 4140 w
+10 R f
+(and means pages)2 698 1 4167 4140 t
+10 I f
+(N)4901 4140 w
+10 R f
+(through)1368 4260 w
+10 I f
+(M)1717 4260 w
+10 R f
+(; an initial)2 432 1 1800 4260 t
+10 S f
+(-)2270 4260 w
+10 I f
+(N)2341 4260 w
+10 R f
+(means from the beginning to page)5 1427 1 2446 4260 t
+10 I f
+(N)3911 4260 w
+10 R f
+(; and a \256nal)3 511 1 3978 4260 t
+10 I f
+(N)4528 4260 w
+10 S f
+(-)4619 4260 w
+10 R f
+(means)4713 4260 w
+(from)1368 4380 w
+10 I f
+(N)1587 4380 w
+10 R f
+(to the end.)2 419 1 1679 4380 t
+10 CW f
+(-n)837 4500 w
+10 I f
+(N)965 4500 w
+10 R f
+(Number \256rst generated page)3 1133 1 1368 4500 t
+10 I f
+(N)2526 4500 w
+10 R f
+(.)2593 4500 w
+10 CW f
+(-r)837 4620 w
+10 I f
+(aN)957 4620 w
+10 R f
+(Set number register)2 782 1 1368 4620 t
+10 I f
+(a)2175 4620 w
+10 R f
+(\(one-character\) to)1 710 1 2250 4620 t
+10 I f
+(N)2985 4620 w
+10 R f
+(.)3052 4620 w
+10 CW f
+(-s)837 4740 w
+10 I f
+(N)957 4740 w
+10 R f
+(Stop every)1 434 1 1368 4740 t
+10 I f
+(N)1831 4740 w
+10 R f
+(pages.)1927 4740 w
+10 I f
+(Nroff)2233 4740 w
+10 R f
+(will halt prior to every)4 915 1 2474 4740 t
+10 I f
+(N)3418 4740 w
+10 R f
+(pages \(default)1 567 1 3515 4740 t
+10 I f
+(N)4112 4740 w
+10 S f
+(=)4203 4740 w
+10 R f
+(1\) to allow paper)3 694 1 4274 4740 t
+( upon receipt of a newline.)5 1144(loading or changing, and will resume)5 1572 2 1368 4860 t
+10 I f
+(Troff)4150 4860 w
+10 R f
+(will include a)2 576 1 4392 4860 t
+(``pause'' code every)2 818 1 1368 4980 t
+10 I f
+(N)2211 4980 w
+10 R f
+(pages; its meaning, if any, depends on the output device.)9 2264 1 2303 4980 t
+10 CW f
+(-u)837 5100 w
+10 I f
+(N)965 5100 w
+10 R f
+(Set amount of emboldening for the)5 1396 1 1368 5100 t
+10 CW f
+(bd)2789 5100 w
+10 R f
+(request to)1 391 1 2934 5100 t
+10 I f
+(N)3350 5100 w
+10 R f
+(.)3417 5100 w
+10 CW f
+(-F)837 5220 w
+10 I f
+(path)957 5220 w
+10 R f
+(Look in directory)2 721 1 1368 5220 t
+10 I f
+(path)2125 5220 w
+10 R f
+( information; default is)3 955(for font)1 313 2 2339 5220 t
+10 CW f
+(/usr/lib/font)3644 5220 w
+10 R f
+(for)4461 5220 w
+10 I f
+(troff)4614 5220 w
+10 R f
+(and)4824 5220 w
+10 CW f
+(/usr/lib/term)1368 5340 w
+10 R f
+(for)2173 5340 w
+10 I f
+(nroff)2314 5340 w
+10 R f
+(.)2509 5340 w
+10 I f
+(troff)792 5520 w
+10 R f
+(only:)990 5520 w
+10 CW f
+(-a)837 5670 w
+10 R f
+(Send a printable \()3 707 1 1368 5670 t
+9 R f
+(ASCII)2075 5670 w
+10 R f
+(\) approximation of the results to the standard output.)8 2101 1 2310 5670 t
+10 I f
+(nroff)792 5850 w
+10 R f
+(only:)1012 5850 w
+10 CW f
+(-e)837 6000 w
+10 R f
+(Produce equally-spaced words in adjusted lines, using full terminal resolution.)9 3133 1 1368 6000 t
+10 CW f
+(-h)837 6120 w
+10 R f
+(Use tabs instead of spaces to speed up printing.)8 1889 1 1368 6120 t
+10 CW f
+(-q)837 6240 w
+10 R f
+(Invoke the simultaneous input-output mode of the)6 1999 1 1368 6240 t
+10 CW f
+(rd)3400 6240 w
+10 R f
+(request.)3545 6240 w
+(Each option is a separate argument; for example,)7 1951 1 540 6480 t
+10 CW f
+(troff -Tpost -ms -o4,6,8-10)3 1620 1 690 6660 t
+10 I f
+(\256le1 \256le2)1 394 1 2370 6660 t
+10 R f
+( of a document contained in the \256les named)8 1870(requests formatting of pages 4, 6, and 8 through 10)9 2174 2 540 6840 t
+10 I f
+(\256le1)4625 6840 w
+10 R f
+(and)4838 6840 w
+10 I f
+(\256le2)5023 6840 w
+10 R f
+(,)5195 6840 w
+(speci\256es the output device as a PostScript printer, and invokes the)10 2639 1 540 6960 t
+9 R f
+(MS)3202 6960 w
+10 R f
+(macro package.)1 625 1 3357 6960 t
+( post-processors are available for use with)6 1703(Various pre- and)2 676 2 540 7140 t
+10 I f
+(nroff)2948 7140 w
+10 R f
+(and)3172 7140 w
+10 I f
+(troff)3345 7140 w
+10 R f
+( include the equation preprocessor)4 1385(. These)1 317 2 3518 7140 t
+10 I f
+(eqn)540 7260 w
+10 R f
+(\(for)717 7260 w
+10 I f
+(troff)899 7260 w
+10 R f
+(;)1072 7260 w
+10 I f
+(neqn)1133 7260 w
+10 R f
+(for)1360 7260 w
+10 I f
+(nroff)1509 7260 w
+10 R f
+( table-construction preprocessor)2 1294(\), the)1 213 2 1712 7260 t
+10 I f
+(tbl)3251 7260 w
+10 R f
+(, and)1 201 1 3365 7260 t
+10 I f
+(pic)3598 7260 w
+10 R f
+(and)3752 7260 w
+10 I f
+(grap)3928 7260 w
+10 R f
+(\(for)4149 7260 w
+10 I f
+(troff)4330 7260 w
+10 R f
+(only\) for various)2 685 1 4535 7260 t
+( reverse-line postprocessor)2 1109( A)1 142(forms of graphics.)2 769 3 540 7380 t
+10 I f
+(col)2605 7380 w
+10 R f
+(is available for multiple-column)3 1345 1 2772 7380 t
+10 I f
+(nroff)4162 7380 w
+10 R f
+(output on terminals)2 818 1 4402 7380 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+11 HB f
+(TROFF User's Manual)2 1147 1 4073 480 t
+10 HB f
+(2)540 600 w
+9 HB f
+(Usage and Options)2 820 1 4400 600 t
+10 R f
+(without reverse-line ability;)2 1110 1 540 960 t
+10 I f
+(col)1675 960 w
+10 R f
+(expects the Model 37 Teletype escape sequences that)7 2125 1 1822 960 t
+10 I f
+(nroff)3972 960 w
+10 R f
+(produces by default.)2 812 1 4192 960 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Trailer
+done
+%%Pages: 2
+%%DocumentFonts: Helvetica-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

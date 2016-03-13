@@ -1,0 +1,575 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( Abbreviations and Default Variables)4 2093( Keywords,)1 744(APPENDIX C:)1 772 3 720 1050 t
+10 I f
+(Picasso)720 1350 w
+10 R f
+( macro \(giving the process id of the)7 1501(has one prede\256ned place name \(for the origin\), one)8 2124 2 1067 1350 t
+10 I f
+(Picasso)4729 1350 w
+10 R f
+( would be unwise to reuse these)6 1312( It)1 118( can affect the appearance of pictures.)6 1549(invocation\) and 28 variables that)4 1341 4 720 1470 t
+( are purely for)3 630( These)1 309( are also sixteen prede\256ned color indexes.)6 1797( There)1 303( purposes.)1 426(names for any other)3 855 6 720 1590 t
+( caution that colors)3 763( We)1 188( other ways.)2 485(convenience, and no harm would result in using these variable names in)11 2884 4 720 1710 t
+( and secondary and tertiary colors may be)7 1721(displayed interactively may not match colors which are printed,)8 2599 2 720 1830 t
+(downright unappetizing, depending on technology.)4 2037 1 720 1950 t
+( suf\256x)1 253( The)1 205(Dimensions are in inches, except for the text variables.)8 2190 3 720 2130 t
+10 CW f
+(d)3393 2130 w
+10 R f
+(converts radians to degrees.)3 1108 1 3478 2130 t
+(Variable Value)1 1093 1 1080 2390 t
+9 S f
+(___________________________________________________________________________)1080 2410 w
+9 CW f
+(O \(0,0\))1 1125 1 1080 2540 t
+9 R f
+(origin)2259 2540 w
+9 CW f
+(pid)1080 2650 w
+9 R f
+(UNIX process id)2 611 1 1935 2650 t
+9 CW f
+(arcrad 0.25)1 1071 1 1080 2760 t
+(arrowfill 1)1 909 1 1080 2870 t
+9 R f
+(\(implies \256lling\))1 563 1 2043 2870 t
+9 CW f
+(arrowht 0.1)1 1017 1 1080 2980 t
+(arrowwid 0.05)1 1071 1 1080 3090 t
+(boxht 0.5)1 1017 1 1080 3200 t
+(boxrad 0)1 909 1 1080 3310 t
+(boxwid 0.75)1 1071 1 1080 3420 t
+(circlerad 0.25)1 1071 1 1080 3530 t
+(curlayer 0)1 909 1 1080 3640 t
+(dashwid 0.05)1 1071 1 1080 3750 t
+(ellipseht 0.5)1 1017 1 1080 3860 t
+(ellipsewid 0.75)1 1071 1 1080 3970 t
+(fillcolor 0)1 909 1 1080 4080 t
+9 R f
+(\(black\))2043 4080 w
+9 CW f
+(flatness)1080 4190 w
+9 R f
+(uninitialized)1935 4190 w
+9 CW f
+(linecap)1080 4300 w
+9 R f
+(uninitialized)1935 4300 w
+9 CW f
+(linecolor 0)1 909 1 1080 4410 t
+9 R f
+(\(black\))2043 4410 w
+9 CW f
+(lineht 0.5)1 1017 1 1080 4520 t
+(linejoin)1080 4630 w
+9 R f
+(uninitialized)1935 4630 w
+9 CW f
+(linerad 0)1 909 1 1080 4740 t
+( ==)1 162(lineweight 0)1 909 2 1080 4850 t
+9 R f
+(device minimum \(1 pixel\))3 939 1 2205 4850 t
+9 CW f
+(linewid 0.5)1 1017 1 1080 4960 t
+(miterlimit)1080 5070 w
+9 R f
+(uninitialized)1935 5070 w
+9 CW f
+(moveht 0.5)1 1017 1 1080 5180 t
+(movewid 0.5)1 1017 1 1080 5290 t
+(textcolor 0)1 909 1 1080 5400 t
+9 R f
+(\(black\))2043 5400 w
+9 CW f
+( == setfont\("Times-Roman"\))2 1404(textfont 0)1 909 2 1080 5510 t
+(textsize 10)1 963 1 1080 5620 t
+9 R f
+(points)2097 5620 w
+9 CW f
+(textspace 12)1 963 1 1080 5730 t
+9 R f
+(points)2097 5730 w
+9 CW f
+( == setrgb\(0,0,0\))2 918(black 0)1 909 2 1080 5840 t
+( == setrgb\(1,1,1\))2 918(white 1)1 909 2 1080 5950 t
+( == setrgb\(1,0,0\))2 918(red 2)1 909 2 1080 6060 t
+( == setrgb\(0,1,0\))2 918(green 3)1 909 2 1080 6170 t
+( == setrgb\(0,0,1\))2 918(blue 4)1 909 2 1080 6280 t
+( == setrgb\(1,1,0\))2 918(yellow 5)1 909 2 1080 6390 t
+( == setrgb\(1,0,1\))2 918(magenta 6)1 909 2 1080 6500 t
+( == setrgb\(0,1,1\))2 918(cyan 7)1 909 2 1080 6610 t
+( == setrgb\(0.6588, 0.6588, 0.6588\))4 1836(lightgrey 8)1 909 2 1080 6720 t
+( == setrgb\(0.1372, 0.1372, 0.5568\))4 1836(navy 9)1 909 2 1080 6830 t
+( == setrgb\(0.196, 0.6, 0.8\))4 1458(skyblue 10)1 963 2 1080 6940 t
+( == setrgb\(0.8, 0.2, 0.2\))4 1350(orange 11)1 963 2 1080 7050 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+9 HB f
+(C-2 Picasso)1 4320 1 720 550 t
+10 R f
+(Variable Value)1 1093 1 1080 880 t
+9 S f
+(___________________________________________________________________________)1080 900 w
+9 CW f
+( == setrgb\(0.5568, 0.4196, 0.1372\))4 1836(sienna 12)1 963 2 1080 1030 t
+( == setrgb\(0.5607, 0.7372, 0.5607\))4 1836(palegreen 13)1 963 2 1080 1140 t
+( == setrgb\(0.1843, 0.3098, 0.1843\))4 1836(darkgreen 14)1 963 2 1080 1250 t
+( == setrgb\(0.6235, 0.3725, 0.6235\))4 1836(blueviolet 15)1 963 2 1080 1360 t
+10 R f
+(The lexicon of the)3 753 1 720 1590 t
+10 I f
+(Picasso)1506 1590 w
+10 R f
+(language contains quite a few synonyms, but not every possible variant on its)12 3190 1 1850 1590 t
+( occurring)1 410( Those)1 297(key words.)1 441 3 720 1710 t
+10 I f
+(only)1896 1710 w
+10 R f
+(after a `)2 315 1 2096 1710 t
+10 CW f
+(.)2411 1710 w
+10 R f
+( as ``top of'' could be)5 877( in the verbose corner references such)6 1523(' or)1 169 3 2471 1710 t
+(reused for variable names, at the risk of some confusion.)9 2259 1 720 1830 t
+(Keyword Synonyms)1 1278 1 1080 2090 t
+9 S f
+(___________________________________________________________________________)1080 2110 w
+9 CW f
+( .1nd, .1rd, .1th)3 918(.1st .first,)1 1233 2 1080 2240 t
+( .2rd, .2th)2 594(.2nd .2st,)1 1125 2 1080 2350 t
+9 S f
+(\274)1188 2460 w
+9 CW f
+( bot, bottom of, .south, .s, south of)7 1998(.bottom .b,)1 1017 2 1080 2570 t
+( center of)2 540(.center .c,)1 1017 2 1080 2680 t
+( east of, .right, .r, right of)6 1620(.east .e,)1 1017 2 1080 2790 t
+( of)1 162(.end end)1 1017 2 1080 2900 t
+( .1nd, .1rd, .1th)3 918(.first .1st,)1 1125 2 1080 3010 t
+(.height .ht)1 1017 1 1080 3120 t
+( left of, .west, .w, west of)6 1512(.left .l,)1 1017 2 1080 3230 t
+( top of)2 378( .t,)1 270( north of, .top,)3 864(.north .n,)1 1017 4 1080 3340 t
+( northeast of)2 702(.northeast .ne,)1 1071 2 1080 3450 t
+( northwest of)2 702(.northwest .nw,)1 1071 2 1080 3560 t
+(.radius .rad)1 1071 1 1080 3670 t
+( right of, .east, .e, east of)6 1566(.right .r,)1 1017 2 1080 3780 t
+( south of, .bottom, .bot, .b, bottom of)7 2106(.south .s,)1 1017 2 1080 3890 t
+( southeast of)2 702(.southeast .se,)1 1071 2 1080 4000 t
+( southwest of)2 702(.southwest .sw,)1 1071 2 1080 4110 t
+( of)1 162(.start start)1 1125 2 1080 4220 t
+( top of, .north, .n, north of)6 1566(.top .t,)1 1017 2 1080 4330 t
+( left of)2 432( .l,)1 270( west of, .left,)3 864(.west .w,)1 1017 4 1080 4440 t
+(.width .wid)1 1071 1 1080 4550 t
+(.x)1080 4660 w
+(.y)1080 4770 w
+( 1nd, 1rd, 1th)3 756(1st first,)1 1179 2 1080 4880 t
+( 2rd, 2th)2 486(2nd 2st,)1 1071 2 1080 4990 t
+(3rd)1080 5100 w
+9 S f
+(\274)1188 5210 w
+9 CW f
+(Here)1080 5320 w
+(about at)1 963 1 1080 5430 t
+(above)1080 5540 w
+(abs)1080 5650 w
+(and between)1 1233 1 1080 5760 t
+9 I f
+(P)2367 5760 w
+9 CW f
+(and)2476 5760 w
+9 I f
+(Q)2692 5760 w
+9 CW f
+(== <)1 216 1 2811 5760 t
+9 I f
+(P)3027 5760 w
+9 CW f
+(,)3082 5760 w
+9 I f
+(Q)3136 5760 w
+9 CW f
+(>)3201 5760 w
+(arc)1080 5870 w
+(arrow)1080 5980 w
+(at)1080 6090 w
+(atan2)1080 6200 w
+(below)1080 6310 w
+(between between)1 1233 1 1080 6420 t
+9 I f
+(P)2367 6420 w
+9 CW f
+(and)2476 6420 w
+9 I f
+(Q)2692 6420 w
+9 CW f
+(== <)1 216 1 2811 6420 t
+9 I f
+(P)3027 6420 w
+9 CW f
+(,)3082 6420 w
+9 I f
+(Q)3136 6420 w
+9 CW f
+(>)3201 6420 w
+(block [])1 963 1 1080 6530 t
+9 R f
+(\(e.g.,)2097 6530 w
+9 CW f
+(last [] == last block)4 1134 1 2304 6530 t
+9 R f
+(\))3438 6530 w
+9 CW f
+(box)1080 6640 w
+(by)1080 6750 w
+(ccw)1080 6860 w
+(center)1080 6970 w
+(chop)1080 7080 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+9 HB f
+(Picasso C-3)1 4320 1 720 550 t
+10 R f
+(Keyword Synonyms)1 1278 1 1080 880 t
+9 S f
+(___________________________________________________________________________)1080 900 w
+9 CW f
+(circle)1080 1030 w
+(clockwise cw)1 963 1 1080 1140 t
+(copy include)1 1233 1 1080 1250 t
+(cos)1080 1360 w
+(cw clockwise)1 1341 1 1080 1470 t
+(dashed dash)1 1071 1 1080 1580 t
+(dashpat)1080 1690 w
+(define)1080 1800 w
+(delete del)1 1017 1 1080 1910 t
+(diameter diam)1 1071 1 1080 2020 t
+(do)1080 2130 w
+(dotted dot)1 1017 1 1080 2240 t
+(down)1080 2350 w
+(duplicate dup)1 1017 1 1080 2460 t
+(edged edge)1 1071 1 1080 2570 t
+(ellipse)1080 2680 w
+(else)1080 2790 w
+(exp)1080 2900 w
+(filled lfill)1 1125 1 1080 3010 t
+( 1nd, 1rd, 1th)3 756(first 1st,)1 1071 2 1080 3120 t
+(font)1080 3230 w
+(for)1080 3340 w
+(from =)1 909 1 1080 3450 t
+9 R f
+(\(in the context of)3 619 1 2151 3450 t
+9 CW f
+(for)2816 3450 w
+9 R f
+(statements\))3024 3450 w
+9 CW f
+(height lht)1 1017 1 1080 3560 t
+(if)1080 3670 w
+(include copy)1 1071 1 1080 3780 t
+(int)1080 3890 w
+( noedge)1 378(invisible invis,)1 1179 2 1080 4000 t
+(labeled label)1 1125 1 1080 4110 t
+(last)1080 4220 w
+(layer)1080 4330 w
+(left)1080 4440 w
+(line)1080 4550 w
+(ljust)1080 4660 w
+(ln)1080 4770 w
+(log)1080 4880 w
+(max)1080 4990 w
+(min)1080 5100 w
+(move)1080 5210 w
+( invis)1 324(noedge invisible,)1 1395 2 1080 5320 t
+(object)1080 5430 w
+(of the way)2 540 1 1080 5540 t
+9 R f
+(\(optional pre\256x for)2 686 1 1935 5540 t
+9 CW f
+(between)2644 5540 w
+9 R f
+(\))3022 5540 w
+9 CW f
+(pow)1080 5650 w
+(print)1080 5760 w
+(radius rad)1 1017 1 1080 5870 t
+(rand)1080 5980 w
+(reflect)1080 6090 w
+(reset)1080 6200 w
+(right)1080 6310 w
+(rjust)1080 6420 w
+(rotate rot)1 1017 1 1080 6530 t
+(same)1080 6640 w
+(scale)1080 6750 w
+(sector)1080 6860 w
+(setfont)1080 6970 w
+(setrgb)1080 7080 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+9 HB f
+(C-4 Picasso)1 4320 1 720 550 t
+10 R f
+(Keyword Synonyms)1 1278 1 1080 880 t
+9 S f
+(___________________________________________________________________________)1080 900 w
+9 CW f
+(sh)1080 1030 w
+(show)1080 1140 w
+(sin)1080 1250 w
+(size)1080 1360 w
+(space)1080 1470 w
+(spline)1080 1580 w
+(sprintf)1080 1690 w
+(sqrt)1080 1800 w
+(text)1080 1910 w
+(then)1080 2020 w
+(through thru)1 1071 1 1080 2130 t
+(to)1080 2240 w
+(touch touching)1 1287 1 1080 2350 t
+(transform)1080 2460 w
+(translate trans)1 1125 1 1080 2570 t
+(undefine undef)1 1125 1 1080 2680 t
+(until)1080 2790 w
+(up)1080 2900 w
+(weight)1080 3010 w
+(width wid)1 1017 1 1080 3120 t
+(with)1080 3230 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Trailer
+done
+%%Pages: 4
+%%DocumentFonts: Helvetica-Bold Times-Italic Times-Roman Symbol Courier Times-Roman

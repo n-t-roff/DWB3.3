@@ -1,0 +1,847 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 HB f
+(PostScript Font Sampler)2 2104 1 540 1040 t
+36 S1 f
+(__________________________)540 1240 w
+10 R f
+(The fonts listed on this page are available on most PostScript laser printers and typesetters.)14 3632 1 540 1540 t
+10 I f
+(troff)1715 1780 w
+10 R f
+(Name Font)1 722 1 1683 1900 t
+10 S f
+(_ _______________________________________________)1 2393 1 1683 1920 t
+10 CW f
+(R)1772 2060 w
+10 R f
+(Times Roman)1 564 1 2221 2060 t
+10 CW f
+(I)1772 2180 w
+10 I f
+(Times Italic)1 475 1 2221 2180 t
+10 CW f
+(B)1772 2300 w
+10 B f
+(Times Bold)1 487 1 2221 2300 t
+10 CW f
+(BI)1742 2420 w
+10 BI f
+(Times Bold Italic)2 712 1 2221 2420 t
+10 CW f
+(H)1772 2560 w
+10 H f
+(Helvetica)2221 2560 w
+10 CW f
+(HI)1742 2680 w
+10 HI f
+(Helvetica Oblique)1 786 1 2221 2680 t
+10 CW f
+(HB)1742 2800 w
+10 HB f
+(Helvetica Bold)1 691 1 2221 2800 t
+10 CW f
+(HX)1742 2920 w
+10 HX f
+(Helvetica Bold Oblique)2 1092 1 2221 2920 t
+10 CW f
+(CO)1742 3060 w
+10 CO f
+(Courier)2221 3060 w
+10 R f
+(*)2666 3060 w
+10 CW f
+(CI)1742 3180 w
+10 CI f
+(Courier Oblique)1 900 1 2221 3180 t
+10 CW f
+(CB)1742 3300 w
+10 CB f
+(Courier Bold)1 720 1 2221 3300 t
+10 CW f
+(CX)1742 3420 w
+10 CX f
+(Courier Bold Oblique)2 1200 1 2221 3420 t
+10 CW f
+(PA)1742 3560 w
+10 PA f
+(Palatino Roman)1 707 1 2221 3560 t
+10 CW f
+(PI)1742 3680 w
+10 PI f
+(Palatino Italic)1 570 1 2221 3680 t
+10 CW f
+(PB)1742 3800 w
+10 PB f
+(Palatino Bold)1 619 1 2221 3800 t
+10 CW f
+(PX)1742 3920 w
+10 PX f
+(Palatino Bold Italic)2 902 1 2221 3920 t
+10 CW f
+(Hr)1742 4060 w
+10 H f
+(Helvetica Narrow)1 762 1 2221 4060 t
+10 CW f
+(Hi)1742 4180 w
+10 HI f
+(Helvetica Narrow Oblique)2 1136 1 2221 4180 t
+10 CW f
+(Hb)1742 4300 w
+10 HB f
+(Helvetica Narrow Bold)2 1064 1 2221 4300 t
+10 CW f
+(Hx)1742 4420 w
+10 HX f
+(Helvetica Narrow Bold Oblique)3 1465 1 2221 4420 t
+10 CW f
+(AR)1742 4560 w
+10 AR f
+(Avant Garde Book)2 906 1 2221 4560 t
+10 CW f
+(AI)1742 4680 w
+10 AI f
+(Avant Garde Book Oblique)3 1323 1 2221 4680 t
+10 CW f
+(AB)1742 4800 w
+10 AR f
+(Avant Garde Demi)2 920 1 2221 4800 t
+10 CW f
+(AX)1742 4920 w
+10 AI f
+(Avant Garde Demi Oblique)3 1337 1 2221 4920 t
+10 CW f
+(KR)1742 5060 w
+10 KR f
+(Bookman Light)1 746 1 2221 5060 t
+10 CW f
+(KI)1742 5180 w
+10 KI f
+(Bookman Light Italic)2 982 1 2221 5180 t
+10 CW f
+(KB)1742 5300 w
+10 KB f
+(Bookman Demi)1 794 1 2221 5300 t
+10 CW f
+(KX)1742 5420 w
+10 KX f
+(Bookman Demi Italic)2 1110 1 2221 5420 t
+10 CW f
+(NR)1742 5560 w
+10 NR f
+(New Century Schoolbook Roman)3 1517 1 2221 5560 t
+10 CW f
+(NI)1742 5680 w
+10 NI f
+(New Century Schoolbook Italic)3 1414 1 2221 5680 t
+10 CW f
+(NB)1742 5800 w
+10 NB f
+(New Century Schoolbook Bold)3 1589 1 2221 5800 t
+10 CW f
+(NX)1742 5920 w
+10 NX f
+(New Century Schoolbook Bold Italic)4 1855 1 2221 5920 t
+10 CW f
+(ZI)1742 6060 w
+10 ZI f
+(Zapf Chancery Medium Italic)3 1056 1 2221 6060 t
+10 R f
+(A sample of the standard character set for each font is given in the pages that follow.)16 3384 1 540 6300 t
+( In)1 143( fonts.)1 260(The Greek alphabet and mathematical and other symbols are generally available with ``special'' symbol)13 4277 3 540 6480 t
+(addition, the Zapf Dingbat font \()5 1309 1 540 6600 t
+10 CW f
+(ZD)1849 6600 w
+10 R f
+( PostScript Character Set and)4 1171( See)1 194( graphic symbols and icons.)4 1113(\) offers a variety of)4 773 4 1969 6600 t
+(Symbols.)540 6720 w
+8 S1 f
+(__________________)540 6929 w
+8 R f
+( Courier font is commonly referred to as Constant-Width; the font name)11 2290(* The)1 244 2 540 7049 t
+8 CW f
+(CW)3094 7049 w
+8 R f
+(is a synonym for)3 533 1 3210 7049 t
+8 CW f
+(CO)3763 7049 w
+8 R f
+(.)3859 7049 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+( Font Sampler)2 668(2 PostScript)1 4012 2 540 600 t
+10 B f
+(Font Family:)1 558 1 540 960 t
+10 R f
+(TIMES)1248 960 w
+12 R f
+(Times Roman)1 678 1 1248 1340 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 1550 w
+(abcdefghijklmnopqrstuvwxyz)1248 1690 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1250 1 1248 1830 t
+( })1 68( {)1 78( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1066 6 1248 1970 t
+12 I f
+(Times Italic)1 572 1 1248 2320 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 2530 w
+(abcdefghijklmnopqrstuvwxyz)1248 2670 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1270 1 1248 2810 t
+( })1 58( {)1 68( ])1 57( [)1 67( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1096 6 1248 2950 t
+12 B f
+(Times Bold)1 585 1 1248 3300 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 3510 w
+(abcdefghijklmnopqrstuvwxyz)1248 3650 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1287 1 1248 3790 t
+( })1 57( {)1 67( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1096 6 1248 3930 t
+12 BI f
+(Times Bold Italic)2 857 1 1248 4280 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 4490 w
+(abcdefghijklmnopqrstuvwxyz)1248 4630 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1294 1 1248 4770 t
+( })1 52( {)1 62( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1058 6 1248 4910 t
+10 R f
+(Knowledge and courage are required to achieve the best results in typography. It is as true in this)17 3870 1 1248 5380 t
+(\256eld as in any other that one receives what one deserves and one deserves whatever one accepts.)16 3847 1 1248 5500 t
+10 I f
+(Knowledge and courage are required to achieve the best results in typography. It is as true in this)17 3920 1 1248 5620 t
+(\256eld as in any other that one receives what one deserves and one deserves whatever one accepts.)16 3873 1 1248 5740 t
+10 B f
+(Knowledge and courage are required to achieve the best results in typography. It is as true in)16 3968 1 1248 5860 t
+(this \256eld as in any other that one receives what one deserves and one deserves whatever one)16 3891 1 1248 5980 t
+(accepts.)1248 6100 w
+10 BI f
+(Knowledge and courage are required to achieve the best results in typography. It is as)14 3521 1 1633 6100 t
+(true in this \256eld as in any other that one receives what one deserves and one deserves whatever)17 3898 1 1248 6220 t
+(one accepts.)1 499 1 1248 6340 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+( 3)1 3511(PostScript Font Sampler)2 1169 2 540 600 t
+10 B f
+(Font Family:)1 558 1 540 960 t
+10 H f
+(HELVETICA)1248 960 w
+12 H f
+(Helvetica)1248 1340 w
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 1550 w
+(abcdefghijklmnopqrstuvwxyz)1248 1690 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1302 1 1248 1830 t
+( })1 50( {)1 60( ])1 44( [)1 54( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1085 6 1248 1970 t
+12 HI f
+(Helvetica Oblique)1 941 1 1248 2320 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 2530 w
+(abcdefghijklmnopqrstuvwxyz)1248 2670 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1302 1 1248 2810 t
+( })1 50( {)1 60( ])1 44( [)1 54( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1085 6 1248 2950 t
+12 HB f
+(Helvetica Bold)1 829 1 1248 3300 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 3510 w
+(abcdefghijklmnopqrstuvwxyz)1248 3650 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1355 1 1248 3790 t
+( })1 57( {)1 67( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1087 6 1248 3930 t
+12 HX f
+(Helvetica Bold Oblique)2 1311 1 1248 4280 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 4490 w
+(abcdefghijklmnopqrstuvwxyz)1248 4630 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1355 1 1248 4770 t
+( })1 57( {)1 67( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1087 6 1248 4910 t
+10 H f
+(Knowledge and courage are required to achieve the best results in typography. It is as)14 3825 1 1248 5380 t
+(true in this \256eld as in any other that one receives what one deserves and one deserves)16 3853 1 1248 5500 t
+(whatever one accepts.)2 1005 1 1248 5620 t
+10 HI f
+(Knowledge and courage are required to achieve the best results)9 2848 1 2309 5620 t
+(in typography. It is as true in this \256eld as in any other that one receives what one)17 3568 1 1248 5740 t
+(deserves and one deserves whatever one accepts.)6 2267 1 1248 5860 t
+10 HB f
+(Knowledge and courage are)3 1337 1 3571 5860 t
+(required to achieve the best results in typography. It is as true in this \256eld as in)16 3779 1 1248 5980 t
+(any other that one receives what one deserves and one deserves whatever one)12 3770 1 1248 6100 t
+(accepts.)1248 6220 w
+10 HX f
+(Knowledge and courage are required to achieve the best results in)10 3171 1 1706 6220 t
+(typography. It is as true in this \256eld as in any other that one receives what one)16 3734 1 1248 6340 t
+(deserves and one deserves whatever one accepts.)6 2411 1 1248 6460 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+( Font Sampler)2 668(4 PostScript)1 4012 2 540 600 t
+10 B f
+(Font Family:)1 558 1 540 960 t
+10 CO f
+(COURIER)1248 960 w
+12 CO f
+(Courier)1248 1340 w
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 1550 w
+(abcdefghijklmnopqrstuvwxyz)1248 1690 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1732 1 1248 1830 t
+( })1 82( {)1 92( ])1 82( [)1 92( \))1 82(@ # $ % & * + = \261 - / \\ \()12 1176 6 1248 1970 t
+12 CI f
+(Courier Oblique)1 1080 1 1248 2320 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 2530 w
+(abcdefghijklmnopqrstuvwxyz)1248 2670 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1732 1 1248 2810 t
+( })1 82( {)1 92( ])1 82( [)1 92( \))1 82(@ # $ % & * + = \261 - / \\ \()12 1176 6 1248 2950 t
+12 CB f
+(Courier Bold)1 864 1 1248 3300 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 3510 w
+(abcdefghijklmnopqrstuvwxyz)1248 3650 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1732 1 1248 3790 t
+( })1 82( {)1 92( ])1 82( [)1 92( \))1 82(@ # $ % & * + = \261 - / \\ \()12 1176 6 1248 3930 t
+12 CX f
+(Courier Bold Oblique)2 1440 1 1248 4280 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 4490 w
+(abcdefghijklmnopqrstuvwxyz)1248 4630 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1732 1 1248 4770 t
+( })1 82( {)1 92( ])1 82( [)1 92( \))1 82(@ # $ % & * + = \261 - / \\ \()12 1176 6 1248 4910 t
+10 CO f
+(Knowledge and courage are required to achieve the best results in)10 3900 1 1248 5380 t
+(typography. It is as true in this field as in any other that one)13 3840 1 1248 5500 t
+(receives what one deserves and one deserves whatever one accepts.)9 3900 1 1248 5620 t
+10 CI f
+(Knowledge and courage are required to achieve the best results in)10 3900 1 1248 5740 t
+(typography. It is as true in this field as in any other that one)13 3840 1 1248 5860 t
+(receives what one deserves and one deserves whatever one accepts.)9 3900 1 1248 5980 t
+10 CB f
+(Knowledge and courage are required to achieve the best results in)10 3900 1 1248 6100 t
+(typography. It is as true in this field as in any other that one)13 3840 1 1248 6220 t
+(receives what one deserves and one deserves whatever one accepts.)9 3900 1 1248 6340 t
+10 CX f
+(Knowledge and courage are required to achieve the best results in)10 3900 1 1248 6460 t
+(typography. It is as true in this field as in any other that one)13 3840 1 1248 6580 t
+(receives what one deserves and one deserves whatever one accepts.)9 3900 1 1248 6700 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+( 5)1 3511(PostScript Font Sampler)2 1169 2 540 600 t
+10 B f
+(Font Family:)1 558 1 540 960 t
+10 PA f
+(PALATINO)1248 960 w
+12 PA f
+(Palatino Roman)1 850 1 1248 1340 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 1550 w
+(abcdefghijklmnopqrstuvwxyz)1248 1690 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1219 1 1248 1830 t
+( })1 50( {)1 60( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1124 6 1248 1970 t
+12 PI f
+(Palatino Italic)1 687 1 1248 2320 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 2530 w
+(abcdefghijklmnopqrstuvwxyz)1248 2670 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1248 1 1248 2810 t
+( })1 50( {)1 60( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1093 6 1248 2950 t
+12 PB f
+(Palatino Bold)1 743 1 1248 3300 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 3510 w
+(abcdefghijklmnopqrstuvwxyz)1248 3650 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1223 1 1248 3790 t
+( })1 47( {)1 57( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1105 6 1248 3930 t
+12 PX f
+(Palatino Bold Italic)2 1083 1 1248 4280 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 4490 w
+(abcdefghijklmnopqrstuvwxyz)1248 4630 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1241 1 1248 4770 t
+( })1 50( {)1 60( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1124 6 1248 4910 t
+10 PA f
+(Knowledge and courage are required to achieve the best results in typography. It is as)14 3801 1 1248 5380 t
+(true in this \256eld as in any other that one receives what one deserves and one deserves)16 3781 1 1248 5500 t
+(whatever one accepts.)2 973 1 1248 5620 t
+10 PI f
+(Knowledge and courage are required to achieve the best results in)10 2620 1 2271 5620 t
+(typography. It is as true in this \256eld as in any other that one receives what one deserves and one)19 3843 1 1248 5740 t
+(deserves whatever one accepts.)3 1226 1 1248 5860 t
+10 PB f
+(Knowledge and courage are required to achieve the best)8 2554 1 2524 5860 t
+(results in typography. It is as true in this \256eld as in any other that one receives what)17 3804 1 1248 5980 t
+(one deserves and one deserves whatever one accepts.)7 2409 1 1248 6100 t
+10 PX f
+(Knowledge and courage are)3 1221 1 3707 6100 t
+(required to achieve the best results in typography. It is as true in this \256eld as in any)17 3716 1 1248 6220 t
+(other that one receives what one deserves and one deserves whatever one accepts.)12 3609 1 1248 6340 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+( Font Sampler)2 668(6 PostScript)1 4012 2 540 600 t
+10 B f
+(Font Family:)1 558 1 540 960 t
+10 Hr f
+(HELVETICA NARROW)1 853 1 1248 960 t
+12 Hr f
+(Helvetica Narrow)1 750 1 1248 1340 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 1550 w
+(abcdefghijklmnopqrstuvwxyz)1248 1690 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1108 1 1248 1830 t
+( })1 42( {)1 52( ])1 38( [)1 48( \))1 42(@ # $ % & * + = \261 - / \\ \()12 933 6 1248 1970 t
+12 Hi f
+(Helvetica Narrow Oblique)2 1119 1 1248 2320 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 2530 w
+(abcdefghijklmnopqrstuvwxyz)1248 2670 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1108 1 1248 2810 t
+( })1 42( {)1 52( ])1 38( [)1 48( \))1 42(@ # $ % & * + = \261 - / \\ \()12 933 6 1248 2950 t
+12 Hb f
+(Helvetica Narrow Bold)2 1048 1 1248 3300 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 3510 w
+(abcdefghijklmnopqrstuvwxyz)1248 3650 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1149 1 1248 3790 t
+( })1 48( {)1 58( ])1 42( [)1 52( \))1 42(@ # $ % & * + = \261 - / \\ \()12 934 6 1248 3930 t
+12 Hx f
+(Helvetica Narrow Bold Oblique)3 1444 1 1248 4280 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 4490 w
+(abcdefghijklmnopqrstuvwxyz)1248 4630 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1149 1 1248 4770 t
+( })1 48( {)1 58( ])1 42( [)1 52( \))1 42(@ # $ % & * + = \261 - / \\ \()12 934 6 1248 4910 t
+10 Hr f
+(Knowledge and courage are required to achieve the best results in typography. It is as true in this \256eld as in)20 3914 1 1248 5380 t
+(any other that one receives what one deserves and one deserves whatever one accepts.)13 3237 1 1248 5500 t
+10 Hi f
+(Knowledge and)1 569 1 4531 5500 t
+(courage are required to achieve the best results in typography. It is as true in this \256eld as in any other that)21 3850 1 1248 5620 t
+(one receives what one deserves and one deserves whatever one accepts.)10 2709 1 1248 5740 t
+10 Hb f
+(Knowledge and courage are)3 1097 1 4003 5740 t
+(required to achieve the best results in typography. It is as true in this \256eld as in any other that one)20 3836 1 1248 5860 t
+(receives what one deserves and one deserves whatever one accepts.)9 2712 1 1248 5980 t
+10 Hx f
+(Knowledge and courage are)3 1097 1 4006 5980 t
+(required to achieve the best results in typography. It is as true in this \256eld as in any other that one)20 3836 1 1248 6100 t
+(receives what one deserves and one deserves whatever one accepts.)9 2712 1 1248 6220 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+10 HB f
+( 7)1 3511(PostScript Font Sampler)2 1169 2 540 600 t
+10 B f
+(Font Family:)1 558 1 540 960 t
+10 AR f
+(AVANT GARDE)1 713 1 1248 960 t
+12 AR f
+(Avant Garde Book)2 1088 1 1248 1340 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 1550 w
+(abcdefghijklmnopqrstuvwxyz)1248 1690 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1356 1 1248 1830 t
+( })1 52( {)1 62( ])1 52( [)1 62( \))1 54(@ # $ % & * + = \261 - / \\ \()12 1145 6 1248 1970 t
+12 AI f
+(Avant Garde Book Oblique)3 1589 1 1248 2320 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 2530 w
+(abcdefghijklmnopqrstuvwxyz)1248 2670 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1356 1 1248 2810 t
+( })1 52( {)1 62( ])1 52( [)1 62( \))1 54(@ # $ % & * + = \261 - / \\ \()12 1145 6 1248 2950 t
+12 AB f
+(Avant Garde Demi)2 1088 1 1248 3300 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 3510 w
+(abcdefghijklmnopqrstuvwxyz)1248 3650 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1361 1 1248 3790 t
+( })1 51( {)1 61( ])1 48( [)1 58( \))1 56(@ # $ % & * + = \261 - / \\ \()12 1138 6 1248 3930 t
+12 AX f
+(Avant Garde Demi Oblique)3 1588 1 1248 4280 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 4490 w
+(abcdefghijklmnopqrstuvwxyz)1248 4630 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1361 1 1248 4770 t
+( })1 51( {)1 61( ])1 48( [)1 58( \))1 56(@ # $ % & * + = \261 - / \\ \()12 1138 6 1248 4910 t
+10 AR f
+(Knowledge and courage are required to achieve the best results in typography. It)12 3971 1 1248 5380 t
+(is as true in this \256eld as in any other that one receives what one deserves and one)17 3945 1 1248 5500 t
+(deserves whatever one accepts.)3 1596 1 1248 5620 t
+10 AI f
+(Knowledge and courage are required to)5 1986 1 2900 5620 t
+(achieve the best results in typography. It is as true in this \256eld as in any other that)17 3883 1 1248 5740 t
+(one receives what one deserves and one deserves whatever one accepts.)10 3643 1 1248 5860 t
+10 AB f
+(Knowledge and courage are required to achieve the best results in typography. It)12 3948 1 1248 5980 t
+(is as true in this \256eld as in any other that one receives what one deserves and one)17 3940 1 1248 6100 t
+(deserves whatever one accepts.)3 1584 1 1248 6220 t
+10 AX f
+(Knowledge and courage are required to)5 1962 1 2888 6220 t
+(achieve the best results in typography. It is as true in this \256eld as in any other that)17 3892 1 1248 6340 t
+(one receives what one deserves and one deserves whatever one accepts.)10 3618 1 1248 6460 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+10 HB f
+( Font Sampler)2 668(8 PostScript)1 4012 2 540 600 t
+10 B f
+(Font Family:)1 558 1 540 960 t
+10 KR f
+(BOOKMAN)1248 960 w
+12 KR f
+(Bookman Light)1 895 1 1248 1340 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 1550 w
+(abcdefghijklmnopqrstuvwxyz)1248 1690 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1414 1 1248 1830 t
+( })1 44( {)1 54( ])1 46( [)1 56( \))1 46(@ # $ % & * + = \261 - / \\ \()12 1173 6 1248 1970 t
+12 KI f
+(Bookman Light Italic)2 1179 1 1248 2320 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 2530 w
+(abcdefghijklmnopqrstuvwxyz)1248 2670 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1424 1 1248 2810 t
+( })1 56( {)1 63( ])1 41( [)1 51( \))1 44(@ # $ % & * + = \261 - / \\ \()12 1147 6 1248 2950 t
+12 KB f
+(Bookman Demi)1 953 1 1248 3300 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 3510 w
+(abcdefghijklmnopqrstuvwxyz)1248 3650 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1540 1 1248 3790 t
+( })1 48( {)1 58( ])1 46( [)1 56( \))1 48(@ # $ % & * + = \261 - / \\ \()12 1182 6 1248 3930 t
+12 KX f
+(Bookman Demi Italic)2 1334 1 1248 4280 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 4490 w
+(abcdefghijklmnopqrstuvwxyz)1248 4630 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1554 1 1248 4770 t
+( })1 46( {)1 56( ])1 41( [)1 51( \))1 41(@ # $ % & * + = \261 - / \\ \()12 1149 6 1248 4910 t
+10 KR f
+(Knowledge and courage are required to achieve the best results in typography. It)12 3940 1 1248 5380 t
+(is as true in this \256eld as in any other that one receives what one deserves and)16 3812 1 1248 5500 t
+(one deserves whatever one accepts.)4 1732 1 1248 5620 t
+10 KI f
+(Knowledge and courage are required to)5 1888 1 3040 5620 t
+(achieve the best results in typography. It is as true in this \256eld as in any other)16 3754 1 1248 5740 t
+(that one receives what one deserves and one deserves whatever one accepts.)11 3716 1 1248 5860 t
+10 KB f
+(Knowledge and courage are required to achieve the best results in)10 3446 1 1248 5980 t
+(typography. It is as true in this \256eld as in any other that one receives what)15 3936 1 1248 6100 t
+(one deserves and one deserves whatever one accepts.)7 2790 1 1248 6220 t
+10 KX f
+(Knowledge and)1 810 1 4106 6220 t
+(courage are required to achieve the best results in typography. It is as)12 3742 1 1248 6340 t
+(true in this \256eld as in any other that one receives what one deserves and)14 3888 1 1248 6460 t
+(one deserves whatever one accepts.)4 1870 1 1248 6580 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Page: 9 9
+/saveobj save def
+mark
+9 pagesetup
+10 HB f
+( 9)1 3511(PostScript Font Sampler)2 1169 2 540 600 t
+10 B f
+(Font Family:)1 558 1 540 960 t
+10 NR f
+(NEW CENTURY SCHOOLBOOK)2 1569 1 1248 960 t
+12 NR f
+(New Century Schoolbook Roman)3 1821 1 1248 1340 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 1550 w
+(abcdefghijklmnopqrstuvwxyz)1248 1690 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1290 1 1248 1830 t
+( })1 50( {)1 60( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1120 6 1248 1970 t
+12 NI f
+(New Century Schoolbook Italic)3 1698 1 1248 2320 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 2530 w
+(abcdefghijklmnopqrstuvwxyz)1248 2670 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1295 1 1248 2810 t
+( })1 50( {)1 60( ])1 50( [)1 60( \))1 50(@ # $ % & * + = \261 - / \\ \()12 1164 6 1248 2950 t
+12 NB f
+(New Century Schoolbook Bold)3 1906 1 1248 3300 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 3510 w
+(abcdefghijklmnopqrstuvwxyz)1248 3650 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1310 1 1248 3790 t
+( })1 57( {)1 67( ])1 57( [)1 67( \))1 57(@ # $ % & * + = \261 - / \\ \()12 1128 6 1248 3930 t
+12 NX f
+(New Century Schoolbook Bold Italic)4 2224 1 1248 4280 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 4490 w
+(abcdefghijklmnopqrstuvwxyz)1248 4630 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1328 1 1248 4770 t
+( })1 59( {)1 69( ])1 59( [)1 69( \))1 59(@ # $ % & * + = \261 - / \\ \()12 1147 6 1248 4910 t
+10 NR f
+(Knowledge and courage are required to achieve the best results in typography. It is)13 3851 1 1248 5380 t
+(as true in this \256eld as in any other that one receives what one deserves and one)16 3678 1 1248 5500 t
+(deserves whatever one accepts.)3 1438 1 1248 5620 t
+10 NI f
+(Knowledge and courage are required to achieve the)7 2320 1 2742 5620 t
+(best results in typography. It is as true in this \256eld as in any other that one receives)17 3790 1 1248 5740 t
+(what one deserves and one deserves whatever one accepts.)8 2621 1 1248 5860 t
+10 NB f
+(Knowledge and courage)2 1249 1 3927 5860 t
+(are required to achieve the best results in typography. It is as true in this)14 3822 1 1248 5980 t
+(\256eld as in any other that one receives what one deserves and one deserves)13 3860 1 1248 6100 t
+(whatever one accepts.)2 1152 1 1248 6220 t
+10 NX f
+(Knowledge and courage are required to achieve the)7 2642 1 2458 6220 t
+(best results in typography. It is as true in this \256eld as in any other that one)16 3844 1 1248 6340 t
+(receives what one deserves and one deserves whatever one accepts.)9 3399 1 1248 6460 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 9 9
+%%Page: 10 10
+/saveobj save def
+mark
+10 pagesetup
+10 HB f
+( Font Sampler)2 668(10 PostScript)1 4012 2 540 600 t
+10 B f
+(Font Family:)1 558 1 540 960 t
+10 ZI f
+(ZAPF CHANCERY)1 740 1 1248 960 t
+12 ZI f
+(Zapf Chancery Medium Italic)3 1265 1 1248 1340 t
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ)1248 1550 w
+(abcdefghijklmnopqrstuvwxyz)1248 1690 w
+(0123456789 . , ; : ! ? ` ' \303 \304 ")11 1120 1 1248 1830 t
+( })1 39( {)1 49( ])1 48( [)1 49( \))1 36(@ # $ % & * + = \261 - / \\ \()12 1033 6 1248 1970 t
+(Knowledge and courage are required to achieve the best results in typography. It is as true in)16 3881 1 1248 2460 t
+(this \256eld as in any other that one receives what one deserves and one deserves whatever one)16 3832 1 1248 2600 t
+(accepts.)1248 2740 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 10 10
+%%Trailer
+done
+%%Pages: 10
+%%DocumentFonts: Helvetica-Bold Palatino-BoldItalic Helvetica-Oblique Helvetica-BoldOblique Bookman-Demi AvantGarde-Demi Helvetica-Narrow-Bold Times-Bold
+%%+ AvantGarde-BookOblique Bookman-LightItalic Helvetica-Narrow-Oblique Helvetica Times-Italic Bookman-Light AvantGarde-Book Times-BoldItalic
+%%+ Helvetica-Narrow Courier-Bold Bookman-DemiItalic Times-Roman Symbol Helvetica-Narrow-BoldOblique AvantGarde-DemiOblique Courier-Oblique
+%%+ NewCenturySchlbk-Bold Courier NewCenturySchlbk-Italic Courier Courier-BoldOblique NewCenturySchlbk-Roman Palatino-Roman Palatino-Bold
+%%+ NewCenturySchlbk-BoldItalic ZapfChancery-MediumItalic Palatino-Italic Times-Roman

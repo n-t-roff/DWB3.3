@@ -1,0 +1,2317 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+17 HB f
+(MVIEW)720 1040 w
+18 HB f
+(\320 A Macro Package)3 1727 1 1347 1040 t
+(for Generating View Graphs)3 2385 1 720 1240 t
+36 S1 f
+(________________________)720 1440 w
+9 HB f
+(ABSTRACT)720 1920 w
+10 R f
+(This is a user's reference manual for)6 1510 1 1365 1920 t
+9 R f
+(MVIEW)2907 1920 w
+10 R f
+( macrocommand package)2 1039(, a general-purpose)2 779 2 3222 1920 t
+( The)1 211(for the generation of view graphs.)5 1382 2 1365 2040 t
+9 R f
+(MVIEW)2987 2040 w
+10 R f
+(approach to view graph production differs)5 1707 1 3333 2040 t
+( that of other macrocommand packages wherein by automatically)8 2923(signi\256cantly from)1 752 2 1365 2160 t
+(adjusting interline spacing and point size, an attempt is made to \256ll the projected)13 3675 1 1365 2280 t
+( the other hand, no attempt is made for consistent line spacing or)12 2751( On)1 186(transparency area.)1 738 3 1365 2400 t
+(character size from page to page \(view graph to view graph\).)10 2428 1 1365 2520 t
+( the layout of the)4 693(Some simple \(optional\) facilities are provided which can be used to aid in)12 2982 2 1365 2700 t
+( features of)2 452( The)1 207( font and point size control.)5 1109(view graph, generate titles and provide)5 1567 4 1365 2820 t
+9 R f
+(MVIEW)4725 2820 w
+10 R f
+(and how to use it with)5 966 1 1365 2940 t
+10 I f
+(troff)2372 2940 w
+10 R f
+( Many)1 300(as well as its preprocessors are shown by example.)8 2154 2 2586 2940 t
+(samples of)1 452 1 1365 3060 t
+9 R f
+(MVIEW)1862 3060 w
+10 R f
+(input are included in the document; the resulting view graphs are)10 2816 1 2224 3060 t
+(included in the Appendix at the end of the document.)9 2125 1 1365 3180 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = INTRODUCTION]
+10 B f
+(1. INTRODUCTION)1 925 1 720 3480 t
+10 R f
+(The)720 3660 w
+9 R f
+(MVIEW)901 3660 w
+10 R f
+(package is a set of macrocommands which aid in the formatting and phototypesetting of view)14 3795 1 1245 3660 t
+( macrocommands are invoked by typing the)6 1771(graphs. These)1 582 2 720 3780 t
+10 CW f
+(-mview)3101 3780 w
+10 R f
+(formatter option on the)3 930 1 3489 3780 t
+10 I f
+(troff)4446 3780 w
+10 R f
+(command)4646 3780 w
+(line. The)1 399 1 720 3900 t
+9 R f
+(MVIEW)1161 3900 w
+10 R f
+(package for)1 486 1 1520 3900 t
+10 I f
+(troff)2050 3900 w
+10 R f
+( formatted view graphs with a)5 1295(enables the novice to produce well)5 1478 2 2267 3900 t
+(minimal amount of advanced planning or knowledge of)7 2348 1 720 4020 t
+10 I f
+(troff)3110 4020 w
+10 R f
+( removes the burden from the user of)7 1596(. It)1 153 2 3291 4020 t
+( on the)2 280(having to calculate point size and line spacing as well as having to ask continually ``will this line \256t)18 4040 2 720 4140 t
+(frames?'';)720 4260 w
+9 R f
+(MVIEW)1163 4260 w
+10 R f
+( then)1 207( It)1 121(adjusts the output text to be as large as possible within the frame boundaries.)13 3199 3 1513 4260 t
+(adjusts the interline spacing \(within reasonable limits\) to \256ll the frame.)10 2834 1 720 4380 t
+(Although)720 4560 w
+9 R f
+(MVIEW)1126 4560 w
+10 R f
+( formatting of view graphs, these are not critical to)9 2078(provides a few facilities to aid in the)7 1491 2 1471 4560 t
+( The)1 214(its use.)1 287 2 720 4680 t
+9 R f
+(MVIEW)1253 4680 w
+10 R f
+( text and)2 360(package can be used effectively with plain text or with)9 2262 2 1602 4680 t
+10 I f
+(troff)4257 4680 w
+10 R f
+(commands. It)1 577 1 4463 4680 t
+(can be used in conjunction with)5 1268 1 720 4800 t
+10 I f
+(troff)2013 4800 w
+10 R f
+(preprocessors \()1 606 1 2211 4800 t
+10 I f
+(tbl)2817 4800 w
+10 R f
+(,)2931 4800 w
+10 I f
+(eqn)2981 4800 w
+10 R f
+(,)3133 4800 w
+10 I f
+(pic)3183 4800 w
+10 R f
+(,)3313 4800 w
+10 I f
+(grap)3363 4800 w
+10 R f
+(\) as well.)2 363 1 3560 4800 t
+(In the remainder of this document, the features of)8 2120 1 720 4980 t
+9 R f
+(MVIEW)2881 4980 w
+10 R f
+(and how to use it with)5 976 1 3239 4980 t
+10 I f
+(troff)4258 4980 w
+10 R f
+(as well as its)3 565 1 4475 4980 t
+( samples of)2 469( Many)1 290( shown by example.)3 820(preprocessors are)1 702 4 720 5100 t
+9 R f
+(MVIEW)3031 5100 w
+10 R f
+( The)1 212(input are included in the document.)5 1450 2 3378 5100 t
+(resulting view graphs are included in the Appendix at the end of the document.)13 3156 1 720 5220 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 2.  , HEADING = THE BASIC VIEW GRAPH]
+10 B f
+( BASIC VIEW GRAPH)3 1020(2. THE)1 337 2 720 5460 t
+10 R f
+(By default,)1 445 1 720 5640 t
+9 R f
+(MVIEW)1189 5640 w
+10 R f
+( line of input text produces a line on the view graph.)11 2108( is, a)2 188( That)1 234(operates in no-\256ll mode.)3 980 4 1530 5640 t
+( where a view graph starts \()6 1192(The user is responsible for saying)5 1425 2 720 5760 t
+10 CW f
+(.VG)3337 5760 w
+10 R f
+(\) and where it ends \()5 892 1 3517 5760 t
+10 CW f
+(.VE)4409 5760 w
+10 R f
+( other)1 245(\). In)1 206 2 4589 5760 t
+(words, pagination must be explicit.)4 1405 1 720 5880 t
+( page)1 218(In order to \256ll the view graph frame, point size and line spacing will automatically vary from page to)18 4102 2 720 6060 t
+( are a number of other features of)7 1373( There)1 288(\(view graph to view graph\).)4 1139 3 720 6180 t
+9 R f
+(MVIEW)3549 6180 w
+10 R f
+(but all of these are optional.)5 1145 1 3895 6180 t
+( the)1 150(The most basic example of a view graph includes lines of text surrounded by)13 3096 2 720 6300 t
+10 CW f
+(.VG)3994 6300 w
+10 R f
+(and)4202 6300 w
+10 CW f
+(.VE)4374 6300 w
+10 R f
+(commands.)4582 6300 w
+(For example, the following text:)4 1291 1 720 6420 t
+10 CW f
+(.VG)870 6600 w
+(Here is Some Text)3 1020 1 870 6720 t
+(Which Can Be)2 720 1 870 6840 t
+(Used to Produce)2 900 1 870 6960 t
+(A)870 7080 w
+(View Graph)1 600 1 870 7200 t
+(.VE)870 7320 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(2 MVIEW)1 4320 1 720 600 t
+10 R f
+( the view graph would have)5 1161( Perhaps)1 377( view graph shown in Example 1 of the Appendix.)9 2113(will produce the)2 669 4 720 960 t
+( a)1 69( Inserting)1 405(looked better if the text had been centered.)7 1701 3 720 1080 t
+10 I f
+(troff)2920 1080 w
+10 R f
+(request \()1 346 1 3118 1080 t
+10 CW f
+(.ce)3464 1080 w
+10 R f
+(\) to center many lines of text:)6 1176 1 3644 1080 t
+10 CW f
+(.VG)870 1260 w
+(.ce 99)1 360 1 870 1380 t
+(Here is Some Text)3 1020 1 870 1500 t
+(Which Can Be Used)3 1020 1 870 1620 t
+(To Produce)1 600 1 870 1740 t
+(A)870 1860 w
+(View Graph)1 600 1 870 1980 t
+(.VE)870 2100 w
+10 R f
+( another simple example, consider a)5 1456( As)1 165( of the Appendix.)3 711(will produce the view graph shown in Example 2)8 1988 4 720 2280 t
+(view graph crammed with long lines of text and all sorts of insigni\256cant details:)13 3195 1 720 2400 t
+10 CW f
+(.VG)870 2580 w
+(.ce 99)1 360 1 870 2700 t
+(Here is some text for a poorly written)7 2280 1 870 2820 t
+(view graph which I really do not want)7 2220 1 870 2940 t
+(anyone to read because much of the)6 2040 1 870 3060 t
+(information which it contains is of)5 2100 1 870 3180 t
+(very little value.)2 1080 1 870 3300 t
+(.VE)870 3420 w
+10 R f
+( how)1 211( Note)1 258(\(see Example 3 of the Appendix\).)5 1417 3 720 3600 t
+9 R f
+(MVIEW)2643 3600 w
+10 R f
+( for this last example to)5 1016(uses a smaller point size)4 1027 2 2997 3600 t
+(accommodate the longer lines of text.)5 1503 1 720 3720 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 3.  , HEADING = DETAILED USE OF \&.VG AND \&.VE]
+10 B f
+( USE OF)2 384(3. DETAILED)1 648 2 720 3960 t
+10 CB f
+(.VG)1777 3960 w
+10 B f
+(AND)1982 3960 w
+10 CB f
+(.VE)2223 3960 w
+10 R f
+(The)720 4140 w
+10 CW f
+(.VG)900 4140 w
+10 R f
+(and)1105 4140 w
+10 CW f
+(.VE)1274 4140 w
+10 R f
+(macrocommands mark the start and end of the view graph input.)10 2576 1 1479 4140 t
+10 CW f
+(.VG)870 4320 w
+10 I f
+(width height point-size vertical-spacing)3 1661 1 1110 4320 t
+10 CW f
+(.)990 4390 w
+(.)990 4440 w
+(.)990 4490 w
+(.VE)870 4620 w
+10 I f
+(on-frame)1110 4620 w
+(off-frame)870 4740 w
+10 R f
+(The)720 4920 w
+10 CW f
+(.VG)914 4920 w
+10 R f
+( optional arguments to override the default frame dimensions as well as the)12 3181(command accepts)1 726 2 1133 4920 t
+( on-frame identi\256er is supplied as an argument to the)9 2210( An)1 183( vertical spacing.)2 701(computed point size and)3 1010 4 720 5040 t
+10 CW f
+(.VE)4860 5040 w
+10 R f
+( or more lines of off-frame identi\256cation may follow the)9 2249(command. One)1 635 2 720 5160 t
+10 CW f
+(.VE)3629 5160 w
+10 R f
+(command.)3834 5160 w
+%INFO[SECTION: LEVEL = 2, NUMBER = 3.1  , HEADING = Starting a View Graph with \&.VG]
+10 B f
+( a View Graph with)4 839(3.1 Starting)1 525 2 720 5340 t
+10 CB f
+(.VG)2109 5340 w
+10 R f
+(By default,)1 447 1 720 5520 t
+9 R f
+(MVIEW)1193 5520 w
+10 R f
+( 7)1 79(assumes a view graph mask is)5 1216 2 1536 5520 t
+10 S f
+(\264)2831 5520 w
+10 R f
+( if other dimensions of width and)6 1351( However,)1 444(7 inches.)1 359 3 2886 5520 t
+( appended to the)3 666(height are desired they should be)5 1337 2 720 5640 t
+10 CW f
+(.VG)2751 5640 w
+10 R f
+( dimensions are kept in effect)5 1193( These)1 291(command line.)1 597 3 2959 5640 t
+( The)1 216( subsequent width and/or height speci\256cations.)5 1926(until modi\256ed by)2 710 3 720 5760 t
+10 CW f
+(.VG)3608 5760 w
+10 R f
+(command sets the output line)4 1216 1 3824 5760 t
+(length to be)2 520 1 720 5880 t
+10 S1 f
+()1289 5880 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_12 {
+    pop
+    /optsize ptsize def
+    /osize size def
+    /ofont font def
+
+    optsize 2 div dup R exch R f
+    0 size 2 mul 3 div dup neg exch 0 exch rmoveto
+
+    (1) show
+    rmoveto
+    optsize R f
+    (\244) show
+    f
+    (2) show
+
+    optsize ofont f
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+1289 5880 m
+75 build_12
+1364 5880 m
+10 R f
+( historical reasons,)2 792( \(For)1 245( than the requested frame width.)5 1401(-inch less)1 404 4 1364 5880 t
+9 R f
+(MVIEW)4252 5880 w
+10 R f
+(assumes a)1 425 1 4615 5880 t
+(maximum line length of 7)4 1107 1 720 6000 t
+10 S1 f
+()1827 6000 w
+1827 6000 m
+75 build_12
+1902 6000 m
+10 R f
+(inches.\) A)1 452 1 1944 6000 t
+10 CW f
+(.VG)2438 6000 w
+10 R f
+(-speci\256ed width greater than seven inches will inhibit the)8 2422 1 2618 6000 t
+(printing of the bracketing frame mounting marks and the on-frame identi\256cation \(see)11 3397 1 720 6120 t
+10 CW f
+(.VE)4142 6120 w
+10 R f
+(in \2473.2\).)1 336 1 4347 6120 t
+(The)720 6300 w
+9 R f
+(MVIEW)915 6300 w
+10 R f
+( the)1 165(package automatically adjusts the values of point size and vertical line spacing to \256ll)13 3603 2 1272 6300 t
+( this)1 183(frame. In)1 403 2 720 6420 t
+10 I f
+(automatic)1344 6420 w
+10 R f
+(mode, the point size and vertical spacing for each view graph is printed at the)14 3259 1 1781 6420 t
+( user may wish to override the automatic mode of)9 2145(terminal. The)1 581 2 720 6540 t
+9 R f
+(MVIEW)3487 6540 w
+10 R f
+(and force the operation of a)5 1194 1 3846 6540 t
+(particular view graph to be in manual mode by designating the point size and vertical line spacing.)16 3936 1 720 6660 t
+( \()1 65(A null argument)2 667 2 720 6840 t
+10 CW f
+("")1452 6840 w
+10 R f
+( For)1 196(\) may be used to retain a particular default and override a subsequent argument.)13 3272 2 1572 6840 t
+(example,)720 6960 w
+10 CW f
+(.VG "" "" 18 22)4 900 1 870 7140 t
+10 R f
+(sets the point size to 18 and the vertical line spacing to 22 without changing the default frame dimensions.)18 4243 1 720 7320 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 HB f
+(MVIEW 3)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 3.2  , HEADING = Terminating a View Graph with \&.VE]
+10 B f
+( a View Graph with)4 839(3.2 Terminating)1 714 2 720 960 t
+10 CB f
+(.VE)2298 960 w
+10 R f
+(The)720 1140 w
+10 CW f
+(.VE)912 1140 w
+10 R f
+(command will accept a line of identifying text to appear in the lower right hand corner of the)17 3911 1 1129 1140 t
+( identifying string is changed by a)6 1510(concluded view graph and all subsequent view graphs unless the)9 2810 2 720 1260 t
+(subsequent)720 1380 w
+10 CW f
+(.VE)1189 1380 w
+10 R f
+( example,)1 388(command. For)1 608 2 1394 1380 t
+10 CW f
+(.VE jns)1 420 1 870 1560 t
+10 R f
+(uses the author's initials as an on-frame identi\256er on the view graph shown in Example 4 of the Appendix.)18 4258 1 720 1740 t
+(One or more lines of text typed after the)8 1602 1 720 1920 t
+10 CW f
+(.VE)2347 1920 w
+10 R f
+(line and before the next)4 942 1 2552 1920 t
+10 CW f
+(.VG)3519 1920 w
+10 R f
+(will appear under the view graph)5 1316 1 3724 1920 t
+( example,)1 388( For)1 189(off the frame.)2 545 3 720 2040 t
+10 CW f
+(.VE)870 2220 w
+(SIZES)870 2340 w
+(Example 5)1 540 1 870 2460 t
+10 R f
+( This)1 237( view graph shown in Example 5 of the Appendix.)9 2095(produced the two-line off-frame identi\256er on the)6 1988 3 720 2640 t
+(latter technique is preferred by some for view graph identi\256cation.)9 2650 1 720 2760 t
+( example,)1 388( For)1 189(Both on- and off-frame identi\256ers can be used on the same view graph as well.)14 3146 3 720 2940 t
+10 CW f
+(.VE jns)1 420 1 870 3120 t
+(Bullet List)1 660 1 870 3240 t
+10 R f
+(produced the identi\256ers on the view graph shown in Example 6 of the Appendix.)13 3229 1 720 3420 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 4.  , HEADING = ADDING EMPHASIS TO A VIEW GRAPH]
+10 B f
+( EMPHASIS TO A VIEW GRAPH)5 1504(4. ADDING)1 530 2 720 3660 t
+10 R f
+(Within a view graph, that is, between a)7 1624 1 720 3840 t
+10 CW f
+(.VG)2379 3840 w
+10 R f
+(and its closing)2 598 1 2594 3840 t
+10 CW f
+(.VE)3227 3840 w
+10 R f
+(, there are a number of simple facilities)7 1633 1 3407 3840 t
+(which can be used to add emphasis and clarify a presentation.)10 2464 1 720 3960 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.1  , HEADING = Titles]
+10 B f
+(4.1 Titles)1 414 1 720 4140 t
+10 R f
+(The)720 4320 w
+10 CW f
+(.T)905 4320 w
+10 R f
+( and reproduce it centered, slightly larger and bolder than the)10 2496(command will accept a string of text)6 1489 2 1055 4320 t
+( graph, however, it is recommended for use to)8 1891( can be used anywhere in the view)7 1427( It)1 119(remainder of the text.)3 883 4 720 4440 t
+( example, the command)3 954( For)1 189(provide centered view graph titles.)4 1383 3 720 4560 t
+10 CW f
+(.T FONTS FOR EMPHASIS)3 1260 1 870 4740 t
+10 R f
+(produced the title shown in Example 4 of the Appendix.)9 2242 1 720 4920 t
+(The)720 5100 w
+10 CW f
+(.TU)908 5100 w
+10 R f
+(command functions similarly to the)4 1454 1 1121 5100 t
+10 CW f
+(.T)2608 5100 w
+10 R f
+( underlined title)2 651( can be used to provide an)6 1090(command. It)1 538 3 2761 5100 t
+( example, the command)3 954( For)1 189(which appears larger, bolder and centered.)5 1691 3 720 5220 t
+10 CW f
+(.TU CHANGING SIZES)2 1080 1 870 5400 t
+10 R f
+(produced the underlined title shown in Example 5 of the Appendix.)10 2694 1 720 5580 t
+(Fifty percent additional spacing is inserted between titles and the text that follows.)12 3294 1 720 5760 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.2  , HEADING = Font Control]
+10 B f
+( Control)1 358(4.2 Font)1 375 2 720 5940 t
+10 R f
+(The)720 6120 w
+9 R f
+(MVIEW)904 6120 w
+10 R f
+( family)1 293( Each)1 256( Times Roman, and Palatino.)4 1189( Helvetica,)1 464( font families:)2 575(package recognizes three)2 1013 6 1250 6120 t
+( italic, bold, and bold-italic typeface to complement the particular typeface)10 3173(of fonts includes a regular,)4 1147 2 720 6240 t
+( all input examples in this document\))6 1507( addition, the typewriter-like Constant Width font \(used for)8 2391(design. In)1 422 3 720 6360 t
+(is available with each font family.)5 1359 1 720 6480 t
+(By default,)1 444 1 720 6660 t
+9 R f
+(MVIEW)1187 6660 w
+10 R f
+( different family)2 656( A)1 123( using the sans-serif Helvetica font family.)6 1706(will generate view graphs)3 1028 4 1527 6660 t
+(of fonts can be requested by the)6 1341 1 720 6780 t
+10 CW f
+(-rf)2098 6780 w
+10 I f
+(N)2278 6780 w
+10 R f
+(option on the)2 550 1 2398 6780 t
+10 I f
+(troff)2984 6780 w
+10 R f
+(command line where)2 859 1 3193 6780 t
+10 I f
+(N)4088 6780 w
+10 R f
+(selects the following)2 849 1 4191 6780 t
+(family of fonts:)2 622 1 720 6900 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 HB f
+(4 MVIEW)1 4320 1 720 600 t
+10 S f
+(_ ______________________________________________)1 2334 1 1713 860 t
+10 I f
+(N)1763 980 w
+10 R f
+(Family Fonts)1 1148 1 1980 980 t
+10 S f
+(_ ______________________________________________)1 2334 1 1713 1000 t
+10 CW f
+(0)1766 1120 w
+10 R f
+(Helvetica \(default\))1 775 1 1980 1120 t
+10 H f
+(Helvetica)2905 1120 w
+10 HI f
+(Helvetica Oblique)1 786 1 2905 1240 t
+10 HB f
+(Helvetica Bold)1 691 1 2905 1360 t
+10 HX f
+(Helvetica Bold Oblique)2 1092 1 2905 1480 t
+10 S f
+(_ ______________________________________________)1 2334 1 1713 1500 t
+10 CW f
+(1)1766 1620 w
+10 R f
+( Roman)1 314( Times)1 611(Times Roman)1 564 3 1980 1620 t
+10 I f
+(Times Roman Italic)2 783 1 2905 1740 t
+10 B f
+(Times Roman Bold)2 823 1 2905 1860 t
+10 BI f
+(Times Roman Bold Italic)3 1038 1 2905 1980 t
+10 S f
+(_ ______________________________________________)1 2334 1 1713 2000 t
+10 CW f
+(2)1766 2120 w
+10 R f
+(Palatino)1980 2120 w
+10 PA f
+(Palatino)2905 2120 w
+10 PI f
+(Palatino Italic)1 570 1 2905 2240 t
+10 PB f
+(Palatino Bold)1 619 1 2905 2360 t
+10 PX f
+(Palatino Bold Italic)2 902 1 2905 2480 t
+10 S f
+( \347)1 -2334(_ ______________________________________________)1 2334 2 1713 2500 t
+(\347)1713 2460 w
+(\347)1713 2360 w
+(\347)1713 2260 w
+(\347)1713 2160 w
+(\347)1713 2060 w
+(\347)1713 1960 w
+(\347)1713 1860 w
+(\347)1713 1760 w
+(\347)1713 1660 w
+(\347)1713 1560 w
+(\347)1713 1460 w
+(\347)1713 1360 w
+(\347)1713 1260 w
+(\347)1713 1160 w
+(\347)1713 1060 w
+(\347)1713 960 w
+(\347)4047 2500 w
+(\347)4047 2460 w
+(\347)4047 2360 w
+(\347)4047 2260 w
+(\347)4047 2160 w
+(\347)4047 2060 w
+(\347)4047 1960 w
+(\347)4047 1860 w
+(\347)4047 1760 w
+(\347)4047 1660 w
+(\347)4047 1560 w
+(\347)4047 1460 w
+(\347)4047 1360 w
+(\347)4047 1260 w
+(\347)4047 1160 w
+(\347)4047 1060 w
+(\347)4047 960 w
+10 R f
+(The)720 2680 w
+9 R f
+(MVIEW)902 2680 w
+10 R f
+(package offers \256ve font emphasis commands:)5 1847 1 1246 2680 t
+10 CW f
+(.R)3122 2680 w
+10 R f
+(selects the regular font,)3 943 1 3271 2680 t
+10 CW f
+(.I)4243 2680 w
+10 R f
+(selects the italic)2 648 1 4392 2680 t
+(font,)720 2800 w
+10 CW f
+(.B)931 2800 w
+10 R f
+(selects the bold font,)3 827 1 1076 2800 t
+10 CW f
+(.BI)1928 2800 w
+10 R f
+(selects the bold-italic font, and)4 1229 1 2133 2800 t
+10 CW f
+(.CW)3387 2800 w
+10 R f
+( The)1 205(selects the constant-width font.)3 1243 2 3592 2800 t
+( lines of output by preceding the text lines by)9 1852(user may switch the typeface for one or more)8 1838 2 720 2920 t
+10 I f
+(one)4440 2920 w
+10 R f
+(of the font)2 426 1 4614 2920 t
+(emphasis commands.)1 855 1 720 3040 t
+(Consider a \256le named ``mview.ex4'' which contains the following text:)9 2863 1 720 3220 t
+10 CW f
+(.VG)870 3400 w
+(.T FONTS FOR EMPHASIS)3 1260 1 870 3520 t
+(Fonts are sometimes used for emphasis.)5 2280 1 870 3640 t
+(.I)870 3760 w
+(This is the italic font.)4 1440 1 870 3880 t
+(.B)870 4000 w
+(This is the bold font.)4 1320 1 870 4120 t
+(.BI)870 4240 w
+(This is the bold-italic font.)4 1740 1 870 4360 t
+(.CW)870 4480 w
+(This is constant width.)3 1380 1 870 4600 t
+(.R)870 4720 w
+(Now back to the regular font.)5 1740 1 870 4840 t
+(.VE jns)1 420 1 870 4960 t
+10 R f
+(The formatting command line)3 1196 1 720 5140 t
+10 CW f
+(troff -mview -rf2 mview.ex4 |)4 1740 1 870 5320 t
+10 S f
+(\274)2670 5320 w
+10 R f
+( that the Palatino font family is)6 1299( Note)1 254( Example 4 of the Appendix.)5 1204(will produce the view graph shown in)6 1563 4 720 5500 t
+( this view graph and that each line of text appears in the appropriate font according to the font)18 3982(used for)1 338 2 720 5620 t
+(emphasis commands used above.)3 1326 1 720 5740 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 4.3  , HEADING = Point Size Control]
+10 B f
+( Size Control)2 555(4.3 Point)1 403 2 720 5920 t
+10 R f
+(Two commands,)1 674 1 720 6100 t
+10 CW f
+(.S)1427 6100 w
+10 R f
+(and)1580 6100 w
+10 CW f
+(.L)1757 6100 w
+10 R f
+(, are de\256ned within)3 795 1 1877 6100 t
+9 R f
+(MVIEW)2703 6100 w
+10 R f
+( The)1 214(to aid in the formatting of view graphs.)7 1621 2 3051 6100 t
+10 CW f
+(.L)4920 6100 w
+10 R f
+( The)1 216( text larger.)2 479(command increases the point size to make the)7 1917 3 720 6220 t
+10 CW f
+(.S)3368 6220 w
+10 R f
+(command decreases the point size to)5 1516 1 3524 6220 t
+( use of)2 286( Each)1 259(make the text smaller.)3 912 3 720 6340 t
+10 CW f
+(.L)2212 6340 w
+10 R f
+(or)2367 6340 w
+10 CW f
+(.S)2485 6340 w
+10 R f
+( example, the)2 557( For)1 200( a change of one point in size.)7 1269(results in)1 374 4 2640 6340 t
+(following text:)1 592 1 720 6460 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 HB f
+(MVIEW 5)1 4320 1 720 600 t
+10 CW f
+(.VG)870 960 w
+(.TU CHANGING SIZES)2 1080 1 870 1080 t
+(Changing the point size \(smaller or larger\) by a single)9 3300 1 870 1200 t
+( change of several points)4 1500( A)1 180(point may not be noticeable.)4 1680 3 870 1320 t
+(may be necessary to see the difference.)6 2340 1 870 1440 t
+(.sp)870 1560 w
+(.ce 99)1 360 1 870 1680 t
+(Some normal-sized text)2 1320 1 870 1800 t
+(.S)870 1920 w
+(.S)870 2040 w
+(A Bit Smaller)2 780 1 870 2160 t
+(.S)870 2280 w
+(.S)870 2400 w
+(.S)870 2520 w
+(.S)870 2640 w
+(Much Smaller)1 720 1 870 2760 t
+(.L)870 2880 w
+(.L)870 3000 w
+(A Bit Larger)2 720 1 870 3120 t
+(.L)870 3240 w
+(.L)870 3360 w
+(.L)870 3480 w
+(.L)870 3600 w
+(Return to the normal point size)5 1860 1 870 3720 t
+(.VE)870 3840 w
+(SIZES)870 3960 w
+(Example 5)1 540 1 870 4080 t
+10 R f
+( that the number of)4 772( Note)1 247( shown in Example 5 of the Appendix.)7 1564(will produce the view graph)4 1128 4 720 4260 t
+10 CW f
+(.L)4459 4260 w
+10 R f
+(commands)4607 4260 w
+(must match the number of)4 1049 1 720 4380 t
+10 CW f
+(.S)1794 4380 w
+10 R f
+(commands in order to return the text to the normal \(original\) point size.)12 2855 1 1939 4380 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 5.  , HEADING = GENERATING LISTS WITHIN A VIEW GRAPH]
+10 B f
+( LISTS WITHIN A VIEW GRAPH)5 1516(5. GENERATING)1 809 2 720 4620 t
+10 R f
+( conveying)1 461(Lists are a series of items which bear a unique marking in the output text for purposes of)17 3859 2 720 4800 t
+( in Example 6 of the Appendix was generated)8 1888( example, the view graph shown)5 1337( For)1 198(emphasis or structure.)2 897 4 720 4920 t
+(with a title macrocommand \()4 1154 1 720 5040 t
+10 CW f
+(.T)1874 5040 w
+10 R f
+(\) followed by a bullet list \()6 1066 1 1994 5040 t
+10 CW f
+(.BL)3060 5040 w
+10 R f
+(\) as follows:)2 494 1 3240 5040 t
+10 CW f
+(.VG)870 5220 w
+(.T A List Example)3 1020 1 870 5340 t
+(.BL)870 5460 w
+(.LI)870 5580 w
+(First List Item)2 900 1 870 5700 t
+(.LI)870 5820 w
+(Second List Item)2 960 1 870 5940 t
+(.LI)870 6060 w
+(Third \(last\) List Item)3 1320 1 870 6180 t
+(.LE)870 6300 w
+(.VE jns)1 420 1 870 6420 t
+(Bullet List)1 660 1 870 6540 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 HB f
+(6 MVIEW)1 4320 1 720 600 t
+10 R f
+(Lists are composed of three essential parts:)6 1719 1 720 960 t
+(1. A)1 247 1 795 1140 t
+10 I f
+(list initialization)1 661 1 1067 1140 t
+10 R f
+(command \(see \2475.1\) which designates the start of a list and its type.)12 2702 1 1753 1140 t
+(\(The)970 1260 w
+10 CW f
+(.BL)1183 1260 w
+10 R f
+(list initialization command was used for the bullet list in the previous example.\))12 3190 1 1388 1260 t
+( or more)2 338(2. One)1 341 2 795 1440 t
+10 I f
+(list items)1 359 1 1499 1440 t
+10 R f
+(\()1883 1440 w
+10 CW f
+(.LI)1916 1440 w
+10 R f
+(\) which denote the components of the list.)7 1676 1 2096 1440 t
+(3. The)1 330 1 795 1620 t
+10 I f
+(list termination)1 615 1 1150 1620 t
+10 R f
+(command \()1 452 1 1790 1620 t
+10 CW f
+(.LE)2242 1620 w
+10 R f
+(\) to specify the end of a list.)7 1115 1 2422 1620 t
+( sub-lists but each such sub-list must contain all three necessary parts of a)13 3034(Lists may be nested to generate)5 1286 2 720 1800 t
+(list as indicated above.)3 910 1 720 1920 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 5.1  , HEADING = List Initialization Commands]
+10 B f
+( Initialization Commands)2 1090(5.1 List)1 342 2 720 2100 t
+10 R f
+(The)720 2280 w
+9 R f
+(MVIEW)911 2280 w
+10 R f
+( \256ve different list formats: bullet list, dash list, marked list, outline list, and)13 3180(package offers)1 596 2 1264 2280 t
+( should be)2 415( Lists)1 247( format of the generated list.)5 1141( list initialization command serves to select the)7 1895( A)1 125(variable list.)1 497 6 720 2400 t
+(preceded by one of the following list initialization commands:)8 2487 1 720 2520 t
+10 S f
+(_ _________________________)1 1264 1 2248 2600 t
+10 R f
+( Format)1 314(Command List)1 787 2 2334 2720 t
+10 S f
+(_ _________________________)1 1264 1 2248 2740 t
+10 CW f
+(.BL)2298 2860 w
+10 R f
+(Bullet List)1 426 1 2938 2860 t
+10 CW f
+(.DL)2298 2980 w
+10 R f
+(Dash List)1 386 1 2938 2980 t
+10 CW f
+(.ML)2298 3100 w
+10 I f
+(mark)2538 3100 w
+10 R f
+(Marked List)1 491 1 2938 3100 t
+10 CW f
+(.OL)2298 3220 w
+10 I f
+(\257ag)2538 3220 w
+10 R f
+(Outline List)1 481 1 2938 3220 t
+10 CW f
+(.VL)2298 3340 w
+10 I f
+(indent)2538 3340 w
+10 R f
+(Variable List)1 524 1 2938 3340 t
+10 S f
+( \347)1 -1264(_ _________________________)1 1264 2 2248 3360 t
+(\347)2248 3300 w
+(\347)2248 3200 w
+(\347)2248 3100 w
+(\347)2248 3000 w
+(\347)2248 2900 w
+(\347)2248 2800 w
+(\347)2248 2700 w
+(\347)3512 3360 w
+(\347)3512 3300 w
+(\347)3512 3200 w
+(\347)3512 3100 w
+(\347)3512 3000 w
+(\347)3512 2900 w
+(\347)3512 2800 w
+(\347)3512 2700 w
+10 R f
+(Each of the list initialization commands are explained in detail in the subsections that follow.)14 3722 1 720 3540 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 5.1.1  , HEADING = Bullet List]
+10 B f
+( List)1 192(5.1.1 Bullet)1 506 2 720 3720 t
+10 CW f
+(.BL)870 3900 w
+10 R f
+( and the corresponding view graph shown in)7 1919( example above)2 666( \(See)1 247(Each item is marked with a bullet.)6 1488 4 720 4080 t
+(Example 6 of the Appendix.\))4 1162 1 720 4200 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 5.1.2  , HEADING = Dash List]
+10 B f
+( List)1 192(5.1.2 Dash)1 467 2 720 4380 t
+10 CW f
+(.DL)870 4560 w
+10 R f
+(Each item is marked with a long \()7 1351 1 720 4740 t
+10 I f
+(em)2071 4740 w
+10 R f
+(\) dash.)1 266 1 2195 4740 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 5.1.3  , HEADING = Marked List]
+10 B f
+( List)1 192(5.1.3 Marked)1 594 2 720 4920 t
+10 CW f
+(.ML)870 5100 w
+10 I f
+(mark)1110 5100 w
+10 R f
+(The)720 5280 w
+10 I f
+(mark)900 5280 w
+10 R f
+(string selects the symbol used to mark each item in the list:)11 2363 1 1130 5280 t
+10 S f
+(_ ____________________________________________)1 2238 1 1761 5360 t
+10 I f
+(mark)1858 5480 w
+10 R f
+(Symbol Description)1 1308 1 2261 5480 t
+10 S f
+(_ ____________________________________________)1 2238 1 1761 5500 t
+10 CW f
+(\\*\(BU)1811 5620 w
+10 S f
+(\267)2394 5620 w
+10 R f
+(Bullet)2723 5620 w
+10 CW f
+(\\*\(DA)1811 5740 w
+10 R f
+(\320 Dash)1 561 1 2367 5740 t
+10 CW f
+(\\*\(CI)1811 5860 w
+10 S1 f
+()2379 5860 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_ci {
+    pop
+    size 3 mul 8 div /rad exch def
+    currentpoint
+    newpath
+    rad add exch rad add exch rad 0 360 arc
+    stroke
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+2379 5860 m
+75 build_ci
+2454 5860 m
+10 R f
+(Circle)2723 5860 w
+10 CW f
+(\\*\(SQ)1811 5980 w
+10 S1 f
+()2392 5980 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_sq {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    font B eq {fill} {stroke} ifelse
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+2392 5980 m
+50 build_sq
+2442 5980 m
+10 R f
+(Square)2723 5980 w
+10 CW f
+(\\*\(FS)1811 6100 w
+10 S1 f
+()2392 6100 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_bx {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    fill
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+2392 6100 m
+50 build_bx
+2442 6100 m
+10 R f
+(Box \(Filled Square\))2 794 1 2723 6100 t
+10 CW f
+(\\*\(RH)1811 6220 w
+10 S1 f
+()2367 6220 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_rh {
+pop
+gsave
+size .0022 mul dup scale
+currentpoint translate
+
+15 66 moveto
+15 86 lineto
+16 131 lineto
+17 146 lineto
+18 158 lineto
+19 167 lineto
+21 181 lineto
+24 190 lineto
+34 193 lineto
+49 189 lineto
+58 182 lineto
+60 177 lineto
+60 166 lineto
+59 156 lineto
+58 143 lineto
+57 130 lineto
+56 117 lineto
+55 102 lineto
+54 42 lineto
+53 39 lineto
+49 35 lineto
+34 34 lineto
+19 39 lineto
+16 47 lineto
+15 66 lineto
+stroke
+
+65 60 moveto
+65 111 lineto
+66 127 lineto
+67 139 lineto
+69 153 lineto
+72 163 lineto
+83 171 lineto
+98 177 lineto
+113 182 lineto
+128 187 lineto
+143 190 lineto
+158 194 lineto
+173 196 lineto
+188 199 lineto
+203 201 lineto
+218 203 lineto
+233 205 lineto
+248 205 lineto
+263 206 lineto
+278 206 lineto
+293 206 lineto
+308 206 lineto
+323 206 lineto
+338 205 lineto
+353 203 lineto
+368 202 lineto
+383 200 lineto
+394 197 lineto
+389 190 lineto
+389 180 lineto
+391 176 lineto
+391 173 lineto
+380 173 lineto
+365 173 lineto
+350 174 lineto
+335 175 lineto
+320 176 lineto
+305 176 lineto
+290 176 lineto
+275 177 lineto
+260 177 lineto
+245 177 lineto
+240 173 lineto
+240 170 lineto
+245 165 lineto
+260 164 lineto
+275 164 lineto
+290 164 lineto
+305 163 lineto
+320 160 lineto
+327 155 lineto
+330 149 lineto
+330 134 lineto
+328 129 lineto
+323 124 lineto
+309 121 lineto
+294 121 lineto
+279 121 lineto
+264 121 lineto
+249 121 lineto
+234 121 lineto
+228 118 lineto
+228 112 lineto
+234 109 lineto
+249 109 lineto
+264 109 lineto
+279 108 lineto
+294 108 lineto
+306 104 lineto
+311 97 lineto
+312 91 lineto
+312 88 lineto
+311 82 lineto
+305 74 lineto
+290 72 lineto
+275 72 lineto
+260 72 lineto
+245 73 lineto
+230 73 lineto
+215 73 lineto
+205 70 lineto
+205 63 lineto
+217 60 lineto
+232 60 lineto
+247 60 lineto
+262 60 lineto
+277 57 lineto
+283 52 lineto
+285 44 lineto
+285 41 lineto
+284 35 lineto
+280 30 lineto
+268 26 lineto
+253 25 lineto
+238 26 lineto
+223 28 lineto
+208 31 lineto
+193 33 lineto
+178 34 lineto
+163 33 lineto
+148 31 lineto
+133 28 lineto
+118 27 lineto
+103 28 lineto
+88 34 lineto
+73 43 lineto
+67 52 lineto
+65 60 lineto
+stroke
+
+396 180 moveto
+396 188 lineto
+399 194 lineto
+410 196 lineto
+416 190 lineto
+416 180 lineto
+415 177 lineto
+411 173 lineto
+400 173 lineto
+396 180 lineto
+stroke
+
+grestore
+} def
+%%EndGlobal
+/saveobj save def
+mark
+10 S1 f
+2367 6220 m
+100 build_rh
+2467 6220 m
+10 R f
+(Right Hand)1 464 1 2723 6220 t
+10 CW f
+(\\*\(NU)1811 6340 w
+10 R f
+(Null \(produces only an indent\))4 1226 1 2723 6340 t
+10 S f
+( \347)1 -2238(_ ____________________________________________)1 2238 2 1761 6360 t
+(\347)1761 6260 w
+(\347)1761 6160 w
+(\347)1761 6060 w
+(\347)1761 5960 w
+(\347)1761 5860 w
+(\347)1761 5760 w
+(\347)1761 5660 w
+(\347)1761 5560 w
+(\347)1761 5460 w
+(\347)3999 6360 w
+(\347)3999 6260 w
+(\347)3999 6160 w
+(\347)3999 6060 w
+(\347)3999 5960 w
+(\347)3999 5860 w
+(\347)3999 5760 w
+(\347)3999 5660 w
+(\347)3999 5560 w
+(\347)3999 5460 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Page: 7 7
+/saveobj save def
+mark
+7 pagesetup
+10 HB f
+(MVIEW 7)1 4320 1 720 600 t
+10 R f
+( items are marked with the box \(\256lled)7 1536(For example, consider a marked list and sub-list where \256rst-level list)10 2784 2 720 960 t
+( following text:)2 617( The)1 205(square\) symbol and second-level list items are marked with the square symbol.)11 3151 3 720 1080 t
+10 CW f
+(.VG 7 8 18 20)4 780 1 870 1260 t
+(.T READER INQUIRY)2 1020 1 870 1380 t
+(.I)870 1500 w
+(Please check all that apply:)4 1680 1 870 1620 t
+(.R)870 1740 w
+(.ML \\*\(FS)1 540 1 870 1860 t
+(.LI)870 1980 w
+(Why did you use this document?)5 1800 1 870 2100 t
+(.ML \\*\(SQ)1 540 1 870 2220 t
+(.LI)870 2340 w
+(To learn procedures)2 1140 1 870 2460 t
+(.LI)870 2580 w
+(To reference information)2 1440 1 870 2700 t
+(.LI)870 2820 w
+(To solve a problem)3 1080 1 870 2940 t
+(.LI)870 3060 w
+(Other:)870 3180 w
+(.LE)870 3300 w
+(.LI)870 3420 w
+(What changes would improve this document?)5 2460 1 870 3540 t
+(.ML \\*\(SQ)1 540 1 870 3660 t
+(.LI)870 3780 w
+(Change structure and organization)3 1980 1 870 3900 t
+(.LI)870 4020 w
+(Add more examples)2 1020 1 870 4140 t
+(.LI)870 4260 w
+(More detailed information)2 1500 1 870 4380 t
+(.LI)870 4500 w
+(Other:)870 4620 w
+(.LE)870 4740 w
+(.LI)870 4860 w
+(Comments:)870 4980 w
+(.LE)870 5100 w
+(.VE DocuCenter)1 840 1 870 5220 t
+(Reader Inquiry)1 840 1 870 5340 t
+10 R f
+(will produce the view graph shown in Example 7 of the Appendix.)11 2663 1 720 5520 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 5.1.4  , HEADING = Outline List]
+10 B f
+( List)1 192(5.1.4 Outline)1 573 2 720 5700 t
+10 CW f
+(.OL)870 5880 w
+10 I f
+(\257ag)1110 5880 w
+10 R f
+( marked with capital Roman)4 1164( list items are)3 557( \256rst-level)1 440(The list will be generated in standard outline format:)8 2159 4 720 6060 t
+( default, the list)3 646( By)1 175( with capital letters, third-level with Arabic numerals, etc.)8 2374(numerals, second-level lists)2 1125 4 720 6180 t
+(item mark has the format ``#.'' where # represents the numeral generated for that item.)14 3463 1 720 6300 t
+(The)720 6480 w
+10 CW f
+(.OL)923 6480 w
+10 R f
+(command allows for the provision of an optional mark separation \257ag which speci\256es the)13 3888 1 1152 6480 t
+( for)1 144( following values)2 702( The)1 209(separation symbol between the outline numeral and the list item at a given level.)13 3265 4 720 6600 t
+10 I f
+(\257ag)720 6720 w
+10 R f
+( item mark \(where ``#'' represents the outline)7 1981(will generate the corresponding format for the list)7 2142 2 917 6720 t
+(numeral\):)720 6840 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 7 7
+%%Page: 8 8
+/saveobj save def
+mark
+8 pagesetup
+10 HB f
+(8 MVIEW)1 4320 1 720 600 t
+10 S f
+(_ ___________________)1 959 1 2400 860 t
+10 I f
+(\257ag)2453 980 w
+10 R f
+(Mark Format)1 530 1 2756 980 t
+10 S f
+(_ ___________________)1 959 1 2400 1000 t
+10 CW f
+(1)2498 1120 w
+10 R f
+(#. \(default\))1 511 1 2798 1120 t
+10 CW f
+(2)2498 1240 w
+10 R f
+(#\))2794 1240 w
+10 CW f
+(3)2498 1360 w
+10 R f
+(\(#\))2778 1360 w
+10 CW f
+(4)2498 1480 w
+10 R f
+([#])2778 1480 w
+10 CW f
+(5)2498 1600 w
+10 S f
+(<)2756 1600 w
+10 R f
+(#)2811 1600 w
+10 S f
+(>)2861 1600 w
+10 CW f
+(6)2498 1720 w
+10 R f
+({#})2763 1720 w
+10 S f
+( \347)1 -959(_ ___________________)1 959 2 2400 1740 t
+(\347)2400 1660 w
+(\347)2400 1560 w
+(\347)2400 1460 w
+(\347)2400 1360 w
+(\347)2400 1260 w
+(\347)2400 1160 w
+(\347)2400 1060 w
+(\347)2400 960 w
+(\347)3359 1740 w
+(\347)3359 1660 w
+(\347)3359 1560 w
+(\347)3359 1460 w
+(\347)3359 1360 w
+(\347)3359 1260 w
+(\347)3359 1160 w
+(\347)3359 1060 w
+(\347)3359 960 w
+10 R f
+( the \256rst- and second-level list items)6 1491(For example, consider an outline list \(nested three levels deep\) where)10 2829 2 720 1920 t
+( following text:)2 617( The)1 205(use the standard mark format and the third-level list items use the ``\(#\)'' mark format.)14 3435 3 720 2040 t
+10 CW f
+(.VG)870 2220 w
+(.OL)870 2340 w
+(.LI)870 2460 w
+(Research)870 2580 w
+(.LI)870 2700 w
+(Electronics Technology)1 1320 1 870 2820 t
+(.OL)870 2940 w
+(.LI)870 3060 w
+(Integrated Circuits Development)2 1860 1 870 3180 t
+(.OL 3)1 300 1 870 3300 t
+(.LI)870 3420 w
+(LSI)870 3540 w
+(.LI)870 3660 w
+(VLSI)870 3780 w
+(.LE)870 3900 w
+(.LI)870 4020 w
+(Electronic Device Materials)2 1620 1 870 4140 t
+(.LI)870 4260 w
+(System Assembly Technology)2 1560 1 870 4380 t
+(.LE)870 4500 w
+(.LI)870 4620 w
+(Network Planning)1 960 1 870 4740 t
+(.LI)870 4860 w
+(Transmission Systems)1 1200 1 870 4980 t
+(.LE)870 5100 w
+(.VE)870 5220 w
+10 R f
+(will produce the view graph shown in Example 8 of the Appendix.)11 2663 1 720 5400 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 5.1.5  , HEADING = Variable List]
+10 B f
+( List)1 192(5.1.5 Variable)1 622 2 720 5580 t
+10 CW f
+(.VL)870 5760 w
+10 I f
+(indent)1110 5760 w
+10 R f
+( argument to)2 511( The)1 208(The variable list allows the user to label each item with a string of varying length.)15 3298 3 720 5940 t
+10 CW f
+(.VL)4765 5940 w
+10 R f
+(is)4973 5940 w
+( indent should be longer than the longest label)8 1955( The)1 220(the indent in characters \(ens\) required by the label.)8 2145 3 720 6060 t
+( labels themselves are speci\256ed as arguments to the list item \()11 2461(expected. The)1 584 2 720 6180 t
+10 CW f
+(.LI)3765 6180 w
+10 R f
+(\) commands.)1 516 1 3945 6180 t
+(Some view graph formats can be quite effective when produced in)10 2699 1 720 6360 t
+10 I f
+(\256lled)3449 6360 w
+10 R f
+(mode \(using)1 503 1 3679 6360 t
+10 CW f
+(.fi)4213 6360 w
+10 R f
+( for)1 147(\). Consider,)1 500 2 4393 6360 t
+( was produced with the)4 986( It)1 126( the Appendix.)2 621(example, the variable list view graph shown in Example 9 of)10 2587 4 720 6480 t
+(following text:)1 592 1 720 6600 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 8 8
+%%Page: 9 9
+/saveobj save def
+mark
+9 pagesetup
+10 HB f
+(MVIEW 9)1 4320 1 720 600 t
+10 CW f
+(.VG 7 7 18 20)4 780 1 870 960 t
+(.fi)870 1080 w
+(.na)870 1200 w
+(.T TYPESETTING FACILITIES)2 1500 1 870 1320 t
+(.VL 16)1 360 1 870 1440 t
+(.LI Preprocessors)1 1020 1 870 1560 t
+(A number of)2 660 1 870 1680 t
+(.I)870 1800 w
+(troff)870 1920 w
+(.R)870 2040 w
+(preprocessors are available)2 1620 1 870 2160 t
+(to aid in formatting view graphs)5 1920 1 870 2280 t
+(with tables, equations, pictures, and graphs.)5 2700 1 870 2400 t
+(.LI Formatter)1 780 1 870 2520 t
+(The)870 2640 w
+(.I)870 2760 w
+(troff)870 2880 w
+(.R)870 3000 w
+(text formatter is the heart of)5 1800 1 870 3120 t
+(UNIX\\*\(Rg system text processing.)3 1980 1 870 3240 t
+(This software does the actual formatting)5 2400 1 870 3360 t
+(of the input text.)3 1080 1 870 3480 t
+(.LI Postprocessors)1 1080 1 870 3600 t
+(Several postprocessors are available)3 2160 1 870 3720 t
+(to translate the)2 960 1 870 3840 t
+(.I)870 3960 w
+(troff)870 4080 w
+(.R)870 4200 w
+(output language)1 900 1 870 4320 t
+(to the page description language)4 1920 1 870 4440 t
+(needed to drive a particular type)5 1980 1 870 4560 t
+(of output device:)2 1020 1 870 4680 t
+(.I)870 4800 w
+(dpost)870 4920 w
+(.R)870 5040 w
+(prepares output for PostScript)3 1800 1 870 5160 t
+(printers and typesetters,)2 1500 1 870 5280 t
+(.I)870 5400 w
+(dimpress)870 5520 w
+(.R)870 5640 w
+(for Imagen printers, and)3 1440 1 870 5760 t
+(.I)870 5880 w
+(dpcl)870 6000 w
+(.R)870 6120 w
+(for HP laser printers.)3 1320 1 870 6240 t
+(.LE)870 6360 w
+(.VE Example 9)2 780 1 870 6480 t
+(Variable List in Filled mode)4 1680 1 870 6600 t
+10 R f
+(It is advisable to turn off justi\256cation \(using)7 1758 1 720 6780 t
+10 CW f
+(.na)2503 6780 w
+10 R f
+( in \256lled mode; having a ragged)6 1277(\) for view graphs produced)4 1080 2 2683 6780 t
+(right margin will avoid unsightly gaps between words.)7 2182 1 720 6900 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 9 9
+%%Page: 10 10
+/saveobj save def
+mark
+10 pagesetup
+10 HB f
+(10 MVIEW)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 6.  , HEADING = USING MVIEW WITH troff  PREPROCESSORS]
+10 B f
+(6. USING)1 442 1 720 960 t
+9 B f
+(MVIEW)1187 960 w
+10 B f
+(WITH)1547 960 w
+10 BI f
+(troff)1856 960 w
+10 B f
+(PREPROCESSORS)2072 960 w
+10 R f
+(The)720 1140 w
+9 R f
+(MVIEW)906 1140 w
+10 R f
+(macro commands are compatible with the)5 1712 1 1254 1140 t
+10 I f
+(troff)2999 1140 w
+10 R f
+(preprocessors \()1 615 1 3205 1140 t
+10 I f
+(tbl)3820 1140 w
+10 R f
+(,)3934 1140 w
+10 I f
+(eqn)3993 1140 w
+10 R f
+(,)4145 1140 w
+10 I f
+(pic)4204 1140 w
+10 R f
+(, and)1 203 1 4334 1140 t
+10 I f
+(grap)4571 1140 w
+10 R f
+(\). The)1 272 1 4768 1140 t
+(preprocessor macros \()2 882 1 720 1260 t
+10 CW f
+(.TS)1602 1260 w
+10 R f
+(and)1808 1260 w
+10 CW f
+(.TE)1978 1260 w
+10 R f
+(for)2184 1260 w
+10 I f
+(tbl)2326 1260 w
+10 R f
+(,)2440 1260 w
+10 CW f
+(.EQ)2491 1260 w
+10 R f
+(and)2697 1260 w
+10 CW f
+(.EN)2867 1260 w
+10 R f
+(for)3073 1260 w
+10 I f
+(eqn)3215 1260 w
+10 R f
+(,)3367 1260 w
+10 CW f
+(.PS)3417 1260 w
+10 R f
+(and)3622 1260 w
+10 CW f
+(.PE)3791 1260 w
+10 R f
+(for)3996 1260 w
+10 I f
+(pic)4137 1260 w
+10 R f
+(, and)1 194 1 4267 1260 t
+10 CW f
+(.G1)4486 1260 w
+10 R f
+(and)4691 1260 w
+10 CW f
+(.G2)4860 1260 w
+10 R f
+(for)720 1380 w
+10 I f
+(grap)874 1380 w
+10 R f
+( in)1 117(\) act as \257ags for the respective preprocessor and are also de\256ned)11 2710 2 1071 1380 t
+9 R f
+(MVIEW)3935 1380 w
+10 R f
+(to generate)1 454 1 4289 1380 t
+10 S1 f
+()4782 1380 w
+4782 1380 m
+75 build_12
+4857 1380 m
+10 R f
+(-line)4857 1380 w
+(vertical space to offset it from any surrounding text.)8 2077 1 720 1500 t
+(Since)720 1680 w
+9 R f
+(MVIEW)968 1680 w
+10 R f
+(determines the point size and vertical spacing for each view graph \(in automatic mode\), you)14 3729 1 1311 1680 t
+( this case, you may need to)6 1151( In)1 145( sized incorrectly.)2 736(may \256nd that some text generated by a preprocessor is)9 2288 4 720 1800 t
+( graph in manual mode\) as)5 1097(explicitly set the size of the text used in the view graph \(i.e., generate the view)15 3223 2 720 1920 t
+( potential problem for each)4 1149( Any)1 239( explicitly state the size of text generated by the preprocessor.)10 2634(well as)1 298 4 720 2040 t
+(preprocessor and an appropriate resolution are noted in the subsections that follow.)11 3316 1 720 2160 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 6.1  , HEADING = Generating Tables]
+10 B f
+( Tables)1 309(6.1 Generating)1 658 2 720 2340 t
+10 R f
+(In many cases,)2 602 1 720 2520 t
+10 I f
+(tbl)1354 2520 w
+10 R f
+(can be used to enhance the formatting facilities of)8 2046 1 1492 2520 t
+9 R f
+(MVIEW)3568 2520 w
+10 R f
+(. The)1 237 1 3883 2520 t
+10 CW f
+(.TS)4152 2520 w
+10 R f
+(and)4364 2520 w
+10 CW f
+(.TE)4540 2520 w
+10 R f
+(macros)4752 2520 w
+( end of)2 277(mark the start and)3 721 2 720 2640 t
+10 I f
+(tbl)1743 2640 w
+10 R f
+( a \256le named ``mview.ex10'' which contains the following text)9 2524(input. Consider)1 642 2 1874 2640 t
+(\(the symbol)1 475 1 720 2760 t
+7 ZD f
+(\344)1220 2760 w
+10 R f
+(represents the tab character\):)3 1148 1 1309 2760 t
+10 CW f
+(.VG)870 2940 w
+(.T READABILITY OF TEXT)3 1320 1 870 3060 t
+(.S)870 3180 w
+(.S)870 3300 w
+(.T Line Width and Leading for 10-Point Type)7 2580 1 870 3420 t
+(.L)870 3540 w
+(.L)870 3660 w
+(.TS)870 3780 w
+(box;)870 3900 w
+( c)1 120( |)1 240( c)1 120( |)1 240( c)1 120( |)1 240( c)1 120(c ||)1 300 8 870 4020 t
+( c)1 120( |)1 240( c)1 120( |)1 240( c)1 120( |)1 240( c)1 120(c ||)1 300 8 870 4140 t
+(r2 || ne2 | ne2 | ne2 | ne.)8 1620 1 870 4260 t
+(Line)870 4380 w
+7 ZD f
+(\344)1110 4380 w
+10 CW f
+(Set)1174 4380 w
+7 ZD f
+(\344)1354 4380 w
+10 CW f
+(1-Point)1418 4380 w
+7 ZD f
+(\344)1838 4380 w
+10 CW f
+(2-Point)1902 4380 w
+7 ZD f
+(\344)2322 4380 w
+10 CW f
+(4-Point)2386 4380 w
+(Width)870 4500 w
+7 ZD f
+(\344)1170 4500 w
+10 CW f
+(Solid)1234 4500 w
+7 ZD f
+(\344)1534 4500 w
+10 CW f
+(Leading)1598 4500 w
+7 ZD f
+(\344)2018 4500 w
+10 CW f
+(Leading)2082 4500 w
+7 ZD f
+(\344)2502 4500 w
+10 CW f
+(Leading)2566 4500 w
+(=)870 4620 w
+(9 Pica)1 360 1 870 4740 t
+7 ZD f
+(\344)1230 4740 w
+10 CW f
+(\\-9.3)1294 4740 w
+7 ZD f
+(\344)1594 4740 w
+10 CW f
+(\\-6.0)1658 4740 w
+7 ZD f
+(\344)1958 4740 w
+10 CW f
+(\\-5.3)2022 4740 w
+7 ZD f
+(\344)2322 4740 w
+10 CW f
+(\\-7.1)2386 4740 w
+(14 Pica)1 420 1 870 4860 t
+7 ZD f
+(\344)1290 4860 w
+10 CW f
+(\\-4.5)1354 4860 w
+7 ZD f
+(\344)1654 4860 w
+10 CW f
+(\\-0.6)1718 4860 w
+7 ZD f
+(\344)2018 4860 w
+10 CW f
+(\\-0.3)2082 4860 w
+7 ZD f
+(\344)2382 4860 w
+10 CW f
+(\\-1.7)2446 4860 w
+(19 Pica)1 420 1 870 4980 t
+7 ZD f
+(\344)1290 4980 w
+10 CW f
+(\\-5.0)1354 4980 w
+7 ZD f
+(\344)1654 4980 w
+10 CW f
+(\\-5.1)1718 4980 w
+7 ZD f
+(\344)2018 4980 w
+10 CW f
+(0.0)2082 4980 w
+7 ZD f
+(\344)2262 4980 w
+10 CW f
+(\\-2.0)2326 4980 w
+(31 Pica)1 420 1 870 5100 t
+7 ZD f
+(\344)1290 5100 w
+10 CW f
+(\\-3.7)1354 5100 w
+7 ZD f
+(\344)1654 5100 w
+10 CW f
+(\\-3.8)1718 5100 w
+7 ZD f
+(\344)2018 5100 w
+10 CW f
+(\\-2.4)2082 5100 w
+7 ZD f
+(\344)2382 5100 w
+10 CW f
+(\\-3.6)2446 5100 w
+(43 Pica)1 420 1 870 5220 t
+7 ZD f
+(\344)1290 5220 w
+10 CW f
+(\\-9.1)1354 5220 w
+7 ZD f
+(\344)1654 5220 w
+10 CW f
+(\\-9.0)1718 5220 w
+7 ZD f
+(\344)2018 5220 w
+10 CW f
+(\\-5.9)2082 5220 w
+7 ZD f
+(\344)2382 5220 w
+10 CW f
+(\\-8.8)2446 5220 w
+(.TE)870 5340 w
+(.VE Example 10)2 840 1 870 5460 t
+(Readability of Text)2 1140 1 870 5580 t
+(\(tbl sample\))1 720 1 870 5700 t
+10 R f
+(\(The sequence)1 578 1 720 5880 t
+10 CW f
+(\\\(mi)1323 5880 w
+10 R f
+( formatting command line)3 1041( The)1 205(generates a minus sign.\))3 965 3 1588 5880 t
+10 CW f
+(tbl mview.ex10 | troff -mview |)5 1860 1 870 6060 t
+10 S f
+(\274)2790 6060 w
+10 R f
+(will produce the view graph shown in Example 10 of the Appendix.)11 2713 1 720 6240 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 10 10
+%%Page: 11 11
+/saveobj save def
+mark
+11 pagesetup
+10 HB f
+(MVIEW 11)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 6.2  , HEADING = Generating Equations]
+10 B f
+( Equations)1 460(6.2 Generating)1 658 2 720 960 t
+10 R f
+(The)720 1140 w
+10 I f
+(eqn)902 1140 w
+10 R f
+(preprocessor can be used with)4 1210 1 1073 1140 t
+9 R f
+(MVIEW)2308 1140 w
+10 R f
+( However,)1 443( mathematics on a view graph.)5 1235(to format)1 371 3 2650 1140 t
+9 R f
+(MVIEW)4725 1140 w
+10 R f
+(is incapable of adjusting the character size of)7 1826 1 720 1260 t
+10 I f
+(eqn)2575 1260 w
+10 R f
+( by)1 128( dif\256culty can be overcome)4 1108( This)1 232(generated equations.)1 824 4 2748 1260 t
+(preceding the \256rst)2 731 1 720 1380 t
+10 CW f
+(.VG)1481 1380 w
+10 R f
+(command with an explicit)3 1056 1 1691 1380 t
+10 I f
+(eqn)2777 1380 w
+10 R f
+(command \()1 457 1 2951 1380 t
+10 CW f
+(gsize)3408 1380 w
+10 R f
+( sets the size for)4 667(\) which globally)2 665 2 3708 1380 t
+(all equations.)1 533 1 720 1500 t
+(The)720 1680 w
+10 CW f
+(.EQ)902 1680 w
+10 R f
+(and)1109 1680 w
+10 CW f
+(.EN)1280 1680 w
+10 R f
+(macros mark the start and end of)6 1320 1 1487 1680 t
+10 I f
+(eqn)2834 1680 w
+10 R f
+(input for displayed equations, and to set delimiters)7 2035 1 3005 1680 t
+( a \256le named ``mview.ex11'' which contains the following text:)9 2552( Consider)1 411(for in-line equations.)2 835 3 720 1800 t
+10 CW f
+(.VG)870 1980 w
+(.EQ)870 2100 w
+(gsize 24)1 480 1 870 2220 t
+(delim $$)1 480 1 870 2340 t
+(.EN)870 2460 w
+(.T Equations Are Easy)3 1260 1 870 2580 t
+(You do not need to be a mathematician to)8 2400 1 870 2700 t
+(format equations on the UNIX\\*\(Rg system.)5 2460 1 870 2820 t
+(For example, the input)3 1320 1 870 2940 t
+(.sp 0.5v)1 480 1 870 3060 t
+(.S)870 3180 w
+(.S)870 3300 w
+(.CW)870 3420 w
+(.ce)870 3540 w
+(sum from i=1 to n x sub i)7 1500 1 870 3660 t
+(.R)870 3780 w
+(.L)870 3900 w
+(.L)870 4020 w
+(.sp 0.5v)1 480 1 870 4140 t
+(produces $sum from i=1 to n x sub i$ on paper.)10 2760 1 870 4260 t
+(.sp)870 4380 w
+(The eqn language makes it easy!)5 1860 1 870 4500 t
+(.VE Example 11)2 840 1 870 4620 t
+(Equations Are Easy)2 1080 1 870 4740 t
+(\(eqn sample\))1 720 1 870 4860 t
+10 R f
+(The formatting command line)3 1196 1 720 5040 t
+10 CW f
+(eqn mview.ex11 | troff -rf1 -mview |)6 2160 1 870 5220 t
+10 S f
+(\274)3090 5220 w
+10 R f
+( that the Times Roman font)5 1177( Note)1 260( Example 11 of the Appendix.)5 1284(will produce the view graph shown in)6 1599 4 720 5400 t
+(family \(option)1 575 1 720 5520 t
+10 CW f
+(-rf1)1320 5520 w
+10 R f
+(\) is used for this view graph.)6 1140 1 1560 5520 t
+( view graph text, then set the equation and view graph)10 2170(If the equation size still does not match the size of the)11 2150 2 720 5700 t
+(size to the same value using both the)7 1468 1 720 5820 t
+10 I f
+(eqn)2213 5820 w
+10 CW f
+(gsize)2382 5820 w
+10 R f
+(command and the)2 710 1 2707 5820 t
+9 R f
+(MVIEW)3440 5820 w
+10 CW f
+(.VG)3780 5820 w
+10 R f
+(command:)3985 5820 w
+10 CW f
+(.EQ)870 6000 w
+(gsize 18)1 480 1 870 6120 t
+(.EN)870 6240 w
+(.VG "" "" 18)3 720 1 870 6360 t
+10 R f
+(This will ensure a uniform point size for the entire view graph.)11 2507 1 720 6540 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 11 11
+%%Page: 12 12
+/saveobj save def
+mark
+12 pagesetup
+10 HB f
+(12 MVIEW)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 6.3  , HEADING = Generating Pictures and Diagrams]
+10 B f
+( Pictures and Diagrams)3 1002(6.3 Generating)1 658 2 720 960 t
+10 R f
+(The)720 1140 w
+10 I f
+(pic)909 1140 w
+10 R f
+( used with)2 431(preprocessor can be)2 809 2 1065 1140 t
+9 R f
+(MVIEW)2338 1140 w
+10 R f
+( The)1 215(to include a picture on a view graph.)7 1528 2 2688 1140 t
+10 CW f
+(.PS)4466 1140 w
+10 R f
+(and)4681 1140 w
+10 CW f
+(.PE)4860 1140 w
+10 R f
+(macros mark the start and end of)6 1410 1 720 1260 t
+10 I f
+(pic)2172 1260 w
+10 R f
+( a \256le named ``mview.ex12'' which contains the)7 2047(input. Consider)1 658 2 2335 1260 t
+(following text:)1 592 1 720 1380 t
+10 CW f
+(.VG 7 5 20 24)4 780 1 870 1560 t
+(.T A Working Model)3 1080 1 870 1680 t
+(.PS)870 1800 w
+(boxwid = 1.25i ; boxht = 0.75i)6 1800 1 870 1920 t
+(arrow)870 2040 w
+(box "input" ; arrow)3 1140 1 870 2160 t
+(box "process" ; arrow)3 1260 1 870 2280 t
+(box "output" ; arrow)3 1200 1 870 2400 t
+(.PE)870 2520 w
+(.VE Example 12)2 840 1 870 2640 t
+(A Working Model)2 900 1 870 2760 t
+(\(pic sample\))1 720 1 870 2880 t
+10 R f
+(The formatting command line)3 1196 1 720 3060 t
+10 CW f
+(pic mview.ex12 | troff -mview |)5 1860 1 870 3240 t
+10 S f
+(\274)2790 3240 w
+10 R f
+(will produce the view graph shown in Example 12 of the Appendix.)11 2713 1 720 3420 t
+(The)720 3600 w
+10 I f
+(pic)902 3600 w
+10 R f
+( and width, circle radius\) may not be)7 1485(defaults for the dimensions of some elements \(e.g., box height)9 2504 2 1051 3600 t
+( this case, you may need to reset dimensions as)9 1908( In)1 136(large enough to accommodate text in a larger point size.)9 2276 3 720 3720 t
+( was necessary in the example above.\))6 1526(needed. \(This)1 568 2 720 3840 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 6.4  , HEADING = Generating Plots and Graphs]
+10 B f
+( Plots and Graphs)3 771(6.4 Generating)1 658 2 720 4020 t
+10 R f
+(The)720 4200 w
+10 I f
+(grap)910 4200 w
+10 R f
+(preprocessor can be used with)4 1242 1 1134 4200 t
+9 R f
+(MVIEW)2409 4200 w
+10 R f
+(and)2759 4200 w
+10 I f
+(pic)2938 4200 w
+10 R f
+( statistical data on a)4 832(to plot a graph and display)5 1113 2 3095 4200 t
+( a \256le named ``mview.ex13'' which contains the following text:)9 2552( Consider)1 411(view graph.)1 471 3 720 4320 t
+10 CW f
+(.VG "" "" 20 24)4 900 1 870 4500 t
+(.T 1984 Age Distribution in U.S.)5 1920 1 870 4620 t
+(.G1)870 4740 w
+(coord x 0,89 y 0,5)4 1080 1 870 4860 t
+(label left "\\s-2Population\\s+2" "\\s-2\(in millions\)\\s+2" left 0.2)6 3840 1 870 4980 t
+(label bottom "\\s-21984 Age\\s+2" down 0.2)5 2400 1 870 5100 t
+(draw solid)1 600 1 870 5220 t
+(copy "agepop.d")1 900 1 870 5340 t
+(.G2)870 5460 w
+(.VE Example 13)2 840 1 870 5580 t
+(Age Distribution)1 960 1 870 5700 t
+(\(grap sample\))1 780 1 870 5820 t
+10 R f
+( The)1 215( ``agepop.d'' contains the statistical data for this graph.\))8 2320(\(The \256le)1 350 3 720 6000 t
+10 I f
+(grap)3640 6000 w
+10 R f
+(program is a preprocessor to)4 1176 1 3864 6000 t
+10 I f
+(pic)720 6120 w
+10 R f
+(, so it must be used along with and before)9 1872 1 850 6120 t
+10 I f
+(pic)2770 6120 w
+10 R f
+( formatting)1 469( The)1 227( line.)1 222(on the formatting command)3 1182 4 2940 6120 t
+(command line)1 569 1 720 6240 t
+10 CW f
+(grap mview.ex13 | pic | troff -mview |)7 2280 1 870 6420 t
+10 S f
+(\274)3210 6420 w
+10 R f
+(will produce the view graph shown in Example 13 of the Appendix.)11 2713 1 720 6600 t
+( axes)1 207(It may be necessary to adjust the size and position of label text to avoid collisions with the frame and)19 4113 2 720 6780 t
+( was necessary in the example above.\))6 1526( \(This)1 261(labels of the plotted graph.)4 1068 3 720 6900 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 12 12
+%%Page: 13 13
+/saveobj save def
+mark
+13 pagesetup
+10 HB f
+(MVIEW 13)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 7.  , HEADING = DEFINED STRINGS]
+10 B f
+( STRINGS)1 465(7. DEFINED)1 575 2 720 960 t
+10 R f
+( symbols are de\256ned as strings in the)7 1544(The registered mark, service mark, and trademark)6 2042 2 720 1140 t
+9 R f
+(MVIEW)4339 1140 w
+10 R f
+(package.)4689 1140 w
+(Use the following string to generate the corresponding symbol:)8 2525 1 720 1260 t
+10 S f
+(_ ________________________________)1 1635 1 2062 1340 t
+10 R f
+( Description)1 694(String Symbol)1 735 2 2139 1460 t
+10 S f
+(_ ________________________________)1 1635 1 2062 1480 t
+10 CW f
+(\\*\(Rg)2112 1600 w
+6 S f
+(\322)2694 1560 w
+10 R f
+(registered mark)1 623 1 3024 1600 t
+10 CW f
+(\\*\(Tm)2112 1720 w
+6 R f
+(TM)2673 1670 w
+10 R f
+(trademark)3024 1720 w
+10 CW f
+(\\*\(Sm)2112 1840 w
+6 R f
+(SM)2674 1790 w
+10 R f
+(service mark)1 512 1 3024 1840 t
+10 S f
+( \347)1 -1635(_ ________________________________)1 1635 2 2062 1860 t
+(\347)2062 1840 w
+(\347)2062 1740 w
+(\347)2062 1640 w
+(\347)2062 1540 w
+(\347)2062 1440 w
+(\347)3697 1860 w
+(\347)3697 1840 w
+(\347)3697 1740 w
+(\347)3697 1640 w
+(\347)3697 1540 w
+(\347)3697 1440 w
+10 R f
+( service mark symbol or)4 1005(Use the registration symbol for registered marks; for unregistered marks, use the)11 3315 2 720 2040 t
+( appear in)2 421( should always be used as adjectives when they)8 2011( Marks)1 320(the trademark symbol, as appropriate.)4 1568 4 720 2160 t
+(printed text \(.e.g,)2 685 1 720 2280 t
+9 R f
+(UNIX)1430 2280 w
+6 S f
+(\322)1655 2240 w
+10 R f
+(system, Tuxedo)1 633 1 1727 2280 t
+6 R f
+(TM)2360 2230 w
+10 R f
+(software,)2475 2280 w
+9 R f
+(ACCUNET)2868 2280 w
+6 R f
+(SM)3301 2230 w
+10 R f
+(digital services\).)1 660 1 3413 2280 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 8.  , HEADING = PROCESSING YOUR OUTPUT]
+10 B f
+( YOUR OUTPUT)2 761(8. PROCESSING)1 776 2 720 2520 t
+10 R f
+(The facility described above will not, in fact, produce a view graph, but rather will produce an opaque,)17 4320 1 720 2700 t
+(high-quality, typeset facsimile on a laser printer or phototypesetter.)8 2685 1 720 2820 t
+( to convert this output to a high-quality view graph)9 2161(The Reproduction Services organization is equipped)5 2159 2 720 3000 t
+( self-service infrared transparency makers available in most)7 2519( there are a number of)5 982(transparency. Also,)1 819 3 720 3120 t
+( self-service facilities do a)4 1119( These)1 306( xerographic copiers.)2 875(secretarial of\256ces or co-located with self-service)5 2020 4 720 3240 t
+( length of the view graph)5 1121( The)1 229( producing transparencies of good quality.)5 1806(better than adequate job of)4 1164 4 720 3360 t
+(transparency has been designed to be compatible with the 8)9 2448 1 720 3480 t
+10 S1 f
+()3168 3480 w
+3168 3480 m
+75 build_12
+3243 3480 m
+10 R f
+( not)1 161( Do)1 180("-width capacity of these machines.)4 1456 3 3243 3480 t
+( then make the)3 621(make the transparency from the original; make a good-quality xerographic copy \256rst and)12 3699 2 720 3600 t
+(transparency from that.)2 928 1 720 3720 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 13 13
+%%Trailer
+done
+%%Pages: 13
+%%DocumentFonts: Helvetica-Bold Palatino-BoldItalic Helvetica-Oblique Helvetica-BoldOblique Times-Bold Helvetica Times-Italic Times-BoldItalic
+%%+ Courier-Bold Times-Roman Symbol Courier Palatino-Roman Palatino-Bold ZapfDingbats Palatino-Italic
+%%+ Times-Roman

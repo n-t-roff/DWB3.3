@@ -1,0 +1,333 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( Footnotes)1 613( Sample)1 564(APPENDIX E:)1 766 3 720 1050 t
+10 R f
+( using both labeled and automatically-numbered footnotes.)6 2392(This example illustrates several footnote styles,)5 1928 2 720 1350 t
+(The input on this page yields the output on the next page.)11 2293 1 720 1470 t
+9 CW f
+(.FD 0)1 270 1 870 1640 t
+(The first three footnotes are processed in the default footnote style \(.FD 0\).)12 4212 1 870 1750 t
+(This is an automatically-numbered footnote\\*F)4 2430 1 870 1860 t
+(.FS)870 1970 w
+(This is the first footnote example.)5 1890 1 870 2080 t
+(In this style \(.FD 0\), hyphenation is not permitted,)8 2808 1 870 2190 t
+(the right margin is justified, the footnote text is indented,)9 3294 1 870 2300 t
+(and the label is left-justified in the text-indent space.)8 3078 1 870 2410 t
+(.FE)870 2520 w
+(followed by another one\\*F)3 1404 1 870 2630 t
+(.FS)870 2740 w
+(This is the second footnote example.)5 1944 1 870 2850 t
+(.FE)870 2960 w
+(and a third one with a user-supplied label.***)7 2484 1 870 3070 t
+(.FS ***)1 378 1 870 3180 t
+(This is the third footnote example.)5 1890 1 870 3290 t
+(The label \(three asterisks\) is supplied manually by the user.)9 3294 1 870 3400 t
+(.FE)870 3510 w
+(.FD 11)1 324 1 870 3620 t
+(The next two footnotes are processed in a different)8 2754 1 870 3730 t
+( is a labeled footnote\\\(dg\\\(dg)4 1620( Here)1 324(footnote style \(.FD 11\).)3 1296 3 870 3840 t
+(.FS \\\(dg\\\(dg)1 648 1 870 3950 t
+(This is the fourth footnote example.)5 1944 1 870 4060 t
+(This footnote is labeled manually with two daggers.)7 2754 1 870 4170 t
+(In this style \(.FD 11\), hyphenation is permitted,)7 2646 1 870 4280 t
+(the right margin is not justified, the footnote text is indented,)10 3510 1 870 4390 t
+(and the footnote label is right-justified.)5 2268 1 870 4500 t
+(.FE)870 4610 w
+(followed by an automatically-numbered footnote.\\*F)4 2700 1 870 4720 t
+(.FS)870 4830 w
+(This is the fifth footnote example.)5 1890 1 870 4940 t
+(This footnote is automatically-numbered.)3 2160 1 870 5050 t
+(Notice how the footnote label is right-justified with)7 2862 1 870 5160 t
+(the label of the previous footnote.)5 1890 1 870 5270 t
+(.FE)870 5380 w
+(.FD 6)1 270 1 870 5490 t
+(The last two footnotes are processed in another footnote style \(.FD 6\))11 3780 1 870 5600 t
+(which generates a simple blocked format.)5 2160 1 870 5710 t
+(Here's an automatically-numbered footnote\\*F)3 2376 1 870 5820 t
+(.FS)870 5930 w
+(This is the sixth footnote example.)5 1890 1 870 6040 t
+(In this footnote style \(.FD 6\), hyphenation is not permitted,)9 3294 1 870 6150 t
+(the right margin is not jusitified, the text is not indented,)10 3294 1 870 6260 t
+(and the footnote label is left-justified.)5 2214 1 870 6370 t
+(.FE)870 6480 w
+(and the last one is a labeled footnote.*****)7 2376 1 870 6590 t
+(.FS *****)1 486 1 870 6700 t
+(This is the seventh and last footnote example.)7 2484 1 870 6810 t
+(This footnote has a very long label \(five asterisks\).)8 2862 1 870 6920 t
+(Of the seven footnotes on this page, four were numbered automatically)10 3726 1 870 7030 t
+(and three were labeled manually.)4 1728 1 870 7140 t
+(.FE)870 7250 w
+(This concludes our footnote example.)4 1944 1 870 7360 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 HB f
+(E-2 MM)1 4320 1 720 600 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Output:]
+10 B f
+(Output:)720 960 w
+10 R f
+( is an automatically-)3 873( This)1 248( 0\).)1 133( \(.FD)1 231(The \256rst three footnotes are processed in the default footnote style)10 2835 5 720 1140 t
+(numbered footnote)1 761 1 720 1260 t
+7 R f
+(1)1481 1220 w
+10 R f
+(followed by another one)3 985 1 1545 1260 t
+7 R f
+(2)2530 1220 w
+10 R f
+( next two)2 382( The)1 210( label.***)1 399(and a third one with a user-supplied)6 1455 4 2594 1260 t
+( is a labeled footnote\262\262 followed by an)7 1591( Here)1 248( 11\).)1 183( processed in a different footnote style \(.FD)7 1776(footnotes are)1 522 5 720 1380 t
+(automatically-numbered footnote.)1 1369 1 720 1500 t
+7 R f
+(3)2089 1460 w
+10 R f
+( 6\))1 108( footnotes are processed in another footnote style \(.FD)8 2259(The last two)2 514 3 2159 1500 t
+( an automatically-numbered footnote)3 1481( Here's)1 316(which generates a simple blocked format.)5 1668 3 720 1620 t
+7 R f
+(4)4185 1580 w
+10 R f
+( last one is a)4 502(and the)1 292 2 4246 1620 t
+( concludes our footnote example.)4 1328( This)1 228(labeled footnote.*****)1 921 3 720 1740 t
+8 S1 f
+(__________________)720 5724 w
+8 R f
+( this style \(.FD 0\), hyphenation is not permitted, the right margin is justi\256ed, the footnote text)16 3008( In)1 108( example.)1 311( is the \256rst footnote)4 631(1. This)1 262 5 720 5844 t
+(is indented, and the label is left-justi\256ed in the text-indent space.)10 2053 1 840 5934 t
+( is the second footnote example.)5 1025(2. This)1 262 2 720 6054 t
+( label \(three asterisks\) is supplied manually by the user.)9 1765( The)1 164(*** This is the third footnote example.)6 1236 3 720 6174 t
+( this style \(.FD 11\), hyphenation is per-)7 1254( In)1 106( footnote is labeled manually with two daggers.)7 1512( This)1 182(\262\262 This is the fourth footnote example.)6 1240 5 740 6294 t
+(mitted, the right margin is not justi\256ed, the footnote text is indented, and the footnote label is right-justi\256ed.)17 3432 1 840 6384 t
+( how the footnote label is right-justi\256ed with)7 1422( Notice)1 252( footnote is automatically-numbered.)3 1174( This)1 182(3. This is the \256fth footnote example.)6 1159 5 760 6504 t
+(the label of the previous footnote.)5 1073 1 840 6594 t
+( this footnote style \(.FD 6\), hyphenation is not permitted, the right margin is not jusiti\256ed, the)16 2981( In)1 106(4. This is the sixth footnote example.)6 1181 3 720 6714 t
+(text is not indented, and the footnote label is left-justi\256ed.)9 1840 1 720 6804 t
+( the seven footnotes on this)5 869( Of)1 124( footnote has a very long label \(\256ve asterisks\).)8 1468( This)1 182(***** This is the seventh and last footnote example.)8 1674 5 720 6924 t
+(page, four were numbered automatically and three were labeled manually.)9 2358 1 720 7014 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Trailer
+done
+%%Pages: 2
+%%DocumentFonts: Helvetica-Bold Times-Bold Times-Roman Courier Times-Roman

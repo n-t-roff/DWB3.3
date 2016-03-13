@@ -1,0 +1,509 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+18 S1 f
+(________________________________________________)720 870 w
+12 HB f
+( Incompatibilities)1 985( PIC)1 336(APPENDIX A:)1 772 3 720 1050 t
+10 R f
+(Despite efforts to maintain compatibility,)4 1680 1 720 1350 t
+10 I f
+(Picasso)2432 1350 w
+10 R f
+( with some pictures described in the)6 1485(will have problems)2 780 2 2775 1350 t
+(older)720 1470 w
+10 I f
+(pic)950 1470 w
+10 R f
+( gimmick for promoting compatibility is the statement:)7 2198(language. The)1 590 2 1097 1470 t
+9 CW f
+(reset p_i_c)1 594 1 870 1640 t
+10 R f
+(right after the)2 585 1 720 1820 t
+10 CW f
+(.PS)1351 1820 w
+10 R f
+( will be ignored by)4 839(. This)1 274 2 1531 1820 t
+10 I f
+(pic)2690 1820 w
+10 R f
+(;)2820 1820 w
+10 I f
+(Picasso)2894 1820 w
+10 R f
+( request to faithfully)3 879(will recognize it as a)4 910 2 3251 1820 t
+(duplicate)720 1940 w
+10 I f
+(pic)1111 1940 w
+10 R f
+(, warts and all.)3 585 1 1241 1940 t
+(The known differences are listed below:)5 1604 1 720 2120 t
+8 S f
+(\267)783 2300 w
+10 R f
+(The \256rst coordinate after a)4 1102 1 870 2300 t
+10 CW f
+(.PS)2008 2300 w
+10 R f
+(gives the)1 369 1 2224 2300 t
+10 I f
+(vertical)2629 2300 w
+10 R f
+(size \(and the second gives horizontal size\) for the)8 2069 1 2971 2300 t
+(picture;)870 2420 w
+10 I f
+(pic)1221 2420 w
+10 R f
+( convention.)1 514(used the reverse)2 684 2 1389 2420 t
+10 I f
+(Picasso)2657 2420 w
+10 R f
+(follows the syntax of the)4 1068 1 3013 2420 t
+10 CW f
+(.BP)4126 2420 w
+10 R f
+(picture inclusion)1 689 1 4351 2420 t
+(macros.)870 2540 w
+8 S f
+(\267)783 2720 w
+10 R f
+(A)870 2720 w
+10 I f
+(Picasso)973 2720 w
+10 R f
+( and/or horizontal sizes)3 950(picture is centered on the page \(or in the prescribed space if vertical)12 2775 2 1315 2720 t
+(are given\) and not justi\256ed to the upper left corner.)9 2035 1 870 2840 t
+8 S f
+(\267)783 3020 w
+10 R f
+(The)870 3020 w
+10 I f
+(pic)1057 3020 w
+10 CW f
+(scale)1211 3020 w
+10 R f
+( been replaced by the use of)6 1161(variable has)1 486 2 1543 3020 t
+10 CW f
+(scale)3223 3020 w
+10 R f
+(as a keyword supporting the general)5 1484 1 3556 3020 t
+(transformations available in)2 1125 1 870 3140 t
+10 I f
+(Picasso)2025 3140 w
+10 R f
+(.)2344 3140 w
+10 I f
+(Picasso)2424 3140 w
+10 R f
+(attempts to handle)2 743 1 2765 3140 t
+10 CW f
+(scale)3538 3140 w
+10 R f
+(=)3867 3140 w
+10 I f
+(r)3952 3140 w
+10 R f
+(statements to give results)3 1020 1 4020 3140 t
+(similar to)1 381 1 870 3260 t
+10 I f
+(pic)1276 3260 w
+10 R f
+(.)1406 3260 w
+8 S f
+(\267)783 3440 w
+10 R f
+(The)870 3440 w
+10 I f
+(pic)1053 3440 w
+10 CW f
+(textwid)1203 3440 w
+10 R f
+(and)1652 3440 w
+10 CW f
+(textht)1825 3440 w
+10 R f
+(variables do not exist in)4 971 1 2214 3440 t
+10 I f
+(Picasso)3214 3440 w
+10 R f
+( widths and heights may be)5 1111(. Explicit)1 396 2 3533 3440 t
+(set as attributes for a text item; otherwise, its dimensions are computed from standard)13 3418 1 870 3560 t
+10 I f
+(troff)4313 3560 w
+10 R f
+(font tables.)1 444 1 4511 3560 t
+8 S f
+(\267)783 3740 w
+10 R f
+(The)870 3740 w
+10 I f
+(pic)1056 3740 w
+10 CW f
+(arrowhead)1209 3740 w
+10 R f
+( drawn to simulate a \256lled head on an arrow\) has been)11 2236(variable \(number of lines)3 1024 2 1780 3740 t
+(replaced by the)2 651 1 870 3860 t
+10 I f
+(Picasso)1567 3860 w
+10 CW f
+(arrowfill)1924 3860 w
+10 R f
+( many existing)2 631(variable. For)1 556 2 2510 3860 t
+10 I f
+(pic)3743 3860 w
+10 R f
+( of)1 128(programs, a simple edit)3 1001 2 3911 3860 t
+10 CW f
+(arrowhead)870 3980 w
+10 R f
+(to)1436 3980 w
+10 CW f
+(arrowfill)1540 3980 w
+10 R f
+(will give reasonable results.)3 1118 1 2106 3980 t
+10 I f
+(Picasso)3276 3980 w
+10 R f
+(takes any odd value of this variable)6 1426 1 3614 3980 t
+(to imply \256ll, any even value to mean just draw the edges of the arrowhead.)14 2984 1 870 4100 t
+8 S f
+(\267)783 4280 w
+10 I f
+(Picasso)870 4280 w
+10 R f
+(will accept)1 437 1 1208 4280 t
+10 CW f
+(invis)1672 4280 w
+10 R f
+(as a synonym for)3 691 1 1999 4280 t
+10 CW f
+(noedge)2717 4280 w
+10 R f
+( \256lled,)1 259( objects with this property may be)6 1372(. \(Since)1 332 3 3077 4280 t
+(they cannot properly be called invisible.\))5 1636 1 870 4400 t
+8 S f
+(\267)783 4580 w
+10 I f
+(Picasso)870 4580 w
+10 R f
+( than)1 201(has more keywords)2 782 2 1209 4580 t
+10 I f
+(pic)2221 4580 w
+10 R f
+(; for example, de\256ning a macro called)6 1540 1 2351 4580 t
+10 CW f
+(space)3920 4580 w
+10 R f
+(or)4249 4580 w
+10 CW f
+(ln)4361 4580 w
+10 R f
+(works \256ne in)2 530 1 4510 4580 t
+10 I f
+(pic)870 4700 w
+10 R f
+(but gives)1 364 1 1017 4700 t
+10 I f
+(Picasso)1406 4700 w
+10 R f
+( complete list of)3 647(\256ts. The)1 353 2 1742 4700 t
+10 I f
+(Picasso)2767 4700 w
+10 R f
+(lexical items is given in Appendices B and C.)8 1824 1 3103 4700 t
+8 S f
+(\267)783 4880 w
+10 I f
+(Picasso)870 4880 w
+10 R f
+(consistently associates labels with the centers of objects;)7 2352 1 1219 4880 t
+10 I f
+(pic)3609 4880 w
+10 R f
+( and)1 183(has different rules for text)4 1088 2 3769 4880 t
+(lines than for other objects.)4 1090 1 870 5000 t
+10 CW f
+(reset p_i_c)1 660 1 2010 5000 t
+10 R f
+(attempts to compensate for this.)4 1274 1 2695 5000 t
+8 S f
+(\267)783 5180 w
+10 R f
+(When invoking total picture scaling \(argument on)6 2064 1 870 5180 t
+10 CW f
+(.PS)2971 5180 w
+10 R f
+(\))3151 5180 w
+10 I f
+(Picasso)3221 5180 w
+10 R f
+( the scaling;)2 509(allows PostScript to do)3 962 2 3569 5180 t
+(accordingly,)870 5300 w
+10 I f
+(everything)1403 5300 w
+10 R f
+(\(text included\) is scaled.)3 1012 1 1861 5300 t
+10 I f
+(Pic)2935 5300 w
+10 R f
+( it knows about, which)4 952(only scales those things)3 983 2 3105 5300 t
+(doesn't include text.)2 813 1 870 5420 t
+8 S f
+(\267)783 5600 w
+10 I f
+(Pic)870 5600 w
+10 R f
+( on the circumference of a circle;)6 1443(associates compass coordinates with points)4 1806 2 1048 5600 t
+10 I f
+(Picasso)4343 5600 w
+10 R f
+(uses the)1 340 1 4700 5600 t
+(bounding box.)1 597 1 870 5720 t
+10 I f
+(Picasso)1536 5720 w
+10 R f
+( the)1 165(offers an alternate method \(``corner numbering''\) to identify points on)9 2984 2 1891 5720 t
+(circumference. Again,)1 913 1 870 5840 t
+10 CW f
+(reset p_i_c)1 660 1 1808 5840 t
+10 R f
+(will force)1 385 1 2493 5840 t
+10 I f
+(pic)2903 5840 w
+10 R f
+(-like behavior.)1 582 1 3033 5840 t
+8 S f
+(\267)783 6020 w
+10 R f
+(As a general warning: clever use of)6 1430 1 870 6020 t
+10 I f
+(troff)2328 6020 w
+10 R f
+(in the midst of)3 590 1 2529 6020 t
+10 I f
+(pic)3147 6020 w
+10 R f
+(descriptions will likely cause)3 1175 1 3297 6020 t
+10 I f
+(Picasso)4501 6020 w
+10 R f
+(great)4841 6020 w
+( to size and font changes and you'll be safe.)9 1746(confusion. Stick)1 675 2 870 6140 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Helvetica-Bold Times-Italic Times-Roman Symbol Courier Times-Roman
