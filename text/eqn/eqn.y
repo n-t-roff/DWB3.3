@@ -41,7 +41,7 @@ eqn	: box
 	| LINEUP	{ $$ = lineup(0); }
 	;
 
-lineupbox: LINEUP box	{ $$ = $2; lineup(1); } /* CK: lineup() overwr. $$ ? */
+lineupbox: LINEUP box	{ $$ = lineup($2); }
 	;
 
 sbox	: SUP box	%prec SUP	{ $$ = $2; }

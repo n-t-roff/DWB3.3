@@ -1,7 +1,7 @@
 #include "e.h"
 
 int	dbg;	/* debugging print if non-zero */
-int	lp[80];	/* stack for things like piles and matrices */
+int	lp[512];	/* stack for things like piles and matrices */
 int	ct;	/* pointer to lp */
 int	used[100];	/* available registers */
 int	ps;	/* default init point size */

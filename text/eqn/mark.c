@@ -26,7 +26,9 @@ void lineup(p1)
 	int yyval;
 
 	markline = 2;
-	if (p1 == 0) {
+	if (p1)
+		yyval = p1;
+	else {
 		yyval = salloc();
 		printf(".ds %d \\h'|\\n(09u'\n", yyval);
 	}
