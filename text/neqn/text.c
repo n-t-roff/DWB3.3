@@ -1,26 +1,25 @@
 # include "e.h"
 # include "y.tab.h"
 
-extern YYSTYPE yyval;
-
 int	csp;
 int	psp;
-#define	CSSIZE	400
-char	cs[420];
+#define	CSSIZE	1024
+char	cs[CSSIZE];
 
 int	lf, rf;	/* temporary spots for left and right fonts */
 
-void
+int
 text(int t, char *p1) {
 	int c;
 	char *p;
 	tbl *tp;
 	extern tbl *restbl;
+	int yyval;
 
-	yyval.token = oalloc();
-	ebase[yyval.token] = 0;
-	eht[yyval.token] = VERT(2);	/* 2 half-spaces */
-	lfont[yyval.token] = rfont[yyval.token] = ROM;
+	yyval = oalloc();
+	ebase[yyval] = 0;
+	eht[yyval] = VERT(2);	/* 2 half-spaces */
+	lfont[yyval] = rfont[yyval] = ROM;
 	if (t == QTEXT)
 		p = p1;
 	else if ( t == SPACE )
@@ -37,19 +36,20 @@ text(int t, char *p1) {
 			rf = trans(c, p1);
 			if (lf == 0)
 				lf = rf;	/* save first */
-			if (csp>CSSIZE)
+			if (csp >= CSSIZE)
 				error(FATAL,"converted token %.25s... too long",p1);
 		}
 		cs[csp] = '\0';
 		p = cs;
-		lfont[yyval.token] = lf;
-		rfont[yyval.token] = rf;
+		lfont[yyval] = lf;
+		rfont[yyval] = rf;
 	}
 	if (dbg)
 		printf(".\t%dtext: S%d <- %s; b=%d,h=%d,lf=%c,rf=%c\n",
-		    t, yyval.token, p, ebase[yyval.token], eht[yyval.token],
-		    lfont[yyval.token], rfont[yyval.token]);
-	printf(".ds %d \"%s\n", yyval.token, p);
+		    t, yyval, p, ebase[yyval], eht[yyval],
+		    lfont[yyval], rfont[yyval]);
+	printf(".ds %d \"%s\n", yyval, p);
+	return yyval;
 }
 
 int

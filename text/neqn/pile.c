@@ -1,12 +1,11 @@
 # include "e.h"
 #include "y.tab.h"
 
-extern YYSTYPE yyval;
-
-void
+int
 lpile(int type, int p1, int p2) {
 	int bi, hi, i, gap, h, b, nlist, nlist2, mid;
-	yyval.token = oalloc();
+	int yyval;
+	yyval = oalloc();
 	gap = VERT(1);
 	if( type=='-' ) gap = 0;
 	nlist = p2 - p1;
@@ -15,27 +14,27 @@ lpile(int type, int p1, int p2) {
 	h = 0;
 	for( i=p1; i<p2; i++ )
 		h += eht[lp[i]];
-	eht[yyval.token] = h + (nlist-1)*gap;
+	eht[yyval] = h + (nlist-1)*gap;
 	b = 0;
 	for( i=p2-1; i>mid; i-- )
 		b += eht[lp[i]] + gap;
-	ebase[yyval.token] = (nlist%2) ? b + ebase[lp[mid]]
+	ebase[yyval] = (nlist%2) ? b + ebase[lp[mid]]
 			: b - VERT(1) - gap;
 	if(dbg) {
-		printf(".\tS%d <- %c pile of:", yyval.token, type);
+		printf(".\tS%d <- %c pile of:", yyval, type);
 		for( i=p1; i<p2; i++)
 			printf(" S%d", lp[i]);
-		printf(";h=%d b=%d\n", eht[yyval.token], ebase[yyval.token]);
+		printf(";h=%d b=%d\n", eht[yyval], ebase[yyval]);
 	}
 	nrwid(lp[p1], ps, lp[p1]);
-	printf(".nr %d \\n(%d\n", yyval.token, lp[p1]);
+	printf(".nr %d \\n(%d\n", yyval, lp[p1]);
 	for( i = p1+1; i<p2; i++ ) {
 		nrwid(lp[i], ps, lp[i]);
 		printf(".if \\n(%d>\\n(%d .nr %d \\n(%d\n", 
-			lp[i], yyval.token, yyval.token, lp[i]);
+			lp[i], yyval, yyval, lp[i]);
 	}
-	printf(".ds %d \\v'%du'\\h'%du*\\n(%du'\\\n", yyval.token, ebase[yyval.token], 
-		type=='R' ? 1 : 0, yyval.token);
+	printf(".ds %d \\v'%du'\\h'%du*\\n(%du'\\\n", yyval, ebase[yyval], 
+		type=='R' ? 1 : 0, yyval);
 	for(i = p2-1; i >=p1; i--) {
 		hi = eht[lp[i]]; 
 		bi = ebase[lp[i]];
@@ -52,15 +51,16 @@ lpile(int type, int p1, int p2) {
 	case 'C':
 	case '-':
 		printf("\\v'%du'\\h'\\n(%du-\\n(%du/2u'\\*(%d", 
-			-bi, yyval.token, lp[i], lp[i]);
+			-bi, yyval, lp[i], lp[i]);
 		printf("\\h'-\\n(%du-\\n(%du/2u'\\v'0-%du'\\\n", 
-			yyval.token, lp[i], hi-bi+gap);
+			yyval, lp[i], hi-bi+gap);
 		continue;
 		}
 	}
-	printf("\\v'%du'\\h'%du*\\n(%du'\n", eht[yyval.token]-ebase[yyval.token]+gap, 
-		type!='R' ? 1 : 0, yyval.token);
+	printf("\\v'%du'\\h'%du*\\n(%du'\n", eht[yyval]-ebase[yyval]+gap, 
+		type!='R' ? 1 : 0, yyval);
 	for( i=p1; i<p2; i++ )
 		ofree(lp[i]);
-	lfont[yyval.token] = rfont[yyval.token] = 0;
+	lfont[yyval] = rfont[yyval] = 0;
+	return yyval;
 }

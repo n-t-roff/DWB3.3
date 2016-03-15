@@ -1,22 +1,20 @@
-#include <stdint.h> /* required for FreeBSD11 */
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include "e.h"
 #include "y.tab.h"
 
-extern YYSTYPE yyval;
-
-#define	SSIZE	400
+#define	SSIZE	1024
 char	token[SSIZE];
 int	sp;
 #define	putbak(c)	*ip++ = c;
-#define	PUSHBACK	300	/* maximum pushback characters */
+#define	PUSHBACK	1024	/* maximum pushback characters */
 char	ibuf[PUSHBACK+SSIZE];	/* pushback buffer for definitions, etc. */
 char	*ip	= ibuf;
 
 int
 gtc(void) {
-  loop:
+loop:
 	if (ip > ibuf)
 		return(*--ip);	/* already present */
 	lastchar = getc(curfile);
@@ -112,15 +110,15 @@ yylex(void) {
 	else if (tp->defn == (char *) DEFINE || tp->defn == (char *) NDEFINE || tp->defn == (char *) TDEFINE)
 		define((int)(intptr_t) tp->defn);
 	else if (tp->defn == (char *) DELIM)
-		delim();
+		yylval.token = delim();
 	else if (tp->defn == (char *) GSIZE)
-		globsize();
+		yylval.token = globsize();
 	else if (tp->defn == (char *) GFONT)
-		globfont();
+		yylval.token = globfont();
 	else if (tp->defn == (char *) INCLUDE)
 		include();
 	else {
-		return((long int) tp->defn);
+		return (intptr_t)tp->defn;
 	}
 	goto beg;
 }
@@ -212,13 +210,15 @@ include(void) {
 	error(!FATAL, "Include not yet implemented");
 }
 
-void
+int
 delim(void) {
-	yyval.token = eqnreg = 0;
+	int yyval;
+	yyval = eqnreg = 0;
 	if (cstr(token, 0, SSIZE))
 		error(FATAL, "Bizarre delimiters at %.20s", token);
 	lefteq = token[0];
 	righteq = token[1];
 	if (lefteq == 'o' && righteq == 'f')
 		lefteq = righteq = '\0';
+	return yyval;
 }

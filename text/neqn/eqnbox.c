@@ -1,20 +1,19 @@
 # include "e.h"
 #include "y.tab.h"
 
-extern YYSTYPE yyval;
-
-void
+int
 eqnbox(int p1, int p2, int lu) {
 	int b, h;
 	char *sh;
+	int yyval;
 
-	yyval.token = p1;
+	yyval = p1;
 	b = max(ebase[p1], ebase[p2]);
-	eht[yyval.token] = h = b + max(eht[p1]-ebase[p1], 
+	eht[yyval] = h = b + max(eht[p1]-ebase[p1], 
 		eht[p2]-ebase[p2]);
-	ebase[yyval.token] = b;
+	ebase[yyval] = b;
 	if(dbg)printf(".\te:eb: S%d <- S%d S%d; b=%d, h=%d\n", 
-		yyval.token, p1, p2, b, h);
+		yyval, p1, p2, b, h);
 	if (rfont[p1] == ITAL && lfont[p2] == ROM)
 		sh = "\\|";
 	else
@@ -23,7 +22,8 @@ eqnbox(int p1, int p2, int lu) {
 		printf(".nr %d \\w'\\s%d\\*(%d%s'\n", p1, ps, p1, sh);
 		printf(".ds %d \\h'|\\n(97u-\\n(%du'\\*(%d\n", p1, p1, p1);
 	}
-	printf(".as %d \"%s\\*(%d\n", yyval.token, sh, p2);
+	printf(".as %d \"%s\\*(%d\n", yyval, sh, p2);
 	rfont[p1] = rfont[p2];
 	ofree(p2);
+	return yyval;
 }

@@ -1,9 +1,10 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 # include "e.h"
 #include "y.tab.h"
 
-#define	TBLSIZE	100
+#define	TBLSIZE	256
 
 tbl	*keytbl[TBLSIZE];	/* key words */
 tbl	*restbl[TBLSIZE];	/* reserved words */
@@ -212,7 +213,7 @@ init_tbl(void)	/* initialize all tables */
 	int i;
 
 	for (i = 0; keyword[i].key != NULL; i++)
-		lookup(keytbl, keyword[i].key, (char *)(long int)keyword[i].keyval);
+		lookup(keytbl, keyword[i].key, (char *)(intptr_t)keyword[i].keyval);
 	for (i = 0; resword[i].res != NULL; i++)
 		lookup(restbl, resword[i].res, resword[i].resval);
 }

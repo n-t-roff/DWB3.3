@@ -3,12 +3,13 @@
 #include <string.h>
 #include "e.h"
 #include "y.tab.h"
-#define	MAXLINE	1200	/* maximum input line */
+#define	MAXLINE	2048	/* maximum input line */
 
 char	in[MAXLINE];	/* input buffer */
 int	eqnexit(int);
 int noeqn;
 
+extern int yyparse(void);
 int dwb_getline(register char *s);
 void dwb_inline(void);
 
@@ -73,9 +74,9 @@ int
 dwb_getline(char *s) {
 	int c;
 	while((*s++=c=gtc())!='\n' && c!=EOF && c!=lefteq)
-		if (s >= in+MAXLINE) {
+		if (s >= in + MAXLINE) {
 			error( !FATAL, "input line too long: %.20s\n", in);
-			in[MAXLINE] = '\0';
+			in[MAXLINE - 1] = '\0';
 			break;
 		}
 	if (c==lefteq)
@@ -137,10 +138,11 @@ max(int i, int j) {
 int
 oalloc(void) {
 	int i;
-	for (i=11; i<100; i++)
-		if (used[i]++ == 0) return(i);
-	error( FATAL, "no eqn strings left", i);
-	return(0);
+	for (i = 11; i < 100; i++)
+		if (!used[i]++)
+			return i;
+	error(FATAL, "no eqn strings left", i);
+	return 0;
 }
 
 void

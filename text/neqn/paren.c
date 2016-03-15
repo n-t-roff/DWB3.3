@@ -1,13 +1,12 @@
 # include "e.h"
 #include "y.tab.h"
 
-extern YYSTYPE yyval;
-
-void
+int
 paren(int leftc, int p1, int rightc) {
 	int n, m, h1, j, b1, v;
+	int yyval;
 	h1 = eht[p1]; b1 = ebase[p1];
-	yyval.token = p1;
+	yyval = p1;
 	n = max(b1+VERT(1), h1-b1-VERT(1)) / VERT(1);
 	if( n<2 ) n = 1;
 	m = n-2;
@@ -17,12 +16,12 @@ paren(int leftc, int p1, int rightc) {
 		if( n<3 ) n=3;
 		m = n-3;
 	}
-	eht[yyval.token] = VERT(2 * n);
-	ebase[yyval.token] = (n)/2 * VERT(2);
+	eht[yyval] = VERT(2 * n);
+	ebase[yyval] = (n)/2 * VERT(2);
 	if (n%2 == 0)
-		ebase[yyval.token] -= VERT(1);
+		ebase[yyval] -= VERT(1);
 	v = b1 - h1/2 + VERT(1);
-	printf(".ds %d \\|\\v'%du'", yyval.token, v);
+	printf(".ds %d \\|\\v'%du'", yyval, v);
 	switch( leftc ) {
 		case 'n':	/* nothing */
 		case '\0':
@@ -99,7 +98,8 @@ paren(int leftc, int p1, int rightc) {
 	}
 	printf("\n");
 	if(dbg)printf(".\tcurly: h=%d b=%d n=%d v=%d l=%c, r=%c\n", 
-		eht[yyval.token], ebase[yyval.token], n, v, leftc, rightc);
+		eht[yyval], ebase[yyval], n, v, leftc, rightc);
+	return yyval;
 }
 
 void

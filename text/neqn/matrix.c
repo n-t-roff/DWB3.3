@@ -1,8 +1,6 @@
 #include "e.h"
 #include "y.tab.h"
 
-extern YYSTYPE yyval;
-
 void
 column(int type, int p1) {
 	int i;
@@ -17,10 +15,11 @@ column(int type, int p1) {
 	lp[ct++] = type;
 }
 
-void
+int
 matrix(int p1) {
 	int nrow, ncol, i, j, k, hb, b, val[100];
 	char *space;
+	int yyval;
 
 	space = "\\ \\ ";
 	nrow = lp[p1];	/* disaster if rows inconsistent */
@@ -47,21 +46,22 @@ matrix(int p1) {
 	}
 	j = p1;
 	for( i=0; i<ncol; i++ ) {
-		lpile(lp[j+lp[j]+1], j+1, j+lp[j]+1);
-		val[i] = yyval.token;
+		yyval = lpile(lp[j+lp[j]+1], j+1, j+lp[j]+1);
+		val[i] = yyval;
 		j += nrow + 2;
 	}
-	yyval.token = oalloc();
-	eht[yyval.token] = eht[val[0]];
-	ebase[yyval.token] = ebase[val[0]];
-	lfont[yyval.token] = rfont[yyval.token] = 0;
+	yyval = oalloc();
+	eht[yyval] = eht[val[0]];
+	ebase[yyval] = ebase[val[0]];
+	lfont[yyval] = rfont[yyval] = 0;
 	if(dbg)printf(".\tmatrix S%d: r=%d, c=%d, h=%d, b=%d\n",
-		yyval.token,nrow,ncol,eht[yyval.token],ebase[yyval.token]);
-	printf(".ds %d \"", yyval.token);
+		yyval,nrow,ncol,eht[yyval],ebase[yyval]);
+	printf(".ds %d \"", yyval);
 	for( i=0; i<ncol; i++ )  {
 		printf("\\*(%d%s", val[i], i==ncol-1 ? "" : space);
 		ofree(val[i]);
 	}
 	printf("\n");
 	ct = p1;
+	return yyval;
 }

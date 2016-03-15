@@ -1,13 +1,12 @@
 # include "e.h"
 # include "y.tab.h"
 
-extern YYSTYPE yyval;
-
-void
+int
 funny(int n) {
 	char *f;
+	int yyval;
 
-	yyval.token = oalloc();
+	yyval = oalloc();
 	switch(n) {
 	case SUM:
 		f = "\\(*S"; break;
@@ -21,11 +20,12 @@ funny(int n) {
 		error(FATAL, "funny type %d in funny", n);
 		f = ""; /* silence warning */
 	}
-	printf(".ds %d %s\n", yyval.token, f);
-	eht[yyval.token] = VERT(2);
-	ebase[yyval.token] = 0;
+	printf(".ds %d %s\n", yyval, f);
+	eht[yyval] = VERT(2);
+	ebase[yyval] = 0;
 	if (dbg)
 		printf(".\tfunny: S%d <- %s; h=%d b=%d\n",
-		    yyval.token, f, eht[yyval.token], ebase[yyval.token]);
-	lfont[yyval.token] = rfont[yyval.token] = ROM;
+		    yyval, f, eht[yyval], ebase[yyval]);
+	lfont[yyval] = rfont[yyval] = ROM;
+	return yyval;
 }
