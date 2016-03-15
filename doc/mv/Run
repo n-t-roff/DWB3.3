@@ -6,7 +6,13 @@ PSFILES="PS.doc PS.app"
 
 # run document parts and create PostScript output files
 tbl mv.doc | eqn | troff -Tpost - | dpost >PS.doc
-troff -Tpost -mpictures mv.app | dpost >PS.app
+troff -Tpost -mpictures mv.app | dpost | \
+    sed 's"([0-9]\{1,2\}/[0-9]\{1,2\}/[0-9]\{4\})"(2/4/1993)"' >PS.app
+for i in ps.ex?; do
+	sed 's"([0-9]\{1,2\}/[0-9]\{1,2\}/[0-9]\{4\})"(2/4/1993)"' $i >$i.sed
+	rm $i
+	mv $i.sed $i
+done
 
 # print document parts if PRINT is set
 if [ x"$PRINT" != "x" ]; then
