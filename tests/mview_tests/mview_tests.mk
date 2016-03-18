@@ -6,11 +6,18 @@ SYSTEM=SYSV
 TDEVNAME=post
 
 all :
-	@for i in mview??; do \
-	    if [ -f "$$i" ]; then \
-		echo "	pic $$i | tbl | eqn | troff -mview -T$(TDEVNAME)>$$i.out"; \
-		pic $$i | tbl | eqn | troff -mview -T$(TDEVNAME)>$$i.out; \
-	    fi; \
+	for i in mview??; do \
+		mv $$i.more $$i.more.orig; \
+		pic $$i | tbl | neqn | nroff -mview | col -x > $$i.more; \
+		diff $$i.more $$i.more.orig; \
+		rm $$i.more; \
+		mv $$i.more.orig $$i.more; \
+		mv $$i.ps $$i.ps.orig; \
+		pic $$i | tbl | eqn | troff -mview -T$(TDEVNAME) | \
+		    dpost > $$i.ps; \
+		diff $$i.ps $$i.ps.orig; \
+		rm $$i.ps; \
+		mv $$i.ps.orig $$i.ps; \
 	done
 
 install : all
@@ -22,7 +29,7 @@ install : all
 	@chmod 644 ../$(SYSTEM)/*.out
 
 clean :
-	rm -f *.out
+	rm -f *.more *.ps *.orig
 
 clobber : clean
 

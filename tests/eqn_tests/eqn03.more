@@ -1,0 +1,66 @@
+
+
+
+       EQN:  File(eqn03)                                 Device(37)
+
+
+
+       KKKKnnnnuuuutttthhhh (Vol. 2, p. 317):
+
+                          (
+                          |1,                                 if  n=0;
+                          |
+       Qn(x1,x2,...,xn) = |x1,                                if  n=1;
+                          |
+                          |x1Qn-1(x2,...,xn)+Qn-2(x3,...,xn)  if  n>1.
+                          (
+
+
+
+       KKKKnnnnuuuutttthhhh (Vol. 2, p. 426):
+
+
+         When zero occurs, the determinant is even easier to
+         compute; for example, if
+
+                                  x  =0
+                                   11
+         but
+
+                                  x  =/0,
+                                   21
+         we have
+
+                             | 0   x12  ...  x1n|
+                             |x    x    ...  x  |
+                             | 21   22        2n|
+                         det |x31  x32  ...  x3n|
+                             |...               |
+                             |x    x    ...  x  |
+                             | n1   n2        nn|
+
+                   |      x           ...        x         |
+                   |       12                     1n       |
+                   |x32-(x31/x21)x22  ...  x3n-(x31/x21)x2n|
+          = -x21det|      ...                    ...       |  . (8)
+                   |x  -(x  /x  )x    ...  x  -(x  /x  )x  |
+                   | n2   n1  21  22        nn   n1  21  2n|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+
+
+
+                                  - 1 -
+
+
+
+       Knuth, vol 2, page 317:
+
+                          (
+                          |1,                                 if  n=0;
+                          |
+       Qn(x1,x2,...,xn) = |x1,                                if  n=1;
+                          |
+                          |x1Qn-1(x2,...,xn)+Qn-2(x3,...,xn)  if  n>1.
+                          (
+       Knuth, vol 2, p426:
+
+          When zero occurs, the determinant is even easier to compute;
+       for example, if
+       x  =0
+       b1u1t
+       x  =/0,
+       w2e1have
+
+           | 0   x12  ...  x1n|
+           |x    x    ...  x  |
+           | 21   22        2n|
+       det |x31  x32  ...  x3n|
+           |...               |
+           |x    x    ...  x  |
+           | n1   n2        nn|
+                |      x12         ...        x1n       |
+                |x  -(x  /x  )x    ...  x  -(x  /x  )x  |
+       = -x  det| 32   31  21  22        3n   31  21  2n|  .   (8)
+           21   |      ...                    ...       |
+                |xn2-(xn1/x21)x22  ...  xnn-(xn1/x21)x2n|
+                |                                       |
+       From|John Butcher:       .  .  .                  |
+           |a11  a12   0    0               0        0   |
+           |                    .  .  .                  |
+           | 0   a22  a23   0               0        0   |
+           |                    .  .  .                  |
+           | 0   a32  a33  a34              0        0   |
+           |                    .  .  .                  |
+           | 0    0   a43  a44              0        0   |
+           | .    .    .    .               .        .   |
+       A = |                                             | =
+           | .    .    .    .               .        .   |
+           | .    .    .    .               .        .   |
+           |                                             |
+           | 0    0    0    0   .  .  .  a         a     |
+           |                              n-1,n-1   n-1,n|
+           |a     0    0    0   .  .  .   a         a    |
+           | ni                            n,n-1     nn  |
+
+           |A   I   Q|
+           |B   J   R|
+           |         |
+           |C   K   S|
+           |D   L   T|
+       X = |         | finis
+           |E   M   U|
+           |F   N   V|
+           |         |
+           |G   O   X|
+           |H   P   Y|
+           |         |
+
+
+                                  - 2 -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

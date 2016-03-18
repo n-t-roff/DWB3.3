@@ -5,20 +5,15 @@ SYSTEM=SYSV
 
 MACROS=-mm
 TDEVNAME=post
-TROFF=TRUE
 
 all :
-	@for i in pic??; do \
-	    if [ -f "$$i" ]; then \
-		if [ $(TROFF) = FALSE ]; \
-		    then \
-			echo "	pic $$i >$$i.out"; \
-			pic $$i >$$i.out; \
-		    else \
-			echo "	pic $$i | tbl | eqn | troff -T$(TDEVNAME) $(MACROS)>$$i.out"; \
-			pic $$i | tbl | eqn | troff -T$(TDEVNAME) $(MACROS)>$$i.out; \
-		fi; \
-	    fi; \
+	for i in pic??; do \
+		mv $$i.ps $$i.ps.orig; \
+		pic $$i | tbl | eqn | troff -T$(TDEVNAME) $(MACROS) | \
+		    dpost > $$i.ps; \
+		diff $$i.ps $$i.ps.orig; \
+		rm $$i.ps; \
+		mv $$i.ps.orig $$i.ps; \
 	done
 
 install : all
@@ -30,7 +25,7 @@ install : all
 	@chmod 644 ../$(SYSTEM)/*.out
 
 clean :
-	rm -f *.out
+	rm -f *.ps *.orig
 
 clobber : clean
 

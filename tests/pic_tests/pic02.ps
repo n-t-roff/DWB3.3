@@ -1,0 +1,750 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 R f
+(- 1 -)2 166 1 2797 480 t
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% Version 3.3.2 drawing procedures for dpost. Automatically pulled in when
+% needed.
+%
+
+/inpath false def
+/savematrix matrix def
+
+/Dl {
+	inpath
+		{pop pop neg lineto}
+		{newpath neg moveto neg lineto stroke}
+	ifelse
+} bind def
+
+/De {
+	/y1 exch 2 div def
+	/x1 exch 2 div def
+	/savematrix savematrix currentmatrix def
+	neg exch x1 add exch translate
+	x1 y1 scale
+	0 0 1 0 360
+	inpath
+		{1 0 moveto arc savematrix setmatrix}
+		{newpath arc savematrix setmatrix stroke}
+	ifelse
+} bind def
+
+/Da {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arc}
+		{newpath arc stroke}
+	ifelse
+} bind def
+
+/DA {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arcn}
+		{newpath arcn stroke}
+	ifelse
+} bind def
+
+/Ds {
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	/y0 exch def
+	/x0 exch def
+	x0 5 x1 mul add 6 div
+	y0 5 y1 mul add -6 div
+	x2 5 x1 mul add 6 div
+	y2 5 y1 mul add -6 div
+	x1 x2 add 2 div
+	y1 y2 add -2 div
+	inpath
+		{curveto}
+		{newpath x0 x1 add 2 div y0 y1 add -2 div moveto curveto stroke}
+	ifelse
+} bind def
+%%EndGlobal
+/saveobj save def
+mark
+24 R f
+720 960 720 1320 Dl
+1260 960 720 960 Dl
+1260 1320 1260 960 Dl
+720 1320 1260 1320 Dl
+(24)870 1188 w
+1440 1320 1260 1140 Dl
+1439 1319 1376 1281 Dl
+1439 1319 1401 1256 Dl
+1656 1320 1476 1320 Dl
+1656 1320 1584 1338 Dl
+1656 1320 1584 1302 Dl
+1692 1140 1692 1320 Dl
+1692 1140 1710 1212 Dl
+1692 1140 1674 1212 Dl
+1907 1319 1876 1253 Dl
+1908 1319 1911 1245 Dl
+1908 1320 -180 0 0 -180 Da
+1944 1320 0 -180 180 0 Da
+2124 1140 2127 1214 Dl
+2123 1140 2092 1206 Dl
+2160 1139 2226 1108 Dl
+2160 1140 2234 1143 Dl
+2160 1140 0 -180 180 0 Da
+2556 1140 -180 0 0 -180 Da
+2376 960 2450 957 Dl
+2376 960 2442 991 Dl
+16 R f
+720 1440 720 1800 Dl
+1260 1440 720 1440 Dl
+1260 1800 1260 1440 Dl
+720 1800 1260 1800 Dl
+(16)910 1652 w
+1440 1800 1260 1620 Dl
+1439 1799 1376 1761 Dl
+1439 1799 1401 1736 Dl
+1656 1800 1476 1800 Dl
+1656 1800 1584 1818 Dl
+1656 1800 1584 1782 Dl
+1692 1620 1692 1800 Dl
+1692 1620 1710 1692 Dl
+1692 1620 1674 1692 Dl
+1907 1799 1876 1733 Dl
+1908 1799 1911 1725 Dl
+1908 1800 -180 0 0 -180 Da
+1944 1800 0 -180 180 0 Da
+2124 1620 2127 1694 Dl
+2123 1620 2092 1686 Dl
+2160 1619 2226 1588 Dl
+2160 1620 2234 1623 Dl
+2160 1620 0 -180 180 0 Da
+2556 1620 -180 0 0 -180 Da
+2376 1440 2450 1437 Dl
+2376 1440 2442 1471 Dl
+10 R f
+720 1920 720 2280 Dl
+1260 1920 720 1920 Dl
+1260 2280 1260 1920 Dl
+720 2280 1260 2280 Dl
+(10)940 2120 w
+1440 2280 1260 2100 Dl
+1439 2279 1376 2241 Dl
+1439 2279 1401 2216 Dl
+1656 2280 1476 2280 Dl
+1656 2280 1584 2298 Dl
+1656 2280 1584 2262 Dl
+1692 2100 1692 2280 Dl
+1692 2100 1710 2172 Dl
+1692 2100 1674 2172 Dl
+1907 2279 1876 2213 Dl
+1908 2279 1911 2205 Dl
+1908 2280 -180 0 0 -180 Da
+1944 2280 0 -180 180 0 Da
+2124 2100 2127 2174 Dl
+2123 2100 2092 2166 Dl
+2160 2099 2226 2068 Dl
+2160 2100 2234 2103 Dl
+2160 2100 0 -180 180 0 Da
+2556 2100 -180 0 0 -180 Da
+2376 1920 2450 1917 Dl
+2376 1920 2442 1951 Dl
+9 R f
+720 2400 720 2760 Dl
+1260 2400 720 2400 Dl
+1260 2760 1260 2400 Dl
+720 2760 1260 2760 Dl
+(9)968 2598 w
+1440 2760 1260 2580 Dl
+1439 2759 1376 2721 Dl
+1439 2759 1401 2696 Dl
+1656 2760 1476 2760 Dl
+1656 2760 1584 2778 Dl
+1656 2760 1584 2742 Dl
+1692 2580 1692 2760 Dl
+1692 2580 1710 2652 Dl
+1692 2580 1674 2652 Dl
+1907 2759 1876 2693 Dl
+1908 2759 1911 2685 Dl
+1908 2760 -180 0 0 -180 Da
+1944 2760 0 -180 180 0 Da
+2124 2580 2127 2654 Dl
+2123 2580 2092 2646 Dl
+2160 2579 2226 2548 Dl
+2160 2580 2234 2583 Dl
+2160 2580 0 -180 180 0 Da
+2556 2580 -180 0 0 -180 Da
+2376 2400 2450 2397 Dl
+2376 2400 2442 2431 Dl
+8 R f
+720 2880 720 3240 Dl
+1260 2880 720 2880 Dl
+1260 3240 1260 2880 Dl
+720 3240 1260 3240 Dl
+(8)970 3076 w
+1440 3240 1260 3060 Dl
+1439 3239 1376 3201 Dl
+1439 3239 1401 3176 Dl
+1656 3240 1476 3240 Dl
+1656 3240 1584 3258 Dl
+1656 3240 1584 3222 Dl
+1692 3060 1692 3240 Dl
+1692 3060 1710 3132 Dl
+1692 3060 1674 3132 Dl
+1907 3239 1876 3173 Dl
+1908 3239 1911 3165 Dl
+1908 3240 -180 0 0 -180 Da
+1944 3240 0 -180 180 0 Da
+2124 3060 2127 3134 Dl
+2123 3060 2092 3126 Dl
+2160 3059 2226 3028 Dl
+2160 3060 2234 3063 Dl
+2160 3060 0 -180 180 0 Da
+2556 3060 -180 0 0 -180 Da
+2376 2880 2450 2877 Dl
+2376 2880 2442 2911 Dl
+24 R f
+720 3360 720 3720 Dl
+1260 3360 720 3360 Dl
+1260 3720 1260 3360 Dl
+720 3720 1260 3720 Dl
+(24)870 3588 w
+1440 3720 1260 3540 Dl
+1439 3719 1376 3681 Dl
+1439 3719 1379 3676 Dl
+1439 3719 1383 3671 Dl
+1439 3719 1387 3667 Dl
+1439 3719 1391 3663 Dl
+1439 3719 1396 3659 Dl
+1439 3719 1401 3656 Dl
+1656 3720 1476 3720 Dl
+1656 3720 1584 3738 Dl
+1655 3720 1582 3732 Dl
+1655 3720 1581 3725 Dl
+1655 3720 1581 3720 Dl
+1655 3719 1581 3714 Dl
+1655 3719 1582 3707 Dl
+1656 3720 1584 3702 Dl
+1692 3540 1692 3720 Dl
+1692 3540 1710 3612 Dl
+1692 3540 1704 3613 Dl
+1692 3540 1697 3614 Dl
+1692 3540 1692 3614 Dl
+1691 3540 1686 3614 Dl
+1691 3540 1679 3613 Dl
+1692 3540 1674 3612 Dl
+1907 3719 1876 3653 Dl
+1907 3719 1881 3650 Dl
+1907 3719 1887 3648 Dl
+1907 3719 1893 3647 Dl
+1907 3719 1899 3646 Dl
+1907 3719 1905 3645 Dl
+1908 3719 1911 3645 Dl
+1908 3720 -180 0 0 -180 Da
+1944 3720 0 -180 180 0 Da
+2124 3540 2127 3614 Dl
+2123 3540 2121 3614 Dl
+2123 3540 2115 3613 Dl
+2123 3540 2109 3612 Dl
+2123 3540 2103 3611 Dl
+2123 3540 2097 3609 Dl
+2123 3540 2092 3606 Dl
+2160 3539 2226 3508 Dl
+2160 3539 2229 3513 Dl
+2160 3539 2231 3519 Dl
+2160 3539 2232 3525 Dl
+2160 3539 2233 3531 Dl
+2160 3539 2234 3537 Dl
+2160 3540 2234 3543 Dl
+2160 3540 0 -180 180 0 Da
+2556 3540 -180 0 0 -180 Da
+2376 3360 2450 3357 Dl
+2376 3360 2450 3362 Dl
+2376 3360 2449 3368 Dl
+2376 3360 2448 3374 Dl
+2376 3360 2447 3380 Dl
+2376 3360 2445 3386 Dl
+2376 3360 2442 3391 Dl
+16 R f
+720 3840 720 4200 Dl
+1260 3840 720 3840 Dl
+1260 4200 1260 3840 Dl
+720 4200 1260 4200 Dl
+(16)910 4052 w
+1440 4200 1260 4020 Dl
+1439 4199 1376 4161 Dl
+1439 4199 1379 4156 Dl
+1439 4199 1383 4151 Dl
+1439 4199 1387 4147 Dl
+1439 4199 1391 4143 Dl
+1439 4199 1396 4139 Dl
+1439 4199 1401 4136 Dl
+1656 4200 1476 4200 Dl
+1656 4200 1584 4218 Dl
+1655 4200 1582 4212 Dl
+1655 4200 1581 4205 Dl
+1655 4200 1581 4200 Dl
+1655 4199 1581 4194 Dl
+1655 4199 1582 4187 Dl
+1656 4200 1584 4182 Dl
+1692 4020 1692 4200 Dl
+1692 4020 1710 4092 Dl
+1692 4020 1704 4093 Dl
+1692 4020 1697 4094 Dl
+1692 4020 1692 4094 Dl
+1691 4020 1686 4094 Dl
+1691 4020 1679 4093 Dl
+1692 4020 1674 4092 Dl
+1907 4199 1876 4133 Dl
+1907 4199 1881 4130 Dl
+1907 4199 1887 4128 Dl
+1907 4199 1893 4127 Dl
+1907 4199 1899 4126 Dl
+1907 4199 1905 4125 Dl
+1908 4199 1911 4125 Dl
+1908 4200 -180 0 0 -180 Da
+1944 4200 0 -180 180 0 Da
+2124 4020 2127 4094 Dl
+2123 4020 2121 4094 Dl
+2123 4020 2115 4093 Dl
+2123 4020 2109 4092 Dl
+2123 4020 2103 4091 Dl
+2123 4020 2097 4089 Dl
+2123 4020 2092 4086 Dl
+2160 4019 2226 3988 Dl
+2160 4019 2229 3993 Dl
+2160 4019 2231 3999 Dl
+2160 4019 2232 4005 Dl
+2160 4019 2233 4011 Dl
+2160 4019 2234 4017 Dl
+2160 4020 2234 4023 Dl
+2160 4020 0 -180 180 0 Da
+2556 4020 -180 0 0 -180 Da
+2376 3840 2450 3837 Dl
+2376 3840 2450 3842 Dl
+2376 3840 2449 3848 Dl
+2376 3840 2448 3854 Dl
+2376 3840 2447 3860 Dl
+2376 3840 2445 3866 Dl
+2376 3840 2442 3871 Dl
+10 R f
+720 4320 720 4680 Dl
+1260 4320 720 4320 Dl
+1260 4680 1260 4320 Dl
+720 4680 1260 4680 Dl
+(10)940 4520 w
+1440 4680 1260 4500 Dl
+1439 4679 1376 4641 Dl
+1439 4679 1379 4636 Dl
+1439 4679 1383 4631 Dl
+1439 4679 1387 4627 Dl
+1439 4679 1391 4623 Dl
+1439 4679 1396 4619 Dl
+1439 4679 1401 4616 Dl
+1656 4680 1476 4680 Dl
+1656 4680 1584 4698 Dl
+1655 4680 1582 4692 Dl
+1655 4680 1581 4685 Dl
+1655 4680 1581 4680 Dl
+1655 4679 1581 4674 Dl
+1655 4679 1582 4667 Dl
+1656 4680 1584 4662 Dl
+1692 4500 1692 4680 Dl
+1692 4500 1710 4572 Dl
+1692 4500 1704 4573 Dl
+1692 4500 1697 4574 Dl
+1692 4500 1692 4574 Dl
+1691 4500 1686 4574 Dl
+1691 4500 1679 4573 Dl
+1692 4500 1674 4572 Dl
+1907 4679 1876 4613 Dl
+1907 4679 1881 4610 Dl
+1907 4679 1887 4608 Dl
+1907 4679 1893 4607 Dl
+1907 4679 1899 4606 Dl
+1907 4679 1905 4605 Dl
+1908 4679 1911 4605 Dl
+1908 4680 -180 0 0 -180 Da
+1944 4680 0 -180 180 0 Da
+2124 4500 2127 4574 Dl
+2123 4500 2121 4574 Dl
+2123 4500 2115 4573 Dl
+2123 4500 2109 4572 Dl
+2123 4500 2103 4571 Dl
+2123 4500 2097 4569 Dl
+2123 4500 2092 4566 Dl
+2160 4499 2226 4468 Dl
+2160 4499 2229 4473 Dl
+2160 4499 2231 4479 Dl
+2160 4499 2232 4485 Dl
+2160 4499 2233 4491 Dl
+2160 4499 2234 4497 Dl
+2160 4500 2234 4503 Dl
+2160 4500 0 -180 180 0 Da
+2556 4500 -180 0 0 -180 Da
+2376 4320 2450 4317 Dl
+2376 4320 2450 4322 Dl
+2376 4320 2449 4328 Dl
+2376 4320 2448 4334 Dl
+2376 4320 2447 4340 Dl
+2376 4320 2445 4346 Dl
+2376 4320 2442 4351 Dl
+9 R f
+720 4800 720 5160 Dl
+1260 4800 720 4800 Dl
+1260 5160 1260 4800 Dl
+720 5160 1260 5160 Dl
+(9)968 4998 w
+1440 5160 1260 4980 Dl
+1439 5159 1376 5121 Dl
+1439 5159 1379 5116 Dl
+1439 5159 1383 5111 Dl
+1439 5159 1387 5107 Dl
+1439 5159 1391 5103 Dl
+1439 5159 1396 5099 Dl
+1439 5159 1401 5096 Dl
+1656 5160 1476 5160 Dl
+1656 5160 1584 5178 Dl
+1655 5160 1582 5172 Dl
+1655 5160 1581 5165 Dl
+1655 5160 1581 5160 Dl
+1655 5159 1581 5154 Dl
+1655 5159 1582 5147 Dl
+1656 5160 1584 5142 Dl
+1692 4980 1692 5160 Dl
+1692 4980 1710 5052 Dl
+1692 4980 1704 5053 Dl
+1692 4980 1697 5054 Dl
+1692 4980 1692 5054 Dl
+1691 4980 1686 5054 Dl
+1691 4980 1679 5053 Dl
+1692 4980 1674 5052 Dl
+1907 5159 1876 5093 Dl
+1907 5159 1881 5090 Dl
+1907 5159 1887 5088 Dl
+1907 5159 1893 5087 Dl
+1907 5159 1899 5086 Dl
+1907 5159 1905 5085 Dl
+1908 5159 1911 5085 Dl
+1908 5160 -180 0 0 -180 Da
+1944 5160 0 -180 180 0 Da
+2124 4980 2127 5054 Dl
+2123 4980 2121 5054 Dl
+2123 4980 2115 5053 Dl
+2123 4980 2109 5052 Dl
+2123 4980 2103 5051 Dl
+2123 4980 2097 5049 Dl
+2123 4980 2092 5046 Dl
+2160 4979 2226 4948 Dl
+2160 4979 2229 4953 Dl
+2160 4979 2231 4959 Dl
+2160 4979 2232 4965 Dl
+2160 4979 2233 4971 Dl
+2160 4979 2234 4977 Dl
+2160 4980 2234 4983 Dl
+2160 4980 0 -180 180 0 Da
+2556 4980 -180 0 0 -180 Da
+2376 4800 2450 4797 Dl
+2376 4800 2450 4802 Dl
+2376 4800 2449 4808 Dl
+2376 4800 2448 4814 Dl
+2376 4800 2447 4820 Dl
+2376 4800 2445 4826 Dl
+2376 4800 2442 4831 Dl
+8 R f
+720 5280 720 5640 Dl
+1260 5280 720 5280 Dl
+1260 5640 1260 5280 Dl
+720 5640 1260 5640 Dl
+(8)970 5476 w
+1440 5640 1260 5460 Dl
+1439 5639 1376 5601 Dl
+1439 5639 1379 5596 Dl
+1439 5639 1383 5591 Dl
+1439 5639 1387 5587 Dl
+1439 5639 1391 5583 Dl
+1439 5639 1396 5579 Dl
+1439 5639 1401 5576 Dl
+1656 5640 1476 5640 Dl
+1656 5640 1584 5658 Dl
+1655 5640 1582 5652 Dl
+1655 5640 1581 5645 Dl
+1655 5640 1581 5640 Dl
+1655 5639 1581 5634 Dl
+1655 5639 1582 5627 Dl
+1656 5640 1584 5622 Dl
+1692 5460 1692 5640 Dl
+1692 5460 1710 5532 Dl
+1692 5460 1704 5533 Dl
+1692 5460 1697 5534 Dl
+1692 5460 1692 5534 Dl
+1691 5460 1686 5534 Dl
+1691 5460 1679 5533 Dl
+1692 5460 1674 5532 Dl
+1907 5639 1876 5573 Dl
+1907 5639 1881 5570 Dl
+1907 5639 1887 5568 Dl
+1907 5639 1893 5567 Dl
+1907 5639 1899 5566 Dl
+1907 5639 1905 5565 Dl
+1908 5639 1911 5565 Dl
+1908 5640 -180 0 0 -180 Da
+1944 5640 0 -180 180 0 Da
+2124 5460 2127 5534 Dl
+2123 5460 2121 5534 Dl
+2123 5460 2115 5533 Dl
+2123 5460 2109 5532 Dl
+2123 5460 2103 5531 Dl
+2123 5460 2097 5529 Dl
+2123 5460 2092 5526 Dl
+2160 5459 2226 5428 Dl
+2160 5459 2229 5433 Dl
+2160 5459 2231 5439 Dl
+2160 5459 2232 5445 Dl
+2160 5459 2233 5451 Dl
+2160 5459 2234 5457 Dl
+2160 5460 2234 5463 Dl
+2160 5460 0 -180 180 0 Da
+2556 5460 -180 0 0 -180 Da
+2376 5280 2450 5277 Dl
+2376 5280 2450 5282 Dl
+2376 5280 2449 5288 Dl
+2376 5280 2448 5294 Dl
+2376 5280 2447 5300 Dl
+2376 5280 2445 5306 Dl
+2376 5280 2442 5311 Dl
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Roman

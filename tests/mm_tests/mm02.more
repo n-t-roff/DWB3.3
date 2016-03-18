@@ -1,0 +1,594 @@
+
+
+
+                                  - 1 -
+
+
+
+       1.  PPPPAAAARRRRAAAAGGGGRRRRAAAAPPPPHHHHSSSS AAAANNNNDDDD HHHHEEEEAAAADDDDIIIINNNNGGGGSSSS
+
+       This section describes simple paragraphs and section
+       headings.
+
+       1.1  PPPPaaaarrrraaaaggggrrrraaaapppphhhhssss
+
+            .P [type]
+            _o_n_e _o_r _m_o_r_e _l_i_n_e_s _o_f _t_e_x_t
+
+       This macro is used to begin two kinds of paragraphs.  In a
+       _l_e_f_t-_j_u_s_t_i_f_i_e_d paragraph, the first line begins at the left
+       margin, while in an _i_n_d_e_n_t_e_d paragraph, it is indented five
+       spaces.
+
+       A document possesses a _d_e_f_a_u_l_t _p_a_r_a_g_r_a_p_h _s_t_y_l_e obtained by
+       specifying .P before each paragraph that does _n_o_t follow a
+       heading.  The default style is controlled by the register
+       Pt.  The initial value of Pt is 0, which always provides
+       left-justified paragraphs.  All paragraphs can be forced to
+       be indented by inserting the following at the beginning of
+       the document:
+
+            .nr Pt 1
+
+       All paragraphs will be indented except after headings,
+       lists, and displays if the following:
+
+            .nr Pt 2
+
+       is inserted at the beginning of the document.
+
+       The amount a paragraph is indented is contained in the
+       register Pi, whose default value is 5.  To indent paragraphs
+       by, say, 10 spaces, insert:
+
+            .nr Pi 10
+
+       at the beginning of the document.  Of course, both the Pi
+       and Pt register values must be greater than zero for any
+       paragraphs to be indented.
+
+       The number register Ps controls the amount of spacing
+       between paragraphs.  By default, Ps is set to 1, yielding
+       one blank space (1/2 a vertical space).
+
+       Regardless of Pt, an _i_n_d_i_v_i_d_u_a_l paragraph can be forced to
+       be left-justified or indented.  ``.P 0'' always forces left
+       justification; ``.P 1'' always causes indentation by the
+       amount specified by the register Pi.
+
+
+
+
+       Memorandum Macros                                 TEST: mm02
+
+
+
+
+
+
+
+                                  - 2 -
+
+
+
+       If .P occurs inside a _l_i_s_t, the indent (if any) of the
+       paragraph is added to the current list indent.
+
+       Numbered paragraphs may be produced by setting the register
+       Np to 1.  This produces paragraphs numbered within first
+       level headings, e.g., 1.01, 1.02, 1.03, 2.01, etc.
+
+       A different style of numbered paragraphs is obtained by
+       using the
+
+            .nP
+
+       macro rather than the .P macro for paragraphs.  This
+       produces paragraphs that are numbered within second level
+       headings and contain a ``double-line indent'' in which the
+       text of the second line is indented to be aligned with the
+       text of the first line so that the number stands out.
+
+            .H 1 "FIRST HEADING"
+            .H 2 "Second Heading"
+            .nP
+            _o_n_e _o_r _m_o_r_e _l_i_n_e_s _o_f _t_e_x_t
+
+       1.2  NNNNuuuummmmbbbbeeeerrrreeeedddd HHHHeeeeaaaaddddiiiinnnnggggssss
+
+            .H level [heading-text] [heading-suffix]
+            _z_e_r_o _o_r _m_o_r_e _l_i_n_e_s _o_f _t_e_x_t
+
+       The .H macro provides seven levels of numbered headings, as
+       illustrated by this document. Level 1 is the most major or
+       highest; level 7 the lowest.
+
+       The _h_e_a_d_i_n_g-_s_u_f_f_i_x is appended to the _h_e_a_d_i_n_g-_t_e_x_t and may
+       be used for footnote marks which should not appear with the
+       heading text in the Table of Contents.
+
+       1.2.1  _N_o_r_m_a_l__A_p_p_e_a_r_a_n_c_e_.  The normal appearance of headings
+       is as shown in this document.  The effect of .H varies
+       according to the _l_e_v_e_l argument.  First-level headings are
+       _p_r_e_c_e_d_e_d by two blank lines (one vertical space); all others
+       are _p_r_e_c_e_d_e_d by one blank line (1/2 vertical space).
+
+
+
+
+
+
+
+
+
+
+
+
+
+       Memorandum Macros                                 TEST: mm02
+
+
+
+
+
+
+
+                                  - 3 -
+
+
+
+            .H 1 heading-text   gives a bold heading _f_o_l_l_o_w_e_d by a single
+                                blank line (1/2 vertical space).  The
+                                following text begins on a new line and is
+                                indented according to the current
+                                paragraph type.  Full capital letters
+                                should normally be used to make the
+                                heading stand out.
+
+            .H 2 heading-text   yields a bold heading followed by a single
+                                blank line (1/2 vertical space).  The
+                                following text begins on a new line and is
+                                indented according to the current
+                                paragraph type.  Normally, initial
+                                capitals are used.
+            .H n heading-text   for 3 _< n _< 7, produces an underlined
+                                (italic) heading followed by two spaces.
+                                The following text appears on the same
+                                line, i.e., these are _r_u_n-_i_n headings.
+
+       Appropriate numbering and spacing (horizontal and vertical)
+       occur even if the heading text is omitted from a .H macro
+       call.
+
+       Here are the first few .H calls in this document:
+
+            .H 1 "PARAGRAPHS AND HEADINGS"
+            .H 2 "Paragraphs"
+            .H 3 "Numbered Headings"
+            .H 3 "Normal Appearance."
+            .H 3 "Altering Appearance of Headings."
+            .H 4 "Pre-Spacing and Page Ejection."
+            .H 4 "Spacing After Headings."
+            .H 4 "Centered Headings."
+            .H 4 "Bold, Italic, and Underlined Headings"
+            .H 5 "Control by Level."
+
+       1.2.2  _A_l_t_e_r_i_n_g__A_p_p_e_a_r_a_n_c_e__o_f__H_e_a_d_i_n_g_s_.  Users satisfied
+       with the default appearance of headings may skip to the
+       section titled ``Unnumbered Headings''.  One can modify the
+       appearance of headings quite easily by setting certain
+       registers and strings at the beginning of the document.
+       This permits quick alteration of a document's style, because
+       this style-control information is concentrated in a few
+       lines, rather than being distributed throughout the
+       document.
+
+       1.2.2.1  _P_r_e_-_S_p_a_c_i_n_g__a_n_d__P_a_g_e__E_j_e_c_t_i_o_n_.  A first-level
+       heading normally has two blank lines (one vertical space)
+       preceding it, and all others have one blank line (1/2
+       vertical space).  If a multi-line heading were to be split
+       across pages, it is automatically moved to the top of the
+
+
+
+       Memorandum Macros                                 TEST: mm02
+
+
+
+
+
+
+
+                                  - 4 -
+
+
+
+       next page.  Every first-level heading may be forced to the
+       top of a new page by inserting:
+
+            .nr Ej 1
+
+       at the beginning of the document.  Long documents may be
+       made more manageable if each section starts on a new page.
+       Setting Ej to a higher value causes the same effect for
+       headings up to that level, i.e., a page eject occurs if the
+       heading level is less than or equal to Ej.
+
+       1.2.2.2  _S_p_a_c_i_n_g__A_f_t_e_r__H_e_a_d_i_n_g_s_.  Three registers control
+       the appearance of text immediately following a .H call.
+       They are Hb (heading break level), Hs (heading space level),
+       and Hi (post-heading indent).
+
+       If the heading level is less than or equal to Hb, a break
+       occurs after the heading.  If the heading level is less than
+       or equal to Hs, a blank line (1/2 vertical space) is
+       inserted after the heading.  Defaults for Hb and Hs are 2.
+       If a heading level is greater than Hb and also greater than
+       Hs, then the heading (if any) is run into the following
+       text.  These registers permit headings to be separated from
+       the text in a consistent way throughout a document, while
+       allowing easy alteration of white space and heading
+       emphasis.
+
+       For any _s_t_a_n_d-_a_l_o_n_e heading, i.e., a heading not run into
+       the following text, the alignment of the next line of output
+       is controlled by the register Hi.  If Hi is 0, text is
+       left-justified.  If Hi is 1 (the _d_e_f_a_u_l_t value), the text is
+       indented according to the paragraph type as specified by the
+       register Pt.  Finally, if Hi is 2, text is indented to line
+       up with the first word of the heading itself, so that the
+       heading number stands out more clearly.
+
+       For example, to cause a blank line (1/2 vertical space) to
+       appear after the first three heading levels, to have no
+       run-in headings, and to force the text following all
+       headings to be left-justified (regardless of the value of
+       Pt), the following should appear at the top of the document:
+
+            .nr Hs 3
+            .nr Hb 7
+            .nr Hi 0
+
+       1.2.2.3  _C_e_n_t_e_r_e_d__H_e_a_d_i_n_g_s_.  The register Hc can be used to
+       obtain centered headings.  A heading is centered if its
+       level is less than or equal to Hc, and if it is also stand-
+       alone.  Hc is 0 initially (no centered headings).
+
+
+
+
+       Memorandum Macros                                 TEST: mm02
+
+
+
+
+
+
+
+                                  - 5 -
+
+
+
+       1.2.2.4  _B_o_l_d_,__I_t_a_l_i_c_,__a_n_d__U_n_d_e_r_l_i_n_e_d__H_e_a_d_i_n_g_s
+
+       1.2.2.4.1  _C_o_n_t_r_o_l__b_y__L_e_v_e_l_.  Any heading that is underlined
+       by _n_r_o_f_f is made italic by _t_r_o_f_f.  The string HF (heading
+       font) contains seven codes that specify the fonts for
+       heading levels 1-7.  The legal codes, their interpretations,
+       and the defaults for HF are:
+
+       _____________________________________________________________
+       |_F_o_r_m_a_t_t_e_r |             _H_F _C_o_d_e             |  _D_e_f_a_u_l_t _H_F   |
+       _|___________|___1________________2_____________3_____|_______________|
+       |nroff     | no underline   underline   bold | 2 2 2 2 2 2 2 |
+       |troff     | roman          italic      bold | 2 2 2 2 2 2 2 |
+       _|___________|__________________________________|_______________|
+
+       Thus, all levels are underlined in _n_r_o_f_f and italic in
+       _t_r_o_f_f.  The user may reset HF as desired.  Any value omitted
+       from the right end of the list is taken to be 1.  For
+       example, the following would result in two bold levels,
+       three underlined (italic) levels, and two normal (roman)
+       levels:
+
+            .ds HF 3 3 2 2 2
+
+       1.2.2.4.2  _N_r_o_f_f__U_n_d_e_r_l_i_n_i_n_g__S_t_y_l_e_.  _N_r_o_f_f can underline in
+       two ways.  The normal style (.ul request) is to underline
+       only letters and digits.  The continuous style (.cu request)
+       underlines all characters, including spaces.  By default, MM
+       attempts to use the continuous style on any heading that is
+       to be underlined and is short enough to fit on a single
+       line.  If a heading is to be underlined, but is too long, it
+       is underlined the normal way (i.e., only letters and digits
+       are underlined).
+
+       All underlining of headings can be forced to the normal way
+       by using the -rU1 flag when invoking _n_r_o_f_f.
+
+       1.2.2.4.3  _H_e_a_d_i_n_g__P_o_i_n_t__S_i_z_e_s_.  The user may also specify
+       the desired point size for each heading level with the HP
+       string (for use with _t_r_o_f_f only).
+
+            .ds HP [ps1] [ps2] [ps3] [ps4] [ps5] [ps6] [ps7]
+
+       By default, the text of headings (.H  and .HU) is printed in
+       the same point size as the body _e_x_c_e_p_t that bold stand-alone
+       headings are printed in a size one point smaller than the
+       body.  The string HP, similar to the string HF, can be
+       specified to contain up to seven values, corresponding to
+       the seven levels of headings.  For example:
+
+            .ds HP 12 12 10 10 10 10 10
+
+
+
+       Memorandum Macros                                 TEST: mm02
+
+
+
+
+
+
+
+                                  - 6 -
+
+
+
+       specifies that the first and second level headings are to be
+       printed in 12-point type, with the remainder printed in 10-
+       point.  Note that the specified values may also be _r_e_l_a_t_i_v_e
+       point-size changes, e.g.:
+
+            .ds HP +2 +2 -1 -1
+
+       If absolute point sizes are specified, then those sizes will
+       be used regardless of the point size of the body of the
+       document.  If relative point sizes are specified, then the
+       point sizes for the headings will be relative to the point
+       size of the body, even if the latter is changed.
+
+       Null or zero values imply that the _d_e_f_a_u_l_t size will be used
+       for the corresponding heading level.
+
+       1.2.2.5  _M_a_r_k_i_n_g__S_t_y_l_e_s__-__N_u_m_e_r_a_l_s__a_n_d__C_o_n_c_a_t_e_n_a_t_i_o_n
+
+            .HM [arg1] ... [arg7]
+
+       The registers names H1 through H7 are used as counters for
+       the seven levels of headings.  Their values are normally
+       printed using Arabic numerals.  The .HM macro (heading mark
+       style) allows this choice to be overridden, thus providing
+       ``outline'' and other document styles.  This macro can have
+       up to seven arguments; each argument is a string indicating
+       the type of marking to be used.  Legal values and their
+       meanings are shown below; omitted values are interpreted as
+       1, while illegal values have no effect.
+
+             ________________________________________________
+             _|__V__a__l__u__e_____I__n__t__e__r__p__r__e__t__a__t__i__o__n_________________________|
+             |  1     Arabic (default for all levels)        |
+             |0001    Arabic with enough leading zeroes      |
+             |         to get the specified number of digits |
+             |  A     Upper-case alphabetic                  |
+             |  a     Lower-case alphabetic                  |
+             |  I     Upper-case Roman                       |
+             |  i     Lower-case Roman                       |
+             _|_______________________________________________|
+
+       By default, the complete heading mark for a given level is
+       built by concatenating the mark for that level to the right
+       of all marks for all levels of higher value.  To inhibit the
+       concatenation of heading level marks, i.e., to obtain just
+       the current level mark followed by a period, set the
+       register Ht (heading-mark type) to 1.
+
+       For example, a commonly-used ``outline'' style is obtained
+       by:
+
+
+
+
+       Memorandum Macros                                 TEST: mm02
+
+
+
+
+
+
+
+                                  - 7 -
+
+
+
+            .HM I A 1 a i
+            .nr Ht 1
+
+       1.3  UUUUnnnnnnnnuuuummmmbbbbeeeerrrreeeedddd HHHHeeeeaaaaddddiiiinnnnggggssss
+
+            .HU heading-text
+
+       .HU is a special case of .H; it is handled in the same way
+       as .H, except that no heading mark is printed.  In order to
+       preserve the hierarchical structure of headings when .H and
+       .HU calls are intermixed, each .HU heading is considered to
+       exist at the level given by register Hu, whose initial value
+       is 2.  Thus, in the normal case, the only difference
+       between:
+
+            .HU heading-text
+
+       and:
+
+            .H 2 heading-text
+
+       is the printing of the heading mark for the latter.  Both
+       have the effect of incrementing the numbering counter for
+       level 2, and resetting to zero the counters for levels 3
+       through 7.  Typically, the value of Hu should be set to make
+       unnumbered headings (if any) be the lowest-level headings in
+       a document.
+
+       .HU can be especially helpful in setting up appendices and
+       other sections that may not fit well into the numbering
+       scheme of the main body of a document.
+
+       1.4  HHHHeeeeaaaaddddiiiinnnnggggssss aaaannnndddd tttthhhheeee TTTTaaaabbbblllleeee ooooffff CCCCoooonnnntttteeeennnnttttssss
+
+       The text of headings and their corresponding page numbers
+       can be automatically collected for a table of contents.
+       This is accomplished by doing the following two things:
+
+          +o specifying in the register Cl what level headings are
+            to be saved
+
+          +o invoking the .TC macro at the end of the document
+
+       Any heading whose level is less than or equal to the value
+       of the register Cl (contents level) is saved and later
+       displayed in the table of contents.  The default value for
+       Cl is 2, i.e., the first two levels of headings are saved.
+
+       Due to the way the headings are saved, it is possible to
+       exceed the formatter's storage capacity, particularly when
+       saving many levels of many headings, while also processing
+
+
+
+       Memorandum Macros                                 TEST: mm02
+
+
+
+
+
+
+
+                                  - 8 -
+
+
+
+       displays and footnotes.  If this happens, the ``Out of temp
+       file space'' diagnostic will be issued; the only remedy is
+       to save fewer levels and/or to have fewer words in the
+       heading text.
+
+       1.5  FFFFiiiirrrrsssstttt----LLLLeeeevvvveeeellll HHHHeeeeaaaaddddiiiinnnnggggssss aaaannnndddd PPPPaaaaggggeeee NNNNuuuummmmbbbbeeeerrrriiiinnnngggg SSSSttttyyyylllleeee
+
+       By default, pages are numbered sequentially at the top of
+       the page.  For large documents, it may be desirable to use
+       page numbering of the form ``section-page,'' where _s_e_c_t_i_o_n
+       is the number of the current first-level heading.  This page
+       numbering style can be achieved by specifying the -rN3 or
+       -rN5 flag on the command line.  As a side effect, this also
+       has the effect of setting Ej to 1, i.e., each section begins
+       on a new page.  In this style, the page number is printed at
+       the _b_o_t_t_o_m of the page, so that the correct section number
+       is printed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       Memorandum Macros                                 TEST: mm02
+
+
+
+
+
+
+
+
+
+
+
+                                 CONTENTS
+
+
+       1.  PARAGRAPHS AND HEADINGS..............................  1
+           1.1  Paragraphs......................................  1
+           1.2  Numbered Headings...............................  2
+           1.3  Unnumbered Headings.............................  7
+           1.4  Headings and the Table of Contents..............  7
+           1.5  First-Level Headings and Page Numbering
+                Style...........................................  8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  - i -
+
+
+
+

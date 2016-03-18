@@ -1,0 +1,736 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 R f
+(- 1 -)2 166 1 2797 480 t
+%INFO[SECTION: LEVEL = 1, NUMBER = 1.  , HEADING = PARAGRAPHS AND HEADINGS]
+10 B f
+( AND HEADINGS)2 800(1. PARAGRAPHS)1 819 2 720 960 t
+10 R f
+(This section describes simple paragraphs and section headings.)7 2518 1 720 1140 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.1  , HEADING = Paragraphs]
+10 B f
+(1.1 Paragraphs)1 675 1 720 1320 t
+10 R f
+(.P [type])1 344 1 870 1500 t
+10 I f
+(one or more lines of text)5 974 1 870 1620 t
+10 R f
+( a)1 70( In)1 134(This macro is used to begin two kinds of paragraphs.)9 2123 3 720 1800 t
+10 I f
+(left-justi\256ed)3073 1800 w
+10 R f
+( the)1 149(paragraph, the \256rst line begins at)5 1314 2 3577 1800 t
+(left margin, while in an)4 935 1 720 1920 t
+10 I f
+(indented)1680 1920 w
+10 R f
+(paragraph, it is indented \256ve spaces.)5 1450 1 2049 1920 t
+(A document possesses a)3 977 1 720 2100 t
+10 I f
+( style)1 212(default paragraph)1 734 2 1725 2100 t
+10 R f
+(obtained by specifying .P before each paragraph that does)8 2340 1 2700 2100 t
+10 I f
+(not)720 2220 w
+10 R f
+( of Pt is 0, which)5 703( initial value)2 512( The)1 211( default style is controlled by the register Pt.)8 1816( The)1 211(follow a heading.)2 708 6 879 2220 t
+( paragraphs can be forced to be indented by inserting the)10 2431( All)1 194(always provides left-justi\256ed paragraphs.)3 1695 3 720 2340 t
+(following at the beginning of the document:)6 1760 1 720 2460 t
+(.nr Pt 1)2 292 1 870 2640 t
+(All paragraphs will be indented except after headings, lists, and displays if the following:)13 3565 1 720 2820 t
+(.nr Pt 2)2 292 1 870 3000 t
+(is inserted at the beginning of the document.)7 1776 1 720 3180 t
+( indent)1 288( To)1 174( whose default value is 5.)5 1080(The amount a paragraph is indented is contained in the register Pi,)11 2778 4 720 3360 t
+(paragraphs by, say, 10 spaces, insert:)5 1480 1 720 3480 t
+(.nr Pi 10)2 342 1 870 3660 t
+( must be greater than zero)5 1073( course, both the Pi and Pt register values)8 1707( Of)1 162(at the beginning of the document.)5 1378 4 720 3840 t
+(for any paragraphs to be indented.)5 1363 1 720 3960 t
+( default, Ps is set to 1,)6 968( By)1 182(The number register Ps controls the amount of spacing between paragraphs.)10 3170 3 720 4140 t
+(yielding one blank space \(1/2 a vertical space\).)7 1873 1 720 4260 t
+(Regardless of Pt, an)3 844 1 720 4440 t
+10 I f
+(individual)1604 4440 w
+10 R f
+( always)1 318( 0'')1 141( ``.P)1 213( indented.)1 410(paragraph can be forced to be left-justi\256ed or)7 1908 5 2050 4440 t
+(forces left justi\256cation; ``.P 1'' always causes indentation by the amount speci\256ed by the register Pi.)15 4009 1 720 4560 t
+(If .P occurs inside a)4 790 1 720 4740 t
+10 I f
+(list)1535 4740 w
+10 R f
+(, the indent \(if any\) of the paragraph is added to the current list indent.)14 2806 1 1666 4740 t
+( produces paragraphs)2 907( This)1 258( Np to 1.)3 440(Numbered paragraphs may be produced by setting the register)8 2715 4 720 4920 t
+(numbered within \256rst level headings, e.g., 1.01, 1.02, 1.03, 2.01, etc.)10 2745 1 720 5040 t
+(A different style of numbered paragraphs is obtained by using the)10 2623 1 720 5220 t
+(.nP)870 5400 w
+( produces paragraphs that are numbered within second)7 2203( This)1 232( than the .P macro for paragraphs.)6 1376(macro rather)1 509 4 720 5580 t
+( line is indented to be)5 908(level headings and contain a ``double-line indent'' in which the text of the second)13 3412 2 720 5700 t
+(aligned with the text of the \256rst line so that the number stands out.)13 2649 1 720 5820 t
+(.H 1 "FIRST HEADING")3 1031 1 870 6000 t
+(.H 2 "Second Heading")3 936 1 870 6120 t
+(.nP)870 6240 w
+10 I f
+(one or more lines of text)5 974 1 870 6360 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.2  , HEADING = Numbered Headings]
+10 B f
+( Headings)1 426(1.2 Numbered)1 630 2 720 6540 t
+10 R f
+(.H level [heading-text] [heading-suf\256x])3 1574 1 870 6720 t
+10 I f
+(zero or more lines of text)5 1002 1 870 6840 t
+10 R f
+( levels of numbered headings, as illustrated by this document. Level 1 is the)13 3124(The .H macro provides seven)4 1196 2 720 7020 t
+(most major or highest; level 7 the lowest.)7 1655 1 720 7140 t
+(The)720 7320 w
+10 I f
+(heading-suf\256x)907 7320 w
+10 R f
+(is appended to the)3 748 1 1505 7320 t
+10 I f
+(heading-text)2286 7320 w
+10 R f
+(and may be used for footnote marks which should not)9 2222 1 2818 7320 t
+(appear with the heading text in the Table of Contents.)9 2147 1 720 7440 t
+( mm02)1 281( TEST:)1 3149(Memorandum Macros)1 890 3 720 7728 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Page: 2 2
+/saveobj save def
+mark
+2 pagesetup
+10 R f
+(- 2 -)2 166 1 2797 480 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 1.2.1  , HEADING = Normal Appearance.]
+10 I f
+( Appearance.)1 539(1.2.1 Normal)1 556 2 720 960 t
+10 R f
+( effect)1 259( The)1 213(The normal appearance of headings is as shown in this document.)10 2696 3 1872 960 t
+(of .H varies according to the)5 1201 1 720 1080 t
+10 I f
+(level)1959 1080 w
+10 R f
+( headings are)2 552(argument. First-level)1 876 2 2185 1080 t
+10 I f
+(preceded)3651 1080 w
+10 R f
+(by two blank lines \(one)4 986 1 4054 1080 t
+(vertical space\); all others are)4 1146 1 720 1200 t
+10 I f
+(preceded)1891 1200 w
+10 R f
+(by one blank line \(1/2 vertical space\).)6 1505 1 2281 1200 t
+( a bold heading)3 655( gives)1 361( heading-text)1 549(.H 1)1 172 4 870 1380 t
+10 I f
+(followed)2646 1380 w
+10 R f
+( line \(1/2 vertical space\).)4 1049(by a single blank)3 722 2 3030 1380 t
+( on a new line and is indented according to the)10 1988(The following text begins)3 1072 2 1741 1500 t
+( make)1 243( capital letters should normally be used to)7 1675( Full)1 213(current paragraph type.)2 929 4 1741 1620 t
+(the heading stand out.)3 877 1 1741 1740 t
+( vertical space\).)2 652( a bold heading followed by a single blank line \(1/2)10 2169( yields)1 389( heading-text)1 549(.H 2)1 172 5 870 1896 t
+( on a new line and is indented according to the)10 1988(The following text begins)3 1072 2 1741 2016 t
+( initial capitals are used.)4 968( Normally,)1 458(current paragraph type.)2 927 3 1741 2136 t
+( 3)1 104( for)1 266( heading-text)1 549(.H n)1 172 4 870 2292 t
+10 S f
+(\243)1986 2292 w
+10 R f
+(n)2066 2292 w
+10 S f
+(\243)2141 2292 w
+10 R f
+( \(italic\) heading followed by two)5 1462(7, produces an underlined)3 1118 2 2221 2292 t
+( line, i.e., these are)4 788( following text appears on the same)6 1486(spaces. The)1 501 3 1741 2412 t
+10 I f
+(run-in)4551 2412 w
+10 R f
+(headings.)1741 2532 w
+( \(horizontal and vertical\) occur even if the heading text is omitted from)12 2875(Appropriate numbering and spacing)3 1445 2 720 2712 t
+(a .H macro call.)3 634 1 720 2832 t
+(Here are the \256rst few .H calls in this document:)9 1891 1 720 3012 t
+(.H 1 "PARAGRAPHS AND HEADINGS")4 1717 1 870 3192 t
+(.H 2 "Paragraphs")2 722 1 870 3312 t
+(.H 3 "Numbered Headings")3 1102 1 870 3432 t
+(.H 3 "Normal Appearance.")3 1109 1 870 3552 t
+(.H 3 "Altering Appearance of Headings.")5 1647 1 870 3672 t
+(.H 4 "Pre-Spacing and Page Ejection.")5 1538 1 870 3792 t
+(.H 4 "Spacing After Headings.")4 1263 1 870 3912 t
+(.H 4 "Centered Headings.")3 1066 1 870 4032 t
+(.H 4 "Bold, Italic, and Underlined Headings")6 1799 1 870 4152 t
+(.H 5 "Control by Level.")4 987 1 870 4272 t
+%INFO[SECTION: LEVEL = 3, NUMBER = 1.2.2  , HEADING = Altering Appearance of Headings.]
+10 I f
+( Appearance of Headings.)3 1058(1.2.2 Altering)1 578 2 720 4452 t
+10 R f
+( headings may skip)3 787(Users satis\256ed with the default appearance of)6 1842 2 2411 4452 t
+( easily by)2 387( can modify the appearance of headings quite)7 1830( One)1 219(to the section titled ``Unnumbered Headings''.)5 1884 4 720 4572 t
+( permits quick alteration of a)5 1211( This)1 240( beginning of the document.)4 1172(setting certain registers and strings at the)6 1697 4 720 4692 t
+( than being)2 466(document's style, because this style-control information is concentrated in a few lines, rather)12 3854 2 720 4812 t
+(distributed throughout the document.)3 1483 1 720 4932 t
+%INFO[SECTION: LEVEL = 4, NUMBER = 1.2.2.1  , HEADING = Pre-Spacing and Page Ejection.]
+10 I f
+( and Page Ejection.)3 818(1.2.2.1 Pre-Spacing)1 824 2 720 5112 t
+10 R f
+( vertical)1 335(A \256rst-level heading normally has two blank lines \(one)8 2283 2 2422 5112 t
+( a multi-line heading were to)5 1176( If)1 121( others have one blank line \(1/2 vertical space\).)8 1927(space\) preceding it, and all)4 1096 4 720 5232 t
+( \256rst-level heading may)3 967( Every)1 294(be split across pages, it is automatically moved to the top of the next page.)14 3059 3 720 5352 t
+(be forced to the top of a new page by inserting:)10 1885 1 720 5472 t
+(.nr Ej 1)2 297 1 870 5652 t
+( made more manageable if each section starts on)8 1942( documents may be)3 774( Long)1 261(at the beginning of the document.)5 1343 4 720 5832 t
+( Ej to a higher value causes the same effect for headings up to that level, i.e., a page)18 3486( Setting)1 343(a new page.)2 491 3 720 5952 t
+(eject occurs if the heading level is less than or equal to Ej.)12 2321 1 720 6072 t
+%INFO[SECTION: LEVEL = 4, NUMBER = 1.2.2.2  , HEADING = Spacing After Headings.]
+10 I f
+( After Headings.)2 662(1.2.2.2 Spacing)1 647 2 720 6252 t
+10 R f
+( immediately following a .H)4 1142(Three registers control the appearance of text)6 1817 2 2081 6252 t
+( are Hb \(heading break level\), Hs \(heading space level\), and Hi \(post-heading indent\).)13 3424(call. They)1 424 2 720 6372 t
+( the heading level is less)5 989( If)1 118(If the heading level is less than or equal to Hb, a break occurs after the heading.)16 3213 3 720 6552 t
+( for Hb and Hs)4 617( Defaults)1 394( equal to Hs, a blank line \(1/2 vertical space\) is inserted after the heading.)14 3022(than or)1 287 4 720 6672 t
+( level is greater than Hb and also greater than Hs, then the heading \(if any\) is run into the)19 3573( a heading)2 410( If)1 116(are 2.)1 221 4 720 6792 t
+( a consistent way)3 775( registers permit headings to be separated from the text in)10 2606( These)1 319(following text.)1 620 4 720 6912 t
+(throughout a document, while allowing easy alteration of white space and heading emphasis.)12 3711 1 720 7032 t
+(For any)1 308 1 720 7212 t
+10 I f
+(stand-alone)1053 7212 w
+10 R f
+( the alignment of the next line of)7 1314(heading, i.e., a heading not run into the following text,)9 2176 2 1550 7212 t
+( Hi is 1 \(the)4 480( If)1 118( Hi is 0, text is left-justi\256ed.)6 1135( If)1 118( controlled by the register Hi.)5 1186(output is)1 351 6 720 7332 t
+10 I f
+(default)4135 7332 w
+10 R f
+(value\), the text)2 600 1 4440 7332 t
+( if Hi is 2, text is)6 784( Finally,)1 378(is indented according to the paragraph type as speci\256ed by the register Pt.)12 3158 3 720 7452 t
+( mm02)1 281( TEST:)1 3149(Memorandum Macros)1 890 3 720 7728 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 2 2
+%%Page: 3 3
+/saveobj save def
+mark
+3 pagesetup
+10 R f
+(- 3 -)2 166 1 2797 480 t
+( so that the heading number stands out more)8 1845(indented to line up with the \256rst word of the heading itself,)11 2475 2 720 960 t
+(clearly.)720 1080 w
+( blank line \(1/2 vertical space\) to appear after the \256rst three heading levels, to have)15 3363(For example, to cause a)4 957 2 720 1260 t
+( and to force the text following all headings to be left-justi\256ed \(regardless of the value of)16 3544(no run-in headings,)2 776 2 720 1380 t
+(Pt\), the following should appear at the top of the document:)10 2384 1 720 1500 t
+(.nr Hs 3)2 319 1 870 1680 t
+(.nr Hb 7)2 330 1 870 1800 t
+(.nr Hi 0)2 308 1 870 1920 t
+%INFO[SECTION: LEVEL = 4, NUMBER = 1.2.2.3  , HEADING = Centered Headings.]
+10 I f
+( Headings.)1 457(1.2.2.3 Centered)1 691 2 720 2100 t
+10 R f
+( heading is)2 481( A)1 146(The register Hc can be used to obtain centered headings.)9 2471 3 1942 2100 t
+( is 0 initially \(no centered)5 1059( Hc)1 173( to Hc, and if it is also stand-alone.)8 1449(centered if its level is less than or equal)8 1639 4 720 2220 t
+(headings\).)720 2340 w
+%INFO[SECTION: LEVEL = 4, NUMBER = 1.2.2.4  , HEADING = Bold, Italic, and Underlined Headings]
+10 I f
+( Italic, and Underlined Headings)4 1324(1.2.2.4 Bold,)1 539 2 720 2520 t
+%INFO[SECTION: LEVEL = 5, NUMBER = 1.2.2.4.1  , HEADING = Control by Level.]
+( by Level.)2 393(1.2.2.4.1 Control)1 712 2 720 2700 t
+10 R f
+(Any heading that is underlined by)5 1377 1 1879 2700 t
+10 I f
+(nroff)3285 2700 w
+10 R f
+(is made italic by)3 670 1 3509 2700 t
+10 I f
+(troff)4208 2700 w
+10 R f
+( string HF)2 416(. The)1 235 2 4389 2700 t
+( legal codes, their)3 740( The)1 217( the fonts for heading levels 1-7.)6 1367(\(heading font\) contains seven codes that specify)6 1996 4 720 2820 t
+(interpretations, and the defaults for HF are:)6 1727 1 720 2940 t
+10 S f
+(_ _____________________________________________________)1 2651 1 1554 3080 t
+10 I f
+(HF Code)1 369 1 2642 3200 t
+(Formatter)1596 3260 w
+( 3)1 527(1 2)1 702 2 2148 3320 t
+(Default HF)1 458 1 3676 3260 t
+10 S f
+(_ _____________________________________________________)1 2651 1 1554 3340 t
+10 R f
+( 2 2 2 2 2 2)6 450( underline bold 2)3 1055( underline)1 402(nroff no)1 644 4 1604 3460 t
+( 2 2 2 2 2 2)6 450( 2)1 200( bold)1 505( italic)1 597(troff roman)1 799 5 1604 3580 t
+10 S f
+( \347)1 -2651(_ _____________________________________________________)1 2651 2 1554 3600 t
+(\347)1554 3580 w
+(\347)1554 3480 w
+(\347)1554 3380 w
+(\347)1554 3280 w
+(\347)1554 3180 w
+(\347)2073 3600 w
+(\347)2073 3580 w
+(\347)2073 3480 w
+(\347)2073 3380 w
+(\347)2073 3280 w
+(\347)2073 3180 w
+(\347)3580 3600 w
+(\347)3580 3580 w
+(\347)3580 3480 w
+(\347)3580 3380 w
+(\347)3580 3280 w
+(\347)3580 3180 w
+(\347)4205 3600 w
+(\347)4205 3580 w
+(\347)4205 3480 w
+(\347)4205 3380 w
+(\347)4205 3280 w
+(\347)4205 3180 w
+10 R f
+(Thus, all levels are underlined in)5 1359 1 720 3840 t
+10 I f
+(nroff)2114 3840 w
+10 R f
+(and italic in)2 492 1 2344 3840 t
+10 I f
+(troff)2871 3840 w
+10 R f
+( value)1 252( Any)1 233( HF as desired.)3 632( user may reset)3 631(. The)1 240 5 3052 3840 t
+( example, the following would result in two bold)8 1976( For)1 192( end of the list is taken to be 1.)9 1254(omitted from the right)3 898 4 720 3960 t
+(levels, three underlined \(italic\) levels, and two normal \(roman\) levels:)9 2792 1 720 4080 t
+(.ds HF 3 3 2 2 2)6 642 1 870 4260 t
+%INFO[SECTION: LEVEL = 5, NUMBER = 1.2.2.4.2  , HEADING = Nroff Underlining Style.]
+10 I f
+( Nroff)1 272( Underlining Style.)2 778(1.2.2.4.2 Nroff)1 612 3 720 4440 t
+10 R f
+( normal style \(.ul request\) is to)6 1290( The)1 216(can underline in two ways.)4 1117 3 2417 4440 t
+( style \(.cu request\) underlines all characters, including)7 2264( continuous)1 480( The)1 221(underline only letters and digits.)4 1355 4 720 4560 t
+( the continuous style on any heading that is to be underlined and is)13 2701( default, MM attempts to use)5 1165(spaces. By)1 454 3 720 4680 t
+( it is underlined the)4 808( a heading is to be underlined, but is too long,)10 1927( If)1 126(short enough to \256t on a single line.)7 1459 4 720 4800 t
+(normal way \(i.e., only letters and digits are underlined\).)8 2224 1 720 4920 t
+(All underlining of headings can be forced to the normal way by using the -rU1 \257ag when invoking)17 3936 1 720 5100 t
+10 I f
+(nroff)4681 5100 w
+10 R f
+(.)4884 5100 w
+%INFO[SECTION: LEVEL = 5, NUMBER = 1.2.2.4.3  , HEADING = Heading Point Sizes.]
+10 I f
+( Point Sizes.)2 492(1.2.2.4.3 Heading)1 744 2 720 5280 t
+10 R f
+( specify the desired point size for each heading level with)10 2305(The user may also)3 729 2 2006 5280 t
+(the HP string \(for use with)5 1063 1 720 5400 t
+10 I f
+(troff)1808 5400 w
+10 R f
+(only\).)2006 5400 w
+(.ds HP [ps1] [ps2] [ps3] [ps4] [ps5] [ps6] [ps7])8 1877 1 870 5580 t
+( .HU\) is printed in the same point size as the body)11 2031( and)1 197( the text of headings \(.H)5 980(By default,)1 446 4 720 5760 t
+10 I f
+(except)4402 5760 w
+10 R f
+(that bold)1 356 1 4684 5760 t
+( string HP, similar to the)5 1029( The)1 214( the body.)2 415(stand-alone headings are printed in a size one point smaller than)10 2662 4 720 5880 t
+( to the seven levels of headings.)6 1339(string HF, can be speci\256ed to contain up to seven values, corresponding)11 2981 2 720 6000 t
+(For example:)1 530 1 720 6120 t
+(.ds HP 12 12 10 10 10 10 10)8 1142 1 870 6300 t
+( type, with the remainder)4 1065(speci\256es that the \256rst and second level headings are to be printed in 12-point)13 3255 2 720 6480 t
+( that the speci\256ed values may also be)7 1484( Note)1 244(printed in 10-point.)2 775 3 720 6600 t
+10 I f
+(relative)3248 6600 w
+10 R f
+(point-size changes, e.g.:)2 962 1 3578 6600 t
+(.ds HP +2 +2 -1 -1)5 745 1 870 6780 t
+( will be used regardless of the point size of the body of)12 2227(If absolute point sizes are speci\256ed, then those sizes)8 2093 2 720 6960 t
+( relative to)2 439( relative point sizes are speci\256ed, then the point sizes for the headings will be)14 3185( If)1 123(the document.)1 573 4 720 7080 t
+(the point size of the body, even if the latter is changed.)11 2188 1 720 7200 t
+( mm02)1 281( TEST:)1 3149(Memorandum Macros)1 890 3 720 7728 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 3 3
+%%Page: 4 4
+/saveobj save def
+mark
+4 pagesetup
+10 R f
+(- 4 -)2 166 1 2797 480 t
+(Null or zero values imply that the)6 1343 1 720 960 t
+10 I f
+(default)2088 960 w
+10 R f
+(size will be used for the corresponding heading level.)8 2132 1 2391 960 t
+%INFO[SECTION: LEVEL = 4, NUMBER = 1.2.2.5  , HEADING = Marking Styles \- Numerals and Concatenation]
+10 I f
+( Styles \261 Numerals and Concatenation)5 1536(1.2.2.5 Marking)1 669 2 720 1140 t
+10 R f
+(.HM [arg1] ... [arg7])3 822 1 870 1320 t
+( values are)2 434( Their)1 270( counters for the seven levels of headings.)7 1702(The registers names H1 through H7 are used as)8 1914 4 720 1500 t
+( to be)2 246( .HM macro \(heading mark style\) allows this choice)8 2181( The)1 218(normally printed using Arabic numerals.)4 1675 4 720 1620 t
+( have up to seven)4 801( macro can)2 489( This)1 254(overridden, thus providing ``outline'' and other document styles.)7 2776 4 720 1740 t
+( values and their)3 696( Legal)1 290( of marking to be used.)5 986(arguments; each argument is a string indicating the type)8 2348 4 720 1860 t
+(meanings are shown below; omitted values are interpreted as 1, while illegal values have no effect.)15 3950 1 720 1980 t
+10 S f
+(_ _______________________________________)1 1976 1 1892 2120 t
+10 I f
+(Value Interpretation)1 944 1 1942 2240 t
+10 S f
+(_ _______________________________________)1 1976 1 1892 2260 t
+10 R f
+( \(default for all levels\))4 892(1 Arabic)1 563 2 2033 2380 t
+( with enough leading zeroes)4 1120(0001 Arabic)1 638 2 1958 2500 t
+(to get the speci\256ed number of digits)6 1438 1 2375 2620 t
+( alphabetic)1 435(A Upper-case)1 756 2 2022 2740 t
+( alphabetic)1 435(a Lower-case)1 753 2 2036 2860 t
+( Roman)1 314(I Upper-case)1 736 2 2042 2980 t
+( Roman)1 314(i Lower-case)1 745 2 2044 3100 t
+10 S f
+( \347)1 -1976(_ _______________________________________)1 1976 2 1892 3120 t
+(\347)1892 3020 w
+(\347)1892 2920 w
+(\347)1892 2820 w
+(\347)1892 2720 w
+(\347)1892 2620 w
+(\347)1892 2520 w
+(\347)1892 2420 w
+(\347)1892 2320 w
+(\347)1892 2220 w
+(\347)3868 3120 w
+(\347)3868 3020 w
+(\347)3868 2920 w
+(\347)3868 2820 w
+(\347)3868 2720 w
+(\347)3868 2620 w
+(\347)3868 2520 w
+(\347)3868 2420 w
+(\347)3868 2320 w
+(\347)3868 2220 w
+10 R f
+( for a given level is built by concatenating the mark for that level to)14 2752(By default, the complete heading mark)5 1568 2 720 3360 t
+( inhibit the concatenation of heading level marks,)7 2038( To)1 170( levels of higher value.)4 948(the right of all marks for all)6 1164 4 720 3480 t
+(i.e., to obtain just the current level mark followed by a period, set the register Ht \(heading-mark type\) to 1.)19 4254 1 720 3600 t
+(For example, a commonly-used ``outline'' style is obtained by:)8 2528 1 720 3780 t
+(.HM I A 1 a i)5 538 1 870 3960 t
+(.nr Ht 1)2 308 1 870 4080 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.3  , HEADING = Unnumbered Headings]
+10 B f
+( Headings)1 426(1.3 Unnumbered)1 742 2 720 4260 t
+10 R f
+(.HU heading-text)1 693 1 870 4440 t
+( In)1 137( way as .H, except that no heading mark is printed.)10 2067(.HU is a special case of .H; it is handled in the same)12 2116 3 720 4620 t
+( preserve the hierarchical structure of headings when .H and .HU calls are intermixed, each .HU)15 3995(order to)1 325 2 720 4740 t
+( the normal)2 457( in)1 103( Thus,)1 275(heading is considered to exist at the level given by register Hu, whose initial value is 2.)16 3485 4 720 4860 t
+(case, the only difference between:)4 1359 1 720 4980 t
+(.HU heading-text)1 693 1 870 5160 t
+(and:)720 5340 w
+(.H 2 heading-text)2 696 1 870 5520 t
+( the numbering)2 639( have the effect of incrementing)5 1351( Both)1 261(is the printing of the heading mark for the latter.)9 2069 4 720 5700 t
+( the value of Hu)4 683( Typically,)1 468( 7.)1 110(counter for level 2, and resetting to zero the counters for levels 3 through)13 3059 4 720 5820 t
+(should be set to make unnumbered headings \(if any\) be the lowest-level headings in a document.)15 3866 1 720 5940 t
+( and other sections that may not \256t well into the)10 2045(.HU can be especially helpful in setting up appendices)8 2275 2 720 6120 t
+(numbering scheme of the main body of a document.)8 2083 1 720 6240 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.4  , HEADING = Headings and the Table of Contents]
+10 B f
+( and the Table of Contents)5 1131(1.4 Headings)1 576 2 720 6420 t
+10 R f
+( headings and their corresponding page numbers can be automatically collected for a table of)14 3862(The text of)2 458 2 720 6600 t
+( is accomplished by doing the following two things:)8 2078(contents. This)1 586 2 720 6720 t
+8 S f
+(\267)783 6900 w
+10 R f
+(specifying in the register Cl what level headings are to be saved)11 2548 1 870 6900 t
+8 S f
+(\267)783 7080 w
+10 R f
+(invoking the .TC macro at the end of the document)9 2042 1 870 7080 t
+( of the register Cl \(contents level\) is saved and)9 1927(Any heading whose level is less than or equal to the value)11 2393 2 720 7260 t
+( default value for Cl is 2, i.e., the \256rst two levels of headings are)14 2563( The)1 206(later displayed in the table of contents.)6 1551 3 720 7380 t
+( mm02)1 281( TEST:)1 3149(Memorandum Macros)1 890 3 720 7728 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 4 4
+%%Page: 5 5
+/saveobj save def
+mark
+5 pagesetup
+10 R f
+(- 5 -)2 166 1 2797 480 t
+(saved.)720 960 w
+( formatter's storage capacity, particularly)4 1660(Due to the way the headings are saved, it is possible to exceed the)13 2660 2 720 1140 t
+( this happens,)2 555( If)1 120( many levels of many headings, while also processing displays and footnotes.)11 3138(when saving)1 507 4 720 1260 t
+( save fewer levels and/or to)5 1139(the ``Out of temp \256le space'' diagnostic will be issued; the only remedy is to)14 3181 2 720 1380 t
+(have fewer words in the heading text.)6 1499 1 720 1500 t
+%INFO[SECTION: LEVEL = 2, NUMBER = 1.5  , HEADING = First-Level Headings and Page Numbering Style]
+10 B f
+( Headings and Page Numbering Style)5 1593(1.5 First-Level)1 646 2 720 1680 t
+10 R f
+( large documents, it may be)5 1214( For)1 211(By default, pages are numbered sequentially at the top of the page.)11 2895 3 720 1860 t
+( use page numbering of the form ``section-page,'' where)8 2337(desirable to)1 474 2 720 1980 t
+10 I f
+(section)3566 1980 w
+10 R f
+(is the number of the current)5 1156 1 3884 1980 t
+( the)1 152( page numbering style can be achieved by specifying the \261rN3 or \261rN5 \257ag on)14 3183( This)1 232(\256rst-level heading.)1 753 4 720 2100 t
+( side effect, this also has the effect of setting Ej to 1, i.e., each section begins on a new)19 3487( a)1 72( As)1 164(command line.)1 597 4 720 2220 t
+( this style, the page number is printed at the)9 1770(page. In)1 349 2 720 2340 t
+10 I f
+(bottom)2867 2340 w
+10 R f
+(of the page, so that the correct section number)8 1867 1 3173 2340 t
+(is printed.)1 400 1 720 2460 t
+( mm02)1 281( TEST:)1 3149(Memorandum Macros)1 890 3 720 7728 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 5 5
+%%Page: 6 6
+/saveobj save def
+mark
+6 pagesetup
+10 R f
+(CONTENTS)2619 960 w
+( AND HEADINGS)2 776(1. PARAGRAPHS)1 787 2 720 1260 t
+10 B f
+(. . . . . . . . . . . . . . . . . . .)18 2419 1 2417 1260 t
+10 R f
+(1)4990 1260 w
+(1.1 Paragraphs)1 618 1 845 1380 t
+10 B f
+(. . . . . . . . . . . . . . . . . . . . . . . . .)24 3217 1 1619 1380 t
+10 R f
+(1)4990 1380 w
+( Headings)1 402(1.2 Numbered)1 596 2 845 1500 t
+10 B f
+(. . . . . . . . . . . . . . . . . . . . . .)21 2818 1 2018 1500 t
+10 R f
+(1)4990 1500 w
+( Headings)1 402(1.3 Unnumbered)1 696 2 845 1620 t
+10 B f
+(. . . . . . . . . . . . . . . . . . . . . .)21 2818 1 2018 1620 t
+10 R f
+(4)4990 1620 w
+( and the Table of Contents)5 1057(1.4 Headings)1 552 2 845 1740 t
+10 B f
+(. . . . . . . . . . . . . . . . . .)17 2286 1 2550 1740 t
+10 R f
+(4)4990 1740 w
+( Headings and Page Numbering Style)5 1501(1.5 First-Level)1 619 2 845 1860 t
+10 B f
+(. . . . . . . . . . . . . .)13 1754 1 3082 1860 t
+10 R f
+(5)4990 1860 w
+(- i -)2 144 1 2808 7728 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 6 6
+%%Trailer
+done
+%%Pages: 6
+%%DocumentFonts: Times-Bold Times-Italic Times-Roman Symbol

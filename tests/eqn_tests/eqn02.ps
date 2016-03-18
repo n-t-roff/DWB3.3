@@ -1,0 +1,565 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 R f
+( Device\(post\))1 3571(EQN: File\(eqn02\))1 749 2 720 480 t
+%INFO[SECTION: LEVEL = 2, NUMBER = none, HEADING = Proof]
+9 B f
+(Proof)720 960 w
+10 S f
+(-)1709 1190 w
+10 I f
+(i)1780 1190 w
+10 R f
+(cos)1849 1190 w
+10 S f
+(w)2023 1190 w
+10 I f
+(t)2100 1190 w
+10 S f
+(=)2177 1190 w
+10 I f
+(i)2281 1190 w
+10 R f
+(cos)2350 1190 w
+10 S f
+(w)2524 1190 w
+10 I f
+(t)2601 1190 w
+10 S f
+(= -)1 167 1 2678 1190 t
+10 I f
+(i)2861 1190 w
+10 R f
+(2)3134 1260 w
+10 I f
+(e)2955 1130 w
+7 I f
+(it)3010 1090 w
+10 S f
+(-)3107 1130 w
+10 I f
+(e)3211 1130 w
+7 S f
+(-)3266 1090 w
+7 I f
+(it)3316 1090 w
+10 S1 f
+(_ ________)1 439 1 2940 1160 t
+10 S f
+(=)3438 1190 w
+10 R f
+(2)3753 1260 w
+10 I f
+(i)3811 1260 w
+(e)3567 1130 w
+7 S f
+(+)3622 1090 w
+7 I f
+(it)3672 1090 w
+10 S f
+(-)3769 1130 w
+10 I f
+(e)3873 1130 w
+7 S f
+(-)3928 1090 w
+7 I f
+(it)3978 1090 w
+10 S1 f
+(_ _________)1 489 1 3552 1160 t
+10 R f
+(Let us consider)2 622 1 720 1420 t
+10 S f
+(d)1373 1420 w
+10 R f
+(\()1430 1420 w
+10 I f
+(t)1471 1420 w
+10 R f
+( shall de\256ne)2 497( We)1 195( unit impulse \(or Dirac\) function.)5 1361(\), the)1 211 4 1507 1420 t
+10 S f
+(d)3803 1420 w
+10 R f
+(\()3860 1420 w
+10 I f
+(t)3901 1420 w
+10 R f
+(\) conceptually as a limit of)5 1103 1 3937 1420 t
+(time functions)1 584 1 720 1540 t
+10 S f
+(d)1337 1540 w
+7 I f
+(n)1397 1560 w
+10 R f
+(\()1448 1540 w
+10 I f
+(t)1489 1540 w
+10 R f
+(\), which: \(i\) vanish outside \()5 1172 1 1525 1540 t
+10 S f
+(- e)1 115 1 2713 1540 t
+7 I f
+(n)2839 1560 w
+10 R f
+(,)2890 1540 w
+10 S f
+(+ e)1 115 1 2931 1540 t
+7 I f
+(n)3057 1560 w
+10 R f
+(\), \(ii\) are nonnegative in \()5 1065 1 3108 1540 t
+10 S f
+(- e)1 115 1 4189 1540 t
+7 I f
+(n)4309 1559 w
+(n)4309 1500 w
+10 R f
+(,)4360 1540 w
+10 S f
+(+ e)1 115 1 4401 1540 t
+7 I f
+(n)4527 1560 w
+10 R f
+(\), \(iii\) have)2 462 1 4578 1540 t
+7 S f
+(- e)1 81 1 720 1855 t
+4 I f
+(n)807 1869 w
+14 S f
+(\362)741 1765 w
+7 S f
+(e)745 1610 w
+4 I f
+(n)782 1624 w
+10 S f
+(d)873 1755 w
+10 R f
+(\()930 1755 w
+10 I f
+(t)971 1755 w
+10 R f
+(\))1007 1755 w
+10 I f
+(dt)1056 1755 w
+10 S f
+(=)1183 1755 w
+10 R f
+(1 \(iv\))1 219 1 1287 1755 t
+7 I f
+(s)1584 1825 w
+10 R f
+(lim)1531 1755 w
+7 S f
+(- e)1 81 1 1706 1855 t
+4 I f
+(n)1793 1869 w
+14 S f
+(\362)1727 1765 w
+7 S f
+(e)1731 1610 w
+4 I f
+(n)1768 1624 w
+10 S f
+(d)1859 1755 w
+10 R f
+(\()1916 1755 w
+10 I f
+(t)1957 1755 w
+10 R f
+(\))1993 1755 w
+10 I f
+(dt)2042 1755 w
+10 S f
+(=)2169 1755 w
+10 R f
+( also have)2 401(0 \(other alternatives for the approximating functions would)7 2366 2 2273 1755 t
+(been reasonable\).)1 697 1 720 1969 t
+10 S1 f
+(_ ______________________________________________________________________________________)1 4320 1 720 2329 t
+10 R f
+( IS box.)2 320(We are now in a position to de\256ne and describe the important concept of the transfer function of an)18 4000 2 720 2749 t
+( already shown that if cos)5 1323(We have)1 412 2 720 2909 t
+10 S f
+(w)2496 2909 w
+10 I f
+(t)2573 2909 w
+10 S f
+(\256)2642 2909 w
+10 I f
+(A)2807 2979 w
+(B)2807 2849 w
+10 S1 f
+(_ _)1 91 1 2792 2879 t
+10 R f
+(cos \()1 174 1 2934 2909 t
+10 S f
+(w)3116 2909 w
+10 I f
+(t)3193 2909 w
+10 S f
+(+ d)1 120 1 3245 2909 t
+10 R f
+(\) and)1 262 1 3373 2909 t
+10 I f
+(K)3720 2909 w
+10 R f
+(and)3872 2909 w
+10 I f
+(n)4101 2909 w
+10 R f
+(are integers, then)2 804 1 4236 2909 t
+10 I f
+(n)753 3189 w
+(K)745 3059 w
+10 S1 f
+(_ _)1 97 1 730 3089 t
+10 R f
+(cos)878 3119 w
+10 S f
+(w)1052 3119 w
+10 I f
+(t)1129 3119 w
+10 S f
+(\256)1198 3119 w
+10 I f
+(n)1371 3189 w
+(K)1363 3059 w
+10 S1 f
+(_ _)1 97 1 1348 3089 t
+10 I f
+(A)1521 3189 w
+(B)1521 3059 w
+10 S1 f
+(_ _)1 91 1 1506 3089 t
+10 R f
+(cos \()1 174 1 1648 3119 t
+10 S f
+(w)1830 3119 w
+10 I f
+(t)1907 3119 w
+10 S f
+(+ d)1 120 1 1959 3119 t
+10 R f
+( result for)2 420( there is even a shred of continuity, we may extend the)11 2344(\). If)1 189 3 2087 3119 t
+( for)1 141( Then)1 255(rationals to the reals.)3 832 3 720 3289 t
+10 S f
+(l)1973 3289 w
+10 R f
+(real,)2053 3289 w
+10 S f
+(l)2209 3509 w
+10 R f
+(cos)2305 3509 w
+10 S f
+(w)2479 3509 w
+10 I f
+(t)2556 3509 w
+10 S f
+(\256 l)1 195 1 2625 3509 t
+10 I f
+(A)2886 3579 w
+(B)2886 3449 w
+10 S1 f
+(_ _)1 91 1 2871 3479 t
+10 R f
+(cos \()1 174 1 3013 3509 t
+10 S f
+(w)3195 3509 w
+10 I f
+(t)3272 3509 w
+10 S f
+(+ d)1 120 1 3324 3509 t
+10 R f
+(\) .)1 99 1 3452 3509 t
+10 S1 f
+(_ ______________________________________________________________________________________)1 4320 1 720 3979 t
+10 R f
+( and third series vanish term by term, while the others yield)11 2738(Now the expectations of the second)5 1582 2 720 4399 t
+10 S f
+(-)720 4604 w
+10 R f
+(2)791 4604 w
+10 S f
+(\354)890 4517 w
+(\357)890 4617 w
+(\356)890 4717 w
+26 S f
+(\326` `)1 385 1 939 4707 t
+10 R f
+(2)1178 4707 w
+(1)1115 4577 w
+10 S f
+(+)1181 4577 w
+10 I f
+(r)1252 4577 w
+10 S1 f
+(_ ____)1 206 1 1100 4607 t
+10 S f
+(+)1381 4637 w
+26 S f
+(\326` `)1 385 1 1485 4707 t
+10 R f
+(2)1724 4707 w
+(1)1661 4577 w
+10 S f
+(-)1727 4577 w
+10 I f
+(r)1798 4577 w
+10 S1 f
+(_ ____)1 206 1 1646 4607 t
+10 S f
+(\374)1878 4517 w
+(\357)1878 4617 w
+(\376)1878 4717 w
+10 I f
+(e)1968 4604 w
+7 S f
+(-)2023 4515 w
+7 I f
+(h)2141 4564 w
+4 R f
+(2)2182 4527 w
+7 R f
+(2)2121 4473 w
+7 S f
+(p)2161 4473 w
+4 R f
+(2)2203 4436 w
+7 S1 f
+(_ ____)1 143 1 2103 4494 t
+10 R f
+(cos)2302 4604 w
+10 I f
+(h)2532 4674 w
+10 R f
+(2)2501 4544 w
+10 S f
+(p)2559 4544 w
+10 S1 f
+(_ __)1 143 1 2486 4574 t
+10 S f
+(f)2680 4604 w
+7 R f
+(0)2743 4624 w
+10 R f
+( is)1 118( Here)1 269( have already seen to be small.)6 1378(, which we)2 489 4 2786 4604 t
+( and we can see how it looks.)7 1240(another line of text so that it will continue underneath the in-line equation,)12 3080 2 720 4829 t
+( square root symbol can only be as large as the largest size available on the target device.)17 3553(Beware: The)1 537 2 720 4949 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Bold Times-Italic Times-Roman Symbol Times-Roman

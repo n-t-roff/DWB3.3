@@ -4,11 +4,12 @@ MAKEFILE=picasso_tst.mk
 SYSTEM=SYSV
 
 all :
-	@for i in picasso??; do \
-	    if [ -f "$$i" ]; then \
-		echo "picasso $$i >$$i.ps"; \
+	for i in picasso??; do \
+		mv $$i.ps $$i.ps.orig; \
 		picasso $$i >$$i.ps; \
-	    fi; \
+		diff $$i.ps $$i.ps.orig; \
+		rm $$i.ps; \
+		mv $$i.ps.orig $$i.ps; \
 	done
 
 install : all

@@ -1,0 +1,66 @@
+
+
+
+       EQN:  File(eqn02)                                 Device(37)
+
+
+
+       _P_r_o_o_f
+
+                                      e_i_t__-__e_-_i_t_   e_+_i_t__-__e_-_i_t_
+            -i cos Ct = i cos Ct = -i     2      =     2i
+
+       Let us consider D(t), the unit impulse (or Dirac) function.
+       We shall define D(t) conceptually as a limit of time
+       functions Dn(t), which: (i) vanish outsideS(-Sn,+Sn), (ii)
+                             n                    n
+       are nonnegative in (-Sn,+Sn), (iii) have  ^  D(t)dt = 1 (iv)
+            S                                   -Sn
+             n
+       lim  ^  D(t)dt = 0 (other alternatives for the approximating
+        s  -Sn
+       functions would also have been reasonable).
+
+
+       ____________________________________________________________
+
+
+
+       We are now in a position to define and describe the
+       important concept of the transfer func_Btion of an IS box.  We
+       have already shown t_Khat if cos C_KtB_-> A cos(Ct+D) and K and n
+       are integers, then n cos Ct -> n A cos(Ct+D).  If there is
+       even a shred of continuity, we may extend the result for
+       rationals to the reals.  Then for L real,
+                                     B_
+                       L cos Ct -> L A cos(Ct+D) .
+
+
+
+       ____________________________________________________________
+
+
+
+       Now the expectations of the second and third series vanish
+       term by term, while the o2thers yield
+             ___     ___   - 2_J__
+          ( |1_+_r_    |1_-_r_)    h2      2_J_
+       -2 |\| 2  + \| 2 | e      cos h  U0, which we have already
+       see(n to be small.) Here is another line of text so that it
+       will continue underneath the in-line equation, and we can
+       see how it looks.  Beware:  The square root symbol can only
+       be as large as the largest size available on the target
+       device.
+
+
+
+
+
+
+
+
+
+
+
+
+

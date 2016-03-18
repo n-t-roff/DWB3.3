@@ -1,0 +1,508 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+%INFO[COMPANY:  AT&T Bell Laboratories]
+%INFO[DATE: May 31, 1979]
+%INFO[WORK PROJECT: 123456]
+%INFO[FILING CASE: 334455]
+%INFO[AUTHOR: NAME = D. W. Stevenson, ORG = 9876, LOC = PY, ROOM = 1X-123, PHONE = 5432, AFFILIATION = AT&T Bell Laboratories]
+%INFO[DOCUMENT STYLE: CODE = IM, TYPE = Memorandum]
+36 S1 f
+()3780 696 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% PostScript 12 and 8 line logos - horizontal configuration. Switch occurs
+% automatically below point size 29. Code from Matthijs Melchior.
+%
+
+/LOGO-dict-mm where not {
+	64 dict /LOGO-dict-mm exch def
+}{pop} ifelse
+LOGO-dict-mm begin		% initialize dictionary
+
+
+/globesetup {
+/r exch def
+/N exch def
+/d 2 N r mul N 1 sub add div def
+/h d r mul def
+} def
+/mkabs {
+/yp exch def
+/xl exch def
+dup dup 0 get xl mul 0 exch put
+dup dup 1 get h mul yp add 1 exch put
+dup dup 2 get xl mul 2 exch put
+dup dup 3 get h mul yp add 3 exch put
+dup dup 4 get xl mul 4 exch put
+dup dup 5 get h mul yp add 5 exch put
+} def
+/topsegment {
+/n exch def
+/y n r mul n .5 add add d mul def
+/a y 1 y dup mul sub sqrt atan def
+/x a cos def
+/c2 exch x y mkabs def
+/ly1 exch h mul y add def
+/lx1 exch x abs mul def
+/c1 exch x y mkabs def
+x y /moveto load
+0 0 1 a 180 a sub /arc load
+c1 aload pop /curveto load
+lx1 ly1 /lineto load
+c2 aload pop /curveto load
+/closepath load
+} def
+/botsegment {
+/n exch 1 add def
+/y n r mul n .5 sub add d mul def
+/a y 1 y dup mul sub sqrt atan def
+/x a cos def
+/c2 exch x y mkabs def
+/ly1 exch h mul y add def
+/lx1 exch x abs mul def
+/c1 exch x y mkabs def
+x y /moveto load
+0 0 1 a 540 a sub /arcn load
+c1 aload pop /curveto load
+lx1 ly1 /lineto load
+c2 aload pop /curveto load
+/closepath load
+} def
+/segment {
+/n exch def
+/dh exch 1 exch sub 2 div def
+/ylb n r mul n 0.5 add add d mul def
+/ylt ylb h add def
+/yrb ylb h dh mul add def
+/yrt ylt h dh mul sub def
+/alb ylb 1 ylb dup mul sub sqrt atan def
+/alt ylt 1 ylt dup mul sub sqrt atan def
+/arb yrb 1 yrb dup mul sub sqrt atan 180 exch sub def
+/art yrt 1 yrt dup mul sub sqrt atan 180 exch sub def
+/xlb alb cos def
+/xlt alt cos def
+/xrb arb cos def
+/xrt art cos def
+/c4 exch xrb abs ylb mkabs def
+/ly2 exch h mul ylb add def
+/lx2 exch xrb abs mul def
+/c3 exch xrb abs ylb mkabs def
+/c2 exch xrt abs ylt mkabs def
+/ly1 exch h mul ylt add def
+/lx1 exch xrt abs mul def
+/c1 exch xrt abs ylt mkabs def
+xlb ylb /moveto load
+0 0 1 alb alt /arc load
+c2 4 get c2 5 get /lineto load
+c2 2 get c2 3 get
+c2 0 get c2 1 get
+lx1 ly1	/curveto load
+c1 4 get c1 5 get /lineto load
+c1 2 get c1 3 get
+c1 0 get c1 1 get
+xrt yrt /curveto load
+0 0 1 art arb /arc load
+c3 aload pop /curveto load
+lx2 ly2 /lineto load
+c4 aload pop /curveto load
+/closepath load
+} def
+8 2.5 globesetup
+/globe8 [
+/newpath load
+[ -.9   .1  -.6   .2  -.5   .2  ] -.5   .2  [ -.4   .2   .0  .0  .4  .0 ] 3 topsegment
+[ -.9  -.35 -.85 -.35 -.8  -.35 ] -.1  -.35 [  .1  -.35  .3  .0  .5  .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ] -.1   .35 [  .1   .35  .4  .0  .55 .0 ] .55 2 segment
+[ -.8  -.35 -.75 -.35 -.7  -.35 ]  .05 -.35 [  .2  -.35  .4  .0  .55 .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ]  .05  .35 [  .2   .35  .45 .0  .6  .0 ] .7  1 segment
+[ -.8  -.35 -.75 -.35 -.7  -.35 ]  .0  -.35 [  .15 -.35  .4  .0  .6  .0 ]
+[ -.8   .35 -.75  .35 -.7   .35 ]  .0   .35 [  .15  .35  .4  .0  .6  .0 ] .7  0 segment
+[ -.7  -.35 -.65 -.35 -.6  -.35 ] -.1  -.35 [  .05 -.35  .35 .0  .55 .0 ]
+[ -.7   .35 -.65  .35 -.6   .35 ] -.1   .35 [  .05  .35  .25 .0  .4  .0 ] .8 -1 segment
+[ -.65 -.2  -.55 -.2 -.45  -.2  ] -.3   -.2 [ -.2  -.2   .2  .0  .3  .0 ]
+[ -.65  .1  -.55  .1 -.45   .1  ] -.45  .1  [ -.3   .1  -.1  .0  .0  .0 ] .96 -2 segment
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]  1 -3 segment
+[  .0   .0   .0   .0  .0    .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] -4 botsegment
+] cvx def
+12 3 globesetup
+/globe12 [
+/newpath load
+[ -.8   .2  -.7  .25 -.5   .25 ] -.4  .25 [ -.2   .25  .0  .0  .2  .0 ] 5 topsegment
+[ -.7  -.35 -.7 -.35 -.6  -.35 ] -.3 -.35 [ -.1  -.35  .3  .0  .55 .0 ]
+[ -.7   .35 -.7  .35 -.6   .35 ] -.25 .35 [ -.05  .35  .4  .0  .55 .0 ] .6  4 segment
+[ -.8  -.35 -.7 -.35 -.6  -.35 ] -.1 -.35 [  .1  -.35  .4  .0  .5  .0 ]
+[ -.8   .35 -.7  .35 -.6   .35 ] -.1  .35 [  .1   .35  .4  .0  .5  .0 ] .7  3 segment
+[ -.8  -.35 -.7 -.35 -.6  -.35 ]  .0 -.35 [  .1  -.35  .45 .0  .55 .0 ]
+[ -.8   .35 -.7  .35 -.6   .35 ]  .0  .35 [  .15  .35  .4  .0  .5  .0 ] .8  2 segment
+[ -.75 -.35 -.7 -.35 -.6  -.35 ]  .0 -.35 [  .2  -.35  .4  .0  .5  .0 ]
+[ -.75  .35 -.7  .35 -.6   .35 ]  .0  .35 [  .2   .35  .45 .0  .55 .0 ] .9  1 segment
+[ -.7  -.35 -.6 -.35 -.55 -.35 ]  .0 -.35 [  .1  -.35  .45 .0  .55 .0 ]
+[ -.7   .35 -.6  .35 -.55  .35 ]  .0  .35 [  .1   .35  .5  .0  .6  .0 ] .9  0 segment
+] cvx
+[
+[ -.7 -.35 -.6 -.35 -.5  -.35 ] -.15 -.35 [  .0  -.35  .4  .0  .5  .0 ]
+[ -.65 .35 -.55 .35 -.45  .35 ] -.15  .35 [  .0   .35  .35 .0  .45 .0 ] .9 -1 segment
+[ -.8 -.1  -.5 -.3  -.4  -.3  ] -.2  -.3  [  .0  -.3   .3  .0  .4  .0 ]
+[ -.8  .1  -.5  .3  -.4   .3  ] -.2   .3  [  .0   .3   .2  .0  .3  .0 ] 1 -2 segment
+[ -.7 -.1  -.5 -.15 -.4  -.15 ] -.3  -.15 [ -.2  -.15  .0  .0  .2  .0 ]
+[ -.7  .05 -.5  .1  -.4   .1  ] -.4   .1  [ -.3   .1   .0  .0  .2  .0 ] 1 -3 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] 1 -4 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ]
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] 1 -5 segment
+[  .0  .0   .0  .0   .0   .0  ]  .0   .0  [  .0   .0   .0  .0  .0  .0 ] -6 botsegment
+] cvx
+4 array cvx
+dup 0 5 -1 roll put
+dup 1 /exec load put
+dup 2 4 -1 roll put
+dup 3 /exec load put
+def
+
+/l {  lineto } def
+/rl {  rlineto } def
+/m {  moveto } def
+/rm {  rmoveto } def
+/C { closepath } def
+/c {  curveto } def
+/rc {  rcurveto } def
+/T { m 0 29 rl -9.5 0 rl 0 7 rl 29 0 rl 0 -7 rl -9.5 0 rl 0 -29 rl C } def
+/ATT {
+newpath
+1 36 div dup scale
+0  0 m  12 36 rl  8 0 rl -11 -36 rl C
+25  0 m -11 36 rl  8 0 rl  12 -36 rl C
+10  7 m   0  7 rl 14 0 rl   0  -7 rl C
+36  0 T
+80  6 m -3 0 -5 1.2 -6 2 rc -12 10 rl -2.4 2 -2.7 6 0 6 rc
+1 0 2 -1 2 -2 rc 0 -4 rl 7 0 rl 0 4 rl
+0 5 -3 7 -9 7 rc -6 0 -9 -3 -9 -7 rc
+0 -2 0 -3.6 2 -6 rc 12 -10 rl 6 -5 10 -6 13 -6 rc C
+71 18 m 0 -6 rl 0 -5 -3 -7 -7 -7 rc -3 0 -5 2 -5 4 rc 0 1 0 3 2 4 rc
+-4 5 rl -4 -2 -6 -6 -6 -9 rc 0 -7 6 -10 13 -10 rc
+9 0 14 6 14 11 rc 0 8 rl C
+82  0 T
+36 dup scale
+} def
+
+end
+
+/build_LH { % standard ATT logo
+    LOGO-dict-mm begin
+	/w exch def
+	ptsize 29 lt	% select globe, # lines depends on point size
+		{ /globe /globe8 load def }
+		{ /globe /globe12 load def } ifelse
+	gsave
+	 currentpoint translate
+	 size 2 div dup scale
+	 gsave
+	  1.02 1 transform round exch round exch itransform
+	  translate
+	  globe fill
+	 grestore
+	 gsave
+	  2.15 .62 translate
+	  .78 dup scale
+	  ATT fill
+	 grestore
+	grestore
+    end
+} def
+%%EndGlobal
+/saveobj save def
+mark
+36 S1 f
+3780 696 m
+756 build_LH
+4536 696 m
+10 S1 f
+(_ ________________________________________________________________________________________________________)1 5220 1 720 876 t
+10 H f
+(AT&T Bell Laboratories)2 1037 1 720 1020 t
+8 R f
+(subject:)720 1416 w
+%INFO[TITLE: <START>]
+10 B f
+(Out-of-Hours Course Description)2 1432 1 1017 1416 t
+%INFO[TITLE: <END>]
+(Work Project No. 123456)3 1081 1 1017 1536 t
+(File Case 334455)2 716 1 1017 1656 t
+8 R f
+(date:)3792 1416 w
+10 B f
+(May 31, 1979)2 569 1 4032 1416 t
+8 R f
+(from:)3792 1656 w
+10 B f
+(D. W. Stevenson)2 700 1 4032 1656 t
+(Org. 9876)1 422 1 4032 1776 t
+(PY 1X-123)1 463 1 4032 1896 t
+(x5432)4032 2016 w
+10 R f
+(J. M. Jones:)2 478 1 720 2496 t
+(Please use the following description for the Out-of Hours course)9 2693 1 720 2676 t
+10 I f
+(Document Preparation on the UNIX)4 1510 1 3451 2676 t
+10 S f
+(\322)4961 2676 w
+10 I f
+(Time-Sharing System.)1 877 1 720 2796 t
+10 R f
+( and secretaries as well as members of administrative and technical)10 2697(The course is intended for clerks, typists)6 1623 2 720 2976 t
+( course will cover such topics)5 1214( The)1 211( documentation.)1 650(staff who intend to use the UNIX system for preparing)9 2245 4 720 3096 t
+(as:)720 3216 w
+( the system; using appropriate)4 1267( a time-sharing computer system; accessing)5 1819(Environment: utilizing)1 1234 3 720 3396 t
+(output terminals.)1 678 1 1620 3516 t
+( text is stored on the system; directories; manipulating \256les.)9 2383(Files: how)1 1072 2 720 3696 t
+( enter text so that subsequent revisions are easier to make; how to use the)14 3119( to)1 116( how)1 558(Text editing:)1 527 4 720 3876 t
+(editing system to add, delete, and move lines of text; how to make corrections.)13 3141 1 1620 3996 t
+( concepts; use of general-purpose formatting packages.)6 2197( basic)1 442(Text processing:)1 663 3 720 4176 t
+( to the typist such as the)6 967( capabilities useful)2 749( additional)1 676(Other facilities:)1 624 4 720 4356 t
+10 I f
+(spell)3762 4356 w
+10 R f
+(,)3959 4356 w
+10 I f
+(diff)4010 4356 w
+10 R f
+(, and)1 195 1 4152 4356 t
+10 I f
+(grep)4373 4356 w
+10 R f
+(commands,)4582 4356 w
+(and a desk-calculator package.)3 1223 1 1620 4476 t
+10 B f
+(D. W. Stevenson)2 700 1 2880 4956 t
+10 R f
+(PY-9876-DWS-jrm)720 4956 w
+%INFO[NOTATION LIST: CODE = , TYPE = Copy to]
+%INFO[NOTATION LIST: <START>]
+(Copy to)1 320 1 720 5196 t
+(S. P. LeName)2 555 1 720 5316 t
+(H. O. Del)2 388 1 720 5436 t
+(M. Hill)1 295 1 720 5556 t
+%INFO[NOTATION LIST: <END>]
+( mm03)1 281( TEST:)1 3149(Memorandum Macros)1 890 3 720 7728 t
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Bold Helvetica Times-Italic Times-Roman Symbol Times-Roman

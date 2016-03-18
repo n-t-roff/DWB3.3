@@ -5,20 +5,21 @@ SYSTEM=SYSV
 
 MACROS=-mm
 TDEVNAME=post
-TROFF=TRUE
 
 all :
-	@for i in grap??; do \
-	    if [ -f "$$i" ]; then \
-		if [ $(TROFF) = FALSE ]; \
-		    then \
-			echo "	grap $$i >$$i.out"; \
-			grap $$i >$$i.out; \
-		    else \
-			echo "	grap $$i | pic | tbl | eqn | troff -T$(TDEVNAME) $(MACROS)>$$i.out"; \
-			grap $$i | pic | tbl | eqn | troff -T$(TDEVNAME) $(MACROS)>$$i.out; \
-		fi; \
-	    fi; \
+	for i in grap??; do \
+		mv $$i.more $$i.more.orig; \
+		grap $$i | pic | tbl | neqn | nroff $(MACROS) | \
+		    col -x > $$i.more; \
+		diff $$i.more $$i.more.orig; \
+		rm $$i.more; \
+		mv $$i.more.orig $$i.more; \
+		mv $$i.ps $$i.ps.orig; \
+		grap $$i | pic | tbl | eqn | troff -T$(TDEVNAME) $(MACROS) | \
+		    dpost > $$i.ps; \
+		diff $$i.ps $$i.ps.orig; \
+		rm $$i.ps; \
+		mv $$i.ps.orig $$i.ps; \
 	done
 
 install : all
@@ -30,7 +31,7 @@ install : all
 	@chmod 644 ../$(SYSTEM)/*.out
 
 clean :
-	rm -f *.out
+	rm -f *.more *.ps *.orig
 
 clobber : clean
 

@@ -1,0 +1,506 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 R f
+( Device\(post\))1 3511(TBL: File\(tbl.test1\))1 809 2 720 480 t
+10 S f
+(_ _____________________________)1 1487 1 720 860 t
+10 R f
+( and)1 474(four score)1 726 2 873 980 t
+( ago)1 488(seven years)1 732 2 770 1100 t
+( brought)1 594(our fathers)1 793 2 770 1220 t
+( this)1 599(forth on)1 622 2 770 1340 t
+( new)1 676(continent a)1 566 2 770 1460 t
+( in)1 228(nation conceived)1 926 2 770 1580 t
+10 S f
+( \347)1 -1487(_ _____________________________)1 1487 2 720 1600 t
+(\347)720 1560 w
+(\347)720 1460 w
+(\347)720 1360 w
+(\347)720 1260 w
+(\347)720 1160 w
+(\347)720 1060 w
+(\347)720 960 w
+(\347)2207 1600 w
+(\347)2207 1560 w
+(\347)2207 1460 w
+(\347)2207 1360 w
+(\347)2207 1260 w
+(\347)2207 1160 w
+(\347)2207 1060 w
+(\347)2207 960 w
+(_ ____________________)1 1007 1 720 1860 t
+10 R f
+(Macbeth)1049 1980 w
+10 S f
+(_ ____________________)1 1007 1 720 2000 t
+10 R f
+( Line)1 354(Act Scene)1 532 2 770 2120 t
+10 S f
+(_ ____________________)1 1007 1 720 2140 t
+10 R f
+( 3)1 357(1 2)1 353 2 842 2260 t
+10 S f
+(_ ____________________)1 1007 1 720 2280 t
+10 R f
+( 3.4)1 357(1 2.1)1 428 2 842 2400 t
+10 S f
+(_ ____________________)1 1007 1 720 2420 t
+10 R f
+( 12)1 282(1 4.3)1 428 2 842 2540 t
+10 S f
+(_ ____________________)1 1007 1 720 2560 t
+10 R f
+( 19.23)1 482(1 5)1 353 2 842 2680 t
+10 S f
+(_ ____________________)1 1007 1 720 2700 t
+10 R f
+( 0.1)1 432(2 5)1 353 2 842 2820 t
+10 S f
+(_ ____________________)1 1007 1 720 2840 t
+10 R f
+( xxx)1 444(3 10)1 353 2 842 2960 t
+10 S f
+(_ ____________________)1 1007 1 720 2980 t
+10 R f
+( 10)1 357(3 10)1 353 2 842 3100 t
+10 S f
+(_ ____________________)1 1007 1 720 3120 t
+10 R f
+(10 2.2)1 478 1 792 3240 t
+10 S f
+( \347)1 -1007(_ ____________________)1 1007 2 720 3260 t
+(\347)720 3160 w
+(\347)720 3060 w
+(\347)720 2960 w
+(\347)720 2860 w
+(\347)720 2760 w
+(\347)720 2660 w
+(\347)720 2560 w
+(\347)720 2460 w
+(\347)720 2360 w
+(\347)720 2260 w
+(\347)720 2160 w
+(\347)720 2060 w
+(\347)720 1960 w
+(\347)989 3260 w
+(\347)989 3200 w
+(\347)989 3100 w
+(\347)989 3000 w
+(\347)989 2900 w
+(\347)989 2800 w
+(\347)989 2700 w
+(\347)989 2600 w
+(\347)989 2500 w
+(\347)989 2400 w
+(\347)989 2300 w
+(\347)989 2200 w
+(\347)989 2100 w
+(\347)1377 3260 w
+(\347)1377 3200 w
+(\347)1377 3100 w
+(\347)1377 3000 w
+(\347)1377 2900 w
+(\347)1377 2800 w
+(\347)1377 2700 w
+(\347)1377 2600 w
+(\347)1377 2500 w
+(\347)1377 2400 w
+(\347)1377 2300 w
+(\347)1377 2200 w
+(\347)1377 2100 w
+(\347)1727 3260 w
+(\347)1727 3160 w
+(\347)1727 3060 w
+(\347)1727 2960 w
+(\347)1727 2860 w
+(\347)1727 2760 w
+(\347)1727 2660 w
+(\347)1727 2560 w
+(\347)1727 2460 w
+(\347)1727 2360 w
+(\347)1727 2260 w
+(\347)1727 2160 w
+(\347)1727 2060 w
+(\347)1727 1960 w
+(_ _____________________________)1 1475 1 720 3520 t
+10 R f
+(Bell System JSPEC)2 791 1 1062 3640 t
+10 S f
+(_ _____________________________)1 1475 1 720 3650 t
+(_ _____________________________)1 1475 1 720 3670 t
+10 R f
+( Usage)1 485(Part Date)1 738 2 922 3780 t
+10 S f
+(_ _____________________________)1 1475 1 720 3800 t
+10 R f
+( 250)1 399(how January)1 926 2 770 3920 t
+( 125)1 349(where February)1 976 2 770 4040 t
+10 S f
+(_ _____________________________)1 1475 1 720 4060 t
+10 R f
+(30)1995 4180 w
+(Description March)1 876 1 770 4300 t
+10 S f
+(_ _______)1 374 1 1821 4250 t
+10 R f
+(200)1945 4420 w
+10 S f
+(_ _____________________________)1 1475 1 720 4440 t
+10 R f
+( Zzz)1 559(xxx yyy)1 766 2 770 4560 t
+( 12)1 582(abc def)1 743 2 770 4680 t
+10 S f
+( \347)1 -1475(_ _____________________________)1 1475 2 720 4700 t
+(\347)720 4620 w
+(\347)720 4520 w
+(\347)720 4420 w
+(\347)720 4320 w
+(\347)720 4220 w
+(\347)720 4120 w
+(\347)720 4020 w
+(\347)720 3920 w
+(\347)720 3820 w
+(\347)720 3720 w
+(\347)720 3620 w
+(\347)1311 4700 w
+(\347)1311 4670 w
+(\347)1311 4570 w
+(\347)1311 4470 w
+(\347)1311 4370 w
+(\347)1311 4270 w
+(\347)1311 4170 w
+(\347)1311 4070 w
+(\347)1311 3970 w
+(\347)1311 3870 w
+(\347)1311 3770 w
+(\347)1821 4700 w
+(\347)1821 4670 w
+(\347)1821 4570 w
+(\347)1821 4470 w
+(\347)1821 4370 w
+(\347)1821 4270 w
+(\347)1821 4170 w
+(\347)1821 4070 w
+(\347)1821 3970 w
+(\347)1821 3870 w
+(\347)1821 3770 w
+(\347)2195 4700 w
+(\347)2195 4620 w
+(\347)2195 4520 w
+(\347)2195 4420 w
+(\347)2195 4320 w
+(\347)2195 4220 w
+(\347)2195 4120 w
+(\347)2195 4020 w
+(\347)2195 3920 w
+(\347)2195 3820 w
+(\347)2195 3720 w
+(\347)2195 3620 w
+(_ _____________________________)1 1496 1 720 4960 t
+10 R f
+( march)1 449(january february)1 897 2 770 5080 t
+(april may)1 732 1 770 5200 t
+10 S f
+(_ ________)1 424 1 1792 5150 t
+10 R f
+(june july)1 716 1 770 5320 t
+10 S f
+(\347)1792 5390 w
+(\347)1792 5350 w
+(\347)1792 5250 w
+10 R f
+(august)1867 5320 w
+(september october)1 859 1 770 5440 t
+10 S f
+(_ ________)1 424 1 1792 5390 t
+10 R f
+( january)1 449(november december)1 947 2 770 5560 t
+10 S f
+( \347)1 -1496(_ _____________________________)1 1496 2 720 5580 t
+(\347)720 5560 w
+(\347)720 5460 w
+(\347)720 5360 w
+(\347)720 5260 w
+(\347)720 5160 w
+(\347)720 5060 w
+(\347)2216 5580 w
+(\347)2216 5560 w
+(\347)2216 5460 w
+(\347)2216 5360 w
+(\347)2216 5260 w
+(\347)2216 5160 w
+(\347)2216 5060 w
+(_ ______________________________)1 1524 1 720 5840 t
+10 R f
+( and)1 691(four score)1 732 2 770 5960 t
+(seven)770 6080 w
+10 S f
+(_ _______________)1 757 1 1217 6030 t
+(_ _____)1 270 1 1974 6020 t
+(_ _____)1 270 1 1974 6040 t
+10 R f
+( our)1 746(years ago)1 666 2 770 6200 t
+10 S f
+(_ _________)1 497 1 720 6260 t
+(_ _________)1 497 1 720 6280 t
+10 R f
+(fathers brought)1 607 1 1292 6320 t
+10 S f
+(_ _____)1 270 1 1974 6270 t
+10 R f
+(forth)770 6440 w
+10 S f
+(\347)1217 6510 w
+(\347)1217 6460 w
+(\347)1217 6360 w
+10 R f
+(on this)1 902 1 1292 6440 t
+(continent)770 6560 w
+10 S f
+(_ _______________)1 757 1 1217 6510 t
+10 R f
+(a)2049 6560 w
+10 S f
+( \347)1 -1524(_ ______________________________)1 1524 2 720 6580 t
+(\347)720 6540 w
+(\347)720 6440 w
+(\347)720 6340 w
+(\347)720 6240 w
+(\347)720 6140 w
+(\347)720 6040 w
+(\347)720 5940 w
+(\347)1974 6580 w
+(\347)1974 6540 w
+(\347)1974 6440 w
+(\347)1974 6340 w
+(\347)1974 6240 w
+(\347)1974 6140 w
+(\347)1974 6040 w
+(\347)1974 5940 w
+(\347)2244 6580 w
+(\347)2244 6540 w
+(\347)2244 6440 w
+(\347)2244 6340 w
+(\347)2244 6240 w
+(\347)2244 6140 w
+(\347)2244 6040 w
+(\347)2244 5940 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Roman Symbol

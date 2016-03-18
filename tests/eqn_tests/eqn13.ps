@@ -1,0 +1,813 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 R f
+(- 1 -)2 166 1 2797 480 t
+(Knuth, vol 2, page 317:)4 944 1 720 960 t
+10 I f
+(Q)720 1385 w
+7 I f
+(n)803 1405 w
+10 R f
+(\()854 1385 w
+10 I f
+(x)895 1385 w
+7 R f
+(1)950 1405 w
+10 R f
+(,)1001 1385 w
+10 I f
+(x)1034 1385 w
+7 R f
+(2)1089 1405 w
+10 R f
+(,)1140 1385 w
+(. . .)2 125 1 1198 1360 t
+(,)1356 1385 w
+10 I f
+(x)1389 1385 w
+7 I f
+(n)1444 1405 w
+10 R f
+(\))1495 1385 w
+10 S f
+(=)1585 1385 w
+(\354)1697 1198 w
+(\357)1697 1298 w
+(\355)1697 1398 w
+(\357)1697 1498 w
+(\356)1697 1598 w
+10 I f
+(x)1746 1545 w
+7 R f
+(1)1801 1565 w
+10 I f
+(Q)1852 1545 w
+7 I f
+(n)1935 1565 w
+7 S f
+(-)1986 1565 w
+7 R f
+(1)2036 1565 w
+10 R f
+(\()2087 1545 w
+10 I f
+(x)2128 1545 w
+7 R f
+(2)2183 1565 w
+10 R f
+(,)2234 1545 w
+(. . .)2 125 1 2292 1520 t
+(,)2450 1545 w
+10 I f
+(x)2483 1545 w
+7 I f
+(n)2538 1565 w
+10 R f
+(\))2589 1545 w
+10 S f
+(+)2638 1545 w
+10 I f
+(Q)2709 1545 w
+7 I f
+(n)2792 1565 w
+7 S f
+(-)2843 1565 w
+7 R f
+(2)2893 1565 w
+10 R f
+(\()2944 1545 w
+10 I f
+(x)2985 1545 w
+7 R f
+(3)3040 1565 w
+10 R f
+(,)3091 1545 w
+(. . .)2 125 1 3149 1520 t
+(,)3307 1545 w
+10 I f
+(x)3340 1545 w
+7 I f
+(n)3395 1565 w
+10 R f
+(\))3446 1545 w
+10 I f
+(x)1746 1385 w
+7 R f
+(1)1801 1405 w
+10 R f
+(,)1852 1385 w
+(1 ,)1 83 1 1746 1245 t
+(if)3529 1545 w
+(if)3529 1385 w
+(if)3529 1245 w
+10 I f
+(n)3640 1545 w
+10 S f
+(>)3714 1545 w
+10 R f
+(1.)3785 1545 w
+10 I f
+(n)3640 1385 w
+10 S f
+(=)3714 1385 w
+10 R f
+(1 ;)1 86 1 3785 1385 t
+10 I f
+(n)3640 1245 w
+10 S f
+(=)3714 1245 w
+10 R f
+(0 ;)1 86 1 3785 1245 t
+(Knuth, vol 2, p426:)3 781 1 720 1830 t
+(When zero occurs, the determinant is even easier to compute;)9 2455 1 1020 2070 t
+(for example, if)2 590 1 720 2190 t
+10 I f
+(x)720 2310 w
+7 R f
+(11)775 2330 w
+10 S f
+(=)869 2310 w
+10 R f
+(0)940 2310 w
+(but)720 2430 w
+10 I f
+(x)720 2550 w
+7 R f
+(21)775 2570 w
+10 S f
+(\271)861 2550 w
+10 R f
+(0 ,)1 83 1 924 2550 t
+(we have)1 329 1 720 2670 t
+(det)720 3145 w
+10 S f
+(\351)891 2908 w
+(\357)891 3008 w
+(\357)891 3108 w
+(\357)891 3208 w
+(\357)891 3308 w
+(\353)891 3408 w
+10 I f
+(x)959 3365 w
+7 I f
+(n)1014 3385 w
+7 R f
+(1)1054 3385 w
+10 R f
+(. . .)2 125 1 966 3240 t
+10 I f
+(x)962 3145 w
+7 R f
+(31)1017 3165 w
+10 I f
+(x)962 3025 w
+7 R f
+(21)1017 3045 w
+10 R f
+(0)1003 2905 w
+10 I f
+(x)1166 3365 w
+7 I f
+(n)1221 3385 w
+7 R f
+(2)1261 3385 w
+10 I f
+(x)1168 3145 w
+7 R f
+(32)1223 3165 w
+10 I f
+(x)1168 3025 w
+7 R f
+(22)1223 3045 w
+10 I f
+(x)1168 2905 w
+7 R f
+(12)1223 2925 w
+10 R f
+(. . .)2 125 1 1379 3340 t
+(. . .)2 125 1 1379 3120 t
+(. . .)2 125 1 1379 3000 t
+(. . .)2 125 1 1379 2880 t
+10 I f
+(x)1581 3365 w
+7 I f
+(nn)1636 3385 w
+10 I f
+(x)1579 3145 w
+7 R f
+(3)1634 3165 w
+7 I f
+(n)1674 3165 w
+10 I f
+(x)1579 3025 w
+7 R f
+(2)1634 3045 w
+7 I f
+(n)1674 3045 w
+10 I f
+(x)1579 2905 w
+7 R f
+(1)1634 2925 w
+7 I f
+(n)1674 2925 w
+10 S f
+(\371)1717 2908 w
+(\357)1717 3008 w
+(\357)1717 3108 w
+(\357)1717 3208 w
+(\357)1717 3308 w
+(\373)1717 3408 w
+(= -)1 167 1 720 3825 t
+10 I f
+(x)903 3825 w
+7 R f
+(21)958 3845 w
+10 R f
+(det)1044 3825 w
+10 S f
+(\351)1182 3638 w
+(\357)1182 3738 w
+(\357)1182 3838 w
+(\357)1182 3938 w
+(\353)1182 4038 w
+10 I f
+(x)1232 3995 w
+7 I f
+(n)1287 4015 w
+7 R f
+(2)1327 4015 w
+10 S f
+(-)1386 3995 w
+10 R f
+(\()1457 3995 w
+10 I f
+(x)1498 3995 w
+7 I f
+(n)1553 4015 w
+7 R f
+(1)1593 4015 w
+10 I f
+(/ x)1 80 1 1644 3995 t
+7 R f
+(21)1735 4015 w
+10 R f
+(\))1821 3995 w
+10 I f
+(x)1870 3995 w
+7 R f
+(22)1925 4015 w
+10 R f
+(. . .)2 125 1 1555 3870 t
+10 I f
+(x)1237 3775 w
+7 R f
+(32)1292 3795 w
+10 S f
+(-)1386 3775 w
+10 R f
+(\()1457 3775 w
+10 I f
+(x)1498 3775 w
+7 R f
+(31)1553 3795 w
+10 I f
+(/ x)1 80 1 1639 3775 t
+7 R f
+(21)1730 3795 w
+10 R f
+(\))1816 3775 w
+10 I f
+(x)1865 3775 w
+7 R f
+(22)1920 3795 w
+10 I f
+(x)1551 3655 w
+7 R f
+(12)1606 3675 w
+10 R f
+(. . .)2 125 1 2078 3970 t
+(. . .)2 125 1 2078 3750 t
+(. . .)2 125 1 2078 3630 t
+10 I f
+(x)2278 3995 w
+7 I f
+(nn)2333 4015 w
+10 S f
+(-)2427 3995 w
+10 R f
+(\()2498 3995 w
+10 I f
+(x)2539 3995 w
+7 I f
+(n)2594 4015 w
+7 R f
+(1)2634 4015 w
+10 I f
+(/ x)1 80 1 2685 3995 t
+7 R f
+(21)2776 4015 w
+10 R f
+(\))2862 3995 w
+10 I f
+(x)2911 3995 w
+7 R f
+(2)2966 4015 w
+7 I f
+(n)3006 4015 w
+10 R f
+(. . .)2 125 1 2601 3870 t
+10 I f
+(x)2278 3775 w
+7 R f
+(3)2333 3795 w
+7 I f
+(n)2373 3795 w
+10 S f
+(-)2432 3775 w
+10 R f
+(\()2503 3775 w
+10 I f
+(x)2544 3775 w
+7 R f
+(31)2599 3795 w
+10 I f
+(/ x)1 80 1 2685 3775 t
+7 R f
+(21)2776 3795 w
+10 R f
+(\))2862 3775 w
+10 I f
+(x)2911 3775 w
+7 R f
+(2)2966 3795 w
+7 I f
+(n)3006 3795 w
+10 I f
+(x)2594 3655 w
+7 R f
+(1)2649 3675 w
+7 I f
+(n)2689 3675 w
+10 S f
+(\371)3049 3638 w
+(\357)3049 3738 w
+(\357)3049 3838 w
+(\357)3049 3938 w
+(\373)3049 4038 w
+10 I f
+(.)3161 3825 w
+10 R f
+(\( 8 \))2 132 1 3293 3825 t
+(From John Butcher:)2 800 1 720 4270 t
+10 I f
+(A)720 5025 w
+10 S f
+(=)830 5025 w
+(\351)942 4388 w
+(\357)942 4488 w
+(\357)942 4588 w
+(\357)942 4688 w
+(\357)942 4788 w
+(\357)942 4888 w
+(\357)942 4988 w
+(\357)942 5088 w
+(\357)942 5188 w
+(\357)942 5288 w
+(\357)942 5388 w
+(\357)942 5488 w
+(\357)942 5588 w
+(\353)942 5688 w
+10 I f
+(a)999 5635 w
+7 I f
+(ni)1060 5655 w
+10 R f
+(0)1036 5475 w
+(.)1049 5305 w
+(.)1049 5165 w
+(.)1049 5025 w
+(0)1036 4895 w
+(0)1036 4735 w
+(0)1036 4575 w
+10 I f
+(a)992 4415 w
+7 R f
+(11)1053 4435 w
+10 R f
+(0)1225 5635 w
+(0)1225 5475 w
+(.)1238 5305 w
+(.)1238 5165 w
+(.)1238 5025 w
+(0)1225 4895 w
+10 I f
+(a)1181 4735 w
+7 R f
+(32)1242 4755 w
+10 I f
+(a)1181 4575 w
+7 R f
+(22)1242 4595 w
+10 I f
+(a)1181 4415 w
+7 R f
+(12)1242 4435 w
+10 R f
+(0)1414 5635 w
+(0)1414 5475 w
+(.)1427 5305 w
+(.)1427 5165 w
+(.)1427 5025 w
+10 I f
+(a)1370 4895 w
+7 R f
+(43)1431 4915 w
+10 I f
+(a)1370 4735 w
+7 R f
+(33)1431 4755 w
+10 I f
+(a)1370 4575 w
+7 R f
+(23)1431 4595 w
+10 R f
+(0)1414 4415 w
+(0)1603 5635 w
+(0)1603 5475 w
+(.)1616 5305 w
+(.)1616 5165 w
+(.)1616 5025 w
+10 I f
+(a)1559 4895 w
+7 R f
+(44)1620 4915 w
+10 I f
+(a)1559 4735 w
+7 R f
+(34)1620 4755 w
+10 R f
+(0)1603 4575 w
+(0)1603 4415 w
+(.)1748 5605 w
+(.)1748 5445 w
+(.)1748 4865 w
+(.)1748 4705 w
+(.)1748 4545 w
+(.)1748 4385 w
+(.)1823 5605 w
+(.)1823 5445 w
+(.)1823 4865 w
+(.)1823 4705 w
+(.)1823 4545 w
+(.)1823 4385 w
+(.)1898 5605 w
+(.)1898 5445 w
+(.)1898 4865 w
+(.)1898 4705 w
+(.)1898 4545 w
+(.)1898 4385 w
+10 I f
+(a)2023 5635 w
+7 I f
+(n)2084 5655 w
+7 R f
+(,)2124 5655 w
+7 I f
+(n)2147 5655 w
+7 S f
+(-)2198 5655 w
+7 R f
+(1)2248 5655 w
+10 I f
+(a)1973 5475 w
+7 I f
+(n)2034 5495 w
+7 S f
+(-)2085 5495 w
+7 R f
+(1 ,)1 58 1 2135 5495 t
+7 I f
+(n)2198 5495 w
+7 S f
+(-)2249 5495 w
+7 R f
+(1)2299 5495 w
+10 R f
+(.)2145 5305 w
+(.)2145 5165 w
+(.)2145 5025 w
+(0)2132 4895 w
+(0)2132 4735 w
+(0)2132 4575 w
+(0)2132 4415 w
+10 I f
+(a)2456 5635 w
+7 I f
+(nn)2517 5655 w
+10 I f
+(a)2392 5475 w
+7 I f
+(n)2453 5495 w
+7 S f
+(-)2504 5495 w
+7 R f
+(1 ,)1 58 1 2554 5495 t
+7 I f
+(n)2617 5495 w
+10 R f
+(.)2513 5305 w
+(.)2513 5165 w
+(.)2513 5025 w
+(0)2501 4895 w
+(0)2501 4735 w
+(0)2501 4575 w
+(0)2501 4415 w
+10 S f
+(\371)2660 4388 w
+(\357)2660 4488 w
+(\357)2660 4588 w
+(\357)2660 4688 w
+(\357)2660 4788 w
+(\357)2660 4888 w
+(\357)2660 4988 w
+(\357)2660 5088 w
+(\357)2660 5188 w
+(\357)2660 5288 w
+(\357)2660 5388 w
+(\357)2660 5488 w
+(\357)2660 5588 w
+(\373)2660 5688 w
+(=)2747 5025 w
+10 I f
+(X)720 6405 w
+10 S f
+(=)830 6405 w
+(\351)942 5918 w
+(\357)942 6018 w
+(\357)942 6118 w
+(\357)942 6218 w
+(\357)942 6318 w
+(\357)942 6418 w
+(\357)942 6518 w
+(\357)942 6618 w
+(\357)942 6718 w
+(\357)942 6818 w
+(\353)942 6918 w
+10 I f
+(H)992 6905 w
+(G)992 6765 w
+(F)992 6625 w
+(E)992 6485 w
+(D)992 6345 w
+(C)992 6205 w
+(B)992 6065 w
+(A)992 5925 w
+(P)1171 6905 w
+(O)1171 6765 w
+(N)1171 6625 w
+(M)1171 6485 w
+(L)1171 6345 w
+(K)1171 6205 w
+(J)1171 6065 w
+(I)1171 5925 w
+(Y)1361 6905 w
+(X)1361 6765 w
+(V)1361 6625 w
+(U)1361 6485 w
+(T)1361 6345 w
+(S)1361 6205 w
+(R)1361 6065 w
+(Q)1361 5925 w
+10 S f
+(\371)1433 5918 w
+(\357)1433 6018 w
+(\357)1433 6118 w
+(\357)1433 6218 w
+(\357)1433 6318 w
+(\357)1433 6418 w
+(\357)1433 6518 w
+(\357)1433 6618 w
+(\357)1433 6718 w
+(\357)1433 6818 w
+(\373)1433 6918 w
+10 I f
+(\256nis)1520 6405 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Italic Times-Roman Symbol

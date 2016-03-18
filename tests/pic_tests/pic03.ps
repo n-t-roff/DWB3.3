@@ -1,0 +1,475 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 R f
+( Device\(post\))1 3642(PIC: File\(pic03\))1 678 2 720 480 t
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% Version 3.3.2 drawing procedures for dpost. Automatically pulled in when
+% needed.
+%
+
+/inpath false def
+/savematrix matrix def
+
+/Dl {
+	inpath
+		{pop pop neg lineto}
+		{newpath neg moveto neg lineto stroke}
+	ifelse
+} bind def
+
+/De {
+	/y1 exch 2 div def
+	/x1 exch 2 div def
+	/savematrix savematrix currentmatrix def
+	neg exch x1 add exch translate
+	x1 y1 scale
+	0 0 1 0 360
+	inpath
+		{1 0 moveto arc savematrix setmatrix}
+		{newpath arc savematrix setmatrix stroke}
+	ifelse
+} bind def
+
+/Da {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arc}
+		{newpath arc stroke}
+	ifelse
+} bind def
+
+/DA {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arcn}
+		{newpath arcn stroke}
+	ifelse
+} bind def
+
+/Ds {
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	/y0 exch def
+	/x0 exch def
+	x0 5 x1 mul add 6 div
+	y0 5 y1 mul add -6 div
+	x2 5 x1 mul add 6 div
+	y2 5 y1 mul add -6 div
+	x1 x2 add 2 div
+	y1 y2 add -2 div
+	inpath
+		{curveto}
+		{newpath x0 x1 add 2 div y0 y1 add -2 div moveto curveto stroke}
+	ifelse
+} bind def
+%%EndGlobal
+/saveobj save def
+mark
+10 R f
+2610 1209 540 360 De
+2505 1032 216 144 De
+3039 1032 216 144 De
+2749 1146 72 72 De
+2939 1146 72 72 De
+2745 1209 135 -118 135 118 Da
+10 I f
+(Smile, HoneyBear!)1 759 1 2500 1569 t
+10 S1 f
+(_ ______________________________________________________________________________________)1 4320 1 720 1929 t
+10 R f
+(Something larger and more complicated ...)5 1703 1 720 2409 t
+8 CW f
+1836 3117 1836 3261 Dl
+2052 3117 1836 3117 Dl
+2052 3261 2052 3117 Dl
+1836 3261 2052 3261 Dl
+1836 3261 1836 3405 Dl
+2052 3261 1836 3261 Dl
+2052 3405 2052 3261 Dl
+1836 3405 2052 3405 Dl
+1836 3405 1836 3549 Dl
+2052 3405 1836 3405 Dl
+2052 3549 2052 3405 Dl
+1836 3549 2052 3549 Dl
+1836 3549 1836 3981 Dl
+2052 3549 1836 3549 Dl
+2052 3981 2052 3549 Dl
+1836 3981 2052 3981 Dl
+(.)1920 3661 w
+(.)1920 3781 w
+(.)1920 3901 w
+1836 3981 1836 4125 Dl
+2052 3981 1836 3981 Dl
+2052 4125 2052 3981 Dl
+1836 4125 2052 4125 Dl
+1836 4125 1836 4269 Dl
+2052 4125 1836 4125 Dl
+2052 4269 2052 4125 Dl
+1836 4269 2052 4269 Dl
+(hashtab:)1428 3205 w
+2340 2829 2340 2973 Dl
+2700 2829 2340 2829 Dl
+2700 2973 2700 2829 Dl
+2340 2973 2700 2973 Dl
+(...)2448 2917 w
+2700 2829 2700 2973 Dl
+2844 2829 2700 2829 Dl
+2844 2973 2844 2829 Dl
+2700 2973 2844 2973 Dl
+(n1)2724 2917 w
+2844 2829 2844 2973 Dl
+3060 2829 2844 2829 Dl
+3060 2973 3060 2829 Dl
+2844 2973 3060 2973 Dl
+(d1)2904 2917 w
+3060 2829 3060 2973 Dl
+3348 2829 3060 2829 Dl
+3348 2973 3348 2829 Dl
+3060 2973 3348 2973 Dl
+(n3)3156 2917 w
+3348 2829 3348 2973 Dl
+3564 2829 3348 2829 Dl
+3564 2973 3564 2829 Dl
+3348 2973 3564 2973 Dl
+(d3)3408 2917 w
+3564 2829 3564 2973 Dl
+3852 2829 3564 2829 Dl
+3852 2973 3852 2829 Dl
+3564 2973 3852 2973 Dl
+(...)3636 2917 w
+3852 2829 3852 2973 Dl
+4212 2829 3852 2829 Dl
+4212 2973 4212 2829 Dl
+3852 2973 4212 2973 Dl
+(n2)3984 2917 w
+4212 2829 4212 2973 Dl
+4356 2829 4212 2829 Dl
+4356 2973 4356 2829 Dl
+4212 2973 4356 2973 Dl
+(d2)4236 2917 w
+2304 3333 1944 3333 Dl
+2304 3333 2232 3351 Dl
+2304 3333 2232 3315 Dl
+2304 3297 2304 3369 Dl
+2412 3297 2304 3297 Dl
+2412 3369 2412 3297 Dl
+2304 3369 2412 3369 Dl
+2304 3369 2304 3441 Dl
+2412 3369 2304 3369 Dl
+2412 3441 2412 3369 Dl
+2304 3441 2412 3441 Dl
+2304 3441 2304 3513 Dl
+2412 3441 2304 3441 Dl
+2412 3513 2412 3441 Dl
+2304 3513 2412 3513 Dl
+2358 3333 2358 3333 2502 3333 Ds
+2358 3333 2502 3333 2736 2973 Ds
+2502 3333 2736 2973 2736 2973 Ds
+2735 2973 2711 3042 Dl
+2736 2973 2682 3023 Dl
+2358 3405 2358 3405 2574 3405 Ds
+2358 3405 2574 3405 2880 2973 Ds
+2574 3405 2880 2973 2880 2973 Ds
+2879 2973 2853 3042 Dl
+2879 2973 2823 3021 Dl
+2718 3477 2358 3477 Dl
+2718 3477 2646 3495 Dl
+2718 3477 2646 3459 Dl
+2718 3441 2718 3513 Dl
+2826 3441 2718 3441 Dl
+2826 3513 2826 3441 Dl
+2718 3513 2826 3513 Dl
+2718 3513 2718 3585 Dl
+2826 3513 2718 3513 Dl
+2826 3585 2826 3513 Dl
+2718 3585 2826 3585 Dl
+2718 3585 2718 3657 Dl
+2826 3585 2718 3585 Dl
+2826 3657 2826 3585 Dl
+2718 3657 2826 3657 Dl
+2772 3477 2772 3477 2916 3477 Ds
+2772 3477 2916 3477 3816 3117 Ds
+2916 3477 3816 3117 3888 2973 Ds
+3816 3117 3888 2973 3888 2973 Ds
+3887 2973 3872 3045 Dl
+3887 2973 3839 3029 Dl
+2772 3549 2772 3549 2988 3549 Ds
+2772 3549 2988 3549 4176 3117 Ds
+2988 3549 4176 3117 4248 2973 Ds
+4176 3117 4248 2973 4248 2973 Ds
+4247 2973 4232 3045 Dl
+4247 2973 4199 3029 Dl
+2664 4053 1944 4053 Dl
+2664 4053 2592 4071 Dl
+2664 4053 2592 4035 Dl
+2664 4017 2664 4089 Dl
+2772 4017 2664 4017 Dl
+2772 4089 2772 4017 Dl
+2664 4089 2772 4089 Dl
+2664 4089 2664 4161 Dl
+2772 4089 2664 4089 Dl
+2772 4161 2772 4089 Dl
+2664 4161 2772 4161 Dl
+2664 4161 2664 4233 Dl
+2772 4161 2664 4161 Dl
+2772 4233 2772 4161 Dl
+2664 4233 2772 4233 Dl
+2718 4053 2718 4053 2862 4053 Ds
+2718 4053 2862 4053 3096 2973 Ds
+2862 4053 3096 2973 3096 2973 Ds
+3096 2973 3098 3047 Dl
+3095 2973 3062 3039 Dl
+2718 4125 2718 4125 2934 4125 Ds
+2718 4125 2934 4125 3384 2973 Ds
+2934 4125 3384 2973 3384 2973 Ds
+3383 2973 3374 3046 Dl
+3383 2973 3340 3033 Dl
+(ndblock)3468 4069 w
+3385 4060 3420 4053 Dl
+3309 4075 3344 4068 Dl
+3233 4090 3268 4083 Dl
+3157 4106 3192 4099 Dl
+3081 4121 3116 4114 Dl
+3005 4137 3040 4130 Dl
+2929 4153 2964 4146 Dl
+2930 4153 2996 4121 Dl
+2929 4154 3003 4156 Dl
+(ndtable:)1932 2917 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Italic Times-Roman Courier Times-Roman

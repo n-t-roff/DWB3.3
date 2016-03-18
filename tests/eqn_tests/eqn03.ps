@@ -1,0 +1,584 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 R f
+( Device\(post\))1 3571(EQN: File\(eqn03\))1 749 2 720 480 t
+10 B f
+(Knuth)720 960 w
+10 R f
+(\(Vol. 2, p. 317\):)3 644 1 1024 960 t
+10 I f
+(Q)1304 1325 w
+7 I f
+(n)1387 1345 w
+10 R f
+(\()1438 1325 w
+10 I f
+(x)1479 1325 w
+7 R f
+(1)1534 1345 w
+10 R f
+(,)1585 1325 w
+10 I f
+(x)1618 1325 w
+7 R f
+(2)1673 1345 w
+10 R f
+(,)1724 1325 w
+(. . .)2 125 1 1782 1300 t
+(,)1940 1325 w
+10 I f
+(x)1973 1325 w
+7 I f
+(n)2028 1345 w
+10 R f
+(\))2079 1325 w
+10 S f
+(=)2169 1325 w
+(\354)2281 1138 w
+(\357)2281 1238 w
+(\355)2281 1338 w
+(\357)2281 1438 w
+(\356)2281 1538 w
+10 I f
+(x)2330 1485 w
+7 R f
+(1)2385 1505 w
+10 I f
+(Q)2436 1485 w
+7 I f
+(n)2519 1505 w
+7 S f
+(-)2570 1505 w
+7 R f
+(1)2620 1505 w
+10 R f
+(\()2671 1485 w
+10 I f
+(x)2712 1485 w
+7 R f
+(2)2767 1505 w
+10 R f
+(,)2818 1485 w
+(. . .)2 125 1 2876 1460 t
+(,)3034 1485 w
+10 I f
+(x)3067 1485 w
+7 I f
+(n)3122 1505 w
+10 R f
+(\))3173 1485 w
+10 S f
+(+)3222 1485 w
+10 I f
+(Q)3293 1485 w
+7 I f
+(n)3376 1505 w
+7 S f
+(-)3427 1505 w
+7 R f
+(2)3477 1505 w
+10 R f
+(\()3528 1485 w
+10 I f
+(x)3569 1485 w
+7 R f
+(3)3624 1505 w
+10 R f
+(,)3675 1485 w
+(. . .)2 125 1 3733 1460 t
+(,)3891 1485 w
+10 I f
+(x)3924 1485 w
+7 I f
+(n)3979 1505 w
+10 R f
+(\))4030 1485 w
+10 I f
+(x)2330 1325 w
+7 R f
+(1)2385 1345 w
+10 R f
+(,)2436 1325 w
+(1 ,)1 83 1 2330 1185 t
+(if)4113 1485 w
+(if)4113 1325 w
+(if)4113 1185 w
+10 I f
+(n)4224 1485 w
+10 S f
+(>)4298 1485 w
+10 R f
+(1.)4369 1485 w
+10 I f
+(n)4224 1325 w
+10 S f
+(=)4298 1325 w
+10 R f
+(1 ;)1 86 1 4369 1325 t
+10 I f
+(n)4224 1185 w
+10 S f
+(=)4298 1185 w
+10 R f
+(0 ;)1 86 1 4369 1185 t
+10 B f
+(Knuth)720 2070 w
+10 R f
+(\(Vol. 2, p. 426\):)3 644 1 1024 2070 t
+(When zero occurs, the determinant is even easier to compute; for example, if)12 3070 1 900 2370 t
+10 I f
+(x)2745 2550 w
+7 R f
+(11)2800 2570 w
+10 S f
+(=)2894 2550 w
+10 R f
+(0)2965 2550 w
+(but)900 2730 w
+10 I f
+(x)2736 2910 w
+7 R f
+(21)2791 2930 w
+10 S f
+(\271)2877 2910 w
+10 R f
+(0 ,)1 83 1 2940 2910 t
+(we have)1 329 1 900 3090 t
+(det)2362 3505 w
+10 S f
+(\351)2533 3268 w
+(\357)2533 3368 w
+(\357)2533 3468 w
+(\357)2533 3568 w
+(\357)2533 3668 w
+(\353)2533 3768 w
+10 I f
+(x)2601 3725 w
+7 I f
+(n)2656 3745 w
+7 R f
+(1)2696 3745 w
+10 R f
+(. . .)2 125 1 2608 3600 t
+10 I f
+(x)2604 3505 w
+7 R f
+(31)2659 3525 w
+10 I f
+(x)2604 3385 w
+7 R f
+(21)2659 3405 w
+10 R f
+(0)2645 3265 w
+10 I f
+(x)2808 3725 w
+7 I f
+(n)2863 3745 w
+7 R f
+(2)2903 3745 w
+10 I f
+(x)2810 3505 w
+7 R f
+(32)2865 3525 w
+10 I f
+(x)2810 3385 w
+7 R f
+(22)2865 3405 w
+10 I f
+(x)2810 3265 w
+7 R f
+(12)2865 3285 w
+10 R f
+(. . .)2 125 1 3021 3700 t
+(. . .)2 125 1 3021 3480 t
+(. . .)2 125 1 3021 3360 t
+(. . .)2 125 1 3021 3240 t
+10 I f
+(x)3223 3725 w
+7 I f
+(nn)3278 3745 w
+10 I f
+(x)3221 3505 w
+7 R f
+(3)3276 3525 w
+7 I f
+(n)3316 3525 w
+10 I f
+(x)3221 3385 w
+7 R f
+(2)3276 3405 w
+7 I f
+(n)3316 3405 w
+10 I f
+(x)3221 3265 w
+7 R f
+(1)3276 3285 w
+7 I f
+(n)3316 3285 w
+10 S f
+(\371)3359 3268 w
+(\357)3359 3368 w
+(\357)3359 3468 w
+(\357)3359 3568 w
+(\357)3359 3668 w
+(\373)3359 3768 w
+(= -)1 167 1 1647 4245 t
+10 I f
+(x)1830 4245 w
+7 R f
+(21)1885 4265 w
+10 R f
+(det)1971 4245 w
+10 S f
+(\351)2109 4058 w
+(\357)2109 4158 w
+(\357)2109 4258 w
+(\357)2109 4358 w
+(\353)2109 4458 w
+10 I f
+(x)2159 4415 w
+7 I f
+(n)2214 4435 w
+7 R f
+(2)2254 4435 w
+10 S f
+(-)2313 4415 w
+10 R f
+(\()2384 4415 w
+10 I f
+(x)2425 4415 w
+7 I f
+(n)2480 4435 w
+7 R f
+(1)2520 4435 w
+10 I f
+(/ x)1 80 1 2571 4415 t
+7 R f
+(21)2662 4435 w
+10 R f
+(\))2748 4415 w
+10 I f
+(x)2797 4415 w
+7 R f
+(22)2852 4435 w
+10 R f
+(. . .)2 125 1 2482 4290 t
+10 I f
+(x)2164 4195 w
+7 R f
+(32)2219 4215 w
+10 S f
+(-)2313 4195 w
+10 R f
+(\()2384 4195 w
+10 I f
+(x)2425 4195 w
+7 R f
+(31)2480 4215 w
+10 I f
+(/ x)1 80 1 2566 4195 t
+7 R f
+(21)2657 4215 w
+10 R f
+(\))2743 4195 w
+10 I f
+(x)2792 4195 w
+7 R f
+(22)2847 4215 w
+10 I f
+(x)2478 4075 w
+7 R f
+(12)2533 4095 w
+10 R f
+(. . .)2 125 1 3005 4390 t
+(. . .)2 125 1 3005 4170 t
+(. . .)2 125 1 3005 4050 t
+10 I f
+(x)3205 4415 w
+7 I f
+(nn)3260 4435 w
+10 S f
+(-)3354 4415 w
+10 R f
+(\()3425 4415 w
+10 I f
+(x)3466 4415 w
+7 I f
+(n)3521 4435 w
+7 R f
+(1)3561 4435 w
+10 I f
+(/ x)1 80 1 3612 4415 t
+7 R f
+(21)3703 4435 w
+10 R f
+(\))3789 4415 w
+10 I f
+(x)3838 4415 w
+7 R f
+(2)3893 4435 w
+7 I f
+(n)3933 4435 w
+10 R f
+(. . .)2 125 1 3528 4290 t
+10 I f
+(x)3205 4195 w
+7 R f
+(3)3260 4215 w
+7 I f
+(n)3300 4215 w
+10 S f
+(-)3359 4195 w
+10 R f
+(\()3430 4195 w
+10 I f
+(x)3471 4195 w
+7 R f
+(31)3526 4215 w
+10 I f
+(/ x)1 80 1 3612 4195 t
+7 R f
+(21)3703 4215 w
+10 R f
+(\))3789 4195 w
+10 I f
+(x)3838 4195 w
+7 R f
+(2)3893 4215 w
+7 I f
+(n)3933 4215 w
+10 I f
+(x)3521 4075 w
+7 R f
+(1)3576 4095 w
+7 I f
+(n)3616 4095 w
+10 S f
+(\371)3976 4058 w
+(\357)3976 4158 w
+(\357)3976 4258 w
+(\357)3976 4358 w
+(\373)3976 4458 w
+10 I f
+(.)4088 4245 w
+10 R f
+(\(8\))4924 4245 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Bold Times-Italic Times-Roman Symbol

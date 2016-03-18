@@ -1,0 +1,495 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 R f
+( Device\(post\))1 3511(TBL: File\(tbl.test3\))1 809 2 720 480 t
+10 S f
+(_ ______________________________________________________________________________________)1 4334 1 720 860 t
+10 B f
+(Some Interesting Places)2 1015 1 2379 980 t
+10 S f
+(_ ______________________________________________________________________________________)1 4334 1 720 1000 t
+10 I f
+( Information)1 503( Practical)1 1383(Name Description)1 1655 3 1085 1120 t
+10 S f
+(_ ______________________________________________________________________________________)1 4334 1 720 1140 t
+10 R f
+( ex. Sun 11-5)3 533(Hours 10-5,)1 792 2 3374 1260 t
+( Park West & 79th)4 752(Location Central)1 878 2 3374 1380 t
+(St.)3958 1500 w
+( $1.00 asked)2 502(Admission Donation:)1 984 2 3374 1620 t
+( to 81st st.)3 412(Subway AA)1 728 2 3374 1740 t
+(American Museum)1 864 1 770 1260 t
+(of Natural History)2 732 1 770 1380 t
+8 R f
+( \(Michelin\) or)2 465(The collections \256ll 11.5 acres)4 975 2 1784 1260 t
+(25 acres \(MTA\) of exhibition halls on four)7 1440 1 1784 1360 t
+( the most)2 372( the non-specialist,)2 676(\257oors. For)1 392 3 1784 1460 t
+( Museum are the life-)4 707(interesting parts of the)3 733 2 1784 1560 t
+( shown in)2 345(size dioramas where animals are)4 1095 2 1784 1660 t
+( is a full-sized)3 510( There)1 246( habitat.)1 277(their natural)1 407 4 1784 1760 t
+( a blue whale and the world's)6 1111(replica of)1 329 2 1784 1860 t
+( 1964, but)2 376(largest star sapphire \(stolen in)4 1064 2 1784 1960 t
+(recovered\).)1784 2060 w
+10 S f
+(_ ______________________________________________________________________________________)1 4334 1 720 2080 t
+10 R f
+( 5:00)1 245( winter, to)2 490(Hours 10-4:30)1 895 3 3374 2200 t
+(summer)3958 2320 w
+( St. & Southern)3 818(Location 185th)1 812 2 3374 2440 t
+(Blvd, the Bronx.)2 667 1 3958 2560 t
+( but Tu,We,Th free)3 767(Admission $1.00,)1 834 2 3374 2680 t
+(Bronx Zoo)1 436 1 770 2200 t
+( 5 to East Tremont Ave.)5 960(Subway 2,)1 659 2 3374 2800 t
+8 R f
+( this is)2 228(About a mile long and .6 mile wide,)7 1212 2 1784 2200 t
+( bison,)1 234( Lions,)1 263( zoo in America.)3 593(the largest)1 350 4 1784 2300 t
+( A)1 116( apes are favorites.)3 648(penguins, birds, and)2 676 3 1784 2400 t
+( of meat a day while a)6 780(lion eats 18 pounds)3 660 2 1784 2500 t
+(sea lion eats 15 pounds of \256sh.)6 981 1 1784 2600 t
+10 S f
+(_ ______________________________________________________________________________________)1 4334 1 720 2820 t
+10 R f
+( 10-5, Sun 12-15)3 672(Hours Wed-Sat,)1 958 2 3374 2940 t
+( Parkway &)2 747(Location Eastern)1 883 2 3374 3060 t
+(Washington Ave.,)1 1046 1 3958 3180 t
+(Brooklyn.)3958 3300 w
+(Admission Free)1 761 1 3374 3420 t
+(Brooklyn Museum)1 753 1 770 2940 t
+( to Eastern Parkway.)3 826(Subway 2,3)1 709 2 3374 3540 t
+8 R f
+( of galleries contain notable)4 1054(Five \257oors)1 386 2 1784 2940 t
+(collections from Egypt, Greece, Rome,)4 1440 1 1784 3040 t
+( The)1 192(Africa, Oceania, Asia and America.)4 1248 2 1784 3140 t
+( contains 18th and 19th century)5 1062(fourth \257oor)1 378 2 1784 3240 t
+( the Sculpture)2 490( In)1 129(American period rooms.)2 821 3 1784 3340 t
+( architectural)1 463(Garden is a collection of)4 977 2 1784 3440 t
+( wrecking ball,)2 533(ornaments saved from the)3 907 2 1784 3540 t
+( \256gure from)2 548(such as the classical)3 892 2 1784 3640 t
+(Pennsylvania Station.)1 691 1 1784 3740 t
+10 S f
+(_ ______________________________________________________________________________________)1 4334 1 720 3760 t
+10 R f
+( 1-5; Sat)2 367( & Sun,)2 335(Hours Tues-Fri)1 928 3 3374 3880 t
+(10-5)3958 4000 w
+( Park West & 77th)4 752(Location Central)1 878 2 3374 4120 t
+(St.)3958 4240 w
+(Admission Free)1 761 1 3374 4360 t
+( to 81st St.)3 429(Subway AA)1 728 2 3374 4480 t
+(New-York Historical)1 864 1 770 3880 t
+(Society)770 4000 w
+8 R f
+( reference library for)3 668(The Society combines a)3 772 2 1784 3880 t
+( There)1 226(scholars and a museum for the public.)6 1214 2 1784 3980 t
+(are many historical portraits, plus a)5 1440 1 1784 4080 t
+( All)1 153( Hudson River school.)3 747(collection of the)2 540 3 1784 4180 t
+(the original paintings for Audubon's)4 1163 1 1784 4280 t
+8 I f
+(Birds of)1 256 1 2968 4280 t
+(America)1784 4380 w
+8 R f
+(are here, as are exhibits of)5 1097 1 2127 4380 t
+( arts, New York)3 590(American and decorative)2 850 2 1784 4480 t
+(history, glass paperweights.)2 884 1 1784 4580 t
+10 S f
+( \347)1 -4334(_ ______________________________________________________________________________________)1 4334 2 720 4600 t
+(\347)720 4560 w
+(\347)720 4460 w
+(\347)720 4360 w
+(\347)720 4260 w
+(\347)720 4160 w
+(\347)720 4060 w
+(\347)720 3960 w
+(\347)720 3860 w
+(\347)720 3760 w
+(\347)720 3660 w
+(\347)720 3560 w
+(\347)720 3460 w
+(\347)720 3360 w
+(\347)720 3260 w
+(\347)720 3160 w
+(\347)720 3060 w
+(\347)720 2960 w
+(\347)720 2860 w
+(\347)720 2760 w
+(\347)720 2660 w
+(\347)720 2560 w
+(\347)720 2460 w
+(\347)720 2360 w
+(\347)720 2260 w
+(\347)720 2160 w
+(\347)720 2060 w
+(\347)720 1960 w
+(\347)720 1860 w
+(\347)720 1760 w
+(\347)720 1660 w
+(\347)720 1560 w
+(\347)720 1460 w
+(\347)720 1360 w
+(\347)720 1260 w
+(\347)720 1160 w
+(\347)720 1060 w
+(\347)720 960 w
+(\347)1709 4600 w
+(\347)1709 4500 w
+(\347)1709 4400 w
+(\347)1709 4300 w
+(\347)1709 4200 w
+(\347)1709 4100 w
+(\347)1709 4000 w
+(\347)1709 3900 w
+(\347)1709 3800 w
+(\347)1709 3700 w
+(\347)1709 3600 w
+(\347)1709 3500 w
+(\347)1709 3400 w
+(\347)1709 3300 w
+(\347)1709 3200 w
+(\347)1709 3100 w
+(\347)1709 3000 w
+(\347)1709 2900 w
+(\347)1709 2800 w
+(\347)1709 2700 w
+(\347)1709 2600 w
+(\347)1709 2500 w
+(\347)1709 2400 w
+(\347)1709 2300 w
+(\347)1709 2200 w
+(\347)1709 2100 w
+(\347)1709 2000 w
+(\347)1709 1900 w
+(\347)1709 1800 w
+(\347)1709 1700 w
+(\347)1709 1600 w
+(\347)1709 1500 w
+(\347)1709 1400 w
+(\347)1709 1300 w
+(\347)1709 1200 w
+(\347)1709 1100 w
+(\347)3299 4600 w
+(\347)3299 4500 w
+(\347)3299 4400 w
+(\347)3299 4300 w
+(\347)3299 4200 w
+(\347)3299 4100 w
+(\347)3299 4000 w
+(\347)3299 3900 w
+(\347)3299 3800 w
+(\347)3299 3700 w
+(\347)3299 3600 w
+(\347)3299 3500 w
+(\347)3299 3400 w
+(\347)3299 3300 w
+(\347)3299 3200 w
+(\347)3299 3100 w
+(\347)3299 3000 w
+(\347)3299 2900 w
+(\347)3299 2800 w
+(\347)3299 2700 w
+(\347)3299 2600 w
+(\347)3299 2500 w
+(\347)3299 2400 w
+(\347)3299 2300 w
+(\347)3299 2200 w
+(\347)3299 2100 w
+(\347)3299 2000 w
+(\347)3299 1900 w
+(\347)3299 1800 w
+(\347)3299 1700 w
+(\347)3299 1600 w
+(\347)3299 1500 w
+(\347)3299 1400 w
+(\347)3299 1300 w
+(\347)3299 1200 w
+(\347)3299 1100 w
+(\347)3883 4600 w
+(\347)3883 4540 w
+(\347)3883 4440 w
+(\347)3883 4340 w
+(\347)3883 4240 w
+(\347)3883 4140 w
+(\347)3883 4040 w
+(\347)3883 3940 w
+(\347)3883 3840 w
+(\347)3883 3740 w
+(\347)3883 3640 w
+(\347)3883 3540 w
+(\347)3883 3440 w
+(\347)3883 3340 w
+(\347)3883 3240 w
+(\347)3883 3140 w
+(\347)3883 3040 w
+(\347)3883 2940 w
+(\347)3883 2840 w
+(\347)3883 2740 w
+(\347)3883 2640 w
+(\347)3883 2540 w
+(\347)3883 2440 w
+(\347)3883 2340 w
+(\347)3883 2240 w
+(\347)3883 2140 w
+(\347)3883 2040 w
+(\347)3883 1940 w
+(\347)3883 1840 w
+(\347)3883 1740 w
+(\347)3883 1640 w
+(\347)3883 1540 w
+(\347)3883 1440 w
+(\347)3883 1340 w
+(\347)3883 1240 w
+(\347)5054 4600 w
+(\347)5054 4560 w
+(\347)5054 4460 w
+(\347)5054 4360 w
+(\347)5054 4260 w
+(\347)5054 4160 w
+(\347)5054 4060 w
+(\347)5054 3960 w
+(\347)5054 3860 w
+(\347)5054 3760 w
+(\347)5054 3660 w
+(\347)5054 3560 w
+(\347)5054 3460 w
+(\347)5054 3360 w
+(\347)5054 3260 w
+(\347)5054 3160 w
+(\347)5054 3060 w
+(\347)5054 2960 w
+(\347)5054 2860 w
+(\347)5054 2760 w
+(\347)5054 2660 w
+(\347)5054 2560 w
+(\347)5054 2460 w
+(\347)5054 2360 w
+(\347)5054 2260 w
+(\347)5054 2160 w
+(\347)5054 2060 w
+(\347)5054 1960 w
+(\347)5054 1860 w
+(\347)5054 1760 w
+(\347)5054 1660 w
+(\347)5054 1560 w
+(\347)5054 1460 w
+(\347)5054 1360 w
+(\347)5054 1260 w
+(\347)5054 1160 w
+(\347)5054 1060 w
+(\347)5054 960 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Bold Times-Italic Times-Roman Symbol

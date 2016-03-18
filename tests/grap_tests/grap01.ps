@@ -1,0 +1,591 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+10 R f
+( Device\(post\))1 3476(GRAP: File\(grap01\))1 844 2 720 480 t
+cleartomark
+saveobj restore
+%%BeginGlobal
+%
+% Version 3.3.2 drawing procedures for dpost. Automatically pulled in when
+% needed.
+%
+
+/inpath false def
+/savematrix matrix def
+
+/Dl {
+	inpath
+		{pop pop neg lineto}
+		{newpath neg moveto neg lineto stroke}
+	ifelse
+} bind def
+
+/De {
+	/y1 exch 2 div def
+	/x1 exch 2 div def
+	/savematrix savematrix currentmatrix def
+	neg exch x1 add exch translate
+	x1 y1 scale
+	0 0 1 0 360
+	inpath
+		{1 0 moveto arc savematrix setmatrix}
+		{newpath arc savematrix setmatrix stroke}
+	ifelse
+} bind def
+
+/Da {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arc}
+		{newpath arc stroke}
+	ifelse
+} bind def
+
+/DA {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arcn}
+		{newpath arcn stroke}
+	ifelse
+} bind def
+
+/Ds {
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	/y0 exch def
+	/x0 exch def
+	x0 5 x1 mul add 6 div
+	y0 5 y1 mul add -6 div
+	x2 5 x1 mul add 6 div
+	y2 5 y1 mul add -6 div
+	x1 x2 add 2 div
+	y1 y2 add -2 div
+	inpath
+		{curveto}
+		{newpath x0 x1 add 2 div y0 y1 add -2 div moveto curveto stroke}
+	ifelse
+} bind def
+%%EndGlobal
+/saveobj save def
+mark
+10 R f
+2204 960 2204 2400 Dl
+3644 960 2204 960 Dl
+3644 2400 3644 960 Dl
+2204 2400 3644 2400 Dl
+7 R f
+(.)2482 2403 w
+(.)2482 2367 w
+(.)2482 2331 w
+(.)2482 2295 w
+(.)2482 2259 w
+(.)2482 2223 w
+(.)2482 2187 w
+(.)2482 2151 w
+(.)2482 2115 w
+(.)2482 2079 w
+(.)2482 2043 w
+(.)2482 2007 w
+(.)2482 1971 w
+(.)2482 1935 w
+(.)2482 1899 w
+(.)2482 1863 w
+(.)2482 1827 w
+(.)2482 1791 w
+(.)2482 1755 w
+(.)2482 1719 w
+(.)2482 1683 w
+(.)2482 1647 w
+(.)2482 1611 w
+(.)2482 1575 w
+(.)2482 1539 w
+(.)2482 1503 w
+(.)2482 1467 w
+(.)2482 1431 w
+(.)2482 1395 w
+(.)2482 1359 w
+(.)2482 1323 w
+(.)2482 1287 w
+(.)2482 1251 w
+(.)2482 1215 w
+(.)2482 1179 w
+(.)2482 1143 w
+(.)2482 1107 w
+(.)2482 1071 w
+(.)2482 1035 w
+(.)2482 999 w
+(.)2482 963 w
+10 R f
+(20)2442 2510 w
+7 R f
+(.)2770 2403 w
+(.)2770 2367 w
+(.)2770 2331 w
+(.)2770 2295 w
+(.)2770 2259 w
+(.)2770 2223 w
+(.)2770 2187 w
+(.)2770 2151 w
+(.)2770 2115 w
+(.)2770 2079 w
+(.)2770 2043 w
+(.)2770 2007 w
+(.)2770 1971 w
+(.)2770 1935 w
+(.)2770 1899 w
+(.)2770 1863 w
+(.)2770 1827 w
+(.)2770 1791 w
+(.)2770 1755 w
+(.)2770 1719 w
+(.)2770 1683 w
+(.)2770 1647 w
+(.)2770 1611 w
+(.)2770 1575 w
+(.)2770 1539 w
+(.)2770 1503 w
+(.)2770 1467 w
+(.)2770 1431 w
+(.)2770 1395 w
+(.)2770 1359 w
+(.)2770 1323 w
+(.)2770 1287 w
+(.)2770 1251 w
+(.)2770 1215 w
+(.)2770 1179 w
+(.)2770 1143 w
+(.)2770 1107 w
+(.)2770 1071 w
+(.)2770 1035 w
+(.)2770 999 w
+(.)2770 963 w
+10 R f
+(40)2730 2510 w
+7 R f
+(.)3058 2403 w
+(.)3058 2367 w
+(.)3058 2331 w
+(.)3058 2295 w
+(.)3058 2259 w
+(.)3058 2223 w
+(.)3058 2187 w
+(.)3058 2151 w
+(.)3058 2115 w
+(.)3058 2079 w
+(.)3058 2043 w
+(.)3058 2007 w
+(.)3058 1971 w
+(.)3058 1935 w
+(.)3058 1899 w
+(.)3058 1863 w
+(.)3058 1827 w
+(.)3058 1791 w
+(.)3058 1755 w
+(.)3058 1719 w
+(.)3058 1683 w
+(.)3058 1647 w
+(.)3058 1611 w
+(.)3058 1575 w
+(.)3058 1539 w
+(.)3058 1503 w
+(.)3058 1467 w
+(.)3058 1431 w
+(.)3058 1395 w
+(.)3058 1359 w
+(.)3058 1323 w
+(.)3058 1287 w
+(.)3058 1251 w
+(.)3058 1215 w
+(.)3058 1179 w
+(.)3058 1143 w
+(.)3058 1107 w
+(.)3058 1071 w
+(.)3058 1035 w
+(.)3058 999 w
+(.)3058 963 w
+10 R f
+(60)3018 2510 w
+7 R f
+(.)3346 2403 w
+(.)3346 2367 w
+(.)3346 2331 w
+(.)3346 2295 w
+(.)3346 2259 w
+(.)3346 2223 w
+(.)3346 2187 w
+(.)3346 2151 w
+(.)3346 2115 w
+(.)3346 2079 w
+(.)3346 2043 w
+(.)3346 2007 w
+(.)3346 1971 w
+(.)3346 1935 w
+(.)3346 1899 w
+(.)3346 1863 w
+(.)3346 1827 w
+(.)3346 1791 w
+(.)3346 1755 w
+(.)3346 1719 w
+(.)3346 1683 w
+(.)3346 1647 w
+(.)3346 1611 w
+(.)3346 1575 w
+(.)3346 1539 w
+(.)3346 1503 w
+(.)3346 1467 w
+(.)3346 1431 w
+(.)3346 1395 w
+(.)3346 1359 w
+(.)3346 1323 w
+(.)3346 1287 w
+(.)3346 1251 w
+(.)3346 1215 w
+(.)3346 1179 w
+(.)3346 1143 w
+(.)3346 1107 w
+(.)3346 1071 w
+(.)3346 1035 w
+(.)3346 999 w
+(.)3346 963 w
+10 R f
+(80)3306 2510 w
+7 R f
+(. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .)40 1458 1 2194 2115 t
+10 R f
+(20)2079 2132 w
+7 R f
+(. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .)40 1458 1 2194 1827 t
+10 R f
+(40)2079 1844 w
+7 R f
+(. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .)40 1458 1 2194 1539 t
+10 R f
+(60)2079 1556 w
+7 R f
+(. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .)40 1458 1 2194 1251 t
+10 R f
+(80)2079 1268 w
+(Text above)1 446 1 2701 1640 t
+(Text rjust)1 386 1 2513 1700 t
+5 S f
+(\267)3345 1124 w
+10 S f
+(|)3346 1268 w
+6 S1 f
+()3341 1412 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_bx {
+    pop
+    size 2 div /side exch def
+    currentpoint
+    newpath
+    moveto
+    0 side rlineto
+    side 0 rlineto
+    0 side neg rlineto
+    closepath
+    fill
+} def
+%%EndGlobal
+/saveobj save def
+mark
+6 S1 f
+3341 1412 m
+30 build_bx
+3371 1412 m
+7 S f
+(\264)3337 1556 w
+7 S1 f
+()2911 1700 w
+cleartomark
+saveobj restore
+%%BeginGlobal
+/build_ob {
+    pop
+    size 3 mul 16 div /rad exch def
+    currentpoint
+    newpath
+    rad add exch rad add exch rad 0 360 arc
+    stroke
+} def
+%%EndGlobal
+/saveobj save def
+mark
+7 S1 f
+2911 1700 m
+27 build_ob
+2938 1700 m
+10 R f
+2744 1248 360 360 De
+2384 1104 2348 1104 Dl
+2446 1104 2410 1104 Dl
+2510 1104 2474 1104 Dl
+2573 1104 2537 1104 Dl
+2636 1104 2600 1104 Dl
+2636 1104 2348 1392 Dl
+2636 1104 2598 1167 Dl
+2635 1104 2572 1142 Dl
+7 S f
+(D)2327 2132 w
+10 R f
+2924 2112 2348 2256 Dl
+3500 2256 2924 2112 Dl
+2383 2104 2348 2112 Dl
+2450 2087 2415 2095 Dl
+2518 2070 2483 2078 Dl
+2586 2053 2551 2061 Dl
+2653 2036 2618 2044 Dl
+2721 2019 2686 2027 Dl
+2789 2002 2754 2010 Dl
+2856 1985 2821 1993 Dl
+2923 1968 2888 1976 Dl
+7 S f
+(D)2903 1988 w
+10 R f
+2960 1968 2924 1968 Dl
+3037 1968 3001 1968 Dl
+3114 1968 3078 1968 Dl
+3191 1968 3155 1968 Dl
+3269 1968 3233 1968 Dl
+3346 1968 3310 1968 Dl
+3423 1968 3387 1968 Dl
+3500 1968 3464 1968 Dl
+7 S f
+(D)3479 1988 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Roman Symbol Times-Roman

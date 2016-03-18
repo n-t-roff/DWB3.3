@@ -1,0 +1,331 @@
+%!PS
+%%Version: 3.3.2
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+%
+% Version 3.3.2 prologue for troff files.
+%
+
+/#copies 1 store
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+%%EndProlog
+%%BeginSetup
+mark
+/resolution 720 def
+setup
+2 setdecoding
+%%EndSetup
+%%Page: 1 1
+/saveobj save def
+mark
+1 pagesetup
+8 S f
+(\257)0 100 w
+8 R f
+(cut)74 100 w
+8 S f
+(\257 \257)1 5135 1 197 100 t
+8 R f
+(cut)5358 100 w
+8 S f
+(\257)5481 100 w
+8 S1 f
+( ______)1 233( _)1 5023(_ ______)1 273 3 0 200 t
+8 R f
+(2/4/1993)4924 350 w
+(mv.test3)4976 450 w
+(FOIL 3)1 244 1 5004 550 t
+(+ +)1 5083 1 165 920 t
+22 R f
+(Of Bits & Bytes & Words)5 2385 1 1543 1227 t
+14 I f
+(But let your communication be, Yea,)5 2096 1 2736 1514 t
+(yea; Nay, nay: for whatsoever is)5 1876 1 2736 1689 t
+(more than these cometh of evil.*)5 1875 1 2736 1864 t
+14 R f
+(Matthew 5:37)1 793 1 3456 2039 t
+18 R f
+(Binary notation has been around for a)6 2794 1 576 2376 t
+24 R f
+(long)3449 2376 w
+18 R f
+(time.)3935 2376 w
+15 S f
+(\267)576 2713 w
+18 R f
+(The above verse tells us to use:)6 2326 1 770 2713 t
+(1\) binary notation,)2 1359 1 837 3050 t
+18 I f
+(and)2255 3050 w
+18 R f
+(2\) redundancy \(in communicating\))3 2537 1 837 3387 t
+15 S f
+(\267)576 3724 w
+18 R f
+(Binary notation is not)3 1605 1 770 3724 t
+18 S f
+(_ __)1 230 1 2145 3740 t
+18 R f
+(suited for human use, above)4 2074 1 2434 3724 t
+(verse to the contrary notwithstanding.)4 2772 1 770 3949 t
+16 S f
+(_ _______________________________________________)1 3831 1 770 4214 t
+16 R f
+( Bytes/Word Bits/Word)2 1919(System Bits/Type)1 1548 2 1054 4414 t
+16 S f
+(_ _______________________________________________)1 3831 1 770 4454 t
+16 R f
+( 36)1 999( 6)1 942(IBM-7090/94 6)1 1476 3 850 4654 t
+( 32)1 999( 4)1 942(IBM-360/370 8)1 1476 3 850 4854 t
+( 16)1 999( 2)1 942(PDP-11/70 8)1 1476 3 850 5054 t
+16 S f
+( \347)1 -3831(_ _______________________________________________)1 3831 2 770 5094 t
+(\347)770 5014 w
+(\347)770 4854 w
+(\347)770 4694 w
+(\347)770 4534 w
+(\347)770 4374 w
+(\347)1850 5094 w
+(\347)1850 5014 w
+(\347)1850 4854 w
+(\347)1850 4694 w
+(\347)1850 4534 w
+(\347)1850 4374 w
+(\347)2722 5094 w
+(\347)2722 5014 w
+(\347)2722 4854 w
+(\347)2722 4694 w
+(\347)2722 4534 w
+(\347)2722 4374 w
+(\347)3734 5094 w
+(\347)3734 5014 w
+(\347)3734 4854 w
+(\347)3734 4694 w
+(\347)3734 4534 w
+(\347)3734 4374 w
+(\347)4601 5094 w
+(\347)4601 5014 w
+(\347)4601 4854 w
+(\347)4601 4694 w
+(\347)4601 4534 w
+(\347)4601 4374 w
+12 R f
+(\304\304\304\304\304\304\304\304\304\304\304\304)770 5244 w
+12 S f
+(________)770 5254 w
+12 R f
+(* The use of this verse in this context is plagiarized from C. Shannon.)13 3486 1 770 5444 t
+8 R f
+(+ +)1 5083 1 165 5960 t
+8 S1 f
+( ______)1 233( _)1 5023(_ ______)1 273 3 0 7040 t
+8 S f
+(\255)0 7140 w
+8 R f
+(cut)74 7140 w
+8 S f
+(\255 \255)1 5135 1 197 7140 t
+8 R f
+(cut)5358 7140 w
+8 S f
+(\255)5481 7140 w
+cleartomark
+showpage
+saveobj restore
+%%EndPage: 1 1
+%%Trailer
+done
+%%Pages: 1
+%%DocumentFonts: Times-Italic Times-Roman Symbol Times-Roman
