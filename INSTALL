@@ -62,17 +62,22 @@ Other settings should only be changed if really necessary.  E.g. the variable
 
 must be left unchanged regardless of the OS.
 
+A configure script had been added to make the software  compile  on  different
+operating systems.  This must be run first:
+
+  $ ./configure
+
 The software is build with
 
-  $ make -f dwb.mk
+  $ make
 
 and installed with
 
-  # make -f dwb.mk install
+  # make install
 
 After installation locally build data is cleaned up with
 
-  $ make -f dwb.mk clobber
+  $ make clobber
 
 If there are problems questions can be send to
 

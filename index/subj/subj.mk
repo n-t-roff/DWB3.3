@@ -76,22 +76,22 @@ parts : parts.sh
 	cp parts.sh parts; chmod 755 parts
 
 sbj1 : sbj1.o
-	$(CC) $(CFLAGS) $(LDFLAGS) sbj1.o -o sbj1 -lfl
+	$(CC) $(CFLAGS) $(LDFLAGS) sbj1.o -o sbj1 $(LIB_LEX)
 
 sbj2 : sbj2.o case.o
-	$(CC) $(CFLAGS) $(LDFLAGS) sbj2.o case.o -o sbj2 -lfl
+	$(CC) $(CFLAGS) $(LDFLAGS) sbj2.o case.o -o sbj2 $(LIB_LEX)
 
 sbj3 : sbj3.o case.o omit.o
-	$(CC) $(CFLAGS) $(LDFLAGS) sbj3.o case.o omit.o -o sbj3 -lfl
+	$(CC) $(CFLAGS) $(LDFLAGS) sbj3.o case.o omit.o -o sbj3 $(LIB_LEX)
 
 style1 : nwords.o
-	$(CC) $(CFLAGS) $(LDFLAGS) nwords.o -o style1 -lfl
+	$(CC) $(CFLAGS) $(LDFLAGS) nwords.o -o style1 $(LIB_LEX)
 
 style2 : end.o
-	$(CC) $(CFLAGS) $(LDFLAGS) end.o -o style2 -lfl
+	$(CC) $(CFLAGS) $(LDFLAGS) end.o -o style2 $(LIB_LEX)
 
 style3 : part.o pscan.o outp.o extern.o
-	$(CC) $(CFLAGS) $(LDFLAGS) part.o pscan.o outp.o extern.o -o style3 -lfl
+	$(CC) $(CFLAGS) $(LDFLAGS) part.o pscan.o outp.o extern.o -o style3 $(LIB_LEX)
 
 end.o : edict.h ehash.h names.h
 nwords.o : abbrev.h dict.h names.h nhash.h ydict.h

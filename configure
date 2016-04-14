@@ -23,6 +23,7 @@ usage () {
 SFLAG=
 MAKE=
 DEFS=
+LIB_LEX=
 LIB_CURSES=
 
 while [ $# -gt 0 ]; do
@@ -77,6 +78,7 @@ gen_mk () {
 	[ -n "$LIBDIR_CURSES" ] && echo "LIBDIR_CURSES=$LIBDIR_CURSES" \
 	    >> $OUTMK
 	[ -n "$LIB_CURSES" ] && echo "LIB_CURSES=$LIB_CURSES" >> $OUTMK
+	[ -n "$LIB_LEX" ] && echo "LIB_LEX=$LIB_LEX" >> $OUTMK
 	cat $INMK >> $OUTMK || exit 1
 }
 check_make () {
@@ -130,6 +132,36 @@ EOT
 	compile
 	test_result && return
 }
+check_lib_lex () {
+	LIB_LEX=-lfl
+
+	check_for $LIB_LEX
+
+	cat <<EOT >$TMPL
+%%
+%%
+int main() { return 0; }
+EOT
+	gen_mk
+	cat <<EOT >>$OUTMK
+$TMPNAM: ${TMPNAM}.o
+	\$(CC) -o \$@ ${TMPNAM}.o \$(LIB_LEX)
+EOT
+	compile
+	test_result && return
+
+	LIB_LEX=-ll
+
+	check_for $LIB_LEX
+
+	gen_mk
+	cat <<EOT >>$OUTMK
+$TMPNAM: ${TMPNAM}.o
+	\$(CC) -o \$@ ${TMPNAM}.o \$(LIB_LEX)
+EOT
+	compile
+	test_result && return
+}
 OUTMK=Makefile
 INMK=dwb.mk
 CFG=config
@@ -143,6 +175,7 @@ gen_mk
 
 check_make
 check_lex
+check_lib_lex
 
 gen_mk
 rm -f $TMPNAM*

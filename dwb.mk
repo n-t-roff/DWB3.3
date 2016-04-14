@@ -276,6 +276,7 @@ $(TARGETS) ::
 	MACRODIR='$(MACRODIR)'; export MACRODIR; \
 	LIBDIR='$(LIBDIR)'; export LIBDIR; \
 	TMACDIR='$(TMACDIR)'; export TMACDIR; \
+	LIB_LEX='$(LIB_LEX)'; export LIB_LEX; \
 	DIRS=`echo */$@ */*/$@`; \
 	DIRS="$@ $$DIRS"; \
 	HERE=`pwd`; \
