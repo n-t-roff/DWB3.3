@@ -173,7 +173,7 @@
 #
 
 #MAKE=/bin/make
-MAKEFILE=dwb.mk
+#MAKEFILE=dwb.mk
 
 SYSTEM=BSD4_2
 VERSION=3.3
@@ -230,11 +230,11 @@ ACTION=all
 all : $(TARGETS)
 
 clean clobber:
-	@$(MAKE) -e -f $(MAKEFILE) MAKE=$(MAKE) ACTION=$@ $(TARGETS)
-	@rm -f cfg
+	$(MAKE) -e MAKE=$(MAKE) ACTION=$@ $(TARGETS)
+	rm -f Makefile config.log
 
 install changes :
-	@SYSTEM='$(SYSTEM)'; export SYSTEM; \
+	SYSTEM='$(SYSTEM)'; export SYSTEM; \
 	VERSION='$(VERSION)'; export VERSION; \
 	GROUP='$(GROUP)'; export GROUP; \
 	OWNER='$(OWNER)'; export OWNER; \
@@ -257,10 +257,10 @@ install changes :
 	DKHOST='$(DKHOST)'; export DKHOST; \
 	DKSTREAMS='$(DKSTREAMS)'; export DKSTREAMS; \
 	ROUNDPAGE='$(ROUNDPAGE)'; export ROUNDPAGE; \
-	$(MAKE) -e -f $(MAKEFILE) MAKE=$(MAKE) ACTION=$@ $(TARGETS)
+	$(MAKE) -e MAKE=$(MAKE) ACTION=$@ $(TARGETS)
 
-$(TARGETS) :: cfg
-	@TARGETS=; unset TARGETS; \
+$(TARGETS) ::
+	TARGETS=; unset TARGETS; \
 	HFILES=; unset HFILES; \
 	OFILES=; unset OFILES; \
 	CFLAGS=; unset CFLAGS; \
@@ -276,7 +276,6 @@ $(TARGETS) :: cfg
 	MACRODIR='$(MACRODIR)'; export MACRODIR; \
 	LIBDIR='$(LIBDIR)'; export LIBDIR; \
 	TMACDIR='$(TMACDIR)'; export TMACDIR; \
-	. ./cfg; \
 	DIRS=`echo */$@ */*/$@`; \
 	DIRS="$@ $$DIRS"; \
 	HERE=`pwd`; \
@@ -298,6 +297,3 @@ $(TARGETS) :: cfg
 		cd $$HERE; \
 	    fi; \
 	done
-
-cfg:
-	CXX=$(CXX) LEX=$(LEX) ./cfgr
