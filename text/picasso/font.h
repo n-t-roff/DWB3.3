@@ -70,4 +70,7 @@ extern	TrFont	*dwb_mount[];
 extern char	*chname();
 extern char	*strsave();
 extern char	*allocate();
-
+int getdesc(char *);
+int onfont(int, int);
+int chwidth(int, int);
+int mountfont(char *, int);

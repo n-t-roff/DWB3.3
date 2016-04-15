@@ -10,48 +10,42 @@
 /*	For systems without X and OpenLook libraries		*/
 
 int
-Xokay()
-{
+Xokay(void) {
 	return 0;
 }
 
-Xloop()
-{
+int
+Xloop(void) {
 	return 0;
 }
 
-Xendpl()
-{
+int
+Xendpl(void) {
 	return 0;
 }
 
-Xopenpl(s)
-    char    *s;
-{
+int
+Xopenpl(char *s) {
 	return 0;
 }
 
-Xclosepl(s)
-    char    *s;
-{
+int
+Xclosepl(char *s) {
 	return 0;
 }
 
-Xprint(t)
-    char    t;
-{
+int
+Xprint(char t) {
 	return 0;
 }
 
-Xallexpose()
-{
+int
+Xallexpose(void) {
 	return 0;
 }
 
-writemessage(msgbuf, secs, bell)
-	char	*msgbuf;
-	int	secs, bell;
-{
+int
+writemessage(char *msgbuf, int secs, int bell) {
 	return 0;
 }
 

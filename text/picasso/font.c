@@ -30,11 +30,22 @@ extern int	unitwidth;
 extern int	nfonts;
 extern char	**lfonts;
 
+static int getfont(char *, TrFont *);
+static void freefonts(void);
+static int findfont(char *);
+static int mounted(int);
+static int chcode(int, int);
+static int chindex(char *);
+static int chadd(char *);
+static int hash(char *, int);
+static void release(void *);
+static void dumpmount(int);
+static void dumpfont(int);
+
 /*****************************************************************************/
 
-getdesc(path)
-
-    char	*path;
+int
+getdesc(char *path)
 
 {
 
@@ -84,10 +95,8 @@ getdesc(path)
 
 /*****************************************************************************/
 
-getfont(path, fpos)
-
-    char	*path;
-    TrFont	*fpos;
+static int
+getfont(char *path, TrFont *fpos)
 
 {
 
@@ -194,10 +203,8 @@ getfont(path, fpos)
 
 /*****************************************************************************/
 
-mountfont(path, m)
-
-    char	*path;
-    int		m;
+int
+mountfont(char *path, int m)
 
 {
 
@@ -231,7 +238,8 @@ mountfont(path, m)
 
 /*****************************************************************************/
 
-freefonts()
+static void
+freefonts(void)
 
 {
 
@@ -255,13 +263,12 @@ freefonts()
 
 /*****************************************************************************/
 
-findfont(path)
-
-    char	*path;
+static int
+findfont(char *path)
 
 {
 
-    register	n;
+    int n;
 
 /*
  *
@@ -279,9 +286,8 @@ findfont(path)
 
 /*****************************************************************************/
 
-mounted(m)
-
-    int		m;
+static int
+mounted(int m)
 
 {
 
@@ -297,10 +303,8 @@ mounted(m)
 
 /*****************************************************************************/
 
-onfont(c, m)
-
-    int		c;
-    int		m;
+int
+onfont(int c, int m)
 
 {
 
@@ -341,10 +345,8 @@ onfont(c, m)
 
 /*****************************************************************************/
 
-chwidth(n, m)
-
-    int		n;
-    int		m;
+int
+chwidth(int n, int m)
 
 {
 
@@ -361,10 +363,8 @@ chwidth(n, m)
 
 /*****************************************************************************/
 
-chcode(n, m)
-
-    int		n;
-    int		m;
+static int
+chcode(int n, int m)
 
 {
 
@@ -381,13 +381,12 @@ chcode(n, m)
 
 /*****************************************************************************/
 
-chindex(s)
-
-    char	*s;
+static int
+chindex(char *s)
 
 {
 
-    register	i;
+    int i;
 
 /*
  *
@@ -405,13 +404,12 @@ chindex(s)
 
 /*****************************************************************************/
 
-chadd(s)
-
-    char	*s;
+static int
+chadd(char *s)
 
 {
 
-    register	i;
+    int i;
 
 /*
  *
@@ -452,14 +450,12 @@ char *chname(n)
 
 /*****************************************************************************/
 
-hash(s, l)
-
-    char	*s;
-    int		l;
+static int
+hash(char *s, int l)
 
 {
 
-    register	i;
+    int i;
 
 /*
  *
@@ -526,9 +522,8 @@ char *allocate(count)
 
 /*****************************************************************************/
 
-release(ptr)
-
-    char	*ptr;
+static void
+release(void *ptr)
 
 {
 
@@ -545,9 +540,8 @@ release(ptr)
 
 /*****************************************************************************/
 
-dumpmount(m)
-
-    int		m;
+static void
+dumpmount(int m)
 
 {
 
@@ -565,9 +559,8 @@ dumpmount(m)
 
 /*****************************************************************************/
 
-dumpfont(n)
-
-    int		n;
+static void
+dumpfont(int n)
 
 {
 

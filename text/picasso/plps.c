@@ -50,7 +50,21 @@ float	*last_dash  = NULL;
 
 static	int	extra_chars = 0;
 
-resetps()	/* these must be reset for each page of a multipage file */
+static void resetps(void);
+static void findfile(char *, char *);
+static void beginpl(void);
+static void new_weight(float);
+static void setattrdefaults(void);
+static void new_style(void);
+static void fill_or_stroke(void);
+static void d_arrow(obj *, double, double, double, double, double, int);
+static void octal_char(char);
+static void extra_bs(void);
+static void escstr(char *);
+static int spacecount(char *);
+
+static void
+resetps(void)	/* these must be reset for each page of a multipage file */
 {		/* (so that -mpictures inclusions will work correctly.)  */
 
 	psfont = last_miter = last_cap = last_join = -1;
@@ -61,9 +75,8 @@ resetps()	/* these must be reset for each page of a multipage file */
 
 static char *nopro = "can't read prologue file ";
 
-findfile(path, name)
-	char	*path, *name;
-{
+static void
+findfile(char *path, char *name) {
 	char	*msgbuf;
 
 	if (access(strcat(strcat(strcpy(path,gwblib),"/"),name),4) != 0) {
@@ -80,8 +93,8 @@ findfile(path, name)
 	}
 }
 
-beginpl()
-{
+static void
+beginpl(void) {
 	char	filename[100];
 	char	enc[100];
 
@@ -114,8 +127,8 @@ beginpl()
 	started = 1;
 }
 
-endpl()
-{
+void
+endpl(void) {
 	if (started) {
 		fputs("%%Trailer\n", outfp);
 		fprintf(outfp, "%%%%BoundingBox: %d %d %d %d\n",
@@ -133,7 +146,7 @@ static int	pbnd[4];
 void
 openpl(char *s)		/* initialize page */
 {
-extern	FILE *tmpfile();
+	extern	FILE *tmpfile();
 	double	deltx, delty, r;
 
 	if (open_done)
@@ -227,8 +240,9 @@ extern	FILE *tmpfile();
 	open_done = 1;
 }
 
-closepl(s)		/* clean up after finished with one picture */
-	char	*s;	/* residue of .PS invocation line */
+void
+closepl(char *s)		/* clean up after finished with one picture */
+/* 	char	*s;	residue of .PS invocation line */
 {
 extern	long	ftell();
 extern	int	flyback;
@@ -313,6 +327,7 @@ extern	int	flyback;
 /* The most recent settings of color and weight are preserved and used to  */
 /* compare with values requested for this object.			   */
 
+#if 0 /* unused */
 check_psxform()
 {
 	if (cur_xform[0].f != 1 || cur_xform[1].f != 0 || cur_xform[2].f != 0
@@ -327,12 +342,13 @@ check_psxform()
 		cur_xform[4].f = cur_xform[5].f = 0;
 	}
 }
+#endif
 
 short	have_temp = 0;
 extern	double	T[];
 
-tmp_xform (p)		/* used only for text */
-	obj	*p;
+void
+tmp_xform (obj *p)		/* used only for text */
 {
 #if 0
 	if (p->o_mxx != 1 || p->o_myx != 0 || p->o_mxy != 0 || p->o_myy != 1
@@ -353,32 +369,30 @@ tmp_xform (p)		/* used only for text */
 #endif
 }
 
-undo_tmpx ()
-{
+void
+undo_tmpx (void) {
 	if (have_temp) {
 		fputs("gr\n", outfp);
 	}
 	have_temp = 0;
 }
 
-reset_line_weight()
-{
+void
+reset_line_weight(void) {
 	last_weight = -1;
 	last_dash = NULL;			/*	this, too.  DBK--6/9/92 */
 }
 
-new_weight (val)
-	float	val;
-{
+static void
+new_weight(float val) {
 	if (val < 0.)
 		yyerror ("bad value for lineweight");
 	else if (val != last_weight)
 		fprintf (outfp, " %.5g w\n", last_weight = val);
 }
 
-new_color (val)
-	float	val;
-{
+void
+new_color(float val) {
 	if (val != last_color) {
 		if (val <= 1.0)
 			fprintf (outfp, " %.5g g\n", val);
@@ -399,7 +413,8 @@ float	line_color;
 float	line_weight;
 float	*line_dash;
 
-setattrdefaults ()
+static void
+setattrdefaults(void)
 {
 	float	x;
 
@@ -413,7 +428,8 @@ setattrdefaults ()
 
 float	solid = 0;
 
-new_style()	/* corners, ends, dash pattern */
+static void
+new_style(void)	/* corners, ends, dash pattern */
 {
 	int	i, n;
 
@@ -452,9 +468,8 @@ new_style()	/* corners, ends, dash pattern */
 	}
 }
 
-chk_attrs (p)
-	obj	*p;
-{
+void
+chk_attrs (obj *p) {
 	line_weight = p->o_weight;
 	/*	It seems as though this should scale with the associated
 	 *	object.  I have made it so, 9/20/90.  DBK
@@ -467,7 +482,8 @@ chk_attrs (p)
 	line_dash   = p->o_ddpat.a;
 }
 
-fill_or_stroke ()	/* If fill/edge colors differ, need save/restore */
+static void
+fill_or_stroke (void)	/* If fill/edge colors differ, need save/restore */
 {
 	switch (attr_flags & (EDGED | FILLED)) {
 
@@ -497,16 +513,15 @@ fill_or_stroke ()	/* If fill/edge colors differ, need save/restore */
 	}
 }
 
-line(x0, y0, x1, y1)	/* draw line from x0,y0 to x1,y1 */
-	double x0, y0, x1, y1;
+void
+line(double x0, double y0, double x1, double y1)	/* draw line from x0,y0 to x1,y1 */
 {
 	fprintf(outfp, "%.5g %.5g 1 %.5g %.5g L", x1, y1, x0, y0);
 	fill_or_stroke ();
 }
 
-box(x0, y0, x1, y1, r)
-	double x0, y0, x1, y1, r;
-{
+int
+box(double x0, double y0, double x1, double y1, double r) {
 	if (r < MINRAD)
 		fprintf(outfp, "%.5g %.5g %.5g %.5g Q", x0,y0, x1,y1);
 	else
@@ -514,9 +529,13 @@ box(x0, y0, x1, y1, r)
 	fill_or_stroke ();
 }
 
-arrow(x0, y0, x1, y1, w, h, ang, attr) 		/* draw arrowhead (w/o shaft) */
-	double x0, y0, x1, y1, w, h, ang;	/* wid w, len h, rotated ang  */
-	int attr;				/* and drawn filled or open.  */
+/* draw arrowhead (w/o shaft) */
+
+void
+arrow(double x0, double y0, double x1, double y1, double w, double h,
+    double ang, int attr)
+/* 	double x0, y0, x1, y1, w, h, ang;	wid w, len h, rotated ang  */
+/* 	int attr;				and drawn filled or open.  */
 {
 	double alpha, rot, hyp;
 	float dx0, dy0, dx1, dy1;
@@ -543,9 +562,8 @@ arrow(x0, y0, x1, y1, w, h, ang, attr) 		/* draw arrowhead (w/o shaft) */
 		fprintf(outfp, "s\n");
 }
 
-arc_arrow(o)
-    obj     *o;
-{
+void
+arc_arrow(obj *o) {
     double  hyp;		/* side of naked arrowhead */
     double  l;			/* actual length of arrowhead */
     double  theta;		/* half angle at arrow point */
@@ -575,14 +593,14 @@ arc_arrow(o)
 		o->o_val[N_VAL+4].f, o->o_val[N_VAL+5].f, (int)o->o_attr);
 }
 
-d_arrow(o, theta, phi, hyp, x1, y1, attr)
-    obj     *o;
-    double  theta,		/* arrowhead point half-angle */
-	    phi,		/* +- half-angle subtended by arrowhead 
+static void
+d_arrow(obj *o, double theta, double phi, double hyp, double x1, double y1,
+    int attr)
+/*  double  theta,		   arrowhead point half-angle */
+/*   phi,		   +- half-angle subtended by arrowhead 
 						+- pi */
-	    hyp,		/* length of side of arrow */
-	    x1, y1;		/* end of arc */
-    int     attr;
+/*   hyp,		   length of side of arrow */
+/*   x1, y1;		   end of arc */
 {
     double  alpha,		/* radius angle */
 	    rho,		/* angle counter to arrow direction */
@@ -622,11 +640,9 @@ d_arrow(o, theta, phi, hyp, x1, y1, attr)
     undo_tmpx();
 #endif
 }
-
-spline(n, close, p)
-	int	n, close;
-	valtype	*p;
-{
+
+void
+spline(int n, int close, valtype *p) {
 	int i;
 
 	for (i = 2*n; i > 2; i -= 2)
@@ -636,10 +652,9 @@ spline(n, close, p)
 	fill_or_stroke ();
 }
 
-pline(n, close, p, r)
-	int	n;
-	valtype	*p;
-	double	r;	/* "corner" radius */
+void
+pline(int n, int close, valtype *p, double r)
+/* 	double	r;	"corner" radius */
 {
 	int	i;
 	float	x, y;
@@ -667,11 +682,12 @@ pline(n, close, p, r)
 	}
 	fill_or_stroke ();
 }
-
-ellipse(xc, yc, x0, y0, x1, y1, ang1, ang2, type)	/* general elliptical */
-	double	xc, yc, x0, y0, x1, y1, ang1, ang2;	/* arc/sector routine */
-	int	type;
-{
+
+/* general elliptical arc/sector routine */
+
+void
+ellipse(double xc, double yc, double x0, double y0, double x1, double y1,
+    double ang1, double ang2, int type) {
 	double	c, s, phi, r1, r2;
 	int	iang1, iang2;
 
@@ -717,15 +733,14 @@ ellipse(xc, yc, x0, y0, x1, y1, ang1, ang2, type)	/* general elliptical */
 	fill_or_stroke();
 }
 
-extra_bs()
-{
+static void
+extra_bs(void) {
 	fputc('\\', outfp);
 	extra_chars++;
 }
 
-octal_char(c)
-	char	c;
-{
+static void
+octal_char(char c) {
 	if (pass_thru)
 		extra_bs();
 	fprintf(outfp,"\\%o", (int) c & 0xff);
@@ -733,9 +748,8 @@ octal_char(c)
 
 char	escapes[] = "()\\";	/* chars needing to be escaped in PostScript */
 
-escstr(s)
-	char	*s;
-{
+static void
+escstr(char *s) {
 	char	*ptr;
 
 	fputc('(', outfp);
@@ -761,9 +775,8 @@ escstr(s)
 	fputc(')', outfp);
 }
 
-spacecount(s)
-	char	*s;
-{
+static int
+spacecount(char *s) {
 	int	count = 0;
 
 	while (*s)

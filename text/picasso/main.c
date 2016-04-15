@@ -15,6 +15,8 @@
 #include        <string.h>
 #include        <errno.h>
 #include	"picasso.h"
+#include	"plps.h"
+#include	"xstubs.h"
 #include	"y.tab.h"
 
 void getdata(void);
