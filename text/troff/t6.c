@@ -14,6 +14,7 @@ int	ccstab[MAXFONTS+1];
 int	bdtab[MAXFONTS+1];
 int	sbold = 0;
 
+int
 t_width(Tchar j)
 {
 	int i, k;
@@ -75,6 +76,7 @@ void zapwcache(int s)
 		widcache[i].fontpts = 0;
 }
 
+int
 onfont(int n, int f)	/* is char n on font f? */
 {
 	int i;
@@ -108,6 +110,7 @@ onfont(int n, int f)	/* is char n on font f? */
 	return -1;	/* vanilla not found */
 }
 
+int
 getcw(int i)
 {
 	int k, n, x;
@@ -277,6 +280,7 @@ Tchar t_setabs(void)		/* set absolute char from \N'...' */
  */
 
 
+int
 t_findft(int i)
 {
 	int k;
@@ -336,8 +340,8 @@ void caseps(void)
 }
 
 
-void casps1(int i)
-{
+void
+casps1(int i) {
 
 /*
  * in olden times, it used to ignore changes to 0 or negative.
@@ -356,6 +360,7 @@ void casps1(int i)
 }
 
 
+int
 findps(int i)
 {
 	int j, k;
@@ -368,8 +373,8 @@ findps(int i)
 }
 
 
-void t_mchbits(void)
-{
+void
+t_mchbits(void) {
 	int i, j, k;
 
 	i = pts;
@@ -684,7 +689,8 @@ void casefp(void)
 		setfp(i, j, nextf, 1);
 }
 
-char *strdupl(const char *s)	/* make a copy of s */
+char *
+strdupl(const char *s)	/* make a copy of s */
 {
 	char *t;
 
@@ -695,6 +701,7 @@ char *strdupl(const char *s)	/* make a copy of s */
 	return t;
 }
 
+int
 setfp(int pos, int f, char *truename, int print)	/* mount font f at position pos[0...nfonts] */
 {
 	char pathname[NS], shortname[NS], *sl;

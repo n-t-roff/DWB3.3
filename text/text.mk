@@ -46,8 +46,9 @@ TARGETS=devnroff\
 	picasso\
 	pm\
 	tbl\
-	otbl\
 	troff
+# Does compile but is not necessary when there is "tbl"
+#	otbl\
 
 ACTION=all
 

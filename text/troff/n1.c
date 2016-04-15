@@ -56,6 +56,7 @@ char	*progname;		/* program name (troff or nroff) */
 int	trace = 0;	/* tracing mode: default off */
 int	trace1 = 0;
 
+int
 main(int argc, char *argv[])
 {
 	char *p;
@@ -801,6 +802,7 @@ n1:
 }
 
 
+int
 popf(void)
 {
 	--ifi;
@@ -815,8 +817,8 @@ popf(void)
 }
 
 
-void flushi(void)
-{
+void
+flushi(void) {
 	if (nflush)
 		return;
 	ch = 0;
@@ -830,6 +832,7 @@ void flushi(void)
 }
 
 
+int
 getach(void)	/* return ascii/alphabetic character */
 {
 	Tchar i;
@@ -851,8 +854,8 @@ getach(void)	/* return ascii/alphabetic character */
 }
 
 
-void casenx(void)
-{
+void
+casenx(void) {
 	lgf++;
 	skip();
 	getname();
@@ -869,6 +872,7 @@ void casenx(void)
 }
 
 
+int
 getname(void)
 {
 	int j, k;
@@ -887,8 +891,8 @@ getname(void)
 }
 
 
-void caseso(void)
-{
+void
+caseso(void) {
 	FILE *fp;
 	char *p, *q;
 

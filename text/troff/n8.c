@@ -71,7 +71,8 @@ void hyphen(Tchar *wp)
 		}
 }
 
-static alpha(Tchar i)	/* non-zero if really alphabetic */
+static int
+alpha(Tchar i)	/* non-zero if really alphabetic */
 {
 	if (ismot(i))
 		return 0;
@@ -82,6 +83,7 @@ static alpha(Tchar i)	/* non-zero if really alphabetic */
 }
 
 
+int
 punct(Tchar i)
 {
 	if (!i || alpha(i))
@@ -91,7 +93,8 @@ punct(Tchar i)
 }
 
 
-void caseha(void)	/* set hyphenation algorithm */
+void
+caseha(void)	/* set hyphenation algorithm */
 {
 	hyphalg = HYPHALG;
 	if (skip())
@@ -102,7 +105,8 @@ void caseha(void)	/* set hyphenation algorithm */
 }
 
 
-void caseht(void)	/* set hyphenation threshold;  not in manual! */
+void
+caseht(void)	/* set hyphenation threshold;  not in manual! */
 {
 	thresh = THRESH;
 	if (skip())
@@ -190,6 +194,7 @@ int exword(void)
 }
 
 
+int
 suffix(void)
 {
 	Tchar *w;
@@ -242,6 +247,7 @@ mark:
 }
 
 
+int
 maplow(int i)
 {
 	if (isupper(i)) 
@@ -250,6 +256,7 @@ maplow(int i)
 }
 
 
+int
 vowel(int i)
 {
 	switch (i) {
@@ -266,8 +273,8 @@ vowel(int i)
 }
 
 
-Tchar *chkvow(Tchar *w)
-{
+Tchar *
+chkvow(Tchar *w) {
 	while (--w >= wdstart)
 		if (vowel(cbits(*w)))
 			return(w);
@@ -275,8 +282,8 @@ Tchar *chkvow(Tchar *w)
 }
 
 
-void digram(void)
-{
+void
+digram(void) {
 	Tchar *w;
 	int val;
 	Tchar *nhyend, *maxw;
@@ -314,6 +321,7 @@ again:
 }
 
 
+int
 dilook(int a, int b, char t[26][13])
 {
 	int i, j;

@@ -12,8 +12,8 @@ int	iflist[NIF];
 int	ifx;
 int	ifnum = 0;	/* trying numeric expression for .if or .ie condition */
 
-void casead(void)
-{
+void
+casead(void) {
 	int i;
 
 	ad = 1;
@@ -46,14 +46,14 @@ void casead(void)
 }
 
 
-void casena(void)
-{
+void
+casena(void) {
 	ad = 0;
 }
 
 
-void casefi(void)
-{
+void
+casefi(void) {
 	tbreak();
 	fi = 1;
 	pendnf = 0;
@@ -61,25 +61,26 @@ void casefi(void)
 }
 
 
-void casenf(void)
-{
+void
+casenf(void) {
 	tbreak();
 	fi = 0;
 }
 
 
-void casers(void)
-{
+void
+casers(void) {
 	dip->nls = 0;
 }
 
 
-void casens(void)
-{
+void
+casens(void) {
 	dip->nls++;
 }
 
 
+int
 chget(int c)
 {
 	Tchar i;
@@ -92,38 +93,38 @@ chget(int c)
 }
 
 
-void casecc(void)
-{
+void
+casecc(void) {
 	cc = chget('.');
 }
 
 
-void casec2(void)
-{
+void
+casec2(void) {
 	c2 = chget('\'');
 }
 
 
-void casehc(void)
-{
+void
+casehc(void) {
 	ohc = chget(OHC);
 }
 
 
-void casetc(void)
-{
+void
+casetc(void) {
 	tabc = chget(0);
 }
 
 
-void caselc(void)
-{
+void
+caselc(void) {
 	dotc = chget(0);
 }
 
 
-void casehy(void)
-{
+void
+casehy(void) {
 	int i;
 
 	hyf = 1;
@@ -138,12 +139,13 @@ void casehy(void)
 }
 
 
-void casenh(void)
-{
+void
+casenh(void) {
 	hyf = 0;
 }
 
 
+int
 max(int aa, int bb)
 {
 	if (aa > bb)
@@ -153,8 +155,8 @@ max(int aa, int bb)
 }
 
 
-void casece(void)
-{
+void
+casece(void) {
 	int i;
 
 	noscale++;
@@ -168,8 +170,8 @@ void casece(void)
 }
 
 
-void casein(void)
-{
+void
+casein(void) {
 	int i;
 
 	if (skip())
@@ -189,8 +191,8 @@ void casein(void)
 }
 
 
-void casell(void)
-{
+void
+casell(void) {
 	int i;
 
 	if (skip())
@@ -206,8 +208,8 @@ void casell(void)
 }
 
 
-void caselt(void)
-{
+void
+caselt(void) {
 	int i;
 
 	if (skip())
@@ -222,8 +224,8 @@ void caselt(void)
 }
 
 
-void caseti(void)
-{
+void
+caseti(void) {
 	int i;
 
 	if (skip())
@@ -235,8 +237,8 @@ void caseti(void)
 }
 
 
-void casels(void)
-{
+void
+casels(void) {
 	int i;
 
 	noscale++;
@@ -253,8 +255,8 @@ void casels(void)
 }
 
 
-void casepo(void)
-{
+void
+casepo(void) {
 	int i;
 
 	if (skip())
@@ -271,8 +273,8 @@ void casepo(void)
 }
 
 
-void casepl(void)
-{
+void
+casepl(void) {
 	int i;
 
 	skip();
@@ -285,8 +287,8 @@ void casepl(void)
 }
 
 
-void casewh(void)
-{
+void
+casewh(void) {
 	int i, j, k;
 
 	lgf++;
@@ -313,8 +315,8 @@ void casewh(void)
 }
 
 
-void casech(void)
-{
+void
+casech(void) {
 	int i, j, k;
 
 	lgf++;
@@ -335,6 +337,7 @@ void casech(void)
 }
 
 
+int
 findn(int i)
 {
 	int k;
@@ -346,8 +349,8 @@ findn(int i)
 }
 
 
-void casepn(void)
-{
+void
+casepn(void) {
 	int i;
 
 	skip();
@@ -361,8 +364,8 @@ void casepn(void)
 }
 
 
-void casebp(void)
-{
+void
+casebp(void) {
 	int i;
 	Stack *savframe;
 
@@ -381,14 +384,14 @@ void casebp(void)
 	eject(savframe);
 }
 
-void casetm(void)
-{
+void
+casetm(void) {
 	casetm1(0, stderr);
 }
 
 
-void casefm(void)
-{
+void
+casefm(void) {
 	static struct fcache {
 		char *name;
 		FILE *fp;
@@ -418,8 +421,8 @@ void casefm(void)
 	casetm1(0, fcache[i].fp);
 }
 
-void casetm1(int ab, FILE *out) 
-{
+void
+casetm1(int ab, FILE *out) {
 	int i, j, c;
 	char *p;
 	char tmbuf[NTM];
@@ -470,13 +473,13 @@ void casetm1(int ab, FILE *out)
 }
 
 
-void casesp(void)
-{
+void
+casesp(void) {
 	casesp1(0);
 }
 
-void casesp1(int a)
-{
+void
+casesp1(int a) {
 	int i, j, savlss;
 
 	tbreak();
@@ -507,8 +510,8 @@ void casesp1(int a)
 }
 
 
-void casert(void)
-{
+void
+casert(void) {
 	int a, *p;
 
 	skip();
@@ -526,16 +529,16 @@ void casert(void)
 }
 
 
-void caseem(void)
-{
+void
+caseem(void) {
 	lgf++;
 	skip();
 	em = getrq();
 }
 
 
-void casefl(void)
-{
+void
+casefl(void) {
 	tbreak();
 	if (!ascii)
 		ptflush();
@@ -543,8 +546,8 @@ void casefl(void)
 }
 
 
-void caseev(void)
-{
+void
+caseev(void) {
 	int nxev;
 
 	if (skip()) {
@@ -577,14 +580,15 @@ e1:
 	envp = &env[ev];
 }
 
-void envcopy(Env *e1, Env *e2)	/* copy env e2 to e1 */
+void
+envcopy(Env *e1, Env *e2)	/* copy env e2 to e1 */
 {
 	*e1 = *e2;	/* rumor hath that this fails on some machines */
 }
 
 
-void caseel(void)
-{
+void
+caseel(void) {
 	if (--ifx < 0) {
 		ifx = 0;
 		iflist[0] = 0;
@@ -593,8 +597,8 @@ void caseel(void)
 }
 
 
-void caseie(void)
-{
+void
+caseie(void) {
 	if (ifx >= NIF) {
 		ERROR "if-else overflow." WARN;
 		ifx = 0;
@@ -605,13 +609,13 @@ void caseie(void)
 }
 
 
-void caseif(void)
-{
+void
+caseif(void) {
 	caseif1(0);
 }
 
-void caseif1(int x)
-{
+void
+caseif1(int x) {
 	extern int falsef;
 	int notflag, true;
 	Tchar i;
@@ -683,8 +687,8 @@ i2:
 	}
 }
 
-void eatblk(int inblk)
-{
+void
+eatblk(int inblk) {
 	int cnt, i;
 
 	cnt = 0;
@@ -715,6 +719,7 @@ void eatblk(int inblk)
 }
 
 
+int
 cmpstr(Tchar c)
 {
 	int j, delim;
@@ -776,8 +781,8 @@ rtn:
 }
 
 
-void caserd(void)
-{
+void
+caserd(void) {
 
 	lgf++;
 	skip();
@@ -803,9 +808,10 @@ void caserd(void)
 }
 
 
+int
 rdtty(void)
 {
-	char	onechar;
+	int	onechar;
 
 	onechar = 0;
 	if (read(0, &onechar, 1) == 1) {

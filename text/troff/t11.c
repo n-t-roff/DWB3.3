@@ -15,6 +15,7 @@ Font	fonts[MAXFONTS+1];	/* font info + ptr to width info */
 
 #define	skipline(f)	while (getc(f) != '\n')
 
+int
 getdesc(char *name)
 {
 	FILE *fin;
@@ -85,6 +86,7 @@ static int checkfont(char *name)
 	
 }
 
+int
 getfont(char *name, int pos)	/* create width tab for font */
 {
 	FILE *fin;
@@ -187,6 +189,7 @@ getfont(char *name, int pos)	/* create width tab for font */
 	return 1;
 }
 
+int
 chindex(char *s)	/* look for s in global character name table */
 {
 	int i;
@@ -197,6 +200,7 @@ chindex(char *s)	/* look for s in global character name table */
 	return -1;
 }
 
+int
 chadd(char *s)	/* add s to global character name table;  assume not there */
 {		/* changes when table format changes */
 	char *p;
@@ -219,6 +223,7 @@ char *chname(int n)	/* return string for char with index n */
 	return chnames[n-ALPHABET];
 }
 
+int
 getlig(FILE *fin)	/* pick up ligature list */
 {
 	int lig;

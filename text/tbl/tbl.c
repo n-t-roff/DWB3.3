@@ -12,6 +12,7 @@
 #include <ctype.h>
 #include <signal.h>
 #include <string.h>
+#include <unistd.h>
 
 #define	MAX_INPUT_CHARS 1024 /* Maximum length of an input line */
 #define	MAXLIN	   250	/* Maximum number of data lines given full treatment */
@@ -93,16 +94,105 @@ struct colstr /* Holds pointers to character data for one table entry */
 	char *col, *rcol;
 };
 
-extern char *chspace(), *gets1(), *maknew(), *reg(), *strsave();
-
-struct colstr *alocv();
-long int dwb_gettext(char **sp, int ilin, int icol); /* Read in a text block */
-int dwb_getline(char *s, int nmax);
-void drawline(int i, int cl, int cr, int lintype, int noheight, int shortl);
-void makeline(int i, int c, int lintype);
-void multipg(void);
-void putline(int i, int nl);
-void skip_input(void);
+static long int dwb_gettext(char **, int, int);
+static int dwb_getline(char *s, int nmax);
+static void drawline(int, int, int, int, int, int);
+static void makeline(int, int, int);
+static void multipg(void);
+static void putline(int i, int nl);
+static void skip_input(void);
+static int barent(char *);
+static int midbcol(int, int);
+static int midbar(int, int);
+static int thish(int, int);
+static int allh(int);
+static void drawvert(int, int, int, int);
+static int prev(int);
+static int next(int);
+static int lefdata(int, int);
+static int left(int, int, int *);
+static void getstop(void);
+static void comment1(char *);
+static void output1(char *);
+static int swapin(void);
+static void badsig(int);
+static void do_table(void);
+static int do_table1(void);
+static int getcomm(char *);
+static int getspec(void);
+static int getchange(void);
+static int readspec(char *);
+static int findcol(char *);
+static void warning1(char *);
+static void garray(void);
+static char *getcore(int, int);
+static void freearr(void);
+static int gettbl(void);
+static int nodata(int);
+static int oneh(int);
+static void permute(void);
+static int vspand(int, int, int);
+static int vspen(char *);
+static void maktab(void);
+static void getcolwidth(int);
+static void wide(char *, char *, char *);
+static int filler(char *);
+static void runout(void);
+static void runtabs(int, int);
+static int ifline(char *);
+static void deftail(void);
+static void check_prev(void);
+static void puttext(char *, char *, char *);
+static void funnies(int, int);
+static void putfont(char *);
+static void putsize(char *);
+static void yetmore(void);
+static int domore(char *);
+static void checkuse(void);
+static int real(char *);
+static char *chspace(void);
+static char *strsave(char *);
+static struct colstr *alocv(int);
+static void release(void);
+static void ch_release(void);
+static void choochar(void);
+static int point(char *);
+static int ischar(char *);
+static int istroff(char *);
+static int is_table_start(char *);
+static int is_table_end(char *);
+static int is_include(char *);
+static int open_for_input(char *);
+static int pushfd(void);
+static int popfd(void);
+static void print_file_info(void);
+static void error1(char *);
+static void fatal_error(char *);
+static void bailout(void);
+static void ungetline(char *);
+static char *gets1(char *, int);
+static void savefill(void);
+static void rstofill(void);
+static void endoff(void);
+static void ifdivert(void);
+static void cleartext(void);
+static void saveline(void);
+static void restline(void);
+static void setfc(void);
+static void cleanfc(void);
+static void untext(void);
+static int interv(int, int);
+static int interh(int, int);
+static int up1(int);
+static char *maknew(char *);
+static char *reg(int, int);
+static int prefix(char *, char *);
+static int ctype(int, int);
+static int fspan(int, int);
+static int lspan(int, int);
+static int ctspan(int, int);
+static void fullwide(int, int);
+static void tohcol(int);
 
 int Vopt = 0;
 int Hflag = 0;		/* Set iff first argument to .TS is "H" */
@@ -181,16 +271,16 @@ int *sep, *sep1;
 int *used, *lused, *rused;
 int *doubled, *acase, *topat;
 
-comment1(s) /* Insert a comment into the troff output (for debugging) */
-char *s;
+static void
+comment1(char *s) /* Insert a comment into the troff output (for debugging) */
 {
 	/* Invoked via macros 'comment', 'comment2', etc. */
 	printf(".\\\" *** %s ***\n", s);
 }
 
-output1(s) /* Insert some text into the output of tbl, while making a copy
+static void
+output1(char *s) /* Insert some text into the output of tbl, while making a copy
 	      on stderr (used for debugging) */
-char *s;
 {
 	/* Invoked via macros 'output', 'output2', etc. */
 	printf("%s", s);
@@ -201,11 +291,9 @@ char *s;
 int errflg = 0;
 int sargc;
 char **sargv;
-extern void	badsig();
 
-main(argc, argv)
-char *argv[];
-{
+int
+main(int argc, char **argv) {
 	int c;
 	char *line;
 	extern char *optarg; /* Set by getopt() */
@@ -269,7 +357,8 @@ char *argv[];
 	return(0);
 }
 
-swapin() /* Switch to next input file */
+static int
+swapin(void) /* Switch to next input file */
 {
 	/* Returns 0 for success, 1 for failure (no more input files) */
 	extern int optind; /* Set by getopt() */
@@ -299,14 +388,16 @@ swapin() /* Switch to next input file */
 	return(0);
 }
 
-void
-badsig() /* Catch broken-pipe signal */
+static void
+badsig(int i) /* Catch broken-pipe signal */
 {
+	(void)i; /* unused */
 	signal(SIGPIPE, SIG_IGN);
 	exit(0);
 }
 
-do_table() /* Subroutine sequencing for one table */
+static void
+do_table(void) /* Subroutine sequencing for one table */
 {
 	errflg = errcnt2 = in_overflow = 0;
 	in_header1 = in_header2 = Hflag; /* Set iff table begins with .TS H */
@@ -324,7 +415,8 @@ do_table() /* Subroutine sequencing for one table */
 	restline();	/* Restore input line number */
 }
 
-do_table1() /* Compile one table */
+static int
+do_table1(void) /* Compile one table */
 {
 	if (getspec())	/* Read format lines */
 		error("Errors in format section.");
@@ -339,7 +431,7 @@ do_table1() /* Compile one table */
 	return 0;
 }
 
-void
+static void
 skip_input(void)	/* Skip remainder of current table */
 {
 	fprintf(stderr, "tbl: Skipping to the end of this table\n");
@@ -395,8 +487,8 @@ struct optstr {
 #define	getcomm_err() error2("Error processing global option %s", lp->optnam)
 #define	maxlin_errmsg "Out-of-range value %ld for global option maxline"
 
-getcomm(line) /* Get global options */
-char *line;
+static int
+getcomm(char *line) /* Get global options */
 {
 	char *cp, *nb, *p, tbuf[9];
 	struct optstr *lp;
@@ -495,7 +587,8 @@ char *line;
 
 /* t4.c: read table specification */
 
-getspec() /* Allocate data structures and read format lines */
+static int
+getspec(void) /* Allocate data structures and read format lines */
 {
 	int i, c, icol, nch;
 	char *line, *p;
@@ -630,7 +723,8 @@ getspec2: /* Come back to here after file inclusion request has been processed *
 	return 0;
 }
 
-getchange() /* Process a table-change (.T&) request */
+static int
+getchange(void) /* Process a table-change (.T&) request */
 {
 	int c, i, nch;
 	char linbuf[MAX_INPUT_CHARS];
@@ -757,8 +851,8 @@ getchange2: /* Come back to here after file inclusion request has been processed
 
 char missing_key_msg[] = "Missing key letter";
 
-readspec(next) /* Process a format line */
-char *next;
+static int
+readspec(char *next) /* Process a format line */
 {
 	char *snp, *temp;
 	int c, stopc, i, k;
@@ -1064,8 +1158,8 @@ char *next;
 
 #define	FLNLIM 200
 
-findcol(line) /* This counts the number of columns */
-char *line;
+static int
+findcol(char *line) /* This counts the number of columns */
 {
 	char *p;
 	int nc = 0;
@@ -1222,8 +1316,8 @@ char *line;
 	return(nc); /* Return the column count */
 }
 
-warning1(s)	/* Display a warning or error message */
-char *s;
+static void
+warning1(char *s)	/* Display a warning or error message */
 {
 	/* Assumes errflg has already been set if appropriate */
 	fprintf(stderr, "tbl: File %s, line %d: Warning: %s\n",
@@ -1232,7 +1326,8 @@ char *s;
 
 long Gdbytes = 0; /* Number of bytes allocated for dynamic arrays */
 
-garray() /* Allocate storage for dynamic arrays */
+static void
+garray(void) /* Allocate storage for dynamic arrays */
 {
 	char *getcore();
 
@@ -1260,9 +1355,8 @@ garray() /* Allocate storage for dynamic arrays */
 	topat = (int *) getcore(qcol+1, sizeof(int));
 }
 
-char *
-getcore(a, b) /* Allocate storage for one array */
-int a, b;
+static char *
+getcore(int a, int b) /* Allocate storage for one array */
 {
 	char *x;
 
@@ -1273,7 +1367,8 @@ int a, b;
 	return(x);
 }
 
-freearr() /* Release storage obtained by garray() */
+static void
+freearr(void) /* Release storage obtained by garray() */
 {
 	if (Gdbytes > 0) {
 		free((char *)style);
@@ -1297,7 +1392,8 @@ freearr() /* Release storage obtained by garray() */
 
 /* t5.c: read data for table */
 
-gettbl() /* Read in the first Maxlin lines of data */
+static int
+gettbl(void) /* Read in the first Maxlin lines of data */
 {
 	int icol, ch;
 	char *cp, *cstore;
@@ -1459,7 +1555,8 @@ gettbl() /* Read in the first Maxlin lines of data */
 	return 0;
 }
 
-nodata(ilin) /* Returns 1 if there are no data fields in this format
+static int
+nodata(int ilin) /* Returns 1 if there are no data fields in this format
 	        row, otherwise 0 */
 {
 	int icol;
@@ -1480,7 +1577,8 @@ nodata(ilin) /* Returns 1 if there are no data fields in this format
 	return(1);
 }
 
-oneh(ilin) /* If all columns for this format row have the same keyletter,
+static int
+oneh(int ilin) /* If all columns for this format row have the same keyletter,
 	     the return value is that keyletter, otherwise 0 */
 {
 	int k, icol;
@@ -1496,7 +1594,8 @@ oneh(ilin) /* If all columns for this format row have the same keyletter,
 
 #define	SPAN "\\^"
 
-permute() /* Check for vertically spanned entries and fix up the 'table' array
+static void
+permute(void) /* Check for vertically spanned entries and fix up the 'table' array
 	     accordingly */
 {
 	int irow, jcol, is;
@@ -1525,7 +1624,8 @@ permute() /* Check for vertically spanned entries and fix up the 'table' array
 	}
 }
 
-vspand(irow, icol, ignore) /* Check for vertical spanning */
+static int
+vspand(int irow, int icol, int ignore) /* Check for vertical spanning */
 {
 	/*
 	 * Returns 1 if this entry is vertically spanned from the previous
@@ -1542,8 +1642,8 @@ vspand(irow, icol, ignore) /* Check for vertical spanning */
 	return(vspen(TABLE(irow,icol).col));
 }
 
-vspen(s) /* Returns 1 if s is a pointer to "\\^", otherwise 0 */
-char *s;
+static int
+vspen(char *s) /* Returns 1 if s is a pointer to "\\^", otherwise 0 */
 {
 	return(point(s) && streql(s, SPAN));
 }
@@ -1551,7 +1651,8 @@ char *s;
 
 /* t6.c: compute tab stops */
 
-maktab() /* Generate code to perform column width calculations */
+static void
+maktab(void) /* Generate code to perform column width calculations */
 {
 	int icol, tsep;
 
@@ -1661,7 +1762,8 @@ maktab() /* Generate code to perform column width calculations */
 	printf(" (\\n(%d.\\n(%d inches)\n", TMP, S9);/*End of long request*/
 }
 
-getcolwidth(icol) /* Generate code to calculate width for one column */
+static void
+getcolwidth(int icol) /* Generate code to calculate width for one column */
 {
 	/* This code used to be part of maktab(). */
 	int ilin, k, ik, vforml, il, pass;
@@ -1798,8 +1900,8 @@ getcolwidth(icol) /* Generate code to calculate width for one column */
 	}
 }
 
-wide(s, fn, size) /* Generate code to calculate the width of string <s> */
-char *s, *size, *fn;
+static void
+wide(char *s, char *fn, char *size) /* Generate code to calculate the width of string <s> */
 {
 	if (point(s))
 	{
@@ -1815,8 +1917,8 @@ char *s, *size, *fn;
 		printf("\\n(%c-", s);
 }
 
-filler(s) /* Returns 1 if s is a field-fill request (\Rx), otherwise 0 */
-char *s;
+static int
+filler(char *s) /* Returns 1 if s is a field-fill request (\Rx), otherwise 0 */
 {
 	return(point(s) && s[0] == '\\' && s[1] == 'R');
 }
@@ -1825,7 +1927,8 @@ char *s;
 /* t7.c: control to write table entries */
 
 
-runout() /* Generate code to format the table */
+static void
+runout(void) /* Generate code to format the table */
 {
 	int i;
 
@@ -1853,7 +1956,8 @@ runout() /* Generate code to format the table */
 	printf(".in \\n(#Iu\n");
 }
 
-runtabs(lform, ldata) /* Set tab stops */
+static void
+runtabs(int lform, int ldata) /* Set tab stops */
 /* lform = index of format line */
 /* ldata = index of data line */
 {
@@ -1896,8 +2000,8 @@ runtabs(lform, ldata) /* Set tab stops */
 	printf("\n");
 }
 
-ifline(s) /* Test for horizontal line through entry */
-char *s;
+static int
+ifline(char *s) /* Test for horizontal line through entry */
 {
 	/* Returns '-' if s is a pointer to "-" or "\\-" */
 	/* Returns '=' if s is a pointer to "=" or "\\=" */
@@ -1910,7 +2014,8 @@ char *s;
 	return(0);
 }
 
-deftail() /* Generate code to define the bottom-of-page macro */
+static void
+deftail(void) /* Generate code to define the bottom-of-page macro */
 {
 	int i, c, lf, lwid;
 
@@ -1986,8 +2091,8 @@ deftail() /* Generate code to define the bottom-of-page macro */
 
 int nlsave, ctsave;
 
-check_prev()
-{
+static void
+check_prev(void) {
 	if (pflag)
 	{
 		fullwide(nlsave, ctsave);
@@ -1995,7 +2100,7 @@ check_prev()
 	}
 }
 
-void
+static void
 putline(int i, int nl) /* Process one line of input data */
 /* i is the line number for selecting the format */
 /* nl is the line number for finding the data (usually identical) */
@@ -2368,8 +2473,8 @@ putline(int i, int nl) /* Process one line of input data */
 	}
 }
 
-puttext(s, fn, size) /* Generate code to output some text */
-char *s, *size, *fn;
+static void
+puttext(char *s, char *fn, char *size) /* Generate code to output some text */
 {
 	if (point(s))
 	{
@@ -2383,7 +2488,8 @@ char *s, *size, *fn;
 	}
 }
 
-funnies(stl, lin) /* Write out funny diverted things */
+static void
+funnies(int stl, int lin) /* Write out funny diverted things */
 /* stl is the line number for selecting the format */
 /* lin is the line number for finding the data (usually identical) */
 {
@@ -2462,21 +2568,21 @@ funnies(stl, lin) /* Write out funny diverted things */
 		printf("\n");
 } /* End funnies() */
 
-putfont(fn) /* Generate an in-line font-change request */
-char *fn;
+static void
+putfont(char *fn) /* Generate an in-line font-change request */
 {
 	if (fn != NULL && *fn)
 		printf( fn[1] ? "\\f(%.2s" : "\\f%.2s", fn);
 }
 
-putsize(s) /* Generate an in-line point-size change request */
-char *s;
+static void
+putsize(char *s) /* Generate an in-line point-size change request */
 {
 	if (s != NULL && *s)
 		printf("\\s%s", s);
 }
 
-void
+static void
 multipg(void) /* Initialize stuff for multi-page boxed tables */
 {
 	int c;
@@ -2525,9 +2631,10 @@ multipg(void) /* Initialize stuff for multi-page boxed tables */
 
 /* t9.c: Generate code for rows after the first Maxlin rows */
 
-static useln;
+static int useln;
 
-yetmore() /* Process the rest of the input data */
+static void
+yetmore(void) /* Process the rest of the input data */
 {
 	/* Called from runout() when there are more than Maxlin lines */
 	/* of input data */
@@ -2556,8 +2663,8 @@ yetmore() /* Process the rest of the input data */
 	last = cstore;
 }
 
-domore(dataln) /* Process one line of data */
-char *dataln;
+static int
+domore(char *dataln) /* Process one line of data */
 /* This routine is called to process each data line after the first 200 or so */
 {
 	int icol, ch;
@@ -2664,7 +2771,8 @@ char *dataln;
 /* tb.c: check which entries exist, also storage allocation */
 
 
-checkuse() /* Flag columns with real data */
+static void
+checkuse(void) /* Flag columns with real data */
 {
 	int i, c, k;
 
@@ -2700,8 +2808,9 @@ checkuse() /* Flag columns with real data */
  * Returns 1 if s is an ASCII character or a pointer to a non-null string,
  * otherwise 0
  */
-real(s)
-char *s;
+
+static int
+real(char *s)
 {
 	if (s == NULL) return(0); /* Null pointer */
 	if (ischar(s)) return(1); /* ASCII character (text block) */
@@ -2713,8 +2822,8 @@ char *s;
 char *spvecs[MAXVEC];
 int spcount = 0; /* Number of non-null pointers in spvecs */
 
-char *
-chspace() /* Allocate a character buffer--reuse previous if available */
+static char *
+chspace(void) /* Allocate a character buffer--reuse previous if available */
 {
 	char *pp;
 
@@ -2730,9 +2839,8 @@ chspace() /* Allocate a character buffer--reuse previous if available */
 
 char *saveptr = NULL, *savelim;
 
-char *
-strsave(s) /* Create a copy of string s */
-char *s;
+static char *
+strsave(char *s) /* Create a copy of string s */
 {
 	int i;
 	char *t;
@@ -2753,9 +2861,9 @@ char *s;
 char *thisvec, *tpvecs[MAXPC];
 int tpcount = -1;
 
-struct colstr *
-alocv(n) /* Allocate one row of 'table' structures */
-int n;	/* Number of structures needed */
+static struct colstr *
+alocv(int n) /* Allocate one row of 'table' structures */
+/* int n; Number of structures needed */
 {
 	int *tp, *q;
 
@@ -2778,7 +2886,8 @@ int n;	/* Number of structures needed */
 	return((struct colstr *)tp);
 }
 
-release() /* Make available for reuse the space obtained via chspace()
+static void
+release(void) /* Make available for reuse the space obtained via chspace()
 	     and alocv() */
 {
 
@@ -2786,7 +2895,8 @@ release() /* Make available for reuse the space obtained via chspace()
 	tpcount = -1; /* Release space used for 'table' structures */
 }
 
-ch_release() /* Make available for reuse the space obtained via chspace() */
+static void
+ch_release(void) /* Make available for reuse the space obtained via chspace() */
 {
 	spcount = 0;
 	saveptr = NULL;
@@ -2794,7 +2904,8 @@ ch_release() /* Make available for reuse the space obtained via chspace() */
 
 /* tc.c: find character not in table to delimit fields */
 
-choochar() /* Choose troff pad character and field delimiter character */
+static void
+choochar(void) /* Choose troff pad character and field delimiter character */
 {
 	int had[128], ilin, icol, k;
 	char *s;
@@ -2846,27 +2957,27 @@ choochar() /* Choose troff pad character and field delimiter character */
 		fatal_error("Couldn't find characters to use for delimiters");
 }
 
-point(s) /* Returns 1 if s is a non-null pointer, otherwise 0 */
-char *s;
+static int
+point(char *s) /* Returns 1 if s is a non-null pointer, otherwise 0 */
 {
 	return((long)s >= 128 || (long)s < 0);
 }
 
-ischar(s) /* Returns 1 if s is really an ASCII character (not a pointer), */
+static int
+ischar(char *s) /* Returns 1 if s is really an ASCII character (not a pointer), */
 /* otherwise 0 */
-char *s;
 {
 	return((long)s > 0 && (long)s < 128);
 }
 
-istroff(s) /* Returns 1 if s is a troff request or a macro call, otherwise 0 */
-char *s;
+static int
+istroff(char *s) /* Returns 1 if s is a troff request or a macro call, otherwise 0 */
 {
 	return (*s == '.' && ! isdigit(*(s+1)));
 }
 
-is_table_start(s) /* Returns 1 if s is a table-start request, otherwise 0 */
-char *s;
+static int
+is_table_start(char *s) /* Returns 1 if s is a table-start request, otherwise 0 */
 {
 	char c;
 
@@ -2880,16 +2991,16 @@ char *s;
 	return 1;
 }
 
-is_table_end(s) /* Returns 1 if s is a table-end request, otherwise 0 */
-char *s;
+static int
+is_table_end(char *s) /* Returns 1 if s is a table-end request, otherwise 0 */
 {
 	if ( ! prefix(".TE", s))
 		return 0;
 	return 1;
 }
 
-is_include(s) /* Returns 1 if s is a file-inclusion request, otherwise 0 */
-char *s;
+static int
+is_include(char *s) /* Returns 1 if s is a file-inclusion request, otherwise 0 */
 {
 	FILENAME namebuf;
 	int c, n;
@@ -2950,8 +3061,8 @@ char *s;
 	return 1;
 }
 
-open_for_input(s)	/* Divert input to a specified file */
-char *s;
+static int
+open_for_input(char *s)	/* Divert input to a specified file */
 {
 	tabin = fopen(s, "r");
 	if (tabin == NULL)
@@ -2962,7 +3073,8 @@ char *s;
 	return 0;
 }
 
-pushfd()	/* Push current input file */
+static int
+pushfd(void)	/* Push current input file */
 {
 	struct file_item *p;
 
@@ -2975,7 +3087,8 @@ pushfd()	/* Push current input file */
 	return 0;
 }
 
-popfd()		/* Restore (pop) previous input file */
+static int
+popfd(void)		/* Restore (pop) previous input file */
 {
 	struct file_item *p;
 
@@ -2989,7 +3102,8 @@ popfd()		/* Restore (pop) previous input file */
 	return 0;
 }
 
-print_file_info()
+static void
+print_file_info(void)
 {
 	printf(".ds f. %s\n", ifile);
 	printf(".lf %d %s\n", iline+1, ifile);
@@ -2997,8 +3111,8 @@ print_file_info()
 
 /* te.c: error message control, input line count */
 
-error1(s) /* Display error message and set error flag */
-char *s;
+static void
+error1(char *s) /* Display error message and set error flag */
 {
 	fprintf(stderr, "File %s, line %d: %s\n", ifile, iline, s);
 	errflg = 1;
@@ -3017,20 +3131,20 @@ char *s;
 	}
 }
 
-fatal_error(s) /* Display an error message and exit */
-char *s;
+static void
+fatal_error(char *s) /* Display an error message and exit */
 {
 	fprintf(stderr, "\n%s: line %d: %s\n", ifile, iline, s);
 	bailout();
 }
 
-bailout()
-{
+static void
+bailout(void) {
 	fprintf(stderr, "tbl quits\n");
 	exit(1);
 }
 
-int
+static int
 dwb_getline(char *s, int nmax)
 /* char *s;  input buffer */
 /* int nmax;  size of input buffer */
@@ -3068,8 +3182,8 @@ dwb_getline(char *s, int nmax)
 	return(i+1);
 }
 
-ungetline(s)	/* Put back an input line */
-char *s;
+static void
+ungetline(char *s)	/* Put back an input line */
 {
 	if (have_buffer)
 		fatal_error("Too much backup!");
@@ -3077,9 +3191,8 @@ char *s;
 	have_buffer = 1;
 }
 
-char *
-gets1(s, nmax) /* Get an input line */
-char *s;
+static char *
+gets1(char *s, int nmax) /* Get an input line */
 /* Get an input line, concatenating continuation lines, if any */
 {
 	char *p = s;
@@ -3103,7 +3216,8 @@ char *s;
 
 /* tf.c: save and restore fill mode around table */
 
-savefill() /* Save context */
+static void
+savefill(void) /* Save context */
 {
 	/* Remembers various things--fill mode, vs, ps--in macro SF (35) */
 	printf(".de %d\n", SF);	/* Begin definition of macro 35 */
@@ -3120,12 +3234,14 @@ savefill() /* Save context */
 	printf(".if \\n(.T .if n .nr #~ 0.6n\n"); /* Set box offset if useful */
 }
 
-rstofill() /* Restore the context saved by savefill() */
+static void
+rstofill(void) /* Restore the context saved by savefill() */
 {
 	printf(".%d\n", SF);
 }
 
-endoff() /* Clean up after one table */
+static void
+endoff(void) /* Clean up after one table */
 {
 	int i;
 
@@ -3139,7 +3255,8 @@ endoff() /* Clean up after one table */
 	printf("%s\n", last);	/* Copy .TE to output */
 }
 
-ifdivert() /* Generate code to define string #d */
+static void
+ifdivert(void) /* Generate code to define string #d */
 {
 	/* Set #d = ".d" if currently in a diversion */
 	/* Set #d = "nl" if no current diversion */
@@ -3147,8 +3264,8 @@ ifdivert() /* Generate code to define string #d */
 	printf(".if \\(ts\\n(.z\\(ts\\(ts .ds #d nl\n");
 }
 
-cleartext()
-{
+static void
+cleartext(void) {
 	int i;
 
 	for (i = 0; i < texct; i++) /* Get rid of text blocks */
@@ -3156,31 +3273,35 @@ cleartext()
 	texct = 0;	/* Set number of text blocks = 0 */
 }
 
-saveline() /* Save input line number */
+static void
+saveline(void) /* Save input line number */
 {
 	printf(".if \\n+(b.=1 .nr d. \\n(.c-\\n(c.-1\n");
 	linstart = iline;
 }
 
-restline() /* Restore input line number */
+static void
+restline(void) /* Restore input line number */
 {
 	printf(".if \\n-(b.=0 .nr c. \\n(.c-\\n(d.-%d\n", iline-linstart);
 	linstart = 0;
 }
 
-setfc() /* Turn on the field delimiter and pad character mechanism */
+static void
+setfc(void) /* Turn on the field delimiter and pad character mechanism */
 {
 	printf(".fc %c %c\n", F1, F2); /* Set field delimiter and pad character */
 }
 
-cleanfc() /* Turn off the field delimiter and pad character mechanism */
+static void
+cleanfc(void) /* Turn off the field delimiter and pad character mechanism */
 {
 	printf(".fc\n");
 }
 
 /* tg.c: process included text blocks */
 
-long int
+static long int
 dwb_gettext(char **sp, int ilin, int icol) /* Read in a text block */
 /* char **sp;  Address of pointer into input line buffer */
 {
@@ -3249,7 +3370,8 @@ dwb_gettext(char **sp, int ilin, int icol) /* Read in a text block */
 	return(texname);
 }
 
-untext() /* Restore line length saved in gettext() */
+static void
+untext(void) /* Restore line length saved in gettext() */
 {
 	rstofill();
 	printf(".nf\n");
@@ -3258,7 +3380,8 @@ untext() /* Restore line length saved in gettext() */
 
 /* ti.c: classify line intersections */
 
-interv(i, c) /* Determine local environment for intersections */
+static int
+interv(int i, int c) /* Determine local environment for intersections */
 {
 	/* Returns TOP if a line extends upward from this entry */
 	/* Returns BOTTOM if a line extends downward from this entry */
@@ -3286,7 +3409,8 @@ interv(i, c) /* Determine local environment for intersections */
 	return(0);
 }
 
-interh(i, c) /* Determine local environment for intersections */
+static int
+interh(int i, int c) /* Determine local environment for intersections */
 /* i = row, c = column */
 {
 	/* Returns LEFT if line extends to the left of this column */
@@ -3316,7 +3440,8 @@ interh(i, c) /* Determine local environment for intersections */
 	return(0);
 }
 
-up1(i) /* Find previous row with horizontal line or data */
+static int
+up1(int i) /* Find previous row with horizontal line or data */
 {
 	/* returns row number if one found, otherwise 0 */
 	while (--i > 0)
@@ -3327,9 +3452,8 @@ up1(i) /* Find previous row with horizontal line or data */
 
 /* tm.c: split numerical fields */
 
-char *
-maknew(str) /* Split a numeric field into two parts */
-char *str;
+static char *
+maknew(char *str) /* Split a numeric field into two parts */
 {
 	int c;
 	int ineqn = 0;
@@ -3402,8 +3526,8 @@ char *nregs[] = {
 
 static int Nregs = sizeof(nregs)/sizeof(char *);
 
-char *
-reg(col, place) /* Allocate a number register */
+static char *
+reg(int col, int place) /* Allocate a number register */
 /* col = column number */
 /* place = CRIGHT (2), CLEFT (0), or CMID (1) */
 /* reg(col,CRIGHT) holds the location of the right edge of the column */
@@ -3423,8 +3547,8 @@ reg(col, place) /* Allocate a number register */
 
 /* ts.c: minor string processing subroutines */
 
-prefix(small, big)
-char *small, *big;
+static int
+prefix(char *small, char *big)
 {
 	int c;
 
@@ -3437,29 +3561,32 @@ char *small, *big;
 
 /* tt.c: subroutines for drawing horizontal lines */
 
-ctype(il, ic) /* Returns key letter for this row and column */
-int il; /* row index */
-int ic; /* column index */
+static int
+ctype(int il, int ic) /* Returns key letter for this row and column */
+/* int il; row index */
+/* int ic; column index */
 {
 	if (fullbot[il] || instead[il] != NULL) return(0); /* Not real data */
 	return(style[ic][stynum[il]]);
 }
 
-fspan(i, c) /* Returns 1 if the entry to the right of this one is
+static int
+fspan(int i, int c) /* Returns 1 if the entry to the right of this one is
 	      horizontally spanned, otherwise 0 */
-int i;	/* row index */
-int c;	/* column index */
+/* int i;	row index */
+/* int c;	column index */
 {
 	c++;
 	return(c < ncol && ctype(i,c) == 's');
 }
 
-lspan(i, c) /* Checks whether or not this entry is the last in a horizontal
+static int
+lspan(int i, int c) /* Checks whether or not this entry is the last in a horizontal
 	       sequence of horizontally spanned entries.  If so, the return
 	       value is the length of the sequence; if not, the return value
 	       is 0 */
-int i;	/* row index */
-int c;	/* column index */
+/* int i;	row index */
+/* int c;	column index */
 {
 	int k;
 
@@ -3470,11 +3597,12 @@ int c;	/* column index */
 	return(k);
 }
 
-ctspan(i, c) /* The return value is 1 plus the number of consecutive
+static int
+ctspan(int i, int c) /* The return value is 1 plus the number of consecutive
 		horizontally spanned entries starting with the entry
 		to the right of this one */
-int i;	/* row index */
-int c;	/* column index */
+/* int i;	row index */
+/* int c;	column index */
 {
 	int k;
 
@@ -3486,7 +3614,7 @@ int c;	/* column index */
 
 /* tu.c: draws horizontal lines */
 
-void
+static void
 makeline(int i, int c, int lintype) /* Draw a less-than-full-width horizontal line */
 /* int i;	row index */
 /* int c;	column index */
@@ -3512,7 +3640,8 @@ makeline(int i, int c, int lintype) /* Draw a less-than-full-width horizontal li
 	drawline(i, c, cr-1, lintype, 0, shortl);
 }
 
-fullwide(i, lintype) /* Draw a full-width horizontal line */
+static void
+fullwide(int i, int lintype) /* Draw a full-width horizontal line */
 {
 	int cr, cl;
 
@@ -3536,7 +3665,7 @@ fullwide(i, lintype) /* Draw a full-width horizontal line */
 }
 
 /* Draw a horizontal line */
-void
+static void
 drawline(int i, int cl, int cr, int lintype, int noheight, int shortl)
 /* i = row number */
 /* cl = beginning column number */
@@ -3670,7 +3799,8 @@ drawline(int i, int cl, int cr, int lintype, int noheight, int shortl)
 		printf("\\v'+.5m'"); /* Return to baseline */
 }
 
-tohcol(ic) /* Generate a move to the left edge of this entry */
+static void
+tohcol(int ic) /* Generate a move to the left edge of this entry */
 /* ic = column */
 {
 	if (ic <= 0)
@@ -3680,7 +3810,8 @@ tohcol(ic) /* Generate a move to the left edge of this entry */
 		    reg(ic,CLEFT), reg(ic-1,CRIGHT));
 }
 
-getstop() /* Mark rows where vertical lines begin */
+static void
+getstop(void) /* Mark rows where vertical lines begin */
 {
 	int i, c, k, junk, stopp;
 
@@ -3701,8 +3832,8 @@ getstop() /* Mark rows where vertical lines begin */
 		linestop[0] = 1;
 }
 
-left(i, c, lwidp) /* Check for vertical line ending to the left of this entry */
-int *lwidp;
+static int
+left(int i, int c, int *lwidp) /* Check for vertical line ending to the left of this entry */
 /* i = row */
 /* c = column */
 /* lwidp = pointer to returned value for type of line (1=single, 2=double) */
@@ -3734,7 +3865,8 @@ int *lwidp;
 	return(li);
 }
 
-lefdata(i, c) /* Test for a vertical line immediately to the left of this entry */
+static int
+lefdata(int i, int c) /* Test for a vertical line immediately to the left of this entry */
 /* i = row */
 /* c = column */
 {
@@ -3760,7 +3892,8 @@ lefdata(i, c) /* Test for a vertical line immediately to the left of this entry 
 	return(0);
 }
 
-next(i) /* Returns the index of the next row with real data (nlin-1 if none) */
+static int
+next(int i) /* Returns the index of the next row with real data (nlin-1 if none) */
 {
 	while (i+1 < nlin)
 	{
@@ -3770,7 +3903,8 @@ next(i) /* Returns the index of the next row with real data (nlin-1 if none) */
 	return(i);
 }
 
-prev(i) /* Returns the index of the previous row with real data (-1 if none) */
+static int
+prev(int i) /* Returns the index of the previous row with real data (-1 if none) */
 {
 	while (--i >= 0)
 	{
@@ -3781,7 +3915,8 @@ prev(i) /* Returns the index of the previous row with real data (-1 if none) */
 
 /* tv.c: draw vertical lines */
 
-drawvert(start, end, c, lwid) /* Draw a vertical line */
+static void
+drawvert(int start, int end, int c, int lwid) /* Draw a vertical line */
 /* start = beginning row number */
 /* end = ending row number */
 /* c = column number */
@@ -3934,7 +4069,8 @@ drawvert(start, end, c, lwid) /* Draw a vertical line */
 	}
 }
 
-allh(i) /* Test for horizontal line in every entry of a given row */
+static int
+allh(int i) /* Test for horizontal line in every entry of a given row */
 {
 	/* Returns true iff every element in line i is horizontal */
 	/* also at least one must be horizontal */
@@ -3952,7 +4088,8 @@ allh(i) /* Test for horizontal line in every entry of a given row */
 	return(one);
 }
 
-thish(i, c) /* Test for a horizontal line through an entry */
+static int
+thish(int i, int c) /* Test for a horizontal line through an entry */
 /* i = row, c = column */
 {
 	/* Returns '-' if there is a single horizontal line through the entry*/
@@ -3978,10 +4115,11 @@ thish(i, c) /* Test for a horizontal line through an entry */
 	if (s == NULL || (point(s) && *s == 0))
 		return(1);
 	if (vspen(s)) return(1);
-	return(barent(s));
+	return(barent(s)); /* int */
 }
 
-midbar(i, c) /* Test for a horizontal line through an entry */
+static int
+midbar(int i, int c) /* Test for a horizontal line through an entry */
 /* i = row, c = column */
 {
 	/*
@@ -3995,7 +4133,8 @@ midbar(i, c) /* Test for a horizontal line through an entry */
 	return(k);
 }
 
-midbcol(i, c) /* Test for a horizontal line through an entry */
+static int
+midbcol(int i, int c) /* Test for a horizontal line through an entry */
 /* i = row, c = column */
 {
 	/* Returns '-' if there is a single horizontal line through the entry */
@@ -4014,8 +4153,8 @@ midbcol(i, c) /* Test for a horizontal line through an entry */
 	return(barent(TABLE(i,c).col));
 }
 
-barent(s) /* Test for a horizontal line through an entry */
-char *s;
+static int
+barent(char *s) /* Test for a horizontal line through an entry */
 {
 	/* Returns '-' if s is "_" or "\_" */
 	/* Returns '=' if s is "=" or "\=" */

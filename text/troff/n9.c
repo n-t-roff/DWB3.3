@@ -76,6 +76,7 @@ s1:
 }
 
 
+int
 eat(int c)
 {
 	int i;

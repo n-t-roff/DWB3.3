@@ -435,6 +435,7 @@ nl2:
 }
 
 
+int
 findn1(int a)
 {
 	int i, j;
@@ -467,6 +468,7 @@ void chkpn(void)
 }
 
 
+int
 findt(int a)
 {
 	int i, j, k;
@@ -494,6 +496,7 @@ findt(int a)
 }
 
 
+int
 findt1(void)
 {
 	int i;
@@ -529,6 +532,7 @@ e1:
 }
 
 
+int
 movword(void)
 {
 	int w;
@@ -638,6 +642,7 @@ void setnel(void)
 }
 
 
+int
 getword(int x)
 {
 	int j, k;

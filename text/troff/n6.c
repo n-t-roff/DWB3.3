@@ -7,6 +7,7 @@
  * n6.c -- width functions, sizes and fonts
 */
 
+int
 n_width(Tchar j)
 {
 	int i, k;
@@ -41,8 +42,8 @@ n_width(Tchar j)
 }
 
 
-Tchar n_setch(int c)
-{
+Tchar
+n_setch(int c) {
 	int j;
 	char temp[50];
 	char *s;
