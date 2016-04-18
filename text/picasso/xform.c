@@ -13,6 +13,10 @@
 
 float	TINYNUM = 10e-4;
 
+static void matmult(valtype *, double *);
+static void identity_coercion(valtype *);
+static void matmult2(double *, valtype *);
+
 /* shorthand for a 3x3 affine matrix applied as follows:
  *
  *	C(x, y)	= |x y 1| | C[0]  C[1]  0 | 
@@ -22,10 +26,11 @@ float	TINYNUM = 10e-4;
  *		= (C[0]x+C[2]y+C[4], C[1]x+C[3]y+C[5])
  */
 
-matmult (A, B)			/* A <- A * B; A is an object transformation */
-	valtype	A[6];		/* or cur_xform updated by a new transform.  */
-	double	B[6];
-{
+/* A <- A * B; A is an object transformation */
+/* or cur_xform updated by a new transform.  */
+
+static void
+matmult(valtype A[6], double B[6]) {
 	register double	p;
 
 	p = A[0].f * B[0] + A[1].f * B[2];
@@ -42,9 +47,8 @@ matmult (A, B)			/* A <- A * B; A is an object transformation */
 	identity_coercion(A);
 }
 
-identity_coercion(A)
-	valtype	A[6];
-{
+static void
+identity_coercion(valtype A[6]) {
 	/*
 	 *	Coerce to identity matrix if sufficiently close to one.
 	 */
@@ -56,9 +60,11 @@ identity_coercion(A)
 	if (A[5].f != 0.0 && fabs(A[5].f) < TINYNUM)	A[5].f = 0.0;
 }
 
-matmult2 (A, B)			/* same, but updates a double array; this is  */
-	double	A[6];		/* done only in going up the block hierarchy. */
-	valtype	B[6];
+/* same, but updates a double array; this is  */
+/* done only in going up the block hierarchy. */
+
+static void
+matmult2(double A[6], valtype B[6])
 {
 	register double	p;
 
@@ -75,6 +81,7 @@ matmult2 (A, B)			/* same, but updates a double array; this is  */
 	A[4] = p;
 }
 
+#if 0 /* unused */
 void
 mat_inverse(double Ainv[6], float A[6])
 {
@@ -95,6 +102,7 @@ mat_inverse(double Ainv[6], float A[6])
 	Ainv[4] = (A[2] * A[5] - A[3] * A[4]) * det_1;
 	Ainv[5] = (A[1] * A[4] - A[0] * A[5]) * det_1;
 }
+#endif
 
 double	T[6];
 
@@ -120,17 +128,13 @@ compose (obj *p)		/* accumulate xforms over block hierarchy */
 				matmult2(T, p->o_xform);
 }
 
-get_matrix(M0, M1, M2, M3)
-	double	*M0, *M1, *M2, *M3;
-{
+void
+get_matrix(double *M0, double *M1, double *M2, double *M3) {
 	*M0 = T[0];	*M1 = T[1];	*M2 = T[2];	*M3 = T[3];
 }
 
-double	Xformx (p, flag, x, y)
-	obj	*p;
-	int	flag;
-	double	x, y;
-{
+double
+Xformx (obj *p, int flag, double x, double y) {
 	if (flag)
 		compose(p);
 	return x*T[0] + y*T[2] + T[4];

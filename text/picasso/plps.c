@@ -11,6 +11,9 @@
 #include <ctype.h>
 #include "font.h"
 #include "picasso.h"
+#include "ps_include.h"
+#include "plps.h"
+#include "xstubs.h"
 #include "y.tab.h"
 
 #define	max(x,y)	((x)>(y) ? (x) : (y))
@@ -62,6 +65,8 @@ static void octal_char(char);
 static void extra_bs(void);
 static void escstr(char *);
 static int spacecount(char *);
+static int catfile(char *s);
+static void transparent(FILE *);
 
 static void
 resetps(void)	/* these must be reset for each page of a multipage file */
@@ -787,11 +792,9 @@ spacecount(char *s) {
 
 double	lastx, lasty;
 
-newlabel(type, str, font, x, y, size, w)
-	char	*str;
-	int	type, font;
-	double	x, y, size, w;
-{
+void
+newlabel(int type, char *str, int font, double x, double y, double size,
+    double w) {
 	if (type & EQNTXT)
 		puteqn(x, y, type, atoi(str));
 	else {
@@ -803,11 +806,8 @@ newlabel(type, str, font, x, y, size, w)
 	lasty = y;
 }
 
-addlabel(type, str, font, size, w)
-	char	*str;
-	int	type, font;
-	double	size, w;
-{
+void
+addlabel(int type, char *str, int font, double size, double w) {
 	if (type & EQNTXT)
 		puteqn(lastx, lasty, type, atoi(str));
 	else {
@@ -818,10 +818,8 @@ addlabel(type, str, font, size, w)
 	lastx += w;
 }
 
-resetfont (font, size)
-	int	font;
-	double	size;
-{
+void
+resetfont(int font, double size) {
 	if (font < 0) font = -font;
 	if (size < 0) size = -size;
 	if (font != psfont || size != pssize) {
@@ -833,10 +831,8 @@ resetfont (font, size)
 	}
 }
 
-int
-catfile(s)
-	char *s;
-{
+static int
+catfile(char *s) {
 	FILE *fp, *fopen();
 	char buf[BUFSIZ];
 	int count;
@@ -848,10 +844,8 @@ catfile(s)
 	return(1);
 }
 
-int
-transparent(fp)
-	FILE *fp;
-{
+static void
+transparent(FILE *fp) {
 	char buf[BUFSIZ];
 
 	while (fgets(buf, BUFSIZ, fp) != NULL) {
@@ -859,10 +853,12 @@ transparent(fp)
 		fputs(buf, stdout);
 	}
 }
+
 /*
  *	include an encapsulated postscript file.  Apply any scaling and
  *	transformation specified by p.
  */
+
 void
 puteps(obj *o)
 {

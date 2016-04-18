@@ -15,7 +15,6 @@
 
 #include <string.h>
 #include "picasso.h"
-#include "ps_include.h"
 
 /* in SVR4, the C-preprocessor will not accept the tricky definitions of lq
    and rq.  However, we should be able to do it using the following
@@ -31,17 +30,110 @@
 			? realloc((char *)global, n*sizeof(Section)) \
 			: calloc(n, sizeof(Section))))
 
-void ps_include(FILE *fin, FILE *fout, int page_no, double cx, double cy,
-    double sx, double sy, double ax, double ay /*, rot */);
+typedef struct { long start, end; } Section;
+
+static void ps_include(FILE *, FILE *, int, double, double, double, double,
+    double, double);
+static void ps_print(FILE *, char **);
+static void ps_copy(FILE *, FILE *, Section *);
 
 char	buf[512];
-typedef struct {long start, end;} Section;
 
-static
-ps_print(fout, s)
-FILE *fout;
-char **s;
-{
+static char *PS_head[] = {
+	"%ps_include: begin",
+	"save",
+	"/ed {exch def} def",
+	"{} /showpage ed",
+	"{} /copypage ed",
+	"{} /erasepage ed",
+	"{} /letter ed",
+	"36 dict dup /PS-include-dict-dw ed begin",
+	"/context ed",
+	"count array astore /o-stack ed",
+	"%ps_include: variables begin",
+	0
+};
+
+static char *PS_setup[] = {
+	"%ps_include: variables end",
+	"{dup mul exch dup mul add sqrt} /len ed",
+	"{2 copy gt {exch} if pop} /min ed",
+	"{2 copy lt {exch} if pop} /max ed",
+	"{6 array} /n ed",
+	"n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed",
+	"urx llx sub 0 A dtransform len /Sx ed",
+	"0 ury lly sub A dtransform len /Sy ed",
+	"llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed",
+/*	"rot dup sin abs /S ed cos abs /C ed",
+/*	"Sx S mul Sy C mul add /H ed",
+/*	"Sx C mul Sy S mul add /W ed",
+/*	"sy H div /Scaley ed",
+/*	"sx W div /Scalex ed",
+/*	"s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if",
+/*	"sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed",
+/*	"sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed",
+/*	"urx llx sub 0 A dtransform exch atan rot exch sub /rot ed",
+/*	"n currentmatrix initgraphics setmatrix",
+*/	"sx Sx div /Scalex ed",
+	"sy Sy div /Scaley ed",
+	"cx cy translate",
+	"Scalex Scaley scale",
+/*	"rot rotate",
+*/	"Cx neg Cy neg translate",
+	"A concat",
+	"newpath",
+	"end",
+	"%ps_include: inclusion begin",
+	0
+};
+
+static char *PS_tail[] = {
+	"%ps_include: inclusion end",
+	"PS-include-dict-dw begin",
+	"clear o-stack aload pop",
+	"context end restore",
+	"%ps_include: end",
+	0
+};
+
+static char *Pic_setup[] = {
+	"%ps_include: variables end",
+	"{dup mul exch dup mul add sqrt} /len ed",
+	"{2 copy gt {exch} if pop} /min ed",
+	"{2 copy lt {exch} if pop} /max ed",
+	"{6 array} /n ed",
+	"n defaultmatrix n currentmatrix n invertmatrix n concatmatrix /A ed",
+	"urx llx sub 0 A dtransform len /Sx ed",
+	"0 ury lly sub A dtransform len /Sy ed",
+	"llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed",
+/*	"rot dup sin abs /S ed cos abs /C ed",
+/*	"Sx S mul Sy C mul add /H ed",
+/*	"Sx C mul Sy S mul add /W ed",
+/*	"sy H div /Scaley ed",
+/*	"sx W div /Scalex ed",
+/*	"s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if",
+/*	"sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed",
+/*	"sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed",
+/*	"urx llx sub 0 A dtransform exch atan rot exch sub /rot ed",
+/*	"n currentmatrix initgraphics setmatrix",
+*/	"sx Sx div /Scalex ed",
+	"sy Sy div /Scaley ed",
+	"BoB concat",
+	"cx cy translate",
+	"newpath sx 2 div sy 2 div moveto sx neg 0 rlineto",
+	"0 sy neg rlineto sx 0 rlineto closepath clip",
+	"Scalex Scaley scale",
+/*	"rot rotate",
+*/	"Cx neg Cy neg translate",
+	"A concat",
+	"newpath",
+	"end",
+	"%ps_include: inclusion begin",
+	0
+};
+
+static void
+ps_print(FILE *fout, char **s) {
 	while (*s)
 		fprintf(fout, "%s\n", *s++);
 }
@@ -57,12 +149,10 @@ ps_copy(FILE *fin, FILE *fout, Section *s)
 			fprintf(fout, "%s", buf);
 }
 
-puteqn(x, y, type, neqn)
-	double	x, y;
-	int	type, neqn;
-{
-extern	FILE	*eqnfp;
-extern	float	eqn_move;
+void
+puteqn(double x, double y, int type, int neqn) {
+	extern	FILE	*eqnfp;
+	extern	float	eqn_move;
 	double	ax, ay;
 
 	ax = 0;
@@ -74,7 +164,7 @@ extern	float	eqn_move;
 	ps_include(eqnfp, outfp, neqn, x, y + eqn_move, 0., 0., ax, ay/*,0.*/);
 }
 
-void
+static void
 ps_include(FILE *fin, FILE *fout, int page_no, double cx, double cy, double sx,
     double sy, double ax, double ay /*, rot */)
 
@@ -226,7 +316,7 @@ pic_include(FILE *fin, FILE *fout, int page_no, obj *o)
 /*	int	page_no;		physical page number from *fin */
 /*	obj	*o;			has bounds and transformation */
 {
-extern	double	T[6];
+	extern	double	T[6];
 	int	foundpage = 0;		/* found the page when non zero */
 	int	foundpbox = 0;		/* found the page bounding box  */
 	int	nglobal   = 0;		/* number of global defs so far */

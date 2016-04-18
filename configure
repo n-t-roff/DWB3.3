@@ -44,21 +44,25 @@ check_for () {
 }
 
 compile () {
-	rm -f ${TMPNAM}.o $TMPNAM
-	$MAKE -f $OUTMK $TMPNAM >> $LOG 2>&1
+	rm -f ${TMPNAM}.o $TMPNAM $OUT $ERR
+	$MAKE -f $OUTMK $TMPNAM > $OUT 2> $ERR
+	RESULT=$?
+	cat $OUT $ERR >> $LOG
+	if [ $RESULT -eq 0 ]; then true; else false; fi
 }
 
 test_result () {
 	RESULT=$?
-	NO_FAIL_TEXT=$1
+	RESULT_TEXT=${1:-0} # 1: omit "no", 2: say nothing
 	if [ $RESULT -eq 0 ]; then
 		echo success >>$LOG
-		[ -z "$SFLAG" ] && echo "yes$PASS_TEXT"
+		[ -z "$SFLAG" -a $RESULT_TEXT -lt 2 ] && \
+		    echo "yes$PASS_TEXT"
 		PASS_TEXT=
 		[ -e $TMPC ] && rm -f $TMPC
 		true
 	else
-		[ -z "$SFLAG" -a -z "$NO_FAIL_TEXT" ] && echo no
+		[ -z "$SFLAG" -a $RESULT_TEXT -lt 1 ] && echo no
 		if [ -e $TMPC ]; then
 			echo "Failed program:" >>$LOG
 			pr -n -t $TMPC >>$LOG
@@ -169,6 +173,8 @@ TMPNAM=.$CFG
 TMPMK=${TMPNAM}.mk
 TMPC=${TMPNAM}.c
 TMPL=${TMPNAM}.l
+OUT=${TMPNAM}.out
+ERR=${TMPNAM}.err
 LOG=${CFG}.log
 rm -f $LOG
 gen_mk

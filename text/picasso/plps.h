@@ -14,3 +14,7 @@ void spline(int, int, valtype *);
 void pline(int, int, valtype *, double);
 void ellipse(double, double, double, double, double, double, double, double,
     int);
+void newlabel(int, char *, int, double, double, double, double);
+void addlabel(int, char *, int, double, double);
+void resetfont(int, double);
+void puteps(obj *);
