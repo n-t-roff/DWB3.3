@@ -94,7 +94,7 @@ struct colstr /* Holds pointers to character data for one table entry */
 	char *col, *rcol;
 };
 
-static long int dwb_gettext(char **, int, int);
+static int dwb_gettext(char **, int, int);
 static int dwb_getline(char *s, int nmax);
 static void drawline(int, int, int, int, int, int);
 static void makeline(int, int, int);
@@ -860,7 +860,7 @@ readspec(char *next) /* Process a format line */
 	int icol = 0;	 /* Index of current column */
 
 	/* Returns nonzero for end of format section or error, otherwise zero */
-	while (c = get1char())
+	while ((c = get1char()))
 	{
 		switch (c)
 		{
@@ -1011,7 +1011,7 @@ readspec(char *next) /* Process a format line */
 			/* point size specification */
 			if (icol < 1) key_error();
 			temp = snp = csize[icol-1][nclin];
-			while (c = get1char())
+			while ((c = get1char()))
 			{
 				if (c == ' ' || c == '\t' || c == '\n') break;
 				if (c == '-' || c == '+')
@@ -1041,7 +1041,7 @@ readspec(char *next) /* Process a format line */
 			/* vertical spacing (for text blocks only) */
 			if (icol < 1) key_error();
 			temp = snp = vsize[icol-1][nclin];
-			while (c = get1char())
+			while ((c = get1char()))
 			{
 				if (c == ' ' || c == '\t' || c == '\n') break;
 				if (c == '-' || c == '+')
@@ -1070,7 +1070,7 @@ readspec(char *next) /* Process a format line */
 			if (icol < 1) key_error();
 			snp = cll[icol-1];
 			stopc = 0;
-			while (c = get1char())
+			while ((c = get1char()))
 			{
 				if (snp == cll[icol-1] && c == '(')
 				{
@@ -1257,7 +1257,7 @@ findcol(char *line) /* This counts the number of columns */
 			 * between keyletters and troff width indicators
 			 */
 			stopc = 0;
-			for (i = 0; c = *p++; i++)
+			for (i = 0; (c = *p++); i++)
 			{
 				if (i == 0 && c == '(')
 				{
@@ -1288,7 +1288,7 @@ findcol(char *line) /* This counts the number of columns */
 			 * integer and the use of '-' to indicate a
 			 * horizontal line
 			 */
-			for (i = 0; c = *p++; i++)
+			for (i = 0; (c = *p++); i++)
 			{
 				if ((c == '-' || c == '+') && i == 0)
 					continue;
@@ -1500,7 +1500,7 @@ gettbl(void) /* Read in the first Maxlin lines of data */
 			ch = 1;
 			if (streql(cstore, "T{")) /* Text block follows */
 			{
-				p->col = (char *)dwb_gettext(&cstore, nlin, icol);
+				p->col = (char *)(intptr_t)dwb_gettext(&cstore, nlin, icol);
 			}
 			else
 			{
@@ -1805,7 +1805,7 @@ getcolwidth(int icol) /* Generate code to calculate width for one column */
 						    S1, S2);
 					doubled[icol] = 1;
 					printf(".if \\n(%c->\\n(%d .nr %d \\n(%c-\n",
-					    s, S2, S2, s);
+					    (int)s, S2, S2, (int)s);
 				}
 				/* fall through to next case */
 			case 'n': /* numeric field */
@@ -1872,7 +1872,7 @@ getcolwidth(int icol) /* Generate code to calculate width for one column */
 	}
 	for (ilin = 0; ilin < nlin; ilin++)
 	{
-		if (k = lspan(ilin, icol))
+		if ((k = lspan(ilin, icol)))
 		{
 			s = TABLE(ilin,icol-k).col;
 			if ( ! real(s) || barent(s) || vspen(s) ) continue;
@@ -1914,7 +1914,7 @@ wide(char *s, char *fn, char *size) /* Generate code to calculate the width of s
 		printf("%c", F1);
 	}
 	else
-		printf("\\n(%c-", s);
+		printf("\\n(%c-", (int)s);
 }
 
 static int
@@ -2147,7 +2147,7 @@ putline(int i, int nl) /* Process one line of input data */
 						break;
 				if ((long int)s>0 && (long int)s<128)
 				{
-					printf(".nr %2d \\n(%c|u\n",TMP,s);
+					printf(".nr %2d \\n(%c|u\n",TMP,(int)s);
 					printf(".if \\n(%2d>\\n(%2d .nr %2d \\n(%2du\n",
 					    TMP, S2, S2, TMP);
 				}
@@ -2155,7 +2155,7 @@ putline(int i, int nl) /* Process one line of input data */
 			}
 			if (point(s))
 				continue;
-			printf(".nr %2d \\n(%c|u\n", TMP, s);
+			printf(".nr %2d \\n(%c|u\n", TMP, (int)s);
 			printf(".if \\n(%2d>\\n(%2d .nr %2d \\n(%2du\n",
 			    TMP, S2, S2, TMP);
 			watchout=1;
@@ -2257,9 +2257,9 @@ putline(int i, int nl) /* Process one line of input data */
 		lf=prev(nl);
 		if (lf>=0 && vspen(TABLE(lf,c).col))
 			printf(".if (\\n(%c|+\\n(^%c-1v)>\\n(#- .nr #- +(\\n(%c|+\\n(^%c-\\n(#--1v)\n",
-			    s, 'a'+c, s, 'a'+c);
+			    (int)s, 'a'+c, (int)s, 'a'+c);
 		else
-			printf(".if (\\n(%c|+\\n(#^-1v)>\\n(#- .nr #- +(\\n(%c|+\\n(#^-\\n(#--1v)\n",s,s);
+			printf(".if (\\n(%c|+\\n(#^-1v)>\\n(#- .nr #- +(\\n(%c|+\\n(#^-\\n(#--1v)\n",(int)s,(int)s);
 	}
 	if (allflg && once>0)
 	{
@@ -2384,7 +2384,7 @@ putline(int i, int nl) /* Process one line of input data */
 			int k;
 
 			/* form: 1 left, 2 right, 3 center adjust */
-			if (k=ifline(s)) /* Horizontal line through entry */
+			if ((k=ifline(s))) /* Horizontal line through entry */
 			{
 				makeline(i,c,k); /* Draw a horizontal line */
 				continue;
@@ -2429,11 +2429,11 @@ putline(int i, int nl) /* Process one line of input data */
 		{
 			if (vspen(TABLE(ip,c).col))
 			{
-				exvspen = (c+1 < ncol) &&
-				    vspen(TABLE(ip,c+1).col) &&
-				    (topat[c] == topat[c+1]) &&
-				    (cmidx == (FLGS(nl,c+1)&(CTOP|CDOWN)==0)) &&
-				    (left(i,c+1,&lwid)<0); /*TEMP--DUBIOUS CODE*/
+				exvspen = (c + 1 < ncol) &&
+				    vspen(TABLE(ip, c + 1).col) &&
+				    topat[c] == topat[c + 1] &&
+				    cmidx == ((FLGS(nl, c + 1) & (CTOP | CDOWN)) == 0) &&
+				    left(i, c + 1, &lwid) < 0; /*TEMP--DUBIOUS CODE*/
 				if (exvspen==0)
 				{
 					output2("\\v'(\\n(\\*(#du-\\n(^%cu", c+'a');
@@ -2514,7 +2514,7 @@ funnies(int stl, int lin) /* Write out funny diverted things */
 		case 'n':
 		case 'c':
 			printf("(\\n(%2su+\\n(%2su-\\n(%c-u)/2u\n",
-			    reg(c,CLEFT), reg(c-1+ctspan(lin,c),CRIGHT), (long int)s);
+			    reg(c,CLEFT), reg(c-1+ctspan(lin,c),CRIGHT), (int)s);
 			break;
 		case 'l':
 			printf("\\n(%2su\n", reg(c,CLEFT));
@@ -2523,7 +2523,7 @@ funnies(int stl, int lin) /* Write out funny diverted things */
 			printf("\\n(%2su\n", reg(c,CMID));
 			break;
 		case 'r':
-			printf("\\n(%2su-\\n(%c-u\n", reg(c,CRIGHT), s);
+			printf("\\n(%2su-\\n(%c-u\n", reg(c,CRIGHT), (int)s);
 			break;
 		}
 		printf(".in +\\n(%du\n", SIND); /* Set left margin for this column */
@@ -2534,18 +2534,18 @@ funnies(int stl, int lin) /* Write out funny diverted things */
 			if ((FLGS(stl,c)&(CTOP|CDOWN))==0)
 			{
 				printf(".nr %d \\n(#-u-\\n(^%c-\\n(%c|+1v\n",
-				    TMP, 'a'+c, s);
+				    TMP, 'a'+c, (int)s);
 				printf(".if \\n(%d>0 .sp \\n(%du/2u", TMP, TMP);
 				if (pr1403) /* round */
 					printf("/1v*1v");
 				printf("\n");
 			}
 		}
-		printf(".ie \\n(%c|>=\\n(.t .nr #& 1\n", s);
+		printf(".ie \\n(%c|>=\\n(.t .nr #& 1\n", (int)s);
 		printf(".el .nr #& 0\n");
 		fn = FN(stl,c);
 		putfont(fn);
-		printf(".%c+\n",s); /* Output saved text block */
+		printf(".%c+\n",(int)s); /* Output saved text block */
 		printf(".#%%\n");
 		printf(".in -\\n(%du\n", SIND); /* Restore previous margin */
 		if (*fn) putfont("P"); /* Restore previous font */
@@ -2722,7 +2722,7 @@ domore(char *dataln) /* Process one line of data */
 		ch = 1;
 		if (streql(dataln, "T{")) /* Text block follows */
 		{
-			p->col = (char *)dwb_gettext(&dataln, useln, icol);
+			p->col = (char *)(intptr_t)dwb_gettext(&dataln, useln, icol);
 			printf(".%2s\n.rm %2s\n",
 			    reg(icol,CRIGHT), reg(icol,CRIGHT));
 		}
@@ -2986,7 +2986,7 @@ is_table_start(char *s) /* Returns 1 if s is a table-start request, otherwise 0 
 		return 0;
 	for (s += strlen(".TS"); ((c=*s++)==' ' || c=='\t'); )
 		;
-	if (c == 'H' && *s=='\0' || *s==' ' || *s=='\t')
+	if ((c == 'H' && *s=='\0') || *s==' ' || *s=='\t')
 		Hflag = 1;
 	return 1;
 }
@@ -3301,11 +3301,11 @@ cleanfc(void) /* Turn off the field delimiter and pad character mechanism */
 
 /* tg.c: process included text blocks */
 
-static long int
+static int
 dwb_gettext(char **sp, int ilin, int icol) /* Read in a text block */
 /* char **sp;  Address of pointer into input line buffer */
 {
-	long int texname;
+	int texname;
 	char line[4096];
 	char *fn = FN(ilin, icol);
 	char *sz = SZ(ilin, icol);
@@ -3461,7 +3461,7 @@ maknew(char *str) /* Split a numeric field into two parts */
 	char *ba = NULL, *dpoint = NULL, *lastdigit = NULL;
 
 	/* First look for \&; it overrides decimal point */
-	for (p = str; c = *p; p++)
+	for (p = str; (c = *p); p++)
 	{
 		if (c == '\\' && p[1] == '&')
 			ba = p;
@@ -3470,7 +3470,7 @@ maknew(char *str) /* Split a numeric field into two parts */
 	if (ba == NULL) /* Didn't find \& */
 	{
 		/* Look for rightmost dot with adjacent digit */
-		for (p = str; c = *p; p++)
+		for (p = str; (c = *p); p++)
 		{
 			if (ineqn)
 			{
