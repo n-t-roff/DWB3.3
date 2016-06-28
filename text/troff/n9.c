@@ -59,7 +59,7 @@ s0:
 		*i++ = makem(-(w - length - temp));
 		goto s1;
 	}
-	if (rem = length % w) {
+	if ((rem = length % w)) {
 		if (cbits(c) == RULE || cbits(c) == UNDERLINE || cbits(c) == ROOTEN)
 			*i++ = c | ZBIT;
 		*i++ = makem(rem);

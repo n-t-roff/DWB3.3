@@ -73,7 +73,7 @@ void t_ptinit(void)
 	ics = EM;	/* insertion character space */
 	for (i = 0; i < (NTAB - 1) && DTAB * (i + 1) < TABMASK; i++)
 		tabtab[i] = DTAB * (i + 1);
-	tabtab[NTAB] = 0;
+	tabtab[NTAB-1] = 0;
 	pl = 11 * INCH;			/* paper length */
 	po = PO;		/* page offset */
 	spacesz = SS;
@@ -165,11 +165,11 @@ int ptout0(Tchar *pi)
 	if (k == CHARHT) {
 		if (xpts != mpts)
 			ptps();
-		OUT "x H %d\n", sbits(i) PUT;
+		OUT "x H %ld\n", sbits(i) PUT;
 		return(outsize);
 	}
 	if (k == SLANT) {
-		OUT "x S %d\n", sfbits(i)-180 PUT;
+		OUT "x S %lu\n", sfbits(i)-180 PUT;
 		return(outsize);
 	}
 	if (k == WORDSP) {
@@ -289,7 +289,7 @@ int ptout0(Tchar *pi)
 			pi[1] = '~';
 		case DRAWSPLINE:	/* spline */
 		default:	/* something else; copy it like spline */
-			OUT "D%c %d %d", cbits(pi[1]), dx, dy PUT;
+			OUT "D%c %d %d", (int)cbits(pi[1]), dx, dy PUT;
 			hpos += dx;
 			vpos += dy;
 			if (cbits(pi[3]) == DRAWFCN || cbits(pi[4]) == DRAWFCN) {
@@ -406,7 +406,7 @@ void ptfpcmd(int f, char *s, char *longname)
 	} else {
 		OUT "x font %d %s\n", f, s PUT;
 	}
-/*	OUT "f%d\n", xfont PUT;	/* need this for buggy version of adobe transcript */
+/*	OUT "f%d\n", xfont PUT;	/ * need this for buggy version of adobe transcript */
 				/* which apparently believes that x font means */
 				/* to set the font, not just the position. */
 }
@@ -422,7 +422,7 @@ void t_ptlead(void)
 void ptesc(void)
 {
 	hpos += esc;
-	if (!ascii)
+	if (!ascii) {
 		if (esc > 0) {
 			oput('h');
 			if (esc>=10 && esc<100) {
@@ -432,6 +432,7 @@ void ptesc(void)
 				OUT "%d", esc PUT;
 		} else
 			OUT "H%d\n", hpos PUT;
+	}
 	esc = 0;
 }
 

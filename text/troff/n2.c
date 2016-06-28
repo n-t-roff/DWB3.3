@@ -86,7 +86,7 @@ void pchar1(Tchar i)
 		return;
 	if (tflg) {	/* transparent mode, undiverted */
 		if (print)			/* assumes that it's ok to print */
-			/* OUT "%c", j PUT;	/* i.e., is ascii */
+			/* OUT "%c", j PUT;	/ * i.e., is ascii */
 			outascii(i);
 		return;
 	}
@@ -106,7 +106,7 @@ void outascii(Tchar i)	/* print i in best-guess ascii */
 
 	if (ismot(i))
 		oput(' ');
-	else if (j < ALPHABET && j >= ' ' || j == '\n' || j == '\t')
+	else if ((j < ALPHABET && j >= ' ') || j == '\n' || j == '\t')
 		oput(j);
 	else if (j == DRAWFCN)
 		oputs("\\D");
@@ -180,7 +180,7 @@ void done(int x)
 
 	error |= x;
 	app = ds = lgf = 0;
-	if (i = em) {
+	if ((i = em)) {
 		donef = -1;
 		eschar = '\\';
 		em = 0;

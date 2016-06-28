@@ -141,7 +141,7 @@ void setn(void)
  			for( i = 0; tabtab[i] != 0 && i < NTAB; i++) {
  				if (i > 0)
  					buf[j++] = ' ';
- 				sprintf(&buf[j], "%d", tabtab[i] & TABMASK);
+ 				sprintf(&buf[j], "%ld", tabtab[i] & TABMASK);
  				j = strlen(buf);
  				if ( tabtab[i] & RTAB)
  					sprintf(&buf[j], "uR");
@@ -210,7 +210,7 @@ void nnspace(void)
 	ncnt = sizeof(numtab)/sizeof(Numtab) + NDELTA;
 	numtabp = (Numtab *) grow((char *)numtabp, ncnt, sizeof(Numtab));
 	if (numtabp == NULL) {
-		ERROR "not enough memory for registers", ncnt WARN;
+		ERROR "not enough memory for %d registers", ncnt WARN;
 		exit(1);
 	}
 	numtabp = (Numtab *) memcpy((char *)numtabp, (char *)numtab,
@@ -397,7 +397,7 @@ int abc0(int i, int (*f)(Tchar))
 	int j, k;
 
 	k = 0;
-	if (j = i / 26)
+	if ((j = i / 26))
 		k = abc0(j - 1, f);
 	return(k + (*f)((i % 26 + nform) | nrbits));
 }
@@ -559,7 +559,7 @@ void prnumerr(void)
 									warn);
 	if (frame != stk)	/* uncertainty correction */
 		numtabp[CD].val--;
-	ERROR err_buf WARN;
+	ERROR "%s", err_buf WARN;
 	numtabp[CD].val = savcd;
 }
 

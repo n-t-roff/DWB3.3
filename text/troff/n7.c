@@ -171,11 +171,12 @@ void text(void)
 	}
 	if (pendw)
 		goto t4;
-	if (pendt)
+	if (pendt) {
 		if (spcnt)
 			goto t2; 
 		else 
 			goto t3;
+	}
 	pendt++;
 	if (spcnt)
 		goto t2;
@@ -656,7 +657,7 @@ getword(int x)
 			*pendw = 0;
 			goto rtn;
 		}
-	if (wordp = pendw)
+	if ((wordp = pendw))
 		goto g1;
 	hyp = hyptr;
 	wordp = word;

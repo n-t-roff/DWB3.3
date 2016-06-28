@@ -71,7 +71,7 @@ void n_ptinit(void)
 	bdtab[3] = 3;
 	bdtab[4] = 3;
 
-	/* hyphalg = 0;	/* for testing */
+	/* hyphalg = 0;	/ * for testing */
 
 	strcat(termtab, dwb_devname);
 	if ((fd = open(termtab, 0)) < 0) {

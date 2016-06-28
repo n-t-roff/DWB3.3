@@ -516,7 +516,7 @@ Tchar rbf(void)	/* return next char from blist[] block */
 	Tchar i, j;
 
 	if (ip == RD_OFFSET) {		/* for rdtty */
-		if (j = rdtty())
+		if ((j = rdtty()))
 			return(j);
 		else
 			return(popi());
@@ -774,7 +774,7 @@ void casedi(void)
 			numtabp[DL].val = dip->maxl;
 			FINDDIV(j);
 			if ((contabp[j].divsiz = (Divsiz *) malloc(sizeof(Divsiz))) == NULL) {
-				ERROR "Cannot alloc diversion (%s) size" WARN;
+				ERROR "Cannot alloc diversion (%s) size", unpair(dip->curd) WARN;
 				done2(1);
 			} else {
 				contabp[j].divsiz->dix = numtabp[DN].val;
@@ -882,15 +882,15 @@ void casetl(void)
 	tp = buf;
 	if (NROFF)
 		horiz(po);
-	while (i = *tp++)
+	while ((i = *tp++))
 		pchar(i);
 	if (w[1] || w[2])
 		horiz(j = quant((lt - w[1]) / 2 - w[0], HOR));
-	while (i = *tp++)
+	while ((i = *tp++))
 		pchar(i);
 	if (w[2]) {
 		horiz(lt - w[0] - w[1] - w[2] - j);
-		while (i = *tp++)
+		while ((i = *tp++))
 			pchar(i);
 	}
 	newline(0);

@@ -256,7 +256,7 @@ Tchar n_mot(void)
 
 	j = HOR;
 	getch(); /*eat delim*/
-	if (n = atoi0()) {
+	if ((n = atoi0())) {
 		if (vflag)
 			j = VERT;
 		i = makem(quant(n, j));
@@ -369,11 +369,11 @@ void n_casevs(void)
 Tchar n_xlss(void)
 {
 	/* stores \x'...' into
-	/* two successive Tchars.
-	/* the first contains HX, the second the value,
-	/* encoded as a vertical motion.
-	/* decoding is done in n2.c by pchar().
-	*/
+	 * two successive Tchars.
+	 * the first contains HX, the second the value,
+	 * encoded as a vertical motion.
+	 * decoding is done in n2.c by pchar().
+	 */
 	int	i;
 
 	getch();

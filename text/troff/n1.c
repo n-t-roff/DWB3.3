@@ -557,13 +557,13 @@ gx:
 		goto g0;
 	case 'v':	/* vert mot */
 		numerr.type = numerr.escarg = 0; numerr.esc = k;
-		if (i = vmot()) {
+		if ((i = vmot())) {
 			return(i);
 		}
 		goto g0;
 	case 'h': 	/* horiz mot */
 		numerr.type = numerr.escarg = 0; numerr.esc = k;
-		if (i = hmot())
+		if ((i = hmot()))
 			return(i);
 		goto g0;
 	case '|':	/* narrow space */
@@ -623,7 +623,7 @@ gx:
 		return(makem(width('0' | chbits)));
 	case 'x':	/* extra line space */
 		numerr.type = numerr.escarg = 0; numerr.esc = k;
-		if (i = xlss())
+		if ((i = xlss()))
 			return(i);
 		goto g0;
 	case 'u':	/* half em up */

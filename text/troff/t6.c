@@ -150,9 +150,9 @@ getcw(int i)
 	}
 	if (!bd)
 		bd = bdtab[xfont];
-	if (cs = cstab[xfont]) {
+	if ((cs = cstab[xfont])) {
 		nocache = 1;
-		if (ccs = ccstab[xfont])
+		if ((ccs = ccstab[xfont]))
 			x = ccs; 
 		else 
 			x = xpts;
@@ -170,13 +170,13 @@ getcw(int i)
 	}
 	return(k);
 	/* Unitwidth is Units/Point, where
-	/* Units is the fundamental digitization
-	/* of the character set widths, and
-	/* Point is the number of goobies in a point
-	/* e.g., for cat, Units=36, Point=6, so Unitwidth=36/6=6
-	/* In effect, it's the size at which the widths
-	/* translate directly into units.
-	*/
+	 * Units is the fundamental digitization
+	 * of the character set widths, and
+	 * Point is the number of goobies in a point
+	 * e.g., for cat, Units=36, Point=6, so Unitwidth=36/6=6
+	 * In effect, it's the size at which the widths
+	 * translate directly into units.
+	 */
 }
 
 void xbits(Tchar i, int bitf)
@@ -568,7 +568,7 @@ Tchar t_mot(void)
 
 	j = HOR;
 	getch(); /*eat delim*/
-	if (n = atoi0()) {
+	if ((n = atoi0())) {
 		if (vflag)
 			j = VERT;
 		i = makem(quant(n, j));
@@ -648,7 +648,7 @@ Tchar getlg(Tchar i)
 		*pbp++ = j;
 		j = i;
 	}
-	return(i & SFMASK | j);
+	return((i & SFMASK) | j);
 }
 
 
@@ -838,7 +838,7 @@ void casess(void)
 	if(TROFF) {
 		noscale++;
 		skip();
-		if(i = atoi0()) {
+		if ((i = atoi0())) {
 			spacesz = i & 0177;
 			zapwcache(0);
 			sps = width(' ' | chbits);
@@ -851,10 +851,10 @@ void casess(void)
 Tchar t_xlss(void)
 {
 	/* stores \x'...' into two successive Tchars.
-	/* the first contains HX, the second the value,
-	/* encoded as a vertical motion.
-	/* decoding is done in n2.c by pchar().
-	*/
+	 * the first contains HX, the second the value,
+	 * encoded as a vertical motion.
+	 * decoding is done in n2.c by pchar().
+	 */
 	int i;
 
 	getch();

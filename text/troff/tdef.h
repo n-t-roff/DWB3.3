@@ -89,12 +89,12 @@ extern	char	errbuf[];
 #define	DTAB	(TROFF? (INCH/2): 0)
 
 /* These "characters" are used to encode various internal functions
-/* Some make use of the fact that most ascii characters between
-/* 0 and 040 don't have any graphic or other function.
-/* The few that do have a purpose (e.g., \n, \b, \t, ...
-/* are avoided by the ad hoc choices here.
-/* See ifilt[] in n1.c for others -- 1, 2, 3, 5, 6, 7, 010, 011, 012 
-*/
+ * Some make use of the fact that most ascii characters between
+ * 0 and 040 don't have any graphic or other function.
+ * The few that do have a purpose (e.g., \n, \b, \t, ...
+ * are avoided by the ad hoc choices here.
+ * See ifilt[] in n1.c for others -- 1, 2, 3, 5, 6, 7, 010, 011, 012 
+ */
 
 #define	LEADER	001
 #define	IMP	004	/* impossible char; glues things together */
@@ -231,8 +231,8 @@ extern	char	errbuf[];
 #define	MOT	(01uL << 16)	/* motion character indicator */
 #define	VMOT	(01uL << 30)	/* vertical motion bit */
 #define	NMOT	(01uL << 29)	/* negative motion indicator */
-/* #define	MOTV	(MOT|VMOT|NMOT)	/* motion flags */
-/* #define	MAXMOT	(~MOTV)		/* maximum motion permitted */
+/* #define	MOTV	(MOT|VMOT|NMOT)	/ * motion flags */
+/* #define	MAXMOT	(~MOTV)		/ * maximum motion permitted */
 #define	MAXMOT	0xFFFF
 
 #define	ismot(n)	((n) & MOT)
