@@ -9,6 +9,11 @@
 #include	<memory.h>
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"symtab.h"
+#include	"misc.h"
+#include	"xform.h"
+#include	"textgen.h"
+#include	"input.h"
 
 obj *copyone (p, delx, dely)
 	obj	*p;

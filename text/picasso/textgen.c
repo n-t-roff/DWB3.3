@@ -11,15 +11,21 @@
 #include <ctype.h>
 #include "picasso.h"
 #include "y.tab.h"
+#include "textgen.h"
+#include "symtab.h"
+#include "misc.h"
+#include "attrs.h"
 
 extern int	pic_compat;
 
-obj *textgen()
-{
-static	double	prevh = 0;
-static	double	prevw = 0;
+static void fix_text(int, int);
 
-struct	objattr	obat;
+obj *
+textgen(void) {
+	static	double	prevh = 0;
+	static	double	prevw = 0;
+
+	struct	objattr	obat;
 	int	i, sub, at, with, saw_with = 0;
 	double	*bnd, savGbox[4], xwith, ywith;
 	double	savcurx, savcury;
@@ -133,7 +139,8 @@ int	def_font, def_size, def_space;
 int	cur_font, cur_size, cur_space;
 int	ft_mark, sz_mark, sp_mark, col_mark, adj_mark, ab_mark;
 
-set_text()	/* called at beginning of each object generator */
+void
+set_text(void)	/* called at beginning of each object generator */
 		/* and each time a line to insert is typed at the terminal */
 {
 	cur_font =  def_font  = (int)getfval("textfont");
@@ -143,8 +150,9 @@ set_text()	/* called at beginning of each object generator */
 	col_mark = adj_mark = ab_mark = ntext;
 }
 
-reset_font(val)		/* user supplied font attribute on object  */
-	double	val;	/* (stored as negative, to distinguish it  */
+void
+reset_font(double val)		/* user supplied font attribute on object  */
+		/* (stored as negative, to distinguish it  */
 {			/* from troff escape embedded in a string) */
 	int	i;
 
@@ -154,10 +162,8 @@ reset_font(val)		/* user supplied font attribute on object  */
 	ft_mark = ntext;
 }
 
-reset_size (op, val)
-	int	op;
-	double	val;
-{
+void
+reset_size(int op, double val) {
 	int	i;
 
 	if (cur_size == 0)
@@ -178,10 +184,8 @@ reset_size (op, val)
 	sz_mark = ntext;	/* NOTE sp_mark not updated */
 }
 
-reset_space (op, val)
-	int	op;
-	double	val;
-{
+void
+reset_space(int op, double val) {
 	int	i;
 
 	if (cur_space == 0)
@@ -199,8 +203,9 @@ reset_space (op, val)
 	sp_mark = ntext;
 }
 
-fix_text(n1, n2)		/* fill in default font/size/space values */
-	int	n1, n2;		/* if space unspecified, set from size.   */
+static void
+fix_text(int n1, int n2)		/* fill in default font/size/space values */
+			/* if space unspecified, set from size.   */
 {
 	if (cur_font == 0)
 		cur_font  = -def_font;
@@ -222,8 +227,8 @@ fix_text(n1, n2)		/* fill in default font/size/space values */
 	}
 }
 
-troffesc(buf)		/* maintain up-to-date values in cur_font, cur_size */
-	char	*buf;
+void
+troffesc(char *buf)		/* maintain up-to-date values in cur_font, cur_size */
 {
 	while (parse_text(buf, &cur_font, &cur_size))
 					;
@@ -231,9 +236,9 @@ troffesc(buf)		/* maintain up-to-date values in cur_font, cur_size */
 
 int	ntextlines = 0;
 
-savetext(type, s)	/* record text elements for current object */
-	int type;	/* breaking up into homogeneous font/size. */
-	char *s;
+void
+savetext(int type, char *s)	/* record text elements for current object */
+		/* breaking up into homogeneous font/size. */
 {
 extern	char	eqn_delim;
 extern	int	eqn_count;
@@ -266,10 +271,8 @@ extern	int	eqn_count;
 	}
 }
 
-save_one(type, font, size, n, str)
-	int type, font, n, size;
-	char *str;
-{
+void
+save_one(int type, int font, int size, int n, char *str) {
 	if (ntext >= ntextlist)
 		text = (Text *) grow((char *) text, "text",
 				ntextlist += 200, sizeof(Text));
@@ -283,9 +286,7 @@ save_one(type, font, size, n, str)
 }
 
 int
-copytext(start, end)
-    int     start, end;
-{
+copytext(int start, int end) {
 /* DBK--3/23/90: This is called from copyone(); if copyone is called during
    the process of assembling a new obj, the calculation of o_nt2 could
    possibly be upset (too many people updating ntext).  However, I don't
@@ -306,8 +307,9 @@ copytext(start, end)
     return ntext1 = ntext;
 }
 
-double	*text_bounds(p)		/* returns relative bounding box */
-	obj	*p;		/* if possible, EQN type text should be sized */
+double *
+text_bounds(obj *p)		/* returns relative bounding box */
+			/* if possible, EQN type text should be sized */
 {				/* by looking for bounding box in dpost file. */
 static	double	bnd[4];
 	double	ext[4];

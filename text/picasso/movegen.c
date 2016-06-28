@@ -8,9 +8,12 @@
 /*	@(#)picasso:movegen.c	1.0	*/
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"attrs.h"
+#include	"misc.h"
+#include	"textgen.h"
 
-obj *movegen()
-{
+obj *
+movegen(void) {
 static	double prevdx, prevdy;
 static	int	xtab[] = { 1, 0, -1, 0 };	/* R=0, U=1, L=2, D=3 */
 static	int	ytab[] = { 0, 1, 0, -1 };

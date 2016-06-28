@@ -1,3 +1,15 @@
 void compose (obj *);
 void get_matrix(double *, double *, double *, double *);
-double Xformx (obj *, int, double, double);
+double Xformx(obj *, int, double, double);
+double Xformy(obj *, int, double, double);
+double Linx(obj *, int, double, double);
+double Liny(obj *, int, double, double);
+void translate (obj *, double, double);
+void xlate(obj *, obj *);
+void xlate_to(obj *, obj *);
+void rescale(double);
+void scale_pic(void);
+void scale (obj *, int, obj *);
+void rotate(obj *, double, obj *);
+void xform (obj *, int);
+void reflect (obj *, obj *);

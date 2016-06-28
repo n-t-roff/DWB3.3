@@ -12,6 +12,9 @@
 #include <math.h>
 #include "picasso.h"
 #include "y.tab.h"
+#include "input.h"
+#include "for.h"
+#include "troffgen.h"
 
 #undef	YY_INPUT
 /* YY_INPUT define (c) Gunnar Ritter */
@@ -22,7 +25,7 @@
 
 extern	double	atof();
 extern	struct	symtab	symtab[];
-extern	char	*filename, *copythru();
+extern	char	*filename;
 
 #define	CADD	cbuf[clen++]=yytext[0];\
 		if(clen>=CBUFLEN-1) {yyerror("string too long",cbuf); BEGIN A;}
@@ -226,7 +229,7 @@ WS	[ \t]
 <A>dup(licate)?		return(DUP);
 <A>copy|include		return(COPY);
 <A>(thru|through){WS}+	{ BEGIN thru; return(THRU); }
-<thru>{A}{B}*|.		{ yylval.p = copythru(yytext); BEGIN A; return(DEFNAME); }
+<thru>{A}{B}*|.		{ yylval.s = copythru(yytext); BEGIN A; return(DEFNAME); }
 <A>until		return(UNTIL);
 
 <A>if		{ ifsw = 1; return(IF); }

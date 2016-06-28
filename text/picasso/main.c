@@ -14,12 +14,26 @@
 #include	<setjmp.h>
 #include        <string.h>
 #include        <errno.h>
+#include	<unistd.h>
 #include	"picasso.h"
 #include	"plps.h"
 #include	"xstubs.h"
 #include	"y.tab.h"
+#include	"symtab.h"
+#include	"troffgen.h"
+#include	"textgen.h"
+#include	"print.h"
+#include	"xform.h"
+#include	"input.h"
+#include	"fonts.h"
 
-void getdata(void);
+static void getdata(void);
+static void primaries(void);
+static void makeindex(char *, double, double, double);
+static void fpecatch(int);
+static void setdefaults(void);
+static void decomment(char *);
+static void reset(void);
 
 extern	int	yydebug;
 
@@ -78,11 +92,8 @@ char	*gwblib = GWBFILES;
 char	*fontdir = FONTDIR;
 char	*dwb_devname = "Latin1";
 
-main(argc, argv)
-	int	argc;
-	char	*argv[];
-{
-extern	void	fpecatch();
+int
+main(int argc, char **argv) {
 extern	double	atof();
 extern	FILE	*tmpfile();
 extern	char	*optarg;
@@ -192,7 +203,8 @@ extern	int	optind;
 	primaries();
 	setdefaults();
 
-	pushsrc(File, curfile = infile);
+	curfile = infile;
+	pushsrc(File, infile->fname);
 	if (argc <= 1) {
 		curfile->fin = batch ? stdin : NULL;
 		curfile->fname = tostring("-");
@@ -254,7 +266,8 @@ struct clor {
 	{ NULL,		0., 0., 0., 0 }
 };
 
-primaries ()			/* set up initial 8-color color table	*/
+static void
+primaries(void)			/* set up initial 8-color color table	*/
 {
 	int	i;
 	char	*s;
@@ -264,9 +277,8 @@ primaries ()			/* set up initial 8-color color table	*/
 						dfcols[i].c_blue);
 }
 
-makeindex (s, r, g, b)		/* simulate user color definition for s */
-	char	*s;
-	double	r, g, b;
+static void
+makeindex(char *s, double r, double g, double b)	/* simulate user color definition for s */
 {
 	YYSTYPE	v;
 
@@ -275,15 +287,14 @@ makeindex (s, r, g, b)		/* simulate user color definition for s */
 	makevar(tostring(s), VARNAME, v);
 }
 
-void
-fpecatch()
-{
+static void
+fpecatch(int i) {
+	(void)i;
 	fatal("floating point exception");
 }
 
-char *grow(ptr, name, num, size)	/* make array bigger */
-	char *ptr, *name;
-	int num, size;
+char *
+grow(char *ptr, char *name, int num, int size)	/* make array bigger */
 {
 	char *p;
 
@@ -336,8 +347,9 @@ struct {
 	};
 
 int	top_layer = 0;			/* high-water mark */
-
-setdefaults()	/* set default sizes for variables like boxht */
+
+static void
+setdefaults(void)	/* set default sizes for variables like boxht */
 {
 	int i;
 	YYSTYPE v;
@@ -369,6 +381,7 @@ resetvar(void)	/* reset variables listed */
 	}
 }
 
+#if 0 /* unused */
 static float savevars[sizeof defaults / sizeof defaults[0]];
 
 savepicvars()	/* save current values, restore original values */
@@ -390,9 +403,10 @@ restorepicvars()	/* restore values saved above */
 	for (i = 0; (s = defaults[i].name) != NULL; i++)
 		setfval(s, savevars[i]);
 }
+#endif
 
-checkscale(v)	/* adjust default variables dependent on scale */
-	double	v;
+void
+checkscale(double v)	/* adjust default variables dependent on scale */
 {
 	int	i;
 
@@ -403,8 +417,8 @@ checkscale(v)	/* adjust default variables dependent on scale */
 	}
 }
 
-decomment(s)		/* remove any #picasso from .PS line */
-	char	*s;
+static void
+decomment(char *s)		/* remove any #picasso from .PS line */
 {
 	int		seenquote = 0;
 	char	*ns = s;
@@ -531,8 +545,8 @@ getdata(void)
 	}
 }
 
-reset()
-{
+static void
+reset(void) {
 extern	int	nstack/*, errno*/;
 	obj	*op, *op1;
 	int	i;

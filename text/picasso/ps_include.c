@@ -15,6 +15,8 @@
 
 #include <string.h>
 #include "picasso.h"
+#include "xform.h"
+#include "misc.h"
 
 /* in SVR4, the C-preprocessor will not accept the tricky definitions of lq
    and rq.  However, we should be able to do it using the following

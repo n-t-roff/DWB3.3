@@ -12,8 +12,10 @@
 /*	@(#)picasso:fonts.c	1.0	*/
 
 #include <string.h>
+#include <unistd.h>
 #include "font.h"
 #include "picasso.h"
+#include "input.h"
 
 extern	char	*fontdir;
 
@@ -87,11 +89,13 @@ static	int	defaultwidthtab[NDEFWID] = {
 	28,	50,	50,	72,	50,	50,
 	44,	48,	20,	48,	54,	0
 };
-
+
+static int fontinit(char *);
+static void initdefaultfont(void);
+
 static	int
-fontinit(fontname)	/* 0 if there is error and default font will be used;
+fontinit(char *fontname)	/* 0 if there is error and default font will be used;
 				1+ is the fontinfo index used */
-	char	*fontname;
 {
 	char	filename[1024];
 
@@ -108,7 +112,7 @@ fontinit(fontname)	/* 0 if there is error and default font will be used;
 }
 
 static void		/* initialize with Times-Roman */
-initdefaultfont()
+initdefaultfont(void)
 {
 	int i;
 	extern	int	fcount, mcount;		/* fake with these */
@@ -132,8 +136,7 @@ initdefaultfont()
 }
 
 int
-devinit(devname)		/* -1  means error; 1 means success */
-	char	*devname;
+devinit(char *devname)		/* -1  means error; 1 means success */
 {
 	char	filename[1024];
 	int	n;
@@ -168,8 +171,7 @@ devinit(devname)		/* -1  means error; 1 means success */
 }
 
 double
-checkfont(f)
-	double	f;
+checkfont(double f)
 {
 	if (f < 0 || f > fontcount-1) {
 		if (f != (int)f) {
@@ -179,10 +181,10 @@ checkfont(f)
 	}
 	return f;
 }
-
+
 double
-setfont(fontname)		/* accepts either troff or (some) PostScript */
-	char	*fontname;	/* fontname, and initializes (mounts) it.    */
+setfont(char *fontname)		/* accepts either troff or (some) PostScript */
+		/* fontname, and initializes (mounts) it.    */
 {
 	int	i;
 
@@ -208,9 +210,7 @@ setfont(fontname)		/* accepts either troff or (some) PostScript */
 }
 
 double
-getstringwidth(s, fontnum, ptsize)	/* assumes no font or size changes */
-	unsigned char	*s;
-	int	fontnum, ptsize;
+getstringwidth(unsigned char *s, int fontnum, int ptsize)	/* assumes no font or size changes */
 {
 	double	width = 0.0;
 	int	pos;

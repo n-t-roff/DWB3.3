@@ -9,15 +9,23 @@
 #include        <string.h>
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"misc.h"
+#include	"symtab.h"
+#include	"print.h"
 
 extern	obj	*picklist[];
 extern	int	pickcount;
 extern	int	pic_compat;
 extern	int	batch;
 
-double getcomp(p, t)	/* return component of a position; these must now be */
-	obj *p;		/* transformed as there is no later chance to do so. */
-	int t;
+static YYSTYPE getblk(obj *, char *);
+static void firsttext(int, char *, int, double, double, double, double);
+static void nothertext(int, char *, int, double, double);
+static void oprint(obj *);
+
+double
+getcomp(obj *p, int t)	/* return component of a position; these must now be */
+			/* transformed as there is no later chance to do so. */
 {
 	float	bnd[4];
 
@@ -46,9 +54,8 @@ double getcomp(p, t)	/* return component of a position; these must now be */
 	yyerror("can't happen getcomp");
 }
 
-exprsave(f)
-	double f;
-{
+int
+exprsave(double f) {
 	if (nexpr >= nexprlist)
 		exprlist = (float *) grow((char *)exprlist, "exprlist",
 					nexprlist += 256, sizeof(float));
@@ -56,9 +63,8 @@ exprsave(f)
 	return ++nexpr;
 }
 
-char *sprintgen(fmt)
-	char *fmt;
-{
+char *
+sprintgen(char *fmt) {
 	char buf[1000];
 
 	sprintf (buf, fmt,  exprlist[0], exprlist[1], exprlist[2],
@@ -68,14 +74,14 @@ char *sprintgen(fmt)
 	return tostring(buf);
 }
 
-printexpr(f)	/* print expression for debugging */
-	double f;
+void
+printexpr(double f)	/* print expression for debugging */
 {
 	fprintf(stderr, "%g\n", f);
 }
 
-printpos(p)	/* print position for debugging */
-	obj *p;
+void
+printpos(obj *p)	/* print position for debugging */
 {
 	double	x, y;
 
@@ -84,9 +90,8 @@ printpos(p)	/* print position for debugging */
 	fprintf(stderr, "%g, %g\n", x, y);
 }
 
-char *tostring(s)
-	register char *s;
-{
+char *
+tostring(char *s) {
 	register char *p;
 
 	p = malloc(strlen(s)+1);
@@ -98,10 +103,8 @@ char *tostring(s)
 	return(p);
 }
 
-obj *makepos(x, y, corner, q)	/* make a position cell */
-	double	x, y;
-	int	corner;
-	obj	*q;
+obj *
+makepos(double x, double y, int corner, obj *q)	/* make a position cell */
 {
 	obj *p;
 
@@ -114,9 +117,9 @@ obj *makepos(x, y, corner, q)	/* make a position cell */
 	return(p);
 }
 
-obj *makebetween(f, p1, p2)	/* make position between p1 and p2   */
-	double	f;		/* again, transforms must be applied */
-	obj	*p1, *p2;
+obj *
+makebetween(double f, obj *p1, obj *p2)	/* make position between p1 and p2   */
+			/* again, transforms must be applied */
 {
 	obj	*p;
 	double	x1, y1, x2, y2;
@@ -137,9 +140,8 @@ obj *makebetween(f, p1, p2)	/* make position between p1 and p2   */
 int	xdelta[8] = {1,1,1,0,-1,-1,-1,0},
 	ydelta[8] = {-1,0,1,1,1,0,-1,-1};
 
-obj *getnth(p, nth)	/* find nth point of an object */
-	obj	*p;
-	int	nth;
+obj *
+getnth(obj *p, int nth)	/* find nth point of an object */
 {
 	float	x, y;
 	double  *tbox;
@@ -230,9 +232,8 @@ obj *getnth(p, nth)	/* find nth point of an object */
 	return makepos(x, y, nth, p);
 }
 
-obj *getpos(p, corner)	/* find position of point */
-	obj	*p;
-	int	corner;
+obj *
+getpos(obj *p, int corner)	/* find position of point */
 {
 	float	x, y;
 
@@ -250,10 +251,8 @@ obj *getpos(p, corner)	/* find position of point */
 	return makepos(x,y,corner,(corner < EAST || corner > SW)? p: (obj *)0);
 }
 
-whatpos(p, corner, px, py)	/* what is the position (no side effect) */
-	obj	*p;
-	int	corner;
-	float	*px, *py;
+int
+whatpos(obj *p, int corner, float *px, float *py)	/* what is the position (no side effect) */
 {
 	float	x, y, bnd[4];
 
@@ -313,13 +312,14 @@ whatpos(p, corner, px, py)	/* what is the position (no side effect) */
 	return 1;
 }
 
-obj *gethere()	/* make a place for curx,cury */
+obj *
+gethere(void)	/* make a place for curx,cury */
 {
 	return(makepos(curx, cury, 0, (obj *)0));
 }
 
-obj *getlast(n, t)	/* find n-th previous occurrence of type t */
-	int n, t;
+obj *
+getlast(int n, int t)	/* find n-th previous occurrence of type t */
 {
 	int k;
 	obj *p;
@@ -345,8 +345,8 @@ obj *getlast(n, t)	/* find n-th previous occurrence of type t */
 	return(NULL);
 }
 
-obj *getfirst(n, t)	/* find n-th occurrence of type t */
-	int n, t;
+obj *
+getfirst(int n, int t)	/* find n-th occurrence of type t */
 {
 	int k;
 	obj *p;
@@ -373,9 +373,8 @@ obj *getfirst(n, t)	/* find n-th occurrence of type t */
 	return(NULL);
 }
 
-double getblkvar(p, s)	/* find variable s2 in block p */
-	obj *p;
-	char *s;
+double
+getblkvar(obj *p, char *s)	/* find variable s2 in block p */
 {
 	YYSTYPE y, getblk();
 
@@ -384,9 +383,8 @@ double getblkvar(p, s)	/* find variable s2 in block p */
 	return y.f;
 }
 
-obj *getblock(p, s)	/* find variable s in block p */
-	obj *p;
-	char *s;
+obj *
+getblock(obj *p, char *s)	/* find variable s in block p */
 {
 	YYSTYPE y, getblk();
 
@@ -395,9 +393,8 @@ obj *getblock(p, s)	/* find variable s in block p */
 	return y.o;
 }
 
-YYSTYPE getblk(p, s)	/* find union type for s in p */
-	obj *p;
-	char *s;
+static YYSTYPE
+getblk(obj *p, char *s)	/* find union type for s in p */
 {
 	static YYSTYPE bug;
 	struct symtab *stp;
@@ -417,9 +414,10 @@ YYSTYPE getblk(p, s)	/* find union type for s in p */
 	return(bug);
 }
 
-obj *fixpos(p, x, y)	/* this, addpos & subpos SHOULD be altered to give   */
-	obj *p;		/* o_x,o_y as offset from position of p, with p as   */
-	double x, y;	/* o_parent, but I haven't yet worked out the xform. */
+obj *
+fixpos(obj *p, double x, double y)	/* this, addpos & subpos SHOULD be altered to give   */
+			/* o_x,o_y as offset from position of p, with p as   */
+		/* o_parent, but I haven't yet worked out the xform. */
 {
 #if 1
 /* DBK: 3/21/90 -- comment out the following if clause.  It has the effect
@@ -445,9 +443,8 @@ obj *fixpos(p, x, y)	/* this, addpos & subpos SHOULD be altered to give   */
 	return makepos(x, y, 0, (obj *)0);
 }
 
-obj *addpos(p, q)
-	obj *p, *q;
-{
+obj *
+addpos(obj *p, obj *q) {
 	double	x, y;
 
 	x = Xformx(q, 1, q->o_x, q->o_y);
@@ -464,9 +461,8 @@ obj *addpos(p, q)
 	return makepos(x, y, 0, (obj *)0);
 }
 
-obj *subpos(p, q)
-	obj *p, *q;
-{
+obj *
+subpos(obj *p, obj *q) {
 	double	x, y;
 
 	x = Xformx(q, 1, q->o_x, q->o_y);
@@ -483,9 +479,8 @@ obj *subpos(p, q)
 	return makepos(x, y, 0, (obj *)0);
 }
 
-obj *makenode(type, n, layer)
-	int	type, n, layer;
-{
+obj *
+makenode(int type, int n, int layer) {
 	obj	*p;
 
 	if (objbuf && batch)
@@ -531,8 +526,8 @@ obj *makenode(type, n, layer)
 	return(p);
 }
 
-freenode (p)		/* free space occupied by object p */
-	obj	*p;
+void
+freenode(obj *p)		/* free space occupied by object p */
 {
 	obj	*q, *q1;
 
@@ -558,9 +553,8 @@ freenode (p)		/* free space occupied by object p */
 	if (!objbuf) redo_gbox = 1;	/* page boundaries are now suspect */
 }
 
-extreme(x, y, bbox)	/* record max and min x and y values */
-	double	x, y;
-	float	*bbox;
+void
+extreme(double x, double y, float *bbox)	/* record max and min x and y values */
 {
 	if ((float)x < bbox[0])	bbox[0] = x;
 	if ((float)y < bbox[1])	bbox[1] = y;
@@ -568,8 +562,8 @@ extreme(x, y, bbox)	/* record max and min x and y values */
 	if ((float)y > bbox[3])	bbox[3] = y;
 }
 
-track_bounds(x0, y0, x1, y1)	/* insert a bounding box into the global box */
-	double	x0, y0, x1, y1;
+void
+track_bounds(double x0, double y0, double x1, double y1)	/* insert a bounding box into the global box */
 {
 	if (x0 < Gbox[0])	Gbox[0] = x0;
 	if (y0 < Gbox[1])	Gbox[1] = y0;
@@ -577,10 +571,8 @@ track_bounds(x0, y0, x1, y1)	/* insert a bounding box into the global box */
 	if (y1 > Gbox[3])	Gbox[3] = y1;
 }
 
-get_bounds(p, bbox, flag) /* reconstruct bounding box from center/basis/xform */
-	obj	*p;
-	float	*bbox;
-	int	flag;
+void
+get_bounds(obj *p, float *bbox, int flag) /* reconstruct bounding box from center/basis/xform */
 {
 static	obj	*lastp = (obj *)0;
 static	double	x0, y0, x1, y1;
@@ -634,11 +626,7 @@ done:	bbox[0] = x0;	bbox[1] = y0;	bbox[2] = x1; bbox[3] = y1;
 }
 
 void
-get_tot_bounds(o, box, flag)
-    obj	*o;
-    float   *box;
-    int	flag;
-{
+get_tot_bounds(obj *o, float *box, int flag) {
     double  *tbox;
     double  xc, yc;
 
@@ -659,9 +647,7 @@ get_tot_bounds(o, box, flag)
  *	Check to see if the object specified has been transformed.
  */
 int
-transformed(o)
-    obj	    *o;
-{
+transformed(obj *o) {
     if (o->o_mxx != 1 || o->o_mxy || o->o_myx ||
 	o->o_myy != 1 || o->o_mxt || o->o_myt)
 	return 1;
@@ -746,11 +732,9 @@ extern	double	getstringwidth();
  *	Test to see if any chars in this string closer than previous best.
  *	Since we go from top to bettom, we know y < closey.
  */
-firsttext(type, str, font, x, y, size, w)
-	char	*str;
-	int	type, font;
-	double	x, y, size, w;
-{
+static void
+firsttext(int type, char *str, int font, double x, double y, double size,
+    double w) {
 	double z = x;
 	static	char	buf[] = " ";
 
@@ -772,11 +756,8 @@ firsttext(type, str, font, x, y, size, w)
 	lasty = y;
 }
 
-nothertext(type, str, font, size, w)
-	char	*str;
-	int	type, font;
-	double	size, w;
-{
+static void
+nothertext(int type, char *str, int font, double size, double w) {
 	if (type & EQNTXT)
 		puteqn(lastx, lasty, type, atoi(str));
 	else {
@@ -798,7 +779,7 @@ nothertext(type, str, font, size, w)
 }
 #endif
 
-void
+static void
 oprint(obj *o)
 {
     obj     *p;
@@ -901,6 +882,7 @@ oprint(obj *o)
     }
 }
 
+#if 0 /* unused */
 oallprint(o)
     obj     *o;
 {
@@ -909,3 +891,4 @@ oallprint(o)
     for ( ; o != objtail; o = o->o_next)
 	oprint(o);
 }
+#endif

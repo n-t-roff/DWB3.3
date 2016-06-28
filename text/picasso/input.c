@@ -7,6 +7,8 @@
 
 /*	@(#)picasso:input.c	1.0	*/
 
+#include <stdarg.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <errno.h>
@@ -14,8 +16,18 @@
 #include <string.h>
 #include "picasso.h"
 #include "y.tab.h"
+#include "input.h"
+#include "xstubs.h"
+#include "symtab.h"
 
-void do_thru(void);
+static void do_thru(void);
+static void popsrc(void);
+static int baldelim(int, char *);
+static int getarg(char *);
+static int nextchar(void);
+static char *addnewline(char *);
+static void eprint(void);
+static int vyyerror(char *, va_list);
 
 extern int	batch;
 extern	jmp_buf	pic_env;
@@ -28,9 +40,8 @@ Infile	*curfile = infile;
 Src	src[MAXSRC];	/* input source stack */
 Src	*srcp	= src;
 
-pushsrc(type, ptr)	/* new input source */
-	int type;
-	char *ptr;
+void
+pushsrc(int type, char *ptr)	/* new input source */
 {
 	if (++srcp >= src + MAXSRC)
 		fatal("inputs nested too deep");
@@ -38,7 +49,8 @@ pushsrc(type, ptr)	/* new input source */
 	srcp->sp = ptr;
 }
 
-popsrc()	/* restore an old one */
+static void
+popsrc(void)	/* restore an old one */
 {
 	if (srcp <= src)
 		fatal("too many inputs popped");
@@ -66,8 +78,9 @@ definition(char *s)	/* collect definition for s and install */
 	stp->s_val.p = p;
 }
 
-char *delimstr(s)	/* get body of X ... X */
-	char *s;		/* message if too big */
+char *
+delimstr(char *s)	/* get body of X ... X */
+			/* message if too big */
 {
 	int c, delim, rdelim, n, deep;
 	static char *buf = NULL;
@@ -101,9 +114,8 @@ char *delimstr(s)	/* get body of X ... X */
 	return tostring(buf);
 }
 
-baldelim(c, s)	/* replace c by balancing entry in s */
-	int c;
-	char *s;
+static int
+baldelim(int c, char *s)	/* replace c by balancing entry in s */
 {
 	for ( ; *s; s += 2)
 		if (*s == c)
@@ -111,8 +123,8 @@ baldelim(c, s)	/* replace c by balancing entry in s */
 	return c;
 }
 
-undefine(s)	/* undefine macro */
-	char *s;
+void
+undefine(char *s)	/* undefine macro */
 {
 	while (*s != ' ' && *s != '\t')		/* skip "undef..." */
 		s++;
@@ -125,8 +137,8 @@ pArg	args[10];	/* argument frames */
 pArg	*argfp = args;	/* frame pointer */
 int	argcnt;		/* number of arguments seen so far */
 
-dodef(stp)	/* collect args and switch input to defn */
-	struct symtab *stp;
+void
+dodef(struct symtab *stp)	/* collect args and switch input to defn */
 {
 	int i, len;
 	char *p;
@@ -151,8 +163,8 @@ dodef(stp)	/* collect args and switch input to defn */
 	pushsrc(Macro, stp->s_val.p);
 }
 
-getarg(p)	/* pick up single argument, store in p, return length */
-	char *p;
+static int
+getarg(char *p)	/* pick up single argument, store in p, return length */
 {
 	int n, c, npar;
 
@@ -192,7 +204,8 @@ extern	int	thru;
 extern	struct symtab	*thrudef;
 extern	char	*untilstr;
 
-int dwb_input(void) {
+int
+dwb_input(void) {
 	register int c;
 
 	if (thru && begin) {
@@ -205,8 +218,8 @@ int dwb_input(void) {
 	return *ep++ = c;
 }
 
-nextchar()
-{
+static int
+nextchar(void) {
 	register int c;
 
   loop:
@@ -282,7 +295,7 @@ nextchar()
 	return c;
 }
 
-void
+static void
 do_thru(void)	/* read one line, make into a macro expansion */
 {
 	int c, i;
@@ -355,7 +368,8 @@ do_thru(void)	/* read one line, make into a macro expansion */
 	pushsrc(Macro, thrudef->s_val.p);
 }
 
-int unput(int c) {
+int
+unput(int c) {
 	if (++pb >= pbuf + sizeof pbuf)
 		fatal("pushback overflow\n");
 	if (--ep < ebuf)
@@ -365,16 +379,13 @@ int unput(int c) {
 	return c;
 }
 
-pbstr(s)
-	char *s;
-{
+void
+pbstr(char *s) {
 	pushsrc(pString, s);
 }
 
-double errcheck(x, s)
-	double x;
-	char *s;
-{
+double
+errcheck(double x, char *s) {
 	if (errno == EDOM) {
 		errno = 0;
 		yyerror("%s argument out of domain", s);
@@ -385,10 +396,12 @@ double errcheck(x, s)
 	return x;
 }
 
-fatal(s, s1, s2, s3, s4)	/* should be a flag on yyerror */
-	char *s, *s1, *s2, *s3, *s4;
+void
+fatal(char *fmt, ...)	/* should be a flag on yyerror */
 {
-	yyerror(s, s1, s2, s3, s4);
+	va_list ap;
+	va_start(ap, fmt);
+	vyyerror(fmt, ap);
 	if (batch)
 		exit(1);
 	else if (parsing)
@@ -397,15 +410,22 @@ fatal(s, s1, s2, s3, s4)	/* should be a flag on yyerror */
 		exit(1);
 }
 
-yyerror(s, s1, s2, s3, s4)
-	char *s, *s1, *s2, *s3, *s4;
-{
+int
+yyerror(char *fmt, ...) {
+	va_list ap;
+	va_start(ap, fmt);
+	return vyyerror(fmt, ap);
+}
+
+static int
+vyyerror(char *fmt, va_list ap) {
 extern	char	*cmdname;
 	char	msgbuf[1024];
 
 /*	if (synerr)
 		return;	*/
-	sprintf(msgbuf, s, s1, s2, s3, s4);	/* for debugging */
+	vsnprintf(msgbuf, sizeof msgbuf, fmt, ap);	/* for debugging */
+	va_end(ap);
 	if (!batch)
 		writemessage(msgbuf, 12, 1);
 	fprintf(stderr, "%s: %s\n", cmdname, msgbuf);
@@ -428,9 +448,11 @@ extern	char	*cmdname;
 	}
 #endif
 	errno = 0;
+	return 0;
 }
 
-eprint()	/* try to print context around error */
+static void
+eprint(void)	/* try to print context around error */
 {
 	char *p, *q;
 
@@ -456,31 +478,34 @@ eprint()	/* try to print context around error */
 		fgets(ebuf, sizeof ebuf, curfile->fin);
 		fprintf(stderr, "%s", ebuf);
 	}
-/*	pbstr("\n.PE\n");	/* safety first */
+/*	pbstr("\n.PE\n");	/ * safety first */
 	ep = ebuf;
 }
 
-yywrap() {;}
+int
+yywrap() {
+	return 1;
+}
 
 char	*newfile = 0;		/* filename for file copy */
 char	*untilstr = 0;		/* string that terminates a thru */
 int	thru	= 0;		/* 1 if copying thru macro */
 struct symtab	*thrudef = 0;		/* macro being used */
 
-copyfile(s)	/* remember file to start reading from */
-	char *s;
+void
+copyfile(char *s)	/* remember file to start reading from */
 {
 	newfile = s;
 }
 
-copydef(p)	/* remember macro symtab ptr */
-	struct symtab *p;
+void
+copydef(struct symtab *p)	/* remember macro symtab ptr */
 {
 	thrudef = p;
 }
 
-struct symtab *copythru(s)	/* collect the macro name or body for thru */
-	char *s;
+struct symtab *
+copythru(char *s)	/* collect the macro name or body for thru */
 {
 	struct symtab *p;
 	char *q, *addnewline();
@@ -511,8 +536,8 @@ struct symtab *copythru(s)	/* collect the macro name or body for thru */
 	return p;
 }
 
-char *addnewline(p)	/* add newline to end of p */
-	char *p;
+static char *
+addnewline(char *p)	/* add newline to end of p */
 {
 	int n;
 
@@ -525,13 +550,14 @@ char *addnewline(p)	/* add newline to end of p */
 	return p;
 }
 
-copyuntil(s)	/* string that terminates a thru */
-	char *s;
+void
+copyuntil(char *s)	/* string that terminates a thru */
 {
 	untilstr = s;
 }
 
-copy()	/* begin input from file, etc. */
+void
+copy(void)	/* begin input from file, etc. */
 {
 	FILE *fin;
 
@@ -542,7 +568,7 @@ copy()	/* begin input from file, etc. */
 		curfile->fin = fin;
 		curfile->fname = newfile;
 		curfile->lineno = 0;
-		pushsrc(File, curfile);
+		pushsrc(File, curfile->fname);
 		newfile = 0;
 	}
 	if (thrudef) {
@@ -553,21 +579,23 @@ copy()	/* begin input from file, etc. */
 
 char	shellbuf[1000], *shellp;
 
-shell_init()	/* set up to interpret a shell command */
+void
+shell_init(void)	/* set up to interpret a shell command */
 {
 	sprintf(shellbuf, "sh -c '");
 	shellp = shellbuf + strlen(shellbuf);
 }
 
-shell_text(s)	/* add string to command being collected */
-	char *s;
+void
+shell_text(char *s)	/* add string to command being collected */
 {
-	while (*shellp++ = *s++)
+	while ((*shellp++ = *s++))
 		;
 	shellp--;
 }
 
-shell_exec()	/* do it */
+void
+shell_exec(void)	/* do it */
 {
 	shell_text("' >&2");
 	system(shellbuf);

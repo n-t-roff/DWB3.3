@@ -8,6 +8,10 @@
 /*	@(#)picasso:blockgen.c	1.0	*/
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"xform.h"
+#include	"attrs.h"
+#include	"textgen.h"
+#include	"misc.h"
 
 #define	NBRACK	20	/* depth of [...] */
 #define	NBRACE	20	/* depth of {...} */
@@ -18,9 +22,9 @@ struct	pushstack bracestack[NBRACE];
 int	nbstack	= 0;
 obj	*cur_block = (obj *)0;
 
-obj *leftthing(c)	/* called for {... or [... */
+obj *
+leftthing(int c)	/* called for {... or [... */
 			/* really ought to be separate functions */
-	int c;
 {
 	obj *p;
 
@@ -52,9 +56,9 @@ obj *leftthing(c)	/* called for {... or [... */
 	}
 	return(p);
 }
-
-obj *rightthing(p, c)	/* called for ... ] or ... } */
-	obj *p;
+
+obj *
+rightthing(obj *p, int c)	/* called for ... ] or ... } */
 {
 	obj *q;
 
@@ -105,8 +109,8 @@ obj *rightthing(p, c)	/* called for ... ] or ... } */
 	return(q);
 }
 
-obj *blockgen(p)	/* handles [...] */
-	obj *p;
+obj *
+blockgen(obj *p)	/* handles [...] */
 {
 	float	h, w, xwith, ywith;
 	float	ctrx, ctry, x0, y0, x1, y1;

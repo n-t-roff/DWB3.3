@@ -8,14 +8,23 @@
 /*	@(#)picasso:linegen.c	1.0	*/
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"misc.h"
+#include	"linegen.h"
+#include	"attrs.h"
+#include	"symtab.h"
+#include	"textgen.h"
 
 static	float	*dx = NULL;
 static	float	*dy = NULL;
 static	int	nxy = 0;
 static	int	nxyvec = 0;
 
-growxy()
-{
+static void growxy(void);
+static void track_head(double, double, double, double, double, double,
+    float *);
+
+static void
+growxy(void) {
 	if (nxy++ >= nxyvec - 1) {
 		dx = (float *)grow((char *)dx,"dx",nxyvec += 256,sizeof(float));
 		dy = (float *)grow((char *)dy,"dy",nxyvec,sizeof(float));
@@ -26,11 +35,9 @@ growxy()
    track_head are in linegen() above.  The purpose is to get o_wid and o_ht
    computed large enough so get_bounds won't lie about arrows.  Note that
    o_x and o_y may also be affected.  */
-static
-track_head (x0, y0, x1, y1, w, h, bbox)
-	double	x0, y0, x1, y1, w, h;
-	float	bbox[];
-{
+static void
+track_head(double x0, double y0, double x1, double y1, double w, double h,
+    float *bbox) {
 	double	rot, hyp, phi;
 
 	rot = atan2(w/2, h);
@@ -45,8 +52,8 @@ track_head (x0, y0, x1, y1, w, h, bbox)
 	extreme (x0, y0, bbox);
 }
 
-obj *linegen(type)
-{
+obj *
+linegen(int type) {
 static	double	prevdx	= HT;
 static	double	prevdy	= 0;
 static	double	prevw	= HT10;	/* arrow dimensions */
@@ -306,8 +313,9 @@ struct	objattr	obat;
 	p->o_ht  = bbox[3] - bbox[1];
 	return(p);
 }
-
-arrowfill ()	/* a bit of a kludge for an obsolescent feature; arroprevw */
+
+int
+arrowfill (void)	/* a bit of a kludge for an obsolescent feature; arroprevw */
 {		/* now is taken simply as odd (fill) or even (nofill) and  */
 		/* has no implication of "number of lines drawn" as in pic */
 

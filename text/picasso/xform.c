@@ -9,6 +9,8 @@
 
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"misc.h"
+#include	"main.h"
 #include    <math.h>
 
 float	TINYNUM = 10e-4;
@@ -16,6 +18,7 @@ float	TINYNUM = 10e-4;
 static void matmult(valtype *, double *);
 static void identity_coercion(valtype *);
 static void matmult2(double *, valtype *);
+static void apply(obj *, double *, double);
 
 /* shorthand for a 3x3 affine matrix applied as follows:
  *
@@ -134,45 +137,36 @@ get_matrix(double *M0, double *M1, double *M2, double *M3) {
 }
 
 double
-Xformx (obj *p, int flag, double x, double y) {
+Xformx(obj *p, int flag, double x, double y) {
 	if (flag)
 		compose(p);
 	return x*T[0] + y*T[2] + T[4];
 }
 
-double	Xformy (p, flag, x, y)
-	obj	*p;
-	int	flag;
-	double	x, y;
-{
+double
+Xformy(obj *p, int flag, double x, double y) {
 	if (flag)
 		compose(p);
 	return x*T[1] + y*T[3] + T[5];
 }
 
-double	Linx (p, flag, x, y)		/* linear component, only */
-	obj	*p;
-	int	flag;
-	double	x, y;
+double
+Linx(obj *p, int flag, double x, double y)		/* linear component, only */
 {
 	if (flag)
 		compose(p);
 	return T[0]*x + T[2]*y;
 }
 
-double	Liny (p, flag, x, y)
-	obj	*p;
-	int	flag;
-	double	x, y;
-{
+double
+Liny(obj *p, int flag, double x, double y) {
 	if (flag)
 		compose(p);
 	return T[1]*x + T[3]*y;
 }
 
-apply (p, M, d)			/* apply matrix M (determinant d) to object p */
-	obj	*p;
-	double  *M, d;
+static void
+apply(obj *p, double *M, double d)			/* apply matrix M (determinant d) to object p */
 {
 	float   bnd[4];
 
@@ -189,9 +183,8 @@ apply (p, M, d)			/* apply matrix M (determinant d) to object p */
 	}
 }
 
-translate (p, x, y)           /* the easy case of applying a transformation */
-	obj     *p;
-	double	x, y;
+void
+translate (obj *p, double x, double y)           /* the easy case of applying a transformation */
 {
 	float	bnd[4];
 	int	i;
@@ -237,22 +230,23 @@ translate (p, x, y)           /* the easy case of applying a transformation */
 	}
 }
 
-xlate (p, q)
-	obj	*p, *q;
+void
+xlate(obj *p, obj *q)
 {
 	translate (p, q->o_x, q->o_y);
 }
 
-xlate_to (p, q)			/* destination given in absolute coordinates */
-	obj	*p, *q;
+void
+xlate_to(obj *p, obj *q)			/* destination given in absolute coordinates */
 {
 	translate (p, q->o_x - p->o_x, q->o_y - p->o_y);
 }
 
 static double	picscale = 1.0;
 
-rescale (v)		/* implicit scaling from user's "scale = v" statement */
-	double	v;	/* rather unintuitively, this is like "scale O 1/v".  */
+void
+rescale(double v)		/* implicit scaling from user's "scale = v" statement */
+		/* rather unintuitively, this is like "scale O 1/v".  */
 {
 	picscale = v;
 }
@@ -336,6 +330,7 @@ register double	det;
 	apply(p, M, det);
 }
 
+#if 0 /* unused */
 void
 olpscaleobj (obj *p, double sx, double sy, double cx, double cy)
 /*        double sx, sy;    scale factor in x and y directions */
@@ -356,10 +351,11 @@ register double	det;
         
 	apply(p, M, det);
 }
+#endif
 
-rotate (p, phi, q)
-	obj	*p, *q;
-	double	phi;	/* in radians */
+void
+rotate(obj *p, double phi, obj *q)
+	/* double	phi;	in radians */
 {
 register double	x, y;
 	double	M[6];
@@ -377,6 +373,7 @@ register double	x, y;
 	apply(p, M, 1);
 }
 
+#if 0 /* unused */
 void 
 rotate_point(x, y,  angle, cx, cy, pointx, pointy)
         double  x, y;
@@ -410,12 +407,11 @@ olprotateobj (p, angle, cx, cy)
 
 	apply(p, M, 1);
 }
+#endif
 
-xform (p, n)
-	obj	*p;
-	int	n;
-{
-register double	det;
+void
+xform (obj *p, int n) {
+	double	det;
 	double	M[6];
 	int	i;
 
@@ -430,9 +426,8 @@ register double	det;
 		apply(p, M, det);
 }
 
-reflect (p, q)
-	obj	*p, *q;
-{
+void
+reflect (obj *p, obj *q) {
 	float	bnd[4];
 	double	phi, c, s, x0, y0, x1, y1, M[6];
 	int	axial;
@@ -497,6 +492,7 @@ reflect (p, q)
 	apply(p, M, 1);
 }
 
+#if 0 /* unused */
 olpreflectobj (p, x0, y0, x1, y1)
 	obj	*p;
         double  x0, y0, x1, y1;
@@ -534,3 +530,4 @@ olpreflectobj (p, x0, y0, x1, y1)
 	}
 	apply(p, M, 1);
 }
+#endif

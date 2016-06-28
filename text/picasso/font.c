@@ -14,6 +14,8 @@
 #include <string.h>
 
 #include "font.h"			/* font table definitions */
+#include "picasso.h"
+#include "input.h"
 
 TrFont	*dwb_mount[MAXFONTS+1];		/* mount table - pointers into fonts[] */
 TrFont	fonts[MAXFONTS+2];		/* font data - guarantee one empty slot */

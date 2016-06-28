@@ -8,12 +8,14 @@
 /*	@(#)picasso:circgen.c	1.0	*/
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"misc.h"
+#include	"attrs.h"
+#include	"textgen.h"
 
 extern	int	pic_compat;
 
-obj *circgen(type)
-	int	type;
-{
+obj *
+circgen(int type) {
 static	double	rad[2]	= { HT2, WID2 };
 static	double	rad2[2]	= { HT2, HT2 };
 

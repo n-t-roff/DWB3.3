@@ -6,11 +6,17 @@
 /*	actual or intended publication of such source code.	*/
 
 /*	@(#)picasso:picgen.c	1.0	*/
+#include	<string.h>
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"misc.h"
+#include	"attrs.h"
+#include	"textgen.h"
 
-obj *picgen()
-{
+static char *checkeps(struct objattr *, char *);
+
+obj *
+picgen(void) {
 	static	double	prevht	= HT;
 	static	double	prevwid	= WID;	/* golden mean, sort of */
 	static	char	*prevname = "";
@@ -121,11 +127,8 @@ obj *picgen()
 	return(p);
 }
 
-char *
-checkeps(obat, tname)
-	struct	objattr	*obat;
-	char	*tname;
-{
+static char *
+checkeps(struct objattr *obat, char *tname) {
 	int	urx, ury, llx, lly;
 	char	buf[128];
 	FILE	*fp;

@@ -1,0 +1,10 @@
+obj *textgen(void);
+void set_text(void);
+void reset_font(double);
+void reset_size(int, double);
+void reset_space(int, double);
+void troffesc(char *);
+void save_one(int, int, int, int, char *);
+int copytext(int, int);
+double	*text_bounds(obj *);
+void savetext(int, char *);

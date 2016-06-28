@@ -11,8 +11,8 @@
 #include	"picasso.h"
 #include	"y.tab.h"
 
-YYSTYPE getvar(s)	/* return value of variable s (usually pointer) */
-	char *s;
+YYSTYPE
+getvar(char *s)	/* return value of variable s (usually pointer) */
 {
 	struct symtab *p;
 	static YYSTYPE bug;
@@ -33,10 +33,8 @@ YYSTYPE getvar(s)	/* return value of variable s (usually pointer) */
 	return(p->s_val);
 }
 
-double	getsub(s, n)
-	char	*s;
-	int	n;
-{
+double
+getsub(char *s, int n) {
 	struct	symtab	*p;
 
 	p = lookup(s);
@@ -51,11 +49,8 @@ double	getsub(s, n)
 	return 0.0;
 }
 
-double	setvar(s, n, v)
-	char	*s;
-	int	n;
-	double	v;
-{
+double
+setvar(char *s, int n, double v) {
 	struct	symtab	*p;
 
 	p = lookup(s);
@@ -75,9 +70,8 @@ double	setvar(s, n, v)
 	return v;
 }
 
-double	setsize(s, v)	/* kludge: textsize = v implies textspace = v * r */
-	char	*s;
-	double	v;
+double
+setsize(char *s, double v)	/* kludge: textsize = v implies textspace = v * r */
 {
 	double	r;
 	struct	symtab	*p, *q;
@@ -90,9 +84,9 @@ double	setsize(s, v)	/* kludge: textsize = v implies textspace = v * r */
 	return v;
 }
 
-struct	symtab *newvar(s, t)	/* allocate variable with name s, type t */
-	char *s;		/* assumes s derives from a tostring	 */ 
-	int t;
+struct symtab *
+newvar(char *s, int t)	/* allocate variable with name s, type t */
+			/* assumes s derives from a tostring	 */ 
 {
 	struct symtab *p;
 
@@ -109,8 +103,9 @@ struct	symtab *newvar(s, t)	/* allocate variable with name s, type t */
 	return(p);
 }
 
-struct symtab *findvar(s, t)	/* make variable named s in table	*/
-	char *s;		/* will reuse local or global symbol	*/
+struct symtab *
+findvar(char *s, int t)	/* make variable named s in table	*/
+			/* will reuse local or global symbol	*/
 {
 	struct symtab *p;
 
@@ -120,9 +115,8 @@ struct symtab *findvar(s, t)	/* make variable named s in table	*/
 	return(p);
 }
 
-double	setarray(s)
-	char	*s;
-{
+double
+setarray(char *s) {
 	struct	symtab	*p;
 
 	p = findvar (s, VARNAME);
@@ -143,9 +137,9 @@ double	setarray(s)
 	nexpr = 0;
 	return exprlist[0];
 }
-
-double	getfval(s)	/* return float value of variable s */
-	char *s;
+
+double
+getfval(char *s)	/* return float value of variable s */
 {
 	struct	symtab	*p;
 
@@ -159,9 +153,8 @@ double	getfval(s)	/* return float value of variable s */
 		return (double)*p->s_val.a;	/* array values in exprlist. */
 }
 
-setfval(s, f)	/* set variable s to f */
-	char *s;
-	double f;
+void
+setfval(char *s, double f)	/* set variable s to f */
 {
 	struct symtab *p;
 
@@ -173,10 +166,11 @@ setfval(s, f)	/* set variable s to f */
 		*p->s_val.a = f;
 }
 
-struct symtab *makevar(s, t, v)	/* make variable named s in table	*/
-	char	*s;		/* assumes s is static or from tostring	*/
-	int	t;		/* if s is already defined as an array,	*/
-	valtype	v;		/* only its first element is set.	*/
+struct symtab *
+makevar(char *s, int t, valtype v)	/* make variable named s in table	*/
+			/* assumes s is static or from tostring	*/
+			/* if s is already defined as an array,	*/
+			/* only its first element is set.	*/
 {
 	struct symtab *p;
 	obj *o;
@@ -203,8 +197,8 @@ struct symtab *makevar(s, t, v)	/* make variable named s in table	*/
 	return(p);
 }
 
-struct symtab *lookup(s)	/* find s in symtab */
-	char *s;
+struct symtab *
+lookup(char *s)	/* find s in symtab */
 {
 	int i;
 	struct symtab *p;
@@ -216,8 +210,8 @@ struct symtab *lookup(s)	/* find s in symtab */
 	return(NULL);
 }
 
-freesymtab(p)	/* free space used by symtab at p */
-	struct symtab *p;
+void
+freesymtab(struct symtab *p)	/* free space used by symtab at p */
 {
 	struct symtab *q;
 
@@ -255,10 +249,8 @@ freedef(char *s)	/* free definition for string s */
 
 static	int	i, M;
 
-first_xy (xsym, ysym, xp, yp)
-	struct	symtab	*xsym, *ysym;
-	double	*xp, *yp;
-{
+void
+first_xy(struct symtab *xsym, struct symtab *ysym, double *xp, double *yp) {
 	if ((M = xsym->s_dim) == 0)
 		*xp = xsym->s_val.f;
 	else
@@ -272,10 +264,8 @@ first_xy (xsym, ysym, xp, yp)
 	i = 0;
 }
 
-next_xy (xsym, ysym, xp, yp)
-	struct	symtab	*xsym, *ysym;
-	double	*xp, *yp;
-{
+int
+next_xy (struct symtab *xsym, struct symtab *ysym, double *xp, double *yp) {
 	if (++i > M)
 		return 0;
 	if (xsym->s_dim == 0)

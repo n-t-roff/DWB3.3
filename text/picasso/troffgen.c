@@ -9,11 +9,20 @@
 
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 #include "font.h"
 #include "picasso.h"
 #include "y.tab.h"
+#include "attrs.h"
+#include "troffgen.h"
+#include "textgen.h"
+#include "symtab.h"
 
 void eqn_save(char *s);
+static int troffcode(char *);
+static int dwb_tolower(int);
+static int iso8859code(char *);
+static void troffparm(char *, char *, int *);
 
 char	esc	    = '\\';
 char	eqn_delim[] = "\0";
@@ -313,9 +322,8 @@ struct	isocode	{unsigned char name[2];  char type;  unsigned char value;}
 		'\0','\0','\0','\0',		/* sentinel; loop terminus */
 		};
 
-int	troffcode(str)
-	char	*str;
-{
+static int
+troffcode(char *str) {
 	int	n;
 
 	for (n = 1; trcode[n].name[0] != '\0'; n++)
@@ -325,19 +333,16 @@ int	troffcode(str)
 }
 
 /*	Where is tolower on Sun?	*/
-int
-dwb_tolower(c)
-    int c;
+static int
+dwb_tolower(int c)
 {
     if (c >= 'A' && c <= 'Z')
 	c += 'a' - 'A';
     return c;
 }
 
-int
-iso8859code(str)
-    char	*str;
-{
+static int
+iso8859code(char *str) {
     int	n;
     struct	isocode	*t;
 
@@ -353,6 +358,7 @@ iso8859code(str)
     return 0;
 }
 
+#if 0 /* unused */
 char	*
 fromiso(c)
     unsigned char c;
@@ -369,11 +375,11 @@ fromiso(c)
 	}
     return NULL;
 }
+#endif
 
-static
-troffparm(name, parm, prev)
-	char	*name, *parm;
-	int	*prev;			/* the previous value */
+static void
+troffparm(char *name, char *parm, int *prev)
+	/* int	*prev;			the previous value */
 {
 extern	double	atof();
 	double	r, s=0, t;
@@ -416,9 +422,8 @@ static	int	psize = 10,	/* ditto previous point size */
  *	latter action is reasonable since troff wouldn't recongnize or
  *	track such changes either.
  */
-troff(s)
-	char	*s;
-{
+void
+troff(char *s) {
 	int	i, fp;
 
 	if (s[1] == 'f' && s[2] == 't') {
@@ -448,9 +453,8 @@ troff(s)
 		}
 }
 
-obj	*troffgen(s)
-	char * /*YYSTYPE*/	s;
-{
+obj *
+troffgen(char *s) {
 	troff(s);
 	save_one(CENTER, 0, 0, 0, s);
 	free(s);
@@ -459,9 +463,9 @@ obj	*troffgen(s)
 /*	Split txt into substrings with uniform font and pointsize.
 /*	Some '\0' chars are put in txt.
  */
-char	*parse_text (txt, fp, sp)
-	char	*txt;
-	int	*fp, *sp;	/* font and size values may be negative! */
+char *
+parse_text (char *txt, int *fp, int *sp)
+	/* int	*fp, *sp;	font and size values may be negative! */
 {
 	extern int  parsing;
 static	char	*buf = 0;
@@ -606,7 +610,7 @@ static	int	n   = 0,
 		return NULL;
 	}
 }
-
+
 int	eqn_count	  = 0;
 char	psfname[L_tmpnam] = "";
 char	dpost[]	= "dpost";
@@ -649,9 +653,8 @@ extern	char	*gwblib;
 	scan_delim(s);
 }
 
-scan_delim(s)
-	char    *s;
-{
+void
+scan_delim(char *s) {
 	while (isspace(*s))
 		++s;
 	/* probably eqn's syntax is less restrictive than the following */
@@ -669,9 +672,8 @@ scan_delim(s)
 	}
 }
 
-eqn_gen(type)
-	int	type;
-{
+void
+eqn_gen(int type) {
 extern	int	ntextlines;
 	obj	*p;
 	char	buf[8];

@@ -1,0 +1,15 @@
+YYSTYPE getvar(char *);
+double getsub(char *, int);
+double setvar(char *, int, double);
+double setsize(char *, double);
+struct symtab *newvar(char *, int);
+struct symtab *findvar(char *, int);
+double setarray(char *);
+double getfval(char *);
+void setfval(char *, double);
+struct symtab *makevar(char *, int, valtype);
+struct symtab *lookup(char *);
+void freesymtab(struct symtab *);
+void freedef(char *);
+void first_xy(struct symtab *, struct symtab *, double *, double *);
+int next_xy (struct symtab *, struct symtab *, double *, double *);

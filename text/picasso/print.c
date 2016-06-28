@@ -10,14 +10,25 @@
 #include	<assert.h>
 #include	<ctype.h>
 #include	<string.h>
+#include	<unistd.h>
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"misc.h"
+#include	"print.h"
+#include	"plps.h"
+#include	"xform.h"
+#include	"troffgen.h"
+#include	"ps_include.h"
 
 extern int  eqn_count;
 extern float line_weight;
 int	flyback;
 int	redo_gbox = 0;
 int	objcount  = 0;
+
+static obj *print_xform(int, obj *);
+static void objtext(double, double, obj *);
+static void dotext(double, double, obj *);
 
 void
 print_buf(void)
@@ -40,8 +51,8 @@ print_buf(void)
 extern	FILE	*pipefp, *eqnfp;
 extern	char	psfname[];
 
-print(c)		/* show everything (above draft layers) */
-	int	c;
+void
+print(int c)		/* show everything (above draft layers) */
 {
 	int	n;
 
@@ -75,8 +86,8 @@ print(c)		/* show everything (above draft layers) */
 #endif
 }
 
-print_layer(n)	/* show contents of a single layer (maybe a draft layer) */
-	int	n;
+void
+print_layer(int n)	/* show contents of a single layer (maybe a draft layer) */
 {
 	obj	*p;
 
@@ -84,8 +95,8 @@ print_layer(n)	/* show contents of a single layer (maybe a draft layer) */
 		p = print_obj(n, p);
 }
 
-print_bnd(p, q)	/* show everything (non-draft) between given bounds */
-	obj	*p, *q;
+void
+print_bnd(obj *p, obj *q)	/* show everything (non-draft) between given bounds */
 {
 	int	n;
 
@@ -93,9 +104,8 @@ print_bnd(p, q)	/* show everything (non-draft) between given bounds */
 		print_layer_bnd(n, p, q);
 }
 
-print_layer_bnd(n, p, q)	/* show objects in layer n from p to q */
-	int	n;
-	obj	*p, *q;
+void
+print_layer_bnd(int n, obj *p, obj *q)	/* show objects in layer n from p to q */
 {
 	obj	*r;
 	float	x0, y0, x1, y1, bnd[4];
@@ -115,10 +125,8 @@ print_layer_bnd(n, p, q)	/* show objects in layer n from p to q */
 			r = print_obj(n, r);
 }
 
-obj	*print_obj(layer, p)
-	int	layer;
-	obj	*p;
-{
+obj *
+print_obj(int layer, obj *p) {
 	double	r, dx, dy, ox, oy, x0, y0, x1, y1;
 	obj	*op, *q;
 	int	n;
@@ -233,10 +241,8 @@ obj	*print_obj(layer, p)
 	return p;
 }
 
-obj	*print_xform (layer,p)
-	int	layer;
-	obj	*p;
-{
+static obj *
+print_xform(int layer, obj *p) {
 	double	r, ox, oy, dx, dy, x0, y0, x1, y1, M[4];
 	double	b, tx0, ty0, tx1, ty1;
 	valtype	*X;
@@ -455,11 +461,9 @@ obj	*print_xform (layer,p)
 		objtext(ox, oy, op);
 	return p;
 }
-
-objtext(x, y, p)
-	double x, y;
-	obj    *p;
-{
+
+static void
+objtext(double x, double y, obj *p) {
 	double  *bnd;
 	int     i, nt2 = (unsigned int) p->o_nt2, t;
 
@@ -477,9 +481,8 @@ objtext(x, y, p)
 	dotext(x, y, p);
 }
 
-dotext(x, y, p)	/* print text strings of p in proper vertical spacing   */
-	double x, y;
-	obj *p;
+static void
+dotext(double x, double y, obj *p)	/* print text strings of p in proper vertical spacing   */
 {
     double  h, v, w, dely, *bnd;
     int	    i, j, m, n, t;
@@ -524,7 +527,8 @@ dotext(x, y, p)	/* print text strings of p in proper vertical spacing   */
     }
 }
 
-redogbox()
+void
+redogbox(void)
 {
 	float	bnd[4];
 	obj	*o;

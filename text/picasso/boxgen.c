@@ -8,14 +8,17 @@
 /*	@(#)picasso:boxgen.c	1.0	*/
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"misc.h"
+#include	"attrs.h"
+#include	"textgen.h"
 
 /*	BOX parameters are a radius (default 0) for rounding corners	*/
 /*	and the NW corner of the box -- so that the box can be rebuilt	*/
 /*	(under transformation, the bounding box by itself may not be	*/
 /*	sufficient, though it contains 4 of the 8 coordinate values.)	*/
 
-obj *boxgen()
-{
+obj *
+boxgen(void) {
 	static	double	prevht	= HT;
 	static	double	prevwid	= WID;	/* golden mean, sort of */
 	static	double	prevrad	= 0;

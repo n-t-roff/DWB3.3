@@ -1,0 +1,16 @@
+int setdir(int);
+int curdir(void);
+double setrgbindex(void);
+double checkcolor(double);
+void makefattr(int, int, double);
+void makeoattr(int, obj *);
+void makeiattr(int, int);
+void maketattr(int, char *);
+void addtattr(int);
+void makevattr(char *);
+void makelattr(char *, char *);
+void makedattr(char *);
+double setattr(obj *, int, double);
+void miscattrs(Attr *, struct objattr *);
+void primattrs(obj *, struct objattr *);
+void checktextcolor (obj *);

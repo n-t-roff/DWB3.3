@@ -8,6 +8,7 @@
 /*	@(#)picasso:for.c	1.0	*/
 #include "picasso.h"
 #include "y.tab.h"
+#include "input.h"
 
 #define	SLOP	1.001
 
@@ -22,11 +23,12 @@ typedef struct {
 For	forstk[10];	/* stack of for loops */
 For	*forp = forstk;	/* pointer to current top */
 
-forloop(var, from, to, op, by, str)	/* set up a for loop */
-	char *var;
-	double from, to, by;
-	int op;
-	char *str;
+static void nextfor(void);
+
+/* set up a for loop */
+
+void
+forloop(char *var, double from, double to, int op, double by, char *str)
 {
 	if (++forp >= forstk+10)
 		fatal("for loop nested too deep");
@@ -69,7 +71,8 @@ forloop(var, from, to, op, by, str)	/* set up a for loop */
 	unput('\n');
 }
 
-nextfor()	/* do one iteration of a for loop */
+static void
+nextfor(void)	/* do one iteration of a for loop */
 {
 	int	done;
 	float	v = forp->sym->s_val.f;
@@ -101,7 +104,8 @@ nextfor()	/* do one iteration of a for loop */
 	}
 }
 
-endfor()	/* end one iteration of for loop */
+void
+endfor(void)	/* end one iteration of for loop */
 {
 	switch (forp->op) {
 	case '+':
@@ -121,10 +125,8 @@ endfor()	/* end one iteration of for loop */
 	nextfor();
 }
 
-char *ifstat(expr, thenpart, elsepart)
-	double expr;
-	char *thenpart, *elsepart;
-{
+char *
+ifstat(double expr, char *thenpart, char *elsepart) {
 	if (expr) {
 		unput('\n');
 		pushsrc(Free, thenpart);

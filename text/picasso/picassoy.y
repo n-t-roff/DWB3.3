@@ -1,5 +1,12 @@
 %{
+#include <string.h>
 #include "picasso.h"
+#include "xform.h"
+#include "input.h"
+#include "misc.h"
+#include "attrs.h"
+#include "for.h"
+#include "print.h"
 YYSTYPE	y;
 %}
 
@@ -130,7 +137,10 @@ show:
 				{ if (batch) print_layer_bnd($2, $4, $6); }
 	| SHOW FROM position TO position
 				{ if (batch) print_bnd($3, $5); }
-	| SHOW objname		{ if (batch) print_obj($2); }
+	| SHOW objname		{ if (batch) print_obj($2->o_layer,
+	                          /* FIXME: Had originally been called */
+	                          /* with only one argument */
+	                          $2); }
 	| SHOW expr		{ if (batch) print_layer($2); }
 	| SHOW			{ if (batch) print(0); }
 

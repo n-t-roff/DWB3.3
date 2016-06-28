@@ -8,8 +8,16 @@
 /*	@(#)picasso:arcgen.c	1.0	*/
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"misc.h"
+#include	"attrs.h"
+#include	"linegen.h"
+#include	"textgen.h"
 
-obj *arcgen(type)	/* handles circular and (eventually) elliptical arcs */
+static int quadrant(double, double);
+static void arc_extreme(obj *);
+
+obj *
+arcgen(int type)	/* handles circular and (eventually) elliptical arcs */
 {
 	static	double	prevwid	= HT10;
 	static	double	prevht	= HT5;
@@ -155,9 +163,8 @@ struct	objattr	obat;
 	return(p);
 }
 
-quadrant(x,y)
-	double x, y;
-{
+static int
+quadrant(double x, double y) {
 	if (     x>=0.0 && y> 0.0) return(1);
 	else if( x< 0.0 && y>=0.0) return(2);
 	else if( x<=0.0 && y< 0.0) return(3);
@@ -165,7 +172,7 @@ quadrant(x,y)
 	else
 		{ fprintf(stderr,"can't happen: x,y=%g,%g",x,y); exit(1);}
 }
-
+
 /***************************************************************************
    bounding box of a circular arc             Eric Grosse  24 May 84
 
@@ -184,9 +191,8 @@ The bounding box is then the range of this list.
 The following code implements this, with simple optimizations.
 ***********************************************************************/
 
-arc_extreme(p)
-	obj	*p;
-{
+void
+arc_extreme(obj *p) {
 	/* assumes center isn't too far out */
 
 	double	x0, y0, x1, y1, xc, yc;  /* start, end, center */

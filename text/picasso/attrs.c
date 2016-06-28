@@ -8,11 +8,14 @@
 /*	@(#)picasso:attrs.c	1.0	*/
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"attrs.h"
+#include	"textgen.h"
+#include	"symtab.h"
 
-void makeattr(int type, int sub, YYSTYPE val);
+static void makeattr(int type, int sub, YYSTYPE val);
 
-setdir(n)	/* set direction (hvmode) from LEFT, RIGHT, etc. */
-	int n;
+int
+setdir(int n)	/* set direction (hvmode) from LEFT, RIGHT, etc. */
 {
 	switch (n) {
 	case UP:	hvmode = U_DIR;		break;
@@ -24,7 +27,8 @@ setdir(n)	/* set direction (hvmode) from LEFT, RIGHT, etc. */
 	return(hvmode);
 }
 
-curdir()	/* convert current dir (hvmode) to RIGHT, LEFT, etc. */
+int
+curdir(void)	/* convert current dir (hvmode) to RIGHT, LEFT, etc. */
 {
 	switch (hvmode) {
 	case R_DIR:	return RIGHT;
@@ -35,7 +39,8 @@ curdir()	/* convert current dir (hvmode) to RIGHT, LEFT, etc. */
 	yyerror("can't happen curdir");
 }
 
-double	setrgbindex ()		/* returns integer-valued index to (r,g,b) */
+double
+setrgbindex(void)		/* returns integer-valued index to (r,g,b) */
 {
 	int	n;
 
@@ -68,8 +73,7 @@ double	setrgbindex ()		/* returns integer-valued index to (r,g,b) */
 }
 
 double
-checkcolor (f)		/* gray level OR negative integer rgb index */
-	double	f;
+checkcolor(double f)		/* gray level OR negative integer rgb index */
 {
 /*	if (f < 0.0 || (f > 1.0 && f != (double)((int)f)))
 		{ yyerror("gray level %g not between 0 and 1", f); f = -1.0; }
@@ -82,25 +86,24 @@ checkcolor (f)		/* gray level OR negative integer rgb index */
 	return f;
 }
 
-makefattr(type, sub, f)	/* float attr */
-	int type, sub;
-	double f;
+void
+makefattr(int type, int sub, double f)	/* float attr */
 {
 	YYSTYPE val;
 	val.f = f;
 	makeattr(type, sub, val);
 }
 
-makeoattr(type, o)	/* obj* attr */
-	obj *o;
+void
+makeoattr(int type, obj *o)	/* obj* attr */
 {
 	YYSTYPE val;
 	val.o = o;
 	makeattr(type, 0, val);
 }
 
-makeiattr(type, i)	/* int attr */
-	int i;
+void
+makeiattr(int type, int i)	/* int attr */
 {
 	YYSTYPE val;
 	val.i = i;
@@ -109,8 +112,8 @@ makeiattr(type, i)	/* int attr */
 
 int	def_textattr = CENTER;
 
-maketattr(sub, p)	/* text attribute: takes two */
-	char *p;
+void
+maketattr(int sub, char *p)	/* text attribute: takes two */
 {
 	YYSTYPE val;
 	val.p = p;
@@ -123,15 +126,16 @@ maketattr(sub, p)	/* text attribute: takes two */
 	makeattr(TEXTATTR, sub, val);
 }
 
-addtattr(sub)		/* add text attrib to existing item */
+void
+addtattr(int sub)		/* add text attrib to existing item */
 {
 	attr[nattr-1].a_sub |= sub;
 /*	def_textattr != sub;  looks like a bug and should be */
 	def_textattr |= sub;
 }
 
-makevattr(p)	/* varname attribute */
-	char *p;
+void
+makevattr(char *p)	/* varname attribute */
 {
 	YYSTYPE val;
 
@@ -139,8 +143,8 @@ makevattr(p)	/* varname attribute */
 	makeattr(VARNAME, 0, val);
 }
 
-makelattr(p, q)	/* "locus" attribute; x and y coordinate lists via varnames */
-	char	*p, *q;
+void
+makelattr(char *p, char *q)	/* "locus" attribute; x and y coordinate lists via varnames */
 {
 	YYSTYPE val;
 	val.p = p;
@@ -177,7 +181,7 @@ struct	symtab	*p;
 	makeattr(DASHPAT, 0, val);
 }
 
-void
+static void
 makeattr(int type, int sub, YYSTYPE val)	/* add attribute type and val */
 {
 	if (type == 0 && val.i == 0) {	/* clear table for next stat */
@@ -195,11 +199,8 @@ makeattr(int type, int sub, YYSTYPE val)	/* add attribute type and val */
 	nattr++;
 }
 
-double	setattr(p, type, val)
-	obj	*p;
-	int	type;
-	double	val;
-{
+double
+setattr(obj *p, int type, double val) {
 	int	cw_switch;
 	double	x, y;
 	obj	*q;
@@ -274,10 +275,8 @@ default:	yyerror ("can't happen setattr");
 	return val;
 }
 
-miscattrs(ap, obat)
-	Attr	*ap;
-struct	objattr	*obat;
-{
+void
+miscattrs(Attr *ap, struct objattr *obat) {
 	float	*fp;
 	int	n;
 
@@ -357,10 +356,10 @@ struct	objattr	*obat;
 
 float	miters[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
-primattrs(p, obat)	/* note: ht, wid, rad and layer are set elsewhere   */
+void
+primattrs(obj *p, struct objattr *obat)	/* note: ht, wid, rad and layer are set elsewhere   */
 			/*	 because of nonuniformities in their design */
-	obj	*p;	/*	 (this could be further rationalized!)	    */
-struct	objattr	*obat;
+		/*	 (this could be further rationalized!)	    */
 {
 	int	n;
 	float	x, bnd[4];
@@ -407,9 +406,8 @@ struct	objattr	*obat;
 	p->o_ddpat = obat->a_dashpat;
 }
 
-checktextcolor (p)
-	obj	*p;
-{
+void
+checktextcolor (obj *p) {
 	if (p->o_nt2 > p->o_nt1) {
 		if (p->o_text == -1)
 			p->o_text = getfval("textcolor");

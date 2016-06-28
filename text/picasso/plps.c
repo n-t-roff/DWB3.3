@@ -9,12 +9,16 @@
 
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 #include "font.h"
 #include "picasso.h"
 #include "ps_include.h"
 #include "plps.h"
 #include "xstubs.h"
+#include "xform.h"
 #include "y.tab.h"
+#include "print.h"
+#include "input.h"
 
 #define	max(x,y)	((x)>(y) ? (x) : (y))
 #define	min(x,y)	((x)<(y) ? (x) : (y))
