@@ -12,6 +12,7 @@
 #include	"attrs.h"
 #include	"textgen.h"
 #include	"misc.h"
+#include	"input.h"
 
 #define	NBRACK	20	/* depth of [...] */
 #define	NBRACE	20	/* depth of {...} */

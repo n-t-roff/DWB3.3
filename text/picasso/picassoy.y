@@ -7,6 +7,7 @@
 #include "attrs.h"
 #include "for.h"
 #include "print.h"
+#include "main.h"
 YYSTYPE	y;
 %}
 

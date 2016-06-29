@@ -201,7 +201,7 @@ extern	float	Gbox[4];
 extern	double	pgscale;
 
 extern	char	*tostring(), *grow();
-extern	double	getsub(), getfval(), getcomp(), getblkvar();
+extern	double	getsub(), getfval(), getblkvar();
 extern	struct	symtab *lookup(), *findvar(), *makevar(), *newvar();
 extern	char	*ifstat(), *delimstr(), *sprintgen();
 extern	YYSTYPE	getvar();
@@ -222,7 +222,8 @@ extern	obj	*makenode(), *makepos(), *fixpos(), *addpos(), *subpos();
 extern	obj	*makebetween();
 extern	obj	*getpos(), *gethere(), *getnth();
 extern	obj	*getfirst(), *getlast(), *getblock();
-extern	obj	*copypos(), *copyobj();
+extern	obj	*copypos(obj *, obj *);
+extern	obj	*copyobj(obj *, char *, char *);
 
 struct pushstack {
 	float	p_x;

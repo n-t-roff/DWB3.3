@@ -19,6 +19,7 @@
 #include	"xform.h"
 #include	"troffgen.h"
 #include	"ps_include.h"
+#include	"input.h"
 
 extern int  eqn_count;
 extern float line_weight;
@@ -471,7 +472,7 @@ objtext(double x, double y, obj *p) {
 	for (i = p->o_nt1; i < nt2; i++)
 		if (text[i].t_type != t)
 			break;
-	if (i = nt2 && p->o_type != TEXT) {  /* all strings same type */
+	if (i == nt2 && p->o_type != TEXT) {  /* all strings same type */
 		bnd = text_bounds(p);
 		if (t & RJUST)
 			x += (bnd[2] - bnd[0]) / 2;

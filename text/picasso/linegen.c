@@ -13,6 +13,7 @@
 #include	"attrs.h"
 #include	"symtab.h"
 #include	"textgen.h"
+#include	"input.h"
 
 static	float	*dx = NULL;
 static	float	*dy = NULL;

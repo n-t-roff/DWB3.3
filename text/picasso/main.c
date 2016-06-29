@@ -431,7 +431,7 @@ decomment(char *s)		/* remove any #picasso from .PS line */
 		else if (*s == '#' && !seenquote && strncmp(s+1, "picasso", 7) == 0) {
 			s += 8;
 		}
-	} while (*ns++ = *s++);
+	} while ((*ns++ = *s++));
 }
 
 void

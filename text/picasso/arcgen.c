@@ -116,7 +116,7 @@ struct	objattr	obat;
 			alpha = atan2(toy - cury, tox - curx) -
 					atan2(fromy - cury, fromx - curx);
 			if (alpha < 0.)	alpha += 2 * M_PI;
-			if (!cw && alpha > M_PI || cw && alpha < M_PI)
+			if ((!cw && alpha > M_PI) || (cw && alpha < M_PI))
 				phi += M_PI;
 		}
 		else if (obat.a_rad <= 0.0)
@@ -226,10 +226,12 @@ arc_extreme(obj *p) {
 		}
 	}
 	if (p->o_type == SECTOR) {	/* include center */
-		if (xmin * xmax > 0)
+		if (xmin * xmax > 0) {
 			if (xmin > 0) xmin = 0; else xmax = 0;
-		if (ymin * ymax > 0)
+		}
+		if (ymin * ymax > 0) {
 			if (ymin > 0) ymin = 0; else ymax = 0;
+		}
 	}
 	p->o_wid = xmax - xmin;
 	p->o_ht  = ymax - ymin;

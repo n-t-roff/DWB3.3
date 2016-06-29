@@ -11,6 +11,7 @@
 #include	"attrs.h"
 #include	"textgen.h"
 #include	"symtab.h"
+#include	"input.h"
 
 static void makeattr(int type, int sub, YYSTYPE val);
 
@@ -37,6 +38,7 @@ curdir(void)	/* convert current dir (hvmode) to RIGHT, LEFT, etc. */
 	case D_DIR:	return DOWN;
 	}
 	yyerror("can't happen curdir");
+	return hvmode; /* CK */
 }
 
 double

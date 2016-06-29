@@ -12,6 +12,7 @@
 #include	"misc.h"
 #include	"symtab.h"
 #include	"print.h"
+#include	"input.h"
 
 extern	obj	*picklist[];
 extern	int	pickcount;
@@ -52,6 +53,7 @@ getcomp(obj *p, int t)	/* return component of a position; these must now be */
 			}
 	}
 	yyerror("can't happen getcomp");
+	return 0; /* CK: silence warning */
 }
 
 int
@@ -241,12 +243,13 @@ getpos(obj *p, int corner)	/* find position of point */
 		(corner == NE || corner == NW || corner == SW || corner == SE))
 			return getnth(p, corner == NE ? 2 : corner == NW ? 4 :
 							corner == SW ? 6 : 8);
-	if (corner == -1 )
+	if (corner == -1 ) {
 		if (pic_compat && (p->o_type == LINE || p->o_type == ARROW ||
 							p->o_type == SPLINE))
 			corner = START;
 		else
 			return p;
+	}
 	whatpos(p, corner, &x, &y);
 	return makepos(x,y,corner,(corner < EAST || corner > SW)? p: (obj *)0);
 }
@@ -509,7 +512,7 @@ makenode(int type, int n, int layer) {
 	if (ntext)
 		lastf = text[ntext-1].t_type & jflags;
 	for ( ; ntext1 < ntext; ntext1++)
-		text[ntext1].t_type = text[ntext1].t_type & ~ jflags | lastf;
+		text[ntext1].t_type = (text[ntext1].t_type & ~ jflags) | lastf;
 	}
 #endif
 	ntext1 = ntext;	/* ready for next caller */
@@ -785,7 +788,7 @@ oprint(obj *o)
     obj     *p;
     int	    t;
 
-    fprintf(stderr, "%x:", o);
+    fprintf(stderr, "%p:", o);
     if (o == objhead)
 	fprintf(stderr, " (objhead)");
     if (o == objtail)
@@ -797,7 +800,7 @@ oprint(obj *o)
     else if (p == objtail)
 	fprintf(stderr, "(objtail)");
     else
-	fprintf(stderr, "%x", p);
+	fprintf(stderr, "%p", p);
     fprintf(stderr, "\tnext=");
     p = o->o_next;
     if (p == objhead)
@@ -805,7 +808,7 @@ oprint(obj *o)
     else if (p == objtail)
 	fprintf(stderr, "(objtail)");
     else
-	fprintf(stderr, "%x", p);
+	fprintf(stderr, "%p", p);
     fprintf(stderr, "\tparent=");
     p = o->o_parent;
     if (p == objhead)
@@ -813,7 +816,7 @@ oprint(obj *o)
     else if (p == objtail)
 	fprintf(stderr, "(objtail)");
     else
-	fprintf(stderr, "%x", p);
+	fprintf(stderr, "%p", p);
     t = o->o_type;
     fprintf(stderr, "\n\ttype=%s", t == BOX ? "BOX"
 				 : t == LINE ? "LINE"
@@ -843,7 +846,7 @@ oprint(obj *o)
 	fprintf(stderr, "\ttranform = [ %g %g %g %g %g %g ]\n", o->o_mxx,
 			o->o_myx, o->o_mxy, o->o_myy, o->o_mxt, o->o_myt);
     fprintf(stderr, "\tdimensions %gx%g", o->o_wid, o->o_ht);
-    fprintf(stderr, " attr=%x", o->o_attr);
+    fprintf(stderr, " attr=%lx", o->o_attr);
     if (o->o_attr) {
 	fprintf(stderr, " (");
 	if (o->o_attr & HEAD1)
@@ -873,8 +876,8 @@ oprint(obj *o)
     fprintf(stderr, "\n\tweight=%g, linecolor=%g, fillcolor=%g\n",
 				o->o_weight, o->o_color, o->o_fill);
     if (t == BLOCK) {
-	fprintf(stderr, "\tmatching BLOCKEND=%x", o->o_val[N_VAL].o);
-	fprintf(stderr, " symbol table=%x\n", o->o_val[N_VAL+1].s);
+	fprintf(stderr, "\tmatching BLOCKEND=%p", o->o_val[N_VAL].o);
+	fprintf(stderr, " symbol table=%p\n", o->o_val[N_VAL+1].s);
     }
     else if (t == BOX || t == LINE || t == ARROW) {
 	if (o->o_val[N_VAL].f != 0.)

@@ -7,7 +7,7 @@ void reset_line_weight(void);
 void new_color(float val);
 void chk_attrs (obj *);
 void line(double, double, double, double);
-int box(double, double, double, double, double);
+void box(double, double, double, double, double);
 void arrow(double, double, double, double, double, double, double, int);
 void arc_arrow(obj *);
 void spline(int, int, valtype *);

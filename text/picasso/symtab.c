@@ -10,6 +10,7 @@
 #include        <string.h>
 #include	"picasso.h"
 #include	"y.tab.h"
+#include	"input.h"
 
 YYSTYPE
 getvar(char *s)	/* return value of variable s (usually pointer) */

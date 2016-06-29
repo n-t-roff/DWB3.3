@@ -12,6 +12,7 @@
 #include	"misc.h"
 #include	"attrs.h"
 #include	"textgen.h"
+#include	"input.h"
 
 static char *checkeps(struct objattr *, char *);
 

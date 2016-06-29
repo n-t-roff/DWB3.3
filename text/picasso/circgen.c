@@ -11,6 +11,7 @@
 #include	"misc.h"
 #include	"attrs.h"
 #include	"textgen.h"
+#include	"input.h"
 
 extern	int	pic_compat;
 
@@ -30,7 +31,7 @@ struct	objattr	obat;
 	obat.a_weight = obat.a_lcolor = obat.a_pcolor = obat.a_tcolor = -1;
 	obat.a_dashpat.a = (float *)0;
 	at = with = xwith = ywith = 0;
-	if (t = (type == CIRCLE) ? 0 : 1) {
+	if ((t = (type == CIRCLE) ? 0 : 1)) {
 		r = getfval("ellipsewid") / 2;
 		r2 = getfval("ellipseht") / 2;
 	}

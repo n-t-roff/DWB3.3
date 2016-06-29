@@ -67,16 +67,16 @@ static char *PS_setup[] = {
 	"0 ury lly sub A dtransform len /Sy ed",
 	"llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed",
 /*	"rot dup sin abs /S ed cos abs /C ed",
-/*	"Sx S mul Sy C mul add /H ed",
-/*	"Sx C mul Sy S mul add /W ed",
-/*	"sy H div /Scaley ed",
-/*	"sx W div /Scalex ed",
-/*	"s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if",
-/*	"sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed",
-/*	"sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed",
-/*	"urx llx sub 0 A dtransform exch atan rot exch sub /rot ed",
-/*	"n currentmatrix initgraphics setmatrix",
-*/	"sx Sx div /Scalex ed",
+ *	"Sx S mul Sy C mul add /H ed",
+ *	"Sx C mul Sy S mul add /W ed",
+ *	"sy H div /Scaley ed",
+ *	"sx W div /Scalex ed",
+ *	"s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if",
+ *	"sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed",
+ *	"sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed",
+ *	"urx llx sub 0 A dtransform exch atan rot exch sub /rot ed",
+ *	"n currentmatrix initgraphics setmatrix",
+ */	"sx Sx div /Scalex ed",
 	"sy Sy div /Scaley ed",
 	"cx cy translate",
 	"Scalex Scaley scale",
@@ -109,16 +109,16 @@ static char *Pic_setup[] = {
 	"0 ury lly sub A dtransform len /Sy ed",
 	"llx urx add 2 div lly ury add 2 div A transform /Cy ed /Cx ed",
 /*	"rot dup sin abs /S ed cos abs /C ed",
-/*	"Sx S mul Sy C mul add /H ed",
-/*	"Sx C mul Sy S mul add /W ed",
-/*	"sy H div /Scaley ed",
-/*	"sx W div /Scalex ed",
-/*	"s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if",
-/*	"sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed",
-/*	"sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed",
-/*	"urx llx sub 0 A dtransform exch atan rot exch sub /rot ed",
-/*	"n currentmatrix initgraphics setmatrix",
-*/	"sx Sx div /Scalex ed",
+ *	"Sx S mul Sy C mul add /H ed",
+ *	"Sx C mul Sy S mul add /W ed",
+ *	"sy H div /Scaley ed",
+ *	"sx W div /Scalex ed",
+ *	"s 0 eq {Scalex Scaley min dup /Scalex ed /Scaley ed} if",
+ *	"sx Scalex W mul sub 0 max ax 0.5 sub mul cx add /cx ed",
+ *	"sy Scaley H mul sub 0 max ay 0.5 sub mul cy add /cy ed",
+ *	"urx llx sub 0 A dtransform exch atan rot exch sub /rot ed",
+ *	"n currentmatrix initgraphics setmatrix",
+ */	"sx Sx div /Scalex ed",
 	"sy Sy div /Scaley ed",
 	"BoB concat",
 	"cx cy translate",
@@ -159,7 +159,7 @@ puteqn(double x, double y, int type, int neqn) {
 
 	ax = 0;
 	ay = 0;
-	if (type & LJUST|RJUST|ABOVE|BELOW) {
+	if (type & (LJUST|RJUST|ABOVE|BELOW)) {
 		/* modify ax,ay if text_bounds can get the bounding box */
 	}
 	if (eqnfp != NULL)
@@ -236,7 +236,7 @@ ps_include(FILE *fin, FILE *fout, int page_no, double cx, double cy, double sx,
 			if (!foundpage)
 				page.start = ftell(fin);
 		} else if (has("%%PageBoundingBox:")) {
-			if (i > page_no & !foundpbox) {
+			if (i > page_no && !foundpbox) {
 				foundpbox = 1;
 				llx = lly = urx = ury = 0;
 			} else if (i == page_no) {
@@ -259,7 +259,7 @@ ps_include(FILE *fin, FILE *fout, int page_no, double cx, double cy, double sx,
 			setup.end = page.start = ftell(fin);
 		else if (has("%%Trailer"))
 			trailer.start = ftell(fin);
-		else if (has("%%BeginGlobal"))
+		else if (has("%%BeginGlobal")) {
 			if (page.end <= page.start) {
 				if (nglobal >= maxglobal) {
 					maxglobal += 20;
@@ -267,7 +267,7 @@ ps_include(FILE *fin, FILE *fout, int page_no, double cx, double cy, double sx,
 				}
 				global[nglobal].start = ftell(fin);
 			}
-		else if (has("%%EndGlobal"))
+		} else if (has("%%EndGlobal"))
 			if (page.end <= page.start)
 				global[nglobal++].end = ftell(fin);
 	}
@@ -384,7 +384,7 @@ pic_include(FILE *fin, FILE *fout, int page_no, obj *o)
 			if (!foundpage)
 				page.start = ftell(fin);
 		} else if (has("%%PageBoundingBox: ")) {
-			if (i > page_no & !foundpbox) {
+			if (i > page_no && !foundpbox) {
 				foundpbox = 1;
 				llx = lly = urx = ury = 0;
 			} else if (i == page_no) {
@@ -407,7 +407,7 @@ pic_include(FILE *fin, FILE *fout, int page_no, obj *o)
 			setup.end = page.start = ftell(fin);
 		else if (has("%%Trailer"))
 			trailer.start = ftell(fin);
-		else if (has("%%BeginGlobal"))
+		else if (has("%%BeginGlobal")) {
 			if (page.end <= page.start) {
 				if (nglobal >= maxglobal) {
 					maxglobal += 20;
@@ -415,7 +415,7 @@ pic_include(FILE *fin, FILE *fout, int page_no, obj *o)
 				}
 				global[nglobal].start = ftell(fin);
 			}
-		else if (has("%%EndGlobal"))
+		} else if (has("%%EndGlobal"))
 			if (page.end <= page.start)
 				global[nglobal++].end = ftell(fin);
 	}

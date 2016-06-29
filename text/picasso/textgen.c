@@ -253,7 +253,7 @@ extern	int	eqn_count;
 		type |= CENTER;
 	if (*s == '\0')		/* then save a blank (KLUDGE!!) */
 		save_one(type, cur_font, cur_size, ntextlines, " ");
-	else while (str = parse_text(s, &cur_font, &cur_size))
+	else while ((str = parse_text(s, &cur_font, &cur_size)))
 		if (*str) {
 			if (abs(cur_size) > max_size)
 				max_size = abs(cur_size);

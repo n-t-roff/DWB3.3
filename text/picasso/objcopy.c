@@ -15,9 +15,10 @@
 #include	"textgen.h"
 #include	"input.h"
 
-obj *copyone (p, delx, dely)
-	obj	*p;
-	double	delx, dely;
+static obj *copyone(obj *, double, double);
+
+static obj *
+copyone (obj *p, double delx, double dely)
 {
 	obj	*q, *r;
 	unsigned n;
@@ -50,8 +51,8 @@ obj *copyone (p, delx, dely)
 	return q;
 }
 
-obj *copypos (p, q)
-	obj	*p, *q;
+obj *
+copypos (obj *p, obj *q)
 {
 	obj	*r;
 	float	bnd[4];
@@ -62,11 +63,11 @@ obj *copypos (p, q)
 	r = copyone(p, q->o_x - ox, q->o_y - oy);
 	get_bounds(r, bnd, 1);
 	track_bounds(bnd[0],bnd[1],bnd[2],bnd[3]);
+	return r;
 }
-
-obj *copyobj (p, xx, yy)
-	obj	*p;
-	char	*xx, *yy;
+
+obj *
+copyobj (obj *p, char *xx, char *yy)
 {
 	obj	*q;
 	struct	symtab	*x, *y;

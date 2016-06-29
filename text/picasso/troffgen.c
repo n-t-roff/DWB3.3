@@ -17,6 +17,7 @@
 #include "troffgen.h"
 #include "textgen.h"
 #include "symtab.h"
+#include "input.h"
 
 void eqn_save(char *s);
 static int troffcode(char *);
@@ -347,13 +348,13 @@ iso8859code(char *str) {
     struct	isocode	*t;
 
     for (n = 1; (t = &isocode[n])->name[0] != '\0'; n++)
-	if (str[0] == t->name[0] && str[1] == t->name[1]	/* exact */
-	     || (t->type & 1) == 0 &&		/* case unimportant */
-		dwb_tolower(str[0]) == t->name[0] && dwb_tolower(str[1]) == t->name[1]
-	     || (t->type & 2) == 0 &&		/* order unimportant */
-		str[0] == t->name[1] && str[1] == t->name[0]
-	     || t->type == 0 &&			/* both unimportant */
-		dwb_tolower(str[0]) == t->name[1] && dwb_tolower(str[1]) == t->name[0])
+	if ((str[0] == t->name[0] && str[1] == t->name[1])	/* exact */
+	     || ((t->type & 1) == 0 &&		/* case unimportant */
+		dwb_tolower(str[0]) == t->name[0] && dwb_tolower(str[1]) == t->name[1])
+	     || ((t->type & 2) == 0 &&		/* order unimportant */
+		str[0] == t->name[1] && str[1] == t->name[0])
+	     || (t->type == 0 &&			/* both unimportant */
+		dwb_tolower(str[0]) == t->name[1] && dwb_tolower(str[1]) == t->name[0]))
 		return n;
     return 0;
 }
@@ -443,7 +444,7 @@ troff(char *s) {
 		troffparm("textsize", s+3, &psize);
 	else if (s[1] == 'v' && s[2] == 's')
 		troffparm("textspace", s+3, &vsize);
-	else if (s[1] == 'e')
+	else if (s[1] == 'e') {
 		if (s[2] == 'o')
 			esc = '\0';
 		else if (s[2] == 'c') {
@@ -451,6 +452,7 @@ troff(char *s) {
 				;
 			esc = *s ? *s : '\\';
 		}
+	}
 }
 
 obj *
@@ -461,7 +463,7 @@ troffgen(char *s) {
 	return makenode(TROFF, 0, (int)getfval("curlayer"));
 }
 /*	Split txt into substrings with uniform font and pointsize.
-/*	Some '\0' chars are put in txt.
+ *	Some '\0' chars are put in txt.
  */
 char *
 parse_text (char *txt, int *fp, int *sp)

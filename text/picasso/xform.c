@@ -11,6 +11,7 @@
 #include	"y.tab.h"
 #include	"misc.h"
 #include	"main.h"
+#include	"input.h"
 #include    <math.h>
 
 float	TINYNUM = 10e-4;
@@ -433,7 +434,7 @@ reflect (obj *p, obj *q) {
 	int	axial;
 
 	if (q == NULL)
-		axial = x0 = x0 = x1 = y1 = 0;
+		axial = x0 = y0 = x1 = y1 = 0;
 	else
 		switch (q->o_type) {
 		case ARC:
@@ -445,7 +446,7 @@ reflect (obj *p, obj *q) {
 				y0 = Xformy(q, 0, bnd[0], bnd[1]);
 				x1 = Xformx(q, 0, bnd[2], bnd[3]);
 				y1 = Xformy(q, 0, bnd[2], bnd[3]);
-				if (axial = (x0 != x1 || y0 != y1))
+				if ((axial = (x0 != x1 || y0 != y1)))
 					break;
 				/* fall through to default case; i.e., use  */
 				/* center, for closed lines. otherwise, use */

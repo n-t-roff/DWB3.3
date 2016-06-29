@@ -202,7 +202,7 @@ openpl(char *s)		/* initialize page */
 		r = max(deltx/px, delty/py);
 		if (r <= 1)
 			r = 1;
-		else if (verbose || px == pgwid && py == pght) {
+		else if (verbose || (px == pgwid && py == pght)) {
 			fprintf(stderr, "%s: %g X %g picture shrunk to",
 					cmdname, deltx, delty);
 			deltx /= r;
@@ -529,7 +529,7 @@ line(double x0, double y0, double x1, double y1)	/* draw line from x0,y0 to x1,y
 	fill_or_stroke ();
 }
 
-int
+void
 box(double x0, double y0, double x1, double y1, double r) {
 	if (r < MINRAD)
 		fprintf(outfp, "%.5g %.5g %.5g %.5g Q", x0,y0, x1,y1);
@@ -709,7 +709,7 @@ ellipse(double xc, double yc, double x0, double y0, double x1, double y1,
 /* most common case will have phi==0 or pi/2, and it seems worthwhile to  */
 /* check for that case without doing all the trigonometric stuff below.   */
 
-	if (y0 == 0 && x1 == 0 || x0 == 0 && y1 == 0) {
+	if ((y0 == 0 && x1 == 0) || (x0 == 0 && y1 == 0)) {
 		phi = 0;
 		r1 = fabs(x0);
 		r2 = fabs(y1);
