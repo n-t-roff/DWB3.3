@@ -1,10 +1,11 @@
 #include	<stdio.h>
 #include	<ctype.h>
+#include	<string.h>
 #include	"pic.h"
 #include	"y.tab.h"
 
-YYSTYPE getvar(s)	/* return value of variable s (usually pointer) */
-	char *s;
+YYSTYPE
+getvar(char *s)	/* return value of variable s (usually pointer) */
 {
 	struct symtab *p;
 	static YYSTYPE bug;
@@ -20,8 +21,8 @@ YYSTYPE getvar(s)	/* return value of variable s (usually pointer) */
 	return(p->s_val);
 }
 
-double getfval(s)	/* return float value of variable s */
-	char *s;
+double
+getfval(char *s)	/* return float value of variable s */
 {
 	YYSTYPE y;
 
@@ -29,9 +30,8 @@ double getfval(s)	/* return float value of variable s */
 	return y.f;
 }
 
-setfval(s, f)	/* set variable s to f */
-	char *s;
-	double f;
+void
+setfval(char *s, double f)	/* set variable s to f */
 {
 	struct symtab *p;
 
@@ -39,10 +39,9 @@ setfval(s, f)	/* set variable s to f */
 		p->s_val.f = f;
 }
 
-struct symtab *makevar(s, t, v)	/* make variable named s in table */
-	char *s;		/* assumes s is static or from tostring */
-	int t;
-	YYSTYPE v;
+struct symtab *
+makevar(char *s, int t, YYSTYPE v)	/* make variable named s in table */
+	/* char *s;		/ * assumes s is static or from tostring */
 {
 	struct symtab *p;
 
@@ -62,8 +61,8 @@ struct symtab *makevar(s, t, v)	/* make variable named s in table */
 	return(p);
 }
 
-struct symtab *lookup(s)	/* find s in symtab */
-	char *s;
+struct symtab *
+lookup(char *s)	/* find s in symtab */
 {
 	int i;
 	struct symtab *p;
@@ -75,8 +74,8 @@ struct symtab *lookup(s)	/* find s in symtab */
 	return(NULL);
 }
 
-freesymtab(p)	/* free space used by symtab at p */
-	struct symtab *p;
+void
+freesymtab(struct symtab *p)	/* free space used by symtab at p */
 {
 	struct symtab *q;
 

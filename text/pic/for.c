@@ -4,6 +4,8 @@
 
 #define	SLOP	1.001
 
+static void nextfor(void);
+
 typedef struct {
 	char	*var;	/* index variable */
 	double	to;	/* limit */
@@ -15,11 +17,8 @@ typedef struct {
 For	forstk[10];	/* stack of for loops */
 For	*forp = forstk;	/* pointer to current top */
 
-forloop(var, from, to, op, by, str)	/* set up a for loop */
-	char *var;
-	double from, to, by;
-	int op;
-	char *str;
+void
+forloop(char *var, double from, double to, int op, double by, char *str)	/* set up a for loop */
 {
 	dprintf("# for %s from %g to %g by %c %g \n",
 		var, from, to, op, by);
@@ -35,7 +34,8 @@ forloop(var, from, to, op, by, str)	/* set up a for loop */
 	unput('\n');
 }
 
-nextfor()	/* do one iteration of a for loop */
+static void
+nextfor(void)	/* do one iteration of a for loop */
 {
 	/* BUG:  this should depend on op and direction */
 	if (getfval(forp->var) > SLOP * forp->to) {	/* loop is done */
@@ -48,7 +48,8 @@ nextfor()	/* do one iteration of a for loop */
 	}
 }
 
-endfor()	/* end one iteration of for loop */
+void
+endfor(void)	/* end one iteration of for loop */
 {
 	struct symtab *p = lookup(forp->var);
 
@@ -70,9 +71,8 @@ endfor()	/* end one iteration of for loop */
 	nextfor();
 }
 
-char *ifstat(expr, thenpart, elsepart)
-	double expr;
-	char *thenpart, *elsepart;
+char *
+ifstat(double expr, char *thenpart, char *elsepart)
 {
 	dprintf("if %g then <%s> else <%s>\n", expr, thenpart, elsepart? elsepart : "");
 	if (expr) {

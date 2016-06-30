@@ -5,9 +5,11 @@
 #include	"y.tab.h"
 
 void makeattr(int type, int sub, YYSTYPE val);
+static int whatpos(obj *, int, double *, double *);
+static YYSTYPE getblk(obj *, char *);
 
-setdir(n)	/* set direction (hvmode) from LEFT, RIGHT, etc. */
-	int n;
+int
+setdir(int n)	/* set direction (hvmode) from LEFT, RIGHT, etc. */
 {
 	switch (n) {
 	case UP:	hvmode = U_DIR; break;
@@ -18,7 +20,8 @@ setdir(n)	/* set direction (hvmode) from LEFT, RIGHT, etc. */
  	return(hvmode);
 }
 
-curdir()	/* convert current dir (hvmode) to RIGHT, LEFT, etc. */
+int
+curdir(void)	/* convert current dir (hvmode) to RIGHT, LEFT, etc. */
 {
 	switch (hvmode) {
 	case R_DIR:	return RIGHT;
@@ -30,9 +33,8 @@ curdir()	/* convert current dir (hvmode) to RIGHT, LEFT, etc. */
 	return 0;
 }
 
-double getcomp(p, t)	/* return component of a position */
-	obj *p;
-	int t;
+double
+getcomp(obj *p, int t)	/* return component of a position */
 {
 	switch (t) {
 	case DOTX:
@@ -83,14 +85,14 @@ double getcomp(p, t)	/* return component of a position */
 double	exprlist[100];
 int	nexpr	= 0;
 
-exprsave(f)
-	double f;
+void
+exprsave(double f)
 {
 	exprlist[nexpr++] = f;
 }
 
-char *sprintgen(fmt)
-	char *fmt;
+char *
+sprintgen(char *fmt)
 {
 	char buf[1000];
 
@@ -100,46 +102,46 @@ char *sprintgen(fmt)
 	return tostring(buf);
 }
 
-makefattr(type, sub, f)	/* double attr */
-	int type, sub;
-	double f;
+void
+makefattr(int type, int sub, double f)	/* double attr */
 {
 	YYSTYPE val;
 	val.f = f;
 	makeattr(type, sub, val);
 }
 
-makeoattr(type, o)	/* obj* attr */
-	obj *o;
+void
+makeoattr(int type, obj *o)	/* obj* attr */
 {
 	YYSTYPE val;
 	val.o = o;
 	makeattr(type, 0, val);
 }
 
-makeiattr(type, i)	/* int attr */
-	int i;
+void
+makeiattr(int type, int i)	/* int attr */
 {
 	YYSTYPE val;
 	val.i = i;
 	makeattr(type, 0, val);
 }
 
-maketattr(sub, p)	/* text attribute: takes two */
-	char *p;
+void
+maketattr(int sub, char *p)	/* text attribute: takes two */
 {
 	YYSTYPE val;
 	val.p = p;
 	makeattr(TEXTATTR, sub, val);
 }
 
-addtattr(sub)		/* add text attrib to existing item */
+void
+addtattr(int sub)		/* add text attrib to existing item */
 {
 	attr[nattr-1].a_sub |= sub;
 }
 
-makevattr(p)	/* varname attribute */
-	char *p;
+void
+makevattr(char *p)	/* varname attribute */
 {
 	YYSTYPE val;
 	val.p = p;
@@ -162,20 +164,20 @@ makeattr(int type, int sub, YYSTYPE val) /* add attribute type and val */
 	nattr++;
 }
 
-printexpr(f)	/* print expression for debugging */
-	double f;
+void
+printexpr(double f)	/* print expression for debugging */
 {
 	printf("%g\n", f);
 }
 
-printpos(p)	/* print position for debugging */
-	obj *p;
+void
+printpos(obj *p)	/* print position for debugging */
 {
 	printf("%g, %g\n", p->o_x, p->o_y);
 }
 
-char *tostring(s)
-	register char *s;
+char *
+tostring(char *s)
 {
 	register char *p;
 	size_t l;
@@ -188,8 +190,8 @@ char *tostring(s)
 	return(p);
 }
 
-obj *makepos(x, y)	/* make a position cell */
-	double x, y;
+obj *
+makepos(double x, double y)	/* make a position cell */
 {
 	obj *p;
 
@@ -199,9 +201,8 @@ obj *makepos(x, y)	/* make a position cell */
 	return(p);
 }
 
-obj *makebetween(f, p1, p2)	/* make position between p1 and p2 */
-	double f;
-	obj *p1, *p2;
+obj *
+makebetween(double f, obj *p1, obj *p2)	/* make position between p1 and p2 */
 {
 	obj *p;
 
@@ -212,9 +213,8 @@ obj *makebetween(f, p1, p2)	/* make position between p1 and p2 */
 	return(p);
 }
 
-obj *getpos(p, corner)	/* find position of point */
-	obj *p;
-	int corner;
+obj *
+getpos(obj *p, int corner)	/* find position of point */
 {
 	double x, y;
 
@@ -222,15 +222,13 @@ obj *getpos(p, corner)	/* find position of point */
 	return makepos(x, y);
 }
 
-whatpos(p, corner, px, py)	/* what is the position (no side effect) */
-	obj *p;
-	int corner;
-	double *px, *py;
+static int
+whatpos(obj *p, int corner, double *px, double *py)	/* what is the position (no side effect) */
 {
 	double x, y, x1, y1;
 	extern double sqrt();
 
-	dprintf("whatpos %o %d %d\n", p, p->o_type, corner);
+	dprintf("whatpos %p %d %d\n", p, p->o_type, corner);
 	x = p->o_x;
 	y = p->o_y;
 	if (p->o_type != PLACE) {
@@ -318,14 +316,15 @@ whatpos(p, corner, px, py)	/* what is the position (no side effect) */
 	return 1;
 }
 
-obj *gethere()	/* make a place for curx,cury */
+obj *
+gethere(void)	/* make a place for curx,cury */
 {
 	dprintf("gethere %g %g\n", curx, cury);
 	return(makepos(curx, cury));
 }
 
-obj *getlast(n, t)	/* find n-th previous occurrence of type t */
-	int n, t;
+obj *
+getlast(int n, int t)	/* find n-th previous occurrence of type t */
 {
 	int i, k;
 	obj *p;
@@ -348,8 +347,8 @@ obj *getlast(n, t)	/* find n-th previous occurrence of type t */
 	return(NULL);
 }
 
-obj *getfirst(n, t)	/* find n-th occurrence of type t */
-	int n, t;
+obj *
+getfirst(int n, int t)	/* find n-th occurrence of type t */
 {
 	int i, k;
 	obj *p;
@@ -372,29 +371,26 @@ obj *getfirst(n, t)	/* find n-th occurrence of type t */
 	return(NULL);
 }
 
-double getblkvar(p, s)	/* find variable s2 in block p */
-	obj *p;
-	char *s;
+double
+getblkvar(obj *p, char *s)	/* find variable s2 in block p */
 {
-	YYSTYPE y, getblk();
+	YYSTYPE y;
 
 	y = getblk(p, s);
 	return y.f;
 }
 
-obj *getblock(p, s)	/* find variable s in block p */
-	obj *p;
-	char *s;
+obj *
+getblock(obj *p, char *s)	/* find variable s in block p */
 {
-	YYSTYPE y, getblk();
+	YYSTYPE y;
 
 	y = getblk(p, s);
 	return y.o;
 }
 
-YYSTYPE getblk(p, s)	/* find union type for s in p */
-	obj *p;
-	char *s;
+static YYSTYPE
+getblk(obj *p, char *s)	/* find union type for s in p */
 {
 	static YYSTYPE bug;
 	struct symtab *stp;
@@ -413,30 +409,29 @@ YYSTYPE getblk(p, s)	/* find union type for s in p */
 	return(bug);
 }
 
-obj *fixpos(p, x, y)
-	obj *p;
-	double x, y;
+obj *
+fixpos(obj *p, double x, double y)
 {
 	dprintf("fixpos returns %g %g\n", p->o_x + x, p->o_y + y);
 	return makepos(p->o_x + x, p->o_y + y);
 }
 
-obj *addpos(p, q)
-	obj *p, *q;
+obj *
+addpos(obj *p, obj *q)
 {
 	dprintf("addpos returns %g %g\n", p->o_x+q->o_x, p->o_y+q->o_y);
 	return makepos(p->o_x+q->o_x, p->o_y+q->o_y);
 }
 
-obj *subpos(p, q)
-	obj *p, *q;
+obj *
+subpos(obj *p, obj *q)
 {
 	dprintf("subpos returns %g %g\n", p->o_x-q->o_x, p->o_y-q->o_y);
 	return makepos(p->o_x-q->o_x, p->o_y-q->o_y);
 }
 
-obj *makenode(type, n)
-	int type, n;
+obj *
+makenode(int type, int n)
 {
 	obj *p;
 
@@ -459,8 +454,8 @@ obj *makenode(type, n)
 	return(p);
 }
 
-extreme(x, y)	/* record max and min x and y values */
-	double x, y;
+void
+extreme(double x, double y)	/* record max and min x and y values */
 {
 	if (x > xmax)
 		xmax = x;

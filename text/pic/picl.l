@@ -17,7 +17,7 @@ extern	char	*filename;
 extern	struct	symtab	symtab[];
 extern	struct	symtab*copythru();
 
-#define	CADD	cbuf[clen++]=yytext[0]; if(clen>=CBUFLEN-1) {ERROR "string too long", cbuf WARNING; BEGIN A;}
+#define	CADD	cbuf[clen++]=yytext[0]; if(clen>=CBUFLEN-1) {ERROR "string too long: \"%s\"", cbuf WARNING; BEGIN A;}
 #define	CBUFLEN	500
 char	cbuf[CBUFLEN];
 int	c, clen, cflag, delim;

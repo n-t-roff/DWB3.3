@@ -3,7 +3,11 @@
 #include	"pic.h"
 #include	"y.tab.h"
 
-obj *arcgen(type)	/* handles circular and (eventually) elliptical arcs */
+static void arc_extreme(double, double, double, double, double, double);
+static int quadrant(double,double);
+
+obj *
+arcgen(int type)	/* handles circular and (eventually) elliptical arcs */
 {
 	static double prevw = HT10;
 	static double prevh = HT5;
@@ -162,9 +166,9 @@ The bounding box is then the range of this list.
 The following code implements this, with simple optimizations.
 ***********************************************************************/
 
-
-arc_extreme(x0, y0, x1, y1, xc, yc)
-	double x0, y0, x1, y1, xc, yc;  /* start, end, center */
+static void
+arc_extreme(double x0, double y0, double x1, double y1, double xc, double yc)
+	/* double x0, y0, x1, y1, xc, yc;  / * start, end, center */
 {
 	/* assumes center isn't too far out */
 	double r, xmin, ymin, xmax, ymax;
@@ -199,8 +203,8 @@ arc_extreme(x0, y0, x1, y1, xc, yc)
 	extreme(xmax, ymax);
 }
 
-quadrant(x,y)
-	double x, y;
+static int
+quadrant(double x,double y)
 {
 	if (     x>=0.0 && y> 0.0) return(1);
 	else if( x< 0.0 && y>=0.0) return(2);

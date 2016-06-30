@@ -146,22 +146,45 @@ extern	double	curx, cury;
 extern	int	hvmode;
 extern	int	codegen;
 extern	int	PEseen;
-extern	char	*tostring(), *grow();
-extern	double	getfval(), getcomp(), getblkvar();
-extern	YYSTYPE	getvar();
-extern	struct	symtab *lookup(), *makevar();
-extern	char	*ifstat(), *sprintgen();
+extern	char	*tostring(char *),
+		*grow(char *, char *, int, int);
+extern	double	getfval(char *);
+extern	double	getcomp(obj *, int),
+		getblkvar(obj *, char *);
+extern	YYSTYPE	getvar(char *);
+extern	struct	symtab *lookup(char *);
+extern	struct	symtab *makevar(char *, int, YYSTYPE);
+extern	char	*ifstat(double, char *, char *);
+extern	char	*sprintgen(char *);
 
 extern	double	deltx, delty;
 extern	int	lineno;
 extern	int	synerr;
 
 extern	double	xmin, ymin, xmax, ymax;
-extern	obj	*leftthing(), *boxgen(), *circgen(), *arcgen();
-extern	obj	*linegen(), *splinegen(), *movegen(), *textgen(), *plotgen();
-extern	obj	*troffgen(), *rightthing(), *blockgen();
-extern	obj	*makenode(), *makepos(), *fixpos(), *addpos(), *subpos(), *makebetween();
-extern	obj	*getpos(), *gethere(), *getfirst(), *getlast(), *getblock();
+extern	obj	*leftthing(int),
+		*boxgen(),
+		*circgen(),
+		*arcgen(int);
+extern	obj	*linegen(),
+		*splinegen(),
+		*movegen(),
+		*textgen(void),
+		*plotgen();
+extern	obj	*troffgen(char *),
+		*rightthing(),
+		*blockgen(obj *, obj *);
+extern	obj	*makenode(int, int),
+		*makepos(double, double),
+		*fixpos(obj *, double, double),
+		*addpos(obj *, obj *),
+		*subpos(obj *, obj *),
+		*makebetween(double, obj *, obj *);
+extern	obj	*getpos(obj *, int),
+		*gethere(void),
+		*getfirst(int, int),
+		*getlast(int, int),
+		*getblock();
 
 struct pushstack {
 	double	p_x;
@@ -181,12 +204,58 @@ extern	int	cw;
 #define	Exp(x)	errcheck(exp(x), "exp")
 #define	Sqrt(x)	errcheck(sqrt(x), "sqrt")
 
-void pushsrc(int type, char *ptr);
-void definition(char *s);
-char *delimstr(char *s);
-void undefine(char *s);
-void dodef(struct symtab *stp);
+void pushsrc(int, char *);
+void definition(char *);
+char *delimstr(char *);
+void undefine(char *);
+void dodef(struct symtab *);
 int dwb_input(void);
-void pbstr(char *s);
-double errcheck(double x, char *s);
-void yyerror(char *s);
+void pbstr(char *);
+double errcheck(double, char *);
+void yyerror(char *);
+void openpl(char *);
+void closepl(int);
+void move(double, double);
+void printlf(int, char *);
+void troff(char *);
+void line(double, double, double, double);
+void arrow(double, double, double, double, double, double, double, int);
+void fillstart(double);
+void fillend(void);
+void box(double, double, double, double);
+void circle(double, double, double);
+void spline(double, double, double, ofloat *, int, double);
+void ellipse(double, double, double, double);
+void arc(double, double, double, double, double, double);
+void dot(void);
+void forloop(char *, double, double, int, double, char *);
+void endfor(void);
+void copyfile(char *);
+void copydef(struct symtab *);
+struct symtab *copythru(char *);
+void copyuntil(char *);
+void copy(void);
+void shell_init(void);
+void shell_text(char *);
+void shell_exec(void);
+int unput(int);
+void setfval(char *, double);
+void freesymtab(struct symtab *);
+void freedef(char *);
+void savetext(int, char *);
+int setdir(int);
+int curdir(void);
+void exprsave(double);
+void makefattr(int, int, double);
+void makeoattr(int, obj *);
+void makeiattr(int, int);
+void maketattr(int, char *);
+void addtattr(int);
+void makevattr(char *);
+void printexpr(double);
+void printpos(obj *);
+void extreme(double, double);
+void print(void);
+void label(char *, int, int);
+void resetvar(void);
+void checkscale(char *);

@@ -18,14 +18,17 @@ int getarg(char *p);
 int nextchar(void);
 void do_thru(void);
 void eprint(void);
+static char *addnewline(char *);
+static void popsrc(void);
 
-void pushsrc(int type, char *ptr) {	/* new input source */
+void
+pushsrc(int type, char *ptr) {	/* new input source */
 	if (++srcp >= src + MAXSRC)
 		ERROR "inputs nested too deep" FATAL;
 	srcp->type = type;
 	srcp->sp = ptr;
 	if (dbg > 1) {
-		printf("\n%3d ", srcp - src);
+		printf("\n%3ld ", srcp - src);
 		switch (srcp->type) {
 		case File:
 			printf("push file %s\n", ((Infile *)ptr)->fname);
@@ -51,11 +54,12 @@ void pushsrc(int type, char *ptr) {	/* new input source */
 	}
 }
 
-void popsrc(void) {	/* restore an old one */
+static void
+popsrc(void) {	/* restore an old one */
 	if (srcp <= src)
 		ERROR "too many inputs popped" FATAL;
 	if (dbg > 1) {
-		printf("%3d ", srcp - src);
+		printf("%3ld ", srcp - src);
 		switch (srcp->type) {
 		case File:
 			printf("pop file\n");
@@ -82,7 +86,8 @@ void popsrc(void) {	/* restore an old one */
 	srcp--;
 }
 
-void definition(char *s) {	/* collect definition for s and install */
+void
+definition(char *s) {	/* collect definition for s and install */
 	/* char *s;	 definitions picked up lexically */
 	char *p;
 	struct symtab *stp;
@@ -104,7 +109,8 @@ void definition(char *s) {	/* collect definition for s and install */
 	dprintf("installing %s as `%s'\n", s, p);
 }
 
-char *delimstr(char *s) {	/* get body of X ... X */
+char *
+delimstr(char *s) {	/* get body of X ... X */
 	/* char *s;		 message if too big */
 	int c, delim, rdelim, n, deep;
 	static char *buf = NULL;
@@ -138,14 +144,16 @@ char *delimstr(char *s) {	/* get body of X ... X */
 	return tostring(buf);
 }
 
-int baldelim(int c, char *s) {	/* replace c by balancing entry in s */
+int
+baldelim(int c, char *s) {	/* replace c by balancing entry in s */
 	for ( ; *s; s += 2)
 		if (*s == c)
 			return s[1];
 	return c;
 }
 
-void undefine(char *s) {	/* undefine macro */
+void
+undefine(char *s) {	/* undefine macro */
 	while (*s != ' ' && *s != '\t')		/* skip "undef..." */
 		s++;
 	while (*s == ' ' || *s == '\t')
@@ -158,7 +166,8 @@ Arg	args[10];	/* argument frames */
 Arg	*argfp = args;	/* frame pointer */
 int	argcnt;		/* number of arguments seen so far */
 
-void dodef(struct symtab *stp) { /* collect args and switch input to defn */
+void
+dodef(struct symtab *stp) { /* collect args and switch input to defn */
 	int i, len;
 	char *p;
 	Arg *ap;
@@ -180,12 +189,13 @@ void dodef(struct symtab *stp) { /* collect args and switch input to defn */
 		ap->argstk[i] = "";
 	if (dbg)
 		for (i = 0; i < argcnt; i++)
-			printf("arg %d.%d = <%s>\n", ap-args, i+1, ap->argstk[i]);
+			printf("arg %ld.%d = <%s>\n", ap-args, i+1, ap->argstk[i]);
 	argfp = ap;
 	pushsrc(Macro, stp->s_val.p);
 }
 
-int getarg(char *p) {	/* pick up single argument, store in p, return length */
+int
+getarg(char *p) {	/* pick up single argument, store in p, return length */
 	int n, c, npar;
 
 	n = npar = 0;
@@ -224,7 +234,8 @@ extern	int	thru;
 extern	struct symtab	*thrudef;
 extern	char	*untilstr;
 
-int dwb_input(void) {
+int
+dwb_input(void) {
 	register int c;
 
 	if (thru && begin) {
@@ -239,7 +250,8 @@ int dwb_input(void) {
 	return *ep++ = c;
 }
 
-int nextchar(void) {
+int
+nextchar(void) {
 	register int c;
 
   loop:
@@ -315,7 +327,8 @@ int nextchar(void) {
 	return c;
 }
 
-void do_thru(void) {	/* read one line, make into a macro expansion */
+void
+do_thru(void) {	/* read one line, make into a macro expansion */
 	int c, i;
 	char *p;
 	Arg *ap;
@@ -369,7 +382,7 @@ void do_thru(void) {	/* read one line, make into a macro expansion */
 		ap->argstk[i] = "";
 	if (dbg)
 		for (i = 0; i < argcnt; i++)
-			printf("arg %d.%d = <%s>\n", ap-args, i+1, ap->argstk[i]);
+			printf("arg %ld.%d = <%s>\n", ap-args, i+1, ap->argstk[i]);
 	if (strcmp(ap->argstk[0], ".PE") == 0) {
 		thru = 0;
 		thrudef = 0;
@@ -389,7 +402,8 @@ void do_thru(void) {	/* read one line, make into a macro expansion */
 	pushsrc(Macro, thrudef->s_val.p);
 }
 
-int unput(int c) {
+int
+unput(int c) {
 	if (++pb >= pbuf + sizeof pbuf)
 		ERROR "pushback overflow" FATAL;
 	if (--ep < ebuf)
@@ -399,11 +413,13 @@ int unput(int c) {
 	return c;
 }
 
-void pbstr(char *s) {
+void
+pbstr(char *s) {
 	pushsrc(String, s);
 }
 
-double errcheck(double x, char *s) {
+double
+errcheck(double x, char *s) {
 	if (errno == EDOM) {
 		errno = 0;
 		ERROR "%s argument out of domain", s WARNING;
@@ -416,7 +432,8 @@ double errcheck(double x, char *s) {
 
 char	errbuf[200];
 
-void yyerror(char *s) {
+void
+yyerror(char *s) {
 	extern char *cmdname;
 
 	if (synerr)
@@ -436,7 +453,8 @@ void yyerror(char *s) {
 	errno = 0;
 }
 
-void eprint(void) {	/* try to print context around error */
+void
+eprint(void) {	/* try to print context around error */
 	char *p, *q;
 
 	p = ep - 1;
@@ -463,25 +481,29 @@ void eprint(void) {	/* try to print context around error */
 	ep = ebuf;
 }
 
-yywrap() {;}
+int
+yywrap(void) {
+	return 1;
+}
 
 char	*newfile = 0;		/* filename for file copy */
 char	*untilstr = 0;		/* string that terminates a thru */
 int	thru	= 0;		/* 1 if copying thru macro */
 struct symtab	*thrudef = 0;		/* macro being used */
 
-copyfile(s)	/* remember file to start reading from */
-	char *s;
+void
+copyfile(char *s)	/* remember file to start reading from */
 {
 	newfile = s;
 }
 
-void copydef(struct symtab *p) {	/* remember macro symtab ptr */
+void
+copydef(struct symtab *p) {	/* remember macro symtab ptr */
 	thrudef = p;
 }
 
-struct symtab *copythru(s)	/* collect the macro name or body for thru */
-	char *s;
+struct symtab *
+copythru(char *s)	/* collect the macro name or body for thru */
 {
 	struct symtab *p;
 	char *q, *addnewline();
@@ -513,8 +535,8 @@ struct symtab *copythru(s)	/* collect the macro name or body for thru */
 	return p;
 }
 
-char *addnewline(p)	/* add newline to end of p */
-	char *p;
+static char *
+addnewline(char *p)	/* add newline to end of p */
 {
 	int n;
 
@@ -527,13 +549,14 @@ char *addnewline(p)	/* add newline to end of p */
 	return p;
 }
 
-copyuntil(s)	/* string that terminates a thru */
-	char *s;
+void
+copyuntil(char *s)	/* string that terminates a thru */
 {
 	untilstr = s;
 }
 
-copy()	/* begin input from file, etc. */
+void
+copy(void)	/* begin input from file, etc. */
 {
 	FILE *fin;
 
@@ -556,18 +579,21 @@ copy()	/* begin input from file, etc. */
 
 char	shellbuf[1000], *shellp;
 
-void shell_init(void) {	/* set up to interpret a shell command */
+void
+shell_init(void) {	/* set up to interpret a shell command */
 	sprintf(shellbuf, "sh -c '");
 	shellp = shellbuf + strlen(shellbuf);
 }
 
-void shell_text(char *s) {	/* add string to command being collected */
-	while (*shellp++ = *s++)
+void
+shell_text(char *s) {	/* add string to command being collected */
+	while ((*shellp++ = *s++))
 		;
 	shellp--;
 }
 
-void shell_exec(void) {	/* do it */
+void
+shell_exec(void) {	/* do it */
 	*shellp++ = '\'';
 	*shellp = '\0';
 	system(shellbuf);

@@ -12,6 +12,18 @@ char	*textshift = "\\v'.2m'";	/* move text this far down */
 /* output dimensions set by -l,-w options to 0,0 to hmax, vmax */
 /* default output is 6x6 inches */
 
+static void space(double, double, double, double);
+static double xconv(double);
+static double xsc(double);
+static double yconv(double);
+static double ysc(double);
+static void movehv(double, double);
+static void hgoto(double);
+static void vgoto(double);
+static double dwb_fabs(double);
+static void hvflush(void);
+static void flyback(void);
+static void cont(double, double);
 
 double	xscale;
 double	yscale;
@@ -32,10 +44,9 @@ extern	double	deltx;
 extern	double	delty;
 extern	double	xmin, ymin, xmax, ymax;
 
-double	xconv(), yconv(), xsc(), ysc();
-
-openpl(s)	/* initialize device */
-	char *s;	/* residue of .PS invocation line */
+void
+openpl(char *s)	/* initialize device */
+	/* char *s;	/ * residue of .PS invocation line */
 {
 	double maxdelt, maxw, maxh, ratio = 1;
 	double odeltx = deltx, odelty = delty;
@@ -43,14 +54,14 @@ openpl(s)	/* initialize device */
 	hpos = vpos = 0;
 	maxw = getfval("maxpswid");
 	maxh = getfval("maxpsht");
-/*	if (deltx > getfval("maxpswid") || delty > getfval("maxpsht")) {	/* 8.5x11 inches max */
-/*		fprintf(stderr, "pic: %g X %g picture shrunk to", deltx, delty);
-/*		maxdelt = max(deltx, delty);
-/*		deltx *= 7/maxdelt;	/* screwed up anyway; */
-/*		delty *= 7/maxdelt;	/* make it 7x7 so someone can see it */
-/*		fprintf(stderr, " %g X %g\n", deltx, delty);
-/*	}
-*/
+/*	if (deltx > getfval("maxpswid") || delty > getfval("maxpsht")) {	/ * 8.5x11 inches max * /
+ *		fprintf(stderr, "pic: %g X %g picture shrunk to", deltx, delty);
+ *		maxdelt = max(deltx, delty);
+ *		deltx *= 7/maxdelt;	/ * screwed up anyway; * /
+ *		delty *= 7/maxdelt;	/ * make it 7x7 so someone can see it * /
+ *		fprintf(stderr, " %g X %g\n", deltx, delty);
+ *	}
+ */
 	if (deltx > maxw) {	/* shrink horizontal */
 		ratio = maxw / deltx;
 		deltx *= ratio;
@@ -75,8 +86,8 @@ openpl(s)	/* initialize device */
 		/* assumes \n comes as part of s */
 }
 
-space(x0, y0, x1, y1)	/* set limits of page */
-	double x0, y0, x1, y1;
+static void
+space(double x0, double y0, double x1, double y1)	/* set limits of page */
 {
 	X0 = x0;
 	Y0 = y0;
@@ -86,33 +97,33 @@ space(x0, y0, x1, y1)	/* set limits of page */
 	yscale = delty == 0.0 ? 1.0 : delty / (Y1-Y0);
 }
 
-double xconv(x)	/* convert x from external to internal form */
-	double x;
+static double
+xconv(double x)	/* convert x from external to internal form */
 {
 	return (x-X0) * xscale;
 }
 
-double xsc(x)	/* convert x from external to internal form, scaling only */
-	double x;
+static double
+xsc(double x)	/* convert x from external to internal form, scaling only */
 {
 
 	return (x) * xscale;
 }
 
-double yconv(y)	/* convert y from external to internal form */
-	double y;
+static double
+yconv(double y)	/* convert y from external to internal form */
 {
 	return (Y1-y) * yscale;
 }
 
-double ysc(y)	/* convert y from external to internal form, scaling only */
-	double y;
+static double
+ysc(double y)	/* convert y from external to internal form, scaling only */
 {
 	return (y) * yscale;
 }
 
-closepl(type)	/* clean up after finished */
-	int type;
+void
+closepl(int type)	/* clean up after finished */
 {
 	movehv(0.0, 0.0);	/* get back to where we started */
 	if (type == 'F')
@@ -124,22 +135,22 @@ closepl(type)	/* clean up after finished */
 	printf(".if \\n(00 .fi\n");
 }
 
-move(x, y)	/* go to position x, y in external coords */
-	double x, y;
+void
+move(double x, double y)	/* go to position x, y in external coords */
 {
 	hgoto(xconv(x));
 	vgoto(yconv(y));
 }
 
-movehv(h, v)	/* go to internal position h, v */
-	double h, v;
+static void
+movehv(double h, double v)	/* go to internal position h, v */
 {
 	hgoto(h);
 	vgoto(v);
 }
 
-hmot(n)	/* generate n units of horizontal motion */
-	double n;
+#if 0
+hmot(double n)	/* generate n units of horizontal motion */
 {
 	hpos += n;
 }
@@ -149,46 +160,48 @@ vmot(n)	/* generate n units of vertical motion */
 {
 	vpos += n;
 }
+#endif
 
-hgoto(n)
-	double n;
+static void
+hgoto(double n)
 {
 	hpos = n;
 }
 
-vgoto(n)
-	double n;
+static void
+vgoto(double n)
 {
 	vpos = n;
 }
 
-double fabs(x)
-	double x;
+static double
+dwb_fabs(double x)
 {
 	return x < 0 ? -x : x;
 }
 
-hvflush()	/* get to proper point for output */
+static void
+hvflush(void)	/* get to proper point for output */
 {
-	if (fabs(hpos-htrue) >= 0.0005) {
+	if (dwb_fabs(hpos-htrue) >= 0.0005) {
 		printf("\\h'%.3fi'", hpos - htrue);
 		htrue = hpos;
 	}
-	if (fabs(vpos-vtrue) >= 0.0005) {
+	if (dwb_fabs(vpos-vtrue) >= 0.0005) {
 		printf("\\v'%.3fi'", vpos - vtrue);
 		vtrue = vpos;
 	}
 }
 
-flyback()	/* return to upper left corner (entry point) */
+static void
+flyback(void)	/* return to upper left corner (entry point) */
 {
 	printf(".sp -1\n");
 	htrue = vtrue = 0;
 }
 
-printlf(n, f)
-	int n;
-	char *f;
+void
+printlf(int n, char *f)
 {
 	if (f)
 		printf(".lf %d %s\n", n, f);
@@ -196,8 +209,8 @@ printlf(n, f)
 		printf(".lf %d\n", n);
 }
 
-troff(s)	/* output troff right here */
-	char *s;
+void
+troff(char *s)	/* output troff right here */
 {
 	printf("%s\n", s);
 }
@@ -244,16 +257,17 @@ label(char *s, int t, int nh)	/* text s of type t nh half-lines up */
 	flyback();
 }
 
-line(x0, y0, x1, y1)	/* draw line from x0,y0 to x1,y1 */
-	double x0, y0, x1, y1;
+void
+line(double x0, double y0, double x1, double y1)	/* draw line from x0,y0 to x1,y1 */
 {
 	move(x0, y0);
 	cont(x1, y1);
 }
 
-arrow(x0, y0, x1, y1, w, h, ang, nhead) 	/* draw arrow (without shaft) */
-	double x0, y0, x1, y1, w, h, ang;	/* head wid w, len h, rotated ang */
-	int nhead;				/* and drawn with nhead lines */
+void
+arrow(double x0, double y0, double x1, double y1, double w, double h, double ang, int nhead) 	/* draw arrow (without shaft) */
+	/* double x0, y0, x1, y1, w, h, ang;	/ * head wid w, len h, rotated ang */
+	/* int nhead;				/ * and drawn with nhead lines */
 {
 	double alpha, rot, drot, hyp;
 	double dx, dy;
@@ -274,23 +288,24 @@ arrow(x0, y0, x1, y1, w, h, ang, nhead) 	/* draw arrow (without shaft) */
 	}
 }
 
-fillstart(v)	/* this works only for postscript, obviously */
-	double v;
+void
+fillstart(double v)	/* this works only for postscript, obviously */
 {
 	hvflush();
 	printf("\\X'BeginObject %g setgray'\n", v);
 	flyback();
 }
 
-fillend()
+void
+fillend(void)
 {
 	hvflush();
 	printf("\\X'EndObject gsave eofill grestore 0 setgray stroke'\n");
 	flyback();
 }
 
-box(x0, y0, x1, y1)
-	double x0, y0, x1, y1;
+void
+box(double x0, double y0, double x1, double y1)
 {
 	move(x0, y0);
 	cont(x0, y1);
@@ -299,8 +314,8 @@ box(x0, y0, x1, y1)
 	cont(x0, y0);
 }
 
-cont(x, y)	/* continue line from here to x,y */
-	double x, y;
+static void
+cont(double x, double y)	/* continue line from here to x,y */
 {
 	double h1, v1;
 	double dh, dv;
@@ -316,8 +331,8 @@ cont(x, y)	/* continue line from here to x,y */
 	vpos = v1;
 }
 
-circle(x, y, r)
-	double x, y, r;
+void
+circle(double x, double y, double r)
 {
 	move(x-r, y);
 	hvflush();
@@ -325,12 +340,9 @@ circle(x, y, r)
 	flyback();
 }
 
-spline(x, y, n, p, dashed, ddval)
-	double x, y;
-	ofloat *p;
-	double n;	/* sic */
-	int dashed;
-	double ddval;
+void
+spline(double x, double y, double n, ofloat *p, int dashed, double ddval)
+	/* double n;	/ * sic */
 {
 	int i;
 	double dx, dy;
@@ -362,8 +374,8 @@ spline(x, y, n, p, dashed, ddval)
 	flyback();
 }
 
-ellipse(x, y, r1, r2)
-	double x, y, r1, r2;
+void
+ellipse(double x, double y, double r1, double r2)
 {
 	double ir1, ir2;
 
@@ -375,8 +387,8 @@ ellipse(x, y, r1, r2)
 	flyback();
 }
 
-arc(x, y, x0, y0, x1, y1)	/* draw arc with center x,y */
-	double x, y, x0, y0, x1, y1;
+void
+arc(double x, double y, double x0, double y0, double x1, double y1)	/* draw arc with center x,y */
 {
 
 	move(x0, y0);
@@ -386,7 +398,8 @@ arc(x, y, x0, y0, x1, y1)	/* draw arc with center x,y */
 	flyback();
 }
 
-dot() {
+void
+dot(void) {
 	hvflush();
 	/* what character to draw here depends on what's available. */
 	/* on the 202, l. is good but small. */

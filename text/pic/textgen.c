@@ -2,7 +2,8 @@
 #include	"pic.h"
 #include	"y.tab.h"
 
-obj *textgen()
+obj *
+textgen(void)
 {
 	int i, sub, nstr, at, with, hset;
 	double xwith, ywith, h, w, x0, y0, x1, y1;
@@ -94,16 +95,15 @@ obj *textgen()
 	return(p);
 }
 
-obj *troffgen(s)	/* save away a string of troff commands */
-	char *s;
+obj *
+troffgen(char *s)	/* save away a string of troff commands */
 {
 	savetext(CENTER, s);	/* use the existing text mechanism */
 	return makenode(TROFF, 0);
 }
 
-savetext(t, s)	/* record text elements for current object */
-	int t;
-	char *s;
+void
+savetext(int t, char *s)	/* record text elements for current object */
 {
 	if (ntext >= ntextlist)
 		text = (Text *) grow((char *) text, "text", ntextlist += 200, sizeof(Text));

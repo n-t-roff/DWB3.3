@@ -2,10 +2,12 @@
 #include	"pic.h"
 #include	"y.tab.h"
 
-void dotline(double x0, double y0, double x1, double y1, int ddtype,
-    double ddval);
+void dotline(double, double, double, double, int, double);
+static void dotbox(double, double, double, double, int, double);
+static void dotext(obj *);
 
-print()
+void
+print(void)
 {
 	obj *p;
 	int i, j, k, m;
@@ -61,9 +63,9 @@ print()
 			move(ox, oy);
 			dotext(p);
 			if (ishor(m))
-				move(ox + isright(m) ? x1 : -x1, oy);
+				move(ox + (isright(m) ? x1 : -x1), oy);
 			else
-				move(ox, oy + isup(m) ? x1 : -x1);
+				move(ox, oy + (isup(m) ? x1 : -x1));
 			break;
 		case ELLIPSE:
 			if (p->o_attr & FILLBIT)
@@ -75,9 +77,9 @@ print()
 			move(ox, oy);
 			dotext(p);
 			if (ishor(m))
-				move(ox + isright(m) ? x1 : -x1, oy);
+				move(ox + (isright(m) ? x1 : -x1), oy);
 			else
-				move(ox, oy - isdown(m) ? y1 : -y1);
+				move(ox, oy - (isdown(m) ? y1 : -y1));
 			break;
 		case ARC:
 			move(ox, oy);
@@ -185,10 +187,8 @@ dotline(double x0, double y0, double x1, double y1, int ddtype, double ddval)
 	prevval = 0.05;
 }
 
-dotbox(x0, y0, x1, y1, ddtype, ddval)	/* dotted or dashed box */
-	double x0, y0, x1, y1;
-	int ddtype;
-	double ddval;
+static void
+dotbox(double x0, double y0, double x1, double y1, int ddtype, double ddval)	/* dotted or dashed box */
 {
 	dotline(x0, y0, x1, y0, ddtype, ddval);
 	dotline(x1, y0, x1, y1, ddtype, ddval);
@@ -196,8 +196,8 @@ dotbox(x0, y0, x1, y1, ddtype, ddval)	/* dotted or dashed box */
 	dotline(x0, y1, x0, y0, ddtype, ddval);
 }
 
-dotext(p)	/* print text strings of p in proper vertical spacing */
-	obj *p;
+static void
+dotext(obj *p)	/* print text strings of p in proper vertical spacing */
 {
 	int i, nhalf;
 

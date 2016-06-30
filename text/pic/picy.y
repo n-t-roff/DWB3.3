@@ -1,8 +1,10 @@
 %{
 #include <stdio.h>
+#include <string.h>
 #include "pic.h"
 #include <math.h>
 YYSTYPE	y;
+int yylex();
 %}
 
 %token	<i>	BOX	1	/* DON'T CHANGE THESE! */

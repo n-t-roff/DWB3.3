@@ -5,14 +5,16 @@
 #define	NBRACK	20	/* depth of [...] */
 #define	NBRACE	20	/* depth of {...} */
 
+static void blockadj(obj *);
+
 struct pushstack stack[NBRACK];
 int	nstack	= 0;
 struct pushstack bracestack[NBRACE];
 int	nbstack	= 0;
 
-obj *leftthing(c)	/* called for {... or [... */
+obj *
+leftthing(int c)	/* called for {... or [... */
 			/* really ought to be separate functions */
-	int c;
 {
 	obj *p;
 
@@ -46,8 +48,8 @@ obj *leftthing(c)	/* called for {... or [... */
 	return(p);
 }
 
-obj *rightthing(p, c)	/* called for ... ] or ... } */
-	obj *p;
+obj *
+rightthing(obj *p, int c)	/* called for ... ] or ... } */
 {
 	obj *q;
 
@@ -81,8 +83,8 @@ obj *rightthing(p, c)	/* called for ... ] or ... } */
 	return(q);
 }
 
-obj *blockgen(p, q)	/* handles [...] */
-	obj *p, *q;
+obj *
+blockgen(obj *p, obj *q)	/* handles [...] */
 {
 	int i, invis, at, with;
 	double ddval, h, w, xwith, ywith;
@@ -189,8 +191,8 @@ obj *blockgen(p, q)	/* handles [...] */
 	return(p);
 }
 
-blockadj(p)	/* adjust coords in block starting at p */
-	obj *p;
+static void
+blockadj(obj *p)	/* adjust coords in block starting at p */
 {
 	double dx, dy;
 	int n, lev;

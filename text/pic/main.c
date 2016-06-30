@@ -1,5 +1,8 @@
+#include	<sys/types.h>
+#include	<unistd.h>
 #include	<stdio.h>
 #include	<signal.h>
+#include	<string.h>
 #include	"pic.h"
 #include	"y.tab.h"
 
@@ -40,11 +43,13 @@ double	ymax	= -30000;
 
 char	*version = "version Sep 20, 1989";
 
-extern void fpecatch();
 void reset(void);
+static void fpecatch(int);
+static void setdefaults(void);
+static void getdata(void);
 
-main(argc, argv)
-	char *argv[];
+int
+main(int argc, char **argv)
 {
 	char buf[20];
 
@@ -88,18 +93,19 @@ main(argc, argv)
 			fclose(curfile->fin);
 			free(curfile->fname);
 		}
-	exit(anyerr);
+	return anyerr;
 }
 
-void fpecatch()
+static void
+fpecatch(int i)
 
 {
+	(void)i;
 	ERROR "floating point exception" FATAL;
 }
 
-char *grow(ptr, name, num, size)	/* make array bigger */
-	char *ptr, *name;
-	int num, size;
+char *
+grow(char *ptr, char *name, int num, int size)	/* make array bigger */
 {
 	char *p;
 
@@ -140,7 +146,8 @@ static struct {
 	NULL, 0, 0
 };
 
-setdefaults()	/* set default sizes for variables like boxht */
+static void
+setdefaults(void)	/* set default sizes for variables like boxht */
 {
 	int i;
 	YYSTYPE v;
@@ -170,8 +177,8 @@ resetvar(void)	/* reset variables listed */
 	}
 }
 
-checkscale(s)	/* if s is "scale", adjust default variables */
-	char *s;
+void
+checkscale(char *s)	/* if s is "scale", adjust default variables */
 {
 	int i;
 	double scale;
@@ -184,7 +191,8 @@ checkscale(s)	/* if s is "scale", adjust default variables */
 	}
 }
 
-getdata()
+static void
+getdata(void)
 {
 	char *p, buf[1000], buf1[100];
 	int ln;
@@ -220,6 +228,7 @@ getdata()
 			if (buf[3] == ' ') {	/* next things are wid & ht */
 				if (sscanf(&buf[4],"%lf %lf", &deltx, &delty) < 2)
 					delty = deltx * (ymax-ymin) / (xmax-xmin);
+#if 0
 				/* else {
 				/*	double xfac, yfac; */
 				/*	xfac = deltx / (xmax-xmin);
@@ -230,6 +239,7 @@ getdata()
 				/*		deltx = yfac * (xmax-xmin);
 				/*}
 				*/
+#endif
 			}
 			dprintf("deltx = %g, delty = %g\n", deltx, delty);
 			if (codegen && !synerr) {
@@ -251,7 +261,8 @@ getdata()
 	}
 }
 
-void reset(void) {
+void
+reset(void) {
 	obj *op;
 	int i;
 	extern int nstack;
