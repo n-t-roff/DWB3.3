@@ -9,6 +9,7 @@
 #include "print.h"
 #include "main.h"
 YYSTYPE	y;
+int yylex();
 %}
 
 %token	<i>	BOX	  1	/* DON'T CHANGE THESE!		*/

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "grap.h"
 #include "y.tab.h"
 
@@ -12,30 +13,30 @@ int	xcflag	= 0;	/* 1 if xcoord set */
 int	ycflag	= 0;
 int	logcoord = 0;
 
-coord_x(pt)	/* remember x coord */
-	Point pt;
+void
+coord_x(Point pt)	/* remember x coord */
 {
 	xcoord = pt;
 	xcflag = 1;
 	margin = 0;	/* no extra space around picture if explicit coords */
 }
 
-coord_y(pt)
-	Point pt;
+void
+coord_y(Point pt)
 {
 	ycoord = pt;
 	ycflag = 1;
 	margin = 0;	/* no extra space if explicit coords */
 }
 
-coordlog(n)	/* remember log scaling */
-	int n;
+void
+coordlog(int n)	/* remember log scaling */
 {
 	logcoord = n;
 }
 
-coord(p)	/* set coord range */
-	Obj *p;
+void
+coord(Obj *p)	/* set coord range */
 {
 	static char buf[10];
 
@@ -67,8 +68,8 @@ coord(p)	/* set coord range */
 	auto_x = 0;
 }
 
-resetcoord(p)	/* reset current coordinate */
-	Obj *p;
+void
+resetcoord(Obj *p)	/* reset current coordinate */
 {
 	curr_coord = p->name;
 }

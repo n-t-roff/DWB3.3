@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 #include "grap.h"
 #include "y.tab.h"
+
+static void print(void);
+static void do_first(void);
+static void reset(void);
+static void opentemp(void);
 
 double	margin	= MARGIN;	/* extra space around edges */
 extern	double	frame_ht, frame_wid, ticklen;
@@ -11,7 +17,8 @@ extern	int	tick_dir;
 char	graphname[50] = "Graph";
 char	graphpos[200] = "";
 
-print()	/* arrange final output */
+static void
+print(void)	/* arrange final output */
 {
 	FILE *fd;
 	Obj *p, *dfp, *setauto();
@@ -114,7 +121,8 @@ print()	/* arrange final output */
 	tfd = NULL;
 }
 
-endstat()	/* clean up after each statement */
+void
+endstat(void)	/* clean up after each statement */
 {
 	extern int just, sizeop;
 	extern double sizexpr, lab_up, lab_rt;
@@ -129,8 +137,8 @@ endstat()	/* clean up after each statement */
 	ticklen = TICKLEN;
 }
 
-graph(s)	/* graph statement */
-	char *s;
+void
+graph(char *s)	/* graph statement */
 {
 	char *p, *os;
 	int c;
@@ -160,7 +168,8 @@ graph(s)	/* graph statement */
 	}
 }
 
-setup()		/* done at each .G1 */
+void
+setup(void)		/* done at each .G1 */
 {
 	static int firstG1 = 0;
 
@@ -175,7 +184,8 @@ setup()		/* done at each .G1 */
 	strcpy(graphpos, "");
 }
 
-do_first()	/* done at first .G1:  definitions, etc. */
+static void
+do_first(void)	/* done at first .G1:  definitions, etc. */
 {
 	extern int lib;
 	extern char *lib_defines;
@@ -193,7 +203,8 @@ do_first()	/* done at first .G1:  definitions, etc. */
 	}
 }
 
-reset()		/* done at each "graph ..." statement */
+static void
+reset(void)		/* done at each "graph ..." statement */
 {
 	Obj *p, *np, *deflist;
 	extern int tlist, toffside, autodir;
@@ -220,7 +231,8 @@ reset()		/* done at each "graph ..." statement */
 	objlist = deflist;
 }
 
-opentemp()
+static void
+opentemp(void)
 {
 	if (tfd != stdout) {
 		if (tfd != NULL)

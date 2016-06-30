@@ -13,15 +13,14 @@ double	lab_up	= 0.0;		/* extra motion for label */
 double	lab_rt	= 0.0;		/* extra motion for label */
 double	lab_wid	= 0.0;		/* override default width computation */
 
-labelwid(amt)
-	double amt;
+void
+labelwid(double amt)
 {
 	lab_wid = amt + .00001;
 }
 
-labelmove(dir, amt)	/* record direction & motion of position corr */
-	int dir;
-	double amt;
+void
+labelmove(int dir, double amt)	/* record direction & motion of position corr */
 {
 	switch (dir) {
 	case UP:	lab_up += amt; break;
@@ -31,9 +30,8 @@ labelmove(dir, amt)	/* record direction & motion of position corr */
 	}
 }
 
-label(label_side, stringlist)	/* stick label on label_side */
-	int label_side;
-	Attr *stringlist;
+void
+label(int label_side, Attr *stringlist)	/* stick label on label_side */
 {
 	int m;
 	Attr *ap;
@@ -72,13 +70,15 @@ label(label_side, stringlist)	/* stick label on label_side */
 	label_side = BOT;
 }
 
-lab_adjust()	/* add a string to adjust labels, ticks, etc. */
+void
+lab_adjust(void)	/* add a string to adjust labels, ticks, etc. */
 {
 	if (lab_up != 0.0 || lab_rt != 0.0)
 		fprintf(tfd, " + (%g,%g)", lab_rt, lab_up);
 }
 
-char *sizeit(Attr *ap)		/* add \s..\s to ap->sval */
+char *
+sizeit(Attr *ap)		/* add \s..\s to ap->sval */
 {
 	int n;
 	static char buf[1000];

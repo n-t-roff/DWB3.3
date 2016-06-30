@@ -14,16 +14,21 @@ Src	src[MAXSRC];	/* input source stack */
 Src	*srcp	= src;
 
 char *addnewline(char *p);	/* add newline to end of p */
-void do_thru(void);
+static void do_thru(void);
 void eprint(void);
+void popsrc(void);
+static int baldelim(int, char *);
+static int getarg(char *);
+static int nextchar(void);
 
-void pushsrc(int type, char *ptr) {	/* new input source */
+void
+pushsrc(int type, char *ptr) {	/* new input source */
 	if (++srcp >= src + MAXSRC)
 		ERROR "inputs nested too deep" FATAL;
 	srcp->type = type;
 	srcp->sp = ptr;
 	if (dbg) {
-		printf("\n%3d ", srcp - src);
+		printf("\n%3ld ", srcp - src);
 		switch (srcp->type) {
 		case File:
 			printf("push file %s\n", ((Infile *)ptr)->fname);
@@ -49,11 +54,12 @@ void pushsrc(int type, char *ptr) {	/* new input source */
 	}
 }
 
-void popsrc(void) {	/* restore an old one */
+void
+popsrc(void) {	/* restore an old one */
 	if (srcp <= src)
 		ERROR "too many inputs popped" FATAL;
 	if (dbg) {
-		printf("%3d ", srcp - src);
+		printf("%3ld ", srcp - src);
 		switch (srcp->type) {
 		case File:
 			printf("pop file\n");
@@ -80,7 +86,8 @@ void popsrc(void) {	/* restore an old one */
 	srcp--;
 }
 
-void definition(char *s) {	/* collect definition for s and install */
+void
+definition(char *s) {	/* collect definition for s and install */
 	/* char *s;	 definitions picked up lexically */
 	char *p;
 	Obj *stp;
@@ -101,7 +108,8 @@ void definition(char *s) {	/* collect definition for s and install */
 	dprintf("installing %s as `%s'\n", s, p);
 }
 
-char *delimstr(char *s) {	/* get body of X ... X */
+char *
+delimstr(char *s) {	/* get body of X ... X */
 	/* char *s;		message if too big */
 	int c, delim, rdelim, n, deep;
 	static char *buf = NULL;
@@ -135,7 +143,8 @@ char *delimstr(char *s) {	/* get body of X ... X */
 	return tostring(buf);
 }
 
-int baldelim(int c, char *s) {	/* replace c by balancing entry in s */
+static int
+baldelim(int c, char *s) {	/* replace c by balancing entry in s */
 	for ( ; *s; s += 2)
 		if (*s == c)
 			return s[1];
@@ -146,7 +155,8 @@ Arg	args[10];	/* argument frames */
 Arg	*argfp = args;	/* frame pointer */
 int	argcnt;		/* number of arguments seen so far */
 
-void dodef(Obj *stp) {	/* collect args and switch input to defn */
+void
+dodef(Obj *stp) {	/* collect args and switch input to defn */
 	int i, len;
 	char *p;
 	Arg *ap;
@@ -168,12 +178,13 @@ void dodef(Obj *stp) {	/* collect args and switch input to defn */
 		ap->argstk[i] = "";
 	if (dbg)
 		for (i = 0; i < argcnt; i++)
-			printf("arg %d.%d = <%s>\n", ap-args, i+1, ap->argstk[i]);
+			printf("arg %ld.%d = <%s>\n", ap-args, i+1, ap->argstk[i]);
 	argfp = ap;
 	pushsrc(Macro, stp->val);
 }
 
-int getarg(char *p) {	/* pick up single argument, store in p, return length */
+static int
+getarg(char *p) {	/* pick up single argument, store in p, return length */
 	int n, c, npar;
 
 	n = npar = 0;
@@ -212,7 +223,8 @@ extern	int	thru;
 extern	Obj	*thrudef;
 extern	char	*untilstr;
 
-int dwb_input(void) {
+int
+dwb_input(void) {
 	register int c;
 
 	if (thru && begin) {
@@ -226,7 +238,8 @@ int dwb_input(void) {
 	return *ep++ = c;
 }
 
-int nextchar(void) {
+static int
+nextchar(void) {
 	register int c;
 
   loop:
@@ -302,7 +315,8 @@ int nextchar(void) {
 	return c;
 }
 
-void do_thru(void) {	/* read one line, make into a macro expansion */
+static void
+do_thru(void) {	/* read one line, make into a macro expansion */
 	int c, i;
 	char *p;
 	Arg *ap;
@@ -358,7 +372,7 @@ void do_thru(void) {	/* read one line, make into a macro expansion */
 		ap->argstk[i] = "";
 	if (dbg)
 		for (i = 0; i < argcnt; i++)
-			printf("arg %d.%d = <%s>\n", ap-args, i+1, ap->argstk[i]);
+			printf("arg %ld.%d = <%s>\n", ap-args, i+1, ap->argstk[i]);
 	if (strcmp(ap->argstk[0], ".G2") == 0) {
 		thru = 0;
 		thrudef = 0;
@@ -378,7 +392,8 @@ void do_thru(void) {	/* read one line, make into a macro expansion */
 	pushsrc(Macro, thrudef->val);
 }
 
-int dwb_unput(int c) {
+int
+dwb_unput(int c) {
 	if (++pb >= pbuf + sizeof pbuf)
 		ERROR "pushback overflow" FATAL;
 	if (--ep < ebuf)
@@ -388,11 +403,13 @@ int dwb_unput(int c) {
 	return c;
 }
 
-void pbstr(char *s) {
+void
+pbstr(char *s) {
 	pushsrc(String, s);
 }
 
-double errcheck(double x, char *s) {
+double
+errcheck(double x, char *s) {
 	if (errno == EDOM) {
 		errno = 0;
 		ERROR "%s argument out of domain", s WARNING;
@@ -405,7 +422,8 @@ double errcheck(double x, char *s) {
 
 char	errbuf[200];
 
-void yyerror(char *s) {
+void
+yyerror(char *s) {
 	extern char *cmdname;
 
 	if (synerr)
@@ -422,7 +440,8 @@ void yyerror(char *s) {
 	errno = 0;
 }
 
-void eprint(void) {	/* try to print context around error */
+void
+eprint(void) {	/* try to print context around error */
 	char *p, *q;
 
 	p = ep - 1;
@@ -449,24 +468,29 @@ void eprint(void) {	/* try to print context around error */
 	ep = ebuf;
 }
 
-yywrap() {;}
+int
+yywrap() {
+	return 1;
+}
 
 char	*newfile = 0;		/* filename for file copy */
 char	*untilstr = 0;		/* string that terminates a thru */
 int	thru	= 0;		/* 1 if copying thru macro */
 Obj	*thrudef = 0;		/* macro being used */
 
-copyfile(s)	/* remember file to start reading from */
-	char *s;
+void
+copyfile(char *s)	/* remember file to start reading from */
 {
 	newfile = s;
 }
 
-void copydef(Obj *p) {	/* remember macro Obj */
+void
+copydef(Obj *p) {	/* remember macro Obj */
 	thrudef = p;
 }
 
-Obj *copythru(char *s)	/* collect the macro name or body for thru */
+Obj *
+copythru(char *s)	/* collect the macro name or body for thru */
 {
 	Obj *p;
 	char *q, *addnewline();
@@ -493,7 +517,8 @@ Obj *copythru(char *s)	/* collect the macro name or body for thru */
 	return p;
 }
 
-char *addnewline(char *p)	/* add newline to end of p */
+char *
+addnewline(char *p)	/* add newline to end of p */
 {
 	int n;
 
@@ -506,13 +531,14 @@ char *addnewline(char *p)	/* add newline to end of p */
 	return p;
 }
 
-copyuntil(s)	/* string that terminates a thru */
-	char *s;
+void
+copyuntil(char *s)	/* string that terminates a thru */
 {
 	untilstr = s;
 }
 
-copy()	/* begin input from file, etc. */
+void
+copy(void)	/* begin input from file, etc. */
 {
 	FILE *fin;
 
@@ -535,13 +561,15 @@ copy()	/* begin input from file, etc. */
 
 char	shellbuf[1000], *shellp;
 
-void shell_init(void) {	/* set up to interpret a shell command */
+void
+shell_init(void) {	/* set up to interpret a shell command */
 	fprintf(tfd, "# shell cmd...\n");
 	sprintf(shellbuf, "sh -c '");
 	shellp = shellbuf + strlen(shellbuf);
 }
 
-void shell_text(char *s) {	/* add string to command being collected */
+void
+shell_text(char *s) {	/* add string to command being collected */
 	/* fprintf(tfd, "#add <%s> to <%s>\n", s, shellbuf); */
 	while (*s) {
 		if (*s == '\'')	{	/* protect interior quotes */
@@ -553,7 +581,8 @@ void shell_text(char *s) {	/* add string to command being collected */
 	}
 }
 
-void shell_exec(void) {	/* do it */
+void
+shell_exec(void) {	/* do it */
 	/* fprintf(tfd, "# run <%s>\n", shellbuf); */
 	*shellp++ = '\'';
 	*shellp = '\0';

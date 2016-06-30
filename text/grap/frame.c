@@ -14,7 +14,8 @@ char	*sides[] = {
 };
 char	*newsides[4] = { 0, 0, 0, 0 };	/* filled in later */
 
-frame()		/* pump out frame definition, reset for next */
+void
+frame(void)		/* pump out frame definition, reset for next */
 {
 	int i;
 
@@ -37,14 +38,14 @@ frame()		/* pump out frame definition, reset for next */
 	}
 }
 
-frameht(f)	/* set height of frame */
-	double f;
+void
+frameht(double f)	/* set height of frame */
 {
 	frame_ht = f;
 }
 
-framewid(f)	/* set width of frame */
-	double f;
+void
+framewid(double f)	/* set width of frame */
 {
 	frame_wid = f;
 }

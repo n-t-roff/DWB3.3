@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 #include "grap.h"
+int yylex();
 %}
 
 %token	<i>	FRAME TICKS GRID LABEL COORD

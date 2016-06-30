@@ -3,8 +3,14 @@
 #include	<stdio.h>
 #include	<signal.h>
 #include	<math.h>
+#include	<unistd.h>
 #include	"grap.h"
 #include	"y.tab.h"
+
+static void onintr(int);
+static void fpecatch(int);
+static void setdefaults(void);
+static void getdata(void);
 
 int	dbg	= 0;
 
@@ -29,10 +35,8 @@ Point	ptmax	= { NULL, BIG, BIG };
 
 char	*version = "version February 5, 1990";
 
-extern void onintr(), fpecatch();
-
-main(argc, argv)
-	char **argv;
+int
+main(int argc, char **argv)
 {
 	char *getenv();
 
@@ -69,7 +73,7 @@ main(argc, argv)
 		while (argc-- > 1) {
 			if ((curfile->fin = fopen(*++argv, "r")) == NULL) {
 				fprintf(stderr, "grap: can't open %s\n", *argv);
-				onintr();
+				onintr(0);
 			}
 			curfile->fname = tostring(*argv);
 			pushsrc(File, curfile->fname);
@@ -79,23 +83,28 @@ main(argc, argv)
 		}
 	if (!dbg)
 		unlink(tempfile);
-	exit(0);
+	return 0;
 }
 
-void onintr()
+static void
+onintr(int i)
 {
+	(void)i;
 	if (!dbg)
 		unlink(tempfile);
 	exit(1);
 }
 
-void fpecatch()
+static void
+fpecatch(int i)
 {
+	(void)i;
 	ERROR "floating point exception" WARNING;
-	onintr();
+	onintr(0);
 }
 
-char *grow(char *ptr, char *name, int num, int size)	/* make array bigger */
+char *
+grow(char *ptr, char *name, int num, int size)	/* make array bigger */
 {
 	char *p;
 
@@ -119,7 +128,8 @@ static struct {
 	NULL, 0
 };
 
-setdefaults()	/* set default sizes for variables */
+static void
+setdefaults(void)	/* set default sizes for variables */
 {
 	int i;
 	Obj *p;
@@ -130,7 +140,8 @@ setdefaults()	/* set default sizes for variables */
 	}
 }
 
-getdata()		/* read input */
+static void
+getdata(void)		/* read input */
 {
 	register FILE *fin;
 	char buf[1000], buf1[100];

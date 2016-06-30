@@ -2,9 +2,8 @@
 #include "grap.h"
 #include "y.tab.h"
 
-line(type, p1, p2, desc)	/* draw a line segment */
-	Point p1, p2;
-	Attr *desc;
+void
+line(int type, Point p1, Point p2, Attr *desc)	/* draw a line segment */
 {
 	fprintf(tfd, "%s %s from %s",
 		type==LINE ? "line" : "arrow",  desc_str(desc), xyname(p1));
@@ -14,9 +13,8 @@ line(type, p1, p2, desc)	/* draw a line segment */
 	range(p2);
 }
 
-circle(r, pt)		/* draw a circle */
-	double r;
-	Point pt;
+void
+circle(double r, Point pt)		/* draw a circle */
 {
 	if (r > 0.0)
 		fprintf(tfd, "circle rad %g at %s\n", r, xyname(pt));
@@ -25,7 +23,8 @@ circle(r, pt)		/* draw a circle */
 	range(pt);
 }
 
-char *xyname(Point pt)	/* generate xy name macro for point p */
+char *
+xyname(Point pt)	/* generate xy name macro for point p */
 {
 	static char buf[200];
 	Obj *p;
@@ -45,8 +44,8 @@ char *xyname(Point pt)	/* generate xy name macro for point p */
 	return buf;	/* WATCH IT:  static */
 }
 
-pic(s)	/* fire out pic stuff directly */
-	char *s;
+void
+pic(char *s)	/* fire out pic stuff directly */
 {
 	while (*s == ' ')
 		s++;
@@ -55,7 +54,8 @@ pic(s)	/* fire out pic stuff directly */
 
 int	auto_x	= 0;	/* counts abscissa if none provided */
 
-numlist()	/* print numbers in default way */
+void
+numlist(void)	/* print numbers in default way */
 {
 	Obj *p;
 	Point pt;
@@ -83,19 +83,16 @@ numlist()	/* print numbers in default way */
 	nnum = 0;
 }
 
-plot(sl, pt)	/* put stringlist sl at point pt */
-	Attr *sl;
-	Point pt;
+void
+plot(Attr *sl, Point pt)	/* put stringlist sl at point pt */
 {
 	fprintf(tfd, "%s at %s\n", slprint(sl), xyname(pt));
 	range(pt);
 	freeattr(sl);
 }
 
-plotnum(f, fmt, pt)	/* plot value f at point */
-	double f;
-	char *fmt;
-	Point pt;
+void
+plotnum(double f, char *fmt, Point pt)	/* plot value f at point */
 {
 	char buf[100];
 
@@ -110,11 +107,8 @@ plotnum(f, fmt, pt)	/* plot value f at point */
 	range(pt);
 }
 
-drawdesc(type, p, desc, s)	/* set line description for p */
-	int type;
-	Obj *p;
-	Attr *desc;
-	char *s;
+void
+drawdesc(int type, Obj *p, Attr *desc, char *s)	/* set line description for p */
 {
 	p->attr = desc;
 	p->attr->sval = s;
@@ -124,10 +118,8 @@ drawdesc(type, p, desc, s)	/* set line description for p */
 	}
 }
 
-next(p, pt, desc)	/* add component to a path */
-	Obj *p;
-	Point pt;
-	Attr *desc;
+void
+next(Obj *p, Point pt, Attr *desc)	/* add component to a path */
 {
 	char *s;
 

@@ -5,9 +5,14 @@
 
 void maketick(int type, char *name, int side, int inflag, double val, char *lab,
     char *lenstr, char *descstr);
-void ticklist(Obj *p, int explicit);
 void autolog(Obj *p, int side);
-void autoside(Obj *p, int side);
+static void autoside(Obj *, int);
+static void dflt_tick(double);
+static double modfloor(double, double);
+static double modceil(double, double);
+static void logtick(double, double, double);
+static void print_ticks(int, int, Obj *, char *, char *);
+static int sidelog(int, int);
 
 #define	MAXTICK	200
 int	ntick	= 0;
@@ -23,9 +28,8 @@ double	ticklen	= TICKLEN;	/* default tick length */
 int	autoticks = LEFT|BOT;
 int	autodir = 0;		/* set LEFT, etc. if automatic ticks go in */
 
-savetick(f, s)	/* remember tick location and label */
-	double f;
-	char *s;
+void
+savetick(double f, char *s)	/* remember tick location and label */
 {
 	if (ntick >= MAXTICK)
 		ERROR "too many ticks (%d)", MAXTICK FATAL;
@@ -34,8 +38,8 @@ savetick(f, s)	/* remember tick location and label */
 	ntick++;
 }
 
-dflt_tick(f)
-	double f;
+static void
+dflt_tick(double f)
 {
 	if (f >= 0.0)
 		savetick(f, tostring("%g"));
@@ -43,38 +47,40 @@ dflt_tick(f)
 		savetick(f, tostring("\\%g"));
 }
 
-tickside(n)	/* remember which side these ticks/gridlines go on */
-	int n;
+void
+tickside(int n)	/* remember which side these ticks/gridlines go on */
 {
 	tside |= n;
 }
 
-tickoff(side)	/* remember explicit sides */
-	int side;
+void
+tickoff(int side)	/* remember explicit sides */
 {
 	toffside |= side;
 }
 
-gridtickoff()	/* turn grid ticks off on the side previously specified (ugh) */
+void
+gridtickoff(void)	/* turn grid ticks off on the side previously specified (ugh) */
 {
 	goffside = tside;
 }
 
-setlist()	/* remember that there was an explicit list */
+void
+setlist(void)	/* remember that there was an explicit list */
 {
 	tlist = 1;
 }
 
-tickdir(dir, val, explicit)	/* remember in/out [expr] */
-	int dir, explicit;
-	double val;
+void
+tickdir(int dir, double val, int explicit)	/* remember in/out [expr] */
 {
 	tick_dir = dir;
 	if (explicit)
 		ticklen = val;
 }
 
-ticks()		/* set autoticks after ticks statement */
+void
+ticks(void)		/* set autoticks after ticks statement */
 {
 	/* was there an explicit "ticks [side] off"? */
 	if (toffside)
@@ -99,15 +105,15 @@ ticks()		/* set autoticks after ticks statement */
 	tick_dir = OUT;
 }
 
-double modfloor(f, t)
-	double f, t;
+static double
+modfloor(double f, double t)
 {
 	t = fabs(t);
 	return floor(f/t) * t;
 }
 
-double modceil(f, t)
-	double f, t;
+static double
+modceil(double f, double t)
 {
 	t = fabs(t);
 	return ceil(f/t) * t;
@@ -178,8 +184,8 @@ do_autoticks(Obj *p)	/* make set of ticks for default coord only */
 	}
 }
 
-logtick(v, lb, ub)
-	double v, lb, ub;
+static void
+logtick(double v, double lb, double ub)
 {
 	float slop = 1.0;	/* was 1.001 */
 
@@ -187,7 +193,8 @@ logtick(v, lb, ub)
 		dflt_tick(v);
 }
 
-Obj *setauto()	/* compute new min,max, and quant & mult */
+Obj *
+setauto(void)	/* compute new min,max, and quant & mult */
 {
 	Obj *p, *q;
 
@@ -209,7 +216,7 @@ Obj *setauto()	/* compute new min,max, and quant & mult */
 	return p;
 }
 
-void
+static void
 autoside(Obj *p, int side)
 {
 	double r, s, d, ub, lb;
@@ -289,10 +296,8 @@ autolog(Obj *p, int side)
 	}
 }
 
-iterator(from, to, op, by, fmt)	/* create an iterator */
-	double from, to, by;
-	int op;
-	char *fmt;
+void
+iterator(double from, double to, int op, double by, char *fmt)	/* create an iterator */
 {
 	double x;
 
@@ -346,10 +351,8 @@ ticklist(Obj *p, int explicit)	/* fire out the accumulated ticks */
 	print_ticks(TICKS, explicit, p, "ticklen", "");
 }
 
-print_ticks(type, explicit, p, lenstr, descstr)
-	int type, explicit;
-	Obj *p;
-	char *lenstr, *descstr;
+static void
+print_ticks(int type, int explicit, Obj *p, char *lenstr, char *descstr)
 {
 	int i, logflag, inside;
 	char buf[100];
@@ -466,14 +469,14 @@ maketick(int type, char *name, int side, int inflag, double val, char *lab,
 
 Attr	*grid_desc	= 0;
 
-griddesc(a)
-	Attr *a;
+void
+griddesc(Attr *a)
 {
 	grid_desc = a;
 }
 
-gridlist(p)
-	Obj *p;
+void
+gridlist(Obj *p)
 {
 	char *framestr;
 
@@ -490,7 +493,8 @@ gridlist(p)
 	}
 }
 
-char *desc_str(Attr *a)	/* convert DOT to "dotted", etc. */
+char *
+desc_str(Attr *a)	/* convert DOT to "dotted", etc. */
 {
 	static char buf[50], *p;
 
@@ -509,8 +513,8 @@ char *desc_str(Attr *a)	/* convert DOT to "dotted", etc. */
 		return p;
 }
 
-sidelog(logflag, side)	/* figure out whether to scale a side */
-	int logflag, side;
+static int
+sidelog(int logflag, int side)	/* figure out whether to scale a side */
 {
 	if ((logflag & XFLAG) && ((side & (BOT|TOP)) || side == 0))
 		return 1;

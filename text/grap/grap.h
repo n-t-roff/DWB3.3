@@ -124,7 +124,7 @@ extern	int	autoticks;
 extern	int	pointsize, ps_set;
 
 extern	double	log10(), log(), exp(), sin(), cos(), sqrt(), atof();
-extern	double	fabs(), floor(), ceil(), moddouble(), modceil();
+extern	double	fabs(), floor(), ceil(), moddouble();
 char *tostring(register char *s);
 Obj *lookup(char *s, int inst);	/* find s in objlist, install if inst */
 char *delimstr(char *s);	/* get body of X ... X */
@@ -147,6 +147,62 @@ char *sprntf(char *s, Attr *ap);	/* sprintf(s, attrlist ap) */
 void yyerror(char *s);
 int dwb_input(void);
 int dwb_unput(int c);
+void savenum(int, double);
+void setjust(int);
+void setsize(int, double);
+void range(Point);
+void halfrange(Obj *, int, double);
+void freeattr(Attr *);
+void pushsrc(int, char *);
+void definition(char *);
+void dodef(Obj *);
+void pbstr(char *);
+void copyfile(char *);
+void copydef(Obj *);
+void copyuntil(char *);
+void copy(void);
+void shell_init(void);
+void shell_text(char *);
+void shell_exec(void);
+void forloop(Obj *, double, double, int, double, char *);
+void endfor(void);
+void labelwid(double);
+void labelmove(int, double);
+void label(int, Attr *);
+void lab_adjust(void);
+void line(int, Point, Point, Attr *);
+void circle(double, Point);
+void pic(char *);
+void numlist(void);
+void plot(Attr *, Point);
+void plotnum(double, char *, Point);
+void drawdesc(int, Obj *, Attr *, char *);
+void next(Obj *, Point, Attr *);
+void savetick(double, char *);
+void tickside(int);
+void tickoff(int);
+void gridtickoff(void);
+void setlist(void);
+void tickdir(int, double, int);
+void ticks(void);
+void do_autoticks(Obj *);
+Obj *setauto(void);
+void iterator(double, double, int, double, char *);
+void ticklist(Obj *, int);
+void griddesc(Attr *);
+void gridlist(Obj *);
+void coord_x(Point);
+void coord_y(Point);
+void coordlog(int);
+void coord(Obj *);
+void resetcoord(Obj *);
+void frame(void);
+void frameht(double);
+void framewid(double);
+void frameside(int, Attr *);
+void endstat(void);
+void graph(char *);
+void setup(void);
 
 #define	logit(x) (x) = log10(x)
 #define	Log10(x) errcheck(log10(x), "log")

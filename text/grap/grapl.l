@@ -13,7 +13,7 @@
 
 #define	CADD	cbuf[clen++] = yytext[0]; \
 		if (clen >= CBUFLEN-1) { \
-			ERROR "string too long", cbuf WARNING; BEGIN A; }
+			ERROR "string too long: \"%s\"", cbuf WARNING; BEGIN A; }
 #define	CBUFLEN	1500
 char	cbuf[CBUFLEN];
 int	clen, cflag;

@@ -11,9 +11,8 @@ int	sizeop;		/* current optional operator for size change */
 double	sizexpr;	/* current size change expression */
 char *juststr(int j);	/* convert RJUST, etc., into string */
 
-savenum(n, f)	/* save f in num[n] */
-	int n;
-	double f;
+void
+savenum(int n, double f)	/* save f in num[n] */
 {
 	num[n] = f;
 	nnum = n+1;
@@ -21,20 +20,21 @@ savenum(n, f)	/* save f in num[n] */
 		ERROR "too many numbers" WARNING;
 }
 
-setjust(j)
+void
+setjust(int j)
 {
 	just |= j;
 }
 
-setsize(op, expr)
-	int op;
-	double expr;
+void
+setsize(int op, double expr)
 {
 	sizeop = op;
 	sizexpr = expr;
 }
 
-char *tostring(register char *s)
+char *
+tostring(char *s)
 {
 	register char *p;
 
@@ -45,8 +45,8 @@ char *tostring(register char *s)
 	return(p);
 }
 
-range(pt)	/* update the range for point pt */
-	Point pt;
+void
+range(Point pt)	/* update the range for point pt */
 {
 	Obj *p = pt.obj;
 
@@ -64,10 +64,8 @@ range(pt)	/* update the range for point pt */
 	}
 }
 
-halfrange(p, side, val)	/* record max and min for one direction */
-	Obj *p;
-	int side;
-	double val;
+void
+halfrange(Obj *p, int side, double val)	/* record max and min for one direction */
 {
 	if (!(p->coord&XFLAG) && (side == LEFT || side == RIGHT)) {
 		if (val < p->pt.y)
@@ -83,7 +81,8 @@ halfrange(p, side, val)	/* record max and min for one direction */
 }
 
 
-Obj *lookup(char *s, int inst)	/* find s in objlist, install if inst */
+Obj *
+lookup(char *s, int inst)	/* find s in objlist, install if inst */
 {
 	Obj *p;
 	int found = 0;
@@ -109,12 +108,14 @@ Obj *lookup(char *s, int inst)	/* find s in objlist, install if inst */
 	return p;
 }
 
-double getvar(Obj *p)	/* return value of variable */
+double
+getvar(Obj *p)	/* return value of variable */
 {
 	return p->fval;
 }
 
-double setvar(Obj *p, double f)	/* set value of variable to f */
+double
+setvar(Obj *p, double f)	/* set value of variable to f */
 {
 	if (strcmp(p->name, "pointsize") == 0) {	/* kludge */
 		pointsize = f;
@@ -124,7 +125,8 @@ double setvar(Obj *p, double f)	/* set value of variable to f */
 	return p->fval = f;
 }
 
-Point makepoint(Obj *s, double x, double y)	/* make a Point */
+Point
+makepoint(Obj *s, double x, double y)	/* make a Point */
 {
 	Point p;
 	
@@ -135,12 +137,14 @@ Point makepoint(Obj *s, double x, double y)	/* make a Point */
 	return p;
 }
 
-Attr *makefattr(int type, double fval)	/* set double in attribute */
+Attr *
+makefattr(int type, double fval)	/* set double in attribute */
 {
 	return makeattr(type, fval, (char *) 0, 0, 0);
 }
 
-Attr *makesattr(char *s)		/* make an Attr cell containing s */
+Attr *
+makesattr(char *s)		/* make an Attr cell containing s */
 {
 	Attr *ap = makeattr(STRING, sizexpr, s, just, sizeop);
 	just = sizeop = 0;
@@ -148,7 +152,8 @@ Attr *makesattr(char *s)		/* make an Attr cell containing s */
 	return ap;
 }
 
-Attr *makeattr(int type, double fval, char *sval, int just, int op)
+Attr *
+makeattr(int type, double fval, char *sval, int just, int op)
 {
 	Attr *a;
 
@@ -164,7 +169,8 @@ Attr *makeattr(int type, double fval, char *sval, int just, int op)
 	return a;
 }
 
-Attr *addattr(Attr *a1, Attr *ap)	/* add attr ap to end of list a1 */
+Attr *
+addattr(Attr *a1, Attr *ap)	/* add attr ap to end of list a1 */
 {
 	Attr *p;
 
@@ -178,8 +184,8 @@ Attr *addattr(Attr *a1, Attr *ap)	/* add attr ap to end of list a1 */
 	return a1;
 }
 
-freeattr(ap)	/* free an attribute list */
-	Attr *ap;
+void
+freeattr(Attr *ap)	/* free an attribute list */
 {
 	Attr *p;
 
@@ -192,7 +198,8 @@ freeattr(ap)	/* free an attribute list */
 	}
 }
 
-char *slprint(Attr *stringlist)	/* print strings from stringlist */
+char *
+slprint(Attr *stringlist)	/* print strings from stringlist */
 {
 	int ntext, n, last_op, last_just;
 	double last_fval;
@@ -224,7 +231,8 @@ char *slprint(Attr *stringlist)	/* print strings from stringlist */
 	return buf;	/* watch it:  static */
 }
 
-char *juststr(int j)	/* convert RJUST, etc., into string */
+char *
+juststr(int j)	/* convert RJUST, etc., into string */
 {
 	static char buf[50];
 
@@ -240,7 +248,8 @@ char *juststr(int j)	/* convert RJUST, etc., into string */
 	return buf;	/* watch it:  static */
 }
 
-char *sprntf(char *s, Attr *ap)	/* sprintf(s, attrlist ap) */
+char *
+sprntf(char *s, Attr *ap)	/* sprintf(s, attrlist ap) */
 {
 	char buf[500];
 	int n;

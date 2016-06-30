@@ -12,14 +12,13 @@ typedef struct {
 
 #define	MAXFOR	10
 
+static void nextfor(void);
+
 For	forstk[MAXFOR];	/* stack of for loops */
 For	*forp = forstk;	/* pointer to current top */
 
-forloop(var, from, to, op, by, str)	/* set up a for loop */
-	Obj *var;
-	double from, to, by;
-	int op;
-	char *str;
+void
+forloop(Obj *var, double from, double to, int op, double by, char *str)	/* set up a for loop */
 {
 	fprintf(tfd, "# for %s from %g to %g by %c %g \n",
 		var->name, from, to, op, by);
@@ -35,7 +34,8 @@ forloop(var, from, to, op, by, str)	/* set up a for loop */
 	dwb_unput('\n');
 }
 
-nextfor()	/* do one iteration of a for loop */
+static void
+nextfor(void)	/* do one iteration of a for loop */
 {
 	/* BUG:  this should depend on op and direction */
 	if (forp->var->fval > SLOP * forp->to) {	/* loop is done */
@@ -48,7 +48,8 @@ nextfor()	/* do one iteration of a for loop */
 	}
 }
 
-endfor()	/* end one iteration of for loop */
+void
+endfor(void)	/* end one iteration of for loop */
 {
 	switch (forp->op) {
 	case '+':
@@ -68,7 +69,8 @@ endfor()	/* end one iteration of for loop */
 	nextfor();
 }
 
-char *ifstat(double expr, char *thenpart, char *elsepart)
+char *
+ifstat(double expr, char *thenpart, char *elsepart)
 {
 	dprintf("if %g then <%s> else <%s>\n", expr, thenpart, elsepart? elsepart : "");
 	if (expr) {
