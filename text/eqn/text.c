@@ -110,6 +110,7 @@ void text(t, p1)	/* convert text string p1 of type t */
 }
 
 #ifndef UNANSI
+int
 trans(int c, char *p1)
 #else /* UNANSI */
 trans(c, p1)
@@ -182,7 +183,7 @@ trans(c, p1)
 		} else if (*psp == c) {		/* << or >> */
 			cadd(c);
 			cadd(c);
-			*psp++;
+			psp++;
 		} else {
 			cadd(c);  
 		}
@@ -320,10 +321,10 @@ void cadd(c)		/* add char c to end of cs */
 			if (ftp->ft == ITAL)	/* usual case */
 				*csp++ = nextft;
 			else		/* gfont set, use it */
-				for (p = ftp->name; *csp = *p++; )
+				for (p = ftp->name; (*csp = *p++); )
 					csp++;
 		} else {	/* inside some kind of font ... */
-			for (p = ftp->name; *csp = *p++; )
+			for (p = ftp->name; (*csp = *p++); )
 				csp++;
 		}
 		lastft = nextft;

@@ -14,6 +14,7 @@ void	define(int);
 void	ifdef(void);
 void	include(void);
 void	delim(void);
+static int cstr(char *, int, int);
 #else /* UNANSI */
 void	space();
 void	dodef();
@@ -24,6 +25,7 @@ void	delim();
 #endif /* UNANSI */
 
 #ifndef UNANSI
+int
 yylex(void)
 #else /* UNANSI */
 yylex()
@@ -163,6 +165,7 @@ void getstr(s, n)
 }
 
 #ifndef UNANSI
+static int
 cstr(char *s, int quote, int maxs)
 #else /* UNANSI */
 cstr(s, quote, maxs)

@@ -28,6 +28,7 @@ void	init_tbl();
 #endif /* UNANSI */
 
 #ifndef UNANSI
+int
 main(int argc, char *argv[])
 #else /* UNANSI */
 main(argc, argv)
@@ -37,7 +38,7 @@ main(argc, argv)
 	char *p, buf[20];
 
 	cmdname = argv[0];
-	if (p = getenv("TYPESETTER"))
+	if ((p = getenv("TYPESETTER")))
 		typesetter = p;
 	while (argc > 1 && argv[1][0] == '-') {
 		switch (argv[1][1]) {
@@ -111,6 +112,7 @@ void settype(s)	/* initialize data for particular typesetter */
 }
 
 #ifndef UNANSI
+int
 getdata(void)
 #else /* UNANSI */
 getdata()
@@ -162,18 +164,19 @@ getdata()
 }
 
 #ifndef UNANSI
+int
 dwb_getline(char *s)
 #else /* UNANSI */
 getline(s)
 	char *s;
 #endif /* UNANSI */
 {
-	register c;
+	int c;
 
 	while ((c=input()) != '\n' && c != EOF && c != lefteq) {
 		if (s >= in+MAXLINE) {
 			ERROR "input line too long: %.20s\n", in WARNING;
-			in[MAXLINE] = '\0';
+			in[MAXLINE - 1] = '\0';
 			break;
 		}
 		*s++ = c;
@@ -373,6 +376,7 @@ char *DPS(f, t)	/* delta ps (t-f) in printable form \s+d or \s-d or \s+-(dd */
 }
 
 #ifndef UNANSI
+int
 EFFPS(int n)	/* effective value of n */
 #else /* UNANSI */
 EFFPS(n)	/* effective value of n */

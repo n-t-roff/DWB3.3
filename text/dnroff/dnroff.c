@@ -49,6 +49,9 @@ x ...\n	device control functions:
 #include	<signal.h>
 #include        <stdlib.h>
 #include        <string.h>
+#include	<stdarg.h>
+
+int ioctl(int fd, unsigned long request, ...);
 
 #ifndef NDEVNAME
 #define NDEVNAME	"37"
@@ -66,6 +69,36 @@ x ...\n	device control functions:
 #define	NCHARS	500
 #include	"tw.h"
 
+static void outlist(char *);
+static void conv(FILE *);
+static void devcntrl(FILE *);
+static void fileinit(void);
+static void getint(FILE *, int *);
+static char *dwb_strdup(char *);
+static void getstr(FILE *, char **);
+static void done(void);
+static void error(int, char *, ...);
+static void t_newline(void);
+static void t_init(int);
+static int t_size(int);
+static int t_font(char *);
+static void t_reset(int);
+static void t_trailer(void);
+static void put1s(char *);
+static void put1a(int);
+static void setsize(int);
+static void t_fp(int, char *, char *);
+static void drawline(int, int, char *);
+static void drawcirc(int);
+static void drawellip(int, int);
+static void drawarc(int, int, int, int);
+static void drawwig(char *);
+static void setfont(int);
+static char *plot(char *);
+static void move(void);
+static void save_tty(void);
+static void restore_tty(void);
+static void set_tty(void);
 void put1(int k);
 void t_page(int n);
 
@@ -109,11 +142,10 @@ int	vpos;		/* vertical position (down positive) ditto */
 int	htrue;		/* where we really are */
 int	vtrue;
 
-main(argc, argv)
-char *argv[];
+int
+main(int argc, char **argv)
 {
 	FILE *fp;
-	int done();
 	char *p, *getenv();
 
 	if ((p = getenv("NROFFTERM")) != 0)
@@ -161,12 +193,13 @@ char *argv[];
 			fclose(fp);
 		}
 	done();
+	return 0;
 }
 
 int	maxolist = 9999;	/* largest page number in -o */
 
-outlist(s)	/* process list of page numbers to be printed */
-char *s;
+static void
+outlist(char *s)	/* process list of page numbers to be printed */
 {
 	int n1, n2, i;
 
@@ -205,8 +238,8 @@ char *s;
 			printf("%3d %3d\n", olist[i], olist[i+1]);
 }
 
-conv(fp)
-register FILE *fp;
+static void
+conv(FILE *fp)
 {
 	register int c, k, sign;
 	int m, n, i, n1, m1;
@@ -336,8 +369,8 @@ register FILE *fp;
 	}
 }
 
-devcntrl(fp)	/* interpret device control functions */
-FILE *fp;
+static void
+devcntrl(FILE *fp)	/* interpret device control functions */
 {
         char str[20], buf[100];
 	int c, n;
@@ -385,11 +418,12 @@ FILE *fp;
 
 #define	skip(fp)	fscanf(fp, "%*s")
 
-fileinit()	/* read in font and code files, etc. */
+static void
+fileinit(void)	/* read in font and code files, etc. */
 {
 	/* open table for device,
-	/* read in resolution, size info, font info, etc.
-	/* and set params
+	 * read in resolution, size info, font info, etc.
+	 * and set params
 	*/
 	char name[50], *cp;
 	FILE *fp;
@@ -452,9 +486,8 @@ fileinit()	/* read in font and code files, etc. */
 
 }
 
-getint(fp, pn)	/* find integer at s */
-	FILE *fp;
-	int *pn;
+static void
+getint(FILE *fp, int *pn)	/* find integer at s */
 {
 	int base, c;
 
@@ -465,17 +498,16 @@ getint(fp, pn)	/* find integer at s */
 		*pn = base * *pn + c - '0';
 }
 
-char *dwb_strdup(s)
-	char *s;
+static char *
+dwb_strdup(char *s)
 {
 	char *p = malloc(strlen(s) + 1);
 	strcpy(p, s);
 	return p;
 }
 
-getstr(fp, strp)	/* find next string, copy to str */
-	FILE *fp;
-	char **strp;
+static void
+getstr(FILE *fp, char **strp)	/* find next string, copy to str */
 {
 	int quote = 0;
 	char buf[100], *s = buf;
@@ -520,7 +552,8 @@ getstr(fp, strp)	/* find next string, copy to str */
 	*strp = dwb_strdup(target);
 }
 
-done()
+static void
+done(void)
 {
 	t_reset('s');
 	oputs(t.twrest);	/* should be in t_reset */
@@ -528,11 +561,14 @@ done()
 	exit(0);
 }
 
-error(f, s, a1, a2, a3, a4, a5, a6, a7)
-	char	*s;
+static void
+error(int f, char *s, ...)
 {
+	va_list ap;
 	fprintf(stderr, "dnroff: ");
-	fprintf(stderr, s, a1, a2, a3, a4, a5, a6, a7);
+	va_start(ap, s);
+	vfprintf(stderr, s, ap);
+	va_end(ap);
 	fprintf(stderr, "\n");
 	if (f)
 		done();
@@ -546,8 +582,8 @@ error(f, s, a1, a2, a3, a4, a5, a6, a7)
 
 	extern int esct;
 
-t_init(reinit)	/* initialize device */
-int reinit;
+static void
+t_init(int reinit)	/* initialize device */
 {
 	if (reinit == 0) {
 		save_tty();
@@ -591,7 +627,8 @@ t_page(int n)	/* do whatever new page functions */
 		}
 }
 
-t_newline()	/* do whatever for the end of a line */
+static void
+t_newline(void)	/* do whatever for the end of a line */
 {
 	esct = 0;
 	htrue = hpos;
@@ -601,33 +638,37 @@ t_newline()	/* do whatever for the end of a line */
 	vtrue += t.Newline;
 }
 
-t_size(n)	/* convert integer to internal size number*/
-int n;
-{	n;
+static int
+t_size(int n)	/* convert integer to internal size number*/
+{
+	return n;
 }
 
-t_font(s)	/* convert string to internal font number */
-char *s;
+static int
+t_font(char *s)	/* convert string to internal font number */
 {
 	/* assumes comes in as f1, f2, etc.   probably rash. */
 	return atoi(s);
 }
 
-t_reset(c)
-{	c;
+static void
+t_reset(int c)
+{
+	(void)c;
 	output = 1;	/* by God */
 	move();
 	fflush(stdout);
 }
 
-t_trailer()
+static void
+t_trailer(void)
 {
 	oputs(t.twnl);
 }
 
 
-put1s(s)	/* s is a funny char name */
-	char *s;
+static void
+put1s(char *s)	/* s is a funny char name */
 {
 	/* look it up, get an index > 128, put1(whatever it was) */
 	int i;
@@ -639,27 +680,56 @@ put1s(s)	/* s is a funny char name */
 		}
 }
 
-put1a(n)	/* put single char by absolute number */
-	int n;
-{n;
+static void
+put1a(int n)	/* put single char by absolute number */
+{
+	(void)n;
 }
 
-setsize(n)	/* set point size to n (internal) */
-int n;
-{n;
+static void
+setsize(int n)	/* set point size to n (internal) */
+{
+	(void)n;
 }
 
-t_fp(n, s, si)	/* font position n now contains font s, intname si */
-int n;
-char *s, *si;
-{n,s,si;
+static void
+t_fp(int n, char *s, char *si)	/* font position n now contains font s, intname si */
+{
+	(void)n;
+	(void)s;
+	(void)si;
 }
 
-drawline(n, m, s) int m, n; char *s; {}
-drawcirc(n) int n; {}
-drawellip(m, n) int m,n; {}
-drawarc(n, m, n1, m1) int m,n,m1,n1; {}
-drawwig(buf) char *buf; {}
+static void
+drawline(int n, int m, char *s) {
+	(void)n;
+	(void)m;
+	(void)s;
+}
+
+static void
+drawcirc(int n) {
+	(void)n;
+}
+
+static void
+drawellip(int m, int n) {
+	(void)m;
+	(void)n;
+}
+
+static void
+drawarc(int n, int m, int n1, int m1) {
+	(void)n;
+	(void)m;
+	(void)n1;
+	(void)m1;
+}
+
+static void
+drawwig(char *buf) {
+	(void)buf;
+}
 
 
 /*
@@ -682,7 +752,8 @@ enum { RFONT = 1, ULFONT, BDFONT, BIFONT };	/* assumes the normal layout */
 int	xfont	= RFONT;	/* current font */
 int	ulfont	= ULFONT;	/* underline font */
 
-setfont(n)	/* set font to n */
+static void
+setfont(int n)	/* set font to n */
 {
 	xfont = n;
 }
@@ -782,8 +853,8 @@ put1(int k)	/* output char k */
 }
 
 
-char	*plot(x)
-char	*x;
+static char *
+plot(char *x)
 {
 	register int	i;
 	register char	*j, *k;
@@ -820,10 +891,10 @@ char	*x;
 	return(k);
 }
 
-
-move()
+static void
+move(void)
 {
-	register k;
+	int k;
 	register char	*i, *j;
 	char	*p, *q;
 
@@ -933,7 +1004,8 @@ struct	sgttyb	ttys[2];
 
 int	ttysave[2] = {-1, -1};
 
-save_tty()			/*save any tty settings that may be changed*/
+static void
+save_tty(void)			/*save any tty settings that may be changed*/
 {
 
 #ifdef	SYSV
@@ -950,8 +1022,8 @@ save_tty()			/*save any tty settings that may be changed*/
 
 }
 
-
-restore_tty()			/*restore tty settings from beginning*/
+static void
+restore_tty(void)			/*restore tty settings from beginning*/
 {
 
 	if (ttysave[0] != -1) {
@@ -974,8 +1046,8 @@ restore_tty()			/*restore tty settings from beginning*/
 	}
 }
 
-
-set_tty()
+static void
+set_tty(void)
 {
 
 	if (t.bset || t.breset) {

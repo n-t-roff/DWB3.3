@@ -14,6 +14,7 @@ void subsup(p1, p2, p3)
 		return bshiftb(p1, SUB, p2);
 	else if (p3 != 0)
 		return bshiftb(p1, SUP, p3);
+	return 0; /* (ck) */
 }
 
 extern double Subbase, Supshift;

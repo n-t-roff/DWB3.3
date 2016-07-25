@@ -30,7 +30,7 @@ void pushsrc(type, ptr)	/* new input source */
 	srcp->type = type;
 	srcp->sp = ptr;
 	if (dbg > 1) {
-		printf("\n%3d ", srcp - src);
+		printf("\n%3d ", (int)(srcp - src));
 		switch (srcp->type) {
 		case File:
 			printf("push file %s\n", ((Infile *)ptr)->fname);
@@ -62,7 +62,7 @@ void popsrc()	/* restore an old one */
 	if (srcp <= src)
 		ERROR "too many inputs popped" FATAL;
 	if (dbg > 1) {
-		printf("%3d ", srcp - src);
+		printf("%3d ", (int)(srcp - src));
 		switch (srcp->type) {
 		case File:
 			printf("pop file\n");
@@ -118,12 +118,13 @@ void dodef(stp)	/* collect args and switch input to defn */
 		ap->argstk[i] = "";
 	if (dbg)
 		for (i = 0; i < argcnt; i++)
-			printf("arg %d.%d = <%s>\n", ap-args, i+1, ap->argstk[i]);
+			printf("arg %d.%d = <%s>\n", (int)(ap-args), i+1, ap->argstk[i]);
 	argfp = ap;
 	pushsrc(Macro, stp->cval);
 }
 
 #ifndef UNANSI
+int
 getarg(char *p)	/* pick up single argument, store in p, return length */
 #else /* UNANSI */
 getarg(p)	/* pick up single argument, store in p, return length */
@@ -164,6 +165,7 @@ char	ebuf[200];		/* collect input here for error reporting */
 char	*ep	= ebuf;
 
 #ifndef UNANSI
+int
 input(void)
 #else /* UNANSI */
 input()
@@ -238,6 +240,7 @@ input()
 
 
 #ifndef UNANSI
+int
 unput(int c)
 #else /* UNANSI */
 unput(c)
@@ -275,7 +278,7 @@ void error(die, s)
 	if (synerr)
 		return;
 	fprintf(stderr, "%s: ", cmdname);
-	fprintf(stderr, s);
+	fputs(s, stderr);
 	if (errno > 0)
 		perror("???");
 	if (curfile->fin)
