@@ -82,12 +82,30 @@
 #include <signal.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include "comments.h"			/* PostScript file structuring comments */
 #include "gen.h"			/* general purpose definitions */
 #include "path.h"			/* for the prologue */
 #include "ext.h"			/* external variable declarations */
 #include "postprint.h"			/* a few special definitions */
+
+static void init_signals(void);
+static void header(void);
+static void options(void);
+static void setup(void);
+static void arguments(void);
+static void done(void);
+static void account(void);
+static void text(void);
+static void formfeed(void);
+static void newline(void);
+static void spaces(int);
+static void startline(void);
+static void endstring(void);
+static void endline(void);
+static void oput(int);
+static void redirect(int);
 
 char	*optnames = "a:c:ef:l:m:n:o:p:r:s:t:x:y:A:C:E:J:L:P:R:DI";
 
@@ -121,10 +139,8 @@ FILE	*fp_acct = NULL;		/* for accounting data */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -150,13 +166,14 @@ main(agc, agv)
     done();				/* print the last page etc. */
     account();				/* job accounting data */
 
-    exit(x_stat);			/* not much could be wrong */
+    return (x_stat);			/* not much could be wrong */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -181,7 +198,8 @@ init_signals()
 
 /*****************************************************************************/
 
-header()
+static void
+header(void)
 
 {
 
@@ -228,7 +246,8 @@ header()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -363,9 +382,10 @@ options()
 
 /*****************************************************************************/
 
-char *get_font(name)
+char *
+get_font(char *name)
 
-    char	*name;			/* name the user asked for */
+    /* char	*name;			/ * name the user asked for */
 
 {
 
@@ -390,7 +410,8 @@ char *get_font(name)
 
 /*****************************************************************************/
 
-setup()
+static void
+setup(void)
 
 {
 
@@ -423,7 +444,8 @@ setup()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -455,7 +477,8 @@ arguments()
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -476,7 +499,8 @@ done()
 
 /*****************************************************************************/
 
-account()
+static void
+account(void)
 
 {
 
@@ -494,7 +518,8 @@ account()
 
 /*****************************************************************************/
 
-text()
+static void
+text(void)
 
 {
 
@@ -548,7 +573,8 @@ text()
 
 /*****************************************************************************/
 
-formfeed()
+static void
+formfeed(void)
 
 {
 
@@ -593,7 +619,8 @@ formfeed()
 
 /*****************************************************************************/
 
-newline()
+static void
+newline(void)
 
 {
 
@@ -614,9 +641,10 @@ newline()
 
 /*****************************************************************************/
 
-spaces(ch)
+static void
+spaces(int ch)
 
-    int		ch;			/* next input character */
+    /* int		ch;			/ * next input character */
 
 {
 
@@ -650,7 +678,7 @@ spaces(ch)
 	else if ( ch == '\r' )
 	    endcol = 1;
 	else break;
-    } while ( ch = getc(fp_in) );	/* if ch is 0 we'd quit anyway */
+    } while (( ch = getc(fp_in) ));	/* if ch is 0 we'd quit anyway */
 
     ungetc(ch, fp_in);			/* wasn't a space, tab, or backspace */
 
@@ -669,7 +697,8 @@ spaces(ch)
 
 /*****************************************************************************/
 
-startline()
+static void
+startline(void)
 
 {
 
@@ -691,7 +720,8 @@ startline()
 
 /*****************************************************************************/
 
-endstring()
+static void
+endstring(void)
 
 {
 
@@ -713,7 +743,8 @@ endstring()
 
 /*****************************************************************************/
 
-endline()
+static void
+endline(void)
 
 {
 
@@ -737,9 +768,10 @@ endline()
 
 /*****************************************************************************/
 
-oput(ch)
+static void
+oput(int ch)
 
-    int		ch;			/* next output character */
+    /* int		ch;			/ * next output character */
 
 {
 
@@ -766,9 +798,10 @@ oput(ch)
 
 /*****************************************************************************/
 
-redirect(pg)
+static void
+redirect(int pg)
 
-    int		pg;			/* next page we're printing */
+    /* int		pg;			/ * next page we're printing */
 
 {
 
