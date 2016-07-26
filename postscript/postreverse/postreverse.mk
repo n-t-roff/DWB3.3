@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=postreverse.mk
 
 SYSTEM=SYSV

@@ -73,12 +73,24 @@
 #include <stdio.h>
 #include <signal.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include "comments.h"			/* PostScript file structuring comments */
 #include "gen.h"			/* general purpose definitions */
 #include "path.h"			/* for temporary directory */
 #include "ext.h"			/* external variable declarations */
 #include "postreverse.h"		/* a few special definitions */
+
+static void init_signals(void);
+static void options(void);
+static void arguments(void);
+static void done(void);
+static void reverse(void);
+static int moreprolog(char *);
+static void readpages(void);
+static void writepages(void);
+static void copypage(long, long);
+static void trailer(void);
 
 int	page = 1;			/* current page number */
 int	forms = 1;			/* forms per page in the input file */
@@ -102,10 +114,8 @@ FILE	*fp_out;		/* and written here */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -130,13 +140,14 @@ main(agc, agv)
     arguments();			/* then process non-option arguments */
     done();				/* and clean things up */
 
-    exit(x_stat);			/* not much could be wrong */
+    return (x_stat);			/* not much could be wrong */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -161,7 +172,8 @@ init_signals()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -229,7 +241,8 @@ options()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -259,7 +272,8 @@ arguments()
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -277,7 +291,8 @@ done()
 
 /*****************************************************************************/
 
-char *copystdin()
+char *
+copystdin(void)
 
 {
 
@@ -315,7 +330,8 @@ char *copystdin()
 
 /*****************************************************************************/
 
-reverse()
+static void
+reverse(void)
 
 {
 
@@ -345,9 +361,10 @@ reverse()
 
 /*****************************************************************************/
 
-moreprolog(str)
+static int
+moreprolog(char *str)
 
-    char	*str;			/* copy everything up to this string */
+    /* char	*str;			/ * copy everything up to this string */
 
 {
 
@@ -383,7 +400,8 @@ moreprolog(str)
 
 /*****************************************************************************/
 
-readpages()
+static void
+readpages(void)
 
 {
 
@@ -448,7 +466,8 @@ readpages()
 
 /*****************************************************************************/
 
-writepages()
+static void
+writepages(void)
 
 {
 
@@ -491,10 +510,11 @@ writepages()
 
 /*****************************************************************************/
 
-copypage(start, stop)
+static void
+copypage(long start, long stop)
 
-    long	start;			/* starting from this offset */
-    long	stop;			/* and ending here */
+    /* long	start;			/ * starting from this offset */
+    /* long	stop;			/ * and ending here */
 
 {
 
@@ -517,7 +537,8 @@ copypage(start, stop)
 
 /*****************************************************************************/
 
-trailer()
+static void
+trailer(void)
 
 {
 
