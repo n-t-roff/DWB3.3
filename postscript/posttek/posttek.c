@@ -105,6 +105,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <fcntl.h> 
+#include <unistd.h>
 
 #include "comments.h"			/* PostScript file structuring comments */
 #include "gen.h"			/* general purpose definitions */
@@ -116,6 +117,27 @@ void incremental(void);
 void graph(void);
 void alpha(void);
 void statemachine(FILE *fp);
+static void init_signals(void);
+static void header(void);
+static void options(void);
+static void setup(void);
+static void arguments(void);
+static void done(void);
+static void account(void);
+static void reset(void);
+static void point(void);
+static void gin(void);
+static int control(int);
+static int esc(void);
+static void move(int, int);
+static void setmode(int);
+static void home(void);
+static void setfont(int);
+static void text(void);
+static void draw(void);
+static void formfeed(void);
+static int nextchar(void);
+static void redirect(int);
 
 char	*optnames = "a:c:f:m:n:o:p:w:x:y:A:C:E:J:L:P:R:DI";
 
@@ -154,11 +176,8 @@ FILE	*fp_acct = NULL;		/* for accounting data */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
-
+int
+main(int agc, char **agv)
 {
 
 /*
@@ -183,13 +202,14 @@ main(agc, agv)
     done();				/* print the last page etc. */
     account();				/* job accounting data */
 
-    exit(x_stat);			/* nothing could be wrong */
+    return x_stat;			/* nothing could be wrong */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -214,7 +234,8 @@ init_signals()
 
 /*****************************************************************************/
 
-header()
+static void
+header(void)
 
 {
 
@@ -258,7 +279,8 @@ header()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -372,9 +394,10 @@ options()
 
 /*****************************************************************************/
 
-char *get_font(name)
+char *
+get_font(char *name)
 
-    char	*name;			/* name the user asked for */
+    /* char	*name;			/ * name the user asked for */
 
 {
 
@@ -398,7 +421,8 @@ char *get_font(name)
 
 /*****************************************************************************/
 
-setup()
+static void
+setup(void)
 
 {
 
@@ -425,7 +449,8 @@ setup()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -457,7 +482,8 @@ arguments()
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -478,7 +504,8 @@ done()
 
 /*****************************************************************************/
 
-account()
+static void
+account(void)
 
 {
 
@@ -550,7 +577,8 @@ statemachine(FILE *fp)
 
 /*****************************************************************************/
 
-reset()
+static void
+reset(void)
 
 {
 
@@ -731,7 +759,8 @@ graph(void)
 
 /*****************************************************************************/
 
-point()
+static void
+point(void)
 
 {
 
@@ -747,7 +776,8 @@ point()
 
     if ( dispmode == SPECIALPOINT )  {
 	if ( (c = nextchar()) < 040 || c > 0175 )
-	    return(control(c));
+	    /* return(control(c)); */
+	    return; /* ck: value not used */
 
 	fprintf(fp_out, "%d %d i\n", intensity[c - ' '], c & 0100);
     }	/* End if */
@@ -804,7 +834,8 @@ incremental(void)
 
 /*****************************************************************************/
 
-gin()
+static void
+gin(void)
 
 {
 
@@ -820,9 +851,10 @@ gin()
 
 /*****************************************************************************/
 
-control(c)
+static int
+control(int c)
 
-    int		c;			/* check this control character */
+    /* int		c;			/ * check this control character */
 
 {
 
@@ -896,7 +928,8 @@ control(c)
 
 /*****************************************************************************/
 
-esc()
+static int
+esc(void)
 
 {
 
@@ -984,9 +1017,10 @@ esc()
 
 /*****************************************************************************/
 
-move(x, y)
+static void
+move(int x, int y)
 
-    int		x, y;			/* move the cursor here */
+    /* int		x, y;			/ * move the cursor here */
 
 {
 
@@ -1003,9 +1037,10 @@ move(x, y)
 
 /*****************************************************************************/
 
-setmode(mode)
+static void
+setmode(int mode)
 
-    int		mode;			/* this should be the new mode */
+    /* int		mode;			/ * this should be the new mode */
 
 {
 
@@ -1035,7 +1070,8 @@ setmode(mode)
 
 /*****************************************************************************/
 
-home()
+static void
+home(void)
 
 {
 
@@ -1052,9 +1088,10 @@ home()
 
 /*****************************************************************************/
 
-setfont(newfont)
+static void
+setfont(int newfont)
 
-    int		newfont;		/* use this font next */
+    /* int		newfont;		/ * use this font next */
 
 {
 
@@ -1076,7 +1113,8 @@ setfont(newfont)
 
 /*****************************************************************************/
 
-text()
+static void
+text(void)
 
 {
 
@@ -1095,7 +1133,8 @@ text()
 
 /*****************************************************************************/
 
-draw()
+static void
+draw(void)
 
 {
 
@@ -1117,7 +1156,8 @@ draw()
 
 /*****************************************************************************/
 
-formfeed()
+static void
+formfeed(void)
 
 {
 
@@ -1157,7 +1197,8 @@ formfeed()
 
 /*****************************************************************************/
 
-nextchar()
+static int
+nextchar(void)
 
 {
 
@@ -1182,9 +1223,10 @@ nextchar()
 
 /*****************************************************************************/
 
-redirect(pg)
+static void
+redirect(int pg)
 
-    int		pg;			/* next page we're printing */
+    /* int		pg;			/ * next page we're printing */
 
 {
 

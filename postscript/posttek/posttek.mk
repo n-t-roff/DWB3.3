@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=posttek.mk
 
 SYSTEM=SYSV

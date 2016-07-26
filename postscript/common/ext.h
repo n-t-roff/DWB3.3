@@ -36,7 +36,16 @@ extern double	atan2();
 
 void error_prognam(void);
 void error_pos(void);
-void error_chk_kind(int kind);
+void error_chk_kind(int);
+void out_list(char *);
+int in_olist(int);
+void setencoding(char *);
+int cat(char *);
+int str_convert(char **, int);
+void error(int, char *, ...);
+void saverequest(char *);
+void writerequest(int, FILE *);
+void dumprequest(char *, char *, FILE *);
 
 #define ERROR(kind, mesg, args)\
 	do {\

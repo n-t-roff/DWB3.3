@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <stdarg.h>
+#include <unistd.h>
 
 #include "gen.h"
 #include "ext.h"
@@ -17,9 +19,8 @@ int	olist[50];			/* processing range pairs */
 
 /*****************************************************************************/
 
-out_list(str)
-
-    char	*str;
+void
+out_list(char *str)
 
 {
 
@@ -53,9 +54,8 @@ out_list(str)
 
 /*****************************************************************************/
 
-in_olist(num)
-
-    int		num;
+int
+in_olist(int num)
 
 {
 
@@ -80,9 +80,8 @@ in_olist(num)
 
 /*****************************************************************************/
 
-setencoding(name)
-
-    char	*name;
+void
+setencoding(char *name)
 
 {
 
@@ -109,9 +108,8 @@ setencoding(name)
 
 /*****************************************************************************/
 
-cat(file)
-
-    char	*file;
+int
+cat(char *file)
 
 {
 
@@ -143,10 +141,8 @@ cat(file)
 
 /*****************************************************************************/
 
-str_convert(str, err)
-
-    char	**str;
-    int		err;
+int
+str_convert(char **str, int err)
 
 {
 
@@ -179,9 +175,9 @@ error_prognam(void) {
 void
 error_pos(void) {
 	if ( lineno > 0 )
-	    fprintf(stderr, " (line %d)", lineno);
+	    fprintf(stderr, " (line %ld)", lineno);
 	if ( position > 0 )
-	    fprintf(stderr, " (near byte %d)", position);
+	    fprintf(stderr, " (near byte %ld)", position);
 	putc('\n', stderr);
 }
 
@@ -194,11 +190,8 @@ error_chk_kind(int kind) {
     }	/* End if */
 }
 
-error(kind, mesg, a1, a2, a3)
-
-    int		kind;
-    char	*mesg;
-    unsigned	a1, a2, a3;
+void
+error(int kind, char *mesg, ...)
 
 {
 
@@ -208,9 +201,13 @@ error(kind, mesg, a1, a2, a3)
  *
  */
 
+    va_list ap;
+
     if ( mesg != NULL && *mesg != '\0' ) {
 	error_prognam();
-	fprintf(stderr, mesg, a1, a2, a3);
+	va_start(ap, mesg);
+	vfprintf(stderr, mesg, ap);
+	va_end(ap);
 	error_pos();
     }	/* End if */
 
@@ -220,9 +217,8 @@ error(kind, mesg, a1, a2, a3)
 
 /*****************************************************************************/
 
-void interrupt(sig)
-
-    int		sig;
+void
+interrupt(int sig)
 
 {
 
