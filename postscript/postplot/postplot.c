@@ -120,6 +120,7 @@
 #include <signal.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include "comments.h"			/* PostScript file structuring comments */
 #include "gen.h"			/* general purpose definitions */
@@ -127,6 +128,19 @@
 #include "ext.h"			/* external variable declarations */
 #include "postplot.h"			/* a few special definitions */
 
+static void init_signals(void);
+static void header(void);
+static void options(void);
+static void setup(void);
+static void arguments(void);
+static void plot(void);
+static void connect(void);
+static void setstyle(char *);
+static int getint(void);
+static void done(void);
+static void account(void);
+static void formfeed(void);
+static void redirect(int);
 void getstring(char *s);
 
 char	*optnames = "a:c:f:m:n:o:p:s:w:x:y:A:C:E:J:L:P:R:DI";
@@ -155,10 +169,8 @@ FILE	*fp_acct = NULL;		/* for accounting data */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -183,13 +195,14 @@ main(agc, agv)
     done();				/* print the last page etc. */
     account();				/* job accounting data */
 
-    exit(x_stat);			/* not much could be wrong */
+    return (x_stat);			/* not much could be wrong */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -214,7 +227,8 @@ init_signals()
 
 /*****************************************************************************/
 
-header()
+static void
+header(void)
 
 {
 
@@ -258,7 +272,8 @@ header()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -376,7 +391,8 @@ options()
 
 /*****************************************************************************/
 
-char *get_font(name)
+char *
+get_font(name)
 
     char	*name;			/* name the user asked for */
 
@@ -402,7 +418,8 @@ char *get_font(name)
 
 /*****************************************************************************/
 
-setup()
+static void
+setup(void)
 
 {
 
@@ -429,7 +446,8 @@ setup()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -461,7 +479,8 @@ arguments()
 
 /*****************************************************************************/
 
-plot()
+static void
+plot(void)
 
 {
 
@@ -580,7 +599,8 @@ plot()
 
 /*****************************************************************************/
 
-connect()
+static void
+connect(void)
 
 {
 
@@ -616,9 +636,8 @@ connect()
 
 /*****************************************************************************/
 
-setstyle(str)
-
-    char	*str;
+static void
+setstyle(char *str)
 
 {
 
@@ -644,7 +663,8 @@ setstyle(str)
 
 /*****************************************************************************/
 
-getint()
+static int
+getint(void)
 
 {
     short	a, b;
@@ -694,7 +714,8 @@ getstring(char *s)
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -715,7 +736,8 @@ done()
 
 /*****************************************************************************/
 
-account()
+static void
+account(void)
 
 {
 
@@ -733,7 +755,8 @@ account()
 
 /*****************************************************************************/
 
-formfeed()
+static void
+formfeed(void)
 
 {
 
@@ -776,9 +799,10 @@ formfeed()
 
 /*****************************************************************************/
 
-redirect(pg)
+static void
+redirect(int pg)
 
-    int		pg;			/* next page we're printing */
+    /* int		pg;			/ * next page we're printing */
 
 {
 
