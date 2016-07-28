@@ -154,12 +154,35 @@
 #include <signal.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include "comments.h"			/* PostScript file structuring comments */
 #include "gen.h"			/* general purpose definitions */
 #include "path.h"			/* for the prologue */
 #include "ext.h"			/* external variable declarations */
 #include "postmd.h"			/* special matrix display definitions */
+
+static void init_signals(void);
+static void header(void);
+static void options(void);
+static void setup(void);
+static void arguments(void);
+static void done(void);
+static void account(void);
+static void matrix(void);
+static void copystdin(void);
+static void getheader(void);
+static void dimensions(void);
+static void buildilist(char *);
+static void addcolormap(char *);
+static void setwindow(char *);
+static int inwindow(void);
+static int inrange(void);
+static int mapfloat(double);
+static void putrow(void);
+static void labelmatrix(void);
+static int patncmp(char *, int);
+static void redirect(int);
 
 char	*optnames = "a:b:c:d:g:i:m:n:o:p:w:x:y:A:C:E:J:L:P:R:DI";
 
@@ -205,10 +228,8 @@ FILE	*fp_acct = NULL;		/* for accounting data */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -236,13 +257,14 @@ main(agc, agv)
     done();				/* print the last page etc. */
     account();				/* job accounting data */
 
-    exit(x_stat);			/* not much could be wrong */
+    return (x_stat);			/* not much could be wrong */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -268,7 +290,8 @@ init_signals()
 
 /*****************************************************************************/
 
-header()
+static void
+header(void)
 
 {
 
@@ -312,7 +335,8 @@ header()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -437,7 +461,8 @@ options()
 
 /*****************************************************************************/
 
-setup()
+static void
+setup(void)
 
 {
 
@@ -464,7 +489,8 @@ setup()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -498,7 +524,8 @@ arguments()
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -520,7 +547,8 @@ done()
 
 /*****************************************************************************/
 
-account()
+static void
+account(void)
 
 {
 
@@ -538,7 +566,8 @@ account()
 
 /*****************************************************************************/
 
-matrix()
+static void
+matrix(void)
 
 {
 
@@ -588,7 +617,7 @@ matrix()
     writerequest(printed+1, fp_out);
     fprintf(fp_out, "%d %d bitmap\n", wlist[2] - wlist[0] + 1, wlist[3] - wlist[1] + 1);
 
-    while ( patcount != total && fscanf(fp_in, "%f", &element) != EOF )  {
+    while ( patcount != total && fscanf(fp_in, "%lf", &element) != EOF )  {
 	if ( inwindow() ) *rptr++ = mapfloat(element);
 	if ( ++patcount % columns == 0 )
 	    if ( inrange() )
@@ -610,7 +639,8 @@ matrix()
 
 /*****************************************************************************/
 
-copystdin()
+static void
+copystdin(void)
 
 {
 
@@ -652,7 +682,8 @@ copystdin()
 
 /*****************************************************************************/
 
-getheader()
+static void
+getheader(void)
 
 {
 
@@ -749,7 +780,8 @@ getheader()
 
 /*****************************************************************************/
 
-dimensions()
+static void
+dimensions(void)
 
 {
 
@@ -800,9 +832,10 @@ dimensions()
 
 /*****************************************************************************/
 
-buildilist(list)
+static void
+buildilist(char *list)
 
-    char	*list;			/* use this as the interval list */
+    /* char	*list;			/ * use this as the interval list */
 
 {
 
@@ -840,10 +873,12 @@ buildilist(list)
     ptr = strtok(templist, ",/ \t\n");
     while ( ptr != NULL )  {
 	ilist[next].count = 0;
-	ilist[next++].color = 254 * (regions - 1 - next) / (regions - 1);
+	ilist[next].color = 254 * (regions - 1 - next) / (regions - 1);
+	next++;
 	ilist[next].val = atof(ptr);
 	ilist[next].count = 0;
-	ilist[next++].color = 254 * (regions - 1 - next) / (regions - 1);
+	ilist[next].color = 254 * (regions - 1 - next) / (regions - 1);
+	next++;
 	ptr = strtok(NULL, ",/ \t\n");
     }	/* End while */
 
@@ -861,9 +896,10 @@ buildilist(list)
 
 /*****************************************************************************/
 
-addcolormap(list)
+static void
+addcolormap(char *list)
 
-    char	*list;			/* use this color map */
+    /* char	*list;			/ * use this color map */
 
 {
 
@@ -894,9 +930,10 @@ addcolormap(list)
 
 /*****************************************************************************/
 
-setwindow(list)
+static void
+setwindow(char *list)
 
-    char	*list;			/* corners of window into the matrix */
+    /* char	*list;			/ * corners of window into the matrix */
 
 {
 
@@ -929,7 +966,8 @@ setwindow(list)
 
 /*****************************************************************************/
 
-inwindow()
+static int
+inwindow(void)
 
 {
 
@@ -951,7 +989,8 @@ inwindow()
 
 /*****************************************************************************/
 
-inrange()
+static int
+inrange(void)
 
 {
 
@@ -968,9 +1007,10 @@ inrange()
 
 /*****************************************************************************/
 
-mapfloat(element)
+static int
+mapfloat(double element)
 
-    double	element;		/* floating point matrix element */
+    /* double	element;		/ * floating point matrix element */
 
 {
 
@@ -996,7 +1036,8 @@ mapfloat(element)
 
 /*****************************************************************************/
 
-putrow()
+static void
+putrow(void)
 
 {
 
@@ -1021,11 +1062,11 @@ putrow()
 	    fprintf(fp_out, "%d ", n);
 	    for ( i = 0; i < n; i++, p1++ )
 		fprintf(fp_out, "%.2X", ((int) *p1) & 0377);
-	    fprintf(fp_out, " %d\n", (p2 - p1) / n);
+	    fprintf(fp_out, " %ld\n", (p2 - p1) / n);
 	} else {
 	    while ( p2 < eptr && patncmp(p2, n) == FALSE ) p2 += n;
 	    if ( p2 > eptr ) p2 = eptr;
-	    fprintf(fp_out, "%d ", p2 - p1);
+	    fprintf(fp_out, "%ld ", p2 - p1);
 	    while ( p1 < p2 )
 		fprintf(fp_out, "%.2X", ((int) *p1++) & 0377);
 	    fprintf(fp_out, " 0\n");
@@ -1039,7 +1080,8 @@ putrow()
 
 /*****************************************************************************/
 
-labelmatrix()
+static void
+labelmatrix(void)
 
 {
 
@@ -1067,17 +1109,18 @@ labelmatrix()
     fprintf(fp_out, "%d ", (regions - 1) / 2);
 
     for ( i = regions - 1; i >= 0; i-- )
-	fprintf(fp_out, "{(\\%.3o)} %d ", ilist[i].color, ilist[i].count);
+	fprintf(fp_out, "{(\\%.3o)} %ld ", ilist[i].color, ilist[i].count);
     fprintf(fp_out, "%d %d legend\n", total, regions);
 
 }   /* End of labelmatrix */
 
 /*****************************************************************************/
 
-patncmp(p1, n)
+static int
+patncmp(char *p1, int n)
 
-    char	*p1;			/* first patterns starts here */
-    int		n;			/* and extends this many bytes */
+    /* char	*p1;			/ * first patterns starts here */
+    /* int		n;			/ * and extends this many bytes */
 
 {
 
@@ -1102,7 +1145,8 @@ patncmp(p1, n)
 
 /*****************************************************************************/
 
-char *savestring(str)
+char *
+savestring(str)
 
     char	*str;			/* save this string */
 
@@ -1128,9 +1172,10 @@ char *savestring(str)
 
 /*****************************************************************************/
 
-redirect(pg)
+static void
+redirect(int pg)
 
-    int		pg;			/* next page we're printing */
+    /* int		pg;			/ * next page we're printing */
 
 {
 
