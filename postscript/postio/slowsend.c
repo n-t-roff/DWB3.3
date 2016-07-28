@@ -15,6 +15,7 @@
  */
 
 #include <stdio.h>
+#include <unistd.h>
 
 #include "gen.h"
 #include "postio.h"
@@ -27,13 +28,14 @@ extern char	*line;
 extern char	mesg[];
 extern int	ttyo;
 
-static writeblock(int num);
+static int writeblock(int);
 
 /*****************************************************************************/
 
-slowsend(fd_in)
+void
+slowsend(int fd_in)
 
-    int		fd_in;			/* next input file */
+    /* int		fd_in;			/ * next input file */
 
 {
 
@@ -90,9 +92,10 @@ slowsend(fd_in)
 
 /*****************************************************************************/
 
-static writeblock(num)
+static int
+writeblock(int num)
 
-    int		num;			/* most bytes we'll write */
+    /* int		num;			/ * most bytes we'll write */
 
 {
 

@@ -99,11 +99,31 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
 #include "ifdef.h"			/* conditional compilation stuff */
 #include "gen.h"			/* general purpose definitions */
 #include "postio.h"			/* some special definitions */
 
+static void init_signals(void);
+static void options(void);
+static int getbaud(char *);
+static void initialize(void);
+static void split(void);
+static void arguments(void);
+static void cleanup(void);
+static int writeblock(void);
+static int parsemesg(void);
+static void clearline(void);
+static int sendsignal(int);
+static void interrupt(int);
+static void logit(char *, ...);
+static void quit(int);
+static void Rest(int);
+static int Read(int, char *, int);
+static int Write(int, char *, int);
 void done(void);
 void send(int fd_in, char *name);
 void start(void);
@@ -160,10 +180,8 @@ FILE	*fp_log;		/* log file for stuff from the printer */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -190,17 +208,18 @@ main(agc, agv)
     done();				/* wait until the printer is finished */
     cleanup();				/* make sure the write process stops */
 
-    exit(x_stat);			/* everything probably went OK */
+    return (x_stat);			/* everything probably went OK */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
-    void	interrupt();		/* handles them if we catch signals */
+    /* void	interrupt();		/ * handles them if we catch signals */
 
 /*
  *
@@ -227,7 +246,8 @@ init_signals()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -332,9 +352,10 @@ options()
 
 /*****************************************************************************/
 
-getbaud(rate)
+static int
+getbaud(char *rate)
 
-    char	*rate;			/* string representing the baud rate */
+    /* char	*rate;			/ * string representing the baud rate */
 
 {
 
@@ -353,12 +374,14 @@ getbaud(rate)
 	    return(baudtable[i].val);
 
     error(FATAL, "don't recognize baud rate %s", rate);
+    return 0;
 
 }   /* End of getbaud */
 
 /*****************************************************************************/
 
-initialize()
+static void
+initialize(void)
 
 {
 
@@ -480,12 +503,12 @@ start(void)
 
 /*****************************************************************************/
 
-split()
+static void
+split(void)
 
 {
 
     int		pid;
-    void	interrupt();
 
 /*
  *
@@ -503,7 +526,7 @@ split()
  *
  */
 
-    if ( splitme == TRUE )
+    if ( splitme == TRUE ) {
 	if ( resetline() == TRUE )  {
 	    pid = getpid();
 	    signal(joinsig, interrupt);
@@ -518,6 +541,7 @@ split()
 	} else if ( interactive == TRUE || tostdout == TRUE )
 	    error(FATAL, "can't create two process - check resetline()");
  	else error(NON_FATAL, "running as a single process - check resetline()");
+    }
 
     canread = (whatami & READ) ? TRUE : FALSE;
     canwrite = (whatami & WRITE) ? TRUE : FALSE;
@@ -526,7 +550,8 @@ split()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -729,7 +754,8 @@ done(void)
 
 /*****************************************************************************/
 
-cleanup()
+static void
+cleanup(void)
 
 {
 
@@ -750,9 +776,10 @@ cleanup()
 
 /*****************************************************************************/
 
-readblock(fd_in)
+int
+readblock(int fd_in)
 
-    int		fd_in;			/* current input file */
+    /* int		fd_in;			/ * current input file */
 
 {
 
@@ -786,7 +813,8 @@ readblock(fd_in)
 
 /*****************************************************************************/
 
-writeblock()
+static int
+writeblock(void)
 
 {
 
@@ -812,9 +840,10 @@ writeblock()
 
 /*****************************************************************************/
 
-getstatus(t)
+int
+getstatus(int t)
 
-    int		t;			/* sleep time after sending '\024' */
+    /* int		t;			/ * sleep time after sending '\024' */
 
 {
 
@@ -863,7 +892,8 @@ getstatus(t)
 
 /*****************************************************************************/
 
-parsemesg()
+static int
+parsemesg(void)
 
 {
 
@@ -929,10 +959,11 @@ parsemesg()
 
 /*****************************************************************************/
 
-char *find(str1, str2)
+char *
+find(char *str1, char *str2)
 
-    char	*str1;			/* look for this string */
-    char	*str2;			/* in this one */
+    /* char	*str1;			/ * look for this string */
+    /* char	*str2;			/ * in this one */
 
 {
 
@@ -957,7 +988,8 @@ char *find(str1, str2)
 
 /*****************************************************************************/
 
-clearline()
+static void
+clearline(void)
 
 {
 
@@ -975,9 +1007,10 @@ clearline()
 
 /*****************************************************************************/
 
-sendsignal(sig)
+static int
+sendsignal(int sig)
 
-    int		sig;			/* this goes to the other process */
+    /* int		sig;			/ * this goes to the other process */
 
 {
 
@@ -998,9 +1031,10 @@ sendsignal(sig)
 
 /*****************************************************************************/
 
-void interrupt(sig)
+static void
+interrupt(int sig)
 
-    int		sig;			/* signal that we caught */
+    /* int		sig;			/ * signal that we caught */
 
 {
 
@@ -1016,10 +1050,11 @@ void interrupt(sig)
 
     if ( sig != joinsig )  {
 	x_stat |= FATAL;
-	if ( canread == TRUE )
+	if ( canread == TRUE ) {
 	    if ( interactive == FALSE )
 		error(NON_FATAL, "signal %d abort", sig);
 	    else error(NON_FATAL, "quitting");
+	}
 	quit(sig);
     }	/* End if */
 
@@ -1030,12 +1065,14 @@ void interrupt(sig)
 
 /*****************************************************************************/
 
-logit(mesg, a1, a2, a3)
+static void
+logit(char *mesg, ...)
 
-    char	*mesg;			/* control string */
-    unsigned	a1, a2, a3;		/* and possible arguments */
+    /* char	*mesg;			/ * control string */
+    /* unsigned	a1, a2, a3;		/ * and possible arguments */
 
 {
+    va_list ap;
 
 /*
  *
@@ -1044,7 +1081,9 @@ logit(mesg, a1, a2, a3)
  */
 
     if ( mesg != NULL && fp_log != NULL )  {
-	fprintf(fp_log, mesg, a1, a2, a3);
+	va_start(ap, mesg);
+	vfprintf(fp_log, mesg, ap);
+	va_end(ap);
 	fflush(fp_log);
     }	/* End if */
 
@@ -1052,15 +1091,17 @@ logit(mesg, a1, a2, a3)
 
 /*****************************************************************************/
 
-error(kind, mesg, a1, a2, a3)
+void
+error(int kind, char *mesg, ...)
 
-    int		kind;			/* FATAL or NON_FATAL error */
-    char	*mesg;			/* error message control string */
-    unsigned	a1, a2, a3;		/* control string arguments */
+    /* int		kind;			/ * FATAL or NON_FATAL error */
+    /* char	*mesg;			/ * error message control string */
+    /* unsigned	a1, a2, a3;		/ * control string arguments */
 
 {
 
     FILE	*fp_err;
+    va_list	ap;
 
 /*
  *
@@ -1075,7 +1116,9 @@ error(kind, mesg, a1, a2, a3)
 
     if ( mesg != NULL && *mesg != '\0' )  {
 	fprintf(fp_err, "%s: ", prog_name);
-	fprintf(fp_err, mesg, a1, a2, a3);
+	va_start(ap, mesg);
+	vfprintf(fp_err, mesg, ap);
+	va_end(ap);
 	putc('\n', fp_err);
     }	/* End if */
 
@@ -1088,9 +1131,8 @@ error(kind, mesg, a1, a2, a3)
 
 /*****************************************************************************/
 
-quit(sig)
-
-    int		sig;
+static void
+quit(int sig)
 
 {
 
@@ -1138,9 +1180,8 @@ quit(sig)
 
 /*****************************************************************************/
 
-Rest(t)
-
-    int		t;
+static void
+Rest(int t)
 
 {
 
@@ -1160,11 +1201,8 @@ Rest(t)
 
 /*****************************************************************************/
 
-Read(fd, buf, n)
-
-    int		fd;
-    char	*buf;
-    int		n;
+static int
+Read(int fd, char *buf, int n)
 
 {
 
@@ -1190,11 +1228,8 @@ Read(fd, buf, n)
 
 /*****************************************************************************/
 
-Write(fd, buf, n)
-
-    int		fd;
-    char	*buf;
-    int		n;
+static int
+Write(int fd, char *buf, int n)
 
 {
 

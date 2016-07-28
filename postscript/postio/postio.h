@@ -204,3 +204,12 @@ typedef struct {
  */
 
 char	*find();
+void	setupline(void);
+int	resetline(void);
+void	setupstdin(int);
+int	readline(void);
+int	dwb_strspn(char *, char *);
+int	getstatus(int);
+void	slowsend(int);
+int	readblock(int);
+void	error(int, char *, ...);

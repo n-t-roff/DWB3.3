@@ -1,4 +1,4 @@
-MAKE=/usr/bin/make
+#MAKE=/usr/bin/make
 MAKEFILE=postio.mk
 
 SYSTEM=BSD4_2

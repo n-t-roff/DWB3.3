@@ -25,9 +25,15 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <string.h>
+#include <unistd.h>
+
+int ioctl(int fd, unsigned long request, ...);
 
 #include "ifdef.h"			/* conditional header file inclusion */
 #include "gen.h"			/* general purpose definitions */
+#include "postio.h"
+
+static char *dwb_strpbrk(char *, char *);
 
 FILE	*fp_ttyi, *fp_ttyo;
 char	*ptr = mesg;
@@ -500,7 +506,8 @@ readline()
 /*****************************************************************************/
 
 #ifdef BSD4_2
-setupline()
+void
+setupline(void)
 
 {
 
@@ -561,7 +568,8 @@ setupline()
 
 /*****************************************************************************/
 
-resetline()
+int
+resetline(void)
 
 {
 
@@ -591,9 +599,10 @@ resetline()
 
 /*****************************************************************************/
 
-setupstdin(mode)
+void
+setupstdin(int mode)
 
-    int		mode;			/* what to do with stdin settings */
+    /* int		mode;			/ * what to do with stdin settings */
 
 {
 
@@ -639,7 +648,8 @@ setupstdin(mode)
 
 /*****************************************************************************/
 
-readline()
+int
+readline(void)
 
 {
 
@@ -661,20 +671,23 @@ readline()
 
     if ( interactive == FALSE )  {
 	while ( 1 )  {
-	    if ( ioctl(ttyi, FIONREAD, &n) < 0 )
+	    if ( ioctl(ttyi, FIONREAD, &n) < 0 ) {
 		if ( errno == EINTR )
 		    continue;
 		else error(FATAL, "ioctl error - FIONREAD");
-	    if ( n <= 0 )
+	    }
+	    if ( n <= 0 ) {
 		if ( canwrite == TRUE )
 		    return(FALSE);
 		else n = 1;
+	    }
 	    for ( ; n > 0; n-- )  {
 		/*if ( read(ttyi, ptr, 1) < 0 )*/
-		if ( (*ptr = getc(fp_ttyi)) == EOF )
+		if ( (*ptr = getc(fp_ttyi)) == EOF ) {
 		    if ( errno == EINTR )
 			continue;
 		    else error(FATAL, "error reading %s", line);
+		}
 		if ( *ptr == '\r' ) continue;
 		if ( *ptr == '\n' || *ptr == '\004' || ptr >= endmesg )  {
 		    *(ptr+1) = '\0';
@@ -706,9 +719,7 @@ readline()
  * of string which consists solely of characters from charset.
  */
 int
-dwb_strspn(string, charset)
-char	*string;
-register char	*charset;
+dwb_strspn(char *string, char *charset)
 {
 	register char *p, *q;
 
@@ -728,9 +739,8 @@ register char	*charset;
  * in the character string `string'; NULL if none exists.
  */
 
-char *
-dwb_strpbrk(string, brkset)
-register char *string, *brkset;
+static char *
+dwb_strpbrk(char *string, char *brkset)
 {
 	register char *p;
 
@@ -754,10 +764,9 @@ register char *string, *brkset;
  * `subsequent' calls are calls with first argument NULL.
  */
 
-
+#if 0
 char *
-dwb_strtok(string, sepset)
-char	*string, *sepset;
+dwb_strtok(char *string, char *sepset)
 {
 	register char	*p, *q, *r;
 	static char	*savept;
@@ -781,6 +790,7 @@ char	*string, *sepset;
 	}
 	return(q);
 }
+#endif
 #endif
 
 /*****************************************************************************/
