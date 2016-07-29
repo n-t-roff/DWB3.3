@@ -4,6 +4,7 @@
 #include <signal.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include "comments.h"
 #include "gen.h"
@@ -170,7 +171,7 @@ initstbl()
 int
 nextbyte()
 {
-    static ibufindex;
+    static int ibufindex;
 
     if (byteinibuf) {
 	byteinibuf--;
@@ -729,9 +730,8 @@ done()
     fprintf(stdout, "%s %d\n", PAGES, printed); 
 }
 
-main(agc, agv)
-    int agc;
-    char *agv[];
+int
+main(int agc, char **agv)
 {
     fp_out = stdout;
     argc = agc;
@@ -745,6 +745,6 @@ main(agc, agv)
     arguments();
     done();
 
-    exit(0);
+    return (0);
 }
 
