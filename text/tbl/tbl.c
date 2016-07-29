@@ -1805,7 +1805,7 @@ getcolwidth(int icol) /* Generate code to calculate width for one column */
 						    S1, S2);
 					doubled[icol] = 1;
 					printf(".if \\n(%c->\\n(%d .nr %d \\n(%c-\n",
-					    (int)s, S2, S2, (int)s);
+					    (int)(intptr_t)s, S2, S2, (int)(intptr_t)s);
 				}
 				/* fall through to next case */
 			case 'n': /* numeric field */
@@ -1914,7 +1914,7 @@ wide(char *s, char *fn, char *size) /* Generate code to calculate the width of s
 		printf("%c", F1);
 	}
 	else
-		printf("\\n(%c-", (int)s);
+		printf("\\n(%c-", (int)(intptr_t)s);
 }
 
 static int
@@ -2147,7 +2147,7 @@ putline(int i, int nl) /* Process one line of input data */
 						break;
 				if ((long int)s>0 && (long int)s<128)
 				{
-					printf(".nr %2d \\n(%c|u\n",TMP,(int)s);
+					printf(".nr %2d \\n(%c|u\n",TMP,(int)(intptr_t)s);
 					printf(".if \\n(%2d>\\n(%2d .nr %2d \\n(%2du\n",
 					    TMP, S2, S2, TMP);
 				}
@@ -2155,7 +2155,7 @@ putline(int i, int nl) /* Process one line of input data */
 			}
 			if (point(s))
 				continue;
-			printf(".nr %2d \\n(%c|u\n", TMP, (int)s);
+			printf(".nr %2d \\n(%c|u\n", TMP, (int)(intptr_t)s);
 			printf(".if \\n(%2d>\\n(%2d .nr %2d \\n(%2du\n",
 			    TMP, S2, S2, TMP);
 			watchout=1;
@@ -2257,9 +2257,9 @@ putline(int i, int nl) /* Process one line of input data */
 		lf=prev(nl);
 		if (lf>=0 && vspen(TABLE(lf,c).col))
 			printf(".if (\\n(%c|+\\n(^%c-1v)>\\n(#- .nr #- +(\\n(%c|+\\n(^%c-\\n(#--1v)\n",
-			    (int)s, 'a'+c, (int)s, 'a'+c);
+			    (int)(intptr_t)s, 'a'+c, (int)(intptr_t)s, 'a'+c);
 		else
-			printf(".if (\\n(%c|+\\n(#^-1v)>\\n(#- .nr #- +(\\n(%c|+\\n(#^-\\n(#--1v)\n",(int)s,(int)s);
+			printf(".if (\\n(%c|+\\n(#^-1v)>\\n(#- .nr #- +(\\n(%c|+\\n(#^-\\n(#--1v)\n",(int)(intptr_t)s,(int)(intptr_t)s);
 	}
 	if (allflg && once>0)
 	{
@@ -2514,7 +2514,7 @@ funnies(int stl, int lin) /* Write out funny diverted things */
 		case 'n':
 		case 'c':
 			printf("(\\n(%2su+\\n(%2su-\\n(%c-u)/2u\n",
-			    reg(c,CLEFT), reg(c-1+ctspan(lin,c),CRIGHT), (int)s);
+			    reg(c,CLEFT), reg(c-1+ctspan(lin,c),CRIGHT), (int)(intptr_t)s);
 			break;
 		case 'l':
 			printf("\\n(%2su\n", reg(c,CLEFT));
@@ -2523,7 +2523,7 @@ funnies(int stl, int lin) /* Write out funny diverted things */
 			printf("\\n(%2su\n", reg(c,CMID));
 			break;
 		case 'r':
-			printf("\\n(%2su-\\n(%c-u\n", reg(c,CRIGHT), (int)s);
+			printf("\\n(%2su-\\n(%c-u\n", reg(c,CRIGHT), (int)(intptr_t)s);
 			break;
 		}
 		printf(".in +\\n(%du\n", SIND); /* Set left margin for this column */
@@ -2534,18 +2534,18 @@ funnies(int stl, int lin) /* Write out funny diverted things */
 			if ((FLGS(stl,c)&(CTOP|CDOWN))==0)
 			{
 				printf(".nr %d \\n(#-u-\\n(^%c-\\n(%c|+1v\n",
-				    TMP, 'a'+c, (int)s);
+				    TMP, 'a'+c, (int)(intptr_t)s);
 				printf(".if \\n(%d>0 .sp \\n(%du/2u", TMP, TMP);
 				if (pr1403) /* round */
 					printf("/1v*1v");
 				printf("\n");
 			}
 		}
-		printf(".ie \\n(%c|>=\\n(.t .nr #& 1\n", (int)s);
+		printf(".ie \\n(%c|>=\\n(.t .nr #& 1\n", (int)(intptr_t)s);
 		printf(".el .nr #& 0\n");
 		fn = FN(stl,c);
 		putfont(fn);
-		printf(".%c+\n",(int)s); /* Output saved text block */
+		printf(".%c+\n",(int)(intptr_t)s); /* Output saved text block */
 		printf(".#%%\n");
 		printf(".in -\\n(%du\n", SIND); /* Restore previous margin */
 		if (*fn) putfont("P"); /* Restore previous font */

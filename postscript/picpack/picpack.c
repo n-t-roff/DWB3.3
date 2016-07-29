@@ -55,6 +55,9 @@
 #include	<stdio.h>
 #include	<sys/types.h>
 #include	<sys/stat.h>
+#include	<unistd.h>
+#include	<fcntl.h>
+
 
 #include	"gen.h"			/* general purpose definitions */
 #include	"ext.h"			/* external variable definitions */
@@ -68,14 +71,19 @@ int		quiet = FALSE;
 FILE		*fp_in;		/* input */
 FILE		*fp_out;	/* and output files */
 
+static void options(void);
+static void newkeys(char *);
+static void arguments(void);
+static void copyfile(int, int);
+static void done(void);
+static void picpack(void);
+static int gotpicfile(char *);
 void dwb_inline(char *name);
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -98,13 +106,14 @@ main(agc, agv)
     arguments();			/* translate all the input files */
     done();				/* clean things up */
 
-    exit(x_stat);			/* everything probably went OK */
+    return (x_stat);			/* everything probably went OK */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -154,9 +163,10 @@ options()
 
 /*****************************************************************************/
 
-newkeys(list)
+static void
+newkeys(char *list)
 
-    char	*list;			/* comma or space separated key strings */
+    /* char	*list;			/ * comma or space separated key strings */
 
 {
 
@@ -186,7 +196,8 @@ newkeys(list)
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -219,7 +230,8 @@ arguments()
 
 /*****************************************************************************/
 
-FILE *copystdin()
+FILE *
+copystdin(void)
 
 {
 
@@ -254,10 +266,11 @@ FILE *copystdin()
 
 /*****************************************************************************/
 
-copyfile(fd_in, fd_out)
+static void
+copyfile(int fd_in, int fd_out)
 
-    int		fd_in;			/* input */
-    int		fd_out;			/* and output files */
+    /* int		fd_in;			/ * input */
+    /* int		fd_out;			/ * and output files */
 
 {
 
@@ -279,7 +292,8 @@ copyfile(fd_in, fd_out)
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -297,7 +311,8 @@ done()
 
 /*****************************************************************************/
 
-picpack()
+static void
+picpack(void)
 
 {
 
@@ -382,9 +397,8 @@ dwb_inline(char *name)
 
 /*****************************************************************************/
 
-gotpicfile(name)
-
-    char	*name;
+static int
+gotpicfile(char *name)
 
 {
 

@@ -130,7 +130,7 @@ static void gin(void);
 static int control(int);
 static int esc(void);
 static void move(int, int);
-static void setmode(int);
+static void dwb_setmode(int);
 static void home(void);
 static void setfont(int);
 static void text(void);
@@ -591,7 +591,7 @@ reset(void)
     tekfont = -1;
     home();
     setfont(TEKFONT);
-    setmode(ALPHA);
+    dwb_setmode(ALPHA);
 
 }   /* End of reset */
 
@@ -878,21 +878,21 @@ control(int c)
 
 	case CR:
 		if ( dispmode != ALPHA )  {
-		    setmode(ALPHA);
+		    dwb_setmode(ALPHA);
 		    ungetc(c, fp_in);
 		    return(OUTMODED);
 		} else return(c);
 
 	case FS:
 		if ( (dispmode == ALPHA) || (dispmode == GRAPH) )  {
-		    setmode(POINT);
+		    dwb_setmode(POINT);
 		    return(OUTMODED);
 		}   /* End if */
 		return(0);
 
 	case GS:
 		if ( (dispmode == ALPHA) || (dispmode == GRAPH) )  {
-		    setmode(GRAPH);
+		    dwb_setmode(GRAPH);
 		    return(OUTMODED);
 		}   /* End if */
 		return(0);
@@ -903,7 +903,7 @@ control(int c)
 
 	case RS:
 		if ( dispmode != GIN )  {
-		    setmode(INCREMENTAL);
+		    dwb_setmode(INCREMENTAL);
 		    return(OUTMODED);
 		}   /* End if */
 		return(0);
@@ -911,7 +911,7 @@ control(int c)
 	case US:
 		if ( dispmode == ALPHA )
 		    return(0);
-		setmode(ALPHA);
+		dwb_setmode(ALPHA);
 		return(OUTMODED);
 
 	case ESC:
@@ -955,7 +955,7 @@ esc(void)
 		    break;
 
 	    case ENQ:
-		    setmode(ALPHA);
+		    dwb_setmode(ALPHA);
 		    return(OUTMODED);
 
 	    case ETB:
@@ -963,13 +963,13 @@ esc(void)
 
 	    case FF:
 		    formfeed();
-		    setmode(ALPHA);
+		    dwb_setmode(ALPHA);
 		    return(OUTMODED);
 
 	    case FS:
 		    if ( (dispmode == INCREMENTAL) || ( dispmode == GIN) )
 			return(0);
-		    setmode(SPECIALPOINT);
+		    dwb_setmode(SPECIALPOINT);
 		    return(OUTMODED);
 
 	    case SI:
@@ -977,7 +977,7 @@ esc(void)
 		    return(0);
 
 	    case SUB:
-		    setmode(GIN);
+		    dwb_setmode(GIN);
 		    return(OUTMODED);
 
 	    case OUTMODED:
@@ -1003,7 +1003,7 @@ esc(void)
 		    if ( (c + 1) & 7 )
 			if ( (c & 7) != linestyle )  {
 			    linestyle = c & 7;
-			    setmode(dispmode);
+			    dwb_setmode(dispmode);
 			    fprintf(fp_out, "%s l\n", styles[linestyle]);
 			}   /* End if */
 		    return(0);
@@ -1038,7 +1038,7 @@ move(int x, int y)
 /*****************************************************************************/
 
 static void
-setmode(int mode)
+dwb_setmode(int mode)
 
     /* int		mode;			/ * this should be the new mode */
 
@@ -1066,7 +1066,7 @@ setmode(int mode)
 
     dispmode = mode;
 
-}   /* End of setmode */
+}   /* End of dwb_setmode */
 
 /*****************************************************************************/
 
@@ -1103,7 +1103,7 @@ setfont(int newfont)
  */
 
     if ( newfont != tekfont )  {
-	setmode(dispmode);
+	dwb_setmode(dispmode);
 	fprintf(fp_out, "%d f\n", charwidth[newfont]);
     }	/* End if */
 
@@ -1169,7 +1169,7 @@ formfeed(void)
  *
  */
 
-    setmode(dispmode);			/* end any outstanding text or graphics */
+    dwb_setmode(dispmode);			/* end any outstanding text or graphics */
 
     if ( fp_out == stdout )		/* count the last page */
 	printed++;
@@ -1213,7 +1213,7 @@ nextchar(void)
  */
 
     if ( (ch = getc(fp_in)) == EOF )  {
-	setmode(EXIT);
+	dwb_setmode(EXIT);
 	ch = OUTMODED;
     }	/* End if */
 
