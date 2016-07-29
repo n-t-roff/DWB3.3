@@ -171,6 +171,7 @@
 #include <signal.h>
 #include <math.h>
 #include <ctype.h>
+#include <unistd.h>
 
 #include "comments.h"			/* PostScript file structuring comments */
 #include "gen.h"			/* general purpose definitions */
@@ -178,6 +179,35 @@
 #include "ext.h"			/* external variable declarations */
 #include "postbgi.h"			/* a few definitions just used here */
 
+static void init_signals(void);
+static void header(void);
+static void options(void);
+static void setup(void);
+static void arguments(void);
+static void done(void);
+static void account(void);
+static void conv(void);
+static void hgoto(int);
+static void vgoto(int);
+static void setsize(int);
+static void repeat(void);
+static void text(int);
+static void formfeed(void);
+static void subr_def(void);
+static void subr_end(void);
+static void subr_call(void);
+static void vector(int, int);
+static void rectangle(int);
+static void trapezoid(void);
+static void point_plot(int, int);
+static void line_plot(void);
+static void pattern(void);
+static int get_color(int, int);
+static void set_color(int);
+static int get_int(int);
+static int get_data(void);
+static int get_char(void);
+static void redirect(int);
 void arc(int mode);
 
 char	*optnames = "a:c:f:m:n:o:p:w:x:y:A:C:E:J:L:P:R:DI";
@@ -217,10 +247,8 @@ FILE	*fp_acct = NULL;		/* for accounting data */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -249,13 +277,14 @@ main(agc, agv)
     done();				/* print the last page etc. */
     account();				/* job accounting data */
 
-    exit(x_stat);			/* everything probably went OK */
+    return (x_stat);			/* everything probably went OK */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -280,7 +309,8 @@ init_signals()
 
 /*****************************************************************************/
 
-header()
+static void
+header(void)
 
 {
 
@@ -324,7 +354,8 @@ header()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -436,9 +467,10 @@ options()
 
 /*****************************************************************************/
 
-char *get_font(name)
+char *
+get_font(char *name)
 
-    char	*name;			/* name the user asked for */
+    /* char	*name;			/ * name the user asked for */
 
 {
 
@@ -462,7 +494,8 @@ char *get_font(name)
 
 /*****************************************************************************/
 
-setup()
+static void
+setup(void)
 
 {
 
@@ -489,7 +522,8 @@ setup()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -520,7 +554,8 @@ arguments()
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -540,7 +575,8 @@ done()
 
 /*****************************************************************************/
 
-account()
+static void
+account(void)
 
 {
 
@@ -557,7 +593,8 @@ account()
 
 /*****************************************************************************/
 
-conv()
+static void
+conv(void)
 
 {
 
@@ -723,9 +760,10 @@ conv()
 
 /*****************************************************************************/
 
-hgoto(n)
+static void
+hgoto(int n)
 
-    int		n;			/* new horizontal position */
+    /* int		n;			/ * new horizontal position */
 
 {
 
@@ -741,9 +779,10 @@ hgoto(n)
 
 /*****************************************************************************/
 
-vgoto(n)
+static void
+vgoto(int n)
 
-    int		n;			/* move to this vertical position */
+    /* int		n;			/ * move to this vertical position */
 
 {
 
@@ -759,9 +798,10 @@ vgoto(n)
 
 /*****************************************************************************/
 
-setsize(n)
+static void
+setsize(int n)
 
-    int		n;			/* BGI size - just a grid separation */
+    /* int		n;			/ * BGI size - just a grid separation */
 
 {
 
@@ -785,7 +825,8 @@ setsize(n)
 
 /*****************************************************************************/
 
-repeat()
+static void
+repeat(void)
 
 {
 
@@ -799,7 +840,7 @@ repeat()
  *
  */
 
-    count = get_int();			/* get the repeat count */
+    count = get_int(0);			/* get the repeat count */
 
     while ( (ch = get_char()) != EOF  &&  ch != BENDR ) ;
 
@@ -807,9 +848,10 @@ repeat()
 
 /*****************************************************************************/
 
-text(angle)
+static void
+text(int angle)
 
-    int		angle;			/* either 0 or 90 degrees */
+    /* int		angle;			/ * either 0 or 90 degrees */
 
 {
 
@@ -861,7 +903,8 @@ text(angle)
 
 /*****************************************************************************/
 
-formfeed()
+static void
+formfeed(void)
 
 {
 
@@ -909,7 +952,8 @@ formfeed()
 
 /*****************************************************************************/
 
-subr_def()
+static void
+subr_def(void)
 
 {
 
@@ -962,7 +1006,8 @@ subr_def()
 
 /*****************************************************************************/
 
-subr_end()
+static void
+subr_end(void)
 
 {
 
@@ -1007,7 +1052,8 @@ subr_end()
 
 /*****************************************************************************/
 
-subr_call()
+static void
+subr_call(void)
 
 {
 
@@ -1036,10 +1082,11 @@ subr_call()
 
 /*****************************************************************************/
 
-vector(var, mode)
+static void
+vector(int var, int mode)
 
-    int		var;			/* coordinate that varies next? */
-    int		mode;			/* VISIBLE or INVISIBLE vectors */
+    /* int		var;			/ * coordinate that varies next? */
+    /* int		mode;			/ * VISIBLE or INVISIBLE vectors */
 
 {
 
@@ -1068,7 +1115,8 @@ vector(var, mode)
 	    y += get_int(0);
 	} else {			/* must be a short vector */
 	    x += ((ch & MSBMAG) * ((ch & SGNB) ? -1 : 1));
-	    y += (((ch = get_data()) & MSBMAG) * ((ch & SGNB) ? -1 : 1));
+	    ch = get_data();
+	    y += ((ch & MSBMAG) * ((ch & SGNB) ? -1 : 1));
 	}   /* End else */
 
 	if ( mode == VISIBLE )  {	/* draw the line segment */
@@ -1095,9 +1143,10 @@ vector(var, mode)
 
 /*****************************************************************************/
 
-rectangle(mode)
+static void
+rectangle(int mode)
 
-    int		mode;			/* FILL or OUTLINE the rectangle */
+    /* int		mode;			/ * FILL or OUTLINE the rectangle */
 
 {
 
@@ -1124,7 +1173,8 @@ rectangle(mode)
 
 /*****************************************************************************/
 
-trapezoid()
+static void
+trapezoid(void)
 
 {
 
@@ -1161,10 +1211,11 @@ trapezoid()
 
 /*****************************************************************************/
 
-point_plot(mode, ch)
+static void
+point_plot(int mode, int ch)
 
-    int		mode;			/* plotting mode BPOINT or BPOINT1 */
-    int		ch;			/* will be placed at the points */
+    /* int		mode;			/ * plotting mode BPOINT or BPOINT1 */
+    /* int		ch;			/ * will be placed at the points */
 
 {
 
@@ -1223,7 +1274,8 @@ point_plot(mode, ch)
 
 /*****************************************************************************/
 
-line_plot()
+static void
+line_plot(void)
 
 {
 
@@ -1306,7 +1358,8 @@ arc(int mode)
 
 /*****************************************************************************/
 
-pattern()
+static void
+pattern(void)
 
 {
 
@@ -1349,10 +1402,11 @@ pattern()
 
 /*****************************************************************************/
 
-get_color(val, component)
+static int
+get_color(int val, int component)
 
-    int		val;			/* color data byte */
-    int		component;		/* RED, GREEN, or BLUE component */
+    /* int		val;			/ * color data byte */
+    /* int		component;		/ * RED, GREEN, or BLUE component */
 
 {
 
@@ -1399,9 +1453,10 @@ get_color(val, component)
 
 /*****************************************************************************/
 
-set_color(val)
+static void
+set_color(int val)
 
-    int		val;			/* color data byte */
+    /* int		val;			/ * color data byte */
 
 {
 
@@ -1417,9 +1472,10 @@ set_color(val)
 
 /*****************************************************************************/
 
-get_int(highbyte)
+static int
+get_int(int highbyte)
 
-    int		highbyte;		/* already read this byte */
+    /* int		highbyte;		/ * already read this byte */
 
 {
 
@@ -1445,7 +1501,8 @@ get_int(highbyte)
 
 /*****************************************************************************/
 
-get_data()
+static int
+get_data(void)
 
 {
 
@@ -1467,7 +1524,8 @@ get_data()
 
 /*****************************************************************************/
 
-get_char()
+static int
+get_char(void)
 
 {
 
@@ -1496,9 +1554,10 @@ get_char()
 
 /*****************************************************************************/
 
-redirect(pg)
+static void
+redirect(int pg)
 
-    int		pg;			/* next page we're printing */
+    /* int		pg;			/ * next page we're printing */
 
 {
 
