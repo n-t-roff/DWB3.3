@@ -78,12 +78,41 @@
 #include <signal.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include "comments.h"			/* PostScript file structuring comments */
 #include "gen.h"			/* general purpose definitions */
 #include "path.h"			/* for the prologue */
 #include "ext.h"			/* external variable declarations */
 #include "postdaisy.h"			/* a few special definitions */
+
+static void init_signals(void);
+static void header(void);
+static void options(void);
+static void setup(void);
+static void arguments(void);
+static void done(void);
+static void account(void);
+static void text(void);
+static void inittabs(void);
+static void cleartabs(void);
+static void formfeed(void);
+static void linefeed(void);
+static void carriage(void);
+static void htab(void);
+static void vtab(void);
+static void backspace(void);
+static void escape(void);
+static void vmot(int);
+static void vgoto(int);
+static void hmot(int);
+static void hgoto(int);
+static void changefont(char *);
+static void startline(void);
+static void endline(void);
+static void endstring(void);
+static void oput(int);
+static void redirect(int);
 
 char	*optnames = "a:c:f:h:l:m:n:o:p:r:s:v:x:y:A:C:E:J:L:P:DI";
 
@@ -140,10 +169,8 @@ FILE	*fp_acct = NULL;		/* for accounting data */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -168,13 +195,14 @@ main(agc, agv)
     done();				/* print the last page etc. */
     account();				/* job accounting data */
 
-    exit(x_stat);			/* not much could be wrong */
+    return (x_stat);			/* not much could be wrong */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -199,7 +227,8 @@ init_signals()
 
 /*****************************************************************************/
 
-header()
+static void
+header(void)
 
 {
 
@@ -246,7 +275,8 @@ header()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -387,9 +417,10 @@ options()
 
 /*****************************************************************************/
 
-char *get_font(name)
+char *
+get_font(char *name)
 
-    char	*name;			/* name the user asked for */
+    /* char	*name;			/ * name the user asked for */
 
 {
 
@@ -414,7 +445,8 @@ char *get_font(name)
 
 /*****************************************************************************/
 
-setup()
+static void
+setup(void)
 
 {
 
@@ -441,7 +473,8 @@ setup()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -475,7 +508,8 @@ arguments()
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -495,7 +529,8 @@ done()
 
 /*****************************************************************************/
 
-account()
+static void
+account(void)
 
 {
 
@@ -513,7 +548,8 @@ account()
 
 /*****************************************************************************/
 
-text()
+static void
+text(void)
 
 {
 
@@ -581,7 +617,8 @@ text()
 
 /*****************************************************************************/
 
-inittabs()
+static void
+inittabs(void)
 
 {
 
@@ -604,7 +641,8 @@ inittabs()
 
 /*****************************************************************************/
 
-cleartabs()
+static void
+cleartabs(void)
 
 {
 
@@ -626,7 +664,8 @@ cleartabs()
 
 /*****************************************************************************/
 
-formfeed()
+static void
+formfeed(void)
 
 {
 
@@ -670,7 +709,8 @@ formfeed()
 
 /*****************************************************************************/
 
-linefeed()
+static void
+linefeed(void)
 
 {
 
@@ -700,7 +740,8 @@ linefeed()
 
 /*****************************************************************************/
 
-carriage()
+static void
+carriage(void)
 
 {
 
@@ -726,7 +767,8 @@ carriage()
 
 /*****************************************************************************/
 
-htab()
+static void
+htab(void)
 
 {
 
@@ -758,7 +800,8 @@ htab()
 
 /*****************************************************************************/
 
-vtab()
+static void
+vtab(void)
 
 {
 
@@ -787,7 +830,8 @@ vtab()
 
 /*****************************************************************************/
 
-backspace()
+static void
+backspace(void)
 
 {
 
@@ -810,7 +854,8 @@ backspace()
 
 /*****************************************************************************/
 
-escape()
+static void
+escape(void)
 
 {
 
@@ -981,9 +1026,10 @@ escape()
 
 /*****************************************************************************/
 
-vmot(n)
+static void
+vmot(int n)
 
-    int		n;			/* move this far vertically */
+    /* int		n;			/ * move this far vertically */
 
 {
 
@@ -999,9 +1045,10 @@ vmot(n)
 
 /*****************************************************************************/
 
-vgoto(n)
+static void
+vgoto(int n)
 
-    int		n;			/* new vertical position */
+    /* int		n;			/ * new vertical position */
 
 {
 
@@ -1017,9 +1064,10 @@ vgoto(n)
 
 /*****************************************************************************/
 
-hmot(n)
+static void
+hmot(int n)
 
-    int		n;			/* move this horizontally */
+    /* int		n;			/ * move this horizontally */
 
 {
 
@@ -1038,9 +1086,10 @@ hmot(n)
 
 /*****************************************************************************/
 
-hgoto(n)
+static void
+hgoto(int n)
 
-    int		n;			/* go to this horizontal position */
+    /* int		n;			/ * go to this horizontal position */
 
 {
 
@@ -1056,9 +1105,8 @@ hgoto(n)
 
 /*****************************************************************************/
 
-changefont(name)
-
-    char	*name;
+static void
+changefont(char *name)
 
 {
 
@@ -1076,7 +1124,8 @@ changefont(name)
 
 /*****************************************************************************/
 
-startline()
+static void
+startline(void)
 
 {
 
@@ -1102,7 +1151,8 @@ startline()
 
 /*****************************************************************************/
 
-endline()
+static void
+endline(void)
 
 {
 
@@ -1122,7 +1172,8 @@ endline()
 
 /*****************************************************************************/
 
-endstring()
+static void
+endstring(void)
 
 {
 
@@ -1144,9 +1195,10 @@ endstring()
 
 /*****************************************************************************/
 
-oput(ch)
+static void
+oput(int ch)
 
-    int		ch;			/* next output character */
+    /* int		ch;			/ * next output character */
 
 {
 
@@ -1196,9 +1248,10 @@ oput(ch)
 
 /*****************************************************************************/
 
-redirect(pg)
+static void
+redirect(int pg)
 
-    int		pg;			/* next page we're printing */
+    /* int		pg;			/ * next page we're printing */
 
 {
 
