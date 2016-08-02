@@ -118,4 +118,11 @@ typedef struct {
  */
 
 extern char	*mapfont();
+void xymove(int, int);
+void flushtext(void);
+void reset(void);
+void resetpos(void);
+void save(void);
+void restore(void);
+int exportfile(char *);
 

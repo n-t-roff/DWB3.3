@@ -70,4 +70,9 @@ typedef struct {
 extern char	*chname();
 extern char	*strsave();
 extern char	*allocate();
-
+int checkdesc(char *);
+int getdesc(char *);
+int mountfont(char *, int);
+int mounted(int);
+int onfont(int, int);
+int chindex(char *);

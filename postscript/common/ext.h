@@ -46,6 +46,13 @@ void error(int, char *, ...);
 void saverequest(char *);
 void writerequest(int, FILE *);
 void dumprequest(char *, char *, FILE *);
+void cover(double, double);
+void writebbox(FILE *, char *, int);
+void resetbbox(int);
+void scale(double, double);
+void translate(double, double);
+void rotate(double);
+void concat(double *);
 
 #define ERROR(kind, mesg, args)\
 	do {\

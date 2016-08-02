@@ -10,22 +10,25 @@
 
 char	buf[512];
 typedef struct {long start, end;} Section;
-static print(FILE *, char **);
+static void print(FILE *, char **);
 static void copy(FILE *fin, FILE *fout, Section *s);
 
 
-ps_include(fin, fout, page_no, whiteout, outline, scaleboth, cx, cy, sx, sy, ax, ay, rot)
+void
+ps_include(FILE *fin, FILE *fout, int page_no, int whiteout, int outline,
+    int scaleboth, double cx, double cy, double sx, double sy, double ax,
+    double ay, double rot)
 
 
-    FILE	*fin, *fout;		/* input and output files */
-    int		page_no;		/* physical page number from *fin */
-    int		whiteout;		/* erase picture area */
-    int		outline;		/* draw a box around it and */
-    int		scaleboth;		/* scale both dimensions - if not zero */
-    double	cx, cy;			/* center of the picture and */
-    double	sx, sy;			/* its size - in current coordinates */
-    double	ax, ay;			/* left-right, up-down adjustment */
-    double	rot;			/* rotation - in clockwise degrees */
+    /* FILE	*fin, *fout;		/ * input and output files */
+    /* int		page_no;		/ * physical page number from *fin */
+    /* int		whiteout;		/ * erase picture area */
+    /* int		outline;		/ * draw a box around it and */
+    /* int		scaleboth;		/ * scale both dimensions - if not zero */
+    /* double	cx, cy;			/ * center of the picture and */
+    /* double	sx, sy;			/ * its size - in current coordinates */
+    /* double	ax, ay;			/ * left-right, up-down adjustment */
+    /* double	rot;			/ * rotation - in clockwise degrees */
 
 
 {
@@ -170,10 +173,8 @@ fprintf(stderr, "trailer=(%d,%d)\n", trailer.start, trailer.end);
 
 }
 
-static
-print(fout, s)
-FILE *fout;
-char **s;
+static void
+print(FILE *fout, char **s)
 {
 	while (*s)
 		fprintf(fout, "%s\n", *s++);

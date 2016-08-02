@@ -35,14 +35,18 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "comments.h"			/* PostScript file structuring comments */
 #include "gen.h"			/* general purpose definitions */
 #include "path.h"			/* just for TEMPDIR definition */
 #include "ext.h"			/* external variable declarations */
+#include "dpost.h"
+#include "ps_include.h"
 
 FILE	*fp_pic = NULL;			/* in-line pictures go here */
 FILE	*picopen();
+static void piccopy(FILE *, FILE *, long);
 
 extern int	res, hpos, vpos;
 extern int	picflag;
@@ -164,9 +168,10 @@ picture(char *buf)
 
 /*****************************************************************************/
 
-FILE *picopen(path)
+FILE *
+picopen(char *path)
 
-    char	*path;			/* picture file pathname */
+    /* char	*path;			/ * picture file pathname */
 
 {
 
@@ -212,10 +217,11 @@ FILE *picopen(path)
 
 /*****************************************************************************/
 
-inlinepic(fp, buf)
+void
+inlinepic(FILE *fp, char *buf)
 
-    FILE	*fp;			/* current input file */
-    char	*buf;			/* whatever followed "x X InlinePicture" */
+    /* FILE	*fp;			/ * current input file */
+    /* char	*buf;			/ * whatever followed "x X InlinePicture" */
 
 {
 
@@ -255,11 +261,12 @@ inlinepic(fp, buf)
 
 /*****************************************************************************/
 
-piccopy(fp_in, fp_out, total)
+static void
+piccopy(FILE *fp_in, FILE *fp_out, long total)
 
-    FILE	*fp_in;			/* input */
-    FILE	*fp_out;		/* and output file pointers */
-    long	total;			/* number of bytes to be copied */
+    /* FILE	*fp_in;			/ * input */
+    /* FILE	*fp_out;		/ * and output file pointers */
+    /* long	total;			/ * number of bytes to be copied */
 
 {
 

@@ -33,9 +33,8 @@ double	matrix1[6], matrix2[6];
 
 /*****************************************************************************/
 
-cover(x, y)
-
-    double	x, y;
+void
+cover(double x, double y)
 
 {
 
@@ -65,11 +64,12 @@ cover(x, y)
 
 /*****************************************************************************/
 
-writebbox(fp, keyword, slop)
+void
+writebbox(FILE *fp, char *keyword, int slop)
 
-    FILE	*fp;			/* the comment is written here */
-    char	*keyword;		/* the boundingbox comment string */
-    int		slop;			/* expand (or contract?) the box a bit */
+    /* FILE	*fp;			/ * the comment is written here */
+    /* char	*keyword;		/ * the boundingbox comment string */
+    /* int		slop;			/ * expand (or contract?) the box a bit */
 
 {
 
@@ -117,9 +117,8 @@ writebbox(fp, keyword, slop)
 
 /*****************************************************************************/
 
-resetbbox(output)
-
-    int		output;
+void
+resetbbox(int output)
 
 {
 
@@ -146,9 +145,8 @@ resetbbox(output)
 
 /*****************************************************************************/
 
-scale(sx, sy)
-
-    double	sx, sy;
+void
+scale(double sx, double sy)
 
 {
 
@@ -171,9 +169,8 @@ scale(sx, sy)
 
 /*****************************************************************************/
 
-translate(tx, ty)
-
-    double	tx, ty;
+void
+translate(double tx, double ty)
 
 {
 
@@ -196,9 +193,8 @@ translate(tx, ty)
 
 /*****************************************************************************/
 
-rotate(angle)
-
-    double	angle;
+void
+rotate(double angle)
 
 {
 
@@ -222,9 +218,8 @@ rotate(angle)
 
 /*****************************************************************************/
 
-concat(m1)
-
-    double	m1[];
+void
+concat(double *m1)
 
 {
 

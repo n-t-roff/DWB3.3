@@ -159,13 +159,14 @@
  *
  */
 
-#include <string.h>
+#include	<string.h>
 #include	<stdio.h>
 #include	<fcntl.h>
 #include	<signal.h>
 #include	<math.h>
 #include	<ctype.h>
 #include	<time.h>
+#include	<unistd.h>
 
 #include	"comments.h"		/* structuring comments */
 #include	"gen.h"			/* general purpose definitions */
@@ -174,7 +175,38 @@
 #include	"font.h"		/* font table definitions */
 #include	"dpost.h"		/* a few definitions just used here */
 #include	"motion.h"		/* positioning macros */
+#include	"draw.h"
+#include	"color.h"
+#include	"pictures.h"
 
+static void init_signals(void);
+static void header(void);
+static void options(void);
+static void setpaths(char *);
+static void setup(void);
+static void arguments(void);
+static void done(void);
+static void account(void);
+static void conv(FILE *);
+static void devcntrl(FILE *);
+static void loadfont(int, char *, char *);
+static void loadspecial(void);
+static void t_init(void);
+static void t_page(int);
+static int t_font(char *);
+static void setfont(int);
+static void t_sf(void);
+static void t_charht(int);
+static void t_slant(int);
+static void oput(int);
+static void starttext(void);
+static void endstring(void);
+static void endline(void);
+static void addchar(int);
+static void addoctal(int);
+static void charlib(int);
+static void exportstring(char *);
+static void redirect(int);
 void put1(int c);
 
 char	*prologue = DPOST;		/* the PostScript prologue */
@@ -257,10 +289,8 @@ extern Font	*dwb_mount[];		/* troff mounts fonts here */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -283,13 +313,14 @@ main(agc, agv)
     done();				/* add trailing comments etc. */
     account();				/* job accounting data */
 
-    exit(x_stat);
+    return (x_stat);
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -314,7 +345,8 @@ init_signals()
 
 /*****************************************************************************/
 
-header()
+static void
+header(void)
 
 {
 
@@ -361,7 +393,8 @@ header()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -513,9 +546,8 @@ options()
 
 /*****************************************************************************/
 
-setpaths(name)
-
-    char	*name;
+static void
+setpaths(char *name)
 
 {
 
@@ -553,7 +585,8 @@ setpaths(name)
 
 /*****************************************************************************/
 
-setup()
+static void
+setup(void)
 
 {
 
@@ -601,7 +634,8 @@ setup()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -632,7 +666,8 @@ arguments()
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -667,7 +702,8 @@ done()
 
 /*****************************************************************************/
 
-account()
+static void
+account(void)
 
 {
 
@@ -684,15 +720,15 @@ account()
 
 /*****************************************************************************/
 
-conv(fp)
-
-    register FILE	*fp;
+static void
+conv(FILE *fp)
 
 {
 
     register int	c;
     int			m, n, n1, m1;
     char		str[50];
+    char		ch;
 
 /*
  *
@@ -749,7 +785,8 @@ conv(fp)
 			    break;
 
 			case 'l':	/* draw a line */
-			    fscanf(fp, "%d %d %c", &n, &m, &n1);
+			    fscanf(fp, "%d %d %c", &n, &m, &ch);
+			    n1 = ch;
 			    drawline(n, m);
 			    break;
 
@@ -851,9 +888,8 @@ conv(fp)
 
 /*****************************************************************************/
 
-devcntrl(fp)
-
-    FILE	*fp;
+static void
+devcntrl(FILE *fp)
 
 {
 
@@ -957,11 +993,8 @@ devcntrl(fp)
 
 /*****************************************************************************/
 
-loadfont(m, f, name)
-
-    int		m;
-    char	*f;
-    char	*name;
+static void
+loadfont(int m, char *f, char *name)
 
 {
 
@@ -969,7 +1002,7 @@ loadfont(m, f, name)
 
 /*
  *
- * Load position m with font f. Font file pathname is *fontdir/dev*realdev/*f
+ * Load position m with font f. Font file pathname is *fontdir/dev*realdev/\*f
  * or name, if name isn't empty. Use mapfont() to replace the missing font
  * if we're emulating another device, name is empty, and the first mount
  * fails.
@@ -1005,9 +1038,8 @@ loadfont(m, f, name)
 
 /*****************************************************************************/
 
-char *mapfont(name)
-
-    char	*name;
+char *
+mapfont(char *name)
 
 {
 
@@ -1036,7 +1068,8 @@ char *mapfont(name)
 
 /*****************************************************************************/
 
-loadspecial()
+static void
+loadspecial(void)
 
 {
 
@@ -1052,7 +1085,8 @@ loadspecial()
 
 /*****************************************************************************/
 
-t_init()
+static void
+t_init(void)
 
 {
 
@@ -1095,9 +1129,8 @@ t_init()
 
 /*****************************************************************************/
 
-t_page(pg)
-
-    int		pg;
+static void
+t_page(int pg)
 
 {
 
@@ -1153,9 +1186,8 @@ t_page(pg)
 
 /*****************************************************************************/
 
-t_font(s)
-
-    char	*s;
+static int
+t_font(char *s)
 
 {
 
@@ -1186,9 +1218,8 @@ t_font(s)
 
 /*****************************************************************************/
 
-setfont(m)
-
-    int		m;
+static void
+setfont(int m)
 
 {
 
@@ -1207,7 +1238,8 @@ setfont(m)
 
 /*****************************************************************************/
 
-t_sf()
+static void
+t_sf(void)
 
 {
 
@@ -1253,9 +1285,8 @@ t_sf()
 
 /*****************************************************************************/
 
-t_charht(n)
-
-    int		n;
+static void
+t_charht(int n)
 
 {
 
@@ -1272,9 +1303,8 @@ t_charht(n)
 
 /*****************************************************************************/
 
-t_slant(n)
-
-    int		n;
+static void
+t_slant(int n)
 
 {
 
@@ -1291,9 +1321,8 @@ t_slant(n)
 
 /*****************************************************************************/
 
-xymove(x, y)
-
-    int		x, y;
+void
+xymove(int x, int y)
 
 {
 
@@ -1363,9 +1392,8 @@ put1(int c)
 
 /*****************************************************************************/
 
-oput(c)
-
-    int		c;
+static void
+oput(int c)
 
 {
 
@@ -1421,7 +1449,8 @@ oput(c)
 
 /*****************************************************************************/
 
-starttext()
+static void
+starttext(void)
 
 {
 
@@ -1472,7 +1501,8 @@ starttext()
 
 /*****************************************************************************/
 
-flushtext()
+void
+flushtext(void)
 
 {
 
@@ -1517,7 +1547,7 @@ flushtext()
 	    case MAXENCODING+1:
 		fprintf(tf, ")%d ", stringstart);
 		fprintf(tf, "%d %d drawrvbox ", lastend - rvslop, (int)(lastx + .5) + rvslop);
-		fprintf(tf, "t\n", stringstart);
+		fprintf(tf, "t\n");
 		lastend = (lastx + .5) + 2 * rvslop;
 		break;
 
@@ -1533,7 +1563,8 @@ flushtext()
 
 /*****************************************************************************/
 
-endstring()
+static void
+endstring(void)
 
 {
 
@@ -1592,7 +1623,8 @@ endstring()
 
 /*****************************************************************************/
 
-endline()
+static void
+endline(void)
 
 {
 
@@ -1615,9 +1647,8 @@ endline()
 
 /*****************************************************************************/
 
-addchar(c)
-
-    int		c;
+static void
+addchar(int c)
 
 {
 
@@ -1648,9 +1679,8 @@ addchar(c)
 
 /*****************************************************************************/
 
-addoctal(c)
-
-    int		c;
+static void
+addoctal(int c)
 
 {
 
@@ -1682,9 +1712,10 @@ addoctal(c)
 
 /*****************************************************************************/
 
-charlib(code)
+static void
+charlib(int code)
 
-    int		code;			/* either 1 or 2 */
+    /* int		code;			/ * either 1 or 2 */
 
 {
 
@@ -1739,7 +1770,8 @@ charlib(code)
 
 /*****************************************************************************/
 
-reset()
+void
+reset(void)
 
 {
 
@@ -1759,7 +1791,8 @@ reset()
 
 /*****************************************************************************/
 
-resetpos()
+void
+resetpos(void)
 
 {
 
@@ -1777,7 +1810,8 @@ resetpos()
 
 /*****************************************************************************/
 
-save()
+void
+save(void)
 
 {
 
@@ -1801,7 +1835,8 @@ save()
 
 /*****************************************************************************/
 
-restore()
+void
+restore(void)
 
 {
 
@@ -1820,9 +1855,8 @@ restore()
 
 /*****************************************************************************/
 
-exportfile(path)
-
-    char	*path;
+int
+exportfile(char *path)
 
 {
 
@@ -1849,9 +1883,8 @@ exportfile(path)
 
 /*****************************************************************************/
 
-exportstring(str)
-
-    char	*str;
+static void
+exportstring(char *str)
 
 {
 
@@ -1873,9 +1906,8 @@ exportstring(str)
 
 /*****************************************************************************/
 
-redirect(pg)
-
-    int		pg;
+static void
+redirect(int pg)
 
 {
 

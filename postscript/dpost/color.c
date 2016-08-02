@@ -77,6 +77,7 @@
 
 #include "gen.h"			/* general purpose definitions */
 #include "ext.h"			/* external variable definitions */
+#include "dpost.h"
 
 #define DEFAULTCOLOR	"black"
 
@@ -100,7 +101,8 @@ extern FILE	*tf;
 
 /*****************************************************************************/
 
-getcolor()
+void
+getcolor(void)
 
 {
 
@@ -122,9 +124,10 @@ getcolor()
 
 /*****************************************************************************/
 
-newcolor(name)
+void
+newcolor(char *name)
 
-    char	*name;			/* of the color */
+    /* char	*name;			/ * of the color */
 
 {
 
@@ -159,7 +162,8 @@ newcolor(name)
 
 /*****************************************************************************/
 
-setcolor()
+void
+setcolor(void)
 
 {
 

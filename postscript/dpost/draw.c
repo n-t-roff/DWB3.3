@@ -93,8 +93,14 @@
 #include "gen.h"			/* general purpose definitions */
 #include "ext.h"			/* external variable definitions */
 #include "motion.h"			/* positioning macros */
+#include "draw.h"
+#include "dpost.h"
+#include "color.h"
 
-void drawellip(int a, int b);
+static void arc_extreme(int, int, int, int);
+static int quadrant(double, double);
+static void parsebuf(char *);
+static void getbaseline(void);
 
 int	gotdraw = FALSE;		/* TRUE when *drawfile has been added */
 int	gotbaseline = FALSE;		/* TRUE after *baselinefile is added */
@@ -118,7 +124,8 @@ extern FILE		*tf;
 
 /*****************************************************************************/
 
-getdraw()
+void
+getdraw(void)
 
 {
 
@@ -142,9 +149,10 @@ getdraw()
 
 /*****************************************************************************/
 
-drawline(dx, dy)
+void
+drawline(int dx, int dy)
 
-    int		dx, dy;			/* endpoint is (hpos+dx, vpos+dy) */
+    /* int		dx, dy;			/ * endpoint is (hpos+dx, vpos+dy) */
 
 {
 
@@ -173,9 +181,10 @@ drawline(dx, dy)
 
 /*****************************************************************************/
 
-drawcirc(d)
+void
+drawcirc(int d)
 
-    int		d;			/* diameter of the circle */
+    /* int		d;			/ * diameter of the circle */
 
 {
 
@@ -227,11 +236,12 @@ drawellip(int a, int b)
 
 /*****************************************************************************/
 
-drawarc(dx1, dy1, dx2, dy2, c)
+void
+drawarc(int dx1, int dy1, int dx2, int dy2, int c)
 
-    int		dx1, dy1;		/* vector from current pos to center */
-    int		dx2, dy2;		/* from center to end of the arc */
-    int		c;			/* clockwise if c is A */
+    /* int		dx1, dy1;		/ * vector from current pos to center */
+    /* int		dx2, dy2;		/ * from center to end of the arc */
+    /* int		c;			/ * clockwise if c is A */
 
 {
 
@@ -268,10 +278,11 @@ drawarc(dx1, dy1, dx2, dy2, c)
 
 /*****************************************************************************/
 
-drawspline(fp, flag)
+void
+drawspline(FILE *fp, int flag)
 
-    FILE	*fp;			/* input for point list */
-    int		flag;			/* flag!=1 connect end points */
+    /* FILE	*fp;			/ * input for point list */
+    /* int		flag;			/ * flag!=1 connect end points */
 
 {
 
@@ -359,9 +370,8 @@ drawspline(fp, flag)
 
 /*****************************************************************************/
 
-arc_extreme(dx1, dy1, dx2, dy2)
-
-    int		dx1, dy1, dx2, dy2;
+static void
+arc_extreme(int dx1, int dy1, int dx2, int dy2)
 
 {
 
@@ -430,9 +440,8 @@ arc_extreme(dx1, dy1, dx2, dy2)
 
 /*****************************************************************************/
 
-quadrant(x,y)
-
-	double x, y;
+static int
+quadrant(double x, double y)
 
 {
 
@@ -446,10 +455,11 @@ quadrant(x,y)
 
 /*****************************************************************************/
 
-beginpath(buf, copy)
+void
+beginpath(char *buf, int copy)
 
-    char	*buf;			/* whatever followed "x X BeginPath" */
-    int		copy;			/* ignore *buf if FALSE */
+    /* char	*buf;			/ * whatever followed "x X BeginPath" */
+    /* int		copy;			/ * ignore *buf if FALSE */
 
 {
 
@@ -494,10 +504,8 @@ beginpath(buf, copy)
 
 /*****************************************************************************/
 
-drawpath(buf, copy)
-
-    char	*buf;
-    int		copy;
+void
+drawpath(char *buf, int copy)
 
 {
 
@@ -536,9 +544,10 @@ drawpath(buf, copy)
 
 /*****************************************************************************/
 
-parsebuf(buf)
+static void
+parsebuf(char *buf)
 
-    char	*buf;			/* whatever followed "x X DrawPath" */
+    /* char	*buf;			/ * whatever followed "x X DrawPath" */
 
 {
 
@@ -638,7 +647,8 @@ parsebuf(buf)
 
 /*****************************************************************************/
 
-getbaseline()
+static void
+getbaseline(void)
 
 {
 
@@ -660,9 +670,10 @@ getbaseline()
 
 /*****************************************************************************/
 
-newbaseline(buf)
+void
+newbaseline(char *buf)
 
-    char	*buf;			/* whatever followed "x X NewBaseline" */
+    /* char	*buf;			/ * whatever followed "x X NewBaseline" */
 
 {
 
@@ -717,9 +728,10 @@ newbaseline(buf)
 
 /*****************************************************************************/
 
-drawtext(buf)
+void
+drawtext(char *buf)
 
-    char	*buf;			/* whatever followed "x X DrawText */
+    /* char	*buf;			/ * whatever followed "x X DrawText */
 
 {
 
@@ -766,9 +778,8 @@ drawtext(buf)
 
 /*****************************************************************************/
 
-settext(buf)
-
-    char	*buf;
+void
+settext(char *buf)
 
 {
 
