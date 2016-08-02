@@ -84,6 +84,7 @@ gen_mk () {
 	    >> $OUTMK
 	[ -n "$LIB_CURSES" ] && echo "LIB_CURSES=$LIB_CURSES" >> $OUTMK
 	[ -n "$LIB_LEX" ] && echo "LIB_LEX=$LIB_LEX" >> $OUTMK
+	[ -n "$__SAN" ] && echo "__SAN=$__SAN" >> $OUTMK
 	cat $INMK >> $OUTMK || exit 1
 }
 check_make () {
@@ -184,6 +185,7 @@ gen_mk
 check_make
 check_lex
 check_lib_lex
+#check_Sanitizer
 
 gen_mk
 rm -f $TMPNAM*

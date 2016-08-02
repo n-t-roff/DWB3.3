@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=troff.mk
 
 SYSTEM=BSD4_2
@@ -20,7 +20,7 @@ NTERMDIR=/usr/lib/nterm
 PUBDIR=/usr/pub
 TMACDIR=/usr/lib/tmac
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS) -D$(SYSTEM) -DDWBVERSION='"${VERSION}"'

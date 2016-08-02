@@ -117,7 +117,7 @@ picassoy.o:	picassoy.y
 		echo "	yacc -d picassoy.y" ; \
 		./yacc -d picassoy.y ; \
 	fi
-	cc -c $(CFLAGS) y.tab.c
+	$(CC) -c $(CFLAGS) y.tab.c
 	mv y.tab.o picassoy.o
 	rm y.tab.c
 

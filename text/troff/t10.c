@@ -24,7 +24,7 @@ int	nfonts;
 void t_ptinit(void)
 {
 	int i;
-	char buf[100], *p;
+	char buf[100];
 
 	hmot = t_hmot;
 	makem = t_makem;
@@ -71,7 +71,7 @@ void t_ptinit(void)
 		setfp(i, fontlab[i], (char *) 0, 0);
 	sps = EM/3;	/* space size */
 	ics = EM;	/* insertion character space */
-	for (i = 0; i < (NTAB - 1) && DTAB * (i + 1) < TABMASK; i++)
+	for (i = 0; i < (NTAB - 1) && DTAB * ((unsigned)i + 1) < TABMASK; i++)
 		tabtab[i] = DTAB * (i + 1);
 	tabtab[NTAB-1] = 0;
 	pl = 11 * INCH;			/* paper length */

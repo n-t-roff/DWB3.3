@@ -93,7 +93,7 @@ getfont(char *name, int pos)	/* create width tab for font */
 	Font *ftemp = &fonts[pos];
 	Chwid chtemp[MAXCH];
 	static Chwid chinit;
-	int i, nw, n, wid, kern, code;
+	int i, nw = 0, n, wid, kern, code;
 	char buf[100], ch[100], s1[100], s2[100], s3[100], cmd[300];
 
 	/* fprintf(stderr, "read font %s onto %d\n", name, pos); */

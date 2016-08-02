@@ -420,7 +420,8 @@ void t_setps(void)
 		if (i == '-')
 			j = -j;
 		j += apts;
-	}
+	} else
+		return; /* TODO: Error msg (ck) */
 	casps1(j);
 }
 
@@ -704,7 +705,7 @@ strdupl(const char *s)	/* make a copy of s */
 int
 setfp(int pos, int f, char *truename, int print)	/* mount font f at position pos[0...nfonts] */
 {
-	char pathname[NS], shortname[NS], *sl;
+	char pathname[NS], shortname[NS];
 
 	zapwcache(0);
 	if (truename)

@@ -253,7 +253,7 @@ void DWBinit(char *prog, dwbinit *paths)
 	else sprintf(path, "%s", prefix);
 
 	if ( paths->address == NULL ) {
-	    if ( strlen(path) >= paths->length ) {
+	    if ( (ssize_t)strlen(path) >= paths->length ) {
 		fprintf(stderr, "%s: no room for %s\n", prog, path);
 		exit(1);
 	    }	/* End if */
@@ -288,7 +288,7 @@ void DWBprefix( char *prog, char *path, int length)
 
     if ( strncmp(path, DWBPREFIX, len) == 0 ) {
 	if ( (home = DWBhome()) != NULL ) {
-	    if ( strlen(home) + strlen(path+len) < length ) {
+	    if ( (ssize_t)(strlen(home) + strlen(path+len)) < length ) {
 		sprintf(buf, "%s%s", home, path+len);
 		strcpy(path, buf);		/* assuming there's room in path */
 	    } else fprintf(stderr, "%s: no room to grow path %s", prog, path);

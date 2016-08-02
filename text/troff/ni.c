@@ -7,21 +7,21 @@ char	fontdir[NS];	/* added in casefp; not used by nroff */
 char	dwb_devname[20];	/* default output device */
 
 Numtab numtab[NN] = {
-	{ PAIR('%', 0) },
-	{ PAIR('n', 'l') },
-	{ PAIR('y', 'r') },
-	{ PAIR('h', 'p') },
-	{ PAIR('c', 't') },
-	{ PAIR('d', 'n') },
-	{ PAIR('m', 'o') },
-	{ PAIR('d', 'y') },
-	{ PAIR('d', 'w') },
-	{ PAIR('l', 'n') },
-	{ PAIR('d', 'l') },
-	{ PAIR('s', 't') },
-	{ PAIR('s', 'b') },
-	{ PAIR('c', '.') },
-	{ PAIR('$', '$') },
+	{ PAIR('%', 0  ), 0, 0, 0, NULL },
+	{ PAIR('n', 'l'), 0, 0, 0, NULL },
+	{ PAIR('y', 'r'), 0, 0, 0, NULL },
+	{ PAIR('h', 'p'), 0, 0, 0, NULL },
+	{ PAIR('c', 't'), 0, 0, 0, NULL },
+	{ PAIR('d', 'n'), 0, 0, 0, NULL },
+	{ PAIR('m', 'o'), 0, 0, 0, NULL },
+	{ PAIR('d', 'y'), 0, 0, 0, NULL },
+	{ PAIR('d', 'w'), 0, 0, 0, NULL },
+	{ PAIR('l', 'n'), 0, 0, 0, NULL },
+	{ PAIR('d', 'l'), 0, 0, 0, NULL },
+	{ PAIR('s', 't'), 0, 0, 0, NULL },
+	{ PAIR('s', 'b'), 0, 0, 0, NULL },
+	{ PAIR('c', '.'), 0, 0, 0, NULL },
+	{ PAIR('$', '$'), 0, 0, 0, NULL },
 };
 
 
@@ -58,7 +58,7 @@ int	tabch = TAB;
 int	ldrch = LEADER;
 
 
-#define	C(a,b)	{a, 0, b, 0, 0}
+#define	C(a,b)	{a, 0, b, 0, 0, NULL}
 Contab contab[NM] = {
 	C(PAIR('d', 's'), caseds),
 	C(PAIR('a', 's'), caseas),
@@ -348,24 +348,24 @@ int	c_isalnum;
 
 Spnames	spnames[] =
 {
-	&c_hyphen,	"hy",
-	&c_emdash,	"em",
-	&c_rule,	"ru",
-	&c_minus,	"\\-",
-	&c_fi,		"fi",
-	&c_fl,		"fl",
-	&c_ff,		"ff",
-	&c_ffi,		"Fi",
-	&c_ffl,		"Fl",
-	&c_acute,	"aa",
-	&c_grave,	"ga",
-	&c_under,	"ul",
-	&c_rooten,	"rn",
-	&c_boxrule,	"br",
-	&c_lefthand,	"lh",
-	&c_dagger,	"dg",	/* not in nroff?? */
-	&c_isalnum,	"__",
-	0, 0
+	{ &c_hyphen,	"hy" },
+	{ &c_emdash,	"em" },
+	{ &c_rule,	"ru" },
+	{ &c_minus,	"\\-" },
+	{ &c_fi,		"fi" },
+	{ &c_fl,		"fl" },
+	{ &c_ff,		"ff" },
+	{ &c_ffi,		"Fi" },
+	{ &c_ffl,		"Fl" },
+	{ &c_acute,	"aa" },
+	{ &c_grave,	"ga" },
+	{ &c_under,	"ul" },
+	{ &c_rooten,	"rn" },
+	{ &c_boxrule,	"br" },
+	{ &c_lefthand,	"lh" },
+	{ &c_dagger,	"dg" },	/* not in nroff?? */
+	{ &c_isalnum,	"__" },
+	{ 0, 0 }
 };
 
 

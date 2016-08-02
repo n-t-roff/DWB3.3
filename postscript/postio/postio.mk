@@ -42,7 +42,7 @@ OFILES=postio.o\
 
 all : postio
 
-install : all
+install : #all # avoid recompile as user root
 	@if [ ! -d "$(POSTBIN)" ]; then \
 	    mkdir $(POSTBIN); \
 	    chmod 755 $(POSTBIN); \
