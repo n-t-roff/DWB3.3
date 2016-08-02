@@ -25,6 +25,7 @@ MAKE=
 DEFS=
 LIB_LEX=
 LIB_CURSES=
+cat /dev/null > compat.h
 
 while [ $# -gt 0 ]; do
 	case $1 in
@@ -73,7 +74,7 @@ test_result () {
 }
 
 gen_mk () {
-	rm -f $OUTMK
+	[ $# -eq 0 ] && rm -f $OUTMK
 	[ -n "$LEX" ] && echo "LEX=$LEX" >> $OUTMK
 	[ -n "$FLOAT_STORE" ] && echo "FLOAT_STORE=$FLOAT_STORE" >> $OUTMK
 	[ -n "$DEFS" ] && echo "DEFINES=$DEFS" >> $OUTMK
@@ -166,6 +167,7 @@ EOT
 	compile
 	test_result && return
 }
+	[ ! -s compat.h ] && rm compat.h
 OUTMK=Makefile
 INMK=dwb.mk
 CFG=config

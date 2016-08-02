@@ -20,8 +20,11 @@ test:
 		./Run; \
 		for j in *.orig; do \
 			k=`echo $$j|sed 's/.orig$$//'`; \
-			diff -d $$j $$k || echo "$$i/$$k"; \
-			rm $$k; \
-			mv $$j $$k; \
+			if diff -d $$j $$k; then \
+				rm $$k; \
+				mv $$j $$k; \
+			else \
+				printf "\n*** Diff for $$i/$$k\n\n"; \
+			fi; \
 		done); \
 	done

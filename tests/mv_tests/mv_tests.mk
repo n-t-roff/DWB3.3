@@ -12,16 +12,18 @@ all :
 		pic $$i | tbl | neqn | nroff -mv | col -x | \
 		    sed 's"[0-9]\{1,2\}/[0-9]\{1,2\}/[0-9]\{4\}"2/4/1993"g' \
 		    > $$i.more; \
-		diff $$i.more $$i.more.orig; \
-		rm $$i.more; \
-		mv $$i.more.orig $$i.more; \
+		if diff $$i.more $$i.more.orig; then \
+			rm $$i.more; \
+			mv $$i.more.orig $$i.more; \
+		fi; \
 		mv $$i.ps $$i.ps.orig; \
 		pic $$i | tbl | eqn | troff -mv -T$(TDEVNAME) | dpost | \
 		    sed 's"[0-9]\{1,2\}/[0-9]\{1,2\}/[0-9]\{4\}"2/4/1993"g' \
 		    > $$i.ps; \
-		diff $$i.ps $$i.ps.orig; \
-		rm $$i.ps; \
-		mv $$i.ps.orig $$i.ps; \
+		if diff $$i.ps $$i.ps.orig; then \
+			rm $$i.ps; \
+			mv $$i.ps.orig $$i.ps; \
+		fi; \
 	done
 
 install : all

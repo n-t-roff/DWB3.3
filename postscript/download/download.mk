@@ -1,4 +1,4 @@
-MAKE=/usr/bin/make
+#MAKE=/usr/bin/make
 MAKEFILE=download.mk
 
 SYSTEM=SYSV
