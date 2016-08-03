@@ -196,7 +196,7 @@ char *getstr(char *s, char *t)	/* find next string in s, copy to t */
 		else {
 			s++;	/* skip \\ */
 			if (isdigit(s[0]) && isdigit(s[1]) && isdigit(s[2])) {
-				*t++ = (s[0]-'0')<<6 | (s[1]-'0')<<3 | s[2]-'0';
+				*t++ = (s[0]-'0')<<6 | (s[1]-'0')<<3 | (s[2]-'0');
 				s += 2;
 			} else if (isdigit(s[0])) {
 				*t++ = *s - '0';

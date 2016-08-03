@@ -43,7 +43,7 @@ t_width(Tchar j)
 	i = trtab[i];
 	if (i < ' ')
 		return(0);
-	if (sfbits(j) == oldbits) {
+	if ((int)sfbits(j) == oldbits) {
 		xfont = pfont;
 		xpts = ppts;
 	} else 

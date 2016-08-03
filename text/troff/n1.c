@@ -34,12 +34,12 @@ char	*DWBalthyphens = ALTHYPHENS;
 char	*DWBhomedir = "";
 
 dwbinit dwbpaths[] = {
-	&DWBfontdir, NULL, 0,
-	&DWBntermdir, NULL, 0,
-	&DWBalthyphens, NULL, 0,
-	&DWBhomedir, NULL, 0,
-	NULL, nextf, NS,
-	NULL, NULL, 0
+	{ &DWBfontdir, NULL, 0 },
+	{ &DWBntermdir, NULL, 0 },
+	{ &DWBalthyphens, NULL, 0 },
+	{ &DWBhomedir, NULL, 0 },
+	{ NULL, nextf, NS },
+	{ NULL, NULL, 0 }
 };
 
 int	TROFF	= 1;	/* assume we started in troff... */
@@ -414,7 +414,7 @@ g0:
 	if (ismot(i))
 		return(i);
 	k = cbits(i);
-	if (k >= sizeof(gchtab)/sizeof(gchtab[0]) || gchtab[k] == 0)	/* nothing special */
+	if (k >= (ssize_t)(sizeof(gchtab)/sizeof(gchtab[0])) || gchtab[k] == 0)	/* nothing special */
 		return(i);
 	if (k != ESC) {
 		if (k == '\n') {
@@ -663,7 +663,6 @@ char	ifilt[32] = { 0, 001, 002, 003, 0, 005, 006, 007, 010, 011, 012 };
 
 Tchar getch0(void)
 {
-	int j;
 	Tchar i;
 
 again:
@@ -706,7 +705,6 @@ g0:
 			if (ip)
 				goto again;
 		}
-g2:
 		if (i >= 040)			/* zapped: && i < 0177 */
 			goto g4;
 		i = ifilt[i];
@@ -876,7 +874,6 @@ int
 getname(void)
 {
 	int j, k;
-	Tchar i;
 
 	lgf++;
 	for (k = 0; k < NS - 1; k++) {
@@ -894,13 +891,13 @@ getname(void)
 void
 caseso(void) {
 	FILE *fp;
-	char *p, *q;
 
 	lgf++;
 	nextf[0] = 0;
 	if (skip() || !getname() || (fp = fopen(nextf, "r")) == NULL || ifi >= NSO) {
 		ERROR "can't open file %s", nextf WARN;
 		done(02);
+		fp = NULL; /* UNREACHED (ck) */
 	}
 	strcpy(cfname[ifi+1], nextf);
 	cfline[ifi] = numtabp[CD].val;		/*hold line counter*/

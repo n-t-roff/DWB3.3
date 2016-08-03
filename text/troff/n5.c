@@ -85,7 +85,9 @@ chget(int c)
 {
 	Tchar i;
 
-	if (skip() || ismot(i = getch()) || cbits(i) == ' ' || cbits(i) == '\n') {
+	if (skip())
+		return c;
+	if (ismot(i = getch()) || cbits(i) == ' ' || cbits(i) == '\n') {
 		ch = i;
 		return(c);
 	} else 
@@ -849,7 +851,7 @@ void caseta(void)
 	for (i = 0; ((i < (NTAB - 1)) && !nonumb); i++) {
 		if (skip())
 			break;
-		if ((j = max(hnumb((int *)&tabtab[max(i-1,0)]),0)) > TABMASK) {
+		if ((j = max(hnumb((int *)&tabtab[max(i-1,0)]),0)) > (int)TABMASK) {
 			ERROR "Tab too far away" WARN;
 			j = TABMASK;
 		}

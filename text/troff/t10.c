@@ -176,7 +176,7 @@ int ptout0(Tchar *pi)
 		oput('w');
 		return(outsize);
 	}
-	if (sfbits(i) == oldbits) {
+	if ((int)sfbits(i) == oldbits) {
 		xfont = pfont;
 		xpts = ppts;
 	} else 

@@ -258,7 +258,7 @@ extern	int	realcbits(Tchar);
 #define	setsbits(n,s)	n = (n & ~SMASK) | (Tchar)(s) << SSHIFT
 #define	setfbits(n,f)	n = (n & ~FMASK) | (Tchar)(f) << FSHIFT
 #define	setsfbits(n,sf)	n = (n & ~SFMASK) | (Tchar)(sf) << FSHIFT
-#define	setcbits(n,c)	n = (n & ~0xFFFFuL | (c))	/* set character bits */
+#define	setcbits(n,c)	n = (n & ~0xFFFFuL) | (c)	/* set character bits */
 
 #define	BYTEMASK 0377
 #define	BYTE	 8

@@ -84,6 +84,7 @@ gen_mk () {
 	    >> $OUTMK
 	[ -n "$LIB_CURSES" ] && echo "LIB_CURSES=$LIB_CURSES" >> $OUTMK
 	[ -n "$LIB_LEX" ] && echo "LIB_LEX=$LIB_LEX" >> $OUTMK
+	[ -n "$__CDBG" ] && echo "__CDBG=$__CDBG" >> $OUTMK
 	[ -n "$__SAN" ] && echo "__SAN=$__SAN" >> $OUTMK
 	cat $INMK >> $OUTMK || exit 1
 }

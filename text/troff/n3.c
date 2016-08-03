@@ -64,7 +64,7 @@ void blockinit(void)
 
 char *grow(char *ptr, int num, int size)	/* make array bigger */
 {
-	char *p, new;
+	char *p;
 
 	if (ptr == NULL)
 		p = (char *) calloc(num, size);
@@ -297,7 +297,6 @@ void growcontab(void)
 Offset finds(int mn)
 {
 	int i;
-	Tchar j = IMP;
 	Offset savip;
 
 	oldmn = findmn(mn);
@@ -320,7 +319,7 @@ Offset finds(int mn)
 		if (i == nm) 
 			growcontab();
 		freeslot = i + 1;
-		if ((nextb = alloc()) == -1) {
+		if ((nextb = alloc()) == (Offset)-1) {
 			app = 0;
 			if (macerr++ > 1)
 				done2(02);
@@ -476,7 +475,7 @@ void ffree(Offset i)	/* free list of blocks starting at blist(o) */
 {			/* (doesn't actually free the blocks, just the pointers) */
 	int j;
 
-	for ( ; blist[j = bindex(i)].nextoff != -1; ) {
+	for ( ; blist[j = bindex(i)].nextoff != (Offset)-1; ) {
 		if (bfree > j)
 			bfree = j;
 		i = blist[j].nextoff;
@@ -499,8 +498,8 @@ void wbf(Tchar i)	/* store i into offset, get ready for next one */
 	blist[j].bp[off++] = i;
 	offset++;
 	if (pastend(offset)) {	/* off the end of this block */
-		if (blist[j].nextoff == -1) {
-			if ((nextb = alloc()) == -1) {
+		if (blist[j].nextoff == (Offset)-1) {
+			if ((nextb = alloc()) == (Offset)-1) {
 				ERROR "Out of temp file space" WARN;
 				done2(01);
 			}
@@ -537,7 +536,7 @@ Offset xxxincoff(Offset p)		/* get next blist[] block */
 {
 	p++;
 	if (pastend(p)) {		/* off the end of this block */
-		if ((p = blist[bindex(p-1)].nextoff) == -1) {	/* and nothing was allocated after it */
+		if ((p = blist[bindex(p-1)].nextoff) == (Offset)-1) {	/* and nothing was allocated after it */
 			ERROR "Bad storage allocation" WARN;
 			done2(-5);
 		}
@@ -924,7 +923,7 @@ void casepm(void)
 			continue;
 		tcnt++;
 		j = contabp[i].mx;
-		for (k = 1; (j = blist[bindex(j)].nextoff) != -1; )
+		for (k = 1; (j = blist[bindex(j)].nextoff) != (Offset)-1; )
 			k++; 
 		cnt++;
 		kk += k;

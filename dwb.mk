@@ -200,9 +200,10 @@ PUBDIR=$(ROOT)/pub
 RASTDIR=$(ROOT)/lib/raster
 TMACDIR=$(ROOT)/lib/tmac
 
-CFLGS=-Wall -Wextra $(__SAN)
-LDFLGS=$(__SAN)
-#LDFLGS=-s
+#CFLGS=$(CFLAGS) -Wall -Wextra $(__CDBG) $(__SAN) -g -O0
+CFLGS=$(CFLAGS)
+#LDFLGS=-g $(__SAN)
+LDFLGS=$(LDFLAGS) -s
 
 #
 # PostScript specific definitions - they probably don't belong here.

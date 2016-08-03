@@ -294,8 +294,8 @@ eat:
 		drawbuf[1] = type | chbits | ZBIT;
 		drawbuf[2] = drawch | chbits | ZBIT;
 		for (k = 0, j = 3; k < i; k++) {
-			drawbuf[j++] = MOT | ((dx[k] >= 0) ? dx[k] : (NMOT | -dx[k]));
-			drawbuf[j++] = MOT | VMOT | ((dy[k] >= 0) ? dy[k] : (NMOT | -dy[k]));
+			drawbuf[j++] = MOT | ((dx[k] >= 0) ? dx[k] : (int)(NMOT | -dx[k]));
+			drawbuf[j++] = MOT | VMOT | ((dy[k] >= 0) ? dy[k] : (int)(NMOT | -dy[k]));
 		}
 		if (type == DRAWELLIPSE) {
 			drawbuf[5] = drawbuf[4] | NMOT;	/* so the net vertical is zero */
