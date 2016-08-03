@@ -123,27 +123,27 @@ static struct {
 	double val;
 	short scalable;		/* 1 => adjust when "scale" changes */
 } defaults[] ={
-	"scale", SCALE, 1,
-	"lineht", HT, 1,
-	"linewid", HT, 1,
-	"moveht", HT, 1,
-	"movewid", HT, 1,
-	"dashwid", HT10, 1,
-	"boxht", HT, 1,
-	"boxwid", WID, 1,
-	"circlerad", HT2, 1,
-	"arcrad", HT2, 1,
-	"ellipseht", HT, 1,
-	"ellipsewid", WID, 1,
-	"arrowht", HT5, 1,
-	"arrowwid", HT10, 1,
-	"arrowhead", 2, 0,		/* arrowhead style */
-	"textht", 0.0, 1,		/* 6 lines/inch is also a useful value */
-	"textwid", 0.0, 1,
-	"maxpsht", MAXHT, 0,
-	"maxpswid", MAXWID, 0,
-	"fillval", 0.3, 0,		/* gray value for filling boxes */
-	NULL, 0, 0
+	{ "scale", SCALE, 1 },
+	{ "lineht", HT, 1 },
+	{ "linewid", HT, 1 },
+	{ "moveht", HT, 1 },
+	{ "movewid", HT, 1 },
+	{ "dashwid", HT10, 1 },
+	{ "boxht", HT, 1 },
+	{ "boxwid", WID, 1 },
+	{ "circlerad", HT2, 1 },
+	{ "arcrad", HT2, 1 },
+	{ "ellipseht", HT, 1 },
+	{ "ellipsewid", WID, 1 },
+	{ "arrowht", HT5, 1 },
+	{ "arrowwid", HT10, 1 },
+	{ "arrowhead", 2, 0 },		/* arrowhead style */
+	{ "textht", 0.0, 1 },		/* 6 lines/inch is also a useful value */
+	{ "textwid", 0.0, 1 },
+	{ "maxpsht", MAXHT, 0 },
+	{ "maxpswid", MAXWID, 0 },
+	{ "fillval", 0.3, 0 },		/* gray value for filling boxes */
+	{ NULL, 0, 0 }
 };
 
 static void
@@ -230,15 +230,15 @@ getdata(void)
 					delty = deltx * (ymax-ymin) / (xmax-xmin);
 #if 0
 				/* else {
-				/*	double xfac, yfac; */
-				/*	xfac = deltx / (xmax-xmin);
-				/*	yfac = delty / (ymax-ymin);
-				/*	if (xfac <= yfac)
-				/*		delty = xfac * (ymax-ymin);
-				/*	else
-				/*		deltx = yfac * (xmax-xmin);
-				/*}
-				*/
+				 *	double xfac, yfac; */
+				 *	xfac = deltx / (xmax-xmin);
+				 *	yfac = delty / (ymax-ymin);
+				 *	if (xfac <= yfac)
+				 *		delty = xfac * (ymax-ymin);
+				 *	else
+				 *		deltx = yfac * (xmax-xmin);
+				 *}
+				 */
 #endif
 			}
 			dprintf("deltx = %g, delty = %g\n", deltx, delty);

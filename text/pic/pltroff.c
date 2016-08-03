@@ -48,7 +48,7 @@ void
 openpl(char *s)	/* initialize device */
 	/* char *s;	/ * residue of .PS invocation line */
 {
-	double maxdelt, maxw, maxh, ratio = 1;
+	double maxw, maxh, ratio = 1;
 	double odeltx = deltx, odelty = delty;
 
 	hpos = vpos = 0;

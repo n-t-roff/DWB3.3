@@ -2,7 +2,7 @@
 #include	"pic.h"
 #include	"y.tab.h"
 
-obj *linegen(type)
+obj *linegen(int type)
 {
 	static double prevdx = HT;
 	static double prevdy = 0;
