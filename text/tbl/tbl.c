@@ -455,33 +455,33 @@ struct optstr {
 	char *optnam;
 	int *optadd;
 } options[] = {
-	"allbox", &allflg,	/* Draw a box around each entry */
-	"ALLBOX", &allflg,
-	"box", &boxflg,		/* Draw a box around the table */
-	"BOX", &boxflg,
-	"center", &ctrflg,	/* Center the table horizontally */
-	"CENTER", &ctrflg,
-	"centre", &ctrflg,	/* Alternative spelling */
-	"CENTRE", &ctrflg,
-	"delim", &delim1,	/* Delimiters for in-line equations */
-	"DELIM", &delim1,
-	"doublebox", &dboxflg,	/* Draw a double box around the table */
-	"DOUBLEBOX", &dboxflg,
-	"expand", &expflg,	/* Expand table to fill page width */
-	"EXPAND", &expflg,
-	"frame", &boxflg,	/* Obsolete synonym for "box" */
-	"FRAME", &boxflg,
-	"doubleframe", &dboxflg, /* Obsolete synonym for "doublebox" */
-	"DOUBLEFRAME", &dboxflg,
-	"linesize", &linsize,	/* Point size for rules */
-	"LINESIZE", &linsize,
-	"maxlines", &Maxlin,	/* Maximum lines to be given full treatment */
-	"MAXLINES", &Maxlin,
-	"maxline", &Maxlin,	/* Synonym for "maxlines" */
-	"MAXLINE", &Maxlin,
-	"tab", &tab,		/* Column separator for data */
-	"TAB", &tab,
-	NULL, NULL};
+	{ "allbox", &allflg },	/* Draw a box around each entry */
+	{ "ALLBOX", &allflg },
+	{ "box", &boxflg },		/* Draw a box around the table */
+	{ "BOX", &boxflg },
+	{ "center", &ctrflg },	/* Center the table horizontally */
+	{ "CENTER", &ctrflg },
+	{ "centre", &ctrflg },	/* Alternative spelling */
+	{ "CENTRE", &ctrflg },
+	{ "delim", &delim1 },	/* Delimiters for in-line equations */
+	{ "DELIM", &delim1 },
+	{ "doublebox", &dboxflg },	/* Draw a double box around the table */
+	{ "DOUBLEBOX", &dboxflg },
+	{ "expand", &expflg },	/* Expand table to fill page width */
+	{ "EXPAND", &expflg },
+	{ "frame", &boxflg },	/* Obsolete synonym for "box" */
+	{ "FRAME", &boxflg },
+	{ "doubleframe", &dboxflg }, /* Obsolete synonym for "doublebox" */
+	{ "DOUBLEFRAME", &dboxflg },
+	{ "linesize", &linsize },	/* Point size for rules */
+	{ "LINESIZE", &linsize },
+	{ "maxlines", &Maxlin },	/* Maximum lines to be given full treatment */
+	{ "MAXLINES", &Maxlin },
+	{ "maxline", &Maxlin },	/* Synonym for "maxlines" */
+	{ "MAXLINE", &Maxlin },
+	{ "tab", &tab },		/* Column separator for data */
+	{ "TAB", &tab },
+	{ NULL, NULL }};
 
 #define	syntax_error() error("Syntax error processing global options")
 #define	getcomm_err() error2("Error processing global option %s", lp->optnam)
@@ -527,14 +527,14 @@ getcomm(char *line) /* Get global options */
 					i = 0;
 					while ((ci = *++cp) != ')')
 					{
-						if (i < sizeof(tbuf))
+						if (i < (ssize_t)sizeof(tbuf))
 							nb[i++] = ci;
 						if (ci == '\0')
 							break;
 					}
 					if (ci != ')')
 						syntax_error();
-					if (i >= sizeof(tbuf))
+					if (i >= (ssize_t)sizeof(tbuf))
 						error("option string is too long");
 					nb[i] = 0;
 				}
@@ -2925,18 +2925,18 @@ choochar(void) /* Choose troff pad character and field delimiter character */
 			s = TABLE(ilin,icol).col;
 			if (point(s))
 				while (*s)
-					had[*s++] = 1;
+					had[(int)*s++] = 1;
 			s = TABLE(ilin,icol).rcol;
 			if (point(s))
 				while (*s)
-					had[*s++] = 1;
+					had[(int)*s++] = 1;
 		}
 	}
 	/* Choose field delimiter character */
 	for (s = "\002\003\005\006\007!%&#/?,:;<=>@`^~_{}+-*ABCDEFGHIJKMNOPQRSTUVWXYZabcdefgjkoqrstwxyz";
 	    *s; s++)
 	{
-		if (had[*s] == 0)
+		if (had[(int)*s] == 0)
 		{
 			F1 = *s;
 			had[F1] = 1;
@@ -2947,7 +2947,7 @@ choochar(void) /* Choose troff pad character and field delimiter character */
 	for (s = "\002\003\005\006\007:_~^`@;,<=>#%&!/?{}+-*ABCDEFGHIJKMNOPQRSTUVWXZabcdefgjkoqrstuwxyz";
 	    *s; s++)
 	{
-		if (had[*s] == 0)
+		if (had[(int)*s] == 0)
 		{
 			F2 = *s;
 			break;
@@ -3031,10 +3031,10 @@ is_include(char *s) /* Returns 1 if s is a file-inclusion request, otherwise 0 *
 	{
 		if (c == ' ' || c == '\t' || c == '\n' || c == delim)
 			break;
-		if (n < sizeof(namebuf))
+		if (n < (ssize_t)sizeof(namebuf))
 			namebuf[n++] = c;
 	}
-	if (n >= sizeof(namebuf))
+	if (n >= (ssize_t)sizeof(namebuf))
 		error("File name exceeds maximum length.");
 	namebuf[n++] = '\0';
 	if (delim)
