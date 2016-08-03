@@ -364,7 +364,7 @@ primattrs(obj *p, struct objattr *obat)	/* note: ht, wid, rad and layer are set 
 		/*	 (this could be further rationalized!)	    */
 {
 	int	n;
-	float	x, bnd[4];
+	float	x;
 
 	p->o_attr |= obat->a_flags;
 	p->o_text  = obat->a_tcolor;

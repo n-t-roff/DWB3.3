@@ -36,13 +36,10 @@ static int getfont(char *, TrFont *);
 static void freefonts(void);
 static int findfont(char *);
 static int mounted(int);
-static int chcode(int, int);
 static int chindex(char *);
 static int chadd(char *);
 static int hash(char *, int);
 static void release(void *);
-static void dumpmount(int);
-static void dumpfont(int);
 
 /*****************************************************************************/
 
@@ -105,7 +102,7 @@ getfont(char *path, TrFont *fpos)
     FILE	*fin;
     Chwid	chtemp[MAXCH];
     static	Chwid chinit;
-    int		i, nw, n, wid, code;
+    int		i, nw = 0, n, wid, code;
     int		nospace = 1;
     char	buf[150], ch[20], s1[10], s2[10], s3[10], cmd[30];
 
@@ -365,6 +362,7 @@ chwidth(int n, int m)
 
 /*****************************************************************************/
 
+#if 0
 static int
 chcode(int n, int m)
 
@@ -380,6 +378,7 @@ chcode(int n, int m)
     return(dwb_mount[m]->wp[n].code);
 
 }   /* End of chcode */
+#endif
 
 /*****************************************************************************/
 
@@ -542,6 +541,7 @@ release(void *ptr)
 
 /*****************************************************************************/
 
+#if 0
 static void
 dumpmount(int m)
 
@@ -558,9 +558,11 @@ dumpmount(int m)
     else fprintf(stderr, "no font mounted at %d\n", m);
 
 }   /* End of dumpmount */
+#endif
 
 /*****************************************************************************/
 
+#if 0
 static void
 dumpfont(int n)
 
@@ -609,6 +611,7 @@ dumpfont(int n)
     putc('\n', stderr);
 
 }   /* End of dumpfont */
+#endif
 
 /*****************************************************************************/
 

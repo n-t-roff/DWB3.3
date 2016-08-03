@@ -109,7 +109,7 @@ void
 print_layer_bnd(int n, obj *p, obj *q)	/* show objects in layer n from p to q */
 {
 	obj	*r;
-	float	x0, y0, x1, y1, bnd[4];
+	float	x0, y0, x1, y1;
 
 	if (p->o_x < q->o_x)
 		{ x0 = p->o_x;	x1 = q->o_x; }
@@ -128,7 +128,7 @@ print_layer_bnd(int n, obj *p, obj *q)	/* show objects in layer n from p to q */
 
 obj *
 print_obj(int layer, obj *p) {
-	double	r, dx, dy, ox, oy, x0, y0, x1, y1;
+	double	r, ox, oy, x0, y0, x1, y1;
 	obj	*op, *q;
 	int	n;
 

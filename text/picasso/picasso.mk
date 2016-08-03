@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=picasso.mk
 
 SYSTEM=SYSV
@@ -12,12 +12,12 @@ FONTDIR=/usr/local/dwb/lib/font
 MAN1DIR=/usr/man/u_man/man1
 POSTLIB=/usr/local/dwb/lib/postscript
 
-CFLGS=-O 
+CFLGS=-Wall -Wextra
 LDFLGS=-s 
 CFLAGS=$(CFLGS)
 LDFLAGS=$(LDFLGS)
-YFLAGS=-d
-YACC=yacc
+#YFLAGS=-d
+#YACC=yacc
 TFLAGS=
 
 OFILES	= picassol.o \

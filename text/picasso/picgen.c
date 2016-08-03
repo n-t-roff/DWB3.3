@@ -146,7 +146,7 @@ checkeps(struct objattr *obat, char *tname) {
 		return NULL;
 	}
 	ntext1++;		/* filename is NOT one of the label strings */
-	llx = lly == - (urx = ury = -65535);
+	llx = lly = - (urx = ury = -65535);
 	while (fgets(buf, 128, fp) != NULL) {
 		if (strncmp(buf, "%%BoundingBox:", 14) != 0)
 			continue;

@@ -2,9 +2,9 @@
 # Won't compile without a good C++ compiler.
 #
 
-CC=CC
+#CC=CC
 
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=pm.mk
 
 SYSTEM=SYSV
@@ -16,7 +16,7 @@ OWNER=bin
 MAN5DIR=/usr/man/p_man/man5
 TMACDIR=/usr/lib/tmac
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS) -D$(SYSTEM)

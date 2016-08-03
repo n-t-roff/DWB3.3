@@ -105,7 +105,6 @@ findfile(char *path, char *name) {
 static void
 beginpl(void) {
 	char	filename[100];
-	char	enc[100];
 
 	fputs("%!PS-Adobe-2.0\n", outfp);
 	fputs("%%Creator: picasso\n", outfp);
@@ -615,7 +614,6 @@ d_arrow(obj *o, double theta, double phi, double hyp, double x1, double y1,
 	    rho,		/* angle counter to arrow direction */
 	    x0, y0, x2, y2,	/* end points of rear of arrow */
 	    wt = o->o_weight;	/* line thickness */
-    double  tmp;
 
     alpha = atan2(y1 - o->o_y, x1 - o->o_x);
     rho = alpha + phi;
@@ -697,7 +695,9 @@ pline(int n, int close, valtype *p, double r)
 void
 ellipse(double xc, double yc, double x0, double y0, double x1, double y1,
     double ang1, double ang2, int type) {
+	/*
 	double	c, s, phi, r1, r2;
+	*/
 	int	iang1, iang2;
 
 	iang1 = (int)(180 * (ang1 * M_1_PI) + (ang1 > 0. ? 0.5 : -0.5));
@@ -709,6 +709,7 @@ ellipse(double xc, double yc, double x0, double y0, double x1, double y1,
 /* most common case will have phi==0 or pi/2, and it seems worthwhile to  */
 /* check for that case without doing all the trigonometric stuff below.   */
 
+	/*
 	if ((y0 == 0 && x1 == 0) || (x0 == 0 && y1 == 0)) {
 		phi = 0;
 		r1 = fabs(x0);
@@ -721,6 +722,7 @@ ellipse(double xc, double yc, double x0, double y0, double x1, double y1,
 		r1 = hypot(c*x0 + s*x1, c*y0 + s*y1);
 		r2 = hypot(c*x1 - s*x0, c*y1 - s*y0);
 	}
+	*/
 /* MS: The following piece of code was taken out, because */
 /* transformed ellipses would print as circles. 6/1/92 */
 

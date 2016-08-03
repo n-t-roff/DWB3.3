@@ -18,29 +18,33 @@
 
 extern int	pic_compat;
 
-static void fix_text(int, int);
-
 obj *
 textgen(void) {
 	static	double	prevh = 0;
 	static	double	prevw = 0;
 
 	struct	objattr	obat;
-	int	i, sub, at, with, saw_with = 0;
+	int	i, /*sub,*/ at, with, saw_with = 0;
 	double	*bnd, savGbox[4], xwith, ywith;
+	/*
 	double	savcurx, savcury;
+	*/
 	obj	*p, *ppos;
 	Attr	*ap;
 
+#if 0
 	if (pic_compat) {	/* in pic, bounding box has size zero */
 		savcurx = curx;
 		savcury = cury;
 	}
+#endif
 	obat.a_weight = obat.a_pcolor = obat.a_lcolor = obat.a_tcolor = -1;
 	obat.a_ht = obat.a_wid = 0;
 	obat.a_dashpat.a = (float *)0;
 	obat.a_layer = (int)getfval("curlayer");
+	/*
 	sub = CENTER;
+	*/
 	at = with = 0;
 	set_text();
 	for (i = 0; i < nattr; i++) {
@@ -203,6 +207,7 @@ reset_space(int op, double val) {
 	sp_mark = ntext;
 }
 
+#if 0
 static void
 fix_text(int n1, int n2)		/* fill in default font/size/space values */
 			/* if space unspecified, set from size.   */
@@ -226,6 +231,7 @@ fix_text(int n1, int n2)		/* fill in default font/size/space values */
 		++n1;
 	}
 }
+#endif
 
 void
 troffesc(char *buf)		/* maintain up-to-date values in cur_font, cur_size */
@@ -240,8 +246,6 @@ void
 savetext(int type, char *s)	/* record text elements for current object */
 		/* breaking up into homogeneous font/size. */
 {
-extern	char	eqn_delim;
-extern	int	eqn_count;
 	int	start = ntext,
 		tmp_font = cur_font,
 		tmp_size = cur_size,

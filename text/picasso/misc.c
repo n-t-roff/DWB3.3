@@ -20,9 +20,6 @@ extern	int	pic_compat;
 extern	int	batch;
 
 static YYSTYPE getblk(obj *, char *);
-static void firsttext(int, char *, int, double, double, double, double);
-static void nothertext(int, char *, int, double, double);
-static void oprint(obj *);
 
 double
 getcomp(obj *p, int t)	/* return component of a position; these must now be */
@@ -657,11 +654,10 @@ transformed(obj *o) {
     return 0;
 }
 
+#if 0
 static	double	cx, cy;
 static	int	close_text;
-static	double  closex, closey;
 
-#if 0
 void
 findclosestletter(p, x, y) /* find letter in p closest to x, y */
     obj     *p;
@@ -782,6 +778,7 @@ nothertext(int type, char *str, int font, double size, double w) {
 }
 #endif
 
+#if 0
 static void
 oprint(obj *o)
 {
@@ -884,6 +881,7 @@ oprint(obj *o)
 	    fprintf(stderr, "\tcorner radius=%g\n", o->o_val[N_VAL].f);
     }
 }
+#endif
 
 #if 0 /* unused */
 oallprint(o)

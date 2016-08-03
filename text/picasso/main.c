@@ -312,38 +312,38 @@ struct {
 	float val;
 	short scalable;		/* 1 => adjust when scale changes */
 } defaults[] ={
-	"flatness",     0,	0,
-	"miterlimit",	0,	0,
-	"linecap",	-1,	0,
-	"linejoin",	-1,	0,
-	"textsize",	10,	0,
-	"textspace",	12,	0,
-	"textcolor",	0,	0,
-	"textfont",	0,	0,
-	"moveht",	HT,	1,
-	"movewid",	HT,	1,
-	"arrowht",	HT5,	1,
-	"arrowwid",	HT10,	1,
-	"arrowend",	0,	0,
-	"arrowfill",	1,	0,	/* arrowhead style */
-	"lineht",	HT,	1,
-	"linewid",	HT,	1,
-	"linerad",	0,	1,
-	"dashwid",	HT10,	1,
-	"boxht",	HT,	1,
-	"boxwid",	WID,	1,
-	"boxrad",	0,	1,
-	"ellipseht",	HT,	1,
-	"ellipsewid",	WID,	1,
-	"arcrad",	HT2,	1,
-	"circlerad",	HT2,	1,
-	"fillcolor",	0,	0,
-	"linecolor",	0,	0,
-	"lineweight",	0,	1,
-	"curlayer",	0,	0,	/* current drawing layer  */
-	"fi__ll",	0,	0,	/* flag for config files  */
-	"li--nc",	1,	0,	/* ditto */
-	NULL, 0
+	{ "flatness",     0,	0 },
+	{ "miterlimit",	0,	0 },
+	{ "linecap",	-1,	0 },
+	{ "linejoin",	-1,	0 },
+	{ "textsize",	10,	0 },
+	{ "textspace",	12,	0 },
+	{ "textcolor",	0,	0 },
+	{ "textfont",	0,	0 },
+	{ "moveht",	HT,	1 },
+	{ "movewid",	HT,	1 },
+	{ "arrowht",	HT5,	1 },
+	{ "arrowwid",	HT10,	1 },
+	{ "arrowend",	0,	0 },
+	{ "arrowfill",	1,	0 },	/* arrowhead style */
+	{ "lineht",	HT,	1 },
+	{ "linewid",	HT,	1 },
+	{ "linerad",	0,	1 },
+	{ "dashwid",	HT10,	1 },
+	{ "boxht",	HT,	1 },
+	{ "boxwid",	WID,	1 },
+	{ "boxrad",	0,	1 },
+	{ "ellipseht",	HT,	1 },
+	{ "ellipsewid",	WID,	1 },
+	{ "arcrad",	HT2,	1 },
+	{ "circlerad",	HT2,	1 },
+	{ "fillcolor",	0,	0 },
+	{ "linecolor",	0,	0 },
+	{ "lineweight",	0,	1 },
+	{ "curlayer",	0,	0 },	/* current drawing layer  */
+	{ "fi__ll",	0,	0 },	/* flag for config files  */
+	{ "li--nc",	1,	0 },	/* ditto */
+	{ NULL, 0, 0 }
 	};
 
 int	top_layer = 0;			/* high-water mark */
@@ -489,10 +489,11 @@ getdata(void)
 			parsing = 1;
 			if (setjmp(pic_env) == 0)
 				yyparse();
-			else
+			else {
 				/* clean up various stacks here, probably */
 				/* especially if not done elsewhere */
 				;
+			}
 			parsing = 0;
 			anyerr += synerr;
 	/* added for PIC compatibility -- 4/18/90 -- DBK */

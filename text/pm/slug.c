@@ -213,8 +213,14 @@ static void arc_extreme(double x0, double y0, double x1, double y1, double xc, d
 		k = quadrant(x1,y1);
 		if (j == k && y1*x0 < x1*y0) {
 			/* viewed as complex numbers, if Im(z1/z0)<0, arc is big */
-			if( xmin > -r) xmin = -r; if( ymin > -r) ymin = -r;
-			if( xmax <  r) xmax =  r; if( ymax <  r) ymax =  r;
+			if( xmin > -r)
+				xmin = -r;
+			if( ymin > -r)
+				ymin = -r;
+			if( xmax <  r)
+				xmax =  r;
+			if( ymax <  r)
+				ymax =  r;
 		} else {
 			while (j != k) {
 				switch (j) {
@@ -292,7 +298,7 @@ slug getslug(FILE *fp)
 			ERROR "no room for %ld character input buffer\n", ninbuf FATAL;
 		inbp = inbuf;
 	}
-	if (wherebuf() > ninbuf-5000) {
+	if (wherebuf() > (ssize_t)(ninbuf-5000)) {
 		// this is still flaky -- lines can be very long
 		int where = wherebuf();	// where we were
 		if ((inbuf = (char *)realloc(inbuf, ninbuf += DELTABUF)) == NULL)

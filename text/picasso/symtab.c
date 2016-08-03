@@ -16,7 +16,6 @@ YYSTYPE
 getvar(char *s)	/* return value of variable s (usually pointer) */
 {
 	struct symtab *p;
-	static YYSTYPE bug;
 
 	p = lookup(s);
 	if (p == NULL) {
