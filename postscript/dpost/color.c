@@ -146,7 +146,7 @@ newcolor(char *name)
 
     for ( p = name; *p && (*p == ' ' || *p == ':'); p++ ) ;
 
-    for ( i = 0; i < sizeof(color) - 1 && *p != '\n' && *p; i++, p++ )
+    for ( i = 0; i < (ssize_t)sizeof(color) - 1 && *p != '\n' && *p; i++, p++ )
 	if ( isupper(*p) )
 	    color[i] = tolower(*p);
 	else color[i] = *p;

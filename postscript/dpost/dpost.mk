@@ -1,4 +1,4 @@
-MAKE=/usr/bin/make
+#MAKE=/usr/bin/make
 MAKEFILE=dpost.mk
 
 SYSTEM=SYSV
@@ -15,7 +15,7 @@ POSTLIB=/usr/lib/postscript
 
 COMMONDIR=../common
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS) -I$(COMMONDIR)\

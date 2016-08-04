@@ -337,7 +337,7 @@ drawspline(FILE *fp, int flag)
  *
  */
 
-    for ( N = 2; N < sizeof(x)/sizeof(x[0]); N++ )
+    for ( N = 2; N < (ssize_t)(sizeof(x)/sizeof(x[0])); N++ )
 	if (fscanf(fp, "%d %d", &x[N], &y[N]) != 2)
 		break;
 
@@ -416,8 +416,14 @@ arc_extreme(int dx1, int dy1, int dx2, int dy2)
 	k = quadrant(x1,y1);
 	if (j == k && y1*x0 < x1*y0) {
 	    /* viewed as complex numbers, if Im(z1/z0)<0, arc is big */
-	    if( xmin > -r) xmin = -r; if( ymin > -r) ymin = -r;
-	    if( xmax <  r) xmax =  r; if( ymax <  r) ymax =  r;
+	    if( xmin > -r)
+		xmin = -r;
+	    if( ymin > -r)
+		ymin = -r;
+	    if( xmax <  r)
+		xmax =  r;
+	    if( ymax <  r)
+		ymax =  r;
 	} else {
 	    while (j != k) {
 		switch (j) {

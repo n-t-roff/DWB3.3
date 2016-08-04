@@ -18,8 +18,6 @@ static int findfont(char *);
 static int chadd(char *);
 static int hash(char *, int);
 static void release(void *);
-static void dumpmount(int);
-static void dumpfont(int);
 
 Font	*dwb_mount[MAXFONTS+1];		/* mount table - pointers into fonts[] */
 Font	fonts[MAXFONTS+2];		/* font data - guarantee one empty slot */
@@ -133,7 +131,7 @@ getfont(char *path, Font *fpos)
     FILE	*fin;
     Chwid	chtemp[MAXCH];
     static	Chwid chinit;
-    int		i, nw, n, wid, code;
+    int		i, nw = 0, n, wid, code;
     char	buf[300], ch[100], s1[100], s2[100], s3[100], cmd[100];
 
 
@@ -556,6 +554,7 @@ release(void *ptr)
 
 /*****************************************************************************/
 
+#if 0
 static void
 dumpmount(int m)
 
@@ -572,9 +571,11 @@ dumpmount(int m)
     else fprintf(stderr, "no font mounted at %d\n", m);
 
 }   /* End of dumpmount */
+#endif
 
 /*****************************************************************************/
 
+#if 0
 static void
 dumpfont(int n)
 
@@ -623,6 +624,7 @@ dumpfont(int n)
     putc('\n', stderr);
 
 }   /* End of dumpfont */
+#endif
 
 /*****************************************************************************/
 

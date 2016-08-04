@@ -367,7 +367,7 @@ header(void)
 	else if ( ch == 'B' )
 	    dobbox = TRUE;
 	else if ( ch == '?' )
-	    ERROR(FATAL, 0, (stderr, NULL));
+	    ERROR(FATAL, 0, (stderr, " "));
 
     optind = old_optind;		/* restored for options() */
 
@@ -530,7 +530,7 @@ options(void)
 		    break;
 
 	    case '?':			/* don't know the option */
-		    ERROR(FATAL, 0, (stderr, NULL));
+		    ERROR(FATAL, 0, (stderr, " "));
 		    break;
 
 	    default:

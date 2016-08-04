@@ -97,18 +97,18 @@ typedef struct {
 #define	FONTMAP								\
 									\
 	{								\
-	    "G", "H",							\
-	    "LO", "S",							\
-	    "S2", "S",							\
-	    "GI", "HI",							\
-	    "HM", "H",							\
-	    "HK", "H",							\
-	    "HL", "H",							\
-	    "PA", "R",							\
-	    "PI", "I",							\
-	    "PB", "B",							\
-	    "PX", "BI",							\
-	    NULL, NULL,							\
+	    { "G", "H" },							\
+	    { "LO", "S" },							\
+	    { "S2", "S" },							\
+	    { "GI", "HI" },							\
+	    { "HM", "H" },							\
+	    { "HK", "H" },							\
+	    { "HL", "H" },							\
+	    { "PA", "R" },							\
+	    { "PI", "I" },							\
+	    { "PB", "B" },							\
+	    { "PX", "BI" },							\
+	    { NULL, NULL }							\
 	}
 
 /*
