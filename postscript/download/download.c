@@ -57,6 +57,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
 #include "comments.h"			/* PostScript file structuring comments */
 #include "gen.h"			/* general purpose definitions */
@@ -64,6 +65,14 @@
 #include "ext.h"			/* external variable declarations */
 #include "download.h"			/* a few special definitions */
 
+static void init_signals(void);
+static void options(void);
+static void arguments(void);
+static void done(void);
+static void download(void);
+static void copyfonts(char *);
+static void copyinput(void);
+static int lookup(char *);
 void readresident(void);
 void readmap(void);
 
@@ -87,10 +96,8 @@ FILE	*fp_temp;		/* for copying stdin */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -115,13 +122,14 @@ main(agc, agv)
     arguments();			/* then process non-option arguments */
     done();				/* and clean things up */
 
-    exit(x_stat);			/* not much could be wrong */
+    return (x_stat);			/* not much could be wrong */
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -146,7 +154,8 @@ init_signals()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -321,7 +330,8 @@ readresident(void)
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -357,7 +367,8 @@ arguments()
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -374,7 +385,8 @@ done()
 
 /*****************************************************************************/
 
-download()
+static void
+download(void)
 
 {
 
@@ -424,9 +436,8 @@ download()
 
 /*****************************************************************************/
 
-copyfonts(list)
-
-    char	*list;
+static void
+copyfonts(char *list)
 
 {
 
@@ -466,7 +477,8 @@ copyfonts(list)
 
 /*****************************************************************************/
 
-copyinput()
+static void
+copyinput(void)
 
 {
 
@@ -494,9 +506,8 @@ copyinput()
 
 /*****************************************************************************/
 
-lookup(font)
-
-    char	*font;
+static int
+lookup(char *font)
 
 {
 
@@ -522,10 +533,8 @@ lookup(font)
 
 /*****************************************************************************/
 
-Map *allocate(ptr, num)
-
-    Map		*ptr;
-    int		num;
+Map *
+allocate(Map *ptr, int num)
 
 {
 
