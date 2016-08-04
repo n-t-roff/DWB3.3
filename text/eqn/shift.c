@@ -88,7 +88,7 @@ void shift2(p1, p2, p3)
 #endif /* UNANSI */
 {
 	int subps;
-	double h1, h2, h3, b1, b2, b3, subsh, d2, supsh, dh;
+	double h1, /*h2,*/ h3, b1, b2, b3, subsh, supsh;
 	int treg;
 	char *sh2;
 	int yyval;
@@ -98,7 +98,7 @@ void shift2(p1, p2, p3)
 	subps = ps;	/* sub and sup at this size */
 	ps += deltaps;	/* outer size */
 	h1 = eht[p1]; b1 = ebase[p1];
-	h2 = eht[p2]; b2 = ebase[p2];
+	/*h2 = eht[p2];*/ b2 = ebase[p2];
 	h3 = eht[p3]; b3 = ebase[p3];
 	subsh = EM(Subbase, ps);
 	if (b1 > b2 + subsh) {	/* move little sub down */

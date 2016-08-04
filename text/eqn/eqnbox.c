@@ -9,7 +9,6 @@ void eqnbox(p1, p2, lu)
 {
 	double b, h;
 	char *sh;
-	extern char *IRspace;
 	int yyval;
 
 	yyval = p1;

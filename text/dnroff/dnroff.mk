@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=dnroff.mk
 
 SYSTEM=BSD4_2
@@ -14,7 +14,7 @@ FONTDIR=/usr/lib/font
 MAN1DIR=/usr/man/u_man/man1
 NTERMDIR=/usr/lib/nterm
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS) -D$(SYSTEM) -D'NDEVNAME="$(NDEVNAME)"' -D'NTERMDIR="$(NTERMDIR)"'

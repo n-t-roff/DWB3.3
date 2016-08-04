@@ -87,7 +87,6 @@ static void t_trailer(void);
 static void put1s(char *);
 static void put1a(int);
 static void setsize(int);
-static void t_fp(int, char *, char *);
 static void drawline(int, int, char *);
 static void drawcirc(int);
 static void drawellip(int, int);
@@ -98,7 +97,6 @@ static char *plot(char *);
 static void move(void);
 static void save_tty(void);
 static void restore_tty(void);
-static void set_tty(void);
 void put1(int k);
 void t_page(int n);
 
@@ -530,7 +528,7 @@ getstr(FILE *fp, char **strp)	/* find next string, copy to str */
 		else {
 			s++;	/* skip \\ */
 			if (isdigit(s[0]) && isdigit(s[1]) && isdigit(s[2])) {
-				*t++ = (s[0]-'0')<<6 | (s[1]-'0')<<3 | s[2]-'0';
+				*t++ = (s[0]-'0')<<6 | (s[1]-'0')<<3 | (s[2]-'0');
 				s += 2;
 			} else if (isdigit(s[0])) {
 				*t++ = *s - '0';
@@ -692,6 +690,7 @@ setsize(int n)	/* set point size to n (internal) */
 	(void)n;
 }
 
+#if 0
 static void
 t_fp(int n, char *s, char *si)	/* font position n now contains font s, intname si */
 {
@@ -699,6 +698,7 @@ t_fp(int n, char *s, char *si)	/* font position n now contains font s, intname s
 	(void)s;
 	(void)si;
 }
+#endif
 
 static void
 drawline(int n, int m, char *s) {
@@ -1046,6 +1046,7 @@ restore_tty(void)			/*restore tty settings from beginning*/
 	}
 }
 
+#if 0
 static void
 set_tty(void)
 {
@@ -1066,3 +1067,4 @@ set_tty(void)
 	}
 
 }
+#endif

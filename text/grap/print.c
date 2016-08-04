@@ -23,7 +23,6 @@ print(void)	/* arrange final output */
 	FILE *fd;
 	Obj *p, *dfp, *setauto();
 	int c;
-	static int firstG1 = 0;
 	double dx, dy, xfac, yfac;
 	extern double pow();
 

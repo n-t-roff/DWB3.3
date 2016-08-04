@@ -31,7 +31,8 @@ void paren(leftc, p1, rightc)
 		n = 1;
 	m = n - 2;
 	if (leftc == '{' || rightc == '}') {
-		n = n%2 ? n : ++n;
+		if (!(n % 2))
+			n++;
 		if (n < 3)
 			n = 3;
 		m = n-3;

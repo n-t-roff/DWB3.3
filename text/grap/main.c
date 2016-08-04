@@ -121,11 +121,11 @@ static struct {
 	char	*name;
 	double	val;
 } defaults[] ={
-	"frameht", FRAMEHT,
-	"framewid", FRAMEWID,
-	"ticklen", TICKLEN,
-	"slop", SLOP,
-	NULL, 0
+	{ "frameht", FRAMEHT },
+	{ "framewid", FRAMEWID },
+	{ "ticklen", TICKLEN },
+	{ "slop", SLOP },
+	{ NULL, 0 }
 };
 
 static void

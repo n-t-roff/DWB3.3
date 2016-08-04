@@ -119,6 +119,7 @@ trans(c, p1)
 {
 	int f;
 
+	(void)p1;
 	if (isalpha(c) && ft == ITAL && c != 'f' && c != 'j') {	/* italic letter */
 		shim(pclass, nclass = ILET);
 		cadd(c);

@@ -26,6 +26,8 @@ void funny(n)
 		f = lookup(deftbl, "prod_def")->cval; break;
 	default:
 		ERROR "funny type %d in funny", n FATAL;
+		/* UNREACHED */
+		f = NULL;
 	}
 	printf(".ds %d %s\n", yyval, f);
 	eht[yyval] = EM(1.0, ps+Funnyps) - EM(Funnyht, ps);
