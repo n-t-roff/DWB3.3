@@ -33,7 +33,7 @@ out_list(char *str)
  *
  */
 
-    while ( *str && nolist < sizeof(olist) - 2 ) {
+    while ( *str && nolist < (ssize_t)(sizeof(olist) - 2) ) {
 	start = stop = str_convert(&str, 0);
 
 	if ( *str == '-' && *str++ )
@@ -228,6 +228,7 @@ interrupt(int sig)
  *
  */
 
+    (void)sig;
     if ( temp_file != NULL )
 	unlink(temp_file);
 

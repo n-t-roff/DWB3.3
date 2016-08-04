@@ -9,9 +9,9 @@
 #define LEVELIMIT 10
 #define BUFSIZE 512
 #define LINSIZE 512
-main(argc,argv)
-register int argc;
-char *argv[];
+static int fgetline(char *, int, FILE *);
+int
+main(int argc, char **argv)
    {
    register int filenum,i;
    char line[LINSIZE],current_file[100];
@@ -66,12 +66,10 @@ char *argv[];
          }
       }
    if (anyso == 0) exit(0);
-   exit(1);
+   return (1);
    }
-fgetline(s,lim,stream)
-char s[];
-register int lim;
-FILE *stream;
+static int
+fgetline(char *s, int lim, FILE *stream)
    {
    register int c , i;
    i = 0;

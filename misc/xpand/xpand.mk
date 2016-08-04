@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=xpand.mk
 
 SYSTEM=SYSV
@@ -10,7 +10,7 @@ OWNER=bin
 BINDIR=/usr/bin
 MAN5DIR=/usr/man/p_man/man5
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS)

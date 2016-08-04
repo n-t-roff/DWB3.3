@@ -47,14 +47,30 @@ x ...\n	device control functions:
 #include	<ctype.h>
 #include        <stdlib.h>
 #include        <string.h>
+#include	<stdarg.h>
+#include	<unistd.h>
 
+#include "tc.h"
+#include "draw.h"
 #include "dev.h"
 #define	NFONT	10
 
+static void outlist(char *);
+static int in_olist(int);
+static void conv(FILE *);
+static void devcntrl(FILE *);
+static void error(int, char *, ...);
+static void t_init(int);
+static void t_push(void);
+static void t_pop(void);
+static void t_newline(void);
+static void t_reset(int);
+static void hflush(void);
+static void done(void);
+static int readch(void);
+static void sendpt(void);
 void t_page(int n);
 void t_text(char *s);
-void setsize(int n);
-void put1(int c);
 void put1s(char *s);
 
 int	output	= 0;	/* do we do output at all? */
@@ -93,11 +109,10 @@ FILE *fp;	/* input file pointer */
 
 extern double	atof();
 
-main(argc, argv)
-char *argv[];
+int
+main(int argc, char **argv)
 {
 	char buf[BUFSIZ];
-	int done();
 
 	fp	= stdin;	/* input file pointer */
 	tf	= stdout;	/* output file */
@@ -139,10 +154,11 @@ char *argv[];
 			fclose(fp);
 		}
 	done();
+	return 0;
 }
 
-outlist(s)	/* process list of page numbers to be printed */
-char *s;
+static void
+outlist(char *s)	/* process list of page numbers to be printed */
 {
 	int n1, n2, i;
 
@@ -177,8 +193,8 @@ char *s;
 			printf("%3d %3d\n", olist[i], olist[i+1]);
 }
 
-in_olist(n)	/* is n in olist? */
-int n;
+static int
+in_olist(int n)	/* is n in olist? */
 {
 	int i;
 
@@ -190,11 +206,11 @@ int n;
 	return(0);
 }
 
-conv(fp)
-register FILE *fp;
+static void
+conv(FILE *fp)
 {
 	register int c, k;
-	int m, n, i, n1, m1;
+	int m, n, n1, m1;
 	char str[100], buf[300];
 
 	while ((c = getc(fp)) != EOF) {
@@ -262,7 +278,7 @@ register FILE *fp;
 			break;
 		case 'f':
 			fscanf(fp, "%s", str);
-			setfont(t_font(str));
+			/*setfont(t_font(str));*/
 			break;
 		case 'H':	/* absolute horizontal motion */
 			/* fscanf(fp, "%d", &n); */
@@ -322,23 +338,23 @@ register FILE *fp;
 	}
 }
 
-devcntrl(fp)	/* interpret device control functions */
-FILE *fp;
+static void
+devcntrl(FILE *fp)	/* interpret device control functions */
 {
 	char str[20];
-	int c, n;
+	int n;
 
 	fscanf(fp, "%s", str);
 	switch (str[0]) {	/* crude for now */
 	case 'i':	/* initialize */
-		fileinit();
+		/*fileinit();*/
 		t_init(0);
 		break;
 	case 'T':	/* device name */
 		fscanf(fp, "%s", dwb_devname);
 		break;
 	case 't':	/* trailer */
-		t_trailer();
+		/*t_trailer();*/
 		break;
 	case 'p':	/* pause -- can restart */
 		t_reset('p');
@@ -351,13 +367,14 @@ FILE *fp;
 		break;
 	case 'f':	/* font used */
 		fscanf(fp, "%d %s", &n, str);
-		loadfont(n, str);
+		/*loadfont(n, str);*/
 		break;
 	}
 	while (getc(fp) != '\n')	/* skip rest of input line */
 		;
 }
 
+#if 0
 fileinit()	/* read in font and code files, etc. */
 {
 }
@@ -376,6 +393,7 @@ int n;
 char *s;
 {
 }
+#endif
 
 #define	ESC	033
 #define	MAXY	(3071-100)
@@ -383,16 +401,18 @@ char *s;
 #define	GS	035	/* graphics mode */
 #define	FF	014
 
-error(f, s, a1, a2, a3, a4, a5, a6, a7)
-	char	*s;
+static void
+error(int f, char *s, ...)
 {
-
+	va_list ap;
 	fprintf(stderr, "%c%c%c", US, ESC, ';');	/* reset terminal sensibly */
 	fprintf(stderr, "tc: ");
-	fprintf(stderr, s, a1, a2, a3, a4, a5, a6, a7);
+	va_start(ap, s);
+	vfprintf(stderr, s, ap);
+	va_end(ap);
 	fprintf(stderr, " near line %ld\n", lineno);
 	if (f)
-		done(2);
+		done(/*2*/);
 }
 
 
@@ -404,7 +424,7 @@ error(f, s, a1, a2, a3, a4, a5, a6, a7)
 
 char	dwb_devname[20]	= "4014";
 
-#define	oput(c)	if (output) putchar(c); else;
+#define	oput(c)	do { if (output) putchar(c); } while (0)
 
 int	stopped = 0;
 int	ohx	= -1;
@@ -426,9 +446,10 @@ int	DY	= 10;	/* step size in y for drawing */
 int	drawdot	= '.';	/* draw with this character */
 int	drawsize = 1;	/* shrink by this factor when drawing */
 
-t_init(reinit)	/* initialize device */
-int reinit;
+static void
+t_init(int reinit)	/* initialize device */
 {
+	(void)reinit;
 	fflush(stdout);
 	stopped = 0;
 	if (erase) {
@@ -454,7 +475,8 @@ struct state {
 struct	state	state[MAXSTATE];
 struct	state	*statep = state;
 
-t_push()	/* begin a new block */
+static void
+t_push(void)	/* begin a new block */
 {
 	hflush();
 	statep->ssize = size;
@@ -471,7 +493,8 @@ t_push()	/* begin a new block */
 	hpos = vpos = 0;
 }
 
-t_pop()	/* pop to previous state */
+static void
+t_pop(void)	/* pop to previous state */
 {
 	if (--statep < state)
 		error(FATAL, "extra }");
@@ -492,7 +515,7 @@ void
 t_page(int n)	/* do whatever new page functions */
 {
 	long ftell();
-	int c, m, i;
+	int m, i;
 	char buf[100], *bp;
 
 	pgnum[np++] = n;
@@ -590,13 +613,14 @@ t_page(int n)	/* do whatever new page functions */
 	goto next;
 }
 
-t_newline()	/* do whatever for the end of a line */
+static void
+t_newline(void)	/* do whatever for the end of a line */
 {
 	hpos = 0;
 }
 
-t_size(n)	/* convert integer to internal size number*/
-int n;
+int
+t_size(int n)	/* convert integer to internal size number*/
 {
 	int i;
 
@@ -609,8 +633,9 @@ int n;
 	return(i+1);
 }
 
-t_font(s)	/* convert string to internal font number */
-char *s;
+#if 0
+static int
+t_font(char *s)	/* convert string to internal font number */
 {
 	int n;
 
@@ -619,6 +644,7 @@ char *s;
 		n = 1;
 	return(n);
 }
+#endif
 
 void
 t_text(char *s)	/* print string s as text */
@@ -650,9 +676,9 @@ t_text(char *s)	/* print string s as text */
 	}
 }
 
-t_reset(c)
+static void
+t_reset(int c)
 {
-	int n;
 
 	output = 1;
 	fflush(stdout);
@@ -662,36 +688,41 @@ t_reset(c)
 	}
 }
 
+/*
 t_trailer()
 {
 }
+*/
 
-hgoto(n)
+void
+hgoto(int n)
 {
 	hpos = n;	/* this is where we want to be */
 			/* before printing a character, */
 			/* have to make sure it's true */
 }
 
-hmot(n)	/* generate n units of horizontal motion */
-int n;
+void
+hmot(int n)	/* generate n units of horizontal motion */
 {
 	hgoto(hpos + n);
 }
 
-hflush()	/* actual horizontal output occurs here */
+static void
+hflush(void)	/* actual horizontal output occurs here */
 {
 	if (output)
 		sendpt();
 }
 
-vgoto(n)
+void
+vgoto(int n)
 {
 	vpos = n;
 }
 
-vmot(n)	/* generate n units of vertical motion */
-int n;
+void
+vmot(int n)	/* generate n units of vertical motion */
 {
 	vgoto(vpos + n);	/* ignores rounding */
 }
@@ -748,6 +779,7 @@ setsize(int n)	/* set point size to n (internal) */
 	size = n;
 }
 
+#if 0
 t_fp(n, s)	/* font position n now contains font s */
 int n;
 char *s;
@@ -758,8 +790,10 @@ setfont(n)	/* set font to n */
 int n;
 {
 }
+#endif
 
-done()
+static void
+done(void)
 {
 	output = 1;
 	hgoto(0);
@@ -773,12 +807,14 @@ done()
 	exit(0);
 }
 
-readch(){
+static int
+readch(void){
 	char c;
 	if (read(2,&c,1)<1) c=0;
 	return(c);
 }
-sendpt(){
+static void
+sendpt(void){
 	int hy,xb,ly,hx,lx;
 	int xx, yy;
 	float fx, fy;
@@ -790,7 +826,7 @@ sendpt(){
 	yy = MAXY - (fy * MAXY / 11) / res + 0.5;
 	oput(GS);
 	hy = ((yy>>7) & 037);
-	xb = ((xx & 03) + ((yy<<2) & 014) & 017);
+	xb = (((xx & 03) + ((yy<<2) & 014)) & 017);
 	ly = ((yy>>2) & 037);
 	hx = ((xx>>7) & 037);
 	lx = ((xx>>2) & 037);
