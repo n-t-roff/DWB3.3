@@ -571,7 +571,7 @@ matrix(void)
 
 {
 
-    int		count;			/* pattern repeats this many times */
+    /* int		count;			/ * pattern repeats this many times */
     long	total;			/* expect this many patterns */
 
 /*

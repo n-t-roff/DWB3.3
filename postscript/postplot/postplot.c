@@ -489,7 +489,7 @@ plot(void)
     int		x0,y0,x1,y1;
     int		xc, yc, r;
     int		dx0, dy0, dx1, dy1;
-    int		n, i, pat[256];
+    /*int		n, i, pat[256];*/
 
 /*
  *
@@ -577,14 +577,16 @@ plot(void)
 		setstyle(s);
 		break;
 
+#if 0
 	    case 'd':			/* undocumented and unimplemented */
 		x0 = getint();
 		y0 = getint();
 		dx0 = getint();
 		n = getint();
 		for(i=0; i<n; i++)pat[i] = getint();
-		/*dot(x0,y0,dx0,n,pat);*/
+		dot(x0,y0,dx0,n,pat);
 		break;
+#endif
 
 	    default:
 		error(FATAL, "unknown command %o\n", c);

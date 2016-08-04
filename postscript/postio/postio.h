@@ -122,16 +122,16 @@ typedef struct {
 #define STATUS								\
 									\
 	{								\
-	    "busy", BUSY,						\
-	    "waiting", WAITING,						\
-	    "printing", PRINTING,					\
-	    "idle", IDLE,						\
-	    "endofjob", ENDOFJOB,					\
-	    "printererror", PRINTERERROR,				\
-	    "error", ERROR,						\
-	    "flushing", FLUSHING,					\
-	    "initializing", INITIALIZING,				\
-	    NULL, UNKNOWN						\
+	    { "busy", BUSY },						\
+	    { "waiting", WAITING },						\
+	    { "printing", PRINTING },					\
+	    { "idle", IDLE },						\
+	    { "endofjob", ENDOFJOB },					\
+	    { "printererror", PRINTERERROR },				\
+	    { "error", ERROR },						\
+	    { "flushing", FLUSHING },					\
+	    { "initializing", INITIALIZING },				\
+	    { NULL, UNKNOWN }						\
 	}
 
 /*
@@ -166,23 +166,23 @@ typedef struct {
 #define BAUDTABLE							\
 									\
 	{								\
-	    "9600", B9600,						\
-	    "B9600", B9600,						\
-	    "19200", EXTA,						\
-	    "19.2", EXTA,						\
-	    "B19200", EXTA,						\
-	    "EXTA", EXTA,						\
-	    "1200", B1200,						\
-	    "B1200", B1200,						\
-	    "2400", B2400,						\
-	    "B2400", B2400,						\
-	    "B4800", B4800,						\
-	    "4800", B4800,						\
-	    "38400", EXTB,						\
-	    "38.4", EXTB,						\
-	    "B38400", EXTB,						\
-	    "EXTB", EXTB,						\
-	    NULL, B9600							\
+	    { "9600", B9600 },						\
+	    { "B9600", B9600 },						\
+	    { "19200", EXTA },						\
+	    { "19.2", EXTA },						\
+	    { "B19200", EXTA },						\
+	    { "EXTA", EXTA },						\
+	    { "1200", B1200 },						\
+	    { "B1200", B1200 },						\
+	    { "2400", B2400 },						\
+	    { "B2400", B2400 },						\
+	    { "B4800", B4800 },						\
+	    { "4800", B4800 },						\
+	    { "38400", EXTB },						\
+	    { "38.4", EXTB },						\
+	    { "B38400", EXTB },						\
+	    { "EXTB", EXTB },						\
+	    { NULL, B9600 }							\
 	}
 
 /*

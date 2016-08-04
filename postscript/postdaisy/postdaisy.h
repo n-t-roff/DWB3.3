@@ -64,18 +64,18 @@ typedef struct {
 #define FONTMAP								\
 									\
 	{								\
-	    "R", "Courier",						\
-	    "I", "Courier-Oblique",					\
-	    "B", "Courier-Bold",					\
-	    "CO", "Courier",						\
-	    "CI", "Courier-Oblique",					\
-	    "CB", "Courier-Bold",					\
-	    "CW", "Courier",						\
-	    "PO", "Courier",						\
-	    "courier", "Courier",					\
-	    "cour", "Courier",						\
-	    "co", "Courier",						\
-	    NULL, NULL							\
+	    { "R", "Courier" },						\
+	    { "I", "Courier-Oblique" },					\
+	    { "B", "Courier-Bold" },					\
+	    { "CO", "Courier" },						\
+	    { "CI", "Courier-Oblique" },					\
+	    { "CB", "Courier-Bold" },					\
+	    { "CW", "Courier" },						\
+	    { "PO", "Courier" },						\
+	    { "courier", "Courier" },					\
+	    { "cour", "Courier" },						\
+	    { "co", "Courier" },						\
+	    { NULL, NULL }							\
 	}
 
 /*

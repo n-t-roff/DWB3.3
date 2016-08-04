@@ -830,7 +830,7 @@ repeat(void)
 
 {
 
-    int		count;			/* repeat this many times */
+    /* int		count;			/ * repeat this many times */
     int		ch;			/* next input character */
 
 /*
@@ -840,7 +840,7 @@ repeat(void)
  *
  */
 
-    count = get_int(0);			/* get the repeat count */
+    /* count = get_int(0);			/ * get the repeat count */
 
     while ( (ch = get_char()) != EOF  &&  ch != BENDR ) ;
 
@@ -1030,8 +1030,9 @@ subr_end(void)
 
     fprintf(fp_out, "grestore\n");
     fprintf(fp_out, "} def\n");
+    ch = get_char();
 
-    if ( in_global == TRUE && (ch = get_char()) != BSUB )  {
+    if ( in_global == TRUE && ch != BSUB )  {
 	fprintf(fp_out, "%s", ENDGLOBAL);
 	fprintf(fp_out, "/saveobj save def\n");
 	fprintf(fp_out, "mark\n");
@@ -1281,7 +1282,7 @@ line_plot(void)
 
     int		c;			/* next input character from fp_in */
     int		deltax;			/* change in x coordinate */
-    int		x0, y0;			/* starting point for next segment */
+    int		/*x0,*/ y0;			/* starting point for next segment */
     int		x1, y1;			/* endpoint of the line */
     int		count = 0;		/* number of points so far */
 
@@ -1298,7 +1299,7 @@ line_plot(void)
     y1 = get_int(0);
 
     while ( (c = get_char()) != EOF  &&  (c & MSB) )  {
-	x0 = x1;			/* line starts here */
+	/*x0 = x1;*/			/* line starts here */
 	y0 = y1;
 
 	x1 += deltax;			/* and ends at this point */
@@ -1339,6 +1340,7 @@ arc(int mode)
  *
  */
 
+    (void)mode;
     dx1 = get_int(0);			/* displacements relative to center */
     dy1 = get_int(0);
     dx2 = get_int(0);

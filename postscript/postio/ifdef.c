@@ -33,8 +33,6 @@ int ioctl(int fd, unsigned long request, ...);
 #include "gen.h"			/* general purpose definitions */
 #include "postio.h"
 
-static char *dwb_strpbrk(char *, char *);
-
 FILE	*fp_ttyi, *fp_ttyo;
 char	*ptr = mesg;
 
@@ -739,6 +737,7 @@ dwb_strspn(char *string, char *charset)
  * in the character string `string'; NULL if none exists.
  */
 
+#if 0
 static char *
 dwb_strpbrk(char *string, char *brkset)
 {
@@ -753,6 +752,7 @@ dwb_strpbrk(char *string, char *brkset)
 	while(*string++);
 	return((char*)0);
 }
+#endif
 
 /*	@(#)strtok.c	1.2	*/
 /*	3.0 SID #	1.2	*/

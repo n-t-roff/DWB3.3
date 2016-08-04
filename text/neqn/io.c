@@ -190,7 +190,9 @@ setfile(int argc, char **argv) {
 }
 
 void
-yyerror(char *s) {}
+yyerror(char *s) {
+	(void)s;
+}
 
 void
 init(void) {

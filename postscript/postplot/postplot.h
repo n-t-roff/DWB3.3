@@ -13,13 +13,13 @@ typedef struct {
 #define STYLES								\
 									\
 	{								\
-	    "solid", "[]",						\
-	    "dotted", "[.5 2]",						\
-	    "dashed", "[4 4]",						\
-	    "dotdashed", "[.5 2 4 2]",					\
-	    "shortdashed", "[4 4]",					\
-	    "longdashed", "[8 8]",					\
-	    NULL, "[]"							\
+	    { "solid", "[]" },						\
+	    { "dotted", "[.5 2]" },						\
+	    { "dashed", "[4 4]" },						\
+	    { "dotdashed", "[.5 2 4 2]" },					\
+	    { "shortdashed", "[4 4]" },					\
+	    { "longdashed", "[8 8]" },					\
+	    { NULL, "[]" }							\
 	}
 
 /*
@@ -39,18 +39,18 @@ typedef struct {
 #define FONTMAP								\
 									\
 	{								\
-	    "R", "Courier",						\
-	    "I", "Courier-Oblique",					\
-	    "B", "Courier-Bold",					\
-	    "CO", "Courier",						\
-	    "CI", "Courier-Oblique",					\
-	    "CB", "Courier-Bold",					\
-	    "CW", "Courier",						\
-	    "PO", "Courier",						\
-	    "courier", "Courier",					\
-	    "cour", "Courier",						\
-	    "co", "Courier",						\
-	    NULL, NULL							\
+	    { "R", "Courier" },						\
+	    { "I", "Courier-Oblique" },					\
+	    { "B", "Courier-Bold" },					\
+	    { "CO", "Courier" },						\
+	    { "CI", "Courier-Oblique" },					\
+	    { "CB", "Courier-Bold" },					\
+	    { "CW", "Courier" },						\
+	    { "PO", "Courier" },						\
+	    { "courier", "Courier" },					\
+	    { "cour", "Courier" },						\
+	    { "co", "Courier" },						\
+	    { NULL, NULL }							\
 	}
 
 /*

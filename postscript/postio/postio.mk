@@ -12,7 +12,7 @@ POSTBIN=/usr/lbin/postscript
 
 COMMONDIR=../common
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS) -I$(COMMONDIR)

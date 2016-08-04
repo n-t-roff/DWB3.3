@@ -122,7 +122,6 @@ static void interrupt(int);
 static void logit(char *, ...);
 static void quit(int);
 static void Rest(int);
-static int Read(int, char *, int);
 static int Write(int, char *, int);
 void done(void);
 void send(int fd_in, char *name);
@@ -1201,6 +1200,7 @@ Rest(int t)
 
 /*****************************************************************************/
 
+#if 0
 static int
 Read(int fd, char *buf, int n)
 
@@ -1225,6 +1225,7 @@ Read(int fd, char *buf, int n)
     return(count);
 
 }   /* End of Read */
+#endif
 
 /*****************************************************************************/
 

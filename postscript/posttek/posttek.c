@@ -537,6 +537,7 @@ statemachine(FILE *fp)
  *
  */
 
+    (void)fp;
     redirect(-1);			/* get ready for the first page */
     formfeed();
     dispmode = RESET;
