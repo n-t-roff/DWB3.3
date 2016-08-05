@@ -20,6 +20,13 @@ char *xxxvers = "@(#)col:col.c	1.8";
 # define GREEK 0200
 # define LINELN 4096
 
+static void outc (int c);
+static void store (int lno);
+static void fetch(int lno);
+static void emit (char *s, int lineno);
+static void incr(void);
+static void decr(void);
+
 char *page[PL];
 char lbuff [ LINELN ] , *line;
 char esc_chars, underline, temp_off, smart;
@@ -31,8 +38,8 @@ int pcp = 0;
 char *pgmname;
 char *strcpy();
 
-main (argc, argv)
-	int argc; char **argv;
+int
+main (int argc, char **argv)
 {
 	int i;
 	int greek;
@@ -210,8 +217,8 @@ main (argc, argv)
 	return 0;
 }
 
-outc (c)
-	register char c;
+static void
+outc (int c)
 {
 	char esc_chars = '\0';
 	if (lp > cp) {
@@ -291,7 +298,8 @@ outc (c)
 	}
 }
 
-store (lno)
+static void
+store (int lno)
 {
 	lno %= PL;
 	if (page[lno] != 0)
@@ -304,7 +312,8 @@ store (lno)
 	strcpy (page[lno],lbuff);
 }
 
-fetch(lno)
+static void
+fetch(int lno)
 {
 	register char *p;
 
@@ -317,11 +326,10 @@ fetch(lno)
 	if (page[lno])
 		strcpy (line, page[lno]);
 }
-emit (s, lineno)
-	char *s;
-	int lineno;
+
+static void
+emit (char *s, int lineno)
 {
-	char esc_chars = '\0';
 	static int cline = 0;
 	register int ncp;
 	register char *p;
@@ -383,7 +391,8 @@ emit (s, lineno)
 	}
 }
 
-incr()
+static void
+incr(void)
 {
 	store (ll++);
 	if (ll > llh)
@@ -397,7 +406,8 @@ incr()
 	fetch (ll);
 }
 
-decr()
+static void
+decr(void)
 {
 	if (ll > mustwr - PL) {
 		store (ll--);

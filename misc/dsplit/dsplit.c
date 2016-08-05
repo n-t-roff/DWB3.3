@@ -14,6 +14,8 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
+#include <unistd.h>
 
 #define	NON_FATAL	0
 #define	FATAL		1
@@ -22,6 +24,19 @@
 #define	MAX_FNAME	2
 #define	NFONT		100
 
+static void options(void);
+static void arguments(void);
+static void conv(FILE *fp);
+static void file_init(void);
+static void devcntrl(FILE *fp);
+static void loadfont(int pos, char *name);
+static void new_page(void);
+static void end_section(void);
+static void new_section(void);
+static int get_int(FILE *fp_in);
+static void put_char(int ch, FILE *fp);
+static void put_string(char *str, FILE *fp);
+static void error(int kind, char *mesg, ...);
 void out_file(void);
 
 int	argc;				/* global so everyone can use them */
@@ -67,10 +82,8 @@ struct  {				/* mounted fonts */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int	    agc;
-    char    *agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -88,12 +101,14 @@ main(agc, agv)
 
     options();				/* read the command line options */
     arguments();			/* translate the input files */
+    return 0;
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -154,7 +169,8 @@ options()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -188,9 +204,10 @@ arguments()
 
 /*****************************************************************************/
 
-conv(fp)
+static void
+conv(FILE *fp)
 
-    FILE    *fp;			/* next input file */
+    /* FILE    *fp;			/ * next input file */
 
 {
 
@@ -294,7 +311,8 @@ conv(fp)
 
 /*****************************************************************************/
 
-file_init()
+static void
+file_init(void)
 
 {
 
@@ -363,9 +381,8 @@ out_file(void)
 
 /*****************************************************************************/
 
-devcntrl(fp)
-
-    FILE    *fp;
+static void
+devcntrl(FILE *fp)
 
 {
 
@@ -425,10 +442,11 @@ devcntrl(fp)
 
 /*****************************************************************************/
 
-loadfont(pos, name)
+static void
+loadfont(int pos, char *name)
 
-    int	    pos;			/* this font position */
-    char    *name;			/* now contains this font */
+    /* int	    pos;			/ * this font position */
+    /* char    *name;			/ * now contains this font */
 
 {
 
@@ -453,7 +471,8 @@ loadfont(pos, name)
 
 /*****************************************************************************/
 
-new_page()
+static void
+new_page(void)
 
 {
 
@@ -474,7 +493,8 @@ new_page()
 
 /*****************************************************************************/
 
-end_section()
+static void
+end_section(void)
 
 {
 
@@ -502,7 +522,8 @@ end_section()
 
 /*****************************************************************************/
 
-new_section()
+static void
+new_section(void)
 
 {
 
@@ -547,9 +568,8 @@ new_section()
 
 /*****************************************************************************/
 
-get_int(fp_in)
-
-    FILE    *fp_in;
+static int
+get_int(FILE *fp_in)
 
 {
 
@@ -577,10 +597,11 @@ get_int(fp_in)
 
 /*****************************************************************************/
 
-put_char(ch, fp)
+static void
+put_char(int ch, FILE *fp)
 
-    int	    ch;				/* write this character */
-    FILE    *fp;			/* to this file */
+    /* int	    ch;				/ * write this character */
+    /* FILE    *fp;			/ * to this file */
 
 {
 
@@ -600,10 +621,11 @@ put_char(ch, fp)
 
 /*****************************************************************************/
 
-put_string(str, fp)
+static void
+put_string(char *str, FILE *fp)
 
-    char    *str;			/* write this string */
-    FILE    *fp;			/* out to this file */
+    /* char    *str;			/ * write this string */
+    /* FILE    *fp;			/ * out to this file */
 
 {
 
@@ -621,11 +643,11 @@ put_string(str, fp)
 
 /*****************************************************************************/
 
-error(kind, mesg, a1, a2)
+static void
+error(int kind, char *mesg, ...)
 
-    int		kind;			/* FATAL or NON_FATAL */
-    char	*mesg;			/* error message */
-    unsigned	a1, a2;			/* control string arguments */
+    /* int		kind;			/ * FATAL or NON_FATAL */
+    /* char	*mesg;			/ * error message */
 
 {
 
@@ -634,9 +656,11 @@ error(kind, mesg, a1, a2)
  * Writes *mesg to stderr and quits if kind is FATAL. 
  * 
  */
-
+    va_list ap;
     fprintf(stderr, "%s: ", prog_name);
-    fprintf(stderr, mesg, a1, a2);
+    va_start(ap, mesg);
+    vfprintf(stderr, mesg, ap);
+    va_end(ap);
     putc('\n', stderr);
 
     if ( kind == FATAL )

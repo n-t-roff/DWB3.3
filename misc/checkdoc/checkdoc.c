@@ -172,7 +172,13 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <unistd.h>
 
+static void error(char *);
+static void warning(char *);
+char * dwb_index(char *s1, char *s2);
+static int findcol(char **nextp);
+static int str_nr_test(char *p);
 void memo_ck(void);
 void letter_ck(void);
 void text_ck(void);
@@ -202,9 +208,8 @@ int errflg=0;
 int IGNORE=0; /* =1 when in an ignore block or in a macro definition */
 char EQ_L_DELIM='\0'; /* for checking EQ delimiter in an IGNORE'd block */
 
-main(argc,argv)
-char **argv; 
-int argc;
+int
+main(int argc, char **argv)
 {
 	char *p, *q;
 	int file_nr;
@@ -315,7 +320,7 @@ int argc;
 					printf("Line %d: ",line_nr);
 					fputs(line,stdout);
 					printf("Ending input from file %s, %d lines done\n",filename,line_nr);
-					close(fp);
+					fclose(fp);
 					p = &line[3];
 					while(*p == ' ') p++;
 					strcpy(filename,strtok(p,"\n"));
@@ -370,15 +375,15 @@ int argc;
 	return errflg;
 }
 
-error(msg)	/* Display an error message */
-char *msg;
+static void
+error(char *msg)	/* Display an error message */
 {
 	errflg = 1;
 	printf("Line %d: %s\n", line_nr, msg);
 }
 
-warning(msg)	/* Display a warning message */
-char *msg;
+static void
+warning(char *msg)	/* Display a warning message */
 {
 	printf("Line %d: Warning: %s\n", line_nr, msg);
 }
@@ -388,7 +393,8 @@ char *msg;
    character following the occurrance, or NULL if not found.
  */
  /* D. Muir 4/2/88 */
-char *dwb_index(s1,s2) char *s1, *s2;
+char *
+dwb_index(char *s1, char *s2)
 {
 	char *p, *pp, *q;
 	for(p=s1; *p!='\n'; p++){
@@ -1219,7 +1225,7 @@ ref_ck(void){
 	static int state = 0;
 	/* State Table:
      0 = initial(base) state
-     1 = /*(Rf found
+     1 = /\*(Rf found
      2 = .RS found
    */
 	static int Rf_line;
@@ -2118,11 +2124,10 @@ cnt_data:
    speed up execution - D. Muir 10/4/91 */
 /* Added check for key letter not first in format line - D. Muir 5/15/92 */
 /* Added check for space or tab after one letter font name - D. Muir 5/18/92 */
-findcol(nextp)
-
-char **nextp;
+static int
+findcol(char **nextp)
 {
-	register c;
+	int c;
 	int nc, mod;
 	char *p;
 
@@ -2880,8 +2885,8 @@ done1:			p++; continue;
 /* Called by font_ck() to look for string and number register
    interpolations. It returns the length if one is found.
    D. Muir 9/25/89 */
-str_nr_test(p)
-char *p;
+static int
+str_nr_test(char *p)
 {
 	if(*p != '\\') return 0;
 	if(*(p+1) != 'n' && *(p+1) != '*') return 0;
