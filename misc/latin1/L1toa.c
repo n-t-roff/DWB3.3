@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+int
 main() {	/* filter 8 bit Latin-1 to escaped 7 bit ASCII */
 #define DIGRAPH(c1,c2) {c1,c2}
 	int c, i;
@@ -146,5 +147,5 @@ main() {	/* filter 8 bit Latin-1 to escaped 7 bit ASCII */
 			putchar(latin1[i][1]);
 		}
 	}
-	exit(0);
+	return (0);
 }

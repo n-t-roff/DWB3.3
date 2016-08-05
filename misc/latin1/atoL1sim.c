@@ -1,4 +1,5 @@
 #include <stdio.h>
+int
 main() {	/* filter escaped 7 bit ASCII to overstruck ASCII */
 #define DIGRAPH(c1,c2) (c1<<8)|c2
 	int c, d, i, c1;
@@ -140,10 +141,10 @@ main() {	/* filter escaped 7 bit ASCII to overstruck ASCII */
 			else c1 = '\0';
 
 			d = DIGRAPH(c1, c);
-			for (i=0; i<sizeof(latin1); i++)
+			for (i=0; i < (ssize_t)sizeof(latin1); i++)
 				if (d == latin1[i]) break;
 
-			if ( i >= sizeof(latin1) ) {	/* not VT200 */
+			if ( i >= (ssize_t)sizeof(latin1) ) {	/* not VT200 */
 				putchar('\\');
 				if (c1 != '\0') {
 					putchar('(');
@@ -157,4 +158,5 @@ main() {	/* filter escaped 7 bit ASCII to overstruck ASCII */
 		}
 		putchar(c);
 	}
+	return 0;
 }

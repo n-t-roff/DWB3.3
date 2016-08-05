@@ -1,11 +1,15 @@
+#include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 # include "structs.h"
 
-error(msg,v)
-char	*msg ;
-int	v ;
+void
+error(char *msg, ...)
 {
+	va_list ap;
 	fprintf(stderr,"%s: ",prog_name) ;
-	fprintf(stderr,msg,v) ;
+	va_start(ap, msg);
+	vfprintf(stderr, msg, ap);
+	va_end(ap);
 	exit(1) ;
 }

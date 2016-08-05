@@ -1,13 +1,26 @@
 # include "structs.h"
 
+struct	range range(struct	point	p);
+struct	range
+range_x(
+struct	range	r1 ,
+struct	range	r2 );
 int
-aligned(b1,e1,b2,e2)
-struct	point	b1 ;
-struct	point	e1 ;
-struct	point	b2 ;
-struct	point	e2 ;
+clk(
+struct	point	p1 ,
+struct	point	p2 );
+int
+cclk(
+struct	point	p1 ,
+struct	point	p2 );
+
+int
+aligned(
+struct	point	b1 ,
+struct	point	e1 ,
+struct	point	b2 ,
+struct	point	e2 )
 {
-	struct	range	x ;
 	struct	range	range() ;
 	struct	range	range_x() ;
 
@@ -28,8 +41,7 @@ struct	point	e2 ;
 }
 
 struct	range
-range(p)
-struct	point	p ;
+range(struct	point	p)
 {
 	struct	point	pt ;
 	struct	point	pc ;
@@ -62,9 +74,9 @@ struct	point	p ;
 }
 
 struct	range
-range_x(r1,r2)
-struct	range	r1 ;
-struct	range	r2 ;
+range_x(
+struct	range	r1 ,
+struct	range	r2 )
 {
 	struct	range	result ;
 	
@@ -80,17 +92,17 @@ struct	range	r2 ;
 }
 
 int
-clk(p1,p2)
-struct	point	p1 ;
-struct	point	p2 ;
+clk(
+struct	point	p1 ,
+struct	point	p2 )
 {
 	return ( p1.x*p2.y </*=*/ p2.x*p1.y ) ;
 }
 
 int
-cclk(p1,p2)
-struct	point	p1 ;
-struct	point	p2 ;
+cclk(
+struct	point	p1 ,
+struct	point	p2 )
 {
 	return ( p1.x*p2.y >/*=*/ p2.x*p1.y ) ;
 }

@@ -1,5 +1,6 @@
 #include <string.h>
 # include "structs.h"
+#include "gc2pic.h"
 
 struct	input
 {
@@ -7,11 +8,15 @@ struct	input
 	int			escaped ;
 } ;
 
+static int get_line(char *);
+static void write_line(struct  input   (*p[3])[MAXDEPTH]);
+static void conv_init(struct  input   (*p[3])[MAXDEPTH],
+    struct  input   convbuf[3][MAXWIDTH][MAXDEPTH]);
 int check(struct input *p, char *q);
 void read_line(char buf[], struct input (*p[3])[MAXDEPTH]);
 
-process(name)
-char	*name ;
+void
+process(char *name)
 {
 	struct	input	(*p[3])[MAXDEPTH] ;
 	struct	input	convbuf[3][MAXWIDTH][MAXDEPTH] ;
@@ -22,8 +27,6 @@ char	*name ;
 		pending ,
 		on ,
 	}	convert ;
-	int	i ;
-	int	j ;
 
 	if ( strcmp(name,"-") == 0 ) {
 		ft[findex] = 0;
@@ -126,9 +129,8 @@ char	*name ;
 			}
 }
 
-int
-get_line(buf)
-char	buf[] ;
+static int
+get_line(char *buf)
 {
 	int	i ;
 	int	c ;
@@ -168,6 +170,7 @@ char	buf[] ;
 				break ;
 		}
 	error("line too long\n") ;
+	return 0;
 }
 
 void
@@ -175,7 +178,6 @@ read_line(char buf[], struct input (*p[3])[MAXDEPTH])
 {
 	int		i ;
 	int		j ;
-	int		c ;
 	int		k ;
 	struct	input	(*t)[MAXDEPTH] ;
 
@@ -233,8 +235,8 @@ read_line(char buf[], struct input (*p[3])[MAXDEPTH])
 	error("internal error (no \\0 in read_line)\n") ;
 }
 
-write_line(p)
-struct	input	(*p[3])[MAXDEPTH] ;
+static void
+write_line(struct  input   (*p[3])[MAXDEPTH])
 {
 	static int	x[] =
 	{
@@ -253,13 +255,13 @@ struct	input	(*p[3])[MAXDEPTH] ;
 		char	*parts ;
 	} part_tab[] =
 	{
-		0xe7 ,	"\364\361" ,		/* horz bar */
-		'|' ,	"\356\363" ,		/* vert bar */
-		0xd4 ,	"\361\363" ,		/* upper left corner */
-		0xe4 ,	"\363\364" ,		/* upper right corner */
-		0xd3 ,	"\356\361" ,		/* lower left corner */
-		0xe3 ,	"\356\364" ,		/* lower right corner */
-		0xc9 ,	"\356\361\363\364"	/* cross */
+		{ 0xe7 ,	"\364\361" },		/* horz bar */
+		{ '|' ,	"\356\363" },		/* vert bar */
+		{ 0xd4 ,	"\361\363" },		/* upper left corner */
+		{ 0xe4 ,	"\363\364" },		/* upper right corner */
+		{ 0xd3 ,	"\356\361" },		/* lower left corner */
+		{ 0xe3 ,	"\356\364" },		/* lower right corner */
+		{ 0xc9 ,	"\356\361\363\364" }	/* cross */
 	} ;
 	int		i ;
 	int		j ;
@@ -311,7 +313,7 @@ struct	input	(*p[3])[MAXDEPTH] ;
 			}
 			if ( converted == 0 )
 			{
-				for ( i=0 ; i<NEL(part_tab) ; i++ )
+				for ( i=0 ; i < (ssize_t)NEL(part_tab) ; i++ )
 					if ( part_tab[i].charcode == input.c )
 						break ;
 				if ( i == NEL(part_tab) )
@@ -336,9 +338,9 @@ struct	input	(*p[3])[MAXDEPTH] ;
 	line_num++ ;
 }
 
-conv_init(p,convbuf)
-struct	input	(*p[3])[MAXDEPTH] ;
-struct	input	convbuf[3][MAXWIDTH][MAXDEPTH] ;
+static void
+conv_init(struct  input   (*p[3])[MAXDEPTH],
+    struct  input   convbuf[3][MAXWIDTH][MAXDEPTH])
 {
 	int	i ;
 	int	j ;

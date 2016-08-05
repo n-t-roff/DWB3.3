@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+int
 main() {	/* filter escaped 7 bit ASCII to 8 bit Latin-1 */
 #define DIGRAPH(c1,c2) (c1<<8)|c2
 	int c, d, i, c1;
@@ -142,10 +143,10 @@ main() {	/* filter escaped 7 bit ASCII to 8 bit Latin-1 */
 			else c1 = '\0';
 
 			d = DIGRAPH(c1, c);
-			for (i=0; i<NLAT; i++)
+			for (i=0; i < (signed long)NLAT; i++)
 				if (d == latin1[i]) break;
 
-			if ( i >= NLAT ) {	/* not VT200 */
+			if ( i >= (signed long)NLAT ) {	/* not VT200 */
 				putchar('\\');
 				if (c1 != '\0') {
 					putchar('(');
@@ -157,5 +158,5 @@ main() {	/* filter escaped 7 bit ASCII to 8 bit Latin-1 */
 		}
 		putchar(c);
 	}
-	exit(0);
+	return (0);
 }

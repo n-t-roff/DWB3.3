@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=latin1.mk
 
 SYSTEM=SYSV
@@ -10,7 +10,7 @@ OWNER=bin
 BINDIR=/usr/bin
 MAN1DIR=/usr/man/u_man/man1
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS)

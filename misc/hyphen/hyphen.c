@@ -8,18 +8,23 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 char b[242];
 char c[60];
 int nread = 1;
 char buf[BUFSIZ];
 
-main(argc,argv)
-int argc;
-char *argv[];
+static int get(int);
+
+int
+main(int argc, char **argv)
 {
 	int ifile,isw,k,i,j,r;
 	extern int optind;
-	int stdinflg = 0;
 
 	while ((r = getopt(argc,argv,"")) != EOF) {
 		switch (r) {
@@ -76,15 +81,16 @@ cont:	while((b[++i] = get(ifile)) != 0)
 	argc--;
 	argv++;
 	} while ( argc > 0 );
+	return 0;
 }
 /* ------------------------------------------------ */
-get(ifile)
-int ifile;
+static int
+get(int ifile)
 {
 	static char *ibuf;
 
 	if(--nread)return(*ibuf++);
-	if(nread = read(ifile,buf,BUFSIZ))
+	if((nread = read(ifile,buf,BUFSIZ)))
 		{if(nread < 0)goto err;
 		ibuf = buf;
 		return(*ibuf++);

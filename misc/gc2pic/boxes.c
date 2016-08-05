@@ -1,12 +1,17 @@
 # include "structs.h"
+#include "gc2pic.h"
 
-boxes()
+static int horz(struct	object	*p);
+static int vert(struct	object	*p);
+static int eqpt(struct	point	p, struct	point	q);
+
+void
+boxes(void)
 {
 	struct	object	*top ;
 	struct	object	*left ;
 	struct	object	*bottom ;
 	struct	object	*right ;
-	struct	object	*text ;
 
 	for ( top=Objects ; top!=NULL ; top=top->next )
 		if ( horz(top) )
@@ -37,23 +42,20 @@ boxes()
 		}
 }
 
-int
-horz(p)
-struct	object	*p ;
+static int
+horz(struct	object	*p)
 {
 	return ( p->type == LINE  &&  p->begin.y == p->end.y ) ;
 }
 
-int
-vert(p)
-struct	object	*p ;
+static int
+vert(struct	object	*p)
 {
 	return ( p->type == LINE  &&  p->begin.x == p->end.x ) ;
 }
 
-eqpt(p,q)
-struct	point	p ;
-struct	point	q ;
+static int
+eqpt(struct	point	p, struct	point	q)
 {
 	return ( p.x == q.x  &&  p.y == q.y ) ;
 }

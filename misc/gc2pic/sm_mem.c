@@ -1,9 +1,9 @@
 # include <stdio.h>
 #include <stdlib.h>
+#include "gc2pic.h"
 
 char	*
-sm_alloc(n)
-int	n ;
+sm_alloc(int n)
 {
 	char	*p ;
 	
@@ -14,9 +14,7 @@ int	n ;
 }
 
 char	*
-sm_realloc(p,n)
-char	*p ;
-int	n ;
+sm_realloc(char *p, int n)
 {
 	p = realloc(p,n) ;
 	if ( p == NULL )
@@ -24,8 +22,8 @@ int	n ;
 	return(p) ;
 }
 
-sm_free(p)
-char	*p ;
+void
+sm_free(void *p)
 {
 	free(p) ;
 }

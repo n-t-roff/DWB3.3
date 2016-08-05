@@ -1,9 +1,15 @@
 # include "structs.h"
+#include "gc2pic.h"
 
+static void draw(struct	object	*object);
+static void point(struct	point	pnt);
+static int x(int n);
+static int y(int n);
 void bounds(void);
 void revout(struct object *object);
 
-out()
+void
+out(void)
 {
 	bounds() ;
 	boxes() ;
@@ -83,13 +89,13 @@ bounds(void)
 	printf("box with .nw at (%d,%d) width %d height %d invis\n",x(min.x),y(min.y),x(max.x)-x(min.x),y(min.y)-y(max.y)) ;
 }
 
-draw(object)
-struct	object	*object ;
+static void
+draw(struct	object	*object)
 {
 	static	char	*arrow[2][2] =
 	{
-		"" ,	"-> " ,
-		"<- " ,	"<-> " ,
+		{ "" ,	"-> " },
+		{ "<- " ,	"<-> " },
 	} ;
 	int	x() ;
 	int	y() ;
@@ -146,8 +152,8 @@ struct	object	*object ;
 	}
 }
 
-point(pnt)
-struct	point	pnt ;
+static void
+point(struct	point	pnt)
 {
 	int	x() ;
 	int	y() ;
@@ -155,23 +161,22 @@ struct	point	pnt ;
 	printf("(%d,%d)",x(pnt.x),y(pnt.y)) ;
 }
 
-int
-x(n)
-int	n ;
+static int
+x(int n)
 {
 	return(n) ;
 }
 
 
-int
-y(n)
-int	n ;
+static int
+y(int n)
 {
 /*	return(2*(2*line_num-n)) ;	*/
 	return ( 2 *  -n ) ;
 }
 
-free_all()
+void
+free_all(void)
 {
 	struct	object	*object ;
 	struct	object	*next ;

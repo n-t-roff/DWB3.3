@@ -9,11 +9,12 @@ char gc2picxver[] = "@(#)main.c	4.0 12/06/85";		/* SCCS */
 */
 
 #include <stdlib.h>
+#include <string.h>
 # include "structs.h"
+#include "gc2pic.h"
 
-main(argc,argv)
-int	argc ;
-char	*argv[] ;
+int
+main(int argc, char **argv)
 {
 	int	i ;
 
@@ -32,5 +33,5 @@ char	*argv[] ;
 	else
 		for ( ; i<argc ; i++ )
 			process(argv[i]) ;
-	exit(0) ;
+	return (0) ;
 }
