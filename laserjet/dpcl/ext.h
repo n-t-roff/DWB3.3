@@ -20,9 +20,17 @@ extern char	*optarg;		/* for getopt() */
 extern int	optind;
 
 extern void	interrupt();
-extern char	*getenv();
-extern char	*tempnam();
-extern char	*strtok();
-extern double	atof();
-extern double	sqrt();
-
+int t_size(int n);
+void setsize(int n);
+void rotate(char *name);
+void out_list(char *str);
+int in_olist(int num);
+void putint(int n, FILE *fp);
+int getint(FILE *fp);
+void error(int kind, char *mesg, ...);
+void drawwig(char *);
+void drawcirc(int);
+void drawarc(int, int, int, int);
+void drawellip(int, int);
+void put1(int);
+void drawline(int dx, int dy, char *s);

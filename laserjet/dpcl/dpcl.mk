@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=dpcl.mk
 
 SYSTEM=SYSV
@@ -12,7 +12,7 @@ FONTDIR=/usr/lib/font
 MAN1DIR=/usr/man/u_man/man1
 RASTDIR=/usr/lib/raster
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS) -D$(SYSTEM)

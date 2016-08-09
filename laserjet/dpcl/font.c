@@ -11,6 +11,15 @@
 
 #include "gen.h"			/* general purpose definitions */
 #include "font.h"			/* font table definitions */
+#include "rast.h"
+#include "ext.h"
+
+static int getfont(char *, Font *);
+static void freefonts(void);
+static int findfont(char *);
+static int chadd(char *);
+static int hash(char *, int);
+static void release(void *);
 
 Font	*dwb_mount[MAXFONTS+1];		/* mount table - pointers into fonts[] */
 Font	fonts[MAXFONTS+2];		/* font data - guarantee one empty slot */
@@ -34,9 +43,8 @@ extern int	nfonts;
 
 /*****************************************************************************/
 
-getdesc(path)
-
-    char	*path;
+int
+getdesc(char *path)
 
 {
 
@@ -84,17 +92,15 @@ getdesc(path)
 
 /*****************************************************************************/
 
-getfont(path, fpos)
-
-    char	*path;
-    Font	*fpos;
+static int
+getfont(char *path, Font *fpos)
 
 {
 
     FILE	*fin;
     Chwid	chtemp[MAXCH];
     static	Chwid chinit;
-    int		i, nw, n, wid, code;
+    int		i, nw = 0, n, wid, code;
     char	buf[150], ch[20], s1[10], s2[10], s3[10], cmd[30];
 
 
@@ -202,10 +208,8 @@ getfont(path, fpos)
 
 /*****************************************************************************/
 
-mountfont(path, m)
-
-    char	*path;
-    int		m;
+int
+mountfont(char *path, int m)
 
 {
 
@@ -239,7 +243,8 @@ mountfont(path, m)
 
 /*****************************************************************************/
 
-freefonts()
+static void
+freefonts(void)
 
 {
 
@@ -263,13 +268,12 @@ freefonts()
 
 /*****************************************************************************/
 
-findfont(path)
-
-    char	*path;
+static int
+findfont(char *path)
 
 {
 
-    register	n;
+    int	n;
 
 /*
  *
@@ -287,9 +291,8 @@ findfont(path)
 
 /*****************************************************************************/
 
-mounted(m)
-
-    int		m;
+int
+mounted(int m)
 
 {
 
@@ -305,10 +308,8 @@ mounted(m)
 
 /*****************************************************************************/
 
-onfont(c, m)
-
-    int		c;
-    int		m;
+int
+onfont(int c, int m)
 
 {
 
@@ -343,10 +344,9 @@ onfont(c, m)
 
 /*****************************************************************************/
 
-chwidth(n, m)
-
-    int		n;
-    int		m;
+#if 0
+static int
+chwidth(int n, int m)
 
 {
 
@@ -360,13 +360,13 @@ chwidth(n, m)
     return(dwb_mount[m]->wp[n].wid);
 
 }   /* End of chwidth */
+#endif
 
 /*****************************************************************************/
 
-chcode(n, m)
-
-    int		n;
-    int		m;
+#if 0
+static int
+chcode(int n, int m)
 
 {
 
@@ -380,16 +380,16 @@ chcode(n, m)
     return(dwb_mount[m]->wp[n].code);
 
 }   /* End of chcode */
+#endif
 
 /*****************************************************************************/
 
-chindex(s)
-
-    char	*s;
+int
+chindex(char *s)
 
 {
 
-    register	i;
+    int	i;
 
 /*
  *
@@ -407,13 +407,12 @@ chindex(s)
 
 /*****************************************************************************/
 
-chadd(s)
-
-    char	*s;
+static int
+chadd(char *s)
 
 {
 
-    register	i;
+    int	i;
 
 /*
  *
@@ -436,9 +435,8 @@ chadd(s)
 
 /*****************************************************************************/
 
-char *chname(n)
-
-    int		n;
+char *
+chname(int n)
 
 {
 
@@ -454,14 +452,12 @@ char *chname(n)
 
 /*****************************************************************************/
 
-hash(s, l)
-
-    char	*s;
-    int		l;
+static int
+hash(char *s, int l)
 
 {
 
-    register	i;
+    int	i;
 
 /*
  *
@@ -478,9 +474,8 @@ hash(s, l)
 
 /*****************************************************************************/
 
-char *strsave(s)
-
-    char	*s;
+char *
+strsave(char *s)
 
 {
 
@@ -502,9 +497,8 @@ char *strsave(s)
 
 /*****************************************************************************/
 
-char *allocate(count)
-
-    int		count;
+char *
+allocate(int count)
 
 {
 
@@ -528,9 +522,8 @@ char *allocate(count)
 
 /*****************************************************************************/
 
-release(ptr)
-
-    char	*ptr;
+static void
+release(void *ptr)
 
 {
 
@@ -547,9 +540,9 @@ release(ptr)
 
 /*****************************************************************************/
 
-dumpmount(m)
-
-    int		m;
+#if 0
+static void
+dumpmount(int m)
 
 {
 
@@ -564,12 +557,13 @@ dumpmount(m)
     else fprintf(stderr, "no font mounted at %d\n", m);
 
 }   /* End of dumpmount */
+#endif
 
 /*****************************************************************************/
 
-dumpfont(n)
-
-    int		n;
+#if 0
+static void
+dumpfont(int n)
 
 {
 
@@ -616,6 +610,7 @@ dumpfont(n)
     putc('\n', stderr);
 
 }   /* End of dumpfont */
+#endif
 
 /*****************************************************************************/
 

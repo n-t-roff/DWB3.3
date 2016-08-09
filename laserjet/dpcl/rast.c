@@ -13,6 +13,8 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 #include "ext.h"			/* external variable definitions */
 #include "gen.h"			/* definitions used by everyone */
@@ -27,7 +29,7 @@ int		cur_fam = 0;		/* family number we're using right now */
 int		last_fam = MAXFAMILY+1;	/* last one we told printer about */
 
 int		maxrast = 0;		/* number of RASTERLIST entries */
-Sizedata	sizedata[MAXFONTS];	/* stuff read from RASTERLIST */
+Sizedata	sizedata[RMAXFONTS];	/* stuff read from RASTERLIST */
 
 extern char	*rastdir;
 extern char	*rastdev;
@@ -36,14 +38,17 @@ extern char	*mode;
 extern FILE	*tf;
 extern int	fast;
 
+static int getfamdata(char *, int);
+static void readrastfile(char *, int);
+static void getoffsets(Rastdata *);
+static int freerast(int);
+static int mapsize(char *, int);
 extern char	*rastalloc();
 
 /*****************************************************************************/
 
-getfamdata(f, s)
-
-    char	*f;
-    int		s;
+static int
+getfamdata(char *f, int s)
 
 {
 
@@ -66,14 +71,11 @@ getfamdata(f, s)
 
 /*****************************************************************************/
 
-getrastdata(f, s)
-
-    char	*f;
-    int		s;
+void
+getrastdata(char *f, int s)
 
 {
 
-    int		i;
     int		first = FALSE;
 
 /*
@@ -111,10 +113,8 @@ getrastdata(f, s)
 
 /*****************************************************************************/
 
-readrastfile(f, s)
-
-    char	*f;
-    int		s;
+static void
+readrastfile(char *f, int s)
 
 {
 
@@ -187,9 +187,8 @@ readrastfile(f, s)
 
 /*****************************************************************************/
 
-getoffsets(f)
-
-    Rastdata	*f;
+static void
+getoffsets(Rastdata *f)
 
 {
 
@@ -197,7 +196,6 @@ getoffsets(f)
     char	*last;
     int		num;
     int		bytes;
-int    i;
 
 /*
  *
@@ -225,9 +223,10 @@ int    i;
 
 /*****************************************************************************/
 
-char *rastalloc(size)
+char *
+rastalloc(unsigned size)
 
-    unsigned	size;			/* allocate this many bytes */
+    /* unsigned	size;			/ * allocate this many bytes */
 
 {
 
@@ -248,9 +247,10 @@ char *rastalloc(size)
 
 /*****************************************************************************/
 
-freerast(count)
+static int
+freerast(int count)
 
-    int		count;			/* max number of calls to free() */
+    /* int		count;			/ * max number of calls to free() */
 
 {
 
@@ -277,7 +277,8 @@ freerast(count)
 
 /*****************************************************************************/
 
-rasterlist()
+void
+rasterlist(void)
 
 {
 
@@ -310,7 +311,8 @@ rasterlist()
 
 /*****************************************************************************/
 
-setfamily()
+void
+setfamily(void)
 
 {
 
@@ -329,10 +331,8 @@ setfamily()
 
 /*****************************************************************************/
 
-mapsize(f, s)
-
-    char	*f;
-    int		s;
+static int
+mapsize(char *f, int s)
 
 {
 
@@ -402,10 +402,8 @@ download(int c)
 
 /*****************************************************************************/
 
-checkbit(p, n)
-
-    char	*p;
-    int		n;
+int
+checkbit(char *p, int n)
 
 {
 
@@ -421,10 +419,8 @@ checkbit(p, n)
 
 /*****************************************************************************/
 
-setbit(p, n)
-
-    char	*p;
-    int		n;
+void
+setbit(char *p, int n)
 
 {
 
@@ -440,10 +436,8 @@ setbit(p, n)
 
 /*****************************************************************************/
 
-dumpbitmap(bptr, height, width, rwid)
-
-    char	*bptr;
-    int		height, width, rwid;
+void
+dumpbitmap(char *bptr, int height, int width, int rwid)
 
 {
 

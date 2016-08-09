@@ -22,7 +22,7 @@
 
 #define L_FNAME		10		/* longest allowed font name */
 #define MAX_SIZES	20		/* only used in Sizedata */
-#define MAXFONTS	60		/* slots for RASTERLIST data */
+#define RMAXFONTS	60		/* slots for RASTERLIST data */
 
 /*
  *
@@ -67,3 +67,10 @@ extern int		next_fam;	/* next available family number */
 extern int		cur_fam;	/* family we're using right now */
 extern int		last_fam;	/* last family we told printer about */
 
+void getrastdata(char *, int);
+void rasterlist(void);
+void setfamily(void);
+int checkbit(char *, int);
+void setbit(char *, int);
+void dumpbitmap(char *, int, int, int);
+void download(int);

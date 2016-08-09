@@ -1,8 +1,10 @@
 /*      @(#)draw.c	1.1     */
 #include	<stdio.h>
 #include	<math.h>
+#include	<stdlib.h>
 
 #include	"motion.h"
+#include	"ext.h"
 
 #define	PI	3.141592654
 
@@ -21,6 +23,11 @@ int	maxdots	= 32000;	/* maximum number of dots in an object */
 #define	min(x,y)	((x) < (y) ? (x) : (y))
 #define	arcmove(x,y)	{ hgoto(x); vmot(-vpos-(y)); }
 
+static double dist(int x1, int y1, int x2, int y2);
+static void conicarc(int x, int y, int x0, int y0, int x1, int y1, int a,
+    int b);
+static void putdot(int x, int y);
+
 /* draw line from here to dx, dy using s */
 void
 drawline(int dx, int dy, char *s)
@@ -30,9 +37,10 @@ drawline(int dx, int dy, char *s)
 	int i, numdots;
 	int dirmot, perp;
 	int motincr, perpincr;
-	int ohpos, ovpos, osize, ofont;
+	int ohpos, ovpos, osize;
 	float incrway;
 
+	(void)s;
 	osize = size;
 	setsize(t_size(pstab[osize-1] / drawsize));
 	ohpos = hpos;
@@ -101,19 +109,19 @@ drawline(int dx, int dy, char *s)
 	setsize(osize);
 }
 
-drawwig(s)	/* draw wiggly line */
-	char *s;
+void
+drawwig(char *s)	/* draw wiggly line */
 {
 	int x[100], y[100], xp, yp, pxp, pyp;
 	float t1, t2, t3, w;
 	int i, j, numdots, N;
-	int osize, ofont;
+	int osize;
 	char temp[50], *p, *getstr();
 
 	osize = size;
 	setsize(t_size(pstab[osize-1] / drawsize));
 	p = s;
-	for (N = 2; (p=getstr(p,temp)) != NULL && N < sizeof(x)/sizeof(x[0]); N++) {
+	for (N = 2; (p=getstr(p,temp)) != NULL && N < (ssize_t)(sizeof(x)/sizeof(x[0])); N++) {
 		x[N] = atoi(temp);
 		p = getstr(p, temp);
 		y[N] = atoi(temp);
@@ -152,8 +160,8 @@ drawwig(s)	/* draw wiggly line */
 	setsize(osize);
 }
 
-char *getstr(p, temp)	/* copy next non-blank string from p to temp, update p */
-char *p, *temp;
+char *
+getstr(char *p, char *temp)	/* copy next non-blank string from p to temp, update p */
 {
 	while (*p == ' ' || *p == '\t' || *p == '\n')
 		p++;
@@ -167,7 +175,8 @@ char *p, *temp;
 	return(p);
 }
 
-drawcirc(d)
+void
+drawcirc(int d)
 {
 	int xc, yc;
 
@@ -178,7 +187,8 @@ drawcirc(d)
 	vgoto(yc);
 }
 
-dist(x1, y1, x2, y2)	/* integer distance from x1,y1 to x2,y2 */
+static double
+dist(int x1, int y1, int x2, int y2)	/* integer distance from x1,y1 to x2,y2 */
 {
 	float dx, dy;
 
@@ -187,7 +197,8 @@ dist(x1, y1, x2, y2)	/* integer distance from x1,y1 to x2,y2 */
 	return sqrt(dx*dx + dy*dy) + 0.5;
 }
 
-drawarc(dx1, dy1, dx2, dy2)
+void
+drawarc(int dx1, int dy1, int dx2, int dy2)
 {
 	int x0, y0, x2, y2, r;
 
@@ -199,7 +210,8 @@ drawarc(dx1, dy1, dx2, dy2)
 	conicarc(x0, -y0, hpos, -vpos, x2, -y2, r, r);
 }
 
-drawellip(a, b)
+void
+drawellip(int a, int b)
 {
 	int xc, yc;
 
@@ -212,13 +224,14 @@ drawellip(a, b)
 
 #define sqr(x) (long int)(x)*(x)
 
-conicarc(x, y, x0, y0, x1, y1, a, b)
+static void
+conicarc(int x, int y, int x0, int y0, int x1, int y1, int a, int b)
 {
 	/* based on Bresenham, CACM, Feb 77, pp 102-3 */
 	/* by Chris Van Wyk */
 	/* capitalized vars are an internal reference frame */
 	long dotcount = 0;
-	int osize, ofont;
+	int osize;
 	int	xs, ys, xt, yt, Xs, Ys, qs, Xt, Yt, qt,
 		M1x, M1y, M2x, M2y, M3x, M3y,
 		Q, move, Xc, Yc;
@@ -420,7 +433,8 @@ conicarc(x, y, x0, y0, x1, y1, a, b)
 	drawline((int)xc-ox1,(int)yc-oy1,".");
 }
 
-putdot(x, y)
+static void
+putdot(int x, int y)
 {
 	arcmove(x, y);
 	put1(drawdot);

@@ -11,6 +11,7 @@
 #include "gen.h"			/* a few general definitions */
 #include "ext.h"			/* external variable definitions */
 #include "path.h"			/* just for temp file directory */
+#include "rast.h"
 
 char	*obptr = NULL;			/* old and */
 char	*bptr = NULL;			/* new pointers to character bitmaps */
@@ -18,9 +19,10 @@ int	available = -1;			/* bytes we've currently got */
 
 /*****************************************************************************/
 
-rotate(name)
+void
+rotate(char *name)
 
-    char	*name;			/* pathname of the portrait raster file */
+    /* char	*name;			/ * pathname of the portrait raster file */
 
 {
 

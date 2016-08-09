@@ -8,18 +8,21 @@
 #include <ctype.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <stdarg.h>
+#include <unistd.h>
 
 #include "gen.h"			/* a few general purpose definitions */
 #include "ext.h"			/* external variable declarations */
+
+static int str_convert(char **str, int err);
 
 int	nolist = 0;			/* number of specified ranges */
 int	olist[50];			/* processing range pairs */
 
 /*****************************************************************************/
 
-out_list(str)
-
-    char	*str;
+void
+out_list(char *str)
 
 {
 
@@ -32,7 +35,7 @@ out_list(str)
  *
  */
 
-    while ( *str && nolist < sizeof(olist) - 2 ) {
+    while ( *str && nolist < (ssize_t)sizeof(olist) - 2 ) {
 	start = stop = str_convert(&str, 0);
 
 	if ( *str == '-' && *str++ )
@@ -53,9 +56,8 @@ out_list(str)
 
 /*****************************************************************************/
 
-in_olist(num)
-
-    int		num;
+int
+in_olist(int num)
 
 {
 
@@ -81,6 +83,7 @@ in_olist(num)
 
 /*****************************************************************************/
 
+#if 0
 cat(file)
 
     char	*file;
@@ -111,13 +114,12 @@ cat(file)
     return(TRUE);
 
 }   /* End of cat */
+#endif
 
 /*****************************************************************************/
 
-putint(n, fp)
-
-    int		n;
-    FILE	*fp;
+void
+putint(int n, FILE *fp)
 
 {
 
@@ -135,9 +137,8 @@ putint(n, fp)
 
 /*****************************************************************************/
 
-getint(fp)
-
-    FILE	*fp;
+int
+getint(FILE *fp)
 
 {
 
@@ -162,10 +163,8 @@ getint(fp)
 
 /*****************************************************************************/
 
-str_convert(str, err)
-
-    char	**str;
-    int		err;
+static int
+str_convert(char **str, int err)
 
 {
 
@@ -191,11 +190,8 @@ str_convert(str, err)
 
 /*****************************************************************************/
 
-error(kind, mesg, a1, a2, a3)
-
-    int		kind;
-    char	*mesg;
-    unsigned	a1, a2, a3;
+void
+error(int kind, char *mesg, ...)
 
 {
 
@@ -206,14 +202,17 @@ error(kind, mesg, a1, a2, a3)
  * and kind is FATAL.
  *
  */
+    va_list ap;
 
     if ( mesg != NULL && *mesg != '\0' ) {
 	fprintf(stderr, "%s: ", prog_name);
-	fprintf(stderr, mesg, a1, a2, a3);
+	va_start(ap, mesg);
+	vfprintf(stderr, mesg, ap);
+	va_end(ap);
 	if ( lineno > 0 )
-	    fprintf(stderr, " (line %d)", lineno);
+	    fprintf(stderr, " (line %ld)", lineno);
 	if ( position > 0 )
-	    fprintf(stderr, " (near byte %d)", position);
+	    fprintf(stderr, " (near byte %ld)", position);
 	putc('\n', stderr);
     }	/* End if */
 
@@ -227,9 +226,7 @@ error(kind, mesg, a1, a2, a3)
 
 /*****************************************************************************/
 
-void interrupt(sig)
-
-    int		sig;
+void interrupt(int sig)
 
 {
 
@@ -238,6 +235,7 @@ void interrupt(sig)
  * Called when we get a signal that we're supposed to catch.
  *
  */
+    (void)sig;
 
     if ( temp_file != NULL )
 	unlink(temp_file);

@@ -55,6 +55,7 @@
 #include	<time.h>
 #include        <stdlib.h>
 #include        <string.h>
+#include	<unistd.h>
 
 #include	"gen.h"			/* general purpose definitions */
 #include	"path.h"		/* a few important pathnames */
@@ -62,8 +63,27 @@
 #include	"font.h"		/* font descriptions */
 #include	"dpcl.h"		/* a few definitions just used here */
 #include	"motion.h"		/* positioning macros */
+#include	"rast.h"
 
-void put1(int c);
+static void init_signals(void);
+static void options(void);
+static void setup(void);
+static void arguments(void);
+static void done(void);
+static void account(void);
+static void conv(FILE *fp);
+static void devcntrl(FILE *fp);
+static void loadfont(int m, char *f, char *dir);
+static void loadspecial(void);
+static void t_init(void);
+static int t_font(char *s);
+static void t_hmove(void);
+static void t_vmove(void);
+static void setfont(int m);
+static void t_sf(void);
+static void oput(int c);
+static void redirect(int pg);
+static void t_page(int pg);
 
 char	*fontdir = FONTDIR;		/* font table directories */
 char	*rastdir = RASTDIR;		/* host resident raster file directories */
@@ -127,10 +147,8 @@ extern int	nsizes;			/* number of sizes in that list */
 
 /*****************************************************************************/
 
-main(agc, agv)
-
-    int		agc;
-    char	*agv[];
+int
+main(int agc, char **agv)
 
 {
 
@@ -158,13 +176,14 @@ main(agc, agv)
     done();				/* clean up */
     account();				/* job accounting data */
 
-    exit(x_stat);
+    return (x_stat);
 
 }   /* End of main */
 
 /*****************************************************************************/
 
-init_signals()
+static void
+init_signals(void)
 
 {
 
@@ -189,7 +208,8 @@ init_signals()
 
 /*****************************************************************************/
 
-options()
+static void
+options(void)
 
 {
 
@@ -304,7 +324,8 @@ options()
 
 /*****************************************************************************/
 
-setup()
+static void
+setup(void)
 
 {
 
@@ -327,7 +348,8 @@ setup()
 
 /*****************************************************************************/
 
-arguments()
+static void
+arguments(void)
 
 {
 
@@ -358,7 +380,8 @@ arguments()
 
 /*****************************************************************************/
 
-done()
+static void
+done(void)
 
 {
 
@@ -378,7 +401,8 @@ done()
 
 /*****************************************************************************/
 
-account()
+static void
+account(void)
 
 {
 
@@ -395,9 +419,8 @@ account()
 
 /*****************************************************************************/
 
-conv(fp)
-
-    register FILE	*fp;
+static void
+conv(FILE *fp)
 
 {
 
@@ -451,15 +474,17 @@ conv(fp)
 		    if ( size != lastsize )
 			t_sf();
 		    switch ((c=getc(fp))) {
+			char ch;
 			case 'p':	/* draw a path */
 			    while (fscanf(fp, "%d %d", &n, &m) == 2)
-				drawline(n, m);
+				drawline(n, m, "");
 			    lineno++;
 			    break;
 
 			case 'l':	/* draw a line */
-			    fscanf(fp, "%d %d %c", &n, &m, &n1);
-			    drawline(n, m);
+			    fscanf(fp, "%d %d %c", &n, &m, &ch);
+			    n1 = ch;
+			    drawline(n, m, "");
 			    break;
 
 			case 'c':	/* circle */
@@ -563,9 +588,8 @@ conv(fp)
 
 /*****************************************************************************/
 
-devcntrl(fp)
-
-    FILE	*fp;
+static void
+devcntrl(FILE *fp)
 
 {
 
@@ -624,11 +648,8 @@ devcntrl(fp)
 
 /*****************************************************************************/
 
-loadfont(m, f, dir)
-
-    int		m;
-    char	*f;
-    char	*dir;
+static void
+loadfont(int m, char *f, char *dir)
 
 {
 
@@ -636,8 +657,8 @@ loadfont(m, f, dir)
 
 /*
  *
- * Load position m with font f. Font file pathname is *fontdir/dev*realdev/*f
- * or *dir/*f, if dir isn't empty. Use mapfont() to replace the missing font
+ * Load position m with font f. Font file pathname is *fontdir/dev*realdev/\*f
+ * or *dir/\*f, if dir isn't empty. Use mapfont() to replace the missing font
  * if we're emulating another device, dir is empty, and the first mount fails.
  *
  */
@@ -701,7 +722,8 @@ char *mapfont(name)
 
 /*****************************************************************************/
 
-loadspecial()
+static void
+loadspecial(void)
 
 {
 
@@ -717,7 +739,8 @@ loadspecial()
 
 /*****************************************************************************/
 
-t_init()
+static void
+t_init(void)
 
 {
 
@@ -751,13 +774,14 @@ t_init()
 
 /*****************************************************************************/
 
-t_page(pg)
+static void
+t_page(int pg)
 
-    int		pg;			/* troff's current page number */
+    /* int		pg;			/ * troff's current page number */
 
 {
 
-    static int	lastpg = 0;		/* last one we started - for PAGE */
+    /* static int	lastpg = 0;		/ * last one we started - for PAGE */
 
 /*
  *
@@ -776,15 +800,16 @@ t_page(pg)
     t_sf();
 
     seenpage = TRUE;
-    lastpg = pg;
+    /*lastpg = pg;*/
 
 }   /* End of t_page */
 
 /*****************************************************************************/
 
-t_size(n)
+int
+t_size(int n)
 
-    int		n;			/* convert this point size */
+    /* int		n;			/ * convert this point size */
 
 {
 
@@ -811,9 +836,8 @@ t_size(n)
 
 /*****************************************************************************/
 
-t_font(s)
-
-    char	*s;
+static int
+t_font(char *s)
 
 {
 
@@ -844,7 +868,8 @@ t_font(s)
 
 /*****************************************************************************/
 
-t_hmove()
+static void
+t_hmove(void)
 
 {
 
@@ -866,7 +891,8 @@ t_hmove()
 
 /*****************************************************************************/
 
-t_vmove()
+static void
+t_vmove(void)
 
 {
 
@@ -888,9 +914,8 @@ t_vmove()
 
 /*****************************************************************************/
 
-setsize(n)
-
-    int		n;
+void
+setsize(int n)
 
 {
 
@@ -907,9 +932,8 @@ setsize(n)
 
 /*****************************************************************************/
 
-setfont(m)
-
-    int		m;
+static void
+setfont(int m)
 
 {
 
@@ -928,7 +952,8 @@ setfont(m)
 
 /*****************************************************************************/
 
-t_sf()
+static void
+t_sf(void)
 
 {
 
@@ -993,9 +1018,8 @@ put1(int c)
 
 /*****************************************************************************/
 
-oput(c)
-
-    int		c;
+static void
+oput(int c)
 
 {
 
@@ -1025,9 +1049,8 @@ oput(c)
 
 /*****************************************************************************/
 
-redirect(pg)
-
-    int		pg;
+static void
+redirect(int pg)
 
 {
 
