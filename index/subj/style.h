@@ -57,4 +57,7 @@ extern int	tverbc;
 extern int	adj;
 #define MAXPAR 20
 extern int	leng[];
-extern sentno;
+extern int	sentno;
+
+void outp(void);
+int scan(int, int, int);

@@ -42,6 +42,9 @@
 #define PUTSUBJ(ptr)  for (i = 0; i < next[curr]; i++) putchar (part[ptr][i])
 #define ERROR1	      fputs("subject too long, is being truncated", stderr)
 
+void writesubj (int type);
+void reset_ptrs (void);
+
 char	part[2][250];		/*buffer to store two parts of a subject*/
 int	next[2];		/*next avail position in each half of buffer*/
 int	curr = 1;		/*ptrs to current and prev halves of buffer*/
@@ -134,9 +137,8 @@ adj[\t][ ]*			{first = ADJ;
 [\n]				{;}
 .				{;}
 %%
-writesubj (type)
-
-int type;
+void
+writesubj (int type)
 {
 	int	i;
 
@@ -177,8 +179,8 @@ int type;
 		}
 }
 
-
-reset_ptrs ()
+void
+reset_ptrs (void)
 {
 	terms = 0;
 	prev = curr;

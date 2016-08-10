@@ -29,6 +29,7 @@
 #include "edict.h"
 #define OUT1(c) putchar(c); putchar(':'); for(i=yyleng-1;i>=0;)putchar(yytext[i--])
 #define POUT1(c) putchar(c); putchar(':'); for(i=yyleng-1;i>0;)putchar(yytext[i--])
+static int look(char (*f)(), int n, int nc);
 int i;
 int nomin = 0;
 int NOCAPS = 0;		/*if set, all caps mapped to lower, plurals stripped*/
@@ -218,10 +219,9 @@ L	[a-zA-Z-]
 	printf("%s",yytext);
 	}
 %%
-look(f,n,nc)
-char (*f)();
-int n;
-char nc;
+
+static int
+look(char (*f)(), int n, int nc)
 {
 	int in,nn,ret;
 	char sch;
@@ -256,7 +256,9 @@ char nc;
 	}
 	return(ret);
 }
-yywrap(){
+
+int
+yywrap(void){
 	printf(";%d\n",nomin);
 	return(1);
 }

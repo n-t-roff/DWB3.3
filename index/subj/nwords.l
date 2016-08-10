@@ -33,6 +33,11 @@
 #include "dict.h"
 #include "ydict.h"
 #include "abbrev.h"
+
+static int ahead(void);
+static void pos(int flg);
+static void look(char (*f)(), int n, int cc);
+
 char nt[]  = "D:n't";
 char qs[]  = "c:'s";
 char fin[]  = "E:.";
@@ -454,10 +459,8 @@ wd:
 /*	fprintf(stderr,"nwords funny char: %c\n",yytext[0])*/ ;
 	}
 %%
-look(f,n,cc)
-char (*f)();
-int n;
-char cc;
+static void
+look(char (*f)(), int n, int cc)
 {
 	int nn;
 	char  save;
@@ -472,7 +475,10 @@ char cc;
 		OUT1(cc);
 	}
 }
-pos(flg){
+
+static void
+pos(int flg)
+{
 	int ii,j;
 	if(flg == 1)yytext[0] = tolower(yytext[0]);
 	for(ii=yyleng-1;yytext[ii] != '\''; ii--);
@@ -488,11 +494,11 @@ pos(flg){
 		OUT1(POS);
 	}
 }
+
 char	*filename="-";
 
-main(argc,argv)
-int	argc;
-char	*argv[];
+int
+main(int argc, char **argv)
 {
 	register int rc=0;
 	putchar(':'); putchar('\n');
@@ -517,7 +523,10 @@ char	*argv[];
 	}
 	return(rc);
 }
-ahead(){
+
+static int
+ahead(void)
+{
 	register int c;
 	if(isalnum((c=input()))){
 		yytext[yyleng++] = '.';

@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=subj.mk
 
 SYSTEM=SYSV
@@ -11,8 +11,9 @@ BINDIR=/usr/bin
 LIBDIR=/usr/lib/dwb
 MAN1DIR=/usr/man/u_man/man1
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
+LIB_LEX=-lfl
 
 CFLAGS=$(CFLGS)
 LDFLAGS=$(LDFLGS)

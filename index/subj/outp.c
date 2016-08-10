@@ -21,11 +21,11 @@ char	*names[] = {
 extern int	barebones;
 
 void
-outp()
+outp(void)
 {
 	struct ss *st;
 	char	*ssp;
-	char	*spart, ff;
+	char	*spart/*, ff*/;
 	int	index, lverbc;
 	int	nn, sc, f, kk, comp, begsc;
 	int	conjf, verbf, lpas, bflg, lexp, olvb;
@@ -292,7 +292,7 @@ outp()
 			}
 		}
 		if (f) {
-			ff = sentp->cc;
+			/*ff = sentp->cc;*/
 			f = 0;
 		}
 		sentp++;

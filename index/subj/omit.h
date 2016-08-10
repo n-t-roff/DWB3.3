@@ -1,0 +1,1 @@
+int omit (char *word);

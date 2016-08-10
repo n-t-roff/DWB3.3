@@ -239,13 +239,13 @@ fragment:
 	printf("%s",&yytext[1]);
 	}
 %%
-yywrap(){
+int
+yywrap(void){
 	int ii;
 	int ml,mg,lsum,gsum;
 	float aindex, avl, avw;
 	float cindex,kindex,findex,fgrad;
 	float syl, avsy, adjs,snonf;
-	FILE *io;
 
 	if(style){
 	if(numwds == 0 || numsent == 0)exit(0);
@@ -271,6 +271,8 @@ yywrap(){
 	printf("	no. questions %d no. imperatives %d\n",qcount,icount);
 	if(numnonf != 0){
 		snonf = (float)(letnonf)/(float)(numnonf);
+	} else {
+		snonf = 0;
 	}
 	printf("	no. content wds %ld  %4.1f%%   av leng %4.2f\n",numnonf,(float)(numnonf)*100/numwds,snonf);
 	mg = avw + 10.5;
@@ -328,28 +330,28 @@ beg[0],beg[7],beg[6],beg[3],beg[8],sperc(ii));
 	return(1);
 }
 float
-wperc(a)
+wperc(int a)
 {
 	return((float)(a)*100/numwds);
 }
 float
-sperc(a)
+sperc(int a)
 {
 	return((float)(a)*100/numsent);
 }
 float
-typersent(a)
+typersent(int a)
 {
 return((float)(a)/numsent);
 }
 float
-vperc(a)
+vperc(int a)
 {
 	if(tverbc == 0)return(0);
 	return((float)(a)*100/tverbc);
 }
-main(argc,argv)
-char **argv;
+int
+main(int argc, char **argv)
 {
 	while(--argc > 0 && (++argv)[0][0] == '-' ){
 		switch(argv[0][1]){
@@ -423,4 +425,5 @@ char **argv;
 			printf(" %d",leng[i]);
 		printf("\"\n");
 	}
+	return 0;
 }

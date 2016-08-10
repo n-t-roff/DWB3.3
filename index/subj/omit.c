@@ -15,9 +15,8 @@
 /*given a string, omit checks to see if it is on its list of words and
   returns the integer value TRUE or FALSE*/
 
-omit (word)
-
-char	*word;
+int
+omit (char *word)
 
 #define	 longest  8				/*length of longest omit word*/
 {

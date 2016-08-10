@@ -30,6 +30,9 @@
 #define RMQUOTES(s,l)  if (*s == '\"')  {int i; for(i=l-1; *(s+i)=='\"' && i>0;\
   i--)  *(s+i) = ' '; *s = ' ';}
 
+void skip (int type);
+void italic_arg(void);
+
 FILE	*hfile, *sfile, *cfile;
 int	preced_blnk = FALSE;
 char	state = 'O';
@@ -239,9 +242,10 @@ char	chr;
 /*skip skips all text between matching macro calls, such as .FS to .FE*/
 /*It must be called when the last character read was a newline        */
 
-skip (type)
+void
+skip (int type)
 
-char	type;			/*type of macro call being skipped*/
+/* char	type;			/ *type of macro call being skipped*/
 {
 	char	ch;
 	char	ch2 = 'E';	/*second character of closing macro*/
@@ -277,7 +281,8 @@ char	type;			/*type of macro call being skipped*/
 /*Note, the max. argument to .I (or .B) is expected to be less than 80	  */
 /*characters.								  */
 
-italic_arg()
+void
+italic_arg(void)
 {
 	int	end = FALSE;
 	int	openquote = FALSE;
@@ -323,11 +328,8 @@ if (yyleng - 3 < 80)
 
 char	*filename = "-";
 
-main (argc, argv)
-
-int	argc;
-char	*argv[];
-
+int
+main (int argc, char **argv)
 {
 	int	rc = 0;
 	BEGIN TX;

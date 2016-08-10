@@ -15,9 +15,9 @@ extern struct ss {
 	int	leng;
 } sent[SLENG];
 extern struct ss *sentp;
-extern comma, j, i;
+extern int	comma, j, i;
 extern int	nsleng;
-extern question;
+extern int	question;
 extern int	must;
 extern int	be;
 extern int	sav;

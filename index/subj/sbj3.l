@@ -29,8 +29,13 @@
 #include <string.h>
 #include <stdio.h>
 #include "cnst.h"
+#include "omit.h"
 
 #define ERROR1	      fputs("subject too long, is being truncated", stderr)
+
+void storeterm(void);
+void writesubj (void);
+void reset_ptrs (void);
 
 char	subj[MAXCHS];		/*buffer to store  a subject*/
 int	next = 0;		/*next avail position in the buffer*/
@@ -69,7 +74,8 @@ adj[\t][ ]*			{prev = ADJ;
 /*unless the current word is found on the list of words to be omitted from
 subjects, storeterm stores the word in the subject buffer*/
 
-storeterm()
+void
+storeterm(void)
 {	if (omit(yytext) == FALSE)
 		{if (next + yyleng >= MAXCHS)
 			{writesubj();
@@ -89,8 +95,8 @@ storeterm()
 		}
 }
 
-
-writesubj ()
+void
+writesubj (void)
 
 {
 	int	i;
@@ -102,8 +108,8 @@ writesubj ()
 	putchar ('\n');
 }
 
-
-reset_ptrs ()
+void
+reset_ptrs (void)
 {
 	terms = 0;
 	next = 0;

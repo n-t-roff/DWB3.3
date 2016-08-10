@@ -18,16 +18,19 @@
 #define isnoun(c)	(c == NOUN || c == NOUN_VERB || c == NV_PL || c == UNK || c == PNOUN)
 #define nounnom(c)	(c == NOUN || c == NOM)
 
-void getv2(char ce);
+static int getv(int si, int ce);
+static void getv2(int ce);
+static int getnoun(int k, int ce);
+static int who(int kk, int ce);
 
 char	lastc, nextc;
 int	savsub;
-scan(si, ce, command)	/*scan a phrase */
-int	si;
-char	ce;
+
+int
+scan(int si, int ce, int command)	/*scan a phrase */
 {
 	int	savi;
-	char	c;
+	int	c;
 	i = si;
 	if (command == 1)
 		subty = PLURAL;
@@ -402,13 +405,11 @@ sdone:
 	}
 }
 
-
-getv(si, ce)
-int	si;
-char	ce;
+static int
+getv(int si, int ce)
 {
 	int	conj;
-	char	c;
+	int	c;
 	int	ik;
 	must = 0;
 	bflg = 0;
@@ -511,12 +512,11 @@ vdone:
 	return(0);
 }
 
-void
-getv2(ce)
-char	ce;
+static void
+getv2(int ce)
 {
 	int	vflg;
-	char	c;
+	int	c;
 	vflg = 0;
 	while (((c = sent[++j].cc) != ce) && (c != END)) {
 		switch (c) {
@@ -591,11 +591,10 @@ char	ce;
 	j -= 1;
 }
 
-
-getnoun(k, ce)
-int	k, ce;
+static int
+getnoun(int k, int ce)
 {
-	char	c;
+	int	c;
 	int	st, t, nextst;
 	int	rep;
 	int	t1, tt;
@@ -993,9 +992,8 @@ getdef:
 	return(st);
 }
 
-
-who(kk, ce)
-int	kk, ce;
+static int
+who(int kk, int ce)
 {
 	char	c;
 	sent[kk].cc = PRONP;
