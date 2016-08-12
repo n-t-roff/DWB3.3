@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=ptx.mk
 
 SYSTEM=SYSV
@@ -12,7 +12,7 @@ LIBDIR=/usr/lib/dwb
 MAN1DIR=/usr/man/u_man/man1
 TMACDIR=/usr/lib/tmac
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS)

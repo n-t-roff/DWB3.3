@@ -33,6 +33,8 @@ char *xxxvers = "@(#)ptx:ptx.c	1.4";
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #define DEFLTX "/usr/lib/dwb/eign"
 #define TILDE 0177
 #define SORT "/bin/sort"
@@ -45,10 +47,18 @@ char *xxxvers = "@(#)ptx:ptx.c	1.4";
 
 #define isabreak(c) (btable[c])
 
+static void diag(char *s, char *arg);
+static void cmpline(char *pend);
+static int cmpword(char *cpp,char *pend,char *hpp);
+static void putline(char *strt, char *end);
+static void getsort(void);
+static void putout(char *strt,char *end);
+static int hash(char *strtp,char *endp);
+static int storeh(int num,char *strtp);
 void msg(char *s, char *arg);
 
 extern char *dwb_getline();
-extern void onintr();
+void onintr(int i);
 int status;
 
 
@@ -79,12 +89,9 @@ FILE *sortptr;
 char *bfile;	/*contains user supplied break chars */
 FILE *bptr;
 
-main(argc,argv)
-int argc;
-char **argv;
+int
+main(int argc, char **argv)
 {
-	extern char *optarg;
-	extern int optind;
 	register int c;
 	register char *bufp;
 	int pid, m, test;
@@ -122,7 +129,7 @@ char **argv;
 				wlen++;
 				llen = atoi(optarg);
 				if(llen == 0)
-					diag("Wrong width:",*optarg);
+					diag("Wrong width:",optarg);
 				if(llen > LMAX) {
 					llen = LMAX;
 					msg("Lines truncated to 200 chars.",empty);
@@ -139,11 +146,12 @@ char **argv;
 			break;
 
 		case 'i':
-			if(only) 
+			if(only) {
 				diag("Only file already given.",empty);
 				ignore++;
 				xfile = optarg;
 				test--;
+			}
 			break;
 
 		case 'o':
@@ -257,7 +265,7 @@ char **argv;
 	if (outfile != 0)
 		if((outptr = fopen(outfile,"w")) == NULL)
 			diag("Cannot open output file:",outfile);
-	while(pend=dwb_getline())
+	while ((pend=dwb_getline()))
 		cmpline(pend);
 	fclose(sortptr);
 
@@ -268,9 +276,9 @@ char **argv;
 
 	case 0:		/* child */
 		if(foldf == 0)
-			execl(SORT, SORT, "-d", sortfile, "-o", sortfile, 0);
+			execl(SORT, SORT, "-d", sortfile, "-o", sortfile, NULL);
 		else
-			execl(SORT, SORT, "-df", sortfile, "-o", sortfile, 0);
+			execl(SORT, SORT, "-df", sortfile, "-o", sortfile, NULL);
 
 	default:	/* parent */
 		while(wait(&status) != pid);
@@ -278,7 +286,8 @@ char **argv;
 
 
 	getsort();
-	onintr();
+	onintr(0);
+	return 0;
 }
 
 void
@@ -287,19 +296,20 @@ msg(char *s, char *arg)
 	fprintf(stderr,"%s %s\n",s,arg);
 	return;
 }
-diag(s,arg)
-char *s, *arg;
+
+static void
+diag(char *s, char *arg)
 {
 
 	msg(s,arg);
 	exit(1);
 }
 
-
-char *dwb_getline()
+char *
+dwb_getline(void)
 {
 
-	register c;
+	int c;
 	register char *linep;
 	char *endlinep;
 
@@ -332,8 +342,8 @@ char *dwb_getline()
 	return(0);
 }
 
-cmpline(pend)
-char *pend;
+static void
+cmpline(char *pend)
 {
 
 	char *pstrt, *pchar, *cp;
@@ -346,16 +356,16 @@ char *pend;
 			pchar++;
 	while(pchar<pend){
 	/* eliminate white space */
-		if(isabreak(*pchar++))
+		if(isabreak((int)*pchar++))
 			continue;
 		pstrt = --pchar;
 
 		flag = 1;
 		while(flag){
-			if(isabreak(*pchar)) {
+			if(isabreak((int)*pchar)) {
 				hp = &hasht[hash(pstrt,pchar)];
 				pchar--;
-				while(cp = *hp++){
+				while ((cp = *hp++)) {
 					if(hp == &hasht[MAXT])
 						hp = hasht;
 	/* possible match */
@@ -379,8 +389,8 @@ char *pend;
 	}
 }
 
-cmpword(cpp,pend,hpp)
-char *cpp, *pend, *hpp;
+static int
+cmpword(char *cpp,char *pend,char *hpp)
 {
 	char c;
 
@@ -393,8 +403,8 @@ char *cpp, *pend, *hpp;
 	return(0);
 }
 
-putline(strt, end)
-char *strt, *end;
+static void
+putline(char *strt, char *end)
 {
 	char *cp;
 
@@ -409,9 +419,10 @@ char *strt, *end;
 	putc('\n',sortptr);
 }
 
-getsort()
+static void
+getsort(void)
 {
-	register c;
+	int c;
 	register char *tilde, *linep, *ref;
 	char *p1a,*p1b,*p2a,*p2b,*p3a,*p3b,*p4a,*p4b;
 	int w;
@@ -489,8 +500,8 @@ getsort()
 	}
 }
 
-char *rtrim(a,c,d)
-char *a,*c;
+char *
+rtrim(char *a,char *c,int d)
 {
 	char *b,*x;
 	b = c;
@@ -502,8 +513,8 @@ char *a,*c;
 	return(b);
 }
 
-char *ltrim(c,b,d)
-char *c,*b;
+char *
+ltrim(char *c,char *b,int d)
 {
 	char *a,*x;
 	a = c;
@@ -515,8 +526,8 @@ char *c,*b;
 	return(a);
 }
 
-putout(strt,end)
-char *strt, *end;
+static void
+putout(char *strt,char *end)
 {
 	char *cp;
 
@@ -527,16 +538,17 @@ char *strt, *end;
 	}
 }
 
-void onintr()
+void
+onintr(int i)
 {
-
+	(void)i;
 	if(*sortfile)
 		unlink(sortfile);
 	exit(1);
 }
 
-hash(strtp,endp)
-char *strtp, *endp;
+static int
+hash(char *strtp,char *endp)
 {
 	char *cp, c;
 	int i, j, k;
@@ -562,9 +574,8 @@ char *strtp, *endp;
 	return(k);
 }
 
-storeh(num,strtp)
-int num;
-char *strtp;
+static int
+storeh(int num,char *strtp)
 {
 	int i;
 
