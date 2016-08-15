@@ -12,15 +12,20 @@
 #include <stdlib.h>
 #define ON 1
 #define OFF 0
+
+static void procnosect(void);
+static void procsect(void);
+
 int	i;
 int	range = OFF;                                                 /* flag used for printing a range of
                                                                           page numbers */
 
 int	nowsubj = 0, nextsubj = 0, currsect = 0, nextsect = 0, currpage = 0, nextpage = 0;
-main(argc, argv)
-int	argc;
-char	*argv[];
+
+int
+main(int argc, char **argv)
 {
+	(void)argc;
 	if ((scanf("%d %d %d", &nowsubj, &currsect, &currpage)) != EOF) {
 		if (nowsubj != 1) {
 			for (i = 1; i < nowsubj; i++)             /* print 0 for any subject not found*/
@@ -44,7 +49,8 @@ char	*argv[];
 
 /* Given that pages are numbered sequentially, the following subroutine 
    collates the list of page numbers for each subject.  */
-procnosect()
+static void
+procnosect(void)
 {
 	while ((scanf("%d %d %d", &nextsubj, &nextsect, &nextpage)) != EOF) {
 		if (nowsubj == nextsubj) {
@@ -82,7 +88,8 @@ procnosect()
 
 /* The following subroutine collates the list of page numbers for each 
    subject when section-page numbering is used. */
-procsect()
+static void
+procsect(void)
 {
 	while ((scanf("%d %d %d", &nextsubj, &nextsect, &nextpage)) != EOF) {
 		if (nowsubj == nextsubj) {

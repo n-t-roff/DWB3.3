@@ -28,7 +28,9 @@
 #include <stdlib.h>
 
 #include "dstructs.h"
-
+#include "space.h"
+#include "rootwd.h"
+#include "case.h"
 
 #define DEBUG 0
 
@@ -43,6 +45,23 @@
 		in line %d in subject file.\n", yytext, s_count);
 #define ERROR5 fprintf (stderr, "\nndx: error5- subject term, %s, too long \n \
 		max. allowed is %d characters", yytext, TOKSIZE);
+
+void init_vars (void);
+void return_lists (void);
+void wri_subjmacro (void);
+void write_context (void);
+void subj_search(void);
+void match_roots (struct word     *tree, char            *root);
+void flush_context (void);
+void copy_in (char *text);
+void printtree (struct word *tree, int c);
+void w_activate (struct word *w_ptr, int m_type);
+void w_update (struct subj     *s);
+void build_subj (int * flag);
+void init_subj (int subjno);
+int s_match (struct subj *subj1, struct subj *subj2);
+int already_act (struct word     *wptr);
+int min (int i, int j);
 
 int	lpass1 = TRUE;			/*flag used by yywrap*/
 
@@ -289,9 +308,9 @@ STET    [~]
 <SL>[.]					{ fprintf (stderr, "\nndx: error2- unrecognized symbol, %s, found ",yytext);
 					  fprintf (stderr, "in subject file.\n");}
 %%
-init_subj (subjno)
+void
+init_subj (int subjno)
 
-int subjno;
 {	struct subj *s_malloc ();
 
 	subject = (struct subj *) s_malloc ();
@@ -304,8 +323,8 @@ int subjno;
 	subject->nxts = NULL;}
 
 
-
-print_subj()			/*For debugging, prints internal subj list*/
+void
+print_subj(void)			/*For debugging, prints internal subj list*/
 
 {struct s_ele	*w;
 
@@ -315,7 +334,7 @@ print_subj()			/*For debugging, prints internal subj list*/
 		printf ("name: %s\n", (*w->ptr).name);
 		w = w->nxte;
 		}
-	printf ("type: %c\nckd: %c\nid: %d\nsec: %d\n",
+	printf ("type: %c\nckd: %c\nid: %d\nsec: %p\n",
 		  subject->type, subject->ckd, subject->id, subject->sec);
 	if (subject->sec != NULL)
 		{
@@ -334,10 +353,10 @@ print_subj()			/*For debugging, prints internal subj list*/
 *   calls  :								   *
 ****************************************************************************/
 
+void
+build_subj (int * flag)
 
-build_subj ( flag)
-
-int  *flag;			/*0,1 if this is not/is the 1st secondary term*/
+/* int  *flag;			/ *0,1 if this is not/is the 1st secondary term*/
 
 {
 struct s_ele	*ele;			/*pointer to entry in subjects list of terms*/
@@ -369,13 +388,11 @@ struct word *word_insert ();
 
 #define MATCH strcmp (tree->name, token) 
 
-struct word *word_insert (tree, growth, nunode)
-struct	word	*(*nunode), *tree;
-int	*growth;
+struct word *
+word_insert (struct  word    *tree, int     *growth, struct  word    *(*nunode))
 {
 	struct	word	*t1,*t2;
 	struct	word	*new_word_node();
-	int printtree ();
 
 	/*printtree (tree, 'S');*/
 	if (tree == NULL)
@@ -475,11 +492,11 @@ int	*growth;
 
 
 
-struct word *new_word_node()
+struct word *
+new_word_node(void)
 {
-	struct word *wd, *w_malloc();
-	int   i, word_length;
-	int   rootword();
+	struct word *wd;
+	int   word_length;
 	unsigned size = 1;
 
 	word_length = strlen (token) + 1;
@@ -512,7 +529,8 @@ struct word *new_word_node()
 /*add the current (global) subject entry, subject, to the head of the
   subject list, slist*/
 
-struct subj *subj_insert ()
+struct subj *
+subj_insert (void)
 
 {	struct subj *s;
 
@@ -535,9 +553,9 @@ struct subj *subj_insert ()
 /* Compare the entries for two subjects in the subject list, returning 1,0
    if they do,do not match*/
 
-s_match (subj1, subj2)
+int
+s_match (struct subj *subj1, struct subj *subj2)
 
-struct subj *subj1, *subj2;
 
 {	struct s_ele *wd1, *wd2;
 	int i = 0;
@@ -559,10 +577,10 @@ struct subj *subj1, *subj2;
 
 
 
+void
+w_update (struct subj     *s)
 
-w_update (s)
-
-struct subj	*s;			/*subject pointer*/
+/* struct subj	*s;			/ *subject pointer*/
 {
 	struct s_ele	*wds;		/*subjects lists of terms*/
 
@@ -589,7 +607,8 @@ struct subj	*s;			/*subject pointer*/
 /*prnt_slist prints the list of subjects and can only be used when
 the list is complete since it uses subject, the current subject ptr*/
 
-prnt_slist ()
+void
+prnt_slist (void)
 {
 	printf ("\nsubject list:\n");
 	subject = slist;
@@ -600,11 +619,9 @@ prnt_slist ()
 	printf ("\nend of subject lst\n");
 }
 
+void
+printtree (struct word *tree, int c)
 
-printtree (tree, c)
-
-char c;
-struct word *tree;
 {
 	if (tree != NULL)
 		{printtree (tree->lc,'L');
@@ -620,10 +637,11 @@ struct word *tree;
 #define ERROR4	fprintf (stderr, "\nndx: error4-  read unexpected eof")
 #define ERROR6  fprintf (stderr, "\nndx:Too many subjects (>%d) found in one sentence.\n	Some subjects will not be reported as found here. (error6)\n",MAXACCEPT);
 
-w_activate (w_ptr, m_type)
+void
+w_activate (struct word *w_ptr, int m_type)
 
-struct word *w_ptr;			/*pointer to current word*/
-char	    m_type;			/*type of match found */
+/* struct word *w_ptr;			/ *pointer to current word*/
+/* char	    m_type;			/ *type of match found */
 {
 	int i;
 
@@ -646,24 +664,28 @@ char	    m_type;			/*type of match found */
 
 
 
-int already_act (wptr)
+int
+already_act (struct word     *wptr)
 
-struct word	*wptr;			/*pointer to current word*/
+/* struct word	*wptr;			/ *pointer to current word*/
 {
 	int	i;
 
-	for (i = head[new_c]; i != tail[new_c]; i = (++i) MOD MAXACTIVE)
-		{if (activ_list[i].w_ptr == wptr)
-		    return (i);}
+	for (i = head[new_c]; i != tail[new_c]; ) {
+		if (activ_list[i].w_ptr == wptr)
+			return (i);
+		i++;
+		i = i MOD MAXACTIVE;
+	}
 	return (-1);
 }
 
 
+void
+match_roots (struct word     *tree, char            *root)
 
-match_roots (tree, root)
-
-struct word	*tree;			/*top of tree or subtree*/
-char		*root;			/*root word*/
+/* struct word	*tree;			/ *top of tree or subtree*/
+/* char		*root;			/ *root word*/
 {
 	struct word  *r_ptr;
 	int	len;
@@ -686,10 +708,9 @@ char		*root;			/*root word*/
 
 
 
-struct word *find_root (tree, token)		/*is token a leading substring of a
+struct word *
+find_root (struct word     *tree, char            *token)		/*is token a leading substring of a
 						  subj word or vice versa*/
-struct word	*tree;
-char		*token;
 {
 	int	len, nchars, diff, found;
 	struct word	*wptr;
@@ -725,8 +746,8 @@ char		*token;
 
 
 
-
-subj_search()
+void
+subj_search(void)
 
 {	int	 found, i;
 	struct word	*wd, *w;		/*word entry in wlist*/
@@ -794,10 +815,10 @@ subj_search()
 
 
 
+void
+copy_in (char *text)			/*copies a string to the context buf*/
 
-copy_in (text)			/*copies a string to the context buf*/
-
-char 	*text;			/*string*/
+/* char 	*text;			/ *string*/
 {
 
 	while (*text != '\0')
@@ -808,10 +829,9 @@ char 	*text;			/*string*/
 
 
 
-struct word *find_word (tree, token)
+struct word *
+find_word (struct word *tree, char        *token)
 
-struct word *tree;
-char        *token;
 {
 	struct word *wptr;
 	int	fnd;
@@ -829,8 +849,8 @@ char        *token;
 
 
 
-
-flush_context ()
+void
+flush_context (void)
 
 {	while (c_len[old_c] > 0 )
 		{subj_search ();
@@ -842,8 +862,8 @@ flush_context ()
 	init_vars ();
 }
 
-
-write_context ()
+void
+write_context (void)
 
 {	int nchars;		/*no. of chars to be copied*/
 	char ch;
@@ -865,8 +885,8 @@ write_context ()
 
 
 
-
-wri_subjmacro ()		/*write subj indexing macros to pagefile and*/
+void
+wri_subjmacro (void)		/*write subj indexing macros to pagefile and*/
 				/*reset subject status*/
 {
 	int	 i;
@@ -884,28 +904,34 @@ wri_subjmacro ()		/*write subj indexing macros to pagefile and*/
 
 
 
-
-return_lists ()
+void
+return_lists (void)
 
 {	int i;
 
 	i = ir;
 	for ( i = 0; i <= ir; i++)
 	    reject_list[i]->ckd = '0';		/*reset status of subjs on reject list*/
-	for ( i = head[old_c]; i != tail[old_c]; i = (++i) MOD MAXACTIVE)
-	    {activ_list [i].w_ptr->act = 'N';	/*reset match status to none*/
-	     tot_act = tot_act - 1;}
+	for ( i = head[old_c]; i != tail[old_c]; ) {
+		activ_list [i].w_ptr->act = 'N';	/*reset match status to none*/
+		tot_act = tot_act - 1;
+		i++;
+		i = i MOD MAXACTIVE;
+	}
 	if (new_c != old_c)		/*if they exist, refresh items that*/
 					/*will be carried over in new window*/
-		for (i = head[new_c]; i != tail[new_c]; i = (++i) MOD MAXACTIVE)
-		     activ_list[i].w_ptr->act = activ_list[i].m_type;
+		for (i = head[new_c]; i != tail[new_c]; ) {
+			activ_list[i].w_ptr->act = activ_list[i].m_type;
+			i++;
+			i = i MOD MAXACTIVE;
+		}
 	ir = iac = -1;
 }
 
 
 
-
-init_vars ()
+void
+init_vars (void)
 
 {
 	int	i;
@@ -925,10 +951,9 @@ init_vars ()
 
 
 
+int
+min (int i, int j)
 
-min (i, j)
-
-int 	i,j;
 {
 	if (i < j)
 		return (i);
@@ -938,10 +963,9 @@ int 	i,j;
 
 
 
+void
+ndx_text (char *pfname)
 
-ndx_text (pfname)
-
-char	*pfname;
  
 {
 	char	*tmpnam ();
@@ -953,7 +977,8 @@ char	*pfname;
 	init_vars ();
 }
 
-yywrap ()
+int
+yywrap (void)
 
 {	if (lpass1)				/*if subj file has been processed*/
 	    {
@@ -987,11 +1012,8 @@ yywrap ()
 
 char	*filename = "-";
 
-
-main (argc,argv)
-
-int	argc;
-char	*argv[];
+int
+main (int argc, char **argv)
 
 {
 	struct word *w_malloc();
@@ -1030,5 +1052,5 @@ char	*argv[];
 		}
 	fclose (c_bufw); fclose (c_bufr);
 	unlink (tmpbuf);
-	exit (rc);
+	return (rc);
 }

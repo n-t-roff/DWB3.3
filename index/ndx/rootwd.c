@@ -12,6 +12,9 @@
 #include <string.h>
 #include "ehash.h"
 #include "edict.h"
+#include "strr.h"
+#include "rootwd.h"
+#include "str.h"
 #define TOKSIZE 32
 #define DEBUG_RTWD 0
 
@@ -26,9 +29,8 @@ int	initflg = 0;
    rootword returns 0.
 */
 
-rootword (token)
-
-char	token[TOKSIZE];
+int
+rootword (char    token[TOKSIZE])
 
 {	
 	int	len;			/*length of token*/
@@ -163,11 +165,12 @@ char	token[TOKSIZE];
 
 
 
-except (endg, token, len, end)
+int
+except (char     (*endg) (), char *token, int len, int end)
 
-int	(*endg) ();			/*pointer to a function for this end'g*/
-char	*token;				/*the word*/
-int	len, end;			/*lengths of token & possible suffix*/
+/* int	(*endg) ();			/ *pointer to a function for this end'g*/
+/* char	*token;				/ *the word*/
+/* int	len, end;			/ *lengths of token & possible suffix*/
 
 {	
 	int	found;

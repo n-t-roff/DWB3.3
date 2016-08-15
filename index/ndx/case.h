@@ -1,0 +1,1 @@
+int ulcase (char *string);

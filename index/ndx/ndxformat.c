@@ -8,6 +8,7 @@
 
 #define gets(s) fgets(s, sizeof(s), stdin)
 
+int
 main()
 {
 	char	str[LINELENGTH];
@@ -15,10 +16,10 @@ main()
 	char	*args[3];
 	int	i, missing = FALSE;
 	while (gets(str) != NULL) {
-		if ((p = strtok(str, SEP)) != NULL)                /* read past subject number in file */
-			;
+		if ((p = strtok(str, SEP)) != NULL) {                /* read past subject number in file */
+		}
 		for (i = 0; i < 3; i ++) {
-			if ((args[i] = strtok(0, SEP1)) == NULL)   /* read until end of string */ {
+			if ((args[i] = strtok(0, SEP1)) == NULL) {   /* read until end of string */
 
 				missing = TRUE;
 				break;
@@ -29,7 +30,7 @@ main()
 		else
 			printf("%s ... %s\n", args[0], args[2]);   /* print subject, corresponding page numbers */
 	}
-	exit(0);
+	return 0;
 }
 
 

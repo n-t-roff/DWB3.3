@@ -9,10 +9,9 @@
 #ident	"@(#)subndx:str.c	1.3"
 */
 int
-string (token, max)
+string (char *token, int max)
 
-char	*token;
-int	max  ;		/*max. no. of non null characters allowed in token*/
+/* int	max  ;		/ *max. no. of non null characters allowed in token*/
 
 {	
 	char	*s;

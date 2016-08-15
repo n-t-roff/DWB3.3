@@ -14,9 +14,8 @@
 	and 0 if none.
 */
 
-
-ulcase (string)
-char	*string;
+int
+ulcase (char *string)
 {
 	int	chg = 0;
 	int	lcase = 'a' - 'A';

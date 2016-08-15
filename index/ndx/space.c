@@ -16,7 +16,8 @@
 
 #define BLOCKMAX 100
 
-struct word *w_malloc ()
+struct word *
+w_malloc (void)
 
 {
 	static struct word *wblock;
@@ -41,7 +42,8 @@ struct word *w_malloc ()
 }
 
 
-struct subj *s_malloc ()
+struct subj *
+s_malloc (void)
 
 {
 	static struct subj *sblock;

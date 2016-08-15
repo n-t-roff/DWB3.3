@@ -16,10 +16,10 @@
 
 #define DEBUG_STRR 0
 
-strn_rev (str, rstr, n)
+void
+strn_rev (char *str, char *rstr, int n)
 
-char	*str, *rstr;
-int	n;					/*length of initial substring*/
+/* int	n;					/ *length of initial substring*/
 
 {	
 	int	i, j;

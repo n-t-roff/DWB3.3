@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=ndx.mk
 
 SYSTEM=SYSV
@@ -11,7 +11,7 @@ BINDIR=/usr/bin
 LIBDIR=/usr/lib/dwb
 MAN1DIR=/usr/man/u_man/man1
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS) -D$(SYSTEM)
