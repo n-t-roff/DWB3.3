@@ -1,4 +1,4 @@
-MAKE=/bin/make
+#MAKE=/bin/make
 MAKEFILE=deroff.mk
 
 SYSTEM=SYSV
@@ -9,7 +9,7 @@ OWNER=bin
 
 LIBDIR=/usr/lib/dwb
 
-CFLGS=-O
+CFLGS=-Wall -Wextra
 LDFLGS=-s
 
 CFLAGS=$(CFLGS)

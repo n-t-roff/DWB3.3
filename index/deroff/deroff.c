@@ -45,6 +45,18 @@ All input is through the C macro; the most recently read character is in c.
 #define DIGIT 3
 #define LETTER 4
 
+static int skeqn(void);
+FILE * opn(char *p);
+static int eof(void);
+void getfname(void);
+static void fatal(char *s,char *p);
+static void work(void);
+static void regline(int macline,int constant);
+static void putmac(char *s,int constant);
+static void tbl(void);
+static void stbl(void);
+char * copys(char *s);
+int getflags(int argc, char **argv, char *opts);
 void inpic();
 void refer(int c1);
 void backsl();
@@ -88,13 +100,12 @@ FILE *files[15];
 FILE **filesp;
 FILE *infile;
 
-main(ac, av)
-int ac;
-char **av;
+int
+main(int ac, char **av)
 {
 	register int i;
 	int errflg = 0;
-	register optchar;
+	int optchar;
 	FILE *opn();
 
 	argc = ac;
@@ -149,21 +160,22 @@ char **av;
 	chars['?'] = PUNCT;
 	chars[':'] = PUNCT;
 	work();
+	return 0;
 }
 
 
 
 
 
-
-skeqn()
+static int
+skeqn(void)
 {
 	while((c = getc(infile)) != rdelim)
 		if(c == '\n')linect++;
 		else if(c == EOF)
 			c = eof();
 		else if(c == '"')
-			while( (c = getc(infile)) != '"')
+			while( (c = getc(infile)) != '"') {
 				if(c == '\n')linect++;
 				else if(c == EOF)
 					c = eof();
@@ -172,13 +184,14 @@ skeqn()
 						c = eof();
 					else if(c == '\n')linect++;
 				}
+			}
 	if(msflag)return(c='x');
 	return(c = ' ');
 }
 
 
-FILE *opn(p)
-register char *p;
+FILE *
+opn(char *p)
 {
 	FILE *fd;
 
@@ -191,8 +204,8 @@ register char *p;
 }
 
 
-
-eof()
+static int
+eof(void)
 {
 	if(infile != stdin)
 		fclose(infile);
@@ -210,7 +223,7 @@ eof()
 
 
 void
-getfname()
+getfname(void)
 {
 	register char *p;
 	struct chain { 
@@ -246,16 +259,16 @@ getfname()
 
 
 
-
-fatal(s,p)
-char *s, *p;
+static void
+fatal(char *s,char *p)
 {
 	fprintf(stderr, "Deroff: ");
 	fprintf(stderr, s, p);
 	exit(1);
 }
 
-work()
+static void
+work(void)
 {
 
 	for( ;; )
@@ -269,10 +282,8 @@ work()
 
 
 
-
-regline(macline,constant)
-int macline;
-int constant;
+static void
+regline(int macline,int constant)
 {
 	line[0] = c;
 	lp = line;
@@ -311,13 +322,11 @@ int constant;
 
 
 
-
-putmac(s,constant)
-register char *s;
-int constant;
+static void
+putmac(char *s,int constant)
 {
 	register char *t;
-	register found;
+	int found;
 	int last;
 	found = 0;
 
@@ -328,7 +337,7 @@ int constant;
 		for(t = s ; *t!=' ' && *t!='\t' && *t!='\0' ; ++t)
 			;
 		if(*s == '\"')s++;
-		if(t>s+constant && chars[ s[0] ]==LETTER && chars[ s[1] ]==LETTER){
+		if(t>s+constant && chars[ (int)s[0] ]==LETTER && chars[ (int)s[1] ]==LETTER){
 			while(s < t)
 				if(*s == '\"')s++;
 				else
@@ -336,7 +345,7 @@ int constant;
 			last = *(t-1);
 			found++;
 		}
-		else if(found && chars[ s[0] ] == PUNCT && s[1] == '\0')
+		else if(found && chars[ (int)s[0] ] == PUNCT && s[1] == '\0')
 			putchar(*s++);
 		else{
 			last = *(t-1);
@@ -360,17 +369,17 @@ putwords(int macline)	/* break into words for -w option */
 	for(p1 = line ; ;)
 	{
 		/* skip initial specials ampersands and apostrophes */
-		while( chars[*p1] < DIGIT)
+		while( chars[(int)*p1] < DIGIT)
 			if(*p1++ == '\0') return;
 		nlet = 0;
-		for(p = p1 ; (i=chars[*p]) != SPECIAL ; ++p)
+		for(p = p1 ; (i=chars[(int)*p]) != SPECIAL ; ++p)
 			if(i == LETTER) ++nlet;
 
 		if( (!macline && nlet>1)   /* MDM definition of word */
-		    || (macline && nlet>2 && chars[ p1[0] ]==LETTER && chars[ p1[1] ]==LETTER) )
+		    || (macline && nlet>2 && chars[ (int)p1[0] ]==LETTER && chars[ (int)p1[1] ]==LETTER) )
 		{
 			/* delete trailing ampersands and apostrophes */
-			while(p[-1]=='\'' || p[-1]=='&'|| chars[ p[-1] ] == PUNCT)
+			while(p[-1]=='\'' || p[-1]=='&'|| chars[ (int)p[-1] ] == PUNCT)
 				--p;
 			while(p1 < p) putchar(*p1++);
 			putchar('\n');
@@ -381,7 +390,7 @@ putwords(int macline)	/* break into words for -w option */
 }
 
 void
-comline()
+comline(void)
 {
 	register int c1, c2;
 
@@ -602,13 +611,17 @@ sdis(char a1, char a2)
 		else SKIP;
 	}
 }
-tbl()
+
+static void
+tbl(void)
 {
 	while(C != '.');
 	SKIP;
 	intable = YES;
 }
-stbl()
+
+static void
+stbl(void)
 {
 	while(C != '.');
 	SKIP_TO_COM;
@@ -747,8 +760,8 @@ sw:
 
 
 
-char *copys(s)
-register char *s;
+char *
+copys(char *s)
 {
 	register char *t, *t0;
 
@@ -834,12 +847,22 @@ inpic(){
 		c1 = c;
 		if(C == '.' && c1 == '\n'){
 			if(C != 'P'){
-				if(c == '\n')continue;
-				else { SKIP; c='\n'; continue;}
+				if(c == '\n')
+					continue;
+				else {
+					SKIP;
+					c='\n';
+					continue;
+				}
 			}
 			if(C != 'E'){
-				if(c == '\n')continue;
-				else { SKIP; c='\n';continue; }
+				if(c == '\n')
+					continue;
+				else {
+					SKIP;
+					c='\n';
+					continue;
+				}
 			}
 			SKIP;
 			return;
@@ -882,15 +905,13 @@ int	opterr = 1;
 int	optopt;
 
 int
-getflags(argc, argv, opts)
-int	argc;
-char	**argv, *opts;
+getflags(int argc, char **argv, char *opts)
 {
 	static int sp = 1;
 	register int c;
 	register char *cp;
 
-	if(sp == 1)
+	if(sp == 1) {
 		if(optind >= argc ||
 		   (argv[optind][0] != '-'  && argv[optind][0] != '+')
 		    || argv[optind][1] == '\0')
@@ -901,6 +922,7 @@ char	**argv, *opts;
 			optind++;
 			return(EOF);
 		}
+	}
 	optopt = c = argv[optind][sp];
 	if(c == ':' || (cp=strchr(opts, c)) == NULL) {
 		ERR(": illegal option -- ", c);
