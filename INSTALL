@@ -1,6 +1,6 @@
 Contents:
 
-  1.  Indroduction
+  1.  Introduction
   2.  Download
   3.  Installation
   4.  Note on using nroff for displaying man pages
@@ -14,9 +14,9 @@ Contents:
            5.3.4  Macro packages
 
 
-1.  Indroduction
+1.  Introduction
 
-The file README is refering to the original DWB 3.3 release from 1993  and  is
+The file README is referring to the original DWB 3.3 release from 1993  and  is
 kept  unchanged since then.  Parts of it's contents may be outdated.  For this
 reason all up-to-date install and usage information can be found in this file.
 
@@ -67,7 +67,7 @@ operating systems.  This must be run first:
 
   $ ./configure
 
-The software is build with
+The software is built with
 
   $ make
 
@@ -102,7 +102,7 @@ not  been available when DWB 3.3 was released so this macro package is not in-
 cluded.  Well written manual pages using man(7) usually should work  but  some
 (e.g.  generated  from  other  languages)  are using special groff(1) features
 which are not available in DWB.  On the other hand many DWB manual  pages  are
-only  formated  correctly by DWB itself since there are some DWB extensions in
+only  formatted correctly by DWB itself since there are some DWB extensions in
 it's man macros.  groff(1), Heirloom nroff, or mandoc(1) should not be used to
 view DWB manual pages.
 
@@ -123,7 +123,7 @@ view DWB manual pages.
 Not all tools and macro packages had been tested yet.  Partly because they are
 not  important anymore or because of lack of input files or just because there
 had not been time for it yet.  The following list gives an overview.  If there
-are  problems  with an tested or untested item please report that to the issue
+are  problems  with  a tested or untested item please report that to the issue
 list at
 
   https://github.com/n-t-roff/DWB3.3/issues
