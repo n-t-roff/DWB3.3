@@ -1,6 +1,6 @@
 Contents:
 
-  1.  Indroduction
+  1.  Introduction
   2.  Download
   3.  Installation
   4.  Note on using nroff for displaying man pages
@@ -14,9 +14,9 @@ Contents:
            5.3.4  Macro packages
 
 
-1.  Indroduction
+1.  Introduction
 
-The file README is refering to the original DWB 3.3 release from 1993  and  is
+The file README is referring to the original DWB 3.3 release from 1993  and  is
 kept  unchanged since then.  Parts of it's contents may be outdated.  For this
 reason all up-to-date install and usage information can be found in this file.
 
